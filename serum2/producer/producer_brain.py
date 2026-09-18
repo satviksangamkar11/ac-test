@@ -207,6 +207,11 @@ class KnowledgeContribution:
     relevance_score: float
     source_id: str
     contribution: str  # how it influenced the reasoning
+    matched_via_dimension: Optional[str] = None
+    """Which structured retrieval dimension surfaced this item: "role",
+    "genre", "subgenre", "artist_style", "technique", "era", or None for
+    the primary intent-text query. Makes context-aware retrieval (Brain V2
+    P2) auditable in the reasoning trace, not just a silent side effect."""
 
 
 @dataclass
@@ -307,43 +312,49 @@ class ProducerBrain:
     ) -> tuple[List[KnowledgeContribution], Dict[str, Dict[str, Any]]]:
         """Retrieve real knowledge from the 343-item store.
 
-        advisory_context enriches retrieval with role and context terms from
-        ProductionContext, WITHOUT overriding the concept-specific `technique`
-        query param (e.g. "cutoff" for filter-cutoff) — that term anchors
-        retrieval to the resolved semantic concept and must remain
-        authoritative. Genre/subgenre/artist_reference/era/techniques are each
-        run as their own single-term supplementary retrieval query (see
-        knowledge_retrieval_adapter.retrieve_knowledge_for_intent) and merged
-        by score — this is real retrieval fan-out, not free-text concatenation.
+        Brain V2 P2: wires ProductionContext into retrieval as structured,
+        individually-labeled query dimensions (role, genre, subgenre,
+        artist_style, technique), not a single anonymous free-text blob.
+        Each dimension is run as its own supplementary query (see
+        knowledge_retrieval_adapter.retrieve_knowledge_for_intent's
+        context_terms) and the resulting items carry matched_via_dimension
+        so the reasoning trace shows exactly which context caused which
+        item to surface. The concept-anchored `technique` query param
+        (e.g. "cutoff" for filter-cutoff) is never overridden by context —
+        it must remain authoritative for the resolved semantic concept.
 
-        Empirically verified against the current 343-item corpus:
-          role="bass"            -> DOES change the retrieved set (6 items
-                                     mention "bass" in their propositions)
-          techniques=["reverb"]  -> DOES change the retrieved set (20 items
-                                     mention "reverb")
-          genre="melodic techno" -> currently 0 matching items (corpus has no
-                                     genre-labeled or genre-name-mentioning
-                                     sources yet)
-          artist_reference=...   -> currently 0 matching items (same reason)
-        Genre/artist wiring is functionally correct and will surface results
-        automatically once the corpus includes a source that mentions them —
-        no code change would be needed then. Today they legitimately retrieve
-        nothing; that is corpus coverage, not a defect in this wiring.
+        Only evidence already present in the canonical KnowledgeItem store
+        is ever used. No dimension is fabricated when the corpus lacks
+        matching content — a term with zero corpus coverage (e.g. an
+        artist/genre name absent from every ingested source) legitimately
+        contributes zero items, proven empirically per-dimension in
+        test_context_aware_retrieval.py. Retrieval remains advisory: it
+        feeds knowledge_notes/rationale only, never CapabilityResolver or
+        admission (see _resolve_and_admit / _run_mcp_path, which take no
+        advisory_context input at all).
         """
         qparams = _CONCEPT_QUERY_PARAMS.get(concept or "", {
             "free_text": intent_text,
         })
 
-        # Extract advisory enrichment from ProductionContext (advisory only)
+        # Extract advisory enrichment from ProductionContext (advisory only).
+        # Dimension names match UniversalQuery's own field names
+        # (genre/subgenre/artist_style/technique) so the reasoning trace is
+        # auditable against the retrieval model's own vocabulary, even
+        # though ProductionContext's own field is named artist_reference.
         ctx = advisory_context or {}
         role = ctx.get("role")
-        # Each context term becomes its own supplementary retrieval query
-        # (see retrieve_knowledge_for_intent's context_terms fan-out).
-        context_terms = [t for t in [
-            ctx.get("genre"), ctx.get("subgenre"),
-            ctx.get("artist_reference"), ctx.get("era"),
-            *(ctx.get("techniques") or []),
-        ] if t]
+        context_terms: List[tuple] = []
+        for dimension, value in (
+            ("genre", ctx.get("genre")),
+            ("subgenre", ctx.get("subgenre")),
+            ("artist_style", ctx.get("artist_reference")),
+            ("era", ctx.get("era")),
+        ):
+            if value:
+                context_terms.append((dimension, value))
+        for technique_term in (ctx.get("techniques") or []):
+            context_terms.append(("technique", technique_term))
 
         items = retrieve_knowledge_for_intent(
             intent_text=qparams.get("free_text", intent_text),
@@ -360,10 +371,13 @@ class ProducerBrain:
                 epistemic_status=it["epistemic_status"],
                 relevance_score=it["relevance_score"],
                 source_id=it["source_reference"]["source_id"],
-                contribution="relevance=%.2f via %s" % (
+                contribution="relevance=%.2f via %s%s" % (
                     it["relevance_score"],
                     it.get("primary_match_type", "unknown"),
+                    " context=%s" % it["matched_via_dimension"]
+                    if it.get("matched_via_dimension") else "",
                 ),
+                matched_via_dimension=it.get("matched_via_dimension"),
             )
             for it in items
         ]
@@ -946,6 +960,23 @@ class ProducerBrain:
             )
             result.retrieved_knowledge = knowledge_contributions
 
+            # Brain V2 P2: make context-aware retrieval visible in the
+            # reasoning trace regardless of which route the concept takes
+            # below (both the early MCP-bridge exit and the full DawDreamer
+            # path read/overwrite this). Honest either way: reports zero
+            # matched dimensions plainly rather than omitting the note.
+            matched_dims = sorted({
+                kc.matched_via_dimension for kc in knowledge_contributions
+                if kc.matched_via_dimension
+            })
+            result.advisory_rationale = (
+                "Retrieved %d knowledge items (context dimensions matched: %s)"
+                % (len(knowledge_contributions), matched_dims)
+                if matched_dims else
+                "Retrieved %d knowledge items (no context dimension matched; "
+                "primary intent-text query only)" % len(knowledge_contributions)
+            )
+
             # ---- determine semantic target ----
             from serum2.knowledge.step_6_6_capability_resolution import UNIVERSAL_TO_SEMANTIC
             target_mapping = UNIVERSAL_TO_SEMANTIC.get(concept)
@@ -1007,11 +1038,9 @@ class ProducerBrain:
                 candidate.operation, concept, confidence
             )
             k_ids = list(knowledge_notes.keys())
-            result.advisory_rationale = (
-                "Retrieved %d knowledge items (ids=%s). Prior episodes=%s. "
-                "Confidence=%.2f" % (
-                    len(knowledge_contributions), k_ids[:3],
-                    episode_ids, confidence,
+            result.advisory_rationale += (
+                " | ids=%s. Prior episodes=%s. Confidence=%.2f" % (
+                    k_ids[:3], episode_ids, confidence,
                 )
             )
 

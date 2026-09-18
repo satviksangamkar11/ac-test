@@ -9,7 +9,7 @@ RETRIEVAL ≠ AUTHORITY. Retrieved items are advisory only.
 import sys
 import os
 from pathlib import Path
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, Tuple
 
 _KNOWLEDGE_DIR = Path(__file__).parent.parent / "knowledge"
 _CANONICAL_STORE = _KNOWLEDGE_DIR / "yt_f507169bd7cb_canonical_knowledge_store_5_6.json"
@@ -40,7 +40,7 @@ def retrieve_knowledge_for_intent(
     store_path: Optional[str] = None,
     *,
     role: Optional[str] = None,
-    context_terms: Optional[List[str]] = None,
+    context_terms: Optional[List[Tuple[str, str]]] = None,
 ) -> List[Dict[str, Any]]:
     """Retrieve real KnowledgeItems relevant to a production intent.
 
@@ -59,22 +59,33 @@ def retrieve_knowledge_for_intent(
               as UniversalQuery.role; the retriever's own _compute_match_reasons
               scores this via lexical fallback (0.6 confidence) against
               proposition text when no semantic binding exists.
-        context_terms: additional advisory terms (genre, subgenre, artist,
-              era, technique mentions from ProductionContext). Each term is
-              run as ITS OWN single-term supplementary query and the results
-              are merged with the primary query, deduped by knowledge_item_id.
-              This is deliberate: UniversalRetriever._text_match() requires
-              ALL words of a free_text query to be a subset of a proposition's
-              words, so concatenating multiple terms into one free_text string
-              makes matching *less* likely, not more. Querying each term alone
-              exercises the retriever's real single-term matching semantics.
-              A term that matches nothing (e.g. genre names/artists absent
-              from the corpus) legitimately contributes zero items — that is
-              a corpus-coverage fact, not a wiring defect.
+        context_terms: structured (dimension, term) pairs from
+              ProductionContext — e.g. [("genre", "melodic techno"),
+              ("artist_style", "Burial"), ("technique", "reverb")]. Each
+              pair is run as ITS OWN single-term supplementary query,
+              tagged with its dimension name in the returned
+              "matched_via_dimension" field, and merged with the primary
+              query (deduped by knowledge_item_id). This is deliberate:
+              UniversalRetriever._text_match() requires ALL words of a
+              free_text query to be a subset of a proposition's words, so
+              concatenating multiple terms into one free_text string makes
+              matching *less* likely, not more — and step_5_7's own
+              UniversalQuery.genre/subgenre/artist_style fields are declared
+              but never scored by _compute_match_reasons (only concept/
+              intent/technique/role have a lexical-fallback path), so
+              setting them directly would silently do nothing. Querying
+              each term alone via free_text exercises the retriever's real,
+              already-correct single-term matching semantics instead. A
+              term with zero corpus coverage (e.g. an artist/genre name
+              absent from every ingested source) legitimately contributes
+              zero items — that is evidence of corpus coverage, never
+              fabricated to compensate.
 
     Returns:
         List of dicts with keys: knowledge_item_id, original_proposition,
-        epistemic_status, relevance_score, match_reasons, source_reference
+        epistemic_status, relevance_score, match_reasons, source_reference,
+        matched_via_dimension (None for the primary query, else the
+        dimension name from context_terms that surfaced this item).
     """
     _ensure_knowledge_path()
 
@@ -86,7 +97,8 @@ def retrieve_knowledge_for_intent(
     else:
         store_paths = _discover_canonical_stores() or [_CANONICAL_STORE]
 
-    merged = []
+    # (RetrievalResult, matched_via_dimension) pairs
+    merged: List[Tuple[Any, Optional[str]]] = []
     seen_ids = set()
 
     for sp in store_paths:
@@ -104,21 +116,22 @@ def retrieve_knowledge_for_intent(
         )
         for r in retriever.retrieve(primary_query, top_k=top_k):
             if r.knowledge_item.knowledge_item_id not in seen_ids:
-                merged.append(r)
+                dim = "role" if role else None
+                merged.append((r, dim))
                 seen_ids.add(r.knowledge_item.knowledge_item_id)
 
-        for term in (context_terms or []):
+        for dimension, term in (context_terms or []):
             term_query = UniversalQuery(free_text=term, instrument=instrument)
             for r in retriever.retrieve(term_query, top_k=3):
                 if r.knowledge_item.knowledge_item_id not in seen_ids:
-                    merged.append(r)
+                    merged.append((r, dimension))
                     seen_ids.add(r.knowledge_item.knowledge_item_id)
 
-    merged.sort(key=lambda r: r.relevance_score, reverse=True)
+    merged.sort(key=lambda pair: pair[0].relevance_score, reverse=True)
     merged = merged[:top_k]
 
     out = []
-    for r in merged:
+    for r, matched_via_dimension in merged:
         item = r.knowledge_item
         out.append({
             "knowledge_item_id": item.knowledge_item_id,
@@ -128,6 +141,7 @@ def retrieve_knowledge_for_intent(
             "knowledge_type": item.knowledge_type.value,
             "relevance_score": r.relevance_score,
             "primary_match_type": r.primary_match_type.value if r.primary_match_type else None,
+            "matched_via_dimension": matched_via_dimension,
             "extraction_confidence": item.extraction_confidence,
             "source_reference": {
                 "source_id": item.source_reference.source_id,
@@ -163,10 +177,13 @@ def build_knowledge_notes(retrieved_items: List[Dict[str, Any]]) -> Dict[str, Di
                 item["source_reference"]["source_id"],
                 item["source_reference"].get("segment_ids", [])[:3],
             ),
-            "contribution": "relevance_score=%.2f match=%s" % (
+            "contribution": "relevance_score=%.2f match=%s%s" % (
                 item["relevance_score"],
                 item.get("primary_match_type", "unknown"),
+                " via_context=%s" % item["matched_via_dimension"]
+                if item.get("matched_via_dimension") else "",
             ),
+            "matched_via_dimension": item.get("matched_via_dimension"),
             "extraction_confidence": item["extraction_confidence"],
         }
     return notes
