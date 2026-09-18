@@ -1,0 +1,141 @@
+{
+  "episode_id": "ep_prod_a16958bfb5bc_20260918_190420",
+  "run_id": "prod_a16958bfb5bc",
+  "youtube_url": "https://www.youtube.com/watch?v=k6OBzXdcFtA",
+  "source_id": "yt_k6OBzXdcFtA",
+  "knowledge_record_count": 1,
+  "intent": {
+    "role": "bass",
+    "character": "dark",
+    "user_intent_text": "create a dark bass sound",
+    "intent_class": "CREATION",
+    "semantic_target": null,
+    "execution_route": "ableton_mcp",
+    "admission_reason": "MCP_HOST_MAP_QUALIFIED",
+    "source_id": "yt_k6OBzXdcFtA",
+    "supporting_knowledge_count": 6,
+    "production_context": {
+      "role": "bass",
+      "character": "dark",
+      "genre": null,
+      "subgenre": null,
+      "artist_reference": null,
+      "track_reference": null,
+      "era": null,
+      "techniques": [
+        "distortion",
+        "filter",
+        "lfo",
+        "modulation",
+        "fm"
+      ],
+      "reference_sources": [
+        "yt_k6OBzXdcFtA"
+      ]
+    }
+  },
+  "production_context": {
+    "role": "bass",
+    "character": "dark",
+    "genre": null,
+    "subgenre": null,
+    "artist_reference": null,
+    "track_reference": null,
+    "era": null,
+    "techniques": [
+      "distortion",
+      "filter",
+      "lfo",
+      "modulation",
+      "fm"
+    ],
+    "reference_sources": [
+      "yt_k6OBzXdcFtA"
+    ]
+  },
+  "admission": {
+    "admitted": true,
+    "reason": "MCP_HOST_MAP_QUALIFIED",
+    "resolution_status": "mcp_qualified",
+    "mcp_plan": {
+      "status": "PLAN_READY",
+      "semantic_target_name": "Filter.Cutoff",
+      "capability_key": "filter_field_cutoff",
+      "host_param_index": 11,
+      "host_param_label": "Filter 1 Freq",
+      "host_param_description": "Filter 1 cutoff frequency",
+      "track_index": 0,
+      "device_index": 0,
+      "value_kind": "relative",
+      "value": -0.2,
+      "execution_steps": [
+        "1. get_device_parameters(track_index=0, device_index=0)",
+        "2. read current value at param index 11 ('Filter 1 Freq')",
+        "3. resolve_host_value(current, kind='relative', value=-0.2)",
+        "4. set_device_parameter(track_index=0, device_index=0, parameter=11, value=<resolved>)",
+        "5. get_device_parameters again \u2192 readback to verify write",
+        "6. make_audit_record(plan, before, after)"
+      ]
+    }
+  },
+  "preset_path": "C:\\Users\\Satvik\\Documents\\Xfer\\Serum 2 Presets\\Presets\\User\\BA - Dark Growl.SerumPreset",
+  "preset_sha256": "509518f98a5b2f2a8e8807bfd8b24296fe710a5d3347027e34c7875458557358",
+  "serum_ui_evidence": {
+    "preset_name_confirmed": "BA - Dark Growl",
+    "serum_version": "2.0.21",
+    "controls_matched": true,
+    "mutation_applied": null,
+    "evidence_notes": "Loaded via Serum preset browser (User bank) onto track 7-Serum 2 in Ableton Live 12.3. Visually confirmed: FM oscillator mode on Osc A/B (unison=3, matches growl-bass intent), Filter 1 = Low 24 lowpass with cutoff visibly low (dark character), artist=serum-mcp, description matches dark dubstep bass intent."
+  },
+  "ableton_evidence": {
+    "track_index": 6,
+    "track_name": "R1 Dark Growl Bass",
+    "clip_info": {
+      "length": 16.0,
+      "is_midi_clip": true,
+      "signature_numerator": 4,
+      "signature_denominator": 4
+    },
+    "arrangement_clips": [
+      {
+        "start_time": 0.0,
+        "end_time": 16.0,
+        "length": 16.0
+      },
+      {
+        "start_time": 16.0,
+        "end_time": 32.0,
+        "length": 16.0
+      },
+      {
+        "start_time": 32.0,
+        "end_time": 48.0,
+        "length": 16.0
+      },
+      {
+        "start_time": 48.0,
+        "end_time": 64.0,
+        "length": 16.0
+      }
+    ]
+  },
+  "render_path": "C:\\Users\\Satvik\\OneDrive\\Dokumen\\Ableton\\Live Recordings\\2026-09-18 174100 Temp Project\\Samples\\Recorded\\Bounce 0001 [2026-09-19 003333].wav",
+  "measurements": {
+    "status": "MEASURED",
+    "acoustic_status": "UNSUPPORTED_FORMAT",
+    "file_size_bytes": 8113232,
+    "duration_sec": 30.66,
+    "channels": 2,
+    "sample_rate": 44100,
+    "sha256": "c9a238a39c4621c6c295147deb0b48f06d7cee3d8452f83008d0743a3df07b28",
+    "rms_db": -120.0,
+    "peak_db": -120.0,
+    "spectral_centroid_hz": 0.0
+  },
+  "completed_at": "2026-09-18T19:04:20.155160+00:00",
+  "semantic_target": null,
+  "human_intent": "create a dark bass sound",
+  "decision": "COMPLETED",
+  "measurement_delta": null,
+  "learning_eligible": true
+}

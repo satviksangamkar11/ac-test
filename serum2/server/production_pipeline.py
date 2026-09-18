@@ -845,10 +845,33 @@ def _measure(render_path: Optional[str]) -> Dict[str, Any]:
     import numpy as np
 
     acoustic = {"rms_db": _DB_FLOOR, "peak_db": _DB_FLOOR, "spectral_centroid_hz": 0.0}
-    acoustic_status = "UNSUPPORTED_FORMAT"  # e.g. 24-bit/float WAV, not in dtype_map
+    acoustic_status = "UNSUPPORTED_FORMAT"  # e.g. 32-bit float WAV, not covered below
     dtype_map = {1: np.int8, 2: np.int16, 4: np.int32}
     dtype = dtype_map.get(sampwidth)
-    if dtype is not None and raw:
+    if raw and sampwidth == 3:
+        # 24-bit PCM: numpy has no native int24 dtype (found live during the
+        # R1 fresh-source run — Ableton's record_section exports 24-bit by
+        # default, which UNSUPPORTED_FORMAT correctly flagged rather than
+        # silently reporting fake numbers). Manually sign-extend each
+        # 3-byte little-endian sample into a 4-byte int32.
+        try:
+            raw_bytes = np.frombuffer(raw, dtype=np.uint8)
+            n_samples = raw_bytes.size // 3
+            raw_bytes = raw_bytes[: n_samples * 3].reshape(-1, 3)
+            padded = np.zeros((n_samples, 4), dtype=np.uint8)
+            padded[:, :3] = raw_bytes
+            sign = (raw_bytes[:, 2] & 0x80) != 0
+            padded[sign, 3] = 0xFF
+            ints = padded.view(np.int32).flatten()
+            if channels > 1:
+                ints = ints.reshape(-1, channels).mean(axis=1)
+            max_val = float(2 ** 23)
+            samples = ints.astype(np.float64) / max_val
+            acoustic = _acoustic_measurements(samples, rate)
+            acoustic_status = "COMPUTED"
+        except Exception:
+            acoustic_status = "ERROR"
+    elif dtype is not None and raw:
         try:
             ints = np.frombuffer(raw, dtype=dtype)
             if channels > 1:
@@ -857,7 +880,7 @@ def _measure(render_path: Optional[str]) -> Dict[str, Any]:
             samples = ints.astype(np.float64) / max_val
             acoustic = _acoustic_measurements(samples, rate)
             acoustic_status = "COMPUTED"
-        except Exception as e:
+        except Exception:
             acoustic_status = "ERROR"
 
     return {
