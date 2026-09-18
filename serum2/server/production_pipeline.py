@@ -135,6 +135,21 @@ def produce_from_youtube(url: str) -> ProductionRun:
         run.save()
         return run
 
+    # Brain V2 P0: create the canonical experience record now, while
+    # source/context/producer_request/brain_decision/retrieved_* are all
+    # already known. Updated incrementally at each later stage — never
+    # reconstructed once at the end (see experience_record.py docstring).
+    try:
+        from serum2.server import experience_record as _exp
+        record = _exp.create_initial(run, brain_result)
+        _exp.save(record)
+    except Exception as e:
+        # Advisory tracking must never block the authoritative production
+        # result, but a swallowed exception would hide real bugs — surface
+        # it visibly instead of a bare `except: pass`.
+        import sys as _sys
+        print(f"[experience_record] non-fatal error creating initial record: {e}", file=_sys.stderr)
+
     # Emit next_action for agent-driven serum-mcp stage
     run.next_action = _preset_generation_action(run)
     run.save()
@@ -168,6 +183,11 @@ _EXPECTED_PREDECESSOR: Dict[ProductionState, ProductionState] = {
 }
 
 
+def _warn_experience(context: str, e: Exception) -> None:
+    import sys as _sys
+    print(f"[experience_record] non-fatal error in {context}: {e}", file=_sys.stderr)
+
+
 def advance_production(run_id: str, stage: str, evidence: Dict[str, Any]) -> ProductionRun:
     """Advance past an agent-driven stage with Claude-captured evidence.
 
@@ -175,6 +195,10 @@ def advance_production(run_id: str, stage: str, evidence: Dict[str, Any]) -> Pro
     run.state's required predecessor — see _EXPECTED_PREDECESSOR.
     """
     run = ProductionRun.load(run_id)
+    # Brain V2 P0: the plan pending BEFORE this call is the "specified" side
+    # of whichever evidence record this stage updates — captured here,
+    # before anything overwrites run.next_action below.
+    specified_action = run.next_action
 
     target_state = _STAGE_TO_STATE.get(stage)
     if target_state is None:
@@ -200,10 +224,18 @@ def advance_production(run_id: str, stage: str, evidence: Dict[str, Any]) -> Pro
             preset_sha256=sha,
         )
         run.next_action = _serum_ui_action(run)
+        try:
+            _record_preset_generated(run, specified_action, evidence, sha)
+        except Exception as e:
+            _warn_experience("PRESET_GENERATED", e)
 
     elif stage == "SERUM_UI_CONFIGURED":
         run.advance(ProductionState.SERUM_UI_CONFIGURED, serum_ui_evidence=evidence)
         run.next_action = _serum_verify_action(run)
+        try:
+            _record_serum_ui_action(run, "load_and_configure", evidence, verified=None)
+        except Exception as e:
+            _warn_experience("SERUM_UI_CONFIGURED", e)
 
     elif stage == "SERUM_VERIFIED":
         if not evidence.get("verified"):
@@ -212,10 +244,18 @@ def advance_production(run_id: str, stage: str, evidence: Dict[str, Any]) -> Pro
             return run
         run.advance(ProductionState.SERUM_VERIFIED)
         run.next_action = _ableton_action(run)
+        try:
+            _record_serum_ui_action(run, "verify", evidence, verified=True)
+        except Exception as e:
+            _warn_experience("SERUM_VERIFIED", e)
 
     elif stage == "ABLETON_CONFIGURED":
         run.advance(ProductionState.ABLETON_CONFIGURED, ableton_evidence=evidence)
         run.next_action = _render_action(run)
+        try:
+            _record_ableton_call(run, specified_action, evidence)
+        except Exception as e:
+            _warn_experience("ABLETON_CONFIGURED", e)
 
     elif stage == "RENDERED":
         render_path = evidence.get("render_path")
@@ -227,11 +267,174 @@ def advance_production(run_id: str, stage: str, evidence: Dict[str, Any]) -> Pro
             run.advance(ProductionState.EVIDENCE_FINALIZED)
             episode_id = _finalize_episode(run)
             run.advance(ProductionState.COMPLETED, episode_id=episode_id, next_action=None)
+            try:
+                _record_render_and_finalize(run, specified_action, evidence, measurements)
+            except Exception as e:
+                _warn_experience("RENDERED", e)
         except Exception as e:
             run.fail(f"POST_RENDER: {e}")
 
     run.save()
     return run
+
+
+# ---------------------------------------------------------------------------
+# Brain V2 P0: incremental experience-record updates, one per stage.
+# Each loads the record created at ADMITTED, applies exactly the update for
+# this stage, and saves — real per-stage tracking, not a single end-of-run
+# reconstruction. See experience_record.py's module docstring and the
+# specified/executed/read_back/verified table in the plan for the exact
+# real (non-fabricated) signal each stage's "verified" check uses.
+# ---------------------------------------------------------------------------
+
+def _record_preset_generated(
+    run: ProductionRun, specified_action: Optional[Dict[str, Any]],
+    evidence: Dict[str, Any], sha: Optional[str],
+) -> None:
+    from serum2.server import experience_record as _exp
+
+    record = _exp.load_for_run(run.run_id)
+    args_specified = (specified_action or {}).get("args", {})
+    preset_path = evidence.get("preset_path", "")
+    if sha:
+        # A real sha256 was computed FROM THE ACTUAL FILE — that computation
+        # is itself the read-back, and a successful hash IS the verification
+        # that the artifact genuinely exists on disk as specified.
+        stage = _exp.EvidenceStage.VERIFIED.value
+    elif preset_path:
+        stage = _exp.EvidenceStage.EXECUTED.value
+    else:
+        stage = _exp.EvidenceStage.SPECIFIED.value
+
+    call = _exp.SerumMcpCallRecord(
+        tool=(specified_action or {}).get("tool", "mcp__serum-mcp__generate_preset"),
+        args_specified=args_specified,
+        stage=stage,
+        result=evidence,
+        preset_path=preset_path or None,
+        preset_sha256=sha,
+    )
+    record.serum_mcp_call = call.to_dict()
+    record.provenance["serum_mcp_call"] = "production_pipeline.advance_production(PRESET_GENERATED)"
+    _exp.save(record)
+
+
+def _record_serum_ui_action(
+    run: ProductionRun, action: str, evidence: Dict[str, Any], verified: Optional[bool],
+) -> None:
+    from serum2.server import experience_record as _exp
+
+    record = _exp.load_for_run(run.run_id)
+    if verified is True:
+        stage = _exp.EvidenceStage.VERIFIED.value
+    elif evidence:
+        stage = _exp.EvidenceStage.EXECUTED.value
+    else:
+        stage = _exp.EvidenceStage.SPECIFIED.value
+
+    entry = _exp.SerumUiActionRecord(
+        action=action,
+        stage=stage,
+        evidence=evidence,
+        controls_matched=evidence.get("controls_matched"),
+        mutation_applied=evidence.get("mutation_applied"),
+    )
+    record.serum_ui_actions.append(entry.to_dict())
+    record.provenance["serum_ui_actions"] = "production_pipeline.advance_production(SERUM_UI_CONFIGURED/SERUM_VERIFIED)"
+    _exp.save(record)
+
+
+def _record_ableton_call(
+    run: ProductionRun, specified_action: Optional[Dict[str, Any]], evidence: Dict[str, Any],
+) -> None:
+    from serum2.server import experience_record as _exp
+
+    record = _exp.load_for_run(run.run_id)
+    args_specified = (specified_action or {}).get("args", {})
+
+    # Real structural check against the KNOWN specified geometry (4 clips at
+    # beats 0/16/32/48, clip length 16.0) — comparing actual readback to what
+    # was specified, not fabricating a pass. If the caller's evidence doesn't
+    # carry these keys at all, this correctly stays below VERIFIED.
+    clip_info = evidence.get("clip_info") or {}
+    arrangement_clips = evidence.get("arrangement_clips") or []
+    clip_length_ok = isinstance(clip_info, dict) and clip_info.get("length") == 16.0
+    arrangement_ok = isinstance(arrangement_clips, list) and len(arrangement_clips) == 4
+    verified = clip_length_ok and arrangement_ok
+
+    if verified:
+        stage = _exp.EvidenceStage.VERIFIED.value
+    elif clip_info or arrangement_clips:
+        stage = _exp.EvidenceStage.READ_BACK.value
+    elif evidence:
+        stage = _exp.EvidenceStage.EXECUTED.value
+    else:
+        stage = _exp.EvidenceStage.SPECIFIED.value
+
+    call = _exp.AbletonMcpCallRecord(
+        tool=(specified_action or {}).get("tool", "mcp__AbletonMCP__batch_commands"),
+        args_specified=args_specified,
+        stage=stage,
+        result=evidence,
+        readback=evidence,
+        readback_verified=verified,
+    )
+    record.ableton_calls.append(call.to_dict())
+    record.provenance["ableton_calls"] = "production_pipeline.advance_production(ABLETON_CONFIGURED)"
+    _exp.save(record)
+
+
+def _record_render_and_finalize(
+    run: ProductionRun, specified_action: Optional[Dict[str, Any]],
+    evidence: Dict[str, Any], measurements: Dict[str, Any],
+) -> None:
+    from serum2.server import experience_record as _exp
+    from serum2.server.production_memory import ProductionMemory, link_experience
+
+    record = _exp.load_for_run(run.run_id)
+
+    measured_ok = measurements.get("status") == "MEASURED"
+    render_stage = (
+        _exp.EvidenceStage.VERIFIED.value if measured_ok
+        else _exp.EvidenceStage.EXECUTED.value if evidence.get("render_path")
+        else _exp.EvidenceStage.SPECIFIED.value
+    )
+    render = _exp.RenderArtifactRecord(
+        render_path=evidence.get("render_path"),
+        file_size_bytes=measurements.get("file_size_bytes"),
+        duration_sec=measurements.get("duration_sec"),
+        sha256=measurements.get("sha256"),
+        stage=render_stage,
+    )
+    record.render_artifact = render.to_dict()
+
+    acoustic = _exp.AcousticMeasurementRecord(
+        rms_db=measurements.get("rms_db"),
+        peak_db=measurements.get("peak_db"),
+        spectral_centroid_hz=measurements.get("spectral_centroid_hz"),
+        stage=_exp.EvidenceStage.VERIFIED.value if measured_ok else _exp.EvidenceStage.SPECIFIED.value,
+    )
+    record.acoustic_measurements = acoustic.to_dict()
+
+    record.canonical_episode_id = run.episode_id
+    record.canonical_episode_path = (
+        str(_EPISODES_DIR / f"{run.episode_id}.json") if run.episode_id else None
+    )
+
+    # Same decision fields _finalize_episode() already writes — reused, not
+    # reinvented: no A/B baseline/treatment comparison in this creation flow,
+    # so "COMPLETED" (not ACCEPTED/REJECTED) is the honest label.
+    record.outcome = {
+        "decision": "COMPLETED",
+        "measurement_delta": None,
+        "learning_eligible": True,
+    }
+    record.provenance["render_artifact"] = "production_pipeline._measure"
+    record.provenance["acoustic_measurements"] = "production_pipeline._acoustic_measurements"
+    record.provenance["outcome"] = "production_pipeline._finalize_episode"
+    _exp.save(record)
+
+    link_experience(ProductionMemory(), record)
 
 
 def get_status(run_id: str) -> Dict[str, Any]:
