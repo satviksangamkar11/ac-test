@@ -263,6 +263,12 @@ def advance_production(run_id: str, stage: str, evidence: Dict[str, Any]) -> Pro
         # Auto-advance: measure → evidence-finalize → episode → complete
         try:
             measurements = _measure(render_path)
+            if measurements.get("status") not in ("MEASURED",):
+                # A render that can't even be read as a WAV must not
+                # silently complete with fabricated measurement values.
+                run.fail(f"MEASUREMENT_FAILED: {measurements.get('status')} — {measurements.get('error', '')}")
+                run.save()
+                return run
             run.advance(ProductionState.MEASURED, measurements=measurements)
             run.advance(ProductionState.EVIDENCE_FINALIZED)
             episode_id = _finalize_episode(run)
@@ -393,9 +399,16 @@ def _record_render_and_finalize(
 
     record = _exp.load_for_run(run.run_id)
 
-    measured_ok = measurements.get("status") == "MEASURED"
+    # Artifact-level success (file exists, WAV header/samples readable) and
+    # acoustic-level success (real DSP actually computed from those samples)
+    # are separate criteria — a valid-but-unsupported-format WAV can be
+    # MEASURED (real duration/rate/sha256) while acoustic_status stays
+    # UNSUPPORTED_FORMAT, and neither may claim VERIFIED on the other's behalf.
+    artifact_ok = measurements.get("status") == "MEASURED"
+    acoustic_ok = measurements.get("acoustic_status") == "COMPUTED"
+
     render_stage = (
-        _exp.EvidenceStage.VERIFIED.value if measured_ok
+        _exp.EvidenceStage.VERIFIED.value if artifact_ok
         else _exp.EvidenceStage.EXECUTED.value if evidence.get("render_path")
         else _exp.EvidenceStage.SPECIFIED.value
     )
@@ -412,7 +425,7 @@ def _record_render_and_finalize(
         rms_db=measurements.get("rms_db"),
         peak_db=measurements.get("peak_db"),
         spectral_centroid_hz=measurements.get("spectral_centroid_hz"),
-        stage=_exp.EvidenceStage.VERIFIED.value if measured_ok else _exp.EvidenceStage.SPECIFIED.value,
+        stage=_exp.EvidenceStage.VERIFIED.value if acoustic_ok else _exp.EvidenceStage.SPECIFIED.value,
     )
     record.acoustic_measurements = acoustic.to_dict()
 
@@ -793,43 +806,68 @@ def _acoustic_measurements(samples, sample_rate: int) -> Dict[str, float]:
 
 
 def _measure(render_path: Optional[str]) -> Dict[str, Any]:
+    """Artifact checks (exists/readable/duration/rate/channels/sha256) are a
+    distinct success criterion from real acoustic DSP computation — they are
+    tracked separately (status vs acoustic_status) so a corrupted/unreadable
+    WAV or an unsupported sample format can never be silently reported as a
+    successful measurement with fabricated floor-value numbers standing in
+    for real analysis. Previously `status` was unconditionally "MEASURED"
+    even when the try block failed and fell through to fallback defaults —
+    that made "measured" true on total failure, which is exactly what the
+    VERIFIED-only-on-real-success provenance rule must never allow.
+    """
     if not render_path:
         return {"status": "NO_RENDER"}
     p = Path(render_path)
     if not p.exists():
         return {"status": "FILE_NOT_FOUND", "path": render_path}
     size = p.stat().st_size
-    try:
-        import wave
-        import numpy as np
+    sha = _sha256(render_path)
 
+    import wave
+    try:
         with wave.open(str(p), "rb") as wf:
             duration = wf.getnframes() / wf.getframerate()
             channels = wf.getnchannels()
             rate = wf.getframerate()
             sampwidth = wf.getsampwidth()
             raw = wf.readframes(wf.getnframes())
+    except Exception as e:
+        # Artifact itself is not even readable as a WAV — this must NOT be
+        # reported as "MEASURED" with fabricated numbers.
+        return {
+            "status": "MEASUREMENT_ERROR",
+            "error": f"{type(e).__name__}: {e}",
+            "file_size_bytes": size,
+            "sha256": sha,
+        }
 
-        dtype_map = {1: np.int8, 2: np.int16, 4: np.int32}
-        dtype = dtype_map.get(sampwidth)
-        acoustic = {"rms_db": _DB_FLOOR, "peak_db": _DB_FLOOR, "spectral_centroid_hz": 0.0}
-        if dtype is not None and raw:
+    import numpy as np
+
+    acoustic = {"rms_db": _DB_FLOOR, "peak_db": _DB_FLOOR, "spectral_centroid_hz": 0.0}
+    acoustic_status = "UNSUPPORTED_FORMAT"  # e.g. 24-bit/float WAV, not in dtype_map
+    dtype_map = {1: np.int8, 2: np.int16, 4: np.int32}
+    dtype = dtype_map.get(sampwidth)
+    if dtype is not None and raw:
+        try:
             ints = np.frombuffer(raw, dtype=dtype)
             if channels > 1:
                 ints = ints.reshape(-1, channels).mean(axis=1)
             max_val = float(2 ** (8 * sampwidth - 1))
             samples = ints.astype(np.float64) / max_val
             acoustic = _acoustic_measurements(samples, rate)
-    except Exception:
-        duration = channels = rate = 0
-        acoustic = {"rms_db": _DB_FLOOR, "peak_db": _DB_FLOOR, "spectral_centroid_hz": 0.0}
+            acoustic_status = "COMPUTED"
+        except Exception as e:
+            acoustic_status = "ERROR"
+
     return {
         "status": "MEASURED",
+        "acoustic_status": acoustic_status,
         "file_size_bytes": size,
         "duration_sec": round(duration, 2),
         "channels": channels,
         "sample_rate": rate,
-        "sha256": _sha256(render_path),
+        "sha256": sha,
         **acoustic,
     }
 

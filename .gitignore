@@ -5,3 +5,6 @@ __pycache__/
 # Large generated/cache artifacts — never commit these
 experiments/_corpus_cache.pkl
 *.corpus_cache.pkl
+
+# Runtime-generated production data (renders, episodes, experiences, memory)
+serum2/data/
