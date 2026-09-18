@@ -1,0 +1,287 @@
+{
+  "timestamp": "2026-09-18T13:13:21.707153",
+  "source": "D:\\ableton claude",
+  "destination": "D:\\ableton claude final best",
+  "files": [
+    {
+      "path": "CORPUS_CACHE_FIXTURE_MANIFEST.md",
+      "subsystem": "unknown",
+      "purpose": "Proven canonical runtime",
+      "why_copied": "Direct dependency or proven layer",
+      "status": "included"
+    },
+    {
+      "path": "PHASE4_CORRECTED_SPEC.md",
+      "subsystem": "unknown",
+      "purpose": "Proven canonical runtime",
+      "why_copied": "Direct dependency or proven layer",
+      "status": "included"
+    },
+    {
+      "path": "SERUM_CONTROL_LAYER_CLOSURE_REPORT.md",
+      "subsystem": "unknown",
+      "purpose": "Proven canonical runtime",
+      "why_copied": "Direct dependency or proven layer",
+      "status": "included"
+    },
+    {
+      "path": "SERUM_CONTROL_LAYER_MATRIX.json",
+      "subsystem": "unknown",
+      "purpose": "Proven canonical runtime",
+      "why_copied": "Direct dependency or proven layer",
+      "status": "included"
+    },
+    {
+      "path": "SERUM_CONTROL_LAYER_MATRIX.md",
+      "subsystem": "unknown",
+      "purpose": "Proven canonical runtime",
+      "why_copied": "Direct dependency or proven layer",
+      "status": "included"
+    },
+    {
+      "path": "experiments/_capability_contracts.pkl",
+      "subsystem": "unknown",
+      "purpose": "Proven canonical runtime",
+      "why_copied": "Direct dependency or proven layer",
+      "status": "included"
+    },
+    {
+      "path": "experiments/_corpus_cache.pkl",
+      "subsystem": "unknown",
+      "purpose": "Proven canonical runtime",
+      "why_copied": "Direct dependency or proven layer",
+      "status": "included"
+    },
+    {
+      "path": "serum2/__init__.py",
+      "subsystem": "Runtime Infrastructure",
+      "purpose": "Proven canonical runtime",
+      "why_copied": "Direct dependency or proven layer",
+      "status": "included"
+    },
+    {
+      "path": "serum2/bridge.py",
+      "subsystem": "Runtime Infrastructure",
+      "purpose": "Proven canonical runtime",
+      "why_copied": "Direct dependency or proven layer",
+      "status": "included"
+    },
+    {
+      "path": "serum2/codec.py",
+      "subsystem": "Runtime Infrastructure",
+      "purpose": "Proven canonical runtime",
+      "why_copied": "Direct dependency or proven layer",
+      "status": "included"
+    },
+    {
+      "path": "serum2/compiler/context.py",
+      "subsystem": "Compiler (targets, context, intent)",
+      "purpose": "Proven canonical runtime",
+      "why_copied": "Direct dependency or proven layer",
+      "status": "included"
+    },
+    {
+      "path": "serum2/compiler/mcp_intent.py",
+      "subsystem": "Compiler (targets, context, intent)",
+      "purpose": "Proven canonical runtime",
+      "why_copied": "Direct dependency or proven layer",
+      "status": "included"
+    },
+    {
+      "path": "serum2/compiler/producer.py",
+      "subsystem": "Compiler (targets, context, intent)",
+      "purpose": "Proven canonical runtime",
+      "why_copied": "Direct dependency or proven layer",
+      "status": "included"
+    },
+    {
+      "path": "serum2/compiler/targets.py",
+      "subsystem": "Compiler (targets, context, intent)",
+      "purpose": "Proven canonical runtime",
+      "why_copied": "Direct dependency or proven layer",
+      "status": "included"
+    },
+    {
+      "path": "serum2/evidence/admission.py",
+      "subsystem": "Evidence & Authority System",
+      "purpose": "Proven canonical runtime",
+      "why_copied": "Direct dependency or proven layer",
+      "status": "included"
+    },
+    {
+      "path": "serum2/evidence/capability_contract.py",
+      "subsystem": "Evidence & Authority System",
+      "purpose": "Proven canonical runtime",
+      "why_copied": "Direct dependency or proven layer",
+      "status": "included"
+    },
+    {
+      "path": "serum2/evidence/claim.py",
+      "subsystem": "Evidence & Authority System",
+      "purpose": "Proven canonical runtime",
+      "why_copied": "Direct dependency or proven layer",
+      "status": "included"
+    },
+    {
+      "path": "serum2/evidence/record.py",
+      "subsystem": "Evidence & Authority System",
+      "purpose": "Proven canonical runtime",
+      "why_copied": "Direct dependency or proven layer",
+      "status": "included"
+    },
+    {
+      "path": "serum2/knowledge/step_6_10_episode_generation.py",
+      "subsystem": "Knowledge Layer (frozen)",
+      "purpose": "Proven canonical runtime",
+      "why_copied": "Direct dependency or proven layer",
+      "status": "included"
+    },
+    {
+      "path": "serum2/knowledge/step_6_11_closed_loop_proof.py",
+      "subsystem": "Knowledge Layer (frozen)",
+      "purpose": "Proven canonical runtime",
+      "why_copied": "Direct dependency or proven layer",
+      "status": "included"
+    },
+    {
+      "path": "serum2/knowledge/step_6_2_universal_production_intent.py",
+      "subsystem": "Knowledge Layer (frozen)",
+      "purpose": "Proven canonical runtime",
+      "why_copied": "Direct dependency or proven layer",
+      "status": "included"
+    },
+    {
+      "path": "serum2/knowledge/step_6_3_episode_context_integration.py",
+      "subsystem": "Knowledge Layer (frozen)",
+      "purpose": "Proven canonical runtime",
+      "why_copied": "Direct dependency or proven layer",
+      "status": "included"
+    },
+    {
+      "path": "serum2/knowledge/step_6_4_semantic_reasoning_integration.py",
+      "subsystem": "Knowledge Layer (frozen)",
+      "purpose": "Proven canonical runtime",
+      "why_copied": "Direct dependency or proven layer",
+      "status": "included"
+    },
+    {
+      "path": "serum2/knowledge/step_6_5_advisory_decision_engine.py",
+      "subsystem": "Knowledge Layer (frozen)",
+      "purpose": "Proven canonical runtime",
+      "why_copied": "Direct dependency or proven layer",
+      "status": "included"
+    },
+    {
+      "path": "serum2/knowledge/step_6_6_capability_resolution.py",
+      "subsystem": "Knowledge Layer (frozen)",
+      "purpose": "Proven canonical runtime",
+      "why_copied": "Direct dependency or proven layer",
+      "status": "included"
+    },
+    {
+      "path": "serum2/knowledge/step_6_7_admission_handoff.py",
+      "subsystem": "Knowledge Layer (frozen)",
+      "purpose": "Proven canonical runtime",
+      "why_copied": "Direct dependency or proven layer",
+      "status": "included"
+    },
+    {
+      "path": "serum2/knowledge/step_6_8_contract_governed_execution.py",
+      "subsystem": "Knowledge Layer (frozen)",
+      "purpose": "Proven canonical runtime",
+      "why_copied": "Direct dependency or proven layer",
+      "status": "included"
+    },
+    {
+      "path": "serum2/knowledge/step_6_9_outcome_attribution.py",
+      "subsystem": "Knowledge Layer (frozen)",
+      "purpose": "Proven canonical runtime",
+      "why_copied": "Direct dependency or proven layer",
+      "status": "included"
+    },
+    {
+      "path": "serum2/pathmerge.py",
+      "subsystem": "Runtime Infrastructure",
+      "purpose": "Proven canonical runtime",
+      "why_copied": "Direct dependency or proven layer",
+      "status": "included"
+    },
+    {
+      "path": "serum2/producer/contract_registry.py",
+      "subsystem": "Producer Brain & Routes",
+      "purpose": "Proven canonical runtime",
+      "why_copied": "Direct dependency or proven layer",
+      "status": "included"
+    },
+    {
+      "path": "serum2/producer/episode_retrieval.py",
+      "subsystem": "Producer Brain & Routes",
+      "purpose": "Proven canonical runtime",
+      "why_copied": "Direct dependency or proven layer",
+      "status": "included"
+    },
+    {
+      "path": "serum2/producer/knowledge_retrieval_adapter.py",
+      "subsystem": "Producer Brain & Routes",
+      "purpose": "Proven canonical runtime",
+      "why_copied": "Direct dependency or proven layer",
+      "status": "included"
+    },
+    {
+      "path": "serum2/producer/producer_brain.py",
+      "subsystem": "Producer Brain & Routes",
+      "purpose": "Proven canonical runtime",
+      "why_copied": "Direct dependency or proven layer",
+      "status": "included"
+    },
+    {
+      "path": "serum2/producer/route_selection.py",
+      "subsystem": "Producer Brain & Routes",
+      "purpose": "Proven canonical runtime",
+      "why_copied": "Direct dependency or proven layer",
+      "status": "included"
+    },
+    {
+      "path": "serum2/producer/test_producer_brain.py",
+      "subsystem": "Producer Brain & Routes",
+      "purpose": "Proven canonical runtime",
+      "why_copied": "Direct dependency or proven layer",
+      "status": "included"
+    },
+    {
+      "path": "serum2/producer/test_route_selection.py",
+      "subsystem": "Producer Brain & Routes",
+      "purpose": "Proven canonical runtime",
+      "why_copied": "Direct dependency or proven layer",
+      "status": "included"
+    },
+    {
+      "path": "serum2/qualification/body_state_mapping.json",
+      "subsystem": "Qualification/Bindings",
+      "purpose": "Proven canonical runtime",
+      "why_copied": "Direct dependency or proven layer",
+      "status": "included"
+    },
+    {
+      "path": "serum2/qualification/semantic_vst3_mapping.json",
+      "subsystem": "Qualification/Bindings",
+      "purpose": "Proven canonical runtime",
+      "why_copied": "Direct dependency or proven layer",
+      "status": "included"
+    },
+    {
+      "path": "serum2/statemodel.py",
+      "subsystem": "Runtime Infrastructure",
+      "purpose": "Proven canonical runtime",
+      "why_copied": "Direct dependency or proven layer",
+      "status": "included"
+    },
+    {
+      "path": "serum2/vst3_state.py",
+      "subsystem": "Runtime Infrastructure",
+      "purpose": "Proven canonical runtime",
+      "why_copied": "Direct dependency or proven layer",
+      "status": "included"
+    }
+  ]
+}

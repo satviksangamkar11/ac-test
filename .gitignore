@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+*.pyo
+
+# Large generated/cache artifacts — never commit these
+experiments/_corpus_cache.pkl
+*.corpus_cache.pkl

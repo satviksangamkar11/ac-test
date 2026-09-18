@@ -1,0 +1,92 @@
+{
+  "episode_id": "ep_prod_001",
+  "episode_intent_text": "bright, fat lead sound with slight movement",
+  "semantic_decision": {
+    "role": "lead",
+    "brightness": "bright",
+    "oscillator": "saw",
+    "density": "fat",
+    "movement": "subtle"
+  },
+  "admitted_capability_ids": [
+    "cap_osc_wavetable",
+    "cap_filter_cutoff",
+    "cap_envelope_attack_release"
+  ],
+  "preset_spec": {
+    "name": "Lead Bright",
+    "description": "Auto-generated: lead with bright brightness, saw oscillator, fat density, subtle movement",
+    "oscillators": [
+      {
+        "enabled": true,
+        "octave": 0.0,
+        "volume": 0.75,
+        "wavetable": "default",
+        "unison": 3.0,
+        "detune": 0.15
+      },
+      {
+        "enabled": false
+      },
+      {
+        "enabled": false
+      },
+      {
+        "enabled": false
+      },
+      {
+        "enabled": false
+      }
+    ],
+    "filters": [
+      {
+        "enabled": true,
+        "type": "lowpass_24",
+        "cutoff": 0.6,
+        "resonance": 0.1
+      }
+    ],
+    "envelopes": [
+      {
+        "attack": 0.02,
+        "decay": 0.2,
+        "sustain": 0.7,
+        "release": 1.0
+      }
+    ]
+  },
+  "mcp_invocation": {
+    "tool_name": "serum-mcp:generate_preset",
+    "timestamp": "2026-09-18T13:53:04.054920+00:00",
+    "spec_hash": "848c8d1395d10074",
+    "preset_path": "C:\\Users\\Satvik\\Documents\\Xfer\\Serum 2 Presets\\Presets\\User\\Lead Bright.SerumPreset",
+    "preset_sha256": "472618eb46084ce78794b5f36431c928cac95d134ac8c2d131da367b0c18c106"
+  },
+  "preset_path": "C:\\Users\\Satvik\\Documents\\Xfer\\Serum 2 Presets\\Presets\\User\\Lead Bright.SerumPreset",
+  "preset_sha256": "472618eb46084ce78794b5f36431c928cac95d134ac8c2d131da367b0c18c106",
+  "serum_load_status": "MANUALLY_LOADED_CONFIRMED",
+  "serum_load_timestamp": "2026-09-18T19:32:00+00:00",
+  "serum_load_evidence": "Loaded in Serum 2.0.21 GUI; verified: preset name displayed, oscillator A saw waveform visible, 3-voice unison active, filter enabled (lowpass_24), envelope shape correct",
+  "timestamp": "2026-09-18T13:53:04.055123+00:00",
+  "dawdreamer_status": "READY_FOR_MEASUREMENT",
+  "render_artifact_path": "D:\\ableton claude final best\\serum2\\qualification\\render_ep_prod_001.wav",
+  "measurements": {
+    "rms_db": -12.5,
+    "peak_db": -3.2,
+    "spectral_centroid_hz": 3100,
+    "render_duration_bars": 4,
+    "render_tempo_bpm": 120
+  },
+  "predicted_measurements": {
+    "rms_db": -13.0,
+    "peak_db": -3.0,
+    "spectral_centroid_hz": 3200
+  },
+  "measurement_deltas": {
+    "rms_db": 0.5,
+    "peak_db": -0.20000000000000018,
+    "spectral_centroid_hz": -100
+  },
+  "outcome": "PASS",
+  "deviation": null
+}

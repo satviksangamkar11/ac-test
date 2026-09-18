@@ -1,0 +1,31 @@
+{
+  "mapping_version": "16.5.69.2",
+  "comment": "Maps semantic capability keys (from targets.py) to actual VST3 parameter names from A1.1 dump",
+  "mappings": {
+    "oscillator_field_OSC-ENABLE": "A Enable",
+    "oscillator_field_OSC-OCTAVE": "A Octave",
+    "oscillator_field_OSC-VOLUME": "A Level",
+    "osc1_plain_param_level": "A Level",
+    "osc2_plain_param_level": "B Level",
+    "osc3_plain_param_level": "C Level",
+    "oscillator_field_OSC1-DETUNE": "A Uni Detune",
+    "oscillator_field_OSC2-DETUNE": "B Uni Detune",
+    "global_field_mastervolume": "Main Vol",
+    "filter_field_type": "Filter 1 Type",
+    "filter_field_cutoff": "Filter 1 Freq",
+    "filter_field_reso": "Filter 1 Res",
+    "envelope_field_attack": "Env 1 Attack",
+    "envelope_field_decay": "Env 1 Decay",
+    "envelope_field_release": "Env 1 Release",
+    "envelope_field_sustain": "Env 1 Sustain",
+    "fx_field_dist_drive": "Filter 1 Drive"
+  },
+  "notes": [
+    "This mapping is authoritative for 16.5.69 production qualification.",
+    "If a capability_key is not in this mapping, the target is NOT YET RESOLVED to VST3.",
+    "VST3 parameter names are case-sensitive and come from A1_1_vst3_parameter_surface.json.",
+    "Known gaps: FXEQ parameters (Freq1/Freq2/Reso1/Reso2/Gain1/Gain2/LevelOut) and OSC1.Wavetable",
+    "These gaps indicate either: (1) missing FX processing in Serum 2.0.21 VST3, (2) FX not exported via IEditController, or (3) different parameter naming",
+    "Audit phases A3–A7 will systematically expand this mapping and surface any truly unreachable targets."
+  ]
+}

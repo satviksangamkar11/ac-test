@@ -1,0 +1,44 @@
+{
+  "gate_id": "gate_2a_ableton_integration",
+  "episode_id": "ep_prod_001",
+  "golden_fixture_hash": "a5bbbfb",
+  "golden_fixture_preset_sha256": "472618eb46084ce78794b5f36431c928cac95d134ac8c2d131da367b0c18c106",
+  "serum_preset_path": "Lead Bright.SerumPreset",
+  "serum_load_status": "CONFIRMED",
+  "serum_vst3_instance": "Ableton Track 0 (Serum)",
+  "ableton_session_name": "Gate-2A: Lead Bright",
+  "ableton_track_name": "Serum Lead",
+  "ableton_midi_track_index": 0,
+  "midi_clip_duration_bars": 4,
+  "midi_notes_created": 4,
+  "midi_note_sequence": [
+    {
+      "pitch": 60,
+      "start": 0.0,
+      "duration": 1.0
+    },
+    {
+      "pitch": 62,
+      "start": 1.0,
+      "duration": 1.0
+    },
+    {
+      "pitch": 64,
+      "start": 2.0,
+      "duration": 1.0
+    },
+    {
+      "pitch": 65,
+      "start": 3.0,
+      "duration": 1.0
+    }
+  ],
+  "arrangement_duration_bars": 16,
+  "arrangement_tempo_bpm": 120,
+  "render_path": null,
+  "render_duration_seconds": null,
+  "render_output_rms_db": null,
+  "render_sample_rate": 44100,
+  "timestamp": "2026-09-18T15:30:51.586398+00:00",
+  "outcome": null
+}

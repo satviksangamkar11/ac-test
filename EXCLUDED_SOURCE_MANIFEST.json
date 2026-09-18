@@ -1,0 +1,50 @@
+{
+  "timestamp": "2026-09-18T13:13:21.708308",
+  "excluded_categories": [
+    {
+      "category": "behavior/",
+      "reason": "Diagnostics, not canonical",
+      "count": 0
+    },
+    {
+      "category": "coverage/",
+      "reason": "Reporting, historical",
+      "count": 0
+    },
+    {
+      "category": "reconciliation/",
+      "reason": "Phase 2D, not used",
+      "count": 0
+    },
+    {
+      "category": "operations/",
+      "reason": "Verify if used - exclude",
+      "count": 0
+    },
+    {
+      "category": "experiments/",
+      "reason": "Historical, non-canonical",
+      "count": 0
+    },
+    {
+      "category": "__pycache__/",
+      "reason": "Compiled Python cache",
+      "count": 0
+    },
+    {
+      "category": ".pytest_cache/",
+      "reason": "Pytest cache",
+      "count": 0
+    },
+    {
+      "category": "test_* (non-targeted)",
+      "reason": "Only 4 targeted tests copied",
+      "count": 0
+    },
+    {
+      "category": "YouTube resolver",
+      "reason": "Not imported by canonical producer",
+      "count": 0
+    }
+  ]
+}
