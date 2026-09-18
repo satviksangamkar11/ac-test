@@ -74,8 +74,11 @@ _INTENT_TO_CONCEPT: List[tuple[List[str], str, SemanticDirection]] = [
     (["attack", "faster attack", "slower attack", "attack longer",
       "attack shorter"],
      "envelope-attack", SemanticDirection.SHORTER),
-    # cutoff / filter
-    (["cutoff", "filter cutoff", "filter frequency", "brighter", "darker"],
+    # cutoff / filter (includes bare character adjectives for CREATE-mode
+    # creation intents, e.g. "create a dark bass sound" — not just the
+    # comparative "brighter"/"darker" used by mutation-style requests)
+    (["cutoff", "filter cutoff", "filter frequency",
+      "brighter", "darker", "bright", "dark", "warm"],
      "filter-cutoff", SemanticDirection.HIGHER),
     # oscillator volume (MCP-only bridge)
     (["osc volume", "osc1 volume", "osc 1 volume", "oscillator volume",
@@ -177,7 +180,16 @@ class ProducerRequest:
     """E.g. 'bass patch, ambient track'."""
 
     mode: str = "EXECUTE"
-    """EXECUTE | RECREATE_REFERENCE | DISCOVERY"""
+    """EXECUTE | CREATE | RECREATE_REFERENCE | DISCOVERY
+
+    CREATE is for creation-style requests ("make a dark bass lead") as
+    opposed to EXECUTE's mutation-style requests ("make the release
+    longer"). Both run through the identical concept-resolution ->
+    knowledge-retrieval -> route-selection -> admission chain; CREATE only
+    changes how the result is labeled (result.intent_class = "CREATION")
+    so callers know an admitted result seeds a new PresetSpec rather than
+    mutating an already-loaded one. See CREATION INTENT != MUTATION INTENT
+    in ProducerResult.intent_class."""
 
     advisory_context: Optional[Dict[str, Any]] = None
     """Advisory musical context from ProductionContext.to_dict().
@@ -253,6 +265,16 @@ class ProducerResult:
     ProducerBrain.finalize_mcp_execution(). A non-None value here is the
     only thing that may justify execution_status == 'EXECUTED' for the
     MCP route — a bare plan must never claim EXECUTED."""
+
+    # ---- intent classification ----
+    intent_class: str = "MUTATION"
+    """"MUTATION" | "CREATION". Set from request.mode (CREATE -> CREATION,
+    everything else -> MUTATION). CREATION INTENT != MUTATION INTENT: the
+    resolution/knowledge/admission computation is identical either way (the
+    same semantic-target authority chain governs both), but a CREATION
+    result's admitted semantic_target/direction/_mcp_plan means "seed value
+    for a new PresetSpec", never "go mutate the currently loaded preset".
+    Callers must branch on this field, not reinterpret MCP_PLAN_READY."""
 
     # ---- errors ----
     error: Optional[str] = None
@@ -839,6 +861,7 @@ class ProducerBrain:
     # ------------------------------------------------------------------
     def execute(self, request: ProducerRequest) -> ProducerResult:
         result = ProducerResult(request=request)
+        result.intent_class = "CREATION" if request.mode == "CREATE" else "MUTATION"
 
         try:
             # ---- source URL ingestion (STEP 6) ----

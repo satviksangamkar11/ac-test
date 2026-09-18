@@ -22,6 +22,15 @@ def _ensure_knowledge_path():
         sys.path.insert(0, kd)
 
 
+def _discover_canonical_stores() -> List[Path]:
+    """Find every per-source canonical KnowledgeItem store in the knowledge
+    dir. Newly ingested YouTube sources (serum2.knowledge.ingestion.
+    ingest_canonical) write {source_id}_canonical_knowledge_store_5_6.json
+    alongside the original demo store — same naming convention, multiple
+    files by design, discovered and queried together here."""
+    return sorted(_KNOWLEDGE_DIR.glob("*_canonical_knowledge_store_5_6.json"))
+
+
 def retrieve_knowledge_for_intent(
     intent_text: str,
     concept: Optional[str] = None,
@@ -72,26 +81,38 @@ def retrieve_knowledge_for_intent(
     from step_5_6_knowledge_store import KnowledgeStore
     from step_5_7_universal_retrieval import UniversalRetriever, UniversalQuery
 
-    path = store_path or str(_CANONICAL_STORE)
-    store = KnowledgeStore(store_path=path, create_if_missing=False)
-    retriever = UniversalRetriever(store)
+    if store_path:
+        store_paths = [Path(store_path)]
+    else:
+        store_paths = _discover_canonical_stores() or [_CANONICAL_STORE]
 
-    primary_query = UniversalQuery(
-        free_text=intent_text,
-        concept=concept,
-        technique=technique,
-        instrument=instrument,
-        role=role,
-    )
-    merged = list(retriever.retrieve(primary_query, top_k=top_k))
-    seen_ids = {r.knowledge_item.knowledge_item_id for r in merged}
+    merged = []
+    seen_ids = set()
 
-    for term in (context_terms or []):
-        term_query = UniversalQuery(free_text=term, instrument=instrument)
-        for r in retriever.retrieve(term_query, top_k=3):
+    for sp in store_paths:
+        if not sp.exists():
+            continue
+        store = KnowledgeStore(store_path=str(sp), create_if_missing=False)
+        retriever = UniversalRetriever(store)
+
+        primary_query = UniversalQuery(
+            free_text=intent_text,
+            concept=concept,
+            technique=technique,
+            instrument=instrument,
+            role=role,
+        )
+        for r in retriever.retrieve(primary_query, top_k=top_k):
             if r.knowledge_item.knowledge_item_id not in seen_ids:
                 merged.append(r)
                 seen_ids.add(r.knowledge_item.knowledge_item_id)
+
+        for term in (context_terms or []):
+            term_query = UniversalQuery(free_text=term, instrument=instrument)
+            for r in retriever.retrieve(term_query, top_k=3):
+                if r.knowledge_item.knowledge_item_id not in seen_ids:
+                    merged.append(r)
+                    seen_ids.add(r.knowledge_item.knowledge_item_id)
 
     merged.sort(key=lambda r: r.relevance_score, reverse=True)
     merged = merged[:top_k]

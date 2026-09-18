@@ -43,7 +43,12 @@ from serum2.server.state_machine import ProductionRun, ProductionState
 from serum2.server.production_context import ProductionContext, build_from_transcript
 
 _RENDERS_DIR = Path(__file__).parent.parent / "data" / "renders"
-_EPISODES_DIR = Path(__file__).parent.parent / "data" / "episodes"
+# Canonical episode read location (episode_retrieval.py's EPISODE_STORAGE_DIR).
+# NOT serum2/data/episodes/ (that dir holds ProductionRun state files,
+# prod_*.json, via state_machine.RUNS_DIR — a different concept). Production
+# episodes must land in qualification/ or the brain's episode-informed
+# reasoning (ProducerBrain._retrieve_episodes) never sees them.
+_EPISODES_DIR = Path(__file__).parent.parent / "qualification"
 
 
 # ---------------------------------------------------------------------------
@@ -84,10 +89,14 @@ def produce_from_youtube(url: str) -> ProductionRun:
         run.save()
         return run
 
-    # Stage 2: Knowledge ingestion (persistence layer — advisory, separate from brain's store)
+    # Stage 2: Canonical knowledge ingestion — writes to the SAME
+    # KnowledgeItem/KnowledgeStore schema and file convention the brain's
+    # retrieval (knowledge_retrieval_adapter.py) actually reads. One
+    # knowledge truth: no separate lightweight KnowledgeRecord store that
+    # the brain can never see.
     try:
-        from serum2.knowledge.ingestion import ingest
-        result = ingest(source_id, transcript_text)
+        from serum2.knowledge.ingestion import ingest_canonical
+        result = ingest_canonical(source_id, transcript_text, source_url=url)
         run.advance(
             ProductionState.KNOWLEDGE_BUILT,
             knowledge_record_count=result["record_count"],
@@ -132,9 +141,55 @@ def produce_from_youtube(url: str) -> ProductionRun:
     return run
 
 
+# Strict predecessor requirement for each agent-driven stage. advance_production()
+# hard-stops (terminal FAILED, not a silent no-op) on any out-of-order call —
+# e.g. re-submitting PRESET_GENERATED evidence after already reaching
+# SERUM_UI_CONFIGURED could silently overwrite preset_path/sha out from under
+# a stage that already consumed it. This is deliberately unforgiving: a
+# stage that already passed must never be re-enterable via a stray or
+# duplicate call. MIDI_CREATED/ARRANGEMENT_VERIFIED are intentionally NOT
+# separate enforced stages: AbletonMCP's own guidance is to batch track+clip+
+# notes+arrangement into one batch_commands call ("one round-trip, one undo
+# step"), so ABLETON_CONFIGURED covers all of it atomically by design, not
+# by omission.
+_STAGE_TO_STATE: Dict[str, ProductionState] = {
+    "PRESET_GENERATED": ProductionState.PRESET_GENERATED,
+    "SERUM_UI_CONFIGURED": ProductionState.SERUM_UI_CONFIGURED,
+    "SERUM_VERIFIED": ProductionState.SERUM_VERIFIED,
+    "ABLETON_CONFIGURED": ProductionState.ABLETON_CONFIGURED,
+    "RENDERED": ProductionState.RENDERED,
+}
+_EXPECTED_PREDECESSOR: Dict[ProductionState, ProductionState] = {
+    ProductionState.PRESET_GENERATED: ProductionState.ADMITTED,
+    ProductionState.SERUM_UI_CONFIGURED: ProductionState.PRESET_GENERATED,
+    ProductionState.SERUM_VERIFIED: ProductionState.SERUM_UI_CONFIGURED,
+    ProductionState.ABLETON_CONFIGURED: ProductionState.SERUM_VERIFIED,
+    ProductionState.RENDERED: ProductionState.ABLETON_CONFIGURED,
+}
+
+
 def advance_production(run_id: str, stage: str, evidence: Dict[str, Any]) -> ProductionRun:
-    """Advance past an agent-driven stage with Claude-captured evidence."""
+    """Advance past an agent-driven stage with Claude-captured evidence.
+
+    Hard-stops (terminal FAILED) on any call whose stage does not match
+    run.state's required predecessor — see _EXPECTED_PREDECESSOR.
+    """
     run = ProductionRun.load(run_id)
+
+    target_state = _STAGE_TO_STATE.get(stage)
+    if target_state is None:
+        run.fail(f"UNKNOWN_STAGE: {stage}")
+        run.save()
+        return run
+
+    expected_predecessor = _EXPECTED_PREDECESSOR[target_state]
+    if run.state != expected_predecessor.value:
+        run.fail(
+            f"OUT_OF_ORDER_STAGE: '{stage}' requires state={expected_predecessor.value!r} "
+            f"but run is currently in state={run.state!r}"
+        )
+        run.save()
+        return run
 
     if stage == "PRESET_GENERATED":
         preset_path = evidence.get("preset_path", "")
@@ -165,17 +220,15 @@ def advance_production(run_id: str, stage: str, evidence: Dict[str, Any]) -> Pro
     elif stage == "RENDERED":
         render_path = evidence.get("render_path")
         run.advance(ProductionState.RENDERED, render_path=render_path)
-        # Auto-advance: measure → finalize → complete
+        # Auto-advance: measure → evidence-finalize → episode → complete
         try:
             measurements = _measure(render_path)
             run.advance(ProductionState.MEASURED, measurements=measurements)
+            run.advance(ProductionState.EVIDENCE_FINALIZED)
             episode_id = _finalize_episode(run)
             run.advance(ProductionState.COMPLETED, episode_id=episode_id, next_action=None)
         except Exception as e:
             run.fail(f"POST_RENDER: {e}")
-
-    else:
-        run.fail(f"UNKNOWN_STAGE: {stage}")
 
     run.save()
     return run
@@ -254,21 +307,6 @@ def _derive_role_character(transcript_lower: str) -> Tuple[str, str]:
     return role, character
 
 
-def _character_to_mutation_intent(character: str) -> str:
-    """Map sound character to a mutation-style intent that the brain's
-    _INTENT_TO_CONCEPT table resolves to an MCP-bridge concept.
-
-    All returned strings map to _MCP_CONCEPT_BRIDGE entries, guaranteeing
-    MCP_HOST_MAP_QUALIFIED admission without requiring a PKL contract.
-    """
-    if character == "dark":
-        return "darker filter"        # → filter-cutoff (MCP bridge)
-    elif character == "warm":
-        return "osc volume louder"    # → oscillator-volume (MCP bridge)
-    else:                             # bright / default
-        return "brighter filter"      # → filter-cutoff (MCP bridge)
-
-
 def _run_brain_intent_admission(
     source_id: str,
     transcript_text: str,
@@ -280,16 +318,30 @@ def _run_brain_intent_admission(
     Does NOT pass source_url to ProducerRequest — avoids the broken
     phase1_ingest.py subprocess path in the brain's _ingest_source_url().
 
+    CREATION INTENT != MUTATION INTENT: this is a creation-style request
+    ("create a dark bass sound"), not a mutation-style one ("make the
+    release longer"). It is passed to the brain AS-IS with mode="CREATE" —
+    no server-side translation into a fake mutation phrase (e.g. "darker
+    filter"). The brain's own _INTENT_TO_CONCEPT table now recognizes bare
+    character adjectives (dark/bright/warm) directly, and
+    ProducerResult.intent_class="CREATION" tells the caller the admitted
+    semantic_target/direction/_mcp_plan is a PresetSpec seed value, not an
+    instruction to mutate an already-loaded preset.
+
     ProductionContext is advisory only: serialized into musical_context
-    (→ UniversalProductionIntent.musical_objective inside the brain).
-    It influences knowledge retrieval and semantic reasoning;
-    it never grants or alters admission authority.
+    (→ UniversalProductionIntent.musical_objective inside the brain) and
+    into advisory_context (→ context-aware knowledge retrieval fan-out).
+    Neither grants or alters admission authority — the same
+    CapabilityResolver/AdmissionHandoff chain governs CREATE exactly as
+    it governs EXECUTE.
     """
     from serum2.producer.producer_brain import execute_producer_request, ProducerRequest
 
     low = transcript_text.lower()
     role, character = _derive_role_character(low)
-    intent_text = _character_to_mutation_intent(character)
+    # Natural creation-style phrase, passed through unchanged — the brain
+    # resolves "dark"/"bright"/"warm" itself via its own intent vocabulary.
+    intent_text = f"create a {character} {role} sound"
 
     # Build musical_context from ProductionContext if available, else plain string
     if context is not None:
@@ -301,12 +353,14 @@ def _run_brain_intent_admission(
         user_intent=intent_text,
         musical_context=musical_context,
         advisory_context=context.to_dict() if context is not None else None,
+        mode="CREATE",
     ))
 
     intent = {
         "role": role,
         "character": character,
         "user_intent_text": intent_text,
+        "intent_class": brain_result.intent_class,
         "semantic_target": brain_result.semantic_target,
         "execution_route": brain_result.execution_route,
         "admission_reason": brain_result.admission_reason,
@@ -428,6 +482,13 @@ def _serum_verify_action(run: ProductionRun) -> Dict[str, Any]:
 
 
 def _ableton_action(run: ProductionRun) -> Dict[str, Any]:
+    """Geometry matches the proven Gate 2A execution (commit cdfac5c):
+    4-bar (16-beat) clip, duplicated to arrangement at beats 0/16/32/48,
+    spanning 64 beats total. AbletonMCP lengths/positions are in BEATS,
+    not seconds/bars — the pre-fix version used bar numbers (4/8/12) where
+    beat numbers were required, corrupting the arrangement (clips
+    overlapped, render truncated to 6.7s instead of ~32s).
+    """
     return {
         "action": "configure_ableton",
         "tool": "mcp__AbletonMCP__batch_commands",
@@ -436,7 +497,7 @@ def _ableton_action(run: ProductionRun) -> Dict[str, Any]:
                 {"command": "set_tempo", "params": {"tempo_bpm": 120}},
                 {"command": "create_midi_track", "params": {"index": -1}},
                 {"command": "set_track_name", "params": {"track_index": "N", "name": "Serum Lead"}},
-                {"command": "create_clip", "params": {"track_index": "N", "clip_index": 0, "length": 4.0}},
+                {"command": "create_clip", "params": {"track_index": "N", "clip_index": 0, "length": 16.0}},
                 {"command": "add_notes_to_clip", "params": {
                     "notes": [
                         {"pitch": 60, "velocity": 100, "start_time": 0, "duration": 1},
@@ -446,21 +507,24 @@ def _ableton_action(run: ProductionRun) -> Dict[str, Any]:
                     ]
                 }},
                 {"command": "duplicate_to_arrangement", "params": {"track_index": "N", "clip_index": 0, "arrangement_position": 0}},
-                {"command": "duplicate_to_arrangement", "params": {"track_index": "N", "clip_index": 0, "arrangement_position": 4}},
-                {"command": "duplicate_to_arrangement", "params": {"track_index": "N", "clip_index": 0, "arrangement_position": 8}},
-                {"command": "duplicate_to_arrangement", "params": {"track_index": "N", "clip_index": 0, "arrangement_position": 12}},
+                {"command": "duplicate_to_arrangement", "params": {"track_index": "N", "clip_index": 0, "arrangement_position": 16}},
+                {"command": "duplicate_to_arrangement", "params": {"track_index": "N", "clip_index": 0, "arrangement_position": 32}},
+                {"command": "duplicate_to_arrangement", "params": {"track_index": "N", "clip_index": 0, "arrangement_position": 48}},
             ]
         },
         "receipt_fields": {
             "track_index": "created track index",
             "tempo_bpm": "confirmed tempo",
-            "clip_info": "get_clip_info result",
-            "arrangement_clips": "get_arrangement_clips result",
+            "clip_info": "get_clip_info result (expect length=16.0 beats)",
+            "arrangement_clips": "get_arrangement_clips result (expect 4 clips at beats 0,16,32,48, spanning 0-64)",
         },
     }
 
 
 def _render_action(run: ProductionRun) -> Dict[str, Any]:
+    """length is in BEATS (AbletonMCP convention), not seconds. 64 beats
+    at 120 BPM = 32 seconds, matching the arrangement's full 0-64 beat span
+    and the proven Gate 2A render (30.7s actual, within +/-2s tolerance)."""
     _RENDERS_DIR.mkdir(parents=True, exist_ok=True)
     render_path = str(_RENDERS_DIR / f"{run.run_id}.wav")
     return {
@@ -468,13 +532,13 @@ def _render_action(run: ProductionRun) -> Dict[str, Any]:
         "tool": "mcp__AbletonMCP__record_section",
         "args": {
             "start_time": 0,
-            "length": 32.0,
+            "length": 64.0,
             "output_path": render_path,
         },
         "receipt_fields": {
             "render_path": render_path,
             "file_size_bytes": "actual file size",
-            "duration_sec": "actual audio duration",
+            "duration_sec": "actual audio duration (expect ~32s at 120 BPM)",
         },
     }
 
@@ -490,6 +554,41 @@ def _sha256(path: str) -> Optional[str]:
         return None
 
 
+_DB_FLOOR = -120.0  # silence floor, avoids log10(0) = -inf
+
+
+def _acoustic_measurements(samples, sample_rate: int) -> Dict[str, float]:
+    """RMS, peak, and spectral centroid from real WAV samples via numpy.
+
+    Standard DSP formulas, not a framework: no existing measurement kernel
+    was reusable here (serum2/evidence/harness.py + spec.py, which
+    producer_brain._execute_dawdreamer_with_authority expects, don't exist
+    in this project; phase4b3_dawdreamer_measurement.py's "measurement" is
+    a fixture returning hardcoded literals, not a real computation).
+    samples: float array normalized to [-1, 1].
+    """
+    import numpy as np
+
+    if samples.size == 0:
+        return {"rms_db": _DB_FLOOR, "peak_db": _DB_FLOOR, "spectral_centroid_hz": 0.0}
+
+    rms = float(np.sqrt(np.mean(samples.astype(np.float64) ** 2)))
+    peak = float(np.max(np.abs(samples)))
+    rms_db = 20.0 * np.log10(rms) if rms > 0 else _DB_FLOOR
+    peak_db = 20.0 * np.log10(peak) if peak > 0 else _DB_FLOOR
+
+    spectrum = np.abs(np.fft.rfft(samples.astype(np.float64)))
+    freqs = np.fft.rfftfreq(samples.size, d=1.0 / sample_rate)
+    magnitude_sum = float(np.sum(spectrum))
+    centroid_hz = float(np.sum(freqs * spectrum) / magnitude_sum) if magnitude_sum > 0 else 0.0
+
+    return {
+        "rms_db": float(round(max(rms_db, _DB_FLOOR), 2)),
+        "peak_db": float(round(max(peak_db, _DB_FLOOR), 2)),
+        "spectral_centroid_hz": float(round(centroid_hz, 1)),
+    }
+
+
 def _measure(render_path: Optional[str]) -> Dict[str, Any]:
     if not render_path:
         return {"status": "NO_RENDER"}
@@ -499,12 +598,28 @@ def _measure(render_path: Optional[str]) -> Dict[str, Any]:
     size = p.stat().st_size
     try:
         import wave
+        import numpy as np
+
         with wave.open(str(p), "rb") as wf:
             duration = wf.getnframes() / wf.getframerate()
             channels = wf.getnchannels()
             rate = wf.getframerate()
+            sampwidth = wf.getsampwidth()
+            raw = wf.readframes(wf.getnframes())
+
+        dtype_map = {1: np.int8, 2: np.int16, 4: np.int32}
+        dtype = dtype_map.get(sampwidth)
+        acoustic = {"rms_db": _DB_FLOOR, "peak_db": _DB_FLOOR, "spectral_centroid_hz": 0.0}
+        if dtype is not None and raw:
+            ints = np.frombuffer(raw, dtype=dtype)
+            if channels > 1:
+                ints = ints.reshape(-1, channels).mean(axis=1)
+            max_val = float(2 ** (8 * sampwidth - 1))
+            samples = ints.astype(np.float64) / max_val
+            acoustic = _acoustic_measurements(samples, rate)
     except Exception:
         duration = channels = rate = 0
+        acoustic = {"rms_db": _DB_FLOOR, "peak_db": _DB_FLOOR, "spectral_centroid_hz": 0.0}
     return {
         "status": "MEASURED",
         "file_size_bytes": size,
@@ -512,11 +627,26 @@ def _measure(render_path: Optional[str]) -> Dict[str, Any]:
         "channels": channels,
         "sample_rate": rate,
         "sha256": _sha256(render_path),
+        **acoustic,
     }
 
 
 def _finalize_episode(run: ProductionRun) -> str:
-    """Write completed episode record to disk."""
+    """Write completed episode to the canonical store (qualification/) in the
+    schema episode_retrieval.retrieve_relevant_episodes() and
+    ProducerBrain._retrieve_episodes() actually read: semantic_target
+    (exact-match filter), human_intent (substring filter), decision,
+    measurement_delta, learning_eligible. Without these fields the file
+    would sit in qualification/ but never match any retrieval query.
+
+    decision="COMPLETED" (not ACCEPTED/REJECTED): this flow renders a new
+    creation once and measures artifact stats, it does not run the
+    baseline-vs-treatment A/B comparison that ACCEPTED/REJECTED represent
+    in the DawDreamer evidence path. COMPLETED contributes no confidence
+    adjustment in ProducerBrain._build_advisory_chain (only ACCEPTED/
+    REJECTED do) — it is retrievable evidence, not an authority signal,
+    consistent with 'episodes inform, never authorize.'
+    """
     ep_id = f"ep_{run.run_id}_{datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S')}"
     _EPISODES_DIR.mkdir(parents=True, exist_ok=True)
     intent = run.intent or {}
@@ -536,6 +666,12 @@ def _finalize_episode(run: ProductionRun) -> str:
         "render_path": run.render_path,
         "measurements": run.measurements,
         "completed_at": datetime.now(timezone.utc).isoformat(),
+        # Canonical fields read by episode_retrieval.py / ProducerBrain:
+        "semantic_target": intent.get("semantic_target"),
+        "human_intent": intent.get("user_intent_text"),
+        "decision": "COMPLETED",
+        "measurement_delta": None,
+        "learning_eligible": True,
     }
     (_EPISODES_DIR / f"{ep_id}.json").write_text(json.dumps(episode, indent=2))
     return ep_id
