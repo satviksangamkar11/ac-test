@@ -53,6 +53,10 @@ from serum2.source.visual_evidence import (
     UIStateSnapshot,
     OBSERVED,
 )
+from serum2.reference.serum_ui_atlas import describe
+from serum2.reference.serum_atlas import (
+    Resolution, normalize_control, normalize_mod_source, EXACT, ALIAS, AMBIGUOUS, UNRESOLVED,
+)
 
 # The visual model is fixed and not caller-configurable.
 _VISUAL_MODEL = "claude-haiku-4-5-20251001"
@@ -159,8 +163,9 @@ _OBSERVE_ONLY_USER_PROMPT_TEMPLATE = """\
 Analyze the following {n_frames} video frame(s) from a Serum 2 tutorial.
 {target_instruction}
 For each frame, perform a full panel-by-panel census: identify every
-visible panel (OSC A/B/C, Sub/Noise, Filter 1/2, ENV1-4, LFO1-6, Matrix,
-FX, Macros, Global), then enumerate every legible control and route in
+visible surface (OSC A/B/C incl. oscillator mode, Sub/Noise, Mixer, Filter 1/2,
+ENV1-4, LFO1-10, Matrix, FX racks/buses, Macros, Global, Clip, Arp, Keyboard,
+Preset Browser), then enumerate every legible control and route in
 each one. Report ONLY what is visible — no interpretation.
 
 Respond with this exact JSON schema:
@@ -179,19 +184,20 @@ Respond with this exact JSON schema:
       "controls": [
         {{
           "control_id": "<stable machine key, e.g. 'env1.release', 'oscA.unison', 'lfo3.shape'>",
-          "control_type": "<knob|slider|dropdown|toggle|tab|badge_count|other>",
+          "control_type": "<knob|slider|dropdown|toggle|tab|badge_count|graph|curve|region|route|topology|text|other>",
           "label": "<the UI's own displayed label, or null>",
           "value": "<exact displayed value with unit, e.g. '36 ms', or null if not numerically legible>",
           "unit": "<unit alone if separable, or null>",
           "status": "<OBSERVED|AMBIGUOUS|OCCLUDED|OUT_OF_VIEW>",
+          "detail": {{"<optional structured state for graphs/regions/routes/ordering, e.g. start/end/loop bounds, curve points; omit if none>": null}},
           "screen_region": "<brief location description, e.g. 'ENV1 panel, REL knob', or null>",
           "confidence": <0.0-1.0>
         }}
       ],
       "mod_routes": [
         {{
-          "source": "<e.g. 'lfo0', 'macro1'>",
-          "destination": "<e.g. 'filter0.cutoff'>",
+          "source": "<as displayed, e.g. 'LFO 1', 'Macro 1'>",
+          "destination": "<as displayed, e.g. 'Filter 1 Freq'>",
           "amount": "<displayed amount with unit if legible, or null>",
           "bipolar": <true|false|null>,
           "status": "<OBSERVED|AMBIGUOUS|OCCLUDED|OUT_OF_VIEW>",
@@ -242,6 +248,37 @@ _TARGET_TO_CONCEPT: Dict[str, str] = {
 }
 
 
+def _canonicalize_control(c: Dict[str, Any]) -> Tuple[str, Dict[str, Any]]:
+    """Atlas-normalize one raw census entry: returns (control_id, resolution).
+    Identification only -- value/status/scope are never touched. The id is
+    replaced only on EXACT/ALIAS; AMBIGUOUS/UNRESOLVED keep the observer's id."""
+    raw_id, label, region = c["control_id"], c.get("label"), c.get("screen_region") or ""
+    res = normalize_control(raw_id, region)
+    by_label = normalize_control(label, "%s %s" % (raw_id, region)) if label else None
+    hint = None
+    if by_label and by_label.status in (EXACT, ALIAS):
+        if res.status == AMBIGUOUS:  # id too generic -> the label may settle it
+            res = by_label if by_label.canonical_id in res.candidates or not res.candidates else res
+        elif res.status in (EXACT, ALIAS) and by_label.canonical_id != res.canonical_id:
+            res = Resolution(AMBIGUOUS, None, tuple(sorted({res.canonical_id, by_label.canonical_id})), raw_id)
+        elif res.status == UNRESOLVED:  # observer's own id isn't an Atlas control: hint only
+            hint = by_label.to_dict()
+    d = res.to_dict()
+    d.update(raw_control_id=raw_id, raw_label=label)
+    if res.canonical_id and describe(res.canonical_id):
+        d["placement"] = describe(res.canonical_id)  # surface/kind/modes: identity knowledge only
+    if hint:
+        d["label_hint"] = hint
+    return (res.canonical_id or raw_id), d
+
+
+def _canonicalize_route(r: Dict[str, Any]) -> Tuple[Optional[str], Optional[str], Dict[str, Any]]:
+    src, dst = r.get("source"), r.get("destination")
+    rs, rd = normalize_mod_source(src or ""), normalize_control(dst or "")
+    return (rs.canonical_id or src, rd.canonical_id or dst,
+            {"source": rs.to_dict(), "destination": rd.to_dict()})
+
+
 def ingest_stage_a_observation(
     bundle: VisualEvidenceBundle,
     data: Dict[str, Any],
@@ -289,23 +326,25 @@ def ingest_stage_a_observation(
 
         controls = [
             ControlState(
-                control_id=c["control_id"], control_type=c.get("control_type", "other"),
+                control_id=cid, resolution=res, detail=c.get("detail"), control_type=c.get("control_type", "other"),
                 label=c.get("label"), value=c.get("value"), unit=c.get("unit"),
                 status=c.get("status", OBSERVED), screen_region=c.get("screen_region"),
                 confidence=float(c.get("confidence", 0.5)),
                 frame_id=frame_id, frame_hash=frame_hash, timestamp_sec=ts,
             )
             for c in frame_data.get("controls", []) if c.get("control_id")
+            for cid, res in [_canonicalize_control(c)]
         ]
         mod_routes = [
             ModRouteState(
-                source=r.get("source"), destination=r.get("destination"),
+                source=src, destination=dst, resolution=res,
                 amount=r.get("amount"), bipolar=r.get("bipolar"),
                 status=r.get("status", OBSERVED),
                 confidence=float(r.get("confidence", 0.5)),
                 frame_id=frame_id, frame_hash=frame_hash, timestamp_sec=ts,
             )
             for r in frame_data.get("mod_routes", [])
+            for src, dst, res in [_canonicalize_route(r)]
         ]
         if controls or mod_routes:
             bundle.ui_state_snapshots.append(UIStateSnapshot(

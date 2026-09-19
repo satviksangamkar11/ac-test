@@ -1,0 +1,2 @@
+# Frozen audit data: byte-exact (its SHA-256 is verified at load) -- no line-ending conversion
+serum2/reference/audit/* -text

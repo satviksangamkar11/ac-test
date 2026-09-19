@@ -272,6 +272,16 @@ class ControlState:
     frame_id: Optional[str] = None
     frame_hash: Optional[str] = None
     timestamp_sec: Optional[float] = None
+    detail: Optional[Dict[str, Any]] = None
+    """Structured payload for state that is not one scalar: graph/curve
+    points, region bounds (start/end/loop), per-row route data, topology or
+    ordering. Observer-supplied and opaque to the Atlas; `value` still holds
+    the raw displayed text. None = nothing structured was captured."""
+    resolution: Optional[Dict[str, Any]] = None
+    """Atlas normalization provenance (set by ingest_stage_a_observation):
+    {status EXACT|ALIAS|UNRESOLVED|AMBIGUOUS, canonical_id, candidates,
+    raw_control_id, raw label, atlas_version}. Identification only -- never
+    touches value/status. None = not normalized."""
 
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)
@@ -295,6 +305,11 @@ class ModRouteState:
     frame_id: Optional[str] = None
     frame_hash: Optional[str] = None
     timestamp_sec: Optional[float] = None
+    resolution: Optional[Dict[str, Any]] = None
+    """Atlas provenance: {"source": {...}, "destination": {...}}, each with
+    status EXACT|ALIAS|UNRESOLVED|AMBIGUOUS, canonical_id, candidates and the
+    raw observed text. source/destination hold the canonical id only when
+    resolved; otherwise the raw text stays. None = not normalized."""
 
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)
@@ -406,8 +421,26 @@ def diff_snapshots(before: UIStateSnapshot, after: UIStateSnapshot) -> Dict[str,
 
     before_routes = {_route_key(r): r for r in before.mod_routes if r.route_present and r.status == OBSERVED}
     after_routes = {_route_key(r): r for r in after.mod_routes if r.route_present and r.status == OBSERVED}
-    added_routes = [after_routes[k].to_dict() for k in after_routes if k not in before_routes]
-    removed_routes = [before_routes[k].to_dict() for k in before_routes if k not in after_routes]
+    # A route table that was EXPLICITLY not observed on one side (control
+    # 'matrix.routes' present with a non-OBSERVED status, e.g. the MATRIX tab
+    # wasn't frontmost) gives no basis to call a route added/removed -- same
+    # newly-observed != newly-created rule as for controls. Snapshots that
+    # carry no such control keep the original behavior.
+    def _matrix_unobserved(snap: UIStateSnapshot) -> bool:
+        return any(c.control_id == "matrix.routes" and c.status != OBSERVED for c in snap.controls)
+
+    if _matrix_unobserved(before):
+        added_routes = []
+        newly_observed_routes = [after_routes[k].to_dict() for k in after_routes if k not in before_routes]
+    else:
+        added_routes = [after_routes[k].to_dict() for k in after_routes if k not in before_routes]
+        newly_observed_routes = []
+    if _matrix_unobserved(after):
+        removed_routes = []
+        not_observed_routes = [before_routes[k].to_dict() for k in before_routes if k not in after_routes]
+    else:
+        removed_routes = [before_routes[k].to_dict() for k in before_routes if k not in after_routes]
+        not_observed_routes = []
 
     return {
         "before_frame_id": before.frame_id, "after_frame_id": after.frame_id,
@@ -417,6 +450,7 @@ def diff_snapshots(before: UIStateSnapshot, after: UIStateSnapshot) -> Dict[str,
         "not_observed_controls": not_observed_controls,
         "removed_controls": removed_controls,
         "added_routes": added_routes, "removed_routes": removed_routes,
+        "newly_observed_routes": newly_observed_routes, "not_observed_routes": not_observed_routes,
     }
 
 

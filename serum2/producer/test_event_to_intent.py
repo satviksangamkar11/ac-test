@@ -92,3 +92,13 @@ if __name__ == "__main__":
     test_route_change_produces_add_modulation_route_candidate_that_admits()
     test_unrecognized_control_produces_no_candidate_not_a_guess()
     print("\nAll event-to-intent tests passed.")
+
+
+def test_attack_change_resolves_to_attack_not_release():
+    """Regression: 'longer Env1.Attack ...' contains 'longer' and used to hit the
+    note-release rule (wrong control). Attack and release must stay distinct."""
+    from serum2.producer.producer_brain import _resolve_intent_to_concept
+    assert _resolve_intent_to_concept("longer Env1.Attack to 1.5 ms")[0] == "envelope-attack"
+    assert _resolve_intent_to_concept("shorter Env1.Attack to 0.5 ms")[0] == "envelope-attack"
+    assert _resolve_intent_to_concept("longer Env1.Release to 120 ms")[0] == "note-release"
+    assert _resolve_intent_to_concept("Make the note sustain longer")[0] == "note-release"

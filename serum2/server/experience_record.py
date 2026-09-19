@@ -181,6 +181,10 @@ class ProductionExperienceRecord:
 
     schema_version: str = "brain_v2.p0.1"
 
+    # reference-data provenance lives in `provenance["reference_provenance"]`
+    # (see REFERENCE_PROVENANCE_KEY) -- deliberately NOT a new field, so old
+    # records load unchanged and source attribution stays separate from it.
+
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)
 
@@ -196,6 +200,25 @@ class ProductionExperienceRecord:
 # Builder — called once, right after ADMITTED (everything below is already
 # known at that point; nothing here is invented or deferred).
 # ---------------------------------------------------------------------------
+
+REFERENCE_PROVENANCE_KEY = "reference_provenance"
+
+
+def stamp_reference_provenance(record: ProductionExperienceRecord) -> None:
+    """Record which Serum reference data (atlas_provenance()) interprets this
+    episode. Never overwrites an already-recorded value."""
+    if REFERENCE_PROVENANCE_KEY not in record.provenance:
+        from serum2.reference.serum_atlas import atlas_provenance
+        record.provenance[REFERENCE_PROVENANCE_KEY] = atlas_provenance()
+
+
+def reference_provenance(record: ProductionExperienceRecord) -> Optional[Dict[str, Any]]:
+    """The reference provenance STORED on the episode, or None if it was never
+    recorded. Pure read of the record -- never consults the current Atlas, so
+    replay needs no local reference files and an old episode is never given
+    today's provenance."""
+    return record.provenance.get(REFERENCE_PROVENANCE_KEY)
+
 
 def create_initial(run, brain_result=None) -> ProductionExperienceRecord:
     """Build the initial record right after ADMITTED.
@@ -272,6 +295,7 @@ def create_initial(run, brain_result=None) -> ProductionExperienceRecord:
             "retrieved_episode_ids": "producer_brain.ProducerResult.prior_episodes",
         },
     )
+    stamp_reference_provenance(record)
     return record
 
 

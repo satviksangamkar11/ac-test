@@ -84,6 +84,14 @@ from serum2.evidence import admission as admission_mod
 # ---------------------------------------------------------------------------
 
 _INTENT_TO_CONCEPT: List[tuple[List[str], str, SemanticDirection]] = [
+    # MUST precede the generic longer/shorter rules below: resolution is
+    # first-match, and "longer Env1.Attack to 1.5 ms" contains "longer" -- it
+    # used to resolve to note-release / Env1.Release, i.e. the WRONG control
+    # (found by the td22OIHpWuI fresh run).
+    # attack → envelope-attack
+    (["attack", "faster attack", "slower attack", "attack longer",
+      "attack shorter"],
+     "envelope-attack", SemanticDirection.SHORTER),
     # longer / sustain / release keywords → note-release concept, LONGER
     (["longer", "sustain longer", "longer sustain", "more sustain",
       "extend", "release longer", "longer release"],
@@ -92,10 +100,6 @@ _INTENT_TO_CONCEPT: List[tuple[List[str], str, SemanticDirection]] = [
     (["shorter", "shorter release", "tighter", "less sustain",
       "quicker release"],
      "note-release", SemanticDirection.SHORTER),
-    # attack → envelope-attack
-    (["attack", "faster attack", "slower attack", "attack longer",
-      "attack shorter"],
-     "envelope-attack", SemanticDirection.SHORTER),
     # cutoff / filter (includes bare character adjectives for CREATE-mode
     # creation intents, e.g. "create a dark bass sound" — not just the
     # comparative "brighter"/"darker" used by mutation-style requests)
