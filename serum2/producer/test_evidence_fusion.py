@@ -50,17 +50,18 @@ def test_route_change_matches_transcript_agreement():
     print("[PASS] test_route_change_matches_transcript_agreement")
 
 
-def test_topically_disjoint_evidence_is_conflict_not_guessed():
-    """Real change exists, real transcript exists, but they're about
-    different things -- must not silently pick one."""
-    from serum2.producer.evidence_fusion import fuse_transcript_and_visual, CONFLICT
+def test_topically_disjoint_evidence_is_visual_only_not_conflict():
+    """Architecture 22: a real change and a real transcript that are about different things are NOT a
+    contradiction. The UI change has no transcript coverage -> VISUAL_ONLY; nothing is guessed."""
+    from serum2.producer.evidence_fusion import fuse_transcript_and_visual, VISUAL_ONLY
     diff = {"changed_controls": [{"control_id": "env1.release", "before": "15", "after": "220"}], "added_routes": [], "removed_routes": []}
     event = fuse_transcript_and_visual(
         "evt_3", 0, 5, ["f4"], diff,
         transcript_excerpt="the filter sounds different now", transcript_timestamp_sec=2,
     )
-    assert event.fusion_status == CONFLICT
-    print("[PASS] test_topically_disjoint_evidence_is_conflict_not_guessed")
+    assert event.fusion_status == VISUAL_ONLY
+    assert event.snapshot_diff["control_fusion"]["env1.release"]["mentioned"] is False
+    print("[PASS] test_topically_disjoint_evidence_is_visual_only_not_conflict")
 
 
 def test_transcript_only_no_ui_change():
@@ -123,3 +124,117 @@ if __name__ == "__main__":
     test_no_evidence_at_all_is_unknown()
     test_snapshot_diff_is_deterministic()
     print("\nAll evidence fusion tests passed.")
+
+
+# ---- architecture section 22: direction is evaluated PER CONTROL ---------------------------------
+def _fuse(changes, text):
+    from serum2.producer.evidence_fusion import fuse_transcript_and_visual
+    diff = {"changed_controls": [{"control_id": c, "before": b, "after": a} for c, b, a in changes],
+            "added_routes": [], "removed_routes": []}
+    return fuse_transcript_and_visual("evt", 0, 10, ["f0", "f1"], diff, transcript_excerpt=text, transcript_timestamp_sec=1)
+
+
+def test_controls_moving_in_different_directions_do_not_conflict_with_each_other():
+    """One window says 'down' for one control and 'more' for another; each matches its own change."""
+    e = _fuse([("env1.sustain", "0.0 dB", "-13.8 dB"), ("env1.release", "15 ms", "120 ms")],
+              "the sustain a bit down and then a bit more release")
+    cf = e.snapshot_diff["control_fusion"]
+    assert cf["env1.sustain"]["classification"] == "AGREEMENT" and cf["env1.sustain"]["transcript"] == "decrease"
+    assert cf["env1.release"]["classification"] == "AGREEMENT" and cf["env1.release"]["transcript"] == "increase"
+    assert e.fusion_status == "AGREEMENT"
+
+
+def test_unrelated_direction_words_in_the_window_are_not_a_contradiction():
+    """'down' is about something else (far from any changed control's mention); the release change is untouched."""
+    e = _fuse([("env1.release", "15 ms", "120 ms")],
+              "we are going down the list of settings now and then look at the release later on")
+    assert e.snapshot_diff["control_fusion"]["env1.release"]["transcript"] is None
+    assert e.fusion_status == "UNKNOWN"            # covered, but direction not evaluable -> never CONFLICT
+
+
+def test_genuine_contradiction_for_the_specific_control_is_conflict():
+    e = _fuse([("env1.release", "15 ms", "120 ms"), ("env1.attack", "1.0 ms", "1.5 ms")],
+              "a bit shorter release and a bit more attack")
+    cf = e.snapshot_diff["control_fusion"]
+    assert cf["env1.release"]["classification"] == "CONFLICT"          # said shorter, value went up
+    assert cf["env1.attack"]["classification"] == "AGREEMENT"          # said more, value went up
+    assert e.fusion_status == "CONFLICT"
+
+
+def test_neutral_language_is_unknown_not_agreement_or_conflict():
+    e = _fuse([("env1.release", "15 ms", "120 ms")], "let's adjust the release time here")
+    assert e.snapshot_diff["control_fusion"]["env1.release"]["mentioned"] is True
+    assert e.fusion_status == "UNKNOWN"
+
+
+def test_direction_word_between_two_controls_is_ambiguous_and_assigned_to_neither():
+    e = _fuse([("env1.attack", "1.0 ms", "1.5 ms"), ("env1.release", "15 ms", "120 ms")], "attack more release")
+    assert e.snapshot_diff["control_fusion"]["env1.attack"]["transcript"] is None
+    assert e.snapshot_diff["control_fusion"]["env1.release"]["transcript"] is None
+
+
+def test_units_are_compared_in_a_common_base():
+    e = _fuse([("env1.decay", "1.00 s", "627 ms")], "the decay a little bit smaller")
+    d = e.snapshot_diff["control_fusion"]["env1.decay"]
+    assert d["visual"] == "decrease" and d["transcript"] == "decrease" and e.fusion_status == "AGREEMENT"
+
+
+def test_toggle_direction_and_uncomparable_values():
+    from serum2.producer.evidence_fusion import _visual_direction
+    assert _visual_direction("off", "on") == "increase" and _visual_direction("on", "off") == "decrease"
+    assert _visual_direction("Band 24", "MG Low 18") is None and _visual_direction("1", "1 ms") is None
+
+
+def test_visual_only_and_transcript_only_and_unknown_are_preserved():
+    assert _fuse([("env1.release", "15 ms", "120 ms")], None).fusion_status == "VISUAL_ONLY"
+    from serum2.producer.evidence_fusion import fuse_transcript_and_visual
+    e = fuse_transcript_and_visual("e", 0, 1, [], {"changed_controls": [], "added_routes": [], "removed_routes": []},
+                                   transcript_excerpt="more release", transcript_timestamp_sec=0)
+    assert e.fusion_status == "TRANSCRIPT_ONLY"
+    assert fuse_transcript_and_visual("e", 0, 1, [], {"changed_controls": []}).fusion_status == "UNKNOWN"
+
+
+def test_no_tutorial_specific_language_in_fusion_source():
+    from pathlib import Path
+    src = (Path(__file__).parent / "evidence_fusion.py").read_text(encoding="utf-8").lower()
+    for forbidden in ("td22", "mu6", "acid", "gotas", "j106", "amelie"):
+        assert forbidden not in src, forbidden
+
+
+def test_direction_word_does_not_cross_a_clause_boundary():
+    e = _fuse([("env1.release", "15 ms", "120 ms"), ("env1.decay", "1.00 s", "627 ms")],
+              "the release a little bit longer and the decay a little bit smaller")
+    cf = e.snapshot_diff["control_fusion"]
+    assert cf["env1.release"]["transcript"] == "increase" and cf["env1.decay"]["transcript"] == "decrease"
+    assert e.fusion_status == "AGREEMENT"
+
+
+def test_a_neighbouring_control_competes_for_the_direction_word():
+    """'down' belongs to the closer control (blend), not to the changed unison count."""
+    e = _fuse([("oscB.unison", 1, 3)], "make it three voices blend a bit down")
+    d = e.snapshot_diff["control_fusion"]["oscB.unison"]
+    assert d["mentioned"] is True and d["transcript"] is None and e.fusion_status == "UNKNOWN"
+
+
+def test_named_slot_excludes_a_different_slots_control():
+    """The excerpt talks about envelope one; a change to env2.decay is not covered by it."""
+    e = _fuse([("env2.decay", "1.00 s", "205 ms")], "envelope one the decay a little bit smaller")
+    d = e.snapshot_diff["control_fusion"]["env2.decay"]
+    assert d["mentioned"] is False and e.fusion_status == "VISUAL_ONLY"
+    e1 = _fuse([("env1.decay", "1.00 s", "627 ms")], "envelope one the decay a little bit smaller")
+    assert e1.snapshot_diff["control_fusion"]["env1.decay"]["classification"] == "AGREEMENT"
+
+
+def test_bracketed_captions_are_not_speech():
+    from serum2.producer.evidence_fusion import _tokens
+    assert _tokens("the decay [music] a bit smaller") == ["the", "decay", "a", "bit", "smaller"]
+
+
+def test_every_conflict_has_a_per_control_contradiction():
+    """Audit rule: an event may be CONFLICT only if some control shows both directions, opposite."""
+    e = _fuse([("env1.release", "15 ms", "120 ms"), ("env1.attack", "1.0 ms", "1.5 ms")], "a bit shorter release and a bit more attack")
+    assert e.fusion_status == "CONFLICT"
+    bad = [c for c, d in e.snapshot_diff["control_fusion"].items() if d["classification"] == "CONFLICT"]
+    assert bad and all(e.snapshot_diff["control_fusion"][c]["visual"] != e.snapshot_diff["control_fusion"][c]["transcript"]
+                       and None not in (e.snapshot_diff["control_fusion"][c]["visual"], e.snapshot_diff["control_fusion"][c]["transcript"])
+                       for c in bad)

@@ -74,11 +74,9 @@ def test_one_visual_change_produces_one_correctly_fused_event():
         _snap("f0", 18.0, [ControlState(control_id="env1.release", control_type="knob", value="15 ms", status=OBSERVED)]),
         _snap("f1", 26.0, [ControlState(control_id="env1.release", control_type="knob", value="36 ms", status=OBSERVED)]),
     ]
-    # Neutral wording (no decrease-coded word like "off") so this exercises
-    # the clean AGREEMENT path -- see test_real_mu6_wording_matches_conflict
-    # below for the "take X off" phrasing's known CONFLICT behavior, which
-    # is existing evidence_fusion.py logic, not something this layer changes.
-    segs = [TranscriptSegment(timestamp_sec=22.0, text="I'm going to change the release time here")]
+    # Directional wording that agrees with the observed increase -> AGREEMENT (architecture 22: both
+    # a transcript direction and a visual direction must be present and agree for this control).
+    segs = [TranscriptSegment(timestamp_sec=22.0, text="I'm going to make the release time longer here")]
     events = build_production_timeline(snaps, segs)
     assert len(events) == 1
     e = events[0]
