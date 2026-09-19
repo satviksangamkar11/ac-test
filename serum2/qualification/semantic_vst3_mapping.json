@@ -3,6 +3,7 @@
   "comment": "Maps semantic capability keys (from targets.py) to actual VST3 parameter names from A1.1 dump",
   "mappings": {
     "oscillator_field_OSC-ENABLE": "A Enable",
+    "oscillator_field_OSC2-ENABLE": "B Enable",
     "oscillator_field_OSC-OCTAVE": "A Octave",
     "oscillator_field_OSC-VOLUME": "A Level",
     "osc1_plain_param_level": "A Level",
