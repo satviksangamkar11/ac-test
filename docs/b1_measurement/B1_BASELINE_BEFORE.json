@@ -1,0 +1,86 @@
+[
+ {
+  "event": 1,
+  "control": "oscA.warp_mode",
+  "terminal": "REFUSED_NO_BRAIN_CONCEPT",
+  "concept": null
+ },
+ {
+  "event": 1,
+  "control": "oscA.wt_pos_display",
+  "terminal": "REFUSED_UNRESOLVED_REFERENCE",
+  "concept": null
+ },
+ {
+  "event": 2,
+  "control": "env2.decay",
+  "terminal": "REFUSED_NO_CAPABILITY",
+  "concept": "canonical:env2.decay"
+ },
+ {
+  "event": 2,
+  "control": "env2.sustain",
+  "terminal": "REFUSED_NO_CAPABILITY",
+  "concept": "canonical:env2.sustain"
+ },
+ {
+  "event": 2,
+  "control": "oscB.enabled",
+  "terminal": "REFUSED_NO_CAPABILITY",
+  "concept": "canonical:osc2.enable"
+ },
+ {
+  "event": 2,
+  "control": "oscB.mode",
+  "terminal": "REFUSED_NO_BRAIN_CONCEPT",
+  "concept": null
+ },
+ {
+  "event": 3,
+  "control": null,
+  "terminal": "NO_SEMANTIC_INTENT",
+  "resolution_mode": null
+ },
+ {
+  "event": 4,
+  "control": "lfo1.rate",
+  "terminal": "REFUSED_NO_CAPABILITY",
+  "concept": "canonical:lfo1.rate"
+ },
+ {
+  "event": 4,
+  "control": "lfo1.smooth",
+  "terminal": "REFUSED_NO_BRAIN_CONCEPT",
+  "concept": null
+ },
+ {
+  "event": 5,
+  "control": "filter1.enabled",
+  "terminal": "REFUSED_NO_CAPABILITY",
+  "concept": "canonical:filter.enable"
+ },
+ {
+  "event": 6,
+  "control": "lfo1.smooth",
+  "terminal": "REFUSED_NO_BRAIN_CONCEPT",
+  "concept": null
+ },
+ {
+  "event": 7,
+  "control": null,
+  "terminal": "NO_SEMANTIC_INTENT",
+  "resolution_mode": null
+ },
+ {
+  "event": 8,
+  "control": null,
+  "terminal": "NO_SEMANTIC_INTENT",
+  "resolution_mode": null
+ },
+ {
+  "event": 9,
+  "control": null,
+  "terminal": "NO_SEMANTIC_INTENT",
+  "resolution_mode": null
+ }
+]
