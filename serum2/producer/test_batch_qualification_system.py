@@ -167,15 +167,15 @@ def test_runner_completes_load_mutate_read_persist_reload_cycle():
     candidate = BindingCandidate(
         target="FXDistortion.Drive",
         capability_key="fx_field_dist_drive",
-        route_type=RouteType.VST3_HOST_PARAMETER,
+        route_type=RouteType.SERUM_BODY_STATE,
         binding=ExecutionBinding(
-            mutation_type="HOST_PARAMETER",
-            host_parameter_name="Filter 1 Drive",
-            binding_source="semantic_vst3_mapping.json",
+            mutation_type="BODY_STATE",
+            body_path="FXRack0.FX.1.FXDistortion.plainParams.kParamDrive",
+            binding_source="body_state_mapping.json",
             binding_version="1",
         ),
-        operation_family=OperationFamily.NUMERIC,
-        provenance="semantic_vst3_mapping.json",
+        operation_family=OperationFamily.BODY_STATE,
+        provenance="body_state_mapping.json",
         confidence=1.0,
         verified=True,
     )

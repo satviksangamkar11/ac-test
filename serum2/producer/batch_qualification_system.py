@@ -150,9 +150,13 @@ class StructuralQualificationResult:
     persistence_verified: bool = False
     trace: Tuple[str, ...] = ()
     backend_evidence: Mapping[str, Any] = field(default_factory=dict)
+    verification_level: str = "UNBOUND"
+    error: Optional[str] = None
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "verification_level": self.verification_level,
+            "error": self.error,
             "target": self.target,
             "capability_key": self.capability_key,
             "status": self.status,
@@ -208,6 +212,19 @@ class StructuralQualificationRunner:
                 trace=("binding candidate rejected before backend execution",),
             )
 
+        if candidate.route_type not in EXECUTION_ELIGIBLE_ROUTES:
+            return StructuralQualificationResult(
+                target=candidate.target,
+                capability_key=candidate.capability_key,
+                status="REFUSED_ROUTE_NOT_EXECUTION_ELIGIBLE",
+                refusal_code="REFUSED_ROUTE_NOT_EXECUTION_ELIGIBLE",
+                operation_family=candidate.operation_family,
+                route_type=candidate.route_type,
+                binding=self._binding_dict(candidate.binding),
+                verification_level="BOUND",
+                trace=("route is evidence-only; rejected before backend execution",),
+            )
+
         if mutation.target != candidate.target:
             return StructuralQualificationResult(
                 target=candidate.target,
@@ -222,7 +239,25 @@ class StructuralQualificationRunner:
 
         evidence: Dict[str, Any] = {}
         trace: List[str] = []
+        try:
+            return self._run_lifecycle(candidate, mutation, evidence, trace)
+        except Exception as exc:  # backend failure must surface, never become success
+            stage = trace[-1] if trace else "START"
+            return StructuralQualificationResult(
+                target=candidate.target,
+                capability_key=candidate.capability_key,
+                status="FAILED_BACKEND_ERROR",
+                refusal_code=None,
+                operation_family=candidate.operation_family,
+                route_type=candidate.route_type,
+                binding=self._binding_dict(candidate.binding),
+                verification_level="BOUND",
+                trace=tuple(trace + ["BACKEND_ERROR_AFTER_" + stage]),
+                backend_evidence=evidence,
+                error="%s: %s" % (type(exc).__name__, exc),
+            )
 
+    def _run_lifecycle(self, candidate, mutation, evidence, trace):
         evidence["load"] = dict(self._backend.load(candidate) or {})
         trace.append("LOAD")
         baseline = self._backend.read(candidate)
@@ -248,6 +283,7 @@ class StructuralQualificationRunner:
                 baseline=baseline,
                 after_mutation=after_mutation,
                 state_changed=False,
+                verification_level="BOUND",
                 trace=tuple(trace + ["STATE_CHANGE_CHECK_FAILED"]),
                 backend_evidence=evidence,
             )
@@ -281,6 +317,7 @@ class StructuralQualificationRunner:
             after_reload=after_reload,
             state_changed=True,
             persistence_verified=persistence_verified,
+            verification_level="STRUCTURAL_VERIFIED" if persistence_verified else "BOUND",
             trace=tuple(trace),
             backend_evidence=evidence,
         )

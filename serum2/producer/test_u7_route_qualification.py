@@ -169,11 +169,12 @@ class TestU7NegativeCases:
             verified=True,  # VST3 can be "verified" per its own route
         )
 
-        runner = StructuralQualificationRunner(backend)
-        # The runner itself should not prevent this; the planner should.
-        # But verify the runner doesn't grant execution eligibility based on VST3 alone.
-        # (This test documents expected behavior; enforcement is at planner level)
-        assert candidate.route_type == RouteType.VST3_HOST_PARAMETER
+        result = StructuralQualificationRunner(backend).run(
+            candidate, MutationSpec(target="vst3.target", value=1, operation="set"))
+        assert result.status == "REFUSED_ROUTE_NOT_EXECUTION_ELIGIBLE"
+        assert result.verification_level == "BOUND"
+        backend.load.assert_not_called()
+        backend.mutate.assert_not_called()
 
     def test_unbound_cannot_qualify(self):
         """UNBOUND candidates must be rejected before any backend call."""
