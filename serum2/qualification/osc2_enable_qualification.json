@@ -1,0 +1,69 @@
+{
+  "semantic_target": "OSC2.Enable",
+  "capability_key": "oscillator_field_OSC2-ENABLE",
+  "qualified_at": "2026-09-19T20:00:32.585985+00:00",
+  "backend": "serum-mcp",
+  "fixture_preset_path": "C:\\Users\\Satvik\\Documents\\Xfer\\Serum 2 Presets\\Presets\\User\\VLP1-Phase3B-OSC2Enable-Test.SerumPreset",
+  "fixture_preset_sha256_after_mutation": "C4A872A13F25F85C2C4D522B27A88E0FE98DF0028EDFBBF84E97EB6C08BFC7BB",
+  "evidence_layers": {
+    "reference_plugin_surface": {
+      "route_type": "VST3_HOST_PARAMETER",
+      "binding": "B Enable",
+      "source": "SERUM2_SEMANTIC_INVENTORY_FINAL.json (MIXER.OSC_B.ENABLE)",
+      "note": "Plugin-surface evidence only. serum-mcp cannot address this control by VST3 parameter name -- it never loads the Serum plugin or a DAW. Kept as a separate binding, not collapsed into the preset-structural evidence below."
+    },
+    "preset_execution_surface": {
+      "route_type": "SERUM_PRESET_STRUCTURAL_BINDING",
+      "field_path": "oscillators[1].enabled",
+      "source": "serum-mcp PresetSpec.OscillatorSpec.enabled",
+      "operation_family": "TOGGLE"
+    }
+  },
+  "acceptance_cycle": [
+    {
+      "step": 1,
+      "action": "generate_preset",
+      "result": "baseline fixture written, Osc B enabled=True"
+    },
+    {
+      "step": 2,
+      "action": "describe_preset (baseline read)",
+      "result": "Osc B: ON"
+    },
+    {
+      "step": 3,
+      "action": "edit_preset (mutate oscillators[1].enabled=False)",
+      "result": "applied"
+    },
+    {
+      "step": 4,
+      "action": "describe_preset (after-mutation read)",
+      "result": "Osc B: off (Osc A unaffected)"
+    },
+    {
+      "step": 5,
+      "action": "state_changed check",
+      "result": true,
+      "before": "ON",
+      "after": "off"
+    },
+    {
+      "step": 6,
+      "action": "persist (sha256 of on-disk file)",
+      "result": "C4A872A13F25F85C2C4D522B27A88E0FE98DF0028EDFBBF84E97EB6C08BFC7BB"
+    },
+    {
+      "step": 7,
+      "action": "reload (independent describe_preset call)",
+      "result": "Osc B: off"
+    },
+    {
+      "step": 8,
+      "action": "persistence_verified check",
+      "result": true
+    }
+  ],
+  "status": "STRUCTURAL_VERIFIED",
+  "tier": "FILE_VERIFIED_ONLY",
+  "notes": "File-level structural qualification only. No live Serum 2.0.21 plugin instance was loaded and no audio was rendered/measured. This is NOT CAUSAL_VERIFIED -- a separate live-Serum verification stage (load fixture into Ableton -> real Serum 2.0.21 -> direct UI/readback observation) is required before any causal or audio-domain claim can be made for this capability."
+}

@@ -28,6 +28,11 @@ QUALIFICATION_DIR = ROOT / "serum2" / "qualification"
 class RouteType(str, Enum):
     VST3_HOST_PARAMETER = "VST3_HOST_PARAMETER"
     SERUM_BODY_STATE = "SERUM_BODY_STATE"
+    # PresetSpec-addressable field executed via serum-mcp's edit_preset/
+    # describe_preset (file-based; no live plugin/DAW involved). Distinct
+    # from VST3_HOST_PARAMETER, which is plugin-surface evidence only --
+    # serum-mcp cannot address a control by its VST3 parameter name.
+    SERUM_PRESET_STRUCTURAL_BINDING = "SERUM_PRESET_STRUCTURAL_BINDING"
     STRUCTURED_OPERATION = "STRUCTURED_OPERATION"
     UNBOUND = "UNBOUND"
 

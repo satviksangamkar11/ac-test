@@ -152,3 +152,67 @@ Labels:
 ---
 
 **Status:** Discovery complete for VST3 surface. Body-state schema inspection deferred to next phase.
+
+---
+
+## Phase 3B.3 Correction: Two Independent Evidence Layers (2026-09-20)
+
+**Critical finding:** The real `serum-mcp` MCP server does not expose a
+`read_parameter(name)` / `set_parameter(name, value)` VST3 host-parameter
+interface. It never loads the Serum plugin or a DAW and never renders
+audio -- it reads/writes `.SerumPreset` files directly through a
+structured `PresetSpec` (`generate_preset`, `edit_preset`,
+`describe_preset`).
+
+This means **"B Enable" (VST3 plugin surface) and
+`oscillators[1].enabled` (serum-mcp preset-execution surface) are two
+distinct evidence layers for the same semantic target, not
+interchangeable representations:**
+
+```
+OSC2.Enable
+  |-- REFERENCE / PLUGIN SURFACE:  VST3 "B Enable"        (inventory evidence)
+  '-- PRESET / EXECUTION SURFACE:  oscillators[1].enabled  (serum-mcp evidence)
+```
+
+Route type `SERUM_PRESET_STRUCTURAL_BINDING` was added to
+`batch_qualification_system.py::RouteType`, distinct from
+`VST3_HOST_PARAMETER`, so this distinction is never collapsed.
+
+### Phase 3B.3 Real Qualification (executed this session)
+
+Following the codebase's own established pattern
+(`serum2/producer/qualify_modulation_route.py`), real serum-mcp tool
+calls were made and packaged into
+`serum2/qualification/osc2_enable_qualification.json`:
+
+| Step | Action | Result |
+|------|--------|--------|
+| 1 | `generate_preset` (fixture, Osc B enabled=True) | baseline written |
+| 2 | `describe_preset` (baseline read) | `Osc B: ON` |
+| 3 | `edit_preset` (`oscillators[1].enabled=False`) | applied |
+| 4 | `describe_preset` (after-mutation read) | `Osc B: off`, Osc A unaffected |
+| 5 | state_changed check | `ON != off` &check; |
+| 6 | persist (sha256 of on-disk file) | `C4A872A1...` |
+| 7 | `describe_preset` (independent reload read) | `Osc B: off` |
+| 8 | persistence_verified check | matches step 4 &check; |
+
+**Result: `STRUCTURAL_VERIFIED`, tier `FILE_VERIFIED_ONLY`.**
+
+This is explicitly **not** `CAUSAL_VERIFIED` — no live Serum 2.0.21
+plugin instance was loaded, no audio was rendered or measured. A
+separate live-Serum verification stage (load the fixture into Ableton,
+observe the real plugin's OSC B enable state directly) is required
+before any causal claim.
+
+### Architecture correction
+
+The earlier `SerumMCPAdapter` (`read_parameter`/`set_parameter`) and
+`SerumStructuralBackend` files were **retired** (deleted) — they modeled
+a live VST3 host-parameter interface serum-mcp does not have. Automated
+pytest-style mocking doesn't fit serum-mcp's nature either: it is an
+MCP-tool-call surface invoked by the agent session, not an importable
+Python object. The correct pattern, already established in this
+codebase by `qualify_modulation_route.py`, is a script that packages
+**already-obtained real tool results** into a qualification evidence
+JSON — see `serum2/producer/qualify_osc2_enable.py`.
