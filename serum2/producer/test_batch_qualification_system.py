@@ -77,6 +77,7 @@ def test_planner_refuses_unverified_osc2_enable_and_keeps_axes_visible():
         contract_registry=FakeRegistry(contracts),
         host_mapping={"filter_field_cutoff": "Filter 1 Freq"},
         body_mapping={},
+        target_universe="FULL_ATLAS",
     ).plan()
 
     by_target = {x.target: x for x in plan.all_targets}
@@ -99,6 +100,7 @@ def test_exact_host_binding_becomes_ready_for_structural():
         contract_registry=FakeRegistry({}),
         host_mapping={"fx_field_dist_drive": "Filter 1 Drive"},
         body_mapping={},
+        target_universe="CAPABILITY_TARGETS",
     ).plan()
 
     item = plan.ready_for_structural[0]
@@ -123,6 +125,7 @@ def test_body_state_is_a_first_class_route_family():
         contract_registry=FakeRegistry({}),
         host_mapping={},
         body_mapping=body,
+        target_universe="CAPABILITY_TARGETS",
     ).plan()
     item = plan.ready_for_structural[0]
     assert item.candidate.route_type == RouteType.SERUM_BODY_STATE
@@ -177,3 +180,75 @@ def test_runner_completes_load_mutate_read_persist_reload_cycle():
         "load", "read", "mutate", "read", "persist", "reload", "read"
     ]
     assert result.after_reload == {"value": 0.75}
+
+
+def test_blocked_contract_puts_target_in_blocked_bucket():
+    atlas = {"filter1.enabled": control("toggle")}
+    semantic_targets = {"Filter1.Enabled": ref("filter_field_ENABLE")}
+    contracts = {
+        "filter_field_ENABLE": SimpleNamespace(status="BLOCKED_CONTRADICTED"),
+    }
+    plan = QualificationPlanner(
+        atlas_controls=atlas,
+        semantic_targets=semantic_targets,
+        contract_registry=FakeRegistry(contracts),
+        host_mapping={},
+        body_mapping={},
+        target_universe="CAPABILITY_TARGETS",
+    ).plan()
+
+    item = next((x for x in plan.all_targets if x.target == "Filter1.Enabled"), None)
+    assert item is not None
+    assert item.bucket == QualificationBucket.BLOCKED
+    assert item.contract_status == "BLOCKED_CONTRADICTED"
+
+
+def test_planner_respects_capability_targets_universe():
+    atlas = {
+        "filter1.enabled": control("toggle"),
+        "oscA.level": control("continuous"),
+        "extra.unknown": control("continuous"),
+    }
+    semantic_targets = {
+        "Filter1.Enabled": ref("filter_field_ENABLE"),
+        "OSC1.Level": ref("osc1_level"),
+    }
+    plan = QualificationPlanner(
+        atlas_controls=atlas,
+        semantic_targets=semantic_targets,
+        contract_registry=FakeRegistry({}),
+        host_mapping={},
+        body_mapping={},
+        target_universe="CAPABILITY_TARGETS",
+    ).plan()
+
+    # Should only qualify the 2 semantic targets, not "extra.unknown"
+    assert plan.total == 2
+    targets = {x.target for x in plan.all_targets}
+    assert targets == {"Filter1.Enabled", "OSC1.Level"}
+    assert "extra.unknown" not in targets
+
+
+def test_planner_respects_full_atlas_universe():
+    atlas = {
+        "filter1.enabled": control("toggle"),
+        "oscA.level": control("continuous"),
+        "extra.unknown": control("continuous"),
+    }
+    semantic_targets = {
+        "Filter1.Enabled": ref("filter_field_ENABLE"),
+        "OSC1.Level": ref("osc1_level"),
+    }
+    plan = QualificationPlanner(
+        atlas_controls=atlas,
+        semantic_targets=semantic_targets,
+        contract_registry=FakeRegistry({}),
+        host_mapping={},
+        body_mapping={},
+        target_universe="FULL_ATLAS",
+    ).plan()
+
+    # Should qualify all 3 Atlas controls
+    assert plan.total == 3
+    targets = {x.target for x in plan.all_targets}
+    assert targets == {"filter1.enabled", "oscA.level", "extra.unknown"}

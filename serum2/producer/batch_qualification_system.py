@@ -288,7 +288,7 @@ class StructuralQualificationRunner:
 
 
 class QualificationPlanner:
-    """Classify the current Atlas universe using only existing authoritative data.
+    """Classify targets using only existing authoritative data.
 
     No target->binding mapping lives in this class. It joins:
         Atlas -> Brain vocabulary -> capability key
@@ -307,7 +307,10 @@ class QualificationPlanner:
         contract_registry: Any = None,
         host_mapping: Optional[Mapping[str, str]] = None,
         body_mapping: Optional[Mapping[str, Mapping[str, Any]]] = None,
+        target_universe: str = "CAPABILITY_TARGETS",
     ):
+        self._target_universe = target_universe
+
         if atlas_controls is None:
             from serum2.reference.serum_atlas import all_control_ids, get_control
             atlas_controls = {cid: get_control(cid) for cid in all_control_ids()}
@@ -450,14 +453,50 @@ class QualificationPlanner:
             QualificationBucket.BLOCKED: plan.blocked,
         }
 
-        for target in sorted(self._atlas):
-            control = self._atlas[target]
-            hit = self._brain_index.get(self._normalize(target))
-            brain_registered = hit is not None
-            ref = hit[1] if hit else None
-            capability_key = getattr(ref, "capability_key", None) if ref else None
+        # Select target universe: CAPABILITY_TARGETS (255) or FULL_ATLAS (1136+)
+        if self._target_universe == "CAPABILITY_TARGETS":
+            targets_to_qualify = sorted(self._semantic_targets.keys())
+        elif self._target_universe == "FULL_ATLAS":
+            targets_to_qualify = sorted(self._atlas.keys())
+        else:
+            raise ValueError(f"Unknown target_universe: {self._target_universe}")
 
-            candidate = self._candidate(target, control, capability_key)
+        for target in targets_to_qualify:
+            # Resolve target to Atlas control and semantic reference
+            if self._target_universe == "CAPABILITY_TARGETS":
+                # target is a semantic target name; look up in brain_index
+                ref = self._semantic_targets.get(target)
+                capability_key = getattr(ref, "capability_key", None) if ref else None
+                # Find corresponding Atlas control by normalized name
+                atlas_key = None
+                for ak in self._atlas.keys():
+                    if self._normalize(ak) == self._normalize(target):
+                        atlas_key = ak
+                        break
+                control = self._atlas.get(atlas_key) if atlas_key else None
+                brain_registered = ref is not None
+            else:  # FULL_ATLAS
+                control = self._atlas[target]
+                hit = self._brain_index.get(self._normalize(target))
+                brain_registered = hit is not None
+                ref = hit[1] if hit else None
+                capability_key = getattr(ref, "capability_key", None) if ref else None
+
+            if control is None:
+                # Semantic target has no Atlas entry
+                candidate = BindingCandidate(
+                    target=target,
+                    capability_key=capability_key,
+                    route_type=RouteType.UNBOUND,
+                    binding=None,
+                    operation_family=OperationFamily.STRUCTURED,
+                    provenance="UNIVERSE_SEMANTIC_ONLY",
+                    confidence=0.0,
+                    verified=False,
+                    reason="No Atlas control entry found for this semantic target.",
+                )
+            else:
+                candidate = self._candidate(target, control, capability_key)
             contract = (
                 self._registry.get(capability_key)
                 if capability_key
