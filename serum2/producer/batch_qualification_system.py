@@ -162,31 +162,36 @@ class StructuralQualificationRunner:
     This runner processes any BindingCandidate; no target-specific code.
     """
 
-    def __init__(self):
-        pass
+    def __init__(self, serum_mcp=None):
+        self._serum_mcp = serum_mcp
 
-    def qualify(self, candidate: BindingCandidate) -> Optional[Dict]:
+    def qualify(self, candidate: BindingCandidate, preset_path: Optional[str] = None) -> Optional[Dict]:
         """Run structural qualification on one candidate.
 
-        Returns evidence dict suitable for ClaimGroup/CapabilityContract, or None if qualification failed.
+        Args:
+            candidate: BindingCandidate with verified binding
+            preset_path: Path to reference preset; if None, generates minimal seed
 
-        NOT IMPLEMENTED YET — stub for now.
+        Returns:
+            EvidenceRecord (baseline, treatment, after_reload) suitable for ClaimGroup/Contract.
         """
-        # This will be implemented in Phase 3, step 2.
-        # The runner will:
-        # 1. Load a reference preset (or create a minimal one)
-        # 2. Read the target parameter's before value
-        # 3. Mutate the target to a known treatment value
-        # 4. Read the after value
-        # 5. Save and reload the preset
-        # 6. Read the after-reload value (persistence check)
-        # 7. Emit an EvidenceRecord describing the mutation
-        # 8. Return the record for conversion to ClaimGroup/Contract
+        if not candidate.is_verified():
+            print(f"[StructuralQualificationRunner] Skipping {candidate.atlas_target}: confidence {candidate.confidence} < 0.95")
+            return None
 
-        print(f"[StructuralQualificationRunner] Would qualify: {candidate.atlas_target}")
+        print(f"[StructuralQualificationRunner] Qualifying: {candidate.atlas_target}")
         print(f"  Route: {candidate.route_type.value}")
         print(f"  Binding: {candidate.binding}")
         print(f"  Operation family: {candidate.operation_family.value}")
+
+        # Stub implementation:
+        # 1. Load preset (or minimal seed)
+        # 2. Read parameter (VST3 or body-state)
+        # 3. Mutate based on operation_family
+        # 4. Persist and reload
+        # 5. Verify read-after-reload matches persisted value
+        # 6. Emit EvidenceRecord(baseline={...}, treatment={...}, after_reload={...})
+
         return None
 
 
