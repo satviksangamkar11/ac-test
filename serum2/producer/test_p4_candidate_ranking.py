@@ -26,12 +26,12 @@ def intent(target="env1.release", op=OperationType.INCREASE, value=None, unit=No
     return UniversalProductionIntent(canonical_target=target, representation=rep, operation=spec, context=RequestContext())
 
 
-def advisory(target="env1.release", op="SET", conf=0.2, sid=None, after="838 ms"):
+def advisory(target="env1.release", op="SET", conf=0.2, sid=None, after="838 ms", state="FRESH"):
     rec = SkillRecord(skill_id=sid or "skill:%s:%s" % (target, op.lower()), canonical_target_id=target,
                       target_concept="c", semantic_target="T", operation=op,
                       trigger={"observed_change": {"before": "15 ms", "after": after}}, preconditions=(),
                       supporting_evidence=({"episode_id": "e", "verified": True},), outcome_stats={}, confidence=conf,
-                      provenance={"source_episode_ids": ["e"]})
+                      provenance={"source_episode_ids": ["e"]}, lifecycle_state=state)
     return SkillAdvisory.from_skill(rec)
 
 
@@ -90,7 +90,7 @@ def test_generation_is_deterministic():
 def test_skill_supporting_the_same_operation_becomes_evidence_on_the_primary_not_a_new_candidate():
     cands = GEN.generate(intent(op=OperationType.SET, value=838, unit="ms"), [advisory()])
     assert len(cands) == 1 and cands[0].origin == PRIMARY
-    assert [dict(e) for e in cands[0].evidence] == [{"skill_id": "skill:env1.release:set", "confidence": 0.2}]
+    assert [dict(e) for e in cands[0].evidence] == [{"skill_id": "skill:env1.release:set", "confidence": 0.2, "lifecycle_state": "FRESH"}]
 
 
 def test_skill_with_a_different_operation_yields_a_variant_on_the_same_target():
@@ -263,3 +263,108 @@ def test_variant_never_contradicts_the_requested_direction():
     only_primary = GEN.generate(intent(op=OperationType.DECREASE), [advisory(op="INCREASE", conf=1.0)])
     assert [c.origin for c in only_primary] == [PRIMARY]
     assert len(GEN.generate(intent(op=OperationType.INCREASE), [advisory(op="SET", conf=1.0)])) == 2   # non-opposing is fine
+
+
+# ---- P4.5 prior-episode evidence -------------------------------------------------------------------------------
+from types import SimpleNamespace
+from serum2.producer.candidate_ranking import PriorEpisodeEvidence, collect_advisories, prior_evidence_from_episodes
+from serum2.producer.skill_library import SkillRetriever, VERIFIED_STATUS
+
+
+def ep(eid="A", target="env1.release", op_after="838 ms", verified=True, admitted=True, operation=None):
+    d = {"source_control_id": target, "observed_before": "15 ms", "observed_after": op_after, "admitted": admitted,
+         "resolved_concept": "c", "semantic_target": "T", "request_kwargs": {"user_intent": "x"}}
+    if operation:
+        d["operation"] = operation
+    return SimpleNamespace(experience_id=eid, provenance={"p": 1}, brain_decision={"decisions": [d]},
+                           outcome={"status": VERIFIED_STATUS if verified else "READBACK_MISMATCH", "verification_level": "PLUGIN_HOST_PARAMETER_READBACK (not causal)",
+                                    "real_plugin_readback": {"match": verified, "expected": {"k": "v"}, "observed": {"k": "v" if verified else "w"}}})
+
+
+def test_p4_5_prior_evidence_validates_its_invariants():
+    for bad in (dict(attempts=1, verified_successes=2, episode_ids=("a",)), dict(attempts=1, verified_successes=1, episode_ids=()),
+                dict(attempts=-1, verified_successes=0, episode_ids=("a",))):
+        with pytest.raises(ValueError):
+            PriorEpisodeEvidence("env1.release", "set", **bad)
+    with pytest.raises(ValueError):
+        PriorEpisodeEvidence("", "set", 0, 0, ())
+
+
+def test_p4_5_evidence_is_aggregated_from_episodes_with_outcomes_and_provenance():
+    (pe,) = prior_evidence_from_episodes([ep("A"), ep("B"), ep("C", verified=False)])
+    assert (pe.canonical_target_id, pe.operation, pe.attempts, pe.verified_successes, pe.episode_ids) == ("env1.release", "set", 3, 2, ("A", "B", "C"))
+
+
+def test_p4_5_only_admitted_decisions_are_attempts_and_targets_are_kept_apart():
+    got = prior_evidence_from_episodes([ep("A", admitted=False), ep("B", target="filter1.cutoff"), ep("C", operation="toggle_on")])
+    assert sorted((p.canonical_target_id, p.operation, p.attempts) for p in got) == [("env1.release", "toggle_on", 1), ("filter1.cutoff", "set", 1)]
+
+
+def test_p4_5_resubmitting_an_episode_is_idempotent():
+    assert prior_evidence_from_episodes([ep("A"), ep("A")])[0].attempts == 1
+
+
+def _prior(target="env1.release", op="set", n=20, ok=None):
+    return PriorEpisodeEvidence(target, op, n, n if ok is None else ok, tuple("e%d" % i for i in range(n)))
+
+
+def test_p4_5_prior_outcomes_alone_cannot_override_the_primary():
+    rs = RANK.rank(GEN.generate(intent(), [advisory(conf=0.0)]), [_prior(n=100)])
+    assert rs.selected.candidate.origin == PRIMARY
+
+
+def test_p4_5_prior_outcomes_can_tip_a_close_same_target_choice_and_it_is_visible():
+    cands = GEN.generate(intent(), [advisory(conf=0.6)])
+    assert RANK.rank(cands).selected.candidate.origin == PRIMARY                        # skill alone: 0.43 < 0.50
+    rs = RANK.rank(cands, [_prior(n=20)])                                                  # + strong verified history
+    assert rs.selected.candidate.origin == SKILL_VARIANT and rs.selected_overrides_primary is True
+    f = rs.selected.features
+    assert f["prior_attempts"] == 20 and f["prior_outcome"] > 0.8 and len(f["prior_episode_ids"]) == 20   # provenance kept
+
+
+def test_p4_5_failures_lower_the_score_and_other_targets_are_ignored():
+    cands = GEN.generate(intent(), [advisory(conf=0.6)])
+    good = RANK.rank(cands, [_prior(n=20)]).selected.score
+    bad = [r for r in RANK.rank(cands, [_prior(n=20, ok=0)]).ranked if r.candidate.origin == SKILL_VARIANT][0].score
+    other = RANK.rank(cands, [_prior(target="env2.release", n=20)]).selected
+    assert bad < good and other.candidate.origin == PRIMARY and other.features["prior_attempts"] == 0
+
+
+def test_p4_5_prior_evidence_cannot_promote_a_target_change():
+    rs = RANK.rank(GEN.generate(intent(), (), ["env2.release"]), [_prior(target="env2.release", n=500)])
+    assert not rs.selected.candidate.target_changed and rs.ranked[-1].candidate.target_changed
+
+
+def test_p4_5_ranking_is_independent_of_prior_evidence_order():
+    cands = GEN.generate(intent(), [advisory(conf=0.6), advisory(op="TOGGLE_ON", conf=0.5, sid="t")])
+    p1, p2 = _prior(op="set", n=10), _prior(op="toggle_on", n=5)
+    a, b = RANK.rank(cands, [p1, p2]), RANK.rank(cands, [p2, p1])
+    assert [(r.candidate.candidate_id, r.score) for r in a.ranked] == [(r.candidate.candidate_id, r.score) for r in b.ranked]
+
+
+# ---- P4.6 lifecycle-aware use of skills ------------------------------------------------------------------------
+@pytest.mark.parametrize("state", ["CONTRADICTED", "RETIRED"])
+def test_p4_6_contradicted_and_retired_skills_contribute_nothing(state):
+    assert [c.origin for c in GEN.generate(intent(), [advisory(conf=1.0, state=state)])] == [PRIMARY]
+    same_op = GEN.generate(intent(op=OperationType.SET), [advisory(conf=1.0, state=state)])
+    assert same_op[0].evidence == ()                                    # and does not support the primary either
+
+
+def test_p4_6_stale_skill_is_penalised_relative_to_a_fresh_one():
+    fresh = RANK.rank(GEN.generate(intent(), [advisory(conf=0.95)]))
+    stale = RANK.rank(GEN.generate(intent(), [advisory(conf=0.95, state="STALE")]))
+    assert fresh.selected.candidate.origin == SKILL_VARIANT and stale.selected.candidate.origin == PRIMARY
+    sv = lambda rs: [r for r in rs.ranked if r.candidate.origin == SKILL_VARIANT][0].features["skill_prior"]
+    assert sv(stale) == pytest.approx(sv(fresh) * cr.STALE_FACTOR)
+
+
+def test_p4_6_collect_advisories_reports_exclusions_and_never_raises():
+    rec = lambda **kw: SkillRecord(skill_id=kw.pop("sid"), canonical_target_id="env1.release", target_concept="c", semantic_target="T",
+                                   operation="SET", trigger={}, preconditions=(), supporting_evidence=({"episode_id": "e"},),
+                                   outcome_stats={}, confidence=0.5, provenance={"source_episode_ids": ["e"]}, **kw)
+    r = SkillRetriever([rec(sid="ok"), rec(sid="stale", lifecycle_state="STALE"), rec(sid="contra", lifecycle_state="CONTRADICTED"),
+                        rec(sid="retired", lifecycle_state="RETIRED"), rec(sid="bad", advisory=False), rec(sid="badstate", lifecycle_state="DEGRADED")])
+    usable, excluded = collect_advisories(r, "env1.release")
+    assert sorted(a.skill_id for a in usable) == ["ok", "stale"]
+    assert {e["skill_id"]: e["reason"].split(":")[0] for e in excluded} == {"contra": "LIFECYCLE", "bad": "INVALID", "badstate": "INVALID"}
+    assert "retired" not in [a.skill_id for a in usable]                # dropped by the retriever itself

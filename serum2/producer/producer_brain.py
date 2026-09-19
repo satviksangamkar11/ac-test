@@ -427,9 +427,10 @@ class ProducerResult:
 class ProducerBrain:
     """Stateful (caches registry / selector) producer brain."""
 
-    def __init__(self, skill_retriever=None):
-        # Optional advisory skill source (P3). It only feeds candidate ranking; it has no authority.
+    def __init__(self, skill_retriever=None, prior_evidence=()):
+        # Optional advisory inputs (P3 skills, P4.5 prior outcomes). They only feed candidate ranking; no authority.
         self._skill_retriever = skill_retriever
+        self._prior_evidence = tuple(prior_evidence)
         self._registry = ContractRegistry()
         self._selector = RouteSelector()
         # Ordered explicit-target resolution over EXISTING registries (architecture 17/18): no tables here.
@@ -1311,12 +1312,12 @@ class ProducerBrain:
         result.resolution_mode = "B1_CANONICAL"
         # P4: advisory candidates -> ranking -> selected candidate becomes the intent handed on to Capability
         # Resolution and Admission (unchanged). The candidate layer cannot execute, admit or add capability.
-        from serum2.producer.candidate_ranking import CandidateGenerator, CandidateRanker, to_intent
-        from serum2.producer.skill_library import advise
-        advisories = advise(self._skill_retriever, intent.canonical_target) if self._skill_retriever else []
-        ranked = CandidateRanker().rank(CandidateGenerator().generate(intent, advisories))
+        from serum2.producer.candidate_ranking import CandidateGenerator, CandidateRanker, collect_advisories, to_intent
+        advisories, excluded = collect_advisories(self._skill_retriever, intent.canonical_target) if self._skill_retriever else ([], [])
+        ranked = CandidateRanker().rank(CandidateGenerator().generate(intent, advisories), self._prior_evidence)
         intent = to_intent(ranked.selected.candidate, intent)
-        result.b1_intent = dict(intent.to_dict(), resolution_mode="B1_CANONICAL", b1_used=True, **ranked.to_audit())
+        result.b1_intent = dict(intent.to_dict(), resolution_mode="B1_CANONICAL", b1_used=True,
+                                excluded_skills=excluded, **ranked.to_audit())
         op = intent.operation
         if op.direction == "decrease":
             return SemanticDirection.SHORTER

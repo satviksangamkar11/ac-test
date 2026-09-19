@@ -10,7 +10,12 @@ invents a capability, or silently replaces a target:
     the audit record say so;
   * DIFFERENT target: a candidate that changes the target sits in a lower tier than every same-target
     candidate, so it is never selected (target replacement is structurally impossible) and to_intent
-    refuses it.
+    refuses it;
+  * a variant never contradicts the requested direction (increase <-> decrease).
+
+Evidence inputs are DATA, not decision engines: skill advisories (P3) and PriorEpisodeEvidence (outcome
+history). Skills that are CONTRADICTED or RETIRED, or that fail validation, are excluded and reported; STALE
+skills are penalised. None of this can create a capability: it only reorders proposals.
 
 The selected candidate is handed to Capability Resolution / Admission unchanged in kind: a
 UniversalProductionIntent (see to_intent). Nothing here imports the Brain, admission, or a backend.
@@ -18,20 +23,25 @@ UniversalProductionIntent (see to_intent). Nothing here imports the Brain, admis
 from __future__ import annotations
 
 from dataclasses import dataclass, replace
-from typing import Any, Dict, Iterable, Mapping, Optional, Sequence, Tuple
+from typing import Any, Dict, Iterable, List, Mapping, Optional, Sequence, Tuple
 
 from serum2.producer.operation_spec import OperationSpec, OperationType
-from serum2.producer.skill_library import SkillAdvisory, _freeze, _FORBIDDEN_SKILL_FIELDS
+from serum2.producer.skill_library import (
+    CONFIDENCE_PRIOR, SkillAdvisory, SkillQualificationValidator, _FORBIDDEN_SKILL_FIELDS, _freeze, derive_operation,
+)
 
 PRIMARY = "PRIMARY"
 SKILL_VARIANT = "SKILL_VARIANT"
 REFERENCE_ALTERNATIVE = "REFERENCE_ALTERNATIVE"
 ORIGINS = frozenset({PRIMARY, SKILL_VARIANT, REFERENCE_ALTERNATIVE})
 
-# Ranking weights (advisory scoring only). The primary starts ahead (fit 1.0 vs 0.5); a variant overtakes it only
-# with strong verified evidence (a single-episode skill has confidence 0.2 and cannot).
+# Advisory scoring weights (sum to 1). The primary starts ahead (fit 1.0 vs 0.5); a variant overtakes it only with
+# strong verified evidence. A single-episode skill has confidence 0.2 and cannot; prior outcomes alone cannot.
 WEIGHT_FIT = 0.5
 WEIGHT_SKILL = 0.3
+WEIGHT_PRIOR = 0.2
+STALE_FACTOR = 0.5                                   # STALE skill confidence is halved
+EXCLUDED_STATES = frozenset({"CONTRADICTED", "RETIRED"})
 _OPPOSITE = {"increase": "decrease", "decrease": "increase"}
 _FIT = {PRIMARY: 1.0, SKILL_VARIANT: 0.5, REFERENCE_ALTERNATIVE: 0.5}
 
@@ -46,7 +56,7 @@ class Candidate:
     operand: Optional[Mapping[str, Any]]        # raw operand hint, e.g. {"raw": "838 ms"}
     origin: str
     target_changed: bool                        # differs from the intent's primary target
-    evidence: Tuple[Mapping[str, Any], ...] = ()  # (skill_id, confidence) supporting this candidate
+    evidence: Tuple[Mapping[str, Any], ...] = ()  # (skill_id, confidence, lifecycle_state) supporting this candidate
     rationale: Tuple[str, ...] = ()
     advisory: bool = True
 
@@ -67,6 +77,75 @@ class Candidate:
                 "rationale": list(self.rationale), "advisory": self.advisory}
 
 
+# ---- prior-episode evidence (P4.5): outcome history as DATA for the ranker --------------------------------------
+@dataclass(frozen=True)
+class PriorEpisodeEvidence:
+    """Aggregated outcomes of past episodes for one (target, operation). Data only: no capability, no route."""
+
+    canonical_target_id: str
+    operation: str
+    attempts: int
+    verified_successes: int
+    episode_ids: Tuple[str, ...]
+
+    def __post_init__(self):
+        if not self.canonical_target_id or not self.operation:
+            raise ValueError("prior evidence needs a target and an operation")
+        if not (isinstance(self.attempts, int) and isinstance(self.verified_successes, int)
+                and 0 <= self.verified_successes <= self.attempts):
+            raise ValueError("need 0 <= verified_successes <= attempts")
+        if self.attempts and not self.episode_ids:
+            raise ValueError("prior evidence needs episode provenance")
+
+
+def prior_evidence_from_episodes(episodes: Iterable[Any]) -> Tuple[PriorEpisodeEvidence, ...]:
+    """Aggregate episodes into per-(target, operation) outcome history.
+
+    Only admitted decisions count as attempts (a refusal is not an attempt). An attempt is a verified success only
+    when its episode passes the P3 verification gate. Each episode counts once per key (resubmission is a no-op).
+    """
+    validator = SkillQualificationValidator()
+    agg: Dict[Tuple[str, str], List[Any]] = {}
+    for ep in episodes:
+        verified = not validator.validate_episode(ep)
+        eid = getattr(ep, "experience_id", None)
+        for d in (getattr(ep, "brain_decision", None) or {}).get("decisions") or []:
+            if d.get("admitted") is not True or not eid:
+                continue
+            try:
+                op = derive_operation(d).lower()
+            except ValueError:
+                continue
+            row = agg.setdefault((d["source_control_id"], op), [0, 0, []])
+            if eid in row[2]:
+                continue
+            row[0] += 1
+            row[1] += 1 if verified else 0
+            row[2].append(eid)
+    return tuple(PriorEpisodeEvidence(t, o, r[0], r[1], tuple(r[2])) for (t, o), r in sorted(agg.items()))
+
+
+# ---- advisories (P4.6: lifecycle-aware collection) -------------------------------------------------------------
+def collect_advisories(retriever: Any, canonical_target_id: str) -> Tuple[List[SkillAdvisory], List[Dict[str, str]]]:
+    """Retrieved skills -> (usable advisories, reported exclusions). Never raises on a bad skill.
+
+    Excluded, with a reason: records failing validation, CONTRADICTED skills. (RETIRED skills are already dropped by
+    the retriever.) STALE skills are kept here and penalised by the ranker.
+    """
+    validator = SkillQualificationValidator()
+    usable: List[SkillAdvisory] = []
+    excluded: List[Dict[str, str]] = []
+    for rec in retriever.retrieve(canonical_target_id):
+        bad = validator.validate_skill(rec)
+        if bad:
+            excluded.append({"skill_id": getattr(rec, "skill_id", "?"), "reason": "INVALID: " + ",".join(bad)})
+        elif rec.lifecycle_state in EXCLUDED_STATES:
+            excluded.append({"skill_id": rec.skill_id, "reason": "LIFECYCLE: " + rec.lifecycle_state})
+        else:
+            usable.append(SkillAdvisory.from_skill(rec))
+    return usable, excluded
+
+
 def _operand_hint(spec: OperationSpec) -> Optional[Mapping[str, Any]]:
     op = spec.operand
     raw = None
@@ -84,11 +163,16 @@ def _cid(target: str, operation: str, origin: str, operand: Optional[Mapping[str
     return "cand:%s:%s:%s:%s" % (target, operation, origin.lower(), (operand or {}).get("raw", "-"))
 
 
+def _skill_ref(a: SkillAdvisory) -> Mapping[str, Any]:
+    return _freeze({"skill_id": a.skill_id, "confidence": a.confidence, "lifecycle_state": a.lifecycle_state})
+
+
 class CandidateGenerator:
     """UniversalProductionIntent (+ optional skill advisories, reference alternatives) -> candidates.
 
     Deterministic; never invents a target. Reference alternatives must be Atlas-resolvable ids supplied by the
-    caller (e.g. the candidate set of an AMBIGUOUS reference); unknown ids are an error, not a guess.
+    caller (e.g. the candidate set of an AMBIGUOUS reference); unknown ids are an error, not a guess. Advisories that
+    are CONTRADICTED/RETIRED contribute nothing.
     """
 
     def generate(self, intent: Any, advisories: Sequence[SkillAdvisory] = (),
@@ -98,9 +182,8 @@ class CandidateGenerator:
         target = intent.canonical_target
         p_op = intent.operation.operation.value
         p_operand = _operand_hint(intent.operation)
-        same = [a for a in advisories if a.canonical_target_id == target]
-        support = tuple(_freeze({"skill_id": a.skill_id, "confidence": a.confidence})
-                        for a in same if a.operation.lower() == p_op)
+        same = [a for a in advisories if a.canonical_target_id == target and a.lifecycle_state not in EXCLUDED_STATES]
+        support = tuple(_skill_ref(a) for a in same if a.operation.lower() == p_op)
         out = [Candidate(_cid(target, p_op, PRIMARY, p_operand), target, p_op, p_operand, PRIMARY, False, support,
                          ("the request's own interpretation",) + (("supported by prior verified skill",) if support else ()))]
         for a in same:
@@ -116,8 +199,7 @@ class CandidateGenerator:
             raw = (a.trigger.get("observed_change") or {}).get("after")
             operand = _freeze({"raw": str(raw)}) if raw is not None else None
             out.append(Candidate(_cid(target, op, SKILL_VARIANT, operand), target, op, operand, SKILL_VARIANT, False,
-                                 (_freeze({"skill_id": a.skill_id, "confidence": a.confidence}),),
-                                 ("alternative operation seen in a verified episode",)))
+                                 (_skill_ref(a),), ("alternative operation seen in a verified episode",)))
         for alt in reference_alternatives:
             res = normalize_control(alt)
             if res.status not in (EXACT, ALIAS):
@@ -163,20 +245,32 @@ class RankedSet:
                 "selected_overrides_primary": self.selected_overrides_primary}
 
 
+def _skill_weight(e: Mapping[str, Any]) -> float:
+    state = e.get("lifecycle_state", "FRESH")
+    if state in EXCLUDED_STATES:
+        return 0.0
+    return float(e["confidence"]) * (STALE_FACTOR if state == "STALE" else 1.0)
+
+
 class CandidateRanker:
     """Deterministic ranking: (target-change tier, -score, id). Advisory; returns ordering + features only."""
 
-    def rank(self, candidates: Sequence[Candidate]) -> RankedSet:
+    def rank(self, candidates: Sequence[Candidate], prior_evidence: Sequence[PriorEpisodeEvidence] = ()) -> RankedSet:
         if not candidates:
             raise ValueError("no candidates to rank")
         if not any(c.origin == PRIMARY for c in candidates):
             raise ValueError("the primary candidate must be present (a target/operation may not be silently replaced)")
         rows = []
         for c in candidates:
-            skill = max((float(e["confidence"]) for e in c.evidence), default=0.0)
-            score = WEIGHT_FIT * _FIT[c.origin] + WEIGHT_SKILL * skill
-            rows.append((1 if c.target_changed else 0, -score, c.candidate_id, c, score,
-                         {"tier": 1 if c.target_changed else 0, "primary_fit": _FIT[c.origin], "skill_prior": skill}))
+            skill = max((_skill_weight(e) for e in c.evidence), default=0.0)
+            mine = [p for p in prior_evidence if p.canonical_target_id == c.canonical_target and p.operation.lower() == c.operation]
+            attempts = sum(p.attempts for p in mine)
+            outcome = sum(p.verified_successes for p in mine) / (attempts + CONFIDENCE_PRIOR) if attempts else 0.0
+            score = WEIGHT_FIT * _FIT[c.origin] + WEIGHT_SKILL * skill + WEIGHT_PRIOR * outcome
+            tier = 1 if c.target_changed else 0
+            feats = {"tier": tier, "primary_fit": _FIT[c.origin], "skill_prior": skill, "prior_outcome": outcome,
+                     "prior_attempts": attempts, "prior_episode_ids": tuple(i for p in mine for i in p.episode_ids)}
+            rows.append((tier, -score, c.candidate_id, c, score, feats))
         rows.sort(key=lambda r: r[:3])
         return RankedSet(tuple(RankedCandidate(r[3], i + 1, round(r[4], 12), _freeze(r[5])) for i, r in enumerate(rows)))
 

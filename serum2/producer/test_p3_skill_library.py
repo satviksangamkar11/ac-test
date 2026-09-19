@@ -240,7 +240,7 @@ def test_p3_7_advisory_has_only_relevance_fields():
     from serum2.producer.skill_library import SkillAdvisory
     assert set(SkillAdvisory.__dataclass_fields__) == {
         "skill_id", "canonical_target_id", "operation", "trigger", "preconditions", "supporting_evidence",
-        "outcome_statistics", "confidence", "provenance", "advisory_only"}
+        "outcome_statistics", "confidence", "provenance", "lifecycle_state", "advisory_only"}
     assert not sl._FORBIDDEN_SKILL_FIELDS & set(SkillAdvisory.__dataclass_fields__)
 
 
@@ -423,7 +423,7 @@ def test_p3_9_merge_refuses_different_identity_and_store_is_unchanged(tmp_path):
 
 def test_p3_9_merge_never_promotes_lifecycle_or_advisory():
     from serum2.producer.skill_library import merge_skills
-    m = merge_skills(sk(ev("A")), sk(ev("B"), lifecycle_state="VALIDATED"))
+    m = merge_skills(sk(ev("A")), sk(ev("B"), lifecycle_state="STALE"))
     assert m.lifecycle_state == "FRESH" and m.advisory is True
 
 
@@ -455,3 +455,11 @@ def test_p3_9_legacy_evidence_without_flag_counts_as_verified():
     from serum2.producer.skill_library import merge_skills
     legacy = skill(supporting_evidence=({"episode_id": "A", "event_id": "e"},), provenance={"source_episode_ids": ["A"]})
     assert merge_skills(None, legacy).outcome_stats["verified_successes"] == 1
+
+
+def test_p4_6_lifecycle_vocabulary_and_advisory_exposure():
+    from serum2.producer.skill_library import LIFECYCLE_STATES, SkillAdvisory
+    assert LIFECYCLE_STATES == {"FRESH", "STALE", "CONTRADICTED", "RETIRED"}
+    for st in LIFECYCLE_STATES:
+        assert SkillAdvisory.from_skill(skill(lifecycle_state=st)).lifecycle_state == st
+    assert "BAD_LIFECYCLE_STATE" in V.validate_skill(skill(lifecycle_state="DEGRADED"))

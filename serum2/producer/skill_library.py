@@ -16,7 +16,8 @@ from typing import Any, Dict, Iterable, List, Mapping, Optional, Tuple
 
 VERIFIED_STATUS = "ADMITTED_CONTROLS_READBACK_VERIFIED"
 SKILL_SCHEMA_VERSION = "1"
-LIFECYCLE_STATES = frozenset({"FRESH", "VALIDATED", "DEGRADED", "RETIRED"})
+# FRESH usable; STALE usable with penalty (policy is the consumer's); CONTRADICTED / RETIRED excluded by consumers.
+LIFECYCLE_STATES = frozenset({"FRESH", "STALE", "CONTRADICTED", "RETIRED"})
 CONFIDENCE_PRIOR = 4   # pseudo-attempts: one verified success alone yields 1/5, never high confidence
 
 
@@ -36,7 +37,7 @@ class SkillRecord:
     confidence: float
     provenance: Mapping[str, Any]
     advisory: bool = True
-    lifecycle_state: str = "FRESH"           # FRESH -> (later stages) VALIDATED / DEGRADED / RETIRED
+    lifecycle_state: str = "FRESH"           # see LIFECYCLE_STATES; transitions are owned by later stages
     schema_version: str = SKILL_SCHEMA_VERSION
 
     def to_dict(self) -> Dict[str, Any]:
@@ -323,6 +324,7 @@ class SkillAdvisory:
     outcome_statistics: Mapping[str, Any]
     confidence: float
     provenance: Mapping[str, Any]
+    lifecycle_state: str = "FRESH"
     advisory_only: bool = True
 
     @classmethod
@@ -332,7 +334,7 @@ class SkillAdvisory:
             raise ValueError("cannot advise from invalid skill: %s" % bad)
         return cls(skill.skill_id, skill.canonical_target_id, skill.operation, _freeze(skill.trigger),
                    _freeze(skill.preconditions), _freeze(skill.supporting_evidence), _freeze(skill.outcome_stats),
-                   skill.confidence, _freeze(skill.provenance))
+                   skill.confidence, _freeze(skill.provenance), skill.lifecycle_state)
 
     def to_dict(self) -> Dict[str, Any]:
         return json.loads(json.dumps({f: getattr(self, f) for f in self.__dataclass_fields__}, default=dict))

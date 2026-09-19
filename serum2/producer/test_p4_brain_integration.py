@@ -20,15 +20,15 @@ ENV1 = "longer Env1.Release"
 ENV2 = "longer Env2.Release to 267 ms"
 
 
-def skill(target="env1.release", op="SET", conf=0.95, sid=None):
+def skill(target="env1.release", op="SET", conf=0.95, sid=None, **kw):
     return SkillRecord(skill_id=sid or "skill:%s:%s" % (target, op.lower()), canonical_target_id=target, target_concept="c",
                        semantic_target="T", operation=op, trigger={"observed_change": {"before": "15 ms", "after": "838 ms"}},
                        preconditions=(), supporting_evidence=({"episode_id": "e", "verified": True},), outcome_stats={},
-                       confidence=conf, provenance={"source_episode_ids": ["e"]})
+                       confidence=conf, provenance={"source_episode_ids": ["e"]}, **kw)
 
 
-def run(text, *skills, brain=None):
-    brain = brain or ProducerBrain(skill_retriever=SkillRetriever(skills) if skills else None)
+def run(text, *skills, brain=None, prior=()):
+    brain = brain or ProducerBrain(skill_retriever=SkillRetriever(skills) if skills else None, prior_evidence=prior)
     return brain.execute(ProducerRequest(user_intent=text, mode="EXECUTE", visual_mode="NEVER"))
 
 
@@ -150,3 +150,50 @@ def test_candidate_code_has_no_side_effects_or_backend_reach(monkeypatch):
 
 def test_brain_without_a_retriever_behaves_exactly_as_before_for_admission():
     assert decision(run(ENV1)) == decision(ProducerBrain().execute(ProducerRequest(user_intent=ENV1, mode="EXECUTE", visual_mode="NEVER")))
+
+
+# ---- P4.5 / P4.6 through the real Brain ---------------------------------------------------------------------
+from serum2.producer.candidate_ranking import PriorEpisodeEvidence
+
+
+def prior(target="env1.release", op="set", n=20):
+    return PriorEpisodeEvidence(target, op, n, n, tuple("e%d" % i for i in range(n)))
+
+
+def test_prior_evidence_influences_the_real_path_visibly_and_admission_is_unchanged():
+    base = run(ENV1)
+    plain = run(ENV1, skill(conf=0.6))
+    tipped = run(ENV1, skill(conf=0.6), prior=(prior(),))
+    assert plain.b1_intent["selected_overrides_primary"] is False and tipped.b1_intent["selected_overrides_primary"] is True
+    sel = next(c for c in tipped.b1_intent["candidates"] if c["candidate_id"] == tipped.b1_intent["selected_candidate_id"])
+    assert sel["features"]["prior_attempts"] == 20 and len(sel["features"]["prior_episode_ids"]) == 20
+    assert decision(tipped) == decision(base)
+
+
+def test_prior_evidence_cannot_create_capability_for_env2():
+    base = run(ENV2)
+    r = run(ENV2, prior=(prior("env2.release", "set", 500), prior("env2.release", "increase", 500)))
+    assert decision(r) == decision(base) and LEGACY_STATUS_TO_REFUSAL[r.execution_status][0] == "REFUSED_NO_CAPABILITY"
+
+
+def test_contradicted_skill_does_not_influence_the_real_path_and_is_reported():
+    r = run(ENV1, skill(conf=1.0, lifecycle_state="CONTRADICTED"))
+    assert len(r.b1_intent["candidates"]) == 1 and r.b1_intent["selected_overrides_primary"] is False
+    assert r.b1_intent["excluded_skills"] == [{"skill_id": "skill:env1.release:set", "reason": "LIFECYCLE: CONTRADICTED"}]
+    assert r.admitted is True
+
+
+def test_invalid_skill_does_not_break_or_influence_the_request_and_is_reported():
+    r = run(ENV1, skill(conf=1.0, advisory=False))
+    assert len(r.b1_intent["candidates"]) == 1 and r.admitted is True
+    assert r.b1_intent["excluded_skills"][0]["reason"].startswith("INVALID")
+
+
+def test_stale_skill_is_penalised_on_the_real_path():
+    assert run(ENV1, skill(conf=0.95)).b1_intent["selected_overrides_primary"] is True
+    assert run(ENV1, skill(conf=0.95, lifecycle_state="STALE")).b1_intent["selected_overrides_primary"] is False
+
+
+def test_retired_skill_is_dropped():
+    r = run(ENV1, skill(conf=1.0, lifecycle_state="RETIRED"))
+    assert len(r.b1_intent["candidates"]) == 1
