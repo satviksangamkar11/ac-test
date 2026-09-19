@@ -216,11 +216,135 @@ def test_p3_6_stored_and_retrieved_skill_is_not_thereby_more_trusted_or_permitte
     assert got == sk and got.confidence == 0.2 and got.lifecycle_state == "FRESH" and got.advisory is True
 
 
-@RED
+def test_p3_operation_is_data_derived_not_target_conditioned():
+    from serum2.producer.skill_library import extract_skill
+    e = copy.deepcopy(episode())
+    d = e.brain_decision["decisions"][0]
+    d.update(source_control_id="filter1.cutoff", semantic_target="Filter1.Cutoff", resolved_concept="filter-cutoff",
+             observed_before="200 Hz", observed_after="900 Hz")
+    assert extract_skill(e).operation == "SET"                       # same data shape, different target
+    d["operation"] = "toggle"
+    assert extract_skill(e).operation == "TOGGLE"                    # explicit data wins
+    d.pop("operation"); d["observed_after"] = None
+    with pytest.raises(ValueError):                                  # no data -> no guessed default
+        extract_skill(e)
+
+
+def test_p3_skill_library_source_names_no_target():
+    tree = ast.parse(Path(sl.__file__).read_text(encoding="utf-8"))
+    consts = [n.value for n in ast.walk(tree) if isinstance(n, ast.Constant) and isinstance(n.value, str)]
+    assert not [c for c in consts if any(t in c.lower() for t in ("env1", "env2", "filter1", "osc"))]
+
+
+def test_p3_7_advisory_has_only_relevance_fields():
+    from serum2.producer.skill_library import SkillAdvisory
+    assert set(SkillAdvisory.__dataclass_fields__) == {
+        "skill_id", "canonical_target_id", "operation", "trigger", "preconditions", "supporting_evidence",
+        "outcome_statistics", "confidence", "provenance", "advisory_only"}
+    assert not sl._FORBIDDEN_SKILL_FIELDS & set(SkillAdvisory.__dataclass_fields__)
+
+
+def test_p3_7_advisory_is_read_only_and_deeply_immutable():
+    from serum2.producer.skill_library import SkillAdvisory, extract_skill
+    adv = SkillAdvisory.from_skill(extract_skill(episode()))
+    with pytest.raises(Exception):
+        adv.confidence = 1.0
+    with pytest.raises(TypeError):
+        adv.outcome_statistics["verified_successes"] = 99
+    with pytest.raises(TypeError):
+        adv.trigger["observed_change"]["after"] = "x"
+
+
 def test_p3_7_advisory_cannot_execute_or_grant_authority():
     from serum2.producer.skill_library import SkillAdvisory, extract_skill
-    adv = SkillAdvisory.from_skills([extract_skill(episode())])
-    assert adv.advisory_only is True and not hasattr(adv, "execute") and not hasattr(adv, "admitted")
+    adv = SkillAdvisory.from_skill(extract_skill(episode()))
+    assert adv.advisory_only is True
+    for attr in ("execute", "admitted", "execution_route", "contract_id", "binding", "capability", "run"):
+        assert not hasattr(adv, attr)
+
+
+def test_p3_7_advisory_cannot_be_used_as_an_execution_request():
+    from serum2.producer.producer_brain import ProducerBrain, ProducerRequest
+    from serum2.producer.skill_library import SkillAdvisory, extract_skill
+    adv = SkillAdvisory.from_skill(extract_skill(episode()))
+    with pytest.raises(TypeError):
+        ProducerRequest(**adv.to_dict())
+    with pytest.raises(Exception):
+        ProducerBrain().execute(adv)
+
+
+def test_p3_7_advisory_refuses_invalid_skill():
+    from serum2.producer.skill_library import SkillAdvisory
+    with pytest.raises(ValueError):
+        SkillAdvisory.from_skill(skill(advisory=False))
+
+
+def test_p3_7_advise_projects_retrieved_skills_in_retrieval_order():
+    from serum2.producer.skill_library import SkillRetriever, advise
+    r = SkillRetriever([skill(skill_id="skill:b", confidence=0.2), skill(skill_id="skill:a", confidence=0.4)])
+    assert [a.skill_id for a in advise(r, "env1.release")] == ["skill:a", "skill:b"]
+
+
+# ---- P3.8 hard boundary: Skill != Capability != Authority, against the real Brain ------------------
+def _brain_outcome(intent):
+    from serum2.producer.producer_brain import ProducerBrain, ProducerRequest
+    from serum2.producer.target_resolution import LEGACY_STATUS_TO_REFUSAL
+    r = ProducerBrain().execute(ProducerRequest(user_intent=intent, mode="EXECUTE", visual_mode="NEVER"))
+    return (bool(r.admitted), r.execution_status, LEGACY_STATUS_TO_REFUSAL.get(r.execution_status or "", (None,))[0],
+            (getattr(r, "_serum_preset_plan", None) or {}).get("contract_id"))
+
+
+def _env2_episode():
+    e = copy.deepcopy(episode())
+    e.brain_decision["decisions"][0].update(source_control_id="env2.release", semantic_target="Env2.Release",
+                                            resolved_concept="canonical:env2.release", observed_after="267 ms")
+    e.outcome["real_plugin_readback"].update(expected={"Env 2 Release": "267 ms"}, observed={"Env 2 Release": "267 ms"})
+    return e
+
+
+def test_p3_8_skill_for_unqualified_target_does_not_create_capability(tmp_path):
+    from serum2.producer.skill_library import SkillRetriever, SkillStore, advise, extract_skill
+    intent = "longer Env2.Release to 267 ms"
+    before = _brain_outcome(intent)
+    assert before[0] is False and before[2] == "REFUSED_NO_CAPABILITY"
+    st = SkillStore(tmp_path)
+    st.save(extract_skill(_env2_episode()))                          # skill exists
+    (adv,) = advise(SkillRetriever.from_store(st), "env2.release", "SET")   # retrieved + advisory produced
+    assert adv.canonical_target_id == "env2.release"
+    after = _brain_outcome(intent)                                   # Capability Resolution + Admission
+    assert after == before and after[0] is False and after[2] == "REFUSED_NO_CAPABILITY"
+
+
+def test_p3_8_skill_for_qualified_target_leaves_capability_decision_unchanged(tmp_path):
+    from serum2.producer.skill_library import SkillRetriever, SkillStore, advise, extract_skill
+    intent = "longer Env1.Release to 838 ms"
+    before = _brain_outcome(intent)
+    assert before[0] is True and before[3] == "envelope_field_release"
+    st = SkillStore(tmp_path)
+    st.save(extract_skill(episode()))
+    advise(SkillRetriever.from_store(st), "env1.release")
+    assert _brain_outcome(intent) == before
+
+
+def test_p3_8_retrieval_never_promotes_confidence_lifecycle_or_statistics(tmp_path):
+    from serum2.producer.skill_library import SkillRetriever, SkillStore, advise, extract_skill
+    st = SkillStore(tmp_path)
+    path = st.save(extract_skill(episode()))
+    raw = path.read_bytes()
+    r = SkillRetriever.from_store(st)
+    for _ in range(5):
+        (adv,) = advise(r, "env1.release")
+        (got,) = r.retrieve("env1.release")
+    assert path.read_bytes() == raw                                  # store untouched by retrieval
+    assert (got.confidence, got.lifecycle_state, dict(got.outcome_stats)) == (0.2, "FRESH", {
+        "attempts": 1, "verified_successes": 1, "distinct_episodes": 1})
+    assert adv.confidence == 0.2 and st.load(got.skill_id) == got
+
+
+def test_p3_8_skill_library_cannot_reach_capability_or_admission_code():
+    tree = ast.parse(Path(sl.__file__).read_text(encoding="utf-8"))
+    mods = {n.module or "" for n in ast.walk(tree) if isinstance(n, ast.ImportFrom)}
+    assert not [m for m in mods if any(b in m for b in ("contract_registry", "capability", "admission", "producer_brain", "backend_dispatcher"))]
 
 
 @RED
@@ -229,3 +353,15 @@ def test_p3_later_outcome_feedback_updates_statistics_not_authority():
     sk = extract_skill(episode())
     new = record_skill_outcome(sk, episode_id="e2", verified=False)
     assert new.outcome_stats["attempts"] == 2 and new.confidence < sk.confidence and new.advisory is True
+
+
+@pytest.mark.xfail(strict=True, raises=AssertionError, reason="KNOWN P3 FOLLOW-UP: store upserts by skill_id; must merge evidence/statistics")
+def test_p3_followup_second_episode_merges_into_skill_instead_of_overwriting(tmp_path):
+    from serum2.producer.skill_library import SkillStore, extract_skill
+    a, b = episode(experience_id="ep_A"), episode(experience_id="ep_B")
+    st = SkillStore(tmp_path)
+    st.save(extract_skill(a))
+    st.save(extract_skill(b))
+    got = st.load("skill:env1.release:set")
+    assert sorted(got.provenance["source_episode_ids"]) == ["ep_A", "ep_B"]
+    assert got.outcome_stats["attempts"] == 2 and got.outcome_stats["distinct_episodes"] == 2

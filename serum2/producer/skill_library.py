@@ -11,6 +11,7 @@ import os
 import re
 from dataclasses import dataclass
 from pathlib import Path
+from types import MappingProxyType
 from typing import Any, Dict, Iterable, List, Mapping, Optional, Tuple
 
 VERIFIED_STATUS = "ADMITTED_CONTROLS_READBACK_VERIFIED"
@@ -106,6 +107,20 @@ class SkillQualificationValidator:
         return v
 
 
+def derive_operation(decision: Mapping[str, Any]) -> str:
+    """Operation comes from the decision's own data, never from which target it is.
+
+    An explicit decision["operation"] wins. Otherwise a decision that observed a concrete written
+    value (observed_after) is a SET. No usable data -> ValueError (no guessing, no default).
+    """
+    op = decision.get("operation")
+    if op:
+        return str(op).upper()
+    if decision.get("observed_after") is not None:
+        return "SET"
+    raise ValueError("decision carries no operation and no observed value")
+
+
 def extract_skill(episode: Any, index: int = 0) -> SkillRecord:
     """VerifiedEpisode -> validated SkillRecord for one admitted decision. Raises ValueError otherwise.
 
@@ -121,10 +136,11 @@ def extract_skill(episode: Any, index: int = 0) -> SkillRecord:
     d, out = decisions[index], episode.outcome
     rb = out["real_plugin_readback"]
     attempts = verified = 1
+    operation = derive_operation(d)
     skill = SkillRecord(
-        skill_id="skill:%s:set" % d["source_control_id"],
+        skill_id="skill:%s:%s" % (d["source_control_id"], operation.lower()),
         canonical_target_id=d["source_control_id"],
-        target_concept=d["resolved_concept"], semantic_target=d["semantic_target"], operation="SET",
+        target_concept=d["resolved_concept"], semantic_target=d["semantic_target"], operation=operation,
         trigger={"intent_text": d["request_kwargs"].get("user_intent"),
                  "observed_change": {"before": d["observed_before"], "after": d["observed_after"]}},
         preconditions=("verification_level=%s" % out.get("verification_level"), "readback_backend=%s" % rb.get("backend")),
@@ -216,3 +232,47 @@ class SkillRetriever:
                 and (operation is None or k.operation == operation)
                 and k.lifecycle_state != "RETIRED"]
         return sorted(hits, key=lambda k: (-k.confidence, k.skill_id))
+
+
+def _freeze(x: Any) -> Any:
+    if isinstance(x, Mapping):
+        return MappingProxyType({k: _freeze(v) for k, v in x.items()})
+    if isinstance(x, (list, tuple)):
+        return tuple(_freeze(v) for v in x)
+    return x
+
+
+@dataclass(frozen=True)
+class SkillAdvisory:
+    """Read-only projection of a SkillRecord for candidate generation/ranking (P4).
+
+    Exactly the relevance fields; deliberately no route, contract, binding, admitted, tool call or
+    execute. It is not a ProducerRequest and cannot be turned into one.
+    """
+
+    skill_id: str
+    canonical_target_id: str
+    operation: str
+    trigger: Mapping[str, Any]
+    preconditions: Tuple[str, ...]
+    supporting_evidence: Tuple[Mapping[str, Any], ...]
+    outcome_statistics: Mapping[str, Any]
+    confidence: float
+    provenance: Mapping[str, Any]
+    advisory_only: bool = True
+
+    @classmethod
+    def from_skill(cls, skill: SkillRecord) -> "SkillAdvisory":
+        bad = SkillQualificationValidator().validate_skill(skill)
+        if bad:
+            raise ValueError("cannot advise from invalid skill: %s" % bad)
+        return cls(skill.skill_id, skill.canonical_target_id, skill.operation, _freeze(skill.trigger),
+                   _freeze(skill.preconditions), _freeze(skill.supporting_evidence), _freeze(skill.outcome_stats),
+                   skill.confidence, _freeze(skill.provenance))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return json.loads(json.dumps({f: getattr(self, f) for f in self.__dataclass_fields__}, default=dict))
+
+
+def advise(retriever: SkillRetriever, canonical_target_id: str, operation: Optional[str] = None) -> List[SkillAdvisory]:
+    return [SkillAdvisory.from_skill(k) for k in retriever.retrieve(canonical_target_id, operation)]
