@@ -1,3 +1,11 @@
+> **CORRECTION (audit, 2026-09-19): B1 is NOT complete and NOT verified.**
+> - B1 modules are standalone scaffolding; `ProducerBrain._resolve_concept()` does not call them.
+> - `_INTENT_TO_CONCEPT` in `producer_brain.py` is still the live natural-language path.
+> - `concept_representation._find_contract()` contains a hand-written `contract_hints` target->contract dict
+>   (it also hands `env2.decay` the Env1 contract, i.e. cross-slot substitution).
+> - The "No hand-written concept tables" and "feeds the frozen pipeline" claims below are false for this tree.
+> - Do not create `vlp1-b1-verified`. See B1_INTEGRATION_FINDINGS.md.
+
 # B1 Canonical Foundation — Implementation Complete
 
 **Date:** 2026-09-19  
