@@ -432,18 +432,28 @@ def infer_from_diffs(
     for d in diffs:
         if not d.changed:
             continue
-        concept = _TARGET_TO_CONCEPT.get(d.target)
-        if concept is None:
-            continue  # unmapped target — do not guess a concept
+        # U4: Use Atlas as the single identity resolver. Only emit an
+        # interpretation for targets the Atlas can positively identify.
+        # Legacy _TARGET_TO_CONCEPT gate removed — it silently dropped all
+        # Atlas-known targets that had no hand-written concept mapping.
+        atlas_res = normalize_control(d.target.lower() if d.target else "")
+        if atlas_res.status not in (EXACT, ALIAS):
+            # Try the target as-is (may already be lowercase canonical)
+            atlas_res2 = normalize_control(d.target)
+            if atlas_res2.status in (EXACT, ALIAS):
+                atlas_res = atlas_res2
+            else:
+                continue  # genuinely ambiguous or unresolved — honest omission
+        canonical_id = atlas_res.canonical_id
+        # Derive concept from canonical identity (U1 format: "canonical:<id>")
+        concept = _TARGET_TO_CONCEPT.get(d.target) or ("canonical:%s" % canonical_id)
 
         before_num = _numeric_with_unit(d.before.value)
         after_num = _numeric_with_unit(d.after.value)
-        inc_word, dec_word = _TARGET_DIRECTION_WORDS.get(d.target, ("higher", "lower"))
+        inc_word, dec_word = _TARGET_DIRECTION_WORDS.get(d.target, ("increase", "decrease"))
         if before_num and after_num and before_num[1] == after_num[1]:
             direction = inc_word if after_num[0] > before_num[0] else dec_word
         else:
-            # Values present but not both cleanly numeric/same-unit — direction
-            # genuinely unknown rather than guessed.
             direction = None
 
         if direction is None:

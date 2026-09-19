@@ -37,6 +37,12 @@ class RouteType(str, Enum):
     UNBOUND = "UNBOUND"
 
 
+EXECUTION_ELIGIBLE_ROUTES = frozenset({
+    RouteType.SERUM_BODY_STATE,
+    RouteType.SERUM_PRESET_STRUCTURAL_BINDING,
+})
+
+
 class OperationFamily(str, Enum):
     TOGGLE = "TOGGLE"
     NUMERIC = "NUMERIC"
@@ -75,6 +81,8 @@ class BindingCandidate:
             return bool(self.binding.host_parameter_name)
         if self.route_type == RouteType.SERUM_BODY_STATE:
             return bool(self.binding.body_path or self.binding.resolver_operation_id)
+        if self.route_type == RouteType.SERUM_PRESET_STRUCTURAL_BINDING:
+            return bool(self.binding.resolver_operation_id)
         if self.route_type == RouteType.STRUCTURED_OPERATION:
             return bool(self.binding.resolver_operation_id)
         return False
@@ -509,7 +517,7 @@ class QualificationPlanner:
             )
             contract_status = getattr(contract, "status", None)
 
-            if contract_status == CAUSAL_VERIFIED:
+            if contract_status == CAUSAL_VERIFIED and candidate.route_type in EXECUTION_ELIGIBLE_ROUTES:
                 bucket = QualificationBucket.ALREADY_VERIFIED
                 reason = "CAUSAL_VERIFIED contract exists."
             elif contract_status == STRUCTURAL_ONLY:
@@ -522,7 +530,7 @@ class QualificationPlanner:
             }:
                 bucket = QualificationBucket.BLOCKED
                 reason = "Registered contract is blocked/negative/unsupported."
-            elif candidate.is_verified():
+            elif candidate.is_verified() and candidate.route_type in EXECUTION_ELIGIBLE_ROUTES:
                 bucket = QualificationBucket.READY_FOR_STRUCTURAL
                 reason = "Authoritative binding exists; no qualifying contract is registered."
             else:
@@ -553,6 +561,7 @@ class QualificationPlanner:
 
 __all__ = [
     "BindingCandidate",
+    "EXECUTION_ELIGIBLE_ROUTES",
     "MutationSpec",
     "OperationFamily",
     "QualificationBucket",

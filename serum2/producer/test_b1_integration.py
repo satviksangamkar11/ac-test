@@ -40,7 +40,8 @@ def test_canonical_path_runs_b1_and_hands_the_resolved_capability_downstream():
                                         ("lower Env1.Sustain to -13.8 dB", "envelope_field_sustain")])
 def test_numeric_value_is_read_from_the_value_not_from_the_identifier(intent, cap):
     op = _run(intent).b1_intent["operation"]
-    assert op["operation"] == "numeric_set" and op["direction"] == "decrease"
+    # U3: canonical name is "set" (NUMERIC_SET is a legacy alias)
+    assert op["operation"] == "set" and op["direction"] == "decrease"
     assert op["target_value"] in (627, -13.8) and op["target_value"] != 1          # 'Env1' digit is not a value
 
 

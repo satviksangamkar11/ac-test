@@ -81,7 +81,12 @@ def test_planner_refuses_unverified_osc2_enable_and_keeps_axes_visible():
     ).plan()
 
     by_target = {x.target: x for x in plan.all_targets}
-    assert by_target["filter1.cutoff"].bucket == QualificationBucket.ALREADY_VERIFIED
+    # VST3_HOST_PARAMETER is evidence-only, not execution-eligible; even with
+    # CAUSAL_VERIFIED contract, it needs a Serum execution binding (BODY_STATE or
+    # SERUM_PRESET_STRUCTURAL_BINDING) to be executable.
+    assert by_target["filter1.cutoff"].bucket == QualificationBucket.NEEDS_BINDING
+    assert by_target["filter1.cutoff"].contract_status == "CAUSAL_VERIFIED"
+    assert by_target["filter1.cutoff"].candidate.route_type == RouteType.VST3_HOST_PARAMETER
     assert by_target["env2.decay"].bucket == QualificationBucket.NEEDS_CAUSAL
     assert by_target["oscB.enabled"].bucket == QualificationBucket.NEEDS_BINDING
     assert by_target["matrix.amount"].bucket == QualificationBucket.NEEDS_BINDING
@@ -90,6 +95,7 @@ def test_planner_refuses_unverified_osc2_enable_and_keeps_axes_visible():
 
 
 def test_exact_host_binding_becomes_ready_for_structural():
+    # VST3 is evidence-only; use BODY_STATE for READY_FOR_STRUCTURAL
     atlas = {"FXDistortion.Drive": control("continuous")}
     semantic_targets = {
         "FXDistortion.Drive": ref("fx_field_dist_drive"),
@@ -98,17 +104,21 @@ def test_exact_host_binding_becomes_ready_for_structural():
         atlas_controls=atlas,
         semantic_targets=semantic_targets,
         contract_registry=FakeRegistry({}),
-        host_mapping={"fx_field_dist_drive": "Filter 1 Drive"},
-        body_mapping={},
+        host_mapping={},
+        body_mapping={
+            "fx_field_dist_drive": {
+                "body_path": "FXRack.Distortion.Drive"
+            }
+        },
         target_universe="CAPABILITY_TARGETS",
     ).plan()
 
     item = plan.ready_for_structural[0]
     assert item.bucket == QualificationBucket.READY_FOR_STRUCTURAL
     assert item.candidate.is_verified()
-    assert item.candidate.route_type == RouteType.VST3_HOST_PARAMETER
-    assert item.candidate.operation_family == OperationFamily.NUMERIC
-    assert item.candidate.binding.host_parameter_name == "Filter 1 Drive"
+    assert item.candidate.route_type == RouteType.SERUM_BODY_STATE
+    assert item.candidate.operation_family == OperationFamily.BODY_STATE
+    assert item.candidate.binding.body_path == "FXRack.Distortion.Drive"
 
 
 def test_body_state_is_a_first_class_route_family():

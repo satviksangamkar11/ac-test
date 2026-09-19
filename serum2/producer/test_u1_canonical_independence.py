@@ -89,12 +89,15 @@ def test_u1_genuinely_unknown_atlas_target_still_fails_at_reference():
         atlas_resolve=normalize_control
     )
 
-    result = resolver.resolve("set unknown.bogus to 42", None)
+    # Pass as semantic_target; TargetResolver routes it through Atlas without needing surface tokens
+    result = resolver.resolve("", "env1.bogus")
 
     # Should fail at REFERENCE layer, NOT BRAIN layer
-    assert result.refusal is not None, "Unknown target should have refusal"
+    assert result is not None and result.refusal is not None, \
+        f"Unknown target should have refusal, got result={result}"
     assert result.refusal.code == "REFUSED_UNRESOLVED_REFERENCE", \
         f"Unknown target must fail at REFERENCE, got {result.refusal.code}"
+    assert result.refusal.layer == "REFERENCE_RESOLUTION"
 
 
 def test_u1_ambiguous_atlas_target_still_fails_at_reference():
@@ -111,12 +114,14 @@ def test_u1_ambiguous_atlas_target_still_fails_at_reference():
         atlas_resolve=normalize_control
     )
 
-    # "cutoff" is ambiguous (filter1.cutoff vs filter2.cutoff)
-    result = resolver.resolve("set cutoff", None)
+    # Pass as semantic_target; TargetResolver routes it through Atlas without needing surface tokens
+    result = resolver.resolve("", "cutoff")
 
-    assert result.refusal is not None, "Ambiguous target should have refusal"
+    assert result is not None and result.refusal is not None, \
+        f"Ambiguous target should have refusal, got result={result}"
     assert result.refusal.code == "REFUSED_AMBIGUOUS_REFERENCE", \
         f"Ambiguous target must fail at REFERENCE, got {result.refusal.code}"
+    assert result.refusal.layer == "REFERENCE_RESOLUTION"
 
 
 if __name__ == "__main__":

@@ -85,12 +85,11 @@ class TestConceptDerivationEngine:
         assert rep.confidence >= 0.90
 
     def test_marks_missing_when_no_path(self):
-        """Returns MISSING when no derivation path exists."""
+        """Returns MISSING when no derivation path exists — i.e., Atlas does not know the target."""
         engine = ConceptDerivationEngine(ContractRegistry())
-        rep = engine.derive("oscA.warp_mode")
+        # U1: oscA.warp_mode IS Atlas-known → ATLAS_CANONICAL (derivable). Use genuinely unknown target.
+        rep = engine.derive("oscA.completely_bogus_field")
 
-        # warp_mode has no contract and no semantic target
-        assert rep.canonical_target == "oscA.warp_mode"
         assert not rep.is_derivable()
         assert rep.provenance == Provenance.MISSING
 

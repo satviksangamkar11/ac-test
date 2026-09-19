@@ -13,31 +13,103 @@ import re
 
 
 class OperationType(Enum):
-    """Canonical operation types."""
-    NUMERIC_SET = "numeric_set"           # set to exact value
-    NUMERIC_INCREASE = "increase"          # increase value
-    NUMERIC_DECREASE = "decrease"          # decrease value
-    ENUM_SELECT = "enum_select"           # select from enum values
+    """Canonical U3 operation types. Target-independent."""
+    # Numeric
+    SET = "set"                           # set to exact value
+    INCREASE = "increase"                 # increase value (direction only)
+    DECREASE = "decrease"                 # decrease value (direction only)
+    # Enum
+    SELECT = "enum_select"                # select from enum values
+    # Toggle
     TOGGLE_ON = "toggle_on"               # enable/on
     TOGGLE_OFF = "toggle_off"             # disable/off
     TOGGLE_SWITCH = "toggle_switch"       # toggle state
+    # Structured / collection
+    PATCH = "patch"                       # partial update of a structured value
+    ADD = "add"                           # add an element (e.g. modulation route)
+    REMOVE = "remove"                     # remove an element
+    # Legacy aliases (keep for callers that predate U3)
+    NUMERIC_SET = "set"                   # alias for SET
+    NUMERIC_INCREASE = "increase"         # alias for INCREASE
+    NUMERIC_DECREASE = "decrease"         # alias for DECREASE
+    ENUM_SELECT = "enum_select"           # alias for SELECT
     UNKNOWN = "unknown"                   # could not interpret
 
 
 @dataclass
-class OperationSpec:
-    """Normalized operation specification.
+class Operand:
+    """U3: Typed operand for an operation.
 
-    Combines user intent language with operation interpretation.
+    Exactly one of (value, boolean_value, enum_value) is populated;
+    the others are None. normalized_value is set by a downstream layer
+    that maps the raw value into the native Atlas range.
     """
+    value: Optional[Any] = None             # numeric value (raw, user-supplied)
+    unit: Optional[str] = None              # user-supplied unit string ("ms", "hz", …)
+    normalized_value: Optional[float] = None  # filled by value-mapping layer
+    enum_value: Optional[str] = None        # for SELECT
+    boolean_value: Optional[bool] = None    # for TOGGLE_ON / TOGGLE_OFF
+
+    _UNIT_COMPAT: dict = None  # populated lazily; not a real field
+
+    def validate_against(self, value_domain) -> tuple[bool, str]:
+        """Check this operand is compatible with value_domain.
+
+        Returns (ok, reason). reason is empty when ok is True.
+        """
+        vd_type = getattr(value_domain, "type", None)
+        vd_unit = getattr(value_domain, "unit", None)
+
+        # Toggle domain
+        if vd_type == "toggle":
+            if self.boolean_value is None:
+                return False, "toggle domain requires boolean_value"
+            return True, ""
+
+        # Enum domain
+        if vd_type == "enum":
+            evs = getattr(value_domain, "enum_values", None) or []
+            if self.enum_value is None:
+                return False, "enum domain requires enum_value"
+            if evs and self.enum_value.lower() not in {e.lower() for e in evs}:
+                return False, f"{self.enum_value!r} not in enum vocabulary {evs}"
+            return True, ""
+
+        # Numeric / direction-only (no value = direction-only = always compatible)
+        if self.boolean_value is not None or self.enum_value is not None:
+            return False, f"non-numeric operand against {vd_type!r} domain"
+        if self.value is None:
+            return True, ""  # direction-only (INCREASE / DECREASE)
+
+        # Unit compatibility check (loose: ms↔seconds are compatible time units)
+        if self.unit and vd_unit:
+            time_units = {"ms", "s", "seconds", "milliseconds"}
+            freq_units = {"hz", "khz", "hz"}
+            def family(u): return (
+                "time" if u.lower() in time_units else
+                "freq" if u.lower() in freq_units else u.lower()
+            )
+            if family(self.unit) != family(vd_unit):
+                # Still accept if both domains are generic numeric
+                if vd_type not in ("normalized", "numeric", "percentage"):
+                    return False, f"unit {self.unit!r} incompatible with domain unit {vd_unit!r}"
+
+        return True, ""
+
+
+@dataclass
+class OperationSpec:
+    """U3: Normalized, target-independent operation specification."""
 
     operation: OperationType
-    target_value: Optional[Any] = None     # for SET operations
-    direction: Optional[str] = None         # "increase" or "decrease"
-    unit: Optional[str] = None              # "ms", "hz", etc.
-    base_phrase: str = ""                  # original user phrase (for audit)
-    certainty: float = 0.5                 # 0.0–1.0; confidence in interpretation
-    interpretation_chain: list[str] = None  # audit trail
+    operand: Optional[Operand] = None       # U3: typed operand
+    # Legacy scalar fields preserved for callers that predate U3
+    target_value: Optional[Any] = None
+    direction: Optional[str] = None
+    unit: Optional[str] = None
+    base_phrase: str = ""
+    certainty: float = 0.5
+    interpretation_chain: list[str] = None
 
     def __post_init__(self):
         if self.interpretation_chain is None:
@@ -45,8 +117,26 @@ class OperationSpec:
         if self.certainty < 0.0 or self.certainty > 1.0:
             raise ValueError(f"Certainty must be 0.0–1.0, got {self.certainty}")
 
+    def validate_against(self, value_domain) -> tuple[bool, str]:
+        """Validate this spec against a ValueDomain.
+
+        Direction-only operations (INCREASE/DECREASE) are always valid for
+        numeric domains. All others delegate to operand.
+        """
+        vd_type = getattr(value_domain, "type", None)
+        if self.operation in (OperationType.INCREASE, OperationType.DECREASE):
+            if vd_type in ("toggle", "enum"):
+                return False, f"{self.operation.value} not valid for {vd_type!r} domain"
+            return True, ""
+        if self.operation in (OperationType.TOGGLE_ON, OperationType.TOGGLE_OFF):
+            if vd_type != "toggle":
+                return False, f"toggle operation against {vd_type!r} domain"
+            return True, ""
+        if self.operand is None:
+            return True, ""
+        return self.operand.validate_against(value_domain)
+
     def to_dict(self) -> dict[str, Any]:
-        """Serialize for logging."""
         return {
             "operation": self.operation.value,
             "target_value": self.target_value,
@@ -111,8 +201,9 @@ class OperationInterpreter:
             if enum_match:
                 value, extracted = enum_match
                 chain.append(f"enum_match(contract is enum): {extracted!r}")
-                return OperationSpec(operation=OperationType.ENUM_SELECT, target_value=value, base_phrase=phrase,
-                                     certainty=0.75, interpretation_chain=chain)
+                return OperationSpec(operation=OperationType.SELECT, target_value=value,
+                                     operand=Operand(enum_value=value),
+                                     base_phrase=phrase, certainty=0.75, interpretation_chain=chain)
 
         # Try to extract numeric value (e.g., "to 100ms", "= 50", "at 200")
         numeric_match = self._extract_numeric_value(phrase_lower)
@@ -123,8 +214,9 @@ class OperationInterpreter:
             inc = sum(1 for t in words if t in self._INCREASE_WORDS)
             dec = sum(1 for t in words if t in self._DECREASE_WORDS)
             return OperationSpec(
-                operation=OperationType.NUMERIC_SET,
+                operation=OperationType.SET,
                 target_value=value,
+                operand=Operand(value=value, unit=unit),
                 direction="increase" if inc > dec else ("decrease" if dec > inc else None),
                 unit=unit,
                 base_phrase=phrase,
@@ -142,17 +234,15 @@ class OperationInterpreter:
                 chain.append("toggle_detection: ON words found")
                 return OperationSpec(
                     operation=OperationType.TOGGLE_ON,
-                    base_phrase=phrase,
-                    certainty=0.85,
-                    interpretation_chain=chain,
+                    operand=Operand(boolean_value=True),
+                    base_phrase=phrase, certainty=0.85, interpretation_chain=chain,
                 )
             if any(t in self._TOGGLE_OFF_WORDS for t in tokens):
                 chain.append("toggle_detection: OFF words found")
                 return OperationSpec(
                     operation=OperationType.TOGGLE_OFF,
-                    base_phrase=phrase,
-                    certainty=0.85,
-                    interpretation_chain=chain,
+                    operand=Operand(boolean_value=False),
+                    base_phrase=phrase, certainty=0.85, interpretation_chain=chain,
                 )
 
         # Check for numeric direction (increase/decrease)
@@ -162,7 +252,7 @@ class OperationInterpreter:
         if increase_count > decrease_count and increase_count > 0:
             chain.append(f"direction_detection: INCREASE ({increase_count} words)")
             return OperationSpec(
-                operation=OperationType.NUMERIC_INCREASE,
+                operation=OperationType.INCREASE,
                 direction="increase",
                 base_phrase=phrase,
                 certainty=0.80 if increase_count >= 1 else 0.60,
@@ -172,7 +262,7 @@ class OperationInterpreter:
         if decrease_count > increase_count and decrease_count > 0:
             chain.append(f"direction_detection: DECREASE ({decrease_count} words)")
             return OperationSpec(
-                operation=OperationType.NUMERIC_DECREASE,
+                operation=OperationType.DECREASE,
                 direction="decrease",
                 base_phrase=phrase,
                 certainty=0.80 if decrease_count >= 1 else 0.60,
@@ -187,18 +277,16 @@ class OperationInterpreter:
             chain.append("toggle_fallback: ON detected")
             return OperationSpec(
                 operation=OperationType.TOGGLE_ON,
-                base_phrase=phrase,
-                certainty=0.75,
-                interpretation_chain=chain,
+                operand=Operand(boolean_value=True),
+                base_phrase=phrase, certainty=0.75, interpretation_chain=chain,
             )
 
         if toggle_off_match:
             chain.append("toggle_fallback: OFF detected")
             return OperationSpec(
                 operation=OperationType.TOGGLE_OFF,
-                base_phrase=phrase,
-                certainty=0.75,
-                interpretation_chain=chain,
+                operand=Operand(boolean_value=False),
+                base_phrase=phrase, certainty=0.75, interpretation_chain=chain,
             )
 
         # Could not interpret

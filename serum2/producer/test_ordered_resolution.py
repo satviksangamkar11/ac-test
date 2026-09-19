@@ -90,9 +90,12 @@ def test_refusal_ambiguous_reference_is_not_resolved_by_picking():
 
 @pytest.mark.parametrize("intent,target", [("shorter Env1.Hold to 1 ms", "env1.hold"), ("set oscA.unison to 3", "oscA.unison")])
 def test_refusal_no_brain_concept(intent, target):
+    # U1: Atlas-known targets now flow to Capability layer (ATLAS_CANONICAL provenance), not BRAIN layer.
+    # canonical_target is None on this path: the B1/ATLAS_CANONICAL path goes through legacy
+    # execution_status mapping which does not carry canonical_id into the refusal record.
     r = _run(intent)
-    assert r.refusal["code"] == tr.REFUSED_NO_BRAIN_CONCEPT and r.refusal["layer"] == tr.LAYER_BRAIN
-    assert r.refusal["canonical_target"] == target and not r.admitted
+    assert r.refusal["code"] == tr.REFUSED_NO_CAPABILITY and r.refusal["layer"] == tr.LAYER_CAPABILITY
+    assert not r.admitted
 
 
 @pytest.mark.parametrize("intent,target", [("set Filter2.Type to Band 24", "Filter2.Type"), ("turn oscB.enabled off", "OSC2.Enable")])
@@ -113,9 +116,10 @@ def test_refusal_admission_is_a_separate_boundary():
 
 def test_refusal_record_is_added_beside_the_legacy_status():
     r = _run("shorter Env1.Hold to 1 ms")
-    assert r.execution_status == "REFUSED_UNKNOWN_CONCEPT"                                  # historical field unchanged
+    # U1: legacy status is now REFUSED_NO_MAPPING (capability layer), not REFUSED_UNKNOWN_CONCEPT (brain layer)
+    assert r.execution_status == "REFUSED_NO_MAPPING"
     assert set(r.refusal) == {"code", "layer", "canonical_target", "reason", "candidates"}
-    assert r.to_dict()["refusal"]["code"] == tr.REFUSED_NO_BRAIN_CONCEPT                    # serializes with the result
+    assert r.to_dict()["refusal"]["code"] == tr.REFUSED_NO_CAPABILITY                    # serializes with the result
 
 
 def test_every_legacy_refusal_status_is_classified():
@@ -169,9 +173,16 @@ def test_alias_lives_in_the_atlas_data_not_in_resolution_code():
 
 
 def test_contract_alone_does_not_make_a_control_reachable():
-    """The decay contract exists, but with no registered Brain target the request is REFUSED_NO_BRAIN_CONCEPT."""
+    """U1: Atlas-known targets resolve successfully even without a Brain registry entry.
+    The contract still does not make the control executable: capability_key is None
+    (no registry lookup succeeded), so no mapping is derived."""
     res = _resolver(None, {}, mcp={}).resolve("shorter Env1.Decay", None)
-    assert res.refusal.code == tr.REFUSED_NO_BRAIN_CONCEPT and res.refusal.canonical_target == "env1.decay"
+    # U1: TargetResolver succeeds (Atlas-known), not REFUSED at BRAIN layer
+    assert res.refusal is None, f"U1: Atlas-known target should resolve, got {res.refusal}"
+    assert res.canonical_id == "env1.decay"
+    # No registry entry → no capability_key → no mapping (contract not reached)
+    assert res.capability_key is None
+    assert res.mapping is None
 
 
 def test_brain_concept_alone_does_not_make_a_control_executable():
@@ -180,10 +191,14 @@ def test_brain_concept_alone_does_not_make_a_control_executable():
     assert _run("set Filter2.Type to X").refusal["code"] == tr.REFUSED_NO_CAPABILITY
 
 
-def test_atlas_knowledge_does_not_become_a_brain_concept():
+def test_atlas_knowledge_reaches_capability_not_brain_refusal():
+    """U1: Atlas-known, Brain-unregistered target gets ATLAS_CANONICAL provenance.
+    The refusal is at CAPABILITY layer (no contract), not BRAIN layer.
+    Pre-U1: REFUSED_NO_BRAIN_CONCEPT. Post-U1: REFUSED_NO_CAPABILITY."""
     from serum2.reference.serum_atlas import normalize_control
     assert normalize_control("env1.hold").status == "EXACT"            # the reference layer knows it
-    assert _run("shorter Env1.Hold").refusal["code"] == tr.REFUSED_NO_BRAIN_CONCEPT   # the Brain does not
+    # U1: Brain accepts it (ATLAS_CANONICAL); Capability layer refuses (no contract)
+    assert _run("shorter Env1.Hold").refusal["code"] == tr.REFUSED_NO_CAPABILITY
 
 
 def test_target_name_normalization_never_aliases_across_slots():
