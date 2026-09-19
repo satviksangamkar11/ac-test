@@ -1,0 +1,82 @@
+{
+  "capability": "serum.modulation_route.add",
+  "qualified_at": "2026-09-19T06:33:37.925566+00:00",
+  "backend": "serum-mcp",
+  "schema_source": "serum-mcp ModRouteSpec (installed server's own documented schema)",
+  "domain": {
+    "supported_source_prefixes": [
+      "lfo",
+      "macro",
+      "velocity",
+      "mod_wheel",
+      "pitch_bend",
+      "key_track",
+      "aftertouch",
+      "poly_aftertouch",
+      "env",
+      "random1",
+      "random2",
+      "random_discrete",
+      "release_velo",
+      "active_voices",
+      "voice_index",
+      "voice_mod1",
+      "voice_mod2",
+      "fixed",
+      "note_on_alt",
+      "note_on_alt2",
+      "expr_pan",
+      "expr_timbre",
+      "expr_press",
+      "oscillator",
+      "filter",
+      "lfo1_y"
+    ],
+    "supported_destination_families": [
+      "oscillator",
+      "filter",
+      "env",
+      "fx",
+      "global"
+    ],
+    "amount_range": [
+      -100,
+      100
+    ],
+    "bipolar_values": [
+      true,
+      false
+    ]
+  },
+  "instances": [
+    {
+      "instance_id": "A",
+      "source": "lfo0",
+      "destination": "filter0.cutoff",
+      "amount": 50,
+      "bipolar": false,
+      "preset_path": "C:\\Users\\Satvik\\Documents\\Xfer\\Serum 2 Presets\\Presets\\User\\VLP1-K6-FilterCutoffLFOMod.SerumPreset",
+      "preset_sha256": "bb6a1087da24d7e7c19acce214df91e427fa4747f9dd5674a866df1f2eee8376",
+      "verification": {
+        "file_level": "describe_preset confirmed 'Mod matrix (recognized routes only): - lfo0 -> filter0.cutoff: +50%'",
+        "real_serum_ui": "Loaded into real Serum 2.0.21 on Ableton Track 0 via Serum's own in-plugin preset browser; MATRIX tab screenshot confirmed SOURCE=LFO1, DESTINATION=Filter 1 Freq, route count 0->1 (computer-use screenshot, this session).",
+        "tier": "UI_VERIFIED"
+      }
+    },
+    {
+      "instance_id": "B",
+      "source": "lfo1",
+      "destination": "oscillator0.pitch",
+      "amount": 25,
+      "bipolar": true,
+      "preset_path": "C:\\Users\\Satvik\\Documents\\Xfer\\Serum 2 Presets\\Presets\\User\\VLP1-ModRouteQualification-InstanceB.SerumPreset",
+      "preset_sha256": "8bce2195cf80434dfa53d69dcc0f07adc75766b2f362796c90c81ae6551a6f9b",
+      "verification": {
+        "file_level": "describe_preset confirmed 'Mod matrix (recognized routes only): - lfo1 -> oscillator0.pitch: +25%, bipolar'",
+        "real_serum_ui": null,
+        "tier": "FILE_VERIFIED_ONLY"
+      }
+    }
+  ],
+  "notes": "Instance A is fully UI-verified (real Serum 2 MATRIX tab readback). Instance B demonstrates domain generality (different source/destination family/bipolar value) at file-level only. This contract's status is STRUCTURAL_ONLY, not CAUSAL_VERIFIED -- no audio-domain causal effect was measured for either instance (no render/measurement tool was used for a modulation route; only construct+persist+load were verified)."
+}

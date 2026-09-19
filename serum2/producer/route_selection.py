@@ -1,8 +1,16 @@
-"""ROUTE SELECTION — Serum/DawDreamer vs Ableton MCP vs Hybrid vs Refuse.
+"""ROUTE SELECTION — Serum vs Ableton MCP vs Hybrid vs Refuse.
 
 Answers, for one semantic target (e.g. "OSC1.Volume", "Env1.Release"):
     "Which real execution backend has EVIDENCE that it can perform this
      operation, and which is currently ADMITTABLE right now?"
+
+The ExecutionRoute.DAWDREAMER_SERUM value (and the "DawDreamer" naming
+throughout this module) refers to the qualification campaign that verified
+these contracts, not to an active DawDreamer-based executor — the actual
+canonical execution mechanism for this route is
+producer_brain._build_serum_preset_plan() -> serum-mcp -> Serum 2.0.21's own
+UI -> readback (see producer_brain.py's module docstring). This module only
+decides WHICH route is admission-ready; it never executes anything.
 
 This module GRANTS NO AUTHORITY. It is a pure advisory lookup over
 EXISTING evidence stores. The only things that actually authorize
@@ -57,7 +65,6 @@ from serum2.producer.contract_registry import ContractRegistry
 class ExecutionRoute(Enum):
     DAWDREAMER_SERUM = "dawdreamer_serum"
     ABLETON_MCP = "ableton_mcp"
-    HYBRID = "hybrid"
     REFUSE = "refuse"
 
 
@@ -188,12 +195,16 @@ class RouteSelector:
         mcp_ready = decision.ableton_mcp_admission_ready
 
         if dd_ready and mcp_ready:
-            decision.route = ExecutionRoute.HYBRID
+            decision.route = ExecutionRoute.DAWDREAMER_SERUM
+            decision.limitations.append(
+                "Ableton MCP is also admission-ready (%s) for this target, "
+                "but DawDreamer/Serum is the real-execution authority and "
+                "takes priority." % decision.ableton_mcp_evidence.value
+            )
             decision.rationale = (
                 "Both routes are admission-ready with real evidence: "
-                "DawDreamer (%s) and Ableton MCP (%s). Either may execute; "
-                "caller chooses based on operation context (e.g. deep "
-                "synthesis mutation -> DawDreamer, live session control -> MCP)."
+                "DawDreamer (%s) and Ableton MCP (%s). DawDreamer/Serum is "
+                "the real Serum-mutation authority and takes priority."
                 % (decision.dawdreamer_evidence.value, decision.ableton_mcp_evidence.value)
             )
         elif dd_ready:

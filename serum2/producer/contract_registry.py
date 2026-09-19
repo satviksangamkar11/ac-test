@@ -157,6 +157,21 @@ class ContractRegistry:
         else:
             print(f"[ContractRegistry] Note: Canonical store not found: {canonical_path}")
 
+        # Load the generic modulation-route capability, derived from real
+        # qualification evidence (serum2/producer/qualify_modulation_route.py)
+        # -- not from a pickle store, since this is a new capability class,
+        # not part of the historical 4.Q/canonical campaigns.
+        try:
+            from serum2.producer.modulation_route_contract import (
+                build_modulation_route_contract, CAPABILITY_TARGET,
+            )
+            contract = build_modulation_route_contract()
+            if contract is not None:
+                self.contracts[CAPABILITY_TARGET] = contract
+                print(f"[ContractRegistry] Loaded {CAPABILITY_TARGET} contract: {contract.status}")
+        except Exception as e:
+            print(f"[ContractRegistry] Warning: Could not load modulation-route contract: {e}")
+
     def get_contracts_dict(self) -> Dict[Tuple[str, str], CapabilityContract]:
         """Return contracts in format expected by admission.admit().
 

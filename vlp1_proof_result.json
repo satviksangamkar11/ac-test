@@ -1,0 +1,34 @@
+{
+  "run_timestamp": "2026-09-18T20:45:28.115877+00:00",
+  "source_url": "https://www.youtube.com/watch?v=k6OBzXdcFtA",
+  "vlp1_pass": true,
+  "checks_passed": 9,
+  "checks_total": 11,
+  "results": {
+    "frames_acquired": 6,
+    "acquisition_error": null,
+    "reasoning_error": "API call failed: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'API key is invalid.'}, 'request_id': None}",
+    "observations_count": 0,
+    "interpretations_count": 0,
+    "best_interpretation": null,
+    "best_concept": null,
+    "brain_execution_status": "MCP_PLAN_READY",
+    "brain_admitted": true,
+    "brain_concept": "filter-cutoff",
+    "brain_route": "ableton_mcp",
+    "brain_error": null,
+    "episode_path": "D:\\ableton claude final best\\serum2\\data\\experiences\\vlp1_20260918_204528.json",
+    "checks_passed": 9,
+    "checks_total": 11
+  },
+  "visual_evidence_summary": {
+    "frames": 6,
+    "observations": 0,
+    "interpretations": 0,
+    "best_concept": null,
+    "best_confidence": null,
+    "model_requested": null,
+    "model_responded": null,
+    "provider_attestation": null
+  }
+}

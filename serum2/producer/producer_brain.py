@@ -15,7 +15,29 @@ Architecture invariants preserved:
 
 Authority chain (unchanged):
   CapabilityResolver (6.6) → AdmissionHandoff (6.7) → ContractGovernedExecutor (6.8)
-  → real Serum/DawDreamer OR real Ableton MCP
+  → ADMITTED → real execution backend
+
+There are exactly two real execution backends, each ending in a caller-fed
+finalize_*() call — a bare plan is never EXECUTED on its own:
+
+  Serum-internal targets (e.g. Env1.Release):
+    ADMITTED → _build_serum_preset_plan() → SERUM_PRESET_PLAN_READY
+    → orchestrator: serum-mcp generate_preset() → .SerumPreset + sha256
+    → Serum 2.0.21's OWN in-plugin preset browser loads it (never Ableton's
+      browser — it does not index .SerumPreset files; never
+      set_device_parameter — Serum-internal fields are not on the
+      Ableton-exposed parameter surface)
+    → real Serum UI readback → finalize_serum_preset_execution()
+    This is the ONLY active Serum execution route. An earlier automatic
+    executor (_execute_dawdreamer_with_authority, calling
+    serum2.evidence.harness.run()) has been removed: harness.py and spec.py
+    never existed in this repository, so that call always raised
+    ImportError. Do not reintroduce a second Serum execution path.
+
+  Ableton/DAW-session targets on the 127-param MCP surface (e.g. filter
+  cutoff, oscillator volume): ADMITTED → _execute_mcp() → MCP_PLAN_READY
+  → orchestrator runs the real mcp__AbletonMCP__* calls → real readback
+  → finalize_mcp_execution().
 
 This module never modifies frozen Step 6 files.
 """
@@ -180,6 +202,23 @@ class ProducerRequest:
     """E.g. 'bass patch, ambient track'."""
 
     mode: str = "EXECUTE"
+
+    visual_mode: str = "AUTO"
+    """Visual evidence mode:
+    AUTO   = use visual when transcript is operationally insufficient
+    ALWAYS = always acquire visual evidence (with transcript when available)
+    NEVER  = skip visual evidence even when transcript is insufficient
+    """
+
+    transcript_segments: Optional[List[Dict[str, Any]]] = None
+    """Timestamped transcript segments ({"timestamp_sec": float, "text": str}),
+    when the caller already has them (e.g. from an agent-layer video/transcript
+    MCP tool — this Python process cannot call those directly). When present,
+    the visual-evidence path uses transcript-first targeted acquisition
+    (transcript_query_planner -> acquire_frames_at_timestamps -> observe ->
+    deterministic diff -> infer) instead of blind fixed-cadence sampling.
+    None falls back to the legacy blind-sampling path, and the fallback is
+    recorded in the trace rather than silently taken."""
     """EXECUTE | CREATE | RECREATE_REFERENCE | DISCOVERY
 
     CREATE is for creation-style requests ("make a dark bass lead") as
@@ -196,6 +235,24 @@ class ProducerRequest:
     Used to enrich knowledge retrieval (role, techniques) and advisory reasoning.
     Does NOT modify CapabilityResolver or admission gate.
     Keys: role, character, genre, subgenre, artist_reference, techniques, era."""
+
+    operation: Optional[str] = None
+    """Generic structured operation name, e.g. 'ADD_MODULATION_ROUTE'. When
+    set, execute() dispatches on this instead of the concept+direction path
+    (note-release/envelope-attack/etc. don't fit a 4-argument topology
+    operation). This is a PARALLEL route, not a replacement -- concept-based
+    intents are unaffected. Still goes through real Resolution (scope check
+    against a qualified contract) and real Admission (admission.admit(),
+    unmodified 15.4 gate) before any plan is produced. None means the
+    existing concept-resolution path runs as before."""
+
+    operation_args: Optional[Dict[str, Any]] = None
+    """Structured runtime arguments for `operation`, e.g. for
+    ADD_MODULATION_ROUTE: {"source": "LFO1", "destination": "Filter 1 Freq",
+    "amount": None, "bipolar": None}. These are evidence-derived data from
+    the video interpreter, not hardcoded per-video values -- amount/bipolar
+    are None (never invented) when the source evidence doesn't legibly show
+    them. The brain must never promote a None here into a guessed number."""
 
 
 @dataclass
@@ -271,6 +328,16 @@ class ProducerResult:
     only thing that may justify execution_status == 'EXECUTED' for the
     MCP route — a bare plan must never claim EXECUTED."""
 
+    # ---- real Serum preset execution evidence (populated by
+    # finalize_serum_preset_execution) — the canonical Serum route ----
+    serum_preset_execution: Optional[Dict[str, Any]] = None
+    """Real observed serum-mcp + Serum-UI evidence: {preset_path,
+    preset_sha256, ui_readback, readback_verified}. None until
+    ProducerBrain.finalize_serum_preset_execution() has been called with
+    real evidence. A non-None value here is the only thing that may
+    justify execution_status == 'EXECUTED' for the Serum route — a bare
+    SERUM_PRESET_PLAN_READY must never claim EXECUTED."""
+
     # ---- intent classification ----
     intent_class: str = "MUTATION"
     """"MUTATION" | "CREATION". Set from request.mode (CREATE -> CREATION,
@@ -280,6 +347,26 @@ class ProducerResult:
     result's admitted semantic_target/direction/_mcp_plan means "seed value
     for a new PresetSpec", never "go mutate the currently loaded preset".
     Callers must branch on this field, not reinterpret MCP_PLAN_READY."""
+
+    # ---- visual evidence ----
+    visual_evidence: Optional[Dict[str, Any]] = None
+    """Serialized VisualEvidenceBundle if visual path was used. Contains:
+    - frames: list of VisualFrameArtifact (timestamp, hash, path)
+    - observations: what was literally observed per frame
+    - interpretations: production inferences derived from observations
+    - model_metadata: which model was used (honest, no attestation)
+    - transcript_sufficiency: what triggered the visual path
+    None when visual path was not triggered."""
+
+    observed_canonical_state: Optional[Dict[str, Any]] = None
+    """The exact before/after value(s) Stage A actually read off a frame
+    (a CanonicalStateDiff, e.g. {target: 'Env1.Release', before: {value:
+    '15 ms', ...}, after: {value: '220 ms', ...}, changed: true}), kept
+    SEPARATE from semantic_target/semantic_direction so the exact magnitude
+    never has to be forced into UniversalProductionIntent (which only
+    carries concept+direction). Execution should reproduce THIS value;
+    the intent explains WHAT/WHY. None when the transcript-first path
+    wasn't used or found no changed diff."""
 
     # ---- errors ----
     error: Optional[str] = None
@@ -517,14 +604,29 @@ class ProducerBrain:
         return resolution, req, adm
 
     # ------------------------------------------------------------------
-    # 5. DAWDREAMER EXECUTION (Phase G)
-    # Uses the same harness pattern as step6_live_vertical_slice.py.
-    # canonical_feedback_loop.execute_producer_from_intent() has a
-    # pre-existing bug (contracts_dict format mismatch with diagnose_goal),
-    # so we build the spec directly from the admitted contract and run the
-    # canonical harness ourselves — exactly as the frozen vertical slice does.
+    # 5. SERUM EXECUTION PLAN (Phase G)
+    #
+    # CANONICAL SERUM EXECUTION ROUTE (the only active one — see module
+    # docstring): resolution -> admission -> serum-mcp preset creation ->
+    # Serum 2.0.21 UI load -> UI readback -> state verification. The brain's
+    # own responsibility ends at ADMITTED; it hands back the admitted
+    # contract's authorized mutation target/value so the orchestrating agent
+    # can perform the real serum-mcp call and real Serum UI load/readback.
+    # Only finalize_serum_preset_execution() (below), fed with REAL observed
+    # evidence, may mark this EXECUTED — a bare plan is never EXECUTED.
+    #
+    # An earlier version of this method additionally called a "canonical
+    # harness" (serum2.evidence.harness.run(spec), built on
+    # serum2.evidence.spec.ExperimentSpec) to auto-run DawDreamer and
+    # fabricate baseline/treatment measurements + a Step 6.10 episode from
+    # them. Those two modules do not exist in this repository — the call
+    # always raised ImportError, caught by the caller as EXECUTION_ERROR.
+    # That auto-executor has been removed, not repaired: there is exactly
+    # one active Serum execution route now, and it is the one documented
+    # above. ContractGovernedExecutor (Step 6.8, frozen) is still used
+    # below — it is the real authority-granting layer, not the broken part.
     # ------------------------------------------------------------------
-    def _execute_dawdreamer_with_authority(
+    def _build_serum_preset_plan(
         self,
         intent: "UniversalProductionIntent",
         candidate: "SemanticCandidate",
@@ -532,25 +634,19 @@ class ProducerBrain:
         resolution,
         adm,
         contract,
-        knowledge_ids: List[str],
-        episode_ids: List[str],
-        ep_id: str,
     ) -> Dict[str, Any]:
-        """Run real Serum execution using admitted contract authority."""
-        from serum2.evidence import harness, epoch as epoch_mod
-        from serum2.evidence.spec import (
-            ExperimentSpec, Mutation, Stimulus, MeasurementPlan,
-            TargetSpec, SINGLE_FIELD,
-        )
+        """Resolve admitted-contract authority into a Serum preset target.
+
+        Returns a plan dict for the orchestrator to execute via serum-mcp +
+        the real Serum UI. Never calls a Serum/DawDreamer backend itself.
+        """
         from step_6_8_contract_governed_execution import (
             ContractGovernedExecutor, ExecutionPathway,
         )
-        from step_6_9_outcome_attribution import attribute_outcome
-        from step_6_10_episode_generation import (
-            UniversalEpisodeGenerator, ExecutionEvidenceRecord,
-        )
 
-        # Build execution intention from admitted contract
+        # Frozen Step 6.8 authority layer — real, unmodified. This is what
+        # actually grants execution authority; it has nothing to do with
+        # the removed auto-harness call.
         executor = ContractGovernedExecutor()
         record = executor.create_execution_intention(
             intent, decision, resolution, adm, self._registry
@@ -560,100 +656,30 @@ class ProducerBrain:
         if record.pathway is not ExecutionPathway.ADMITTED or authority is None:
             return {"status": "NOT_ADMITTED", "pathway": record.pathway.value}
 
-        # Build spec from authority (contract is the sole source)
         scope = authority.scope or {}
-        meas = contract.measurement or {}
         mutation_path = scope["mutation_target_path"]
         mutation_value = scope["mutation_value_used"]
-        metric = meas["metric"]
-
-        baseline_overrides = []
-        for p in (contract.prerequisites or ()):
-            fp = p["field_path"]
-            if fp.startswith("body:"):
-                baseline_overrides.append(
-                    Mutation(fp.split("body:", 1)[1], p["declared_value"],
-                             "contract prerequisite")
-                )
-
-        spec = ExperimentSpec(
-            experiment_id=ep_id,
-            mutations=[Mutation(mutation_path, mutation_value,
-                                "contract-authorized treatment")],
-            prerequisites=[],
-            baseline_overrides=baseline_overrides,
-            isolation_level=SINGLE_FIELD,
-            claim_subject=contract.target,
-            claim_predicate="extends",
-            measurement_plans=[MeasurementPlan(
-                metric=metric,
-                target=TargetSpec(mutation_path, "Env", mutation_path.split(".")[-1]),
-                expected_direction=meas.get("expected_direction", "increase"),
-                threshold=meas.get("threshold", 0.0),
-                stimulus=Stimulus(note=60, velocity=110, note_len=0.4,
-                                  render_seconds=2.0, tail_start=0.6),
-                kernel_artifact="tail_rms_db.py",
-            )],
-            notes="ProducerBrain execution; spec from admitted CapabilityContract.",
-        )
-
-        # Run via canonical harness (real Serum + DawDreamer)
-        rec = harness.run(spec)
-        m = rec.causal_measurements[0]
-
-        # Outcome attribution (Step 6.9, frozen)
-        outcome = attribute_outcome(
-            execution_id=ep_id,
-            contract_id=adm.contract_id,
-            intent_id="brain_intent_001",
-            baseline_measurement={
-                "value": float(m.baseline),
-                "measurement_definition_id": m.measurement_definition_id,
-            },
-            treatment_measurement={
-                "value": float(m.treatment),
-                "measurement_definition_id": m.measurement_definition_id,
-            },
-            admitted_contract=contract,
-        )
-
-        # Episode generation + persistence (Step 6.10, frozen)
-        evidence = ExecutionEvidenceRecord(
-            baseline_state={mutation_path: "contract-default"},
-            treatment_state={mutation_path: mutation_value},
-            mutation_description="%s -> %s" % (mutation_path, mutation_value),
-            render_evidence={
-                "baseline_db": float(m.baseline),
-                "treatment_db": float(m.treatment),
-                "delta_db": float(m.delta),
-            },
-            diagnosis="delta=%.4f dB %s" % (m.delta, m.observed_direction),
-        )
-        gen = UniversalEpisodeGenerator()
-        episode = gen.generate_episode(
-            execution_id=ep_id,
-            universal_intent=intent,
-            execution_record=record,
-            admission_result=adm,
-            admitted_contract=contract,
-            advisory_decision=decision,
-            capability_resolution=resolution,
-            outcome=outcome,
-            execution_evidence=evidence,
-            knowledge_ids=knowledge_ids,
-            prior_episode_ids=episode_ids,
-        )
-        persist_path = gen.persist_episode(episode)
 
         return {
-            "status": "EXECUTED",
-            "episode_id": episode.episode_id,
-            "measurement_baseline": float(m.baseline),
-            "measurement_treatment": float(m.treatment),
-            "measurement_delta": float(m.delta),
-            "decision": "ACCEPTED" if m.delta > 0 else "REJECTED",
-            "learning_eligible": episode.learning_eligible,
-            "persistence_path": persist_path,
+            "status": "SERUM_PRESET_PLAN_READY",
+            "contract_id": adm.contract_id,
+            "mutation_target_path": mutation_path,
+            "mutation_value_used": mutation_value,
+            "capability_key": contract.target,
+            "execution_steps": [
+                "1. serum-mcp generate_preset(spec) with %s set to the "
+                "admitted value" % mutation_path,
+                "2. record preset_path + sha256 of the written .SerumPreset",
+                "3. Load the preset into the real Serum 2 instance via "
+                "Serum's own in-plugin preset browser (NOT Ableton's "
+                "browser — it does not index .SerumPreset files, and NOT "
+                "set_device_parameter — Serum-internal fields are not on "
+                "the Ableton-exposed parameter surface)",
+                "4. Screenshot/read back the real Serum UI to confirm the "
+                "loaded value matches the admitted target",
+                "5. Call finalize_serum_preset_execution(plan, preset_path, "
+                "preset_sha256, ui_readback, readback_verified)",
+            ],
         }
 
     # ------------------------------------------------------------------
@@ -817,6 +843,252 @@ class ProducerBrain:
         }
 
     # ------------------------------------------------------------------
+    # VISUAL EVIDENCE PATH (VLP-1)
+    # ------------------------------------------------------------------
+
+    def _check_transcript_sufficiency(
+        self, source_id: Optional[str], intent_text: str
+    ):
+        """Check whether transcript evidence is operationally sufficient.
+
+        Loads the canonical knowledge store for source_id and checks whether
+        the available items contain actionable production technique information
+        relevant to intent_text.
+
+        Returns a TranscriptSufficiency dataclass.
+        """
+        from serum2.source.visual_evidence import TranscriptSufficiency
+
+        if source_id is None:
+            return TranscriptSufficiency(
+                status="UNAVAILABLE",
+                reason="No source_id (no source URL was provided)",
+                evidence_item_count=0,
+            )
+
+        knowledge_dir = Path(__file__).parent.parent / "knowledge"
+        store_path = knowledge_dir / ("%s_canonical_knowledge_store_5_6.json" % source_id)
+
+        if not store_path.exists():
+            return TranscriptSufficiency(
+                status="UNAVAILABLE",
+                reason="Canonical knowledge store not found for %s" % source_id,
+                evidence_item_count=0,
+            )
+
+        try:
+            data = json.loads(store_path.read_text())
+            items = data.get("items", {})
+            item_count = len(items)
+        except Exception as exc:
+            return TranscriptSufficiency(
+                status="UNAVAILABLE",
+                reason="Failed to read knowledge store: %s" % exc,
+                evidence_item_count=0,
+            )
+
+        # Insufficient if very few items (punctuation bug) or no actionable content
+        # The known issue: auto-generated transcript without punctuation → 1 chunk only
+        if item_count <= 1:
+            return TranscriptSufficiency(
+                status="INSUFFICIENT_OPERATIONAL",
+                reason=(
+                    "Canonical store has only %d item(s) — transcript is likely "
+                    "unpunctuated (auto-generated) causing the full content to be "
+                    "collapsed into one chunk with insufficient detail" % item_count
+                ),
+                evidence_item_count=item_count,
+            )
+
+        # Check if any items contain actionable production technique detail
+        # Look for parameter values, numeric references, or technique-specific language
+        actionable_keywords = [
+            "set", "turn", "adjust", "increase", "decrease", "lower", "raise",
+            "filter", "cutoff", "resonance", "attack", "release", "knob", "slider",
+            "%", "hz", "db", "ms", "sec",
+        ]
+        intent_lower = intent_text.lower()
+        actionable_count = 0
+        for item in items.values():
+            prop = (item.get("original_proposition") or "").lower()
+            if any(kw in prop for kw in actionable_keywords):
+                actionable_count += 1
+
+        if actionable_count == 0:
+            return TranscriptSufficiency(
+                status="INSUFFICIENT_OPERATIONAL",
+                reason=(
+                    "%d items found but none contain actionable production "
+                    "technique information (no parameter values, settings, "
+                    "or technique-specific language)" % item_count
+                ),
+                evidence_item_count=item_count,
+            )
+
+        return TranscriptSufficiency(
+            status="SUFFICIENT",
+            reason="%d items; %d contain actionable production detail" % (
+                item_count, actionable_count
+            ),
+            evidence_item_count=item_count,
+        )
+
+    def _acquire_and_reason_visual(
+        self,
+        source_url: str,
+        source_id: Optional[str],
+        intent_text: str,
+        transcript_sufficiency,
+        force: bool = False,
+    ):
+        """Acquire visual evidence and run VisualReasoner.
+
+        Returns a VisualEvidenceBundle (with observations + interpretations).
+        """
+        from serum2.source.acquire_visual_evidence import acquire_visual_evidence
+        from serum2.producer.visual_reasoner import VisualReasoner
+
+        bundle = acquire_visual_evidence(
+            source_url=source_url,
+            transcript_sufficiency=transcript_sufficiency,
+            force=force,
+        )
+        if bundle.acquisition_error:
+            return bundle
+
+        reasoner = VisualReasoner()
+        reasoner.reason(bundle)
+        return bundle
+
+    def _acquire_and_reason_visual_transcript_first(
+        self,
+        source_url: str,
+        transcript_segments: List[Dict[str, Any]],
+        transcript_sufficiency,
+    ):
+        """Transcript-first visual evidence pipeline (VLP-1 correction).
+
+        transcript_query_planner locates WHERE to look (action-bearing
+        mention + before/after window) -> acquire_frames_at_timestamps
+        fetches ONLY those exact timestamps (no blind cadence sampling) ->
+        VisualReasoner.observe_frames reads exact UI values per frame
+        (OBSERVED only) -> diff_observed_states computes the before/after
+        change deterministically (no model call) -> infer_from_diffs derives
+        production meaning FROM the diff (also deterministic — the exact
+        value can never drift from what Stage A actually read off a frame).
+
+        Returns a VisualEvidenceBundle. bundle.query_plan records the plan
+        that drove acquisition; bundle.acquisition_error is set (and the
+        bundle otherwise empty) if no known target was mentioned in the
+        transcript at all — that is an honest BLOCKED outcome, not a
+        silent fallback to blind sampling.
+        """
+        from serum2.source.transcript_query_planner import (
+            plan_visual_queries, TranscriptSegment,
+        )
+        from serum2.source.acquire_visual_evidence import acquire_frames_at_timestamps
+        from serum2.producer.visual_reasoner import (
+            VisualReasoner, diff_observed_states, infer_from_diffs,
+        )
+
+        segments = [
+            TranscriptSegment(
+                timestamp_sec=float(s["timestamp_sec"]), text=str(s.get("text", "")),
+            )
+            for s in transcript_segments
+        ]
+        plan = plan_visual_queries(segments)
+
+        bundle = None
+        if not plan.targets:
+            from serum2.source.visual_evidence import VisualEvidenceBundle
+            from serum2.source.youtube_url import extract_youtube_video_id
+            bundle = VisualEvidenceBundle(
+                source_url=source_url,
+                source_id="",
+                video_id=extract_youtube_video_id(source_url),
+                transcript_sufficiency=transcript_sufficiency,
+            )
+            bundle.acquisition_error = (
+                "Transcript-first planning found no mention of a known "
+                "production target (release/attack/cutoff/resonance) — "
+                "BLOCKED rather than falling back to blind sampling, which "
+                "is what produced the invalidated genre-inferred episode."
+            )
+            return bundle
+
+        bundle = acquire_frames_at_timestamps(
+            source_url=source_url, timestamps=plan.timestamps(),
+        )
+        bundle.transcript_sufficiency = transcript_sufficiency
+        bundle.query_plan = plan.to_dict()
+        if bundle.acquisition_error:
+            return bundle
+
+        reasoner = VisualReasoner()
+        reasoner.observe_frames(bundle, target_hint=plan.target_name_hint)
+        if bundle.reasoning_error:
+            return bundle
+
+        diffs = diff_observed_states(bundle)
+        infer_from_diffs(bundle, diffs)
+        return bundle
+
+    def _visual_evidence_to_intent(
+        self, bundle, user_intent: str
+    ) -> Optional["UniversalProductionIntent"]:
+        """Convert the best visual interpretation to a UniversalProductionIntent.
+
+        This does NOT bypass admission — it produces an intent that then goes
+        through the existing authority chain unchanged.
+
+        Returns None if no actionable interpretation was found.
+        """
+        interp = bundle.best_interpretation()
+        if interp is None:
+            return None
+
+        from serum2.source.visual_evidence import VisualInterpretation
+
+        # Map interpretation's production_concept + direction to SemanticDirection
+        concept = interp.production_concept
+        direction_str = interp.semantic_direction.lower()
+
+        direction_map = {
+            "increase": SemanticDirection.INCREASE,
+            "decrease": SemanticDirection.DECREASE,
+            "higher": SemanticDirection.HIGHER,
+            "lower": SemanticDirection.LOWER,
+            "longer": SemanticDirection.LONGER,
+            "shorter": SemanticDirection.SHORTER,
+            "brighter": SemanticDirection.BRIGHTER,
+            "darker": SemanticDirection.DARKER,
+            "louder": SemanticDirection.LOUDER,
+            "quieter": SemanticDirection.QUIETER,
+        }
+        direction = direction_map.get(direction_str, SemanticDirection.HIGHER)
+
+        # Build a user_intent string that the brain's concept resolver can match
+        # Use the production_action if available, otherwise the interpretation text
+        effective_intent = interp.production_action or interp.interpretation_text
+
+        intent = UniversalProductionIntent(
+            original_user_request=user_intent,
+            musical_objective=interp.interpretation_text,
+            desired_change=interp.production_action,
+            target_concept=concept,
+            semantic_direction=direction,
+            notes=(
+                "Derived from visual evidence (VisualReasoner). "
+                "Confidence=%.2f. Supporting frames: %s" % (
+                    interp.confidence,
+                    ", ".join(interp.supporting_frame_ids[:3]),
+                )
+            ),
+        )
+        return intent
+
+    # ------------------------------------------------------------------
     # SOURCE URL INGESTION (STEP 6)
     # ------------------------------------------------------------------
     def _ingest_source_url(self, source_url: str) -> Dict[str, Any]:
@@ -829,10 +1101,11 @@ class ProducerBrain:
         Does NOT modify frozen step_5_* files.
         """
         import hashlib
+        from serum2.source.youtube_url import extract_youtube_video_id
         source_id = "yt_" + hashlib.md5(source_url.encode()).hexdigest()[:12]
-
-        # Check if already ingested (idempotent)
         knowledge_dir = Path(__file__).parent.parent / "knowledge"
+
+        # Check if already ingested under this (md5-based) source_id (idempotent)
         ingestion_file = knowledge_dir / ("%s_source_ingestion_5_3.json" % source_id)
         if ingestion_file.exists():
             return {
@@ -841,6 +1114,26 @@ class ProducerBrain:
                 "source_url": source_url,
                 "ingestion_file": str(ingestion_file),
             }
+
+        # Older sources were ingested under a video-id-based source_id
+        # (e.g. "yt_k6OBzXdcFtA") rather than this md5-based scheme. Recognize
+        # an existing canonical store under that naming instead of attempting
+        # to re-ingest (and failing) a source that already has evidence.
+        try:
+            legacy_source_id = "yt_" + extract_youtube_video_id(source_url)
+        except ValueError:
+            legacy_source_id = None
+        if legacy_source_id:
+            legacy_store = knowledge_dir / (
+                "%s_canonical_knowledge_store_5_6.json" % legacy_source_id
+            )
+            if legacy_store.exists():
+                return {
+                    "status": "ALREADY_INGESTED",
+                    "source_id": legacy_source_id,
+                    "source_url": source_url,
+                    "ingestion_file": str(legacy_store),
+                }
 
         # Phase 1: transcript acquisition
         try:
@@ -877,6 +1170,11 @@ class ProducerBrain:
         result = ProducerResult(request=request)
         result.intent_class = "CREATION" if request.mode == "CREATE" else "MUTATION"
 
+        # ---- generic structured operation path (parallel to concept-based
+        # intents; e.g. ADD_MODULATION_ROUTE) ----
+        if request.operation:
+            return self._run_structured_operation(result, request)
+
         try:
             # ---- source URL ingestion (STEP 6) ----
             ingested_source_id = None
@@ -912,6 +1210,90 @@ class ProducerBrain:
                         ingest_status, ingested_source_id
                     )
                 )
+
+            # ---- visual evidence path (VLP-1) ----
+            if request.source_url and request.visual_mode != "NEVER":
+                ts_check = self._check_transcript_sufficiency(
+                    ingested_source_id, request.user_intent
+                )
+                needs_visual = (
+                    request.visual_mode == "ALWAYS"
+                    or ts_check.status in ("INSUFFICIENT_OPERATIONAL", "UNAVAILABLE")
+                )
+                if needs_visual:
+                    if request.transcript_segments:
+                        bundle = self._acquire_and_reason_visual_transcript_first(
+                            source_url=request.source_url,
+                            transcript_segments=request.transcript_segments,
+                            transcript_sufficiency=ts_check,
+                        )
+                    else:
+                        bundle = self._acquire_and_reason_visual(
+                            source_url=request.source_url,
+                            source_id=ingested_source_id,
+                            intent_text=request.user_intent,
+                            transcript_sufficiency=ts_check,
+                        )
+                        result.advisory_rationale = (
+                            (result.advisory_rationale or "") +
+                            " | visual path: no transcript_segments supplied, "
+                            "used legacy blind fixed-cadence sampling"
+                        )
+                    result.visual_evidence = bundle.to_dict()
+
+                    changed_diff = next(
+                        (d for d in bundle.canonical_diffs if d.changed), None
+                    )
+                    if changed_diff:
+                        result.observed_canonical_state = changed_diff.to_dict()
+
+                    # If visual reasoning produced interpretations, use the best
+                    # one to override/augment the user intent for concept resolution
+                    if bundle.interpretations and not bundle.reasoning_error:
+                        visual_intent = self._visual_evidence_to_intent(
+                            bundle, request.user_intent
+                        )
+                        if visual_intent and visual_intent.target_concept:
+                            # Inject visual concept into the request so the
+                            # existing concept resolver finds it
+                            result.advisory_rationale = (
+                                (result.advisory_rationale or "") +
+                                " | visual_evidence: %d frames, %d obs, %d interp; "
+                                "best_concept=%r dir=%s conf=%.2f" % (
+                                    len(bundle.frames),
+                                    len(bundle.observations),
+                                    len(bundle.interpretations),
+                                    visual_intent.target_concept,
+                                    visual_intent.semantic_direction.value
+                                    if visual_intent.semantic_direction else "?",
+                                    bundle.best_interpretation().confidence,
+                                )
+                            )
+                            # If no explicit user_intent provided a concept,
+                            # use the visual concept (still goes through existing
+                            # authority chain unchanged)
+                            if not any(
+                                any(kw in request.user_intent.lower() for kw in kws)
+                                for kws, _, _ in _INTENT_TO_CONCEPT
+                            ):
+                                # User intent is ambiguous; use visual concept
+                                request = ProducerRequest(
+                                    user_intent=(
+                                        visual_intent.production_action
+                                        or visual_intent.musical_objective
+                                        or request.user_intent
+                                    ),
+                                    source_url=request.source_url,
+                                    mode=request.mode,
+                                    musical_context=request.musical_context,
+                                    advisory_context=request.advisory_context,
+                                    visual_mode="NEVER",  # prevent recursion
+                                )
+                    elif bundle.reasoning_error:
+                        result.advisory_rationale = (
+                            (result.advisory_rationale or "") +
+                            " | visual_reasoning_error: %s" % bundle.reasoning_error
+                        )
 
             # ---- RECREATE_REFERENCE mode (STEP 8) ----
             if request.mode == "RECREATE_REFERENCE":
@@ -962,8 +1344,8 @@ class ProducerBrain:
 
             # Brain V2 P2: make context-aware retrieval visible in the
             # reasoning trace regardless of which route the concept takes
-            # below (both the early MCP-bridge exit and the full DawDreamer
-            # path read/overwrite this). Honest either way: reports zero
+            # below (both the early MCP-bridge exit and the full Serum
+            # route read/overwrite this). Honest either way: reports zero
             # matched dimensions plainly rather than omitting the note.
             matched_dims = sorted({
                 kc.matched_via_dimension for kc in knowledge_contributions
@@ -985,7 +1367,7 @@ class ProducerBrain:
                 if concept in _MCP_CONCEPT_BRIDGE:
                     mcp_target = _MCP_CONCEPT_BRIDGE[concept]
                     result.execution_route = ExecutionRoute.ABLETON_MCP.value
-                    result.route_rationale = "MCP bridge (no DawDreamer path): %r → %s" % (
+                    result.route_rationale = "MCP bridge (no Serum route): %r → %s" % (
                         concept, mcp_target
                     )
                     return self._run_mcp_path(result, request, mcp_target, concept=concept)
@@ -1058,12 +1440,10 @@ class ProducerBrain:
                 result.error = route_decision.rationale
                 return result
 
-            if route_decision.route in (
-                ExecutionRoute.DAWDREAMER_SERUM, ExecutionRoute.HYBRID
-            ):
-                return self._run_dawdreamer_path(
+            if route_decision.route == ExecutionRoute.DAWDREAMER_SERUM:
+                return self._run_serum_preset_path(
                     result, request, intent, candidate, decision,
-                    capability_target, knowledge_notes, episode_ids,
+                    capability_target,
                 )
 
             if route_decision.route == ExecutionRoute.ABLETON_MCP:
@@ -1155,11 +1535,185 @@ class ProducerBrain:
         )
         return result
 
-    def _run_dawdreamer_path(
-        self, result, request, intent, candidate, decision,
-        capability_target, knowledge_notes, episode_ids,
+    # ------------------------------------------------------------------
+    # GENERIC STRUCTURED OPERATIONS (e.g. ADD_MODULATION_ROUTE)
+    #
+    # Distinct from the concept+direction path above: these operations carry
+    # multiple structured runtime arguments (source/destination/amount/
+    # bipolar) that don't fit UniversalProductionIntent's target_concept +
+    # semantic_direction shape. Still goes through real Resolution (a scope
+    # check against a qualified CapabilityContract's domain -- not a guess)
+    # and real Admission (the unmodified 15.4 admission.admit() gate) before
+    # any plan is produced. No operation reaches a plan by any other path.
+    # ------------------------------------------------------------------
+    _STRUCTURED_OPERATIONS = {"ADD_MODULATION_ROUTE"}
+
+    def _run_structured_operation(self, result: ProducerResult, request: ProducerRequest) -> ProducerResult:
+        if request.operation not in self._STRUCTURED_OPERATIONS:
+            result.execution_status = "REFUSED_UNKNOWN_OPERATION"
+            result.error = (
+                "Unknown structured operation %r. Supported: %s"
+                % (request.operation, sorted(self._STRUCTURED_OPERATIONS))
+            )
+            return result
+
+        if request.operation == "ADD_MODULATION_ROUTE":
+            return self._run_modulation_route_operation(result, request)
+
+        result.execution_status = "REFUSED_UNKNOWN_OPERATION"
+        return result
+
+    def _run_modulation_route_operation(self, result: ProducerResult, request: ProducerRequest) -> ProducerResult:
+        """ADD_MODULATION_ROUTE: source/destination/amount/bipolar are runtime
+        data (evidence-derived, e.g. from visual interpretation), never
+        hardcoded per-video values. amount/bipolar may legitimately be None
+        ("not legible in the source evidence") -- that is preserved as None
+        through resolution, admission, and the plan; never coerced into an
+        invented number.
+        """
+        from serum2.producer.modulation_route_contract import CAPABILITY_TARGET
+        from serum2.evidence import admission as admission_mod
+
+        args = request.operation_args or {}
+        source = args.get("source")
+        destination = args.get("destination")
+        amount = args.get("amount")      # may be None -- UNKNOWN, never guessed
+        bipolar = args.get("bipolar")    # may be None -- UNKNOWN, never guessed
+
+        result.resolved_concept = "modulation-route-add"
+        result.semantic_target = CAPABILITY_TARGET
+
+        if not source or not destination:
+            result.execution_status = "REFUSED_MISSING_ARGUMENTS"
+            result.error = "ADD_MODULATION_ROUTE requires source and destination (got source=%r destination=%r)" % (source, destination)
+            return result
+
+        contract = self._registry.get(CAPABILITY_TARGET)
+        if contract is None:
+            result.execution_status = "REFUSED_NO_CONTRACT"
+            result.error = "No qualified contract for %r -- capability was never qualified" % CAPABILITY_TARGET
+            return result
+
+        # ---- Resolution (this producer-layer code, not frozen Step 6):
+        # scope-check the RUNTIME source/destination against the QUALIFIED
+        # domain using PRECISE indexed-range matching (a loose substring
+        # match would wrongly accept e.g. "Envelope 7" just because it
+        # starts with "env" -- env sources only go 0-3; caught live while
+        # testing this exact operation). This is "RESOLVED", distinct from
+        # "ADMITTED" below -- a candidate that fails this check never
+        # reaches admission.admit() at all. ----
+        from serum2.producer.qualify_modulation_route import (
+            resolve_source_in_domain, resolve_destination_in_domain,
+        )
+        source_hit = resolve_source_in_domain(source)
+        dest_hit = resolve_destination_in_domain(destination)
+
+        if source_hit is None or dest_hit is None:
+            result.resolution_status = "out_of_scope"
+            result.execution_status = "REFUSED_OUT_OF_SCOPE"
+            result.error = (
+                "source=%r (resolved=%r) / destination=%r (resolved=%r) "
+                "outside the qualified domain for %r. Qualified source families: %s. "
+                "Qualified destination families: %s. REFUSED -- not a guess, "
+                "not routed to any backend."
+                % (source, source_hit, destination, dest_hit, CAPABILITY_TARGET,
+                   contract.scope["supported_source_prefixes"],
+                   contract.scope["supported_destination_families"])
+            )
+            return result
+
+        result.resolution_status = "resolved"
+
+        # ---- Admission: the REAL, unmodified 15.4 gate. required_causal
+        # is correctly False here -- a topology/routing operation has no
+        # before/after-dB causal shape to prove; STRUCTURAL_ONLY (construct
+        # +persist+load verified) is the right and only tier this class of
+        # operation can ever reach. ----
+        contracts_dict = self._registry.get_contracts_dict()
+        adm = admission_mod.admit(contracts_dict, CAPABILITY_TARGET, required_causal=False)
+
+        if not adm.admitted:
+            result.admitted = False
+            result.admission_reason = adm.reason
+            result.execution_status = "REFUSED_ADMISSION"
+            result.error = adm.detail
+            return result
+
+        result.admitted = True
+        result.admission_reason = adm.reason
+
+        plan = {
+            "status": "MODULATION_ROUTE_PLAN_READY",
+            "operation": "ADD_MODULATION_ROUTE",
+            "source": source, "destination": destination,
+            "amount": amount, "bipolar": bipolar,
+            "capability_target": CAPABILITY_TARGET,
+            "resolver_operation_id": contract.execution_binding.resolver_operation_id,
+            "execution_steps": [
+                "1. serum-mcp edit_preset(spec) with mod_routes=[{source, destination, "
+                "amount: <amount or a documented placeholder if amount is None>, bipolar}]",
+                "2. record preset_path + sha256 of the written .SerumPreset",
+                "3. Load the preset into the real Serum 2 instance via Serum's own "
+                "in-plugin preset browser",
+                "4. Read the real Serum MATRIX tab to confirm SOURCE/DESTINATION match "
+                "and route count increased",
+                "5. Call finalize_modulation_route_execution(plan, preset_path, "
+                "preset_sha256, matrix_readback, readback_verified)",
+            ],
+        }
+        result.execution_status = "MODULATION_ROUTE_PLAN_READY"
+        result.advisory_rationale = (
+            "ADD_MODULATION_ROUTE resolved+admitted: source=%r destination=%r "
+            "amount=%r bipolar=%r (contract=%s status=%s)"
+            % (source, destination, amount, bipolar, CAPABILITY_TARGET, contract.status)
+        )
+        result._modulation_route_plan = plan  # type: ignore[attr-defined]
+        return result
+
+    def finalize_modulation_route_execution(
+        self,
+        result: ProducerResult,
+        *,
+        preset_path: str,
+        preset_sha256: str,
+        matrix_readback: Dict[str, Any],
+        readback_verified: bool,
     ) -> ProducerResult:
-        """Full DawDreamer path: resolution → admission → real execution."""
+        """Record REAL observed serum-mcp + Serum-MATRIX execution evidence.
+        Same seam shape as finalize_serum_preset_execution / finalize_mcp_execution
+        -- requires the plan-ready state, requires a real hash, only then sets
+        EXECUTED. A bare MODULATION_ROUTE_PLAN_READY must never be EXECUTED."""
+        if result.execution_status != "MODULATION_ROUTE_PLAN_READY":
+            raise ValueError(
+                "finalize_modulation_route_execution() requires a result with "
+                "execution_status == 'MODULATION_ROUTE_PLAN_READY' (got %r). "
+                "This prevents finalizing a REFUSED result as EXECUTED."
+                % result.execution_status
+            )
+        if not preset_sha256:
+            raise ValueError(
+                "preset_sha256 is required -- an empty hash would let a plan "
+                "be marked EXECUTED without a real preset file ever existing."
+            )
+
+        result.serum_preset_execution = {
+            "preset_path": preset_path,
+            "preset_sha256": preset_sha256,
+            "matrix_readback": matrix_readback,
+            "readback_verified": readback_verified,
+        }
+        result.execution_status = "EXECUTED" if readback_verified else "EXECUTION_UNVERIFIED"
+        result.decision = "ACCEPTED" if readback_verified else "REJECTED"
+        return result
+
+    def _run_serum_preset_path(
+        self, result, request, intent, candidate, decision,
+        capability_target,
+    ) -> ProducerResult:
+        """Canonical Serum execution route: resolution -> admission ->
+        serum-mcp preset plan. See _build_serum_preset_plan's docstring for
+        the full external flow (serum-mcp -> Serum UI load -> readback ->
+        finalize_serum_preset_execution)."""
         contract = self._registry.get(capability_target)
         if contract is None:
             result.error = "No contract for capability target %r" % capability_target
@@ -1184,32 +1738,26 @@ class ProducerBrain:
         result.admitted = True
         result.admission_reason = adm.admission_reason
 
-        # Real execution (Phase G)
-        ep_id = "ep_brain_%s" % datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
-        try:
-            episode = self._execute_dawdreamer_with_authority(
-                intent, candidate, decision, resolution, adm, contract,
-                knowledge_ids=list(knowledge_notes.keys()),
-                episode_ids=episode_ids,
-                ep_id=ep_id,
-            )
-        except Exception as exc:
-            result.execution_status = "EXECUTION_ERROR"
-            result.error = "DawDreamer execution failed: %s" % exc
-            return result
+        # Serum preset plan (Phase G) — see _build_serum_preset_plan's
+        # docstring for why this stops at a plan rather than auto-executing.
+        plan = self._build_serum_preset_plan(
+            intent, candidate, decision, resolution, adm, contract,
+        )
 
-        if episode.get("status") == "NOT_ADMITTED":
+        if plan.get("status") == "NOT_ADMITTED":
             result.execution_status = "REFUSED_AUTHORITY"
-            result.error = "Execution authority not granted: %s" % episode
+            result.error = "Execution authority not granted: %s" % plan
             return result
 
-        # Populate result from episode
-        result.baseline_db = episode.get("measurement_baseline")
-        result.treatment_db = episode.get("measurement_treatment")
-        result.delta_db = episode.get("measurement_delta")
-        result.decision = episode.get("decision", "UNKNOWN")
-        result.episode_id = episode.get("episode_id", ep_id)
-        result.execution_status = "EXECUTED"
+        result.execution_status = "SERUM_PRESET_PLAN_READY"
+        result.advisory_rationale += (
+            " | Serum preset plan: target=%r value=%r contract_id=%r" % (
+                plan.get("mutation_target_path"),
+                plan.get("mutation_value_used"),
+                plan.get("contract_id"),
+            )
+        )
+        result._serum_preset_plan = plan  # type: ignore[attr-defined]
         return result
 
     def _run_mcp_path(
@@ -1329,6 +1877,69 @@ class ProducerBrain:
             "tool_calls": tool_calls,
             "before_state": before_state,
             "after_state": after_state,
+            "readback_verified": readback_verified,
+        }
+        result.execution_status = "EXECUTED" if readback_verified else "EXECUTION_UNVERIFIED"
+        result.decision = "ACCEPTED" if readback_verified else "REJECTED"
+        return result
+
+    # ------------------------------------------------------------------
+    # REAL SERUM PRESET EXECUTION FEEDBACK
+    #
+    # Same seam shape as finalize_mcp_execution() above, for the OTHER real
+    # route: this Python process cannot call mcp__serum-mcp__* or take a
+    # screenshot of the real Serum UI either — those are orchestrating-agent
+    # tools. The orchestrator generates the preset via serum-mcp, loads it
+    # into the real Serum 2 instance through Serum's own in-plugin preset
+    # browser, reads back the live UI, and feeds the REAL evidence in here.
+    # Only after this call does execution_status become EXECUTED. A bare
+    # SERUM_PRESET_PLAN_READY must never be reported as EXECUTED.
+    # ------------------------------------------------------------------
+    def finalize_serum_preset_execution(
+        self,
+        result: ProducerResult,
+        *,
+        preset_path: str,
+        preset_sha256: str,
+        ui_readback: Dict[str, Any],
+        readback_verified: bool,
+    ) -> ProducerResult:
+        """Record REAL observed serum-mcp + Serum-UI execution evidence.
+
+        Args:
+            result: a ProducerResult previously returned with
+                execution_status == "SERUM_PRESET_PLAN_READY"
+                (has result._serum_preset_plan)
+            preset_path: absolute path of the .SerumPreset serum-mcp wrote
+            preset_sha256: sha256 of that file (never fabricated)
+            ui_readback: real values read off the actual Serum UI (e.g. a
+                screenshot-derived dict), never a planned/expected value
+            readback_verified: True iff ui_readback actually matches the
+                plan's mutation_target_path/mutation_value_used (caller
+                must have compared, not assumed)
+
+        Returns:
+            The same result object, mutated: execution_status="EXECUTED",
+            serum_preset_execution populated, decision set from
+            readback_verified.
+        """
+        if result.execution_status != "SERUM_PRESET_PLAN_READY":
+            raise ValueError(
+                "finalize_serum_preset_execution() requires a result with "
+                "execution_status == 'SERUM_PRESET_PLAN_READY' (got %r). "
+                "This prevents finalizing a REFUSED result as EXECUTED."
+                % result.execution_status
+            )
+        if not preset_sha256:
+            raise ValueError(
+                "preset_sha256 is required — an empty hash would let a plan "
+                "be marked EXECUTED without a real preset file ever existing."
+            )
+
+        result.serum_preset_execution = {
+            "preset_path": preset_path,
+            "preset_sha256": preset_sha256,
+            "ui_readback": ui_readback,
             "readback_verified": readback_verified,
         }
         result.execution_status = "EXECUTED" if readback_verified else "EXECUTION_UNVERIFIED"

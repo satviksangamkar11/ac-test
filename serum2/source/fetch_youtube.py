@@ -18,27 +18,11 @@ External only - raw transcript text never enters Claude Code / stdout.
 import sys
 import json
 import hashlib
-import re
 from pathlib import Path
 from datetime import datetime
 
 from youtube_transcript_resolver import resolve_youtube_transcript
-
-
-def extract_video_id(url: str) -> str:
-    """Extract YouTube video ID from a watch/shorts/youtu.be/embed/live URL."""
-    patterns = [
-        r"youtube\.com/shorts/([A-Za-z0-9_-]{11})",
-        r"youtube\.com/embed/([A-Za-z0-9_-]{11})",
-        r"youtube\.com/live/([A-Za-z0-9_-]{11})",
-        r"[?&]v=([A-Za-z0-9_-]{11})",
-        r"youtu\.be/([A-Za-z0-9_-]{11})",
-    ]
-    for pattern in patterns:
-        m = re.search(pattern, url)
-        if m:
-            return m.group(1)
-    raise ValueError(f"Cannot extract video ID from URL: {url}")
+from youtube_url import extract_youtube_video_id as extract_video_id
 
 
 def compute_source_id(url: str) -> str:

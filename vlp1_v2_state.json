@@ -1,0 +1,176 @@
+{
+  "bundle": {
+    "source_url": "https://www.youtube.com/watch?v=k6OBzXdcFtA",
+    "source_id": "yt_a16958bfb5bc",
+    "video_id": "k6OBzXdcFtA",
+    "acquired_at": "2026-09-18T21:00:16.100132+00:00",
+    "frames": [
+      {
+        "frame_id": "frame_yt_a16958bfb5bc_00000000",
+        "source_url": "https://www.youtube.com/watch?v=k6OBzXdcFtA",
+        "source_id": "yt_a16958bfb5bc",
+        "video_id": "k6OBzXdcFtA",
+        "timestamp_sec": 0.0,
+        "artifact_path": "serum2/data/visual_frames/yt_a16958bfb5bc/frame_yt_a16958bfb5bc_00000000.jpg",
+        "artifact_hash": "283f03a6fa2426a831d73c365b608a8ed9fd57b6bbf9032d268b50b43fa46f24",
+        "acquired_at": "2026-09-18T20:37:05.637690+00:00"
+      },
+      {
+        "frame_id": "frame_yt_a16958bfb5bc_00044482",
+        "source_url": "https://www.youtube.com/watch?v=k6OBzXdcFtA",
+        "source_id": "yt_a16958bfb5bc",
+        "video_id": "k6OBzXdcFtA",
+        "timestamp_sec": 44.482,
+        "artifact_path": "serum2/data/visual_frames/yt_a16958bfb5bc/frame_yt_a16958bfb5bc_00044482.jpg",
+        "artifact_hash": "04d864db0f15d96bfac768228de84287d5c8a5e222650bd51e8d483ea7cbdb32",
+        "acquired_at": "2026-09-18T20:37:05.693355+00:00"
+      },
+      {
+        "frame_id": "frame_yt_a16958bfb5bc_00088964",
+        "source_url": "https://www.youtube.com/watch?v=k6OBzXdcFtA",
+        "source_id": "yt_a16958bfb5bc",
+        "video_id": "k6OBzXdcFtA",
+        "timestamp_sec": 88.964,
+        "artifact_path": "serum2/data/visual_frames/yt_a16958bfb5bc/frame_yt_a16958bfb5bc_00088964.jpg",
+        "artifact_hash": "86becd3574cd81b8081f1f6a472c9ca35e0387dcd536293aef77b72727e334c0",
+        "acquired_at": "2026-09-18T20:37:05.747089+00:00"
+      },
+      {
+        "frame_id": "frame_yt_a16958bfb5bc_00133446",
+        "source_url": "https://www.youtube.com/watch?v=k6OBzXdcFtA",
+        "source_id": "yt_a16958bfb5bc",
+        "video_id": "k6OBzXdcFtA",
+        "timestamp_sec": 133.446,
+        "artifact_path": "serum2/data/visual_frames/yt_a16958bfb5bc/frame_yt_a16958bfb5bc_00133446.jpg",
+        "artifact_hash": "114dc00e6aa2a463d6c8525604d8c783700a7c6f9e9d50d22c470fc687731998",
+        "acquired_at": "2026-09-18T20:37:05.803061+00:00"
+      },
+      {
+        "frame_id": "frame_yt_a16958bfb5bc_00177928",
+        "source_url": "https://www.youtube.com/watch?v=k6OBzXdcFtA",
+        "source_id": "yt_a16958bfb5bc",
+        "video_id": "k6OBzXdcFtA",
+        "timestamp_sec": 177.928,
+        "artifact_path": "serum2/data/visual_frames/yt_a16958bfb5bc/frame_yt_a16958bfb5bc_00177928.jpg",
+        "artifact_hash": "b18d5e8fc2a47a0c5824ebc3fb5d286298a1be24d8f0b136c63c6f71e60e4cfb",
+        "acquired_at": "2026-09-18T20:37:05.856827+00:00"
+      },
+      {
+        "frame_id": "frame_yt_a16958bfb5bc_00222410",
+        "source_url": "https://www.youtube.com/watch?v=k6OBzXdcFtA",
+        "source_id": "yt_a16958bfb5bc",
+        "video_id": "k6OBzXdcFtA",
+        "timestamp_sec": 222.41,
+        "artifact_path": "serum2/data/visual_frames/yt_a16958bfb5bc/frame_yt_a16958bfb5bc_00222410.jpg",
+        "artifact_hash": "fb0076b312bfa1ef5ebfe2959cbe79ee81e4ef83edad01a98c0f3e0bd5abca98",
+        "acquired_at": "2026-09-18T20:37:05.913251+00:00"
+      }
+    ],
+    "observations": [
+      {
+        "frame_id": "frame_yt_a16958bfb5bc_00000000",
+        "timestamp_sec": 0.0,
+        "observation_text": "Serum 2 plugin window open, titled 'SERUM 2'. Two oscillator wavetable display panels visible at top (green waveform traces). The modulation shape-editor pad (bottom-center) is empty/blank.",
+        "observable_type": "plugin_view",
+        "ui_element": "modulation_shape_editor",
+        "estimated_value": "blank",
+        "confidence": 0.85
+      },
+      {
+        "frame_id": "frame_yt_a16958bfb5bc_00044482",
+        "timestamp_sec": 44.482,
+        "observation_text": "Serum 2 UI, same layout. The modulation shape-editor pad now shows a hand-drawn heart-shaped curve.",
+        "observable_type": "waveform_display",
+        "ui_element": "modulation_shape_editor",
+        "estimated_value": "heart-shaped curve",
+        "confidence": 0.85
+      },
+      {
+        "frame_id": "frame_yt_a16958bfb5bc_00088964",
+        "timestamp_sec": 88.964,
+        "observation_text": "The modulation shape-editor pad shows a smooth double-hump (two-peak) wave curve, visibly different from the heart shape in the previous sampled frame.",
+        "observable_type": "waveform_display",
+        "ui_element": "modulation_shape_editor",
+        "estimated_value": "double-hump curve",
+        "confidence": 0.8
+      },
+      {
+        "frame_id": "frame_yt_a16958bfb5bc_00133446",
+        "timestamp_sec": 133.446,
+        "observation_text": "The modulation shape-editor pad shows a jagged, multi-segment zigzag curve with several sharp angular points \u2014 a distinctly different, more complex hand-drawn shape than prior frames.",
+        "observable_type": "waveform_display",
+        "ui_element": "modulation_shape_editor",
+        "estimated_value": "jagged zigzag curve",
+        "confidence": 0.85
+      },
+      {
+        "frame_id": "frame_yt_a16958bfb5bc_00177928",
+        "timestamp_sec": 177.928,
+        "observation_text": "The modulation shape-editor pad shows a circular/oval closed-loop curve.",
+        "observable_type": "waveform_display",
+        "ui_element": "modulation_shape_editor",
+        "estimated_value": "circular/oval curve",
+        "confidence": 0.8
+      },
+      {
+        "frame_id": "frame_yt_a16958bfb5bc_00222410",
+        "timestamp_sec": 222.41,
+        "observation_text": "The modulation shape-editor pad shows a single-peak triangular curve; a cursor/pointer is visible near the curve, consistent with active editing at this timestamp.",
+        "observable_type": "waveform_display",
+        "ui_element": "modulation_shape_editor",
+        "estimated_value": "triangular curve, cursor present",
+        "confidence": 0.65
+      }
+    ],
+    "interpretations": [
+      {
+        "interpretation_text": "Across the 6 sampled frames (0s-222s), the modulation shape-editor pad shows six DIFFERENT hand-drawn curves in sequence (blank -> heart -> double-hump -> zigzag -> circle -> triangle). This is strong, genuinely visual evidence that the tutorial is demonstrating custom LFO/modulation shape drawing in Serum 2 \u2014 a technique used instead of a standard preset LFO shape. AMBIGUOUS: the exact modulation destination (which parameter this shape controls) is not legible at the source storyboard resolution (320x180) \u2014 no destination/routing label could be read. The mapping below to 'filter-cutoff' is inferred from genre convention (the video's own title, independently verified via yt-dlp metadata, is 'How to Make Dubstep GROWLS in SERUM 2 Tutorial' \u2014 dubstep growl-bass sound design conventionally uses a custom-drawn LFO shape to modulate filter cutoff), NOT a directly-read on-screen value. Note: Serum's target-parameter system does have a matching LFO.Shape capability target, but no CapabilityContract for it exists in this codebase yet, so it cannot be safely routed to execution \u2014 filter-cutoff is used instead as the closest EXISTING, contract-verified, admissible concept.",
+        "production_concept": "filter-cutoff",
+        "semantic_direction": "darker",
+        "supporting_frame_ids": [
+          "frame_yt_a16958bfb5bc_00000000",
+          "frame_yt_a16958bfb5bc_00044482",
+          "frame_yt_a16958bfb5bc_00088964",
+          "frame_yt_a16958bfb5bc_00133446",
+          "frame_yt_a16958bfb5bc_00177928",
+          "frame_yt_a16958bfb5bc_00222410"
+        ],
+        "confidence": 0.45,
+        "production_action": "Apply a custom-drawn modulation shape targeting filter cutoff (darker direction), consistent with dubstep growl-bass sound design as demonstrated in the source tutorial."
+      }
+    ],
+    "model_metadata": {
+      "requested_model": "active-claude-code-session (native vision, no API call)",
+      "response_model": null,
+      "request_id": null,
+      "input_tokens": null,
+      "output_tokens": null,
+      "provider": "none",
+      "provider_attestation": null,
+      "called_at": "2026-09-18T21:00:16.100499+00:00"
+    },
+    "transcript_sufficiency": {
+      "status": "INSUFFICIENT_OPERATIONAL",
+      "reason": "Canonical store has 1 item \u2014 unpunctuated auto-generated transcript",
+      "evidence_item_count": 1
+    },
+    "acquisition_error": null,
+    "reasoning_error": null
+  },
+  "intent": {
+    "target_concept": "filter-cutoff",
+    "semantic_direction": "SemanticDirection.DARKER",
+    "musical_objective": "Across the 6 sampled frames (0s-222s), the modulation shape-editor pad shows six DIFFERENT hand-drawn curves in sequence (blank -> heart -> double-hump -> zigzag -> circle -> triangle). This is strong, genuinely visual evidence that the tutorial is demonstrating custom LFO/modulation shape drawing in Serum 2 \u2014 a technique used instead of a standard preset LFO shape. AMBIGUOUS: the exact modulation destination (which parameter this shape controls) is not legible at the source storyboard resolution (320x180) \u2014 no destination/routing label could be read. The mapping below to 'filter-cutoff' is inferred from genre convention (the video's own title, independently verified via yt-dlp metadata, is 'How to Make Dubstep GROWLS in SERUM 2 Tutorial' \u2014 dubstep growl-bass sound design conventionally uses a custom-drawn LFO shape to modulate filter cutoff), NOT a directly-read on-screen value. Note: Serum's target-parameter system does have a matching LFO.Shape capability target, but no CapabilityContract for it exists in this codebase yet, so it cannot be safely routed to execution \u2014 filter-cutoff is used instead as the closest EXISTING, contract-verified, admissible concept.",
+    "desired_change": "Apply a custom-drawn modulation shape targeting filter cutoff (darker direction), consistent with dubstep growl-bass sound design as demonstrated in the source tutorial.",
+    "resolution_status": "AMBIGUOUS"
+  },
+  "brain_result": {
+    "execution_status": "REFUSED_RESOLUTION_FAILED",
+    "admitted": null,
+    "admission_reason": null,
+    "resolved_concept": "filter-cutoff",
+    "execution_route": "hybrid",
+    "error": "6.6 resolution failed: Universal concept 'filter-cutoff' not mapped to semantic target",
+    "mcp_plan": null
+  }
+}

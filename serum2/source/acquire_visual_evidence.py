@@ -673,6 +673,110 @@ def acquire_visual_evidence(
     return bundle
 
 
+def acquire_frames_at_timestamps(
+    source_url: str,
+    timestamps: List[float],
+    force: bool = False,
+) -> VisualEvidenceBundle:
+    """Acquire frames at EXACT caller-given timestamps — the transcript-first
+    counterpart to acquire_visual_evidence()'s blind fixed-cadence sampling.
+
+    Used when a transcript_query_planner.VisualQueryPlan has already
+    identified WHICH moments matter; this function only fetches those, at
+    the highest resolution available, with the same real hash/provenance
+    guarantees as the cadence-based path. It never falls back to storyboard
+    sampling on its own — storyboard frames are too low-resolution (down to
+    320x180 or smaller) to reliably read a knob's displayed number, which is
+    the whole point of a targeted query. Callers that need a storyboard
+    fallback should do so explicitly and say so in the resulting record.
+
+    Returns a VisualEvidenceBundle with bundle.frames populated in the same
+    order as `timestamps` (one frame per timestamp; a timestamp that fails
+    to extract is simply omitted, not silently replaced by a nearby one).
+    """
+    url, video_id = _validate_youtube_url(source_url)
+    sid = _source_id(url)
+
+    bundle = VisualEvidenceBundle(source_url=url, source_id=sid, video_id=video_id)
+
+    ffmpeg = _find_ffmpeg()
+    if not ffmpeg:
+        bundle.acquisition_error = "ffmpeg not found on PATH"
+        return bundle
+
+    frames_dir = _FRAMES_DIR / sid
+    frames_dir.mkdir(parents=True, exist_ok=True)
+
+    with tempfile.TemporaryDirectory(prefix="vlp1_targeted_") as tmp:
+        tmp_dir = Path(tmp)
+        video_path, video_provenance = _download_best_video(url, tmp_dir, video_id)
+
+        if video_path is None:
+            bundle.acquisition_error = (
+                "Real video stream unavailable for targeted acquisition "
+                "(storyboard fallback deliberately not used — resolution "
+                "too low to read exact UI values). fallback_reason=%r"
+                % video_provenance.get("fallback_reason")
+            )
+            return bundle
+
+        frame_w = video_provenance.get("width")
+        frame_h = video_provenance.get("height")
+        src_sha = video_provenance.get("source_video_sha256")
+
+        manifest_frames = []
+        for ts in timestamps:
+            frame_id = "frame_%s_%08d" % (sid, int(ts * 1000))
+            out_path = frames_dir / ("%s.jpg" % frame_id)
+            if out_path.exists() and not force:
+                ahash = _sha256_file(out_path)
+            else:
+                ok = _extract_frame(video_path, ts, out_path, ffmpeg)
+                if not ok:
+                    continue
+                ahash = _sha256_file(out_path)
+
+            artifact = VisualFrameArtifact(
+                frame_id=frame_id,
+                source_url=url,
+                source_id=sid,
+                video_id=video_id,
+                timestamp_sec=ts,
+                artifact_path=str(out_path.relative_to(
+                    Path(__file__).parent.parent.parent
+                )).replace("\\", "/"),
+                artifact_hash=ahash,
+                width=frame_w,
+                height=frame_h,
+                source_video_sha256=src_sha,
+            )
+            bundle.frames.append(artifact)
+            manifest_frames.append(artifact.to_dict())
+
+        if bundle.frames:
+            bundle.source_video_info = video_provenance
+            manifest_path = frames_dir / "manifest.json"
+            existing = []
+            if manifest_path.exists():
+                try:
+                    existing = json.loads(manifest_path.read_text()).get("frames", [])
+                except Exception:
+                    existing = []
+            existing_ids = {f["frame_id"] for f in existing}
+            merged = existing + [f for f in manifest_frames if f["frame_id"] not in existing_ids]
+            manifest_path.write_text(json.dumps({
+                "frames": merged,
+                "source_video_info": video_provenance,
+            }, indent=2))
+        else:
+            bundle.acquisition_error = (
+                "Video downloaded but no frame could be extracted at any "
+                "requested timestamp"
+            )
+
+    return bundle
+
+
 def _load_existing_frames(bundle: VisualEvidenceBundle, manifest_path: Path) -> None:
     """Populate bundle.frames (and source_video_info, if present) from a
     persisted manifest. Accepts both the current {frames, source_video_info}

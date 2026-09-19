@@ -150,6 +150,238 @@ class VisualInterpretation:
 
 
 # ---------------------------------------------------------------------------
+# Observed canonical state — the exact value read from a frame, kept
+# separate from UniversalProductionIntent (which carries only
+# target_concept + direction, never a magnitude). Execution reproduces
+# THIS value; the intent explains WHAT/WHY it changed.
+# ---------------------------------------------------------------------------
+
+@dataclass
+class ObservedCanonicalState:
+    """One exact UI reading tied to a single frame.
+
+    This is a STRUCTURED reading (e.g. a knob's displayed number), distinct
+    from VisualObservation's free-text description of the same frame. Two of
+    these (before/after) are what CanonicalStateDiff compares.
+    """
+    target: str
+    """Canonical parameter name, e.g. 'Env1.Release'."""
+
+    value: str
+    """Exact displayed value with unit, e.g. '220 ms'. A string because the
+    display itself is a string (e.g. 'BPM' sync units, '%'); callers that
+    need a float parse it themselves."""
+
+    frame_id: str
+    timestamp_sec: float
+    frame_hash: str
+    """sha256 of the frame this reading came from — same value as the
+    matching VisualFrameArtifact.artifact_hash, duplicated here so this
+    record is independently traceable without a join."""
+
+    confidence: float = 0.8
+
+    def to_dict(self) -> Dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass
+class CanonicalStateDiff:
+    """Before/after comparison of two ObservedCanonicalState readings for the
+    SAME target. This is what stage-B inference is allowed to reason from —
+    never a single frame in isolation, never genre/title convention.
+    """
+    target: str
+    before: ObservedCanonicalState
+    after: ObservedCanonicalState
+    changed: bool
+    """True iff before.value != after.value (string comparison — the two
+    readings are the same display format, so this is exact, not a fuzzy
+    numeric compare)."""
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "target": self.target,
+            "before": self.before.to_dict(),
+            "after": self.after.to_dict(),
+            "changed": self.changed,
+        }
+
+
+# ---------------------------------------------------------------------------
+# UIStateSnapshot — the COMPLETE observable UI state of one frame, not one
+# preselected control. ObservedCanonicalState (above) stays the primitive
+# for "one exact reading of one named target"; UIStateSnapshot composes many
+# of those (plus free-text controls whose meaning isn't fully resolved) into
+# "everything legible in this frame". This is what makes the visual layer
+# transcript-independent: it is built by SCANNING the frame, not by looking
+# for the one control the transcript named.
+# ---------------------------------------------------------------------------
+
+@dataclass
+class ControlState:
+    """One observed UI control (knob/slider/dropdown/toggle/tab), scanned
+    from a frame independent of what the transcript said. Unknown fields
+    stay None/UNKNOWN rather than guessed -- a control whose value isn't
+    legible in this frame is still worth recording as 'visible but unclear',
+    distinct from 'not visible at all' (simply absent from the snapshot)."""
+    control_id: str
+    """Stable identifier for this control across frames, e.g. 'env1.release',
+    'filter1.type' -- NOT tied to any one video's UI label; the same
+    control_id should be reused whenever the same knob/dropdown is scanned
+    in a later frame, so diffing (see UIStateSnapshot.diff) can match them."""
+
+    control_type: str
+    """'knob' | 'slider' | 'dropdown' | 'toggle' | 'tab' | 'badge_count' | 'other'"""
+
+    label: Optional[str] = None
+    """The UI's own displayed label, e.g. 'REL', 'Filter 1 Freq' -- kept
+    separate from control_id since UI labels vary across contexts/zoom."""
+
+    value: Optional[str] = None
+    """Exact displayed value with unit, e.g. '36 ms', 'Band 24', '(5)'.
+    None when visible but not legible -- never a guessed value."""
+
+    unit: Optional[str] = None
+    confidence: float = 0.5
+    frame_id: Optional[str] = None
+    frame_hash: Optional[str] = None
+    timestamp_sec: Optional[float] = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass
+class ModRouteState:
+    """One observed modulation-matrix row, scanned independent of any
+    transcript mention of it -- the same completeness principle as
+    ControlState, specialized for routing topology (source/destination
+    pairs, not a single value)."""
+    source: Optional[str] = None
+    destination: Optional[str] = None
+    amount: Optional[str] = None
+    """Displayed amount with unit if legible (e.g. '+50%'); None if only
+    the route's existence is legible, not its depth."""
+    bipolar: Optional[bool] = None
+    route_present: bool = True
+    confidence: float = 0.5
+    frame_id: Optional[str] = None
+    frame_hash: Optional[str] = None
+    timestamp_sec: Optional[float] = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass
+class UIStateSnapshot:
+    """Everything observable in ONE frame -- not the single control a
+    transcript mention pointed at. Built by scanning the whole visible UI
+    (plugin panels, tabs, knobs, mod matrix) once per frame; a frame this
+    project never asked about a specific parameter for can still contribute
+    a full snapshot."""
+    frame_id: str
+    frame_hash: str
+    timestamp_sec: float
+    plugin: Optional[str] = None
+    plugin_version: Optional[str] = None
+    visible_panel: Optional[str] = None
+    """Which UI tab/panel was frontmost, e.g. 'OSC', 'MATRIX', 'ENV1'."""
+
+    controls: List[ControlState] = field(default_factory=list)
+    mod_routes: List[ModRouteState] = field(default_factory=list)
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "frame_id": self.frame_id, "frame_hash": self.frame_hash,
+            "timestamp_sec": self.timestamp_sec, "plugin": self.plugin,
+            "plugin_version": self.plugin_version, "visible_panel": self.visible_panel,
+            "controls": [c.to_dict() for c in self.controls],
+            "mod_routes": [r.to_dict() for r in self.mod_routes],
+        }
+
+    @classmethod
+    def from_dict(cls, d: Dict[str, Any]) -> "UIStateSnapshot":
+        return cls(
+            frame_id=d["frame_id"], frame_hash=d["frame_hash"],
+            timestamp_sec=d["timestamp_sec"], plugin=d.get("plugin"),
+            plugin_version=d.get("plugin_version"), visible_panel=d.get("visible_panel"),
+            controls=[ControlState(**c) for c in d.get("controls", [])],
+            mod_routes=[ModRouteState(**r) for r in d.get("mod_routes", [])],
+        )
+
+
+def diff_snapshots(before: UIStateSnapshot, after: UIStateSnapshot) -> Dict[str, Any]:
+    """Deterministic, control-by-control diff between two snapshots.
+    Pure function, no model call -- same determinism guarantee as
+    diff_observed_states() in visual_reasoner.py. Matches controls by
+    control_id; a control present in only one snapshot is reported as
+    added/removed, not silently ignored. Mod routes are matched by
+    (source, destination) pair."""
+    before_by_id = {c.control_id: c for c in before.controls}
+    after_by_id = {c.control_id: c for c in after.controls}
+
+    changed_controls = []
+    for cid, a in after_by_id.items():
+        b = before_by_id.get(cid)
+        if b is None:
+            continue  # a control absent from `before` isn't a "change", see new_controls
+        if b.value != a.value:
+            changed_controls.append({"control_id": cid, "before": b.value, "after": a.value})
+    new_controls = [cid for cid in after_by_id if cid not in before_by_id]
+    removed_controls = [cid for cid in before_by_id if cid not in after_by_id]
+
+    def _route_key(r: ModRouteState):
+        return (r.source, r.destination)
+
+    before_routes = {_route_key(r): r for r in before.mod_routes if r.route_present}
+    after_routes = {_route_key(r): r for r in after.mod_routes if r.route_present}
+    added_routes = [after_routes[k].to_dict() for k in after_routes if k not in before_routes]
+    removed_routes = [before_routes[k].to_dict() for k in before_routes if k not in after_routes]
+
+    return {
+        "before_frame_id": before.frame_id, "after_frame_id": after.frame_id,
+        "changed_controls": changed_controls,
+        "new_controls": new_controls, "removed_controls": removed_controls,
+        "added_routes": added_routes, "removed_routes": removed_routes,
+    }
+
+
+@dataclass
+class ProductionEvent:
+    """One grouped production action spanning several frames -- the object
+    the Brain reasons over, replacing 'the single knob the transcript
+    named'. Groups a UI diff (everything that actually changed, whether or
+    not the narrator mentioned it) with whatever transcript evidence
+    overlaps that time window."""
+    event_id: str
+    start_timestamp_sec: float
+    end_timestamp_sec: float
+
+    evidence_frame_ids: List[str] = field(default_factory=list)
+    snapshot_diff: Optional[Dict[str, Any]] = None
+    """diff_snapshots() output between the event's before/after frames."""
+
+    transcript_excerpt: Optional[str] = None
+    transcript_timestamp_sec: Optional[float] = None
+
+    observed: List[str] = field(default_factory=list)
+    """Plain-language observed facts, e.g. 'Env1.Release: 15ms -> 36ms'."""
+    inferred: List[str] = field(default_factory=list)
+    """Interpretations, always downstream of `observed`, never replacing it."""
+    unknown: List[str] = field(default_factory=list)
+
+    fusion_status: Optional[str] = None
+    """'AGREEMENT' | 'VISUAL_ONLY' | 'TRANSCRIPT_ONLY' | 'CONFLICT' | 'UNKNOWN'
+    -- set by evidence_fusion.fuse_transcript_and_visual(). None until fusion
+    has actually run."""
+
+    def to_dict(self) -> Dict[str, Any]:
+        return asdict(self)
+
+
+# ---------------------------------------------------------------------------
 # Model metadata — honest provenance for visual reasoning
 # ---------------------------------------------------------------------------
 
@@ -235,6 +467,26 @@ class VisualEvidenceBundle:
     observations: List[VisualObservation] = field(default_factory=list)
     interpretations: List[VisualInterpretation] = field(default_factory=list)
 
+    observed_canonical_states: List[ObservedCanonicalState] = field(default_factory=list)
+    """Stage-A exact readings (target/value/frame_hash). Populated by
+    VisualReasoner.observe_frames() when the query plan names a specific
+    target to read, in addition to the free-text `observations`."""
+
+    canonical_diffs: List[CanonicalStateDiff] = field(default_factory=list)
+    """Before/after comparisons derived from observed_canonical_states.
+    Stage-B inference (infer_from_diff) reasons from these, not from a
+    single frame."""
+
+    query_plan: Optional[Dict[str, Any]] = None
+    """The VisualQueryPlan (as a dict) that drove targeted frame acquisition,
+    when transcript-first planning was used. None for legacy fixed-cadence
+    acquisition."""
+
+    unknown: List[str] = field(default_factory=list)
+    """Things Stage A (observe_frames) explicitly could not determine, e.g.
+    'exact UI gesture used to change the value'. Kept separate from
+    observations/interpretations — an honest gap, not a silent omission."""
+
     model_metadata: Optional[VisualModelMetadata] = None
     """Populated after VisualReasoner completes. None if reasoning not yet run."""
 
@@ -268,6 +520,10 @@ class VisualEvidenceBundle:
             "frames": [f.to_dict() for f in self.frames],
             "observations": [o.to_dict() for o in self.observations],
             "interpretations": [i.to_dict() for i in self.interpretations],
+            "observed_canonical_states": [s.to_dict() for s in self.observed_canonical_states],
+            "canonical_diffs": [d.to_dict() for d in self.canonical_diffs],
+            "query_plan": self.query_plan,
+            "unknown": self.unknown,
             "model_metadata": self.model_metadata.to_dict() if self.model_metadata else None,
             "transcript_sufficiency": self.transcript_sufficiency.to_dict() if self.transcript_sufficiency else None,
             "acquisition_error": self.acquisition_error,
@@ -292,6 +548,20 @@ class VisualEvidenceBundle:
         bundle.frames = [VisualFrameArtifact(**f) for f in data.get("frames", [])]
         bundle.observations = [VisualObservation(**o) for o in data.get("observations", [])]
         bundle.interpretations = [VisualInterpretation(**i) for i in data.get("interpretations", [])]
+        bundle.observed_canonical_states = [
+            ObservedCanonicalState(**s) for s in data.get("observed_canonical_states", [])
+        ]
+        bundle.canonical_diffs = [
+            CanonicalStateDiff(
+                target=d["target"],
+                before=ObservedCanonicalState(**d["before"]),
+                after=ObservedCanonicalState(**d["after"]),
+                changed=d["changed"],
+            )
+            for d in data.get("canonical_diffs", [])
+        ]
+        bundle.query_plan = data.get("query_plan")
+        bundle.unknown = data.get("unknown", [])
         if data.get("model_metadata"):
             bundle.model_metadata = VisualModelMetadata(**data["model_metadata"])
         if data.get("transcript_sufficiency"):

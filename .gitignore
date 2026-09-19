@@ -2,6 +2,10 @@ __pycache__/
 *.pyc
 *.pyo
 
+# Secrets — never commit
+.env
+.env.*
+
 # Large generated/cache artifacts — never commit these
 experiments/_corpus_cache.pkl
 *.corpus_cache.pkl

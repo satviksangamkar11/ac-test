@@ -425,6 +425,9 @@ def _record_render_and_finalize(
         rms_db=measurements.get("rms_db"),
         peak_db=measurements.get("peak_db"),
         spectral_centroid_hz=measurements.get("spectral_centroid_hz"),
+        measurement_definition_id=measurements.get("measurement_definition_id"),
+        kernel_version=measurements.get("kernel_version"),
+        channel_policy=measurements.get("channel_policy"),
         stage=_exp.EvidenceStage.VERIFIED.value if acoustic_ok else _exp.EvidenceStage.SPECIFIED.value,
     )
     record.acoustic_measurements = acoustic.to_dict()
@@ -442,8 +445,8 @@ def _record_render_and_finalize(
         "measurement_delta": None,
         "learning_eligible": True,
     }
-    record.provenance["render_artifact"] = "production_pipeline._measure"
-    record.provenance["acoustic_measurements"] = "production_pipeline._acoustic_measurements"
+    record.provenance["render_artifact"] = "serum2.evidence.acoustic_measurement.measure_render"
+    record.provenance["acoustic_measurements"] = "serum2.evidence.acoustic_measurement.compute_acoustic_metrics"
     record.provenance["outcome"] = "production_pipeline._finalize_episode"
     _exp.save(record)
 
@@ -770,129 +773,11 @@ def _sha256(path: str) -> Optional[str]:
         return None
 
 
-_DB_FLOOR = -120.0  # silence floor, avoids log10(0) = -inf
-
-
-def _acoustic_measurements(samples, sample_rate: int) -> Dict[str, float]:
-    """RMS, peak, and spectral centroid from real WAV samples via numpy.
-
-    Standard DSP formulas, not a framework: no existing measurement kernel
-    was reusable here (serum2/evidence/harness.py + spec.py, which
-    producer_brain._execute_dawdreamer_with_authority expects, don't exist
-    in this project; phase4b3_dawdreamer_measurement.py's "measurement" is
-    a fixture returning hardcoded literals, not a real computation).
-    samples: float array normalized to [-1, 1].
-    """
-    import numpy as np
-
-    if samples.size == 0:
-        return {"rms_db": _DB_FLOOR, "peak_db": _DB_FLOOR, "spectral_centroid_hz": 0.0}
-
-    rms = float(np.sqrt(np.mean(samples.astype(np.float64) ** 2)))
-    peak = float(np.max(np.abs(samples)))
-    rms_db = 20.0 * np.log10(rms) if rms > 0 else _DB_FLOOR
-    peak_db = 20.0 * np.log10(peak) if peak > 0 else _DB_FLOOR
-
-    spectrum = np.abs(np.fft.rfft(samples.astype(np.float64)))
-    freqs = np.fft.rfftfreq(samples.size, d=1.0 / sample_rate)
-    magnitude_sum = float(np.sum(spectrum))
-    centroid_hz = float(np.sum(freqs * spectrum) / magnitude_sum) if magnitude_sum > 0 else 0.0
-
-    return {
-        "rms_db": float(round(max(rms_db, _DB_FLOOR), 2)),
-        "peak_db": float(round(max(peak_db, _DB_FLOOR), 2)),
-        "spectral_centroid_hz": float(round(centroid_hz, 1)),
-    }
-
-
-def _measure(render_path: Optional[str]) -> Dict[str, Any]:
-    """Artifact checks (exists/readable/duration/rate/channels/sha256) are a
-    distinct success criterion from real acoustic DSP computation — they are
-    tracked separately (status vs acoustic_status) so a corrupted/unreadable
-    WAV or an unsupported sample format can never be silently reported as a
-    successful measurement with fabricated floor-value numbers standing in
-    for real analysis. Previously `status` was unconditionally "MEASURED"
-    even when the try block failed and fell through to fallback defaults —
-    that made "measured" true on total failure, which is exactly what the
-    VERIFIED-only-on-real-success provenance rule must never allow.
-    """
-    if not render_path:
-        return {"status": "NO_RENDER"}
-    p = Path(render_path)
-    if not p.exists():
-        return {"status": "FILE_NOT_FOUND", "path": render_path}
-    size = p.stat().st_size
-    sha = _sha256(render_path)
-
-    import wave
-    try:
-        with wave.open(str(p), "rb") as wf:
-            duration = wf.getnframes() / wf.getframerate()
-            channels = wf.getnchannels()
-            rate = wf.getframerate()
-            sampwidth = wf.getsampwidth()
-            raw = wf.readframes(wf.getnframes())
-    except Exception as e:
-        # Artifact itself is not even readable as a WAV — this must NOT be
-        # reported as "MEASURED" with fabricated numbers.
-        return {
-            "status": "MEASUREMENT_ERROR",
-            "error": f"{type(e).__name__}: {e}",
-            "file_size_bytes": size,
-            "sha256": sha,
-        }
-
-    import numpy as np
-
-    acoustic = {"rms_db": _DB_FLOOR, "peak_db": _DB_FLOOR, "spectral_centroid_hz": 0.0}
-    acoustic_status = "UNSUPPORTED_FORMAT"  # e.g. 32-bit float WAV, not covered below
-    dtype_map = {1: np.int8, 2: np.int16, 4: np.int32}
-    dtype = dtype_map.get(sampwidth)
-    if raw and sampwidth == 3:
-        # 24-bit PCM: numpy has no native int24 dtype (found live during the
-        # R1 fresh-source run — Ableton's record_section exports 24-bit by
-        # default, which UNSUPPORTED_FORMAT correctly flagged rather than
-        # silently reporting fake numbers). Manually sign-extend each
-        # 3-byte little-endian sample into a 4-byte int32.
-        try:
-            raw_bytes = np.frombuffer(raw, dtype=np.uint8)
-            n_samples = raw_bytes.size // 3
-            raw_bytes = raw_bytes[: n_samples * 3].reshape(-1, 3)
-            padded = np.zeros((n_samples, 4), dtype=np.uint8)
-            padded[:, :3] = raw_bytes
-            sign = (raw_bytes[:, 2] & 0x80) != 0
-            padded[sign, 3] = 0xFF
-            ints = padded.view(np.int32).flatten()
-            if channels > 1:
-                ints = ints.reshape(-1, channels).mean(axis=1)
-            max_val = float(2 ** 23)
-            samples = ints.astype(np.float64) / max_val
-            acoustic = _acoustic_measurements(samples, rate)
-            acoustic_status = "COMPUTED"
-        except Exception:
-            acoustic_status = "ERROR"
-    elif dtype is not None and raw:
-        try:
-            ints = np.frombuffer(raw, dtype=dtype)
-            if channels > 1:
-                ints = ints.reshape(-1, channels).mean(axis=1)
-            max_val = float(2 ** (8 * sampwidth - 1))
-            samples = ints.astype(np.float64) / max_val
-            acoustic = _acoustic_measurements(samples, rate)
-            acoustic_status = "COMPUTED"
-        except Exception:
-            acoustic_status = "ERROR"
-
-    return {
-        "status": "MEASURED",
-        "acoustic_status": acoustic_status,
-        "file_size_bytes": size,
-        "duration_sec": round(duration, 2),
-        "channels": channels,
-        "sample_rate": rate,
-        "sha256": sha,
-        **acoustic,
-    }
+# G8: the canonical acoustic-measurement kernel now lives under
+# serum2/evidence/acoustic_measurement.py (single implementation, per the
+# frozen plan's "reuse, do not duplicate" rule) -- imported and called here,
+# not reimplemented.
+from serum2.evidence.acoustic_measurement import measure_render as _measure
 
 
 def _finalize_episode(run: ProductionRun) -> str:

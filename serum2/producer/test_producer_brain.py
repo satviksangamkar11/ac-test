@@ -1,8 +1,14 @@
 """Acceptance tests for the canonical producer brain.
 
-Tests that are marked UNIT run without real Serum/DawDreamer (import-only checks).
-Tests marked LIVE require real Serum 2.0.21 + DawDreamer 0.9.0 and are skipped
-when DawDreamer is not importable (CI-safe).
+Tests that are marked UNIT run without a real Serum instance (import-only
+checks). Tests marked LIVE exercise resolution + admission against the real
+4.Q-fresh contract store; they require the real knowledge store on disk
+(REQUIRES_STORE) but do NOT require DawDreamer or any Serum execution
+backend to be importable/running — the canonical Serum route stops at
+SERUM_PRESET_PLAN_READY (see producer_brain.py's module docstring); actually
+loading a preset into Serum and reading it back is an orchestrating-agent
+action fed back via finalize_serum_preset_execution(), not something these
+Python-only tests perform.
 
 Phase B: real knowledge retrieval replaces hardcoded IDs
 Phase C: canonical execute_producer_request() exists
@@ -21,21 +27,6 @@ KNOWLEDGE_DIR = str(Path(__file__).parent.parent / "knowledge")
 for p in [ROOT, KNOWLEDGE_DIR]:
     if p not in sys.path:
         sys.path.insert(0, p)
-
-
-# ---- skip-guard for live tests ----
-def _dawdreamer_available():
-    try:
-        import dawdreamer  # noqa: F401
-        return True
-    except ImportError:
-        return False
-
-
-LIVE = pytest.mark.skipif(
-    not _dawdreamer_available(),
-    reason="DawDreamer not available; live Serum tests skipped",
-)
 
 # ---- knowledge store skip guard ----
 _STORE_PATH = Path(KNOWLEDGE_DIR) / "yt_f507169bd7cb_canonical_knowledge_store_5_6.json"
@@ -138,10 +129,12 @@ def test_route_selection_integrated_in_brain():
     brain = ProducerBrain()
     req = ProducerRequest(user_intent="make the note sustain longer")
     result = brain.execute(req)
-    # Even if execution fails (no DawDreamer), route must have been selected
+    # Even if execution stops at a plan (no live Serum instance), route must
+    # have been selected. "hybrid" was never a real ExecutionRoute member --
+    # dead branch, removed.
     assert result.execution_route is not None, "execution_route must be populated"
     assert result.execution_route in (
-        "dawdreamer_serum", "ableton_mcp", "hybrid", "refuse"
+        "dawdreamer_serum", "ableton_mcp", "refuse"
     )
 
 
@@ -151,7 +144,7 @@ def test_env1_release_routes_to_dawdreamer():
     brain = ProducerBrain()
     req = ProducerRequest(user_intent="make the note sustain longer")
     result = brain.execute(req)
-    assert result.execution_route in ("dawdreamer_serum", "hybrid")
+    assert result.execution_route == "dawdreamer_serum"
 
 
 def test_second_run_episode_influences_decision():
@@ -200,13 +193,15 @@ def test_second_run_episode_influences_decision():
 
 
 # ===========================================================================
-# LIVE: real Serum/DawDreamer execution
+# LIVE: real resolution + admission against the fresh 4.Q contract store
+# (pure Python — no Serum instance, no DawDreamer package required; actually
+# loading/reading back Serum is an orchestrating-agent action, see
+# producer_brain.py's module docstring)
 # ===========================================================================
 
-@LIVE
 @REQUIRES_STORE
 def test_live_full_pipeline_release():
-    """TEST 1 (Phase N): full pipeline — knowledge → intent → Serum → episode."""
+    """TEST 1 (Phase N): full pipeline — knowledge → intent → admitted Serum plan."""
     from serum2.producer.producer_brain import execute_producer_request, ProducerRequest
 
     req = ProducerRequest(user_intent="make the note sustain longer")
@@ -222,23 +217,31 @@ def test_live_full_pipeline_release():
     # Route decided
     assert result.execution_route is not None
 
-    # If DawDreamer path succeeded, verify measurements
-    if result.execution_status == "EXECUTED":
+    # The canonical Serum route stops at a plan — real execution requires
+    # an orchestrating agent to run serum-mcp + read the real Serum UI and
+    # feed that back via finalize_serum_preset_execution(). This test only
+    # exercises resolution+admission, so EXECUTED should never appear here.
+    assert result.execution_status != "EXECUTED", (
+        "execute_producer_request() alone must never report EXECUTED for "
+        "the Serum route — only finalize_serum_preset_execution() may, "
+        "after real orchestrator-fed evidence"
+    )
+    if result.execution_status == "SERUM_PRESET_PLAN_READY":
         assert result.admitted is True
-        assert result.baseline_db is not None
-        assert result.treatment_db is not None
-        assert result.delta_db is not None
-        assert result.episode_id is not None
-        print("[LIVE] delta=%.2f dB episode=%s" % (result.delta_db, result.episode_id))
+        plan = getattr(result, "_serum_preset_plan", None)
+        assert plan is not None
+        assert plan["mutation_target_path"]
+        print("[LIVE] admitted plan target=%r value=%r" % (
+            plan["mutation_target_path"], plan["mutation_value_used"]
+        ))
     else:
         # May refuse if no valid contract in current environment
         assert result.execution_status in (
             "REFUSED_RESOLUTION_FAILED", "REFUSED_ADMISSION",
-            "REFUSED_NO_CONTRACT", "EXECUTION_ERROR",
+            "REFUSED_NO_CONTRACT", "REFUSED_AUTHORITY",
         ), "Unexpected status: %s (%s)" % (result.execution_status, result.error)
 
 
-@LIVE
 @REQUIRES_STORE
 def test_live_second_run_episode_retrieval():
     """TEST 2 (Phase N): second request retrieves prior episode and changes confidence."""
@@ -273,15 +276,14 @@ def test_live_second_run_episode_retrieval():
     ))
 
 
-@LIVE
 def test_live_mcp_path_filter_cutoff():
     """TEST 3 (Phase N): Filter.Cutoff intent routes via MCP or refuses explicitly.
 
     filter-cutoff is not in UNIVERSAL_TO_SEMANTIC so the brain refuses with
     REFUSED_NO_MAPPING before reaching route selection. This is correct
-    architecture: no DawDreamer contract + no UNIVERSAL_TO_SEMANTIC entry
-    = explicit refusal, not a guess. The test verifies that Filter.Cutoff
-    requests are handled explicitly, not silently substituted.
+    architecture: no admitted Serum contract + no UNIVERSAL_TO_SEMANTIC
+    entry = explicit refusal, not a guess. The test verifies that
+    Filter.Cutoff requests are handled explicitly, not silently substituted.
     """
     from serum2.producer.producer_brain import execute_producer_request, ProducerRequest
 

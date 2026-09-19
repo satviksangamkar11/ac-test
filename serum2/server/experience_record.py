@@ -102,6 +102,9 @@ class AcousticMeasurementRecord:
     rms_db: Optional[float] = None
     peak_db: Optional[float] = None
     spectral_centroid_hz: Optional[float] = None
+    measurement_definition_id: Optional[str] = None
+    kernel_version: Optional[str] = None
+    channel_policy: Optional[str] = None
     stage: str = EvidenceStage.SPECIFIED.value
 
     def to_dict(self) -> Dict[str, Any]:
@@ -154,13 +157,21 @@ class ProductionExperienceRecord:
     render_artifact: Optional[Dict[str, Any]] = None
     acoustic_measurements: Optional[Dict[str, Any]] = None
 
-    # ---- outcome / feedback / reflection ----
+    # ---- visual evidence (VLP-1) ----
+    visual_evidence: Optional[Dict[str, Any]] = None
+    """Serialized VisualEvidenceBundle when the visual path was triggered.
+    Contains frames (with hashes/timestamps), observations (observed facts),
+    interpretations (inferred production meaning), and model_metadata.
+    None when transcript was sufficient or visual_mode == 'NEVER'."""
+
+    transcript_sufficiency: Optional[Dict[str, Any]] = None
+    """TranscriptSufficiency check result: status, reason, evidence_item_count.
+    Explains WHY the visual path was or was not triggered."""
+
+    # ---- outcome / feedback ----
     outcome: Optional[Dict[str, Any]] = None
     user_feedback: Optional[Dict[str, Any]] = None
     """None until a human/agent supplies it. Not populated by this phase."""
-    reflection: Optional[Dict[str, Any]] = None
-    """None — Phase P5 (reflection learner). Field exists now so P5 needs no
-    schema migration; no code in this phase writes to it."""
 
     # ---- provenance ----
     provenance: Dict[str, Any] = field(default_factory=dict)
@@ -220,6 +231,13 @@ def create_initial(run, brain_result=None) -> ProductionExperienceRecord:
             k.knowledge_item_id for k in getattr(brain_result, "retrieved_knowledge", []) or []
         ]
 
+    visual_evidence = None
+    transcript_sufficiency = None
+    if brain_result is not None:
+        visual_evidence = getattr(brain_result, "visual_evidence", None)
+        if visual_evidence and isinstance(visual_evidence, dict):
+            transcript_sufficiency = visual_evidence.get("transcript_sufficiency")
+
     record = ProductionExperienceRecord(
         experience_id=f"exp_{run.run_id}",
         run_id=run.run_id,
@@ -240,6 +258,8 @@ def create_initial(run, brain_result=None) -> ProductionExperienceRecord:
         brain_decision=brain_decision,
         retrieved_knowledge_ids=retrieved_knowledge_ids,
         retrieved_episode_ids=retrieved_episode_ids,
+        visual_evidence=visual_evidence,
+        transcript_sufficiency=transcript_sufficiency,
         provenance={
             "source_id": "production_pipeline._resolve_transcript",
             "source_url": "state_machine.ProductionRun.youtube_url",
