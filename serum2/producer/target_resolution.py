@@ -123,25 +123,37 @@ class TargetResolver:
                 REFUSED_UNRESOLVED_REFERENCE, LAYER_REFERENCE, None,
                 "No canonical identity for %r in the reference Atlas." % surface))
         cid = r.canonical_id
+
+        # U1 RESTRUCTURING: Canonical Brain concept derivation is INDEPENDENT of registry.
+        # Always derive a canonical concept from canonical_id, then optionally enrich with
+        # registry associations (for capability_key and legacy concept mappings).
+        # Missing registry entry ≠ missing brain concept; both are valid outcomes.
+
+        # ALWAYS establish a canonical concept from the canonical_id alone
+        concept = "canonical:" + normalize_target_name(cid)
+
+        # OPTIONALLY look up existing registry associations (capability, legacy mappings)
         names = self._by_key.get(normalize_target_name(cid), [])
-        if len(names) != 1:
-            why = ("no Brain-side target is registered for it" if not names
-                   else "several Brain-side targets %s match it" % names)
-            return TargetResolution(surface, Refusal(
-                REFUSED_NO_BRAIN_CONCEPT, LAYER_BRAIN, cid,
-                "Canonical target %r resolved, but no Brain concept exists (%s)." % (cid, why)), canonical_id=cid)
-        target = names[0]
-        ref = self._targets.get(target)
-        cap = getattr(ref, "capability_key", None)
-        concept = self._legacy_concept_by_cap.get(cap) or self._mcp_concept_by_target.get(target)
+        target = names[0] if len(names) == 1 else None
+        ref = self._targets.get(target) if target else None
+        cap = getattr(ref, "capability_key", None) if ref else None
+
+        # Check for legacy/hand-written concept override (if registered)
+        legacy_concept = self._legacy_concept_by_cap.get(cap) if cap else None
+        mcp_concept = self._mcp_concept_by_target.get(target) if target else None
+        if legacy_concept or mcp_concept:
+            concept = legacy_concept or mcp_concept
+
+        # Check for contract attachment (optional; missing contract does not block this layer)
         mapping = None
-        if concept is None:
-            concept = "canonical:" + normalize_target_name(target)
-            contract = self._contracts.contracts.get(cap) if cap else None
-            if contract is not None and contract.usable_for(required_causal=True):
-                mapping = self._factory(
-                    universal_concept=concept, semantic_target=cap, confidence=1.0,
-                    rationale="derived from SEMANTIC_TARGETS + a CAUSAL_VERIFIED contract; not a hand-written mapping")
+        contract = self._contracts.contracts.get(cap) if cap else None
+        if contract is not None and contract.usable_for(required_causal=True):
+            mapping = self._factory(
+                universal_concept=concept, semantic_target=cap, confidence=1.0,
+                rationale="derived from SEMANTIC_TARGETS + a CAUSAL_VERIFIED contract; not a hand-written mapping")
+
+        # Return SUCCESS: canonical concept always established.
+        # Capability Resolution layer later checks whether contract exists (if cap is set).
         return TargetResolution(surface, None, cid, target, cap, concept, mapping)
 
     # -- public --------------------------------------------------------------------------------
