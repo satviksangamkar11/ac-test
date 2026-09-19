@@ -1,0 +1,76 @@
+{
+  "semantic_target": "OSC2.Enable",
+  "capability_key": "oscillator_field_OSC2-ENABLE",
+  "phase": "3B.4",
+  "experiment": "Live Serum 2.0.21 verification",
+  "verified_at": "2026-09-20T01:38:00Z",
+  "ableton_version": "12.3",
+  "fixture_preset": "VLP1-Phase3B-OSC2Enable-Test.SerumPreset",
+  "fixture_preset_sha256_at_qualification": "C4A872A13F25F85C2C4D522B27A88E0FE98DF0028EDFBBF84E97EB6C08BFC7BB",
+  "experiment_steps": [
+    {
+      "step": 1,
+      "action": "User manually loaded VLP1-Phase3B-OSC2Enable-Test.SerumPreset into Serum 2.0.21 on Ableton track 0",
+      "result": "Preset loaded; preset name bar shows 'VLP1-Phase3B-OSC2Enable-Test', ARTIST: serum-mcp"
+    },
+    {
+      "step": 2,
+      "action": "Screenshot of OSC strip (OSC tab view)",
+      "result": "OSC A: green dot (ON). OSC B: grey dot (OFF). OSC C: grey dot (OFF)."
+    },
+    {
+      "step": 3,
+      "action": "Screenshot of MIX view channel strip",
+      "result": "OSC A: yellow/lit indicator (ON). OSC B: grey dot (OFF). OSC C, NOISE, FILTER 1, FILTER 2: all grey (OFF)."
+    },
+    {
+      "step": 4,
+      "action": "Comparison: INTENDED vs ACTUAL",
+      "intended": "oscillators[1].enabled = False  (from serum-mcp STRUCTURAL_VERIFIED qualification, Phase 3B.3)",
+      "actual": "OSC B Enable = OFF  (observed in live Serum 2.0.21 UI after loading fixture)",
+      "match": true
+    },
+    {
+      "step": 5,
+      "action": "Verify OSC A unaffected",
+      "intended": "oscillators[0].enabled = True  (baseline fixture had Osc A enabled)",
+      "actual": "OSC A = ON  (green/lit indicator in both OSC strip and MIX view)",
+      "match": true
+    }
+  ],
+  "observation": {
+    "osc_b_enable_state": "OFF",
+    "osc_a_enable_state": "ON",
+    "osc_a_unaffected": true,
+    "preset_name_confirmed": "VLP1-Phase3B-OSC2Enable-Test",
+    "artist_field_confirmed": "serum-mcp",
+    "evidence_type": "direct_ui_observation",
+    "ui_view": "OSC strip + MIX view channel strip, Serum 2.0.21 in Ableton Live 12.3"
+  },
+  "conclusion": {
+    "structural_to_plugin_state_demonstrated": true,
+    "statement": "The preset-execution surface mutation (oscillators[1].enabled=False, written by serum-mcp and FILE_VERIFIED in Phase 3B.3) is reflected in real Serum 2.0.21's OSC B Enable control after loading the fixture into Ableton. The structural preset state propagated correctly to the live plugin's UI state.",
+    "tier": "UI_VERIFIED",
+    "causal_verified": false,
+    "causal_note": "No audio render or measurement was performed. UI state matches structural intent. CAUSAL_VERIFIED requires a separate audio-domain measurement step not performed here."
+  },
+  "evidence_chain": {
+    "layer_1_vst3_reference": {
+      "route_type": "VST3_HOST_PARAMETER",
+      "binding": "B Enable",
+      "source": "SERUM2_SEMANTIC_INVENTORY_FINAL.json (MIXER.OSC_B.ENABLE)",
+      "status": "REFERENCE_ONLY"
+    },
+    "layer_2_preset_structural": {
+      "route_type": "SERUM_PRESET_STRUCTURAL_BINDING",
+      "field_path": "oscillators[1].enabled",
+      "source": "serum-mcp PresetSpec.OscillatorSpec.enabled",
+      "status": "STRUCTURAL_VERIFIED (Phase 3B.3)"
+    },
+    "layer_3_live_plugin": {
+      "route_type": "LIVE_PLUGIN_UI_OBSERVATION",
+      "observation": "OSC B Enable = OFF in Serum 2.0.21 UI after loading fixture",
+      "status": "UI_VERIFIED (Phase 3B.4)"
+    }
+  }
+}
