@@ -14,13 +14,13 @@ This backend:
 The backend is non-authoritative: it records observations only.
 Admission and capability authority remain unchanged.
 
-NOTE: Phase 3B.1 (this file) implements the skeleton and preset I/O.
-      Phase 3B.2 (future) integrates real serum-mcp parameter read/write.
+NOTE: Phase 3B.2 integrates real serum-mcp parameter read/write.
+      No fallback to stubs. Explicit failure if adapter missing.
 """
 from __future__ import annotations
 
 import tempfile
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Mapping, Optional
 
@@ -31,6 +31,7 @@ from serum2.producer.batch_qualification_system import (
     StructuralQualificationBackend,
     RouteType,
 )
+from serum2.producer.serum_mcp_adapter import SerumMCPAdapter
 
 
 @dataclass
@@ -38,21 +39,32 @@ class SerumBackendConfig:
     """Configuration for Serum structural backend."""
     reference_preset_path: Optional[str] = None  # User preset or None for minimal seed
     work_dir: Optional[str] = None  # Temp dir for load/save cycles
-    serum_mcp_client: Optional[Any] = None  # serum-mcp client instance
+    adapter: Optional[SerumMCPAdapter] = None  # REQUIRED: real adapter (Phase 3B.2+)
 
 
 class SerumStructuralBackend:
     """Real structural qualification backend for Serum 2.0.21 presets.
 
     Cycle: load → read → mutate → read → persist → reload → read
+
+    REQUIRES real SerumMCPAdapter. Does NOT fall back to stubs.
+    Raises explicit error if adapter is missing.
     """
 
     def __init__(self, config: Optional[SerumBackendConfig] = None):
         self._config = config or SerumBackendConfig()
+
+        # Phase 3B.2: require real adapter, no stubs allowed
+        if not self._config.adapter:
+            raise ValueError(
+                "SerumStructuralBackend requires config.adapter (SerumMCPAdapter). "
+                "No stubs allowed for production qualification."
+            )
+
+        self._adapter = self._config.adapter
         self._work_dir = Path(self._config.work_dir or tempfile.gettempdir())
         self._current_preset: Optional[tuple] = None  # (meta, body)
         self._preset_path: Optional[Path] = None
-        self._mcp = self._config.serum_mcp_client
 
     def _get_reference_preset(self) -> tuple:
         """Load reference preset or return minimal seed."""
@@ -85,71 +97,74 @@ class SerumStructuralBackend:
         }
 
     def read(self, candidate: BindingCandidate) -> Any:
-        """Read current parameter value.
+        """Read current parameter value via real adapter.
 
-        For VST3_HOST_PARAMETER route: use serum-mcp to read parameter.
-        For SERUM_BODY_STATE route: read from preset body.
+        For VST3_HOST_PARAMETER: use adapter.read_parameter()
+        For SERUM_BODY_STATE: read from preset body (TODO Phase 3B.3)
 
-        Returns: observed value (type depends on parameter)
+        Returns: observed value (actual from Serum 2.0.21, never stub)
 
-        NOTE: Phase 3B.2 integrates real serum-mcp. For now, returns stubs.
+        Raises: RuntimeError if adapter fails or route unsupported
         """
         if candidate.route_type == RouteType.VST3_HOST_PARAMETER:
-            # Use serum-mcp to read VST3 parameter
             param_name = candidate.binding.host_parameter_name if candidate.binding else None
             if not param_name:
-                return {"error": "No parameter name in binding"}
+                raise ValueError("No parameter name in binding")
 
-            # TODO Phase 3B.2: Call serum-mcp to read actual parameter value
-            return {"parameter": param_name, "value": None, "status": "STUB"}
+            # Phase 3B.2: use real adapter, no stubs
+            try:
+                value = self._adapter.read_parameter(param_name)
+                return {"parameter": param_name, "value": value, "status": "READ"}
+            except Exception as e:
+                raise RuntimeError(f"Failed to read parameter '{param_name}': {e}")
 
         elif candidate.route_type == RouteType.SERUM_BODY_STATE:
-            # Read from preset body (JSON path)
             body_path = candidate.binding.body_path if candidate.binding else None
             if not body_path or not self._current_preset:
-                return {"error": "No body path or preset loaded"}
+                raise ValueError("No body path or preset loaded")
 
-            # TODO Phase 3B.2: Traverse body_path in preset body
-            return {"body_path": body_path, "value": None, "status": "STUB"}
+            # TODO Phase 3B.3: Traverse body_path in preset body
+            raise NotImplementedError("SERUM_BODY_STATE read not yet implemented")
 
-        return {"error": f"Unsupported route type: {candidate.route_type}"}
+        raise ValueError(f"Unsupported route type: {candidate.route_type}")
 
     def mutate(self, candidate: BindingCandidate, mutation: MutationSpec) -> Mapping[str, Any]:
-        """Mutate target to treatment value.
+        """Mutate target to treatment value via real adapter.
 
-        For VST3_HOST_PARAMETER: use serum-mcp to set parameter.
-        For SERUM_BODY_STATE: update preset body JSON.
+        For VST3_HOST_PARAMETER: use adapter.set_parameter()
+        For SERUM_BODY_STATE: update preset body (TODO Phase 3B.3)
 
-        Returns: {status, parameter, value_set, error?}
+        Returns: {status, parameter, value_set, adapter_evidence, ...}
 
-        NOTE: Phase 3B.2 integrates real serum-mcp. For now, returns stubs.
+        Raises: RuntimeError if adapter fails or route unsupported
         """
         if candidate.route_type == RouteType.VST3_HOST_PARAMETER:
             param_name = candidate.binding.host_parameter_name if candidate.binding else None
             if not param_name:
-                return {"error": "No parameter name in binding"}
+                raise ValueError("No parameter name in binding")
 
-            # TODO Phase 3B.2: Call serum-mcp to set actual parameter value
-            return {
-                "status": "MUTATED",
-                "parameter": param_name,
-                "value_set": mutation.value,
-                "operation": mutation.operation,
-            }
+            # Phase 3B.2: use real adapter to set parameter, no stubs
+            try:
+                evidence = self._adapter.set_parameter(param_name, mutation.value)
+                return {
+                    "status": "MUTATED",
+                    "parameter": param_name,
+                    "value_set": mutation.value,
+                    "operation": mutation.operation,
+                    "adapter_evidence": evidence,
+                }
+            except Exception as e:
+                raise RuntimeError(f"Failed to set parameter '{param_name}' to {mutation.value}: {e}")
 
         elif candidate.route_type == RouteType.SERUM_BODY_STATE:
             body_path = candidate.binding.body_path if candidate.binding else None
             if not body_path or not self._current_preset:
-                return {"error": "No body path or preset loaded"}
+                raise ValueError("No body path or preset loaded")
 
-            # TODO Phase 3B.2: Update preset body at body_path
-            return {
-                "status": "MUTATED",
-                "body_path": body_path,
-                "value_set": mutation.value,
-            }
+            # TODO Phase 3B.3: Update preset body at body_path
+            raise NotImplementedError("SERUM_BODY_STATE mutate not yet implemented")
 
-        return {"error": f"Unsupported route type: {candidate.route_type}"}
+        raise ValueError(f"Unsupported route type: {candidate.route_type}")
 
     def persist(self, candidate: BindingCandidate) -> Mapping[str, Any]:
         """Save preset to disk.
