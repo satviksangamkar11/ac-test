@@ -63,6 +63,7 @@ class UniversalProductionIntent:
         return {
             "canonical_target": self.canonical_target,
             "overall_confidence": self.overall_confidence,
+            "capability_key": self.capability_key,
             "representation": self.representation.to_dict(),
             "operation": self.operation.to_dict(),
             "context": {
@@ -136,6 +137,7 @@ class IntentFormationEngine:
             overall_confidence=overall,
             derivation_trace=trace,
             input_request=input_request,
+            capability_key=representation.capability_key,
         )
 
         return intent

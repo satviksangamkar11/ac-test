@@ -106,30 +106,29 @@ class OperationInterpreter:
         chain = [f"interpret(phrase={phrase!r}, op_type={operation_type})"]
         phrase_lower = phrase.lower().strip()
 
+        if operation_type == "enum":
+            enum_match = self._extract_enum_selection(phrase_lower)
+            if enum_match:
+                value, extracted = enum_match
+                chain.append(f"enum_match(contract is enum): {extracted!r}")
+                return OperationSpec(operation=OperationType.ENUM_SELECT, target_value=value, base_phrase=phrase,
+                                     certainty=0.75, interpretation_chain=chain)
+
         # Try to extract numeric value (e.g., "to 100ms", "= 50", "at 200")
         numeric_match = self._extract_numeric_value(phrase_lower)
         if numeric_match:
             value, unit, extracted = numeric_match
             chain.append(f"numeric_match: {extracted} → value={value}, unit={unit}")
+            words = self._tokenize(phrase_lower)
+            inc = sum(1 for t in words if t in self._INCREASE_WORDS)
+            dec = sum(1 for t in words if t in self._DECREASE_WORDS)
             return OperationSpec(
                 operation=OperationType.NUMERIC_SET,
                 target_value=value,
+                direction="increase" if inc > dec else ("decrease" if dec > inc else None),
                 unit=unit,
                 base_phrase=phrase,
                 certainty=0.90,
-                interpretation_chain=chain,
-            )
-
-        # Try to extract enum selection (e.g., "to Band 24", "select BP12")
-        enum_match = self._extract_enum_selection(phrase_lower)
-        if enum_match:
-            value, extracted = enum_match
-            chain.append(f"enum_match: {extracted} → value={value}")
-            return OperationSpec(
-                operation=OperationType.ENUM_SELECT,
-                target_value=value,
-                base_phrase=phrase,
-                certainty=0.75,
                 interpretation_chain=chain,
             )
 
@@ -219,7 +218,7 @@ class OperationInterpreter:
         Matches patterns like: "to 100ms", "= 50", "at 200 hz", "shorter 100"
         """
         # Pattern: (to|at|=|shorter|longer) <number> <optional_unit>
-        pattern = r"(?:to|at|=|shorter|longer|by)?\s*(-?[\d.]+)\s*(ms|s|hz|khz|db|%|cents)?"
+        pattern = r"(?<![A-Za-z0-9_.])(-?\d+(?:\.\d+)?)\s*(ms|s|hz|khz|db|%|cents)?(?![A-Za-z0-9_])"
         match = re.search(pattern, phrase, re.IGNORECASE)
 
         if match:
@@ -241,27 +240,11 @@ class OperationInterpreter:
         return None
 
     def _extract_enum_selection(self, phrase: str) -> Optional[tuple[str, str]]:
-        """Try to extract an enum value selection.
-
-        Matches patterns like: "to Band 24", "select BP12", "choose sine"
-        """
-        # Very conservative: only recognize known enum patterns
-        known_enums = {
-            "sine": ["sine", "sine wave"],
-            "triangle": ["triangle", "tri"],
-            "square": ["square"],
-            "sawtooth": ["sawtooth", "saw"],
-            "bp12": ["band 24", "bp12", "bandpass 12"],
-            "lp12": ["low 12", "lp12", "lowpass 12"],
-            "hp12": ["high 12", "hp12", "highpass 12"],
-            "remap": ["remap"],
-        }
-
-        for canonical, aliases in known_enums.items():
-            for alias in aliases:
-                if alias in phrase:
-                    return canonical, alias
-
+        """Enum value = the raw text after 'to' / 'select' / 'choose'. No value vocabulary lives here;
+        validity is the capability contract's business."""
+        m = re.search(r"(?:^|\s)(?:to|select|choose|as)\s+(.+)$", phrase)
+        if m and m.group(1).strip():
+            return m.group(1).strip(), m.group(0)
         return None
 
     def _tokenize(self, text: str) -> list[str]:

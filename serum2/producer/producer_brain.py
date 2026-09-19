@@ -69,6 +69,10 @@ from serum2.producer.target_resolution import (
     TargetResolver, Refusal, LEGACY_STATUS_TO_REFUSAL, REFUSED_UNCLASSIFIED, LAYER_UNKNOWN,
 )
 from serum2.compiler.mcp_intent import parse_intent, MCP_HOST_MAP
+from serum2.producer.concept_representation import ConceptDerivationEngine
+from serum2.producer.operation_spec import OperationInterpreter
+from serum2.producer.request_context import ContextExtractor
+from serum2.producer.universal_intent import IntentFormationEngine
 
 
 # ---- Step 6 frozen layers (imports must live here, never patched) --------
@@ -327,6 +331,9 @@ class ProducerResult:
 
     # ---- reasoning (advisory) ----
     resolved_concept: Optional[str] = None
+    # B1 provenance: which brain produced the concept. B1_CANONICAL | LEGACY | REFUSED (never mixed).
+    resolution_mode: Optional[str] = None
+    b1_intent: Optional[Dict[str, Any]] = None
     semantic_direction: Optional[str] = None
     candidate_operations: List[str] = field(default_factory=list)
     selected_operation: Optional[str] = None
@@ -430,6 +437,12 @@ class ProducerBrain:
         self._target_resolver = TargetResolver(
             self._registry, SEMANTIC_TARGETS, MCP_HOST_MAP, UNIVERSAL_TO_SEMANTIC,
             _MCP_CONCEPT_BRIDGE, SemanticTargetMapping)
+        # B1 consumes the resolver's result; it owns no target/contract table.
+        self._b1_derivation = ConceptDerivationEngine(
+            self._registry, SEMANTIC_TARGETS, MCP_HOST_MAP, target_resolver=self._target_resolver)
+        self._b1_operation = OperationInterpreter()
+        self._b1_context = ContextExtractor()
+        self._b1_intent = IntentFormationEngine()
 
     # ------------------------------------------------------------------
     # 1. KNOWLEDGE RETRIEVAL (Phase B)
@@ -1273,6 +1286,34 @@ class ProducerBrain:
             return SemanticDirection.INCREASE
         return _direction_from_words(text)
 
+    def _record_resolution(self, result, request, direction, refusal, explicit):
+        """Label which brain produced the concept and, on the canonical path, run B1.
+
+        explicit is the TargetResolver result. With an explicit canonical target B1 forms the
+        UniversalProductionIntent from it (B1 never re-resolves the target). Without one, the concept
+        came from the LEGACY natural-language table and B1 was NOT used. B1 has no execution authority:
+        the intent it forms goes on to Capability Resolution and Admission unchanged."""
+        if explicit is None:
+            result.resolution_mode = "LEGACY"
+            result.b1_intent = {"resolution_mode": "LEGACY", "brain_source": "_INTENT_TO_CONCEPT", "b1_used": False}
+            return direction
+        if refusal is not None:
+            result.resolution_mode = "REFUSED"
+            result.b1_intent = {"resolution_mode": "REFUSED", "b1_used": False, "refusal_code": refusal.code}
+            return direction
+        rep = self._b1_derivation.derive_from_resolution(explicit)
+        hint = rep.operation_type if rep.operation_type in ("numeric", "enum", "toggle") else None
+        op = self._b1_operation.interpret(request.user_intent, hint)
+        ctx = self._b1_context.extract(request.user_intent, request.semantic_target)
+        intent = self._b1_intent.form_intent(rep.canonical_target, rep, op, ctx, input_request=request)
+        result.resolution_mode = "B1_CANONICAL"
+        result.b1_intent = dict(intent.to_dict(), resolution_mode="B1_CANONICAL", b1_used=True)
+        if op.direction == "decrease":
+            return SemanticDirection.SHORTER
+        if op.direction == "increase":
+            return SemanticDirection.LONGER
+        return direction
+
     def _mapping_for(self, concept: str):
         from serum2.knowledge.step_6_6_capability_resolution import UNIVERSAL_TO_SEMANTIC
         return UNIVERSAL_TO_SEMANTIC.get(concept) or self._derived_mappings.get(concept)
@@ -1441,6 +1482,7 @@ class ProducerBrain:
 
             # ---- resolve intent to concept ----
             concept, direction, refusal, explicit = self._resolve_concept(request)
+            direction = self._record_resolution(result, request, direction, refusal, explicit)
             result.resolved_concept = concept
             result.semantic_direction = direction.value if direction else None
 
@@ -1452,7 +1494,7 @@ class ProducerBrain:
             if concept is None:
                 result.error = (
                     "No semantic concept resolved from intent %r. "
-                    "Extend _INTENT_TO_CONCEPT or supply request.semantic_target." % request.user_intent
+                    "Supply an explicit canonical target (request.semantic_target)." % request.user_intent
                 )
                 result.execution_status = "REFUSED_UNKNOWN_CONCEPT"
                 return result
@@ -1594,6 +1636,7 @@ class ProducerBrain:
           6. Classify: RECREATED / PARTIALLY_RECREATED / BLOCKED / INSUFFICIENT_EVIDENCE
         """
         concept, direction, refusal, _explicit = self._resolve_concept(request)
+        direction = self._record_resolution(result, request, direction, refusal, _explicit)
         result.resolved_concept = concept
         result.semantic_direction = direction.value if direction else None
 
