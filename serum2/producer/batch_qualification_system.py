@@ -1,232 +1,522 @@
-"""Phase 3: Batch Qualification System.
+"""Generic Phase-3 capability qualification infrastructure.
 
-Three generic, reusable pieces:
-
-1. BindingCandidate — common structure for any verified binding
-2. StructuralQualificationRunner — generic load/mutate/readback/persist cycle
-3. QualificationPlanner — auto-classify 255 targets into action buckets
-
-Batch by operation family (TOGGLE, NUMERIC, ENUM, BODY_STATE, STRUCTURED).
-No target-specific code. Reusable for 1 or 234 targets.
+The planner joins existing Atlas/Brain/contract/binding data. It contains no
+target->binding dictionary. The runner is backend-agnostic: the orchestrator
+supplies the real execution/evidence adapter (serum-mcp/UI/etc.).
 """
 from __future__ import annotations
 
+import json
 from dataclasses import dataclass, field
-from typing import Dict, List, Optional, Set, Tuple
 from enum import Enum
 from pathlib import Path
-import sys
+from typing import Any, Callable, Dict, List, Mapping, Optional, Protocol, Tuple
 
-ROOT = Path(__file__).resolve().parents[3]
-sys.path.insert(0, str(ROOT))
+from serum2.evidence.capability_contract import (
+    BLOCKED_CONTRADICTED,
+    CAUSAL_VERIFIED,
+    NEGATIVE_EVIDENCE,
+    STRUCTURAL_ONLY,
+    UNSUPPORTED,
+    ExecutionBinding,
+)
 
-from serum2.compiler.targets import SEMANTIC_TARGETS
-from serum2.producer.route_classifier import ExecutionRoute, RouteClassifier
-
-
-class OperationFamily(Enum):
-    """Batch grouping by operation type."""
-    TOGGLE = "toggle"              # OSC enable, filter enable, mute
-    NUMERIC = "numeric"            # Attack, decay, cutoff, rate
-    ENUM = "enum"                  # Filter type, oscillator mode
-    BODY_STATE = "body_state"      # Direct preset-body field
-    STRUCTURED = "structured"      # Matrix routing, topology
-    UNKNOWN = "unknown"
+ROOT = Path(__file__).resolve().parents[2]
+QUALIFICATION_DIR = ROOT / "serum2" / "qualification"
 
 
-class QualificationStatus(Enum):
-    """Where each target is in the qualification pipeline."""
-    READY_FOR_STRUCTURAL = "ready_for_structural"      # Verified binding, can qualify
-    NEEDS_BINDING = "needs_binding"                    # No binding discovered yet
-    NEEDS_CAUSAL = "needs_causal"                      # Structural done, needs audio proof
-    ALREADY_VERIFIED = "already_verified"              # Contract exists
-    BLOCKED = "blocked"                                # Conflict or ambiguity
+class RouteType(str, Enum):
+    VST3_HOST_PARAMETER = "VST3_HOST_PARAMETER"
+    SERUM_BODY_STATE = "SERUM_BODY_STATE"
+    STRUCTURED_OPERATION = "STRUCTURED_OPERATION"
+    UNBOUND = "UNBOUND"
 
 
-@dataclass
+class OperationFamily(str, Enum):
+    TOGGLE = "TOGGLE"
+    NUMERIC = "NUMERIC"
+    ENUM = "ENUM"
+    BODY_STATE = "BODY_STATE"
+    STRUCTURED = "STRUCTURED"
+
+
+class QualificationBucket(str, Enum):
+    ALREADY_VERIFIED = "ALREADY_VERIFIED"
+    READY_FOR_STRUCTURAL = "READY_FOR_STRUCTURAL"
+    NEEDS_BINDING = "NEEDS_BINDING"
+    NEEDS_CAUSAL = "NEEDS_CAUSAL"
+    BLOCKED = "BLOCKED"
+
+
+@dataclass(frozen=True)
 class BindingCandidate:
-    """Common structure for any verified binding."""
+    """A binding from an authoritative source, or an explicitly unverified candidate."""
 
-    # Identity
-    atlas_target: str                       # e.g., "env2.decay"
-    semantic_target: Optional[str]          # from SEMANTIC_TARGETS
-    capability_key: Optional[str]           # the semantic target's key
-
-    # Binding
-    route_type: ExecutionRoute
-    binding: str                            # e.g., "B Enable" or "Envelope1.plainParams.kParamDecay"
-    binding_source: str                     # "vst3_mapping", "body_state_mapping", "discovered"
-
-    # Execution metadata
-    operation_family: OperationFamily       # TOGGLE, NUMERIC, ENUM, etc.
-    operation_type: str                     # e.g., "mutate_numeric_value", "mutate_enum_value"
-
-    # Quality
-    confidence: float                       # 0.0-1.0 (1.0 = verified, <1.0 = candidate)
-    rationale: str                          # why we believe this binding is correct
-
-    # Evidence
-    existing_contract: Optional[str] = None # if contract already exists, its status
+    target: str
+    capability_key: Optional[str]
+    route_type: RouteType
+    binding: Optional[ExecutionBinding]
+    operation_family: OperationFamily
+    provenance: str
+    confidence: float = 0.0
+    verified: bool = False
+    evidence_ref: Optional[str] = None
+    reason: str = ""
 
     def is_verified(self) -> bool:
-        """Binding is verified for qualification (confidence >= threshold)."""
-        return self.confidence >= 0.95
+        if not self.verified or self.binding is None or not self.capability_key:
+            return False
+        if self.route_type == RouteType.VST3_HOST_PARAMETER:
+            return bool(self.binding.host_parameter_name)
+        if self.route_type == RouteType.SERUM_BODY_STATE:
+            return bool(self.binding.body_path or self.binding.resolver_operation_id)
+        if self.route_type == RouteType.STRUCTURED_OPERATION:
+            return bool(self.binding.resolver_operation_id)
+        return False
+
+
+@dataclass(frozen=True)
+class TargetQualification:
+    target: str
+    capability_key: Optional[str]
+    control_type: Optional[str]
+    operation_family: OperationFamily
+    candidate: BindingCandidate
+    bucket: QualificationBucket
+    contract_status: Optional[str]
+    brain_registered: bool
+    reason: str = ""
 
 
 @dataclass
 class QualificationPlan:
-    """Automatic plan for all 255 targets."""
+    all_targets: List[TargetQualification] = field(default_factory=list)
+    already_verified: List[TargetQualification] = field(default_factory=list)
+    ready_for_structural: List[TargetQualification] = field(default_factory=list)
+    needs_binding: List[TargetQualification] = field(default_factory=list)
+    needs_causal: List[TargetQualification] = field(default_factory=list)
+    blocked: List[TargetQualification] = field(default_factory=list)
 
-    # Bucketed targets
-    ready_for_structural: List[BindingCandidate] = field(default_factory=list)
-    needs_binding: List[str] = field(default_factory=list)  # atlas_target names
-    needs_causal: List[str] = field(default_factory=list)   # atlas_target names
-    already_verified: List[str] = field(default_factory=list)
-    blocked: List[Tuple[str, str]] = field(default_factory=list)  # (target, reason)
+    @property
+    def total(self) -> int:
+        return len(self.all_targets)
 
-    # Grouped by operation family for batching
-    by_operation_family: Dict[OperationFamily, List[BindingCandidate]] = field(default_factory=dict)
+    def counts(self) -> Dict[str, int]:
+        return {
+            "ALREADY_VERIFIED": len(self.already_verified),
+            "READY_FOR_STRUCTURAL": len(self.ready_for_structural),
+            "NEEDS_BINDING": len(self.needs_binding),
+            "NEEDS_CAUSAL": len(self.needs_causal),
+            "BLOCKED": len(self.blocked),
+            "TOTAL": self.total,
+        }
+
+
+@dataclass(frozen=True)
+class MutationSpec:
+    target: str
+    value: Any
+    operation: str
+    note: str = ""
+
+
+@dataclass(frozen=True)
+class StructuralQualificationResult:
+    target: str
+    capability_key: Optional[str]
+    status: str
+    refusal_code: Optional[str]
+    operation_family: OperationFamily
+    route_type: RouteType
+    binding: Optional[Dict[str, Any]]
+    baseline: Any = None
+    after_mutation: Any = None
+    persisted: Any = None
+    after_reload: Any = None
+    state_changed: bool = False
+    persistence_verified: bool = False
+    trace: Tuple[str, ...] = ()
+    backend_evidence: Mapping[str, Any] = field(default_factory=dict)
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "target": self.target,
+            "capability_key": self.capability_key,
+            "status": self.status,
+            "refusal_code": self.refusal_code,
+            "operation_family": self.operation_family.value,
+            "route_type": self.route_type.value,
+            "binding": self.binding,
+            "baseline": self.baseline,
+            "after_mutation": self.after_mutation,
+            "persisted": self.persisted,
+            "after_reload": self.after_reload,
+            "state_changed": self.state_changed,
+            "persistence_verified": self.persistence_verified,
+            "trace": list(self.trace),
+            "backend_evidence": dict(self.backend_evidence),
+        }
+
+
+class StructuralQualificationBackend(Protocol):
+    def load(self, candidate: BindingCandidate) -> Mapping[str, Any]: ...
+    def read(self, candidate: BindingCandidate) -> Any: ...
+    def mutate(self, candidate: BindingCandidate, mutation: MutationSpec) -> Mapping[str, Any]: ...
+    def persist(self, candidate: BindingCandidate) -> Mapping[str, Any]: ...
+    def reload(self, candidate: BindingCandidate) -> Mapping[str, Any]: ...
+
+
+class StructuralQualificationRunner:
+    """Generic load/mutate/read/persist/reload cycle.
+
+    This class deliberately does not call MCP or Serum itself. The injected
+    backend must return real observed execution/readback data.
+    """
+
+    def __init__(
+        self,
+        backend: StructuralQualificationBackend,
+        *,
+        state_equal: Optional[Callable[[Any, Any], bool]] = None,
+    ):
+        self._backend = backend
+        self._state_equal = state_equal or (lambda a, b: a == b)
+
+    def run(self, candidate: BindingCandidate, mutation: MutationSpec) -> StructuralQualificationResult:
+        if not candidate.is_verified():
+            return StructuralQualificationResult(
+                target=candidate.target,
+                capability_key=candidate.capability_key,
+                status="REFUSED_UNVERIFIED_BINDING",
+                refusal_code="REFUSED_UNVERIFIED_BINDING",
+                operation_family=candidate.operation_family,
+                route_type=candidate.route_type,
+                binding=self._binding_dict(candidate.binding),
+                trace=("binding candidate rejected before backend execution",),
+            )
+
+        if mutation.target != candidate.target:
+            return StructuralQualificationResult(
+                target=candidate.target,
+                capability_key=candidate.capability_key,
+                status="REFUSED_MUTATION_TARGET_MISMATCH",
+                refusal_code="REFUSED_MUTATION_TARGET_MISMATCH",
+                operation_family=candidate.operation_family,
+                route_type=candidate.route_type,
+                binding=self._binding_dict(candidate.binding),
+                trace=("mutation target does not match binding candidate",),
+            )
+
+        evidence: Dict[str, Any] = {}
+        trace: List[str] = []
+
+        evidence["load"] = dict(self._backend.load(candidate) or {})
+        trace.append("LOAD")
+        baseline = self._backend.read(candidate)
+        evidence["baseline_read"] = baseline
+        trace.append("READ_BASELINE")
+
+        evidence["mutation"] = dict(self._backend.mutate(candidate, mutation) or {})
+        trace.append("MUTATE")
+        after_mutation = self._backend.read(candidate)
+        evidence["after_mutation_read"] = after_mutation
+        trace.append("READ_AFTER_MUTATION")
+
+        changed = not self._state_equal(baseline, after_mutation)
+        if not changed:
+            return StructuralQualificationResult(
+                target=candidate.target,
+                capability_key=candidate.capability_key,
+                status="FAILED_NO_STATE_CHANGE",
+                refusal_code=None,
+                operation_family=candidate.operation_family,
+                route_type=candidate.route_type,
+                binding=self._binding_dict(candidate.binding),
+                baseline=baseline,
+                after_mutation=after_mutation,
+                state_changed=False,
+                trace=tuple(trace + ["STATE_CHANGE_CHECK_FAILED"]),
+                backend_evidence=evidence,
+            )
+
+        persisted = self._backend.persist(candidate)
+        evidence["persist"] = dict(persisted or {})
+        trace.append("PERSIST")
+
+        evidence["reload"] = dict(self._backend.reload(candidate) or {})
+        trace.append("RELOAD")
+        after_reload = self._backend.read(candidate)
+        evidence["after_reload_read"] = after_reload
+        trace.append("READ_AFTER_RELOAD")
+
+        persistence_verified = self._state_equal(after_mutation, after_reload)
+        trace.append(
+            "PERSISTENCE_CHECK_%s" % ("PASSED" if persistence_verified else "FAILED")
+        )
+
+        return StructuralQualificationResult(
+            target=candidate.target,
+            capability_key=candidate.capability_key,
+            status="STRUCTURAL_VERIFIED" if persistence_verified else "FAILED_PERSISTENCE",
+            refusal_code=None,
+            operation_family=candidate.operation_family,
+            route_type=candidate.route_type,
+            binding=self._binding_dict(candidate.binding),
+            baseline=baseline,
+            after_mutation=after_mutation,
+            persisted=persisted,
+            after_reload=after_reload,
+            state_changed=True,
+            persistence_verified=persistence_verified,
+            trace=tuple(trace),
+            backend_evidence=evidence,
+        )
+
+    @staticmethod
+    def _binding_dict(binding: Optional[ExecutionBinding]):
+        if binding is None:
+            return None
+        return {
+            "mutation_type": binding.mutation_type,
+            "body_path": binding.body_path,
+            "host_parameter_name": binding.host_parameter_name,
+            "meta_path": binding.meta_path,
+            "binding_source": binding.binding_source,
+            "binding_version": binding.binding_version,
+            "resolver_operation_id": binding.resolver_operation_id,
+        }
 
 
 class QualificationPlanner:
-    """Auto-classify 255 targets into action buckets."""
+    """Classify the current Atlas universe using only existing authoritative data.
 
-    def __init__(self):
-        self._classifier = RouteClassifier()
-        self._targets = SEMANTIC_TARGETS
+    No target->binding mapping lives in this class. It joins:
+        Atlas -> Brain vocabulary -> capability key
+        -> authoritative binding maps -> existing contract state.
 
-    def _infer_operation_family(self, capability_key: Optional[str]) -> OperationFamily:
-        """Infer operation family from capability key."""
-        if not capability_key:
-            return OperationFamily.UNKNOWN
+    Targets lacking a Brain concept can remain in NEEDS_BINDING, but their
+    reason explicitly says that Brain vocabulary is also missing. Coverage
+    axes remain visible and are not silently conflated.
+    """
 
-        key_lower = capability_key.lower()
+    def __init__(
+        self,
+        *,
+        atlas_controls: Optional[Mapping[str, Any]] = None,
+        semantic_targets: Optional[Mapping[str, Any]] = None,
+        contract_registry: Any = None,
+        host_mapping: Optional[Mapping[str, str]] = None,
+        body_mapping: Optional[Mapping[str, Mapping[str, Any]]] = None,
+    ):
+        if atlas_controls is None:
+            from serum2.reference.serum_atlas import all_control_ids, get_control
+            atlas_controls = {cid: get_control(cid) for cid in all_control_ids()}
+        self._atlas = dict(atlas_controls)
 
-        if any(word in key_lower for word in ["enable", "mute", "toggle"]):
+        if semantic_targets is None:
+            from serum2.compiler.targets import SEMANTIC_TARGETS
+            semantic_targets = SEMANTIC_TARGETS
+        self._semantic_targets = dict(semantic_targets)
+
+        if contract_registry is None:
+            from serum2.producer.contract_registry import ContractRegistry
+            contract_registry = ContractRegistry()
+        self._registry = contract_registry
+
+        self._host_mapping = (
+            dict(host_mapping)
+            if host_mapping is not None
+            else self._load_json("semantic_vst3_mapping.json").get("mappings", {})
+        )
+        self._body_mapping = (
+            dict(body_mapping)
+            if body_mapping is not None
+            else self._load_json("body_state_mapping.json").get("bindings", {})
+        )
+
+        self._brain_index = {
+            self._normalize(name): (name, ref)
+            for name, ref in self._semantic_targets.items()
+        }
+
+    @staticmethod
+    def _load_json(filename: str):
+        with (QUALIFICATION_DIR / filename).open("r", encoding="utf-8") as handle:
+            return json.load(handle)
+
+    @staticmethod
+    def _normalize(name: str) -> str:
+        from serum2.producer.target_names import normalize_target_name
+        return normalize_target_name(name)
+
+    @staticmethod
+    def _operation_family(control: Any) -> OperationFamily:
+        kind = getattr(control, "control_type", None)
+        if kind == "toggle":
             return OperationFamily.TOGGLE
-        if any(word in key_lower for word in ["attack", "decay", "sustain", "release", "cutoff", "resonance", "rate"]):
+        if kind == "continuous":
             return OperationFamily.NUMERIC
-        if any(word in key_lower for word in ["type", "mode"]):
+        if kind == "enum":
             return OperationFamily.ENUM
-        if "field" in key_lower or key_lower.startswith("envelope") or key_lower.startswith("oscillator"):
-            return OperationFamily.BODY_STATE
-        if "matrix" in key_lower or "routing" in key_lower:
-            return OperationFamily.STRUCTURED
+        return OperationFamily.STRUCTURED
 
-        return OperationFamily.UNKNOWN
+    def _candidate(
+        self,
+        target: str,
+        control: Any,
+        capability_key: Optional[str],
+    ) -> BindingCandidate:
+        body = self._body_mapping.get(capability_key) if capability_key else None
+        host = self._host_mapping.get(capability_key) if capability_key else None
+
+        if body is not None and host is not None:
+            return BindingCandidate(
+                target=target,
+                capability_key=capability_key,
+                route_type=RouteType.UNBOUND,
+                binding=None,
+                operation_family=OperationFamily.STRUCTURED,
+                provenance="MULTIPLE_BINDING_SOURCES",
+                reason="Multiple authoritative binding sources exist; planner refuses to choose.",
+            )
+
+        if body is not None:
+            binding = ExecutionBinding(
+                mutation_type="BODY_STATE",
+                body_path=body.get("body_path"),
+                host_parameter_name=None,
+                meta_path=body.get("meta_path"),
+                binding_source="body_state_mapping.json",
+                binding_version=str(body.get("binding_version", "1")),
+                resolver_operation_id=body.get("resolver_operation_id"),
+            )
+            return BindingCandidate(
+                target=target,
+                capability_key=capability_key,
+                route_type=RouteType.SERUM_BODY_STATE,
+                binding=binding,
+                operation_family=OperationFamily.BODY_STATE,
+                provenance="body_state_mapping.json",
+                confidence=1.0,
+                verified=True,
+                reason="Exact authoritative BODY_STATE mapping.",
+            )
+
+        if host is not None:
+            binding = ExecutionBinding(
+                mutation_type="HOST_PARAMETER",
+                body_path=None,
+                host_parameter_name=str(host),
+                meta_path=None,
+                binding_source="semantic_vst3_mapping.json",
+                binding_version="1",
+            )
+            return BindingCandidate(
+                target=target,
+                capability_key=capability_key,
+                route_type=RouteType.VST3_HOST_PARAMETER,
+                binding=binding,
+                operation_family=self._operation_family(control),
+                provenance="semantic_vst3_mapping.json",
+                confidence=1.0,
+                verified=True,
+                reason="Exact authoritative VST3 host-parameter mapping.",
+            )
+
+        family = self._operation_family(control)
+        return BindingCandidate(
+            target=target,
+            capability_key=capability_key,
+            route_type=(
+                RouteType.STRUCTURED_OPERATION
+                if family == OperationFamily.STRUCTURED
+                else RouteType.UNBOUND
+            ),
+            binding=None,
+            operation_family=family,
+            provenance="UNBOUND",
+            confidence=0.0,
+            verified=False,
+            reason="No authoritative execution binding is currently registered.",
+        )
 
     def plan(self) -> QualificationPlan:
-        """Generate qualification plan for all 255 targets."""
         plan = QualificationPlan()
+        buckets = {
+            QualificationBucket.ALREADY_VERIFIED: plan.already_verified,
+            QualificationBucket.READY_FOR_STRUCTURAL: plan.ready_for_structural,
+            QualificationBucket.NEEDS_BINDING: plan.needs_binding,
+            QualificationBucket.NEEDS_CAUSAL: plan.needs_causal,
+            QualificationBucket.BLOCKED: plan.blocked,
+        }
 
-        for semantic_target in sorted(self._targets.keys()):
-            route_class = self._classifier.classify(semantic_target)
-            target_ref = self._targets.get(semantic_target)
-            capability_key = target_ref.capability_key if target_ref else None
-            op_family = self._infer_operation_family(capability_key)
+        for target in sorted(self._atlas):
+            control = self._atlas[target]
+            hit = self._brain_index.get(self._normalize(target))
+            brain_registered = hit is not None
+            ref = hit[1] if hit else None
+            capability_key = getattr(ref, "capability_key", None) if ref else None
 
-            # Already has contract
-            if route_class.contract_exists:
-                plan.already_verified.append(semantic_target)
-                continue
+            candidate = self._candidate(target, control, capability_key)
+            contract = (
+                self._registry.get(capability_key)
+                if capability_key
+                else None
+            )
+            contract_status = getattr(contract, "status", None)
 
-            # Has verified binding (high confidence)
-            if route_class.route != ExecutionRoute.UNBOUND and route_class.binding:
-                candidate = BindingCandidate(
-                    atlas_target=route_class.atlas_target,
-                    semantic_target=semantic_target,
-                    capability_key=capability_key,
-                    route_type=route_class.route,
-                    binding=route_class.binding,
-                    binding_source=route_class.binding_source or "unknown",
-                    operation_family=op_family,
-                    operation_type="unknown",  # TODO: infer from contract or schema
-                    confidence=0.95,
-                    rationale=f"Binding found in {route_class.binding_source}",
-                    existing_contract=route_class.contract_status,
-                )
-                plan.ready_for_structural.append(candidate)
-                plan.by_operation_family.setdefault(op_family, []).append(candidate)
+            if contract_status == CAUSAL_VERIFIED:
+                bucket = QualificationBucket.ALREADY_VERIFIED
+                reason = "CAUSAL_VERIFIED contract exists."
+            elif contract_status == STRUCTURAL_ONLY:
+                bucket = QualificationBucket.NEEDS_CAUSAL
+                reason = "STRUCTURAL_ONLY exists; causal proof is still required."
+            elif contract_status in {
+                BLOCKED_CONTRADICTED,
+                NEGATIVE_EVIDENCE,
+                UNSUPPORTED,
+            }:
+                bucket = QualificationBucket.BLOCKED
+                reason = "Registered contract is blocked/negative/unsupported."
+            elif candidate.is_verified():
+                bucket = QualificationBucket.READY_FOR_STRUCTURAL
+                reason = "Authoritative binding exists; no qualifying contract is registered."
             else:
-                # Unbound, needs discovery
-                plan.needs_binding.append(semantic_target)
+                bucket = QualificationBucket.NEEDS_BINDING
+                reason = candidate.reason
+                if not brain_registered:
+                    reason = (
+                        "No Brain semantic target is registered; "
+                        "binding cannot be inferred."
+                    )
+
+            item = TargetQualification(
+                target=target,
+                capability_key=capability_key,
+                control_type=getattr(control, "control_type", None),
+                operation_family=candidate.operation_family,
+                candidate=candidate,
+                bucket=bucket,
+                contract_status=contract_status,
+                brain_registered=brain_registered,
+                reason=reason,
+            )
+            plan.all_targets.append(item)
+            buckets[bucket].append(item)
 
         return plan
 
 
-class StructuralQualificationRunner:
-    """Generic runner for any target with a verified binding.
-
-    Cycle: load → read_before → mutate → read_after → persist/reload → read_after_reload → emit evidence
-
-    This runner processes any BindingCandidate; no target-specific code.
-    """
-
-    def __init__(self, serum_mcp=None):
-        self._serum_mcp = serum_mcp
-
-    def qualify(self, candidate: BindingCandidate, preset_path: Optional[str] = None) -> Optional[Dict]:
-        """Run structural qualification on one candidate.
-
-        Args:
-            candidate: BindingCandidate with verified binding
-            preset_path: Path to reference preset; if None, generates minimal seed
-
-        Returns:
-            EvidenceRecord (baseline, treatment, after_reload) suitable for ClaimGroup/Contract.
-        """
-        if not candidate.is_verified():
-            print(f"[StructuralQualificationRunner] Skipping {candidate.atlas_target}: confidence {candidate.confidence} < 0.95")
-            return None
-
-        print(f"[StructuralQualificationRunner] Qualifying: {candidate.atlas_target}")
-        print(f"  Route: {candidate.route_type.value}")
-        print(f"  Binding: {candidate.binding}")
-        print(f"  Operation family: {candidate.operation_family.value}")
-
-        # Stub implementation:
-        # 1. Load preset (or minimal seed)
-        # 2. Read parameter (VST3 or body-state)
-        # 3. Mutate based on operation_family
-        # 4. Persist and reload
-        # 5. Verify read-after-reload matches persisted value
-        # 6. Emit EvidenceRecord(baseline={...}, treatment={...}, after_reload={...})
-
-        return None
-
-
-def main():
-    planner = QualificationPlanner()
-    plan = planner.plan()
-
-    print("=== QUALIFICATION PLAN: ALL 255 ATLAS TARGETS ===\n")
-    print(f"Already verified (contracts exist):  {len(plan.already_verified):3d}")
-    print(f"Ready for structural:                {len(plan.ready_for_structural):3d}")
-    print(f"Needs binding discovery:             {len(plan.needs_binding):3d}")
-    print(f"---")
-    print(f"TOTAL:                               {len(plan.already_verified) + len(plan.ready_for_structural) + len(plan.needs_binding):3d}")
-
-    print("\n=== READY FOR STRUCTURAL (by operation family) ===\n")
-    for op_family in sorted(plan.by_operation_family.keys()):
-        items = plan.by_operation_family[op_family]
-        print(f"{op_family.value.upper():30s} ({len(items):3d} targets)")
-        for item in items[:2]:
-            print(f"  {item.atlas_target:30s} binding={item.binding}")
-        if len(items) > 2:
-            print(f"  ... and {len(items) - 2} more")
-        print()
-
-    print("\n=== FROZEN TUTORIAL TARGETS IN PLAN ===\n")
-    frozen = ["env2.decay", "env2.sustain", "oscb.enabled", "lfo1.rate", "filter1.enabled"]
-    for target in frozen:
-        if target in plan.needs_binding:
-            print(f"{target:25s} → NEEDS_BINDING (discovery queue)")
-        elif any(c.atlas_target == target for c in plan.ready_for_structural):
-            c = next(c for c in plan.ready_for_structural if c.atlas_target == target)
-            print(f"{target:25s} → READY_FOR_STRUCTURAL (binding: {c.binding})")
-        elif target in plan.already_verified:
-            print(f"{target:25s} → ALREADY_VERIFIED (contract exists)")
-
-
-if __name__ == "__main__":
-    main()
+__all__ = [
+    "BindingCandidate",
+    "MutationSpec",
+    "OperationFamily",
+    "QualificationBucket",
+    "QualificationPlan",
+    "QualificationPlanner",
+    "RouteType",
+    "StructuralQualificationBackend",
+    "StructuralQualificationResult",
+    "StructuralQualificationRunner",
+    "TargetQualification",
+]
