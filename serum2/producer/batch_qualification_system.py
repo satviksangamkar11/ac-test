@@ -320,6 +320,7 @@ class QualificationPlanner:
         contract_registry: Any = None,
         host_mapping: Optional[Mapping[str, str]] = None,
         body_mapping: Optional[Mapping[str, Mapping[str, Any]]] = None,
+        preset_mapping: Optional[Mapping[str, Mapping[str, Any]]] = None,
         target_universe: str = "CAPABILITY_TARGETS",
     ):
         self._target_universe = target_universe
@@ -349,6 +350,11 @@ class QualificationPlanner:
             if body_mapping is not None
             else self._load_json("body_state_mapping.json").get("bindings", {})
         )
+        self._preset_mapping = (
+            dict(preset_mapping)
+            if preset_mapping is not None
+            else self._load_json("preset_structural_mapping.json").get("bindings", {})
+        )
 
         self._brain_index = {
             self._normalize(name): (name, ref)
@@ -357,7 +363,10 @@ class QualificationPlanner:
 
     @staticmethod
     def _load_json(filename: str):
-        with (QUALIFICATION_DIR / filename).open("r", encoding="utf-8") as handle:
+        path = QUALIFICATION_DIR / filename
+        if not path.exists():
+            return {}
+        with path.open("r", encoding="utf-8") as handle:
             return json.load(handle)
 
     @staticmethod
@@ -383,17 +392,23 @@ class QualificationPlanner:
         capability_key: Optional[str],
     ) -> BindingCandidate:
         body = self._body_mapping.get(capability_key) if capability_key else None
+        preset = self._preset_mapping.get(capability_key) if capability_key else None
         host = self._host_mapping.get(capability_key) if capability_key else None
 
-        if body is not None and host is not None:
+        # Check for multiple execution-eligible sources (execution routes conflict)
+        execution_sources = sum([
+            body is not None,
+            preset is not None,
+        ])
+        if execution_sources > 1:
             return BindingCandidate(
                 target=target,
                 capability_key=capability_key,
                 route_type=RouteType.UNBOUND,
                 binding=None,
                 operation_family=OperationFamily.STRUCTURED,
-                provenance="MULTIPLE_BINDING_SOURCES",
-                reason="Multiple authoritative binding sources exist; planner refuses to choose.",
+                provenance="MULTIPLE_EXECUTION_SOURCES",
+                reason="Multiple execution-eligible binding sources exist; planner refuses to choose.",
             )
 
         if body is not None:
@@ -416,6 +431,28 @@ class QualificationPlanner:
                 confidence=1.0,
                 verified=True,
                 reason="Exact authoritative BODY_STATE mapping.",
+            )
+
+        if preset is not None:
+            binding = ExecutionBinding(
+                mutation_type="SERUM_PRESET_STRUCTURAL",
+                body_path=None,
+                host_parameter_name=None,
+                meta_path=preset.get("meta_path"),
+                binding_source="preset_structural_mapping.json",
+                binding_version=str(preset.get("binding_version", "1")),
+                resolver_operation_id=preset.get("resolver_operation_id"),
+            )
+            return BindingCandidate(
+                target=target,
+                capability_key=capability_key,
+                route_type=RouteType.SERUM_PRESET_STRUCTURAL_BINDING,
+                binding=binding,
+                operation_family=OperationFamily.STRUCTURED,
+                provenance="preset_structural_mapping.json",
+                confidence=1.0,
+                verified=True,
+                reason="Exact authoritative SERUM_PRESET_STRUCTURAL mapping.",
             )
 
         if host is not None:

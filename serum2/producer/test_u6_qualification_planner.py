@@ -185,9 +185,46 @@ class TestU6SerumPresetStructuralVerified:
     """BindingCandidate.is_verified() must return True for SERUM_PRESET_STRUCTURAL_BINDING
     when the binding carries a resolver_operation_id (the serum-mcp preset path).
 
-    Currently RED: is_verified() returns False for this route type because
-    the branch is missing.
+    The planner must also DISCOVER this route from authoritative preset_mapping data,
+    without any target-specific logic.
     """
+
+    def test_planner_discovers_preset_structural_from_generic_mapping(self):
+        """Planner discovers SERUM_PRESET_STRUCTURAL_BINDING from injected preset_mapping.
+
+        Uses arbitrary target names (SomeTarget.Param) to prove generic discovery.
+        No tutorial-specific or target-specific logic allowed.
+        """
+        from unittest.mock import MagicMock
+        stub_control = MagicMock()
+        stub_control.control_type = "continuous"
+        stub_ref = MagicMock()
+        stub_ref.capability_key = "some_capability_key"
+
+        planner = QualificationPlanner(
+            atlas_controls={"SomeTarget.Param": stub_control},
+            semantic_targets={"SomeTarget.Param": stub_ref},
+            contract_registry=MagicMock(**{"get.return_value": None}),
+            host_mapping={},
+            body_mapping={},
+            preset_mapping={
+                "some_capability_key": {
+                    "resolver_operation_id": "generic.test.operation"
+                }
+            },
+            target_universe="CAPABILITY_TARGETS",
+        )
+        plan = planner.plan()
+        q = plan.all_targets[0]
+
+        assert q.target == "SomeTarget.Param"
+        assert q.candidate.route_type == RouteType.SERUM_PRESET_STRUCTURAL_BINDING
+        assert q.candidate.is_verified(), (
+            "Discovered preset binding with resolver_operation_id must be verified"
+        )
+        assert q.bucket == QualificationBucket.READY_FOR_STRUCTURAL, (
+            "Verified preset binding must reach READY_FOR_STRUCTURAL"
+        )
 
     def test_serum_preset_structural_binding_is_verified_with_resolver_op(self):
         """SERUM_PRESET_STRUCTURAL_BINDING + resolver_operation_id → is_verified() True."""
@@ -237,6 +274,39 @@ class TestU6SerumPresetStructuralVerified:
         assert not bc.is_verified(), (
             "SERUM_PRESET_STRUCTURAL_BINDING with no resolver_operation_id must NOT be verified."
         )
+
+    def test_real_osc2_preset_evidence_via_generic_mapping(self):
+        """OSC2.Enable discovered from generic preset_mapping (not target-specific).
+
+        Proves that actual Serum preset evidence reaches generic discovery.
+        """
+        from unittest.mock import MagicMock
+        from serum2.reference.serum_atlas import get_control
+
+        # Use real Atlas control for OSC2.Enable
+        osc2_control = get_control("oscB.enabled")
+
+        # Inject OSC2 evidence through generic mapping
+        planner = QualificationPlanner(
+            atlas_controls={"oscB.enabled": osc2_control},
+            semantic_targets={"OSC2.Enable": MagicMock(capability_key="oscillator_field_OSC2-ENABLE")},
+            contract_registry=MagicMock(**{"get.return_value": None}),
+            host_mapping={},
+            body_mapping={},
+            preset_mapping={
+                "oscillator_field_OSC2-ENABLE": {
+                    "resolver_operation_id": "oscillators[1].enabled"
+                }
+            },
+            target_universe="CAPABILITY_TARGETS",
+        )
+        plan = planner.plan()
+        q = plan.all_targets[0]
+
+        assert q.target == "OSC2.Enable"
+        assert q.candidate.route_type == RouteType.SERUM_PRESET_STRUCTURAL_BINDING
+        assert q.candidate.is_verified()
+        assert q.bucket == QualificationBucket.READY_FOR_STRUCTURAL
 
     def test_serum_preset_structural_planner_bucket_is_ready_when_verified(self):
         """When a SERUM_PRESET_STRUCTURAL_BINDING candidate is verified, the planner
