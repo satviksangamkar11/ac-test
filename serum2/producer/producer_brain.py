@@ -43,6 +43,7 @@ This module never modifies frozen Step 6 files.
 """
 from __future__ import annotations
 
+import re
 import sys
 import os
 import json
@@ -64,6 +65,9 @@ from serum2.producer.knowledge_retrieval_adapter import (
 from serum2.producer.episode_retrieval import retrieve_relevant_episodes
 from serum2.producer.route_selection import RouteSelector, ExecutionRoute
 from serum2.producer.contract_registry import ContractRegistry
+from serum2.producer.target_resolution import (
+    TargetResolver, Refusal, LEGACY_STATUS_TO_REFUSAL, REFUSED_UNCLASSIFIED, LAYER_UNKNOWN,
+)
 from serum2.compiler.mcp_intent import parse_intent, MCP_HOST_MAP
 
 
@@ -92,12 +96,13 @@ _INTENT_TO_CONCEPT: List[tuple[List[str], str, SemanticDirection]] = [
     (["attack", "faster attack", "slower attack", "attack longer",
       "attack shorter"],
      "envelope-attack", SemanticDirection.SHORTER),
-    # longer / sustain / release keywords → note-release concept, LONGER
-    (["longer", "sustain longer", "longer sustain", "more sustain",
-      "extend", "release longer", "longer release"],
+    # Legacy natural-language rules. A bare direction word ("longer", "shorter", "extend",
+    # "tighter") must NOT select a target (architecture section 9): only phrases that also name
+    # sustain/release do. Explicit canonical targets never reach these rules (see _resolve_concept).
+    (["sustain longer", "longer sustain", "more sustain",
+      "release longer", "longer release"],
      "note-release", SemanticDirection.LONGER),
-    # shorter / tighter / less sustain → note-release concept, SHORTER
-    (["shorter", "shorter release", "tighter", "less sustain",
+    (["shorter release", "less sustain",
       "quicker release"],
      "note-release", SemanticDirection.SHORTER),
     # cutoff / filter (includes bare character adjectives for CREATE-mode
@@ -183,6 +188,19 @@ def _resolve_intent_to_concept(
         if any(kw in lower for kw in keywords):
             return concept, direction
     return None, SemanticDirection.LONGER
+
+
+def _direction_from_words(text: str) -> "SemanticDirection":
+    """Advisory direction, read from the wording AFTER a canonical concept is established
+    (architecture section 17: heuristics may refine direction, never the target)."""
+    t = (text or "").lower()
+    for words, d in ((("shorter", "shorten", "less", "lower", "down", "decrease", "reduce", "tighter"),
+                      SemanticDirection.SHORTER),
+                     (("longer", "more", "higher", "up", "increase", "extend"),
+                      SemanticDirection.LONGER)):
+        if any(re.search(r"\b%s\b" % re.escape(w), t) for w in words):
+            return d
+    return SemanticDirection.LONGER
 
 
 # ---------------------------------------------------------------------------
@@ -385,6 +403,10 @@ class ProducerResult:
     # ---- errors ----
     error: Optional[str] = None
 
+    refusal: Optional[Dict[str, Any]] = None
+    """Structured refusal (architecture 7.1 / 19): {code, layer, canonical_target, reason, candidates}.
+    execution_status is kept unchanged for compatibility; this is the canonical diagnostic."""
+
     def to_dict(self) -> Dict[str, Any]:
         d = asdict(self)
         d["request"] = asdict(self.request)
@@ -401,6 +423,13 @@ class ProducerBrain:
     def __init__(self):
         self._registry = ContractRegistry()
         self._selector = RouteSelector()
+        # Ordered explicit-target resolution over EXISTING registries (architecture 17/18): no tables here.
+        from serum2.compiler.targets import SEMANTIC_TARGETS
+        from serum2.knowledge.step_6_6_capability_resolution import UNIVERSAL_TO_SEMANTIC, SemanticTargetMapping
+        self._derived_mappings: Dict[str, Any] = {}
+        self._target_resolver = TargetResolver(
+            self._registry, SEMANTIC_TARGETS, MCP_HOST_MAP, UNIVERSAL_TO_SEMANTIC,
+            _MCP_CONCEPT_BRIDGE, SemanticTargetMapping)
 
     # ------------------------------------------------------------------
     # 1. KNOWLEDGE RETRIEVAL (Phase B)
@@ -554,6 +583,12 @@ class ProducerBrain:
             SemanticDirection.INCREASE: "increase",
             SemanticDirection.DECREASE: "decrease",
         }.get(intent.semantic_direction, "modify")
+        # Enum / toggle contracts are SET, not lengthened or increased. Derived from the contract's own
+        # allowed_operation; 'select' is a word Capability Resolution's enum check already accepts.
+        _m = self._mapping_for(concept)
+        _c = self._registry.get(_m.semantic_target) if _m else None
+        if _c is not None and _c.allowed_operation == "mutate_enum_value":
+            op_name = "select"
 
         candidate = SemanticCandidate(
             candidate_id="c_%s_%s" % (concept.replace("-", "_"), op_name),
@@ -598,6 +633,7 @@ class ProducerBrain:
             ctx[fp] = p.get("declared_value")
 
         resolver = CapabilityResolver(self._registry)
+        resolver.semantic_mappings = dict(resolver.semantic_mappings, **self._derived_mappings)
         resolution = resolver.resolve(candidate, intent, current_context=ctx)
 
         if resolution.resolution_status != ResolutionStatus.RESOLVED:
@@ -1203,6 +1239,45 @@ class ProducerBrain:
     # MAIN ENTRY
     # ------------------------------------------------------------------
     def execute(self, request: ProducerRequest) -> ProducerResult:
+        """Canonical entry point. Runs the decision flow, then guarantees every refused request
+        carries a structured refusal record (code + emitting layer) next to the legacy status."""
+        result = self._execute_inner(request)
+        if result.refusal is None and str(result.execution_status).startswith("REFUSED"):
+            code, layer = LEGACY_STATUS_TO_REFUSAL.get(result.execution_status, (REFUSED_UNCLASSIFIED, LAYER_UNKNOWN))
+            result.refusal = Refusal(code, layer, result.semantic_target,
+                                     result.error or result.execution_status).to_dict()
+        return result
+
+    def _resolve_concept(self, request: ProducerRequest):
+        """Ordered resolution (architecture 17/18). Returns (concept, direction, refusal, resolution).
+
+        An explicit canonical target (named in the intent or as semantic_target) is resolved through
+        the reference Atlas and the existing target registries ONLY; keyword heuristics never see it.
+        Without an explicit target the legacy natural-language path runs (its bare direction words
+        no longer select a target)."""
+        res = self._target_resolver.resolve(request.user_intent, request.semantic_target)
+        if res is None:
+            concept, direction = _resolve_intent_to_concept(request.user_intent)
+            return concept, direction, None, None
+        if res.refusal is not None:
+            return None, SemanticDirection.LONGER, res.refusal, res
+        if res.mapping is not None:
+            self._derived_mappings[res.concept] = res.mapping
+        return res.concept, self._direction_for(res, request.user_intent), None, res
+
+    def _direction_for(self, res, text: str):
+        """Direction after the target is fixed. An enum/toggle contract has no numeric direction
+        (SemanticDirection has no neutral member), so INCREASE is a placeholder there."""
+        contract = self._registry.contracts.get(res.capability_key) if res.capability_key else None
+        if contract is not None and contract.allowed_operation == "mutate_enum_value":
+            return SemanticDirection.INCREASE
+        return _direction_from_words(text)
+
+    def _mapping_for(self, concept: str):
+        from serum2.knowledge.step_6_6_capability_resolution import UNIVERSAL_TO_SEMANTIC
+        return UNIVERSAL_TO_SEMANTIC.get(concept) or self._derived_mappings.get(concept)
+
+    def _execute_inner(self, request: ProducerRequest) -> ProducerResult:
         result = ProducerResult(request=request)
         result.intent_class = "CREATION" if request.mode == "CREATE" else "MUTATION"
 
@@ -1365,10 +1440,15 @@ class ProducerBrain:
                 return result
 
             # ---- resolve intent to concept ----
-            concept, direction = _resolve_intent_to_concept(request.user_intent)
+            concept, direction, refusal, explicit = self._resolve_concept(request)
             result.resolved_concept = concept
             result.semantic_direction = direction.value if direction else None
 
+            if refusal is not None:
+                result.refusal = refusal.to_dict()
+                result.error = refusal.reason
+                result.execution_status = "REFUSED_UNKNOWN_CONCEPT"   # legacy status kept for compatibility
+                return result
             if concept is None:
                 result.error = (
                     "No semantic concept resolved from intent %r. "
@@ -1376,6 +1456,7 @@ class ProducerBrain:
                 )
                 result.execution_status = "REFUSED_UNKNOWN_CONCEPT"
                 return result
+            explicit_target = explicit.registry_target if explicit is not None else None
 
             # ---- retrieve real knowledge (Phase B) ----
             knowledge_contributions, knowledge_notes = self._retrieve_knowledge(
@@ -1402,9 +1483,8 @@ class ProducerBrain:
             )
 
             # ---- determine semantic target ----
-            from serum2.knowledge.step_6_6_capability_resolution import UNIVERSAL_TO_SEMANTIC
-            target_mapping = UNIVERSAL_TO_SEMANTIC.get(concept)
-            if target_mapping is None and request.semantic_target is None:
+            target_mapping = self._mapping_for(concept)
+            if target_mapping is None and request.semantic_target is None and explicit_target is None:
                 # STEP 7: before refusing, check MCP-only concept bridge
                 if concept in _MCP_CONCEPT_BRIDGE:
                     mcp_target = _MCP_CONCEPT_BRIDGE[concept]
@@ -1423,7 +1503,7 @@ class ProducerBrain:
             capability_target = (
                 target_mapping.semantic_target if target_mapping else None
             )
-            semantic_target_name = request.semantic_target or _capability_to_semantic_name(
+            semantic_target_name = explicit_target or request.semantic_target or _capability_to_semantic_name(
                 capability_target
             )
             result.semantic_target = semantic_target_name or capability_target
@@ -1513,9 +1593,15 @@ class ProducerBrain:
           5. Execute the best-admitted operation
           6. Classify: RECREATED / PARTIALLY_RECREATED / BLOCKED / INSUFFICIENT_EVIDENCE
         """
-        concept, direction = _resolve_intent_to_concept(request.user_intent)
+        concept, direction, refusal, _explicit = self._resolve_concept(request)
         result.resolved_concept = concept
         result.semantic_direction = direction.value if direction else None
+
+        if refusal is not None:
+            result.refusal = refusal.to_dict()
+            result.error = refusal.reason
+            result.execution_status = "REFUSED_UNKNOWN_CONCEPT"
+            return result
 
         if concept is None:
             result.execution_status = "BLOCKED"

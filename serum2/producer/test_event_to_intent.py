@@ -95,10 +95,15 @@ if __name__ == "__main__":
 
 
 def test_attack_change_resolves_to_attack_not_release():
-    """Regression: 'longer Env1.Attack ...' contains 'longer' and used to hit the
-    note-release rule (wrong control). Attack and release must stay distinct."""
-    from serum2.producer.producer_brain import _resolve_intent_to_concept
-    assert _resolve_intent_to_concept("longer Env1.Attack to 1.5 ms")[0] == "envelope-attack"
-    assert _resolve_intent_to_concept("shorter Env1.Attack to 0.5 ms")[0] == "envelope-attack"
-    assert _resolve_intent_to_concept("longer Env1.Release to 120 ms")[0] == "note-release"
-    assert _resolve_intent_to_concept("Make the note sustain longer")[0] == "note-release"
+    """Regression: 'longer Env1.Attack ...' used to hit the note-release keyword rule (wrong control).
+    Explicit targets now resolve through the ordered resolver, never through keywords."""
+    from serum2.producer.producer_brain import ProducerBrain, ProducerRequest
+    b = ProducerBrain()
+
+    def concept(text):
+        return b._resolve_concept(ProducerRequest(user_intent=text))[0]
+
+    assert concept("longer Env1.Attack to 1.5 ms") == "envelope-attack"
+    assert concept("shorter Env1.Attack to 0.5 ms") == "envelope-attack"
+    assert concept("longer Env1.Release to 120 ms") == "note-release"
+    assert concept("Make the note sustain longer") == "note-release"      # legacy natural language, names sustain

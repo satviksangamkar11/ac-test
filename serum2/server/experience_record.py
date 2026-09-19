@@ -220,6 +220,96 @@ def reference_provenance(record: ProductionExperienceRecord) -> Optional[Dict[st
     return record.provenance.get(REFERENCE_PROVENANCE_KEY)
 
 
+REPLAY_PROVENANCE_KEY = "replay_provenance"
+REPLAY_PIN_FIELDS = (
+    "brain_logic_version", "capability_contract_versions", "capability_binding_versions",
+    "admission_policy_version", "execution_backend_versions", "readback_route_versions",
+)
+# section 29: only Direct UI is the authoritative Serum readback route; the others corroborate.
+READBACK_ROUTES = ("DIRECT_UI", "PLUGIN_HOST_READBACK", "STANDALONE_PLUGIN_INSPECTION", "SCREEN_INSPECTION")
+
+
+def _file_sha256(path) -> Optional[str]:
+    import hashlib
+    from pathlib import Path as _P
+    try:
+        return hashlib.sha256(_P(path).read_bytes()).hexdigest()
+    except OSError:
+        return None
+
+
+def build_replay_provenance(registry, capability_keys, backends: Dict[str, Any],
+                            readbacks: Optional[List[Dict[str, Any]]] = None) -> Dict[str, Any]:
+    """Version pins needed to REPLAY_EXECUTE an episode faithfully (architecture 33.2).
+
+    Pins what was actually used: hashes of the decision/admission code, and for every capability key
+    the contract's status + condition signature and its execution binding. `backends` and `readbacks`
+    are supplied by the caller from what really ran; anything not supplied is recorded as absent
+    (never invented) and shows up as missing in replay_eligibility()."""
+    from pathlib import Path as _P
+    here = _P(__file__).parent.parent
+    contracts, bindings = {}, {}
+    for key in capability_keys:
+        c = registry.contracts.get(key)
+        if c is None:
+            contracts[key] = None
+            continue
+        contracts[key] = {"status": c.status, "condition_signature_hash": (c.scope or {}).get("condition_signature_hash"),
+                          "provenance": c.provenance}
+        b = c.execution_binding
+        bindings[key] = None if b is None else {
+            "mutation_type": b.mutation_type, "host_parameter_name": b.host_parameter_name, "body_path": b.body_path,
+            "binding_source": b.binding_source, "binding_version": b.binding_version}
+    return {
+        "brain_logic_version": {f: _file_sha256(here / "producer" / f) for f in
+                                ("producer_brain.py", "target_resolution.py", "target_names.py")},
+        "capability_contract_versions": contracts,
+        "capability_binding_versions": bindings,
+        "admission_policy_version": {"evidence/admission.py": _file_sha256(here / "evidence" / "admission.py"),
+                                     "knowledge/step_6_7_admission_handoff.py": _file_sha256(here / "knowledge" / "step_6_7_admission_handoff.py")},
+        "execution_backend_versions": dict(backends or {}),
+        "readback_route_versions": [dict(r) for r in (readbacks or [])],
+    }
+
+
+def stamp_replay_provenance(record: "ProductionExperienceRecord", registry, capability_keys,
+                            backends: Dict[str, Any], readbacks=None) -> None:
+    """Pin the replay versions on the episode. Never overwrites an existing pin."""
+    if REPLAY_PROVENANCE_KEY not in record.provenance:
+        record.provenance[REPLAY_PROVENANCE_KEY] = build_replay_provenance(registry, capability_keys, backends, readbacks)
+
+
+def build_readback_record(*, domain: str, route: str, plugin: str, version: str, delivery_route: Optional[str],
+                          watched: List[str], expected: Dict[str, Any], observed: Dict[str, Any],
+                          artifact: Optional[str] = None) -> Dict[str, Any]:
+    """One readback record (architecture 29). The comparison is computed here from expected vs observed."""
+    if route not in READBACK_ROUTES:
+        raise ValueError("unknown readback route %r; expected one of %s" % (route, READBACK_ROUTES))
+    match = {k: (k in observed and observed[k] == expected[k]) for k in watched}
+    return {"domain": domain, "route": route, "plugin": plugin, "version": version, "delivery_route": delivery_route,
+            "watched": list(watched), "expected": {k: expected.get(k) for k in watched},
+            "observed": {k: observed.get(k) for k in watched}, "comparison": match,
+            "all_match": bool(watched) and all(match.values()), "artifact": artifact,
+            "recorded_at": datetime.now(timezone.utc).isoformat()}
+
+
+def is_canonical_serum_readback(rec: Dict[str, Any]) -> bool:
+    """Only DIRECT_UI can establish canonical Serum verification (architecture 28/29)."""
+    return rec.get("domain") == "serum" and rec.get("route") == "DIRECT_UI" and bool(rec.get("all_match"))
+
+
+def replay_eligibility(record: "ProductionExperienceRecord") -> Dict[str, Any]:
+    """Architecture 33.3 / 34: what this episode may be used for. Never reinterprets a legacy episode
+    against today's reference data."""
+    if reference_provenance(record) is None:
+        return {"status": "LEGACY_NO_PROVENANCE", "replay_execute": False, "replay_simulate": False,
+                "missing": ["reference_provenance"]}
+    pins = record.provenance.get(REPLAY_PROVENANCE_KEY) or {}
+    missing = [f for f in REPLAY_PIN_FIELDS if not pins.get(f)]
+    return {"status": "REPLAYABLE" if not missing else "REFERENCE_ONLY",
+            "replay_execute": not missing, "replay_simulate": True, "missing": missing}
+
+
 def create_initial(run, brain_result=None) -> ProductionExperienceRecord:
     """Build the initial record right after ADMITTED.
 

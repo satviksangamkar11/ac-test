@@ -134,6 +134,7 @@ def test_lfo_7_to_10_are_sources_only():
     assert normalize_mod_source("LFO 11").status == "UNRESOLVED"
 
 
+@pytest.mark.skipif(not ARTIFACT.exists(), reason="real mU6 Stage-A artifact lives in gitignored serum2/data")
 def test_real_mu6_artifact_still_ingests():
     d = json.loads(ARTIFACT.read_text())
     raw = d["frames"][0]["controls"]

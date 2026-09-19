@@ -1,5 +1,6 @@
 """Reference-data provenance persisted on ProductionExperienceRecord."""
 import json
+import pytest
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -70,6 +71,8 @@ def test_replay_reads_stored_provenance_without_reference_files(tmp_path, monkey
     assert ref["source_audit_hash"].startswith("fac5ced3")
 
 
+@pytest.mark.skipif(not (EXP_DIR / "vlp1_mu6_env1release_20260919_064310.json").exists(),
+                    reason="real mU6 episodes live in gitignored serum2/data")
 def test_real_mu6_episodes_carry_no_fabricated_provenance():
     rec_file = EXP_DIR / "vlp1_mu6_env1release_20260919_064310.json"
     raw = json.loads(rec_file.read_text())

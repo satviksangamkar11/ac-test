@@ -9,6 +9,7 @@ real observation JSON already written by direct visual inspection -- not a
 synthetic fixture -- so this exercises the actual seam end to end.
 """
 import json
+import pytest
 import sys
 from pathlib import Path
 
@@ -47,6 +48,9 @@ def test_transcript_first_visual_path_stops_at_stage_a_required_without_observat
     print("[PASS] test_transcript_first_visual_path_stops_at_stage_a_required_without_observation")
 
 
+@pytest.mark.skipif(
+    not (Path(ROOT) / "serum2" / "data" / "visual_frames" / "yt_89a28028e125" / "stage_a_observation_00018000.json").exists(),
+    reason="real mU6 Stage-A artifact lives in gitignored serum2/data")
 def test_transcript_first_visual_path_proceeds_with_real_stage_a_observation():
     from serum2.producer.producer_brain import ProducerBrain
 
