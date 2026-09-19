@@ -13,7 +13,8 @@ from typing import Any, Dict, List, Optional, Tuple
 from enum import Enum
 
 from serum2.reference.serum_atlas import normalize_control, get_control, Resolution
-from serum2.producer.contract_registry import ContractRegistry, Contract
+from serum2.producer.contract_registry import ContractRegistry
+from serum2.evidence.capability_contract import CapabilityContract
 from serum2.compiler.targets import SEMANTIC_TARGETS
 from serum2.compiler.mcp_intent import MCP_HOST_MAP
 
@@ -50,7 +51,7 @@ class ConceptRepresentation:
 
     # Data source references
     atlas_entry: Optional[Any] = None  # AtlasControl (if resolved)
-    capability_contract: Optional[Contract] = None  # if CAUSAL_VERIFIED exists
+    capability_contract: Optional[CapabilityContract] = None  # if CAUSAL_VERIFIED exists
     semantic_target_name: Optional[str] = None  # Brain-side target name from SEMANTIC_TARGETS
 
     # Semantic properties
@@ -221,7 +222,7 @@ class ConceptDerivationEngine:
 
     # ---- Helpers ----
 
-    def _find_contract(self, canonical_target: str) -> Tuple[Optional[Contract], Optional[str]]:
+    def _find_contract(self, canonical_target: str) -> Tuple[Optional[CapabilityContract], Optional[str]]:
         """Find a CAUSAL_VERIFIED contract for this target."""
         # Try to infer contract key from canonical target
         # e.g., "env1.decay" → "envelope_field_decay"
@@ -264,7 +265,7 @@ class ConceptDerivationEngine:
                 return target_name
         return None
 
-    def _operation_type_from_contract(self, contract: Contract) -> str:
+    def _operation_type_from_contract(self, contract: CapabilityContract) -> str:
         """Infer operation type from contract."""
         # Check contract metadata for operation hints
         if hasattr(contract, "operation_type"):
@@ -273,7 +274,7 @@ class ConceptDerivationEngine:
             return "enum"
         return "numeric"
 
-    def _value_domain_from_contract(self, contract: Contract) -> Optional[ValueDomain]:
+    def _value_domain_from_contract(self, contract: CapabilityContract) -> Optional[ValueDomain]:
         """Extract value domain from contract."""
         if not contract:
             return None

@@ -20,6 +20,7 @@ from serum2.producer.operation_spec import OperationInterpreter, OperationType
 from serum2.producer.request_context import ContextExtractor
 from serum2.producer.universal_intent import IntentFormationEngine, IntentValidator
 from serum2.producer.contract_registry import ContractRegistry
+from serum2.evidence.capability_contract import CapabilityContract
 
 
 class TestConceptRepresentation:
@@ -164,7 +165,7 @@ class TestOperationInterpreter:
     def test_returns_unknown_when_cannot_interpret(self):
         """Returns UNKNOWN operation when interpretation fails."""
         interp = OperationInterpreter()
-        spec = interp.interpret("xyz123abc")
+        spec = interp.interpret("xyzabc")  # no direction, no value, no toggle
 
         assert spec.operation == OperationType.UNKNOWN
         assert spec.certainty == 0.0
