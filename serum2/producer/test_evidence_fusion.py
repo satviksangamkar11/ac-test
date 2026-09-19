@@ -110,7 +110,7 @@ def test_snapshot_diff_is_deterministic():
     d2 = diff_snapshots(before, after)
     assert d1 == d2
     assert d1["changed_controls"] == [{"control_id": "env1.release", "before": "15 ms", "after": "36 ms"}]
-    assert d1["new_controls"] == ["filter1.type"]
+    assert d1["newly_observed_controls"] == ["filter1.type"]
     print("[PASS] test_snapshot_diff_is_deterministic")
 
 

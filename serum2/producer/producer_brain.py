@@ -219,6 +219,16 @@ class ProducerRequest:
     deterministic diff -> infer) instead of blind fixed-cadence sampling.
     None falls back to the legacy blind-sampling path, and the fallback is
     recorded in the trace rather than silently taken."""
+
+    stage_a_observation: Optional[Dict[str, Any]] = None
+    """The structured Stage-A visual-census dict, produced by the Claude
+    Code session directly inspecting the acquired frames (see
+    visual_reasoner.ingest_stage_a_observation() for the schema) -- NOT
+    from an embedded Anthropic SDK call. When the transcript-first visual
+    path is needed and this is None, execution stops with
+    execution_status="STAGE_A_REQUIRED" so the orchestrating session can
+    inspect the frames named in result.visual_evidence and re-call with
+    this field filled in. Ignored when visual evidence isn't needed."""
     """EXECUTE | CREATE | RECREATE_REFERENCE | DISCOVERY
 
     CREATE is for creation-style requests ("make a dark bass lead") as
@@ -965,17 +975,31 @@ class ProducerBrain:
         source_url: str,
         transcript_segments: List[Dict[str, Any]],
         transcript_sufficiency,
+        stage_a_observation: Optional[Dict[str, Any]] = None,
     ):
-        """Transcript-first visual evidence pipeline (VLP-1 correction).
+        """Transcript-first visual evidence pipeline (VLP-1 canonical architecture).
 
         transcript_query_planner locates WHERE to look (action-bearing
         mention + before/after window) -> acquire_frames_at_timestamps
         fetches ONLY those exact timestamps (no blind cadence sampling) ->
-        VisualReasoner.observe_frames reads exact UI values per frame
-        (OBSERVED only) -> diff_observed_states computes the before/after
-        change deterministically (no model call) -> infer_from_diffs derives
+        Stage A reads exact UI values + a full panel census per frame ->
+        diff_observed_states computes the before/after change
+        deterministically (no model call) -> infer_from_diffs derives
         production meaning FROM the diff (also deterministic — the exact
         value can never drift from what Stage A actually read off a frame).
+
+        CANONICAL PATH: Stage A vision is performed by the Claude Code
+        session itself (this project's model runtime), never by an embedded
+        Anthropic SDK client. `stage_a_observation` is the structured
+        observation dict Claude Code produces by directly inspecting the
+        acquired frames (see visual_reasoner.ingest_stage_a_observation()
+        for the exact contract/schema). When it is None, this method stops
+        right after frame acquisition and reports bundle.reasoning_error
+        asking the orchestrating session to inspect the acquired frames and
+        call this method again with stage_a_observation filled in -- it
+        does NOT fall back to VisualReasoner.observe_frames()'s legacy
+        Anthropic-SDK path, which is non-canonical (see that method's
+        docstring) and stays unused by this pipeline.
 
         Returns a VisualEvidenceBundle. bundle.query_plan records the plan
         that drove acquisition; bundle.acquisition_error is set (and the
@@ -988,7 +1012,7 @@ class ProducerBrain:
         )
         from serum2.source.acquire_visual_evidence import acquire_frames_at_timestamps
         from serum2.producer.visual_reasoner import (
-            VisualReasoner, diff_observed_states, infer_from_diffs,
+            ingest_stage_a_observation, diff_observed_states, infer_from_diffs,
         )
 
         segments = [
@@ -1025,10 +1049,18 @@ class ProducerBrain:
         if bundle.acquisition_error:
             return bundle
 
-        reasoner = VisualReasoner()
-        reasoner.observe_frames(bundle, target_hint=plan.target_name_hint)
-        if bundle.reasoning_error:
+        if stage_a_observation is None:
+            bundle.reasoning_error = (
+                "STAGE_A_REQUIRED: frames acquired at %r; the orchestrating "
+                "Claude Code session must now directly inspect them (a full "
+                "panel census, not scoped to target_hint=%r) and re-call "
+                "this method with stage_a_observation set to the resulting "
+                "observation dict. No Anthropic SDK call happens here by "
+                "design." % (plan.timestamps(), plan.target_name_hint)
+            )
             return bundle
+
+        ingest_stage_a_observation(bundle, stage_a_observation, target_hint=plan.target_name_hint)
 
         diffs = diff_observed_states(bundle)
         infer_from_diffs(bundle, diffs)
@@ -1226,7 +1258,13 @@ class ProducerBrain:
                             source_url=request.source_url,
                             transcript_segments=request.transcript_segments,
                             transcript_sufficiency=ts_check,
+                            stage_a_observation=request.stage_a_observation,
                         )
+                        if bundle.reasoning_error and bundle.reasoning_error.startswith("STAGE_A_REQUIRED"):
+                            result.visual_evidence = bundle.to_dict()
+                            result.execution_status = "STAGE_A_REQUIRED"
+                            result.error = bundle.reasoning_error
+                            return result
                     else:
                         bundle = self._acquire_and_reason_visual(
                             source_url=request.source_url,

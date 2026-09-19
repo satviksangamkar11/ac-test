@@ -218,6 +218,18 @@ class CanonicalStateDiff:
 # for the one control the transcript named.
 # ---------------------------------------------------------------------------
 
+OBSERVED = "OBSERVED"
+NOT_OBSERVED = "NOT_OBSERVED"
+OCCLUDED = "OCCLUDED"
+OUT_OF_VIEW = "OUT_OF_VIEW"
+AMBIGUOUS = "AMBIGUOUS"
+"""Observation-status vocabulary for ControlState/ModRouteState.status.
+A control absent from a snapshot's `controls` list, or present with a
+status other than OBSERVED, must never be read as 'removed' or 'reset' --
+see diff_snapshots(), which keeps these strictly separate from a genuine
+value change."""
+
+
 @dataclass
 class ControlState:
     """One observed UI control (knob/slider/dropdown/toggle/tab), scanned
@@ -243,6 +255,19 @@ class ControlState:
     None when visible but not legible -- never a guessed value."""
 
     unit: Optional[str] = None
+    screen_region: Optional[str] = None
+    """Where on the frame this was read, e.g. 'ENV1 panel, REL knob' or a
+    'x0,y0,x1,y1' pixel box -- provenance for a human/audit re-check,
+    not used by any diffing/fusion logic."""
+    status: str = OBSERVED
+    """One of OBSERVED/NOT_OBSERVED/OCCLUDED/OUT_OF_VIEW/AMBIGUOUS. Only
+    OBSERVED entries carry a meaningful `value`; a scanner that couldn't
+    read this control in this frame should still emit a ControlState with
+    status=OCCLUDED (visible panel, blocked view) or OUT_OF_VIEW (wrong
+    tab/panel entirely) rather than omitting it, wherever the scanner
+    positively knows WHY it couldn't read it -- omitting the entry means
+    'not scanned at all', which diff_snapshots treats identically to an
+    explicit NOT_OBSERVED."""
     confidence: float = 0.5
     frame_id: Optional[str] = None
     frame_hash: Optional[str] = None
@@ -265,6 +290,7 @@ class ModRouteState:
     the route's existence is legible, not its depth."""
     bipolar: Optional[bool] = None
     route_present: bool = True
+    status: str = OBSERVED
     confidence: float = 0.5
     frame_id: Optional[str] = None
     frame_hash: Optional[str] = None
@@ -316,34 +342,80 @@ def diff_snapshots(before: UIStateSnapshot, after: UIStateSnapshot) -> Dict[str,
     """Deterministic, control-by-control diff between two snapshots.
     Pure function, no model call -- same determinism guarantee as
     diff_observed_states() in visual_reasoner.py. Matches controls by
-    control_id; a control present in only one snapshot is reported as
-    added/removed, not silently ignored. Mod routes are matched by
+    control_id.
+
+    Invariants (do not weaken these without re-reading the architecture
+    note this function was written against):
+      - changed_controls   requires OBSERVED values at BOTH snapshots that
+                            differ. Never inferred from one-sided evidence.
+      - unchanged_controls requires OBSERVED values at BOTH snapshots that
+                            are equal.
+      - newly_observed_controls means 'visible in `after`, absent from
+                            `before`'s scan' -- i.e. newly OBSERVED, NOT a
+                            claim the control was newly created/added to
+                            the production state. A control can easily
+                            have existed all along outside a prior frame's
+                            visible panel/tab.
+      - not_observed_controls means insufficient visual evidence in at
+                            least one snapshot (absent entirely, or status
+                            OCCLUDED/OUT_OF_VIEW/NOT_OBSERVED/AMBIGUOUS).
+                            'Couldn't see it' must never collapse into
+                            'it changed' or 'it was removed'.
+      - removed_controls   requires POSITIVE disappearance evidence -- a
+                            scan that clearly shows the control/module/
+                            route no longer exists in the UI, not merely
+                            its absence from one snapshot's controls list.
+                            Nothing in this data model currently supplies
+                            that positive signal, so this stays honestly
+                            empty; it exists so a future caller with real
+                            disappearance evidence (e.g. a tab-structure
+                            diff) has somewhere to put it, rather than
+                            repurposing not_observed_controls for it.
+    Mod routes get the same not-observed-vs-removed split, matched by
     (source, destination) pair."""
+
+    def _observed(c: ControlState) -> bool:
+        return c.status == OBSERVED
+
     before_by_id = {c.control_id: c for c in before.controls}
     after_by_id = {c.control_id: c for c in after.controls}
 
     changed_controls = []
-    for cid, a in after_by_id.items():
-        b = before_by_id.get(cid)
-        if b is None:
-            continue  # a control absent from `before` isn't a "change", see new_controls
-        if b.value != a.value:
-            changed_controls.append({"control_id": cid, "before": b.value, "after": a.value})
-    new_controls = [cid for cid in after_by_id if cid not in before_by_id]
-    removed_controls = [cid for cid in before_by_id if cid not in after_by_id]
+    unchanged_controls = []
+    not_observed_controls = []
+    newly_observed_controls = []
+
+    all_ids = set(before_by_id) | set(after_by_id)
+    for cid in sorted(all_ids):
+        b, a = before_by_id.get(cid), after_by_id.get(cid)
+        b_ok, a_ok = b is not None and _observed(b), a is not None and _observed(a)
+        if b_ok and a_ok:
+            if b.value != a.value:
+                changed_controls.append({"control_id": cid, "before": b.value, "after": a.value})
+            else:
+                unchanged_controls.append(cid)
+        elif a_ok and b is None:
+            newly_observed_controls.append(cid)  # OBSERVED in `after`, wasn't in `before` at all
+        else:
+            not_observed_controls.append(cid)  # occluded/out-of-view/absent in either frame
+
+    removed_controls: List[str] = []
 
     def _route_key(r: ModRouteState):
         return (r.source, r.destination)
 
-    before_routes = {_route_key(r): r for r in before.mod_routes if r.route_present}
-    after_routes = {_route_key(r): r for r in after.mod_routes if r.route_present}
+    before_routes = {_route_key(r): r for r in before.mod_routes if r.route_present and r.status == OBSERVED}
+    after_routes = {_route_key(r): r for r in after.mod_routes if r.route_present and r.status == OBSERVED}
     added_routes = [after_routes[k].to_dict() for k in after_routes if k not in before_routes]
     removed_routes = [before_routes[k].to_dict() for k in before_routes if k not in after_routes]
 
     return {
         "before_frame_id": before.frame_id, "after_frame_id": after.frame_id,
         "changed_controls": changed_controls,
-        "new_controls": new_controls, "removed_controls": removed_controls,
+        "unchanged_controls": unchanged_controls,
+        "newly_observed_controls": newly_observed_controls,
+        "not_observed_controls": not_observed_controls,
+        "removed_controls": removed_controls,
         "added_routes": added_routes, "removed_routes": removed_routes,
     }
 
@@ -480,7 +552,26 @@ class VisualEvidenceBundle:
     query_plan: Optional[Dict[str, Any]] = None
     """The VisualQueryPlan (as a dict) that drove targeted frame acquisition,
     when transcript-first planning was used. None for legacy fixed-cadence
-    acquisition."""
+    acquisition. NOTE: this plan governs WHICH TIMESTAMPS get frames, never
+    which controls get scanned once a frame exists -- see ui_state_snapshots."""
+
+    stage_a_provenance: Optional[Dict[str, Any]] = None
+    """Machine-checkable proof of HOW ui_state_snapshots was produced, e.g.
+    {"observer": "claude_code", "observation_mode": "direct_visual_inspection",
+    "model_api_used": false}. Populated by
+    visual_reasoner.ingest_stage_a_observation() from the observation dict's
+    own top-level provenance fields -- this is what makes "no API was used"
+    a checkable fact on the persisted bundle/episode, not just a claim in a
+    session transcript."""
+
+    ui_state_snapshots: List["UIStateSnapshot"] = field(default_factory=list)
+    """One full panel-by-panel census per frame, populated by
+    VisualReasoner.observe_frames(). Independent of any transcript-named
+    target -- observe_frames() enumerates every legible control/route in
+    every visible panel, regardless of what (if anything) the transcript
+    mentioned. This is the primary Stage-A output; observed_canonical_states
+    (below) is a narrower, target-scoped convenience view derived from the
+    same frames for Stage B's diff_observed_states()/infer_from_diffs()."""
 
     unknown: List[str] = field(default_factory=list)
     """Things Stage A (observe_frames) explicitly could not determine, e.g.
@@ -522,6 +613,8 @@ class VisualEvidenceBundle:
             "interpretations": [i.to_dict() for i in self.interpretations],
             "observed_canonical_states": [s.to_dict() for s in self.observed_canonical_states],
             "canonical_diffs": [d.to_dict() for d in self.canonical_diffs],
+            "ui_state_snapshots": [s.to_dict() for s in self.ui_state_snapshots],
+            "stage_a_provenance": self.stage_a_provenance,
             "query_plan": self.query_plan,
             "unknown": self.unknown,
             "model_metadata": self.model_metadata.to_dict() if self.model_metadata else None,
@@ -551,6 +644,10 @@ class VisualEvidenceBundle:
         bundle.observed_canonical_states = [
             ObservedCanonicalState(**s) for s in data.get("observed_canonical_states", [])
         ]
+        bundle.ui_state_snapshots = [
+            UIStateSnapshot.from_dict(s) for s in data.get("ui_state_snapshots", [])
+        ]
+        bundle.stage_a_provenance = data.get("stage_a_provenance")
         bundle.canonical_diffs = [
             CanonicalStateDiff(
                 target=d["target"],

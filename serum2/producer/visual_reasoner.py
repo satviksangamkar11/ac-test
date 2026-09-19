@@ -48,6 +48,10 @@ from serum2.source.visual_evidence import (
     VisualInterpretation,
     ObservedCanonicalState,
     CanonicalStateDiff,
+    ControlState,
+    ModRouteState,
+    UIStateSnapshot,
+    OBSERVED,
 )
 
 # The visual model is fixed and not caller-configurable.
@@ -115,19 +119,38 @@ Frame data follows as images with their frame_ids and timestamps.
 
 _OBSERVE_ONLY_SYSTEM_PROMPT = """\
 You are a video frame analyst specializing in music production software.
-Your ONLY task is to report what is literally visible in each frame.
+Your task is to perform a COMPLETE panel-by-panel census of every frame:
+identify every visible plugin/DAW panel, then enumerate every legible
+control and modulation route in each panel — not just one named target.
 
 Rules:
-- Describe only what is visually present. Do NOT interpret what it means,
-  why it might have changed, or what the producer is trying to achieve.
-- If a specific control is named as the target, read its EXACT displayed
-  value (the number/unit shown on screen, e.g. "220 ms", "34%", "1.2 kHz").
-  If you cannot read it precisely, say so and give your best estimate with
-  a low confidence rather than fabricating an exact figure.
-- If Serum 2 is not visible in a frame, say so clearly.
-- Do NOT propose a production concept, a direction (increase/decrease), or
-  any narrative about intent. That is a separate step this response is not
-  part of.
+- A transcript excerpt may be supplied as CONTEXT for what part of the
+  video this is, and MAY be given as an "emphasis hint" naming a control
+  to pay extra attention to. It NEVER limits what you report: scan and
+  report every legible control in every visible panel regardless of
+  whether the transcript mentioned it. A tutorial routinely changes
+  controls it never narrates out loud — the frame is the evidence, not
+  the transcript.
+- For each control you can see, report control_id (a stable machine key
+  like "env1.release", "oscA.unison", "lfo3.shape", "filter1.cutoff" —
+  lowercase module name + '.' + parameter name, reusing the SAME
+  control_id for the same physical control across frames), the UI's own
+  label, control_type, its exact displayed value with unit if legible, and
+  status: "OBSERVED" (value read cleanly), "AMBIGUOUS" (control visible,
+  value unclear/blurry — give a best-effort value at low confidence),
+  "OCCLUDED" (control's screen position is visible in principle but
+  something is blocking it), or "OUT_OF_VIEW" (this panel/tab isn't the
+  frontmost one in this frame, so its controls cannot be read at all).
+  A knob whose position is visible but has no numeric readout on screen
+  still gets a ControlState entry with status OBSERVED and value null —
+  do NOT guess a number from knob angle.
+- Also report every visible modulation-matrix route (source, destination,
+  amount if legible, bipolar if legible) — a tutorial can create a route
+  purely by dragging, without ever describing it verbally.
+- Do NOT interpret what any of this means, why it might have changed, or
+  what the producer is trying to achieve. That is a separate step this
+  response is not part of.
+- Do NOT fabricate a value, control, or route that isn't actually visible.
 
 Respond ONLY with valid JSON matching the schema provided in the user message.
 """
@@ -135,30 +158,52 @@ Respond ONLY with valid JSON matching the schema provided in the user message.
 _OBSERVE_ONLY_USER_PROMPT_TEMPLATE = """\
 Analyze the following {n_frames} video frame(s) from a Serum 2 tutorial.
 {target_instruction}
-For each frame, report ONLY what is visible — no interpretation.
+For each frame, perform a full panel-by-panel census: identify every
+visible panel (OSC A/B/C, Sub/Noise, Filter 1/2, ENV1-4, LFO1-6, Matrix,
+FX, Macros, Global), then enumerate every legible control and route in
+each one. Report ONLY what is visible — no interpretation.
 
 Respond with this exact JSON schema:
 {{
+  "stage_a_provenance": {{
+    "observer": "<who performed this census, e.g. 'claude_code'>",
+    "observation_mode": "<e.g. 'direct_visual_inspection'>",
+    "model_api_used": <true|false>
+  }},
   "frames": [
     {{
       "frame_id": "<frame_id from input>",
       "timestamp_sec": <float>,
       "serum_visible": <true|false>,
-      "observations": [
+      "visible_panel": "<which panel/tab is frontmost, e.g. 'ENV1', 'OSC+ENV1+LFO3', or null>",
+      "controls": [
         {{
-          "observation_text": "<literal description of what is visible>",
-          "observable_type": "<ui_control|parameter_value|waveform_display|automation_lane|preset_name|plugin_view|general>",
-          "ui_element": "<element name or null>",
-          "estimated_value": "<visual estimate with unit or null>",
+          "control_id": "<stable machine key, e.g. 'env1.release', 'oscA.unison', 'lfo3.shape'>",
+          "control_type": "<knob|slider|dropdown|toggle|tab|badge_count|other>",
+          "label": "<the UI's own displayed label, or null>",
+          "value": "<exact displayed value with unit, e.g. '36 ms', or null if not numerically legible>",
+          "unit": "<unit alone if separable, or null>",
+          "status": "<OBSERVED|AMBIGUOUS|OCCLUDED|OUT_OF_VIEW>",
+          "screen_region": "<brief location description, e.g. 'ENV1 panel, REL knob', or null>",
+          "confidence": <0.0-1.0>
+        }}
+      ],
+      "mod_routes": [
+        {{
+          "source": "<e.g. 'lfo0', 'macro1'>",
+          "destination": "<e.g. 'filter0.cutoff'>",
+          "amount": "<displayed amount with unit if legible, or null>",
+          "bipolar": <true|false|null>,
+          "status": "<OBSERVED|AMBIGUOUS|OCCLUDED|OUT_OF_VIEW>",
           "confidence": <0.0-1.0>
         }}
       ],
       "target_reading": {{
-        "target": "<the named target, or null if none was given>",
+        "target": "<the named emphasis target, or null if none was given>",
         "value": "<exact displayed value with unit, e.g. '220 ms', or null if not legible>",
         "confidence": <0.0-1.0>
       }},
-      "unknown": ["<something you could not determine from this frame, e.g. 'exact UI gesture used to change the value', 'which secondary control this affects' — empty list if nothing is unclear>"]
+      "unknown": ["<something you could not determine from this frame at all, e.g. 'exact UI gesture used to change the value' — empty list if nothing is unclear>"]
     }}
   ]
 }}
@@ -195,6 +240,110 @@ _TARGET_TO_CONCEPT: Dict[str, str] = {
     "Filter.Cutoff": "filter-cutoff",
     "Filter.Resonance": "filter-cutoff",  # no separate resonance concept in the brain yet
 }
+
+
+def ingest_stage_a_observation(
+    bundle: VisualEvidenceBundle,
+    data: Dict[str, Any],
+    target_hint: Optional[str] = None,
+) -> VisualEvidenceBundle:
+    """The real Stage-A entry point. Pure evidence-layer function -- no
+    Anthropic SDK, no API key, no model call of any kind. Validates and
+    normalizes an already-produced observation dict (matching the schema
+    documented in _OBSERVE_ONLY_USER_PROMPT_TEMPLATE) into
+    bundle.ui_state_snapshots / observed_canonical_states / observations /
+    unknown.
+
+    `data` is produced by WHOEVER actually performed the visual reasoning
+    -- in this project that is the Claude Code session itself inspecting
+    frame images directly (via its own Read tool), not a second Claude
+    instance reached through ANTHROPIC_API_KEY/the anthropic SDK.
+    VisualReasoner.observe_frames() (see its class docstring: NON-CANONICAL
+    / LEGACY) is the only other producer of this shape, for the rare case a
+    real API key is genuinely available outside this pipeline -- it funnels
+    through this same function so neither path can silently diverge in
+    what counts as a valid observation.
+
+    `data` should carry top-level provenance -- {"observer": ..., "
+    observation_mode": ..., "model_api_used": bool} -- captured verbatim
+    into bundle.stage_a_provenance so "no API was used" is a checkable
+    fact on the bundle/episode, not just a claim. Missing provenance is
+    recorded as an `unknown` entry rather than silently accepted.
+    """
+    provenance = data.get("stage_a_provenance")
+    if provenance is None:
+        bundle.unknown.append(
+            "Stage-A observation dict carried no stage_a_provenance block "
+            "(observer/observation_mode/model_api_used) -- 'no API was "
+            "used' cannot be verified for this bundle, only assumed."
+        )
+    else:
+        bundle.stage_a_provenance = provenance
+
+    for frame_data in data.get("frames", []):
+        frame_id = frame_data.get("frame_id", "unknown")
+        ts = float(frame_data.get("timestamp_sec", 0.0))
+        frame_hash = next(
+            (f.artifact_hash for f in bundle.frames if f.frame_id == frame_id), ""
+        )
+
+        controls = [
+            ControlState(
+                control_id=c["control_id"], control_type=c.get("control_type", "other"),
+                label=c.get("label"), value=c.get("value"), unit=c.get("unit"),
+                status=c.get("status", OBSERVED), screen_region=c.get("screen_region"),
+                confidence=float(c.get("confidence", 0.5)),
+                frame_id=frame_id, frame_hash=frame_hash, timestamp_sec=ts,
+            )
+            for c in frame_data.get("controls", []) if c.get("control_id")
+        ]
+        mod_routes = [
+            ModRouteState(
+                source=r.get("source"), destination=r.get("destination"),
+                amount=r.get("amount"), bipolar=r.get("bipolar"),
+                status=r.get("status", OBSERVED),
+                confidence=float(r.get("confidence", 0.5)),
+                frame_id=frame_id, frame_hash=frame_hash, timestamp_sec=ts,
+            )
+            for r in frame_data.get("mod_routes", [])
+        ]
+        if controls or mod_routes:
+            bundle.ui_state_snapshots.append(UIStateSnapshot(
+                frame_id=frame_id, frame_hash=frame_hash, timestamp_sec=ts,
+                plugin="Serum 2" if frame_data.get("serum_visible") else None,
+                visible_panel=frame_data.get("visible_panel"),
+                controls=controls, mod_routes=mod_routes,
+            ))
+
+        for obs_data in frame_data.get("observations", []):
+            obs = VisualObservation(
+                frame_id=frame_id,
+                timestamp_sec=ts,
+                observation_text=obs_data.get("observation_text", ""),
+                observable_type=obs_data.get("observable_type", "general"),
+                ui_element=obs_data.get("ui_element"),
+                estimated_value=obs_data.get("estimated_value"),
+                confidence=float(obs_data.get("confidence", 0.5)),
+            )
+            if obs.observation_text:
+                bundle.observations.append(obs)
+
+        reading = frame_data.get("target_reading") or {}
+        if target_hint and reading.get("value"):
+            bundle.observed_canonical_states.append(ObservedCanonicalState(
+                target=target_hint,
+                value=reading["value"],
+                frame_id=frame_id,
+                timestamp_sec=ts,
+                frame_hash=frame_hash,
+                confidence=float(reading.get("confidence", 0.5)),
+            ))
+
+        for unk in frame_data.get("unknown", []):
+            if unk:
+                bundle.unknown.append("[t=%.1fs] %s" % (ts, unk))
+
+    return bundle
 
 
 def diff_observed_states(bundle: VisualEvidenceBundle) -> List[CanonicalStateDiff]:
@@ -279,7 +428,24 @@ def infer_from_diffs(
 
 
 class VisualReasoner:
-    """Boundary for visual inference. Model is fixed; not caller-selectable."""
+    """NON-CANONICAL / LEGACY. Not part of the frozen VLP-1 pipeline.
+
+    The canonical Stage-A path is: Claude Code (this project's model
+    runtime) directly inspects frame images and produces a structured
+    observation dict, which is fed to the module-level, model-free
+    ingest_stage_a_observation() function above. producer_brain.py's
+    _acquire_and_reason_visual_transcript_first() calls ONLY that function
+    — it never instantiates this class.
+
+    This class exists only for the case a real ANTHROPIC_API_KEY is
+    genuinely available and someone wants a self-contained API-driven
+    fallback outside the pipeline (e.g. ad-hoc scripting, not this
+    project's producer flow). It builds the exact same observation-dict
+    shape via `client.messages.create(...)` and still funnels through
+    ingest_stage_a_observation(), so it cannot silently diverge in what
+    counts as a valid observation — but it is never invoked by the Brain,
+    and reintroducing a call to it from producer_brain.py would violate
+    the hard invariant NO ANTHROPIC SDK IN PRODUCER PIPELINE."""
 
     def __init__(self, api_key: Optional[str] = None):
         """Initialize with optional API key (falls back to ANTHROPIC_API_KEY env var,
@@ -342,16 +508,24 @@ class VisualReasoner:
         self, bundle: VisualEvidenceBundle, target_hint: Optional[str] = None,
     ) -> VisualEvidenceBundle:
         """Stage A: OBSERVED ONLY. No interpretation, no production concept,
-        no direction — see module docstring. When target_hint names a
-        specific parameter (e.g. 'Env1.Release', from a
-        transcript_query_planner.VisualQueryPlan), each frame is also asked
-        for that target's exact displayed value, populating
-        bundle.observed_canonical_states with ObservedCanonicalState records
-        that carry the frame's hash for independent traceability.
+        no direction — see module docstring.
 
-        Populates bundle.observations, bundle.observed_canonical_states, and
-        bundle.unknown. Never touches bundle.interpretations — that is
-        infer_from_diffs()'s job, run over the diffs this produces.
+        Default behavior is a COMPLETE panel-by-panel census of every
+        frame: every legible control and modulation route in every visible
+        panel is captured into bundle.ui_state_snapshots (one UIStateSnapshot
+        per frame), regardless of what the transcript did or didn't mention.
+        `target_hint` (e.g. 'Env1.Release', from a
+        transcript_query_planner.VisualQueryPlan) is ONLY an emphasis hint —
+        it tells the model where to look extra closely and additionally
+        populates bundle.observed_canonical_states (a narrower, target-scoped
+        convenience view Stage B's diff_observed_states()/infer_from_diffs()
+        already consume) — it never narrows what gets captured in
+        ui_state_snapshots. Passing target_hint=None still performs the full
+        census.
+
+        Populates bundle.ui_state_snapshots, bundle.observations,
+        bundle.observed_canonical_states, and bundle.unknown. Never touches
+        bundle.interpretations — that is infer_from_diffs()'s job.
         """
         if not bundle.frames:
             bundle.reasoning_error = "No frames to reason about"
@@ -370,9 +544,13 @@ class VisualReasoner:
             return bundle
 
         target_instruction = (
-            "The specific target to read at every frame, if visible, is: %r." % target_hint
+            "As an EMPHASIS HINT ONLY (it does not limit what you report -- "
+            "still perform the full panel census below), pay extra close "
+            "attention to this target's exact displayed value at every "
+            "frame: %r." % target_hint
             if target_hint else
-            "No specific target was named; report target_reading as all-null and focus on observations."
+            "No emphasis target was named; report target_reading as all-null "
+            "and perform the full panel census below."
         )
         user_prompt = _OBSERVE_ONLY_USER_PROMPT_TEMPLATE.format(
             n_frames=len(bundle.frames), target_instruction=target_instruction,
@@ -467,41 +645,7 @@ class VisualReasoner:
         if err:
             bundle.reasoning_error = err
             return
-
-        for frame_data in data.get("frames", []):
-            frame_id = frame_data.get("frame_id", "unknown")
-            ts = float(frame_data.get("timestamp_sec", 0.0))
-            frame_hash = next(
-                (f.artifact_hash for f in bundle.frames if f.frame_id == frame_id), ""
-            )
-
-            for obs_data in frame_data.get("observations", []):
-                obs = VisualObservation(
-                    frame_id=frame_id,
-                    timestamp_sec=ts,
-                    observation_text=obs_data.get("observation_text", ""),
-                    observable_type=obs_data.get("observable_type", "general"),
-                    ui_element=obs_data.get("ui_element"),
-                    estimated_value=obs_data.get("estimated_value"),
-                    confidence=float(obs_data.get("confidence", 0.5)),
-                )
-                if obs.observation_text:
-                    bundle.observations.append(obs)
-
-            reading = frame_data.get("target_reading") or {}
-            if target_hint and reading.get("value"):
-                bundle.observed_canonical_states.append(ObservedCanonicalState(
-                    target=target_hint,
-                    value=reading["value"],
-                    frame_id=frame_id,
-                    timestamp_sec=ts,
-                    frame_hash=frame_hash,
-                    confidence=float(reading.get("confidence", 0.5)),
-                ))
-
-            for unk in frame_data.get("unknown", []):
-                if unk:
-                    bundle.unknown.append("[t=%.1fs] %s" % (ts, unk))
+        ingest_stage_a_observation(bundle, data, target_hint)
 
     def _parse_response(self, raw_text: str, bundle: VisualEvidenceBundle) -> None:
         """Parse the model response and populate bundle observations/interpretations."""
