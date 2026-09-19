@@ -88,10 +88,10 @@ def test_planner_refuses_unverified_osc2_enable_and_keeps_axes_visible():
     assert by_target["filter1.cutoff"].contract_status == "CAUSAL_VERIFIED"
     assert by_target["filter1.cutoff"].candidate.route_type == RouteType.VST3_HOST_PARAMETER
     assert by_target["env2.decay"].bucket == QualificationBucket.NEEDS_CAUSAL
-    assert by_target["oscB.enabled"].bucket == QualificationBucket.NEEDS_BINDING
+    # oscB.enabled now has SERUM_PRESET_STRUCTURAL_BINDING from production mapping
+    assert by_target["oscB.enabled"].bucket == QualificationBucket.READY_FOR_STRUCTURAL
+    assert by_target["oscB.enabled"].candidate.route_type == RouteType.SERUM_PRESET_STRUCTURAL_BINDING
     assert by_target["matrix.amount"].bucket == QualificationBucket.NEEDS_BINDING
-    assert by_target["oscB.enabled"].candidate.binding is None
-    assert by_target["oscB.enabled"].candidate.verified is False
 
 
 def test_exact_host_binding_becomes_ready_for_structural():

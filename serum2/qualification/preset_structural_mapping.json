@@ -1,0 +1,24 @@
+{
+  "mapping_version": "PHASE3-OSC2-ENABLE-2026-09-20",
+  "comment": "SERUM_PRESET_STRUCTURAL_BINDING execution bindings for OSC2 targets (Phase 3B)",
+  "notes": [
+    "These paths are derived from serum-mcp PresetSpec evidence: oscillators[1].enabled corresponds to Osc B (OSC2) in the semantic model",
+    "Paths use the canonical serum-mcp field accessor syntax from PresetSpec schema",
+    "These targets are qualified via SERUM_PRESET_STRUCTURAL_BINDING mutation (file-based, no live plugin involved)",
+    "ExecutionBinding.mutation_type = 'SERUM_PRESET_STRUCTURAL'",
+    "ExecutionBinding.resolver_operation_id = the path below",
+    "ExecutionBinding.binding_source = 'preset_structural_mapping.json' (producer-level configuration)",
+    "This is the first serum-mcp preset-level binding mapping, extracted from Phase 3B OSC2 qualification evidence"
+  ],
+  "bindings": {
+    "oscillator_field_OSC2-ENABLE": {
+      "mutation_type": "SERUM_PRESET_STRUCTURAL",
+      "resolver_operation_id": "oscillators[1].enabled",
+      "evidence_source": "OSC2.Enable qualified via serum-mcp structural verification (2026-09-19)",
+      "semantic_target": "OSC2.Enable",
+      "qualification_file": "osc2_enable_qualification.json",
+      "status": "STRUCTURAL_VERIFIED",
+      "operation_family": "TOGGLE"
+    }
+  }
+}
