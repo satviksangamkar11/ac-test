@@ -4,11 +4,13 @@ A candidate is a *proposal* about (target, operation). It carries no route, cont
 admission or tool call and cannot execute. Ranking orders candidates; it never executes, admits,
 invents a capability, or silently replaces a target:
 
-  * the intent's own primary candidate is always present;
-  * a candidate that changes the target sits in a lower tier than every same-target candidate, so it
-    is never selected while a same-target candidate exists (target replacement is structurally
-    impossible for the selected candidate);
-  * skill evidence can only reorder alternatives -- its weight is too small to displace the primary.
+  * the intent's own primary candidate is always present, so a same-target fallback always exists;
+  * SAME target: candidates genuinely compete on score, and evidence may promote a same-target operation
+    variant over the primary. Such an override is never silent: RankedSet.selected_overrides_primary and
+    the audit record say so;
+  * DIFFERENT target: a candidate that changes the target sits in a lower tier than every same-target
+    candidate, so it is never selected (target replacement is structurally impossible) and to_intent
+    refuses it.
 
 The selected candidate is handed to Capability Resolution / Admission unchanged in kind: a
 UniversalProductionIntent (see to_intent). Nothing here imports the Brain, admission, or a backend.
@@ -26,10 +28,11 @@ SKILL_VARIANT = "SKILL_VARIANT"
 REFERENCE_ALTERNATIVE = "REFERENCE_ALTERNATIVE"
 ORIGINS = frozenset({PRIMARY, SKILL_VARIANT, REFERENCE_ALTERNATIVE})
 
-# Ranking weights. WEIGHT_FIT > 2*WEIGHT_SKILL guarantees skill evidence (confidence <= 1) can never lift a
-# non-primary candidate above the primary: 0.5*W_FIT + W_SKILL < W_FIT.
-WEIGHT_FIT = 0.8
-WEIGHT_SKILL = 0.2
+# Ranking weights (advisory scoring only). The primary starts ahead (fit 1.0 vs 0.5); a variant overtakes it only
+# with strong verified evidence (a single-episode skill has confidence 0.2 and cannot).
+WEIGHT_FIT = 0.5
+WEIGHT_SKILL = 0.3
+_OPPOSITE = {"increase": "decrease", "decrease": "increase"}
 _FIT = {PRIMARY: 1.0, SKILL_VARIANT: 0.5, REFERENCE_ALTERNATIVE: 0.5}
 
 
@@ -108,6 +111,8 @@ class CandidateGenerator:
                 OperationType(op)
             except ValueError:
                 continue                                    # skill operation not in the generic operation model
+            if _OPPOSITE.get(p_op) == op:
+                continue                                    # never contradict the direction the request asked for
             raw = (a.trigger.get("observed_change") or {}).get("after")
             operand = _freeze({"raw": str(raw)}) if raw is not None else None
             out.append(Candidate(_cid(target, op, SKILL_VARIANT, operand), target, op, operand, SKILL_VARIANT, False,
@@ -147,6 +152,16 @@ class RankedSet:
     def selected(self) -> RankedCandidate:
         return self.ranked[0]
 
+    @property
+    def selected_overrides_primary(self) -> bool:
+        return self.selected.candidate.origin != PRIMARY
+
+    def to_audit(self) -> Dict[str, Any]:
+        return {"candidate_layer": "ADVISORY",
+                "candidates": [dict(r.candidate.to_dict(), rank=r.rank, score=r.score, features=dict(r.features)) for r in self.ranked],
+                "selected_candidate_id": self.selected.candidate.candidate_id,
+                "selected_overrides_primary": self.selected_overrides_primary}
+
 
 class CandidateRanker:
     """Deterministic ranking: (target-change tier, -score, id). Advisory; returns ordering + features only."""
@@ -177,7 +192,10 @@ def to_intent(candidate: Candidate, intent: Any) -> Any:
         raise ValueError("candidate changes the target; ranking may not replace a target")
     if candidate.origin == PRIMARY:
         return intent
-    spec = OperationSpec(operation=OperationType(candidate.operation),
+    op = OperationType(candidate.operation)
+    spec = OperationSpec(operation=op,
+                         direction=op.value if op in (OperationType.INCREASE, OperationType.DECREASE) else None,
+                         target_value=(candidate.operand or {}).get("raw"),
                          base_phrase=intent.operation.base_phrase, certainty=intent.operation.certainty,
                          interpretation_chain=list(intent.operation.interpretation_chain) +
                          ["advisory candidate %s (not authority)" % candidate.candidate_id])

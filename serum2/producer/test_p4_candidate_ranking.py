@@ -138,19 +138,34 @@ def test_target_change_is_never_ranked_above_any_same_target_candidate():
     assert min(changed) > max(same)
 
 
-def test_even_maximal_skill_confidence_cannot_displace_the_primary():
-    rs = RANK.rank(GEN.generate(intent(), [advisory(conf=1.0)]))
-    assert rs.selected.candidate.origin == PRIMARY
-    assert cr.WEIGHT_FIT * 0.5 + cr.WEIGHT_SKILL * 1.0 < cr.WEIGHT_FIT
+def test_weak_evidence_cannot_override_but_strong_same_target_evidence_can():
+    weak = RANK.rank(GEN.generate(intent(), [advisory(conf=0.2)]))
+    assert weak.selected.candidate.origin == PRIMARY and weak.selected_overrides_primary is False
+    strong = RANK.rank(GEN.generate(intent(), [advisory(conf=0.95)]))
+    assert strong.selected.candidate.origin == SKILL_VARIANT and strong.selected_overrides_primary is True
+    assert strong.selected.candidate.canonical_target == "env1.release"      # competed on the SAME target
+
+
+def test_no_evidence_however_strong_can_promote_a_target_change():
+    rs = RANK.rank(GEN.generate(intent(), [advisory(conf=1.0), advisory(target="env2.release", conf=1.0)], ["env2.release"]))
+    assert not rs.selected.candidate.target_changed
+    assert [r.candidate.target_changed for r in rs.ranked] == sorted(r.candidate.target_changed for r in rs.ranked)
+
+
+def test_override_is_visible_in_the_audit_record():
+    rs = RANK.rank(GEN.generate(intent(), [advisory(conf=0.95)]))
+    a = rs.to_audit()
+    assert a["candidate_layer"] == "ADVISORY" and a["selected_overrides_primary"] is True
+    assert a["selected_candidate_id"] == rs.selected.candidate.candidate_id and len(a["candidates"]) == 2
 
 
 def test_skill_confidence_reorders_alternatives_among_themselves():
-    hi = advisory(op="SET", conf=0.9, sid="hi")
+    hi = advisory(op="SET", conf=0.6, sid="hi")
     lo = advisory(op="TOGGLE_ON", conf=0.1, sid="lo")
     got = [r.candidate.operation for r in RANK.rank(GEN.generate(intent(), [lo, hi])).ranked]
     assert got == ["increase", "set", "toggle_on"]
     got = [r.candidate.operation for r in RANK.rank(GEN.generate(intent(), [advisory(op="SET", conf=0.1, sid="a"),
-                                                                             advisory(op="TOGGLE_ON", conf=0.9, sid="b")])).ranked]
+                                                                             advisory(op="TOGGLE_ON", conf=0.6, sid="b")])).ranked]
     assert got == ["increase", "toggle_on", "set"]
 
 
@@ -240,3 +255,11 @@ def test_tier_keeps_target_change_behind_same_target_variant_even_when_fit_and_i
     rs = RANK.rank(GEN.generate(intent(), [advisory()], ["env1.attack"]))
     assert [(r.candidate.origin, r.candidate.canonical_target) for r in rs.ranked] == [
         (PRIMARY, "env1.release"), (SKILL_VARIANT, "env1.release"), (REFERENCE_ALTERNATIVE, "env1.attack")]
+
+
+def test_variant_never_contradicts_the_requested_direction():
+    only_primary = GEN.generate(intent(op=OperationType.INCREASE), [advisory(op="DECREASE", conf=1.0)])
+    assert [c.origin for c in only_primary] == [PRIMARY]
+    only_primary = GEN.generate(intent(op=OperationType.DECREASE), [advisory(op="INCREASE", conf=1.0)])
+    assert [c.origin for c in only_primary] == [PRIMARY]
+    assert len(GEN.generate(intent(op=OperationType.INCREASE), [advisory(op="SET", conf=1.0)])) == 2   # non-opposing is fine

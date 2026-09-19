@@ -427,7 +427,9 @@ class ProducerResult:
 class ProducerBrain:
     """Stateful (caches registry / selector) producer brain."""
 
-    def __init__(self):
+    def __init__(self, skill_retriever=None):
+        # Optional advisory skill source (P3). It only feeds candidate ranking; it has no authority.
+        self._skill_retriever = skill_retriever
         self._registry = ContractRegistry()
         self._selector = RouteSelector()
         # Ordered explicit-target resolution over EXISTING registries (architecture 17/18): no tables here.
@@ -1307,7 +1309,15 @@ class ProducerBrain:
         ctx = self._b1_context.extract(request.user_intent, request.semantic_target)
         intent = self._b1_intent.form_intent(rep.canonical_target, rep, op, ctx, input_request=request)
         result.resolution_mode = "B1_CANONICAL"
-        result.b1_intent = dict(intent.to_dict(), resolution_mode="B1_CANONICAL", b1_used=True)
+        # P4: advisory candidates -> ranking -> selected candidate becomes the intent handed on to Capability
+        # Resolution and Admission (unchanged). The candidate layer cannot execute, admit or add capability.
+        from serum2.producer.candidate_ranking import CandidateGenerator, CandidateRanker, to_intent
+        from serum2.producer.skill_library import advise
+        advisories = advise(self._skill_retriever, intent.canonical_target) if self._skill_retriever else []
+        ranked = CandidateRanker().rank(CandidateGenerator().generate(intent, advisories))
+        intent = to_intent(ranked.selected.candidate, intent)
+        result.b1_intent = dict(intent.to_dict(), resolution_mode="B1_CANONICAL", b1_used=True, **ranked.to_audit())
+        op = intent.operation
         if op.direction == "decrease":
             return SemanticDirection.SHORTER
         if op.direction == "increase":
