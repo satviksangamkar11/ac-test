@@ -9,7 +9,7 @@ from __future__ import annotations
 import json
 import os
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from pathlib import Path
 from types import MappingProxyType
 from typing import Any, Dict, Iterable, List, Mapping, Optional, Tuple
@@ -147,7 +147,7 @@ def extract_skill(episode: Any, index: int = 0) -> SkillRecord:
         supporting_evidence=({"episode_id": episode.experience_id, "event_id": d.get("event_id"),
                               "before": d["observed_before"], "after": d["observed_after"],
                               "readback_expected": rb["expected"], "readback_observed": rb["observed"],
-                              "fusion_status": d.get("fusion_status")},),
+                              "fusion_status": d.get("fusion_status"), "verified": True},),
         outcome_stats={"attempts": attempts, "verified_successes": verified, "distinct_episodes": 1},
         confidence=verified / (attempts + CONFIDENCE_PRIOR),
         provenance={"source_episode_ids": [episode.experience_id], "source_id": getattr(episode, "source_id", None),
@@ -170,11 +170,70 @@ def skill_from_dict(d: Mapping[str, Any]) -> SkillRecord:
     return SkillRecord(**d)
 
 
+def _dedupe_evidence(evidence: Iterable[Mapping[str, Any]]) -> Tuple[Mapping[str, Any], ...]:
+    seen, out = set(), []
+    for e in evidence:
+        key = (e.get("episode_id"), e.get("event_id"))
+        if key not in seen:            # first occurrence wins: resubmitting an episode is a no-op
+            seen.add(key)
+            out.append(e)
+    return tuple(out)
+
+
+def _ordered_union(*seqs: Iterable[Any]) -> List[Any]:
+    out: List[Any] = []
+    for seq in seqs:
+        for x in seq:
+            if x not in out:
+                out.append(x)
+    return out
+
+
+def merge_skills(existing: Optional[SkillRecord], incoming: SkillRecord) -> SkillRecord:
+    """Merge a skill into the library entry with the same identity (existing may be None).
+
+    Statistics and confidence are RECOMPUTED from the merged evidence, never summed or copied, so
+    merging is idempotent and order-independent for the numbers. Evidence entries without an explicit
+    "verified" flag predate the flag and only ever came from verified episodes, so they count as verified.
+    Lifecycle and advisory are never promoted by a merge. Generic: no target- or operation-specific logic.
+    """
+    validator = SkillQualificationValidator()
+    for k in (existing, incoming):
+        bad = validator.validate_skill(k) if k is not None else []
+        if bad:
+            raise ValueError("cannot merge invalid skill: %s" % bad)
+    base = existing or incoming
+    if existing is not None:
+        for f in ("skill_id", "canonical_target_id", "operation", "target_concept", "semantic_target"):
+            if getattr(existing, f) != getattr(incoming, f):
+                raise ValueError("cannot merge skills with different %s: %r != %r" % (f, getattr(existing, f), getattr(incoming, f)))
+    evidence = _dedupe_evidence((existing.supporting_evidence if existing else ()) + incoming.supporting_evidence)
+    attempts = len(evidence)
+    verified = sum(1 for e in evidence if e.get("verified", True))
+    episodes = _ordered_union(*[[e["episode_id"]] for e in evidence])
+    provenance = dict(base.provenance)
+    provenance["source_episode_ids"] = _ordered_union(
+        (existing.provenance.get("source_episode_ids", []) if existing else []),
+        incoming.provenance.get("source_episode_ids", []), episodes)
+    merged = replace(
+        base,
+        preconditions=tuple(_ordered_union(*(k.preconditions for k in (existing, incoming) if k is not None))),
+        supporting_evidence=evidence,
+        outcome_stats={"attempts": attempts, "verified_successes": verified, "distinct_episodes": len(episodes)},
+        confidence=verified / (attempts + CONFIDENCE_PRIOR),
+        provenance=provenance,
+    )
+    bad = validator.validate_skill(merged)
+    if bad:
+        raise ValueError("merged skill failed validation: %s" % bad)
+    return merged
+
+
 class SkillStore:
     """One JSON file per skill. Validates on save AND load; never stores a record that fails the gate.
 
-    ponytail: upsert by skill_id, no merge/versioning; add evidence-merging when a second episode
-    for the same target exists (P5).
+    save() merges with an existing skill of the same skill_id (see merge_skills); it never overwrites
+    evidence. Every stored record has evidence-derived statistics and confidence.
     """
 
     def __init__(self, directory: Any):
@@ -188,12 +247,17 @@ class SkillStore:
         bad = self._validator.validate_skill(skill)
         if bad:
             raise ValueError("refusing to store invalid skill: %s" % bad)
-        self._dir.mkdir(parents=True, exist_ok=True)
         path = self._path(skill.skill_id)
+        skill = merge_skills(self.load(skill.skill_id) if path.exists() else None, skill)
+        self._dir.mkdir(parents=True, exist_ok=True)
         tmp = path.with_suffix(".tmp")
         tmp.write_text(json.dumps(skill.to_dict(), indent=1, sort_keys=True), encoding="utf-8")
         os.replace(tmp, path)
         return path
+
+    def add_episode(self, episode: Any, index: int = 0) -> Path:
+        """VerifiedEpisode -> validate -> extract -> merge into the library. Unverified episodes write nothing."""
+        return self.save(extract_skill(episode, index))
 
     def load(self, skill_id: str) -> SkillRecord:
         skill = skill_from_dict(json.loads(self._path(skill_id).read_text(encoding="utf-8")))
