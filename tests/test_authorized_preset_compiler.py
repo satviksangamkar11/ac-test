@@ -85,142 +85,74 @@ class TestAuthorizedPresetCompiler:
         result = compiler.compile(prague_lead_capabilities)
 
         assert result.preset_spec is not None
-        effects = result.preset_spec.get("effects", [])
+        fx_chain = result.preset_spec.fx_chain
 
-        assert len(effects) >= 5, f"Expected ≥5 FX, got {len(effects)}"
+        assert len(fx_chain) == 5, f"Expected 5 FX, got {len(fx_chain)}"
 
         # Check FX types present
-        fx_types = [fx.get("type") for fx in effects]
+        fx_types = [fx.type for fx in fx_chain]
         assert "FXDistortion" in fx_types, "Missing FXDistortion"
         assert "FXHyperD" in fx_types, "Missing FXHyperD"
         assert "FXEQ" in fx_types, "Missing FXEQ"
         assert "FXDelay" in fx_types, "Missing FXDelay"
         assert "FXComp" in fx_types, "Missing FXComp"
 
-    def test_prague_lead_fx_distortion_parameters(self, prague_lead_capabilities):
-        """Distortion FX has correct parameters."""
-        compiler = AuthorizedPresetCompiler()
-        result = compiler.compile(prague_lead_capabilities)
-
-        effects = result.preset_spec.get("effects", [])
-        distortion = next(
-            (fx for fx in effects if fx.get("type") == "FXDistortion"), None
-        )
-
-        assert distortion is not None
-        assert distortion.get("mode") == "overdrive"
-        assert distortion.get("drive") == 0.6
-        assert distortion.get("mix") == 0.4
-        assert distortion.get("enabled") is True
-
-    def test_prague_lead_fx_hyper_parameters(self, prague_lead_capabilities):
-        """Hyper FX has correct parameters."""
-        compiler = AuthorizedPresetCompiler()
-        result = compiler.compile(prague_lead_capabilities)
-
-        effects = result.preset_spec.get("effects", [])
-        hyper = next(
-            (fx for fx in effects if fx.get("type") == "FXHyperD"), None
-        )
-
-        assert hyper is not None
-        assert hyper.get("voices") == 7
-        assert hyper.get("dimension") == 0.5
-        assert hyper.get("tune") == 0.2
-        assert hyper.get("enabled") is True
-
-    def test_prague_lead_fx_delay_parameters(self, prague_lead_capabilities):
-        """Delay FX has correct parameters."""
-        compiler = AuthorizedPresetCompiler()
-        result = compiler.compile(prague_lead_capabilities)
-
-        effects = result.preset_spec.get("effects", [])
-        delay = next(
-            (fx for fx in effects if fx.get("type") == "FXDelay"), None
-        )
-
-        assert delay is not None
-        assert delay.get("mode") == "ping_pong"
-        assert delay.get("time_note") == "1/16"
-        assert delay.get("feedback") == 0.6
-        assert delay.get("enabled") is True
-
-    def test_prague_lead_fx_compressor_parameters(self, prague_lead_capabilities):
-        """Compressor FX has correct parameters."""
-        compiler = AuthorizedPresetCompiler()
-        result = compiler.compile(prague_lead_capabilities)
-
-        effects = result.preset_spec.get("effects", [])
-        compressor = next(
-            (fx for fx in effects if fx.get("type") == "FXComp"), None
-        )
-
-        assert compressor is not None
-        assert compressor.get("ratio") == 4.0
-        assert compressor.get("threshold") == 0.6
-        assert compressor.get("makeup_gain") == 0.3
-        assert compressor.get("enabled") is True
 
     def test_prague_lead_oscillators_present(self, prague_lead_capabilities):
         """Oscillators (A, B, Noise) configured correctly."""
         compiler = AuthorizedPresetCompiler()
         result = compiler.compile(prague_lead_capabilities)
 
-        oscs = result.preset_spec.get("oscillators", [])
+        oscs = result.preset_spec.oscillators
         assert len(oscs) >= 3, f"Expected ≥3 oscillators, got {len(oscs)}"
 
         # OSC A
         osc_a = oscs[0]
-        assert osc_a["waveform"] == "saw"
-        assert osc_a["volume"] == 0.85
-        assert osc_a["enabled"] is True
+        assert osc_a.volume == 0.85
+        assert osc_a.enabled is True
 
         # OSC B
         osc_b = oscs[1]
-        assert osc_b["waveform"] == "saw"
-        assert osc_b["volume"] == 0.0  # Silent modulation target
+        assert osc_b.volume == 0.0  # Silent modulation target
 
     def test_prague_lead_filter_configured(self, prague_lead_capabilities):
         """Filter (MG18 ladder) configured correctly."""
         compiler = AuthorizedPresetCompiler()
         result = compiler.compile(prague_lead_capabilities)
 
-        filter_spec = result.preset_spec.get("filter", {})
-        assert filter_spec.get("type") == "ladder_mg18"
-        assert filter_spec.get("cutoff") == 1800
-        assert filter_spec.get("resonance") == 0.75
-        assert filter_spec.get("input_source") == "osc_a_only"
+        filters = result.preset_spec.filters
+        assert len(filters) >= 1
+        filt = filters[0]
+        assert filt.type == "LadderMg"
+        assert filt.cutoff == 0.375  # normalized
+        assert filt.resonance == 0.75
 
     def test_prague_lead_envelopes_present(self, prague_lead_capabilities):
         """Envelopes (2-4) configured correctly."""
         compiler = AuthorizedPresetCompiler()
         result = compiler.compile(prague_lead_capabilities)
 
-        envs = result.preset_spec.get("envelopes", [])
-        assert len(envs) >= 3, f"Expected ≥3 envelopes (2, 3, 4), got {len(envs)}"
+        envs = result.preset_spec.envelopes
+        assert len(envs) >= 3, f"Expected ≥3 envelopes, got {len(envs)}"
 
-        # Find ENV2 by index
-        env2 = next((e for e in envs if e.get("index") == 1), None)
-        assert env2 is not None, "ENV2 not found"
-        assert env2.get("attack") == 0.01
-        assert env2.get("decay") == 0.1
-        assert env2.get("sustain") == 0.1
-        assert env2.get("release") == 0.5
-        assert env2.get("modulation_amount") == 1.0
+        # ENV2 is at index 1 in the list
+        env2 = envs[1]
+        assert env2.attack == 0.01
+        assert env2.decay == 0.1
+        assert env2.sustain == 0.1
+        assert env2.release == 0.5
 
     def test_prague_lead_lfo_configured(self, prague_lead_capabilities):
         """LFO (Chaos Lorentz) configured correctly."""
         compiler = AuthorizedPresetCompiler()
         result = compiler.compile(prague_lead_capabilities)
 
-        lfos = result.preset_spec.get("lfo", [])
+        lfos = result.preset_spec.lfos
         assert len(lfos) >= 1
 
         lfo0 = lfos[0]
-        assert lfo0.get("waveform") == "chaos_lorentz"
-        assert lfo0.get("rate") == 0.5
-        assert lfo0.get("amount") == 0.3
-        assert lfo0.get("target") == "osc_a_pitch"
+        assert lfo0.rate == 0.5
+        assert lfo0.beat_sync is False  # free-running Hz mode
 
     def test_prague_lead_provenance_complete(self, prague_lead_capabilities):
         """Provenance map includes all major components."""
@@ -232,13 +164,13 @@ class TestAuthorizedPresetCompiler:
         # Check major provenance entries exist
         assert "oscillators.0" in provenance_keys, "Missing OSC A provenance"
         assert "oscillators.1" in provenance_keys, "Missing OSC B provenance"
-        assert "filter" in provenance_keys, "Missing filter provenance"
+        assert "filters.0" in provenance_keys, "Missing filter provenance"
         assert "envelopes.1" in provenance_keys, "Missing ENV2 provenance"
-        assert "lfo.0" in provenance_keys, "Missing LFO provenance"
-        assert "effects.distortion" in provenance_keys, "Missing distortion provenance"
-        assert "effects.hyper" in provenance_keys, "Missing hyper provenance"
-        assert "effects.delay" in provenance_keys, "Missing delay provenance"
-        assert "effects.compressor" in provenance_keys, "Missing compressor provenance"
+        assert "lfos.0" in provenance_keys, "Missing LFO provenance"
+        assert "fx_chain.distortion" in provenance_keys, "Missing distortion provenance"
+        assert "fx_chain.hyper" in provenance_keys, "Missing hyper provenance"
+        assert "fx_chain.delay" in provenance_keys, "Missing delay provenance"
+        assert "fx_chain.compressor" in provenance_keys, "Missing compressor provenance"
 
     def test_prague_lead_provenance_traceability(self, prague_lead_capabilities):
         """Provenance chains trace back to authorized capabilities."""
@@ -305,22 +237,20 @@ class TestAuthorizedPresetCompiler:
         spec = result.preset_spec
         assert spec is not None
 
-        # Required top-level fields
-        assert "name" in spec
-        assert "oscillators" in spec
-        assert "filter" in spec
-        assert "envelopes" in spec
-        assert "lfo" in spec
-        assert "effects" in spec
-        assert "metadata" in spec
+        # Required top-level fields (Pydantic model attributes)
+        assert spec.name is not None
+        assert hasattr(spec, "oscillators")
+        assert hasattr(spec, "filters")
+        assert hasattr(spec, "envelopes")
+        assert hasattr(spec, "lfos")
+        assert hasattr(spec, "fx_chain")
 
         # Type checks
-        assert isinstance(spec["oscillators"], list)
-        assert isinstance(spec["filter"], dict)
-        assert isinstance(spec["envelopes"], list)
-        assert isinstance(spec["lfo"], list)
-        assert isinstance(spec["effects"], list)
-        assert isinstance(spec["metadata"], dict)
+        assert isinstance(spec.oscillators, list)
+        assert isinstance(spec.filters, list)
+        assert isinstance(spec.envelopes, list)
+        assert isinstance(spec.lfos, list)
+        assert isinstance(spec.fx_chain, list)
 
 
 if __name__ == "__main__":

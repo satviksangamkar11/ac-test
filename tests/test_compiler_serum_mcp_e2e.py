@@ -122,7 +122,10 @@ class TestCompilerSerumMcpE2E:
             pytest.fail(f"unpack_file failed: {type(e).__name__}: {e}")
 
         # THE REGRESSION CHECK: 5 → 5 (no drops)
-        fx_chain = decoded.get("FXRack0", {}).get("FX", [])
+        # decoded is a SerumPreset object; access FX via .data dict, not attributes
+        data_dict = decoded.data if hasattr(decoded, "data") else decoded
+        fx_rack = data_dict.get("FXRack0", {})
+        fx_chain = fx_rack.get("FX", [])
         serialized_fx_count = len(fx_chain)
 
         assert serialized_fx_count == 5, (
