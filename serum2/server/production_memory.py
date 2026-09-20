@@ -31,8 +31,9 @@ RELATION_TYPES = frozenset({
     "source",
     "context",
     "semantic_concept",
-    "serum_skill",
-    "ableton_skill",
+    "serum_skill",        # Links to Skill objects (P3+)
+    "ableton_skill",      # Links to Skill objects (P3+)
+    "learned_skill",      # Skill extracted from episode (P3+)
     "outcome",
     "related_episode",
 })
@@ -160,3 +161,26 @@ def link_experience(memory: ProductionMemory, record) -> List[MemoryEdge]:
         ))
 
     return edges
+
+
+def link_skill(memory: ProductionMemory, experience_id: str, skill_id: str,
+               skill_type: str = "learned_skill") -> MemoryEdge:
+    """Link a skill to an experience after extraction.
+
+    Called during skill extraction (P3.2) to record that experience_id
+    generated or qualified skill_id.
+
+    Args:
+        memory: ProductionMemory instance
+        experience_id: the experience_id that produced the skill
+        skill_id: the skill_id that was extracted/qualified
+        skill_type: "learned_skill" (extracted), "serum_skill" (qualified serum-MCP skill),
+                    or "ableton_skill" (qualified Ableton-MCP skill)
+    """
+    if skill_type not in ("learned_skill", "serum_skill", "ableton_skill"):
+        skill_type = "learned_skill"
+    return memory.link(
+        experience_id, skill_type, skill_id,
+        evidence={"linked_at": datetime.now(timezone.utc).isoformat()},
+        confidence=1.0,
+    )
