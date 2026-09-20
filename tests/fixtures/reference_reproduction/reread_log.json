@@ -1,0 +1,50 @@
+{
+  "video_id": "HEEGN1Xl5o4",
+  "method": "dense re-sample of source video (3 s spacing, 262-306 s) inspected visually, Matrix panel crop",
+  "attempts": [
+    {
+      "target": "route:Env 4->Main Tuning",
+      "window_s": [262, 306],
+      "observed_transient_values": [
+        {"t": 277, "value": "100%", "source": "hover tooltip while dragging"},
+        {"t": 285, "value": "44%", "source": "hover tooltip while dragging (Stage-A reading)"},
+        {"t": 286, "value": "57%", "source": "hover tooltip while dragging"}
+      ],
+      "outcome": "UNREADABLE_AFTER_RETRY",
+      "reason": "amount only shown in a transient drag tooltip whose value changes between frames; no static final numeric readout exists in the video"
+    },
+    {
+      "target": "route:LFO 1->A Fine",
+      "window_s": [262, 306],
+      "outcome": "UNREADABLE_AFTER_RETRY",
+      "reason": "amount displayed only as slider position; no tooltip/numeric readout appears in any sampled frame"
+    },
+    {
+      "target": "route:LFO 1->B Fine",
+      "window_s": [262, 306],
+      "outcome": "UNREADABLE_AFTER_RETRY",
+      "reason": "amount displayed only as slider position; no tooltip/numeric readout appears in any sampled frame"
+    },
+    {
+      "target": "route:Env 3->Noise Level",
+      "window_s": [262, 306],
+      "outcome": "UNREADABLE_AFTER_RETRY",
+      "reason": "amount displayed only as slider position; no tooltip/numeric readout appears in any sampled frame"
+    },
+    {
+      "target": "route:Env 2->Filter 1 Freq",
+      "window_s": [262, 306],
+      "outcome": "UNREADABLE_AFTER_RETRY",
+      "reason": "amount displayed only as slider position; no tooltip/numeric readout appears in any sampled frame"
+    }
+  ],
+  "verified_against_frame": [
+    {
+      "control": "env1.sustain",
+      "frame_t": 210,
+      "displayed": "0.0 dB",
+      "check": "ENV1 graph holds full level until release; ATK 1.0 ms, HOLD 0.0 ms, DEC 1.00 s, SUS 0.0 dB, REL 838 ms all legible",
+      "outcome": "FRESH_DIRECT_OBSERVATION"
+    }
+  ]
+}

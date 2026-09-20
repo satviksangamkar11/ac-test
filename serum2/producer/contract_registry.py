@@ -38,10 +38,12 @@ class ContractRegistry:
     time via dataclasses.replace(), since CapabilityContract is frozen.
     """
 
-    def __init__(self, include_pass1: bool = False):
-        # include_pass1: opt-in to the Serum 2.0.23-epoch Pass-1 contracts. Off by default so the frozen
-        # contract frontier (and every test pinned to it) is unchanged unless a caller asks for the expansion.
-        self.include_pass1 = include_pass1
+    def __init__(self, epoch=None):
+        # epoch=None: the frozen legacy frontier, unchanged (every legacy test is pinned to it).
+        # epoch=ExecutionEpoch: ONLY contracts qualified on that exact Serum build are loaded; everything
+        # else is recorded in self.excluded with the reason. No contract crosses epochs.
+        self.epoch = epoch
+        self.excluded = {}
         self.contracts = {}
         self._host_param_mapping = self._load_host_param_mapping()
         self._body_state_mapping = self._load_body_state_mapping()
@@ -191,7 +193,8 @@ class ContractRegistry:
         # ClaimEngine/build_contract. Explicit allow-list; never overwrites an existing
         # contract; each must carry the epoch it was proven in.
         pass1_path = base_path / "_capability_contracts_pass1.pkl"
-        if self.include_pass1 and pass1_path.exists():
+        legacy_keys = set(self.contracts)
+        if self.epoch is not None and pass1_path.exists():
             try:
                 with open(pass1_path, 'rb') as f:
                     pass1_store = pickle.load(f)
@@ -222,6 +225,35 @@ class ContractRegistry:
                 print(f"[ContractRegistry] Loaded {CAPABILITY_TARGET} contract: {contract.status}")
         except Exception as e:
             print(f"[ContractRegistry] Warning: Could not load modulation-route contract: {e}")
+
+        self._apply_epoch(legacy_keys)
+
+    def _apply_epoch(self, legacy_keys):
+        """Tag each contract with the epoch it was proven on and drop every contract not proven on self.epoch."""
+        if self.epoch is None:
+            return
+        from serum2.producer.execution_epoch import EPOCH_2_0_21, epoch_for_sha
+        kept = {}
+        for target, c in self.contracts.items():
+            scope = dict(c.scope or {})
+            sha = scope.get("serum_binary_sha256")
+            if sha:
+                source = "recorded in contract scope"
+            elif target in legacy_keys:
+                sha, source = EPOCH_2_0_21.binary_sha256, (
+                    "inferred: every archived EvidenceRecord (65) carries sha 7978c9be, none any other")
+            else:
+                self.excluded[target] = "epoch not recorded and not inferable"
+                continue
+            e = epoch_for_sha(sha)
+            if sha != self.epoch.binary_sha256:
+                self.excluded[target] = "EPOCH_MISMATCH: proven on %s, run epoch is %s" % (
+                    e.label if e else sha[:8], self.epoch.label)
+                continue
+            scope.update({"serum_binary_sha256": sha, "serum_product_version": self.epoch.serum_version,
+                          "epoch_source": source})
+            kept[target] = dataclasses.replace(c, scope=scope)
+        self.contracts = kept
 
     def get_contracts_dict(self) -> Dict[Tuple[str, str], CapabilityContract]:
         """Return contracts in format expected by admission.admit().

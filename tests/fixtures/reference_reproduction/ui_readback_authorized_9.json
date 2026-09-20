@@ -1,0 +1,22 @@
+{
+  "route": "DIRECT_UI",
+  "captured_at": "2026-09-21T03:22:00+05:30",
+  "serum": "Serum 2 Version 2.0.23 (About dialog), VST3 hosted in Ableton Live 12 Suite",
+  "preset_loaded": "User/VLP1/LD - Plucky Lead authorized (DESC: 'reference reproduction of HEEGN1Xl5o4; every operand fr...')",
+  "method": "Preset loaded through Serum's own in-plugin browser; each value read visually from the live plugin UI via computer-use screenshots/zoom (OSC tab; ENV 2, ENV 3, ENV 4 tabs) and transcribed by claude-code. Not read from the .SerumPreset file.",
+  "values": {
+    "oscB.enabled": "on",
+    "oscC.enabled": "off",
+    "oscB.octave": "+1",
+    "env2.decay": "753 ms",
+    "env2.release": "267 ms",
+    "env3.decay": "540 ms",
+    "env3.release": "15 ms",
+    "env4.decay": "14 ms",
+    "env4.release": "15 ms"
+  },
+  "observed_but_not_authorized": {
+    "oscA.octave": "0 (video: -1) -- not authorized on this build, left at Serum default",
+    "filter1": "default (video: MG Low 18) -- not authorized on this build"
+  }
+}

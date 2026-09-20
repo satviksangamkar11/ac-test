@@ -1,0 +1,11 @@
+{
+  "purpose": "Explicit, audited identity corrections to Stage-A control ids. Evidence values are never edited; only the id a reading is filed under, and every correction is recorded in the ledger row's context.",
+  "corrections": [
+    {"from": "lfo1.mode", "to": "lfo1.shape",
+     "reason": "The dropdown at the top of the LFO panel showing 'Chaos: Lorenz' is the LFO shape selector. The Atlas defines lfo1.shape as the shape control and lfo1.mode as Free/Retrig/Envelope.",
+     "atlas_check": "lfo1.shape exists; lfo1.mode enum = Free/Retrig/Envelope"},
+    {"from": "lfo1.trigger", "to": "lfo1.mode",
+     "reason": "The FREE / RETRIG / ENVELOPE selector is the LFO trigger mode, which the Atlas names lfo1.mode; lfo1.trigger is not an Atlas control.",
+     "atlas_check": "lfo1.trigger is UNRESOLVED; lfo1.mode enum = Free/Retrig/Envelope"}
+  ]
+}
