@@ -1313,9 +1313,13 @@ class ProducerBrain:
         result.resolution_mode = "B1_CANONICAL"
         # P4: advisory candidates -> ranking -> selected candidate becomes the intent handed on to Capability
         # Resolution and Admission (unchanged). The candidate layer cannot execute, admit or add capability.
-        from serum2.producer.candidate_ranking import CandidateGenerator, CandidateRanker, collect_advisories, to_intent
+        from serum2.producer.candidate_ranking import (
+            CandidateGenerator, CandidateRanker, collect_advisories, collect_grounding_advisory, to_intent
+        )
         advisories, excluded = collect_advisories(self._skill_retriever, intent.canonical_target) if self._skill_retriever else ([], [])
-        ranked = CandidateRanker().rank(CandidateGenerator().generate(intent, advisories), self._prior_evidence)
+        grounding_advisory = collect_grounding_advisory(self._grounding_claims, intent)
+        ranked = CandidateRanker().rank(CandidateGenerator().generate(intent, advisories), self._prior_evidence,
+                                        grounding_advisory)
         intent = to_intent(ranked.selected.candidate, intent)
         result.b1_intent = dict(intent.to_dict(), resolution_mode="B1_CANONICAL", b1_used=True,
                                 excluded_skills=excluded, **ranked.to_audit())

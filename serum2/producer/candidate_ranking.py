@@ -37,9 +37,10 @@ ORIGINS = frozenset({PRIMARY, SKILL_VARIANT, REFERENCE_ALTERNATIVE})
 
 # Advisory scoring weights (sum to 1). The primary starts ahead (fit 1.0 vs 0.5); a variant overtakes it only with
 # strong verified evidence. A single-episode skill has confidence 0.2 and cannot; prior outcomes alone cannot.
-WEIGHT_FIT = 0.5
+WEIGHT_FIT = 0.4
 WEIGHT_SKILL = 0.3
 WEIGHT_PRIOR = 0.2
+WEIGHT_GROUNDING = 0.1
 STALE_FACTOR = 0.5                                   # STALE skill confidence is halved
 EXCLUDED_STATES = frozenset({"CONTRADICTED", "RETIRED"})
 _OPPOSITE = {"increase": "decrease", "decrease": "increase"}
@@ -173,6 +174,58 @@ def collect_advisories(retriever: Any, canonical_target_id: str) -> Tuple[List[S
     return usable, excluded
 
 
+def collect_grounding_advisory(grounding_claims: Sequence[Any], intent: Any) -> Tuple[Mapping[str, Any], ...]:
+    """P6 grounding claims -> advisory evidence keyed by canonical_target.
+
+    Converts multimodal grounding observations into preference signals for candidate ranking.
+    Grounding can inform preference for same-target candidates but cannot create capability,
+    bypass resolution, or replace targets.
+
+    Returns: tuple of {target_id: str, confidence: float, sources: count, modalities: [list]}
+    """
+    if not grounding_claims:
+        return ()
+
+    # Group grounding by target to compute aggregate confidence per target
+    by_target: Dict[str, Dict[str, Any]] = {}
+    for claim in grounding_claims:
+        if not hasattr(claim, 'target_canonical_id') or claim.status == 'UNKNOWN':
+            continue
+
+        target_id = claim.target_canonical_id
+        if target_id not in by_target:
+            by_target[target_id] = {
+                'target_id': target_id,
+                'confidence': 0.0,
+                'sources': 0,
+                'modalities': set(),
+                'claim_ids': []
+            }
+
+        # Aggregate confidence across observations
+        by_target[target_id]['sources'] += len(claim.observations)
+        by_target[target_id]['confidence'] = min(1.0, by_target[target_id]['confidence'] + 0.1)  # soft aggregate
+        by_target[target_id]['claim_ids'].append(claim.claim_id)
+
+        # Track modalities (transcript, video, audio, state)
+        for obs in claim.observations:
+            if hasattr(obs, 'modality'):
+                by_target[target_id]['modalities'].add(obs.modality)
+
+    # Convert to frozen advisory records
+    result = []
+    for target_id, info in sorted(by_target.items()):
+        result.append(_freeze({
+            'target_id': target_id,
+            'confidence': min(1.0, info['confidence']),
+            'source_count': info['sources'],
+            'modalities': sorted(info['modalities']),
+            'claim_ids': info['claim_ids']
+        }))
+
+    return tuple(result)
+
+
 def _operand_hint(spec: OperationSpec) -> Optional[Mapping[str, Any]]:
     op = spec.operand
     raw = None
@@ -282,21 +335,40 @@ def _skill_weight(e: Mapping[str, Any]) -> float:
 class CandidateRanker:
     """Deterministic ranking: (target-change tier, -score, id). Advisory; returns ordering + features only."""
 
-    def rank(self, candidates: Sequence[Candidate], prior_evidence: Sequence[PriorEpisodeEvidence] = ()) -> RankedSet:
+    def rank(self, candidates: Sequence[Candidate], prior_evidence: Sequence[PriorEpisodeEvidence] = (),
+             grounding_evidence: Sequence[Mapping[str, Any]] = ()) -> RankedSet:
         if not candidates:
             raise ValueError("no candidates to rank")
         if not any(c.origin == PRIMARY for c in candidates):
             raise ValueError("the primary candidate must be present (a target/operation may not be silently replaced)")
+
+        # Index grounding by target for O(1) lookup
+        grounding_by_target = {g['target_id']: g for g in grounding_evidence}
+
         rows = []
         for c in candidates:
             skill = max((_skill_weight(e) for e in c.evidence), default=0.0)
             mine = [p for p in prior_evidence if p.canonical_target_id == c.canonical_target and p.operation.lower() == c.operation]
             attempts = sum(p.attempts for p in mine)
             outcome = sum(p.verified_successes for p in mine) / (attempts + CONFIDENCE_PRIOR) if attempts else 0.0
-            score = WEIGHT_FIT * _FIT[c.origin] + WEIGHT_SKILL * skill + WEIGHT_PRIOR * outcome
+
+            # Incorporate grounding evidence for same-target candidates only
+            grounding = 0.0
+            grounding_info = None
+            if c.canonical_target in grounding_by_target:
+                grounding_info = grounding_by_target[c.canonical_target]
+                grounding = grounding_info['confidence']
+
+            score = (WEIGHT_FIT * _FIT[c.origin] + WEIGHT_SKILL * skill +
+                    WEIGHT_PRIOR * outcome + WEIGHT_GROUNDING * grounding)
             tier = 1 if c.target_changed else 0
             feats = {"tier": tier, "primary_fit": _FIT[c.origin], "skill_prior": skill, "prior_outcome": outcome,
-                     "prior_attempts": attempts, "prior_episode_ids": tuple(i for p in mine for i in p.episode_ids)}
+                     "prior_attempts": attempts, "prior_episode_ids": tuple(i for p in mine for i in p.episode_ids),
+                     "grounding_confidence": grounding}
+            if grounding_info:
+                feats["grounding_sources"] = grounding_info['source_count']
+                feats["grounding_modalities"] = grounding_info['modalities']
+
             rows.append((tier, -score, c.candidate_id, c, score, feats))
         rows.sort(key=lambda r: r[:3])
         return RankedSet(tuple(RankedCandidate(r[3], i + 1, round(r[4], 12), _freeze(r[5])) for i, r in enumerate(rows)))
