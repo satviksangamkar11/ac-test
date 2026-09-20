@@ -49,17 +49,39 @@ class ReferenceReproductionRun:
     verification_level: str
     replay_pins: Dict[str, Any]
     rows: List[Any] = field(default_factory=list, repr=False)
+    coverage_status: str = "PARTIAL"
+
+    # Two independent axes. proof_level says how strongly the reproduced operations were verified; coverage_status
+    # says how much of the observed reference state was reproduced at all. Only both together verify the reference.
+    @property
+    def proof_level(self) -> str:
+        return self.verification_level
 
     @property
-    def episode_eligible(self) -> bool:
+    def operation_evidence_eligible(self) -> bool:
+        """The reproduced operations were verified in the live Serum UI (says nothing about the rest of the reference)."""
         return self.verification_level == "LIVE_UI_VERIFIED"
+
+    @property
+    def reference_verified(self) -> bool:
+        return self.verification_level == "LIVE_UI_VERIFIED" and self.coverage_status == "COMPLETE"
 
     def to_dict(self) -> Dict[str, Any]:
         return {"source": self.source, "epoch": self.epoch.label, "evidence": self.evidence, "ledger": self.ledger,
                 "operations": self.operations, "admission": self.admission, "authorized": self.authorized,
                 "compilation": self.compilation, "preset": self.preset, "file_comparison": self.file_comparison,
-                "ui_comparison": self.ui_comparison, "verification_level": self.verification_level,
-                "episode_eligible": self.episode_eligible, "replay_pins": self.replay_pins}
+                "ui_comparison": self.ui_comparison, "proof_level": self.proof_level, "coverage_status": self.coverage_status,
+                "operation_evidence_eligible": self.operation_evidence_eligible, "reference_verified": self.reference_verified,
+                "replay_pins": self.replay_pins}
+
+
+def _coverage_status(rows, level: str) -> str:
+    """COMPLETE only if EVERY observed Serum-state row was derived and admitted (and the proof did not fail);
+    FAILED if any reproduced operation failed verification; otherwise PARTIAL."""
+    if level not in ("FILE_READBACK_VERIFIED_ONLY", "LIVE_UI_VERIFIED"):
+        return "FAILED"
+    considered = [r for r in rows if r.terminal not in ("IGNORED_NAVIGATION", "NOT_SERUM_SURFACE")]
+    return "COMPLETE" if considered and all(r.terminal == DERIVED and r.admission == "ADMITTED" for r in considered) else "PARTIAL"
 
 
 def run_reference_reproduction(stage_a_path, reread_log_path, corrections_path=None, *, source: Dict[str, Any], name: str,
@@ -103,7 +125,7 @@ def run_reference_reproduction(stage_a_path, reread_log_path, corrections_path=N
         admission=admission, authorized=[o.operation_id for o in ops],
         compilation={"status": report.status, "admitted": report.admitted, "compiled": report.compiled, "missing": report.missing},
         preset={"path": path, "sha256": _sha(path)}, file_comparison=file_cmp, ui_comparison=ui_cmp,
-        verification_level=level, replay_pins=pins, rows=rows)
+        verification_level=level, replay_pins=pins, rows=rows, coverage_status=_coverage_status(rows, level))
 
 
 def coverage(run: "ReferenceReproductionRun") -> Dict[str, Any]:
@@ -133,8 +155,9 @@ def to_experience_record(run: "ReferenceReproductionRun", ui_readback: Dict[str,
     from serum2.server.experience_record import (EvidenceStage, ProductionExperienceRecord, SerumMcpCallRecord,
                                                  SerumUiActionRecord, build_readback_record, stamp_reference_provenance,
                                                  stamp_replay_provenance)
-    if not run.episode_eligible or not ui_readback or ui_readback.get("route") != "DIRECT_UI":
+    if not run.operation_evidence_eligible or not ui_readback or ui_readback.get("route") != "DIRECT_UI":
         raise NotVerified("only a LIVE_UI_VERIFIED run with a DIRECT_UI readback can become an episode (level=%s)" % run.verification_level)
+    kind = "VerifiedReferenceEpisode" if run.reference_verified else "VerifiedOperationEvidence"
     from serum2.producer.contract_registry import ContractRegistry
     watched = [o.canonical_target for o in _authorized_ops(run)]
     expected = {r.control_id: r.value for r in run.rows if r.control_id in watched}
@@ -151,8 +174,9 @@ def to_experience_record(run: "ReferenceReproductionRun", ui_readback: Dict[str,
         preset_path=run.preset["path"], preset_sha256=run.preset["sha256"]).to_dict()
     rec.serum_ui_actions = [SerumUiActionRecord(action="verify", stage=EvidenceStage.VERIFIED.value, evidence=readback,
                                                 controls_matched=readback["all_match"]).to_dict()]
-    rec.outcome = {"status": "VERIFIED" if readback["all_match"] else "MISMATCH", "verification_level": run.verification_level,
-                   "coverage": coverage(run)}
+    rec.outcome = {"status": "VERIFIED" if readback["all_match"] else "MISMATCH", "kind": kind,
+                   "proof_level": run.proof_level, "coverage_status": run.coverage_status,
+                   "reference_verified": run.reference_verified, "coverage": coverage(run)}
     rec.provenance[REFERENCE_REPRODUCTION_KEY] = {
         "source": run.source, "epoch": run.epoch.label, "evidence": run.evidence, "ledger_terminals": run.ledger["terminals"],
         "authorized": run.authorized,
@@ -160,7 +184,8 @@ def to_experience_record(run: "ReferenceReproductionRun", ui_readback: Dict[str,
                                   "contract_key": o.contract_key, "binding": o.contract_binding, "fidelity": o.fidelity}
                                  for o in _authorized_ops(run)],
         "file_comparison": run.file_comparison["field_counts"],
-        "ui_comparison": run.ui_comparison["field_counts"], "verification_level": run.verification_level,
+        "ui_comparison": run.ui_comparison["field_counts"], "proof_level": run.proof_level,
+        "coverage_status": run.coverage_status, "reference_verified": run.reference_verified, "kind": kind,
         "coverage": coverage(run), "replay_pins": run.replay_pins}
     keys = sorted({o.contract_key for o in _authorized_ops(run)})
     stamp_replay_provenance(rec, ContractRegistry(epoch=run.epoch), keys,

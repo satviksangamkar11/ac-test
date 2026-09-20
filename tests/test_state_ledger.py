@@ -194,6 +194,6 @@ def test_reference_reproduction_run_end_to_end(tmp_path):
                                      epoch=EPOCH_2_0_23, subfolder="VLP1-tests")
     assert run.ledger["invariant_holds"] and run.compilation["status"] == "SUCCESS"
     assert run.compilation["admitted"] == run.compilation["compiled"] == len(run.authorized) == 9
-    assert run.verification_level == "FILE_READBACK_VERIFIED_ONLY" and not run.episode_eligible
+    assert run.proof_level == "FILE_READBACK_VERIFIED_ONLY" and not run.operation_evidence_eligible and not run.reference_verified
     assert run.replay_pins["serum_binary_sha256"] == EPOCH_2_0_23.binary_sha256
     assert set(run.replay_pins["contracts"]) and len(run.preset["sha256"]) == 64
