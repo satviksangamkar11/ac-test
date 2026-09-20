@@ -230,12 +230,11 @@ def merge_frame_candidates(
 
     num_categories = sum(1 for g in [transcript, visual, uniform] if g)
 
-    if num_categories == 1:
-        # Single category: just take the top max_frames
-        return all_candidates[:max_frames]
-    elif transcript:
-        # Per-cue allocation: ensure each unique transcript cue gets at least one frame
-        # Group by cue_id
+    # Check per-cue coverage guarantee BEFORE deciding on category strategy
+    if transcript:
+        # ponytail: per-cue coverage guarantee: guarantee at least one frame per unique cue
+        # if budget allows. If not enough frames for all cues, fail loudly.
+        # Upgrade to adaptive cue selection if workload demands.
         cues_by_id = {}
         for c in transcript:
             for cue_id in c.cue_ids:
@@ -244,31 +243,76 @@ def merge_frame_candidates(
                 cues_by_id[cue_id].append(c)
 
         num_unique_cues = len(cues_by_id)
-        cue_slots = min(num_unique_cues, max_frames // 2)  # Reserve at least one per cue
+        if num_unique_cues > max_frames:
+            raise ValueError(
+                f"Cannot fit all {num_unique_cues} unique transcript cues "
+                f"within max_frames={max_frames}. "
+                f"Increase max_frames to at least {num_unique_cues}."
+            )
 
-        # Take first candidate from each cue
+    if num_categories == 1:
+        # Single category: if it's transcript, apply per-cue allocation
+        # Otherwise, just take the top max_frames
+        if transcript:
+            # Apply per-cue allocation for transcript (checked above)
+            cues_by_id = {}
+            for c in transcript:
+                for cue_id in c.cue_ids:
+                    if cue_id not in cues_by_id:
+                        cues_by_id[cue_id] = []
+                    cues_by_id[cue_id].append(c)
+
+            # Take first candidate from each cue (guarantees coverage)
+            selected = []
+            for cue_id in sorted(cues_by_id.keys()):
+                selected.append(cues_by_id[cue_id][0])
+
+            # Fill remaining with additional candidates
+            remaining = max_frames - len(selected)
+            selected_ids = set(id(c) for c in selected)
+            additional = [c for c in transcript if id(c) not in selected_ids]
+            selected.extend(additional[:remaining])
+
+            return sorted(selected, key=lambda c: c.timestamp_s)[:max_frames]
+        else:
+            # Not transcript, just take top frames
+            return all_candidates[:max_frames]
+    elif transcript:
+        # Per-cue allocation: ensure each unique transcript cue gets at least one frame
+        # Build cue_by_id map (required for allocation logic, already checked above)
+        cues_by_id = {}
+        for c in transcript:
+            for cue_id in c.cue_ids:
+                if cue_id not in cues_by_id:
+                    cues_by_id[cue_id] = []
+                cues_by_id[cue_id].append(c)
+
+        # Take first candidate from each cue (guarantees coverage)
+        # Each unique cue is guaranteed to fit (checked above)
         transcript_selected = []
         for cue_id in sorted(cues_by_id.keys()):
-            if transcript_selected and len(transcript_selected) >= cue_slots:
-                break
             transcript_selected.append(cues_by_id[cue_id][0])
 
         # Fill remaining slots with additional transcript candidates
-        remaining_t = (
-            max_frames
-            - len(transcript_selected)
-            - (1 if visual else 0)
-            - (1 if uniform else 0)
-        )
-        transcript_selected.extend(
-            transcript[len(transcript_selected) : len(transcript_selected) + remaining_t]
-        )
+        remaining_budget = max_frames - len(transcript_selected)
 
-        # Add visual and uniform to fill budget
-        v_slots = 1 if visual else 0
-        u_slots = (
-            max(1, max_frames - len(transcript_selected) - v_slots) if uniform else 0
-        )
+        # Reserve at least 1 slot each for visual and uniform if they exist
+        if visual and remaining_budget > 0:
+            remaining_budget -= 1
+        if uniform and remaining_budget > 0:
+            remaining_budget -= 1
+
+        # Collect all transcript candidates we haven't selected yet
+        selected_set = set(id(c) for c in transcript_selected)
+        additional_transcript = [c for c in transcript if id(c) not in selected_set]
+
+        # Add additional transcript candidates up to remaining budget
+        transcript_selected.extend(additional_transcript[:remaining_budget])
+
+        # Add visual and uniform to fill remaining slots
+        v_slots = 1 if visual and len(transcript_selected) < max_frames else 0
+        u_remaining = max_frames - len(transcript_selected) - v_slots
+        u_slots = 1 if uniform and u_remaining > 0 else 0
 
         result = transcript_selected + visual[:v_slots] + uniform[:u_slots]
         return sorted(result, key=lambda c: c.timestamp_s)[:max_frames]

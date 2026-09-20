@@ -80,6 +80,7 @@ class TranscriptCuePlan:
       - direct_anthropic_sdk: false (never used)
       - api_key_used: false (subscription auth only)
       - transcript_sha256: guard against stale plans
+      - provenance: scalar-only, enforced at construction
     """
 
     schema_version: str
@@ -104,10 +105,25 @@ class TranscriptCuePlan:
     # Fully immutable provenance metadata: tuple of (key, scalar_value) pairs.
     # Values must be immutable scalars (str, int, float, bool, None).
     # No nested mutable structures (dicts, lists). Frozen dataclass +
-    # tuple structure + scalar-only values = true deep immutability.
+    # tuple structure + scalar-only values + __post_init__ validation
+    # = true deep immutability.
     provenance: tuple[tuple[str, str | int | float | bool | None], ...] = field(
         default_factory=tuple
     )
+
+    def __post_init__(self) -> None:
+        """Validate provenance contains only immutable scalar values."""
+        allowed_scalar_types = (str, int, float, bool, type(None))
+        for key, value in self.provenance:
+            if not isinstance(key, str):
+                raise ValueError(
+                    f"Provenance key must be str, got {type(key).__name__}"
+                )
+            if not isinstance(value, allowed_scalar_types):
+                raise ValueError(
+                    f"Provenance value for '{key}' must be scalar "
+                    f"(str/int/float/bool/None), got {type(value).__name__}"
+                )
 
 
 def transcript_sha256(transcript_text: str) -> str:

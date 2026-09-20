@@ -63,9 +63,10 @@ def validate_transcript_cue_plan(
         transcript_sha256: Expected transcript hash (canonical normalized artifact)
         duration_s: Video duration for timestamp validation
         transcript_segment_ids: Known segment IDs from transcript (for provenance check)
-        transcript_segment_timestamps: Map of segment_id → (start_s, end_s) for
-            preferred_timestamps validation. Required for enforcing that preferred
-            timestamps are exact boundaries or deterministic functions thereof.
+        transcript_segment_timestamps: Optional. Map of segment_id → (start_s, end_s).
+            When provided, enforces that preferred_timestamps are exact boundaries or
+            deterministic functions thereof (midpoint ±1ms tolerance).
+            When None or empty, preferred_timestamps validation is skipped.
 
     Raises:
         ValueError: If the plan violates frozen properties
@@ -207,20 +208,29 @@ def validate_transcript_cue_plan(
                 )
 
             # Enforce that preferred timestamp is exact boundary or deterministic
-            if transcript_segment_timestamps is not None:
+            # (only if segment timestamps are provided)
+            if transcript_segment_timestamps:
                 segment_ids = cue.get("segment_ids", [])
-                is_allowed = False
 
+                # If there are preferred timestamps, segment_ids must be non-empty
+                if preferred and not segment_ids:
+                    raise ValueError(
+                        f"Cue {i} has preferred_timestamps but no segment_ids. "
+                        f"Cannot verify timestamps without segment boundaries."
+                    )
+
+                is_allowed = False
                 # Check if ts is an exact segment boundary
                 for seg_id in segment_ids:
                     if seg_id in transcript_segment_timestamps:
                         seg_start, seg_end = transcript_segment_timestamps[seg_id]
                         # Allow exact boundaries or midpoint (deterministic)
-                        tolerance = 0.001  # 1ms tolerance for float rounding
+                        # Tolerance: ±1ms for float rounding
+                        tolerance = 0.001
                         if (
-                            abs(ts - seg_start) < tolerance
-                            or abs(ts - seg_end) < tolerance
-                            or abs(ts - (seg_start + seg_end) / 2) < tolerance
+                            abs(ts - seg_start) <= tolerance
+                            or abs(ts - seg_end) <= tolerance
+                            or abs(ts - (seg_start + seg_end) / 2) <= tolerance
                         ):
                             is_allowed = True
                             break
@@ -229,5 +239,5 @@ def validate_transcript_cue_plan(
                     raise ValueError(
                         f"Cue {i} preferred timestamp {j} ({ts}) is not an "
                         f"exact segment boundary or deterministic function "
-                        f"(segments: {segment_ids})"
+                        f"of segment boundaries (±1ms tolerance). Segments: {segment_ids}"
                     )
