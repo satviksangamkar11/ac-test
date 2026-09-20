@@ -15,6 +15,13 @@ from pathlib import Path
 from serum2.evidence.capability_contract import CapabilityContract, ExecutionBinding
 
 
+_PASS1_TARGETS = frozenset(
+    ["oscillator_field_OSC2-ENABLE", "oscillator_field_OSC3-ENABLE",
+     "oscillator_field_OSC2-OCTAVE", "oscillator_field_OSC3-OCTAVE"]
+    + ["envelope%d_field_%s" % (n, f) for n in (2, 3, 4) for f in ("decay", "release")]
+)
+
+
 class ContractRegistry:
     """Unified registry for fresh CapabilityContracts.
 
@@ -31,7 +38,10 @@ class ContractRegistry:
     time via dataclasses.replace(), since CapabilityContract is frozen.
     """
 
-    def __init__(self):
+    def __init__(self, include_pass1: bool = False):
+        # include_pass1: opt-in to the Serum 2.0.23-epoch Pass-1 contracts. Off by default so the frozen
+        # contract frontier (and every test pinned to it) is unchanged unless a caller asks for the expansion.
+        self.include_pass1 = include_pass1
         self.contracts = {}
         self._host_param_mapping = self._load_host_param_mapping()
         self._body_state_mapping = self._load_body_state_mapping()
@@ -103,6 +113,25 @@ class ContractRegistry:
         )
         return dataclasses.replace(contract, execution_binding=binding)
 
+    def _attach_pass1_binding(self, contract):
+        """Attach an ExecutionBinding ONLY from a BINDING_VERIFIED evidence file whose accessor was proven to
+        write this contract's own mutation_target_path (see qualification/pass1/qualify_bindings_pass1.py).
+        No evidence file -> no binding (the contract stays unbound, never guessed)."""
+        import json
+        ev_path = Path(__file__).parent.parent / "qualification" / "pass1" / "bindings" / (contract.target + ".json")
+        try:
+            ev = json.loads(ev_path.read_text())
+        except Exception:
+            return contract
+        if (ev.get("status") != "BINDING_VERIFIED" or not ev.get("accessor_writes_contract_body_path")
+                or ev.get("contract_body_path") != (contract.scope or {}).get("mutation_target_path")):
+            return contract
+        binding = ExecutionBinding(
+            mutation_type="SERUM_PRESET_STRUCTURAL", body_path=ev["contract_body_path"],
+            binding_source="serum2/qualification/pass1/bindings/%s.json" % contract.target,
+            binding_version="pass1-2.0.23", resolver_operation_id=ev["accessor"])
+        return dataclasses.replace(contract, execution_binding=binding)
+
     def _load_fresh_contracts(self):
         """Load fresh contracts from 4.Q.4 qualification pickle stores + canonical restored store."""
         base_path = Path(__file__).parent.parent.parent / "experiments"
@@ -156,6 +185,28 @@ class ContractRegistry:
                 print(f"[ContractRegistry] Warning: Could not load canonical store: {e}")
         else:
             print(f"[ContractRegistry] Note: Canonical store not found: {canonical_path}")
+
+        # Authority-expansion Pass 1 (Serum 2.0.23 epoch): fresh contracts built by
+        # serum2/qualification/pass1/build_pass1_contracts.py through the unmodified
+        # ClaimEngine/build_contract. Explicit allow-list; never overwrites an existing
+        # contract; each must carry the epoch it was proven in.
+        pass1_path = base_path / "_capability_contracts_pass1.pkl"
+        if self.include_pass1 and pass1_path.exists():
+            try:
+                with open(pass1_path, 'rb') as f:
+                    pass1_store = pickle.load(f)
+                loaded_pass1 = 0
+                for contract in pass1_store.values():
+                    if (contract.target in _PASS1_TARGETS
+                            and contract.status in ("CAUSAL_VERIFIED", "STRUCTURAL_ONLY")
+                            and contract.scope.get("serum_binary_sha256")
+                            and contract.target not in self.contracts):
+                        contract = self._attach_pass1_binding(contract)
+                        self.contracts[contract.target] = contract
+                        loaded_pass1 += 1
+                print(f"[ContractRegistry] Loaded {loaded_pass1} Pass-1 contracts (Serum 2.0.23 epoch)")
+            except Exception as e:
+                print(f"[ContractRegistry] Warning: Could not load Pass-1 contracts: {e}")
 
         # Load the generic modulation-route capability, derived from real
         # qualification evidence (serum2/producer/qualify_modulation_route.py)
