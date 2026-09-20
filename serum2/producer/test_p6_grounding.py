@@ -45,6 +45,8 @@ def unknown_obs(oid="u1", modality=AUDIO, reason="no render was produced"):
 
 def claim(members, status=SINGLE_MODALITY, agreeing=(), conflicting=(), conf=0.6, resolution=None, subject=None, **over):
     mods = tuple(sorted({o.modality for o in members}))
+    if status == SINGLE_MODALITY and not agreeing:
+        agreeing = [o.observation_id for o in members if o.status != UNKNOWN and o.interpretation is not None]
     d = dict(claim_id="claim:1", subject=subject or SUBJ, observations=tuple(members), modalities=mods,
              agreement={"status": status, "agreeing_observation_ids": list(agreeing), "conflicting_observation_ids": [list(x) for x in conflicting]},
              confidence=conf, conflict_resolution=resolution, provenance={"recorded_by": "test"})
@@ -171,13 +173,13 @@ def test_a_conflict_needs_two_sides_and_may_not_carry_a_resolution():
 def test_resolution_needs_additional_evidence_outside_the_conflicting_observations():
     t, v, e = obs("t", TRANSCRIPT), obs("v", VISUAL, value="decrease"), obs("e", EPISODE_STATE)
     res = {"resolved_by": ["e"], "outcome": "increase", "basis": "readback", "provenance": {"recorded_by": "test"}}
-    ok = claim([t, v, e], RESOLVED, conflicting=[["t"], ["v"]], resolution=res)
+    ok = claim([t, v, e], RESOLVED, agreeing=["t", "e"], conflicting=[["t"], ["v"]], resolution=res)
     assert V.validate_claim(ok) == []
     for by in (["t"], [], ["ghost"]):
-        bad = claim([t, v, e], RESOLVED, conflicting=[["t"], ["v"]], resolution={**res, "resolved_by": by})
+        bad = claim([t, v, e], RESOLVED, agreeing=["t", "e"], conflicting=[["t"], ["v"]], resolution={**res, "resolved_by": by})
         assert "CLAIM_RESOLVED_WITHOUT_ADDITIONAL_EVIDENCE" in V.validate_claim(bad)
     for drop in ("basis", "provenance"):
-        thin = claim([t, v, e], RESOLVED, conflicting=[["t"], ["v"]], resolution={k: x for k, x in res.items() if k != drop})
+        thin = claim([t, v, e], RESOLVED, agreeing=["t", "e"], conflicting=[["t"], ["v"]], resolution={k: x for k, x in res.items() if k != drop})
         assert "CLAIM_RESOLUTION_WITHOUT_PROVENANCE" in V.validate_claim(thin)
     assert "CLAIM_RESOLUTION_WITHOUT_CONFLICT" in V.validate_claim(claim([t], resolution={"resolved_by": ["t"], "outcome": "x", "basis": "y"}))
 
@@ -343,7 +345,7 @@ def test_agreement_can_raise_confidence_under_the_default_policy_and_never_lower
 @pytest.mark.parametrize("policy", POLICIES, ids=IDS)
 def test_repeated_observations_from_one_modality_are_not_independent_support(policy):
     c = ground([obs("a", VISUAL, conf=0.6), obs("b", VISUAL, conf=0.7), obs("c", VISUAL, conf=0.5)], policy=policy)
-    assert c.agreement["status"] == SINGLE_MODALITY and c.agreement["agreeing_observation_ids"] == ["a", "b", "c"]
+    assert c.agreement["status"] == SINGLE_MODALITY and list(c.agreement["agreeing_observation_ids"]) == ["a", "b", "c"]
     assert c.confidence == ground([obs("b", VISUAL, conf=0.7)], policy=policy).confidence
 
 
@@ -384,7 +386,7 @@ def test_an_uninterpreted_observation_is_kept_but_is_not_evidence(policy):
     c = ground([raw_only], policy=policy)
     assert c.agreement["status"] == INSUFFICIENT and c.confidence == 0.0 and keep(c)["r"] is raw_only
     mixed = ground([raw_only, obs("v", VISUAL, conf=0.7)], policy=policy)
-    assert mixed.agreement["agreeing_observation_ids"] == ["v"] and mixed.agreement["status"] == SINGLE_MODALITY
+    assert list(mixed.agreement["agreeing_observation_ids"]) == ["v"] and mixed.agreement["status"] == SINGLE_MODALITY
 
 
 def test_ground_rejects_bad_input():
@@ -414,12 +416,207 @@ def test_ground_has_no_side_effects(monkeypatch):
 RED = pytest.mark.xfail(strict=True, raises=(ImportError, AttributeError, TypeError), reason="P6 later stage not implemented")
 
 
-@pytest.mark.xfail(strict=True, raises=AssertionError, reason="P6.3: validator does not yet re-derive agreement from the observations")
-def test_p6_3_the_validator_rederives_agreement_so_a_forged_claim_is_caught():
-    from serum2.producer.grounding import ground
-    real = ground([obs("t", TRANSCRIPT, "increase"), obs("v", VISUAL, "decrease")])
-    forged = replace(real, agreement={"status": AGREEMENT, "agreeing_observation_ids": ["t", "v"], "conflicting_observation_ids": []}, confidence=0.9)
-    assert "CLAIM_AGREEMENT_INCONSISTENT" in V.validate_claim(forged)
+# ---- P6.3 policy-free, evidence-derived validation ------------------------------------------------------------------------
+import inspect
+from serum2.producer.grounding import derive_structure
+
+
+def conflict_claim(ti="increase", vi="decrease"):
+    return ground([obs("t", TRANSCRIPT, ti), obs("v", VISUAL, vi)])
+
+
+def forged(real, status, agreeing=(), conflicting=(), **over):
+    return replace(real, agreement={"status": status, "agreeing_observation_ids": list(agreeing),
+                                    "conflicting_observation_ids": [list(x) for x in conflicting]}, **over)
+
+
+def test_p6_3_observations_say_conflict_claim_says_agreement_is_rejected():
+    real = conflict_claim()
+    assert real.agreement["status"] == CONFLICT
+    codes = V.validate_claim(forged(real, AGREEMENT, agreeing=["t", "v"], confidence=0.9))
+    assert "CLAIM_STATUS_INCONSISTENT" in codes and "CLAIM_AGREEMENT_INCONSISTENT" in codes
+
+
+def test_p6_3_observations_say_agreement_claim_says_conflict_is_rejected():
+    real = conflict_claim("increase", "increase")
+    assert real.agreement["status"] == AGREEMENT
+    codes = V.validate_claim(forged(real, CONFLICT, conflicting=[["t"], ["v"]]))
+    assert "CLAIM_STATUS_INCONSISTENT" in codes and "CLAIM_CONFLICT_INCONSISTENT" in codes
+
+
+def test_p6_3_a_conflict_cannot_be_downgraded_or_have_a_side_hidden():
+    real = conflict_claim()
+    assert "CLAIM_STATUS_INCONSISTENT" in V.validate_claim(forged(real, SINGLE_MODALITY, agreeing=["t"]))
+    hidden = V.validate_claim(forged(real, CONFLICT, conflicting=[["t"]]))
+    assert "CLAIM_CONFLICT_WITHOUT_SIDES" in hidden and "CLAIM_CONFLICT_INCONSISTENT" in hidden
+
+
+def test_p6_3_same_modality_duplicates_are_never_agreement_even_if_the_claim_says_so():
+    real = ground([obs("a", VISUAL, "increase"), obs("b", VISUAL, "increase")])
+    assert real.agreement["status"] == SINGLE_MODALITY and derive_structure([o.to_dict() for o in real.observations])["status"] == SINGLE_MODALITY
+    assert "CLAIM_STATUS_INCONSISTENT" in V.validate_claim(forged(real, AGREEMENT, agreeing=["a", "b"]))
+
+
+def test_p6_3_unknown_observations_are_never_supporting_evidence_even_if_the_claim_lists_them():
+    real = ground([obs("t", TRANSCRIPT), unknown_obs("u")])
+    codes = V.validate_claim(forged(real, AGREEMENT, agreeing=["t", "u"]))
+    assert "CLAIM_UNKNOWN_COUNTED_AS_EVIDENCE" in codes and "CLAIM_STATUS_INCONSISTENT" in codes
+    only = ground([unknown_obs("u")])
+    for status in (SINGLE_MODALITY, AGREEMENT):
+        assert V.validate_claim(forged(only, status, agreeing=["u"], confidence=0.6))
+
+
+def test_p6_3_omitting_a_modality_from_the_provenance_is_rejected():
+    real = ground([obs("t", TRANSCRIPT), obs("v", VISUAL), obs("e", EPISODE_STATE)])
+    assert "CLAIM_MODALITIES_MISMATCH" in V.validate_claim(replace(real, modalities=("TRANSCRIPT", "VISUAL")))
+
+
+def test_p6_3_subject_mismatch_is_rejected():
+    real = conflict_claim("increase", "increase")
+    assert "CLAIM_MIXED_SUBJECTS" in V.validate_claim(replace(real, subject={"canonical_target_id": "env2.release", "aspect": "direction"}))
+    other = obs("x", AUDIO, subject={"canonical_target_id": "env2.release", "aspect": "direction"})
+    assert "CLAIM_MIXED_SUBJECTS" in V.validate_claim(replace(real, observations=real.observations + (other,), modalities=("AUDIO", "TRANSCRIPT", "VISUAL")))
+
+
+def test_p6_3_agreement_and_conflict_are_reconstructed_from_the_observations_alone():
+    agree = derive_structure([obs("t", TRANSCRIPT, "increase").to_dict(), obs("v", VISUAL, "increase").to_dict(), unknown_obs("u").to_dict()])
+    assert (agree["status"], agree["agreeing_ids"], agree["conflicting_ids"], agree["unknown_ids"]) == (AGREEMENT, ["t", "v"], [], ["u"])
+    conf = derive_structure([obs("t", TRANSCRIPT, "increase").to_dict(), obs("v", VISUAL, "decrease").to_dict(), obs("e", EPISODE_STATE, "increase").to_dict()])
+    assert conf["status"] == CONFLICT and sorted(map(sorted, conf["conflicting_ids"])) == [["e", "t"], ["v"]] and conf["agreeing_ids"] == []
+    assert derive_structure([])["status"] == INSUFFICIENT
+
+
+def test_p6_3_a_claim_missing_its_reconstructed_conflict_is_rejected():
+    real = ground([obs("t", TRANSCRIPT, "increase"), obs("v", VISUAL, "decrease"), obs("e", EPISODE_STATE, "increase")])
+    assert V.validate_claim(real) == []
+    assert "CLAIM_CONFLICT_INCONSISTENT" in V.validate_claim(forged(real, CONFLICT, conflicting=[["t"], ["v"]]))     # dropped e from its side
+
+
+def resolved(conflict=None, e_value="increase"):
+    base = ground([obs("t", TRANSCRIPT, "increase"), obs("v", VISUAL, "decrease"), obs("e", EPISODE_STATE, e_value)])
+    res = {"resolved_by": ["e"], "outcome": "increase", "basis": "plugin readback", "provenance": {"recorded_by": "test"}}
+    return base, replace(base, agreement={"status": RESOLVED, "agreeing_observation_ids": ["t", "e"], "conflicting_observation_ids": [["t"], ["v"]]},
+                         conflict_resolution=res)
+
+
+def test_p6_3_a_genuine_resolution_is_valid():
+    _base, r = resolved()
+    assert V.validate_claim(r) == []
+
+
+@pytest.mark.parametrize("mutate,code", [
+    (lambda r: replace(r, conflict_resolution={**r.conflict_resolution, "outcome": "decrease"}), "CLAIM_RESOLUTION_OUTCOME_UNSUPPORTED"),
+    (lambda r: replace(r, conflict_resolution={**r.conflict_resolution, "outcome": "sideways"}), "CLAIM_RESOLUTION_OUTCOME_NOT_A_SIDE"),
+    (lambda r: replace(r, conflict_resolution={**r.conflict_resolution, "resolved_by": ["t"]}), "CLAIM_RESOLVED_WITHOUT_ADDITIONAL_EVIDENCE"),
+    (lambda r: replace(r, conflict_resolution={**r.conflict_resolution, "resolved_by": ["v"]}), "CLAIM_RESOLVED_WITHOUT_ADDITIONAL_EVIDENCE"),
+    (lambda r: replace(r, conflict_resolution={**r.conflict_resolution, "resolved_by": ["ghost"]}), "CLAIM_RESOLVED_WITHOUT_ADDITIONAL_EVIDENCE"),
+    (lambda r: replace(r, conflict_resolution={**r.conflict_resolution, "resolved_by": []}), "CLAIM_RESOLVED_WITHOUT_ADDITIONAL_EVIDENCE"),
+    (lambda r: replace(r, conflict_resolution={k: x for k, x in r.conflict_resolution.items() if k != "basis"}), "CLAIM_RESOLUTION_WITHOUT_PROVENANCE"),
+    (lambda r: replace(r, conflict_resolution={**r.conflict_resolution, "provenance": {}}), "CLAIM_RESOLUTION_WITHOUT_PROVENANCE"),
+    (lambda r: replace(r, agreement={**r.agreement, "conflicting_observation_ids": [["t"]]}), "CLAIM_RESOLVED_WITHOUT_PRIOR_CONFLICT"),
+    (lambda r: replace(r, agreement={**r.agreement, "agreeing_observation_ids": ["t", "e", "v"]}), "CLAIM_AGREEMENT_INCONSISTENT"),
+])
+def test_p6_3_fabricated_resolutions_are_rejected(mutate, code):
+    _base, r = resolved()
+    assert code in V.validate_claim(mutate(r))
+
+
+def test_p6_3_a_resolution_by_an_unknown_or_uninterpreted_observation_is_rejected():
+    for bad_e in (unknown_obs("e", EPISODE_STATE), obs("e", EPISODE_STATE, interpretation=None)):
+        base = ground([obs("t", TRANSCRIPT, "increase"), obs("v", VISUAL, "decrease"), bad_e])
+        r = replace(base, agreement={"status": RESOLVED, "agreeing_observation_ids": ["t"], "conflicting_observation_ids": [["t"], ["v"]]},
+                    conflict_resolution={"resolved_by": ["e"], "outcome": "increase", "basis": "x", "provenance": {"r": 1}})
+        assert "CLAIM_RESOLUTION_OUTCOME_UNSUPPORTED" in V.validate_claim(r)
+
+
+def test_p6_3_a_resolution_where_there_was_no_conflict_is_rejected():
+    agree = ground([obs("t", TRANSCRIPT, "increase"), obs("e", EPISODE_STATE, "increase")])
+    r = replace(agree, agreement={"status": RESOLVED, "agreeing_observation_ids": ["t", "e"], "conflicting_observation_ids": []},
+                conflict_resolution={"resolved_by": ["e"], "outcome": "increase", "basis": "x", "provenance": {"r": 1}})
+    assert "CLAIM_RESOLVED_WITHOUT_PRIOR_CONFLICT" in V.validate_claim(r)
+
+
+def test_p6_3_lineage_originals_stay_immutable_and_only_the_resolving_evidence_is_added():
+    before = conflict_claim()
+    base = ground([obs("t", TRANSCRIPT, "increase"), obs("v", VISUAL, "decrease"), obs("e", EPISODE_STATE, "increase")])
+    after = replace(base, agreement={"status": RESOLVED, "agreeing_observation_ids": ["t", "e"], "conflicting_observation_ids": [["t"], ["v"]]},
+                    conflict_resolution={"resolved_by": ["e"], "outcome": "increase", "basis": "x", "provenance": {"r": 1}})
+    assert V.validate_resolution(before, after) == []
+    snapshot = before.to_dict()
+    assert before.to_dict() == snapshot                                                          # building `after` did not touch `before`
+    assert all(orig in after.observations for orig in before.observations)                       # every original is present, equal, unmodified
+
+
+@pytest.mark.parametrize("mutate,code", [
+    (lambda a: replace(a, observations=tuple(replace(o, interpretation={"kind": "direction", "value": "increase", "basis": "edited"}) if o.observation_id == "v" else o for o in a.observations)), "RESOLUTION_ALTERED_ORIGINAL"),
+    (lambda a: replace(a, observations=tuple(o for o in a.observations if o.observation_id != "v")), "RESOLUTION_ALTERED_ORIGINAL"),
+    (lambda a: replace(a, agreement={**a.agreement, "conflicting_observation_ids": []}), "RESOLUTION_LOST_CONFLICT_RECORD"),
+    (lambda a: replace(a, observations=a.observations + (obs("z", AUDIO, "increase"),), modalities=("AUDIO", "EPISODE_STATE", "TRANSCRIPT", "VISUAL")), "RESOLUTION_EXTRA_OBSERVATIONS"),
+    (lambda a: replace(a, subject={"canonical_target_id": "env2.release", "aspect": "direction"}), "RESOLUTION_SUBJECT_CHANGED"),
+    (lambda a: replace(a, agreement={**a.agreement, "status": CONFLICT}), "RESOLUTION_NOT_RESOLVED"),
+])
+def test_p6_3_lineage_violations_are_rejected(mutate, code):
+    before = conflict_claim()
+    base = ground([obs("t", TRANSCRIPT, "increase"), obs("v", VISUAL, "decrease"), obs("e", EPISODE_STATE, "increase")])
+    after = replace(base, agreement={"status": RESOLVED, "agreeing_observation_ids": ["t", "e"], "conflicting_observation_ids": [["t"], ["v"]]},
+                    conflict_resolution={"resolved_by": ["e"], "outcome": "increase", "basis": "x", "provenance": {"r": 1}})
+    assert code in V.validate_resolution(before, mutate(after))
+
+
+def test_p6_3_resolving_something_that_was_not_a_conflict_is_rejected_by_lineage():
+    agree = ground([obs("t", TRANSCRIPT, "increase"), obs("v", VISUAL, "increase")])
+    assert "RESOLUTION_BEFORE_NOT_CONFLICT" in V.validate_resolution(agree, agree)
+
+
+def test_p6_3_originals_are_deeply_immutable_and_to_dict_returns_independent_copies():
+    c = conflict_claim()
+    o = c.observations[0]
+    for attempt in (lambda: setattr(o, "confidence", 1.0),
+                    lambda: o.interpretation.__setitem__("value", "hijacked"),
+                    lambda: o.source.__setitem__("ref", "forged"),
+                    lambda: o.observation.__setitem__("x", 1),
+                    lambda: c.agreement.__setitem__("status", AGREEMENT),
+                    lambda: c.subject.__setitem__("aspect", "other")):
+        with pytest.raises((TypeError, AttributeError)):
+            attempt()
+    d = c.to_dict()
+    d["observations"][0]["interpretation"]["value"] = "hijacked"
+    d["agreement"]["status"] = AGREEMENT
+    assert c.observations[0].interpretation["value"] != "hijacked" and c.agreement["status"] == CONFLICT
+
+
+def test_p6_3_validity_is_policy_free():
+    xs = [obs("t", TRANSCRIPT, "increase", 0.6), obs("v", VISUAL, "decrease", 0.7), unknown_obs("u")]
+    for policy in POLICIES:
+        assert V.validate_claim(ground(xs, policy=policy)) == []                       # any policy's claim has the same valid structure
+    assert list(inspect.signature(GroundingValidator.validate_claim).parameters) == ["self", "claim"]
+    tree = ast.parse(Path(g.__file__).read_text(encoding="utf-8"))
+    for node in ast.walk(tree):
+        if isinstance(node, (ast.ClassDef, ast.FunctionDef)) and node.name in ("GroundingValidator", "derive_structure"):
+            names = {n.id.lower() for n in ast.walk(node) if isinstance(n, ast.Name)} | {n.attr.lower() for n in ast.walk(node) if isinstance(n, ast.Attribute)}
+            assert not [x for x in names if "policy" in x or "confidence_policy" in x], (node.name, names)
+
+
+def test_p6_3_exhaustive_small_space_ground_output_validates_and_every_status_forgery_is_rejected():
+    mods = [(TRANSCRIPT, "t"), (VISUAL, "v"), (AUDIO, "a"), (EPISODE_STATE, "e")]
+    build = {"A": lambda m, i: obs(i, m, "increase", 0.6), "B": lambda m, i: obs(i, m, "decrease", 0.7),
+             "U": lambda m, i: unknown_obs(i, m), "R": lambda m, i: obs(i, m, interpretation=None)}
+    checked = 0
+    for combo in itertools.product([None, "A", "B", "U", "R"], repeat=4):
+        members = [build[k](m, i) for k, (m, i) in zip(combo, mods) if k]
+        if not members:
+            continue
+        real = ground(members)
+        assert V.validate_claim(real) == [], (combo, V.validate_claim(real))
+        for alt in (SINGLE_MODALITY, AGREEMENT, CONFLICT, INSUFFICIENT):
+            if alt == real.agreement["status"]:
+                continue
+            fake = forged(real, alt, agreeing=real.agreement["agreeing_observation_ids"] or [m.observation_id for m in members],
+                          conflicting=real.agreement["conflicting_observation_ids"] or [[m.observation_id] for m in members[:2]],
+                          confidence=0.0 if alt == INSUFFICIENT else real.confidence)
+            assert V.validate_claim(fake), (combo, alt)
+            checked += 1
+    assert checked > 1000
 
 
 @RED

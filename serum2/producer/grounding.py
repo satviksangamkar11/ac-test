@@ -23,7 +23,7 @@ import math
 from dataclasses import dataclass
 from typing import Any, Dict, Iterable, List, Mapping, Optional, Protocol, Sequence, Tuple
 
-from serum2.producer.skill_library import _FORBIDDEN_SKILL_FIELDS
+from serum2.producer.skill_library import _FORBIDDEN_SKILL_FIELDS, _freeze
 
 GROUNDING_SCHEMA_VERSION = "1"
 
@@ -76,6 +76,11 @@ class GroundingObservation:
     advisory: bool = True
     schema_version: str = GROUNDING_SCHEMA_VERSION
 
+    def __post_init__(self):
+        # deep-freeze: an original observation cannot be edited in place, not even inside its nested mappings
+        for f in ("source", "timestamp", "subject", "observation", "interpretation", "uncertainty", "provenance"):
+            object.__setattr__(self, f, _freeze(getattr(self, f)))
+
     def to_dict(self) -> Dict[str, Any]:
         return {"observation_id": self.observation_id, "modality": self.modality, "source": dict(self.source),
                 "timestamp": dict(self.timestamp) if self.timestamp is not None else None, "subject": dict(self.subject),
@@ -100,6 +105,10 @@ class GroundedClaim:
     advisory: bool = True
     schema_version: str = GROUNDING_SCHEMA_VERSION
 
+    def __post_init__(self):
+        for f in ("subject", "observations", "modalities", "agreement", "conflict_resolution", "provenance"):
+            object.__setattr__(self, f, _freeze(getattr(self, f)))
+
     def to_dict(self) -> Dict[str, Any]:
         return {"claim_id": self.claim_id, "subject": dict(self.subject), "observations": [o.to_dict() for o in self.observations],
                 "modalities": list(self.modalities),
@@ -110,6 +119,40 @@ class GroundedClaim:
                 "conflict_resolution": dict(self.conflict_resolution) if self.conflict_resolution is not None else None,
                 "provenance": dict(self.provenance), "advisory": self.advisory, "schema_version": self.schema_version}
 
+
+
+# ====================================================================================================================
+# Policy-free structure derivation: what the observations themselves say. Used by ground() AND the validator.
+# ====================================================================================================================
+def derive_structure(observations: Iterable[Mapping[str, Any]]) -> Dict[str, Any]:
+    """Derive a claim's structure from observation dicts ONLY. No confidence, no policy, no other module.
+
+    Evidence = observations that are known (not UNKNOWN) AND carry an interpretation. Evidence is grouped by
+    interpretation value: one group is agreement (two or more DISTINCT modalities) or single-modality support; two or
+    more groups are a conflict. UNKNOWN and uninterpreted observations are listed but are never evidence.
+    """
+    obs = sorted(observations, key=lambda o: str(o.get("observation_id")))
+    known = [o for o in obs if o.get("status") != UNKNOWN and o.get("interpretation") is not None]
+    groups: Dict[str, List[Mapping[str, Any]]] = {}
+    for o in known:
+        groups.setdefault(repr(o["interpretation"].get("value")), []).append(o)
+    keys = sorted(groups)
+    group_ids = [[o["observation_id"] for o in groups[k]] for k in keys]
+    if not groups:
+        status, agreeing, conflicting = INSUFFICIENT, [], []
+    elif len(groups) == 1:
+        status = AGREEMENT if len({o.get("modality") for o in groups[keys[0]]}) >= 2 else SINGLE_MODALITY
+        agreeing, conflicting = group_ids[0], []
+    else:
+        status, agreeing, conflicting = CONFLICT, [], group_ids
+    return {
+        "modalities": tuple(sorted({o.get("modality") for o in obs})),
+        "unknown_ids": [o["observation_id"] for o in obs if o.get("status") == UNKNOWN],
+        "uninterpreted_ids": [o["observation_id"] for o in obs if o.get("status") != UNKNOWN and o.get("interpretation") is None],
+        "mixed_kinds": len({o["interpretation"].get("kind") for o in known}) > 1,
+        "groups": group_ids, "group_values": [groups[k][0]["interpretation"].get("value") for k in keys],
+        "status": status, "agreeing_ids": agreeing, "conflicting_ids": conflicting,
+    }
 
 # ====================================================================================================================
 # Confidence policy: the numbers are a replaceable policy, the invariants are enforced by ground()
@@ -216,14 +259,12 @@ def ground(observations: Iterable[GroundingObservation], policy: Optional[Confid
     if any(subject_key(o.subject) != subject_key(subject) for o in obs):
         raise ValueError("observations about different subjects cannot be grounded together")
 
-    evidence = [o for o in obs if o.status != UNKNOWN and o.interpretation is not None]
-    unknowns = [o for o in obs if o.status == UNKNOWN]
-    if len({o.interpretation["kind"] for o in evidence}) > 1:
+    by_id = {o.observation_id: o for o in obs}
+    st = derive_structure([o.to_dict() for o in obs])
+    if st["mixed_kinds"]:
         raise ValueError("interpretations of different kinds cannot be compared")
-
-    groups: Dict[Any, List[GroundingObservation]] = {}
-    for o in evidence:
-        groups.setdefault(repr(o.interpretation["value"]), []).append(o)
+    unknowns = [by_id[i] for i in st["unknown_ids"]]
+    groups = [[by_id[i] for i in ids] for ids in st["groups"]]
 
     def group_confidence(members: List[GroundingObservation]) -> Tuple[float, int]:
         per_modality: Dict[str, float] = {}
@@ -235,26 +276,20 @@ def ground(observations: Iterable[GroundingObservation], policy: Optional[Confid
         agree = max(_unit(policy.agreement_effect(list(sub))) for r in range(1, len(confs) + 1) for sub in itertools.combinations(confs, r))
         return round(max(best, agree), 12), len(per_modality)
 
-    if not groups:
-        status, confidence, agreeing, conflicting = INSUFFICIENT, 0.0, [], []
-    elif len(groups) == 1:
-        (members,) = groups.values()
-        confidence, n_mod = group_confidence(members)
-        agreeing = [o.observation_id for o in members]
-        status = AGREEMENT if n_mod >= 2 else SINGLE_MODALITY
-        conflicting = []
-        confidence = round(min(confidence, _unit(policy.unknown_effect(confidence, unknowns))) if unknowns else confidence, 12)
-    else:
-        sides = [group_confidence(m)[0] for m in groups.values()]
+    status, agreeing, conflicting = st["status"], st["agreeing_ids"], st["conflicting_ids"]
+    if status == INSUFFICIENT:
+        confidence = 0.0
+    elif status == CONFLICT:
+        sides = [group_confidence(m)[0] for m in groups]
         confidence = round(min(min(sides), _unit(policy.conflict_effect(sides))), 12)
-        status, agreeing = CONFLICT, []
-        conflicting = [[o.observation_id for o in m] for _k, m in sorted(groups.items())]
-        if unknowns:
-            confidence = round(min(confidence, _unit(policy.unknown_effect(confidence, unknowns))), 12)
+    else:
+        confidence = group_confidence(groups[0])[0]
+    if unknowns and status != INSUFFICIENT:
+        confidence = round(min(confidence, _unit(policy.unknown_effect(confidence, unknowns))), 12)
 
     return GroundedClaim(
         claim_id=_claim_id(subject, ids), subject=subject, observations=tuple(obs), modalities=tuple(sorted({o.modality for o in obs})),
-        agreement={"status": status, "agreeing_observation_ids": agreeing, "conflicting_observation_ids": conflicting},
+        agreement={"status": status, "agreeing_observation_ids": list(agreeing), "conflicting_observation_ids": [list(g) for g in conflicting]},
         confidence=confidence, conflict_resolution=None, provenance={"recorded_by": "grounding.ground", "policy": type(policy).__name__})
 
 
@@ -352,26 +387,75 @@ class GroundingValidator:
         if referenced & unknown_ids:
             v.append("CLAIM_UNKNOWN_COUNTED_AS_EVIDENCE")
         res = d.get("conflict_resolution")
-        if status == CONFLICT:
-            if len(conflicting) < 2 or any(not g for g in conflicting):
-                v.append("CLAIM_CONFLICT_WITHOUT_SIDES")
-            if res is not None:
-                v.append("CLAIM_CONFLICT_PRESET_RESOLUTION")
-        elif status == RESOLVED:
+        st = derive_structure(obs)
+        if st["mixed_kinds"]:
+            v.append("CLAIM_MIXED_INTERPRETATION_KINDS")
+        stored_sides = {frozenset(g) for g in conflicting}
+        if status == RESOLVED:
             by = list((res or {}).get("resolved_by") or [])
-            sides = {i for g in conflicting for i in g}
-            if not by or set(by) - set(ids) or not (set(by) - sides) or not (res or {}).get("outcome"):
+            outcome = (res or {}).get("outcome")
+            resolvers = [o for o in obs if o.get("observation_id") in by]
+            base = derive_structure([o for o in obs if o.get("observation_id") not in by])
+            if not by or set(by) - set(ids) or not (set(by) - {i for g in conflicting for i in g}) or outcome is None or outcome == "":
                 v.append("CLAIM_RESOLVED_WITHOUT_ADDITIONAL_EVIDENCE")
             if not (res or {}).get("basis") or not (res or {}).get("provenance"):
                 v.append("CLAIM_RESOLUTION_WITHOUT_PROVENANCE")
-            if len(conflicting) < 2:
+            if len(conflicting) < 2 or base["status"] != CONFLICT:
                 v.append("CLAIM_RESOLVED_WITHOUT_PRIOR_CONFLICT")
-        elif res is not None:
-            v.append("CLAIM_RESOLUTION_WITHOUT_CONFLICT")
+            elif stored_sides != {frozenset(g) for g in base["conflicting_ids"]}:
+                v.append("CLAIM_CONFLICT_INCONSISTENT")
+            if base["status"] == CONFLICT and outcome not in base["group_values"]:
+                v.append("CLAIM_RESOLUTION_OUTCOME_NOT_A_SIDE")
+            if any(r.get("status") == UNKNOWN or r.get("interpretation") is None or r["interpretation"].get("value") != outcome for r in resolvers):
+                v.append("CLAIM_RESOLUTION_OUTCOME_UNSUPPORTED")
+            supporting = sorted(o["observation_id"] for o in obs if o.get("status") != UNKNOWN and o.get("interpretation") is not None
+                                and o["interpretation"].get("value") == outcome)
+            if sorted(agreeing) != supporting:
+                v.append("CLAIM_AGREEMENT_INCONSISTENT")
+        else:
+            if status in AGREEMENT_STATUSES:
+                if st["status"] != status:
+                    v.append("CLAIM_STATUS_INCONSISTENT")
+                if sorted(agreeing) != sorted(st["agreeing_ids"]):
+                    v.append("CLAIM_AGREEMENT_INCONSISTENT")
+                if stored_sides != {frozenset(g) for g in st["conflicting_ids"]}:
+                    v.append("CLAIM_CONFLICT_INCONSISTENT")
+            if status == CONFLICT:
+                if len(conflicting) < 2 or any(not g for g in conflicting):
+                    v.append("CLAIM_CONFLICT_WITHOUT_SIDES")
+                if res is not None:
+                    v.append("CLAIM_CONFLICT_PRESET_RESOLUTION")
+            elif res is not None:
+                v.append("CLAIM_RESOLUTION_WITHOUT_CONFLICT")
         if status == AGREEMENT and len({o.get("modality") for o in obs if o.get("observation_id") in set(agreeing)}) < 2:
             v.append("CLAIM_AGREEMENT_NEEDS_TWO_MODALITIES")
         if status == INSUFFICIENT and c != 0.0:
             v.append("CLAIM_INSUFFICIENT_HAS_CONFIDENCE")
         if not d.get("provenance"):
             v.append("CLAIM_NO_PROVENANCE")
+        return v
+
+    def validate_resolution(self, before: Any, after: Any) -> List[str]:
+        """Lineage check for a resolved claim against the conflicting claim it came from: every original observation is
+        present and unmodified, the conflict record survives, and the ONLY new observations are the resolving evidence."""
+        v: List[str] = []
+        b = before.to_dict() if hasattr(before, "to_dict") else dict(before)
+        a = after.to_dict() if hasattr(after, "to_dict") else dict(after)
+        bs = derive_structure(b.get("observations") or [])
+        if bs["status"] != CONFLICT or (b.get("agreement") or {}).get("status") != CONFLICT:
+            v.append("RESOLUTION_BEFORE_NOT_CONFLICT")
+        if subject_key(b.get("subject") or {}) != subject_key(a.get("subject") or {}):
+            v.append("RESOLUTION_SUBJECT_CHANGED")
+        if (a.get("agreement") or {}).get("status") != RESOLVED:
+            v.append("RESOLUTION_NOT_RESOLVED")
+        after_by_id = {o.get("observation_id"): o for o in a.get("observations") or []}
+        if any(after_by_id.get(o.get("observation_id")) != o for o in b.get("observations") or []):
+            v.append("RESOLUTION_ALTERED_ORIGINAL")
+        if {frozenset(g) for g in (a.get("agreement") or {}).get("conflicting_observation_ids") or []} != {frozenset(g) for g in bs["conflicting_ids"]}:
+            v.append("RESOLUTION_LOST_CONFLICT_RECORD")
+        added = set(after_by_id) - {o.get("observation_id") for o in b.get("observations") or []}
+        if added != set(((a.get("conflict_resolution") or {}).get("resolved_by")) or []):
+            v.append("RESOLUTION_EXTRA_OBSERVATIONS")
+        if self.validate_claim(a):
+            v.append("RESOLUTION_AFTER_INVALID")
         return v
