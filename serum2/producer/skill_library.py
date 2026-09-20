@@ -171,13 +171,51 @@ def skill_from_dict(d: Mapping[str, Any]) -> SkillRecord:
     return SkillRecord(**d)
 
 
+_STATE_ORDER = ("FRESH", "STALE", "CONTRADICTED", "RETIRED")
+
+
+def worse_state(*states: str) -> str:
+    """Lifecycle only ever worsens through merging; recovery needs an explicit future re-validation step."""
+    return max(states, key=_STATE_ORDER.index)
+
+
+def evidence_outcome(e: Mapping[str, Any]) -> str:
+    """CONFIRMED / CONTRADICTED / INCONCLUSIVE. Entries that predate explicit outcomes: verified -> CONFIRMED, else CONTRADICTED."""
+    o = e.get("outcome")
+    return o if o is not None else ("CONFIRMED" if e.get("verified", True) else "CONTRADICTED")
+
+
+def derive_lifecycle_state(evidence: Iterable[Mapping[str, Any]]) -> str:
+    """Evidence-derived state: no contradiction -> FRESH; contradictions not outnumbering confirmations -> STALE;
+    more contradictions than confirmations -> CONTRADICTED. INCONCLUSIVE outcomes never move it. RETIRED is only
+    ever entered explicitly (retire_skill)."""
+    outs = [evidence_outcome(e) for e in evidence]
+    k, c = outs.count("CONFIRMED"), outs.count("CONTRADICTED")
+    return "FRESH" if c == 0 else ("STALE" if c <= k else "CONTRADICTED")
+
+
+def retire_skill(skill: SkillRecord, reason: str) -> SkillRecord:
+    if not reason or not str(reason).strip():
+        raise ValueError("retiring a skill needs a reason")
+    return replace(skill, lifecycle_state="RETIRED", provenance={**skill.provenance, "retired_reason": str(reason)})
+
+
 def _dedupe_evidence(evidence: Iterable[Mapping[str, Any]]) -> Tuple[Mapping[str, Any], ...]:
-    seen, out = set(), []
+    """One entry per attempt (episode_id, event_id). First occurrence wins, so resubmission is a no-op; the SAME
+    attempt reported with a different outcome is a conflict and raises instead of being silently dropped."""
+    seen: Dict[Any, bool] = {}
+    out = []
     for e in evidence:
+        if "outcome" in e and "verified" in e and bool(e["verified"]) != (e["outcome"] == "CONFIRMED"):
+            raise ValueError("evidence entry is inconsistent: outcome=%r verified=%r" % (e["outcome"], e["verified"]))
         key = (e.get("episode_id"), e.get("event_id"))
-        if key not in seen:            # first occurrence wins: resubmitting an episode is a no-op
-            seen.add(key)
-            out.append(e)
+        confirmed = evidence_outcome(e) == "CONFIRMED"
+        if key in seen:
+            if seen[key] != confirmed:
+                raise ValueError("conflicting outcomes reported for the same attempt %r" % (key,))
+            continue
+        seen[key] = confirmed
+        out.append(e)
     return tuple(out)
 
 
@@ -196,7 +234,7 @@ def merge_skills(existing: Optional[SkillRecord], incoming: SkillRecord) -> Skil
     Statistics and confidence are RECOMPUTED from the merged evidence, never summed or copied, so
     merging is idempotent and order-independent for the numbers. Evidence entries without an explicit
     "verified" flag predate the flag and only ever came from verified episodes, so they count as verified.
-    Lifecycle and advisory are never promoted by a merge. Generic: no target- or operation-specific logic.
+    Lifecycle only ever worsens (worst of existing, incoming and evidence-derived); advisory is never promoted. Generic: no target- or operation-specific logic.
     """
     validator = SkillQualificationValidator()
     for k in (existing, incoming):
@@ -210,7 +248,7 @@ def merge_skills(existing: Optional[SkillRecord], incoming: SkillRecord) -> Skil
                 raise ValueError("cannot merge skills with different %s: %r != %r" % (f, getattr(existing, f), getattr(incoming, f)))
     evidence = _dedupe_evidence((existing.supporting_evidence if existing else ()) + incoming.supporting_evidence)
     attempts = len(evidence)
-    verified = sum(1 for e in evidence if e.get("verified", True))
+    verified = sum(1 for e in evidence if evidence_outcome(e) == "CONFIRMED")
     episodes = _ordered_union(*[[e["episode_id"]] for e in evidence])
     provenance = dict(base.provenance)
     provenance["source_episode_ids"] = _ordered_union(
@@ -219,6 +257,8 @@ def merge_skills(existing: Optional[SkillRecord], incoming: SkillRecord) -> Skil
     merged = replace(
         base,
         preconditions=tuple(_ordered_union(*(k.preconditions for k in (existing, incoming) if k is not None))),
+        lifecycle_state=worse_state(derive_lifecycle_state(evidence), incoming.lifecycle_state,
+                                    *([existing.lifecycle_state] if existing else [])),
         supporting_evidence=evidence,
         outcome_stats={"attempts": attempts, "verified_successes": verified, "distinct_episodes": len(episodes)},
         confidence=verified / (attempts + CONFIDENCE_PRIOR),

@@ -98,14 +98,22 @@ class PriorEpisodeEvidence:
             raise ValueError("prior evidence needs episode provenance")
 
 
-def prior_evidence_from_episodes(episodes: Iterable[Any]) -> Tuple[PriorEpisodeEvidence, ...]:
-    """Aggregate episodes into per-(target, operation) outcome history.
+@dataclass(frozen=True)
+class AttemptOutcome:
+    """One attempt's outcome, keyed by attempt_key=(episode_id, event_id-or-target|operation). The SAME key means the
+    same execution no matter which representation (skill evidence, prior evidence, reflection) reports it."""
 
-    Only admitted decisions count as attempts (a refusal is not an attempt). An attempt is a verified success only
-    when its episode passes the P3 verification gate. Each episode counts once per key (resubmission is a no-op).
-    """
+    attempt_key: Tuple[Any, Any]
+    canonical_target_id: str
+    operation: str
+    episode_id: str
+    success: bool
+
+
+def attempts_from_episodes(episodes: Iterable[Any]) -> Tuple[AttemptOutcome, ...]:
+    """Admitted decisions are attempts (a refusal is not one); success needs the P3 verification gate."""
     validator = SkillQualificationValidator()
-    agg: Dict[Tuple[str, str], List[Any]] = {}
+    out: List[AttemptOutcome] = []
     for ep in episodes:
         verified = not validator.validate_episode(ep)
         eid = getattr(ep, "experience_id", None)
@@ -116,13 +124,32 @@ def prior_evidence_from_episodes(episodes: Iterable[Any]) -> Tuple[PriorEpisodeE
                 op = derive_operation(d).lower()
             except ValueError:
                 continue
-            row = agg.setdefault((d["source_control_id"], op), [0, 0, []])
-            if eid in row[2]:
-                continue
-            row[0] += 1
-            row[1] += 1 if verified else 0
-            row[2].append(eid)
+            t = d["source_control_id"]
+            out.append(AttemptOutcome((eid, d.get("event_id") or "%s|%s" % (t, op)), t, op, eid, verified))
+    return tuple(out)
+
+
+def prior_evidence_from_attempts(attempts: Iterable[AttemptOutcome]) -> Tuple[PriorEpisodeEvidence, ...]:
+    """Aggregate attempts into per-(target, operation) history. Each attempt counts once however many sources report
+    it; the same attempt with different outcomes raises."""
+    seen: Dict[Any, bool] = {}
+    agg: Dict[Tuple[str, str], List[Any]] = {}
+    for a in attempts:
+        if a.attempt_key in seen:
+            if seen[a.attempt_key] != a.success:
+                raise ValueError("conflicting outcomes reported for the same attempt %r" % (a.attempt_key,))
+            continue
+        seen[a.attempt_key] = a.success
+        row = agg.setdefault((a.canonical_target_id, a.operation.lower()), [0, 0, []])
+        row[0] += 1
+        row[1] += 1 if a.success else 0
+        if a.episode_id not in row[2]:
+            row[2].append(a.episode_id)
     return tuple(PriorEpisodeEvidence(t, o, r[0], r[1], tuple(r[2])) for (t, o), r in sorted(agg.items()))
+
+
+def prior_evidence_from_episodes(episodes: Iterable[Any]) -> Tuple[PriorEpisodeEvidence, ...]:
+    return prior_evidence_from_attempts(attempts_from_episodes(episodes))
 
 
 # ---- advisories (P4.6: lifecycle-aware collection) -------------------------------------------------------------

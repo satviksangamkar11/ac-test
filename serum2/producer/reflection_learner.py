@@ -117,3 +117,167 @@ class ReflectionValidator:
         if not (d.get("provenance") or {}).get("source_episode_ids"):
             v.append("NO_PROVENANCE")
         return v
+
+
+# ====================================================================================================================
+# P5.2  record_skill_outcome: real execution + readback evidence -> ReflectionRecord
+# ====================================================================================================================
+from dataclasses import replace as _replace  # noqa: E402
+from typing import Iterable  # noqa: E402
+
+from serum2.producer.candidate_ranking import AttemptOutcome, PriorEpisodeEvidence, prior_evidence_from_attempts  # noqa: E402
+from serum2.producer.skill_library import (  # noqa: E402,F401  (lifecycle semantics are owned by P3; re-exported for P5 callers)
+    SkillRecord, derive_lifecycle_state, merge_skills, retire_skill, worse_state,
+)
+
+MAX_CONFIDENCE = 0.8    # one readback is never certainty; confidence scales with how many watched keys were actually observed
+
+
+def attempt_id(attempt: Mapping[str, Any]) -> Tuple[Any, Any]:
+    """The identity of ONE execution across every advisory representation (skill evidence, prior evidence, reflection)."""
+    return (attempt["episode_id"], attempt.get("event_id") or "%s|%s" % (attempt["canonical_target_id"], str(attempt["operation"]).lower()))
+
+
+def _statement(kind: str, attempt: Mapping[str, Any], expected: Mapping[str, Any], observed: Mapping[str, Any],
+               diffs: List[Mapping[str, Any]]) -> str:
+    what = "%s on %s%s" % (attempt["operation"], attempt["canonical_target_id"],
+                           " (%s)" % attempt["operand"] if attempt.get("operand") else "")
+    if kind == CONFIRMED:
+        return "%s produced the expected readback %s." % (what, dict(expected))
+    if kind == CONTRADICTED:
+        return "%s did not produce the expected readback: %s." % (what, "; ".join(
+            "%s expected %r observed %r" % (d["key"], d["expected"], d["observed"]) for d in diffs))
+    if kind == INCONCLUSIVE:
+        return "%s could not be confirmed: no usable readback for %s." % (what, sorted(k for k in expected if observed.get(k) is None))
+    return "%s was not executed (%s); nothing is learned about the target." % (what, attempt.get("execution_status") or "no execution")
+
+
+def record_skill_outcome(*, attempt: Mapping[str, Any], expected: Mapping[str, Any], observed: Optional[Mapping[str, Any]] = None,
+                         evidence: Iterable[Mapping[str, Any]] = ()) -> ReflectionRecord:
+    """Turn one completed attempt into an advisory ReflectionRecord.
+
+    expected is what was predicted BEFORE observing; observed must come from a real readback and be backed by a
+    readback evidence entry with a route. Nothing is inferred from admission: a REFUSED or not-executed attempt is
+    NOT_EXECUTED whatever was passed as observed, and an observation without readback evidence is discarded.
+    """
+    missing = [k for k in _ATTEMPT_REQUIRED if not attempt.get(k)]
+    if missing:
+        raise ValueError("attempt is missing %s" % missing)
+    status = str(attempt.get("execution_status") or "")
+    executed = bool(attempt.get("executed")) and not status.startswith("REFUSED")
+    ev: List[Dict[str, Any]] = [dict(e) for e in evidence]
+    obs = dict(observed or {})
+    if not executed:
+        obs = {}
+        ev.append({"kind": "execution", "executed": False, "execution_status": status or "NOT_EXECUTED"})
+    elif obs and not any(e.get("kind") == "readback" and e.get("route") for e in ev):
+        obs = {}
+        ev.append({"kind": "execution", "note": "observation supplied without readback evidence; discarded"})
+    elif not obs and not ev:
+        ev.append({"kind": "execution", "note": "executed; no readback supplied"})
+    disc = classify_discrepancy(expected, obs, executed)
+    cls = disc["class"]
+    conf = 0.0 if cls in (NOT_EXECUTED, NO_READBACK) else MAX_CONFIDENCE * sum(1 for k in expected if obs.get(k) is not None) / len(expected)
+    kind = KIND_FOR_CLASS[cls]
+    att = {k: attempt[k] for k in _ATTEMPT_REQUIRED}
+    att.update({k: attempt[k] for k in ("operand", "event_id") if attempt.get(k) is not None})
+    att.update(executed=executed, execution_status=status or None)
+    aid = attempt_id(att)
+    rec = ReflectionRecord(
+        reflection_id="refl:%s:%s" % aid, attempt=att, expected_outcome=dict(expected), observed_outcome=obs, discrepancy=disc,
+        evidence=tuple(ev), confidence=round(conf, 6),
+        lesson={"kind": kind, "statement": _statement(kind, att, expected, obs, disc["differences"]), "advisory": True,
+                "applies_to": {"canonical_target_id": att["canonical_target_id"], "operation": att["operation"]}},
+        provenance={"source_episode_ids": [att["episode_id"]], "attempt_id": list(aid), "recorded_by": "reflection_learner.record_skill_outcome"})
+    bad = ReflectionValidator().validate(rec)
+    if bad:
+        raise ValueError("reflection failed validation: %s" % bad)
+    return rec
+
+
+def attempt_from_result(result: Any, *, episode_id: str, event_id: Optional[str] = None) -> Dict[str, Any]:
+    """Duck-typed adapter from a Producer result. `executed` is true ONLY for a result that was actually executed
+    (finalized with real readback); an admitted/plan-ready result is not an execution."""
+    b1 = getattr(result, "b1_intent", None) or {}
+    op = b1.get("operation") or {}
+    status = getattr(result, "execution_status", None)
+    if not b1.get("canonical_target") or not op.get("operation"):
+        raise ValueError("result carries no canonical target/operation to reflect on")
+    att = {"canonical_target_id": b1["canonical_target"], "operation": op["operation"], "episode_id": episode_id,
+           "executed": status in ("EXECUTED", "EXECUTION_UNVERIFIED"), "execution_status": status}
+    if op.get("target_value") is not None:
+        att["operand"] = str(op["target_value"])
+    if event_id:
+        att["event_id"] = event_id
+    return att
+
+
+# ====================================================================================================================
+# P5.3  apply a reflection to a skill: one attempt counts once, however many representations report it
+# ====================================================================================================================
+def apply_reflection(skill: SkillRecord, reflection: ReflectionRecord) -> SkillRecord:
+    """Merge the reflection's outcome into the skill's evidence via the P3 merge (idempotent per attempt). A reflection
+    can update an existing skill; it cannot create one, and it changes evidence/lifecycle only -- never capability."""
+    bad = ReflectionValidator().validate(reflection)
+    if bad:
+        raise ValueError("cannot apply an invalid reflection: %s" % bad)
+    att = reflection.attempt
+    if att["canonical_target_id"] != skill.canonical_target_id or str(att["operation"]).upper() != skill.operation.upper():
+        raise ValueError("reflection about %s/%s cannot update skill %s" % (att["canonical_target_id"], att["operation"], skill.skill_id))
+    kind = reflection.lesson["kind"]
+    if kind == NOT_TESTED:
+        return skill                                            # nothing was tried
+    entry = {"episode_id": att["episode_id"], "event_id": att.get("event_id"), "verified": kind == CONFIRMED, "outcome": kind,
+             "reflection_id": reflection.reflection_id, "discrepancy_class": reflection.discrepancy["class"],
+             "readback_expected": dict(reflection.expected_outcome), "readback_observed": dict(reflection.observed_outcome)}
+    incoming = _replace(skill, supporting_evidence=(entry,), provenance={"source_episode_ids": [att["episode_id"]]})
+    return merge_skills(skill, incoming)
+
+
+def update_skill_store(store: Any, reflection: ReflectionRecord) -> Optional[SkillRecord]:
+    """Apply a reflection to the stored skill for its target/operation. Returns None if no such skill exists: reflections
+    never create skills (only verified episodes do, in P3)."""
+    att = reflection.attempt
+    skill_id = "skill:%s:%s" % (att["canonical_target_id"], str(att["operation"]).lower())
+    try:
+        skill = store.load(skill_id)
+    except FileNotFoundError:
+        return None
+    store.save(apply_reflection(skill, reflection))
+    return store.load(skill_id)
+
+
+# ====================================================================================================================
+# P5.5  contradiction detection (generic)      P5.6  reflections as P4 prior evidence
+# ====================================================================================================================
+def detect_contradictions(reflections: Iterable[ReflectionRecord], skill: Optional[SkillRecord] = None) -> List[ReflectionRecord]:
+    """Reflections whose observation contradicted their expectation, optionally only those about `skill`."""
+    out = []
+    for r in reflections:
+        if ReflectionValidator().validate(r):
+            continue
+        a = r.attempt
+        if skill is not None and (a["canonical_target_id"] != skill.canonical_target_id or str(a["operation"]).upper() != skill.operation.upper()):
+            continue
+        if r.discrepancy["class"] == VALUE_MISMATCH:
+            out.append(r)
+    return out
+
+
+def attempts_from_reflections(reflections: Iterable[ReflectionRecord]) -> Tuple[AttemptOutcome, ...]:
+    out = []
+    for r in reflections:
+        bad = ReflectionValidator().validate(r)
+        if bad:
+            raise ValueError("invalid reflection: %s" % bad)
+        if r.lesson["kind"] == NOT_TESTED:
+            continue
+        a = r.attempt
+        out.append(AttemptOutcome(attempt_id(a), a["canonical_target_id"], str(a["operation"]).lower(), a["episode_id"],
+                                  r.lesson["kind"] == CONFIRMED))
+    return tuple(out)
+
+
+def prior_evidence_from_reflections(reflections: Iterable[ReflectionRecord]) -> Tuple[PriorEpisodeEvidence, ...]:
+    """The authoritative outcome record P4 consumes: aggregated from reflections, each attempt counted once."""
+    return prior_evidence_from_attempts(attempts_from_reflections(reflections))
