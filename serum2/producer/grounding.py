@@ -1,0 +1,222 @@
+"""P6: Audio / Text / Visual grounding -- one representation, modality provenance preserved.
+
+A GroundingObservation is ONE modality's evidence about a subject: modality, source and timestamp, the raw
+observation, an interpretation kept separate from it, confidence and uncertainty. A GroundedClaim groups the
+observations about one subject WITHOUT erasing any of them. Frozen-plan rules encoded here:
+
+  * multimodal agreement may raise confidence but never erases per-modality provenance;
+  * conflicting modalities remain a CONFLICT until additional evidence resolves them (no winner is picked);
+  * unknown measurements stay unknown: a number needs a real measurement (method + source ref), an UNKNOWN
+    observation carries no value, no interpretation and zero confidence;
+  * grounding informs reasoning and never executes: no capability, route, binding, admission, action or
+    winner field exists on either object.
+
+This module imports nothing from the Brain, admission, contract registry, or any backend, and names no target.
+"""
+from __future__ import annotations
+
+from dataclasses import dataclass
+from typing import Any, Dict, Iterable, List, Mapping, Optional, Tuple
+
+from serum2.producer.skill_library import _FORBIDDEN_SKILL_FIELDS
+
+GROUNDING_SCHEMA_VERSION = "1"
+
+TRANSCRIPT, VISUAL, AUDIO, EPISODE_STATE = "TRANSCRIPT", "VISUAL", "AUDIO", "EPISODE_STATE"
+MODALITIES = frozenset({TRANSCRIPT, VISUAL, AUDIO, EPISODE_STATE})
+_TIMESTAMP_REQUIRED = frozenset({TRANSCRIPT, VISUAL})       # source-time evidence; audio/episode may be untimed
+
+OBSERVED, MEASURED, UNKNOWN = "OBSERVED", "MEASURED", "UNKNOWN"
+STATUSES = frozenset({OBSERVED, MEASURED, UNKNOWN})
+UNCERTAINTY_LEVELS = frozenset({"LOW", "MEDIUM", "HIGH", "UNKNOWN"})
+
+SINGLE_MODALITY, AGREEMENT, CONFLICT, INSUFFICIENT, RESOLVED = "SINGLE_MODALITY", "AGREEMENT", "CONFLICT", "INSUFFICIENT", "RESOLVED"
+AGREEMENT_STATUSES = frozenset({SINGLE_MODALITY, AGREEMENT, CONFLICT, INSUFFICIENT, RESOLVED})
+
+MAX_GROUNDED_CONFIDENCE = 0.95    # agreement never yields certainty
+
+_FORBIDDEN = _FORBIDDEN_SKILL_FIELDS | {"capability_contract", "admission", "admission_token", "mcp_call", "action", "command",
+                                        "winner", "selected", "resolved_value"}
+
+
+def _numeric_leaves(x: Any) -> List[Any]:
+    if isinstance(x, bool):
+        return []
+    if isinstance(x, (int, float)):
+        return [x]
+    if isinstance(x, Mapping):
+        return [n for v in x.values() for n in _numeric_leaves(v)]
+    if isinstance(x, (list, tuple)):
+        return [n for v in x for n in _numeric_leaves(v)]
+    return []
+
+
+def subject_key(subject: Mapping[str, Any]) -> Tuple[Optional[str], Optional[str]]:
+    return (subject.get("canonical_target_id"), subject.get("aspect"))
+
+
+@dataclass(frozen=True)
+class GroundingObservation:
+    """One modality's evidence. Deliberately has no capability/route/binding/admission/action/winner field."""
+
+    observation_id: str
+    modality: str
+    source: Mapping[str, Any]                # {"kind", "ref", optional "sha256", "method"}
+    timestamp: Optional[Mapping[str, Any]]   # {"start_sec", "end_sec"}; required for TRANSCRIPT/VISUAL
+    subject: Mapping[str, Any]               # {"canonical_target_id": optional, "aspect": required}
+    observation: Mapping[str, Any]           # the raw content; numbers only when MEASURED
+    interpretation: Optional[Mapping[str, Any]]  # {"kind", "value", "basis"}; kept apart from the raw observation
+    status: str                              # OBSERVED | MEASURED | UNKNOWN
+    confidence: float
+    uncertainty: Mapping[str, Any]           # {"level": LOW|MEDIUM|HIGH|UNKNOWN, ...; "reason" required when UNKNOWN}
+    provenance: Mapping[str, Any]
+    advisory: bool = True
+    schema_version: str = GROUNDING_SCHEMA_VERSION
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {"observation_id": self.observation_id, "modality": self.modality, "source": dict(self.source),
+                "timestamp": dict(self.timestamp) if self.timestamp is not None else None, "subject": dict(self.subject),
+                "observation": dict(self.observation), "interpretation": dict(self.interpretation) if self.interpretation is not None else None,
+                "status": self.status, "confidence": self.confidence, "uncertainty": dict(self.uncertainty),
+                "provenance": dict(self.provenance), "advisory": self.advisory, "schema_version": self.schema_version}
+
+
+@dataclass(frozen=True)
+class GroundedClaim:
+    """Unified view of every observation about one subject. Holds the observations themselves, so no modality's
+    provenance can be dropped; `agreement` and `confidence` are derived from them."""
+
+    claim_id: str
+    subject: Mapping[str, Any]
+    observations: Tuple[GroundingObservation, ...]
+    modalities: Tuple[str, ...]              # sorted distinct modalities of `observations` (checked, not trusted)
+    agreement: Mapping[str, Any]             # {"status", "agreeing_observation_ids", "conflicting_observation_ids": [[...], ...]}
+    confidence: float
+    conflict_resolution: Optional[Mapping[str, Any]]   # only when RESOLVED: {"resolved_by": [ids], "outcome", "basis"}
+    provenance: Mapping[str, Any]
+    advisory: bool = True
+    schema_version: str = GROUNDING_SCHEMA_VERSION
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {"claim_id": self.claim_id, "subject": dict(self.subject), "observations": [o.to_dict() for o in self.observations],
+                "modalities": list(self.modalities),
+                "agreement": {"status": self.agreement.get("status"),
+                              "agreeing_observation_ids": list(self.agreement.get("agreeing_observation_ids", [])),
+                              "conflicting_observation_ids": [list(g) for g in self.agreement.get("conflicting_observation_ids", [])]},
+                "confidence": self.confidence,
+                "conflict_resolution": dict(self.conflict_resolution) if self.conflict_resolution is not None else None,
+                "provenance": dict(self.provenance), "advisory": self.advisory, "schema_version": self.schema_version}
+
+
+class GroundingValidator:
+    """Structural well-formedness. Returns violation codes; empty means valid. Never raises on bad input."""
+
+    def validate_observation(self, obs: Any) -> List[str]:
+        v: List[str] = []
+        d = obs.to_dict() if hasattr(obs, "to_dict") else dict(obs)
+        if d.get("advisory") is not True:
+            v.append("OBSERVATION_NOT_ADVISORY")
+        if _FORBIDDEN & set(d) or _FORBIDDEN & set(d.get("interpretation") or {}):
+            v.append("CARRIES_CAPABILITY_OR_AUTHORITY_FIELD")
+        if not d.get("observation_id"):
+            v.append("MISSING_OBSERVATION_ID")
+        modality, status = d.get("modality"), d.get("status")
+        if modality not in MODALITIES:
+            v.append("BAD_MODALITY")
+        if status not in STATUSES:
+            v.append("BAD_STATUS")
+        src = d.get("source") or {}
+        if not src.get("kind") or not src.get("ref"):
+            v.append("NO_SOURCE")
+        ts = d.get("timestamp")
+        if ts is None:
+            if modality in _TIMESTAMP_REQUIRED:
+                v.append("TIMESTAMP_REQUIRED")
+        else:
+            a, b = ts.get("start_sec"), ts.get("end_sec")
+            ok = all(isinstance(x, (int, float)) and not isinstance(x, bool) for x in (a, b)) and 0 <= a <= b
+            if not ok:
+                v.append("BAD_TIMESTAMP")
+        if not (d.get("subject") or {}).get("aspect"):
+            v.append("NO_SUBJECT_ASPECT")
+        raw, interp = d.get("observation") or {}, d.get("interpretation")
+        if not raw:
+            v.append("NO_OBSERVATION")
+        if interp is not None and (not interp.get("kind") or interp.get("value") is None or not interp.get("basis")):
+            v.append("INTERPRETATION_MALFORMED")
+        c = d.get("confidence")
+        if not isinstance(c, (int, float)) or isinstance(c, bool) or not 0.0 <= c <= 1.0:
+            v.append("CONFIDENCE_OUT_OF_RANGE")
+        unc = d.get("uncertainty") or {}
+        if unc.get("level") not in UNCERTAINTY_LEVELS:
+            v.append("BAD_UNCERTAINTY")
+        if not d.get("provenance"):
+            v.append("NO_PROVENANCE")
+        numbers = _numeric_leaves(raw)
+        if status == MEASURED and not src.get("method"):
+            v.append("MEASURED_WITHOUT_METHOD")
+        if numbers and status != MEASURED:
+            v.append("NUMERIC_WITHOUT_MEASUREMENT")
+        if status == UNKNOWN:
+            if numbers or any(raw.get(k) is not None for k in ("value",)) or interp is not None or c != 0.0:
+                v.append("UNKNOWN_CARRIES_VALUE")
+            if not unc.get("reason") or unc.get("level") != "UNKNOWN":
+                v.append("UNKNOWN_WITHOUT_REASON")
+        return v
+
+    def validate_claim(self, claim: Any) -> List[str]:
+        v: List[str] = []
+        d = claim.to_dict() if hasattr(claim, "to_dict") else dict(claim)
+        if d.get("advisory") is not True:
+            v.append("CLAIM_NOT_ADVISORY")
+        if _FORBIDDEN & set(d) or _FORBIDDEN & set(d.get("agreement") or {}):
+            v.append("CLAIM_CARRIES_CAPABILITY_OR_AUTHORITY_FIELD")
+        obs = d.get("observations") or []
+        if not obs:
+            v.append("CLAIM_NO_OBSERVATIONS")
+        ids = [o.get("observation_id") for o in obs]
+        if len(set(ids)) != len(ids):
+            v.append("CLAIM_DUPLICATE_OBSERVATION_IDS")
+        if any(self.validate_observation(o) for o in obs):
+            v.append("CLAIM_OBSERVATION_INVALID")
+        if any(subject_key(o.get("subject") or {}) != subject_key(d.get("subject") or {}) for o in obs):
+            v.append("CLAIM_MIXED_SUBJECTS")
+        if sorted(set(o.get("modality") for o in obs)) != list(d.get("modalities") or []):
+            v.append("CLAIM_MODALITIES_MISMATCH")
+        c = d.get("confidence")
+        if not isinstance(c, (int, float)) or isinstance(c, bool) or not 0.0 <= c <= MAX_GROUNDED_CONFIDENCE:
+            v.append("CLAIM_CONFIDENCE_OUT_OF_RANGE")
+        ag = d.get("agreement") or {}
+        status = ag.get("status")
+        if status not in AGREEMENT_STATUSES:
+            v.append("CLAIM_BAD_AGREEMENT_STATUS")
+        agreeing = list(ag.get("agreeing_observation_ids") or [])
+        conflicting = [list(g) for g in ag.get("conflicting_observation_ids") or []]
+        referenced = set(agreeing) | {i for g in conflicting for i in g}
+        unknown_ids = {o.get("observation_id") for o in obs if o.get("status") == UNKNOWN}
+        if referenced - set(ids):
+            v.append("CLAIM_REFERENCES_MISSING_OBSERVATION")
+        if referenced & unknown_ids:
+            v.append("CLAIM_UNKNOWN_COUNTED_AS_EVIDENCE")
+        res = d.get("conflict_resolution")
+        if status == CONFLICT:
+            if len(conflicting) < 2 or any(not g for g in conflicting):
+                v.append("CLAIM_CONFLICT_WITHOUT_SIDES")
+            if res is not None:
+                v.append("CLAIM_CONFLICT_PRESET_RESOLUTION")
+        elif status == RESOLVED:
+            by = list((res or {}).get("resolved_by") or [])
+            sides = {i for g in conflicting for i in g}
+            if not by or set(by) - set(ids) or not (set(by) - sides) or not (res or {}).get("outcome"):
+                v.append("CLAIM_RESOLVED_WITHOUT_ADDITIONAL_EVIDENCE")
+            if len(conflicting) < 2:
+                v.append("CLAIM_RESOLVED_WITHOUT_PRIOR_CONFLICT")
+        elif res is not None:
+            v.append("CLAIM_RESOLUTION_WITHOUT_CONFLICT")
+        if status == AGREEMENT and len({o.get("modality") for o in obs if o.get("observation_id") in set(agreeing)}) < 2:
+            v.append("CLAIM_AGREEMENT_NEEDS_TWO_MODALITIES")
+        if status == INSUFFICIENT and c != 0.0:
+            v.append("CLAIM_INSUFFICIENT_HAS_CONFIDENCE")
+        if not d.get("provenance"):
+            v.append("CLAIM_NO_PROVENANCE")
+        return v
