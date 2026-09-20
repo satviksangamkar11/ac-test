@@ -15,6 +15,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from enum import StrEnum
+from types import MappingProxyType
 from typing import Any
 import hashlib
 import json
@@ -49,8 +50,10 @@ class TranscriptCue:
     start_s: float
     end_s: float
 
-    # Optional preferred moments within the spoken region
-    # (e.g., when the speaker completes the action described)
+    # Optional preferred moments within the spoken region.
+    # Must be either exact transcript segment boundaries or deterministic
+    # functions of transcript boundaries (e.g., midpoint, segment_start + offset).
+    # Never model-estimated or arbitrary moments (no semantic inference).
     preferred_timestamps_s: tuple[float, ...]
 
     # Linguistic category (not semantic target)
@@ -99,15 +102,37 @@ class TranscriptCuePlan:
     # The cues themselves
     cues: tuple[TranscriptCue, ...] = field(default_factory=tuple)
 
-    # Optional provenance metadata
-    provenance: dict[str, Any] = field(default_factory=dict)
+    # Immutable provenance metadata: tuple of (key, value) pairs
+    # Use as: dict(plan.provenance) if dict representation needed
+    provenance: tuple[tuple[str, Any], ...] = field(default_factory=tuple)
 
 
 def transcript_sha256(transcript_text: str) -> str:
-    """SHA256 of transcript text for integrity checking."""
+    """SHA256 of transcript text for integrity checking.
+
+    DEPRECATED: Use canonical_normalized_transcript_sha256() instead.
+    This function only hashes text, not timestamps/structure.
+    """
     return hashlib.sha256(
         transcript_text.encode("utf-8")
     ).hexdigest()
+
+
+def canonical_normalized_transcript_sha256(
+    transcript_json: dict
+) -> str:
+    """SHA256 of complete normalized transcript artifact.
+
+    Covers: segments, timestamps, IDs, metadata, text.
+    Ensures stale plans cannot be accepted against temporally different transcripts.
+    """
+    raw = json.dumps(
+        transcript_json,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode("utf-8")
+    return hashlib.sha256(raw).hexdigest()
 
 
 def canonical_json_sha256(payload: dict[str, Any]) -> str:

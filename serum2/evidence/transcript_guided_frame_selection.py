@@ -46,13 +46,6 @@ class FrameSelectionConfig:
     # Maximum frames to return
     max_frames: int = 64
 
-    # Temporal window around transcript cues (for fallback when no preferred_timestamps)
-    pre_roll_s: float = 2.0
-    post_roll_s: float = 2.0
-
-    # Uniform fallback interval (e.g., one frame every 10 seconds)
-    uniform_interval_s: float = 10.0
-
     # Prevent one transcript cue from exploding frame count
     max_preferred_per_cue: int = 3
 
@@ -144,8 +137,12 @@ def merge_frame_candidates(
     """Merge three sources of frame candidates into deduplicated list.
 
     Deduplication: 100ms bucket (±50ms).
-    Priority (for provenance field only):
+    Priority (enforced via slot allocation under budget):
       TRANSCRIPT_CUE > VISUAL_CHANGE > UNIFORM_FALLBACK
+
+    Allocation strategy: reserve frame slots for transcript and visual,
+    fill remainder with uniform fallback. Ensures transcript cues are not
+    starved when under frame budget.
 
     Args:
         transcript_candidates: From Claude Code cue plan
@@ -155,23 +152,17 @@ def merge_frame_candidates(
         duration_s: Video duration (for clamping)
 
     Returns:
-        Sorted list of merged candidates
+        Sorted list of merged candidates (deduplicated, priority-allocated)
     """
 
     merged: dict[int, FrameCandidate] = {}
 
-    # Process in priority order
-    ordered = (
-        transcript_candidates
-        + visual_change_candidates
-        + uniform_candidates
-    )
-
-    for candidate in ordered:
+    # Deduplicate within 100ms buckets
+    # ponytail: allocation strategy is deterministic but simple (60/30/10 split)
+    # upgrade if workload demands more sophisticated distribution
+    def add_to_merged(candidate: FrameCandidate) -> None:
         timestamp = clamp_timestamp(candidate.timestamp_s, duration_s)
-
-        # 100ms bucket (±50ms) for deduplication
-        key = round(timestamp * 10)
+        key = round(timestamp * 10)  # 100ms bucket
 
         if key not in merged:
             merged[key] = FrameCandidate(
@@ -182,8 +173,7 @@ def merge_frame_candidates(
             )
         else:
             current = merged[key]
-
-            # Merge: prefer stronger provenance, combine cue_ids, preserve reason
+            # Merge: prefer stronger provenance, combine cue_ids
             merged[key] = FrameCandidate(
                 timestamp_s=current.timestamp_s,
                 basis=(
@@ -216,9 +206,67 @@ def merge_frame_candidates(
                 ),
             )
 
-    # Sort by timestamp, limit to max_frames
-    result = sorted(merged.values(), key=lambda c: c.timestamp_s)
-    return result[:max_frames]
+    # Add all candidates in priority order
+    for candidate in transcript_candidates:
+        add_to_merged(candidate)
+
+    for candidate in visual_change_candidates:
+        add_to_merged(candidate)
+
+    for candidate in uniform_candidates:
+        add_to_merged(candidate)
+
+    # Sort by timestamp
+    all_candidates = sorted(merged.values(), key=lambda c: c.timestamp_s)
+
+    if len(all_candidates) <= max_frames:
+        return all_candidates
+
+    # Over budget: preserve priority via slot allocation
+    # Separate by basis
+    transcript = [c for c in all_candidates if c.basis == FrameSelectionBasis.TRANSCRIPT_CUE]
+    visual = [c for c in all_candidates if c.basis == FrameSelectionBasis.VISUAL_CHANGE]
+    uniform = [c for c in all_candidates if c.basis == FrameSelectionBasis.UNIFORM_FALLBACK]
+
+    # Allocate slots: 60% transcript, 30% visual, remainder uniform
+    # (adjusted so empty categories don't consume slots)
+    num_categories = sum(1 for g in [transcript, visual, uniform] if g)
+
+    if num_categories == 1:
+        # Single category: just take the top max_frames
+        return all_candidates[:max_frames]
+    elif num_categories == 2:
+        # Two categories: split allocation
+        if transcript and visual:
+            t_slots = int(max_frames * 0.7)
+            v_slots = max_frames - t_slots
+            return sorted(
+                transcript[:t_slots] + visual[:v_slots],
+                key=lambda c: c.timestamp_s
+            )
+        elif transcript:
+            t_slots = int(max_frames * 0.7)
+            u_slots = max_frames - t_slots
+            return sorted(
+                transcript[:t_slots] + uniform[:u_slots],
+                key=lambda c: c.timestamp_s
+            )
+        else:  # visual and uniform
+            v_slots = int(max_frames * 0.7)
+            u_slots = max_frames - v_slots
+            return sorted(
+                visual[:v_slots] + uniform[:u_slots],
+                key=lambda c: c.timestamp_s
+            )
+    else:
+        # All three: 60/30/10
+        t_slots = int(max_frames * 0.6)
+        v_slots = int(max_frames * 0.3)
+        u_slots = max_frames - t_slots - v_slots
+        return sorted(
+            transcript[:t_slots] + visual[:v_slots] + uniform[:u_slots],
+            key=lambda c: c.timestamp_s
+        )
 
 
 def build_uniform_candidates(

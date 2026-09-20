@@ -16,6 +16,19 @@ from __future__ import annotations
 
 from typing import Any
 
+# Required fields in every TranscriptCue
+REQUIRED_CUE_FIELDS = {
+    "cue_id",
+    "segment_ids",
+    "start_s",
+    "end_s",
+    "preferred_timestamps_s",
+    "kind",
+    "focus_terms",
+    "verification_reason",
+    "confidence",
+}
+
 FORBIDDEN_FIELDS = {
     "semantic_target",
     "canonical_target",
@@ -40,13 +53,15 @@ def validate_transcript_cue_plan(
     *,
     transcript_sha256: str,
     duration_s: float,
+    transcript_segment_ids: set[str] | None = None,
 ) -> None:
     """Validate a TranscriptCuePlan JSON payload.
 
     Args:
         payload: The plan as a dict
-        transcript_sha256: Expected transcript hash
+        transcript_sha256: Expected transcript hash (canonical normalized artifact)
         duration_s: Video duration for timestamp validation
+        transcript_segment_ids: Known segment IDs from transcript (for provenance check)
 
     Raises:
         ValueError: If the plan violates frozen properties
@@ -105,6 +120,13 @@ def validate_transcript_cue_plan(
         if not isinstance(cue, dict):
             raise ValueError(f"Cue {i} is not a dict")
 
+        # Validate all required cue fields exist
+        missing_cue_fields = REQUIRED_CUE_FIELDS - cue.keys()
+        if missing_cue_fields:
+            raise ValueError(
+                f"Cue {i} missing fields: {sorted(missing_cue_fields)}"
+            )
+
         # Guard against semantic reasoning fields
         forbidden = FORBIDDEN_FIELDS & cue.keys()
         if forbidden:
@@ -112,6 +134,21 @@ def validate_transcript_cue_plan(
                 f"Cue {i} contains forbidden reasoning fields: "
                 f"{sorted(forbidden)}"
             )
+
+        # Validate segment provenance (if transcript segments provided)
+        if transcript_segment_ids is not None:
+            cue_segment_ids = cue.get("segment_ids", [])
+            if not isinstance(cue_segment_ids, (list, tuple)):
+                raise ValueError(
+                    f"Cue {i} segment_ids must be a list/tuple"
+                )
+
+            unknown_segments = set(cue_segment_ids) - transcript_segment_ids
+            if unknown_segments:
+                raise ValueError(
+                    f"Cue {i} references unknown transcript segments: "
+                    f"{sorted(unknown_segments)}"
+                )
 
         # Validate timestamps
         try:
