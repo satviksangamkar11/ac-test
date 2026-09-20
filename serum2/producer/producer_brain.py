@@ -427,10 +427,11 @@ class ProducerResult:
 class ProducerBrain:
     """Stateful (caches registry / selector) producer brain."""
 
-    def __init__(self, skill_retriever=None, prior_evidence=()):
-        # Optional advisory inputs (P3 skills, P4.5 prior outcomes). They only feed candidate ranking; no authority.
+    def __init__(self, skill_retriever=None, prior_evidence=(), grounding_claims=None):
+        # Optional advisory inputs (P3 skills, P4.5 prior outcomes, P6 grounding). They only feed reasoning; no authority.
         self._skill_retriever = skill_retriever
         self._prior_evidence = tuple(prior_evidence)
+        self._grounding_claims = tuple(grounding_claims) if grounding_claims else ()
         self._registry = ContractRegistry()
         self._selector = RouteSelector()
         # Ordered explicit-target resolution over EXISTING registries (architecture 17/18): no tables here.

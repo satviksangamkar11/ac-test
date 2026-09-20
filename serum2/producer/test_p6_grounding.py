@@ -960,7 +960,6 @@ def test_p6_5_a_conflict_resolves_only_with_additional_evidence_and_keeps_every_
         resolve_conflict(ground([obs("t", TRANSCRIPT)]), e, basis="nothing to resolve")
 
 
-@RED
 def test_p6_6_grounding_cannot_change_a_real_brain_decision_and_cannot_execute():
     from serum2.producer.grounding import ground
     from serum2.producer.producer_brain import ProducerBrain, ProducerRequest
