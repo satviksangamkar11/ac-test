@@ -7,16 +7,21 @@ observations about one subject WITHOUT erasing any of them. Frozen-plan rules en
   * multimodal agreement may raise confidence but never erases per-modality provenance;
   * conflicting modalities remain a CONFLICT until additional evidence resolves them (no winner is picked);
   * unknown measurements stay unknown: a number needs a real measurement (method + source ref), an UNKNOWN
-    observation carries no value, no interpretation and zero confidence;
+    observation carries no value, no interpretation and zero confidence, and is never positive evidence;
   * grounding informs reasoning and never executes: no capability, route, binding, admission, action or
-    winner field exists on either object.
+    winner field exists on either object, and ground() produces no operation.
 
-This module imports nothing from the Brain, admission, contract registry, or any backend, and names no target.
+The plan fixes those invariants, not a formula. Numbers therefore live in a replaceable ConfidencePolicy; ground()
+guards whatever a policy returns so the invariants hold for ANY policy (see ground()). This module imports nothing
+from the Brain, admission, contract registry, or any backend, and names no target.
 """
 from __future__ import annotations
 
+import hashlib
+import itertools
+import math
 from dataclasses import dataclass
-from typing import Any, Dict, Iterable, List, Mapping, Optional, Tuple
+from typing import Any, Dict, Iterable, List, Mapping, Optional, Protocol, Sequence, Tuple
 
 from serum2.producer.skill_library import _FORBIDDEN_SKILL_FIELDS
 
@@ -32,8 +37,6 @@ UNCERTAINTY_LEVELS = frozenset({"LOW", "MEDIUM", "HIGH", "UNKNOWN"})
 
 SINGLE_MODALITY, AGREEMENT, CONFLICT, INSUFFICIENT, RESOLVED = "SINGLE_MODALITY", "AGREEMENT", "CONFLICT", "INSUFFICIENT", "RESOLVED"
 AGREEMENT_STATUSES = frozenset({SINGLE_MODALITY, AGREEMENT, CONFLICT, INSUFFICIENT, RESOLVED})
-
-MAX_GROUNDED_CONFIDENCE = 0.95    # agreement never yields certainty
 
 _FORBIDDEN = _FORBIDDEN_SKILL_FIELDS | {"capability_contract", "admission", "admission_token", "mcp_call", "action", "command",
                                         "winner", "selected", "resolved_value"}
@@ -92,7 +95,7 @@ class GroundedClaim:
     modalities: Tuple[str, ...]              # sorted distinct modalities of `observations` (checked, not trusted)
     agreement: Mapping[str, Any]             # {"status", "agreeing_observation_ids", "conflicting_observation_ids": [[...], ...]}
     confidence: float
-    conflict_resolution: Optional[Mapping[str, Any]]   # only when RESOLVED: {"resolved_by": [ids], "outcome", "basis"}
+    conflict_resolution: Optional[Mapping[str, Any]]   # only when RESOLVED: {"resolved_by": [ids], "outcome", "basis", "provenance"}
     provenance: Mapping[str, Any]
     advisory: bool = True
     schema_version: str = GROUNDING_SCHEMA_VERSION
@@ -108,6 +111,156 @@ class GroundedClaim:
                 "provenance": dict(self.provenance), "advisory": self.advisory, "schema_version": self.schema_version}
 
 
+# ====================================================================================================================
+# Confidence policy: the numbers are a replaceable policy, the invariants are enforced by ground()
+# ====================================================================================================================
+class ConfidencePolicy(Protocol):
+    """How evidence becomes a number. Every method is a pure function returning a value in [0, 1] (anything else is
+    clamped by ground()). None of these outputs is a plan requirement; only the invariants ground() enforces are."""
+
+    def evidence_weight(self, observation: GroundingObservation) -> float:
+        """How much one KNOWN observation counts as evidence for its own interpretation."""
+
+    def combine(self, confidences: Sequence[float]) -> float:
+        """Fold several independent confidences into one."""
+
+    def agreement_effect(self, modality_confidences: Sequence[float]) -> float:
+        """Confidence when distinct modalities support the SAME interpretation (one confidence per modality)."""
+
+    def conflict_effect(self, side_confidences: Sequence[float]) -> float:
+        """Confidence of a claim whose sides disagree (one confidence per side)."""
+
+    def unknown_effect(self, confidence: float, unknowns: Sequence[GroundingObservation]) -> float:
+        """Confidence after UNKNOWN observations are present. An unknown is never positive evidence."""
+
+
+class IndependenceConfidencePolicy:
+    """Parameter-free default: standard independent-evidence algebra, no tuned constants, uncalibrated.
+
+    Weights are the observations' own confidences; supporting modalities combine as a noisy-OR; a conflict is the
+    chance, under independence, that only the weakest side is right; unknowns leave confidence unchanged. The
+    independence assumption is optimistic for modalities describing the same narrator action; replace this policy
+    once real evidence allows calibration.
+    """
+
+    def evidence_weight(self, observation: GroundingObservation) -> float:
+        return observation.confidence
+
+    def combine(self, confidences: Sequence[float]) -> float:
+        miss = 1.0
+        for c in confidences:
+            miss *= 1.0 - c
+        return 1.0 - miss
+
+    def agreement_effect(self, modality_confidences: Sequence[float]) -> float:
+        return self.combine(modality_confidences)
+
+    def conflict_effect(self, side_confidences: Sequence[float]) -> float:
+        best = 1.0
+        for i, c in enumerate(side_confidences):
+            others = 1.0
+            for j, o in enumerate(side_confidences):
+                if j != i:
+                    others *= 1.0 - o
+            best = min(best, c * others)
+        return best
+
+    def unknown_effect(self, confidence: float, unknowns: Sequence[GroundingObservation]) -> float:
+        return confidence
+
+
+def _unit(x: Any) -> float:
+    """Clamp any policy output to the valid domain; garbage (non-numeric, NaN, inf) is 0.0, never positive evidence."""
+    try:
+        f = float(x)
+    except (TypeError, ValueError):
+        return 0.0
+    return min(1.0, max(0.0, f)) if math.isfinite(f) else 0.0
+
+
+DEFAULT_POLICY: ConfidencePolicy = IndependenceConfidencePolicy()
+
+
+def _claim_id(subject: Mapping[str, Any], ids: Iterable[str]) -> str:
+    h = hashlib.sha256("|".join(sorted(ids)).encode("utf-8")).hexdigest()[:12]
+    return "claim:%s:%s:%s" % (subject.get("canonical_target_id") or "_", subject.get("aspect"), h)
+
+
+def ground(observations: Iterable[GroundingObservation], policy: Optional[ConfidencePolicy] = None) -> GroundedClaim:
+    """Aggregate observations about ONE subject into a GroundedClaim. A generic aggregator, not an interpreter:
+    it reads the interpretations already attached to observations, never creates one, and produces no operation,
+    capability, admission or execution. Every observation is kept, in canonical (id) order, unchanged.
+
+    Invariants enforced here for ANY policy (the policy only supplies the numbers):
+      * agreement: confidence never falls below any subset of the supporting modalities, so adding an independent
+        supporting modality can never lower it;
+      * conflict: status is CONFLICT and confidence never exceeds the weakest side, so a conflict cannot look
+        resolved and no side wins;
+      * unknown/uninterpreted observations are kept but are never evidence: they cannot raise confidence;
+      * every confidence is clamped to [0, 1];
+      * repeated observations from ONE modality are not independent support and gain no agreement effect.
+    """
+    policy = policy or DEFAULT_POLICY
+    obs = sorted(observations, key=lambda o: o.observation_id)
+    if not obs:
+        raise ValueError("nothing to ground")
+    validator = GroundingValidator()
+    for o in obs:
+        bad = validator.validate_observation(o)
+        if bad:
+            raise ValueError("invalid observation %s: %s" % (o.observation_id, bad))
+    ids = [o.observation_id for o in obs]
+    if len(set(ids)) != len(ids):
+        raise ValueError("duplicate observation ids")
+    subject = dict(obs[0].subject)
+    if any(subject_key(o.subject) != subject_key(subject) for o in obs):
+        raise ValueError("observations about different subjects cannot be grounded together")
+
+    evidence = [o for o in obs if o.status != UNKNOWN and o.interpretation is not None]
+    unknowns = [o for o in obs if o.status == UNKNOWN]
+    if len({o.interpretation["kind"] for o in evidence}) > 1:
+        raise ValueError("interpretations of different kinds cannot be compared")
+
+    groups: Dict[Any, List[GroundingObservation]] = {}
+    for o in evidence:
+        groups.setdefault(repr(o.interpretation["value"]), []).append(o)
+
+    def group_confidence(members: List[GroundingObservation]) -> Tuple[float, int]:
+        per_modality: Dict[str, float] = {}
+        for o in members:                                    # best observation per modality: repeats are not independent
+            per_modality[o.modality] = max(per_modality.get(o.modality, 0.0), _unit(policy.evidence_weight(o)))
+        confs = sorted(per_modality.values(), reverse=True)
+        best = confs[0]
+        # max over every subset of the (at most four) modalities: monotone in added support for any policy
+        agree = max(_unit(policy.agreement_effect(list(sub))) for r in range(1, len(confs) + 1) for sub in itertools.combinations(confs, r))
+        return round(max(best, agree), 12), len(per_modality)
+
+    if not groups:
+        status, confidence, agreeing, conflicting = INSUFFICIENT, 0.0, [], []
+    elif len(groups) == 1:
+        (members,) = groups.values()
+        confidence, n_mod = group_confidence(members)
+        agreeing = [o.observation_id for o in members]
+        status = AGREEMENT if n_mod >= 2 else SINGLE_MODALITY
+        conflicting = []
+        confidence = round(min(confidence, _unit(policy.unknown_effect(confidence, unknowns))) if unknowns else confidence, 12)
+    else:
+        sides = [group_confidence(m)[0] for m in groups.values()]
+        confidence = round(min(min(sides), _unit(policy.conflict_effect(sides))), 12)
+        status, agreeing = CONFLICT, []
+        conflicting = [[o.observation_id for o in m] for _k, m in sorted(groups.items())]
+        if unknowns:
+            confidence = round(min(confidence, _unit(policy.unknown_effect(confidence, unknowns))), 12)
+
+    return GroundedClaim(
+        claim_id=_claim_id(subject, ids), subject=subject, observations=tuple(obs), modalities=tuple(sorted({o.modality for o in obs})),
+        agreement={"status": status, "agreeing_observation_ids": agreeing, "conflicting_observation_ids": conflicting},
+        confidence=confidence, conflict_resolution=None, provenance={"recorded_by": "grounding.ground", "policy": type(policy).__name__})
+
+
+# ====================================================================================================================
+# Validation
+# ====================================================================================================================
 class GroundingValidator:
     """Structural well-formedness. Returns violation codes; empty means valid. Never raises on bad input."""
 
@@ -184,7 +337,7 @@ class GroundingValidator:
         if sorted(set(o.get("modality") for o in obs)) != list(d.get("modalities") or []):
             v.append("CLAIM_MODALITIES_MISMATCH")
         c = d.get("confidence")
-        if not isinstance(c, (int, float)) or isinstance(c, bool) or not 0.0 <= c <= MAX_GROUNDED_CONFIDENCE:
+        if not isinstance(c, (int, float)) or isinstance(c, bool) or not 0.0 <= c <= 1.0:
             v.append("CLAIM_CONFIDENCE_OUT_OF_RANGE")
         ag = d.get("agreement") or {}
         status = ag.get("status")
@@ -209,6 +362,8 @@ class GroundingValidator:
             sides = {i for g in conflicting for i in g}
             if not by or set(by) - set(ids) or not (set(by) - sides) or not (res or {}).get("outcome"):
                 v.append("CLAIM_RESOLVED_WITHOUT_ADDITIONAL_EVIDENCE")
+            if not (res or {}).get("basis") or not (res or {}).get("provenance"):
+                v.append("CLAIM_RESOLUTION_WITHOUT_PROVENANCE")
             if len(conflicting) < 2:
                 v.append("CLAIM_RESOLVED_WITHOUT_PRIOR_CONFLICT")
         elif res is not None:
