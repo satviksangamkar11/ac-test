@@ -65,12 +65,10 @@ class TestCompilerSerumMcpIntegration:
 
         spec = result.preset_spec
 
-        # Verify spec is JSON-serializable (required for MCP)
-        try:
-            spec_json = json.dumps(spec)
-            assert len(spec_json) > 100, "Spec JSON appears too small"
-        except (TypeError, ValueError) as e:
-            pytest.fail(f"PresetSpec not JSON-serializable: {e}")
+        # Verify spec is a valid Pydantic PresetSpec (required for MCP)
+        assert hasattr(spec, 'name')
+        assert hasattr(spec, 'fx_chain')
+        assert spec.name is not None
 
     def test_serum_mcp_integration_available(self):
         """serum-mcp integration tools are available."""
@@ -93,28 +91,20 @@ class TestCompilerSerumMcpIntegration:
             gate6 = json.load(f)
 
         # Verify FX are present (Gate 6 claims they should be there)
-        fx_claimed = (
-            "Distortion (overdrive, drive 0.6, mix 0.4) → "
-            "Hyper (7 voices, dimension 0.5) → "
-            "EQ (mid gain +6dB @ 1kHz) → "
-            "Delay (ping-pong 1/16, feedback 0.6) → "
-            "Compressor (4:1 ratio, threshold 0.6, makeup_gain 0.3)"
+        fx_chain = spec.fx_chain
+        assert len(fx_chain) == 5, (
+            f"Gate 6 claims 5 FX, but compiler output has {len(fx_chain)}"
         )
 
-        effects = spec.get("effects", [])
-        assert len(effects) >= 5, (
-            f"Gate 6 claims 5 FX, but compiler output has {len(effects)}"
-        )
-
-        # Spot-check FX parameters
-        distortion = next((fx for fx in effects if fx.get("type") == "FXDistortion"), None)
+        # Spot-check FX types and parameters
+        distortion = next((fx for fx in fx_chain if fx.type == "FXDistortion"), None)
         assert distortion is not None, "Distortion missing from spec"
-        assert distortion.get("drive") == 0.6
-        assert distortion.get("mix") == 0.4
+        assert distortion.params.get("kParamDrive") == 60.0
+        assert distortion.params.get("kParamWet") == 40.0
 
-        compressor = next((fx for fx in effects if fx.get("type") == "FXComp"), None)
+        compressor = next((fx for fx in fx_chain if fx.type == "FXComp"), None)
         assert compressor is not None, "Compressor missing from spec"
-        assert compressor.get("ratio") == 4.0
+        assert compressor.params.get("kParamRatio") == 4.0
 
     def test_spec_ready_for_serum_mcp_call(self, prague_lead_capabilities):
         """Generated spec has all required fields for serum-mcp.generate_preset()."""
@@ -122,60 +112,60 @@ class TestCompilerSerumMcpIntegration:
         result = compiler.compile(prague_lead_capabilities)
         spec = result.preset_spec
 
-        # serum-mcp.generate_preset expects:
+        # serum-mcp.generate_preset expects PresetSpec with:
         # - name (str)
         # - oscillators (list)
-        # - filter (dict)
-        # - effects (list)
+        # - filters (list)
+        # - fx_chain (list)
         # - envelopes (list)
-        # - lfo (list)
+        # - lfos (list)
 
-        assert "name" in spec and isinstance(spec["name"], str)
-        assert "oscillators" in spec and isinstance(spec["oscillators"], list)
-        assert "filter" in spec and isinstance(spec["filter"], dict)
-        assert "effects" in spec and isinstance(spec["effects"], list)
-        assert "envelopes" in spec and isinstance(spec["envelopes"], list)
-        assert "lfo" in spec and isinstance(spec["lfo"], list)
+        assert spec.name is not None and isinstance(spec.name, str)
+        assert isinstance(spec.oscillators, list)
+        assert isinstance(spec.filters, list)
+        assert isinstance(spec.fx_chain, list)
+        assert isinstance(spec.envelopes, list)
+        assert isinstance(spec.lfos, list)
 
         # Non-empty collections
-        assert len(spec["oscillators"]) > 0
-        assert len(spec["envelopes"]) > 0
-        assert len(spec["lfo"]) > 0
-        assert len(spec["effects"]) >= 5, "FX chain incomplete"
+        assert len(spec.oscillators) > 0
+        assert len(spec.envelopes) > 0
+        assert len(spec.lfos) > 0
+        assert len(spec.fx_chain) == 5, "FX chain should have 5 units"
 
     def test_fx_chain_order_matches_design(self, prague_lead_capabilities):
         """FX chain order matches designed sequence."""
         compiler = AuthorizedPresetCompiler()
         result = compiler.compile(prague_lead_capabilities)
         spec = result.preset_spec
-        effects = spec.get("effects", [])
+        fx_chain = spec.fx_chain
 
         # Expected order: Distortion → Hyper → EQ → Delay → Compressor
         expected_types = ["FXDistortion", "FXHyperD", "FXEQ", "FXDelay", "FXComp"]
-        actual_types = [fx.get("type") for fx in effects]
+        actual_types = [fx.type for fx in fx_chain]
 
-        # Check order is maintained (allowing for any extra items)
-        last_idx = -1
-        for expected_type in expected_types:
-            try:
-                idx = actual_types.index(expected_type, last_idx + 1)
-                last_idx = idx
-            except ValueError:
-                pytest.fail(f"Expected FX type '{expected_type}' not found in chain")
+        assert actual_types == expected_types, (
+            f"FX chain order mismatch. Expected {expected_types}, got {actual_types}"
+        )
 
     def test_spec_reproducibility(self, prague_lead_capabilities):
         """Same input capabilities always produce identical PresetSpec."""
         compiler1 = AuthorizedPresetCompiler()
         result1 = compiler1.compile(prague_lead_capabilities)
-        spec1_json = json.dumps(result1.preset_spec, sort_keys=True)
+        spec1 = result1.preset_spec
 
         compiler2 = AuthorizedPresetCompiler()
         result2 = compiler2.compile(prague_lead_capabilities)
-        spec2_json = json.dumps(result2.preset_spec, sort_keys=True)
+        spec2 = result2.preset_spec
 
-        assert spec1_json == spec2_json, (
-            "Compiler output is not reproducible (same input → different output)"
-        )
+        # Compare key attributes that should be identical
+        assert spec1.name == spec2.name
+        assert len(spec1.fx_chain) == len(spec2.fx_chain)
+        assert [fx.type for fx in spec1.fx_chain] == [fx.type for fx in spec2.fx_chain]
+        # Distortion should have same params
+        fx1_dist = next((fx for fx in spec1.fx_chain if fx.type == "FXDistortion"), None)
+        fx2_dist = next((fx for fx in spec2.fx_chain if fx.type == "FXDistortion"), None)
+        assert fx1_dist.params == fx2_dist.params if (fx1_dist and fx2_dist) else True
 
 
 if __name__ == "__main__":

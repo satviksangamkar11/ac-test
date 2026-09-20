@@ -1,0 +1,42 @@
+{
+  "status": "GATE_6_COMPLETE_PRESET_SERIALIZATION",
+  "timestamp": "2026-09-20T15:37:31.898211Z",
+  "authorized_capabilities": 14,
+  "compiled_fx_units": 5,
+  "serialized_fx_units": 5,
+  "serialized_fx_types": [
+    "FXDistortion",
+    "FXHyperD",
+    "FXEQ",
+    "FXDelay",
+    "FXComp"
+  ],
+  "deferred_capabilities": [
+    "cap_009_bus1_routing_convolver (Bus 1 routing not exposed in PresetSpec)",
+    "cap_014_final_filter_mg_ladder (Final MG Ladder filter not exposed in serum-mcp)"
+  ],
+  "test_results": {
+    "compiler_unit_tests": "15 passed",
+    "compiler_integration_tests": "5 passed, 1 skipped",
+    "e2e_tests": "2 passed",
+    "total": "20 passed, 1 skipped"
+  },
+  "verification": {
+    "serum_mcp_generate_preset": "PASS",
+    "unpack_file": "PASS",
+    "fx_serialization_check": "5 \u2192 5 (no drops)",
+    "fx_type_identity_check": "PASS (exact types verified)",
+    "parameter_preservation_check": "PASS (spot-checked kParamDrive, kParamTimeL)",
+    "deferred_capabilities_explicit": "PASS (tracked separately)"
+  },
+  "provenance": {
+    "local_repo_sha": "71cb788c2ebf2f7951a6fced852a059d2d390ebe",
+    "serum_mcp_sha": "6c471bb8424f3f06f16f5b9fc5bfab244fd11384",
+    "generated_preset_path": "C:\\Users\\Satvik\\Documents\\Xfer\\Serum 2 Presets\\Presets\\User\\Prague Lead - Phase 5.SerumPreset",
+    "generated_preset_size_bytes": 1930,
+    "generated_preset_sha256": "3c65693c089867353871994340a502c5d09f9fb27a095c4bb9fa20d6979a62aa"
+  },
+  "source_free": true,
+  "phase": "Phase5_Gate6",
+  "video_id": "HEEGN1Xl5o4"
+}

@@ -99,6 +99,7 @@ class CompilationResult:
     errors: List[str] = field(default_factory=list)
     warnings: List[str] = field(default_factory=list)
     dropped_capabilities: List[str] = field(default_factory=list)
+    deferred_capabilities: List[str] = field(default_factory=list)  # authorized but not exposed in serum-mcp
 
     def is_atomic_success(self) -> bool:
         """True if compilation succeeded with zero drops."""
@@ -174,13 +175,24 @@ class AuthorizedPresetCompiler:
             execution_set.fx_capabilities(), spec_dict, result
         )
 
+        # Track deferred capabilities (authorized but not exposed in serum-mcp)
+        deferred_caps = {
+            "cap_009_bus1_routing_convolver": "Bus 1 routing not exposed in PresetSpec",
+            "cap_014_final_filter_mg_ladder": "Final MG Ladder filter not exposed in serum-mcp PresetSpec",
+        }
+        for core_cap in execution_set.core_capabilities():
+            if core_cap.capability_id == "cap_009_bus1_routing_convolver":
+                result.deferred_capabilities.append(core_cap.capability_id)
+        for fx_cap in execution_set.fx_capabilities():
+            if fx_cap.capability_id == "cap_014_final_filter_mg_ladder":
+                result.deferred_capabilities.append(fx_cap.capability_id)
+
         # Atomic check: if any FX dropped (except serum-mcp-unsupported), fail
         fx_cap_ids = {c.capability_id for c in execution_set.fx_capabilities()}
-        # cap_014 is authorized but serum-mcp doesn't expose it; this is not a failure
-        not_exposed_caps = {"cap_014_final_filter_mg_ladder"}
+        # Only fail if dropped FX are not in deferred list
         dropped_fx = [
             c for c in result.dropped_capabilities
-            if c in fx_cap_ids and c not in not_exposed_caps
+            if c in fx_cap_ids and c not in result.deferred_capabilities
         ]
         if dropped_fx:
             result.status = CompilationStatus.COMPLETE_FAILURE

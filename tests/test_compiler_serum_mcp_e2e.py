@@ -135,6 +135,35 @@ class TestCompilerSerumMcpE2E:
             f"This is the Prague Lead Phase 5 failure."
         )
 
+        # STRENGTHEN: Verify exact FX types and order
+        expected_fx_types = ["FXDistortion", "FXHyperD", "FXEQ", "FXDelay", "FXComp"]
+        actual_fx_types = []
+
+        for fx_entry in fx_chain:
+            # Each FX entry is {type: int, kUIParamMixOrGain: float, FXType: {plainParams: {...}}}
+            fx_type_id = fx_entry.get("type")
+            # Map type IDs back to names using serum_mcp's FX_TYPE_IDS
+            from serum_mcp.preset.schema import FX_TYPE_IDS
+            fx_type_name = FX_TYPE_IDS.get(fx_type_id, f"UNKNOWN_{fx_type_id}")
+            actual_fx_types.append(fx_type_name)
+
+        assert actual_fx_types == expected_fx_types, (
+            f"FX TYPE MISMATCH:\n"
+            f"  Expected: {expected_fx_types}\n"
+            f"  Actual: {actual_fx_types}"
+        )
+
+        # Spot-check representative parameters
+        distortion_fx = fx_chain[0]
+        assert distortion_fx.get("type") == 0  # FXDistortion type ID
+        distortion_params = distortion_fx.get("FXDistortion", {}).get("plainParams", {})
+        assert distortion_params.get("kParamDrive") == 60.0, "Distortion drive mismatch"
+
+        delay_fx = fx_chain[3]
+        assert delay_fx.get("type") == 4  # FXDelay type ID
+        delay_params = delay_fx.get("FXDelay", {}).get("plainParams", {})
+        assert delay_params.get("kParamTimeL") == 0.25, "Delay time mismatch"
+
 
 if __name__ == "__main__":
     pytest.main([__file__, "-v", "-s"])
