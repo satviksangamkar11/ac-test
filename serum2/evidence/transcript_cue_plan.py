@@ -15,7 +15,6 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from enum import StrEnum
-from types import MappingProxyType
 from typing import Any
 import hashlib
 import json
@@ -102,9 +101,13 @@ class TranscriptCuePlan:
     # The cues themselves
     cues: tuple[TranscriptCue, ...] = field(default_factory=tuple)
 
-    # Immutable provenance metadata: tuple of (key, value) pairs
-    # Use as: dict(plan.provenance) if dict representation needed
-    provenance: tuple[tuple[str, Any], ...] = field(default_factory=tuple)
+    # Fully immutable provenance metadata: tuple of (key, scalar_value) pairs.
+    # Values must be immutable scalars (str, int, float, bool, None).
+    # No nested mutable structures (dicts, lists). Frozen dataclass +
+    # tuple structure + scalar-only values = true deep immutability.
+    provenance: tuple[tuple[str, str | int | float | bool | None], ...] = field(
+        default_factory=tuple
+    )
 
 
 def transcript_sha256(transcript_text: str) -> str:

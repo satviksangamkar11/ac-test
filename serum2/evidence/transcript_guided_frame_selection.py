@@ -222,51 +222,68 @@ def merge_frame_candidates(
     if len(all_candidates) <= max_frames:
         return all_candidates
 
-    # Over budget: preserve priority via slot allocation
+    # Over budget: per-cue allocation guarantees each transcript cue gets coverage
     # Separate by basis
     transcript = [c for c in all_candidates if c.basis == FrameSelectionBasis.TRANSCRIPT_CUE]
     visual = [c for c in all_candidates if c.basis == FrameSelectionBasis.VISUAL_CHANGE]
     uniform = [c for c in all_candidates if c.basis == FrameSelectionBasis.UNIFORM_FALLBACK]
 
-    # Allocate slots: 60% transcript, 30% visual, remainder uniform
-    # (adjusted so empty categories don't consume slots)
     num_categories = sum(1 for g in [transcript, visual, uniform] if g)
 
     if num_categories == 1:
         # Single category: just take the top max_frames
         return all_candidates[:max_frames]
-    elif num_categories == 2:
-        # Two categories: split allocation
-        if transcript and visual:
-            t_slots = int(max_frames * 0.7)
-            v_slots = max_frames - t_slots
-            return sorted(
-                transcript[:t_slots] + visual[:v_slots],
-                key=lambda c: c.timestamp_s
-            )
-        elif transcript:
-            t_slots = int(max_frames * 0.7)
-            u_slots = max_frames - t_slots
-            return sorted(
-                transcript[:t_slots] + uniform[:u_slots],
-                key=lambda c: c.timestamp_s
-            )
-        else:  # visual and uniform
+    elif transcript:
+        # Per-cue allocation: ensure each unique transcript cue gets at least one frame
+        # Group by cue_id
+        cues_by_id = {}
+        for c in transcript:
+            for cue_id in c.cue_ids:
+                if cue_id not in cues_by_id:
+                    cues_by_id[cue_id] = []
+                cues_by_id[cue_id].append(c)
+
+        num_unique_cues = len(cues_by_id)
+        cue_slots = min(num_unique_cues, max_frames // 2)  # Reserve at least one per cue
+
+        # Take first candidate from each cue
+        transcript_selected = []
+        for cue_id in sorted(cues_by_id.keys()):
+            if transcript_selected and len(transcript_selected) >= cue_slots:
+                break
+            transcript_selected.append(cues_by_id[cue_id][0])
+
+        # Fill remaining slots with additional transcript candidates
+        remaining_t = (
+            max_frames
+            - len(transcript_selected)
+            - (1 if visual else 0)
+            - (1 if uniform else 0)
+        )
+        transcript_selected.extend(
+            transcript[len(transcript_selected) : len(transcript_selected) + remaining_t]
+        )
+
+        # Add visual and uniform to fill budget
+        v_slots = 1 if visual else 0
+        u_slots = (
+            max(1, max_frames - len(transcript_selected) - v_slots) if uniform else 0
+        )
+
+        result = transcript_selected + visual[:v_slots] + uniform[:u_slots]
+        return sorted(result, key=lambda c: c.timestamp_s)[:max_frames]
+    else:
+        # No transcript: split visual and uniform
+        num_categories = sum(1 for g in [visual, uniform] if g)
+        if num_categories == 1:
+            return all_candidates[:max_frames]
+        else:
             v_slots = int(max_frames * 0.7)
             u_slots = max_frames - v_slots
             return sorted(
                 visual[:v_slots] + uniform[:u_slots],
                 key=lambda c: c.timestamp_s
             )
-    else:
-        # All three: 60/30/10
-        t_slots = int(max_frames * 0.6)
-        v_slots = int(max_frames * 0.3)
-        u_slots = max_frames - t_slots - v_slots
-        return sorted(
-            transcript[:t_slots] + visual[:v_slots] + uniform[:u_slots],
-            key=lambda c: c.timestamp_s
-        )
 
 
 def build_uniform_candidates(
