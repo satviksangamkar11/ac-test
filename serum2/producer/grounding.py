@@ -229,6 +229,14 @@ def _claim_id(subject: Mapping[str, Any], ids: Iterable[str]) -> str:
     return "claim:%s:%s:%s" % (subject.get("canonical_target_id") or "_", subject.get("aspect"), h)
 
 
+def _claim_provenance(obs: Sequence[GroundingObservation], policy: Any) -> Dict[str, Any]:
+    prov: Dict[str, Any] = {"recorded_by": "grounding.ground", "policy": type(policy).__name__}
+    ids = sorted({(o.provenance.get("video_source") or {}).get("source_id") for o in obs} - {None})
+    if ids:
+        prov["source_ids"] = ids                     # which video(s) the evidence came from; the observations hold the detail
+    return prov
+
+
 def ground(observations: Iterable[GroundingObservation], policy: Optional[ConfidencePolicy] = None) -> GroundedClaim:
     """Aggregate observations about ONE subject into a GroundedClaim. A generic aggregator, not an interpreter:
     it reads the interpretations already attached to observations, never creates one, and produces no operation,
@@ -290,7 +298,7 @@ def ground(observations: Iterable[GroundingObservation], policy: Optional[Confid
     return GroundedClaim(
         claim_id=_claim_id(subject, ids), subject=subject, observations=tuple(obs), modalities=tuple(sorted({o.modality for o in obs})),
         agreement={"status": status, "agreeing_observation_ids": list(agreeing), "conflicting_observation_ids": [list(g) for g in conflicting]},
-        confidence=confidence, conflict_resolution=None, provenance={"recorded_by": "grounding.ground", "policy": type(policy).__name__})
+        confidence=confidence, conflict_resolution=None, provenance=_claim_provenance(obs, policy))
 
 
 # ====================================================================================================================
@@ -459,3 +467,230 @@ class GroundingValidator:
         if self.validate_claim(a):
             v.append("RESOLUTION_AFTER_INVALID")
         return v
+
+
+# ====================================================================================================================
+# P6.4 Adapters: existing evidence layers -> GroundingObservation[]. Wrappers, not interpreters.
+#
+# * They read what fusion / measurement / the episode already recorded (per-control directions, computed metrics, real
+#   readback) and attach it as interpretation; they never classify again and never look at a fusion LABEL.
+# * They know no target: subjects come from the canonical ids already in the evidence.
+# * Nothing observed becomes a number: values stay the displayed/recorded readings; numbers exist only for computed
+#   measurements. Anything not observed or not computed is an UNKNOWN observation.
+# * Confidence is UNRATED (0.0, uncertainty UNKNOWN) unless the caller supplies a confidence source: no evidence layer
+#   records how reliable a diff, a caption or a readback is, so the adapters do not invent it.
+# ====================================================================================================================
+import math as _math  # noqa: E402
+from typing import Callable  # noqa: E402
+
+ConfidenceSource = Callable[[str, Mapping[str, Any]], float]   # (modality, raw observation) -> confidence in [0, 1]
+
+_UNRATED = {"level": "UNKNOWN", "notes": ["confidence not rated: the adapter records no reliability for this source"]}
+
+
+def _rated(confidence_for: Optional[ConfidenceSource], modality: str, raw: Mapping[str, Any]) -> Tuple[float, Dict[str, Any]]:
+    if confidence_for is None:
+        return 0.0, dict(_UNRATED)
+    c = confidence_for(modality, raw)
+    if isinstance(c, bool) or not isinstance(c, (int, float)) or not 0.0 <= c <= 1.0:
+        raise ValueError("confidence source returned %r; expected a number in [0, 1]" % (c,))
+    return float(c), dict(_UNRATED)
+
+
+def _reading(v: Any) -> Optional[str]:
+    """A displayed/recorded reading is text. Stringify so a reading is never mistaken for a measured number."""
+    return None if v is None else str(v)
+
+
+def _window(start: Any, end: Any) -> Optional[Dict[str, float]]:
+    if not all(isinstance(x, (int, float)) and not isinstance(x, bool) for x in (start, end)):
+        return None
+    lo, hi = float(min(start, end)), float(max(start, end))
+    return {"start_sec": lo, "end_sec": hi}
+
+
+def _video_source(explicit: Optional[Mapping[str, Any]] = None, episode: Any = None) -> Optional[Dict[str, Any]]:
+    """The video a piece of evidence came from: source_id, video_id, source_url, title. Only what is actually recorded
+    (the caller's mapping, or the episode's own fields) is kept; nothing is looked up, defaulted or guessed."""
+    found: Dict[str, Any] = {}
+    if episode is not None:
+        ctx = getattr(episode, "production_context", None) or {}
+        found = {"source_id": getattr(episode, "source_id", None), "source_url": getattr(episode, "source_url", None),
+                 "video_id": ctx.get("video_id"), "title": ctx.get("source_title")}
+    found.update({k: v for k, v in (explicit or {}).items() if k in ("source_id", "video_id", "source_url", "title")})
+    found = {k: v for k, v in found.items() if v}
+    return found or None
+
+
+def _checked(observations: List[GroundingObservation]) -> List[GroundingObservation]:
+    """Adapters never emit an invalid observation: a source that cannot produce a valid one raises instead."""
+    v = GroundingValidator()
+    for o in observations:
+        bad = v.validate_observation(o)
+        if bad:
+            raise ValueError("adapter could not build a valid observation %s: %s" % (o.observation_id, bad))
+    return observations
+
+
+def _diff(event: Any) -> Mapping[str, Any]:
+    return getattr(event, "snapshot_diff", None) or {}
+
+
+def observations_from_production_event(event: Any, confidence_for: Optional[ConfidenceSource] = None, *,
+                                       video_source: Optional[Mapping[str, Any]] = None) -> List[GroundingObservation]:
+    """A (fused) production event -> transcript and visual observations, one claim-subject per changed control.
+
+    VISUAL: each changed control's before/after reading, interpreted with the direction fusion recorded for it
+    (else the same pure comparison fusion uses). TRANSCRIPT: the excerpt, attached to a control ONLY where fusion
+    recorded that the transcript mentions it, interpreted with the direction fusion evaluated from language local to
+    that control (None stays uninterpreted). Controls that could not be observed become UNKNOWN visual observations;
+    added/removed routes become presence observations; a transcript with no per-control fusion is kept as narration.
+    """
+    eid = getattr(event, "event_id", None) or "event"
+    start, end = getattr(event, "start_timestamp_sec", None), getattr(event, "end_timestamp_sec", None)
+    frames = list(getattr(event, "evidence_frame_ids", None) or [])
+    d = _diff(event)
+    fusion = d.get("control_fusion") or {}
+    excerpt = getattr(event, "transcript_excerpt", None)
+    t_at = getattr(event, "transcript_timestamp_sec", None)
+    vis_src = {"kind": "frame_diff", "ref": ",".join(frames) or eid, "frame_ids": frames,
+               "before_frame_id": d.get("before_frame_id"), "after_frame_id": d.get("after_frame_id")}
+    prov = {"recorded_by": "grounding.observations_from_production_event", "event_id": eid, "fusion_status": getattr(event, "fusion_status", None)}
+    vs = _video_source(video_source)
+    if vs:
+        prov["video_source"] = vs
+    vis_ts = _window(start, end)
+    tr_ts = _window(t_at if t_at is not None else start, end)
+    out: List[GroundingObservation] = []
+
+    def add(oid, modality, source, ts, subject, raw, interp, status="OBSERVED", extra_unc=None):
+        conf, unc = _rated(confidence_for, modality, raw) if status != UNKNOWN else (0.0, {"level": "UNKNOWN", "reason": (extra_unc or {}).get("reason", "not observed")})
+        out.append(GroundingObservation(oid, modality, source, ts, subject, raw, interp, status, conf, unc, prov))
+
+    for c in d.get("changed_controls") or []:
+        cid = c["control_id"]
+        f = fusion.get(cid) or {}
+        subject = {"canonical_target_id": cid, "aspect": "direction"}
+        if "visual" in f:
+            v_dir = f["visual"]
+        else:
+            from serum2.producer.evidence_fusion import _visual_direction
+            v_dir = _visual_direction(c.get("before"), c.get("after"))
+        raw = {"control_id": cid, "before": _reading(c.get("before")), "after": _reading(c.get("after"))}
+        add("%s:visual:%s" % (eid, cid), VISUAL, vis_src, vis_ts, subject, raw,
+            {"kind": "direction", "value": v_dir, "basis": "before/after reading comparison"} if v_dir else None)
+        if excerpt and f.get("mentioned"):
+            t_dir = f.get("transcript")
+            add("%s:transcript:%s" % (eid, cid), TRANSCRIPT, {"kind": "transcript", "ref": "%s@%s" % (eid, t_at if t_at is not None else start)},
+                tr_ts, subject, {"text": excerpt, "control_id": cid},
+                {"kind": "direction", "value": t_dir, "basis": "direction language local to the control mention"} if t_dir else None)
+    for cid in d.get("not_observed_controls") or []:
+        add("%s:visual:%s:unknown" % (eid, cid), VISUAL, vis_src, vis_ts, {"canonical_target_id": cid, "aspect": "direction"},
+            {"control_id": cid, "before": None, "after": None}, None, status=UNKNOWN,
+            extra_unc={"reason": "control was occluded, out of view or absent in at least one frame"})
+    for kind, routes in (("added", d.get("added_routes") or []), ("removed", d.get("removed_routes") or [])):
+        for r in routes:
+            rid = "%s->%s" % (r.get("source"), r.get("destination"))
+            add("%s:visual:route:%s:%s" % (eid, kind, rid), VISUAL, vis_src, vis_ts, {"canonical_target_id": None, "aspect": "route:" + rid},
+                {"route": rid, "change": kind}, {"kind": "presence", "value": kind, "basis": "route present in one frame and absent in the other"})
+    if excerpt and not fusion:
+        add("%s:transcript:narration" % eid, TRANSCRIPT, {"kind": "transcript", "ref": "%s@%s" % (eid, t_at if t_at is not None else start)},
+            tr_ts, {"canonical_target_id": None, "aspect": "narration"}, {"text": excerpt}, None)
+    return _checked(sorted(out, key=lambda o: o.observation_id))
+
+
+# ---- audio: computed measurements only ----------------------------------------------------------------------------
+_METRIC_UNITS = {"rms_db": "dB", "peak_db": "dB", "spectral_centroid_hz": "Hz"}     # the G8 measurement schema's own keys
+
+
+def _finite(x: Any) -> bool:
+    return isinstance(x, (int, float)) and not isinstance(x, bool) and _math.isfinite(x)
+
+
+def observations_from_measurement(measurement: Mapping[str, Any], baseline: Optional[Mapping[str, Any]] = None,
+                                  confidence_for: Optional[ConfidenceSource] = None, *,
+                                  video_source: Optional[Mapping[str, Any]] = None) -> List[GroundingObservation]:
+    """A G8 measurement dict -> one AUDIO observation per metric. A number appears ONLY when the measurement was COMPUTED
+    and that metric is a finite number, and then it carries the definition id (method) and the render's hash/path as its
+    source. Every other case is an UNKNOWN observation with the reason, never a value. With a COMPUTED baseline measurement
+    the metric's direction (increase/decrease/unchanged) is attached as arithmetic on the two real numbers."""
+    computed = measurement.get("acoustic_status") == "COMPUTED"
+    ref = measurement.get("sha256") or measurement.get("path") or "unavailable:%s" % measurement.get("status", "unknown")
+    method = measurement.get("measurement_definition_id")
+    reason = "measurement %s (acoustic_status %s)" % (measurement.get("status"), measurement.get("acoustic_status"))
+    out: List[GroundingObservation] = []
+    for metric, unit in sorted(_METRIC_UNITS.items()):
+        value = measurement.get(metric)
+        subject = {"canonical_target_id": None, "aspect": metric}
+        prov = {"recorded_by": "grounding.observations_from_measurement", "measurement_status": measurement.get("status")}
+        if _video_source(video_source):
+            prov["video_source"] = _video_source(video_source)
+        oid = "meas:%s:%s" % (ref, metric)
+        if computed and _finite(value) and method:
+            raw = {"metric": metric, "value": value, "unit": unit}
+            conf, unc = _rated(confidence_for, AUDIO, raw)
+            interp = None
+            if baseline is not None and baseline.get("acoustic_status") == "COMPUTED" and _finite(baseline.get(metric)):
+                b = baseline[metric]
+                interp = {"kind": "direction", "value": "increase" if value > b else ("decrease" if value < b else "unchanged"),
+                          "basis": "computed %s vs baseline render %s" % (metric, baseline.get("sha256") or baseline.get("path") or "?")}
+            out.append(GroundingObservation(oid, AUDIO, {"kind": "render", "ref": ref, "sha256": measurement.get("sha256"), "method": method},
+                                            None, subject, raw, interp, MEASURED, conf, unc, prov))
+        else:
+            why = reason if not computed else "metric %s missing or not a finite number" % metric
+            out.append(GroundingObservation(oid, AUDIO, {"kind": "render", "ref": ref}, None, subject, {"metric": metric, "value": None},
+                                            None, UNKNOWN, 0.0, {"level": "UNKNOWN", "reason": why}, prov))
+    return _checked(out)
+
+
+# ---- episode state: real readback ---------------------------------------------------------------------------------
+def observations_from_episode(episode: Any, subjects: Optional[Mapping[str, Mapping[str, Any]]] = None,
+                              confidence_for: Optional[ConfidenceSource] = None, *,
+                              video_source: Optional[Mapping[str, Any]] = None) -> List[GroundingObservation]:
+    """An episode's real readback -> EPISODE_STATE observations, one per watched key.
+
+    The observed reading is recorded as text (never a number). A key with no observed reading is UNKNOWN. If the readback
+    kept an untouched baseline, the direction is attached with the same pure comparison fusion uses. The subject comes from
+    `subjects` (the executor knows which control each watched key is); with no mapping it is taken from the episode's single
+    admitted decision ONLY when that is unambiguous (one decision, one key), else the key itself is the aspect.
+    """
+    eid = getattr(episode, "experience_id", None) or "episode"
+    rb = ((getattr(episode, "outcome", None) or {}).get("real_plugin_readback")) or {}
+    expected, observed, baseline = rb.get("expected") or {}, rb.get("observed") or {}, rb.get("baseline_untouched_init") or {}
+    keys = sorted(set(expected) | set(observed))
+    decisions = [x for x in ((getattr(episode, "brain_decision", None) or {}).get("decisions") or []) if x.get("admitted") is True]
+    subjects = dict(subjects or {})
+    if not subjects and len(decisions) == 1 and len(keys) == 1:
+        subjects = {keys[0]: {"canonical_target_id": decisions[0].get("source_control_id"), "aspect": "direction"}}
+    out: List[GroundingObservation] = []
+    for k in keys:
+        subject = dict(subjects.get(k) or {"canonical_target_id": None, "aspect": "readback:%s" % k})
+        got = observed.get(k)
+        prov = {"recorded_by": "grounding.observations_from_episode", "source_episode_ids": [eid]}
+        if _video_source(video_source, episode):
+            prov["video_source"] = _video_source(video_source, episode)
+        src = {"kind": "episode", "ref": eid, "backend": rb.get("backend"), "route": rb.get("route") or rb.get("backend")}
+        oid = "%s:state:%s" % (eid, k)
+        if got is None:
+            out.append(GroundingObservation(oid, EPISODE_STATE, src, None, subject, {"key": k, "observed": None, "expected": _reading(expected.get(k))},
+                                            None, UNKNOWN, 0.0, {"level": "UNKNOWN", "reason": "the readback recorded no value for %s" % k}, prov))
+            continue
+        raw = {"key": k, "observed": _reading(got), "expected": _reading(expected.get(k))}
+        conf, unc = _rated(confidence_for, EPISODE_STATE, raw)
+        interp = None
+        if k in baseline:
+            from serum2.producer.evidence_fusion import _visual_direction
+            base_reading = baseline[k].get("display") if isinstance(baseline[k], Mapping) else baseline[k]
+            direction = _visual_direction(base_reading, got)
+            if direction:
+                interp = {"kind": "direction", "value": direction, "basis": "readback vs untouched baseline reading"}
+        out.append(GroundingObservation(oid, EPISODE_STATE, src, None, subject, raw, interp, OBSERVED, conf, unc, prov))
+    return _checked(out)
+
+
+def ground_by_subject(observations: Iterable[GroundingObservation], policy: Optional[ConfidencePolicy] = None) -> List[GroundedClaim]:
+    """Group observations by subject and ground each group. A generic convenience over ground(); decides nothing."""
+    groups: Dict[Tuple[Optional[str], Optional[str]], List[GroundingObservation]] = {}
+    for o in observations:
+        groups.setdefault(subject_key(o.subject), []).append(o)
+    return [ground(groups[k], policy) for k in sorted(groups, key=lambda k: (str(k[0]), str(k[1])))]

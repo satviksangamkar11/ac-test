@@ -412,6 +412,329 @@ def test_ground_has_no_side_effects(monkeypatch):
     assert ground([obs("t", TRANSCRIPT), obs("v", VISUAL)]).agreement["status"] == AGREEMENT
 
 
+# ---- P6.4 adapters: wrappers over existing evidence, never interpreters ----------------------------------------------------
+import json
+from types import SimpleNamespace
+from serum2.producer.grounding import (
+    ground_by_subject, observations_from_episode, observations_from_measurement, observations_from_production_event,
+)
+
+FRAMES = ["frame_a", "frame_b"]
+
+
+def event(changed=(), fusion=None, excerpt="a bit more release", eid="evt_1", t_at=12.0, fusion_status="AGREEMENT", **diff_extra):
+    d = {"before_frame_id": "frame_a", "after_frame_id": "frame_b", "changed_controls": [dict(c) for c in changed],
+         "not_observed_controls": [], "added_routes": [], "removed_routes": [], "newly_observed_routes": []}
+    d.update(diff_extra)
+    if fusion is not None:
+        d["control_fusion"] = fusion
+    return SimpleNamespace(event_id=eid, start_timestamp_sec=10.0, end_timestamp_sec=35.0, evidence_frame_ids=list(FRAMES),
+                           transcript_excerpt=excerpt, transcript_timestamp_sec=t_at, fusion_status=fusion_status, snapshot_diff=d)
+
+
+REL = {"control_id": "env1.release", "before": "15 ms", "after": "838 ms"}
+
+
+def fus(visual="increase", transcript="increase", mentioned=True, cls="AGREEMENT"):
+    return {"mentioned": mentioned, "visual": visual, "transcript": transcript, "classification": cls}
+
+
+def by_mod(out):
+    return {o.modality: o for o in out}
+
+
+def test_p6_4_event_becomes_transcript_and_visual_observations_with_full_provenance():
+    out = observations_from_production_event(event([REL], {"env1.release": fus()}))
+    assert {o.modality for o in out} == {TRANSCRIPT, VISUAL} and all(V.validate_observation(o) == [] for o in out)
+    m = by_mod(out)
+    assert m[VISUAL].subject == {"canonical_target_id": "env1.release", "aspect": "direction"} == dict(m[TRANSCRIPT].subject)
+    assert dict(m[VISUAL].observation) == {"control_id": "env1.release", "before": "15 ms", "after": "838 ms"}
+    assert list(m[VISUAL].source["frame_ids"]) == FRAMES and m[VISUAL].source["ref"] == "frame_a,frame_b"
+    assert dict(m[VISUAL].timestamp) == {"start_sec": 10.0, "end_sec": 35.0} and dict(m[TRANSCRIPT].timestamp) == {"start_sec": 12.0, "end_sec": 35.0}
+    assert m[TRANSCRIPT].observation["text"] == "a bit more release"
+    assert m[VISUAL].interpretation["value"] == m[TRANSCRIPT].interpretation["value"] == "increase"
+    assert m[VISUAL].interpretation["basis"] != m[TRANSCRIPT].interpretation["basis"]         # each modality keeps its own basis
+    (claim_,) = ground_by_subject(out)
+    assert claim_.agreement["status"] == AGREEMENT and claim_.modalities == ("TRANSCRIPT", "VISUAL") and V.validate_claim(claim_) == []
+
+
+def test_p6_4_a_conflict_comes_from_the_recorded_directions_and_is_never_settled_by_the_adapter():
+    out = observations_from_production_event(event([REL], {"env1.release": fus(visual="increase", transcript="decrease", cls="CONFLICT")}))
+    (c,) = ground_by_subject(out)
+    assert c.agreement["status"] == CONFLICT and c.conflict_resolution is None and {o.modality for o in c.observations} == {TRANSCRIPT, VISUAL}
+
+
+def test_p6_4_the_adapter_reads_evidence_not_fusion_labels():
+    lying = event([REL], {"env1.release": fus(visual="increase", transcript="decrease", cls="AGREEMENT")}, fusion_status="AGREEMENT")
+    assert ground_by_subject(observations_from_production_event(lying))[0].agreement["status"] == CONFLICT
+    honest_conflict_label = event([REL], {"env1.release": fus(cls="CONFLICT")}, fusion_status="CONFLICT")
+    out = observations_from_production_event(honest_conflict_label)
+    assert ground_by_subject(out)[0].agreement["status"] == AGREEMENT and out[0].provenance["fusion_status"] == "CONFLICT"      # label only recorded
+
+
+def test_p6_4_a_transcript_observation_exists_only_where_fusion_says_the_control_was_mentioned():
+    other = {"control_id": "filter1.cutoff", "before": "200 Hz", "after": "900 Hz"}
+    out = observations_from_production_event(event([REL, other], {"env1.release": fus(), "filter1.cutoff": fus(transcript=None, mentioned=False, cls="UNKNOWN")}))
+    assert sorted((o.modality, o.subject["canonical_target_id"]) for o in out) == [
+        (TRANSCRIPT, "env1.release"), (VISUAL, "env1.release"), (VISUAL, "filter1.cutoff")]
+
+
+def test_p6_4_an_unevaluable_transcript_direction_stays_uninterpreted_and_is_not_evidence():
+    out = observations_from_production_event(event([REL], {"env1.release": fus(transcript=None, mentioned=True, cls="UNKNOWN")}))
+    assert by_mod(out)[TRANSCRIPT].interpretation is None
+    (c,) = ground_by_subject(out)
+    assert c.agreement["status"] == SINGLE_MODALITY and list(c.agreement["agreeing_observation_ids"]) == [by_mod(out)[VISUAL].observation_id]
+
+
+def test_p6_4_a_non_directional_change_is_kept_as_an_uninterpreted_reading():
+    enum = {"control_id": "lfo1.mode", "before": "Normal", "after": "Chaos: Lorenz"}
+    out = observations_from_production_event(event([enum], {"lfo1.mode": fus(visual=None, transcript=None, mentioned=False, cls="UNKNOWN")}, excerpt=None))
+    (o,) = out
+    assert o.interpretation is None and dict(o.observation)["after"] == "Chaos: Lorenz" and V.validate_observation(o) == []
+    assert ground_by_subject(out)[0].agreement["status"] == INSUFFICIENT
+
+
+def test_p6_4_displayed_readings_are_text_never_numbers():
+    numeric = {"control_id": "oscB.unison", "before": 1, "after": 3}                # the census may hold a bare number
+    (o,) = observations_from_production_event(event([numeric], None, excerpt=None))
+    assert dict(o.observation)["before"] == "1" and dict(o.observation)["after"] == "3" and o.status == OBSERVED and V.validate_observation(o) == []
+    assert o.interpretation["value"] == "increase"
+
+
+def test_p6_4_controls_that_could_not_be_observed_become_unknown_observations():
+    out = observations_from_production_event(event([], {}, excerpt=None, not_observed_controls=["fx.hyper.unison"]))
+    (o,) = out
+    assert o.status == UNKNOWN and o.confidence == 0.0 and o.interpretation is None and dict(o.observation) == {"control_id": "fx.hyper.unison", "before": None, "after": None}
+    assert o.uncertainty["reason"] and V.validate_observation(o) == []
+    assert ground_by_subject(out)[0].agreement["status"] == INSUFFICIENT
+
+
+def test_p6_4_route_changes_become_presence_observations_and_newly_observed_routes_claim_nothing():
+    out = observations_from_production_event(event([], {}, excerpt=None, added_routes=[{"source": "env2", "destination": "filter1.cutoff"}],
+                                                    removed_routes=[{"source": "lfo1", "destination": "osc.a.fine"}],
+                                                    newly_observed_routes=[{"source": "env3", "destination": "noise.level"}]))
+    assert sorted((o.subject["aspect"], o.interpretation["value"]) for o in out) == [("route:env2->filter1.cutoff", "added"), ("route:lfo1->osc.a.fine", "removed")]
+
+
+def test_p6_4_a_transcript_without_per_control_fusion_is_kept_as_narration():
+    out = observations_from_production_event(event([], None))
+    (o,) = out
+    assert o.modality == TRANSCRIPT and o.subject == {"canonical_target_id": None, "aspect": "narration"} and o.interpretation is None
+
+
+def test_p6_4_an_event_with_no_evidence_yields_nothing_and_one_without_a_time_window_is_refused():
+    assert observations_from_production_event(event([], {}, excerpt=None)) == []
+    e = event([REL], {"env1.release": fus()})
+    e.start_timestamp_sec = e.end_timestamp_sec = None
+    with pytest.raises(ValueError):
+        observations_from_production_event(e)
+
+
+def test_p6_4_adapters_do_not_invent_confidence_but_take_a_supplied_source():
+    out = observations_from_production_event(event([REL], {"env1.release": fus()}))
+    assert {o.confidence for o in out} == {0.0} and all(o.uncertainty["level"] == "UNKNOWN" and o.uncertainty["notes"] for o in out)
+    rated = observations_from_production_event(event([REL], {"env1.release": fus()}), confidence_for=lambda m, raw: {TRANSCRIPT: 0.4, VISUAL: 0.7}[m])
+    assert {o.modality: o.confidence for o in rated} == {TRANSCRIPT: 0.4, VISUAL: 0.7} and all(V.validate_observation(o) == [] for o in rated)
+    for bad in (lambda m, r: 1.5, lambda m, r: True, lambda m, r: "high", lambda m, r: -0.1):
+        with pytest.raises(ValueError):
+            observations_from_production_event(event([REL], {"env1.release": fus()}), confidence_for=bad)
+
+
+def test_p6_4_event_adapter_is_deterministic_target_agnostic_and_carries_no_authority_field():
+    e = event([REL, {"control_id": "filter1.cutoff", "before": "200 Hz", "after": "900 Hz"}], {"env1.release": fus(), "filter1.cutoff": fus()})
+    a, b = observations_from_production_event(e), observations_from_production_event(e)
+    assert a == b and [o.observation_id for o in a] == sorted(o.observation_id for o in a)
+    assert all(not g._FORBIDDEN & set(o.to_dict()) for o in a) and len(ground_by_subject(a)) == 2
+
+
+def test_p6_4_every_event_of_the_real_heegn1_timeline_adapts_to_valid_observations():
+    root = Path(__file__).resolve().parents[1] / "data" / "experiences"
+    files = sorted(root.glob("vlp1_u8_HEEGN1_*.json")) if root.exists() else []
+    if not files:
+        pytest.skip("local run artifact not present (serum2/data is gitignored)")
+    timeline = json.loads(files[-1].read_text(encoding="utf-8"))["visual_evidence"]["timeline"]
+    total = 0
+    for ev in timeline:
+        out = observations_from_production_event(SimpleNamespace(**{k: ev.get(k) for k in (
+            "event_id", "start_timestamp_sec", "end_timestamp_sec", "evidence_frame_ids", "snapshot_diff", "transcript_excerpt",
+            "transcript_timestamp_sec", "fusion_status")}))
+        assert all(V.validate_observation(o) == [] for o in out)
+        assert all(V.validate_claim(c) == [] for c in ground_by_subject(out))
+        total += len(out)
+    assert total > 20
+
+
+# ---- audio ----
+COMPUTED = {"status": "MEASURED", "acoustic_status": "COMPUTED", "sha256": "abc123", "measurement_definition_id": "g8-basic-acoustic-v1",
+            "rms_db": -23.01, "peak_db": -10.86, "spectral_centroid_hz": 3711.6}
+
+
+def test_p6_4_computed_measurements_become_measured_observations_with_method_and_source():
+    out = observations_from_measurement(COMPUTED)
+    assert {o.subject["aspect"] for o in out} == {"rms_db", "peak_db", "spectral_centroid_hz"} and {o.status for o in out} == {MEASURED}
+    for o in out:
+        assert V.validate_observation(o) == [] and o.source["method"] == "g8-basic-acoustic-v1" and o.source["ref"] == "abc123" and o.timestamp is None
+        assert o.observation["value"] == COMPUTED[o.subject["aspect"]] and o.subject["canonical_target_id"] is None and o.interpretation is None
+
+
+@pytest.mark.parametrize("status,acoustic", [("NO_RENDER", "NOT_ATTEMPTED"), ("FILE_NOT_FOUND", "NOT_ATTEMPTED"), ("EMPTY_AUDIO", "NOT_ATTEMPTED"),
+                                              ("MEASUREMENT_ERROR", "NOT_ATTEMPTED"), ("UNSUPPORTED_FORMAT", "UNSUPPORTED_FORMAT"), ("MEASUREMENT_ERROR", "ERROR")])
+def test_p6_4_a_measurement_that_was_not_computed_yields_only_unknowns(status, acoustic):
+    out = observations_from_measurement({"status": status, "acoustic_status": acoustic, "rms_db": -3.0, "peak_db": -1.0, "spectral_centroid_hz": 999.0})
+    assert len(out) == 3 and all(o.status == UNKNOWN and o.confidence == 0.0 and V.validate_observation(o) == [] for o in out)
+    assert all(dict(o.observation)["value"] is None for o in out) and all(status in o.uncertainty["reason"] for o in out)          # stray numbers are NOT trusted
+
+
+def test_p6_4_a_computed_measurement_with_a_bad_metric_marks_only_that_metric_unknown():
+    for bad in (None, float("nan"), float("inf"), "loud", True):
+        out = by_aspect = {o.subject["aspect"]: o for o in observations_from_measurement({**COMPUTED, "peak_db": bad})}
+        assert out["peak_db"].status == UNKNOWN and out["rms_db"].status == MEASURED and out["spectral_centroid_hz"].status == MEASURED
+    assert all(o.status == UNKNOWN for o in observations_from_measurement({k: v for k, v in COMPUTED.items() if k != "measurement_definition_id"}))   # no method: not a measurement
+
+
+def test_p6_4_direction_is_attached_only_between_two_real_computed_measurements():
+    louder = {**COMPUTED, "sha256": "new", "rms_db": -20.0, "peak_db": -10.86, "spectral_centroid_hz": 3000.0}
+    m = {o.subject["aspect"]: o for o in observations_from_measurement(louder, baseline=COMPUTED)}
+    assert [m[k].interpretation["value"] for k in ("rms_db", "peak_db", "spectral_centroid_hz")] == ["increase", "unchanged", "decrease"]
+    assert all(o.interpretation is None for o in observations_from_measurement(louder, baseline={"status": "NO_RENDER", "acoustic_status": "NOT_ATTEMPTED"}))
+    assert all(o.interpretation is None for o in observations_from_measurement(louder))
+
+
+def test_p6_4_audio_adapter_takes_a_confidence_source_and_never_defaults_to_one():
+    assert {o.confidence for o in observations_from_measurement(COMPUTED)} == {0.0}
+    assert {o.confidence for o in observations_from_measurement(COMPUTED, confidence_for=lambda m, r: 0.6)} == {0.6}
+
+
+def test_p6_4_the_real_g8_measurement_adapts_exactly():
+    wav = Path(__file__).resolve().parents[1] / "data" / "renders" / "heegn1_env1release_exec.wav"
+    if not wav.exists():
+        pytest.skip("local render not present (serum2/data is gitignored)")
+    from serum2.evidence.acoustic_measurement import measure_render
+    m = measure_render(str(wav))
+    out = observations_from_measurement(m)
+    assert all(V.validate_observation(o) == [] for o in out)
+    assert {o.subject["aspect"]: o.observation["value"] for o in out} == {k: m[k] for k in ("rms_db", "peak_db", "spectral_centroid_hz")}
+    assert observations_from_measurement(measure_render(str(wav) + ".missing")) and all(o.status == UNKNOWN for o in observations_from_measurement(measure_render(str(wav) + ".missing")))
+
+
+# ---- episode state ----
+def readback_episode(observed=None, baseline=None, expected=None):
+    rb = {"backend": "vst3-host", "expected": expected if expected is not None else {"Env 1 Release": "838 ms"},
+          "observed": observed if observed is not None else {"Env 1 Release": "838 ms"}}
+    if baseline is not None:
+        rb["baseline_untouched_init"] = baseline
+    return SimpleNamespace(experience_id="e1", outcome={"real_plugin_readback": rb},
+                           brain_decision={"decisions": [{"source_control_id": "env1.release", "admitted": True}]})
+
+
+def test_p6_4_episode_readback_becomes_episode_state_observations_with_direction_from_the_baseline():
+    (o,) = observations_from_episode(readback_episode(baseline={"Env 1 Release": "15 ms"}))
+    assert o.modality == EPISODE_STATE and V.validate_observation(o) == [] and o.timestamp is None
+    assert o.subject == {"canonical_target_id": "env1.release", "aspect": "direction"}            # unambiguous single decision + single key
+    assert dict(o.observation) == {"key": "Env 1 Release", "observed": "838 ms", "expected": "838 ms"} and o.interpretation["value"] == "increase"
+    assert o.source["ref"] == "e1" and o.source["route"] == "vst3-host" and list(o.provenance["source_episode_ids"]) == ["e1"]
+
+
+def test_p6_4_episode_subject_mapping_is_explicit_when_ambiguous():
+    ep = readback_episode(observed={"A": "1 ms", "B": "2 ms"}, expected={"A": "1 ms", "B": "2 ms"})
+    plain = observations_from_episode(ep)
+    assert {o.subject["aspect"] for o in plain} == {"readback:A", "readback:B"} and all(o.subject["canonical_target_id"] is None for o in plain)
+    mapped = observations_from_episode(ep, subjects={"A": {"canonical_target_id": "env1.attack", "aspect": "direction"}})
+    assert {o.subject["aspect"] for o in mapped} == {"direction", "readback:B"}
+
+
+def test_p6_4_episode_without_a_baseline_or_a_reading_stays_uninterpreted_or_unknown():
+    (o,) = observations_from_episode(readback_episode())
+    assert o.interpretation is None and o.status == OBSERVED
+    (u,) = observations_from_episode(readback_episode(observed={}, expected={"Env 1 Release": "838 ms"}))
+    assert u.status == UNKNOWN and u.confidence == 0.0 and dict(u.observation)["observed"] is None and V.validate_observation(u) == []
+    assert observations_from_episode(SimpleNamespace(experience_id="e", outcome={})) == []
+
+
+def test_p6_4_a_readback_that_disagrees_with_the_expectation_is_recorded_as_read_not_as_expected():
+    (o,) = observations_from_episode(readback_episode(observed={"Env 1 Release": "15 ms"}, baseline={"Env 1 Release": "15 ms"}))
+    assert dict(o.observation)["observed"] == "15 ms" and dict(o.observation)["expected"] == "838 ms" and o.interpretation is None
+
+
+def test_p6_4_episode_readback_can_resolve_nothing_by_itself_but_joins_the_claim_for_its_subject():
+    ep_obs = observations_from_episode(readback_episode(baseline={"Env 1 Release": "15 ms"}))
+    ev_obs = observations_from_production_event(event([REL], {"env1.release": fus(visual="increase", transcript="decrease", cls="CONFLICT")}))
+    (c,) = ground_by_subject(ev_obs + ep_obs)
+    assert c.agreement["status"] == CONFLICT and c.modalities == ("EPISODE_STATE", "TRANSCRIPT", "VISUAL") and V.validate_claim(c) == []
+
+
+def test_p6_4_ground_by_subject_partitions_and_is_order_independent():
+    obs_ = observations_from_measurement(COMPUTED) + observations_from_production_event(event([REL], {"env1.release": fus()}))
+    a, b = ground_by_subject(obs_), ground_by_subject(list(reversed(obs_)))
+    assert a == b and len(a) == 4 and all(V.validate_claim(c) == [] for c in a)
+
+
+# ---- video source provenance: every observation can say which video it came from -----------------------------------------
+VIDEO = {"source_id": "yt_test000001", "video_id": "VIDEOID0001", "source_url": "https://example.test/watch?v=VIDEOID0001", "title": "A Tutorial"}
+
+
+def test_p6_4_observations_record_the_video_they_came_from_when_it_is_known():
+    ev = observations_from_production_event(event([REL], {"env1.release": fus()}), video_source=VIDEO)
+    me = observations_from_measurement(COMPUTED, video_source=VIDEO)
+    assert all(dict(o.provenance["video_source"]) == VIDEO for o in ev + me)
+    assert all(V.validate_observation(o) == [] for o in ev + me)
+
+
+def test_p6_4_no_video_source_is_invented_when_none_is_given():
+    for o in observations_from_production_event(event([REL], {"env1.release": fus()})) + observations_from_measurement(COMPUTED):
+        assert "video_source" not in o.provenance
+    assert all("video_source" not in o.provenance for o in observations_from_episode(readback_episode()))
+    partial = observations_from_production_event(event([REL], {"env1.release": fus()}), video_source={"video_id": "V", "junk": "x", "title": ""})
+    assert all(dict(o.provenance["video_source"]) == {"video_id": "V"} for o in partial)                  # only recorded, known fields
+
+
+def test_p6_4_the_episode_adapter_takes_the_video_from_the_episodes_own_fields_and_an_explicit_source_wins():
+    ep = readback_episode(baseline={"Env 1 Release": "15 ms"})
+    ep.source_id, ep.source_url = "yt_ep", "https://example.test/ep"
+    ep.production_context = {"video_id": "EPVIDEO0001", "source_title": "Episode Title"}
+    (o,) = observations_from_episode(ep)
+    assert dict(o.provenance["video_source"]) == {"source_id": "yt_ep", "source_url": "https://example.test/ep", "video_id": "EPVIDEO0001", "title": "Episode Title"}
+    (o2,) = observations_from_episode(ep, video_source={"source_id": "override"})
+    assert o2.provenance["video_source"]["source_id"] == "override" and o2.provenance["video_source"]["video_id"] == "EPVIDEO0001"
+
+
+def test_p6_4_a_claim_names_the_videos_its_evidence_came_from_and_keeps_the_detail_on_the_observations():
+    a = observations_from_production_event(event([REL], {"env1.release": fus()}), video_source=VIDEO)
+    other = observations_from_production_event(event([REL], {"env1.release": fus()}, eid="evt_2"), video_source={**VIDEO, "source_id": "yt_other"})
+    (c,) = ground_by_subject(a)
+    assert list(c.provenance["source_ids"]) == ["yt_test000001"] and V.validate_claim(c) == []
+    (c2,) = ground_by_subject(a[:1] + other[1:])
+    assert list(c2.provenance["source_ids"]) == ["yt_other", "yt_test000001"] and all("video_source" in o.provenance for o in c2.observations)
+    assert "source_ids" not in ground_by_subject(observations_from_production_event(event([REL], {"env1.release": fus()})))[0].provenance
+
+
+def test_p6_4_real_episode_evidence_traces_back_to_the_exact_video_frames_and_timestamps():
+    root = Path(__file__).resolve().parents[1] / "data" / "experiences"
+    files = sorted(root.glob("vlp1_u8_HEEGN1_*.json")) if root.exists() else []
+    if not files:
+        pytest.skip("local run artifact not present (serum2/data is gitignored)")
+    rec = json.loads(files[-1].read_text(encoding="utf-8"))
+    ve = rec["visual_evidence"]
+    frames = {f["frame_id"]: f for f in ve["frames"]}
+    ev = next(e for e in ve["timeline"] if any(c["control_id"] == "env1.release" for c in (e["snapshot_diff"] or {}).get("changed_controls", [])))
+    src = {"source_id": rec["source_id"], "source_url": rec["source_url"], "video_id": rec["production_context"]["video_id"], "title": rec["production_context"]["source_title"]}
+    out = observations_from_production_event(SimpleNamespace(**{k: ev.get(k) for k in (
+        "event_id", "start_timestamp_sec", "end_timestamp_sec", "evidence_frame_ids", "snapshot_diff", "transcript_excerpt",
+        "transcript_timestamp_sec", "fusion_status")}), video_source=src)
+    vis = next(o for o in out if o.modality == VISUAL and o.subject["canonical_target_id"] == "env1.release")
+    assert dict(vis.provenance["video_source"])["video_id"] == "HEEGN1Xl5o4" and dict(vis.provenance["video_source"])["source_id"] == rec["source_id"]
+    assert set(vis.source["frame_ids"]) <= set(frames) and all(frames[i]["artifact_hash"] for i in vis.source["frame_ids"])      # exact frames, hashed
+    assert all(vis.timestamp["start_sec"] <= frames[i]["timestamp_sec"] <= vis.timestamp["end_sec"] for i in vis.source["frame_ids"])
+    assert dict(vis.observation) == {"control_id": "env1.release", "before": "15 ms", "after": "838 ms"}
+
+
+def test_p6_4_the_grounding_module_contains_no_video_specific_identifiers():
+    import re
+    tree = ast.parse(Path(g.__file__).read_text(encoding="utf-8"))
+    consts = [n.value for n in ast.walk(tree) if isinstance(n, ast.Constant) and isinstance(n.value, str)]
+    assert not [c for c in consts if re.fullmatch(r"yt_[0-9a-f]{12}", c) or c in ("HEEGN1Xl5o4", "td22OIHpWuI", "k6OBzXdcFtA")]
+
+
 # ---- RED: later stages (strict xfail; remove marker when implemented) ------------------------------------------------------
 RED = pytest.mark.xfail(strict=True, raises=(ImportError, AttributeError, TypeError), reason="P6 later stage not implemented")
 
@@ -636,40 +959,6 @@ def test_p6_5_a_conflict_resolves_only_with_additional_evidence_and_keeps_every_
         resolve_conflict(c, obs("x", EPISODE_STATE, "sideways"), basis="outcome is neither conflicting interpretation")
     with pytest.raises(ValueError):
         resolve_conflict(ground([obs("t", TRANSCRIPT)]), e, basis="nothing to resolve")
-
-
-@RED
-def test_p6_4_adapter_turns_a_fusion_event_into_transcript_and_visual_observations_with_provenance():
-    from types import SimpleNamespace
-    from serum2.producer.grounding import observations_from_production_event
-    ev = SimpleNamespace(event_id="evt_1", start_timestamp_sec=10.0, end_timestamp_sec=35.0, evidence_frame_ids=["frame_a"],
-                         transcript_excerpt="a bit more release", transcript_timestamp_sec=12.0, fusion_status="AGREEMENT",
-                         snapshot_diff={"changed_controls": [{"control_id": "env1.release", "before": "15 ms", "after": "838 ms"}]})
-    out = observations_from_production_event(ev)
-    assert {o.modality for o in out} == {TRANSCRIPT, VISUAL} and all(V.validate_observation(o) == [] for o in out)
-    vis = next(o for o in out if o.modality == VISUAL)
-    assert vis.subject["canonical_target_id"] == "env1.release" and vis.source["ref"] == "frame_a"
-
-
-@RED
-def test_p6_4_adapter_keeps_measurements_real_and_unknowns_unknown():
-    from serum2.producer.grounding import observations_from_measurement
-    done = {"status": "MEASURED", "acoustic_status": "COMPUTED", "sha256": "abc", "measurement_definition_id": "g8-basic-acoustic-v1",
-            "rms_db": -23.01, "peak_db": -10.86, "spectral_centroid_hz": 3711.6}
-    out = observations_from_measurement(done)
-    assert {o.status for o in out} == {MEASURED} and all(o.source["method"] == "g8-basic-acoustic-v1" for o in out) and all(V.validate_observation(o) == [] for o in out)
-    for status in ("NO_RENDER", "FILE_NOT_FOUND", "EMPTY_AUDIO", "MEASUREMENT_ERROR"):
-        unk = observations_from_measurement({"status": status, "acoustic_status": "NOT_ATTEMPTED"})
-        assert unk and all(o.status == UNKNOWN and o.confidence == 0.0 and V.validate_observation(o) == [] for o in unk)
-
-
-@RED
-def test_p6_4_adapter_turns_episode_readback_into_episode_state_observations():
-    from types import SimpleNamespace
-    from serum2.producer.grounding import observations_from_episode
-    ep = SimpleNamespace(experience_id="e1", outcome={"real_plugin_readback": {"backend": "vst3-host", "expected": {"k": "838 ms"}, "observed": {"k": "838 ms"}}})
-    out = observations_from_episode(ep)
-    assert out and all(o.modality == EPISODE_STATE and V.validate_observation(o) == [] for o in out)
 
 
 @RED
