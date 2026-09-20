@@ -336,7 +336,8 @@ class CandidateRanker:
     """Deterministic ranking: (target-change tier, -score, id). Advisory; returns ordering + features only."""
 
     def rank(self, candidates: Sequence[Candidate], prior_evidence: Sequence[PriorEpisodeEvidence] = (),
-             grounding_evidence: Sequence[Mapping[str, Any]] = ()) -> RankedSet:
+             grounding_evidence: Sequence[Mapping[str, Any]] = (),
+             context: Any = None, context_policy: Any = None) -> RankedSet:
         if not candidates:
             raise ValueError("no candidates to rank")
         if not any(c.origin == PRIMARY for c in candidates):
@@ -359,15 +360,31 @@ class CandidateRanker:
                 grounding_info = grounding_by_target[c.canonical_target]
                 grounding = grounding_info['confidence']
 
+            # Incorporate context preference
+            context_score = 0.0
+            context_info = None
+            if context is not None and context_policy is not None:
+                pref = context_policy.preference(c.to_dict(), context)
+                context_score = max(0.0, min(1.0, pref.score_delta))
+                context_info = {
+                    'score': context_score,
+                    'reasons': pref.reasons,
+                    'provenance': pref.provenance
+                }
+
             score = (WEIGHT_FIT * _FIT[c.origin] + WEIGHT_SKILL * skill +
-                    WEIGHT_PRIOR * outcome + WEIGHT_GROUNDING * grounding)
+                    WEIGHT_PRIOR * outcome + WEIGHT_GROUNDING * grounding +
+                    WEIGHT_GROUNDING * context_score)  # context uses same weight as grounding
             tier = 1 if c.target_changed else 0
             feats = {"tier": tier, "primary_fit": _FIT[c.origin], "skill_prior": skill, "prior_outcome": outcome,
                      "prior_attempts": attempts, "prior_episode_ids": tuple(i for p in mine for i in p.episode_ids),
-                     "grounding_confidence": grounding}
+                     "grounding_confidence": grounding, "context_score": context_score}
             if grounding_info:
                 feats["grounding_sources"] = grounding_info['source_count']
                 feats["grounding_modalities"] = grounding_info['modalities']
+            if context_info:
+                feats["context_reasons"] = context_info['reasons']
+                feats["context_provenance"] = context_info['provenance']
 
             rows.append((tier, -score, c.candidate_id, c, score, feats))
         rows.sort(key=lambda r: r[:3])
