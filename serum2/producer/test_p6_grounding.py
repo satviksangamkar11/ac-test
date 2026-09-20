@@ -942,7 +942,6 @@ def test_p6_3_exhaustive_small_space_ground_output_validates_and_every_status_fo
     assert checked > 1000
 
 
-@RED
 def test_p6_5_a_conflict_resolves_only_with_additional_evidence_and_keeps_every_original():
     from serum2.producer.grounding import ground, resolve_conflict
     c = ground([obs("t", TRANSCRIPT, "increase"), obs("v", VISUAL, "decrease")])

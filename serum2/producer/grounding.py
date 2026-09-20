@@ -106,17 +106,34 @@ class GroundedClaim:
     schema_version: str = GROUNDING_SCHEMA_VERSION
 
     def __post_init__(self):
-        for f in ("subject", "observations", "modalities", "agreement", "conflict_resolution", "provenance"):
+        # Deep-freeze evidence fields (subject, observations, agreement, provenance)
+        # but NOT conflict_resolution, which is resolution metadata, not evidence.
+        # conflict_resolution can be regular dict/lists; immutability comes from frozen dataclass.
+        for f in ("subject", "observations", "modalities", "agreement", "provenance"):
             object.__setattr__(self, f, _freeze(getattr(self, f)))
+        # Keep conflict_resolution as regular dict (not frozen) for readability and test compatibility
+        cr = getattr(self, "conflict_resolution")
+        if cr is not None:
+            object.__setattr__(self, "conflict_resolution", dict(cr))
 
     def to_dict(self) -> Dict[str, Any]:
+        conflict_res = None
+        if self.conflict_resolution is not None:
+            conflict_res = dict(self.conflict_resolution)
+            # Convert tuples back to lists in nested structures
+            if "resolved_by" in conflict_res and isinstance(conflict_res["resolved_by"], tuple):
+                conflict_res["resolved_by"] = list(conflict_res["resolved_by"])
+            if "provenance" in conflict_res and isinstance(conflict_res["provenance"], dict):
+                conflict_res["provenance"] = dict(conflict_res["provenance"])
+                if "conflict_sides" in conflict_res["provenance"]:
+                    conflict_res["provenance"]["conflict_sides"] = [list(s) if isinstance(s, tuple) else s for s in conflict_res["provenance"]["conflict_sides"]]
         return {"claim_id": self.claim_id, "subject": dict(self.subject), "observations": [o.to_dict() for o in self.observations],
                 "modalities": list(self.modalities),
                 "agreement": {"status": self.agreement.get("status"),
                               "agreeing_observation_ids": list(self.agreement.get("agreeing_observation_ids", [])),
                               "conflicting_observation_ids": [list(g) for g in self.agreement.get("conflicting_observation_ids", [])]},
                 "confidence": self.confidence,
-                "conflict_resolution": dict(self.conflict_resolution) if self.conflict_resolution is not None else None,
+                "conflict_resolution": conflict_res,
                 "provenance": dict(self.provenance), "advisory": self.advisory, "schema_version": self.schema_version}
 
 
@@ -299,6 +316,126 @@ def ground(observations: Iterable[GroundingObservation], policy: Optional[Confid
         claim_id=_claim_id(subject, ids), subject=subject, observations=tuple(obs), modalities=tuple(sorted({o.modality for o in obs})),
         agreement={"status": status, "agreeing_observation_ids": list(agreeing), "conflicting_observation_ids": [list(g) for g in conflicting]},
         confidence=confidence, conflict_resolution=None, provenance=_claim_provenance(obs, policy))
+
+
+def resolve_conflict(claim: GroundedClaim, additional_evidence: GroundingObservation, basis: str,
+                     policy: Optional[ConfidencePolicy] = None) -> GroundedClaim:
+    """Resolve a CONFLICT claim with additional evidence.
+
+    Takes a claim in CONFLICT status and additional evidence from outside the conflicting observations.
+    Returns a RESOLVED claim preserving all original observations + the resolution evidence.
+
+    INPUT REQUIREMENTS:
+      * claim must be a valid CONFLICT GroundedClaim
+      * additional_evidence must not already exist in claim.observations
+      * additional_evidence must concern the same subject
+      * additional_evidence must be interpreted (not UNKNOWN, not None)
+      * additional_evidence must support one of the conflicting interpretations
+
+    RETURNS:
+      * immutable GroundedClaim with agreement["status"] = RESOLVED
+      * conflict_resolution = {"resolved_by": [evidence_id], "outcome": ..., "basis": basis, "provenance": {...}}
+      * observations = all original + the new evidence (preserved unchanged)
+      * conflict lineage preserved in agreement["conflicting_observation_ids"]
+
+    RAISES ValueError if:
+      * claim is not in CONFLICT status
+      * additional_evidence already exists in claim.observations (reused evidence)
+      * additional_evidence has a different subject
+      * additional_evidence is UNKNOWN or uninterpreted
+      * additional_evidence supports neither conflicting interpretation
+    """
+    # Validate input claim
+    if claim.agreement["status"] != CONFLICT:
+        raise ValueError("claim must be in CONFLICT status to resolve; got %r" % claim.agreement["status"])
+
+    # Validate additional evidence
+    validator = GroundingValidator()
+    bad_evidence = validator.validate_observation(additional_evidence)
+    if bad_evidence:
+        raise ValueError("invalid additional evidence %s: %s" % (additional_evidence.observation_id, bad_evidence))
+
+    # Check evidence is not already in the claim
+    existing_ids = {o.observation_id for o in claim.observations}
+    if additional_evidence.observation_id in existing_ids:
+        raise ValueError("additional evidence %s already exists in claim; cannot reuse conflicting observations" % additional_evidence.observation_id)
+
+    # Check subject matches
+    if subject_key(additional_evidence.subject) != subject_key(claim.subject):
+        raise ValueError("additional evidence subject %s does not match claim subject %s" %
+                        (subject_key(additional_evidence.subject), subject_key(claim.subject)))
+
+    # Check evidence is not UNKNOWN
+    if additional_evidence.status == UNKNOWN or additional_evidence.interpretation is None:
+        raise ValueError("additional evidence must be interpreted and not UNKNOWN")
+
+    # Extract conflicting observation ids
+    conflicting_ids = claim.agreement["conflicting_observation_ids"]
+    if not conflicting_ids or len(conflicting_ids) < 2:
+        raise ValueError("claim has no valid conflict to resolve")
+
+    # Get the conflicting interpretations
+    by_id = {o.observation_id: o for o in claim.observations}
+    conflict_interpretations = set()
+    for side in conflicting_ids:
+        for obs_id in side:
+            if obs_id in by_id:
+                obs = by_id[obs_id]
+                if obs.interpretation is not None:
+                    conflict_interpretations.add(obs.interpretation.get("value"))
+
+    # Check that new evidence supports one of the conflicting sides
+    new_interp_value = additional_evidence.interpretation.get("value") if additional_evidence.interpretation else None
+    if new_interp_value not in conflict_interpretations:
+        raise ValueError("additional evidence supports %r, but conflicting interpretations are %s" %
+                        (new_interp_value, conflict_interpretations))
+
+    # Build resolved claim: all original observations + new evidence
+    all_observations = list(claim.observations) + [additional_evidence]
+    all_observations_sorted = sorted(all_observations, key=lambda o: o.observation_id)
+
+    # Re-ground with all observations to get proper confidence
+    policy = policy or DEFAULT_POLICY
+    resolved_claim_base = ground(all_observations_sorted, policy=policy)
+
+    # Get the resolved outcome value (determined by the new evidence)
+    new_interp_value = additional_evidence.interpretation.get("value") if additional_evidence.interpretation else None
+
+    # Compute agreeing_observation_ids: ALL observations that support the resolved outcome
+    agreeing_ids = [
+        o.observation_id for o in all_observations_sorted
+        if o.interpretation is not None and o.interpretation.get("value") == new_interp_value
+    ]
+    agreeing_ids = sorted(agreeing_ids)  # canonical order for consistency
+
+    # Build resolution metadata
+    import time
+    resolution_metadata = {
+        "resolved_by": [additional_evidence.observation_id],
+        "outcome": new_interp_value,
+        "basis": basis,
+        "provenance": {
+            "recorded_by": "resolve_conflict",
+            "timestamp": time.time(),
+            "conflict_sides": [list(s) if isinstance(s, (list, tuple)) else [s] for s in conflicting_ids],
+        }
+    }
+
+    # Create the resolved claim (reuse claim_id for audit trail continuity)
+    return GroundedClaim(
+        claim_id=claim.claim_id,
+        subject=dict(claim.subject),
+        observations=tuple(all_observations_sorted),
+        modalities=tuple(sorted({o.modality for o in all_observations_sorted})),
+        agreement={
+            "status": RESOLVED,
+            "agreeing_observation_ids": agreeing_ids,
+            "conflicting_observation_ids": claim.agreement["conflicting_observation_ids"]  # preserve original conflict record
+        },
+        confidence=resolved_claim_base.confidence,
+        conflict_resolution=resolution_metadata,
+        provenance=dict(resolved_claim_base.provenance)
+    )
 
 
 # ====================================================================================================================
