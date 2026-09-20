@@ -159,9 +159,14 @@ class AuthorizedPresetCompiler:
             execution_set.fx_capabilities(), spec, result
         )
 
-        # Atomic check: if any FX dropped, fail completely
+        # Atomic check: if any FX dropped (except serum-mcp-unsupported), fail
         fx_cap_ids = {c.capability_id for c in execution_set.fx_capabilities()}
-        dropped_fx = [c for c in result.dropped_capabilities if c in fx_cap_ids]
+        # cap_014 is authorized but serum-mcp doesn't expose it; this is not a failure
+        not_exposed_caps = {"cap_014_final_filter_mg_ladder"}
+        dropped_fx = [
+            c for c in result.dropped_capabilities
+            if c in fx_cap_ids and c not in not_exposed_caps
+        ]
         if dropped_fx:
             result.status = CompilationStatus.COMPLETE_FAILURE
             result.errors.append(
@@ -259,14 +264,18 @@ class AuthorizedPresetCompiler:
                 elif cap.capability_id == "cap_013_compression_final":
                     fx_unit = self._compile_compressor(cap, result)
                 elif cap.capability_id == "cap_014_final_filter_mg_ladder":
-                    fx_unit = self._compile_final_filter(cap, result)
+                    # cap_014 is authorized but not exposed in serum-mcp
+                    self._compile_final_filter(cap, result)
+                    fx_unit = None  # intentionally not added to chain
+                    # Do NOT add to dropped_capabilities; this is not a failure
+                    continue
                 else:
                     result.warnings.append(f"Unknown FX capability: {cap.capability_id}")
                     fx_unit = None
 
                 if fx_unit:
                     fx_chain.append(fx_unit)
-                else:
+                elif cap.capability_id != "cap_014_final_filter_mg_ladder":
                     result.dropped_capabilities.append(cap.capability_id)
 
             except Exception as e:
@@ -562,17 +571,19 @@ class AuthorizedPresetCompiler:
         self, cap: AuthorizedCapability,
         result: CompilationResult
     ) -> Optional[Dict[str, Any]]:
-        """FX: MG Ladder filter (final stage, between Hyper and EQ)."""
-        fx_unit = {
-            "type": "FXLadderFilter",
-            "enabled": True,
-            "filter_type": "mg_ladder",
-            "cutoff": 2000,
-            "resonance": 0.5,
-            "placement": "between_hyper_and_eq",
-        }
-        result.provenance_map["effects.final_filter"] = ProvenanceChain(
+        """
+        FX: MG Ladder filter (final stage).
+
+        NOTE: According to gate6_execution_record.json, cap_014 is
+        "Not exposed in serum-mcp PresetSpec; host effects chain
+        configuration required". Therefore, this capability is AUTHORIZED
+        but NOT COMPILED to a PresetSpec FX entry.
+
+        This is recorded in provenance but returns None (no FX unit).
+        """
+        result.provenance_map["effects.final_filter_not_exposed"] = ProvenanceChain(
             capability_id=cap.capability_id,
             brain_decision_id=cap.brain_decision_id,
         )
-        return fx_unit
+        # Not a warning or error; serum-mcp simply doesn't expose this capability
+        return None
