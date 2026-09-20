@@ -123,6 +123,21 @@ class AuthorizedPresetCompiler:
 
     def compile(self, execution_set: AuthorizedExecutionSet) -> CompilationResult:
         """Compile authorized capabilities to PresetSpec."""
+        # Try to import serum-mcp PresetSpec for proper typing
+        try:
+            import sys
+            from pathlib import Path
+            serum_mcp_src = Path("D:/serum-mcp/src")
+            if str(serum_mcp_src) not in sys.path:
+                sys.path.insert(0, str(serum_mcp_src))
+            from serum_mcp.generation.spec import PresetSpec
+            self._PresetSpec = PresetSpec
+            use_serum_spec = True
+        except ImportError:
+            # serum-mcp not available; fall back to dict output
+            self._PresetSpec = None
+            use_serum_spec = False
+
         result = CompilationResult(status=CompilationStatus.SUCCESS)
 
         if not execution_set.capabilities:
@@ -143,12 +158,12 @@ class AuthorizedPresetCompiler:
                 )
             return result
 
-        # Initialize empty spec
-        spec = self._initialize_empty_spec()
+        # Initialize empty spec (dict for now)
+        spec_dict = self._initialize_empty_spec()
 
         # Compile core capabilities
         self._compile_core_capabilities(
-            execution_set.core_capabilities(), spec, result
+            execution_set.core_capabilities(), spec_dict, result
         )
         if result.errors:
             result.status = CompilationStatus.COMPLETE_FAILURE
@@ -156,7 +171,7 @@ class AuthorizedPresetCompiler:
 
         # Compile FX capabilities
         self._compile_fx_capabilities(
-            execution_set.fx_capabilities(), spec, result
+            execution_set.fx_capabilities(), spec_dict, result
         )
 
         # Atomic check: if any FX dropped (except serum-mcp-unsupported), fail
@@ -176,8 +191,18 @@ class AuthorizedPresetCompiler:
             result.preset_spec = None
             return result
 
-        # Success
-        result.preset_spec = spec
+        # Convert dict to serum-mcp PresetSpec if available
+        if self._PresetSpec:
+            try:
+                result.preset_spec = self._PresetSpec(**spec_dict)
+            except Exception as e:
+                result.errors.append(f"Failed to construct PresetSpec: {e}")
+                result.status = CompilationStatus.COMPLETE_FAILURE
+                result.preset_spec = None
+                return result
+        else:
+            result.preset_spec = spec_dict
+
         if not result.errors and not result.warnings:
             result.status = CompilationStatus.SUCCESS
         else:
@@ -190,20 +215,17 @@ class AuthorizedPresetCompiler:
         return result
 
     def _initialize_empty_spec(self) -> Dict[str, Any]:
-        """Create empty PresetSpec with all required fields."""
+        """Create empty PresetSpec with all required fields for serum-mcp."""
         return {
             "name": "Prague Lead - Phase 5",
+            "description": "Phase 5 gate 6 execution: parametric lead with FX chain",
             "oscillators": [],
-            "filter": {},
+            "filters": [],
             "envelopes": [],
-            "lfo": [],
-            "effects": [],
-            "matrix": [],
-            "routing": {},
-            "metadata": {
-                "source": "AuthorizedPresetCompiler",
-                "phase": "Phase5_Gate6",
-            },
+            "lfos": [],
+            "fx_chain": [],
+            "mod_routes": [],
+            "voice_unison": None,
         }
 
     def _compile_core_capabilities(
@@ -284,7 +306,7 @@ class AuthorizedPresetCompiler:
                 )
                 result.dropped_capabilities.append(cap.capability_id)
 
-        spec["effects"] = fx_chain
+        spec["fx_chain"] = fx_chain
 
     # ===== CORE COMPILATION METHODS =====
 
@@ -297,7 +319,7 @@ class AuthorizedPresetCompiler:
             capability_id=cap.capability_id,
             brain_decision_id=cap.brain_decision_id,
         )
-        spec["metadata"]["initialized_from"] = "factory_default"
+        # serum-mcp PresetSpec doesn't expose metadata; this is a no-op for spec building
 
     def _compile_osc_a(
         self, cap: AuthorizedCapability, spec: Dict[str, Any],

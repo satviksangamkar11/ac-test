@@ -1,0 +1,168 @@
+[
+  {
+    "frame_num": 1,
+    "timestamp_s": 26.55,
+    "basis": "UNIFORM_FALLBACK",
+    "cue_ids": []
+  },
+  {
+    "frame_num": 2,
+    "timestamp_s": 67.0,
+    "basis": "TRANSCRIPT_CUE",
+    "cue_ids": [
+      "cue-init-serum"
+    ]
+  },
+  {
+    "frame_num": 3,
+    "timestamp_s": 72.0,
+    "basis": "TRANSCRIPT_CUE",
+    "cue_ids": [
+      "cue-osc-a-saw"
+    ]
+  },
+  {
+    "frame_num": 4,
+    "timestamp_s": 78.0,
+    "basis": "TRANSCRIPT_CUE",
+    "cue_ids": [
+      "cue-osc-a-saw"
+    ]
+  },
+  {
+    "frame_num": 5,
+    "timestamp_s": 87.0,
+    "basis": "TRANSCRIPT_CUE",
+    "cue_ids": [
+      "cue-osc-b-saw"
+    ]
+  },
+  {
+    "frame_num": 6,
+    "timestamp_s": 98.0,
+    "basis": "TRANSCRIPT_CUE",
+    "cue_ids": [
+      "cue-osc-b-saw"
+    ]
+  },
+  {
+    "frame_num": 7,
+    "timestamp_s": 113.0,
+    "basis": "TRANSCRIPT_CUE",
+    "cue_ids": [
+      "cue-lfo-chaos"
+    ]
+  },
+  {
+    "frame_num": 8,
+    "timestamp_s": 119.0,
+    "basis": "TRANSCRIPT_CUE",
+    "cue_ids": [
+      "cue-lfo-chaos"
+    ]
+  },
+  {
+    "frame_num": 9,
+    "timestamp_s": 141.0,
+    "basis": "TRANSCRIPT_CUE",
+    "cue_ids": [
+      "cue-noise-envelope"
+    ]
+  },
+  {
+    "frame_num": 10,
+    "timestamp_s": 152.0,
+    "basis": "TRANSCRIPT_CUE",
+    "cue_ids": [
+      "cue-noise-envelope"
+    ]
+  },
+  {
+    "frame_num": 11,
+    "timestamp_s": 196.0,
+    "basis": "TRANSCRIPT_CUE",
+    "cue_ids": [
+      "cue-filter-mg18"
+    ]
+  },
+  {
+    "frame_num": 12,
+    "timestamp_s": 201.0,
+    "basis": "TRANSCRIPT_CUE",
+    "cue_ids": [
+      "cue-filter-mg18"
+    ]
+  },
+  {
+    "frame_num": 13,
+    "timestamp_s": 213.0,
+    "basis": "TRANSCRIPT_CUE",
+    "cue_ids": [
+      "cue-env2-cutoff"
+    ]
+  },
+  {
+    "frame_num": 14,
+    "timestamp_s": 220.0,
+    "basis": "TRANSCRIPT_CUE",
+    "cue_ids": [
+      "cue-env2-cutoff"
+    ]
+  },
+  {
+    "frame_num": 15,
+    "timestamp_s": 258.0,
+    "basis": "TRANSCRIPT_CUE",
+    "cue_ids": [
+      "cue-env4-tuning"
+    ]
+  },
+  {
+    "frame_num": 16,
+    "timestamp_s": 294.0,
+    "basis": "TRANSCRIPT_CUE",
+    "cue_ids": [
+      "cue-routing-bus1"
+    ]
+  },
+  {
+    "frame_num": 17,
+    "timestamp_s": 342.0,
+    "basis": "TRANSCRIPT_CUE",
+    "cue_ids": [
+      "cue-distortion-drive"
+    ]
+  },
+  {
+    "frame_num": 18,
+    "timestamp_s": 389.0,
+    "basis": "TRANSCRIPT_CUE",
+    "cue_ids": [
+      "cue-hyper-voices"
+    ]
+  },
+  {
+    "frame_num": 19,
+    "timestamp_s": 420.0,
+    "basis": "TRANSCRIPT_CUE",
+    "cue_ids": [
+      "cue-eq-delay"
+    ]
+  },
+  {
+    "frame_num": 20,
+    "timestamp_s": 453.0,
+    "basis": "TRANSCRIPT_CUE",
+    "cue_ids": [
+      "cue-compression-final"
+    ]
+  },
+  {
+    "frame_num": 21,
+    "timestamp_s": 475.0,
+    "basis": "TRANSCRIPT_CUE",
+    "cue_ids": [
+      "cue-final-filter"
+    ]
+  }
+]

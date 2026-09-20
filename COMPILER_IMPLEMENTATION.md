@@ -65,18 +65,25 @@ PresetSpec.effects[0]
 
 Enables future auditing: "Why does this effect exist?" traces deterministically back to source.
 
-#### Extensibility
-Current implementation covers Prague Lead Phase 5 (14 capabilities, 5 FX). Compiler architecture is generic:
+#### Scope: Prague Lead Phase 5
+**IMPORTANT:** Current implementation is **Prague-Lead-specific**, not generic.
 
-```python
-def _compile_XXX(self, cap, spec, result):
-    # Extract qualified parameters from cap
-    # Lower to PresetSpec equivalent
-    # Record provenance
-    # Raise exception if unmappable
+The compiler has hardcoded methods for exactly 14 capabilities:
+```
+_compile_init, _compile_osc_a, _compile_osc_b, _compile_lfo_chaos,
+_compile_noise_env3, _compile_filter_mg18, _compile_env2_pluck,
+_compile_env4_tuning, _compile_bus1_convolver, _compile_distortion,
+_compile_hyper, _compile_eq_delay, _compile_compressor, _compile_final_filter
 ```
 
-Adding new capabilities (new oscillator types, matrix destinations, etc.) requires ONE method per capability, no redesign.
+Each method is hardcoded for Prague Lead's parameter values (drive=0.6, voices=7, feedback=0.6, etc.). The parameter values are NOT extracted from the authorized capability; they are literals in the code.
+
+**Future generalization:** To support other tutorials or presets, the compiler would need:
+1. Parameterized compilation (extract values from qualified_parameters, not hardcode)
+2. Unknown-capability fallback (what to do with cap_XXX that has no _compile method)
+3. Routing table (map semantic targets to PresetSpec fields dynamically)
+
+For now, this is a **single-use compiler for Prague Lead Phase 5**. It solves the immediate problem (FX disappeared) without overengineering for hypothetical future use cases.
 
 ---
 
