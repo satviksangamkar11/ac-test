@@ -15,10 +15,11 @@ from __future__ import annotations
 import math
 import re
 import sys
+from pathlib import Path
 from collections import Counter, defaultdict
 from typing import Any, Dict, List, Tuple
 
-sys.path.insert(0, "D:/serum-mcp/src")
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "vendor" / "serum-mcp" / "src"))
 
 from serum2.execution.authorized_state_compiler import CompileReport  # noqa: E402
 

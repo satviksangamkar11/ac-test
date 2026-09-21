@@ -21,7 +21,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
-sys.path.insert(0, "D:/serum-mcp/src")
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "vendor" / "serum-mcp" / "src"))
 from serum2.reference.serum_atlas import normalize_control, get_control, all_control_ids, EXACT, ALIAS  # noqa: E402
 
 UNREADABLE_FINAL = "UNREADABLE_AFTER_RETRY"

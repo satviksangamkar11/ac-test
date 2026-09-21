@@ -6,7 +6,7 @@ import sys
 from pathlib import Path
 
 # Add serum-mcp to path
-sys.path.insert(0, str(Path("D:/serum-mcp/src")))
+sys.path.insert(0, str(Path(__file__).resolve().parents[0] / "vendor" / "serum-mcp" / "src"))
 
 from serum_mcp.generation.spec import PresetSpec, OscillatorSpec
 from serum_mcp.tools.generate_preset import generate_preset

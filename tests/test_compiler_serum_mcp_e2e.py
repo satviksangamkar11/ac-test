@@ -31,7 +31,7 @@ class TestCompilerSerumMcpE2E:
     def serum_mcp_tools(self):
         """Load real serum-mcp tools."""
         try:
-            serum_mcp_src = Path("D:/serum-mcp/src")
+            serum_mcp_src = Path(__file__).resolve().parents[1] / "vendor" / "serum-mcp" / "src"
             if not serum_mcp_src.exists():
                 raise ImportError(f"serum-mcp source not found: {serum_mcp_src}")
 
@@ -50,7 +50,7 @@ class TestCompilerSerumMcpE2E:
         except (ImportError, AttributeError) as e:
             pytest.fail(
                 f"SERUM_MCP_UNAVAILABLE: {type(e).__name__}: {str(e)}\n"
-                f"Gate 6 requires serum-mcp at D:/serum-mcp/src"
+                f"Gate 6 requires serum-mcp at vendor/serum-mcp/src"
             )
 
     @pytest.fixture

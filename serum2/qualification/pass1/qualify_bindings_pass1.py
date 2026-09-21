@@ -20,7 +20,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT))
-sys.path.insert(0, "D:/serum-mcp/src")
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "vendor" / "serum-mcp" / "src"))
 
 from serum2.evidence.capability_contract import ExecutionBinding  # noqa: E402
 from serum2.pathmerge import read_path_value  # noqa: E402

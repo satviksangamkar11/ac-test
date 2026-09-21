@@ -128,7 +128,7 @@ class AuthorizedPresetCompiler:
         try:
             import sys
             from pathlib import Path
-            serum_mcp_src = Path("D:/serum-mcp/src")
+            serum_mcp_src = Path(__file__).resolve().parents[2] / "vendor" / "serum-mcp" / "src"
             if str(serum_mcp_src) not in sys.path:
                 sys.path.insert(0, str(serum_mcp_src))
             from serum_mcp.generation.spec import PresetSpec

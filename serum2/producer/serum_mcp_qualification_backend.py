@@ -23,7 +23,7 @@ from serum2.producer.batch_qualification_system import (
     RouteType,
 )
 
-SERUM_MCP_SRC = Path("D:/serum-mcp/src")
+SERUM_MCP_SRC = Path(__file__).resolve().parents[2] / "vendor" / "serum-mcp" / "src"
 _OSC_LABELS = ("A", "B", "C", "Noise", "Sub")
 _OSC_ENABLED = re.compile(r"^oscillators\[(\d+)\]\.enabled$")
 
