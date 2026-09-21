@@ -38,7 +38,7 @@ class ContractRegistry:
     time via dataclasses.replace(), since CapabilityContract is frozen.
     """
 
-    def __init__(self, epoch=None):
+    def __init__(self, epoch=None, binding_evidence_dir=None):
         # epoch=None: the frozen legacy frontier, unchanged (every legacy test is pinned to it).
         # epoch=ExecutionEpoch: ONLY contracts qualified on that exact Serum build are loaded; everything
         # else is recorded in self.excluded with the reason. No contract crosses epochs.
@@ -48,6 +48,8 @@ class ContractRegistry:
         self._host_param_mapping = self._load_host_param_mapping()
         self._body_state_mapping = self._load_body_state_mapping()
         self._load_fresh_contracts()
+        self.binding_diagnostics = {}
+        self._load_binding_evidence_contracts(binding_evidence_dir)
 
     def _load_host_param_mapping(self) -> Dict[str, str]:
         """Load the authoritative capability_key -> host parameter name mapping.
@@ -114,6 +116,23 @@ class ContractRegistry:
             binding_version=str(1),
         )
         return dataclasses.replace(contract, execution_binding=binding)
+
+    def _load_binding_evidence_contracts(self, evidence_dir=None):
+        """Evidence-derived contracts (candidate_binding_qualifier output), built by the generic ClaimEngine/build_contract
+        path. Explicit opt-in (a directory must be named) and epoch runs only, so no run's authority widens implicitly;
+        a target already present is never overridden."""
+        if self.epoch is None or not evidence_dir:
+            return
+        from serum2.qualification.binding_contract import load_binding_contracts
+        d = Path(evidence_dir)
+        loaded, diag = load_binding_contracts(sorted(d.glob("*.json")) if d.is_dir() else [], self.epoch)
+        for target, c in loaded.items():
+            if target in self.contracts:
+                diag["rejected_contract"][target] = "target already registered"
+                diag["loaded"].remove(target)
+            else:
+                self.contracts[target] = c
+        self.binding_diagnostics = diag
 
     def _attach_pass1_binding(self, contract):
         """Attach an ExecutionBinding ONLY from a BINDING_VERIFIED evidence file whose accessor was proven to

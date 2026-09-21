@@ -150,7 +150,7 @@ class ClaimDefinition:
             "required_gate": self.required_gate,
             "required_isolation": list(self.required_isolation),
             "required_measurement": self.required_measurement,
-        }, 8))
+        })[:8])
 
     def gates_met(self, gate_completeness: Dict[str, str]) -> bool:
         for gate, required in self.required_gate.items():

@@ -1,0 +1,97 @@
+{
+  "control_id": "filter2.enabled",
+  "accessor": "filters[1].enabled",
+  "derived_body_path": "VoiceFilter1.plainParams.kParamEnable",
+  "baseline": false,
+  "value_domain": {
+    "kind": "bool"
+  },
+  "serum_identity": {
+    "serum_binary_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+    "serum_product_version": "2.0.23"
+  },
+  "mutation_value": true,
+  "run_status": "STRUCTURAL_VERIFIED",
+  "run": {
+    "verification_level": "STRUCTURAL_VERIFIED",
+    "error": null,
+    "target": "filter2.enabled",
+    "capability_key": "candidate:filter2.enabled",
+    "status": "STRUCTURAL_VERIFIED",
+    "refusal_code": null,
+    "operation_family": "TOGGLE",
+    "route_type": "SERUM_PRESET_STRUCTURAL_BINDING",
+    "binding": {
+      "mutation_type": "SERUM_PRESET_STRUCTURAL",
+      "body_path": null,
+      "host_parameter_name": null,
+      "meta_path": null,
+      "binding_source": "candidate accessor (unverified)",
+      "binding_version": "candidate",
+      "resolver_operation_id": "filters[1].enabled"
+    },
+    "baseline": false,
+    "after_mutation": true,
+    "persisted": {
+      "path": "serum2\\data\\runs\\qUNIEASFZSs\\capability\\binding_qualification_v2\\qual-filter2-enabled.SerumPreset",
+      "size_bytes": 1466,
+      "sha256": "77815A6FC438DA115EF2DF1B3AD3D0F636B83E80F47488CFEB072B30B9D7249D"
+    },
+    "after_reload": true,
+    "state_changed": true,
+    "persistence_verified": true,
+    "trace": [
+      "LOAD",
+      "READ_BASELINE",
+      "MUTATE",
+      "READ_AFTER_MUTATION",
+      "PERSIST",
+      "RELOAD",
+      "READ_AFTER_RELOAD",
+      "PERSISTENCE_CHECK_PASSED"
+    ],
+    "backend_evidence": {
+      "load": {
+        "preset_path": "serum2\\data\\runs\\qUNIEASFZSs\\capability\\binding_qualification_v2\\qual-filter2-enabled.SerumPreset",
+        "tool": "serum_mcp.tools.describe_preset"
+      },
+      "baseline_read": false,
+      "mutation": {
+        "tool": "serum_mcp.tools.edit_preset",
+        "value": true,
+        "written_path": "serum2\\data\\runs\\qUNIEASFZSs\\capability\\binding_qualification_v2\\qual-filter2-enabled.SerumPreset"
+      },
+      "after_mutation_read": true,
+      "persist": {
+        "path": "serum2\\data\\runs\\qUNIEASFZSs\\capability\\binding_qualification_v2\\qual-filter2-enabled.SerumPreset",
+        "size_bytes": 1466,
+        "sha256": "77815A6FC438DA115EF2DF1B3AD3D0F636B83E80F47488CFEB072B30B9D7249D"
+      },
+      "reload": {
+        "path": "serum2\\data\\runs\\qUNIEASFZSs\\capability\\binding_qualification_v2\\qual-filter2-enabled.SerumPreset",
+        "tool": "serum_mcp.tools.describe_preset"
+      },
+      "after_reload_read": true
+    }
+  },
+  "collateral_semantically_neutral": true,
+  "collateral_body_keys": [
+    "VoiceFilter0.plainParams",
+    "VoiceFilter0.plainParams.kParamEnable",
+    "VoiceFilter0.plainParams.kParamFreq",
+    "VoiceFilter0.plainParams.kParamKeyTrack",
+    "VoiceFilter0.plainParams.kParamType",
+    "VoiceFilter1.plainParams",
+    "VoiceFilter1.plainParams.kParamFreq",
+    "VoiceFilter1.plainParams.kParamKeyTrack",
+    "VoiceFilter1.plainParams.kParamType"
+  ],
+  "second_write_value": false,
+  "baseline_restorable": true,
+  "second_write_neutral": true,
+  "value_landed_in_derived_path": true,
+  "status": "BINDING_VERIFIED",
+  "fixture": "serum2\\data\\runs\\qUNIEASFZSs\\capability\\binding_qualification_v2\\qual-filter2-enabled.SerumPreset",
+  "qualified_at": "2026-09-21T09:13:29.945357+00:00",
+  "notes": "File-level, serum-mcp only; path derived from the revert-step diff, not from any table or contract."
+}

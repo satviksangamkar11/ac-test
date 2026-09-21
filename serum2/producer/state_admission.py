@@ -36,12 +36,12 @@ def observed_body_state(rows: List[Row], cat) -> Dict[str, float]:
     return out
 
 
-def admit_rows(rows: List[Row], epoch: ExecutionEpoch) -> List[Dict]:
+def admit_rows(rows: List[Row], epoch: ExecutionEpoch, binding_evidence_dir=None) -> List[Dict]:
     from serum2.producer.contract_registry import ContractRegistry
-    registry = ContractRegistry(epoch=epoch)
+    registry = ContractRegistry(epoch=epoch, binding_evidence_dir=binding_evidence_dir)
     contracts = registry.get_contracts_dict()
     cov = bridge_index(registry)
-    others = {e: bridge_index(ContractRegistry(epoch=e)) for e in KNOWN_EPOCHS if e != epoch}
+    others = {e: bridge_index(ContractRegistry(epoch=e, binding_evidence_dir=binding_evidence_dir)) for e in KNOWN_EPOCHS if e != epoch}
     cat = catalog()
     observed = observed_body_state(rows, cat)
     table = []

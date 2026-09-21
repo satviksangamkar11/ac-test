@@ -45,14 +45,64 @@ def _changed(a, b):
     return (sorted(k for k in fa.keys() & fb.keys() if fa[k] != fb[k]), sorted(fa.keys() ^ fb.keys()))
 
 
-def domain_value(control, baseline):
-    """Any in-domain value different from baseline. Enum/other domains need reviewed value aliases -> not handled."""
+def field_domain(lst: str, fld: str) -> dict:
+    """The serum-mcp schema's own declaration for one field: bool / int / float and its numeric bounds."""
+    import typing
+    from serum_mcp.generation.spec import PresetSpec
+    item = typing.get_args(PresetSpec.model_fields[lst].annotation)[0]
+    f = item.model_fields[fld]
+    ann = f.annotation
+    lo = hi = None
+    for m in f.metadata:
+        lo = getattr(m, "ge", getattr(m, "gt", lo)) if hasattr(m, "ge") or hasattr(m, "gt") else lo
+        hi = getattr(m, "le", getattr(m, "lt", hi)) if hasattr(m, "le") or hasattr(m, "lt") else hi
+    return {"is_bool": ann is bool, "is_int": ann is int, "is_float": ann is float, "lo": lo, "hi": hi}
+
+
+def value_domain(control, dom: dict) -> dict:
+    """Valid mutation domain = Atlas bounds INTERSECT schema bounds; integer if Atlas (VST3 class INTEGER) or schema says so.
+    Raises NotImplementedError when the schema cannot establish a domain (-> QUALIFICATION_BLOCKED)."""
     if control.control_type == "toggle":
+        if not dom["is_bool"]:
+            raise NotImplementedError("toggle control but schema field is not bool")
+        return {"kind": "bool"}
+    if control.control_type != "continuous":
+        raise NotImplementedError("no generic domain rule for control_type=%r" % control.control_type)
+    los = [x for x in (control.min_value, dom["lo"]) if x is not None]
+    his = [x for x in (control.max_value, dom["hi"]) if x is not None]
+    if not los or not his or not (dom["is_int"] or dom["is_float"]):
+        raise NotImplementedError("bounds/type not established by schema")
+    integer = dom["is_int"] or (getattr(control, "audit", None) or {}).get("control_type") == "integer"
+    return {"kind": "integer" if integer else "float", "lo": max(los), "hi": min(his)}
+
+
+def domain_value(control, baseline, domain: dict):
+    """Any in-domain value different from baseline, respecting type."""
+    if domain["kind"] == "bool":
         return not baseline
-    if control.control_type == "continuous" and control.min_value is not None and control.max_value is not None:
-        step = 0.1 * (control.max_value - control.min_value)
-        return baseline + step if baseline + step <= control.max_value else baseline - step
-    raise NotImplementedError("no generic domain rule for control_type=%r" % control.control_type)
+    lo, hi = domain["lo"], domain["hi"]
+    step = 0.1 * (hi - lo)
+    if domain["kind"] == "integer":
+        step = max(1, round(step))
+    for v in (baseline + step, baseline - step):
+        if lo <= v <= hi and v != baseline:
+            return float(v) if domain["kind"] == "integer" else v
+    raise NotImplementedError("no in-domain value differs from baseline %r within [%r, %r]" % (baseline, lo, hi))
+
+
+_EPOCH = []
+
+
+def _serum_identity() -> dict:
+    """Serum build installed when this evidence was produced (serum-mcp itself never runs Serum). None if not a known build."""
+    if not _EPOCH:
+        from serum2.producer.execution_epoch import installed_epoch
+        try:
+            e = installed_epoch()
+            _EPOCH.append({"serum_binary_sha256": e.binary_sha256, "serum_product_version": e.serum_version})
+        except Exception:
+            _EPOCH.append({"serum_binary_sha256": None, "serum_product_version": None})
+    return _EPOCH[0]
 
 
 def qualify(control_id: str, out: Path) -> dict:
@@ -70,7 +120,11 @@ def qualify(control_id: str, out: Path) -> dict:
     shutil.move(str(gen), fixture)
     be = FieldBackend(fixture, lst, idx, fld)
     baseline = be._value()
-    value = domain_value(control, baseline)
+    try:
+        domain = value_domain(control, field_domain(lst, fld))
+        value = domain_value(control, baseline, domain)
+    except NotImplementedError as e:
+        return {"control_id": control_id, "accessor": "%s[%d].%s" % (lst, idx, fld), "status": "QUALIFICATION_BLOCKED", "reason": str(e)}
     accessor = "%s[%d].%s" % (lst, idx, fld)
     cand = BindingCandidate(
         target=control_id, capability_key="candidate:" + control_id,  # label only, grants nothing
@@ -89,7 +143,7 @@ def qualify(control_id: str, out: Path) -> dict:
     # Isolating write: serum-mcp silently drops a write equal to a field's default (stale value stays), so try baseline
     # first and fall back to another in-domain value; keep the first write that observably takes effect.
     second = None
-    for v2 in dict.fromkeys([baseline, domain_value(control, value)]):
+    for v2 in dict.fromkeys([baseline, domain_value(control, value, domain)]):
         be.mutate(cand, MutationSpec(target=control_id, value=v2, operation="set"))
         if be._value() == v2:
             second = v2
@@ -104,7 +158,7 @@ def qualify(control_id: str, out: Path) -> dict:
     collateral = sorted(set(sum(_changed(be.body_before, after), [])) - {body_path})
     ok = run.status == "STRUCTURAL_VERIFIED" and neutral and reversible and landed
     ev = {"control_id": control_id, "accessor": accessor, "derived_body_path": body_path, "baseline": baseline,
-          "mutation_value": value, "run_status": run.status, "run": run.to_dict(), "collateral_semantically_neutral": neutral,
+          "value_domain": domain, "serum_identity": _serum_identity(), "mutation_value": value, "run_status": run.status, "run": run.to_dict(), "collateral_semantically_neutral": neutral,
           "collateral_body_keys": collateral, "second_write_value": second, "baseline_restorable": second == baseline, "second_write_neutral": reversible, "value_landed_in_derived_path": landed,
           "status": "BINDING_VERIFIED" if ok else "BINDING_NOT_VERIFIED", "fixture": str(fixture),
           "qualified_at": datetime.now(timezone.utc).isoformat(),

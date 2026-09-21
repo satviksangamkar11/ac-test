@@ -1,0 +1,94 @@
+{
+  "control_id": "oscA.enabled",
+  "accessor": "oscillators[0].enabled",
+  "derived_body_path": "Oscillator0.plainParams.kParamEnable",
+  "baseline": true,
+  "value_domain": {
+    "kind": "bool"
+  },
+  "serum_identity": {
+    "serum_binary_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+    "serum_product_version": "2.0.23"
+  },
+  "mutation_value": false,
+  "run_status": "STRUCTURAL_VERIFIED",
+  "run": {
+    "verification_level": "STRUCTURAL_VERIFIED",
+    "error": null,
+    "target": "oscA.enabled",
+    "capability_key": "candidate:oscA.enabled",
+    "status": "STRUCTURAL_VERIFIED",
+    "refusal_code": null,
+    "operation_family": "TOGGLE",
+    "route_type": "SERUM_PRESET_STRUCTURAL_BINDING",
+    "binding": {
+      "mutation_type": "SERUM_PRESET_STRUCTURAL",
+      "body_path": null,
+      "host_parameter_name": null,
+      "meta_path": null,
+      "binding_source": "candidate accessor (unverified)",
+      "binding_version": "candidate",
+      "resolver_operation_id": "oscillators[0].enabled"
+    },
+    "baseline": true,
+    "after_mutation": false,
+    "persisted": {
+      "path": "serum2\\data\\runs\\qUNIEASFZSs\\capability\\binding_qualification_v2\\qual-oscA-enabled.SerumPreset",
+      "size_bytes": 1473,
+      "sha256": "791AD44CB334E106A0B4CF560C05665CF578FC190BCCA32A8D8C6DF7A75AEAC6"
+    },
+    "after_reload": false,
+    "state_changed": true,
+    "persistence_verified": true,
+    "trace": [
+      "LOAD",
+      "READ_BASELINE",
+      "MUTATE",
+      "READ_AFTER_MUTATION",
+      "PERSIST",
+      "RELOAD",
+      "READ_AFTER_RELOAD",
+      "PERSISTENCE_CHECK_PASSED"
+    ],
+    "backend_evidence": {
+      "load": {
+        "preset_path": "serum2\\data\\runs\\qUNIEASFZSs\\capability\\binding_qualification_v2\\qual-oscA-enabled.SerumPreset",
+        "tool": "serum_mcp.tools.describe_preset"
+      },
+      "baseline_read": true,
+      "mutation": {
+        "tool": "serum_mcp.tools.edit_preset",
+        "value": false,
+        "written_path": "serum2\\data\\runs\\qUNIEASFZSs\\capability\\binding_qualification_v2\\qual-oscA-enabled.SerumPreset"
+      },
+      "after_mutation_read": false,
+      "persist": {
+        "path": "serum2\\data\\runs\\qUNIEASFZSs\\capability\\binding_qualification_v2\\qual-oscA-enabled.SerumPreset",
+        "size_bytes": 1473,
+        "sha256": "791AD44CB334E106A0B4CF560C05665CF578FC190BCCA32A8D8C6DF7A75AEAC6"
+      },
+      "reload": {
+        "path": "serum2\\data\\runs\\qUNIEASFZSs\\capability\\binding_qualification_v2\\qual-oscA-enabled.SerumPreset",
+        "tool": "serum_mcp.tools.describe_preset"
+      },
+      "after_reload_read": false
+    }
+  },
+  "collateral_semantically_neutral": true,
+  "collateral_body_keys": [
+    "Oscillator0.WTOsc0.plainParams",
+    "Oscillator0.WTOsc0.plainParams.kParamTablePos",
+    "Oscillator0.WTOsc0.plainParams.kParamWarp",
+    "Oscillator0.WTOsc0.plainParams.kParamWarpMenu",
+    "Oscillator0.plainParams",
+    "Oscillator0.plainParams.kParamType"
+  ],
+  "second_write_value": true,
+  "baseline_restorable": true,
+  "second_write_neutral": true,
+  "value_landed_in_derived_path": true,
+  "status": "BINDING_VERIFIED",
+  "fixture": "serum2\\data\\runs\\qUNIEASFZSs\\capability\\binding_qualification_v2\\qual-oscA-enabled.SerumPreset",
+  "qualified_at": "2026-09-21T09:13:29.960536+00:00",
+  "notes": "File-level, serum-mcp only; path derived from the revert-step diff, not from any table or contract."
+}

@@ -1,0 +1,97 @@
+{
+  "control_id": "oscA.octave",
+  "accessor": "oscillators[0].octave",
+  "derived_body_path": "Oscillator0.plainParams.kParamOctave",
+  "baseline": 0.0,
+  "value_domain": {
+    "kind": "integer",
+    "lo": -4.0,
+    "hi": 4.0
+  },
+  "serum_identity": {
+    "serum_binary_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+    "serum_product_version": "2.0.23"
+  },
+  "mutation_value": 1.0,
+  "run_status": "STRUCTURAL_VERIFIED",
+  "run": {
+    "verification_level": "STRUCTURAL_VERIFIED",
+    "error": null,
+    "target": "oscA.octave",
+    "capability_key": "candidate:oscA.octave",
+    "status": "STRUCTURAL_VERIFIED",
+    "refusal_code": null,
+    "operation_family": "NUMERIC",
+    "route_type": "SERUM_PRESET_STRUCTURAL_BINDING",
+    "binding": {
+      "mutation_type": "SERUM_PRESET_STRUCTURAL",
+      "body_path": null,
+      "host_parameter_name": null,
+      "meta_path": null,
+      "binding_source": "candidate accessor (unverified)",
+      "binding_version": "candidate",
+      "resolver_operation_id": "oscillators[0].octave"
+    },
+    "baseline": 0.0,
+    "after_mutation": 1.0,
+    "persisted": {
+      "path": "serum2\\data\\runs\\qUNIEASFZSs\\capability\\binding_qualification_v2\\qual-oscA-octave.SerumPreset",
+      "size_bytes": 1480,
+      "sha256": "065B9D34F9F4BF8120A764F9CF67324AF45C535D4D22B127E45ACA497FEBF3AF"
+    },
+    "after_reload": 1.0,
+    "state_changed": true,
+    "persistence_verified": true,
+    "trace": [
+      "LOAD",
+      "READ_BASELINE",
+      "MUTATE",
+      "READ_AFTER_MUTATION",
+      "PERSIST",
+      "RELOAD",
+      "READ_AFTER_RELOAD",
+      "PERSISTENCE_CHECK_PASSED"
+    ],
+    "backend_evidence": {
+      "load": {
+        "preset_path": "serum2\\data\\runs\\qUNIEASFZSs\\capability\\binding_qualification_v2\\qual-oscA-octave.SerumPreset",
+        "tool": "serum_mcp.tools.describe_preset"
+      },
+      "baseline_read": 0.0,
+      "mutation": {
+        "tool": "serum_mcp.tools.edit_preset",
+        "value": 1.0,
+        "written_path": "serum2\\data\\runs\\qUNIEASFZSs\\capability\\binding_qualification_v2\\qual-oscA-octave.SerumPreset"
+      },
+      "after_mutation_read": 1.0,
+      "persist": {
+        "path": "serum2\\data\\runs\\qUNIEASFZSs\\capability\\binding_qualification_v2\\qual-oscA-octave.SerumPreset",
+        "size_bytes": 1480,
+        "sha256": "065B9D34F9F4BF8120A764F9CF67324AF45C535D4D22B127E45ACA497FEBF3AF"
+      },
+      "reload": {
+        "path": "serum2\\data\\runs\\qUNIEASFZSs\\capability\\binding_qualification_v2\\qual-oscA-octave.SerumPreset",
+        "tool": "serum_mcp.tools.describe_preset"
+      },
+      "after_reload_read": 1.0
+    }
+  },
+  "collateral_semantically_neutral": true,
+  "collateral_body_keys": [
+    "Oscillator0.WTOsc0.plainParams",
+    "Oscillator0.WTOsc0.plainParams.kParamTablePos",
+    "Oscillator0.WTOsc0.plainParams.kParamWarp",
+    "Oscillator0.WTOsc0.plainParams.kParamWarpMenu",
+    "Oscillator0.plainParams",
+    "Oscillator0.plainParams.kParamEnable",
+    "Oscillator0.plainParams.kParamType"
+  ],
+  "second_write_value": 2.0,
+  "baseline_restorable": false,
+  "second_write_neutral": true,
+  "value_landed_in_derived_path": true,
+  "status": "BINDING_VERIFIED",
+  "fixture": "serum2\\data\\runs\\qUNIEASFZSs\\capability\\binding_qualification_v2\\qual-oscA-octave.SerumPreset",
+  "qualified_at": "2026-09-21T09:13:29.979035+00:00",
+  "notes": "File-level, serum-mcp only; path derived from the revert-step diff, not from any table or contract."
+}

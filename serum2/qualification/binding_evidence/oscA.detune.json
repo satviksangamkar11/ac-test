@@ -1,0 +1,97 @@
+{
+  "control_id": "oscA.detune",
+  "accessor": "oscillators[0].detune",
+  "derived_body_path": "Oscillator0.plainParams.kParamDetune",
+  "baseline": 0.0,
+  "value_domain": {
+    "kind": "float",
+    "lo": 0.0,
+    "hi": 1.0
+  },
+  "serum_identity": {
+    "serum_binary_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+    "serum_product_version": "2.0.23"
+  },
+  "mutation_value": 0.1,
+  "run_status": "STRUCTURAL_VERIFIED",
+  "run": {
+    "verification_level": "STRUCTURAL_VERIFIED",
+    "error": null,
+    "target": "oscA.detune",
+    "capability_key": "candidate:oscA.detune",
+    "status": "STRUCTURAL_VERIFIED",
+    "refusal_code": null,
+    "operation_family": "NUMERIC",
+    "route_type": "SERUM_PRESET_STRUCTURAL_BINDING",
+    "binding": {
+      "mutation_type": "SERUM_PRESET_STRUCTURAL",
+      "body_path": null,
+      "host_parameter_name": null,
+      "meta_path": null,
+      "binding_source": "candidate accessor (unverified)",
+      "binding_version": "candidate",
+      "resolver_operation_id": "oscillators[0].detune"
+    },
+    "baseline": 0.0,
+    "after_mutation": 0.1,
+    "persisted": {
+      "path": "serum2\\data\\runs\\qUNIEASFZSs\\capability\\binding_qualification_v2\\qual-oscA-detune.SerumPreset",
+      "size_bytes": 1487,
+      "sha256": "F6E58D3CE515278847D7321E9971498C95E93C930251ABA4F19DF7F32549C288"
+    },
+    "after_reload": 0.1,
+    "state_changed": true,
+    "persistence_verified": true,
+    "trace": [
+      "LOAD",
+      "READ_BASELINE",
+      "MUTATE",
+      "READ_AFTER_MUTATION",
+      "PERSIST",
+      "RELOAD",
+      "READ_AFTER_RELOAD",
+      "PERSISTENCE_CHECK_PASSED"
+    ],
+    "backend_evidence": {
+      "load": {
+        "preset_path": "serum2\\data\\runs\\qUNIEASFZSs\\capability\\binding_qualification_v2\\qual-oscA-detune.SerumPreset",
+        "tool": "serum_mcp.tools.describe_preset"
+      },
+      "baseline_read": 0.0,
+      "mutation": {
+        "tool": "serum_mcp.tools.edit_preset",
+        "value": 0.1,
+        "written_path": "serum2\\data\\runs\\qUNIEASFZSs\\capability\\binding_qualification_v2\\qual-oscA-detune.SerumPreset"
+      },
+      "after_mutation_read": 0.1,
+      "persist": {
+        "path": "serum2\\data\\runs\\qUNIEASFZSs\\capability\\binding_qualification_v2\\qual-oscA-detune.SerumPreset",
+        "size_bytes": 1487,
+        "sha256": "F6E58D3CE515278847D7321E9971498C95E93C930251ABA4F19DF7F32549C288"
+      },
+      "reload": {
+        "path": "serum2\\data\\runs\\qUNIEASFZSs\\capability\\binding_qualification_v2\\qual-oscA-detune.SerumPreset",
+        "tool": "serum_mcp.tools.describe_preset"
+      },
+      "after_reload_read": 0.1
+    }
+  },
+  "collateral_semantically_neutral": true,
+  "collateral_body_keys": [
+    "Oscillator0.WTOsc0.plainParams",
+    "Oscillator0.WTOsc0.plainParams.kParamTablePos",
+    "Oscillator0.WTOsc0.plainParams.kParamWarp",
+    "Oscillator0.WTOsc0.plainParams.kParamWarpMenu",
+    "Oscillator0.plainParams",
+    "Oscillator0.plainParams.kParamEnable",
+    "Oscillator0.plainParams.kParamType"
+  ],
+  "second_write_value": 0.2,
+  "baseline_restorable": false,
+  "second_write_neutral": true,
+  "value_landed_in_derived_path": true,
+  "status": "BINDING_VERIFIED",
+  "fixture": "serum2\\data\\runs\\qUNIEASFZSs\\capability\\binding_qualification_v2\\qual-oscA-detune.SerumPreset",
+  "qualified_at": "2026-09-21T09:13:30.035279+00:00",
+  "notes": "File-level, serum-mcp only; path derived from the revert-step diff, not from any table or contract."
+}

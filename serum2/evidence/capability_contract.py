@@ -21,6 +21,7 @@ from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional, Tuple
 
 from .claim import ClaimGroup, CONTRADICTED
+from .canonical import digest
 from .record import PASS, NOT_RUN
 
 # ---- allowed_operation vocabulary -- derived from the mutation VALUE TYPE
@@ -161,6 +162,26 @@ def _causal_outcome_for(record) -> str:
     if not record.causal_measurements:
         return NOT_RUN
     return record.causal_measurements[0].status
+
+
+def _binding_from_evidence(rec, mut) -> Optional[ExecutionBinding]:
+    """Execution binding derived ONLY from the witness record's own immutable binding_evidence (the
+    candidate_binding_qualifier output stored on the record). No caller argument exists. It must be
+    BINDING_VERIFIED, all three qualifier checks true, and its derived body path must be the very path
+    this record's single mutation targeted -- evidence for one path is never a binding for another."""
+    be = rec.experiment.get("binding_evidence")
+    if not isinstance(be, dict) or not mut:
+        return None
+    path = be.get("derived_body_path")
+    if (be.get("status") != "BINDING_VERIFIED" or not path or not be.get("accessor")
+            or not all(be.get(k) is True for k in ("value_landed_in_derived_path",
+                                                    "collateral_semantically_neutral", "second_write_neutral"))):
+        return None
+    if path != str(mut.get("target_path", "")).removeprefix("body:"):
+        return None
+    return ExecutionBinding(mutation_type="SERUM_PRESET_STRUCTURAL", body_path=path,
+                            binding_source="evidence:%s" % rec.experiment_id, binding_version=digest(be),
+                            resolver_operation_id=be["accessor"])
 
 
 def build_contract(group: ClaimGroup) -> Optional[CapabilityContract]:
@@ -315,6 +336,7 @@ def build_contract(group: ClaimGroup) -> Optional[CapabilityContract]:
                    "supporting_evidence": list(group.supporting_evidence),
                    "witness_experiment_id": rec.experiment_id},
         limitations=tuple(limitations),
+        execution_binding=_binding_from_evidence(rec, mut),
     )
 
 

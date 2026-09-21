@@ -1,0 +1,105 @@
+{
+  "control_id": "env2.release",
+  "accessor": "envelopes[1].release",
+  "derived_body_path": "Env1.plainParams.kParamRelease",
+  "baseline": 0.015,
+  "value_domain": {
+    "kind": "float",
+    "lo": 0.0,
+    "hi": 32.0
+  },
+  "serum_identity": {
+    "serum_binary_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+    "serum_product_version": "2.0.23"
+  },
+  "mutation_value": 3.2150000000000003,
+  "run_status": "STRUCTURAL_VERIFIED",
+  "run": {
+    "verification_level": "STRUCTURAL_VERIFIED",
+    "error": null,
+    "target": "env2.release",
+    "capability_key": "candidate:env2.release",
+    "status": "STRUCTURAL_VERIFIED",
+    "refusal_code": null,
+    "operation_family": "NUMERIC",
+    "route_type": "SERUM_PRESET_STRUCTURAL_BINDING",
+    "binding": {
+      "mutation_type": "SERUM_PRESET_STRUCTURAL",
+      "body_path": null,
+      "host_parameter_name": null,
+      "meta_path": null,
+      "binding_source": "candidate accessor (unverified)",
+      "binding_version": "candidate",
+      "resolver_operation_id": "envelopes[1].release"
+    },
+    "baseline": 0.015,
+    "after_mutation": 3.2150000000000003,
+    "persisted": {
+      "path": "serum2\\data\\runs\\qUNIEASFZSs\\capability\\binding_qualification_v2\\qual-env2-release.SerumPreset",
+      "size_bytes": 1504,
+      "sha256": "84231A12B31E1ABFC2B605C95021D8F5BE8C15AE70B7B92FCDCAFBD24A4B3696"
+    },
+    "after_reload": 3.2150000000000003,
+    "state_changed": true,
+    "persistence_verified": true,
+    "trace": [
+      "LOAD",
+      "READ_BASELINE",
+      "MUTATE",
+      "READ_AFTER_MUTATION",
+      "PERSIST",
+      "RELOAD",
+      "READ_AFTER_RELOAD",
+      "PERSISTENCE_CHECK_PASSED"
+    ],
+    "backend_evidence": {
+      "load": {
+        "preset_path": "serum2\\data\\runs\\qUNIEASFZSs\\capability\\binding_qualification_v2\\qual-env2-release.SerumPreset",
+        "tool": "serum_mcp.tools.describe_preset"
+      },
+      "baseline_read": 0.015,
+      "mutation": {
+        "tool": "serum_mcp.tools.edit_preset",
+        "value": 3.2150000000000003,
+        "written_path": "serum2\\data\\runs\\qUNIEASFZSs\\capability\\binding_qualification_v2\\qual-env2-release.SerumPreset"
+      },
+      "after_mutation_read": 3.2150000000000003,
+      "persist": {
+        "path": "serum2\\data\\runs\\qUNIEASFZSs\\capability\\binding_qualification_v2\\qual-env2-release.SerumPreset",
+        "size_bytes": 1504,
+        "sha256": "84231A12B31E1ABFC2B605C95021D8F5BE8C15AE70B7B92FCDCAFBD24A4B3696"
+      },
+      "reload": {
+        "path": "serum2\\data\\runs\\qUNIEASFZSs\\capability\\binding_qualification_v2\\qual-env2-release.SerumPreset",
+        "tool": "serum_mcp.tools.describe_preset"
+      },
+      "after_reload_read": 3.2150000000000003
+    }
+  },
+  "collateral_semantically_neutral": true,
+  "collateral_body_keys": [
+    "Env0.plainParams",
+    "Env0.plainParams.kParamAttack",
+    "Env0.plainParams.kParamCurve1",
+    "Env0.plainParams.kParamCurve2",
+    "Env0.plainParams.kParamCurve3",
+    "Env0.plainParams.kParamDecay",
+    "Env0.plainParams.kParamRelease",
+    "Env0.plainParams.kParamSustain",
+    "Env1.plainParams",
+    "Env1.plainParams.kParamAttack",
+    "Env1.plainParams.kParamCurve1",
+    "Env1.plainParams.kParamCurve2",
+    "Env1.plainParams.kParamCurve3",
+    "Env1.plainParams.kParamDecay",
+    "Env1.plainParams.kParamSustain"
+  ],
+  "second_write_value": 0.015,
+  "baseline_restorable": true,
+  "second_write_neutral": true,
+  "value_landed_in_derived_path": true,
+  "status": "BINDING_VERIFIED",
+  "fixture": "serum2\\data\\runs\\qUNIEASFZSs\\capability\\binding_qualification_v2\\qual-env2-release.SerumPreset",
+  "qualified_at": "2026-09-21T09:13:30.208802+00:00",
+  "notes": "File-level, serum-mcp only; path derived from the revert-step diff, not from any table or contract."
+}
