@@ -306,6 +306,72 @@ class VerifiedStateBuilder:
         self.verified_state.add_verified_route(verified_route)
         return verified_route
 
+    def add_matrix_route_observation(
+        self,
+        extraction_result,  # ExtractionResult from SliderEvidenceExtractorV3
+        route_id: str,
+        source: str,
+        destination: str,
+    ) -> Tuple[VerifiedControlValue, VerifiedMatrixRoute]:
+        """Add matrix route observation from v3 extractor.
+
+        Creates both VerifiedControlValue (track geometry) and VerifiedMatrixRoute
+        (modulation amount) from production extraction pipeline.
+
+        Critical: agreement=False initially. Route only becomes verified after
+        independent Claude audit confirms the amount.
+
+        Args:
+            extraction_result: ExtractionResult from SliderEvidenceExtractorV3
+            route_id: Unique route identifier
+            source: Modulation source (e.g., "LFO 1", "Env 3")
+            destination: Modulation destination (e.g., "Osc A Fine")
+
+        Returns:
+            (VerifiedControlValue, VerifiedMatrixRoute)
+                Both added to verified_state; both unverified (agreement=False)
+        """
+        from slider_evidence_extractor_v3 import ExtractionStatus
+
+        if extraction_result.status != ExtractionStatus.EXTRACTED:
+            raise ValueError(
+                f"Cannot add route from failed extraction. Status: {extraction_result.status.value}"
+            )
+
+        # Step 1: Create track geometry control value
+        canonical_id = f"matrix.track[{route_id}]"
+        track_control = VerifiedControlValue(
+            canonical_id=canonical_id,
+            value=extraction_result.handle_position_pixel,
+            value_text=f"handle at pixel {extraction_result.handle_position_pixel}",
+            unit="pixel",
+            modality="SLIDER_PIXEL",
+            frame_source=extraction_result.extraction_provenance.get("image_path", ""),
+            system_value=extraction_result.handle_position_pixel,
+            calibration_confidence=extraction_result.handle_detection_confidence,
+            agreement=False,  # Not verified until Claude audit
+        )
+
+        self.verified_state.add_verified_control(track_control)
+
+        # Step 2: Create matrix route with calibrated amount
+        verified_route = VerifiedMatrixRoute(
+            route_id=route_id,
+            source=source,
+            destination=destination,
+            amount=extraction_result.calibrated_amount,
+            amount_unit="%",
+            amount_domain=(-100.0, 100.0),
+            amount_source="SLIDER_PIXEL_CALIBRATION",
+            system_amount=extraction_result.calibrated_amount,
+            claude_amount=None,  # Will be filled by audit
+            agreement=False,  # CRITICAL: Not verified until Claude audit
+        )
+
+        self.verified_state.add_verified_route(verified_route)
+
+        return track_control, verified_route
+
     def detect_claude_only_items(
         self,
         system_keys: set,  # system manifest keys
