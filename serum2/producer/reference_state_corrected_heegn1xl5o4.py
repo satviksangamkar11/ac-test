@@ -53,6 +53,7 @@ CORRECTED_ROUTES = [
         "destination": "A Fine",
         "amount": 6.7,  # canonical domain: +6.7 percentage points
         "amount_unit": "%",
+        "amount_domain": (-100.0, 100.0),
         "amount_source": "SLIDER_PIXEL_CALIBRATION",
         "calibration_note": "Knob pixel 375 of 75px track (53% right). Formula: -100 + (normalized * 200)",
     },
@@ -62,6 +63,7 @@ CORRECTED_ROUTES = [
         "destination": "B Fine",
         "amount": -12.0,  # canonical domain: -12.0 percentage points
         "amount_unit": "%",
+        "amount_domain": (-100.0, 100.0),
         "amount_source": "SLIDER_PIXEL_CALIBRATION",
         "calibration_note": "Knob pixel 368 of 75px track (44% right).",
     },
@@ -71,6 +73,7 @@ CORRECTED_ROUTES = [
         "destination": "Noise Level",
         "amount": -33.3,  # canonical domain: -33.3 percentage points
         "amount_unit": "%",
+        "amount_domain": (-100.0, 100.0),
         "amount_source": "SLIDER_PIXEL_CALIBRATION",
         "calibration_note": "Knob pixel 360 of 75px track (33% right).",
     },
@@ -80,6 +83,7 @@ CORRECTED_ROUTES = [
         "destination": "Filter 1 Freq",
         "amount": 1.3,  # canonical domain: +1.3 percentage points
         "amount_unit": "%",
+        "amount_domain": (-100.0, 100.0),
         "amount_source": "SLIDER_PIXEL_CALIBRATION",
         "calibration_note": "Knob pixel 373 of 75px track (51% right).",
     },

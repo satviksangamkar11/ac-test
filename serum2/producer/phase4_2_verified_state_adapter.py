@@ -186,6 +186,10 @@ class VerifiedControlValue:
         }
 
 
+CANONICAL_AMOUNT_UNIT = "%"
+CANONICAL_AMOUNT_DOMAIN = (-100.0, 100.0)
+
+
 @dataclass
 class VerifiedMatrixRoute:
     """A matrix route that has passed verification gates."""
@@ -194,10 +198,26 @@ class VerifiedMatrixRoute:
     destination: str
     amount: Optional[float] = None
 
+    # Explicit representation declaration (required, not inferred)
+    amount_unit: Optional[str] = None
+    amount_domain: Optional[Tuple[float, float]] = None
+    amount_source: Optional[str] = None  # e.g. SLIDER_PIXEL_CALIBRATION, TOOLTIP
+
     # Verification
     system_amount: Optional[float] = None
     claude_amount: Optional[float] = None
     agreement: bool = False
+
+    def declares_canonical_representation(self) -> bool:
+        """Reject routes that don't explicitly declare unit/domain.
+
+        Prevents 0.067 (normalized) vs 6.7 (canonical %) from being
+        silently compared as if equivalent.
+        """
+        return (
+            self.amount_unit == CANONICAL_AMOUNT_UNIT
+            and self.amount_domain == CANONICAL_AMOUNT_DOMAIN
+        )
 
     def to_dict(self) -> Dict:
         return {
@@ -205,6 +225,9 @@ class VerifiedMatrixRoute:
             "source": self.source,
             "destination": self.destination,
             "amount": self.amount,
+            "amount_unit": self.amount_unit,
+            "amount_domain": self.amount_domain,
+            "amount_source": self.amount_source,
             "agreement": self.agreement,
         }
 
@@ -257,14 +280,25 @@ class VerifiedStateBuilder:
         source: str,
         destination: str,
         amount: float,
+        amount_unit: str,
+        amount_domain: Tuple[float, float],
+        amount_source: str,
         agreement: bool = True,
     ) -> VerifiedMatrixRoute:
-        """Add a verified matrix route."""
+        """Add a verified matrix route.
+
+        amount_unit/amount_domain/amount_source are mandatory (no defaults):
+        callers must state the representation explicitly rather than relying
+        on an assumed convention.
+        """
         verified_route = VerifiedMatrixRoute(
             route_id=route_id,
             source=source,
             destination=destination,
             amount=amount,
+            amount_unit=amount_unit,
+            amount_domain=amount_domain,
+            amount_source=amount_source,
             system_amount=amount,
             agreement=agreement,
         )
@@ -359,6 +393,16 @@ class VerifiedStateBuilder:
                 conflicts.append(f"ROUTE_SOURCE_MISMATCH: {route_id}")
             if system_route.destination != claude_route.destination:
                 conflicts.append(f"ROUTE_DESTINATION_MISMATCH: {route_id}")
+
+            # Reject undeclared/non-canonical representation BEFORE comparing
+            # numbers. Without this, 0.067 (normalized) and 6.7 (canonical %)
+            # would silently compare as if the same unit.
+            if not system_route.declares_canonical_representation():
+                conflicts.append(f"AMOUNT_REPRESENTATION_UNDECLARED_SYSTEM: {route_id}")
+                continue
+            if not claude_route.declares_canonical_representation():
+                conflicts.append(f"AMOUNT_REPRESENTATION_UNDECLARED_CLAUDE: {route_id}")
+                continue
 
             # Verify amount (both in canonical [-100, +100]% domain)
             # Tolerance: ±5 percentage points

@@ -20,7 +20,7 @@ The manifest is the bridge between evidence and execution:
 """
 
 from dataclasses import dataclass, field
-from typing import List, Dict, Optional, Set
+from typing import List, Dict, Optional, Set, Tuple
 from enum import Enum
 import json
 
@@ -80,14 +80,26 @@ class ControlValue:
 
 @dataclass
 class MatrixRoute:
-    """A matrix modulation route in the reference state."""
+    """A matrix modulation route in the reference state.
+
+    amount_unit/amount_domain are mandatory once amount is set: two manifests
+    built with different conventions (e.g. normalized [0,1] vs canonical
+    [-100,+100]%) must never be compared as if the numbers meant the same
+    thing. declares_canonical_representation() is the gate check for this.
+    """
     route_id: str  # e.g., "matrix_row_1"
     source: str  # e.g., "Env 2"
     destination: str  # e.g., "Filter 1 Freq"
-    amount: Optional[float] = None  # normalized [0, 1]
+    amount: Optional[float] = None
+    amount_unit: Optional[str] = None  # must be "%" for canonical representation
+    amount_domain: Optional[Tuple[float, float]] = None  # must be (-100.0, 100.0)
+    amount_source: Optional[str] = None  # e.g. TOOLTIP, SLIDER_PIXEL_CALIBRATION
     status: ControlValueStatus = ControlValueStatus.OBSERVED
     frame_source: Optional[str] = None
     verification_status: ControlValueStatus = ControlValueStatus.OBSERVED
+
+    def declares_canonical_representation(self) -> bool:
+        return self.amount_unit == "%" and self.amount_domain == (-100.0, 100.0)
 
     def to_dict(self) -> Dict:
         return {
@@ -95,6 +107,9 @@ class MatrixRoute:
             "source": self.source,
             "destination": self.destination,
             "amount": self.amount,
+            "amount_unit": self.amount_unit,
+            "amount_domain": self.amount_domain,
+            "amount_source": self.amount_source,
             "status": self.status.value,
             "verified": self.verification_status == ControlValueStatus.VERIFIED,
         }

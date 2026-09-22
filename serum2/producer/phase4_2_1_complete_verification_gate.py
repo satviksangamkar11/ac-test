@@ -75,6 +75,15 @@ def audit_full_state_complete(
         system_route = system_routes[route_id]
         claude_route = claude_routes[route_id]
 
+        # Reject undeclared/non-canonical representation BEFORE comparing
+        # numbers (e.g. normalized [0,1] vs canonical [-100,+100]%).
+        if not system_route.declares_canonical_representation():
+            conflicts.append(f"AMOUNT_REPRESENTATION_UNDECLARED_SYSTEM: {route_id}")
+            continue
+        if not claude_route.declares_canonical_representation():
+            conflicts.append(f"AMOUNT_REPRESENTATION_UNDECLARED_CLAUDE: {route_id}")
+            continue
+
         if system_route.amount is not None and claude_route.amount is not None:
             if abs(system_route.amount - claude_route.amount) > 5.0:
                 conflicts.append(f"ROUTE_MISMATCH: {route_id}")

@@ -322,24 +322,30 @@ def test_8_route_mismatch_conflict():
     """Matrix route mismatch -> VERIFICATION_CONFLICT"""
     print("\n--- Test 8: Route mismatch -> CONFLICT ---")
 
-    # System: Route with amount 0.5
+    # System: Route with amount +50.0% (canonical domain)
     system_recon = ReferenceStateReconstructor(episode_id="HEEGN1Xl5o4")
     system_recon.record_route(MatrixRoute(
         route_id="matrix_row1",
         source="Env 2",
         destination="Filter 1 Freq",
-        amount=0.5,
+        amount=50.0,
+        amount_unit="%",
+        amount_domain=(-100.0, 100.0),
+        amount_source="TOOLTIP",
         status=ControlValueStatus.OBSERVED,
     ))
     system_manifest = system_recon.get_manifest()
 
-    # Claude: same route, different amount (0.45)
+    # Claude: same route, different amount (+20.0%, outside ±5.0 tolerance)
     claude_recon = ReferenceStateReconstructor(episode_id="HEEGN1Xl5o4")
     claude_recon.record_route(MatrixRoute(
         route_id="matrix_row1",
         source="Env 2",
         destination="Filter 1 Freq",
-        amount=0.45,
+        amount=20.0,
+        amount_unit="%",
+        amount_domain=(-100.0, 100.0),
+        amount_source="TOOLTIP",
         status=ControlValueStatus.OBSERVED,
     ))
     claude_manifest = claude_recon.get_manifest()
@@ -574,6 +580,52 @@ def test_17_positive_gate_all_conditions():
     return True
 
 
+def test_18_undeclared_representation_blocked():
+    """Route amounts without declared unit/domain -> BLOCK, not silently compared.
+
+    Regression guard for the 0.067 (normalized) vs 6.7 (canonical %) bug:
+    same route, numerically "close" under the old raw-diff check, but the
+    representations were never declared equal, so the gate must refuse to
+    compare them at all.
+    """
+    print("\n--- Test 18: Undeclared amount representation -> BLOCK ---")
+
+    system_recon = ReferenceStateReconstructor(episode_id="HEEGN1Xl5o4")
+    system_recon.record_route(MatrixRoute(
+        route_id="matrix_row1",
+        source="Env 2",
+        destination="Filter 1 Freq",
+        amount=0.067,  # no amount_unit/amount_domain declared
+        status=ControlValueStatus.OBSERVED,
+    ))
+    system_manifest = system_recon.get_manifest()
+
+    claude_recon = ReferenceStateReconstructor(episode_id="HEEGN1Xl5o4")
+    claude_recon.record_route(MatrixRoute(
+        route_id="matrix_row1",
+        source="Env 2",
+        destination="Filter 1 Freq",
+        amount=6.7,  # declared canonical %, but system side is not
+        amount_unit="%",
+        amount_domain=(-100.0, 100.0),
+        amount_source="TOOLTIP",
+        status=ControlValueStatus.OBSERVED,
+    ))
+    claude_manifest = claude_recon.get_manifest()
+
+    builder = VerifiedStateBuilder(episode_id="HEEGN1Xl5o4")
+    all_agree, conflicts = builder.audit_full_state(system_manifest, claude_manifest)
+
+    assert not all_agree
+    assert any("AMOUNT_REPRESENTATION_UNDECLARED" in c for c in conflicts)
+    assert not any("ROUTE_MISMATCH" in c for c in conflicts), (
+        "must block on undeclared representation, not fall through to a raw numeric diff"
+    )
+
+    print(f"[PASS] Undeclared representation blocked: {conflicts}")
+    return True
+
+
 def run_phase_4_2_tests():
     """Run verified reference state tests."""
     print("\n" + "=" * 70)
@@ -598,6 +650,7 @@ def run_phase_4_2_tests():
         ("Gate requires system_manifest_hidden", test_15_gate_requires_manifest_hidden),
         ("Gate requires DIRECT_VISUAL_INSPECTION", test_16_gate_requires_direct_visual),
         ("Gate passes all conditions", test_17_positive_gate_all_conditions),
+        ("Undeclared amount representation BLOCK", test_18_undeclared_representation_blocked),
     ]
 
     passed = 0
