@@ -1,0 +1,283 @@
+{
+  "benchmark_version": "roi-v1-gateB-audit",
+  "audit_method": "Each source image and crop was independently re-opened and visually inspected by the auditing model in this session, without assuming the existing JSON/filenames/prompts were complete or correct. Findings below are direct pixel observations, cross-checked against five_roi_test_results.json (commit 80e5183).",
+  "entries": [
+    {
+      "benchmark_version": "roi-v1-gateB-audit",
+      "source_image": {
+        "path": "video_screenshots/HEEGN1Xl5o4/step2_03m14s_filter_mg18_setup.jpg",
+        "sha256": "f719a873767633e1406e52544a7345f59bdd3fd8e5faf9f0e8d4a03a073d1925",
+        "width": 1280,
+        "height": 720
+      },
+      "roi": {
+        "bbox": [
+          100,
+          270,
+          175,
+          300
+        ],
+        "crop_sha256": "c798ee69165223a1c56bceeeda5db5c8a5db767aecc46998ce21b6b431dae099",
+        "crop_width": 300,
+        "crop_height": 120
+      },
+      "target": {
+        "canonical_id": "oscA.unison",
+        "observation_kind": "CONTROL"
+      },
+      "ground_truth": {
+        "value": "7",
+        "visual_state": "checkbox_na",
+        "notes": "Numeric stepper readout, unison voice count"
+      },
+      "model": {
+        "name": "Qwen2.5-VL-3B-Instruct",
+        "quantization": {
+          "type": "bnb",
+          "bits": 4,
+          "double_quant": true,
+          "quant_type": "nf4"
+        },
+        "max_pixels": 802816
+      },
+      "prompt": {
+        "version": "five_roi_tests.py@80e5183",
+        "text": "Read only the target control in this crop.\n\nTarget: OSC A Unison\nReturn exactly:\nVALUE=<visible text>\nor\nUNREADABLE=<reason>\n\nDo not infer. Do not convert units. Do not use information outside the crop."
+      },
+      "capture_audit": {
+        "text_captured": true,
+        "visual_state_captured": false,
+        "shape_captured": false,
+        "missing_observable_state": [
+          "OSC A waveform shape (sawtooth line rendered in the wavetable display, visible directly above this crop bbox in the source frame) is a distinct visual observable, not represented by the OCT/SEM/FIN/Unison text alone",
+          "OCT=-1, SEM=0, FIN=0 text values (visible in source frame just above this bbox, not included in this crop, not scored by any of the 5 tests)",
+          "OSC A wavetable name 'Default Shapes' and WT POS knob value (visible in source frame, not scored)"
+        ],
+        "status": "PARTIAL"
+      },
+      "auditor_notes": "Assigned target (Unison=7) correctly captured. Same source frame contains OSC A waveform shape and adjacent numeric fields that are outside this crop's bbox and unscored by the current 5-test benchmark."
+    },
+    {
+      "benchmark_version": "roi-v1-gateB-audit",
+      "source_image": {
+        "path": "video_screenshots/HEEGN1Xl5o4/step3_04m35s_matrix_mod_routes.jpg",
+        "sha256": "9f7f51e1a70a33555b8b327d698a9900b1805216eb5e69c7834fb786741266aa",
+        "width": 1280,
+        "height": 720
+      },
+      "roi": {
+        "bbox": [
+          40,
+          222,
+          460,
+          240
+        ],
+        "crop_sha256": "1032bc4841f1caf2eda6ef9f786f64f6170108b9991fe363a869706e0d2a652d",
+        "crop_width": 1260,
+        "crop_height": 54
+      },
+      "target": {
+        "canonical_id": "matrix.row[Env2-to-Filter1Freq]",
+        "observation_kind": "ROUTE"
+      },
+      "ground_truth": {
+        "value": {
+          "SOURCE": "Env 2",
+          "DESTINATION": "Filter 1 Freq"
+        },
+        "visual_state": "amount_slider_present_unread",
+        "notes": "Amount magnitude deliberately excluded from this test's scope"
+      },
+      "model": {
+        "name": "Qwen2.5-VL-3B-Instruct",
+        "quantization": {
+          "type": "bnb",
+          "bits": 4,
+          "double_quant": true,
+          "quant_type": "nf4"
+        },
+        "max_pixels": 802816
+      },
+      "prompt": {
+        "version": "five_roi_tests.py@80e5183",
+        "text": "This is one row of a modulation matrix table with three columns: source, amount slider, destination.\nReturn exactly:\nSOURCE=<text>\nDESTINATION=<text>\nDo not infer amount. Do not use information outside the crop."
+      },
+      "capture_audit": {
+        "text_captured": true,
+        "visual_state_captured": false,
+        "shape_captured": false,
+        "missing_observable_state": [
+          "Modulation AMOUNT value for this route: encoded ONLY as slider-fill length plus handle position, zero text or numeric representation exists anywhere in this row. Current test explicitly excluded this by design ('do not infer amount'), but no observation modality for it has been tested at all. OCR cannot recover it; would require pixel-position-to-value calibration against known slider geometry.",
+          "Bipolar/unipolar toggle icon next to the slider (small circular icon, state not inspected)",
+          "The other 4 rows visible in the same Matrix table (LFO1 to A Fine, LFO1 to B Fine, Env3 to Noise Level, Env4 to unset) were visually inspected earlier in this session but are not part of this 5-test benchmark at all"
+        ],
+        "status": "PARTIAL"
+      },
+      "auditor_notes": "Assigned target (Source/Destination text) correctly captured. The row's actual modulation depth, arguably the most important value in a mod-matrix row, is not captured by any current observation modality, by explicit test design, not by oversight of this particular test. That gap should be tracked, not left implicit."
+    },
+    {
+      "benchmark_version": "roi-v1-gateB-audit",
+      "source_image": {
+        "path": "video_screenshots/HEEGN1Xl5o4/step2_02m08s_lfo1_lorenz_full_pattern.jpg",
+        "sha256": "c6bc3eb1d7988f08c84d5140ac96afcbd18b8f59b69e3d1d11420d1ce8e26272",
+        "width": 1280,
+        "height": 720
+      },
+      "roi": {
+        "bbox": [
+          385,
+          370,
+          460,
+          385
+        ],
+        "crop_sha256": "64cb40af52d4047ce00b399fff1c8875512a8937fbc6703974ebb812d26cff95",
+        "crop_width": 450,
+        "crop_height": 90
+      },
+      "target": {
+        "canonical_id": "lfo1.mode",
+        "observation_kind": "SELECTOR"
+      },
+      "ground_truth": {
+        "value": "Chaos: Lorenz",
+        "visual_state": "WAVEFORM_SHAPE_OBSERVED",
+        "notes": "Enum text captured; the actual rendered attractor curve is a separate, dynamic visual element"
+      },
+      "model": {
+        "name": "Qwen2.5-VL-3B-Instruct",
+        "quantization": {
+          "type": "bnb",
+          "bits": 4,
+          "double_quant": true,
+          "quant_type": "nf4"
+        },
+        "max_pixels": 802816
+      },
+      "prompt": {
+        "version": "five_roi_tests.py@80e5183",
+        "text": "What text do you see in this image? Just transcribe it exactly."
+      },
+      "capture_audit": {
+        "text_captured": true,
+        "visual_state_captured": false,
+        "shape_captured": false,
+        "missing_observable_state": [
+          "The rendered Lorenz attractor curve itself (butterfly-shaped double-loop, visible in the source frame's LFO graph area, separate from this text-label crop). This is a continuously-animated visualization of an ongoing chaotic process, not a fixed or settable parameter. My assessment, not verified against Serum's actual preset file schema, is this is likely NOT_APPLICABLE as an independent reproducible parameter beyond the enum name plus Rate/Sync (already a separate, unscoped field). Flagging as an open question rather than asserting it doesn't matter."
+        ],
+        "status": "PARTIAL"
+      },
+      "auditor_notes": "Enum text correctly captured after the working prompt was substituted. The literal curve rendering was never scored under any modality; classification of whether it is reproducible state or purely cosmetic animation is a judgment call outside this pixel-level audit's authority to close."
+    },
+    {
+      "benchmark_version": "roi-v1-gateB-audit",
+      "source_image": {
+        "path": "video_screenshots/HEEGN1Xl5o4/step5_07m04s_main_delay_ping_pong.jpg",
+        "sha256": "57729750e080d91caa0616d7c1eb3c6982841db4008e95836b56d52c7868041e",
+        "width": 1280,
+        "height": 720
+      },
+      "roi": {
+        "bbox": [
+          560,
+          130,
+          620,
+          150
+        ],
+        "crop_sha256": "d979a0a7c31c55655000872a3fb1b5650ddad188469b73b725ca7e47a28213fb",
+        "crop_width": 360,
+        "crop_height": 120
+      },
+      "target": {
+        "canonical_id": "fx.overdrive.drive",
+        "observation_kind": "CONTROL"
+      },
+      "ground_truth": {
+        "value": "1.9",
+        "visual_state": "knob_position_redundant_with_text",
+        "notes": "Note: original commit incorrectly cited step5_05m51s as this value's source; corrected to step5_07m04s during the ROI experiment (see commit a1e5397 history)"
+      },
+      "model": {
+        "name": "Qwen2.5-VL-3B-Instruct",
+        "quantization": {
+          "type": "bnb",
+          "bits": 4,
+          "double_quant": true,
+          "quant_type": "nf4"
+        },
+        "max_pixels": 802816
+      },
+      "prompt": {
+        "version": "five_roi_tests.py@80e5183",
+        "text": "Read only the target control in this crop.\n\nTarget: Drive value\nReturn exactly:\nDRIVE=<visible text>\nor\nUNREADABLE=<reason>"
+      },
+      "capture_audit": {
+        "text_captured": true,
+        "visual_state_captured": false,
+        "shape_captured": false,
+        "missing_observable_state": [
+          "Same source frame is FX-chain-dense and largely unaudited: Hyper/Dimension (Rate=7 numeric knob, Unison toggle state, Detune/Retrig/Size/Mix knob positions, none scored)",
+          "Equalizer: an actual filter-response CURVE is drawn in the EQ graph area (shelf shape), plus Freq=210/Q=60/Gain=0.0 and Freq=20000/Q=60/Gain=-24.0 numeric fields, none scored, curve shape not captured at all",
+          "Delay: L/R sync times (1/4, 1/4), Feedback knob, Freq knob, and a large blue waveform/spectrum panel, none scored",
+          "Distortion module header icon (collapsed, glyph state not inspected)",
+          "LFO1 Chaos:Lorenz curve reappears in this frame (same instrument state as test 3), consistent but redundant, not independently scored here"
+        ],
+        "status": "PARTIAL"
+      },
+      "auditor_notes": "Assigned target (Drive=1.9) correctly captured, but this is by far the most under-sampled source frame in the benchmark: a single numeric crop out of an FX chain with 3 other modules carrying substantial unscored state, including one actual response curve."
+    },
+    {
+      "benchmark_version": "roi-v1-gateB-audit",
+      "source_image": {
+        "path": "video_screenshots/HEEGN1Xl5o4/step1_01m09s_osc_a_sawtooth_setup.jpg",
+        "sha256": "1e8bd398fbe29a1c0bb1d61f1898a9fdfe512f059b6985e7cd646a8169072ad5",
+        "width": 1280,
+        "height": 720
+      },
+      "roi": {
+        "bbox": [
+          735,
+          480,
+          825,
+          512
+        ],
+        "crop_sha256": "3a88ca275e710d43d99b33dae6cf7be1e84c394dca7dc70ceb56435748ae9a19",
+        "crop_width": 360,
+        "crop_height": 128
+      },
+      "target": {
+        "canonical_id": "voicing.legato",
+        "observation_kind": "ENABLE_STATE"
+      },
+      "ground_truth": {
+        "value": "OFF",
+        "visual_state": "unchecked_checkbox_glyph",
+        "notes": "Confirmed by direct pixel inspection: empty/grey checkbox = OFF"
+      },
+      "model": {
+        "name": "Qwen2.5-VL-3B-Instruct",
+        "quantization": {
+          "type": "bnb",
+          "bits": 4,
+          "double_quant": true,
+          "quant_type": "nf4"
+        },
+        "max_pixels": 802816
+      },
+      "prompt": {
+        "version": "five_roi_tests.py@80e5183",
+        "text": "This crop shows a checkbox labeled LEGATO. Determine if the checkbox is checked (ON) or unchecked (OFF).\nReturn exactly:\nSTATE=ON\nor\nSTATE=OFF"
+      },
+      "capture_audit": {
+        "text_captured": false,
+        "visual_state_captured": true,
+        "shape_captured": "not_applicable",
+        "missing_observable_state": [
+          "IMPORTANT: this crop's own bbox (735,480)-(825,512) visually contains THREE additional distinct values that were never scored: (1) MONO checkbox state, also unchecked/OFF, directly above Legato; (2) POLY=8 numeric stepper (max polyphony setting), same row as MONO; (3) '0/8' voice-count readout in the Legato row. This is a LIVE/runtime meter (currently-active voices out of max), not a stable preset parameter, and should NOT be treated as reproducible ground truth the way Legato's ON/OFF state is.",
+          "OSC A/B/C waveform shapes, ENV1 envelope curve, and an LFO curve are all visible elsewhere in this same 1280x720 source frame, consistent with tests 1 and 3's findings, not independently re-scored here"
+        ],
+        "status": "PARTIAL"
+      },
+      "auditor_notes": "Assigned target (Legato=OFF) correctly captured as a boolean visual-state classification, appropriately not treated as OCR. But the crop bbox was drawn loosely enough to include 3 more distinct values (Mono, Poly, voice-count meter) that the test never asked about or scored, and one of those (voice-count) is not even the same kind of thing (transient runtime state vs stored preset parameter); conflating it with the others would be a category error."
+    }
+  ]
+}
