@@ -1,0 +1,328 @@
+"""Phase 4.2: Verified State Adapter
+
+Bridge: evidence layer → complete verified reference state
+
+Integrates:
+- SliderObservation (from Phase 3.5 calibration)
+- ControlValue (Phase 4.1 manifest structure)
+- ReferenceStateManifest (Phase 4.1)
+- ExpectedInventory (Phase 3.2 completeness context)
+
+Handles:
+1. SliderObservation → ControlValue conversion
+2. Full-state audit (controls + routes + topology)
+3. Claude-only item detection (Claude saw more than system)
+4. Visibility reconciliation (NOT_VISIBLE only when inventory allows)
+5. Blind audit provenance tracking
+"""
+
+from dataclasses import dataclass, field
+from typing import Dict, List, Optional, Tuple
+from enum import Enum
+from datetime import datetime
+import hashlib
+
+
+class AuditMode(Enum):
+    """How the audit was conducted."""
+    DIRECT_VISUAL_INSPECTION = "DIRECT_VISUAL_INSPECTION"
+    SYSTEM_EXTRACTION = "SYSTEM_EXTRACTION"
+    MANUAL_MEASUREMENT = "MANUAL_MEASUREMENT"
+
+
+@dataclass
+class BlindAuditProvenance:
+    """Tracking that Claude audit was genuinely blind."""
+    observer: str  # "Claude", "System", "Manual"
+    audit_mode: AuditMode
+    source_frame_hashes: Dict[str, str] = field(default_factory=dict)  # frame_path → SHA256
+    system_manifest_hidden: bool = True  # Were system values hidden from observer?
+    audit_timestamp: str = field(default_factory=lambda: datetime.utcnow().isoformat())
+    model_checkpoint: str = ""  # Which Claude version conducted audit
+
+    def to_dict(self) -> Dict:
+        return {
+            "observer": self.observer,
+            "audit_mode": self.audit_mode.value,
+            "source_frame_hashes": self.source_frame_hashes,
+            "system_manifest_hidden": self.system_manifest_hidden,
+            "audit_timestamp": self.audit_timestamp,
+            "model_checkpoint": self.model_checkpoint,
+        }
+
+
+@dataclass
+class VerifiedReferenceState:
+    """Final output: complete, audited, reconciled reference state.
+
+    This is the only input to PresetSpec compilation.
+    No unresolved required items.
+    All controls audited and either verified or reconciled.
+    """
+    episode_id: str
+    source_description: str
+    serum_version: str = "2.0.21"
+
+    # Complete state
+    controls: Dict[str, "VerifiedControlValue"] = field(default_factory=dict)
+    matrix_routes: Dict[str, "VerifiedMatrixRoute"] = field(default_factory=dict)
+    topology: Dict[str, bool] = field(default_factory=dict)
+
+    # Audit trail
+    audit_provenance: Optional[BlindAuditProvenance] = None
+
+    # Gate status
+    is_verified: bool = False
+    verification_conflicts: List[str] = field(default_factory=list)
+    unresolved_required: List[str] = field(default_factory=list)
+
+    def add_verified_control(self, control: "VerifiedControlValue") -> None:
+        """Add a verified control to the state."""
+        self.controls[control.canonical_id] = control
+
+    def add_verified_route(self, route: "VerifiedMatrixRoute") -> None:
+        """Add a verified matrix route."""
+        self.matrix_routes[route.route_id] = route
+
+    def pass_completeness_gate(self) -> bool:
+        """Check if state passes completeness gate."""
+        return len(self.unresolved_required) == 0 and len(self.verification_conflicts) == 0
+
+    def to_dict(self) -> Dict:
+        return {
+            "episode_id": self.episode_id,
+            "source_description": self.source_description,
+            "serum_version": self.serum_version,
+            "controls": {cid: c.to_dict() for cid, c in self.controls.items()},
+            "matrix_routes": {rid: r.to_dict() for rid, r in self.matrix_routes.items()},
+            "topology": self.topology,
+            "is_verified": self.is_verified,
+            "verification_conflicts": self.verification_conflicts,
+            "unresolved_required": self.unresolved_required,
+            "audit_provenance": self.audit_provenance.to_dict() if self.audit_provenance else None,
+        }
+
+
+@dataclass
+class VerifiedControlValue:
+    """A control value that has passed verification gates."""
+    canonical_id: str
+    value: Optional[float] = None
+    value_text: Optional[str] = None
+    unit: Optional[str] = None
+
+    # Source
+    modality: str = "UNKNOWN"
+    frame_source: str = ""
+
+    # Verification
+    system_value: Optional[float] = None
+    claude_value: Optional[float] = None
+    agreement: bool = False  # system and claude agree
+
+    # Provenance
+    calibration_confidence: float = 0.0  # extraction confidence
+    audit_confidence: float = 0.0  # verification confidence
+
+    def to_dict(self) -> Dict:
+        return {
+            "canonical_id": self.canonical_id,
+            "value": self.value,
+            "value_text": self.value_text,
+            "unit": self.unit,
+            "modality": self.modality,
+            "frame_source": self.frame_source,
+            "agreement": self.agreement,
+            "calibration_confidence": self.calibration_confidence,
+            "audit_confidence": self.audit_confidence,
+        }
+
+
+@dataclass
+class VerifiedMatrixRoute:
+    """A matrix route that has passed verification gates."""
+    route_id: str
+    source: str
+    destination: str
+    amount: Optional[float] = None
+
+    # Verification
+    system_amount: Optional[float] = None
+    claude_amount: Optional[float] = None
+    agreement: bool = False
+
+    def to_dict(self) -> Dict:
+        return {
+            "route_id": self.route_id,
+            "source": self.source,
+            "destination": self.destination,
+            "amount": self.amount,
+            "agreement": self.agreement,
+        }
+
+
+class VerifiedStateBuilder:
+    """Constructs VerifiedReferenceState from evidence + audit."""
+
+    def __init__(self, episode_id: str, expected_inventory: Optional[Dict] = None):
+        self.episode_id = episode_id
+        self.expected_inventory = expected_inventory or {}  # ExpectedInventory context
+        self.verified_state = VerifiedReferenceState(
+            episode_id=episode_id,
+            source_description=f"Reference reconstruction for {episode_id}",
+        )
+
+    def add_slider_observation(
+        self,
+        slider_obs,  # SliderObservation from Phase 3.5
+        calibration_result,  # CalibrationResult
+        domain_value: float,
+    ) -> VerifiedControlValue:
+        """Convert slider observation → verified control value.
+
+        Takes calibration output and creates canonical ControlValue.
+        """
+        from calibration_model import SliderObservation
+
+        verified_control = VerifiedControlValue(
+            canonical_id=slider_obs.canonical_id,
+            value=domain_value,
+            unit="%",  # Matrix amount is typically percent
+            modality="SLIDER_PIXEL",
+            frame_source=slider_obs.source_image,
+            system_value=domain_value,
+            calibration_confidence=slider_obs.confidence,
+        )
+
+        self.verified_state.add_verified_control(verified_control)
+        return verified_control
+
+    def add_verified_route(
+        self,
+        route_id: str,
+        source: str,
+        destination: str,
+        amount: float,
+        agreement: bool = True,
+    ) -> VerifiedMatrixRoute:
+        """Add a verified matrix route."""
+        verified_route = VerifiedMatrixRoute(
+            route_id=route_id,
+            source=source,
+            destination=destination,
+            amount=amount,
+            system_amount=amount,
+            agreement=agreement,
+        )
+
+        self.verified_state.add_verified_route(verified_route)
+        return verified_route
+
+    def detect_claude_only_items(
+        self,
+        system_keys: set,  # system manifest keys
+        claude_keys: set,  # Claude audit keys
+    ) -> List[str]:
+        """Detect items Claude observed that system missed.
+
+        Returns: list of canonical_ids only in Claude's audit
+        """
+        claude_only = claude_keys - system_keys
+        return list(claude_only)
+
+    def audit_full_state(
+        self,
+        system_manifest,  # ReferenceStateManifest
+        claude_manifest,  # ReferenceStateManifest (Claude's independent audit)
+    ) -> Tuple[bool, List[str]]:
+        """Full state audit: controls + routes + topology.
+
+        Returns: (all_agree, conflicts_list)
+        """
+        conflicts = []
+
+        # 1. Audit controls
+        for cid in system_manifest.controls:
+            if cid not in claude_manifest.controls:
+                conflicts.append(f"CLAUDE_MISSING: {cid}")
+                continue
+
+            system_ctrl = system_manifest.controls[cid]
+            claude_ctrl = claude_manifest.controls[cid]
+
+            # Numeric comparison
+            if system_ctrl.value is not None and claude_ctrl.value is not None:
+                tolerance = 0.01 * abs(system_ctrl.value) if system_ctrl.value != 0 else 0.01
+                if abs(system_ctrl.value - claude_ctrl.value) > tolerance:
+                    conflicts.append(f"CONTROL_MISMATCH: {cid}")
+
+            # Text comparison
+            elif system_ctrl.value_text and claude_ctrl.value_text:
+                if system_ctrl.value_text.lower() != claude_ctrl.value_text.lower():
+                    conflicts.append(f"CONTROL_TEXT_MISMATCH: {cid}")
+
+        # 2. Detect Claude-only controls
+        system_cids = set(system_manifest.controls.keys())
+        claude_cids = set(claude_manifest.controls.keys())
+        claude_only = self.detect_claude_only_items(system_cids, claude_cids)
+        if claude_only:
+            conflicts.append(f"CLAUDE_ONLY_CONTROLS: {', '.join(claude_only)}")
+
+        # 3. Audit matrix routes
+        system_routes = {r.route_id: r for r in system_manifest.matrix_routes}
+        claude_routes = {r.route_id: r for r in claude_manifest.matrix_routes}
+
+        for route_id in system_routes:
+            if route_id not in claude_routes:
+                conflicts.append(f"CLAUDE_MISSING_ROUTE: {route_id}")
+                continue
+
+            system_route = system_routes[route_id]
+            claude_route = claude_routes[route_id]
+
+            if system_route.amount is not None and claude_route.amount is not None:
+                tolerance = 0.01
+                if abs(system_route.amount - claude_route.amount) > tolerance:
+                    conflicts.append(f"ROUTE_MISMATCH: {route_id}")
+
+        # 4. Audit topology
+        for module_id in system_manifest.topology:
+            if module_id not in claude_manifest.topology:
+                conflicts.append(f"CLAUDE_MISSING_TOPOLOGY: {module_id}")
+                continue
+
+            if system_manifest.topology[module_id] != claude_manifest.topology[module_id]:
+                conflicts.append(f"TOPOLOGY_MISMATCH: {module_id}")
+
+        return len(conflicts) == 0, conflicts
+
+    def validate_required_visibility(self) -> List[str]:
+        """Check that NOT_VISIBLE items are allowed by expected inventory.
+
+        Returns: list of invalid NOT_VISIBLE items (required but invisible)
+        """
+        invalid = []
+
+        for canonical_id, control in self.verified_state.controls.items():
+            # If NOT_VISIBLE_IN_FRAME, check if inventory says it's required
+            if control.value is None:  # Not observed
+                # For now, assume all items are required (Phase 4.3 will integrate ExpectedInventory)
+                invalid.append(canonical_id)
+
+        return invalid
+
+    def finalize(
+        self,
+        audit_provenance: Optional[BlindAuditProvenance] = None,
+    ) -> VerifiedReferenceState:
+        """Finalize the verified state and check completion gate."""
+
+        self.verified_state.audit_provenance = audit_provenance or BlindAuditProvenance(
+            observer="System",
+            audit_mode=AuditMode.SYSTEM_EXTRACTION,
+        )
+
+        # Check completeness gate
+        self.verified_state.is_verified = self.verified_state.pass_completeness_gate()
+
+        return self.verified_state
