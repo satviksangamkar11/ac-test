@@ -151,16 +151,31 @@ All eight conditions must pass:
 
 ## Status
 
-**ARCHITECTURE: SOLVED** ✓
-- Regression tests passing (6/6)
-- Integration example passing (8/8 gate conditions)
-- All amounts within tolerance
+**VALIDATION: COMPLETE** ✓
+- v3 detector: handles [198-323], all four routes 0px agreement
+- SliderEvidenceExtractorV3: 4/4 extraction tests passing
+- Amounts: ±1.4pp maximum difference (tolerance ±5pp)
+- GenericSliderCalibration: verified and unchanged
 
-**NEXT PHASE: PRODUCTION INTEGRATION**
-- Wire into actual episode extraction
-- Run full test suite
-- Commit corrected reference state
-- Then: Phase 4.2.1 = CLOSED
+**EXTRACTION-LAYER INTEGRATION: COMPLETE** ✓
+- SliderEvidenceExtractorV3 production-wired
+- Takes ExtractionRequest → ExtractionResult with calibrated amounts
+- Ready for VerifiedStateAdapter consumption
+
+**END-TO-END INTEGRATION: PENDING** (ordered checklist)
+
+1. [ ] **VerifiedStateAdapter integration** — Wire SliderEvidenceExtractorV3 into VerifiedStateBuilder.add_slider_observation(); consume v3-produced SliderObservation with explicit domain/unit/source
+2. [ ] **ExpectedInventory matrix routes** — Add the four route identities (LFO 1→A Fine, LFO 1→B Fine, Env 3→Noise Level, Env 2→Filter 1 Freq) as expected observations
+3. [ ] **Reference row auto-selection** — Replace hardcoded `y=280` with deterministic structural-selection algorithm; algorithm should independently select same row; return ReferenceRailCandidate with provenance
+4. [ ] **Regenerate corrected reference state** — Commit final amounts with v3 provenance (amount_source=SLIDER_PIXEL_CALIBRATION, amount_unit=%, amount_domain=[-100,100])
+5. [ ] **Full Phase 3-4 test suite** — Run complete suite; must pass 0 failures (existing tests + new v3 tests)
+6. [ ] **Blind audit through production path** — End-to-end gate run: image → extractor → geometry → calibration → reference state → blind manifest → hardened gate
+7. [ ] **Second episode validation** — Prove structural-rail approach generalizes beyond HEEGN1Xl5o4
+8. [ ] **Phase 4.2.1 closure** — All conditions met
+
+**LABEL:** "Phase 4.2.1: Slider Geometry — VALIDATED; EXTRACTION-LAYER INTEGRATION COMPLETE; END-TO-END INTEGRATION PENDING"
+
+**Critical boundary:** Reference row selection (y=280) is screenshot-specific evidence, not a universal Serum rule. The universal principle is: infer structural rail from UI, detect value handles independently of fill geometry.
 
 ---
 
