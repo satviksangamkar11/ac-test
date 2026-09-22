@@ -1,0 +1,158 @@
+{
+  "model": "3B 4-bit",
+  "load_time": 12.483541250228882,
+  "vram_gb": 2.413708288,
+  "total_images": 25,
+  "images": [
+    {
+      "file": "step1_01m09s_osc_a_sawtooth_setup",
+      "inference_time": 12.882620334625244,
+      "explicit_failures": false,
+      "hallucination_risk": false
+    },
+    {
+      "file": "step1_01m27s_phase_distortion_pd_b_menu",
+      "inference_time": 10.994219779968262,
+      "explicit_failures": true,
+      "hallucination_risk": false
+    },
+    {
+      "file": "step1_01m34s_osc_b_sawtooth_plus1_oct",
+      "inference_time": 11.44567608833313,
+      "explicit_failures": false,
+      "hallucination_risk": false
+    },
+    {
+      "file": "step1_01m46s_lfo1_chaos_lorenz_routing",
+      "inference_time": 11.648089408874512,
+      "explicit_failures": true,
+      "hallucination_risk": false
+    },
+    {
+      "file": "step2_02m08s_lfo1_lorenz_full_pattern",
+      "inference_time": 11.872775793075562,
+      "explicit_failures": true,
+      "hallucination_risk": true
+    },
+    {
+      "file": "step2_02m21s_noise_white_noise_active",
+      "inference_time": 11.912473917007446,
+      "explicit_failures": true,
+      "hallucination_risk": false
+    },
+    {
+      "file": "step2_02m31s_env3_modulating_noise",
+      "inference_time": 12.07170844078064,
+      "explicit_failures": false,
+      "hallucination_risk": false
+    },
+    {
+      "file": "step2_02m49s_env1_main_amp_shape",
+      "inference_time": 11.98158049583435,
+      "explicit_failures": false,
+      "hallucination_risk": false
+    },
+    {
+      "file": "step2_03m14s_filter_mg18_setup",
+      "inference_time": 12.12712025642395,
+      "explicit_failures": false,
+      "hallucination_risk": false
+    },
+    {
+      "file": "step2_03m27s_env2_to_filter_cutoff",
+      "inference_time": 12.27652907371521,
+      "explicit_failures": true,
+      "hallucination_risk": false
+    },
+    {
+      "file": "step2_03m47s_env2_parameters_adjust",
+      "inference_time": 11.999333381652832,
+      "explicit_failures": false,
+      "hallucination_risk": false
+    },
+    {
+      "file": "step3_04m19s_env4_pitch_transient",
+      "inference_time": 12.13388729095459,
+      "explicit_failures": false,
+      "hallucination_risk": false
+    },
+    {
+      "file": "step3_04m35s_matrix_mod_routes",
+      "inference_time": 12.080090045928955,
+      "explicit_failures": true,
+      "hallucination_risk": false
+    },
+    {
+      "file": "step3_04m50s_filter1_send_to_bus1",
+      "inference_time": 12.066759824752808,
+      "explicit_failures": false,
+      "hallucination_risk": false
+    },
+    {
+      "file": "step4_05m06s_bus1_fx_add",
+      "inference_time": 12.069031715393066,
+      "explicit_failures": false,
+      "hallucination_risk": false
+    },
+    {
+      "file": "step4_05m19s_bus1_convolve_reverb",
+      "inference_time": 12.164595365524292,
+      "explicit_failures": false,
+      "hallucination_risk": false
+    },
+    {
+      "file": "step4_05m36s_bus1_eq",
+      "inference_time": 12.327758550643921,
+      "explicit_failures": false,
+      "hallucination_risk": false
+    },
+    {
+      "file": "step5_05m51s_main_distortion_overdrive",
+      "inference_time": 12.247370719909668,
+      "explicit_failures": false,
+      "hallucination_risk": false
+    },
+    {
+      "file": "step5_06m19s_main_hyper_dimension",
+      "inference_time": 12.160174131393433,
+      "explicit_failures": false,
+      "hallucination_risk": false
+    },
+    {
+      "file": "step5_06m44s_main_eq_chain",
+      "inference_time": 12.041145086288452,
+      "explicit_failures": false,
+      "hallucination_risk": false
+    },
+    {
+      "file": "step5_07m04s_main_delay_ping_pong",
+      "inference_time": 12.234099388122559,
+      "explicit_failures": false,
+      "hallucination_risk": false
+    },
+    {
+      "file": "step5_07m31s_main_compressor",
+      "inference_time": 12.091132879257202,
+      "explicit_failures": false,
+      "hallucination_risk": false
+    },
+    {
+      "file": "step6_07m47s_secondary_filter_mg_low6",
+      "inference_time": 12.083476305007935,
+      "explicit_failures": false,
+      "hallucination_risk": false
+    },
+    {
+      "file": "step6_08m07s_secondary_filter_mg_ladder",
+      "inference_time": 12.079772233963013,
+      "explicit_failures": false,
+      "hallucination_risk": false
+    },
+    {
+      "file": "step6_08m34s_final_preset_overview",
+      "inference_time": 12.1927330493927,
+      "explicit_failures": false,
+      "hallucination_risk": true
+    }
+  ]
+}

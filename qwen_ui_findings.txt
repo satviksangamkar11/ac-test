@@ -1,0 +1,414 @@
+Loading weights:   0%|          | 0/824 [00:00<?, ?it/s]Loading weights:   0%|          | 1/824 [00:00<12:17,  1.12it/s]Loading weights:   0%|          | 3/824 [00:01<04:00,  3.41it/s]Loading weights:   1%|1         | 9/824 [00:01<01:08, 11.91it/s]Loading weights:   2%|1         | 16/824 [00:01<00:40, 20.00it/s]Loading weights:   3%|2         | 23/824 [00:01<00:28, 28.44it/s]Loading weights:   3%|3         | 28/824 [00:01<00:26, 30.18it/s]Loading weights:   5%|4         | 39/824 [00:01<00:18, 41.61it/s]Loading weights:   5%|5         | 44/824 [00:01<00:19, 41.03it/s]Loading weights:   6%|6         | 52/824 [00:02<00:17, 44.26it/s]Loading weights:   8%|7         | 63/824 [00:02<00:14, 51.88it/s]Loading weights:   8%|8         | 69/824 [00:02<00:15, 49.51it/s]Loading weights:   9%|9         | 76/824 [00:02<00:16, 46.06it/s]Loading weights:  10%|#         | 83/824 [00:02<00:14, 49.71it/s]Loading weights:  11%|#         | 89/824 [00:02<00:16, 43.41it/s]Loading weights:  12%|#2        | 100/824 [00:02<00:13, 52.50it/s]Loading weights:  13%|#2        | 107/824 [00:03<00:12, 56.10it/s]Loading weights:  14%|#3        | 113/824 [00:03<00:15, 44.70it/s]Loading weights:  15%|#4        | 123/824 [00:03<00:12, 55.84it/s]Loading weights:  16%|#5        | 130/824 [00:03<00:12, 54.05it/s]Loading weights:  17%|#6        | 136/824 [00:03<00:13, 51.22it/s]Loading weights:  18%|#7        | 147/824 [00:03<00:11, 57.96it/s]Loading weights:  19%|#8        | 154/824 [00:03<00:12, 55.56it/s]Loading weights:  19%|#9        | 160/824 [00:04<00:12, 51.26it/s]Loading weights:  21%|##        | 171/824 [00:04<00:11, 57.69it/s]Loading weights:  21%|##1       | 177/824 [00:04<00:11, 54.85it/s]Loading weights:  22%|##2       | 184/824 [00:04<00:11, 54.13it/s]Loading weights:  24%|##3       | 195/824 [00:04<00:10, 60.56it/s]Loading weights:  25%|##4       | 202/824 [00:04<00:10, 57.80it/s]Loading weights:  25%|##5       | 208/824 [00:04<00:11, 52.65it/s]Loading weights:  27%|##6       | 219/824 [00:05<00:10, 58.70it/s]Loading weights:  27%|##7       | 225/824 [00:05<00:11, 50.02it/s]Loading weights:  28%|##8       | 232/824 [00:05<00:12, 48.80it/s]Loading weights:  29%|##9       | 243/824 [00:05<00:10, 55.77it/s]Loading weights:  30%|###       | 249/824 [00:05<00:10, 52.39it/s]Loading weights:  31%|###1      | 256/824 [00:05<00:11, 51.57it/s]Loading weights:  32%|###2      | 267/824 [00:06<00:09, 58.20it/s]Loading weights:  33%|###3      | 273/824 [00:06<00:10, 52.21it/s]Loading weights:  34%|###3      | 279/824 [00:06<00:10, 53.42it/s]Loading weights:  35%|###4      | 285/824 [00:06<00:10, 50.63it/s]Loading weights:  35%|###5      | 292/824 [00:06<00:10, 50.25it/s]Loading weights:  37%|###6      | 303/824 [00:06<00:09, 56.37it/s]Loading weights:  38%|###7      | 309/824 [00:06<00:09, 52.47it/s]Loading weights:  38%|###8      | 316/824 [00:07<00:10, 48.24it/s]Loading weights:  39%|###8      | 321/824 [00:07<00:10, 47.59it/s]Loading weights:  40%|###9      | 328/824 [00:07<00:10, 46.53it/s]Loading weights:  41%|####1     | 339/824 [00:07<00:08, 54.35it/s]Loading weights:  42%|####1     | 345/824 [00:07<00:09, 51.92it/s]Loading weights:  43%|####2     | 352/824 [00:07<00:09, 50.14it/s]Loading weights:  43%|####3     | 357/824 [00:07<00:09, 49.71it/s]Loading weights:  44%|####4     | 364/824 [00:08<00:10, 45.93it/s]Loading weights:  46%|####5     | 375/824 [00:08<00:08, 55.33it/s]Loading weights:  46%|####6     | 381/824 [00:08<00:08, 54.07it/s]Loading weights:  47%|####7     | 388/824 [00:08<00:08, 54.22it/s]Loading weights:  48%|####8     | 399/824 [00:08<00:06, 61.00it/s]Loading weights:  49%|####9     | 406/824 [00:08<00:07, 58.08it/s]Loading weights:  50%|#####     | 412/824 [00:08<00:07, 51.84it/s]Loading weights:  51%|#####1    | 421/824 [00:08<00:06, 60.49it/s]Loading weights:  52%|#####1    | 428/824 [00:09<00:08, 48.36it/s]Loading weights:  54%|#####3    | 444/824 [00:09<00:05, 70.69it/s]Loading weights:  56%|#####5    | 460/824 [00:09<00:04, 90.80it/s]Loading weights:  58%|#####7    | 476/824 [00:09<00:03, 104.84it/s]Loading weights:  60%|#####9    | 492/824 [00:09<00:02, 114.20it/s]Loading weights:  62%|######1   | 510/824 [00:09<00:02, 126.83it/s]Loading weights:  64%|######3   | 526/824 [00:09<00:02, 132.17it/s]Loading weights:  66%|######6   | 546/824 [00:09<00:01, 145.96it/s]Loading weights:  68%|######8   | 562/824 [00:10<00:01, 145.46it/s]Loading weights:  70%|#######   | 577/824 [00:10<00:01, 146.04it/s]Loading weights:  72%|#######2  | 594/824 [00:10<00:01, 144.46it/s]Loading weights:  74%|#######3  | 609/824 [00:10<00:01, 139.95it/s]Loading weights:  76%|#######5  | 624/824 [00:10<00:01, 140.11it/s]Loading weights:  78%|#######7  | 642/824 [00:10<00:01, 146.83it/s]Loading weights:  80%|#######9  | 658/824 [00:10<00:01, 144.01it/s]Loading weights:  82%|########2 | 678/824 [00:10<00:00, 153.60it/s]Loading weights:  84%|########4 | 696/824 [00:10<00:00, 153.28it/s]Loading weights:  87%|########6 | 716/824 [00:11<00:00, 158.62it/s]Loading weights:  89%|########8 | 732/824 [00:11<00:00, 154.65it/s]Loading weights:  91%|#########1| 750/824 [00:11<00:00, 158.80it/s]Loading weights:  93%|#########2| 766/824 [00:11<00:00, 152.52it/s]Loading weights:  95%|#########5| 786/824 [00:11<00:00, 159.26it/s]Loading weights:  97%|#########7| 802/824 [00:11<00:00, 152.79it/s]Loading weights: 100%|#########9| 821/824 [00:11<00:00, 131.24it/s]Loading weights: 100%|##########| 824/824 [00:11<00:00, 69.53it/s] 
+Model loaded.
+
+step1_01m09s_osc_a_sawtooth_setup  (46.9s)
+The visible synthesizer parameters, settings, and values include:
+
+- Oscillator A: 
+  - Frequency: 100 Hz
+  - Amplitude: 50%
+  - Envelope: Linear
+  - Filter: None
+
+- Oscillator B:
+  - Frequency: 200 Hz
+  - Amplitude: 50%
+  - Envelope: Linear
+  - Filter: None
+
+- Global:
+  - Pitch Bend: Off
+  - Modula
+
+step1_01m27s_phase_distortion_pd_b_menu  (47.0s)
+The visible synthesizer parameters include:
+
+- Oscillator 1: Off
+- Oscillator 2: Off
+- Oscillator 3: Off
+- Oscillator 4: Off
+- Oscillator 5: Off
+
+- Filter 1: Off
+- Filter 2: Off
+- Filter 3: Off
+- Filter 4: Off
+- Filter 5: Off
+
+- Level: Off
+- Pan: Off
+- Mix: Off
+- Macro: Off
+- Macro 2: Off
+- Macro 3:
+
+step1_01m34s_osc_b_sawtooth_plus1_oct  (44.6s)
+The visible synthesizer parameters, settings, and values include:
+
+- Oscillator 1: 
+  - Frequency: 200 Hz
+  - Amplitude: 50%
+  - Envelope Generator 1: Off
+  - Envelope Generator 2: Off
+  - Envelope Generator 3: Off
+  - Envelope Generator 4: Off
+
+- Oscillator 2:
+  - Frequency: 200 Hz
+  - Amplitude: 5
+
+step1_01m46s_lfo1_chaos_lorenz_routing  (46.6s)
+The visible synthesizer parameters, settings, and values include:
+
+- Oscillator 1: 
+  - Frequency: 200 Hz
+  - Amplitude: 50%
+  - Filter: 40 Hz
+  - Reson: Off
+
+- Oscillator 2:
+  - Frequency: 200 Hz
+  - Amplitude: 50%
+  - Filter: 40 Hz
+  - Reson: Off
+
+- Filter:
+  - Frequency: 40 Hz
+  - Reson: Off
+
+- E
+
+step2_02m08s_lfo1_lorenz_full_pattern  (30.2s)
+The visible synthesizer parameters, settings, and values include:
+
+- Oscillator 1: 
+  - Frequency: 200 Hz
+  - Amplitude: 50%
+  - Phase: 0°
+
+- Oscillator 2:
+  - Frequency: 100 Hz
+  - Amplitude: 50%
+  - Phase: 0°
+
+- Filter:
+  - Frequency: 1 kHz
+  - Reson: 0 dB
+  - Reson Level: 0%
+
+- LFO:
+  - Frequency
+
+step2_02m21s_noise_white_noise_active  (23.3s)
+The visible synthesizer parameters, settings, and values include:
+
+- Oscillator 1: 
+  - Type: Triangle
+  - Frequency: 200 Hz
+  - Amplitude: 50%
+  - Filter: None
+
+- Oscillator 2:
+  - Type: Sawtooth
+  - Frequency: 400 Hz
+  - Amplitude: 50%
+  - Filter: None
+
+- Filter 1:
+  - Type: Butterworth
+  - Freque
+
+step2_02m31s_env3_modulating_noise  (39.4s)
+The visible synthesizer parameters, settings, and values include:
+
+- Oscillator 1: 
+  - Frequency: 20 Hz
+  - Amplitude: 50%
+  - Filter: 48 Hz
+  - Reson: Off
+
+- Oscillator 2:
+  - Frequency: 20 Hz
+  - Amplitude: 50%
+  - Filter: 48 Hz
+  - Reson: Off
+
+- Filter:
+  - Frequency: 48 Hz
+  - Reson: Off
+
+- Res
+
+step2_02m49s_env1_main_amp_shape  (38.6s)
+The image shows the following visible synthesizer parameters, settings, and values:
+
+- Oscillator 1: 
+  - Frequency: 200 Hz
+  - Amplitude: 50%
+  - 
+  - Phase: 0
+
+- Oscillator 2:
+  - Frequency: 200 Hz
+  - Amplitude: 50%
+  - Phase: 0
+
+- Filter:
+  - Frequency: 100 Hz
+  - Reson: 0%
+
+- Envelope Generator
+
+step2_03m14s_filter_mg18_setup  (37.6s)
+The visible synthesizer parameters, settings, and values include:
+
+- Oscillator 1: 
+  - Frequency: 20 Hz
+  - Amplitude: 100%
+  - Filter: 1
+  - Filter Type: 1
+  - Filter Level: 50%
+
+- Oscillator 2:
+  - Frequency: 100 Hz
+  - Amplitude: 100%
+  - Filter: 2
+  - Filter Type: 1
+  - Filter Level: 50%
+
+- Fil
+
+step2_03m27s_env2_to_filter_cutoff  (38.4s)
+The image shows the following parameters and settings for the Serum synthesizer:
+
+- Oscillator 1:
+  - Shape: Triangle
+  - Frequency: 200 Hz
+
+- Oscillator 2:
+  - Shape: Sawtooth
+  - Frequency: 500 Hz
+
+- Filter:
+  - Type: Low Pass
+  - Frequency: 1000 Hz
+  - Reson: Off
+
+- Global:
+  - Level: 0 dB
+  - Ga
+
+step2_03m47s_env2_parameters_adjust  (40.7s)
+The image shows the interface of the Serum synthesizer software with various parameters and settings visible. Here is a list of the main parameters and their current values:
+
+- **OSC 1:**
+  - **Waveform:** Triangle
+  - **LFO Rate:** 0.5 Hz
+  - **LFO Depth:** 0%
+  - **LFO Phase:** 0%
+  - **LFO Sync:*
+
+step3_04m19s_env4_pitch_transient  (41.1s)
+The image shows the following parameters and settings for the Serum synthesizer:
+
+- Oscillator 1:
+  - Frequency: 200 Hz
+  - Amplitude: 50%
+  - Filter: 0 dB
+  - Reson: Off
+
+- Oscillator 2:
+  - Frequency: 200 Hz
+  - Amplitude: 50%
+  - Filter: 0 dB
+  - Reson: Off
+
+- LFO:
+  - Frequency: 100 Hz
+  - Ampli
+
+step3_04m35s_matrix_mod_routes  (40.8s)
+The image shows the user interface of the software 'Serum' by Xfer Records, an audio workstation used for creating digital audio. The visible parameters include:
+
+- **Source**: Various input sources such as LF01, Env2, Env3, Env4.
+-**-Source: 
+ and Destination**:
+- **Destination**: Various output de
+
+step3_04m50s_filter1_send_to_bus1  (36.0s)
+The image shows the following visible synthesizer parameters, settings, and values:
+
+- Oscillator 1: 
+  - Frequency: 200 Hz
+  - Amplitude: 50%
+  - Other settings are not visible.
+
+  
+- Oscillator 2:
+  - Frequency: 200 Hz
+  - Amplitude: 50%
+  - Settings: Not visible
+  
+- Filter:
+  - Frequency: 200 Hz
+
+step4_05m06s_bus1_fx_add  (40.5s)
+The visible synthesizer parameters include:
+
+- Filter Type: 2D
+- Filter Parameters:
+  - Frequency: 100 Hz
+  - Reson: 50%
+  - Reson: 5
+  - Reson: 50%
+  - Reson: 50%
+  - Reson: 50%
+  - Reson: 50%
+  - Reson: 50%
+  - Reson: 50%
+  - Reson: 50%
+  - Reson: 50%
+  - Reson: 50%
+  - Reson: 50%
+  - Reson: 50%
+ 
+
+step4_05m19s_bus1_convolve_reverb  (40.6s)
+The visible synthesizer parameters, settings, and values include:
+
+- Factory: Convolve
+- Colortation: Long
+- LFO 1: 0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+
+step4_05m36s_bus1_eq  (37.6s)
+The image shows the following visible synthesizer parameters, settings, and values:
+
+- **Convolve**:
+  - **Custom**: Off
+  - **Digital Roll**: Off
+
+- **Equalizer**:
+  - **Custom**: Off
+  - **Frequency**: Off
+  - **Gain**: Off
+
+- **Parameters**:
+  - **Env1**: Off
+  - **Env2**: Off
+  - **Env3**: Off
+ 
+
+step5_05m51s_main_distortion_overdrive  (39.0s)
+The visible synthesizer parameters, settings, and values include:
+
+- **Bode**: Chorus
+- **FX**: Splitter L/M/S
+- **Splitter**: 48 Hz
+- **Splitter**: 60 Hz
+- **Splitter**: 72 Hz
+- **Splitter**: 96 Hz
+- **Splitter**: 128 Hz
+- **Splitter**: 192 Hz
+- **Splitter**: 384 Hz
+- **Splitter**: 512 Hz
+- **Split
+
+step5_06m19s_main_hyper_dimension  (14.1s)
+The visible synthesizer parameters, settings, and values include:
+
+- Distortion: On, with various knobs and sliders set.
+- Macro 1: Off.
+- Macro 2: Off.
+- Macro 3: Off.
+- Macro 4: Off.
+- Macro 5: Off.
+- Macro 6: Off.
+- Macro 7: Off.
+- Macro 8: Off.
+- Macro 9: Off.
+- Macro 10: Off.
+- Macro 11: Off.
+-
+
+step5_06m44s_main_eq_chain  (10.3s)
+The visible synthesizer parameters include:
+
+- Macro1: Envelope Generator 1
+- Macro2: Envelope Generator 2
+- Macro3: Envelope Generator 3
+- Macro4: Envelope Generator 4
+- Macro5: Envelope Generator 5
+- Macro6: Envelope Generator 6
+
+Each macro has its own settings for:
+- Env1
+- Env2
+- Env3
+- Env4
+- E
+
+step5_07m04s_main_delay_ping_pong  (5.1s)
+The visible synthesizer parameters, settings, and values include:
+
+- **Distortion**: Off
+- **Hyper/Expansion**: Off
+- **Equalizer**: Off
+- **Delay**: Off
+
+Additional controls and parameters may be present but are not fully visible in the screenshot provided.
+
+step5_07m31s_main_compressor  (6.0s)
+The visible synthesizer parameters, settings, and values include:
+
+- **Distortion**: Off
+- **Hyper/Expansion**: Off
+- **EQ**: Off
+- **Delay**: Off
+- **Compressor**: Off
+
+Additionally, there are various knobs and sliders for adjusting the sound parameters, but specific values cannot be determined fro
+
+step6_07m47s_secondary_filter_mg_low6  (117.1s)
+The visible synthesizer parameters, settings, and values include:
+
+- **Bode**: HyperDimension
+- **Chorus**: Off
+- **Compressor**: Off
+- **Convolve**: Off
+- **Delay**: Off
+- **EQ**: Off
+- **Filter**: Off
+
+These settings are for the Hyperdimension plugin within the Serum software.
+
+step6_08m07s_secondary_filter_mg_ladder  (61.1s)
+The visible synthesizer parameters, settings, and values include:
+
+- **Filter**: 
+  - Type: PMI Ladder
+  - Frequency: 130 Hz
+
+- **EQ**:
+  - Frequency: 200 Hz
+  - Gain: -6 dB
+
+- **Delay**:
+  - Feedback: 50%
+  - Delay Time: 100 ms
+
+- **Compressor**:
+  - Threshold: 0 dB
+  - Ratio: 4:1
+  - Attack Time: 
+
+step6_08m34s_final_preset_overview  (6.0s)
+The visible synthesizer parameters, settings, and values include:
+
+- **Distortion**: Off
+- **EQ**: Off
+- **Filter**: Off
+- **Delay**: Off
+- **Compressor**: Off
+
+No other specific parameters or settings are visible in the screenshot provided.
+

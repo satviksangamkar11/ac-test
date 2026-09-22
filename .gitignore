@@ -12,3 +12,7 @@ experiments/_corpus_cache.pkl
 
 # Runtime-generated production data (renders, episodes, experiences, memory)
 serum2/data/
+
+# Qwen VLM experiment (large model weights, separate venv)
+models/
+.venv_qwen/

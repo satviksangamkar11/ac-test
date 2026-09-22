@@ -1,0 +1,25 @@
+{
+  "name": "4-bit BNB (baseline)",
+  "load_time": 13.184464931488037,
+  "vram_gb": 2.413708288,
+  "images": [
+    {
+      "file": "step1_01m09s_osc_a_sawtooth_setup",
+      "inference_time": 13.084728240966797,
+      "explicit_failures": true,
+      "hallucination_risk": false
+    },
+    {
+      "file": "step2_02m21s_noise_white_noise_active",
+      "inference_time": 11.530360460281372,
+      "explicit_failures": true,
+      "hallucination_risk": false
+    },
+    {
+      "file": "step3_04m19s_env4_pitch_transient",
+      "inference_time": 11.55095624923706,
+      "explicit_failures": false,
+      "hallucination_risk": false
+    }
+  ]
+}

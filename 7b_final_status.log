@@ -1,0 +1,2 @@
+D:\ableton claude final best\final_monitor.py:20: SyntaxWarning: "\|" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\|"? A raw string is also an option.
+  os.system(".venv_qwen/Scripts/python benchmark_7b_vs_3b.py 2>&1 | grep -v 'Loading\|UserWarning'")

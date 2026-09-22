@@ -1,0 +1,5 @@
+7B Download Monitor (updated every 60s)
+========================================
+monitor_7b_download.sh: line 23: 1.3 * 100 / 15: arithmetic syntax error: invalid arithmetic operator (error token is ".3 * 100 / 15")
+D:\ableton claude final best\wait_for_7b.py:19: SyntaxWarning: "\|" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\|"? A raw string is also an option.
+  os.system("timeout 900 .venv_qwen/Scripts/python benchmark_7b_vs_3b.py 2>&1 | grep -v '^Loading\|^W0\|UserWarning\|inner'")
