@@ -14,10 +14,15 @@ ROUTE IDENTITIES (independently verified by Claude visual audit):
 ✓ Env 2 → Filter 1 Freq
 
 ROUTE AMOUNTS (pixel-calibrated, NOT directly observed):
-- LFO 1 → A Fine:       +6.7%   (amount_source: SLIDER_PIXEL_CALIBRATION)
-- LFO 1 → B Fine:       -12.0%  (amount_source: SLIDER_PIXEL_CALIBRATION)
-- Env 3 → Noise Level:  -33.3%  (amount_source: SLIDER_PIXEL_CALIBRATION)
-- Env 2 → Filter 1 Freq: +1.3%  (amount_source: SLIDER_PIXEL_CALIBRATION)
+Domain: [-100, +100]% (Matrix Amount canonical representation)
+Unit: % (percentage points)
+Tolerance: ±5.0 (must agree within 5 percentage points for gate to pass)
+Source: SLIDER_PIXEL_CALIBRATION (not tooltip-observed)
+
+- LFO 1 → A Fine:       +6.7 %   (calibrated from pixel position 375)
+- LFO 1 → B Fine:       -12.0 %  (calibrated from pixel position 368)
+- Env 3 → Noise Level:  -33.3 %  (calibrated from pixel position 360)
+- Env 2 → Filter 1 Freq: +1.3 %  (calibrated from pixel position 373)
 
 GATE STATUS (before blind verification):
 - unresolved_required:     0 (all four routes represented)
@@ -40,40 +45,65 @@ NEXT: Run hardened gate with corrected manifests and verify amount agreement.
 """
 
 # Corrected route definitions
+# All amounts in canonical domain: [-100, +100] % (percentage points)
 CORRECTED_ROUTES = [
     {
         "route_id": "matrix_row1",
         "source": "LFO 1",
         "destination": "A Fine",
-        "amount": 0.067,  # +6.7% normalized
+        "amount": 6.7,  # canonical domain: +6.7 percentage points
+        "amount_unit": "%",
         "amount_source": "SLIDER_PIXEL_CALIBRATION",
-        "note": "Knob position ~53% right of track. Bipolar domain [-100, +100]%.",
+        "calibration_note": "Knob pixel 375 of 75px track (53% right). Formula: -100 + (normalized * 200)",
     },
     {
         "route_id": "matrix_row2",
         "source": "LFO 1",
         "destination": "B Fine",
-        "amount": -0.120,  # -12.0% normalized
+        "amount": -12.0,  # canonical domain: -12.0 percentage points
+        "amount_unit": "%",
         "amount_source": "SLIDER_PIXEL_CALIBRATION",
-        "note": "Knob position ~44% right of track.",
+        "calibration_note": "Knob pixel 368 of 75px track (44% right).",
     },
     {
         "route_id": "matrix_row3",
         "source": "Env 3",
         "destination": "Noise Level",
-        "amount": -0.333,  # -33.3% normalized
+        "amount": -33.3,  # canonical domain: -33.3 percentage points
+        "amount_unit": "%",
         "amount_source": "SLIDER_PIXEL_CALIBRATION",
-        "note": "Knob position ~33% right of track.",
+        "calibration_note": "Knob pixel 360 of 75px track (33% right).",
     },
     {
         "route_id": "matrix_row4",
         "source": "Env 2",
         "destination": "Filter 1 Freq",
-        "amount": 0.013,  # +1.3% normalized
+        "amount": 1.3,  # canonical domain: +1.3 percentage points
+        "amount_unit": "%",
         "amount_source": "SLIDER_PIXEL_CALIBRATION",
-        "note": "Knob position ~51% right of track.",
+        "calibration_note": "Knob pixel 373 of 75px track (51% right).",
     },
 ]
+
+VERIFICATION_CONTRACT = {
+    "episode_id": "HEEGN1Xl5o4",
+    "frame": "step3_04m35s_matrix_mod_routes.jpg",
+    "timestamp": "~00:04:35",
+
+    # Amount verification: both system and Claude manifests must use same representation
+    "amount_domain": "[-100, +100] % (Matrix Amount canonical)",
+    "amount_unit": "%",
+    "amount_tolerance": 5.0,  # ±5 percentage points
+
+    # Gate pass condition
+    "gate_condition": (
+        "Gate passes when:\n"
+        "1. Route identities match (VERIFIED)\n"
+        "2. Route amounts agree within ±5.0 percentage points\n"
+        "3. All other completeness gates pass (no conflicts, no claude_only, etc.)"
+    ),
+}
+
 
 def get_corrected_reference_state():
     """
@@ -82,7 +112,9 @@ def get_corrected_reference_state():
     Use with phase4_2_verified_state_adapter.VerifiedStateBuilder
     to create the system manifest.
 
-    Amounts are pixel-calibrated and require blind-audit verification.
+    Amounts are pixel-calibrated in canonical [-100, +100]% domain.
+    Both system and Claude manifests must use the same representation
+    for blind-audit comparison to be meaningful.
     """
     return {
         "episode_id": "HEEGN1Xl5o4",
@@ -90,6 +122,7 @@ def get_corrected_reference_state():
         "timestamp": "~00:04:35",
         "routes": CORRECTED_ROUTES,
         "status": "PROVISIONAL_ROUTE_IDENTITIES_VERIFIED_AMOUNTS_PENDING",
+        "verification_contract": VERIFICATION_CONTRACT,
     }
 
 

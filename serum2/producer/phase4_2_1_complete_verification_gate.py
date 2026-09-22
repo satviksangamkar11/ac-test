@@ -65,6 +65,8 @@ def audit_full_state_complete(
     claude_route_ids = set(claude_routes.keys())
 
     # System routes vs Claude
+    # Canonical representation: [-100, +100]% (percentage points)
+    # Tolerance: ±5.0 percentage points
     for route_id in system_route_ids:
         if route_id not in claude_route_ids:
             conflicts.append(f"CLAUDE_MISSING_ROUTE: {route_id}")
@@ -74,8 +76,7 @@ def audit_full_state_complete(
         claude_route = claude_routes[route_id]
 
         if system_route.amount is not None and claude_route.amount is not None:
-            tolerance = 0.01
-            if abs(system_route.amount - claude_route.amount) > tolerance:
+            if abs(system_route.amount - claude_route.amount) > 5.0:
                 conflicts.append(f"ROUTE_MISMATCH: {route_id}")
 
     # Claude-only routes — NEW

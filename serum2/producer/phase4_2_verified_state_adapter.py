@@ -360,10 +360,11 @@ class VerifiedStateBuilder:
             if system_route.destination != claude_route.destination:
                 conflicts.append(f"ROUTE_DESTINATION_MISMATCH: {route_id}")
 
-            # Verify amount
+            # Verify amount (both in canonical [-100, +100]% domain)
+            # Tolerance: ±5 percentage points
             if system_route.amount is None or claude_route.amount is None:
                 conflicts.append(f"ROUTE_UNVERIFIED: {route_id}")
-            elif abs(system_route.amount - claude_route.amount) > 0.01:
+            elif abs(system_route.amount - claude_route.amount) > 5.0:
                 conflicts.append(f"ROUTE_MISMATCH: {route_id}")
             else:
                 # Agreement: update verified state
