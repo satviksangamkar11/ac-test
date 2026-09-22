@@ -1,0 +1,57 @@
+{
+  "phase": "3B_observation_gap_collapse_by_equivalence",
+  "date": "2026-09-23",
+  "problem_statement": "657 OBSERVATION_GAP controls were classified individually in Phase 2E, falling short of equivalence_key match or flagged with 'uncertain meaning'. Testing 657 controls individually is wasteful. Solution: group by unique equivalence_key, test one representative per group, propagate result to all sibling controls.",
+  "equivalence_key_components": [
+    "raw_module (e.g., Oscillator, VoiceFilter, Env, LFO, ModSlot, Arp, FXRack, Global)",
+    "raw_path (e.g., Oscillator{i}.plainParams, VoiceFilter{i}.plainParams)",
+    "raw_parameter (e.g., kParamVolume, kParamCutoff, kParamRate)",
+    "value_kind (direct_float, direct_int, discrete_enum, computed_curve, structured_dict)",
+    "conversion (passthrough, enum_index, log_scale, unit_conversion, opaque_roundtrip)",
+    "presence_semantics (always_written, optional_none_default, conditional_on_state)",
+    "slot_rule (shared_across_instances, per_instance, index_dependent)"
+  ],
+  "methodology": [
+    "Extract all 657 OBSERVATION_GAP rows from PHASE_2_FINAL_RECOUNT.json",
+    "For each control: derive its full equivalence_key (module+path+parameter+value_kind+conversion+presence+slot_rule)",
+    "Group all 657 by equivalence_key, producing N unique groups (likely 30-80 distinct keys)",
+    "For each unique group: select ONE representative control (preferably lowest-index slot)",
+    "Live-test representative in Serum 2.0.21 GUI (screenshot/tooltip readback)",
+    "If representative PASSES: promote all N sibling controls in group to AUTO_VERIFIED (verified_equivalence_key match proven)",
+    "If representative FAILS: mark entire group as MANUAL_REQUIRED with failure reason",
+    "If representative PARTIAL (e.g., LFO curve display limitation): mark as OBSERVATION_GAP_CONFIRMED_LIMITATION with workaround note"
+  ],
+  "expected_outcome": {
+    "unique_equivalence_keys": "Approximately 40-60 distinct mechanisms across 657 controls (savings: ~11x reduction in testing)",
+    "auto_verified_gain": "Potentially 100-200 additional controls promoted from OBSERVATION_GAP to AUTO_VERIFIED (depending on test results)",
+    "manual_required_identified": "Controls whose Serum mechanism proved unsupported/unsafe for MCP authoring",
+    "unresolved_confirmed": "Controls whose equivalence_key failed to match any tested mechanism or showed irreducible uncertainty"
+  },
+  "critical_assumptions": [
+    "Assumption 1: Controls sharing identical raw_module, raw_path, and raw_parameter MUST share identical write/read behavior (code inspection in Phase 0 shows this holds for mapping.py generic iterations)",
+    "Assumption 2: One live test per equivalence_key is sufficient proof (if oscA.volume works, oscB.volume MUST work identically per mapping.py code — this is proven by shared iteration loop, not assumption)",
+    "Assumption 3: Serum 2.0.21 behavior is consistent within a preset save/load cycle (assumption, but reasonable for production system closure)"
+  ],
+  "test_plan": {
+    "step_1_extract_observation_gap": "Read PHASE_2_FINAL_RECOUNT.json, filter terminal_state='OBSERVATION_GAP'",
+    "step_2_derive_equivalence_keys": "For each 657: extract (section, canonical_id) -> derive full raw_module/path/parameter/etc. from spec.py + mapping.py evidence",
+    "step_3_group_by_key": "Use equivalence_key as dict key, accumulate all control IDs per key; count unique keys",
+    "step_4_select_representatives": "For each unique key, select representative (e.g., 'oscA' for 'osc_scalar_direct' family, 'env1' for 'env_scalar_direct', etc.)",
+    "step_5_live_test": "For each representative: launch Serum 2.0.21, load test preset with control set, readback via GUI tooltip/numeric field, document result",
+    "step_6_propagate_result": "For each group: if representative passed, bulk-promote all sibling controls to AUTO_VERIFIED; if failed, classify group as MANUAL_REQUIRED",
+    "step_7_update_bridge": "Rewrite 1,136-row bridge with new AUTO_VERIFIED count (133 + promoted_count) and updated terminal_states"
+  },
+  "risk_mitigation": [
+    "RISK: A control's equivalence key appears to match but Serum's behavior differs per-slot. MITIGATION: Phase 0 code inspection proves mapping.py uses shared iteration for all slots; exception would require explicit per-slot special-case (rare, would be visible in code)",
+    "RISK: Equivalence key derivation has errors, wrong grouping. MITIGATION: Each equivalence_key derivation is documented and reviewable; code inspection of spec.py + mapping.py is the ground truth",
+    "RISK: Serum 2.0.21 changes behavior in non-obvious ways. MITIGATION: This is a system closure effort; if Serum's behavior shifts later, tests capture that as a data point for future updates, but closure can proceed on current evidence"
+  ],
+  "phase_3b_gate": [
+    "PASS: All 657 grouped, unique_equivalence_key count known",
+    "PASS: Representative selection completed for each group",
+    "PASS: Live test results recorded (PASS/FAIL/PARTIAL for each group)",
+    "PASS: Bulk promotion rules applied and new AUTO_VERIFIED count computed",
+    "PASS: Updated 1,136-row bridge saved with fresh counts"
+  ],
+  "next": "After Phase 3B: proceed to Phase 3C (close genuine MCP gaps, if any), then Phase 4 (production reproduction path)"
+}

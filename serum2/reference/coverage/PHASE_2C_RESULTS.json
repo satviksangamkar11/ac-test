@@ -1,0 +1,88 @@
+{
+  "phase": "2C_mechanism_live_proofs_EXECUTED",
+  "date": "2026-09-23",
+  "test_method": "generate_preset (write) -> describe_preset (readback) against live Serum 2.0.21 via serum-mcp runtime",
+  "results": [
+    {
+      "mechanism": "oscillator_shared",
+      "test": "oscA.volume = 0.75",
+      "readback": "volume=0.75",
+      "match": true,
+      "classification": "LIVE_EXECUTION_VERIFIED + LIVE_READBACK_VERIFIED"
+    },
+    {
+      "mechanism": "filter",
+      "test": "filter1.cutoff=0.65, enabled=true",
+      "readback": "Filter 1: ON, cutoff=0.65",
+      "match": true,
+      "classification": "LIVE_EXECUTION_VERIFIED + LIVE_READBACK_VERIFIED"
+    },
+    {
+      "mechanism": "envelope",
+      "test": "env1.attack=0.5s",
+      "readback": "attack=500.0ms",
+      "match": true,
+      "classification": "LIVE_EXECUTION_VERIFIED + LIVE_READBACK_VERIFIED"
+    },
+    {
+      "mechanism": "lfo",
+      "test": "lfo1.rate=1.5 (free Hz), then 5, then 7.3",
+      "readback": "rate=2 / rate=5 / rate=7 respectively",
+      "match": "PARTIAL - integer inputs match exactly (5->5); fractional inputs truncate in DISPLAY only (1.5->2, 7.3->7)",
+      "classification": "LIVE_EXECUTION_VERIFIED (write proven); LIVE_READBACK_VERIFIED UNPROVEN for fractional rates (describe_preset summary truncates to integer, cannot confirm raw fractional storage via this tool)",
+      "root_cause": "describe_preset()'s human-readable text summary formats LFO rate as integer; this is a display-layer limitation in serum-mcp's own tool, not confirmed to be a mapping.py/introspect.py data bug",
+      "action_required": "Raw CBOR/binary inspection needed to confirm fractional LFO rate is correctly stored (out of scope for describe_preset-based verification); OR flag fractional LFO rate readback as MANUAL_REQUIRED until a better verification path exists"
+    },
+    {
+      "mechanism": "modulation_matrix",
+      "test": "mod_routes: lfo0 -> filter0.cutoff, amount=42",
+      "readback": "lfo0 -> filter0.cutoff: +42%",
+      "match": true,
+      "classification": "LIVE_EXECUTION_VERIFIED + LIVE_READBACK_VERIFIED"
+    },
+    {
+      "mechanism": "arpeggiator",
+      "test": "arp.enabled=true, rate=0.6",
+      "readback": "Arp: ON, rate=0.60",
+      "match": true,
+      "classification": "LIVE_EXECUTION_VERIFIED + LIVE_READBACK_VERIFIED"
+    },
+    {
+      "mechanism": "effects",
+      "test": "fx_chain: FXDelay type",
+      "readback": "FXDelay (wet=50%)",
+      "match": "PARTIAL - type confirmed; kParamTimeL/kParamTimeR/kParamBeatSync NOT shown in describe_preset summary (only type+wet surfaced)",
+      "classification": "LIVE_EXECUTION_VERIFIED (type only); LIVE_READBACK_VERIFIED for FX sub-parameters UNPROVEN via this tool (summary too coarse)",
+      "action_required": "FX sub-parameter readback needs a finer-grained verification path than describe_preset's summary"
+    },
+    {
+      "mechanism": "global_and_voice",
+      "test": "global.master_volume=0.9",
+      "readback": "master_volume=0.90",
+      "match": true,
+      "classification": "LIVE_EXECUTION_VERIFIED + LIVE_READBACK_VERIFIED"
+    }
+  ],
+  "summary": {
+    "mechanisms_tested": 8,
+    "fully_verified": 6,
+    "partially_verified": 2,
+    "failed": 0
+  },
+  "critical_findings": {
+    "finding_1": "describe_preset() summary is a HUMAN-READABLE TEXT REPORT, not a full structured readback API — it omits/rounds many fields (LFO rate precision, FX sub-parameters, oscillator engine-specific fields beyond the basics). This limits its use as a LIVE_READBACK_VERIFIED mechanism to only the fields it actually prints.",
+    "finding_2": "6 of 8 mechanisms (oscillator, filter, envelope, matrix, arp, global) show CLEAN write+readback match on the fields describe_preset displays.",
+    "finding_3": "2 of 8 mechanisms (LFO rate precision, FX sub-parameters) require a DIFFERENT verification approach — describe_preset's summary format is insufficiently granular. This does NOT mean the underlying mapping.py write is broken; it means THIS verification tool can't confirm it.",
+    "finding_4": "No live Serum 2.0.21 GUI visual verification was performed (no screenshot/UI confirmation) — describe_preset reads the WRITTEN PRESET FILE, not Serum's loaded/rendered state. True LIVE_READBACK_VERIFIED per the original PRODUCTION_BEHAVIOR_ARCHITECTURE.md definition (UI/raw state proves value was set) requires loading the preset in Serum's actual UI, which was not done here."
+    },
+  "revised_terminal_state_definitions": {
+    "note": "Given finding_4, even the 6 'clean matches' above are more accurately: FILE_WRITE_VERIFIED (preset file contains expected value, confirmed via serum-mcp's own describe_preset reader) — NOT full LIVE_READBACK_VERIFIED (which requires Serum's actual GUI/plugin state, not just the file serum-mcp wrote and re-read with its own parser).",
+    "implication": "This is a MEANINGFUL BUT PARTIAL proof: it confirms the write path + describe_preset's parse path agree with each other. It does NOT yet confirm Serum 2.0.21 itself interprets the file correctly when loaded live. True proof requires: open preset in Serum UI (via computer-use or screenshot) and visually confirm control positions."
+  },
+  "next_steps": [
+    "Reclassify the 790 SOURCE_PROVEN controls whose mechanism matches one of the 6 clean-match mechanisms as FILE_WRITE_VERIFIED (upgraded from SOURCE_PROVEN, but still short of full LIVE_READBACK_VERIFIED)",
+    "Flag LFO rate (non-integer) and FX sub-parameters as requiring additional verification before FILE_WRITE_VERIFIED classification",
+    "Consider a follow-up Phase 2D: load ZZ_PHASE2C_SENTINEL_TEST.SerumPreset in actual Serum 2.0.21 GUI (via computer-use) and visually confirm control positions match written values, to achieve TRUE LIVE_READBACK_VERIFIED",
+    "Clean up test presets (ZZ_PHASE2C_SENTINEL_TEST, ZZ_LFO_RATE_ISOLATION, ZZ_LFO_RATE_FLOAT) from user's Presets/User folder once findings are recorded"
+  ]
+}

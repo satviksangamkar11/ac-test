@@ -1,0 +1,87 @@
+{
+  "phase": "3B_execution_plan",
+  "date": "2026-09-23",
+  "status": "READY FOR EXECUTION",
+  "objective": "Prove structural equivalence of 474 verification_equivalence_keys via code inspection, build true equivalence classes, live-test one representative per class, promote only exact-equivalent siblings",
+  "starting_materials": [
+    "PHASE_3B_EQUIVALENCE_GROUPING.json — 474 keys with field-level granularity",
+    "PHASE_3B_MECHANISM_FAMILIES.json — 12 loose family groupings (DO NOT use for promotion)",
+    "serum-mcp source: mapping.py, schema.py, spec.py, introspect.py"
+  ],
+  "step_1_derive_structural_keys": {
+    "task": "For each of 474 equivalence_keys, extract the EXACT structural properties from mapping.py + schema.py that define write/read behavior",
+    "extract": [
+      "raw_module (e.g., 'Oscillator0', 'VoiceFilter0', 'Global0')",
+      "raw_path (e.g., 'Oscillator0.plainParams', 'FXRack0.FX[i]')",
+      "raw_parameter (e.g., 'kParamVolume', 'kParamCutoff')",
+      "write_mechanism (e.g., 'direct dict assignment', 'enum index lookup', 'loop iteration with shared list')",
+      "value_kind (e.g., 'float 0-1', 'int enum', 'structured dict', 'curve data')",
+      "conversion (e.g., 'direct passthrough', 'log scale', 'enum lookup', 'unit conversion')",
+      "presence_semantics (e.g., 'always written', 'none-default optional', 'conditional on state')",
+      "slot_rule (e.g., 'shared across A/B/C', 'per-slot independent', 'index-parameterized')",
+      "reverse_mechanism (how introspect.py reads it back)"
+    ],
+    "evidence_source": "grep mapping.py for write loops (e.g., _OSC_KEYS iteration, _FILTER_KEYS loop); grep schema.py for raw param definitions (type, range, enum); grep introspect.py for reverse extraction",
+    "output": "structured_equivalence_key for each of 474"
+  },
+  "step_2_build_equivalence_classes": {
+    "task": "Group 474 keys by their EXACT structural equivalence",
+    "rule": "Two keys belong to the same equivalence class ONLY if: same raw_module pattern + same raw_parameter mapping + same write_mechanism + same value_kind + same conversion + same presence_semantics + same reverse_mechanism",
+    "merge_candidates": "e.g., if mapping.py proves lfo1.rate, lfo2.rate, ..., lfo6.rate all use the exact same LFO{i}.plainParams.kParamRate write via shared loop, they form ONE equivalence class with 6 siblings",
+    "do_not_merge": "e.g., if field has different presence_semantics (some optional, some conditional), keep separate; if reverse-extraction differs (some curve data vs scalars), keep separate",
+    "expected_output": "~40-80 TRUE equivalence classes (much smaller than 474 keys; smaller than 12 families)"
+  },
+  "step_3_select_representatives": {
+    "task": "For each true equivalence class, select ONE representative control to live-test in Serum 2.0.21 GUI",
+    "selection_criteria": "Choose lowest-index slot or simplest member (e.g., lfo1 for lfo1-6 class, env1 for env1-4 class, fx.delay over fx.bode for FXDelay sub-params)",
+    "output": "representative_list: [{equivalence_class_id, representative_control, siblings_count, sibling_controls}, ...]"
+  },
+  "step_4_live_test_representatives": {
+    "task": "For each representative, test in Serum 2.0.21 GUI (same methodology as Phase 2D)",
+    "procedure": [
+      "Generate test preset via serum-mcp with representative set to non-default test value",
+      "Load .SerumPreset in Ableton Live hosting Serum 2.0.21",
+      "Navigate to relevant GUI control (OSC/Filter/ENV/LFO/MATRIX/ARP/FX/GLOBAL tab)",
+      "Read actual control value via tooltip/numeric display",
+      "Compare against requested value",
+      "Document: PASS (exact match) | PARTIAL (indirect match, display limitation) | FAIL (no effect, wrong value, missing control)"
+    ],
+    "pass_criteria": "Exact match or plausible indirect match (e.g., Hz display vs normalized 0-1 requested, dB vs linear volume)"
+  },
+  "step_5_promote_and_recount": {
+    "task": "Apply test results to update classification",
+    "rule_pass": "If representative PASSES: all siblings in that equivalence class become AUTO_VERIFIED (they share identical write/reverse mechanism, proven by representative)",
+    "rule_fail": "If representative FAILS: entire equivalence class becomes MANUAL_REQUIRED (with failure reason)",
+    "rule_partial": "If representative PARTIAL (e.g., describe_preset display limitation, not data corruption): mark as OBSERVATION_GAP_CONFIRMED with workaround note; keep AUTO_VERIFIED if underlying write/read mechanism works",
+    "output": "PHASE_3B_LIVE_TEST_RESULTS.json with {representative, verdict, affected_count, promoted_controls, ...}"
+  },
+  "step_6_recompute_bridge": {
+    "task": "Rebuild 1,136-row bridge with Phase 3B results",
+    "fields": {
+      "canonical_id": "existing",
+      "section": "existing",
+      "source_proven": "existing",
+      "file_write_verified": "existing",
+      "live_execution_verified": "UPDATED from Phase 3B tests",
+      "live_readback_verified": "UPDATED from Phase 3B tests",
+      "terminal_state": "RECOMPUTED (AUTO_VERIFIED if 3B class passed, else OBSERVATION_GAP/MANUAL_REQUIRED)",
+      "phase_3b_equivalence_class": "NEW — which class this control belongs to",
+      "phase_3b_test_result": "NEW — PASS/FAIL/PARTIAL/UNTESTED"
+    },
+    "integrity_check": "1,136 rows total, 0 missing, 0 duplicates, 0 silent drops"
+  },
+  "expected_outcomes": {
+    "scenario_all_classes_pass": "657 OBSERVATION_GAP + some UNRESOLVED -> bulk promoted to AUTO_VERIFIED. New totals: ~400-500 AUTO_VERIFIED, reduced OBSERVATION_GAP/UNRESOLVED.",
+    "scenario_mixed": "Some classes pass (promoted), others fail (MANUAL_REQUIRED). Granular, selective promotion — only exact-equivalent siblings promoted.",
+    "scenario_all_fail": "No classes pass. 657 OBSERVATION_GAP + 282 UNRESOLVED remain unchanged. Phase 4 proceeds with narrower AUTO scope (only 133 from Phase 2D)."
+  },
+  "success_criteria": [
+    "474 keys analyzed for structural equivalence",
+    "True equivalence classes built (not family-level shortcuts)",
+    "Live tests executed for all representatives",
+    "Promotion applied ONLY to exact-equivalent siblings",
+    "1,136-row bridge recomputed and integrity-checked",
+    "Zero silent drops, zero silent inflations, every control accounted for"
+  ],
+  "next_phase": "Phase 3D (final recount) → Phase 4 (production reproduction) → Phase 5 (final proof)"
+}

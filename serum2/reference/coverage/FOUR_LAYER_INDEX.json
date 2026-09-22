@@ -1,0 +1,1347 @@
+{
+  "friendly_authorable": {
+    "kParamOctave": {
+      "spec_field": "octave",
+      "param_key": "kParamOctave",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamPitch": {
+      "spec_field": "semitone",
+      "param_key": "kParamPitch",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamFine": {
+      "spec_field": "fine",
+      "param_key": "kParamFine",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamVolume": {
+      "spec_field": "volume",
+      "param_key": "kParamVolume",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamPan": {
+      "spec_field": "pan",
+      "param_key": "kParamPan",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamUnison": {
+      "spec_field": "unison",
+      "param_key": "kParamUnison",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamDetune": {
+      "spec_field": "detune",
+      "param_key": "kParamDetune",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamTablePos": {
+      "spec_field": "table_position",
+      "param_key": "kParamTablePos",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamWarp": {
+      "spec_field": "warp_amount",
+      "param_key": "kParamWarp",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamRandomPitch": {
+      "spec_field": "granular_random_pitch",
+      "param_key": "kParamRandomPitch",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamRandomPan": {
+      "spec_field": "granular_random_pan",
+      "param_key": "kParamRandomPan",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamRandomGrainLength": {
+      "spec_field": "granular_random_grain_length",
+      "param_key": "kParamRandomGrainLength",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamRandomOffset": {
+      "spec_field": "granular_random_offset",
+      "param_key": "kParamRandomOffset",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamLoopGrains": {
+      "spec_field": "granular_loop",
+      "param_key": "kParamLoopGrains",
+      "param_type": "bool",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamJumpStartGrains": {
+      "spec_field": "granular_jump_start",
+      "param_key": "kParamJumpStartGrains",
+      "param_type": "bool",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamGrainReverse": {
+      "spec_field": "granular_reverse",
+      "param_key": "kParamGrainReverse",
+      "param_type": "bool",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamLengthKeyTrack": {
+      "spec_field": "granular_length_key_track",
+      "param_key": "kParamLengthKeyTrack",
+      "param_type": "bool",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamMaxNumGrains": {
+      "spec_field": "granular_max_grains",
+      "param_key": "kParamMaxNumGrains",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamRandomWindowAmount": {
+      "spec_field": "granular_random_window_amount",
+      "param_key": "kParamRandomWindowAmount",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamRandomWindowSkew": {
+      "spec_field": "granular_random_window_skew",
+      "param_key": "kParamRandomWindowSkew",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamFreqLo": {
+      "spec_field": "spectral_warp_freq_lo",
+      "param_key": "kParamFreqLo",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamFreqHi": {
+      "spec_field": "spectral_warp_freq_hi",
+      "param_key": "kParamFreqHi",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamSpecFltShift": {
+      "spec_field": "spectral_filter_shift",
+      "param_key": "kParamSpecFltShift",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamSpecFltWetDry": {
+      "spec_field": "spectral_filter_wet",
+      "param_key": "kParamSpecFltWetDry",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamEnvAttack": {
+      "spec_field": "multisample_env_attack",
+      "param_key": "kParamEnvAttack",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamEnvDecay": {
+      "spec_field": "multisample_env_decay",
+      "param_key": "kParamEnvDecay",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamEnvRelease": {
+      "spec_field": "multisample_env_release",
+      "param_key": "kParamEnvRelease",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamFreq": {
+      "spec_field": "cutoff",
+      "param_key": "kParamFreq",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamReso": {
+      "spec_field": "resonance",
+      "param_key": "kParamReso",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamDrive": {
+      "spec_field": "drive",
+      "param_key": "kParamDrive",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamStereo": {
+      "spec_field": "stereo",
+      "param_key": "kParamStereo",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamVar": {
+      "spec_field": "var",
+      "param_key": "kParamVar",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamWet": {
+      "spec_field": "wet",
+      "param_key": "kParamWet",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamLevelOut": {
+      "spec_field": "level_out",
+      "param_key": "kParamLevelOut",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamAttack": {
+      "spec_field": "attack",
+      "param_key": "kParamAttack",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamHold": {
+      "spec_field": "hold",
+      "param_key": "kParamHold",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamDecay": {
+      "spec_field": "decay",
+      "param_key": "kParamDecay",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamSustain": {
+      "spec_field": "sustain",
+      "param_key": "kParamSustain",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamRelease": {
+      "spec_field": "release",
+      "param_key": "kParamRelease",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamCurve1": {
+      "spec_field": "attack_curve",
+      "param_key": "kParamCurve1",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamCurve2": {
+      "spec_field": "decay_curve",
+      "param_key": "kParamCurve2",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamCurve3": {
+      "spec_field": "release_curve",
+      "param_key": "kParamCurve3",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamRate": {
+      "spec_field": "rate",
+      "param_key": "kParamRate",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamBeatSync": {
+      "spec_field": "beat_sync",
+      "param_key": "kParamBeatSync",
+      "param_type": "bool",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamDelay": {
+      "spec_field": "delay",
+      "param_key": "kParamDelay",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamRise": {
+      "spec_field": "rise",
+      "param_key": "kParamRise",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamSmooth": {
+      "spec_field": "smooth",
+      "param_key": "kParamSmooth",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamMono": {
+      "spec_field": "mono",
+      "param_key": "kParamMono",
+      "param_type": "bool",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamSwing": {
+      "spec_field": "swing",
+      "param_key": "kParamSwing",
+      "param_type": "float",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamDotted": {
+      "spec_field": "dotted",
+      "param_key": "kParamDotted",
+      "param_type": "bool",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamTriplets": {
+      "spec_field": "triplets",
+      "param_key": "kParamTriplets",
+      "param_type": "bool",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    },
+    "kParamRate10x": {
+      "spec_field": "rate10x",
+      "param_key": "kParamRate10x",
+      "param_type": "bool",
+      "schema_present": true,
+      "mapping_present": true,
+      "introspect_capable": true
+    }
+  },
+  "raw_schema_known": {
+    "kParamEnable": {
+      "schema_family": "VOICE_FILTER",
+      "param_key": "kParamEnable",
+      "param_type": "bool"
+    },
+    "kParamOctave": {
+      "schema_family": "OSCILLATOR",
+      "param_key": "kParamOctave",
+      "param_type": "float"
+    },
+    "kParamVolume": {
+      "schema_family": "OSCILLATOR",
+      "param_key": "kParamVolume",
+      "param_type": "float"
+    },
+    "kParamPan": {
+      "schema_family": "OSCILLATOR",
+      "param_key": "kParamPan",
+      "param_type": "float"
+    },
+    "kParamFine": {
+      "schema_family": "OSCILLATOR",
+      "param_key": "kParamFine",
+      "param_type": "float"
+    },
+    "kParamCoarsePit": {
+      "schema_family": "OSCILLATOR",
+      "param_key": "kParamCoarsePit",
+      "param_type": "float"
+    },
+    "kParamPitch": {
+      "schema_family": "OSCILLATOR",
+      "param_key": "kParamPitch",
+      "param_type": "float"
+    },
+    "kParamDetune": {
+      "schema_family": "OSCILLATOR",
+      "param_key": "kParamDetune",
+      "param_type": "float"
+    },
+    "kParamDetuneWid": {
+      "schema_family": "OSCILLATOR",
+      "param_key": "kParamDetuneWid",
+      "param_type": "float"
+    },
+    "kParamUnison": {
+      "schema_family": "OSCILLATOR",
+      "param_key": "kParamUnison",
+      "param_type": "float"
+    },
+    "kParamUnisonStereo": {
+      "schema_family": "OSCILLATOR",
+      "param_key": "kParamUnisonStereo",
+      "param_type": "float"
+    },
+    "kParamPitchTrack": {
+      "schema_family": "OSCILLATOR",
+      "param_key": "kParamPitchTrack",
+      "param_type": "bool"
+    },
+    "kParamType": {
+      "schema_family": "LFO",
+      "param_key": "kParamType",
+      "param_type": "enum"
+    },
+    "kParamLoopMode": {
+      "schema_family": "OSCILLATOR",
+      "param_key": "kParamLoopMode",
+      "param_type": "enum"
+    },
+    "kParamLoopStart": {
+      "schema_family": "OSCILLATOR",
+      "param_key": "kParamLoopStart",
+      "param_type": "float"
+    },
+    "kParamLoopEnd": {
+      "schema_family": "OSCILLATOR",
+      "param_key": "kParamLoopEnd",
+      "param_type": "float"
+    },
+    "kParamLoopCrossfade": {
+      "schema_family": "OSCILLATOR",
+      "param_key": "kParamLoopCrossfade",
+      "param_type": "float"
+    },
+    "kParamTablePos": {
+      "schema_family": "WTOSC",
+      "param_key": "kParamTablePos",
+      "param_type": "float"
+    },
+    "kParamWarp": {
+      "schema_family": "MULTISAMPLEOSC",
+      "param_key": "kParamWarp",
+      "param_type": "float"
+    },
+    "kParamWarp2": {
+      "schema_family": "MULTISAMPLEOSC",
+      "param_key": "kParamWarp2",
+      "param_type": "float"
+    },
+    "kParamWarpMenu": {
+      "schema_family": "MULTISAMPLEOSC",
+      "param_key": "kParamWarpMenu",
+      "param_type": "enum"
+    },
+    "kParamInitialPhase": {
+      "schema_family": "WTOSC",
+      "param_key": "kParamInitialPhase",
+      "param_type": "float"
+    },
+    "kParamRandomPhase": {
+      "schema_family": "MULTISAMPLEOSC",
+      "param_key": "kParamRandomPhase",
+      "param_type": "float"
+    },
+    "kParamXfadeMode": {
+      "schema_family": "WTOSC",
+      "param_key": "kParamXfadeMode",
+      "param_type": "float"
+    },
+    "kParamWarpMenu2": {
+      "schema_family": "MULTISAMPLEOSC",
+      "param_key": "kParamWarpMenu2",
+      "param_type": "enum"
+    },
+    "kParamWarpVar2": {
+      "schema_family": "MULTISAMPLEOSC",
+      "param_key": "kParamWarpVar2",
+      "param_type": "float"
+    },
+    "kParamWarpVar": {
+      "schema_family": "MULTISAMPLEOSC",
+      "param_key": "kParamWarpVar",
+      "param_type": "float"
+    },
+    "kParamDensity": {
+      "schema_family": "GRANULAROSC",
+      "param_key": "kParamDensity",
+      "param_type": "float"
+    },
+    "kParamGrainLength": {
+      "schema_family": "GRANULAROSC",
+      "param_key": "kParamGrainLength",
+      "param_type": "float"
+    },
+    "kParamGrainReverse": {
+      "schema_family": "GRANULAROSC",
+      "param_key": "kParamGrainReverse",
+      "param_type": "bool"
+    },
+    "kParamRandomOffset": {
+      "schema_family": "GRANULAROSC",
+      "param_key": "kParamRandomOffset",
+      "param_type": "float"
+    },
+    "kParamRandomDir": {
+      "schema_family": "GRANULAROSC",
+      "param_key": "kParamRandomDir",
+      "param_type": "float"
+    },
+    "kParamRandomPitch": {
+      "schema_family": "GRANULAROSC",
+      "param_key": "kParamRandomPitch",
+      "param_type": "float"
+    },
+    "kParamRandomGrainLength": {
+      "schema_family": "GRANULAROSC",
+      "param_key": "kParamRandomGrainLength",
+      "param_type": "float"
+    },
+    "kParamRandomPan": {
+      "schema_family": "GRANULAROSC",
+      "param_key": "kParamRandomPan",
+      "param_type": "float"
+    },
+    "kParamRandomGain": {
+      "schema_family": "GRANULAROSC",
+      "param_key": "kParamRandomGain",
+      "param_type": "float"
+    },
+    "kParamRandomWindowAmount": {
+      "schema_family": "GRANULAROSC",
+      "param_key": "kParamRandomWindowAmount",
+      "param_type": "float"
+    },
+    "kParamRandomWindowSkew": {
+      "schema_family": "GRANULAROSC",
+      "param_key": "kParamRandomWindowSkew",
+      "param_type": "float"
+    },
+    "kParamRandomWarp": {
+      "schema_family": "GRANULAROSC",
+      "param_key": "kParamRandomWarp",
+      "param_type": "float"
+    },
+    "kParamRandomWarp2": {
+      "schema_family": "GRANULAROSC",
+      "param_key": "kParamRandomWarp2",
+      "param_type": "float"
+    },
+    "kParamWindowParam": {
+      "schema_family": "GRANULAROSC",
+      "param_key": "kParamWindowParam",
+      "param_type": "float"
+    },
+    "kParamWindowSkew": {
+      "schema_family": "GRANULAROSC",
+      "param_key": "kParamWindowSkew",
+      "param_type": "float"
+    },
+    "kParamWindowShape": {
+      "schema_family": "GRANULAROSC",
+      "param_key": "kParamWindowShape",
+      "param_type": "enum"
+    },
+    "kParamDensityMode": {
+      "schema_family": "GRANULAROSC",
+      "param_key": "kParamDensityMode",
+      "param_type": "enum"
+    },
+    "kParamLengthMode": {
+      "schema_family": "GRANULAROSC",
+      "param_key": "kParamLengthMode",
+      "param_type": "enum"
+    },
+    "kParamUnisonTrigPattern": {
+      "schema_family": "GRANULAROSC",
+      "param_key": "kParamUnisonTrigPattern",
+      "param_type": "enum"
+    },
+    "kParamYAxisAssignment": {
+      "schema_family": "SPECTRALOSC",
+      "param_key": "kParamYAxisAssignment",
+      "param_type": "enum"
+    },
+    "kParamMaxNumGrains": {
+      "schema_family": "GRANULAROSC",
+      "param_key": "kParamMaxNumGrains",
+      "param_type": "float"
+    },
+    "kParamJumpStartGrains": {
+      "schema_family": "GRANULAROSC",
+      "param_key": "kParamJumpStartGrains",
+      "param_type": "bool"
+    },
+    "kParamDensityDotted": {
+      "schema_family": "GRANULAROSC",
+      "param_key": "kParamDensityDotted",
+      "param_type": "bool"
+    },
+    "kParamDensityTriplet": {
+      "schema_family": "GRANULAROSC",
+      "param_key": "kParamDensityTriplet",
+      "param_type": "bool"
+    },
+    "kParamLengthDotted": {
+      "schema_family": "GRANULAROSC",
+      "param_key": "kParamLengthDotted",
+      "param_type": "bool"
+    },
+    "kParamLengthTriplet": {
+      "schema_family": "GRANULAROSC",
+      "param_key": "kParamLengthTriplet",
+      "param_type": "bool"
+    },
+    "kParamLoopGrains": {
+      "schema_family": "GRANULAROSC",
+      "param_key": "kParamLoopGrains",
+      "param_type": "bool"
+    },
+    "kParamLengthKeyTrack": {
+      "schema_family": "GRANULAROSC",
+      "param_key": "kParamLengthKeyTrack",
+      "param_type": "bool"
+    },
+    "kParamSpecFltShift": {
+      "schema_family": "SPECTRALOSC",
+      "param_key": "kParamSpecFltShift",
+      "param_type": "float"
+    },
+    "kParamSpecFltWetDry": {
+      "schema_family": "SPECTRALOSC",
+      "param_key": "kParamSpecFltWetDry",
+      "param_type": "float"
+    },
+    "kParamFreqLo": {
+      "schema_family": "SPECTRALOSC",
+      "param_key": "kParamFreqLo",
+      "param_type": "float"
+    },
+    "kParamFreqHi": {
+      "schema_family": "SPECTRALOSC",
+      "param_key": "kParamFreqHi",
+      "param_type": "float"
+    },
+    "kParamPhaseLock": {
+      "schema_family": "SPECTRALOSC",
+      "param_key": "kParamPhaseLock",
+      "param_type": "bool"
+    },
+    "kParamTransients": {
+      "schema_family": "SPECTRALOSC",
+      "param_key": "kParamTransients",
+      "param_type": "bool"
+    },
+    "kParamLoHiIsPost": {
+      "schema_family": "SPECTRALOSC",
+      "param_key": "kParamLoHiIsPost",
+      "param_type": "bool"
+    },
+    "kParamLoHiIsSmooth": {
+      "schema_family": "SPECTRALOSC",
+      "param_key": "kParamLoHiIsSmooth",
+      "param_type": "bool"
+    },
+    "kParamEnvAttack": {
+      "schema_family": "MULTISAMPLEOSC",
+      "param_key": "kParamEnvAttack",
+      "param_type": "float"
+    },
+    "kParamEnvDecay": {
+      "schema_family": "MULTISAMPLEOSC",
+      "param_key": "kParamEnvDecay",
+      "param_type": "float"
+    },
+    "kParamEnvSustain": {
+      "schema_family": "MULTISAMPLEOSC",
+      "param_key": "kParamEnvSustain",
+      "param_type": "float"
+    },
+    "kParamEnvRelease": {
+      "schema_family": "MULTISAMPLEOSC",
+      "param_key": "kParamEnvRelease",
+      "param_type": "float"
+    },
+    "kParamEnvHold": {
+      "schema_family": "MULTISAMPLEOSC",
+      "param_key": "kParamEnvHold",
+      "param_type": "float"
+    },
+    "kParamEnvDelay": {
+      "schema_family": "MULTISAMPLEOSC",
+      "param_key": "kParamEnvDelay",
+      "param_type": "float"
+    },
+    "kParamEnvOverride": {
+      "schema_family": "MULTISAMPLEOSC",
+      "param_key": "kParamEnvOverride",
+      "param_type": "bool"
+    },
+    "kParamVelTrack": {
+      "schema_family": "MULTISAMPLEOSC",
+      "param_key": "kParamVelTrack",
+      "param_type": "float"
+    },
+    "kParamVelTrackOverride": {
+      "schema_family": "MULTISAMPLEOSC",
+      "param_key": "kParamVelTrackOverride",
+      "param_type": "bool"
+    },
+    "kParamTimbreShift": {
+      "schema_family": "MULTISAMPLEOSC",
+      "param_key": "kParamTimbreShift",
+      "param_type": "float"
+    },
+    "kParamNoiseType": {
+      "schema_family": "NOISEOSC",
+      "param_key": "kParamNoiseType",
+      "param_type": "enum"
+    },
+    "kParamColor": {
+      "schema_family": "NOISEOSC",
+      "param_key": "kParamColor",
+      "param_type": "float"
+    },
+    "kParamOneShot": {
+      "schema_family": "NOISEOSC",
+      "param_key": "kParamOneShot",
+      "param_type": "bool"
+    },
+    "kParamShape": {
+      "schema_family": "ARPCLIP",
+      "param_key": "kParamShape",
+      "param_type": "enum"
+    },
+    "kParamFreq": {
+      "schema_family": "VOICE_FILTER",
+      "param_key": "kParamFreq",
+      "param_type": "float"
+    },
+    "kParamReso": {
+      "schema_family": "VOICE_FILTER",
+      "param_key": "kParamReso",
+      "param_type": "float"
+    },
+    "kParamDrive": {
+      "schema_family": "VOICE_FILTER",
+      "param_key": "kParamDrive",
+      "param_type": "float"
+    },
+    "kParamVar": {
+      "schema_family": "VOICE_FILTER",
+      "param_key": "kParamVar",
+      "param_type": "float"
+    },
+    "kParamLevelOut": {
+      "schema_family": "VOICE_FILTER",
+      "param_key": "kParamLevelOut",
+      "param_type": "float"
+    },
+    "kParamStereo": {
+      "schema_family": "VOICE_FILTER",
+      "param_key": "kParamStereo",
+      "param_type": "float"
+    },
+    "kParamWet": {
+      "schema_family": "VOICE_FILTER",
+      "param_key": "kParamWet",
+      "param_type": "float"
+    },
+    "kParamKeyTrack": {
+      "schema_family": "VOICE_FILTER",
+      "param_key": "kParamKeyTrack",
+      "param_type": "bool"
+    },
+    "kParamAttack": {
+      "schema_family": "ENVELOPE",
+      "param_key": "kParamAttack",
+      "param_type": "float"
+    },
+    "kParamHold": {
+      "schema_family": "ENVELOPE",
+      "param_key": "kParamHold",
+      "param_type": "float"
+    },
+    "kParamDecay": {
+      "schema_family": "ENVELOPE",
+      "param_key": "kParamDecay",
+      "param_type": "float"
+    },
+    "kParamSustain": {
+      "schema_family": "ENVELOPE",
+      "param_key": "kParamSustain",
+      "param_type": "float"
+    },
+    "kParamRelease": {
+      "schema_family": "ENVELOPE",
+      "param_key": "kParamRelease",
+      "param_type": "float"
+    },
+    "kParamCurve1": {
+      "schema_family": "ENVELOPE",
+      "param_key": "kParamCurve1",
+      "param_type": "float"
+    },
+    "kParamCurve2": {
+      "schema_family": "ENVELOPE",
+      "param_key": "kParamCurve2",
+      "param_type": "float"
+    },
+    "kParamCurve3": {
+      "schema_family": "ENVELOPE",
+      "param_key": "kParamCurve3",
+      "param_type": "float"
+    },
+    "kParamRate": {
+      "schema_family": "ARPCLIP",
+      "param_key": "kParamRate",
+      "param_type": "float"
+    },
+    "kParamMode": {
+      "schema_family": "LFO",
+      "param_key": "kParamMode",
+      "param_type": "enum"
+    },
+    "kParamBeatSync": {
+      "schema_family": "LFO",
+      "param_key": "kParamBeatSync",
+      "param_type": "bool"
+    },
+    "kParamRise": {
+      "schema_family": "LFO",
+      "param_key": "kParamRise",
+      "param_type": "float"
+    },
+    "kParamSmooth": {
+      "schema_family": "LFO",
+      "param_key": "kParamSmooth",
+      "param_type": "float"
+    },
+    "kParamDelay": {
+      "schema_family": "LFO",
+      "param_key": "kParamDelay",
+      "param_type": "float"
+    },
+    "kParamMono": {
+      "schema_family": "LFO",
+      "param_key": "kParamMono",
+      "param_type": "bool"
+    },
+    "kParamSwing": {
+      "schema_family": "GLOBAL",
+      "param_key": "kParamSwing",
+      "param_type": "float"
+    },
+    "kParamDotted": {
+      "schema_family": "ARPCLIP",
+      "param_key": "kParamDotted",
+      "param_type": "bool"
+    },
+    "kParamTriplets": {
+      "schema_family": "ARPCLIP",
+      "param_key": "kParamTriplets",
+      "param_type": "bool"
+    },
+    "kParamRate10x": {
+      "schema_family": "LFO",
+      "param_key": "kParamRate10x",
+      "param_type": "bool"
+    },
+    "kParamMasterVolume": {
+      "schema_family": "GLOBAL",
+      "param_key": "kParamMasterVolume",
+      "param_type": "float"
+    },
+    "kParamMonoToggle": {
+      "schema_family": "GLOBAL",
+      "param_key": "kParamMonoToggle",
+      "param_type": "bool"
+    },
+    "kParamPolyCount": {
+      "schema_family": "GLOBAL",
+      "param_key": "kParamPolyCount",
+      "param_type": "float"
+    },
+    "kParamPortamentoTime": {
+      "schema_family": "GLOBAL",
+      "param_key": "kParamPortamentoTime",
+      "param_type": "float"
+    },
+    "kParamLimitSameNotePolyphony": {
+      "schema_family": "GLOBAL",
+      "param_key": "kParamLimitSameNotePolyphony",
+      "param_type": "bool"
+    },
+    "kParamDirectVol": {
+      "schema_family": "GLOBAL",
+      "param_key": "kParamDirectVol",
+      "param_type": "float"
+    },
+    "kParamFXBus1Vol": {
+      "schema_family": "GLOBAL",
+      "param_key": "kParamFXBus1Vol",
+      "param_type": "float"
+    },
+    "kParamFXBus2Vol": {
+      "schema_family": "GLOBAL",
+      "param_key": "kParamFXBus2Vol",
+      "param_type": "float"
+    },
+    "kParamFXBus1Dest": {
+      "schema_family": "GLOBAL",
+      "param_key": "kParamFXBus1Dest",
+      "param_type": "float"
+    },
+    "kParamFXBus2Dest": {
+      "schema_family": "GLOBAL",
+      "param_key": "kParamFXBus2Dest",
+      "param_type": "float"
+    },
+    "kParamBendRangeUp": {
+      "schema_family": "GLOBAL",
+      "param_key": "kParamBendRangeUp",
+      "param_type": "float"
+    },
+    "kParamBendRangeDn": {
+      "schema_family": "GLOBAL",
+      "param_key": "kParamBendRangeDn",
+      "param_type": "float"
+    },
+    "kParamLegato": {
+      "schema_family": "GLOBAL",
+      "param_key": "kParamLegato",
+      "param_type": "bool"
+    },
+    "kParamPortaAlways": {
+      "schema_family": "GLOBAL",
+      "param_key": "kParamPortaAlways",
+      "param_type": "bool"
+    },
+    "kParamPortaScaled": {
+      "schema_family": "GLOBAL",
+      "param_key": "kParamPortaScaled",
+      "param_type": "bool"
+    },
+    "kParamPortamentoCurve": {
+      "schema_family": "GLOBAL",
+      "param_key": "kParamPortamentoCurve",
+      "param_type": "float"
+    },
+    "kParamSwingDiv": {
+      "schema_family": "GLOBAL",
+      "param_key": "kParamSwingDiv",
+      "param_type": "float"
+    },
+    "kParamTranspose": {
+      "schema_family": "ARPCLIP",
+      "param_key": "kParamTranspose",
+      "param_type": "float"
+    },
+    "kParamGlobalTuning": {
+      "schema_family": "GLOBAL",
+      "param_key": "kParamGlobalTuning",
+      "param_type": "float"
+    },
+    "kParamOversampling": {
+      "schema_family": "GLOBAL",
+      "param_key": "kParamOversampling",
+      "param_type": "float"
+    },
+    "kParamS1Compatibility": {
+      "schema_family": "GLOBAL",
+      "param_key": "kParamS1Compatibility",
+      "param_type": "bool"
+    },
+    "kParamUseUltraOnRender": {
+      "schema_family": "GLOBAL",
+      "param_key": "kParamUseUltraOnRender",
+      "param_type": "bool"
+    },
+    "kParamNoteLatch": {
+      "schema_family": "GLOBAL",
+      "param_key": "kParamNoteLatch",
+      "param_type": "bool"
+    },
+    "kParamVoiceAmp": {
+      "schema_family": "GLOBAL",
+      "param_key": "kParamVoiceAmp",
+      "param_type": "float"
+    },
+    "kParamValue": {
+      "schema_family": "MACRO",
+      "param_key": "kParamValue",
+      "param_type": "float"
+    },
+    "kParamAmount": {
+      "schema_family": "MODSLOT",
+      "param_key": "kParamAmount",
+      "param_type": "float"
+    },
+    "kParamBipolar": {
+      "schema_family": "MODSLOT",
+      "param_key": "kParamBipolar",
+      "param_type": "bool"
+    },
+    "kParamAuxInverted": {
+      "schema_family": "MODSLOT",
+      "param_key": "kParamAuxInverted",
+      "param_type": "bool"
+    },
+    "kParamAuxCurve": {
+      "schema_family": "MODSLOT",
+      "param_key": "kParamAuxCurve",
+      "param_type": "float"
+    },
+    "kParamBypass": {
+      "schema_family": "MODSLOT",
+      "param_key": "kParamBypass",
+      "param_type": "bool"
+    },
+    "kParamCurveIn": {
+      "schema_family": "MODSLOT",
+      "param_key": "kParamCurveIn",
+      "param_type": "float"
+    },
+    "kParamMainCurveData": {
+      "schema_family": "MODSLOT",
+      "param_key": "kParamMainCurveData",
+      "param_type": "float"
+    },
+    "kParamAuxCurveData": {
+      "schema_family": "MODSLOT",
+      "param_key": "kParamAuxCurveData",
+      "param_type": "float"
+    },
+    "kParamDelayOffset": {
+      "schema_family": "MODSLOT",
+      "param_key": "kParamDelayOffset",
+      "param_type": "float"
+    },
+    "kParamDelayBeatSync": {
+      "schema_family": "MODSLOT",
+      "param_key": "kParamDelayBeatSync",
+      "param_type": "bool"
+    },
+    "kParamSmoothRise": {
+      "schema_family": "MODSLOT",
+      "param_key": "kParamSmoothRise",
+      "param_type": "float"
+    },
+    "kParamSmoothFall": {
+      "schema_family": "MODSLOT",
+      "param_key": "kParamSmoothFall",
+      "param_type": "float"
+    },
+    "kParamSmoothLink": {
+      "schema_family": "MODSLOT",
+      "param_key": "kParamSmoothLink",
+      "param_type": "bool"
+    },
+    "kParamEnabled": {
+      "schema_family": "ARP",
+      "param_key": "kParamEnabled",
+      "param_type": "bool"
+    },
+    "kParamActiveClipID": {
+      "schema_family": "ARP",
+      "param_key": "kParamActiveClipID",
+      "param_type": "float"
+    },
+    "kParamLaunchQuantize": {
+      "schema_family": "ARP",
+      "param_key": "kParamLaunchQuantize",
+      "param_type": "float"
+    },
+    "kParamKeyZoneMin": {
+      "schema_family": "ARP",
+      "param_key": "kParamKeyZoneMin",
+      "param_type": "float"
+    },
+    "kParamKeyZoneMax": {
+      "schema_family": "ARP",
+      "param_key": "kParamKeyZoneMax",
+      "param_type": "float"
+    },
+    "kParamMidiSelectOctave": {
+      "schema_family": "ARP",
+      "param_key": "kParamMidiSelectOctave",
+      "param_type": "float"
+    },
+    "kParamGate": {
+      "schema_family": "ARPCLIP",
+      "param_key": "kParamGate",
+      "param_type": "float"
+    },
+    "kParamTransposeShift": {
+      "schema_family": "ARPCLIP",
+      "param_key": "kParamTransposeShift",
+      "param_type": "float"
+    },
+    "kParamTransposeShape": {
+      "schema_family": "ARPCLIP",
+      "param_key": "kParamTransposeShape",
+      "param_type": "enum"
+    },
+    "kParamNoteRetrig": {
+      "schema_family": "ARPCLIP",
+      "param_key": "kParamNoteRetrig",
+      "param_type": "bool"
+    },
+    "kParamWrapRange": {
+      "schema_family": "ARPCLIP",
+      "param_key": "kParamWrapRange",
+      "param_type": "float"
+    },
+    "kParamWrapTranspose": {
+      "schema_family": "ARPCLIP",
+      "param_key": "kParamWrapTranspose",
+      "param_type": "bool"
+    },
+    "kParamChance": {
+      "schema_family": "ARPCLIP",
+      "param_key": "kParamChance",
+      "param_type": "float"
+    },
+    "kParamOffset": {
+      "schema_family": "ARPCLIP",
+      "param_key": "kParamOffset",
+      "param_type": "float"
+    },
+    "kParamTransposeRange": {
+      "schema_family": "ARPCLIP",
+      "param_key": "kParamTransposeRange",
+      "param_type": "float"
+    },
+    "kParamRetrigRate": {
+      "schema_family": "ARPCLIP",
+      "param_key": "kParamRetrigRate",
+      "param_type": "float"
+    },
+    "kParamFirstNoteRetrig": {
+      "schema_family": "ARPCLIP",
+      "param_key": "kParamFirstNoteRetrig",
+      "param_type": "bool"
+    },
+    "kParamVeloEnabled": {
+      "schema_family": "ARPCLIP",
+      "param_key": "kParamVeloEnabled",
+      "param_type": "bool"
+    },
+    "kParamVeloTarget": {
+      "schema_family": "ARPCLIP",
+      "param_key": "kParamVeloTarget",
+      "param_type": "float"
+    },
+    "kParamWrapPhantomNote": {
+      "schema_family": "ARPCLIP",
+      "param_key": "kParamWrapPhantomNote",
+      "param_type": "float"
+    },
+    "kParamBeatRetrig": {
+      "schema_family": "ARPCLIP",
+      "param_key": "kParamBeatRetrig",
+      "param_type": "bool"
+    },
+    "kParamLaunchRetrig": {
+      "schema_family": "ARPCLIP",
+      "param_key": "kParamLaunchRetrig",
+      "param_type": "bool"
+    },
+    "kParamVeloRetrig": {
+      "schema_family": "ARPCLIP",
+      "param_key": "kParamVeloRetrig",
+      "param_type": "bool"
+    },
+    "kParamVeloDecay": {
+      "schema_family": "ARPCLIP",
+      "param_key": "kParamVeloDecay",
+      "param_type": "float"
+    },
+    "kParamRepeats": {
+      "schema_family": "ARPCLIP",
+      "param_key": "kParamRepeats",
+      "param_type": "float"
+    },
+    "kParamThru": {
+      "schema_family": "ARPCLIP",
+      "param_key": "kParamThru",
+      "param_type": "bool"
+    },
+    "kParamPlaybackModeTime": {
+      "schema_family": "ARPCLIP",
+      "param_key": "kParamPlaybackModeTime",
+      "param_type": "float"
+    },
+    "FXDistortion": {
+      "schema_family": "FX",
+      "param_key": "FXDistortion",
+      "param_type": "unknown"
+    },
+    "FXChorus": {
+      "schema_family": "FX",
+      "param_key": "FXChorus",
+      "param_type": "unknown"
+    },
+    "FXFlanger": {
+      "schema_family": "FX",
+      "param_key": "FXFlanger",
+      "param_type": "unknown"
+    },
+    "FXPhaser": {
+      "schema_family": "FX",
+      "param_key": "FXPhaser",
+      "param_type": "unknown"
+    },
+    "FXDelay": {
+      "schema_family": "FX",
+      "param_key": "FXDelay",
+      "param_type": "unknown"
+    },
+    "FXReverb": {
+      "schema_family": "FX",
+      "param_key": "FXReverb",
+      "param_type": "unknown"
+    },
+    "FXComp": {
+      "schema_family": "FX",
+      "param_key": "FXComp",
+      "param_type": "unknown"
+    },
+    "FXEQ": {
+      "schema_family": "FX",
+      "param_key": "FXEQ",
+      "param_type": "unknown"
+    },
+    "FXFilter": {
+      "schema_family": "FX",
+      "param_key": "FXFilter",
+      "param_type": "unknown"
+    },
+    "FXBode": {
+      "schema_family": "FX",
+      "param_key": "FXBode",
+      "param_type": "unknown"
+    },
+    "FXHyperD": {
+      "schema_family": "FX",
+      "param_key": "FXHyperD",
+      "param_type": "unknown"
+    },
+    "FXConv": {
+      "schema_family": "FX",
+      "param_key": "FXConv",
+      "param_type": "unknown"
+    },
+    "FXUtils": {
+      "schema_family": "FX",
+      "param_key": "FXUtils",
+      "param_type": "unknown"
+    },
+    "FXSplit": {
+      "schema_family": "FX",
+      "param_key": "FXSplit",
+      "param_type": "unknown"
+    },
+    "FXSplit3": {
+      "schema_family": "FX",
+      "param_key": "FXSplit3",
+      "param_type": "unknown"
+    },
+    "FXSplitMS": {
+      "schema_family": "FX",
+      "param_key": "FXSplitMS",
+      "param_type": "unknown"
+    }
+  }
+}

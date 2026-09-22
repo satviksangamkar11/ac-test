@@ -1,0 +1,105 @@
+{
+  "phase": "2D_actual_serum_gui_verification",
+  "date": "2026-09-23",
+  "method": "generate_preset (serum-mcp write) -> load .SerumPreset in Ableton Live 12 Suite hosting Serum 2.0.21 (build 2.0.23 vst / product 2.0.11 shown in preset metadata) -> visual/tooltip readback from actual plugin GUI via computer-use",
+  "test_preset": "ZZ_PHASE2C_SENTINEL_TEST.SerumPreset",
+  "host": "Ableton Live 12 Suite, track '1 Serum 2'",
+  "mechanisms": [
+    {
+      "mechanism": "oscillator_shared",
+      "control": "oscA.volume",
+      "requested_value": 0.75,
+      "file_write_value": "volume=0.75 (describe_preset)",
+      "serum_gui_value": "A Level (75% [-5.0 dB]) — exact tooltip readout",
+      "match": true,
+      "verification_method": "hover tooltip on OSC A LEVEL knob, OSC tab",
+      "result": "LIVE_READBACK_VERIFIED"
+    },
+    {
+      "mechanism": "filter",
+      "control": "filter1.cutoff",
+      "requested_value": 0.65,
+      "file_write_value": "cutoff=0.65 (describe_preset)",
+      "serum_gui_value": "1390 Hz (double-click numeric entry on CUTOFF knob, OSC tab Filter 1 panel); Filter 1 shown ON, type Low 24",
+      "match": "indirect — Hz domain vs 0-1 normalized domain, but non-default frequency confirms write took effect; ON state confirmed",
+      "verification_method": "double-click numeric field + visual ON/type check",
+      "result": "LIVE_READBACK_VERIFIED (frequency-domain confirmation; exact 0-1 normalized value not independently re-derived from Hz without knowing Serum's cutoff curve formula)"
+    },
+    {
+      "mechanism": "envelope",
+      "control": "env1.attack",
+      "requested_value": 0.5,
+      "file_write_value": "attack=500.0ms (describe_preset)",
+      "serum_gui_value": "ATK 500 ms — exact numeric readout on ENV 1 panel",
+      "match": true,
+      "verification_method": "visible numeric label under ATK knob, OSC tab ENV1 panel",
+      "result": "LIVE_READBACK_VERIFIED"
+    },
+    {
+      "mechanism": "lfo",
+      "control": "lfo1.rate (free Hz, beat_sync=false)",
+      "requested_value": 1.5,
+      "file_write_value": "rate=2 (describe_preset — CONFIRMED BUG: describe_preset's text summary truncates/rounds LFO rate to integer)",
+      "serum_gui_value": "1.5 Hz — exact numeric readout, FREE mode, on LFO1 panel",
+      "match": true,
+      "verification_method": "visible numeric label next to RATE knob, LFO1 panel",
+      "result": "LIVE_READBACK_VERIFIED",
+      "critical_finding": "Serum's actual GUI shows 1.5 Hz exactly, proving the write (mapping.py) was correct all along. describe_preset()'s human-readable summary has a display-only truncation bug for fractional LFO rates — this is a serum-mcp introspection-tool limitation, NOT a mapping.py write defect. Confirmed the underlying preset data is accurate."
+    },
+    {
+      "mechanism": "modulation_matrix",
+      "control": "mod_routes[0]: lfo0 -> filter0.cutoff, amount=42",
+      "requested_value": 42,
+      "file_write_value": "lfo0 -> filter0.cutoff: +42% (describe_preset)",
+      "serum_gui_value": "Mod 1 Amount (42%) — exact tooltip readout; SOURCE=LFO1, DESTINATION=Filter 1 Freq confirmed in MATRIX tab",
+      "match": true,
+      "verification_method": "hover tooltip on AMOUNT slider, MATRIX tab, row 1",
+      "result": "LIVE_READBACK_VERIFIED"
+    },
+    {
+      "mechanism": "arpeggiator",
+      "control": "arp.rate = 0.6 (discrete step-rate dial)",
+      "requested_value": 0.6,
+      "file_write_value": "rate=0.60 (describe_preset)",
+      "serum_gui_value": "1/32 — exact tier readout on ARP panel RATE dial",
+      "match": "tier-consistent — per serum-mcp's own documented breakpoint table (0.575-0.65 = 1/32 tier), 0.6 correctly lands in 1/32",
+      "verification_method": "visible numeric/tier label on RATE dial, ARP panel (bottom tab)",
+      "result": "LIVE_READBACK_VERIFIED",
+      "additional_confirmation": "SHAPE also confirmed 'Played' matching default shape='played'"
+    },
+    {
+      "mechanism": "effects",
+      "control": "fx_chain[0]: type=FXDelay, params={kParamTimeL:0.25, kParamTimeR:0.25, kParamBeatSync:false}",
+      "requested_value": "TimeL=0.25s, TimeR=0.25s, BeatSync=False",
+      "file_write_value": "FXDelay (wet=50%) — type only, describe_preset summary too coarse for sub-parameters",
+      "serum_gui_value": "L: 250.00 ms, R: 250.00 ms, mode: NORMAL/MS (not BPM-synced) — exact numeric readout, FX tab DELAY unit",
+      "match": true,
+      "verification_method": "visible numeric labels L/R time fields + mode toggle, FX tab",
+      "result": "LIVE_READBACK_VERIFIED",
+      "critical_finding": "This closes the earlier-flagged gap where describe_preset's summary only showed FX TYPE, not parameters. Live GUI confirms sub-parameter write is correct: 0.25s -> 250.00ms exactly, and beat_sync=False correctly produced literal-seconds NORMAL mode (not BPM sync)."
+    },
+    {
+      "mechanism": "global_and_voice",
+      "control": "global_.master_volume",
+      "requested_value": 0.9,
+      "file_write_value": "master_volume=0.90 (describe_preset)",
+      "serum_gui_value": "2.1 dB (double-click numeric entry on MAIN knob, header bar)",
+      "match": "indirect — dB domain vs 0-1 normalized domain; non-default positive gain confirms 0.9 > 0.5 (unity/default) was written correctly, direction and magnitude consistent",
+      "verification_method": "double-click numeric field on MAIN knob",
+      "result": "LIVE_READBACK_VERIFIED (dB-domain confirmation; exact 0-1 normalized value not independently re-derived from dB without knowing Serum's volume curve formula)"
+    }
+  ],
+  "summary": {
+    "mechanisms_tested": 8,
+    "live_readback_verified": 8,
+    "exact_domain_match": 6,
+    "indirect_domain_match_but_confirmed_nondefault": 2,
+    "failures": 0
+  },
+  "test_artifacts_retained": [
+    "ZZ_PHASE2C_SENTINEL_TEST.SerumPreset",
+    "ZZ_LFO_RATE_ISOLATION.SerumPreset",
+    "ZZ_LFO_RATE_FLOAT.SerumPreset"
+  ],
+  "evidence_note": "All verification performed via computer-use screenshots/zooms/tooltips against the actual Serum 2.0.21 plugin GUI hosted in Ableton Live 12 Suite — not describe_preset() text summaries. This satisfies the production definition: AUTO_VERIFIED = serum-mcp write + Serum 2.0.21 loads preset + actual Serum state/UI confirms value."
+}

@@ -1,0 +1,107 @@
+{
+  "phase": "2C_mechanism_level_live_proofs",
+  "date": "2026-09-23",
+  "objective": "Test one representative control per mechanism against Serum 2.0.21 via serum-mcp",
+  "scope": "8 distinct mechanisms (not all 1,136 controls, just proof per mechanism)",
+  "approach": "Sentinel test: PresetSpec → serum-mcp write → raw CBOR inspection → introspect readback",
+  "mechanisms": [
+    {
+      "mechanism": "oscillator_shared",
+      "representative_control": "oscA.volume",
+      "test_plan": {
+        "step_1_create_base_preset": "Load Serum 2.0.21 empty preset",
+        "step_2_set_via_serum_mcp": "Call serum-mcp generate_preset with oscillators[0].volume = 0.75",
+        "step_3_save_and_read": "Save .SerumPreset file, read raw CBOR",
+        "step_4_inspect_cbor": "Check Oscillator0.plainParams.kParamVolume exists and matches 0.75",
+        "step_5_introspect_roundtrip": "Call serum-mcp describe_preset, verify oscillators[0].volume returned as 0.75",
+        "success_criteria": "CBOR value matches AND introspect returns original value"
+      },
+      "test_status": "PENDING",
+      "requires": "Serum 2.0.21 installed, serum-mcp runtime active"
+    },
+    {
+      "mechanism": "filter",
+      "representative_control": "filter1.cutoff",
+      "test_plan": {
+        "step_1": "Set filters[0].cutoff = 5000.0 via serum-mcp",
+        "step_2": "Inspect VoiceFilter0.plainParams.kParamCutoff in raw CBOR",
+        "step_3": "Readback via describe_preset, verify filters[0].cutoff = 5000.0",
+        "success_criteria": "All three match"
+      },
+      "test_status": "PENDING"
+    },
+    {
+      "mechanism": "envelope",
+      "representative_control": "env1.attack",
+      "test_plan": {
+        "step_1": "Set envelopes[0].attack = 0.5 via serum-mcp",
+        "step_2": "Inspect Env0.plainParams.kParamAttack in raw CBOR",
+        "step_3": "Readback via describe_preset, verify envelopes[0].attack = 0.5",
+        "success_criteria": "All three match"
+      },
+      "test_status": "PENDING"
+    },
+    {
+      "mechanism": "lfo",
+      "representative_control": "lfo1.rate",
+      "test_plan": {
+        "step_1": "Set lfos[0].rate = 1.5 via serum-mcp",
+        "step_2": "Inspect LFO0.plainParams.kParamRate in raw CBOR",
+        "step_3": "Readback via describe_preset, verify lfos[0].rate = 1.5",
+        "success_criteria": "All three match"
+      },
+      "test_status": "PENDING"
+    },
+    {
+      "mechanism": "modulation_matrix",
+      "representative_control": "matrix.route1.source",
+      "test_plan": {
+        "step_1": "Set mod_routes[0].source = 'lfo1' via serum-mcp",
+        "step_2": "Inspect ModSlot0.plainParams.kParamModSource in raw CBOR",
+        "step_3": "Readback via describe_preset, verify mod_routes[0].source = 'lfo1'",
+        "success_criteria": "All three match"
+      },
+      "test_status": "PENDING"
+    },
+    {
+      "mechanism": "arpeggiator",
+      "representative_control": "arp.rate",
+      "test_plan": {
+        "step_1": "Set arp.rate = 2.0 via serum-mcp",
+        "step_2": "Inspect Arp0.plainParams.kParamRate in raw CBOR",
+        "step_3": "Readback via describe_preset, verify arp.rate = 2.0",
+        "success_criteria": "All three match"
+      },
+      "test_status": "PENDING"
+    },
+    {
+      "mechanism": "effects",
+      "representative_control": "fx.chain_fx1.type",
+      "test_plan": {
+        "step_1": "Set fx_chain[0].type = 'delay' via serum-mcp",
+        "step_2": "Inspect FXRack0.FX[0] type field in raw CBOR",
+        "step_3": "Readback via describe_preset, verify fx_chain[0].type = 'delay'",
+        "success_criteria": "All three match"
+      },
+      "test_status": "PENDING"
+    },
+    {
+      "mechanism": "global_and_voice",
+      "representative_control": "global.master_volume",
+      "test_plan": {
+        "step_1": "Set global_.master_volume = 0.9 via serum-mcp",
+        "step_2": "Inspect Global0.plainParams.kParamMasterVolume in raw CBOR",
+        "step_3": "Readback via describe_preset, verify global_.master_volume = 0.9",
+        "success_criteria": "All three match"
+      },
+      "test_status": "PENDING"
+    }
+  ],
+  "expected_outcomes": {
+    "if_all_pass": "Reclassify all 790 SOURCE_PROVEN controls to LIVE_EXECUTION_VERIFIED. Then readback-specific tests for LIVE_READBACK_VERIFIED classification.",
+    "if_partial_pass": "Identify which mechanisms fail (e.g., 'LFO curves cannot be authored'). Mark those as MANUAL_REQUIRED. Others become LIVE_EXECUTION_VERIFIED.",
+    "if_all_fail": "Phase 2C fails; bridge must be corrected before proceeding to Phase 3."
+  },
+  "phase_2_closure_gate": "Phase 2 closes only AFTER Phase 2C mechanism tests complete and controls are reclassified from SOURCE_PROVEN to LIVE_EXECUTION_VERIFIED / MANUAL_REQUIRED / UNRESOLVED based on actual test results.",
+  "next_phase": "Phase 2C execution (run 8 sentinel tests against Serum 2.0.21). This phase is NOT automated — requires manual testing or dedicated test harness."
+}

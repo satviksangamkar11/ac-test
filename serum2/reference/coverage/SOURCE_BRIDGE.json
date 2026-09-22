@@ -1,0 +1,73 @@
+{
+  "oscillator_shared": {
+    "octave": "kParamOctave",
+    "semitone": "kParamPitch",
+    "fine": "kParamFine",
+    "volume": "kParamVolume",
+    "pan": "kParamPan",
+    "unison": "kParamUnison",
+    "detune": "kParamDetune"
+  },
+  "oscillator_wavetable": {
+    "table_position": "kParamTablePos",
+    "warp_amount": "kParamWarp"
+  },
+  "oscillator_sample": {
+    "warp_amount": "kParamWarp"
+  },
+  "oscillator_granular": {
+    "granular_random_pitch": "kParamRandomPitch",
+    "granular_random_pan": "kParamRandomPan",
+    "granular_random_grain_length": "kParamRandomGrainLength",
+    "granular_random_offset": "kParamRandomOffset",
+    "granular_loop": "kParamLoopGrains",
+    "granular_jump_start": "kParamJumpStartGrains",
+    "granular_reverse": "kParamGrainReverse",
+    "granular_length_key_track": "kParamLengthKeyTrack",
+    "granular_max_grains": "kParamMaxNumGrains",
+    "granular_random_window_amount": "kParamRandomWindowAmount",
+    "granular_random_window_skew": "kParamRandomWindowSkew"
+  },
+  "oscillator_spectral": {
+    "spectral_warp_freq_lo": "kParamFreqLo",
+    "spectral_warp_freq_hi": "kParamFreqHi",
+    "spectral_filter_shift": "kParamSpecFltShift",
+    "spectral_filter_wet": "kParamSpecFltWetDry"
+  },
+  "oscillator_multisample": {
+    "multisample_env_attack": "kParamEnvAttack",
+    "multisample_env_decay": "kParamEnvDecay",
+    "multisample_env_release": "kParamEnvRelease"
+  },
+  "filter": {
+    "cutoff": "kParamFreq",
+    "resonance": "kParamReso",
+    "drive": "kParamDrive",
+    "stereo": "kParamStereo",
+    "var": "kParamVar",
+    "wet": "kParamWet",
+    "level_out": "kParamLevelOut"
+  },
+  "envelope": {
+    "attack": "kParamAttack",
+    "hold": "kParamHold",
+    "decay": "kParamDecay",
+    "sustain": "kParamSustain",
+    "release": "kParamRelease",
+    "attack_curve": "kParamCurve1",
+    "decay_curve": "kParamCurve2",
+    "release_curve": "kParamCurve3"
+  },
+  "lfo": {
+    "rate": "kParamRate",
+    "beat_sync": "kParamBeatSync",
+    "delay": "kParamDelay",
+    "rise": "kParamRise",
+    "smooth": "kParamSmooth",
+    "mono": "kParamMono",
+    "swing": "kParamSwing",
+    "dotted": "kParamDotted",
+    "triplets": "kParamTriplets",
+    "rate10x": "kParamRate10x"
+  }
+}

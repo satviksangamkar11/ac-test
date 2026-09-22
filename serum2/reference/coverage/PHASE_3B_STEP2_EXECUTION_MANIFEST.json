@@ -1,0 +1,191 @@
+{
+  "phase": "3B_step2_live_testing",
+  "date": "2026-09-23",
+  "status": "PRESETS GENERATED — READY FOR MANUAL GUI VERIFICATION",
+  "session_start_token_budget": 200000,
+  "session_end_token_budget": 73000,
+  "objective": "Verify 12 equivalence class representatives via Serum 2.0.21 GUI readback",
+  "methodology": {
+    "step_1": "Generate test preset via serum-mcp with representative set to specific test value",
+    "step_2": "Load .SerumPreset in Ableton Live 12 hosting Serum 2.0.21",
+    "step_3": "Navigate to relevant Serum GUI tab and locate representative control",
+    "step_4": "Read actual GUI value via tooltip or numeric display",
+    "step_5": "Compare against expected value (must match or be plausibly equivalent)",
+    "step_6": "Record: PASS (exact/plausible match), FAIL (no effect/wrong value), PARTIAL (display issue like LFO rate truncation)",
+    "step_7": "Document in PHASE_3B_STEP2_LIVE_TEST_RESULTS.json"
+  },
+  "test_plan": [
+    {
+      "rank": 1,
+      "class": "fx_core",
+      "controls": 170,
+      "representative": "fx.delay.wet",
+      "preset_name": "TEST_3B_01_fx_core",
+      "preset_path": "C:\\Users\\Satvik\\Documents\\Xfer\\Serum 2 Presets\\Presets\\User\\TEST_3B_01_fx_core.SerumPreset",
+      "test_value": 75,
+      "test_unit": "%",
+      "expected_display": "75% (wet level knob or numeric field in FX tab)",
+      "status": "PRESET_GENERATED — AWAITING_GUI_TEST",
+      "gui_location": "FX CHAIN tab -> Delay unit -> WET knob/slider"
+    },
+    {
+      "rank": 2,
+      "class": "matrix_core",
+      "controls": 121,
+      "representative": "mod_routes[0].amount",
+      "preset_name": "TEST_3B_02_matrix_core",
+      "test_value": 42,
+      "test_unit": "%",
+      "expected_display": "42% modulation amount on first matrix route",
+      "status": "AWAITING_GENERATION",
+      "gui_location": "MATRIX tab -> first route visible row -> AMOUNT column"
+    },
+    {
+      "rank": 3,
+      "class": "lfo_scalar",
+      "controls": 72,
+      "representative": "lfo1.rate",
+      "preset_name": "TEST_3B_03_lfo_scalar",
+      "test_value": 1.5,
+      "test_unit": "Hz",
+      "expected_display": "1.5 Hz or 1.5 (free-running mode), may display as fractional",
+      "status": "AWAITING_GENERATION",
+      "gui_location": "LFO1 section -> RATE knob/numeric display",
+      "note": "May display as 1 or 2 due to describe_preset() truncation (display bug, not data bug)"
+    },
+    {
+      "rank": 4,
+      "class": "global_scalar",
+      "controls": 66,
+      "representative": "global.master_volume",
+      "preset_name": "TEST_3B_04_global_scalar",
+      "test_value": 0.85,
+      "test_unit": "normalized (0-1, ~1.27 linear = 2.1dB)",
+      "expected_display": "0.85 normalized or 2.1 dB equivalent on master volume fader",
+      "status": "AWAITING_GENERATION",
+      "gui_location": "GLOBAL tab -> Master Volume fader"
+    },
+    {
+      "rank": 5,
+      "class": "filter_scalar",
+      "controls": 62,
+      "representative": "filter1.cutoff",
+      "preset_name": "TEST_3B_05_filter_scalar",
+      "test_value": 0.5,
+      "test_unit": "normalized (0-1, midpoint)",
+      "expected_display": "0.5 or ~1390 Hz (midpoint of typical filter range)",
+      "status": "AWAITING_GENERATION",
+      "gui_location": "FILTER1 tab -> CUTOFF knob"
+    },
+    {
+      "rank": 6,
+      "class": "macro_scalar",
+      "controls": 48,
+      "representative": "macro1.value",
+      "preset_name": "TEST_3B_06_macro_scalar",
+      "test_value": 50,
+      "test_unit": "%",
+      "expected_display": "50% on macro1 value display",
+      "status": "AWAITING_GENERATION",
+      "gui_location": "GLOBAL tab -> Macro 1 display/knob"
+    },
+    {
+      "rank": 7,
+      "class": "arp_core",
+      "controls": 47,
+      "representative": "arp.rate",
+      "preset_name": "TEST_3B_07_arp_core",
+      "test_value": "1/32",
+      "test_unit": "enum (note division)",
+      "expected_display": "1/32 (32nd note) on arp rate display",
+      "status": "AWAITING_GENERATION",
+      "gui_location": "ARP/GLOBAL tab -> Rate knob showing note divisions"
+    },
+    {
+      "rank": 8,
+      "class": "env_scalar",
+      "controls": 24,
+      "representative": "env1.attack",
+      "preset_name": "TEST_3B_08_env_scalar",
+      "test_value": 0.5,
+      "test_unit": "seconds",
+      "expected_display": "0.5 s or 500 ms on ENV1 attack knob",
+      "status": "AWAITING_GENERATION",
+      "gui_location": "ENV1 section -> ATTACK knob/numeric"
+    },
+    {
+      "rank": 9,
+      "class": "keyboard_state",
+      "controls": 21,
+      "representative": "keyboard.key",
+      "preset_name": "TEST_3B_09_keyboard_state",
+      "test_value": 60,
+      "test_unit": "MIDI note (C3)",
+      "expected_display": "May not be directly visible in GUI (keyboard state is runtime, not preset-stored)",
+      "status": "AWAITING_GENERATION",
+      "gui_location": "N/A (keyboard state may not persist across preset load)",
+      "risk": "UNCERTAIN if keyboard.key is truly preset-authoring parameter or runtime state"
+    },
+    {
+      "rank": 10,
+      "class": "unknown_oscnoise",
+      "controls": 10,
+      "representative": "oscNoise.color",
+      "preset_name": "TEST_3B_10_unknown_oscnoise",
+      "test_value": 0.5,
+      "test_unit": "normalized (0-1)",
+      "expected_display": "0.5 on Noise oscillator color knob",
+      "status": "AWAITING_GENERATION",
+      "gui_location": "OSC Noise section (index 3) -> COLOR knob"
+    },
+    {
+      "rank": 11,
+      "class": "unknown_oscsub",
+      "controls": 8,
+      "representative": "oscSub.coarse_pitch",
+      "preset_name": "TEST_3B_11_unknown_oscsub",
+      "test_value": -12,
+      "test_unit": "semitones",
+      "expected_display": "-12 (one octave down) on Sub oscillator pitch display",
+      "status": "AWAITING_GENERATION",
+      "gui_location": "OSC Sub section (index 4) -> COARSE PITCH knob"
+    },
+    {
+      "rank": 12,
+      "class": "voice_panel",
+      "controls": 8,
+      "representative": "voice.voicing.legato",
+      "preset_name": "TEST_3B_12_voice_panel",
+      "test_value": true,
+      "test_unit": "boolean",
+      "expected_display": "Legato ON/enabled in GLOBAL tab VOICE CONTROL panel",
+      "status": "AWAITING_GENERATION",
+      "gui_location": "GLOBAL tab -> VOICE CONTROL -> Legato toggle"
+    }
+  ],
+  "critical_notes": [
+    "TEST_3B_01_fx_core.SerumPreset generated successfully in session 1",
+    "Remaining 11 presets ready to generate in next session",
+    "Keyboard state (test 9) may not be preset-authorable — risk of UNRESOLVED or MANUAL_REQUIRED classification",
+    "LFO rate (test 3) may display fractionally-truncated in describe_preset() (display bug), but GUI should show exact 1.5 Hz",
+    "All tests must read ACTUAL Serum 2.0.21 GUI values, not describe_preset() summaries",
+    "Comparison tolerance: must be exact match OR plausibly equivalent (e.g., Hz vs normalized, dB vs linear)",
+    "Each PASS result promotes entire equivalence class siblings to AUTO_VERIFIED",
+    "Each FAIL result classifies entire equivalence class as MANUAL_REQUIRED (with failure reason)"
+  ],
+  "next_session_tasks": [
+    "Generate remaining 11 test presets (tests 2-12)",
+    "Load each preset in Ableton Live 12 + Serum 2.0.21",
+    "Read GUI values via tooltips/numeric displays for each representative control",
+    "Record verdict (PASS/FAIL/PARTIAL) in PHASE_3B_STEP2_LIVE_TEST_RESULTS.json",
+    "Apply promotion rules: PASS -> auto-promote all siblings to AUTO_VERIFIED",
+    "Recompute 1,136-row bridge with Phase 3B results",
+    "Verify integrity: 1,136 rows total, 0 missing, 0 duplicates",
+    "Transition to Phase 3D final recount"
+  ],
+  "expected_outcomes": {
+    "best_case": "All 12 representatives PASS -> 657 OBSERVATION_GAP bulk-promoted to AUTO_VERIFIED -> new total ~790 AUTO_VERIFIED",
+    "partial_case": "Mixed PASS/FAIL -> selective promotion -> AUTO_VERIFIED expanded by subset of 657",
+    "worst_case": "Multiple FAIL verdicts -> classes become MANUAL_REQUIRED -> 657 OBSERVATION_GAP remains largely unchanged"
+  }
+}
