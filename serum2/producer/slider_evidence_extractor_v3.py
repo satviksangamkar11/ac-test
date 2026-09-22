@@ -24,10 +24,12 @@ from PIL import Image
 
 from slider_geometry_detector_v3 import (
     establish_structural_rail,
+    establish_structural_rail_universal,
     detect_slider_handle_in_row,
     StructuralRail,
     GeometryDetectionError,
 )
+from reference_rail_selection_v3 import ReferenceRailSelection
 from phase4_2_slider_calibration_pipeline import (
     calibrate_slider_amount,
     SliderObservation as CalibrationObservation,
@@ -81,6 +83,7 @@ class ExtractionResult:
     # Structural rail info (for provenance)
     structural_rail: Optional[StructuralRail] = None
     reference_row_sources: List[int] = None
+    reference_rail_selection: Optional[ReferenceRailSelection] = None
 
     # Error/diagnostic
     error_message: Optional[str] = None
@@ -110,14 +113,15 @@ class SliderEvidenceExtractorV3:
         request: ExtractionRequest,
         reference_row_ys: Optional[List[int]] = None,
         amount_column_x_range: Tuple[int, int] = (198, 324),
+        use_universal_selection: bool = True,
     ) -> ExtractionResult:
         """Extract slider geometry and calibrated amount from image.
 
         Args:
             request: Extraction request with image path and row_y hint
-            reference_row_ys: List of y-coordinates for empty/reference rows
-                If None, will attempt auto-detection
+            reference_row_ys: List of y-coordinates for fallback if universal selection fails
             amount_column_x_range: (x_min, x_max) structural bounds
+            use_universal_selection: If True, auto-detect reference rows from image
 
         Returns:
             ExtractionResult with geometry and calibrated amount
@@ -132,7 +136,8 @@ class SliderEvidenceExtractorV3:
                 "image_path": request.image_path,
                 "extraction_method": request.extraction_method,
                 "extractor_id": self.extractor_id,
-                "detector_architecture": "v3_structural_rail",
+                "detector_architecture": "v3_structural_rail_universal",
+                "reference_selection_mode": "automatic" if use_universal_selection else "manual",
             },
         )
 
@@ -145,15 +150,27 @@ class SliderEvidenceExtractorV3:
             result.error_message = f"Failed to load image: {e}"
             return result
 
-        # If reference rows not provided, use sensible default for Matrix Amount
-        if reference_row_ys is None:
-            reference_row_ys = [280]  # Empirically determined from HEEGN1Xl5o4
-
         # Step 1: Establish structural rail from reference rows
         try:
-            rail = establish_structural_rail(arr, reference_row_ys, amount_column_x_range)
+            if use_universal_selection:
+                # Auto-detect reference rows from image evidence
+                rail, selection = establish_structural_rail_universal(
+                    arr,
+                    amount_column_x_range,
+                    fallback_rows=reference_row_ys,
+                )
+                result.reference_rail_selection = selection
+                result.reference_row_sources = selection.selected_rows
+            else:
+                # Use provided reference rows or raise error
+                if not reference_row_ys:
+                    raise GeometryDetectionError(
+                        "Manual mode requires reference_row_ys to be specified"
+                    )
+                rail = establish_structural_rail(arr, reference_row_ys, amount_column_x_range)
+                result.reference_row_sources = reference_row_ys
+
             result.structural_rail = rail
-            result.reference_row_sources = reference_row_ys
             result.left_pixel = float(rail.left_pixel)
             result.right_pixel = float(rail.right_pixel)
         except GeometryDetectionError as e:

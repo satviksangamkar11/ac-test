@@ -3,10 +3,17 @@
 Key insight: Track fill changes with value, but rail geometry is fixed.
 Use reference rows (empty slots) to establish the structural rail once,
 then detect only handle positions in populated rows.
+
+Reference rows are selected dynamically from image evidence (not hardcoded).
 """
 
 from typing import Tuple, Optional, NamedTuple, List
 import numpy as np
+from reference_rail_selection_v3 import (
+    select_reference_rows_automatic,
+    select_reference_rows_with_fallback,
+    ReferenceRailSelection,
+)
 
 
 class StructuralRail(NamedTuple):
@@ -115,6 +122,54 @@ def establish_structural_rail(
         width=rail_width,
         center_x=(rail_left + rail_right) / 2.0,
     )
+
+
+def establish_structural_rail_universal(
+    arr: np.ndarray,
+    amount_column_x_range: Tuple[int, int],
+    fallback_rows: Optional[List[int]] = None,
+) -> Tuple[StructuralRail, ReferenceRailSelection]:
+    """Establish structural rail using automatic reference row selection.
+
+    Universal version: selects reference rows from image evidence, no hardcoding.
+
+    Args:
+        arr: Image array (H, W, C)
+        amount_column_x_range: (x_min, x_max) of Amount column
+        fallback_rows: List of y-coordinates to use if auto-detection fails
+
+    Returns:
+        (StructuralRail, ReferenceRailSelection) - geometry and selection provenance
+
+    Raises:
+        GeometryDetectionError: If rail cannot be established even with fallback
+    """
+
+    # Select reference rows automatically or with fallback
+    selection = select_reference_rows_with_fallback(
+        arr,
+        amount_column_x_range,
+        fallback_rows=fallback_rows,
+    )
+
+    if not selection.selected_rows:
+        raise GeometryDetectionError(
+            f"Could not select reference rows. Reason: {selection.selection_reason}"
+        )
+
+    # Establish rail from selected rows
+    try:
+        rail = establish_structural_rail(
+            arr,
+            selection.selected_rows,
+            amount_column_x_range,
+        )
+        return rail, selection
+    except GeometryDetectionError as e:
+        # Selection returned rows, but rail establishment failed
+        raise GeometryDetectionError(
+            f"Selected reference rows {selection.selected_rows} but rail establishment failed: {e}"
+        )
 
 
 def detect_slider_handle_in_row(
