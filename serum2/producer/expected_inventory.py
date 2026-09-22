@@ -40,6 +40,7 @@ class ObservationOutcome(Enum):
     NOT_APPLICABLE = "NOT_APPLICABLE"
     UNSUPPORTED_MODALITY = "UNSUPPORTED_MODALITY"
     VALIDATION_REJECTED = "VALIDATION_REJECTED"
+    UNRESOLVED_METADATA = "UNRESOLVED_METADATA"  # Atlas cannot resolve this control ID
 
 
 @dataclass
@@ -183,7 +184,10 @@ class ExpectedInventoryBuilder:
         """Build complete expected inventory.
 
         Returns inventory keyed by canonical_id.
-        Includes all controls expected from episode context, even if unreadable.
+        Includes all controls expected from episode context, even if unreadable or unresolved by Atlas.
+
+        CRITICAL: Controls unresolved by Atlas get UNRESOLVED observation_kind + strategy,
+        not invented defaults. This preserves the North Star: explicit terminal states only.
         """
         expected_ids = self.context.get_expected_set()
 
@@ -194,6 +198,11 @@ class ExpectedInventoryBuilder:
 
             # Look up control in Atlas to get observation_kind, strategy
             obs_kind, strategy = self._resolve_observation_type(canonical_id)
+
+            # If Atlas cannot resolve this control, mark it explicitly as UNRESOLVED
+            if obs_kind is None or strategy is None:
+                obs_kind = "UNRESOLVED"
+                strategy = "UNRESOLVED"  # No observation strategy available
 
             observation = ExpectedObservation(
                 canonical_id=canonical_id,
@@ -220,7 +229,12 @@ class ExpectedInventoryBuilder:
         not from control-name heuristics. Placeholder implementation with
         Atlas-backed lookups from serum_atlas.py.
         """
-        from serum_atlas import get_control, normalize_control
+        # Import from canonical module path, not bare import
+        try:
+            from serum2.reference.serum_atlas import get_control, normalize_control
+        except ImportError:
+            # Atlas module unavailable — explicit UNRESOLVED, not fallback
+            return (None, None)
 
         try:
             # Normalize the canonical_id (removes aliases, ensures canonical form)
@@ -230,8 +244,8 @@ class ExpectedInventoryBuilder:
             control = get_control(normalized_id)
 
             if not control:
-                # Unknown control — explicit UNKNOWN, not inferred
-                return ("UNKNOWN", "TEXT")
+                # Atlas cannot resolve this control — explicit UNRESOLVED, not invented strategy
+                return (None, None)
 
             # Derive observation strategy from Atlas element_kind
             element_kind = getattr(control, 'element_kind', None)
@@ -255,12 +269,12 @@ class ExpectedInventoryBuilder:
                 # Text label
                 return ("TEXT", "TEXT")
             else:
-                # Unmapped element kind — explicit UNKNOWN
-                return ("UNKNOWN", "TEXT")
+                # Unmapped element kind in Atlas — explicit UNRESOLVED, not invented
+                return (None, None)
 
         except Exception:
-            # Atlas lookup failed — explicit UNKNOWN, not fallback inference
-            return ("UNKNOWN", "TEXT")
+            # Atlas lookup failed — explicit UNRESOLVED, not invented strategy
+            return (None, None)
 
 
 class CompletenessValidator:

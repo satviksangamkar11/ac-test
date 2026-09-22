@@ -206,7 +206,7 @@ def run_phase_3_3_tests():
             if test_func():
                 passed += 1
         except AssertionError as e:
-            print(f"❌ {name}: {e}")
+            print(f"[FAIL] {name}: {e}")
 
     print("\n" + "=" * 70)
     print(f"Phase 3.3 Results: {passed}/{len(tests)} PASSED")
