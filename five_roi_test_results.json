@@ -1,0 +1,49 @@
+{
+  "correct": 4,
+  "total": 5,
+  "tests": [
+    {
+      "test_id": 1,
+      "name": "OSC A Unison (numeric)",
+      "raw_output": "VALUE=7",
+      "ground_truth": "7",
+      "exact_match": true,
+      "inference_time": 4.511998653411865
+    },
+    {
+      "test_id": 2,
+      "name": "Matrix row (table structure)",
+      "raw_output": "SOURCE=Env 2\nDESTINATION=Filter 1 Freq",
+      "ground_truth": {
+        "SOURCE": "Env 2",
+        "DESTINATION": "Filter 1 Freq"
+      },
+      "exact_match": true,
+      "inference_time": 4.261560678482056
+    },
+    {
+      "test_id": 3,
+      "name": "LFO1 mode (enum/text)",
+      "raw_output": "UNREADABLE=The text is not clear and cannot be read.",
+      "ground_truth": "Chaos: Lorenz",
+      "exact_match": false,
+      "inference_time": 1.767439603805542
+    },
+    {
+      "test_id": 4,
+      "name": "Overdrive Drive (FX numeric)",
+      "raw_output": "DRIVE=1.9",
+      "ground_truth": "1.9",
+      "exact_match": true,
+      "inference_time": 1.632678508758545
+    },
+    {
+      "test_id": 5,
+      "name": "Legato (boolean)",
+      "raw_output": "STATE=OFF",
+      "ground_truth": "OFF",
+      "exact_match": true,
+      "inference_time": 1.7940971851348877
+    }
+  ]
+}
