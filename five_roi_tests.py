@@ -35,7 +35,8 @@ TESTS = [
         "id": 1, "name": "OSC A Unison (numeric)",
         "image": "t1_unison.png",
         "prompt": "Read only the target control in this crop.\n\nTarget: OSC A Unison\nReturn exactly:\nVALUE=<visible text>\nor\nUNREADABLE=<reason>\n\nDo not infer. Do not convert units. Do not use information outside the crop.",
-        "ground_truth": "7"
+        "ground_truth": "7",
+        "expected_output": "VALUE=7"
     },
     {
         "id": 2, "name": "Matrix row (table structure)",
@@ -50,48 +51,63 @@ TESTS = [
         # false abstention (UNREADABLE) on this same, legible crop. Plain literal transcription
         # reads it correctly. Using the prompt that actually works, not the one in the commit log.
         "prompt": "What text do you see in this image? Just transcribe it exactly.",
-        "ground_truth": "Chaos: Lorenz"
+        "ground_truth": "Chaos: Lorenz",
+        "expected_output": "Chaos: Lorenz"
     },
     {
         "id": 4, "name": "Overdrive Drive (FX numeric)",
         "image": "t4_drive.png",
         "prompt": "Read only the target control in this crop.\n\nTarget: Drive value\nReturn exactly:\nDRIVE=<visible text>\nor\nUNREADABLE=<reason>",
-        "ground_truth": "1.9"
+        "ground_truth": "1.9",
+        "expected_output": "DRIVE=1.9"
     },
     {
         "id": 5, "name": "Legato (boolean)",
         "image": "t5_legato.png",
         "prompt": "This crop shows a checkbox labeled LEGATO. Determine if the checkbox is checked (ON) or unchecked (OFF).\nReturn exactly:\nSTATE=ON\nor\nSTATE=OFF",
-        "ground_truth": "OFF"
+        "ground_truth": "OFF",
+        "expected_output": "STATE=OFF"
     },
 ]
 
-def score(raw_output, ground_truth):
+def score(raw_output, test):
     """Returns (exact_match: bool, category: str). Category is diagnostic only;
-    exact_match is the primary score."""
+    exact_match is the primary score. Exact match means the FULL normalized output
+    equals the FULL normalized expected output (or, for structured targets, that the
+    complete parsed key set equals the complete ground-truth key set with matching
+    values) -- not substring containment. A response with extra hedging/trailing text
+    beyond the expected format fails as WRONG_STRUCTURE, not PASS."""
+    ground_truth = test["ground_truth"]
     norm_output = normalize(raw_output)
     is_abstention = "unreadable" in norm_output
 
     if isinstance(ground_truth, dict):
-        # Structured target: parse KEY=value pairs out of the output, normalize both sides.
+        # Structured target: parse ALL KEY=value pairs out of the output (not just the
+        # expected ones), normalize both sides, and require full dict equality -- extra
+        # or missing keys are a structural failure, not a pass.
         parsed = dict(re.findall(r"(\w+)\s*=\s*([^\n]+)", raw_output))
         parsed_norm = {k.upper(): normalize(v) for k, v in parsed.items()}
         gt_norm = {k.upper(): normalize(v) for k, v in ground_truth.items()}
-        match = all(parsed_norm.get(k) == v for k, v in gt_norm.items())
+        match = parsed_norm == gt_norm
         if match:
             return True, "PASS"
         if is_abstention:
             return False, "FALSE_ABSTENTION"
-        if set(gt_norm.keys()) - set(parsed_norm.keys()):
+        if parsed_norm.keys() != gt_norm.keys():
             return False, "WRONG_STRUCTURE"
         return False, "WRONG_VALUE"
     else:
-        gt_norm = normalize(ground_truth)
-        match = gt_norm in norm_output
+        expected_norm = normalize(test["expected_output"])
+        match = norm_output == expected_norm
         if match:
             return True, "PASS"
         if is_abstention:
             return False, "FALSE_ABSTENTION"
+        # Right value present but wrapped in extra text (hedging, trailing claims, etc.)
+        # is a structural failure of the output format, not a value error.
+        gt_norm = normalize(str(ground_truth))
+        if gt_norm in norm_output:
+            return False, "WRONG_STRUCTURE"
         return False, "WRONG_VALUE"
 
 results = []
@@ -99,7 +115,7 @@ correct_count = 0
 
 for t in TESTS:
     result, elapsed = ask(t["image"], t["prompt"])
-    match, category = score(result, t["ground_truth"])
+    match, category = score(result, t)
 
     print(f"\n{'='*70}")
     print(f"TEST {t['id']}: {t['name']}  ({elapsed:.1f}s)")

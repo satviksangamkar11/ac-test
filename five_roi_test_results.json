@@ -21,7 +21,7 @@
       "ground_truth": "7",
       "exact_match": true,
       "category": "PASS",
-      "inference_time": 2.2358005046844482
+      "inference_time": 2.084759473800659
     },
     {
       "test_id": 2,
@@ -35,7 +35,7 @@
       },
       "exact_match": true,
       "category": "PASS",
-      "inference_time": 1.2817871570587158
+      "inference_time": 1.2340960502624512
     },
     {
       "test_id": 3,
@@ -46,7 +46,7 @@
       "ground_truth": "Chaos: Lorenz",
       "exact_match": true,
       "category": "PASS",
-      "inference_time": 0.5769944190979004
+      "inference_time": 0.5686888694763184
     },
     {
       "test_id": 4,
@@ -57,7 +57,7 @@
       "ground_truth": "1.9",
       "exact_match": true,
       "category": "PASS",
-      "inference_time": 0.63356614112854
+      "inference_time": 0.612138032913208
     },
     {
       "test_id": 5,
@@ -68,7 +68,7 @@
       "ground_truth": "OFF",
       "exact_match": true,
       "category": "PASS",
-      "inference_time": 0.4306638240814209
+      "inference_time": 0.4239063262939453
     }
   ]
 }
