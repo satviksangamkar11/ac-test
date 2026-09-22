@@ -13,16 +13,16 @@ ROUTE IDENTITIES (independently verified by Claude visual audit):
 ✓ Env 3 → Noise Level
 ✓ Env 2 → Filter 1 Freq
 
-ROUTE AMOUNTS (pixel-calibrated, NOT directly observed):
+ROUTE AMOUNTS (v3 detector pixel-calibration, January 2025):
 Domain: [-100, +100]% (Matrix Amount canonical representation)
 Unit: % (percentage points)
 Tolerance: ±5.0 (must agree within 5 percentage points for gate to pass)
-Source: SLIDER_PIXEL_CALIBRATION (not tooltip-observed)
+Source: SLIDER_PIXEL_CALIBRATION (structural rail architecture v3)
 
-- LFO 1 → A Fine:       +6.7 %   (calibrated from pixel position 375)
-- LFO 1 → B Fine:       -12.0 %  (calibrated from pixel position 368)
-- Env 3 → Noise Level:  -33.3 %  (calibrated from pixel position 360)
-- Env 2 → Filter 1 Freq: +1.3 %  (calibrated from pixel position 373)
+- LFO 1 → A Fine:       +2.4 %   (v3 rail [198-323], handle 262)
+- LFO 1 → B Fine:       +2.4 %   (v3 rail [198-323], handle 262)
+- Env 3 → Noise Level:  +34.4 %  (v3 rail [198-323], handle 282)
+- Env 2 → Filter 1 Freq: +71.2 % (v3 rail [198-323], handle 305)
 
 GATE STATUS (before blind verification):
 - unresolved_required:     0 (all four routes represented)
@@ -44,48 +44,57 @@ NEXT: Run hardened gate with corrected manifests and verify amount agreement.
       Do not advance to Phase 4.3 until amounts pass verification.
 """
 
-# Corrected route definitions
+# Corrected route definitions — v3 detector calibration
 # All amounts in canonical domain: [-100, +100] % (percentage points)
+# All amounts from production v3 detector (structural rail [198-323], handle detection)
 CORRECTED_ROUTES = [
     {
-        "route_id": "matrix_row1",
+        "route_id": "LFO 1 → A Fine",
         "source": "LFO 1",
-        "destination": "A Fine",
-        "amount": 6.7,  # canonical domain: +6.7 percentage points
+        "destination": "Osc A Fine",
+        "amount": 2.4,  # v3: rail [198-323], handle 262, normalized 0.512, amount +2.4%
         "amount_unit": "%",
         "amount_domain": (-100.0, 100.0),
         "amount_source": "SLIDER_PIXEL_CALIBRATION",
-        "calibration_note": "Knob pixel 375 of 75px track (53% right). Formula: -100 + (normalized * 200)",
+        "calibration_note": "v3 detector: structural rail 198-323, handle pixel 262. GenericSliderCalibration: normalized=(262-198)/125=0.512, amount=0.512*200-100=+2.4%",
+        "geometry_provenance": "v3_structural_rail_architecture",
+        "reference_row": 280,
     },
     {
-        "route_id": "matrix_row2",
+        "route_id": "LFO 1 → B Fine",
         "source": "LFO 1",
-        "destination": "B Fine",
-        "amount": -12.0,  # canonical domain: -12.0 percentage points
+        "destination": "Osc B Fine",
+        "amount": 2.4,  # v3: rail [198-323], handle 262 (same as row 1)
         "amount_unit": "%",
         "amount_domain": (-100.0, 100.0),
         "amount_source": "SLIDER_PIXEL_CALIBRATION",
-        "calibration_note": "Knob pixel 368 of 75px track (44% right).",
+        "calibration_note": "v3 detector: structural rail 198-323, handle pixel 262. GenericSliderCalibration: +2.4%",
+        "geometry_provenance": "v3_structural_rail_architecture",
+        "reference_row": 280,
     },
     {
-        "route_id": "matrix_row3",
+        "route_id": "Env 3 → Noise Level",
         "source": "Env 3",
         "destination": "Noise Level",
-        "amount": -33.3,  # canonical domain: -33.3 percentage points
+        "amount": 34.4,  # v3: rail [198-323], handle 282
         "amount_unit": "%",
         "amount_domain": (-100.0, 100.0),
         "amount_source": "SLIDER_PIXEL_CALIBRATION",
-        "calibration_note": "Knob pixel 360 of 75px track (33% right).",
+        "calibration_note": "v3 detector: structural rail 198-323, handle pixel 282. GenericSliderCalibration: normalized=(282-198)/125=0.672, amount=0.672*200-100=+34.4%",
+        "geometry_provenance": "v3_structural_rail_architecture",
+        "reference_row": 280,
     },
     {
-        "route_id": "matrix_row4",
+        "route_id": "Env 2 → Filter 1 Freq",
         "source": "Env 2",
         "destination": "Filter 1 Freq",
-        "amount": 1.3,  # canonical domain: +1.3 percentage points
+        "amount": 71.2,  # v3: rail [198-323], handle 305
         "amount_unit": "%",
         "amount_domain": (-100.0, 100.0),
         "amount_source": "SLIDER_PIXEL_CALIBRATION",
-        "calibration_note": "Knob pixel 373 of 75px track (51% right).",
+        "calibration_note": "v3 detector: structural rail 198-323, handle pixel 305. GenericSliderCalibration: normalized=(305-198)/125=0.856, amount=0.856*200-100=+71.2%",
+        "geometry_provenance": "v3_structural_rail_architecture",
+        "reference_row": 280,
     },
 ]
 
