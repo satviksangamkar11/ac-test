@@ -7,7 +7,13 @@ Three failure conditions, one success condition.
 """
 
 import sys
-from expected_inventory import CompletenessValidator, ExpectedObservation, TerminalObservation, ObservationOutcome
+from expected_inventory import (
+    CompletenessValidator,
+    ExpectedObservation,
+    TerminalObservation,
+    ObservationOutcome,
+    DuplicateTerminalObservation,
+)
 
 
 def test_missing_expected_item_fails():
@@ -91,7 +97,7 @@ def test_extra_unexpected_item_fails():
 
 
 def test_duplicate_terminal_fails():
-    """Invariant: Duplicate terminal outcome for same canonical_id -> FAIL
+    """Invariant: Duplicate terminal outcome for same canonical_id -> explicit FAIL
 
     This prevents accidental double-accounting of the same observation.
     """
@@ -107,14 +113,16 @@ def test_duplicate_terminal_fails():
     # Add first terminal for control_A
     validator.add_terminal_observation(TerminalObservation("control_A", ObservationOutcome.OBSERVED))
 
-    # Try to add duplicate terminal for control_A
-    initial_count = len(validator.terminal_ids)
-    validator.add_terminal_observation(TerminalObservation("control_A", ObservationOutcome.OBSERVED))
-
-    # Set-based tracking should prevent duplicates
-    assert len(validator.terminal_ids) == initial_count, "Duplicate terminal should not increase count"
-    print(f"[PASS] Correctly prevented duplicate: control_A terminal_ids count unchanged")
-    return True
+    # Try to add duplicate terminal for control_A — must raise exception
+    try:
+        validator.add_terminal_observation(TerminalObservation("control_A", ObservationOutcome.SOURCE_INSUFFICIENT))
+        # Should not reach here
+        print("[FAIL] Duplicate was not rejected!")
+        return False
+    except DuplicateTerminalObservation as e:
+        # Correct behavior: explicit rejection
+        print(f"[PASS] Correctly rejected duplicate: {str(e)[:80]}...")
+        return True
 
 
 def test_real_reference_scenario():
@@ -172,7 +180,7 @@ def test_real_reference_scenario():
     assert len(result["extra"]) == 0, "No extra items"
     print(f"[PASS] Real reference scenario PASSED")
     print(f"   Expected: {len(expected)} controls")
-    print(f"   Terminal outcomes: {len(validator.terminal_ids)}")
+    print(f"   Terminal outcomes: {len(validator.terminal_observations)}")
     print(f"   All accounted for (including SOURCE_INSUFFICIENT)")
     return True
 

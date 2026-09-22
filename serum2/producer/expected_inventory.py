@@ -18,6 +18,15 @@ from enum import Enum
 import json
 
 
+class DuplicateTerminalObservation(Exception):
+    """Raised when a duplicate terminal observation is attempted for the same canonical_id.
+
+    Prevents silent contradiction of evidence (e.g., one outcome says OBSERVED,
+    another says SOURCE_INSUFFICIENT for the same control).
+    """
+    pass
+
+
 class ObservationOutcome(Enum):
     """Terminal evidence outcomes — all explicit, no silent drops."""
     OBSERVED = "OBSERVED"
@@ -200,24 +209,57 @@ class ExpectedInventoryBuilder:
         return self.inventory
 
     def _resolve_observation_type(self, canonical_id: str) -> tuple:
-        """Look up observation kind and strategy for a control ID.
+        """Look up observation kind and strategy for a control ID via frozen Atlas.
+
+        UNIVERSAL ARCHITECTURE: Does NOT use parameter-name string matching.
+        Instead: canonical_id + Atlas lookup → observation_kind + strategy
 
         Returns: (observation_kind, strategy)
+
+        This must be populated from the frozen Serum 2.0.21 Atlas/UI Atlas,
+        not from control-name heuristics. Placeholder implementation with
+        Atlas-backed lookups from serum_atlas.py.
         """
-        # Simplified lookup; real implementation would query Atlas
-        if "drive" in canonical_id.lower():
-            return ("NUMERIC", "NUMERIC")
-        elif "mode" in canonical_id.lower() or "shape" in canonical_id.lower():
-            return ("ENUM", "ENUM")
-        elif "legato" in canonical_id.lower() or "mono" in canonical_id.lower():
-            return ("ENABLE_STATE", "ENABLE_STATE")
-        elif "unison" in canonical_id.lower():
-            return ("NUMERIC", "NUMERIC")
-        elif "route:" in canonical_id.lower():
-            return ("ROUTE", "ROUTE_TEXT")
-        elif "amount" in canonical_id.lower() and "matrix" in canonical_id.lower():
-            return ("MATRIX_AMOUNT", "SLIDER_PIXEL")
-        else:
+        from serum_atlas import get_control, normalize_control
+
+        try:
+            # Normalize the canonical_id (removes aliases, ensures canonical form)
+            normalized_id = normalize_control(canonical_id)
+
+            # Look up the control in the frozen Atlas
+            control = get_control(normalized_id)
+
+            if not control:
+                # Unknown control — explicit UNKNOWN, not inferred
+                return ("UNKNOWN", "TEXT")
+
+            # Derive observation strategy from Atlas element_kind
+            element_kind = getattr(control, 'element_kind', None)
+
+            if element_kind == "CONTROL":
+                # Continuous parameter
+                return ("NUMERIC", "NUMERIC")
+            elif element_kind == "SELECTOR":
+                # Enum/categorical value
+                return ("ENUM", "ENUM")
+            elif element_kind == "ENABLE_STATE":
+                # Checkbox/toggle
+                return ("ENABLE_STATE", "ENABLE_STATE")
+            elif element_kind == "ROUTE":
+                # Modulation routing
+                return ("ROUTE", "ROUTE_TEXT")
+            elif element_kind in ("GRAPH", "CURVE"):
+                # Visual/derived state
+                return ("GRAPH_DERIVED", "GRAPH_DERIVED")
+            elif element_kind == "TEXT_IDENTITY":
+                # Text label
+                return ("TEXT", "TEXT")
+            else:
+                # Unmapped element kind — explicit UNKNOWN
+                return ("UNKNOWN", "TEXT")
+
+        except Exception:
+            # Atlas lookup failed — explicit UNKNOWN, not fallback inference
             return ("UNKNOWN", "TEXT")
 
 
@@ -229,12 +271,22 @@ class CompletenessValidator:
 
     def __init__(self, expected_inventory: Dict[str, ExpectedObservation]):
         self.expected_ids = set(expected_inventory.keys())
-        self.terminal_ids = set()
+        self.terminal_observations: Dict[str, TerminalObservation] = {}
         self.validation_report = {}
 
     def add_terminal_observation(self, terminal_obs: TerminalObservation):
-        """Record a terminal observation outcome."""
-        self.terminal_ids.add(terminal_obs.canonical_id)
+        """Record a terminal observation outcome.
+
+        Raises DuplicateTerminalObservation if a terminal for this canonical_id already exists.
+        """
+        if terminal_obs.canonical_id in self.terminal_observations:
+            raise DuplicateTerminalObservation(
+                f"Duplicate terminal observation for {terminal_obs.canonical_id}. "
+                f"First: {self.terminal_observations[terminal_obs.canonical_id].outcome.value}. "
+                f"Second attempt: {terminal_obs.outcome.value}. "
+                f"Evidence cannot contradict itself."
+            )
+        self.terminal_observations[terminal_obs.canonical_id] = terminal_obs
 
     def validate(self) -> Dict:
         """Check completeness invariant.
@@ -242,19 +294,20 @@ class CompletenessValidator:
         Returns:
             {
                 "valid": bool,
-                "missing": list of expected_ids not in terminal_ids,
+                "missing": list of expected_ids not in terminal observations,
                 "extra": list of terminal_ids not in expected_ids,
                 "report": {expected_id: status for all expected_ids}
             }
         """
-        missing = self.expected_ids - self.terminal_ids
-        extra = self.terminal_ids - self.expected_ids
+        terminal_ids = set(self.terminal_observations.keys())
+        missing = self.expected_ids - terminal_ids
+        extra = terminal_ids - self.expected_ids
 
         report = {}
         for eid in self.expected_ids:
             report[eid] = {
                 "expected": True,
-                "observed": eid in self.terminal_ids,
+                "observed": eid in terminal_ids,
             }
 
         for tid in extra:
