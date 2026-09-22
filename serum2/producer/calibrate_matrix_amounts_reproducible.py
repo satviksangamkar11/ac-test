@@ -37,17 +37,21 @@ MATRIX_AMOUNT_ROI = {
     "y1": 305,   # Bottom of populated rows
 }
 
-# Populated routes in the Matrix (row_y values to be determined from inspection)
+# Row seed coordinates (visual inspection, NOT ground truth)
+# Script will search ±ROW_SEARCH_RADIUS around each seed to auto-discover exact row center
+ROW_SEARCH_RADIUS = 5
+
+# Populated routes in the Matrix (row_y values are seeds for detection band)
 ROUTES = [
-    {'name': 'LFO 1 → A Fine', 'row_y': None, 'source': 'LFO 1', 'dest': 'A Fine'},
-    {'name': 'LFO 1 → B Fine', 'row_y': None, 'source': 'LFO 1', 'dest': 'B Fine'},
-    {'name': 'Env 3 → Noise Level', 'row_y': None, 'source': 'Env 3', 'dest': 'Noise Level'},
-    {'name': 'Env 2 → Filter 1 Freq', 'row_y': None, 'source': 'Env 2', 'dest': 'Filter 1 Freq'},
+    {'name': 'LFO 1 → A Fine', 'row_y': 160, 'source': 'LFO 1', 'dest': 'A Fine'},
+    {'name': 'LFO 1 → B Fine', 'row_y': 184, 'source': 'LFO 1', 'dest': 'B Fine'},
+    {'name': 'Env 3 → Noise Level', 'row_y': 207, 'source': 'Env 3', 'dest': 'Noise Level'},
+    {'name': 'Env 2 → Filter 1 Freq', 'row_y': 232, 'source': 'Env 2', 'dest': 'Filter 1 Freq'},
 ]
 
 # Empty/unassigned rows (for zero-reference verification)
 EMPTY_ROWS = [
-    {'name': 'Empty row (control)', 'row_y': None},
+    {'name': 'Empty row (control)', 'row_y': 280},
 ]
 
 
@@ -111,6 +115,50 @@ def find_handle_center_in_row(
     return None
 
 
+def find_best_row_center(
+    arr: np.ndarray,
+    row_seed_y: int,
+    search_radius: int,
+    x_search_range: Tuple[int, int],
+) -> Tuple[int, float]:
+    """Search a vertical band around row_seed_y to find the row with strongest slider geometry.
+
+    Returns: (detected_row_y, geometry_strength_score)
+
+    Geometry strength is measured by how consistently the plateau is detected
+    (wider, more stable track plateau = higher strength).
+    """
+    best_y = row_seed_y
+    best_score = -1.0
+
+    for y_offset in range(-search_radius, search_radius + 1):
+        y = row_seed_y + y_offset
+        if y < 0 or y >= arr.shape[0]:
+            continue
+
+        left_x, right_x = find_track_plateau_in_row(arr, y, x_search_range)
+
+        if left_x is not None and right_x is not None:
+            # Geometry strength: wider plateau with good centering is stronger
+            width = right_x - left_x
+            center_x = (left_x + right_x) / 2.0
+
+            # Prefer rows with stable, wide plateaus
+            # (JPEG artifacts or anti-aliasing can make narrow plateaus unreliable)
+            # Strength score: favor width >= 80px and center within ROI
+            is_wide = width >= 80
+            is_centered = (x_search_range[0] + 50) < center_x < (x_search_range[1] - 50)
+            width_score = width / 200.0  # normalize by max reasonable width
+
+            score = (width_score * 0.7) + (is_wide * 0.2) + (is_centered * 0.1)
+
+            if score > best_score:
+                best_score = score
+                best_y = y
+
+    return best_y, best_score
+
+
 def generic_slider_calibration(
     observed_position_px: float,
     left_px: float,
@@ -152,7 +200,8 @@ def calibrate_routes():
     print("="*80)
     print("MATRIX AMOUNT CALIBRATION — RAW PIXEL MEASUREMENTS")
     print("="*80)
-    print(f"\nMatrix ROI: x={MATRIX_ROI['x_min']}–{MATRIX_ROI['x_max']}")
+    print(f"\nMatrix ROI: x={MATRIX_AMOUNT_ROI['x0']}–{MATRIX_AMOUNT_ROI['x1']}")
+    print(f"Row search radius: ±{ROW_SEARCH_RADIUS} pixels")
     print(f"Image size: {arr.shape}")
 
     measurements = {}
@@ -166,10 +215,16 @@ def calibrate_routes():
         if route['row_y'] is None:
             continue
 
-        row_y = route['row_y']
+        row_seed = route['row_y']
         name = route['name']
 
-        # Detect track geometry
+        # Find the best row center within the search band
+        detected_row_y, strength = find_best_row_center(
+            arr, row_seed, ROW_SEARCH_RADIUS, x_search_range
+        )
+        row_y = detected_row_y
+
+        # Detect track geometry at the detected row
         left_x, right_x = find_track_plateau_in_row(arr, row_y, x_search_range)
 
         if left_x is None:
@@ -193,7 +248,7 @@ def calibrate_routes():
         amount_pct = matrix_amount_domain(normalized)
 
         print(f"\n{name}")
-        print(f"  row_y:         {row_y}")
+        print(f"  row_seed:      {row_seed} → detected {row_y} (strength={strength:.2f})")
         print(f"  track_left:    {left_x}")
         print(f"  track_right:   {right_x}")
         print(f"  track_width:   {right_x - left_x}")
@@ -220,7 +275,12 @@ def calibrate_routes():
         if empty_row['row_y'] is None:
             continue
 
-        row_y = empty_row['row_y']
+        row_seed = empty_row['row_y']
+        detected_row_y, strength = find_best_row_center(
+            arr, row_seed, ROW_SEARCH_RADIUS, x_search_range
+        )
+        row_y = detected_row_y
+
         left_x, right_x = find_track_plateau_in_row(arr, row_y, x_search_range)
         handle_x = find_handle_center_in_row(arr, row_y, x_search_range)
 
@@ -228,7 +288,7 @@ def calibrate_routes():
             normalized = generic_slider_calibration(handle_x, left_x, right_x)
             amount_pct = matrix_amount_domain(normalized)
 
-            print(f"\n{empty_row['name']} (row y={row_y})")
+            print(f"\n{empty_row['name']} (seed {row_seed} → detected {row_y}, strength={strength:.2f})")
             print(f"  track: {left_x} ← {(left_x+right_x)/2:.1f} → {right_x}")
             print(f"  handle: {handle_x}")
             print(f"  amount: {amount_pct:+.1f}%")
