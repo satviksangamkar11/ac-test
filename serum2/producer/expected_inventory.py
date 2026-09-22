@@ -17,6 +17,9 @@ from typing import List, Dict, Optional, Set
 from enum import Enum
 import json
 
+# Canonical Atlas import — fails at module load if unavailable (explicit config error)
+from serum2.reference.serum_atlas import get_control, normalize_control
+
 
 class DuplicateTerminalObservation(Exception):
     """Raised when a duplicate terminal observation is attempted for the same canonical_id.
@@ -68,6 +71,10 @@ class ExpectedObservation:
     visibility_requirement: str = "VISIBLE"  # VISIBLE, OPTIONAL, CONTEXTUAL
     evidence_requirement: str = "PREFERRED"  # REQUIRED, PREFERRED, OPTIONAL
 
+    # Row-detail identity (for observations that reference a specific row/item within a container)
+    # e.g., matrix.amount[Env 2 → Filter 1 Freq]: canonical_id="matrix.amount", row_detail="Env 2 → Filter 1 Freq"
+    row_detail: Optional[str] = None
+
     epoch: str = "phase-3-canonical"
     inventory_fingerprint: str = ""  # hash of inventory version
 
@@ -80,6 +87,7 @@ class ExpectedObservation:
             "applicability": self.applicability,
             "visibility_requirement": self.visibility_requirement,
             "evidence_requirement": self.evidence_requirement,
+            "row_detail": self.row_detail,
             "epoch": self.epoch,
         }
 
@@ -196,8 +204,11 @@ class ExpectedInventoryBuilder:
             if not basis:
                 basis = {"note": "inferred from episode context"}
 
+            # Parse row-detail identity if present (e.g., "matrix.amount[Env 2 → Filter 1 Freq]")
+            base_id, row_detail = self._extract_row_detail(canonical_id)
+
             # Look up control in Atlas to get observation_kind, strategy
-            obs_kind, strategy = self._resolve_observation_type(canonical_id)
+            obs_kind, strategy = self._resolve_observation_type(base_id)
 
             # If Atlas cannot resolve this control, mark it explicitly as UNRESOLVED
             if obs_kind is None or strategy is None:
@@ -212,10 +223,27 @@ class ExpectedInventoryBuilder:
                 applicability=True,
                 visibility_requirement="VISIBLE",
                 evidence_requirement="PREFERRED",
+                row_detail=row_detail,
             )
             self.inventory[canonical_id] = observation
 
         return self.inventory
+
+    def _extract_row_detail(self, canonical_id: str) -> tuple:
+        """Extract row-detail identity from canonical_id if present.
+
+        Format: "control_id[row_detail]" → ("control_id", "row_detail")
+        Format: "control_id" → ("control_id", None)
+
+        Example: "matrix.amount[Env 2 → Filter 1 Freq]" → ("matrix.amount", "Env 2 → Filter 1 Freq")
+        """
+        if "[" in canonical_id and "]" in canonical_id:
+            bracket_idx = canonical_id.index("[")
+            close_bracket_idx = canonical_id.rindex("]")
+            base = canonical_id[:bracket_idx]
+            detail = canonical_id[bracket_idx + 1:close_bracket_idx]
+            return (base, detail)
+        return (canonical_id, None)
 
     def _resolve_observation_type(self, canonical_id: str) -> tuple:
         """Look up observation kind and strategy for a control ID via frozen Atlas.
@@ -225,17 +253,9 @@ class ExpectedInventoryBuilder:
 
         Returns: (observation_kind, strategy)
 
-        This must be populated from the frozen Serum 2.0.21 Atlas/UI Atlas,
-        not from control-name heuristics. Placeholder implementation with
-        Atlas-backed lookups from serum_atlas.py.
+        Atlas import is canonical (module-level). If unavailable, that is
+        a configuration error that should be caught at startup, not here.
         """
-        # Import from canonical module path, not bare import
-        try:
-            from serum2.reference.serum_atlas import get_control, normalize_control
-        except ImportError:
-            # Atlas module unavailable — explicit UNRESOLVED, not fallback
-            return (None, None)
-
         try:
             # Normalize the canonical_id (removes aliases, ensures canonical form)
             normalized_id = normalize_control(canonical_id)
