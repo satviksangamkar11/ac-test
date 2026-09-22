@@ -1,0 +1,1262 @@
+{
+ "serum2\\reference\\generate_binding_table.py": {
+  "origin": "serum2\\reference\\generate_binding_table.py",
+  "size_bytes": 7972,
+  "category": "reference",
+  "destination": "serum2\\reference\\generate_binding_table.py"
+ },
+ "serum2\\reference\\serum_2_0_21_schema_snapshot.json": {
+  "origin": "serum2\\reference\\serum_2_0_21_schema_snapshot.json",
+  "size_bytes": 55075,
+  "category": "reference",
+  "destination": "serum2\\reference\\serum_2_0_21_schema_snapshot.json"
+ },
+ "serum2\\reference\\serum_atlas.py": {
+  "origin": "serum2\\reference\\serum_atlas.py",
+  "size_bytes": 27684,
+  "category": "reference",
+  "destination": "serum2\\reference\\serum_atlas.py"
+ },
+ "serum2\\reference\\serum_audit.py": {
+  "origin": "serum2\\reference\\serum_audit.py",
+  "size_bytes": 9347,
+  "category": "reference",
+  "destination": "serum2\\reference\\serum_audit.py"
+ },
+ "serum2\\reference\\serum_mcp_binding_table.json": {
+  "origin": "serum2\\reference\\serum_mcp_binding_table.json",
+  "size_bytes": 39769,
+  "category": "reference",
+  "destination": "serum2\\reference\\serum_mcp_binding_table.json"
+ },
+ "serum2\\reference\\serum_ui_atlas.py": {
+  "origin": "serum2\\reference\\serum_ui_atlas.py",
+  "size_bytes": 17420,
+  "category": "reference",
+  "destination": "serum2\\reference\\serum_ui_atlas.py"
+ },
+ "serum2\\reference\\__init__.py": {
+  "origin": "serum2\\reference\\__init__.py",
+  "size_bytes": 0,
+  "category": "reference",
+  "destination": "serum2\\reference\\__init__.py"
+ },
+ "serum2\\reference\\audit\\SERUM2_SEMANTIC_FREEZE_MANIFEST.json": {
+  "origin": "serum2\\reference\\audit\\SERUM2_SEMANTIC_FREEZE_MANIFEST.json",
+  "size_bytes": 4304,
+  "category": "reference",
+  "destination": "serum2\\reference\\audit\\SERUM2_SEMANTIC_FREEZE_MANIFEST.json"
+ },
+ "serum2\\reference\\audit\\SERUM2_SEMANTIC_INVENTORY_FINAL.json": {
+  "origin": "serum2\\reference\\audit\\SERUM2_SEMANTIC_INVENTORY_FINAL.json",
+  "size_bytes": 1344773,
+  "category": "reference",
+  "destination": "serum2\\reference\\audit\\SERUM2_SEMANTIC_INVENTORY_FINAL.json"
+ },
+ "serum2\\reference\\coverage\\COMPLETE_CANONICAL_INVENTORY.json": {
+  "origin": "serum2\\reference\\coverage\\COMPLETE_CANONICAL_INVENTORY.json",
+  "size_bytes": 214248,
+  "category": "reference",
+  "destination": "serum2\\reference\\coverage\\COMPLETE_CANONICAL_INVENTORY.json"
+ },
+ "serum2\\reference\\coverage\\FOUR_LAYER_INDEX.json": {
+  "origin": "serum2\\reference\\coverage\\FOUR_LAYER_INDEX.json",
+  "size_bytes": 37622,
+  "category": "reference",
+  "destination": "serum2\\reference\\coverage\\FOUR_LAYER_INDEX.json"
+ },
+ "serum2\\reference\\coverage\\MCP_RUNTIME_FINGERPRINT.json": {
+  "origin": "serum2\\reference\\coverage\\MCP_RUNTIME_FINGERPRINT.json",
+  "size_bytes": 855,
+  "category": "reference",
+  "destination": "serum2\\reference\\coverage\\MCP_RUNTIME_FINGERPRINT.json"
+ },
+ "serum2\\reference\\coverage\\PHASE_2B_AUDIT_REPORT.json": {
+  "origin": "serum2\\reference\\coverage\\PHASE_2B_AUDIT_REPORT.json",
+  "size_bytes": 7388,
+  "category": "reference",
+  "destination": "serum2\\reference\\coverage\\PHASE_2B_AUDIT_REPORT.json"
+ },
+ "serum2\\reference\\coverage\\PHASE_2B_SOURCE_BRIDGE_INDEX_COMPLETE.json": {
+  "origin": "serum2\\reference\\coverage\\PHASE_2B_SOURCE_BRIDGE_INDEX_COMPLETE.json",
+  "size_bytes": 336680,
+  "category": "reference",
+  "destination": "serum2\\reference\\coverage\\PHASE_2B_SOURCE_BRIDGE_INDEX_COMPLETE.json"
+ },
+ "serum2\\reference\\coverage\\PHASE_2C_MECHANISM_LIVE_PROOFS.json": {
+  "origin": "serum2\\reference\\coverage\\PHASE_2C_MECHANISM_LIVE_PROOFS.json",
+  "size_bytes": 4979,
+  "category": "reference",
+  "destination": "serum2\\reference\\coverage\\PHASE_2C_MECHANISM_LIVE_PROOFS.json"
+ },
+ "serum2\\reference\\coverage\\PHASE_2C_RESULTS.json": {
+  "origin": "serum2\\reference\\coverage\\PHASE_2C_RESULTS.json",
+  "size_bytes": 5970,
+  "category": "reference",
+  "destination": "serum2\\reference\\coverage\\PHASE_2C_RESULTS.json"
+ },
+ "serum2\\reference\\coverage\\PHASE_2D_LIVE_VERIFICATION.json": {
+  "origin": "serum2\\reference\\coverage\\PHASE_2D_LIVE_VERIFICATION.json",
+  "size_bytes": 6298,
+  "category": "reference",
+  "destination": "serum2\\reference\\coverage\\PHASE_2D_LIVE_VERIFICATION.json"
+ },
+ "serum2\\reference\\coverage\\PHASE_2E_PROMOTION_AUDIT.json": {
+  "origin": "serum2\\reference\\coverage\\PHASE_2E_PROMOTION_AUDIT.json",
+  "size_bytes": 4176,
+  "category": "reference",
+  "destination": "serum2\\reference\\coverage\\PHASE_2E_PROMOTION_AUDIT.json"
+ },
+ "serum2\\reference\\coverage\\PHASE_2_AUDIT.json": {
+  "origin": "serum2\\reference\\coverage\\PHASE_2_AUDIT.json",
+  "size_bytes": 9005,
+  "category": "reference",
+  "destination": "serum2\\reference\\coverage\\PHASE_2_AUDIT.json"
+ },
+ "serum2\\reference\\coverage\\PHASE_2_CLOSURE_REPORT.json": {
+  "origin": "serum2\\reference\\coverage\\PHASE_2_CLOSURE_REPORT.json",
+  "size_bytes": 12072,
+  "category": "reference",
+  "destination": "serum2\\reference\\coverage\\PHASE_2_CLOSURE_REPORT.json"
+ },
+ "serum2\\reference\\coverage\\PHASE_2_FINAL_RECOUNT.json": {
+  "origin": "serum2\\reference\\coverage\\PHASE_2_FINAL_RECOUNT.json",
+  "size_bytes": 465980,
+  "category": "reference",
+  "destination": "serum2\\reference\\coverage\\PHASE_2_FINAL_RECOUNT.json"
+ },
+ "serum2\\reference\\coverage\\PHASE_3A1_UNRESOLVED_CLASSIFIED.json": {
+  "origin": "serum2\\reference\\coverage\\PHASE_3A1_UNRESOLVED_CLASSIFIED.json",
+  "size_bytes": 49245,
+  "category": "reference",
+  "destination": "serum2\\reference\\coverage\\PHASE_3A1_UNRESOLVED_CLASSIFIED.json"
+ },
+ "serum2\\reference\\coverage\\PHASE_3A_CLOSURE.json": {
+  "origin": "serum2\\reference\\coverage\\PHASE_3A_CLOSURE.json",
+  "size_bytes": 2795,
+  "category": "reference",
+  "destination": "serum2\\reference\\coverage\\PHASE_3A_CLOSURE.json"
+ },
+ "serum2\\reference\\coverage\\PHASE_3A_UNRESOLVED_AUDIT.json": {
+  "origin": "serum2\\reference\\coverage\\PHASE_3A_UNRESOLVED_AUDIT.json",
+  "size_bytes": 19191,
+  "category": "reference",
+  "destination": "serum2\\reference\\coverage\\PHASE_3A_UNRESOLVED_AUDIT.json"
+ },
+ "serum2\\reference\\coverage\\PHASE_3A_UNRESOLVED_SUMMARY.json": {
+  "origin": "serum2\\reference\\coverage\\PHASE_3A_UNRESOLVED_SUMMARY.json",
+  "size_bytes": 3458,
+  "category": "reference",
+  "destination": "serum2\\reference\\coverage\\PHASE_3A_UNRESOLVED_SUMMARY.json"
+ },
+ "serum2\\reference\\coverage\\PHASE_3B_EQUIVALENCE_GROUPING.json": {
+  "origin": "serum2\\reference\\coverage\\PHASE_3B_EQUIVALENCE_GROUPING.json",
+  "size_bytes": 128068,
+  "category": "reference",
+  "destination": "serum2\\reference\\coverage\\PHASE_3B_EQUIVALENCE_GROUPING.json"
+ },
+ "serum2\\reference\\coverage\\PHASE_3B_EXECUTION_PLAN.json": {
+  "origin": "serum2\\reference\\coverage\\PHASE_3B_EXECUTION_PLAN.json",
+  "size_bytes": 6444,
+  "category": "reference",
+  "destination": "serum2\\reference\\coverage\\PHASE_3B_EXECUTION_PLAN.json"
+ },
+ "serum2\\reference\\coverage\\PHASE_3B_MECHANISM_FAMILIES.json": {
+  "origin": "serum2\\reference\\coverage\\PHASE_3B_MECHANISM_FAMILIES.json",
+  "size_bytes": 16629,
+  "category": "reference",
+  "destination": "serum2\\reference\\coverage\\PHASE_3B_MECHANISM_FAMILIES.json"
+ },
+ "serum2\\reference\\coverage\\PHASE_3B_STEP1_STRUCTURAL_CLASSES.json": {
+  "origin": "serum2\\reference\\coverage\\PHASE_3B_STEP1_STRUCTURAL_CLASSES.json",
+  "size_bytes": 73120,
+  "category": "reference",
+  "destination": "serum2\\reference\\coverage\\PHASE_3B_STEP1_STRUCTURAL_CLASSES.json"
+ },
+ "serum2\\reference\\coverage\\PHASE_3B_STEP2_EXECUTION_MANIFEST.json": {
+  "origin": "serum2\\reference\\coverage\\PHASE_3B_STEP2_EXECUTION_MANIFEST.json",
+  "size_bytes": 8056,
+  "category": "reference",
+  "destination": "serum2\\reference\\coverage\\PHASE_3B_STEP2_EXECUTION_MANIFEST.json"
+ },
+ "serum2\\reference\\coverage\\PHASE_3B_STEP2_LIVE_TEST_RESULTS.json": {
+  "origin": "serum2\\reference\\coverage\\PHASE_3B_STEP2_LIVE_TEST_RESULTS.json",
+  "size_bytes": 4811,
+  "category": "reference",
+  "destination": "serum2\\reference\\coverage\\PHASE_3B_STEP2_LIVE_TEST_RESULTS.json"
+ },
+ "serum2\\reference\\coverage\\PHASE_3B_STRATEGY.json": {
+  "origin": "serum2\\reference\\coverage\\PHASE_3B_STRATEGY.json",
+  "size_bytes": 5346,
+  "category": "reference",
+  "destination": "serum2\\reference\\coverage\\PHASE_3B_STRATEGY.json"
+ },
+ "serum2\\reference\\coverage\\PHASE_3B_UPDATED_BRIDGE.json": {
+  "origin": "serum2\\reference\\coverage\\PHASE_3B_UPDATED_BRIDGE.json",
+  "size_bytes": 3504,
+  "category": "reference",
+  "destination": "serum2\\reference\\coverage\\PHASE_3B_UPDATED_BRIDGE.json"
+ },
+ "serum2\\reference\\coverage\\PHASE_3_CHECKPOINT.json": {
+  "origin": "serum2\\reference\\coverage\\PHASE_3_CHECKPOINT.json",
+  "size_bytes": 6350,
+  "category": "reference",
+  "destination": "serum2\\reference\\coverage\\PHASE_3_CHECKPOINT.json"
+ },
+ "serum2\\reference\\coverage\\PRODUCTION_BEHAVIOR_ARCHITECTURE.md": {
+  "origin": "serum2\\reference\\coverage\\PRODUCTION_BEHAVIOR_ARCHITECTURE.md",
+  "size_bytes": 11227,
+  "category": "reference",
+  "destination": "serum2\\reference\\coverage\\PRODUCTION_BEHAVIOR_ARCHITECTURE.md"
+ },
+ "serum2\\reference\\coverage\\SOURCE_BRIDGE.json": {
+  "origin": "serum2\\reference\\coverage\\SOURCE_BRIDGE.json",
+  "size_bytes": 2291,
+  "category": "reference",
+  "destination": "serum2\\reference\\coverage\\SOURCE_BRIDGE.json"
+ },
+ "serum2\\reference\\coverage\\SOURCE_BRIDGE_INDEX.json": {
+  "origin": "serum2\\reference\\coverage\\SOURCE_BRIDGE_INDEX.json",
+  "size_bytes": 24415,
+  "category": "reference",
+  "destination": "serum2\\reference\\coverage\\SOURCE_BRIDGE_INDEX.json"
+ },
+ "serum2\\reference\\coverage\\STEP_1A_AUTHORITATIVE_BASELINE.json": {
+  "origin": "serum2\\reference\\coverage\\STEP_1A_AUTHORITATIVE_BASELINE.json",
+  "size_bytes": 1085,
+  "category": "reference",
+  "destination": "serum2\\reference\\coverage\\STEP_1A_AUTHORITATIVE_BASELINE.json"
+ },
+ "serum2\\reference\\coverage\\STEP_1A_BASELINE_INVENTORY.md": {
+  "origin": "serum2\\reference\\coverage\\STEP_1A_BASELINE_INVENTORY.md",
+  "size_bytes": 8439,
+  "category": "reference",
+  "destination": "serum2\\reference\\coverage\\STEP_1A_BASELINE_INVENTORY.md"
+ },
+ "serum2\\reference\\coverage\\STEP_1B_MCP_RUNTIME_FINGERPRINT.json": {
+  "origin": "serum2\\reference\\coverage\\STEP_1B_MCP_RUNTIME_FINGERPRINT.json",
+  "size_bytes": 841,
+  "category": "reference",
+  "destination": "serum2\\reference\\coverage\\STEP_1B_MCP_RUNTIME_FINGERPRINT.json"
+ },
+ "serum2\\reference\\coverage\\STEP_1B_RECONCILIATION_FRAMEWORK.md": {
+  "origin": "serum2\\reference\\coverage\\STEP_1B_RECONCILIATION_FRAMEWORK.md",
+  "size_bytes": 6754,
+  "category": "reference",
+  "destination": "serum2\\reference\\coverage\\STEP_1B_RECONCILIATION_FRAMEWORK.md"
+ },
+ "serum2\\reference\\coverage\\STEP_1B_RECONCILIATION_MATRIX.json": {
+  "origin": "serum2\\reference\\coverage\\STEP_1B_RECONCILIATION_MATRIX.json",
+  "size_bytes": 623555,
+  "category": "reference",
+  "destination": "serum2\\reference\\coverage\\STEP_1B_RECONCILIATION_MATRIX.json"
+ },
+ "serum2\\reference\\coverage\\STEP_1_AUDIT_PLAN.md": {
+  "origin": "serum2\\reference\\coverage\\STEP_1_AUDIT_PLAN.md",
+  "size_bytes": 5669,
+  "category": "reference",
+  "destination": "serum2\\reference\\coverage\\STEP_1_AUDIT_PLAN.md"
+ },
+ "serum2\\evidence\\acoustic_measurement.py": {
+  "origin": "serum2\\evidence\\acoustic_measurement.py",
+  "size_bytes": 7887,
+  "category": "evidence",
+  "destination": "serum2\\evidence\\acoustic_measurement.py"
+ },
+ "serum2\\evidence\\admission.py": {
+  "origin": "serum2\\evidence\\admission.py",
+  "size_bytes": 7937,
+  "category": "evidence",
+  "destination": "serum2\\evidence\\admission.py"
+ },
+ "serum2\\evidence\\canonical.py": {
+  "origin": "serum2\\evidence\\canonical.py",
+  "size_bytes": 381,
+  "category": "evidence",
+  "destination": "serum2\\evidence\\canonical.py"
+ },
+ "serum2\\evidence\\capability_contract.py": {
+  "origin": "serum2\\evidence\\capability_contract.py",
+  "size_bytes": 20429,
+  "category": "evidence",
+  "destination": "serum2\\evidence\\capability_contract.py"
+ },
+ "serum2\\evidence\\claim.py": {
+  "origin": "serum2\\evidence\\claim.py",
+  "size_bytes": 24965,
+  "category": "evidence",
+  "destination": "serum2\\evidence\\claim.py"
+ },
+ "serum2\\evidence\\record.py": {
+  "origin": "serum2\\evidence\\record.py",
+  "size_bytes": 7671,
+  "category": "evidence",
+  "destination": "serum2\\evidence\\record.py"
+ },
+ "serum2\\evidence\\transcript_cue_plan.py": {
+  "origin": "serum2\\evidence\\transcript_cue_plan.py",
+  "size_bytes": 5339,
+  "category": "evidence",
+  "destination": "serum2\\evidence\\transcript_cue_plan.py"
+ },
+ "serum2\\evidence\\transcript_guided_frame_selection.py": {
+  "origin": "serum2\\evidence\\transcript_guided_frame_selection.py",
+  "size_bytes": 13158,
+  "category": "evidence",
+  "destination": "serum2\\evidence\\transcript_guided_frame_selection.py"
+ },
+ "serum2\\evidence\\validate_transcript_cue_plan.py": {
+  "origin": "serum2\\evidence\\validate_transcript_cue_plan.py",
+  "size_bytes": 8329,
+  "category": "evidence",
+  "destination": "serum2\\evidence\\validate_transcript_cue_plan.py"
+ },
+ "serum2\\knowledge\\ingestion.py": {
+  "origin": "serum2\\knowledge\\ingestion.py",
+  "size_bytes": 7563,
+  "category": "knowledge",
+  "destination": "serum2\\knowledge\\ingestion.py"
+ },
+ "serum2\\knowledge\\intent_bridge.py": {
+  "origin": "serum2\\knowledge\\intent_bridge.py",
+  "size_bytes": 3765,
+  "category": "knowledge",
+  "destination": "serum2\\knowledge\\intent_bridge.py"
+ },
+ "serum2\\knowledge\\knowledge_item.py": {
+  "origin": "serum2\\knowledge\\knowledge_item.py",
+  "size_bytes": 12759,
+  "category": "knowledge",
+  "destination": "serum2\\knowledge\\knowledge_item.py"
+ },
+ "serum2\\knowledge\\semantic_intent_resolver.py": {
+  "origin": "serum2\\knowledge\\semantic_intent_resolver.py",
+  "size_bytes": 7362,
+  "category": "knowledge",
+  "destination": "serum2\\knowledge\\semantic_intent_resolver.py"
+ },
+ "serum2\\knowledge\\step_5_6_knowledge_store.py": {
+  "origin": "serum2\\knowledge\\step_5_6_knowledge_store.py",
+  "size_bytes": 11488,
+  "category": "knowledge",
+  "destination": "serum2\\knowledge\\step_5_6_knowledge_store.py"
+ },
+ "serum2\\knowledge\\step_5_7_universal_retrieval.py": {
+  "origin": "serum2\\knowledge\\step_5_7_universal_retrieval.py",
+  "size_bytes": 18244,
+  "category": "knowledge",
+  "destination": "serum2\\knowledge\\step_5_7_universal_retrieval.py"
+ },
+ "serum2\\knowledge\\step_6_10_episode_generation.py": {
+  "origin": "serum2\\knowledge\\step_6_10_episode_generation.py",
+  "size_bytes": 20329,
+  "category": "knowledge",
+  "destination": "serum2\\knowledge\\step_6_10_episode_generation.py"
+ },
+ "serum2\\knowledge\\step_6_11_closed_loop_proof.py": {
+  "origin": "serum2\\knowledge\\step_6_11_closed_loop_proof.py",
+  "size_bytes": 11531,
+  "category": "knowledge",
+  "destination": "serum2\\knowledge\\step_6_11_closed_loop_proof.py"
+ },
+ "serum2\\knowledge\\step_6_2_universal_production_intent.py": {
+  "origin": "serum2\\knowledge\\step_6_2_universal_production_intent.py",
+  "size_bytes": 12910,
+  "category": "knowledge",
+  "destination": "serum2\\knowledge\\step_6_2_universal_production_intent.py"
+ },
+ "serum2\\knowledge\\step_6_3_episode_context_integration.py": {
+  "origin": "serum2\\knowledge\\step_6_3_episode_context_integration.py",
+  "size_bytes": 14906,
+  "category": "knowledge",
+  "destination": "serum2\\knowledge\\step_6_3_episode_context_integration.py"
+ },
+ "serum2\\knowledge\\step_6_4_semantic_reasoning_integration.py": {
+  "origin": "serum2\\knowledge\\step_6_4_semantic_reasoning_integration.py",
+  "size_bytes": 13214,
+  "category": "knowledge",
+  "destination": "serum2\\knowledge\\step_6_4_semantic_reasoning_integration.py"
+ },
+ "serum2\\knowledge\\step_6_5_advisory_decision_engine.py": {
+  "origin": "serum2\\knowledge\\step_6_5_advisory_decision_engine.py",
+  "size_bytes": 17999,
+  "category": "knowledge",
+  "destination": "serum2\\knowledge\\step_6_5_advisory_decision_engine.py"
+ },
+ "serum2\\knowledge\\step_6_6_capability_resolution.py": {
+  "origin": "serum2\\knowledge\\step_6_6_capability_resolution.py",
+  "size_bytes": 16143,
+  "category": "knowledge",
+  "destination": "serum2\\knowledge\\step_6_6_capability_resolution.py"
+ },
+ "serum2\\knowledge\\step_6_7_admission_handoff.py": {
+  "origin": "serum2\\knowledge\\step_6_7_admission_handoff.py",
+  "size_bytes": 9717,
+  "category": "knowledge",
+  "destination": "serum2\\knowledge\\step_6_7_admission_handoff.py"
+ },
+ "serum2\\knowledge\\step_6_8_contract_governed_execution.py": {
+  "origin": "serum2\\knowledge\\step_6_8_contract_governed_execution.py",
+  "size_bytes": 8636,
+  "category": "knowledge",
+  "destination": "serum2\\knowledge\\step_6_8_contract_governed_execution.py"
+ },
+ "serum2\\knowledge\\step_6_9_outcome_attribution.py": {
+  "origin": "serum2\\knowledge\\step_6_9_outcome_attribution.py",
+  "size_bytes": 10509,
+  "category": "knowledge",
+  "destination": "serum2\\knowledge\\step_6_9_outcome_attribution.py"
+ },
+ "serum2\\knowledge\\yt_f507169bd7cb_canonical_knowledge_store_5_6.json": {
+  "origin": "serum2\\knowledge\\yt_f507169bd7cb_canonical_knowledge_store_5_6.json",
+  "size_bytes": 709889,
+  "category": "knowledge",
+  "destination": "serum2\\knowledge\\yt_f507169bd7cb_canonical_knowledge_store_5_6.json"
+ },
+ "serum2\\knowledge\\yt_k6OBzXdcFtA_canonical_knowledge_store_5_6.backup": {
+  "origin": "serum2\\knowledge\\yt_k6OBzXdcFtA_canonical_knowledge_store_5_6.backup",
+  "size_bytes": 195,
+  "category": "knowledge",
+  "destination": "serum2\\knowledge\\yt_k6OBzXdcFtA_canonical_knowledge_store_5_6.backup"
+ },
+ "serum2\\knowledge\\yt_k6OBzXdcFtA_canonical_knowledge_store_5_6.json": {
+  "origin": "serum2\\knowledge\\yt_k6OBzXdcFtA_canonical_knowledge_store_5_6.json",
+  "size_bytes": 1728,
+  "category": "knowledge",
+  "destination": "serum2\\knowledge\\yt_k6OBzXdcFtA_canonical_knowledge_store_5_6.json"
+ },
+ "serum2\\source\\acquire_visual_evidence.py": {
+  "origin": "serum2\\source\\acquire_visual_evidence.py",
+  "size_bytes": 29397,
+  "category": "source",
+  "destination": "serum2\\source\\acquire_visual_evidence.py"
+ },
+ "serum2\\source\\fallback_transcribe.py": {
+  "origin": "serum2\\source\\fallback_transcribe.py",
+  "size_bytes": 5683,
+  "category": "source",
+  "destination": "serum2\\source\\fallback_transcribe.py"
+ },
+ "serum2\\source\\fetch_youtube.py": {
+  "origin": "serum2\\source\\fetch_youtube.py",
+  "size_bytes": 10877,
+  "category": "source",
+  "destination": "serum2\\source\\fetch_youtube.py"
+ },
+ "serum2\\source\\transcript_query_planner.py": {
+  "origin": "serum2\\source\\transcript_query_planner.py",
+  "size_bytes": 8761,
+  "category": "source",
+  "destination": "serum2\\source\\transcript_query_planner.py"
+ },
+ "serum2\\source\\visual_evidence.py": {
+  "origin": "serum2\\source\\visual_evidence.py",
+  "size_bytes": 31385,
+  "category": "source",
+  "destination": "serum2\\source\\visual_evidence.py"
+ },
+ "serum2\\source\\youtube_transcript_resolver.py": {
+  "origin": "serum2\\source\\youtube_transcript_resolver.py",
+  "size_bytes": 10565,
+  "category": "source",
+  "destination": "serum2\\source\\youtube_transcript_resolver.py"
+ },
+ "serum2\\source\\youtube_url.py": {
+  "origin": "serum2\\source\\youtube_url.py",
+  "size_bytes": 848,
+  "category": "source",
+  "destination": "serum2\\source\\youtube_url.py"
+ },
+ "serum2\\source\\__init__.py": {
+  "origin": "serum2\\source\\__init__.py",
+  "size_bytes": 0,
+  "category": "source",
+  "destination": "serum2\\source\\__init__.py"
+ },
+ "serum2\\producer\\backend_dispatcher.py": {
+  "origin": "serum2\\producer\\backend_dispatcher.py",
+  "size_bytes": 1993,
+  "category": "producer",
+  "destination": "serum2\\producer\\backend_dispatcher.py"
+ },
+ "serum2\\producer\\batch_qualification_system.py": {
+  "origin": "serum2\\producer\\batch_qualification_system.py",
+  "size_bytes": 26281,
+  "category": "producer",
+  "destination": "serum2\\producer\\batch_qualification_system.py"
+ },
+ "serum2\\producer\\calibrate_matrix_amounts_reproducible.py": {
+  "origin": "serum2\\producer\\calibrate_matrix_amounts_reproducible.py",
+  "size_bytes": 11731,
+  "category": "producer",
+  "destination": "serum2\\producer\\calibrate_matrix_amounts_reproducible.py"
+ },
+ "serum2\\producer\\calibration_model.py": {
+  "origin": "serum2\\producer\\calibration_model.py",
+  "size_bytes": 6882,
+  "category": "producer",
+  "destination": "serum2\\producer\\calibration_model.py"
+ },
+ "serum2\\producer\\candidate_ranking.py": {
+  "origin": "serum2\\producer\\candidate_ranking.py",
+  "size_bytes": 20503,
+  "category": "producer",
+  "destination": "serum2\\producer\\candidate_ranking.py"
+ },
+ "serum2\\producer\\capability_qualification_sweep.py": {
+  "origin": "serum2\\producer\\capability_qualification_sweep.py",
+  "size_bytes": 9223,
+  "category": "producer",
+  "destination": "serum2\\producer\\capability_qualification_sweep.py"
+ },
+ "serum2\\producer\\concept_representation.py": {
+  "origin": "serum2\\producer\\concept_representation.py",
+  "size_bytes": 15634,
+  "category": "producer",
+  "destination": "serum2\\producer\\concept_representation.py"
+ },
+ "serum2\\producer\\contract_registry.py": {
+  "origin": "serum2\\producer\\contract_registry.py",
+  "size_bytes": 15494,
+  "category": "producer",
+  "destination": "serum2\\producer\\contract_registry.py"
+ },
+ "serum2\\producer\\contract_scope.py": {
+  "origin": "serum2\\producer\\contract_scope.py",
+  "size_bytes": 7132,
+  "category": "producer",
+  "destination": "serum2\\producer\\contract_scope.py"
+ },
+ "serum2\\producer\\debug_track_colors.py": {
+  "origin": "serum2\\producer\\debug_track_colors.py",
+  "size_bytes": 2282,
+  "category": "producer",
+  "destination": "serum2\\producer\\debug_track_colors.py"
+ },
+ "serum2\\producer\\diagnostic_row4_pixel_analysis.py": {
+  "origin": "serum2\\producer\\diagnostic_row4_pixel_analysis.py",
+  "size_bytes": 5630,
+  "category": "producer",
+  "destination": "serum2\\producer\\diagnostic_row4_pixel_analysis.py"
+ },
+ "serum2\\producer\\episode_retrieval.py": {
+  "origin": "serum2\\producer\\episode_retrieval.py",
+  "size_bytes": 3398,
+  "category": "producer",
+  "destination": "serum2\\producer\\episode_retrieval.py"
+ },
+ "serum2\\producer\\event_to_intent.py": {
+  "origin": "serum2\\producer\\event_to_intent.py",
+  "size_bytes": 4860,
+  "category": "producer",
+  "destination": "serum2\\producer\\event_to_intent.py"
+ },
+ "serum2\\producer\\evidence_fusion.py": {
+  "origin": "serum2\\producer\\evidence_fusion.py",
+  "size_bytes": 15972,
+  "category": "producer",
+  "destination": "serum2\\producer\\evidence_fusion.py"
+ },
+ "serum2\\producer\\example_phase4_2_integration.py": {
+  "origin": "serum2\\producer\\example_phase4_2_integration.py",
+  "size_bytes": 6448,
+  "category": "producer",
+  "destination": "serum2\\producer\\example_phase4_2_integration.py"
+ },
+ "serum2\\producer\\execution_epoch.py": {
+  "origin": "serum2\\producer\\execution_epoch.py",
+  "size_bytes": 1642,
+  "category": "producer",
+  "destination": "serum2\\producer\\execution_epoch.py"
+ },
+ "serum2\\producer\\expected_inventory.py": {
+  "origin": "serum2\\producer\\expected_inventory.py",
+  "size_bytes": 14138,
+  "category": "producer",
+  "destination": "serum2\\producer\\expected_inventory.py"
+ },
+ "serum2\\producer\\extract_matrix_geometry_from_image.py": {
+  "origin": "serum2\\producer\\extract_matrix_geometry_from_image.py",
+  "size_bytes": 6253,
+  "category": "producer",
+  "destination": "serum2\\producer\\extract_matrix_geometry_from_image.py"
+ },
+ "serum2\\producer\\find_matrix_panel_bounds.py": {
+  "origin": "serum2\\producer\\find_matrix_panel_bounds.py",
+  "size_bytes": 4810,
+  "category": "producer",
+  "destination": "serum2\\producer\\find_matrix_panel_bounds.py"
+ },
+ "serum2\\producer\\geometry_mismatch_overlay.png": {
+  "origin": "serum2\\producer\\geometry_mismatch_overlay.png",
+  "size_bytes": 687512,
+  "category": "producer",
+  "destination": "serum2\\producer\\geometry_mismatch_overlay.png"
+ },
+ "serum2\\producer\\grounding.py": {
+  "origin": "serum2\\producer\\grounding.py",
+  "size_bytes": 49908,
+  "category": "producer",
+  "destination": "serum2\\producer\\grounding.py"
+ },
+ "serum2\\producer\\heegn1xl5o4_episode_context.py": {
+  "origin": "serum2\\producer\\heegn1xl5o4_episode_context.py",
+  "size_bytes": 9491,
+  "category": "producer",
+  "destination": "serum2\\producer\\heegn1xl5o4_episode_context.py"
+ },
+ "serum2\\producer\\INTEGRATION_CHECKLIST_P4_2_1.md": {
+  "origin": "serum2\\producer\\INTEGRATION_CHECKLIST_P4_2_1.md",
+  "size_bytes": 10571,
+  "category": "producer",
+  "destination": "serum2\\producer\\INTEGRATION_CHECKLIST_P4_2_1.md"
+ },
+ "serum2\\producer\\knowledge_retrieval_adapter.py": {
+  "origin": "serum2\\producer\\knowledge_retrieval_adapter.py",
+  "size_bytes": 8376,
+  "category": "producer",
+  "destination": "serum2\\producer\\knowledge_retrieval_adapter.py"
+ },
+ "serum2\\producer\\matrix_amount_fixture.py": {
+  "origin": "serum2\\producer\\matrix_amount_fixture.py",
+  "size_bytes": 10926,
+  "category": "producer",
+  "destination": "serum2\\producer\\matrix_amount_fixture.py"
+ },
+ "serum2\\producer\\measure_b1_baseline.py": {
+  "origin": "serum2\\producer\\measure_b1_baseline.py",
+  "size_bytes": 3402,
+  "category": "producer",
+  "destination": "serum2\\producer\\measure_b1_baseline.py"
+ },
+ "serum2\\producer\\modulation_route_contract.py": {
+  "origin": "serum2\\producer\\modulation_route_contract.py",
+  "size_bytes": 3820,
+  "category": "producer",
+  "destination": "serum2\\producer\\modulation_route_contract.py"
+ },
+ "serum2\\producer\\observation_engine.py": {
+  "origin": "serum2\\producer\\observation_engine.py",
+  "size_bytes": 17938,
+  "category": "producer",
+  "destination": "serum2\\producer\\observation_engine.py"
+ },
+ "serum2\\producer\\operation_registry.py": {
+  "origin": "serum2\\producer\\operation_registry.py",
+  "size_bytes": 11657,
+  "category": "producer",
+  "destination": "serum2\\producer\\operation_registry.py"
+ },
+ "serum2\\producer\\operation_spec.py": {
+  "origin": "serum2\\producer\\operation_spec.py",
+  "size_bytes": 14721,
+  "category": "producer",
+  "destination": "serum2\\producer\\operation_spec.py"
+ },
+ "serum2\\producer\\phase4_2_1_blind_audit_run_heegn1xl5o4.py": {
+  "origin": "serum2\\producer\\phase4_2_1_blind_audit_run_heegn1xl5o4.py",
+  "size_bytes": 4240,
+  "category": "producer",
+  "destination": "serum2\\producer\\phase4_2_1_blind_audit_run_heegn1xl5o4.py"
+ },
+ "serum2\\producer\\phase4_2_1_complete_verification_gate.py": {
+  "origin": "serum2\\producer\\phase4_2_1_complete_verification_gate.py",
+  "size_bytes": 7232,
+  "category": "producer",
+  "destination": "serum2\\producer\\phase4_2_1_complete_verification_gate.py"
+ },
+ "serum2\\producer\\phase4_2_slider_calibration_pipeline.py": {
+  "origin": "serum2\\producer\\phase4_2_slider_calibration_pipeline.py",
+  "size_bytes": 4637,
+  "category": "producer",
+  "destination": "serum2\\producer\\phase4_2_slider_calibration_pipeline.py"
+ },
+ "serum2\\producer\\phase4_2_verified_state_adapter.py": {
+  "origin": "serum2\\producer\\phase4_2_verified_state_adapter.py",
+  "size_bytes": 22491,
+  "category": "producer",
+  "destination": "serum2\\producer\\phase4_2_verified_state_adapter.py"
+ },
+ "serum2\\producer\\PHASE_4_2_1_CLOSURE_GATES.md": {
+  "origin": "serum2\\producer\\PHASE_4_2_1_CLOSURE_GATES.md",
+  "size_bytes": 6109,
+  "category": "producer",
+  "destination": "serum2\\producer\\PHASE_4_2_1_CLOSURE_GATES.md"
+ },
+ "serum2\\producer\\PHASE_4_2_1_CLOSURE_REPORT.md": {
+  "origin": "serum2\\producer\\PHASE_4_2_1_CLOSURE_REPORT.md",
+  "size_bytes": 14502,
+  "category": "producer",
+  "destination": "serum2\\producer\\PHASE_4_2_1_CLOSURE_REPORT.md"
+ },
+ "serum2\\producer\\PHASE_4_2_1_CLOSURE_ROADMAP.md": {
+  "origin": "serum2\\producer\\PHASE_4_2_1_CLOSURE_ROADMAP.md",
+  "size_bytes": 3758,
+  "category": "producer",
+  "destination": "serum2\\producer\\PHASE_4_2_1_CLOSURE_ROADMAP.md"
+ },
+ "serum2\\producer\\PHASE_4_2_1_SOLUTION_SUMMARY.md": {
+  "origin": "serum2\\producer\\PHASE_4_2_1_SOLUTION_SUMMARY.md",
+  "size_bytes": 8080,
+  "category": "producer",
+  "destination": "serum2\\producer\\PHASE_4_2_1_SOLUTION_SUMMARY.md"
+ },
+ "serum2\\producer\\PHASE_5_CLOSURE_STRATEGY.md": {
+  "origin": "serum2\\producer\\PHASE_5_CLOSURE_STRATEGY.md",
+  "size_bytes": 10365,
+  "category": "producer",
+  "destination": "serum2\\producer\\PHASE_5_CLOSURE_STRATEGY.md"
+ },
+ "serum2\\producer\\producer_brain.py": {
+  "origin": "serum2\\producer\\producer_brain.py",
+  "size_bytes": 106237,
+  "category": "producer",
+  "destination": "serum2\\producer\\producer_brain.py"
+ },
+ "serum2\\producer\\qualify_modulation_route.py": {
+  "origin": "serum2\\producer\\qualify_modulation_route.py",
+  "size_bytes": 10260,
+  "category": "producer",
+  "destination": "serum2\\producer\\qualify_modulation_route.py"
+ },
+ "serum2\\producer\\qualify_osc2_enable.py": {
+  "origin": "serum2\\producer\\qualify_osc2_enable.py",
+  "size_bytes": 5643,
+  "category": "producer",
+  "destination": "serum2\\producer\\qualify_osc2_enable.py"
+ },
+ "serum2\\producer\\qualify_osc2_enable_u7.py": {
+  "origin": "serum2\\producer\\qualify_osc2_enable_u7.py",
+  "size_bytes": 2941,
+  "category": "producer",
+  "destination": "serum2\\producer\\qualify_osc2_enable_u7.py"
+ },
+ "serum2\\producer\\reference_extraction_engine.py": {
+  "origin": "serum2\\producer\\reference_extraction_engine.py",
+  "size_bytes": 8752,
+  "category": "producer",
+  "destination": "serum2\\producer\\reference_extraction_engine.py"
+ },
+ "serum2\\producer\\reference_rail_selection_v3.py": {
+  "origin": "serum2\\producer\\reference_rail_selection_v3.py",
+  "size_bytes": 9950,
+  "category": "producer",
+  "destination": "serum2\\producer\\reference_rail_selection_v3.py"
+ },
+ "serum2\\producer\\REFERENCE_ROW_SELECTION_STRATEGY.md": {
+  "origin": "serum2\\producer\\REFERENCE_ROW_SELECTION_STRATEGY.md",
+  "size_bytes": 8068,
+  "category": "producer",
+  "destination": "serum2\\producer\\REFERENCE_ROW_SELECTION_STRATEGY.md"
+ },
+ "serum2\\producer\\reference_skill.py": {
+  "origin": "serum2\\producer\\reference_skill.py",
+  "size_bytes": 6398,
+  "category": "producer",
+  "destination": "serum2\\producer\\reference_skill.py"
+ },
+ "serum2\\producer\\reference_state_corrected_heegn1xl5o4.py": {
+  "origin": "serum2\\producer\\reference_state_corrected_heegn1xl5o4.py",
+  "size_bytes": 6386,
+  "category": "producer",
+  "destination": "serum2\\producer\\reference_state_corrected_heegn1xl5o4.py"
+ },
+ "serum2\\producer\\reference_state_reconstructor.py": {
+  "origin": "serum2\\producer\\reference_state_reconstructor.py",
+  "size_bytes": 13150,
+  "category": "producer",
+  "destination": "serum2\\producer\\reference_state_reconstructor.py"
+ },
+ "serum2\\producer\\reflection_learner.py": {
+  "origin": "serum2\\producer\\reflection_learner.py",
+  "size_bytes": 16616,
+  "category": "producer",
+  "destination": "serum2\\producer\\reflection_learner.py"
+ },
+ "serum2\\producer\\request_context.py": {
+  "origin": "serum2\\producer\\request_context.py",
+  "size_bytes": 8164,
+  "category": "producer",
+  "destination": "serum2\\producer\\request_context.py"
+ },
+ "serum2\\producer\\route_classifier.py": {
+  "origin": "serum2\\producer\\route_classifier.py",
+  "size_bytes": 8531,
+  "category": "producer",
+  "destination": "serum2\\producer\\route_classifier.py"
+ },
+ "serum2\\producer\\route_selection.py": {
+  "origin": "serum2\\producer\\route_selection.py",
+  "size_bytes": 10927,
+  "category": "producer",
+  "destination": "serum2\\producer\\route_selection.py"
+ },
+ "serum2\\producer\\row4_profile.csv": {
+  "origin": "serum2\\producer\\row4_profile.csv",
+  "size_bytes": 935,
+  "category": "producer",
+  "destination": "serum2\\producer\\row4_profile.csv"
+ },
+ "serum2\\producer\\serum_mcp_qualification_backend.py": {
+  "origin": "serum2\\producer\\serum_mcp_qualification_backend.py",
+  "size_bytes": 4513,
+  "category": "producer",
+  "destination": "serum2\\producer\\serum_mcp_qualification_backend.py"
+ },
+ "serum2\\producer\\skill.py": {
+  "origin": "serum2\\producer\\skill.py",
+  "size_bytes": 12651,
+  "category": "producer",
+  "destination": "serum2\\producer\\skill.py"
+ },
+ "serum2\\producer\\skill_graph.py": {
+  "origin": "serum2\\producer\\skill_graph.py",
+  "size_bytes": 7641,
+  "category": "producer",
+  "destination": "serum2\\producer\\skill_graph.py"
+ },
+ "serum2\\producer\\skill_library.py": {
+  "origin": "serum2\\producer\\skill_library.py",
+  "size_bytes": 19015,
+  "category": "producer",
+  "destination": "serum2\\producer\\skill_library.py"
+ },
+ "serum2\\producer\\skill_retrieval.py": {
+  "origin": "serum2\\producer\\skill_retrieval.py",
+  "size_bytes": 6208,
+  "category": "producer",
+  "destination": "serum2\\producer\\skill_retrieval.py"
+ },
+ "serum2\\producer\\slider_evidence_extractor.py": {
+  "origin": "serum2\\producer\\slider_evidence_extractor.py",
+  "size_bytes": 9114,
+  "category": "producer",
+  "destination": "serum2\\producer\\slider_evidence_extractor.py"
+ },
+ "serum2\\producer\\slider_evidence_extractor_v3.py": {
+  "origin": "serum2\\producer\\slider_evidence_extractor_v3.py",
+  "size_bytes": 9990,
+  "category": "producer",
+  "destination": "serum2\\producer\\slider_evidence_extractor_v3.py"
+ },
+ "serum2\\producer\\slider_geometry_detector_v2.py": {
+  "origin": "serum2\\producer\\slider_geometry_detector_v2.py",
+  "size_bytes": 7563,
+  "category": "producer",
+  "destination": "serum2\\producer\\slider_geometry_detector_v2.py"
+ },
+ "serum2\\producer\\slider_geometry_detector_v3.py": {
+  "origin": "serum2\\producer\\slider_geometry_detector_v3.py",
+  "size_bytes": 9301,
+  "category": "producer",
+  "destination": "serum2\\producer\\slider_geometry_detector_v3.py"
+ },
+ "serum2\\producer\\state_admission.py": {
+  "origin": "serum2\\producer\\state_admission.py",
+  "size_bytes": 6430,
+  "category": "producer",
+  "destination": "serum2\\producer\\state_admission.py"
+ },
+ "serum2\\producer\\state_ledger.py": {
+  "origin": "serum2\\producer\\state_ledger.py",
+  "size_bytes": 18493,
+  "category": "producer",
+  "destination": "serum2\\producer\\state_ledger.py"
+ },
+ "serum2\\producer\\STEP_1_COMPLETION_REPORT.md": {
+  "origin": "serum2\\producer\\STEP_1_COMPLETION_REPORT.md",
+  "size_bytes": 12775,
+  "category": "producer",
+  "destination": "serum2\\producer\\STEP_1_COMPLETION_REPORT.md"
+ },
+ "serum2\\producer\\STEP_1_IMPLEMENTATION_STATUS.md": {
+  "origin": "serum2\\producer\\STEP_1_IMPLEMENTATION_STATUS.md",
+  "size_bytes": 5975,
+  "category": "producer",
+  "destination": "serum2\\producer\\STEP_1_IMPLEMENTATION_STATUS.md"
+ },
+ "serum2\\producer\\STEP_2_COMPLETION_REPORT.md": {
+  "origin": "serum2\\producer\\STEP_2_COMPLETION_REPORT.md",
+  "size_bytes": 14325,
+  "category": "producer",
+  "destination": "serum2\\producer\\STEP_2_COMPLETION_REPORT.md"
+ },
+ "serum2\\producer\\STEP_4_SYSTEM_MANIFEST.json": {
+  "origin": "serum2\\producer\\STEP_4_SYSTEM_MANIFEST.json",
+  "size_bytes": 1766,
+  "category": "producer",
+  "destination": "serum2\\producer\\STEP_4_SYSTEM_MANIFEST.json"
+ },
+ "serum2\\producer\\structured_context.py": {
+  "origin": "serum2\\producer\\structured_context.py",
+  "size_bytes": 5522,
+  "category": "producer",
+  "destination": "serum2\\producer\\structured_context.py"
+ },
+ "serum2\\producer\\target_names.py": {
+  "origin": "serum2\\producer\\target_names.py",
+  "size_bytes": 2166,
+  "category": "producer",
+  "destination": "serum2\\producer\\target_names.py"
+ },
+ "serum2\\producer\\target_resolution.py": {
+  "origin": "serum2\\producer\\target_resolution.py",
+  "size_bytes": 8754,
+  "category": "producer",
+  "destination": "serum2\\producer\\target_resolution.py"
+ },
+ "serum2\\producer\\target_surfaces.py": {
+  "origin": "serum2\\producer\\target_surfaces.py",
+  "size_bytes": 6026,
+  "category": "producer",
+  "destination": "serum2\\producer\\target_surfaces.py"
+ },
+ "serum2\\producer\\timeline.py": {
+  "origin": "serum2\\producer\\timeline.py",
+  "size_bytes": 6720,
+  "category": "producer",
+  "destination": "serum2\\producer\\timeline.py"
+ },
+ "serum2\\producer\\u8_event_audit.py": {
+  "origin": "serum2\\producer\\u8_event_audit.py",
+  "size_bytes": 3791,
+  "category": "producer",
+  "destination": "serum2\\producer\\u8_event_audit.py"
+ },
+ "serum2\\producer\\UNIVERSAL_EXTRACTION_ARCHITECTURE.md": {
+  "origin": "serum2\\producer\\UNIVERSAL_EXTRACTION_ARCHITECTURE.md",
+  "size_bytes": 10510,
+  "category": "producer",
+  "destination": "serum2\\producer\\UNIVERSAL_EXTRACTION_ARCHITECTURE.md"
+ },
+ "serum2\\producer\\universal_intent.py": {
+  "origin": "serum2\\producer\\universal_intent.py",
+  "size_bytes": 7179,
+  "category": "producer",
+  "destination": "serum2\\producer\\universal_intent.py"
+ },
+ "serum2\\producer\\visualize_geometry_mismatch.py": {
+  "origin": "serum2\\producer\\visualize_geometry_mismatch.py",
+  "size_bytes": 5151,
+  "category": "producer",
+  "destination": "serum2\\producer\\visualize_geometry_mismatch.py"
+ },
+ "serum2\\producer\\visual_reasoner.py": {
+  "origin": "serum2\\producer\\visual_reasoner.py",
+  "size_bytes": 34559,
+  "category": "producer",
+  "destination": "serum2\\producer\\visual_reasoner.py"
+ },
+ "serum2\\producer\\_finalize_mu6_episode.py": {
+  "origin": "serum2\\producer\\_finalize_mu6_episode.py",
+  "size_bytes": 5440,
+  "category": "producer",
+  "destination": "serum2\\producer\\_finalize_mu6_episode.py"
+ },
+ "serum2\\producer\\.pytest_cache\\CACHEDIR.TAG": {
+  "origin": "serum2\\producer\\.pytest_cache\\CACHEDIR.TAG",
+  "size_bytes": 191,
+  "category": "producer",
+  "destination": "serum2\\producer\\.pytest_cache\\CACHEDIR.TAG"
+ },
+ "serum2\\producer\\.pytest_cache\\README.md": {
+  "origin": "serum2\\producer\\.pytest_cache\\README.md",
+  "size_bytes": 302,
+  "category": "producer",
+  "destination": "serum2\\producer\\.pytest_cache\\README.md"
+ },
+ "serum2\\producer\\.pytest_cache\\v\\cache\\lastfailed": {
+  "origin": "serum2\\producer\\.pytest_cache\\v\\cache\\lastfailed",
+  "size_bytes": 413,
+  "category": "producer",
+  "destination": "serum2\\producer\\.pytest_cache\\v\\cache\\lastfailed"
+ },
+ "serum2\\producer\\.pytest_cache\\v\\cache\\nodeids": {
+  "origin": "serum2\\producer\\.pytest_cache\\v\\cache\\nodeids",
+  "size_bytes": 2387,
+  "category": "producer",
+  "destination": "serum2\\producer\\.pytest_cache\\v\\cache\\nodeids"
+ },
+ "serum2\\compiler\\context.py": {
+  "origin": "serum2\\compiler\\context.py",
+  "size_bytes": 8686,
+  "category": "compiler",
+  "destination": "serum2\\compiler\\context.py"
+ },
+ "serum2\\compiler\\mcp_intent.py": {
+  "origin": "serum2\\compiler\\mcp_intent.py",
+  "size_bytes": 11746,
+  "category": "compiler",
+  "destination": "serum2\\compiler\\mcp_intent.py"
+ },
+ "serum2\\compiler\\producer.py": {
+  "origin": "serum2\\compiler\\producer.py",
+  "size_bytes": 21841,
+  "category": "compiler",
+  "destination": "serum2\\compiler\\producer.py"
+ },
+ "serum2\\compiler\\targets.py": {
+  "origin": "serum2\\compiler\\targets.py",
+  "size_bytes": 32804,
+  "category": "compiler",
+  "destination": "serum2\\compiler\\targets.py"
+ },
+ "vendor\\serum-mcp\\CONTRIBUTING.md": {
+  "origin": "vendor\\serum-mcp\\CONTRIBUTING.md",
+  "size_bytes": 7200,
+  "category": "serum-mcp",
+  "destination": "vendor\\serum-mcp\\CONTRIBUTING.md"
+ },
+ "vendor\\serum-mcp\\Dockerfile": {
+  "origin": "vendor\\serum-mcp\\Dockerfile",
+  "size_bytes": 160,
+  "category": "serum-mcp",
+  "destination": "vendor\\serum-mcp\\Dockerfile"
+ },
+ "vendor\\serum-mcp\\LICENSE": {
+  "origin": "vendor\\serum-mcp\\LICENSE",
+  "size_bytes": 1100,
+  "category": "serum-mcp",
+  "destination": "vendor\\serum-mcp\\LICENSE"
+ },
+ "vendor\\serum-mcp\\manifest.json": {
+  "origin": "vendor\\serum-mcp\\manifest.json",
+  "size_bytes": 2499,
+  "category": "serum-mcp",
+  "destination": "vendor\\serum-mcp\\manifest.json"
+ },
+ "vendor\\serum-mcp\\prompt-claude-code-serum-mcp.md": {
+  "origin": "vendor\\serum-mcp\\prompt-claude-code-serum-mcp.md",
+  "size_bytes": 13752,
+  "category": "serum-mcp",
+  "destination": "vendor\\serum-mcp\\prompt-claude-code-serum-mcp.md"
+ },
+ "vendor\\serum-mcp\\pyproject.toml": {
+  "origin": "vendor\\serum-mcp\\pyproject.toml",
+  "size_bytes": 1771,
+  "category": "serum-mcp",
+  "destination": "vendor\\serum-mcp\\pyproject.toml"
+ },
+ "vendor\\serum-mcp\\README.md": {
+  "origin": "vendor\\serum-mcp\\README.md",
+  "size_bytes": 21972,
+  "category": "serum-mcp",
+  "destination": "vendor\\serum-mcp\\README.md"
+ },
+ "vendor\\serum-mcp\\UPSTREAM_COMMIT.txt": {
+  "origin": "vendor\\serum-mcp\\UPSTREAM_COMMIT.txt",
+  "size_bytes": 41,
+  "category": "serum-mcp",
+  "destination": "vendor\\serum-mcp\\UPSTREAM_COMMIT.txt"
+ },
+ "vendor\\serum-mcp\\docs\\PARAMETER_SCHEMA.md": {
+  "origin": "vendor\\serum-mcp\\docs\\PARAMETER_SCHEMA.md",
+  "size_bytes": 205692,
+  "category": "serum-mcp",
+  "destination": "vendor\\serum-mcp\\docs\\PARAMETER_SCHEMA.md"
+ },
+ "vendor\\serum-mcp\\docs\\PRIVACY.md": {
+  "origin": "vendor\\serum-mcp\\docs\\PRIVACY.md",
+  "size_bytes": 1714,
+  "category": "serum-mcp",
+  "destination": "vendor\\serum-mcp\\docs\\PRIVACY.md"
+ },
+ "vendor\\serum-mcp\\docs\\REAL_SERUM_TESTING.md": {
+  "origin": "vendor\\serum-mcp\\docs\\REAL_SERUM_TESTING.md",
+  "size_bytes": 30093,
+  "category": "serum-mcp",
+  "destination": "vendor\\serum-mcp\\docs\\REAL_SERUM_TESTING.md"
+ },
+ "vendor\\serum-mcp\\docs\\SOUND_DESIGN_REFERENCE.md": {
+  "origin": "vendor\\serum-mcp\\docs\\SOUND_DESIGN_REFERENCE.md",
+  "size_bytes": 5278,
+  "category": "serum-mcp",
+  "destination": "vendor\\serum-mcp\\docs\\SOUND_DESIGN_REFERENCE.md"
+ },
+ "vendor\\serum-mcp\\fixtures\\init_preset.SerumPreset": {
+  "origin": "vendor\\serum-mcp\\fixtures\\init_preset.SerumPreset",
+  "size_bytes": 1445,
+  "category": "serum-mcp",
+  "destination": "vendor\\serum-mcp\\fixtures\\init_preset.SerumPreset"
+ },
+ "vendor\\serum-mcp\\scripts\\check_preset.py": {
+  "origin": "vendor\\serum-mcp\\scripts\\check_preset.py",
+  "size_bytes": 2713,
+  "category": "serum-mcp",
+  "destination": "vendor\\serum-mcp\\scripts\\check_preset.py"
+ },
+ "vendor\\serum-mcp\\tests\\__init__.py": {
+  "origin": "vendor\\serum-mcp\\tests\\__init__.py",
+  "size_bytes": 0,
+  "category": "serum-mcp",
+  "destination": "vendor\\serum-mcp\\tests\\__init__.py"
+ },
+ "vendor\\serum-mcp\\src\\serum_mcp\\config.py": {
+  "origin": "vendor\\serum-mcp\\src\\serum_mcp\\config.py",
+  "size_bytes": 7375,
+  "category": "serum-mcp",
+  "destination": "vendor\\serum-mcp\\src\\serum_mcp\\config.py"
+ },
+ "vendor\\serum-mcp\\src\\serum_mcp\\server.py": {
+  "origin": "vendor\\serum-mcp\\src\\serum_mcp\\server.py",
+  "size_bytes": 89523,
+  "category": "serum-mcp",
+  "destination": "vendor\\serum-mcp\\src\\serum_mcp\\server.py"
+ },
+ "vendor\\serum-mcp\\src\\serum_mcp\\__init__.py": {
+  "origin": "vendor\\serum-mcp\\src\\serum_mcp\\__init__.py",
+  "size_bytes": 120,
+  "category": "serum-mcp",
+  "destination": "vendor\\serum-mcp\\src\\serum_mcp\\__init__.py"
+ },
+ "vendor\\serum-mcp\\src\\serum_mcp\\generation\\spec.py": {
+  "origin": "vendor\\serum-mcp\\src\\serum_mcp\\generation\\spec.py",
+  "size_bytes": 105264,
+  "category": "serum-mcp",
+  "destination": "vendor\\serum-mcp\\src\\serum_mcp\\generation\\spec.py"
+ },
+ "vendor\\serum-mcp\\src\\serum_mcp\\generation\\__init__.py": {
+  "origin": "vendor\\serum-mcp\\src\\serum_mcp\\generation\\__init__.py",
+  "size_bytes": 0,
+  "category": "serum-mcp",
+  "destination": "vendor\\serum-mcp\\src\\serum_mcp\\generation\\__init__.py"
+ },
+ "vendor\\serum-mcp\\src\\serum_mcp\\preset\\introspect.py": {
+  "origin": "vendor\\serum-mcp\\src\\serum_mcp\\preset\\introspect.py",
+  "size_bytes": 45452,
+  "category": "serum-mcp",
+  "destination": "vendor\\serum-mcp\\src\\serum_mcp\\preset\\introspect.py"
+ },
+ "vendor\\serum-mcp\\src\\serum_mcp\\preset\\mapping.py": {
+  "origin": "vendor\\serum-mcp\\src\\serum_mcp\\preset\\mapping.py",
+  "size_bytes": 85262,
+  "category": "serum-mcp",
+  "destination": "vendor\\serum-mcp\\src\\serum_mcp\\preset\\mapping.py"
+ },
+ "vendor\\serum-mcp\\src\\serum_mcp\\preset\\packer.py": {
+  "origin": "vendor\\serum-mcp\\src\\serum_mcp\\preset\\packer.py",
+  "size_bytes": 3693,
+  "category": "serum-mcp",
+  "destination": "vendor\\serum-mcp\\src\\serum_mcp\\preset\\packer.py"
+ },
+ "vendor\\serum-mcp\\src\\serum_mcp\\preset\\safety.py": {
+  "origin": "vendor\\serum-mcp\\src\\serum_mcp\\preset\\safety.py",
+  "size_bytes": 2955,
+  "category": "serum-mcp",
+  "destination": "vendor\\serum-mcp\\src\\serum_mcp\\preset\\safety.py"
+ },
+ "vendor\\serum-mcp\\src\\serum_mcp\\preset\\sample_analysis.py": {
+  "origin": "vendor\\serum-mcp\\src\\serum_mcp\\preset\\sample_analysis.py",
+  "size_bytes": 15372,
+  "category": "serum-mcp",
+  "destination": "vendor\\serum-mcp\\src\\serum_mcp\\preset\\sample_analysis.py"
+ },
+ "vendor\\serum-mcp\\src\\serum_mcp\\preset\\sample_library.py": {
+  "origin": "vendor\\serum-mcp\\src\\serum_mcp\\preset\\sample_library.py",
+  "size_bytes": 12271,
+  "category": "serum-mcp",
+  "destination": "vendor\\serum-mcp\\src\\serum_mcp\\preset\\sample_library.py"
+ },
+ "vendor\\serum-mcp\\src\\serum_mcp\\preset\\schema.py": {
+  "origin": "vendor\\serum-mcp\\src\\serum_mcp\\preset\\schema.py",
+  "size_bytes": 337158,
+  "category": "serum-mcp",
+  "destination": "vendor\\serum-mcp\\src\\serum_mcp\\preset\\schema.py"
+ },
+ "vendor\\serum-mcp\\src\\serum_mcp\\preset\\validator.py": {
+  "origin": "vendor\\serum-mcp\\src\\serum_mcp\\preset\\validator.py",
+  "size_bytes": 4422,
+  "category": "serum-mcp",
+  "destination": "vendor\\serum-mcp\\src\\serum_mcp\\preset\\validator.py"
+ },
+ "vendor\\serum-mcp\\src\\serum_mcp\\preset\\wavetable.py": {
+  "origin": "vendor\\serum-mcp\\src\\serum_mcp\\preset\\wavetable.py",
+  "size_bytes": 15943,
+  "category": "serum-mcp",
+  "destination": "vendor\\serum-mcp\\src\\serum_mcp\\preset\\wavetable.py"
+ },
+ "vendor\\serum-mcp\\src\\serum_mcp\\preset\\__init__.py": {
+  "origin": "vendor\\serum-mcp\\src\\serum_mcp\\preset\\__init__.py",
+  "size_bytes": 0,
+  "category": "serum-mcp",
+  "destination": "vendor\\serum-mcp\\src\\serum_mcp\\preset\\__init__.py"
+ },
+ "vendor\\serum-mcp\\src\\serum_mcp\\tools\\analyze_sample_file.py": {
+  "origin": "vendor\\serum-mcp\\src\\serum_mcp\\tools\\analyze_sample_file.py",
+  "size_bytes": 1617,
+  "category": "serum-mcp",
+  "destination": "vendor\\serum-mcp\\src\\serum_mcp\\tools\\analyze_sample_file.py"
+ },
+ "vendor\\serum-mcp\\src\\serum_mcp\\tools\\describe_preset.py": {
+  "origin": "vendor\\serum-mcp\\src\\serum_mcp\\tools\\describe_preset.py",
+  "size_bytes": 6985,
+  "category": "serum-mcp",
+  "destination": "vendor\\serum-mcp\\src\\serum_mcp\\tools\\describe_preset.py"
+ },
+ "vendor\\serum-mcp\\src\\serum_mcp\\tools\\edit_preset.py": {
+  "origin": "vendor\\serum-mcp\\src\\serum_mcp\\tools\\edit_preset.py",
+  "size_bytes": 2516,
+  "category": "serum-mcp",
+  "destination": "vendor\\serum-mcp\\src\\serum_mcp\\tools\\edit_preset.py"
+ },
+ "vendor\\serum-mcp\\src\\serum_mcp\\tools\\find_reference_presets.py": {
+  "origin": "vendor\\serum-mcp\\src\\serum_mcp\\tools\\find_reference_presets.py",
+  "size_bytes": 11294,
+  "category": "serum-mcp",
+  "destination": "vendor\\serum-mcp\\src\\serum_mcp\\tools\\find_reference_presets.py"
+ },
+ "vendor\\serum-mcp\\src\\serum_mcp\\tools\\generate_preset.py": {
+  "origin": "vendor\\serum-mcp\\src\\serum_mcp\\tools\\generate_preset.py",
+  "size_bytes": 2833,
+  "category": "serum-mcp",
+  "destination": "vendor\\serum-mcp\\src\\serum_mcp\\tools\\generate_preset.py"
+ },
+ "vendor\\serum-mcp\\src\\serum_mcp\\tools\\list_parameters.py": {
+  "origin": "vendor\\serum-mcp\\src\\serum_mcp\\tools\\list_parameters.py",
+  "size_bytes": 3355,
+  "category": "serum-mcp",
+  "destination": "vendor\\serum-mcp\\src\\serum_mcp\\tools\\list_parameters.py"
+ },
+ "vendor\\serum-mcp\\src\\serum_mcp\\tools\\list_sample_files.py": {
+  "origin": "vendor\\serum-mcp\\src\\serum_mcp\\tools\\list_sample_files.py",
+  "size_bytes": 3646,
+  "category": "serum-mcp",
+  "destination": "vendor\\serum-mcp\\src\\serum_mcp\\tools\\list_sample_files.py"
+ },
+ "vendor\\serum-mcp\\src\\serum_mcp\\tools\\_dependencies.py": {
+  "origin": "vendor\\serum-mcp\\src\\serum_mcp\\tools\\_dependencies.py",
+  "size_bytes": 2699,
+  "category": "serum-mcp",
+  "destination": "vendor\\serum-mcp\\src\\serum_mcp\\tools\\_dependencies.py"
+ },
+ "vendor\\serum-mcp\\src\\serum_mcp\\tools\\_naming.py": {
+  "origin": "vendor\\serum-mcp\\src\\serum_mcp\\tools\\_naming.py",
+  "size_bytes": 1599,
+  "category": "serum-mcp",
+  "destination": "vendor\\serum-mcp\\src\\serum_mcp\\tools\\_naming.py"
+ },
+ "vendor\\serum-mcp\\src\\serum_mcp\\tools\\__init__.py": {
+  "origin": "vendor\\serum-mcp\\src\\serum_mcp\\tools\\__init__.py",
+  "size_bytes": 0,
+  "category": "serum-mcp",
+  "destination": "vendor\\serum-mcp\\src\\serum_mcp\\tools\\__init__.py"
+ },
+ "vendor\\serum-mcp\\.github\\workflows\\ci.yml": {
+  "origin": "vendor\\serum-mcp\\.github\\workflows\\ci.yml",
+  "size_bytes": 1170,
+  "category": "serum-mcp",
+  "destination": "vendor\\serum-mcp\\.github\\workflows\\ci.yml"
+ },
+ "serum2/reference/serum_2_0_21_schema_snapshot.json": {
+  "origin": "serum2/reference/serum_2_0_21_schema_snapshot.json",
+  "size_bytes": 55075,
+  "category": "reference-data",
+  "destination": "serum2\\reference\\serum_2_0_21_schema_snapshot.json"
+ },
+ "serum2/reference/serum_mcp_binding_table.json": {
+  "origin": "serum2/reference/serum_mcp_binding_table.json",
+  "size_bytes": 39769,
+  "category": "reference-data",
+  "destination": "serum2\\reference\\serum_mcp_binding_table.json"
+ }
+}

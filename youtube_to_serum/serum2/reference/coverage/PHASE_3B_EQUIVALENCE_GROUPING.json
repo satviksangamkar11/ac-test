@@ -1,0 +1,5387 @@
+{
+ "phase": "3B_observation_gap_equivalence_key_grouping",
+ "date": "2026-09-23",
+ "total_observation_gap": 657,
+ "unique_equivalence_keys": 474,
+ "reduction_ratio": 1.4,
+ "group_summary": [
+  {
+   "mechanism": "macro_scalar",
+   "module": "Macro{i}.plainParams",
+   "field": "name",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 8,
+   "representative_controls": [
+    "macro1.name",
+    "macro2.name",
+    "macro3.name",
+    "macro4.name",
+    "macro5.name"
+   ]
+  },
+  {
+   "mechanism": "macro_scalar",
+   "module": "Macro{i}.plainParams",
+   "field": "value",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 8,
+   "representative_controls": [
+    "macro1.value",
+    "macro2.value",
+    "macro3.value",
+    "macro4.value",
+    "macro5.value"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "bpm",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 6,
+   "representative_controls": [
+    "fx.bode.bpm",
+    "fx.chorus.bpm",
+    "fx.convolve.bpm",
+    "fx.delay.bpm",
+    "fx.flanger.bpm"
+   ]
+  },
+  {
+   "mechanism": "lfo_scalar",
+   "module": "LFO{i}.plainParams",
+   "field": "chaos_mode",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 6,
+   "representative_controls": [
+    "lfo1.chaos_mode",
+    "lfo2.chaos_mode",
+    "lfo3.chaos_mode",
+    "lfo4.chaos_mode",
+    "lfo5.chaos_mode"
+   ]
+  },
+  {
+   "mechanism": "lfo_scalar",
+   "module": "LFO{i}.plainParams",
+   "field": "curve_display",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 6,
+   "representative_controls": [
+    "lfo1.curve_display",
+    "lfo2.curve_display",
+    "lfo3.curve_display",
+    "lfo4.curve_display",
+    "lfo5.curve_display"
+   ]
+  },
+  {
+   "mechanism": "lfo_scalar",
+   "module": "LFO{i}.plainParams",
+   "field": "division",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 6,
+   "representative_controls": [
+    "lfo1.division",
+    "lfo2.division",
+    "lfo3.division",
+    "lfo4.division",
+    "lfo5.division"
+   ]
+  },
+  {
+   "mechanism": "lfo_scalar",
+   "module": "LFO{i}.plainParams",
+   "field": "grid_x",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 6,
+   "representative_controls": [
+    "lfo1.grid_x",
+    "lfo2.grid_x",
+    "lfo3.grid_x",
+    "lfo4.grid_x",
+    "lfo5.grid_x"
+   ]
+  },
+  {
+   "mechanism": "lfo_scalar",
+   "module": "LFO{i}.plainParams",
+   "field": "grid_y",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 6,
+   "representative_controls": [
+    "lfo1.grid_y",
+    "lfo2.grid_y",
+    "lfo3.grid_y",
+    "lfo4.grid_y",
+    "lfo5.grid_y"
+   ]
+  },
+  {
+   "mechanism": "lfo_scalar",
+   "module": "LFO{i}.plainParams",
+   "field": "mode",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 6,
+   "representative_controls": [
+    "lfo1.mode",
+    "lfo2.mode",
+    "lfo3.mode",
+    "lfo4.mode",
+    "lfo5.mode"
+   ]
+  },
+  {
+   "mechanism": "lfo_scalar",
+   "module": "LFO{i}.plainParams",
+   "field": "phase",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 6,
+   "representative_controls": [
+    "lfo1.phase",
+    "lfo2.phase",
+    "lfo3.phase",
+    "lfo4.phase",
+    "lfo5.phase"
+   ]
+  },
+  {
+   "mechanism": "lfo_scalar",
+   "module": "LFO{i}.plainParams",
+   "field": "playback_direction",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 6,
+   "representative_controls": [
+    "lfo1.playback_direction",
+    "lfo2.playback_direction",
+    "lfo3.playback_direction",
+    "lfo4.playback_direction",
+    "lfo5.playback_direction"
+   ]
+  },
+  {
+   "mechanism": "lfo_scalar",
+   "module": "LFO{i}.plainParams",
+   "field": "preset_identity",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 6,
+   "representative_controls": [
+    "lfo1.preset_identity",
+    "lfo2.preset_identity",
+    "lfo3.preset_identity",
+    "lfo4.preset_identity",
+    "lfo5.preset_identity"
+   ]
+  },
+  {
+   "mechanism": "lfo_scalar",
+   "module": "LFO{i}.plainParams",
+   "field": "rate_10x",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 6,
+   "representative_controls": [
+    "lfo1.rate_10x",
+    "lfo2.rate_10x",
+    "lfo3.rate_10x",
+    "lfo4.rate_10x",
+    "lfo5.rate_10x"
+   ]
+  },
+  {
+   "mechanism": "lfo_scalar",
+   "module": "LFO{i}.plainParams",
+   "field": "shape",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 6,
+   "representative_controls": [
+    "lfo1.shape",
+    "lfo2.shape",
+    "lfo3.shape",
+    "lfo4.shape",
+    "lfo5.shape"
+   ]
+  },
+  {
+   "mechanism": "lfo_scalar",
+   "module": "LFO{i}.plainParams",
+   "field": "source",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 6,
+   "representative_controls": [
+    "lfo1.source",
+    "lfo2.source",
+    "lfo3.source",
+    "lfo4.source",
+    "lfo5.source"
+   ]
+  },
+  {
+   "mechanism": "env_scalar",
+   "module": "Env{i}.plainParams",
+   "field": "bpm",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 4,
+   "representative_controls": [
+    "env1.bpm",
+    "env2.bpm",
+    "env3.bpm",
+    "env4.bpm"
+   ]
+  },
+  {
+   "mechanism": "env_scalar",
+   "module": "Env{i}.plainParams",
+   "field": "curve_display",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 4,
+   "representative_controls": [
+    "env1.curve_display",
+    "env2.curve_display",
+    "env3.curve_display",
+    "env4.curve_display"
+   ]
+  },
+  {
+   "mechanism": "env_scalar",
+   "module": "Env{i}.plainParams",
+   "field": "invert_legato",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 4,
+   "representative_controls": [
+    "env1.invert_legato",
+    "env2.invert_legato",
+    "env3.invert_legato",
+    "env4.invert_legato"
+   ]
+  },
+  {
+   "mechanism": "env_scalar",
+   "module": "Env{i}.plainParams",
+   "field": "source",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 4,
+   "representative_controls": [
+    "env1.source",
+    "env2.source",
+    "env3.source",
+    "env4.source"
+   ]
+  },
+  {
+   "mechanism": "env_scalar",
+   "module": "Env{i}.plainParams",
+   "field": "time_mode",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 4,
+   "representative_controls": [
+    "env1.time_mode",
+    "env2.time_mode",
+    "env3.time_mode",
+    "env4.time_mode"
+   ]
+  },
+  {
+   "mechanism": "env_scalar",
+   "module": "Env{i}.plainParams",
+   "field": "voicestealretriggermode",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 4,
+   "representative_controls": [
+    "env1.voicestealretriggermode",
+    "env2.voicestealretriggermode",
+    "env3.voicestealretriggermode",
+    "env4.voicestealretriggermode"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "feedback",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 4,
+   "representative_controls": [
+    "fx.chorus.feedback",
+    "fx.delay.feedback",
+    "fx.flanger.feedback",
+    "fx.phaser.feedback"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "rate",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 4,
+   "representative_controls": [
+    "fx.chorus.rate",
+    "fx.flanger.rate",
+    "fx.hyper.rate",
+    "fx.phaser.rate"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "freq",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 4,
+   "representative_controls": [
+    "fx.delay.freq",
+    "fx.distortion.freq",
+    "fx.phaser.freq",
+    "fx.utility.freq"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "structure",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 4,
+   "representative_controls": [
+    "fx.hyper_dimension.structure",
+    "fx.splitter_lh.structure",
+    "fx.splitter_lmh.structure",
+    "fx.splitter_ms.structure"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "depth",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 3,
+   "representative_controls": [
+    "fx.chorus.depth",
+    "fx.flanger.depth",
+    "fx.phaser.depth"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "size",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 3,
+   "representative_controls": [
+    "fx.convolve.size",
+    "fx.dimension.size",
+    "fx.reverb.size"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "envs",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 3,
+   "representative_controls": [
+    "global.voice_control.random.envs",
+    "global.voice_control.scaling.envs",
+    "global.voice_control.seq.envs"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "mode",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 3,
+   "representative_controls": [
+    "oscA.mode",
+    "oscB.mode",
+    "oscC.mode"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "sample_loop_mode",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 3,
+   "representative_controls": [
+    "oscA.sample_loop_mode",
+    "oscB.sample_loop_mode",
+    "oscC.sample_loop_mode"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "slice_play_mode",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 3,
+   "representative_controls": [
+    "oscA.slice_play_mode",
+    "oscB.slice_play_mode",
+    "oscC.slice_play_mode"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "slicing_mode",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 3,
+   "representative_controls": [
+    "oscA.slicing_mode",
+    "oscB.slicing_mode",
+    "oscC.slicing_mode"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "tuning_mode",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 3,
+   "representative_controls": [
+    "oscA.tuning_mode",
+    "oscB.tuning_mode",
+    "oscC.tuning_mode"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "warp_mode",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 3,
+   "representative_controls": [
+    "oscA.warp_mode",
+    "oscB.warp_mode",
+    "oscC.warp_mode"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "warp_mode2",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 3,
+   "representative_controls": [
+    "oscA.warp_mode2",
+    "oscB.warp_mode2",
+    "oscC.warp_mode2"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "wt_interpolation_mode",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 3,
+   "representative_controls": [
+    "oscA.wt_interpolation_mode",
+    "oscB.wt_interpolation_mode",
+    "oscC.wt_interpolation_mode"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "range",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 2,
+   "representative_controls": [
+    "arp.pattern.editor.range",
+    "arp.transpose.range"
+   ]
+  },
+  {
+   "mechanism": "filter_scalar",
+   "module": "VoiceFilter{i}.plainParams",
+   "field": "drive_mode",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 2,
+   "representative_controls": [
+    "filter1.drive_mode",
+    "filter2.drive_mode"
+   ]
+  },
+  {
+   "mechanism": "filter_scalar",
+   "module": "VoiceFilter{i}.plainParams",
+   "field": "enabled",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 2,
+   "representative_controls": [
+    "filter1.enabled",
+    "filter2.enabled"
+   ]
+  },
+  {
+   "mechanism": "filter_scalar",
+   "module": "VoiceFilter{i}.plainParams",
+   "field": "key_track",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 2,
+   "representative_controls": [
+    "filter1.key_track",
+    "filter2.key_track"
+   ]
+  },
+  {
+   "mechanism": "filter_scalar",
+   "module": "VoiceFilter{i}.plainParams",
+   "field": "mute",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 2,
+   "representative_controls": [
+    "filter1.mute",
+    "filter2.mute"
+   ]
+  },
+  {
+   "mechanism": "filter_scalar",
+   "module": "VoiceFilter{i}.plainParams",
+   "field": "response_graph",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 2,
+   "representative_controls": [
+    "filter1.response_graph",
+    "filter2.response_graph"
+   ]
+  },
+  {
+   "mechanism": "filter_scalar",
+   "module": "VoiceFilter{i}.plainParams",
+   "field": "routenoise",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 2,
+   "representative_controls": [
+    "filter1.routenoise",
+    "filter2.routenoise"
+   ]
+  },
+  {
+   "mechanism": "filter_scalar",
+   "module": "VoiceFilter{i}.plainParams",
+   "field": "routeosca",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 2,
+   "representative_controls": [
+    "filter1.routeosca",
+    "filter2.routeosca"
+   ]
+  },
+  {
+   "mechanism": "filter_scalar",
+   "module": "VoiceFilter{i}.plainParams",
+   "field": "routeoscb",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 2,
+   "representative_controls": [
+    "filter1.routeoscb",
+    "filter2.routeoscb"
+   ]
+  },
+  {
+   "mechanism": "filter_scalar",
+   "module": "VoiceFilter{i}.plainParams",
+   "field": "routeoscc",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 2,
+   "representative_controls": [
+    "filter1.routeoscc",
+    "filter2.routeoscc"
+   ]
+  },
+  {
+   "mechanism": "filter_scalar",
+   "module": "VoiceFilter{i}.plainParams",
+   "field": "routesub",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 2,
+   "representative_controls": [
+    "filter1.routesub",
+    "filter2.routesub"
+   ]
+  },
+  {
+   "mechanism": "filter_scalar",
+   "module": "VoiceFilter{i}.plainParams",
+   "field": "stereo",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 2,
+   "representative_controls": [
+    "filter1.stereo",
+    "filter2.stereo"
+   ]
+  },
+  {
+   "mechanism": "filter_scalar",
+   "module": "VoiceFilter{i}.plainParams",
+   "field": "boeuf",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 2,
+   "representative_controls": [
+    "filter1.type_specific.boeuf",
+    "filter2.type_specific.boeuf"
+   ]
+  },
+  {
+   "mechanism": "filter_scalar",
+   "module": "VoiceFilter{i}.plainParams",
+   "field": "combfreq",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 2,
+   "representative_controls": [
+    "filter1.type_specific.combfreq",
+    "filter2.type_specific.combfreq"
+   ]
+  },
+  {
+   "mechanism": "filter_scalar",
+   "module": "VoiceFilter{i}.plainParams",
+   "field": "damp",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 2,
+   "representative_controls": [
+    "filter1.type_specific.damp",
+    "filter2.type_specific.damp"
+   ]
+  },
+  {
+   "mechanism": "filter_scalar",
+   "module": "VoiceFilter{i}.plainParams",
+   "field": "fat",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 2,
+   "representative_controls": [
+    "filter1.type_specific.fat",
+    "filter2.type_specific.fat"
+   ]
+  },
+  {
+   "mechanism": "filter_scalar",
+   "module": "VoiceFilter{i}.plainParams",
+   "field": "formant",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 2,
+   "representative_controls": [
+    "filter1.type_specific.formant",
+    "filter2.type_specific.formant"
+   ]
+  },
+  {
+   "mechanism": "filter_scalar",
+   "module": "VoiceFilter{i}.plainParams",
+   "field": "freq2",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 2,
+   "representative_controls": [
+    "filter1.type_specific.freq2",
+    "filter2.type_specific.freq2"
+   ]
+  },
+  {
+   "mechanism": "filter_scalar",
+   "module": "VoiceFilter{i}.plainParams",
+   "field": "freq2comb",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 2,
+   "representative_controls": [
+    "filter1.type_specific.freq2comb",
+    "filter2.type_specific.freq2comb"
+   ]
+  },
+  {
+   "mechanism": "filter_scalar",
+   "module": "VoiceFilter{i}.plainParams",
+   "field": "gaindb",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 2,
+   "representative_controls": [
+    "filter1.type_specific.gaindb",
+    "filter2.type_specific.gaindb"
+   ]
+  },
+  {
+   "mechanism": "filter_scalar",
+   "module": "VoiceFilter{i}.plainParams",
+   "field": "hlwidth",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 2,
+   "representative_controls": [
+    "filter1.type_specific.hlwidth",
+    "filter2.type_specific.hlwidth"
+   ]
+  },
+  {
+   "mechanism": "filter_scalar",
+   "module": "VoiceFilter{i}.plainParams",
+   "field": "hpfreq",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 2,
+   "representative_controls": [
+    "filter1.type_specific.hpfreq",
+    "filter2.type_specific.hpfreq"
+   ]
+  },
+  {
+   "mechanism": "filter_scalar",
+   "module": "VoiceFilter{i}.plainParams",
+   "field": "lpfreq",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 2,
+   "representative_controls": [
+    "filter1.type_specific.lpfreq",
+    "filter2.type_specific.lpfreq"
+   ]
+  },
+  {
+   "mechanism": "filter_scalar",
+   "module": "VoiceFilter{i}.plainParams",
+   "field": "mixalt",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 2,
+   "representative_controls": [
+    "filter1.type_specific.mixalt",
+    "filter2.type_specific.mixalt"
+   ]
+  },
+  {
+   "mechanism": "filter_scalar",
+   "module": "VoiceFilter{i}.plainParams",
+   "field": "morph",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 2,
+   "representative_controls": [
+    "filter1.type_specific.morph",
+    "filter2.type_specific.morph"
+   ]
+  },
+  {
+   "mechanism": "filter_scalar",
+   "module": "VoiceFilter{i}.plainParams",
+   "field": "pain",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 2,
+   "representative_controls": [
+    "filter1.type_specific.pain",
+    "filter2.type_specific.pain"
+   ]
+  },
+  {
+   "mechanism": "filter_scalar",
+   "module": "VoiceFilter{i}.plainParams",
+   "field": "screamamt",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 2,
+   "representative_controls": [
+    "filter1.type_specific.screamamt",
+    "filter2.type_specific.screamamt"
+   ]
+  },
+  {
+   "mechanism": "filter_scalar",
+   "module": "VoiceFilter{i}.plainParams",
+   "field": "smooth",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 2,
+   "representative_controls": [
+    "filter1.type_specific.smooth",
+    "filter2.type_specific.smooth"
+   ]
+  },
+  {
+   "mechanism": "filter_scalar",
+   "module": "VoiceFilter{i}.plainParams",
+   "field": "spread",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 2,
+   "representative_controls": [
+    "filter1.type_specific.spread",
+    "filter2.type_specific.spread"
+   ]
+  },
+  {
+   "mechanism": "filter_scalar",
+   "module": "VoiceFilter{i}.plainParams",
+   "field": "stages",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 2,
+   "representative_controls": [
+    "filter1.type_specific.stages",
+    "filter2.type_specific.stages"
+   ]
+  },
+  {
+   "mechanism": "filter_scalar",
+   "module": "VoiceFilter{i}.plainParams",
+   "field": "thru",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 2,
+   "representative_controls": [
+    "filter1.type_specific.thru",
+    "filter2.type_specific.thru"
+   ]
+  },
+  {
+   "mechanism": "filter_scalar",
+   "module": "VoiceFilter{i}.plainParams",
+   "field": "width",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 2,
+   "representative_controls": [
+    "filter1.type_specific.width",
+    "filter2.type_specific.width"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "width",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 2,
+   "representative_controls": [
+    "fx.bode.width",
+    "fx.utility.width"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "attack",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 2,
+   "representative_controls": [
+    "fx.compressor.attack",
+    "fx.convolve.attack"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "mode",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 2,
+   "representative_controls": [
+    "fx.compressor.mode",
+    "fx.delay.mode"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "pre_dly",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 2,
+   "representative_controls": [
+    "fx.convolve.pre_dly",
+    "fx.reverb.pre_dly"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "filter_graph",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 2,
+   "representative_controls": [
+    "fx.delay.filter_graph",
+    "fx.distortion.filter_graph"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "q",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 2,
+   "representative_controls": [
+    "fx.delay.q",
+    "fx.distortion.q"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "drive",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 2,
+   "representative_controls": [
+    "fx.distortion.drive",
+    "fx.filter.drive"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "graph",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 2,
+   "representative_controls": [
+    "fx.equalizer.graph",
+    "fx.filter.graph"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "pan",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 2,
+   "representative_controls": [
+    "fx.filter.pan",
+    "fx.utility.pan"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "phase",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 2,
+   "representative_controls": [
+    "fx.flanger.phase",
+    "fx.phaser.phase"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "highs_bypass",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 2,
+   "representative_controls": [
+    "fx.splitter_lh.highs_bypass",
+    "fx.splitter_lmh.highs_bypass"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "highs_rack",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 2,
+   "representative_controls": [
+    "fx.splitter_lh.highs_rack",
+    "fx.splitter_lmh.highs_rack"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "lows_bypass",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 2,
+   "representative_controls": [
+    "fx.splitter_lh.lows_bypass",
+    "fx.splitter_lmh.lows_bypass"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "lows_rack",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 2,
+   "representative_controls": [
+    "fx.splitter_lh.lows_rack",
+    "fx.splitter_lmh.lows_rack"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "global_tuning",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 2,
+   "representative_controls": [
+    "global.global_tuning",
+    "global.tuning.global_tuning"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "oversampling",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 2,
+   "representative_controls": [
+    "global.oversampling",
+    "global.quality.oversampling"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "s1_compatibility",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 2,
+   "representative_controls": [
+    "global.quality.s1_compatibility",
+    "global.s1_compatibility"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "cutoff",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 2,
+   "representative_controls": [
+    "global.voice_control.random.cutoff",
+    "global.voice_control.seq.cutoff"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "detune",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 2,
+   "representative_controls": [
+    "global.voice_control.random.detune",
+    "global.voice_control.seq.detune"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "pan",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 2,
+   "representative_controls": [
+    "global.voice_control.random.pan",
+    "global.voice_control.seq.pan"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "bank",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.global.bank"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "edit_all",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.global.edit_all"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "launch_quant",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.global.launch_quant"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "midi_out",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.midi_out"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "bpm_hz",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.pattern.bpm_hz"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "dot",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.pattern.dot"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "edit_toggle",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.pattern.edit_toggle"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "accent_row",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.pattern.editor.accent_row"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "add_lane_menu",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.pattern.editor.add_lane_menu"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "length",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.pattern.editor.length"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "mode",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.pattern.editor.mode"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "pattern_select",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.pattern.editor.pattern_select"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "pitch",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.pattern.editor.pitch"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "step_grid",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.pattern.editor.step_grid"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "step_mode",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.pattern.editor.step_mode"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "strum_row",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.pattern.editor.strum_row"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "time",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.pattern.editor.time"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "vel_rand_lane",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.pattern.editor.vel_rand_lane"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "velocity_lane",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.pattern.editor.velocity_lane"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "wrap",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.pattern.editor.wrap"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "wrap_phantom_note",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.pattern.editor.wrap_phantom_note"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "shape_pattern_mode",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.pattern.shape_pattern_mode"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "trip",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.pattern.trip"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "chance",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.playback.chance"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "chance_pre",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.playback.chance_pre"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "gate",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.playback.gate"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "latch",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.playback.latch"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "offset",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.playback.offset"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "repeats",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.playback.repeats"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "thru",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.playback.thru"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "first",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.retrigger.first"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "launch",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.retrigger.launch"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "note",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.retrigger.note"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "rate_enable",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.retrigger.rate_enable"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "rate_value",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.retrigger.rate_value"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "context_menu",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.slot.context_menu"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "count",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.slot.count"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "midi_keyboard_launch",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.slot.midi_keyboard_launch"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "play_button",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.slot.play_button"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "summary_display",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.slot.summary_display"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "shift",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.transpose.shift"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "decay",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.velocity.decay"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "enable",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.velocity.enable"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "retrig",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.velocity.retrig"
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "module": "Arp0.plainParams",
+   "field": "target",
+   "value_kind": "float_or_enum",
+   "conversion": "discrete_or_enum",
+   "count": 1,
+   "representative_controls": [
+    "arp.velocity.target"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "balance",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.bode.balance"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "blur",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.bode.blur"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "delay",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.bode.delay"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "dir",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.bode.dir"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "feed",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.bode.feed"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "mono_input",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.bode.mono_input"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "range",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.bode.range"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "shift",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.bode.shift"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "shift_retrig",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.bode.shift_retrig"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "delay1",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.chorus.delay1"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "delay2",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.chorus.delay2"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "filter_cutoff",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.chorus.filter_cutoff"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "filter_mode",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.chorus.filter_mode"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "band_graphic",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.compressor.band_graphic"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "band_h",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.compressor.band_h"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "band_l",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.compressor.band_l"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "band_m",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.compressor.band_m"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "below",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.compressor.below"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "gain",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.compressor.gain"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "ratio",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.compressor.ratio"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "release",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.compressor.release"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "thresh",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.compressor.thresh"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "x_high",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.compressor.x_high"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "x_low",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.compressor.x_low"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "damp",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.convolve.damp"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "decay",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.convolve.decay"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "ir_browser",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.convolve.ir_browser"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "ir_gain",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.convolve.ir_gain"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "ir_next_prev",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.convolve.ir_next_prev"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "load_ir_external",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.convolve.load_ir_external"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "min_phase",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.convolve.min_phase"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "tone",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.convolve.tone"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "high_quality",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.delay.high_quality"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "link",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.delay.link"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "time_l",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.delay.time_l"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "time_r",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.delay.time_r"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "filter_position",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.distortion.filter_position"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "waveform_preview",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.distortion.waveform_preview"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "xshaper_a",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.distortion.xshaper_a"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "xshaper_b",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.distortion.xshaper_b"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "xshaper_edit_pencil",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.distortion.xshaper_edit_pencil"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "left_freq",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.equalizer.left_freq"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "left_gain",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.equalizer.left_gain"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "left_q",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.equalizer.left_q"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "left_type",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.equalizer.left_type"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "level",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.equalizer.level"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "right_freq",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.equalizer.right_freq"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "right_gain",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.equalizer.right_gain"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "right_q",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.equalizer.right_q"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "right_type",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.equalizer.right_type"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "cutoff",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.filter.cutoff"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "fat",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.filter.fat"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "key_track",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.filter.key_track"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "res",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.filter.res"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "no_separate_delay_knob",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.flanger.no_separate_delay_knob"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "fxbode",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.fxbode"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "fxchorus",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.fxchorus"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "fxcomp",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.fxcomp"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "fxconv",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.fxconv"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "fxdelay",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.fxdelay"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "fxdistortion",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.fxdistortion"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "fxeq",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.fxeq"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "fxfilter",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.fxfilter"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "fxflanger",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.fxflanger"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "fxhyperd",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.fxhyperd"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "fxphaser",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.fxphaser"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "fxreverb",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.fxreverb"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "fxsplit",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.fxsplit"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "fxsplit3",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.fxsplit3"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "fxsplitms",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.fxsplitms"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "fxutils",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.fxutils"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "detune",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.hyper.detune"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "retrig",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.hyper.retrig"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "unison",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.hyper.unison"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "depth2",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.phaser.depth2"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "poles",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.phaser.poles"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "chorus_mod",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.reverb.chorus_mod"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "damp_plate",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.reverb.damp_plate"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "damp_vintage",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.reverb.damp_vintage"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "decay_hall",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.reverb.decay_hall"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "diff_a_vintage",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.reverb.diff_a_vintage"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "diff_b_vintage",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.reverb.diff_b_vintage"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "diffusion_nitrous",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.reverb.diffusion_nitrous"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "er_size_vintage",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.reverb.er_size_vintage"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "feedback_nitrous_basin",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.reverb.feedback_nitrous_basin"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "hi_cut",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.reverb.hi_cut"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "lo_cut",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.reverb.lo_cut"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "mode_nitrous",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.reverb.mode_nitrous"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "spin_hall",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.reverb.spin_hall"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "width_plate",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.reverb.width_plate"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "highs_select",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.splitter_lh.highs_select"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "lows_select",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.splitter_lh.lows_select"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "split_freq",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.splitter_lh.split_freq"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "mids_bypass",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.splitter_lmh.mids_bypass"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "mids_rack",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.splitter_lmh.mids_rack"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "split_freq_low_mid",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.splitter_lmh.split_freq_low_mid"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "split_freq_mid_high",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.splitter_lmh.split_freq_mid_high"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "mid_bypass",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.splitter_ms.mid_bypass"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "mid_rack",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.splitter_ms.mid_rack"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "side_bypass",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.splitter_ms.side_bypass"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "side_rack",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.splitter_ms.side_rack"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "add_fx_menu",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.sys.add_fx_menu"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "module_bypass",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.sys.module_bypass"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "module_context_menu",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.sys.module_context_menu"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "module_list_panel",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.sys.module_list_panel"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "module_param_context_menu",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.sys.module_param_context_menu"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "rack_preset_browser",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.sys.rack_preset_browser"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "racks",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.sys.racks"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "reorder",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.sys.reorder"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "hpf",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.utility.hpf"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "lpf",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.utility.lpf"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "mono_bass",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.utility.mono_bass"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "polarity_inv_l",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.utility.polarity_inv_l"
+   ]
+  },
+  {
+   "mechanism": "fx_core",
+   "module": "FXRack{r}.FX[i]",
+   "field": "polarity_inv_r",
+   "value_kind": "mixed",
+   "conversion": "type_dispatch_plus_dict",
+   "count": 1,
+   "representative_controls": [
+    "fx.utility.polarity_inv_r"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "direct_volume",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.direct_volume"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "fx_bus1_destination",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.fx_bus1_destination"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "fx_bus1_volume",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.fx_bus1_volume"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "fx_bus2_destination",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.fx_bus2_destination"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "fx_bus2_volume",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.fx_bus2_volume"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "build_date_display",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.info.build_date_display"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "note_latch",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.note_latch"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "porta_always",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.porta_always"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "porta_scaled",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.porta_scaled"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "portamento_curve",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.portamento_curve"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "default_waveform_view",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.preferences.default_waveform_view"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "double_click_params",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.preferences.double_click_params"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "help_tooltips",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.preferences.help_tooltips"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "keyboard_shortcuts",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.preferences.keyboard_shortcuts"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "mouse_wheel_param_control",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.preferences.mouse_wheel_param_control"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "mpe_enabled_by_default",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.preferences.mpe_enabled_by_default"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "mpe_expr_y_acts_bi_directional",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.preferences.mpe_expr_y_acts_bi_directional"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "mpe_pitch_bend_maps_to_expr_x",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.preferences.mpe_pitch_bend_maps_to_expr_x"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "param_value_tooltips",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.preferences.param_value_tooltips"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "disable_smoothing",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.quality.disable_smoothing"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "oversampling_lock",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.quality.oversampling_lock"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "env_2",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.retriggers.env_2"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "env_3",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.retriggers.env_3"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "env_4",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.retriggers.env_4"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "lfo_1",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.retriggers.lfo_1"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "lfo_10",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.retriggers.lfo_10"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "lfo_2",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.retriggers.lfo_2"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "lfo_3",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.retriggers.lfo_3"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "lfo_4",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.retriggers.lfo_4"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "lfo_5",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.retriggers.lfo_5"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "lfo_6",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.retriggers.lfo_6"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "lfo_7",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.retriggers.lfo_7"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "lfo_8",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.retriggers.lfo_8"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "lfo_9",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.retriggers.lfo_9"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "noise",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.retriggers.noise"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "note",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.retriggers.note"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "osc_a",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.retriggers.osc_a"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "osc_b",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.retriggers.osc_b"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "osc_c",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.retriggers.osc_c"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "sub",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.retriggers.sub"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "swing_div",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.swing_div"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "lock",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.tuning.lock"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "tun_file",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.tuning.tun_file"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "use_ultra_on_render",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.use_ultra_on_render"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "voice_amp",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.voice_amp"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "osc_scope",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.voice_control.osc_scope"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "preset_field",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.voice_control.preset_field"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "lfos",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.voice_control.scaling.lfos"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "lfos_rate_toggle",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.voice_control.scaling.lfos_rate_toggle"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "mod1",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.voice_control.seq.mod1"
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "module": "Global0.plainParams",
+   "field": "mod2",
+   "value_kind": "float_or_enum",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "global.voice_control.seq.mod2"
+   ]
+  },
+  {
+   "mechanism": "keyboard_state",
+   "module": "unknown",
+   "field": "key",
+   "value_kind": "unknown",
+   "conversion": "unknown",
+   "count": 1,
+   "representative_controls": [
+    "keyboard.key"
+   ]
+  },
+  {
+   "mechanism": "keyboard_state",
+   "module": "unknown",
+   "field": "main_keyboard",
+   "value_kind": "unknown",
+   "conversion": "unknown",
+   "count": 1,
+   "representative_controls": [
+    "keyboard.main_keyboard"
+   ]
+  },
+  {
+   "mechanism": "keyboard_state",
+   "module": "unknown",
+   "field": "mod_wheel",
+   "value_kind": "unknown",
+   "conversion": "unknown",
+   "count": 1,
+   "representative_controls": [
+    "keyboard.mod_wheel"
+   ]
+  },
+  {
+   "mechanism": "keyboard_state",
+   "module": "unknown",
+   "field": "source_indicator",
+   "value_kind": "unknown",
+   "conversion": "unknown",
+   "count": 1,
+   "representative_controls": [
+    "keyboard.mod_wheel.source_indicator"
+   ]
+  },
+  {
+   "mechanism": "keyboard_state",
+   "module": "unknown",
+   "field": "bend_range",
+   "value_kind": "unknown",
+   "conversion": "unknown",
+   "count": 1,
+   "representative_controls": [
+    "keyboard.mpe.bend_range"
+   ]
+  },
+  {
+   "mechanism": "keyboard_state",
+   "module": "unknown",
+   "field": "enabled",
+   "value_kind": "unknown",
+   "conversion": "unknown",
+   "count": 1,
+   "representative_controls": [
+    "keyboard.mpe.enabled"
+   ]
+  },
+  {
+   "mechanism": "keyboard_state",
+   "module": "unknown",
+   "field": "xyz_to_macros123",
+   "value_kind": "unknown",
+   "conversion": "unknown",
+   "count": 1,
+   "representative_controls": [
+    "keyboard.mpe.xyz_to_macros123"
+   ]
+  },
+  {
+   "mechanism": "keyboard_state",
+   "module": "unknown",
+   "field": "y_to_modwheel",
+   "value_kind": "unknown",
+   "conversion": "unknown",
+   "count": 1,
+   "representative_controls": [
+    "keyboard.mpe.y_to_modwheel"
+   ]
+  },
+  {
+   "mechanism": "keyboard_state",
+   "module": "unknown",
+   "field": "yz_to_macros12",
+   "value_kind": "unknown",
+   "conversion": "unknown",
+   "count": 1,
+   "representative_controls": [
+    "keyboard.mpe.yz_to_macros12"
+   ]
+  },
+  {
+   "mechanism": "keyboard_state",
+   "module": "unknown",
+   "field": "arp_row_fold",
+   "value_kind": "unknown",
+   "conversion": "unknown",
+   "count": 1,
+   "representative_controls": [
+    "keyboard.osc_mapping.arp_row_fold"
+   ]
+  },
+  {
+   "mechanism": "keyboard_state",
+   "module": "unknown",
+   "field": "arp_row_key_range",
+   "value_kind": "unknown",
+   "conversion": "unknown",
+   "count": 1,
+   "representative_controls": [
+    "keyboard.osc_mapping.arp_row_key_range"
+   ]
+  },
+  {
+   "mechanism": "keyboard_state",
+   "module": "unknown",
+   "field": "arp_row_warp",
+   "value_kind": "unknown",
+   "conversion": "unknown",
+   "count": 1,
+   "representative_controls": [
+    "keyboard.osc_mapping.arp_row_warp"
+   ]
+  },
+  {
+   "mechanism": "keyboard_state",
+   "module": "unknown",
+   "field": "editor",
+   "value_kind": "unknown",
+   "conversion": "unknown",
+   "count": 1,
+   "representative_controls": [
+    "keyboard.osc_mapping.editor"
+   ]
+  },
+  {
+   "mechanism": "keyboard_state",
+   "module": "unknown",
+   "field": "reset_all",
+   "value_kind": "unknown",
+   "conversion": "unknown",
+   "count": 1,
+   "representative_controls": [
+    "keyboard.osc_mapping.reset_all"
+   ]
+  },
+  {
+   "mechanism": "keyboard_state",
+   "module": "unknown",
+   "field": "vel_tab",
+   "value_kind": "unknown",
+   "conversion": "unknown",
+   "count": 1,
+   "representative_controls": [
+    "keyboard.osc_mapping.vel_tab"
+   ]
+  },
+  {
+   "mechanism": "keyboard_state",
+   "module": "unknown",
+   "field": "pitch_bend",
+   "value_kind": "unknown",
+   "conversion": "unknown",
+   "count": 1,
+   "representative_controls": [
+    "keyboard.pitch_bend"
+   ]
+  },
+  {
+   "mechanism": "keyboard_state",
+   "module": "unknown",
+   "field": "bend_down",
+   "value_kind": "unknown",
+   "conversion": "unknown",
+   "count": 1,
+   "representative_controls": [
+    "keyboard.pitch_bend.bend_down"
+   ]
+  },
+  {
+   "mechanism": "keyboard_state",
+   "module": "unknown",
+   "field": "bend_up",
+   "value_kind": "unknown",
+   "conversion": "unknown",
+   "count": 1,
+   "representative_controls": [
+    "keyboard.pitch_bend.bend_up"
+   ]
+  },
+  {
+   "mechanism": "keyboard_state",
+   "module": "unknown",
+   "field": "scale",
+   "value_kind": "unknown",
+   "conversion": "unknown",
+   "count": 1,
+   "representative_controls": [
+    "keyboard.scale"
+   ]
+  },
+  {
+   "mechanism": "keyboard_state",
+   "module": "unknown",
+   "field": "swing",
+   "value_kind": "unknown",
+   "conversion": "unknown",
+   "count": 1,
+   "representative_controls": [
+    "keyboard.swing"
+   ]
+  },
+  {
+   "mechanism": "keyboard_state",
+   "module": "unknown",
+   "field": "transpose",
+   "value_kind": "unknown",
+   "conversion": "unknown",
+   "count": 1,
+   "representative_controls": [
+    "keyboard.transpose"
+   ]
+  },
+  {
+   "mechanism": "macro_scalar",
+   "module": "Macro{i}.plainParams",
+   "field": "add_remove_slot",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "macro.sys.add_remove_slot"
+   ]
+  },
+  {
+   "mechanism": "macro_scalar",
+   "module": "Macro{i}.plainParams",
+   "field": "apply_and_delete_macro",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "macro.sys.apply_and_delete_macro"
+   ]
+  },
+  {
+   "mechanism": "macro_scalar",
+   "module": "Macro{i}.plainParams",
+   "field": "assign_drag",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "macro.sys.assign_drag"
+   ]
+  },
+  {
+   "mechanism": "macro_scalar",
+   "module": "Macro{i}.plainParams",
+   "field": "assign_matrix_source",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "macro.sys.assign_matrix_source"
+   ]
+  },
+  {
+   "mechanism": "macro_scalar",
+   "module": "Macro{i}.plainParams",
+   "field": "aux_curve",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "macro.sys.aux_curve"
+   ]
+  },
+  {
+   "mechanism": "macro_scalar",
+   "module": "Macro{i}.plainParams",
+   "field": "aux_invert",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "macro.sys.aux_invert"
+   ]
+  },
+  {
+   "mechanism": "macro_scalar",
+   "module": "Macro{i}.plainParams",
+   "field": "aux_output",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "macro.sys.aux_output"
+   ]
+  },
+  {
+   "mechanism": "macro_scalar",
+   "module": "Macro{i}.plainParams",
+   "field": "aux_source",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "macro.sys.aux_source"
+   ]
+  },
+  {
+   "mechanism": "macro_scalar",
+   "module": "Macro{i}.plainParams",
+   "field": "bipolar_unipolar",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "macro.sys.bipolar_unipolar"
+   ]
+  },
+  {
+   "mechanism": "macro_scalar",
+   "module": "Macro{i}.plainParams",
+   "field": "browser_view_access",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "macro.sys.browser_view_access"
+   ]
+  },
+  {
+   "mechanism": "macro_scalar",
+   "module": "Macro{i}.plainParams",
+   "field": "center_toggle_modifier",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "macro.sys.center_toggle_modifier"
+   ]
+  },
+  {
+   "mechanism": "macro_scalar",
+   "module": "Macro{i}.plainParams",
+   "field": "clip_view_access",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "macro.sys.clip_view_access"
+   ]
+  },
+  {
+   "mechanism": "macro_scalar",
+   "module": "Macro{i}.plainParams",
+   "field": "copy_paste",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "macro.sys.copy_paste"
+   ]
+  },
+  {
+   "mechanism": "macro_scalar",
+   "module": "Macro{i}.plainParams",
+   "field": "delete_route",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "macro.sys.delete_route"
+   ]
+  },
+  {
+   "mechanism": "macro_scalar",
+   "module": "Macro{i}.plainParams",
+   "field": "fx_expanded_not_assignable",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "macro.sys.fx_expanded_not_assignable"
+   ]
+  },
+  {
+   "mechanism": "macro_scalar",
+   "module": "Macro{i}.plainParams",
+   "field": "init_module",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "macro.sys.init_module"
+   ]
+  },
+  {
+   "mechanism": "macro_scalar",
+   "module": "Macro{i}.plainParams",
+   "field": "knob_context_menu",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "macro.sys.knob_context_menu"
+   ]
+  },
+  {
+   "mechanism": "macro_scalar",
+   "module": "Macro{i}.plainParams",
+   "field": "lock_parameter",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "macro.sys.lock_parameter"
+   ]
+  },
+  {
+   "mechanism": "macro_scalar",
+   "module": "Macro{i}.plainParams",
+   "field": "macro_depth_reconcile",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "macro.sys.macro_depth_reconcile"
+   ]
+  },
+  {
+   "mechanism": "macro_scalar",
+   "module": "Macro{i}.plainParams",
+   "field": "macro_specific_preset",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "macro.sys.macro_specific_preset"
+   ]
+  },
+  {
+   "mechanism": "macro_scalar",
+   "module": "Macro{i}.plainParams",
+   "field": "multi_assign_one_macro",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "macro.sys.multi_assign_one_macro"
+   ]
+  },
+  {
+   "mechanism": "macro_scalar",
+   "module": "Macro{i}.plainParams",
+   "field": "multi_macro_summed_dest",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "macro.sys.multi_macro_summed_dest"
+   ]
+  },
+  {
+   "mechanism": "macro_scalar",
+   "module": "Macro{i}.plainParams",
+   "field": "output_monitor",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "macro.sys.output_monitor"
+   ]
+  },
+  {
+   "mechanism": "macro_scalar",
+   "module": "Macro{i}.plainParams",
+   "field": "range_direction_drag",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "macro.sys.range_direction_drag"
+   ]
+  },
+  {
+   "mechanism": "macro_scalar",
+   "module": "Macro{i}.plainParams",
+   "field": "rename_mechanism",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "macro.sys.rename_mechanism"
+   ]
+  },
+  {
+   "mechanism": "macro_scalar",
+   "module": "Macro{i}.plainParams",
+   "field": "reset_value",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "macro.sys.reset_value"
+   ]
+  },
+  {
+   "mechanism": "macro_scalar",
+   "module": "Macro{i}.plainParams",
+   "field": "rise_fall_smooth",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "macro.sys.rise_fall_smooth"
+   ]
+  },
+  {
+   "mechanism": "macro_scalar",
+   "module": "Macro{i}.plainParams",
+   "field": "route_amount",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "macro.sys.route_amount"
+   ]
+  },
+  {
+   "mechanism": "macro_scalar",
+   "module": "Macro{i}.plainParams",
+   "field": "source_curve",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "macro.sys.source_curve"
+   ]
+  },
+  {
+   "mechanism": "macro_scalar",
+   "module": "Macro{i}.plainParams",
+   "field": "temp_bypass",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "macro.sys.temp_bypass"
+   ]
+  },
+  {
+   "mechanism": "macro_scalar",
+   "module": "Macro{i}.plainParams",
+   "field": "unassign_rightclick",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "macro.sys.unassign_rightclick"
+   ]
+  },
+  {
+   "mechanism": "macro_scalar",
+   "module": "Macro{i}.plainParams",
+   "field": "value_as_mod_destination",
+   "value_kind": "float",
+   "conversion": "direct_passthrough",
+   "count": 1,
+   "representative_controls": [
+    "macro.sys.value_as_mod_destination"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "aux_curve",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.aux_curve"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "aux_inverted",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.aux_inverted"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "aux_source",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.aux_source"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "bipolar",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.bipolar"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "bypass",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.bypass"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "curve_in",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.curve_in"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "delay_beat_sync",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.delay_beat_sync"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "delay_offset",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.delay_offset"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "lfo_n_conditional",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.destination.lfo_n_conditional"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "destination_vocabulary",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.destination_vocabulary"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "01",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.lfo_bus.01"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "02",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.lfo_bus.02"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "03",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.lfo_bus.03"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "04",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.lfo_bus.04"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "05",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.lfo_bus.05"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "06",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.lfo_bus.06"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "07",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.lfo_bus.07"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "08",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.lfo_bus.08"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "09",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.lfo_bus.09"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "10",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.lfo_bus.10"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "11",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.lfo_bus.11"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "12",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.lfo_bus.12"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "13",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.lfo_bus.13"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "14",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.lfo_bus.14"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "15",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.lfo_bus.15"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "16",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.lfo_bus.16"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "mod",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.mod"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "order",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.order"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "out",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.out"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "out_indicator",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.out_indicator"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "routes",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.routes"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "signal_balance",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.routing.signal_balance"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "smooth_fall",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.smooth_fall"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "smooth_link",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.smooth_link"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "smooth_rise",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.smooth_rise"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "active_voices",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.active_voices"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "aftertouch",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.aftertouch"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "env_1",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.env_1"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "env_2",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.env_2"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "env_3",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.env_3"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "env_4",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.env_4"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "expr_x_pan",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.expr_x_pan"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "expr_y_timbre",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.expr_y_timbre"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "expr_z_press",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.expr_z_press"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "filter_1",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.filter_1"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "filter_2",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.filter_2"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "fixed",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.fixed"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "lfo_1",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.lfo_1"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "lfo_10",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.lfo_10"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "lfo_2",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.lfo_2"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "lfo_3",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.lfo_3"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "lfo_4",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.lfo_4"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "lfo_5",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.lfo_5"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "lfo_6",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.lfo_6"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "lfo_7",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.lfo_7"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "lfo_8",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.lfo_8"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "lfo_9",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.lfo_9"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "macro_1",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.macro_1"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "macro_2",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.macro_2"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "macro_3",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.macro_3"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "macro_4",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.macro_4"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "macro_5",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.macro_5"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "macro_6",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.macro_6"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "macro_7",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.macro_7"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "macro_8",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.macro_8"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "mod_wheel",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.mod_wheel"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "noise_osc",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.noise_osc"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "notenum",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.notenum"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "noteon_alt",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.noteon_alt"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "noteon_alt2",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.noteon_alt2"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "noteon_rand1",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.noteon_rand1"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "noteon_rand2",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.noteon_rand2"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "noteon_rand_discrete",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.noteon_rand_discrete"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "osc_a",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.osc_a"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "osc_b",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.osc_b"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "osc_c",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.osc_c"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "pitch_bend",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.pitch_bend"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "poly_aftertch",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.poly_aftertch"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "release_velo",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.release_velo"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "sub_osc",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.sub_osc"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "velo",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.velo"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "voice_index",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.voice_index"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "voice_mod_1",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.voice_mod_1"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "voice_mod_2",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source.voice_mod_2"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "source_curve",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source_curve"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "source_vocabulary",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.source_vocabulary"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "apply_and_delete_macros",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.sys.apply_and_delete_macros"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "create_velo_amp_assignment",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.sys.create_velo_amp_assignment"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "create_vibrato",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.sys.create_vibrato"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "duplicate_route_policy",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.sys.duplicate_route_policy"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "dynamic_visualization",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.sys.dynamic_visualization"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "expanded_view",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.sys.expanded_view"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "lock_matrix",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.sys.lock_matrix"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "max_routes",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.sys.max_routes"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "menu",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.sys.menu"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "sort_by_destination",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.sys.sort_by_destination"
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "module": "ModSlot{i}.plainParams",
+   "field": "sort_by_source",
+   "value_kind": "float_or_enum",
+   "conversion": "passthrough_or_index",
+   "count": 1,
+   "representative_controls": [
+    "matrix.sys.sort_by_source"
+   ]
+  },
+  {
+   "mechanism": "unknown_oscnoise",
+   "module": "unknown",
+   "field": "color",
+   "value_kind": "unknown",
+   "conversion": "unknown",
+   "count": 1,
+   "representative_controls": [
+    "oscNoise.color"
+   ]
+  },
+  {
+   "mechanism": "unknown_oscnoise",
+   "module": "unknown",
+   "field": "fine",
+   "value_kind": "unknown",
+   "conversion": "unknown",
+   "count": 1,
+   "representative_controls": [
+    "oscNoise.fine"
+   ]
+  },
+  {
+   "mechanism": "unknown_oscnoise",
+   "module": "unknown",
+   "field": "level",
+   "value_kind": "unknown",
+   "conversion": "unknown",
+   "count": 1,
+   "representative_controls": [
+    "oscNoise.level"
+   ]
+  },
+  {
+   "mechanism": "unknown_oscnoise",
+   "module": "unknown",
+   "field": "noise_type",
+   "value_kind": "unknown",
+   "conversion": "unknown",
+   "count": 1,
+   "representative_controls": [
+    "oscNoise.noise_type"
+   ]
+  },
+  {
+   "mechanism": "unknown_oscnoise",
+   "module": "unknown",
+   "field": "one_shot",
+   "value_kind": "unknown",
+   "conversion": "unknown",
+   "count": 1,
+   "representative_controls": [
+    "oscNoise.one_shot"
+   ]
+  },
+  {
+   "mechanism": "unknown_oscnoise",
+   "module": "unknown",
+   "field": "pan",
+   "value_kind": "unknown",
+   "conversion": "unknown",
+   "count": 1,
+   "representative_controls": [
+    "oscNoise.pan"
+   ]
+  },
+  {
+   "mechanism": "unknown_oscnoise",
+   "module": "unknown",
+   "field": "phase",
+   "value_kind": "unknown",
+   "conversion": "unknown",
+   "count": 1,
+   "representative_controls": [
+    "oscNoise.phase"
+   ]
+  },
+  {
+   "mechanism": "unknown_oscnoise",
+   "module": "unknown",
+   "field": "pitch",
+   "value_kind": "unknown",
+   "conversion": "unknown",
+   "count": 1,
+   "representative_controls": [
+    "oscNoise.pitch"
+   ]
+  },
+  {
+   "mechanism": "unknown_oscnoise",
+   "module": "unknown",
+   "field": "pitch_track",
+   "value_kind": "unknown",
+   "conversion": "unknown",
+   "count": 1,
+   "representative_controls": [
+    "oscNoise.pitch_track"
+   ]
+  },
+  {
+   "mechanism": "unknown_oscnoise",
+   "module": "unknown",
+   "field": "rand_phase",
+   "value_kind": "unknown",
+   "conversion": "unknown",
+   "count": 1,
+   "representative_controls": [
+    "oscNoise.rand_phase"
+   ]
+  },
+  {
+   "mechanism": "unknown_oscsub",
+   "module": "unknown",
+   "field": "coarse_pitch",
+   "value_kind": "unknown",
+   "conversion": "unknown",
+   "count": 1,
+   "representative_controls": [
+    "oscSub.coarse_pitch"
+   ]
+  },
+  {
+   "mechanism": "unknown_oscsub",
+   "module": "unknown",
+   "field": "cont_phase",
+   "value_kind": "unknown",
+   "conversion": "unknown",
+   "count": 1,
+   "representative_controls": [
+    "oscSub.cont_phase"
+   ]
+  },
+  {
+   "mechanism": "unknown_oscsub",
+   "module": "unknown",
+   "field": "level",
+   "value_kind": "unknown",
+   "conversion": "unknown",
+   "count": 1,
+   "representative_controls": [
+    "oscSub.level"
+   ]
+  },
+  {
+   "mechanism": "unknown_oscsub",
+   "module": "unknown",
+   "field": "octave",
+   "value_kind": "unknown",
+   "conversion": "unknown",
+   "count": 1,
+   "representative_controls": [
+    "oscSub.octave"
+   ]
+  },
+  {
+   "mechanism": "unknown_oscsub",
+   "module": "unknown",
+   "field": "pan",
+   "value_kind": "unknown",
+   "conversion": "unknown",
+   "count": 1,
+   "representative_controls": [
+    "oscSub.pan"
+   ]
+  },
+  {
+   "mechanism": "unknown_oscsub",
+   "module": "unknown",
+   "field": "phase",
+   "value_kind": "unknown",
+   "conversion": "unknown",
+   "count": 1,
+   "representative_controls": [
+    "oscSub.phase"
+   ]
+  },
+  {
+   "mechanism": "unknown_oscsub",
+   "module": "unknown",
+   "field": "pitch_track",
+   "value_kind": "unknown",
+   "conversion": "unknown",
+   "count": 1,
+   "representative_controls": [
+    "oscSub.pitch_track"
+   ]
+  },
+  {
+   "mechanism": "unknown_oscsub",
+   "module": "unknown",
+   "field": "shape",
+   "value_kind": "unknown",
+   "conversion": "unknown",
+   "count": 1,
+   "representative_controls": [
+    "oscSub.shape"
+   ]
+  },
+  {
+   "mechanism": "voice_panel",
+   "module": "VoicePanel.plainParams",
+   "field": "legato",
+   "value_kind": "mixed",
+   "conversion": "passthrough",
+   "count": 1,
+   "representative_controls": [
+    "voice.voicing.legato"
+   ]
+  },
+  {
+   "mechanism": "voice_panel",
+   "module": "VoicePanel.plainParams",
+   "field": "mono",
+   "value_kind": "mixed",
+   "conversion": "passthrough",
+   "count": 1,
+   "representative_controls": [
+    "voice.voicing.mono"
+   ]
+  },
+  {
+   "mechanism": "voice_panel",
+   "module": "VoicePanel.plainParams",
+   "field": "poly",
+   "value_kind": "mixed",
+   "conversion": "passthrough",
+   "count": 1,
+   "representative_controls": [
+    "voice.voicing.poly"
+   ]
+  },
+  {
+   "mechanism": "voice_panel",
+   "module": "VoicePanel.plainParams",
+   "field": "porta_always",
+   "value_kind": "mixed",
+   "conversion": "passthrough",
+   "count": 1,
+   "representative_controls": [
+    "voice.voicing.porta_always"
+   ]
+  },
+  {
+   "mechanism": "voice_panel",
+   "module": "VoicePanel.plainParams",
+   "field": "porta_curve",
+   "value_kind": "mixed",
+   "conversion": "passthrough",
+   "count": 1,
+   "representative_controls": [
+    "voice.voicing.porta_curve"
+   ]
+  },
+  {
+   "mechanism": "voice_panel",
+   "module": "VoicePanel.plainParams",
+   "field": "porta_scaled",
+   "value_kind": "mixed",
+   "conversion": "passthrough",
+   "count": 1,
+   "representative_controls": [
+    "voice.voicing.porta_scaled"
+   ]
+  },
+  {
+   "mechanism": "voice_panel",
+   "module": "VoicePanel.plainParams",
+   "field": "porta_time",
+   "value_kind": "mixed",
+   "conversion": "passthrough",
+   "count": 1,
+   "representative_controls": [
+    "voice.voicing.porta_time"
+   ]
+  },
+  {
+   "mechanism": "voice_panel",
+   "module": "VoicePanel.plainParams",
+   "field": "voice_count_display",
+   "value_kind": "mixed",
+   "conversion": "passthrough",
+   "count": 1,
+   "representative_controls": [
+    "voice.voicing.voice_count_display"
+   ]
+  }
+ ]
+}

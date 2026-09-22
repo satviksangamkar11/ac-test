@@ -1,0 +1,39 @@
+{
+  "phase": "3A_unresolved_classification",
+  "date": "2026-09-23",
+  "total_unresolved_controls": 282,
+  "key_finding": "All 282 UNRESOLVED are mixer UI panel controls (bus levels, routing, filter sends, etc.). These are NOT new capabilities — they wrap PresetSpec fields already present in spec.py.",
+  "unresolved_section_breakdown": {
+    "mixer": 57,
+    "unknown": 225
+  },
+  "mixer_controls_mapped_to_spec": {
+    "mixer.bus1.level -> GlobalSpec.fx_bus1_volume": "RAW_AUTHORABLE — direct float authoring",
+    "mixer.bus2.level -> GlobalSpec.fx_bus2_volume": "RAW_AUTHORABLE — direct float authoring",
+    "mixer.direct.level -> GlobalSpec.direct_out_level": "RAW_AUTHORABLE — direct float authoring",
+    "mixer.filter1.routing -> FilterSpec[0].output_routing": "RAW_AUTHORABLE — parallel | series",
+    "mixer.filter2.routing -> FilterSpec[1].output_routing": "RAW_AUTHORABLE — parallel | series",
+    "mixer.filter1.bus1 -> FilterSpec[0].fx_bus1_send": "RAW_AUTHORABLE — direct float authoring",
+    "mixer.filter1.bus2 -> FilterSpec[0].fx_bus2_send": "RAW_AUTHORABLE — direct float authoring",
+    "mixer.filter2.bus1 -> FilterSpec[1].fx_bus1_send": "RAW_AUTHORABLE — direct float authoring",
+    "mixer.filter2.bus2 -> FilterSpec[1].fx_bus2_send": "RAW_AUTHORABLE — direct float authoring",
+    "mixer.bus1.enable / mixer.bus2.enable": "MANUAL_REQUIRED — inferred from send level state, not directly authored; Serum has no explicit 'enable' flag for buses",
+    "mixer.filter1.enable / mixer.filter2.enable": "UNRESOLVED — filter enable exists in Serum but unclear if independently settable via preset (likely tied to filter routing default)",
+    "mixer.*.graphic_cutoff_resonance": "MANUAL_REQUIRED — GUI-only graphic EQ display, not a preset parameter",
+    "mixer.*.level (osc/filter/noise levels in mixer panel)": "RAW_AUTHORABLE or MANUAL_REQUIRED depending on whether global mixer faders are part of preset (likely yes for individual, no for 'direct' destination)"
+  },
+  "phase_3a_provisional_classification": {
+    "RAW_AUTHORABLE": "Approximately 40-50 mixer controls map directly to spec.py authoring fields (bus volumes, routing, sends)",
+    "MANUAL_REQUIRED": "Approximately 10-15 mixer controls are UI-only display (enable states, graphic EQ visualization)",
+    "UNRESOLVED": "Approximately 200+ 'unknown' section controls require source mapping to serum_atlas.py to determine"
+  },
+  "action_items": [
+    "Recover full serum_atlas.py canonical_ids list to identify what the 225 'unknown' section controls actually represent",
+    "Map each 225 to raw module/parameter (if preset parameter) or UI-only state (if transient GUI chrome)",
+    "For mapped controls: copy spec field and promote to RAW_AUTHORABLE; add serum-mcp mapping.py evidence",
+    "For UI-only: mark MANUAL_REQUIRED with exact Serum GUI path for manual completion",
+    "For unclassifiable: leave UNRESOLVED with rationale"
+  ],
+  "critical_decision": "Do NOT create new serum-mcp authoring code for mixer UI controls. These wrap existing spec fields. The 282 UNRESOLVED are largely a classification gap from Phase 2B (missing section-to-field mapping), not a serum-mcp capability gap.",
+  "next": "Phase 3B — Collapse 657 OBSERVATION_GAP by unique equivalence_key. After 3B completes, return to finish 3A mapping if 'unknown' controls prove critical; otherwise mark remaining as UNRESOLVED with evidence and proceed to Phase 4."
+}

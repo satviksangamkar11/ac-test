@@ -1,0 +1,3569 @@
+{
+ "phase": "3B_step1_structural_equivalence",
+ "total_keys": 474,
+ "structural_patterns_count": 12,
+ "structural_classes": [
+  {
+   "mechanism": "fx_core",
+   "write_mechanism": "type_dispatch (switch on fx type) then param dict passthrough",
+   "conversion": "type_dispatch_plus_raw_param_passthrough",
+   "slot_rule": "per_fx_slot_independent (32 FX slots, variable types per slot)",
+   "fields": 135,
+   "total_controls": 170,
+   "field_details": [
+    {
+     "field": "bpm",
+     "controls_in_field": 6,
+     "sample_controls": [
+      "fx.bode.bpm",
+      "fx.chorus.bpm",
+      "fx.convolve.bpm"
+     ]
+    },
+    {
+     "field": "feedback",
+     "controls_in_field": 4,
+     "sample_controls": [
+      "fx.chorus.feedback",
+      "fx.delay.feedback",
+      "fx.flanger.feedback"
+     ]
+    },
+    {
+     "field": "rate",
+     "controls_in_field": 4,
+     "sample_controls": [
+      "fx.chorus.rate",
+      "fx.flanger.rate",
+      "fx.hyper.rate"
+     ]
+    },
+    {
+     "field": "freq",
+     "controls_in_field": 4,
+     "sample_controls": [
+      "fx.delay.freq",
+      "fx.distortion.freq",
+      "fx.phaser.freq"
+     ]
+    },
+    {
+     "field": "structure",
+     "controls_in_field": 4,
+     "sample_controls": [
+      "fx.hyper_dimension.structure",
+      "fx.splitter_lh.structure",
+      "fx.splitter_lmh.structure"
+     ]
+    },
+    {
+     "field": "depth",
+     "controls_in_field": 3,
+     "sample_controls": [
+      "fx.chorus.depth",
+      "fx.flanger.depth",
+      "fx.phaser.depth"
+     ]
+    },
+    {
+     "field": "size",
+     "controls_in_field": 3,
+     "sample_controls": [
+      "fx.convolve.size",
+      "fx.dimension.size",
+      "fx.reverb.size"
+     ]
+    },
+    {
+     "field": "width",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "fx.bode.width",
+      "fx.utility.width"
+     ]
+    },
+    {
+     "field": "attack",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "fx.compressor.attack",
+      "fx.convolve.attack"
+     ]
+    },
+    {
+     "field": "mode",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "fx.compressor.mode",
+      "fx.delay.mode"
+     ]
+    },
+    {
+     "field": "pre_dly",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "fx.convolve.pre_dly",
+      "fx.reverb.pre_dly"
+     ]
+    },
+    {
+     "field": "filter_graph",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "fx.delay.filter_graph",
+      "fx.distortion.filter_graph"
+     ]
+    },
+    {
+     "field": "q",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "fx.delay.q",
+      "fx.distortion.q"
+     ]
+    },
+    {
+     "field": "drive",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "fx.distortion.drive",
+      "fx.filter.drive"
+     ]
+    },
+    {
+     "field": "graph",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "fx.equalizer.graph",
+      "fx.filter.graph"
+     ]
+    },
+    {
+     "field": "pan",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "fx.filter.pan",
+      "fx.utility.pan"
+     ]
+    },
+    {
+     "field": "phase",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "fx.flanger.phase",
+      "fx.phaser.phase"
+     ]
+    },
+    {
+     "field": "highs_bypass",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "fx.splitter_lh.highs_bypass",
+      "fx.splitter_lmh.highs_bypass"
+     ]
+    },
+    {
+     "field": "highs_rack",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "fx.splitter_lh.highs_rack",
+      "fx.splitter_lmh.highs_rack"
+     ]
+    },
+    {
+     "field": "lows_bypass",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "fx.splitter_lh.lows_bypass",
+      "fx.splitter_lmh.lows_bypass"
+     ]
+    },
+    {
+     "field": "lows_rack",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "fx.splitter_lh.lows_rack",
+      "fx.splitter_lmh.lows_rack"
+     ]
+    },
+    {
+     "field": "balance",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.bode.balance"
+     ]
+    },
+    {
+     "field": "blur",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.bode.blur"
+     ]
+    },
+    {
+     "field": "delay",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.bode.delay"
+     ]
+    },
+    {
+     "field": "dir",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.bode.dir"
+     ]
+    },
+    {
+     "field": "feed",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.bode.feed"
+     ]
+    },
+    {
+     "field": "mono_input",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.bode.mono_input"
+     ]
+    },
+    {
+     "field": "range",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.bode.range"
+     ]
+    },
+    {
+     "field": "shift",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.bode.shift"
+     ]
+    },
+    {
+     "field": "shift_retrig",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.bode.shift_retrig"
+     ]
+    },
+    {
+     "field": "delay1",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.chorus.delay1"
+     ]
+    },
+    {
+     "field": "delay2",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.chorus.delay2"
+     ]
+    },
+    {
+     "field": "filter_cutoff",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.chorus.filter_cutoff"
+     ]
+    },
+    {
+     "field": "filter_mode",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.chorus.filter_mode"
+     ]
+    },
+    {
+     "field": "band_graphic",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.compressor.band_graphic"
+     ]
+    },
+    {
+     "field": "band_h",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.compressor.band_h"
+     ]
+    },
+    {
+     "field": "band_l",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.compressor.band_l"
+     ]
+    },
+    {
+     "field": "band_m",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.compressor.band_m"
+     ]
+    },
+    {
+     "field": "below",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.compressor.below"
+     ]
+    },
+    {
+     "field": "gain",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.compressor.gain"
+     ]
+    },
+    {
+     "field": "ratio",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.compressor.ratio"
+     ]
+    },
+    {
+     "field": "release",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.compressor.release"
+     ]
+    },
+    {
+     "field": "thresh",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.compressor.thresh"
+     ]
+    },
+    {
+     "field": "x_high",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.compressor.x_high"
+     ]
+    },
+    {
+     "field": "x_low",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.compressor.x_low"
+     ]
+    },
+    {
+     "field": "damp",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.convolve.damp"
+     ]
+    },
+    {
+     "field": "decay",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.convolve.decay"
+     ]
+    },
+    {
+     "field": "ir_browser",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.convolve.ir_browser"
+     ]
+    },
+    {
+     "field": "ir_gain",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.convolve.ir_gain"
+     ]
+    },
+    {
+     "field": "ir_next_prev",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.convolve.ir_next_prev"
+     ]
+    },
+    {
+     "field": "load_ir_external",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.convolve.load_ir_external"
+     ]
+    },
+    {
+     "field": "min_phase",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.convolve.min_phase"
+     ]
+    },
+    {
+     "field": "tone",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.convolve.tone"
+     ]
+    },
+    {
+     "field": "high_quality",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.delay.high_quality"
+     ]
+    },
+    {
+     "field": "link",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.delay.link"
+     ]
+    },
+    {
+     "field": "time_l",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.delay.time_l"
+     ]
+    },
+    {
+     "field": "time_r",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.delay.time_r"
+     ]
+    },
+    {
+     "field": "filter_position",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.distortion.filter_position"
+     ]
+    },
+    {
+     "field": "waveform_preview",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.distortion.waveform_preview"
+     ]
+    },
+    {
+     "field": "xshaper_a",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.distortion.xshaper_a"
+     ]
+    },
+    {
+     "field": "xshaper_b",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.distortion.xshaper_b"
+     ]
+    },
+    {
+     "field": "xshaper_edit_pencil",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.distortion.xshaper_edit_pencil"
+     ]
+    },
+    {
+     "field": "left_freq",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.equalizer.left_freq"
+     ]
+    },
+    {
+     "field": "left_gain",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.equalizer.left_gain"
+     ]
+    },
+    {
+     "field": "left_q",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.equalizer.left_q"
+     ]
+    },
+    {
+     "field": "left_type",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.equalizer.left_type"
+     ]
+    },
+    {
+     "field": "level",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.equalizer.level"
+     ]
+    },
+    {
+     "field": "right_freq",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.equalizer.right_freq"
+     ]
+    },
+    {
+     "field": "right_gain",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.equalizer.right_gain"
+     ]
+    },
+    {
+     "field": "right_q",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.equalizer.right_q"
+     ]
+    },
+    {
+     "field": "right_type",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.equalizer.right_type"
+     ]
+    },
+    {
+     "field": "cutoff",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.filter.cutoff"
+     ]
+    },
+    {
+     "field": "fat",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.filter.fat"
+     ]
+    },
+    {
+     "field": "key_track",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.filter.key_track"
+     ]
+    },
+    {
+     "field": "res",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.filter.res"
+     ]
+    },
+    {
+     "field": "no_separate_delay_knob",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.flanger.no_separate_delay_knob"
+     ]
+    },
+    {
+     "field": "fxbode",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.fxbode"
+     ]
+    },
+    {
+     "field": "fxchorus",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.fxchorus"
+     ]
+    },
+    {
+     "field": "fxcomp",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.fxcomp"
+     ]
+    },
+    {
+     "field": "fxconv",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.fxconv"
+     ]
+    },
+    {
+     "field": "fxdelay",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.fxdelay"
+     ]
+    },
+    {
+     "field": "fxdistortion",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.fxdistortion"
+     ]
+    },
+    {
+     "field": "fxeq",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.fxeq"
+     ]
+    },
+    {
+     "field": "fxfilter",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.fxfilter"
+     ]
+    },
+    {
+     "field": "fxflanger",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.fxflanger"
+     ]
+    },
+    {
+     "field": "fxhyperd",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.fxhyperd"
+     ]
+    },
+    {
+     "field": "fxphaser",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.fxphaser"
+     ]
+    },
+    {
+     "field": "fxreverb",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.fxreverb"
+     ]
+    },
+    {
+     "field": "fxsplit",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.fxsplit"
+     ]
+    },
+    {
+     "field": "fxsplit3",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.fxsplit3"
+     ]
+    },
+    {
+     "field": "fxsplitms",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.fxsplitms"
+     ]
+    },
+    {
+     "field": "fxutils",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.fxutils"
+     ]
+    },
+    {
+     "field": "detune",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.hyper.detune"
+     ]
+    },
+    {
+     "field": "retrig",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.hyper.retrig"
+     ]
+    },
+    {
+     "field": "unison",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.hyper.unison"
+     ]
+    },
+    {
+     "field": "depth2",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.phaser.depth2"
+     ]
+    },
+    {
+     "field": "poles",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.phaser.poles"
+     ]
+    },
+    {
+     "field": "chorus_mod",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.reverb.chorus_mod"
+     ]
+    },
+    {
+     "field": "damp_plate",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.reverb.damp_plate"
+     ]
+    },
+    {
+     "field": "damp_vintage",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.reverb.damp_vintage"
+     ]
+    },
+    {
+     "field": "decay_hall",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.reverb.decay_hall"
+     ]
+    },
+    {
+     "field": "diff_a_vintage",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.reverb.diff_a_vintage"
+     ]
+    },
+    {
+     "field": "diff_b_vintage",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.reverb.diff_b_vintage"
+     ]
+    },
+    {
+     "field": "diffusion_nitrous",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.reverb.diffusion_nitrous"
+     ]
+    },
+    {
+     "field": "er_size_vintage",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.reverb.er_size_vintage"
+     ]
+    },
+    {
+     "field": "feedback_nitrous_basin",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.reverb.feedback_nitrous_basin"
+     ]
+    },
+    {
+     "field": "hi_cut",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.reverb.hi_cut"
+     ]
+    },
+    {
+     "field": "lo_cut",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.reverb.lo_cut"
+     ]
+    },
+    {
+     "field": "mode_nitrous",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.reverb.mode_nitrous"
+     ]
+    },
+    {
+     "field": "spin_hall",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.reverb.spin_hall"
+     ]
+    },
+    {
+     "field": "width_plate",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.reverb.width_plate"
+     ]
+    },
+    {
+     "field": "highs_select",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.splitter_lh.highs_select"
+     ]
+    },
+    {
+     "field": "lows_select",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.splitter_lh.lows_select"
+     ]
+    },
+    {
+     "field": "split_freq",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.splitter_lh.split_freq"
+     ]
+    },
+    {
+     "field": "mids_bypass",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.splitter_lmh.mids_bypass"
+     ]
+    },
+    {
+     "field": "mids_rack",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.splitter_lmh.mids_rack"
+     ]
+    },
+    {
+     "field": "split_freq_low_mid",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.splitter_lmh.split_freq_low_mid"
+     ]
+    },
+    {
+     "field": "split_freq_mid_high",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.splitter_lmh.split_freq_mid_high"
+     ]
+    },
+    {
+     "field": "mid_bypass",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.splitter_ms.mid_bypass"
+     ]
+    },
+    {
+     "field": "mid_rack",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.splitter_ms.mid_rack"
+     ]
+    },
+    {
+     "field": "side_bypass",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.splitter_ms.side_bypass"
+     ]
+    },
+    {
+     "field": "side_rack",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.splitter_ms.side_rack"
+     ]
+    },
+    {
+     "field": "add_fx_menu",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.sys.add_fx_menu"
+     ]
+    },
+    {
+     "field": "module_bypass",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.sys.module_bypass"
+     ]
+    },
+    {
+     "field": "module_context_menu",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.sys.module_context_menu"
+     ]
+    },
+    {
+     "field": "module_list_panel",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.sys.module_list_panel"
+     ]
+    },
+    {
+     "field": "module_param_context_menu",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.sys.module_param_context_menu"
+     ]
+    },
+    {
+     "field": "rack_preset_browser",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.sys.rack_preset_browser"
+     ]
+    },
+    {
+     "field": "racks",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.sys.racks"
+     ]
+    },
+    {
+     "field": "reorder",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.sys.reorder"
+     ]
+    },
+    {
+     "field": "hpf",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.utility.hpf"
+     ]
+    },
+    {
+     "field": "lpf",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.utility.lpf"
+     ]
+    },
+    {
+     "field": "mono_bass",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.utility.mono_bass"
+     ]
+    },
+    {
+     "field": "polarity_inv_l",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.utility.polarity_inv_l"
+     ]
+    },
+    {
+     "field": "polarity_inv_r",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "fx.utility.polarity_inv_r"
+     ]
+    }
+   ]
+  },
+  {
+   "mechanism": "matrix_core",
+   "write_mechanism": "per-route loop via mod_routes[], direct dict assignment per slot",
+   "conversion": "direct_passthrough_or_enum_index",
+   "slot_rule": "per_slot_independent (64 mod slots, each own ModSlot{i})",
+   "fields": 105,
+   "total_controls": 121,
+   "field_details": [
+    {
+     "field": "mode",
+     "controls_in_field": 3,
+     "sample_controls": [
+      "oscA.mode",
+      "oscB.mode",
+      "oscC.mode"
+     ]
+    },
+    {
+     "field": "sample_loop_mode",
+     "controls_in_field": 3,
+     "sample_controls": [
+      "oscA.sample_loop_mode",
+      "oscB.sample_loop_mode",
+      "oscC.sample_loop_mode"
+     ]
+    },
+    {
+     "field": "slice_play_mode",
+     "controls_in_field": 3,
+     "sample_controls": [
+      "oscA.slice_play_mode",
+      "oscB.slice_play_mode",
+      "oscC.slice_play_mode"
+     ]
+    },
+    {
+     "field": "slicing_mode",
+     "controls_in_field": 3,
+     "sample_controls": [
+      "oscA.slicing_mode",
+      "oscB.slicing_mode",
+      "oscC.slicing_mode"
+     ]
+    },
+    {
+     "field": "tuning_mode",
+     "controls_in_field": 3,
+     "sample_controls": [
+      "oscA.tuning_mode",
+      "oscB.tuning_mode",
+      "oscC.tuning_mode"
+     ]
+    },
+    {
+     "field": "warp_mode",
+     "controls_in_field": 3,
+     "sample_controls": [
+      "oscA.warp_mode",
+      "oscB.warp_mode",
+      "oscC.warp_mode"
+     ]
+    },
+    {
+     "field": "warp_mode2",
+     "controls_in_field": 3,
+     "sample_controls": [
+      "oscA.warp_mode2",
+      "oscB.warp_mode2",
+      "oscC.warp_mode2"
+     ]
+    },
+    {
+     "field": "wt_interpolation_mode",
+     "controls_in_field": 3,
+     "sample_controls": [
+      "oscA.wt_interpolation_mode",
+      "oscB.wt_interpolation_mode",
+      "oscC.wt_interpolation_mode"
+     ]
+    },
+    {
+     "field": "aux_curve",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.aux_curve"
+     ]
+    },
+    {
+     "field": "aux_inverted",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.aux_inverted"
+     ]
+    },
+    {
+     "field": "aux_source",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.aux_source"
+     ]
+    },
+    {
+     "field": "bipolar",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.bipolar"
+     ]
+    },
+    {
+     "field": "bypass",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.bypass"
+     ]
+    },
+    {
+     "field": "curve_in",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.curve_in"
+     ]
+    },
+    {
+     "field": "delay_beat_sync",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.delay_beat_sync"
+     ]
+    },
+    {
+     "field": "delay_offset",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.delay_offset"
+     ]
+    },
+    {
+     "field": "lfo_n_conditional",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.destination.lfo_n_conditional"
+     ]
+    },
+    {
+     "field": "destination_vocabulary",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.destination_vocabulary"
+     ]
+    },
+    {
+     "field": "01",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.lfo_bus.01"
+     ]
+    },
+    {
+     "field": "02",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.lfo_bus.02"
+     ]
+    },
+    {
+     "field": "03",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.lfo_bus.03"
+     ]
+    },
+    {
+     "field": "04",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.lfo_bus.04"
+     ]
+    },
+    {
+     "field": "05",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.lfo_bus.05"
+     ]
+    },
+    {
+     "field": "06",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.lfo_bus.06"
+     ]
+    },
+    {
+     "field": "07",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.lfo_bus.07"
+     ]
+    },
+    {
+     "field": "08",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.lfo_bus.08"
+     ]
+    },
+    {
+     "field": "09",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.lfo_bus.09"
+     ]
+    },
+    {
+     "field": "10",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.lfo_bus.10"
+     ]
+    },
+    {
+     "field": "11",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.lfo_bus.11"
+     ]
+    },
+    {
+     "field": "12",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.lfo_bus.12"
+     ]
+    },
+    {
+     "field": "13",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.lfo_bus.13"
+     ]
+    },
+    {
+     "field": "14",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.lfo_bus.14"
+     ]
+    },
+    {
+     "field": "15",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.lfo_bus.15"
+     ]
+    },
+    {
+     "field": "16",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.lfo_bus.16"
+     ]
+    },
+    {
+     "field": "mod",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.mod"
+     ]
+    },
+    {
+     "field": "order",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.order"
+     ]
+    },
+    {
+     "field": "out",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.out"
+     ]
+    },
+    {
+     "field": "out_indicator",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.out_indicator"
+     ]
+    },
+    {
+     "field": "routes",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.routes"
+     ]
+    },
+    {
+     "field": "signal_balance",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.routing.signal_balance"
+     ]
+    },
+    {
+     "field": "smooth_fall",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.smooth_fall"
+     ]
+    },
+    {
+     "field": "smooth_link",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.smooth_link"
+     ]
+    },
+    {
+     "field": "smooth_rise",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.smooth_rise"
+     ]
+    },
+    {
+     "field": "active_voices",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.active_voices"
+     ]
+    },
+    {
+     "field": "aftertouch",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.aftertouch"
+     ]
+    },
+    {
+     "field": "env_1",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.env_1"
+     ]
+    },
+    {
+     "field": "env_2",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.env_2"
+     ]
+    },
+    {
+     "field": "env_3",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.env_3"
+     ]
+    },
+    {
+     "field": "env_4",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.env_4"
+     ]
+    },
+    {
+     "field": "expr_x_pan",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.expr_x_pan"
+     ]
+    },
+    {
+     "field": "expr_y_timbre",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.expr_y_timbre"
+     ]
+    },
+    {
+     "field": "expr_z_press",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.expr_z_press"
+     ]
+    },
+    {
+     "field": "filter_1",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.filter_1"
+     ]
+    },
+    {
+     "field": "filter_2",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.filter_2"
+     ]
+    },
+    {
+     "field": "fixed",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.fixed"
+     ]
+    },
+    {
+     "field": "lfo_1",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.lfo_1"
+     ]
+    },
+    {
+     "field": "lfo_10",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.lfo_10"
+     ]
+    },
+    {
+     "field": "lfo_2",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.lfo_2"
+     ]
+    },
+    {
+     "field": "lfo_3",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.lfo_3"
+     ]
+    },
+    {
+     "field": "lfo_4",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.lfo_4"
+     ]
+    },
+    {
+     "field": "lfo_5",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.lfo_5"
+     ]
+    },
+    {
+     "field": "lfo_6",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.lfo_6"
+     ]
+    },
+    {
+     "field": "lfo_7",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.lfo_7"
+     ]
+    },
+    {
+     "field": "lfo_8",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.lfo_8"
+     ]
+    },
+    {
+     "field": "lfo_9",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.lfo_9"
+     ]
+    },
+    {
+     "field": "macro_1",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.macro_1"
+     ]
+    },
+    {
+     "field": "macro_2",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.macro_2"
+     ]
+    },
+    {
+     "field": "macro_3",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.macro_3"
+     ]
+    },
+    {
+     "field": "macro_4",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.macro_4"
+     ]
+    },
+    {
+     "field": "macro_5",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.macro_5"
+     ]
+    },
+    {
+     "field": "macro_6",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.macro_6"
+     ]
+    },
+    {
+     "field": "macro_7",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.macro_7"
+     ]
+    },
+    {
+     "field": "macro_8",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.macro_8"
+     ]
+    },
+    {
+     "field": "mod_wheel",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.mod_wheel"
+     ]
+    },
+    {
+     "field": "noise_osc",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.noise_osc"
+     ]
+    },
+    {
+     "field": "notenum",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.notenum"
+     ]
+    },
+    {
+     "field": "noteon_alt",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.noteon_alt"
+     ]
+    },
+    {
+     "field": "noteon_alt2",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.noteon_alt2"
+     ]
+    },
+    {
+     "field": "noteon_rand1",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.noteon_rand1"
+     ]
+    },
+    {
+     "field": "noteon_rand2",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.noteon_rand2"
+     ]
+    },
+    {
+     "field": "noteon_rand_discrete",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.noteon_rand_discrete"
+     ]
+    },
+    {
+     "field": "osc_a",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.osc_a"
+     ]
+    },
+    {
+     "field": "osc_b",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.osc_b"
+     ]
+    },
+    {
+     "field": "osc_c",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.osc_c"
+     ]
+    },
+    {
+     "field": "pitch_bend",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.pitch_bend"
+     ]
+    },
+    {
+     "field": "poly_aftertch",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.poly_aftertch"
+     ]
+    },
+    {
+     "field": "release_velo",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.release_velo"
+     ]
+    },
+    {
+     "field": "sub_osc",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.sub_osc"
+     ]
+    },
+    {
+     "field": "velo",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.velo"
+     ]
+    },
+    {
+     "field": "voice_index",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.voice_index"
+     ]
+    },
+    {
+     "field": "voice_mod_1",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.voice_mod_1"
+     ]
+    },
+    {
+     "field": "voice_mod_2",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source.voice_mod_2"
+     ]
+    },
+    {
+     "field": "source_curve",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source_curve"
+     ]
+    },
+    {
+     "field": "source_vocabulary",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.source_vocabulary"
+     ]
+    },
+    {
+     "field": "apply_and_delete_macros",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.sys.apply_and_delete_macros"
+     ]
+    },
+    {
+     "field": "create_velo_amp_assignment",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.sys.create_velo_amp_assignment"
+     ]
+    },
+    {
+     "field": "create_vibrato",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.sys.create_vibrato"
+     ]
+    },
+    {
+     "field": "duplicate_route_policy",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.sys.duplicate_route_policy"
+     ]
+    },
+    {
+     "field": "dynamic_visualization",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.sys.dynamic_visualization"
+     ]
+    },
+    {
+     "field": "expanded_view",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.sys.expanded_view"
+     ]
+    },
+    {
+     "field": "lock_matrix",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.sys.lock_matrix"
+     ]
+    },
+    {
+     "field": "max_routes",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.sys.max_routes"
+     ]
+    },
+    {
+     "field": "menu",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.sys.menu"
+     ]
+    },
+    {
+     "field": "sort_by_destination",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.sys.sort_by_destination"
+     ]
+    },
+    {
+     "field": "sort_by_source",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "matrix.sys.sort_by_source"
+     ]
+    }
+   ]
+  },
+  {
+   "mechanism": "lfo_scalar",
+   "write_mechanism": "unknown",
+   "conversion": "unknown",
+   "slot_rule": "unknown",
+   "fields": 12,
+   "total_controls": 72,
+   "field_details": [
+    {
+     "field": "chaos_mode",
+     "controls_in_field": 6,
+     "sample_controls": [
+      "lfo1.chaos_mode",
+      "lfo2.chaos_mode",
+      "lfo3.chaos_mode"
+     ]
+    },
+    {
+     "field": "curve_display",
+     "controls_in_field": 6,
+     "sample_controls": [
+      "lfo1.curve_display",
+      "lfo2.curve_display",
+      "lfo3.curve_display"
+     ]
+    },
+    {
+     "field": "division",
+     "controls_in_field": 6,
+     "sample_controls": [
+      "lfo1.division",
+      "lfo2.division",
+      "lfo3.division"
+     ]
+    },
+    {
+     "field": "grid_x",
+     "controls_in_field": 6,
+     "sample_controls": [
+      "lfo1.grid_x",
+      "lfo2.grid_x",
+      "lfo3.grid_x"
+     ]
+    },
+    {
+     "field": "grid_y",
+     "controls_in_field": 6,
+     "sample_controls": [
+      "lfo1.grid_y",
+      "lfo2.grid_y",
+      "lfo3.grid_y"
+     ]
+    },
+    {
+     "field": "mode",
+     "controls_in_field": 6,
+     "sample_controls": [
+      "lfo1.mode",
+      "lfo2.mode",
+      "lfo3.mode"
+     ]
+    },
+    {
+     "field": "phase",
+     "controls_in_field": 6,
+     "sample_controls": [
+      "lfo1.phase",
+      "lfo2.phase",
+      "lfo3.phase"
+     ]
+    },
+    {
+     "field": "playback_direction",
+     "controls_in_field": 6,
+     "sample_controls": [
+      "lfo1.playback_direction",
+      "lfo2.playback_direction",
+      "lfo3.playback_direction"
+     ]
+    },
+    {
+     "field": "preset_identity",
+     "controls_in_field": 6,
+     "sample_controls": [
+      "lfo1.preset_identity",
+      "lfo2.preset_identity",
+      "lfo3.preset_identity"
+     ]
+    },
+    {
+     "field": "rate_10x",
+     "controls_in_field": 6,
+     "sample_controls": [
+      "lfo1.rate_10x",
+      "lfo2.rate_10x",
+      "lfo3.rate_10x"
+     ]
+    },
+    {
+     "field": "shape",
+     "controls_in_field": 6,
+     "sample_controls": [
+      "lfo1.shape",
+      "lfo2.shape",
+      "lfo3.shape"
+     ]
+    },
+    {
+     "field": "source",
+     "controls_in_field": 6,
+     "sample_controls": [
+      "lfo1.source",
+      "lfo2.source",
+      "lfo3.source"
+     ]
+    }
+   ]
+  },
+  {
+   "mechanism": "global_scalar",
+   "write_mechanism": "unknown",
+   "conversion": "unknown",
+   "slot_rule": "unknown",
+   "fields": 58,
+   "total_controls": 66,
+   "field_details": [
+    {
+     "field": "envs",
+     "controls_in_field": 3,
+     "sample_controls": [
+      "global.voice_control.random.envs",
+      "global.voice_control.scaling.envs",
+      "global.voice_control.seq.envs"
+     ]
+    },
+    {
+     "field": "global_tuning",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "global.global_tuning",
+      "global.tuning.global_tuning"
+     ]
+    },
+    {
+     "field": "oversampling",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "global.oversampling",
+      "global.quality.oversampling"
+     ]
+    },
+    {
+     "field": "s1_compatibility",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "global.quality.s1_compatibility",
+      "global.s1_compatibility"
+     ]
+    },
+    {
+     "field": "cutoff",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "global.voice_control.random.cutoff",
+      "global.voice_control.seq.cutoff"
+     ]
+    },
+    {
+     "field": "detune",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "global.voice_control.random.detune",
+      "global.voice_control.seq.detune"
+     ]
+    },
+    {
+     "field": "pan",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "global.voice_control.random.pan",
+      "global.voice_control.seq.pan"
+     ]
+    },
+    {
+     "field": "direct_volume",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.direct_volume"
+     ]
+    },
+    {
+     "field": "fx_bus1_destination",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.fx_bus1_destination"
+     ]
+    },
+    {
+     "field": "fx_bus1_volume",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.fx_bus1_volume"
+     ]
+    },
+    {
+     "field": "fx_bus2_destination",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.fx_bus2_destination"
+     ]
+    },
+    {
+     "field": "fx_bus2_volume",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.fx_bus2_volume"
+     ]
+    },
+    {
+     "field": "build_date_display",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.info.build_date_display"
+     ]
+    },
+    {
+     "field": "note_latch",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.note_latch"
+     ]
+    },
+    {
+     "field": "porta_always",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.porta_always"
+     ]
+    },
+    {
+     "field": "porta_scaled",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.porta_scaled"
+     ]
+    },
+    {
+     "field": "portamento_curve",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.portamento_curve"
+     ]
+    },
+    {
+     "field": "default_waveform_view",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.preferences.default_waveform_view"
+     ]
+    },
+    {
+     "field": "double_click_params",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.preferences.double_click_params"
+     ]
+    },
+    {
+     "field": "help_tooltips",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.preferences.help_tooltips"
+     ]
+    },
+    {
+     "field": "keyboard_shortcuts",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.preferences.keyboard_shortcuts"
+     ]
+    },
+    {
+     "field": "mouse_wheel_param_control",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.preferences.mouse_wheel_param_control"
+     ]
+    },
+    {
+     "field": "mpe_enabled_by_default",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.preferences.mpe_enabled_by_default"
+     ]
+    },
+    {
+     "field": "mpe_expr_y_acts_bi_directional",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.preferences.mpe_expr_y_acts_bi_directional"
+     ]
+    },
+    {
+     "field": "mpe_pitch_bend_maps_to_expr_x",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.preferences.mpe_pitch_bend_maps_to_expr_x"
+     ]
+    },
+    {
+     "field": "param_value_tooltips",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.preferences.param_value_tooltips"
+     ]
+    },
+    {
+     "field": "disable_smoothing",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.quality.disable_smoothing"
+     ]
+    },
+    {
+     "field": "oversampling_lock",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.quality.oversampling_lock"
+     ]
+    },
+    {
+     "field": "env_2",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.retriggers.env_2"
+     ]
+    },
+    {
+     "field": "env_3",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.retriggers.env_3"
+     ]
+    },
+    {
+     "field": "env_4",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.retriggers.env_4"
+     ]
+    },
+    {
+     "field": "lfo_1",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.retriggers.lfo_1"
+     ]
+    },
+    {
+     "field": "lfo_10",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.retriggers.lfo_10"
+     ]
+    },
+    {
+     "field": "lfo_2",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.retriggers.lfo_2"
+     ]
+    },
+    {
+     "field": "lfo_3",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.retriggers.lfo_3"
+     ]
+    },
+    {
+     "field": "lfo_4",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.retriggers.lfo_4"
+     ]
+    },
+    {
+     "field": "lfo_5",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.retriggers.lfo_5"
+     ]
+    },
+    {
+     "field": "lfo_6",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.retriggers.lfo_6"
+     ]
+    },
+    {
+     "field": "lfo_7",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.retriggers.lfo_7"
+     ]
+    },
+    {
+     "field": "lfo_8",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.retriggers.lfo_8"
+     ]
+    },
+    {
+     "field": "lfo_9",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.retriggers.lfo_9"
+     ]
+    },
+    {
+     "field": "noise",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.retriggers.noise"
+     ]
+    },
+    {
+     "field": "note",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.retriggers.note"
+     ]
+    },
+    {
+     "field": "osc_a",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.retriggers.osc_a"
+     ]
+    },
+    {
+     "field": "osc_b",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.retriggers.osc_b"
+     ]
+    },
+    {
+     "field": "osc_c",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.retriggers.osc_c"
+     ]
+    },
+    {
+     "field": "sub",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.retriggers.sub"
+     ]
+    },
+    {
+     "field": "swing_div",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.swing_div"
+     ]
+    },
+    {
+     "field": "lock",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.tuning.lock"
+     ]
+    },
+    {
+     "field": "tun_file",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.tuning.tun_file"
+     ]
+    },
+    {
+     "field": "use_ultra_on_render",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.use_ultra_on_render"
+     ]
+    },
+    {
+     "field": "voice_amp",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.voice_amp"
+     ]
+    },
+    {
+     "field": "osc_scope",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.voice_control.osc_scope"
+     ]
+    },
+    {
+     "field": "preset_field",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.voice_control.preset_field"
+     ]
+    },
+    {
+     "field": "lfos",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.voice_control.scaling.lfos"
+     ]
+    },
+    {
+     "field": "lfos_rate_toggle",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.voice_control.scaling.lfos_rate_toggle"
+     ]
+    },
+    {
+     "field": "mod1",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.voice_control.seq.mod1"
+     ]
+    },
+    {
+     "field": "mod2",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "global.voice_control.seq.mod2"
+     ]
+    }
+   ]
+  },
+  {
+   "mechanism": "filter_scalar",
+   "write_mechanism": "unknown",
+   "conversion": "unknown",
+   "slot_rule": "unknown",
+   "fields": 31,
+   "total_controls": 62,
+   "field_details": [
+    {
+     "field": "drive_mode",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "filter1.drive_mode",
+      "filter2.drive_mode"
+     ]
+    },
+    {
+     "field": "enabled",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "filter1.enabled",
+      "filter2.enabled"
+     ]
+    },
+    {
+     "field": "key_track",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "filter1.key_track",
+      "filter2.key_track"
+     ]
+    },
+    {
+     "field": "mute",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "filter1.mute",
+      "filter2.mute"
+     ]
+    },
+    {
+     "field": "response_graph",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "filter1.response_graph",
+      "filter2.response_graph"
+     ]
+    },
+    {
+     "field": "routenoise",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "filter1.routenoise",
+      "filter2.routenoise"
+     ]
+    },
+    {
+     "field": "routeosca",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "filter1.routeosca",
+      "filter2.routeosca"
+     ]
+    },
+    {
+     "field": "routeoscb",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "filter1.routeoscb",
+      "filter2.routeoscb"
+     ]
+    },
+    {
+     "field": "routeoscc",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "filter1.routeoscc",
+      "filter2.routeoscc"
+     ]
+    },
+    {
+     "field": "routesub",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "filter1.routesub",
+      "filter2.routesub"
+     ]
+    },
+    {
+     "field": "stereo",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "filter1.stereo",
+      "filter2.stereo"
+     ]
+    },
+    {
+     "field": "boeuf",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "filter1.type_specific.boeuf",
+      "filter2.type_specific.boeuf"
+     ]
+    },
+    {
+     "field": "combfreq",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "filter1.type_specific.combfreq",
+      "filter2.type_specific.combfreq"
+     ]
+    },
+    {
+     "field": "damp",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "filter1.type_specific.damp",
+      "filter2.type_specific.damp"
+     ]
+    },
+    {
+     "field": "fat",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "filter1.type_specific.fat",
+      "filter2.type_specific.fat"
+     ]
+    },
+    {
+     "field": "formant",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "filter1.type_specific.formant",
+      "filter2.type_specific.formant"
+     ]
+    },
+    {
+     "field": "freq2",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "filter1.type_specific.freq2",
+      "filter2.type_specific.freq2"
+     ]
+    },
+    {
+     "field": "freq2comb",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "filter1.type_specific.freq2comb",
+      "filter2.type_specific.freq2comb"
+     ]
+    },
+    {
+     "field": "gaindb",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "filter1.type_specific.gaindb",
+      "filter2.type_specific.gaindb"
+     ]
+    },
+    {
+     "field": "hlwidth",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "filter1.type_specific.hlwidth",
+      "filter2.type_specific.hlwidth"
+     ]
+    },
+    {
+     "field": "hpfreq",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "filter1.type_specific.hpfreq",
+      "filter2.type_specific.hpfreq"
+     ]
+    },
+    {
+     "field": "lpfreq",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "filter1.type_specific.lpfreq",
+      "filter2.type_specific.lpfreq"
+     ]
+    },
+    {
+     "field": "mixalt",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "filter1.type_specific.mixalt",
+      "filter2.type_specific.mixalt"
+     ]
+    },
+    {
+     "field": "morph",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "filter1.type_specific.morph",
+      "filter2.type_specific.morph"
+     ]
+    },
+    {
+     "field": "pain",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "filter1.type_specific.pain",
+      "filter2.type_specific.pain"
+     ]
+    },
+    {
+     "field": "screamamt",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "filter1.type_specific.screamamt",
+      "filter2.type_specific.screamamt"
+     ]
+    },
+    {
+     "field": "smooth",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "filter1.type_specific.smooth",
+      "filter2.type_specific.smooth"
+     ]
+    },
+    {
+     "field": "spread",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "filter1.type_specific.spread",
+      "filter2.type_specific.spread"
+     ]
+    },
+    {
+     "field": "stages",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "filter1.type_specific.stages",
+      "filter2.type_specific.stages"
+     ]
+    },
+    {
+     "field": "thru",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "filter1.type_specific.thru",
+      "filter2.type_specific.thru"
+     ]
+    },
+    {
+     "field": "width",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "filter1.type_specific.width",
+      "filter2.type_specific.width"
+     ]
+    }
+   ]
+  },
+  {
+   "mechanism": "macro_scalar",
+   "write_mechanism": "per-macro loop via macros[], direct dict assignment per slot",
+   "conversion": "direct_passthrough",
+   "slot_rule": "per_slot_independent (8 macro slots, each own Macro{i})",
+   "fields": 34,
+   "total_controls": 48,
+   "field_details": [
+    {
+     "field": "name",
+     "controls_in_field": 8,
+     "sample_controls": [
+      "macro1.name",
+      "macro2.name",
+      "macro3.name"
+     ]
+    },
+    {
+     "field": "value",
+     "controls_in_field": 8,
+     "sample_controls": [
+      "macro1.value",
+      "macro2.value",
+      "macro3.value"
+     ]
+    },
+    {
+     "field": "add_remove_slot",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "macro.sys.add_remove_slot"
+     ]
+    },
+    {
+     "field": "apply_and_delete_macro",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "macro.sys.apply_and_delete_macro"
+     ]
+    },
+    {
+     "field": "assign_drag",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "macro.sys.assign_drag"
+     ]
+    },
+    {
+     "field": "assign_matrix_source",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "macro.sys.assign_matrix_source"
+     ]
+    },
+    {
+     "field": "aux_curve",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "macro.sys.aux_curve"
+     ]
+    },
+    {
+     "field": "aux_invert",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "macro.sys.aux_invert"
+     ]
+    },
+    {
+     "field": "aux_output",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "macro.sys.aux_output"
+     ]
+    },
+    {
+     "field": "aux_source",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "macro.sys.aux_source"
+     ]
+    },
+    {
+     "field": "bipolar_unipolar",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "macro.sys.bipolar_unipolar"
+     ]
+    },
+    {
+     "field": "browser_view_access",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "macro.sys.browser_view_access"
+     ]
+    },
+    {
+     "field": "center_toggle_modifier",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "macro.sys.center_toggle_modifier"
+     ]
+    },
+    {
+     "field": "clip_view_access",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "macro.sys.clip_view_access"
+     ]
+    },
+    {
+     "field": "copy_paste",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "macro.sys.copy_paste"
+     ]
+    },
+    {
+     "field": "delete_route",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "macro.sys.delete_route"
+     ]
+    },
+    {
+     "field": "fx_expanded_not_assignable",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "macro.sys.fx_expanded_not_assignable"
+     ]
+    },
+    {
+     "field": "init_module",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "macro.sys.init_module"
+     ]
+    },
+    {
+     "field": "knob_context_menu",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "macro.sys.knob_context_menu"
+     ]
+    },
+    {
+     "field": "lock_parameter",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "macro.sys.lock_parameter"
+     ]
+    },
+    {
+     "field": "macro_depth_reconcile",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "macro.sys.macro_depth_reconcile"
+     ]
+    },
+    {
+     "field": "macro_specific_preset",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "macro.sys.macro_specific_preset"
+     ]
+    },
+    {
+     "field": "multi_assign_one_macro",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "macro.sys.multi_assign_one_macro"
+     ]
+    },
+    {
+     "field": "multi_macro_summed_dest",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "macro.sys.multi_macro_summed_dest"
+     ]
+    },
+    {
+     "field": "output_monitor",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "macro.sys.output_monitor"
+     ]
+    },
+    {
+     "field": "range_direction_drag",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "macro.sys.range_direction_drag"
+     ]
+    },
+    {
+     "field": "rename_mechanism",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "macro.sys.rename_mechanism"
+     ]
+    },
+    {
+     "field": "reset_value",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "macro.sys.reset_value"
+     ]
+    },
+    {
+     "field": "rise_fall_smooth",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "macro.sys.rise_fall_smooth"
+     ]
+    },
+    {
+     "field": "route_amount",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "macro.sys.route_amount"
+     ]
+    },
+    {
+     "field": "source_curve",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "macro.sys.source_curve"
+     ]
+    },
+    {
+     "field": "temp_bypass",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "macro.sys.temp_bypass"
+     ]
+    },
+    {
+     "field": "unassign_rightclick",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "macro.sys.unassign_rightclick"
+     ]
+    },
+    {
+     "field": "value_as_mod_destination",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "macro.sys.value_as_mod_destination"
+     ]
+    }
+   ]
+  },
+  {
+   "mechanism": "arp_core",
+   "write_mechanism": "direct dict assignment for Arp0; ArpClip structured data for pattern",
+   "conversion": "discrete_or_enum_or_structured",
+   "slot_rule": "shared_single_instance (one Arp0 for all voices)",
+   "fields": 46,
+   "total_controls": 47,
+   "field_details": [
+    {
+     "field": "range",
+     "controls_in_field": 2,
+     "sample_controls": [
+      "arp.pattern.editor.range",
+      "arp.transpose.range"
+     ]
+    },
+    {
+     "field": "bank",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.global.bank"
+     ]
+    },
+    {
+     "field": "edit_all",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.global.edit_all"
+     ]
+    },
+    {
+     "field": "launch_quant",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.global.launch_quant"
+     ]
+    },
+    {
+     "field": "midi_out",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.midi_out"
+     ]
+    },
+    {
+     "field": "bpm_hz",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.pattern.bpm_hz"
+     ]
+    },
+    {
+     "field": "dot",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.pattern.dot"
+     ]
+    },
+    {
+     "field": "edit_toggle",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.pattern.edit_toggle"
+     ]
+    },
+    {
+     "field": "accent_row",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.pattern.editor.accent_row"
+     ]
+    },
+    {
+     "field": "add_lane_menu",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.pattern.editor.add_lane_menu"
+     ]
+    },
+    {
+     "field": "length",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.pattern.editor.length"
+     ]
+    },
+    {
+     "field": "mode",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.pattern.editor.mode"
+     ]
+    },
+    {
+     "field": "pattern_select",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.pattern.editor.pattern_select"
+     ]
+    },
+    {
+     "field": "pitch",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.pattern.editor.pitch"
+     ]
+    },
+    {
+     "field": "step_grid",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.pattern.editor.step_grid"
+     ]
+    },
+    {
+     "field": "step_mode",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.pattern.editor.step_mode"
+     ]
+    },
+    {
+     "field": "strum_row",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.pattern.editor.strum_row"
+     ]
+    },
+    {
+     "field": "time",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.pattern.editor.time"
+     ]
+    },
+    {
+     "field": "vel_rand_lane",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.pattern.editor.vel_rand_lane"
+     ]
+    },
+    {
+     "field": "velocity_lane",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.pattern.editor.velocity_lane"
+     ]
+    },
+    {
+     "field": "wrap",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.pattern.editor.wrap"
+     ]
+    },
+    {
+     "field": "wrap_phantom_note",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.pattern.editor.wrap_phantom_note"
+     ]
+    },
+    {
+     "field": "shape_pattern_mode",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.pattern.shape_pattern_mode"
+     ]
+    },
+    {
+     "field": "trip",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.pattern.trip"
+     ]
+    },
+    {
+     "field": "chance",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.playback.chance"
+     ]
+    },
+    {
+     "field": "chance_pre",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.playback.chance_pre"
+     ]
+    },
+    {
+     "field": "gate",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.playback.gate"
+     ]
+    },
+    {
+     "field": "latch",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.playback.latch"
+     ]
+    },
+    {
+     "field": "offset",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.playback.offset"
+     ]
+    },
+    {
+     "field": "repeats",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.playback.repeats"
+     ]
+    },
+    {
+     "field": "thru",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.playback.thru"
+     ]
+    },
+    {
+     "field": "first",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.retrigger.first"
+     ]
+    },
+    {
+     "field": "launch",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.retrigger.launch"
+     ]
+    },
+    {
+     "field": "note",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.retrigger.note"
+     ]
+    },
+    {
+     "field": "rate_enable",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.retrigger.rate_enable"
+     ]
+    },
+    {
+     "field": "rate_value",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.retrigger.rate_value"
+     ]
+    },
+    {
+     "field": "context_menu",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.slot.context_menu"
+     ]
+    },
+    {
+     "field": "count",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.slot.count"
+     ]
+    },
+    {
+     "field": "midi_keyboard_launch",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.slot.midi_keyboard_launch"
+     ]
+    },
+    {
+     "field": "play_button",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.slot.play_button"
+     ]
+    },
+    {
+     "field": "summary_display",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.slot.summary_display"
+     ]
+    },
+    {
+     "field": "shift",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.transpose.shift"
+     ]
+    },
+    {
+     "field": "decay",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.velocity.decay"
+     ]
+    },
+    {
+     "field": "enable",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.velocity.enable"
+     ]
+    },
+    {
+     "field": "retrig",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.velocity.retrig"
+     ]
+    },
+    {
+     "field": "target",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "arp.velocity.target"
+     ]
+    }
+   ]
+  },
+  {
+   "mechanism": "env_scalar",
+   "write_mechanism": "unknown",
+   "conversion": "unknown",
+   "slot_rule": "unknown",
+   "fields": 6,
+   "total_controls": 24,
+   "field_details": [
+    {
+     "field": "bpm",
+     "controls_in_field": 4,
+     "sample_controls": [
+      "env1.bpm",
+      "env2.bpm",
+      "env3.bpm"
+     ]
+    },
+    {
+     "field": "curve_display",
+     "controls_in_field": 4,
+     "sample_controls": [
+      "env1.curve_display",
+      "env2.curve_display",
+      "env3.curve_display"
+     ]
+    },
+    {
+     "field": "invert_legato",
+     "controls_in_field": 4,
+     "sample_controls": [
+      "env1.invert_legato",
+      "env2.invert_legato",
+      "env3.invert_legato"
+     ]
+    },
+    {
+     "field": "source",
+     "controls_in_field": 4,
+     "sample_controls": [
+      "env1.source",
+      "env2.source",
+      "env3.source"
+     ]
+    },
+    {
+     "field": "time_mode",
+     "controls_in_field": 4,
+     "sample_controls": [
+      "env1.time_mode",
+      "env2.time_mode",
+      "env3.time_mode"
+     ]
+    },
+    {
+     "field": "voicestealretriggermode",
+     "controls_in_field": 4,
+     "sample_controls": [
+      "env1.voicestealretriggermode",
+      "env2.voicestealretriggermode",
+      "env3.voicestealretriggermode"
+     ]
+    }
+   ]
+  },
+  {
+   "mechanism": "keyboard_state",
+   "write_mechanism": "unknown",
+   "conversion": "unknown",
+   "slot_rule": "unknown",
+   "fields": 21,
+   "total_controls": 21,
+   "field_details": [
+    {
+     "field": "key",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "keyboard.key"
+     ]
+    },
+    {
+     "field": "main_keyboard",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "keyboard.main_keyboard"
+     ]
+    },
+    {
+     "field": "mod_wheel",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "keyboard.mod_wheel"
+     ]
+    },
+    {
+     "field": "source_indicator",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "keyboard.mod_wheel.source_indicator"
+     ]
+    },
+    {
+     "field": "bend_range",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "keyboard.mpe.bend_range"
+     ]
+    },
+    {
+     "field": "enabled",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "keyboard.mpe.enabled"
+     ]
+    },
+    {
+     "field": "xyz_to_macros123",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "keyboard.mpe.xyz_to_macros123"
+     ]
+    },
+    {
+     "field": "y_to_modwheel",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "keyboard.mpe.y_to_modwheel"
+     ]
+    },
+    {
+     "field": "yz_to_macros12",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "keyboard.mpe.yz_to_macros12"
+     ]
+    },
+    {
+     "field": "arp_row_fold",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "keyboard.osc_mapping.arp_row_fold"
+     ]
+    },
+    {
+     "field": "arp_row_key_range",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "keyboard.osc_mapping.arp_row_key_range"
+     ]
+    },
+    {
+     "field": "arp_row_warp",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "keyboard.osc_mapping.arp_row_warp"
+     ]
+    },
+    {
+     "field": "editor",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "keyboard.osc_mapping.editor"
+     ]
+    },
+    {
+     "field": "reset_all",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "keyboard.osc_mapping.reset_all"
+     ]
+    },
+    {
+     "field": "vel_tab",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "keyboard.osc_mapping.vel_tab"
+     ]
+    },
+    {
+     "field": "pitch_bend",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "keyboard.pitch_bend"
+     ]
+    },
+    {
+     "field": "bend_down",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "keyboard.pitch_bend.bend_down"
+     ]
+    },
+    {
+     "field": "bend_up",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "keyboard.pitch_bend.bend_up"
+     ]
+    },
+    {
+     "field": "scale",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "keyboard.scale"
+     ]
+    },
+    {
+     "field": "swing",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "keyboard.swing"
+     ]
+    },
+    {
+     "field": "transpose",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "keyboard.transpose"
+     ]
+    }
+   ]
+  },
+  {
+   "mechanism": "unknown_oscnoise",
+   "write_mechanism": "unknown",
+   "conversion": "unknown",
+   "slot_rule": "unknown",
+   "fields": 10,
+   "total_controls": 10,
+   "field_details": [
+    {
+     "field": "color",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "oscNoise.color"
+     ]
+    },
+    {
+     "field": "fine",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "oscNoise.fine"
+     ]
+    },
+    {
+     "field": "level",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "oscNoise.level"
+     ]
+    },
+    {
+     "field": "noise_type",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "oscNoise.noise_type"
+     ]
+    },
+    {
+     "field": "one_shot",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "oscNoise.one_shot"
+     ]
+    },
+    {
+     "field": "pan",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "oscNoise.pan"
+     ]
+    },
+    {
+     "field": "phase",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "oscNoise.phase"
+     ]
+    },
+    {
+     "field": "pitch",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "oscNoise.pitch"
+     ]
+    },
+    {
+     "field": "pitch_track",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "oscNoise.pitch_track"
+     ]
+    },
+    {
+     "field": "rand_phase",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "oscNoise.rand_phase"
+     ]
+    }
+   ]
+  },
+  {
+   "mechanism": "unknown_oscsub",
+   "write_mechanism": "unknown",
+   "conversion": "unknown",
+   "slot_rule": "unknown",
+   "fields": 8,
+   "total_controls": 8,
+   "field_details": [
+    {
+     "field": "coarse_pitch",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "oscSub.coarse_pitch"
+     ]
+    },
+    {
+     "field": "cont_phase",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "oscSub.cont_phase"
+     ]
+    },
+    {
+     "field": "level",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "oscSub.level"
+     ]
+    },
+    {
+     "field": "octave",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "oscSub.octave"
+     ]
+    },
+    {
+     "field": "pan",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "oscSub.pan"
+     ]
+    },
+    {
+     "field": "phase",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "oscSub.phase"
+     ]
+    },
+    {
+     "field": "pitch_track",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "oscSub.pitch_track"
+     ]
+    },
+    {
+     "field": "shape",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "oscSub.shape"
+     ]
+    }
+   ]
+  },
+  {
+   "mechanism": "voice_panel",
+   "write_mechanism": "unknown",
+   "conversion": "unknown",
+   "slot_rule": "unknown",
+   "fields": 8,
+   "total_controls": 8,
+   "field_details": [
+    {
+     "field": "legato",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "voice.voicing.legato"
+     ]
+    },
+    {
+     "field": "mono",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "voice.voicing.mono"
+     ]
+    },
+    {
+     "field": "poly",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "voice.voicing.poly"
+     ]
+    },
+    {
+     "field": "porta_always",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "voice.voicing.porta_always"
+     ]
+    },
+    {
+     "field": "porta_curve",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "voice.voicing.porta_curve"
+     ]
+    },
+    {
+     "field": "porta_scaled",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "voice.voicing.porta_scaled"
+     ]
+    },
+    {
+     "field": "porta_time",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "voice.voicing.porta_time"
+     ]
+    },
+    {
+     "field": "voice_count_display",
+     "controls_in_field": 1,
+     "sample_controls": [
+      "voice.voicing.voice_count_display"
+     ]
+    }
+   ]
+  }
+ ]
+}

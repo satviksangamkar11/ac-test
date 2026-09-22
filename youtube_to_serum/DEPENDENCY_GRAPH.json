@@ -1,0 +1,426 @@
+{
+ "serum2\\evidence\\record.py": {
+  "imports_from": [
+   "serum2.qualification.a3_evidence_extension"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\knowledge\\ingestion.py": {
+  "imports_from": [
+   "step_5_6_knowledge_store"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\knowledge\\step_5_7_universal_retrieval.py": {
+  "imports_from": [
+   "step_5_6_knowledge_store"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\knowledge\\step_6_10_episode_generation.py": {
+  "imports_from": [
+   "step_6_9_outcome_attribution",
+   "step_6_2_universal_production_intent"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\knowledge\\step_6_3_episode_context_integration.py": {
+  "imports_from": [
+   "step_6_2_universal_production_intent"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\knowledge\\step_6_4_semantic_reasoning_integration.py": {
+  "imports_from": [
+   "step_6_3_episode_context_integration",
+   "step_6_2_universal_production_intent"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\knowledge\\step_6_5_advisory_decision_engine.py": {
+  "imports_from": [
+   "step_6_3_episode_context_integration",
+   "step_6_2_universal_production_intent",
+   "step_6_4_semantic_reasoning_integration"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\knowledge\\step_6_6_capability_resolution.py": {
+  "imports_from": [
+   "step_6_2_universal_production_intent",
+   "step_6_5_advisory_decision_engine",
+   "step_6_4_semantic_reasoning_integration"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\knowledge\\step_6_7_admission_handoff.py": {
+  "imports_from": [
+   "step_6_6_capability_resolution",
+   "step_6_2_universal_production_intent",
+   "step_6_5_advisory_decision_engine",
+   "step_6_4_semantic_reasoning_integration"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\knowledge\\step_6_8_contract_governed_execution.py": {
+  "imports_from": [
+   "step_6_2_universal_production_intent",
+   "step_6_5_advisory_decision_engine",
+   "step_6_4_semantic_reasoning_integration",
+   "step_6_6_capability_resolution",
+   "step_6_7_admission_handoff"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\producer\\batch_qualification_system.py": {
+  "imports_from": [
+   "serum2.evidence.capability_contract",
+   "serum2.producer.contract_registry",
+   "serum2.compiler.targets",
+   "serum2.reference.serum_atlas",
+   "serum2.producer.target_names"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\producer\\candidate_ranking.py": {
+  "imports_from": [
+   "serum2.producer.skill_library",
+   "serum2.producer.operation_spec",
+   "serum2.reference.serum_atlas"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\producer\\capability_qualification_sweep.py": {
+  "imports_from": [
+   "serum2.evidence.capability_contract",
+   "serum2.producer.contract_registry",
+   "serum2.producer.target_resolution",
+   "serum2.compiler.targets",
+   "serum2.compiler.mcp_intent",
+   "serum2.knowledge.step_6_6_capability_resolution",
+   "serum2.reference.serum_atlas"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\producer\\concept_representation.py": {
+  "imports_from": [
+   "serum2.producer.contract_registry",
+   "serum2.evidence.capability_contract",
+   "serum2.producer.target_resolution",
+   "serum2.compiler.targets",
+   "serum2.compiler.mcp_intent",
+   "serum2.knowledge.step_6_6_capability_resolution",
+   "serum2.reference.serum_atlas"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\producer\\contract_registry.py": {
+  "imports_from": [
+   "serum2.qualification.binding_contract",
+   "serum2.evidence.capability_contract",
+   "serum2.producer.execution_epoch",
+   "serum2.producer.modulation_route_contract"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\producer\\event_to_intent.py": {
+  "imports_from": [
+   "serum2.source.visual_evidence",
+   "serum2.reference.serum_atlas",
+   "serum2.producer.visual_reasoner"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\producer\\evidence_fusion.py": {
+  "imports_from": [
+   "serum2.source.visual_evidence",
+   "serum2.source.transcript_query_planner",
+   "serum2.reference.serum_atlas"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\producer\\expected_inventory.py": {
+  "imports_from": [
+   "serum2.reference.serum_atlas"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\producer\\grounding.py": {
+  "imports_from": [
+   "serum2.producer.skill_library",
+   "serum2.producer.evidence_fusion"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\producer\\knowledge_retrieval_adapter.py": {
+  "imports_from": [
+   "step_5_7_universal_retrieval",
+   "step_5_6_knowledge_store"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\producer\\measure_b1_baseline.py": {
+  "imports_from": [
+   "serum2.producer.producer_brain"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\producer\\modulation_route_contract.py": {
+  "imports_from": [
+   "serum2.evidence.capability_contract"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\producer\\operation_registry.py": {
+  "imports_from": [
+   "serum2.producer.contract_registry"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\producer\\producer_brain.py": {
+  "imports_from": [
+   "step_6_2_universal_production_intent",
+   "step_6_5_advisory_decision_engine",
+   "serum2.producer.knowledge_retrieval_adapter",
+   "serum2.producer.candidate_ranking",
+   "serum2.producer.visual_reasoner",
+   "serum2.source.acquire_visual_evidence",
+   "serum2.source.transcript_query_planner",
+   "serum2.producer.contract_registry",
+   "serum2.evidence",
+   "serum2.producer.target_resolution",
+   "serum2.producer.universal_intent",
+   "serum2.source.visual_evidence",
+   "serum2.source.youtube_url",
+   "step_6_6_capability_resolution",
+   "step_6_7_admission_handoff",
+   "serum2.producer.episode_retrieval",
+   "serum2.compiler.targets",
+   "serum2.knowledge.step_6_6_capability_resolution",
+   "serum2.producer.route_selection",
+   "serum2.producer.concept_representation",
+   "serum2.producer.request_context",
+   "step_6_4_semantic_reasoning_integration",
+   "serum2.producer.modulation_route_contract",
+   "step_6_8_contract_governed_execution",
+   "serum2.compiler.mcp_intent",
+   "serum2.producer.operation_spec",
+   "serum2.producer.qualify_modulation_route"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\producer\\qualify_osc2_enable_u7.py": {
+  "imports_from": [
+   "serum2.producer.batch_qualification_system",
+   "serum2.producer.serum_mcp_qualification_backend"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\producer\\reference_skill.py": {
+  "imports_from": [
+   "serum2.producer.skill"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\producer\\reflection_learner.py": {
+  "imports_from": [
+   "serum2.producer.skill_library",
+   "serum2.producer.candidate_ranking"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\producer\\route_classifier.py": {
+  "imports_from": [
+   "serum2.compiler.targets",
+   "serum2.reference.serum_atlas",
+   "serum2.producer.contract_registry",
+   "serum2.compiler.mcp_intent"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\producer\\route_selection.py": {
+  "imports_from": [
+   "serum2.producer.contract_registry",
+   "serum2.compiler.targets",
+   "serum2.compiler.mcp_intent"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\producer\\serum_mcp_qualification_backend.py": {
+  "imports_from": [
+   "serum2.producer.batch_qualification_system"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\producer\\skill_graph.py": {
+  "imports_from": [
+   "serum2.producer.skill"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\producer\\skill_retrieval.py": {
+  "imports_from": [
+   "serum2.producer.skill",
+   "serum2.producer.skill_graph"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\producer\\state_admission.py": {
+  "imports_from": [
+   "serum2.producer.execution_epoch",
+   "serum2.evidence",
+   "serum2.producer.contract_registry",
+   "serum2.producer.state_ledger",
+   "serum2.producer.contract_scope",
+   "serum2.reference.serum_atlas"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\producer\\state_ledger.py": {
+  "imports_from": [
+   "serum2.reference.serum_atlas"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\producer\\structured_context.py": {
+  "imports_from": [
+   "serum2.producer.skill_library"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\producer\\target_resolution.py": {
+  "imports_from": [
+   "serum2.reference.serum_atlas",
+   "serum2.producer.target_names"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\producer\\target_surfaces.py": {
+  "imports_from": [
+   "serum2.compiler.targets",
+   "serum2.reference.serum_atlas",
+   "serum2.producer.target_resolution"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\producer\\timeline.py": {
+  "imports_from": [
+   "serum2.source.visual_evidence",
+   "serum2.producer.evidence_fusion",
+   "serum2.source.transcript_query_planner"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\producer\\u8_event_audit.py": {
+  "imports_from": [
+   "serum2.reference.serum_atlas",
+   "serum2.producer.target_resolution",
+   "serum2.producer.event_to_intent",
+   "serum2.producer.producer_brain"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\producer\\universal_intent.py": {
+  "imports_from": [
+   "serum2.producer.concept_representation",
+   "serum2.producer.operation_spec",
+   "serum2.producer.request_context"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\producer\\visual_reasoner.py": {
+  "imports_from": [
+   "serum2.source.visual_evidence",
+   "serum2.reference.serum_atlas",
+   "serum2.reference.serum_ui_atlas"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\producer\\_finalize_mu6_episode.py": {
+  "imports_from": [
+   "serum2.server.experience_record"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\reference\\generate_binding_table.py": {
+  "imports_from": [
+   "serum2.reference.serum_atlas",
+   "serum2.producer.state_ledger"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\reference\\serum_atlas.py": {
+  "imports_from": [
+   "serum2.reference.serum_audit",
+   "serum2.producer.qualify_modulation_route",
+   "serum2.reference.serum_ui_atlas"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\reference\\serum_audit.py": {
+  "imports_from": [
+   "serum2.reference.serum_atlas"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\reference\\serum_ui_atlas.py": {
+  "imports_from": [
+   "serum2.reference.serum_atlas"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ },
+ "serum2\\source\\acquire_visual_evidence.py": {
+  "imports_from": [
+   "serum2.source.visual_evidence",
+   "serum2.source.youtube_url"
+  ],
+  "imported_by": [],
+  "data_deps": []
+ }
+}

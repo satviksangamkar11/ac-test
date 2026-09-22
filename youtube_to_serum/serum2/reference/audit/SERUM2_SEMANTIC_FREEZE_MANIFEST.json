@@ -1,0 +1,95 @@
+{
+  "manifest_version": "1.0.0",
+  "created": "2026-09-16",
+  "artifact_file": "serum2/reconciliation/SERUM2_SEMANTIC_INVENTORY_FINAL.json",
+  "artifact_sha256": "fac5ced33ceeed2aaf1309f4cdf90f6977f45f5dafd56535d1cba2d7c71b3a32",
+  "artifact_size_bytes": 1344773,
+  "semantic_count": 908,
+  "unique_semantic_ids": 908,
+  "duplicate_semantic_ids": 0,
+  "unresolved_questions": 0,
+  "status_counts": {
+    "VERIFIED": 879,
+    "PROVEN_NOT_USER_CONTROL": 23,
+    "UNVERIFIED_CANDIDATE": 6
+  },
+  "section_counts": {
+    "FX": 173,
+    "OSC": 135,
+    "MATRIX": 81,
+    "MIXER": 66,
+    "FILTER": 66,
+    "LFO": 90,
+    "MACRO": 48,
+    "GLOBAL": 51,
+    "GLOBAL_KEYBOARD": 21,
+    "ARP": 50,
+    "CLIP": 30,
+    "VOICE": 8,
+    "ENV": 48,
+    "BROWSER": 41
+  },
+  "source_provenance": {
+    "git_reconstructed_baseline": {
+      "commit": "86dfde7",
+      "commit_message": "BROWSER/RESOURCES section closed: 41 records, all VERIFIED (P0=0, P1=0, P2=1)",
+      "plus_diff_recovered_from": "79d74ae (corrupted commit, recovered via git diff, 1 record + 1 modification)",
+      "count": 516
+    },
+    "closure_ledger_itemization_filter_env_lfo": {
+      "phase": "2A-R.4",
+      "count": 188,
+      "sources": ["meta.filter_closure_ledger (dc707b6)", "meta.env_closure_ledger (8388843/7c2edea)", "meta.lfo_closure_ledger (315f092)"]
+    },
+    "technical_inventory_itemization_osc": {
+      "phase": "2A-R.5",
+      "count": 129,
+      "sources": ["A_OSC1_INVENTORY_DISCOVERED.json", "A_OSC2_INVENTORY_DISCOVERED.json", "OSC_FINAL_CLOSURE_REPORT.md"]
+    },
+    "vst3_census_sub_noise": {
+      "phase": "2A-R.6",
+      "count": 6,
+      "sources": ["EXHAUSTIVE_CENSUS_ALL_2623.json"]
+    },
+    "retracted_duplicates": {
+      "phase": "2A-R.7",
+      "count": -11,
+      "reason": "OSC1-3/SUB/NOISE Enable/Level/Pan confirmed ONE_SEMANTIC_MULTIPLE_UI_SURFACES with pre-existing MIXER.* records via internal VST3 field name matching"
+    },
+    "matrix_source_itemization": {
+      "phase": "2A-R.8",
+      "count": 42,
+      "sources": ["meta.matrix_closure_ledger.source_domain_reopening_2026_09_15"]
+    },
+    "matrix_destination_itemization": {
+      "phase": "2A-R.9",
+      "count": 36,
+      "sources": ["meta.matrix_closure_ledger.destination_family_exact_counts"]
+    },
+    "clip_player_live_verification": {
+      "phase": "2A-R.9b",
+      "count": 2,
+      "sources": ["Live DawDreamer read/mutate/readback/restore on VST3 param idx 521", "bridge.capture_v8_skeleton body-state structure", "Ableton MCP session verification"]
+    }
+  },
+  "arithmetic_check": {
+    "516 + 188 + 129 + 6 - 11 + 42 + 36 + 2": 908,
+    "matches_final_count": true
+  },
+  "freeze_commit": "NOT_YET_COMMITTED",
+  "freeze_commit_note": "All reconciliation artifacts (serum2/reconciliation/) are currently untracked in git (verified via `git status`). No commit hash exists for this exact artifact state. A commit should be made to establish a permanent, citable freeze point before Phase 2D begins -- not fabricated here.",
+  "validation_performed": [
+    "JSON parses successfully",
+    "0 duplicate semantic_id values across all 908 records",
+    "Every record has a non-empty sources[] array with documented evidence_type",
+    "All 6 sections with aggregate closure-ledger structure (macro/osc/filter/env/lfo/matrix) explicitly reconciled",
+    "All identified ownership ambiguities (25 total: 14 FILTER + 11 OSC/SUB/NOISE) resolved with cited evidence",
+    "Clip Player multiplicity question resolved via live tool-based verification (Ableton MCP + DawDreamer)"
+  ],
+  "known_limitations_carried_forward": [
+    "4 UNVERIFIED_CANDIDATE items pre-date this reconciliation (MACRO.SYS.RENAME_MECHANISM, 3 MPE menu items) -- unchanged, still P2/non-blocking per original Section-Closure Method disposition",
+    "OSC1/2/3 mode-dependent field applicability is qualitatively noted (conditional_visibility text) but not tabulated as an exact per-mode matrix like FILTER's type-specific controls",
+    "MATRIX.SOURCE's 42 new items are itemized as flat entries; deeper per-item conditional gating (if any) was not individually investigated"
+  ],
+  "declaration": "SEMANTIC FREEZE: 908 records, evidence-derived, machine-verified, 0 duplicates, 0 unresolved multiplicity questions. Ready for Phase 2C normalization."
+}

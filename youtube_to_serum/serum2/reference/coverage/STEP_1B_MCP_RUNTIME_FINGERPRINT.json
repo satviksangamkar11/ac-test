@@ -1,0 +1,31 @@
+{
+  "phase": "1B",
+  "date": "2026-09-23",
+  "mcp_version": "vendored",
+  "mcp_raw_schema_total": 361,
+  "mcp_modules_exposed": 26,
+  "mcp_list_parameters_total": 448,
+  "mcp_runtime_sha256": "a3af8419e30b32f9f148b48edd9dfe3854827dfe18e39d51f09fbac76561fdb8",
+  "schema_breakdown": {
+    "OSCILLATOR_PARAMS": 17,
+    "WTOSC_PARAMS": 9,
+    "SAMPLEOSC_PARAMS": 5,
+    "NOISEOSC_PARAMS": 3,
+    "GRANULAROSC_PARAMS": 34,
+    "SPECTRALOSC_PARAMS": 15,
+    "MULTISAMPLEOSC_PARAMS": 17,
+    "SUBOSC_PARAMS": 1,
+    "VOICE_FILTER_PARAMS": 10,
+    "ENV_PARAMS": 8,
+    "LFO_PARAMS": 12,
+    "MACRO_PARAMS": 1,
+    "GLOBAL_PARAMS": 25,
+    "VOICEPANEL_PARAMS": 62,
+    "ROUTING_SLOT_PARAMS": 5,
+    "ARP_PARAMS": 6,
+    "ARPCLIP_PARAMS": 26,
+    "MODSLOT_PARAMS": 13,
+    "FX_PARAMS": 16
+  },
+  "status": "ENUMERATED"
+}

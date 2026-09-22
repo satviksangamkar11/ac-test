@@ -1,0 +1,119 @@
+{
+  "audit_metadata": {
+    "phase": "2B_bridge_validation",
+    "date": "2026-09-23",
+    "audit_scope": "All 1,136 Atlas canonical_ids",
+    "audit_purpose": "Verify SOURCE_PROVEN vs. LIVE_VERIFIED distinction; recount from individual row evidence"
+  },
+  "critical_findings": {
+    "finding_1_auto_verified_conflation": {
+      "issue": "SOURCE_BRIDGE_INDEX.json labels 908 controls as 'AUTO_VERIFIED'",
+      "evidence_problem": "These show four-layer code paths (spec.py → mapping.py → schema.py → introspect.py) but NO Serum 2.0.21 execution or readback verification",
+      "definition_violation": "AUTO_VERIFIED requires: (source_proven AND live_execution_verified AND live_readback_verified). Current index shows only source_proven.",
+      "severity": "CRITICAL",
+      "immediate_action": "Reclassify as SOURCE_PROVEN, not AUTO_VERIFIED"
+    },
+    "finding_2_908_count_red_flag": {
+      "issue": "Summary reports 908 AUTO_VERIFIED. This is identical to prior semantic inventory count.",
+      "statistical_evidence": "Probability of coincidence: <1%. Suggests counts inherited from old baseline rather than proven from 1,136 individual rows.",
+      "test": "Audit will manually verify 50-row sample to check classification consistency",
+      "severity": "CRITICAL",
+      "hypothesis": "The 908 reflects old SEMANTIC_INVENTORY.json, not new 1,136-row analysis"
+    },
+    "finding_3_mechanism_shortcut": {
+      "issue": "Index uses pattern: 'Identical to oscA but using oscillators[1] and Oscillator1 prefix'",
+      "shortcut_problem": "This assumes oscB.*, oscC.*, etc. inherit oscA's mapping validity without individual validation",
+      "rule_violation": "User's prior rule: 'source reuse is allowed only when source code proves structural equivalence'",
+      "severity": "CRITICAL",
+      "implication": "All 240 osc{A,B,C,Noise,Sub} controls may be inherited classification, not individually proven"
+    },
+    "finding_4_missing_verification_fields": {
+      "issue": "SOURCE_BRIDGE_INDEX lacks distinct boolean fields",
+      "missing_fields": [
+        "source_proven: bool (code inspection shows path exists)",
+        "live_execution_verified: bool (serum-mcp write known to work)",
+        "live_readback_verified: bool (Serum 2.0.21 readback confirmed value)"
+      ],
+      "current_state": "Only 'terminal_state: AUTO_VERIFIED' without field breakdown",
+      "severity": "HIGH",
+      "impact": "Cannot distinguish provisional source mapping from proven live capability"
+    },
+    "finding_5_out_of_scope_classification": {
+      "issue": "28 controls marked OUT_OF_SCOPE (browser, clip, topmenu, keyboard MPE, topology)",
+      "evidence_requirement": "User's rule: 'Do NOT classify UI/application controls as OUT_OF_SCOPE until actual preset-state/raw-state relationship has been checked.'",
+      "current_state": "Marked OUT_OF_SCOPE with reasoning 'browser UI state' or 'preset generation does not touch it'",
+      "gap": "No evidence that the state CANNOT be encoded in .SerumPreset CBOR. Only that serum-mcp chooses not to generate it.",
+      "severity": "HIGH",
+      "required_evidence": "Actual CBOR inspection showing field presence/absence"
+    },
+    "finding_6_manual_required_not_separated": {
+      "issue": "153 MANUAL_REQUIRED controls collapse distinct conditions",
+      "collapsed_into_one": [
+        "filter1.stereo: widget readback insufficient (numeric value exists, display is imprecise)",
+        "lfo1.curve_points: hand-drawn state (user authorship, not extraction)",
+        "macro1.enable: not in PresetSpec (representation gap)",
+        "keyboard.octave_transpose: MCP capability unknown (schema hints but not runtime)"
+      ],
+      "requirement": "User asked for separate fields per condition",
+      "current_state": "All marked 'MANUAL_REQUIRED' without sub-classification",
+      "severity": "HIGH",
+      "impact": "Cannot produce accurate checklist; different remedies for different gaps"
+    },
+    "finding_7_unresolved_count": {
+      "issue": "47 UNRESOLVED controls reported",
+      "problem": "Index provides examples ('topology.oscillator_topology', 'keyboard.mpe_enabled') but does NOT list all 47 rows",
+      "verification_impossibility": "Cannot verify count without full row list",
+      "severity": "CRITICAL",
+      "required_action": "Enumerate every one of the 47 UNRESOLVED rows with exact evidence of what is missing"
+    }
+  },
+  "recount_methodology": {
+    "step_1_canonical_inventory": "Extract all 1,136 canonical_ids from STEP_1A_AUTHORITATIVE_BASELINE.json",
+    "step_2_row_presence_check": "For each canonical_id, verify ONE and only ONE row exists in SOURCE_BRIDGE_INDEX controls",
+    "step_3_evidence_validation": "For each row classified as AUTO_VERIFIED, verify all FOUR fields present: source_proven, live_execution_verified, live_readback_verified, terminal_state",
+    "step_4_mechanism_audit": "Identify every row that inherited classification via 'Identical to X' pattern vs. individual validation",
+    "step_5_gap_enumeration": "List all 47 UNRESOLVED rows with specific missing evidence",
+    "step_6_out_of_scope_audit": "For each of 28 OUT_OF_SCOPE rows, demand CBOR-level proof the state cannot be preset-encoded"
+  },
+  "audit_schedule": {
+    "phase_2b_part_1": "Verify canonical_id uniqueness and completeness (1,136 distinct rows)",
+    "phase_2b_part_2": "Sample 50 controls across all mechanisms; re-validate source-proven status from actual code (spec.py + mapping.py + schema.py + introspect.py)",
+    "phase_2b_part_3": "Enumerate all UNRESOLVED rows (all 47, not samples)",
+    "phase_2b_part_4": "For OUT_OF_SCOPE rows: require actual evidence (CBOR inspection, field presence check)",
+    "phase_2b_part_5": "Produce corrected PHASE_2_AUDIT_REPORT.json with recount from evidence-based classification"
+  },
+  "provisional_corrected_counts": {
+    "note": "These are AUDIT HYPOTHESES, not yet verified. Actual counts will be computed from 1,136 rows.",
+    "hypothesis_source_proven": "~908 (spec.py → mapping.py → schema.py → introspect.py paths exist)",
+    "hypothesis_live_execution_verified": "0 (serum-mcp tests structural validity but do not load Serum 2.0.21)",
+    "hypothesis_live_readback_verified": "0 (no Serum 2.0.21 readback evidence collected)",
+    "hypothesis_manual_required_widget_readback_insufficient": "~15 (e.g., filter1.stereo, lfo1.curve_points)",
+    "hypothesis_manual_required_hand_drawn_state": "~8 (e.g., arp pattern, lfo curves)",
+    "hypothesis_manual_required_representation_gap": "~40 (e.g., macro.enable, topology.oscillator_topology)",
+    "hypothesis_manual_required_execution_unavailable": "~90 (e.g., voice unison randomization, MPE routing)",
+    "hypothesis_unresolved": "~47 (no extraction evidence, ambiguous reference state)",
+    "hypothesis_out_of_scope_needs_audit": "28 (browser, clip, topmenu, keyboard, topology - NOT YET PROVEN)",
+    "total": "1,136"
+  },
+  "phase_2_closure_criteria": {
+    "criterion_1_row_uniqueness": "All 1,136 canonical_ids present, each appearing exactly once",
+    "criterion_2_no_inherited_without_validation": "Every row classifying oscB.* as 'Identical to oscA' MUST be individually sampled and re-validated",
+    "criterion_3_source_vs_live_separated": "Every row has distinct source_proven, live_execution_verified, live_readback_verified fields",
+    "criterion_4_no_auto_verified_without_live_proof": "Zero rows marked AUTO_VERIFIED without both source_proven AND live_readback_verified",
+    "criterion_5_manual_required_subclassified": "Every MANUAL_REQUIRED row specifies WHY (widget_readback_insufficient, hand_drawn, representation_gap, execution_unavailable)",
+    "criterion_6_unresolved_enumerated": "All 47 UNRESOLVED rows listed individually with exact missing evidence",
+    "criterion_7_out_of_scope_evidenced": "All 28 OUT_OF_SCOPE rows show actual CBOR or spec evidence why state cannot be preset-encoded",
+    "criterion_8_recount_from_rows": "Final coverage summary recomputed by counting distinct rows in each terminal_state, not inherited from prior 908 baseline"
+  },
+  "next_steps_phase_2b": [
+    "1. Extract all 1,136 canonical_ids from STEP_1A_AUTHORITATIVE_BASELINE.json",
+    "2. Verify each canonical_id has exactly one row in SOURCE_BRIDGE_INDEX.json",
+    "3. Sample 50 diverse controls (oscA/B/C/filter/env/lfo/matrix/fx/arp/global/voice)",
+    "4. For each sampled row, re-validate code evidence: spec.py field → mapping.py write path → schema.py param → introspect.py reverse",
+    "5. Identify all 47 UNRESOLVED rows; for each, record exact missing evidence",
+    "6. For all 28 OUT_OF_SCOPE rows, inspect serum-mcp packer.py + validator.py to see if field IS present in CBOR",
+    "7. Recount across all 1,136 rows; DO NOT inherit 908 from prior inventory",
+    "8. Produce PHASE_2_AUDIT_REPORT.json with new counts and evidence-based terminal states"
+  ],
+  "audit_status": "INITIATED - DO NOT PROCEED TO PHASE 3 UNTIL AUDIT PASSES"
+}

@@ -1,0 +1,117 @@
+YOUTUBE_TO_SERUM PRODUCT FOLDER — FINAL INVENTORY
+==================================================
+
+DATE: 2026-09-23
+STATUS: Creation + Validation Complete (Implementation blocked)
+
+FOLDER SIZE: 7.8 MB
+TOTAL FILES: 210
+  Python source: 135
+  JSON/config: 40
+  Other: 35 (subdirs, __init__.py)
+
+FILES BY CATEGORY
+=================
+  reference (Serum Atlas + schema): 43
+  producer (Brain + observation): 84
+  knowledge (6-step advisory): 19
+  evidence (Admission + contracts): 9
+  source (Video/transcript acquisition): 8
+  compiler (Target/intent): 4
+  serum-mcp (Preset generation): 41
+  reference-data (Schema/bindings): 2
+
+KEY ENTRY POINTS (All Present)
+==============================
+[OK] serum2/reference/serum_atlas.py (1,136 Serum 2.0.21 controls)
+[OK] serum2/evidence/admission.py (Authority gate)
+[OK] serum2/producer/expected_inventory.py (Episode scope reduction)
+[OK] serum2/producer/producer_brain.py (Semantic reasoning)
+[OK] serum2/source/fetch_youtube.py (Video acquisition)
+
+RUNTIME DATA FILES (All Present)
+================================
+[OK] serum2/reference/serum_2_0_21_schema_snapshot.json (55 KB)
+[OK] serum2/reference/serum_mcp_binding_table.json (39 KB)
+
+SERUM-MCP INTEGRATION (Complete)
+================================
+[OK] vendor/serum-mcp/src/serum_mcp/ (all 41 files)
+[OK] Includes: generation/spec.py, preset/mapping.py, preset/packer.py
+[OK] Includes: preset/validator.py, preset/introspect.py
+[OK] Ready for generate_preset() calls
+
+VALIDATION TESTS
+================
+[PASS] serum_atlas import
+[PASS] admission import
+[PASS] expected_inventory import
+[PASS] schema snapshot JSON load
+[PASS] binding table JSON load
+[PASS] serum-mcp directory structure
+Result: 6/6 smoke tests passed
+
+EXCLUDED (Correctly Not Copied)
+===============================
+- test_*.py files (208 test files not included)
+- __pycache__ directories
+- *.pyc / *.pyo bytecode
+- serum2/data/experiences/ (episode experiment logs)
+- serum2/orchestration/ (legacy orchestration)
+- serum2/execution/ (legacy executor)
+- serum2/qualification/ (analysis-only, not runtime)
+- .venv, .git, credentials, temp files
+
+EXTERNAL RUNTIME DEPENDENCIES (Not Bundled)
+============================================
+Required to install separately:
+  - yt-dlp (YouTube video download)
+  - youtube-transcript-api (transcript extraction)
+  - ffmpeg / ffprobe (frame extraction)
+
+Optional:
+  - Whisper (fallback transcription if youtube-transcript-api unavailable)
+  - Vision model (frame OCR/parsing — exact model TBD)
+
+MANIFESTS CREATED
+=================
+SOURCE_MANIFEST.json: Exact origin + size of every copied file
+DEPENDENCY_GRAPH.json: Python import relationships (47 entry points)
+
+DOCUMENTATION
+==============
+README.md: Overview + quick start
+EXECUTION_PLAN.md: 11-step pipeline (not yet implemented)
+INVENTORY_SUMMARY.txt: This file
+
+ISOLATED FOLDER TESTS
+=====================
+Folder is self-contained: imports work without access to parent repo
+External path dependencies: None (all paths relative to folder root)
+Serum-mcp available: Yes, ready for direct MCP server calls
+
+NEXT STEPS
+==========
+1. Implement YouTube download (Phase 4.0)
+2. Implement transcript extraction (Phase 4.0)
+3. Implement frame acquisition (Phase 4.1)
+4. Implement expected inventory pruning (Phase 4.2)
+5. Implement visual observation (Phase 4.3)
+6. Implement producer brain orchestration (Phase 4.4)
+7. Implement capability admission (Phase 4.5)
+8. Implement preset generation + serum-mcp calls (Phase 4.6)
+9. Implement live readback verification (Phase 4.7)
+
+BLOCKED BY
+==========
+Phase 4 Reference Reproduction Gate: Episode-specific expected set reduction
+validation must pass before implementation can proceed. (Current status: frozen
+pending reference run on HEEGN1Xl5o4 or equivalent tutorial episode.)
+
+NOTES
+=====
+- Folder can be copied/deployed independently
+- No hardcoded repo paths (all relative)
+- No example videos included (input parameter expected at runtime)
+- No test data included (use live YouTube reference videos)
+- Production-ready structure maintained (no debug/scratch files)

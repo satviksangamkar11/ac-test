@@ -1,0 +1,1850 @@
+"""The semantic, MCP-client-facing preset schema.
+
+This is deliberately a *simplified* view of the full raw parameter set in
+:mod:`serum_mcp.preset.schema` -- friendly field names, a curated filter-type
+vocabulary, seconds instead of opaque curve values where we're confident of
+the unit. The calling model (see ``server.py``'s tool instructions) builds
+JSON matching :class:`PresetSpec` itself; :mod:`serum_mcp.preset.mapping`
+then translates a validated ``PresetSpec`` onto the raw CBOR structure.
+
+Every field range mirrors the bounds recorded in ``preset/schema.py`` --
+if you change one, change the other.
+"""
+
+from __future__ import annotations
+
+from typing import Literal
+
+from pydantic import BaseModel, Field
+
+from serum_mcp.preset.schema import (
+    MULTISAMPLE_INSTRUMENTS,
+    SIMPLE_ARP_SHAPES,
+    SIMPLE_FILTER_TYPES,
+    SIMPLE_SUB_SHAPES,
+    SIMPLE_WARP_MODES,
+    SIMPLE_WAVETABLES,
+)
+
+FilterTypeName = str  # validated against SIMPLE_FILTER_TYPES keys in mapping.py
+
+
+class OscillatorSpec(BaseModel):
+    """Shared fields apply to all 5 oscillator slots (A/B/C/Noise/Sub).
+    ``table_position``/``warp_amount`` only affect slots 0-2; ``noise_type``
+    only affects slot 3; ``sub_shape`` only affects slot 4 -- mapping.py
+    ignores the fields that don't apply to a given slot rather than writing
+    them somewhere Serum doesn't expect. Slots 0-2 pick one of two sound-
+    source engines: the wavetable engine (``wavetable``/``custom_harmonics``/
+    ``sample_source``) or, if ``sample_playback_source`` is set, the sample-
+    playback engine -- never both at once.
+    """
+
+    enabled: bool = True
+    octave: float = Field(0.0, ge=-4.0, le=4.0)
+    semitone: float = Field(
+        0.0,
+        ge=-12.0,
+        le=12.0,
+        description="static pitch offset in semitones, independent of octave -- exists "
+        "mainly to align two sample_playback_source layers to the same pitch class "
+        "without a full octave jump. Found live: SampleOsc has no configurable root "
+        "note, so a layered one-shot's actual sounding pitch is whatever its own "
+        "recorded content is; when combining pitched one-shots, check "
+        "analyze_sample_file's pitch_hz on each candidate first and use this field to "
+        "correct a mismatch (e.g. two layers a tritone apart) rather than assuming they "
+        "already agree.",
+    )
+    fine: float = Field(
+        0.0,
+        ge=-80.0,
+        le=80.0,
+        description="cents (approx.), independent of both octave and semitone -- a "
+        "smaller-than-a-semitone micro-tuning control, the same 'Coarse + Fine' pattern "
+        "as most synths. Found live 2026-07-29: a real preset used this on 2 of its "
+        "active oscillators (-3/+4 cents) for subtle detuning/beating between layers "
+        "that this project had never exposed as a settable base value (only as a mod "
+        "destination, oscillator{i}.fine).",
+    )
+    volume: float = Field(0.75, ge=0.0, le=1.0, description="0=silent, 1=unity gain")
+    pan: float = Field(0.0, ge=-50.0, le=50.0)
+    unison: float = Field(
+        1.0,
+        ge=1.0,
+        le=16.0,
+        description="voice count, slots 0-2 only. Stored as a float in Serum's own "
+        "format even though it's conceptually an integer -- keep it typed float here "
+        "so pydantic doesn't hand back a Python int, which would encode as the wrong "
+        "CBOR wire type (see docs/PARAMETER_SCHEMA.md's CBOR bool/float note).",
+    )
+    detune: float = Field(0.0, ge=0.0, le=1.0, description="unison detune amount, slots 0-2 only")
+    wavetable: str = Field(
+        "default",
+        description=f"slots 0-2 only, one of: {', '.join(sorted(SIMPLE_WAVETABLES))}. "
+        "Different oscillators can (and often should) use different wavetables -- "
+        "using the same one for every slot limits timbral variety. Ignored if "
+        "custom_harmonics, sample_source, or sample_playback_source is set. IMPORTANT: "
+        "'flute' is nearly silent at the default table_position=0.0 (its frame 0 peaks "
+        "at 0.004 vs a table average of 0.81, found live) -- always pair it with "
+        "table_position around 130-150.",
+    )
+    custom_harmonics: list[list[float]] | None = Field(
+        None,
+        description="slots 0-2 only. If set, SYNTHESIZES a brand-new wavetable instead of "
+        "using `wavetable`/`table_position`: each inner list is one frame's harmonic "
+        "amplitude series (index 0 = fundamental, index 1 = 2nd harmonic, index 2 = 3rd, "
+        "...), amplitudes roughly 0..1 (auto-normalized, don't worry about exact scale), "
+        "additively synthesized via inverse FFT into a 2048-sample single-cycle waveform "
+        "per frame. 1-256 frames; multiple frames create a wavetable that morphs in "
+        "timbre as table_position scans through it -- e.g. start with just [1.0] (pure "
+        "sine) and progressively add harmonics in later frames for a tone that gets "
+        "brighter as table_position increases. Use this when the user wants a genuinely "
+        "custom/unusual timbre that none of the curated `wavetable` options cover, not "
+        "for routine sound design (the curated tables are cheaper and pre-validated).",
+    )
+    sample_source: str | None = Field(
+        None,
+        description="slots 0-2 only. If set, SYNTHESIZES a wavetable by slicing a "
+        "user-provided audio file (absolute path to a WAV: 16/24/32-bit PCM or 32-bit "
+        "float, any sample rate/channel count) into `sample_frames` evenly-spaced "
+        "2048-sample frames that table_position scans through -- turns a one-shot (drum "
+        "hit, vocal chop, foley) into an evolving/morphable synth texture derived from "
+        "its own timbre. This is NOT faithful one-shot playback -- expect a synthesized, "
+        "often buzzy/looped character built from slices of the source audio, not a clean "
+        "reproduction of the original transient. Use ONLY when the user wants that "
+        "synthesized/morphing character; if they want the one-shot to still sound "
+        "recognizably like itself, use `sample_playback_source` instead. Ignored if "
+        "sample_playback_source is set.",
+    )
+    sample_playback_source: str | None = Field(
+        None,
+        description="slots 0-2 only. If set, uses Serum's SAMPLE-PLAYBACK engine "
+        "(SampleOsc) instead of the wavetable engine: an absolute path to a WAV file "
+        "that gets copied into Serum's Samples library and played back preserving its "
+        "own recorded character -- unlike sample_source (above), which resynthesizes a "
+        "wavetable and loses the original transient/timbre. Use this when the user wants "
+        "to recognizably keep a one-shot/sample (drum hit, vocal chop, foley) and shape "
+        "it with Serum's filter/envelope/FX, alone or layered with other oscillators, "
+        "rather than turn it into a synthesized texture. Takes priority over "
+        "wavetable/custom_harmonics/sample_source if set. warp_amount/warp_mode still "
+        "apply (this engine shares WTOsc's warp system) but table_position does not -- "
+        "there's no scannable frame position, the file plays back as one continuous "
+        "sample. Only .wav is supported (not .flac/.mp3/.aiff -- convert first). "
+        "Confirmed live: the sample plays back at its originally-recorded pitch/speed "
+        "when C5 is played -- that's the fixed reference note this engine uses (not "
+        "configurable), so octave/detune/fine are the only way to shift it if the user "
+        "wants a different reference. Pitch and duration are coupled with no way to "
+        "decouple them (classic 'resampling' behavior, not time-stretching) -- a note "
+        "played higher reads through the sample faster (shorter), lower reads slower "
+        "(longer). This matters for melodic use across a wide note range (a one-shot "
+        "used as a melody instrument will have a different length at each pitch); "
+        "sample_loop sustains the *looped* portion regardless of pitch but not the "
+        "initial attack/transient, which still speeds up or slows down with the note.",
+    )
+    sample_center_pan: bool = Field(
+        True,
+        description="slots 0-2 only, sample_playback_source only. Real one-shot "
+        "recordings often have a measurable left/right level imbalance (an off-center "
+        "mic placement in the original recording, not anything Serum or this project "
+        "adds) -- when true (the default), a stereo file's channels are gain-balanced "
+        "to the same RMS before being copied in, correcting that bias without altering "
+        "either channel's actual waveform/content (not summed to mono, stereo width "
+        "survives). Set false to preserve the file exactly as recorded.",
+    )
+    sample_loop: str = Field(
+        "off",
+        description="slots 0-2 only, sample_playback_source only. One of: 'off' (play "
+        "through once, true one-shot -- default, use for drum hits/percussive "
+        "material), 'forward' (loop sample_loop_start..sample_loop_end forward, for "
+        "sustaining a pad/drone from a one-shot), 'ping_pong' (loop back and forth), "
+        "'tailed' (play through once then loop the tail region -- keeps a one-shot's "
+        "attack intact while sustaining its tail indefinitely).",
+    )
+    sample_loop_start: float = Field(
+        0.0,
+        ge=0.0,
+        le=100.0,
+        description="% into the sample where the loop region starts, sample_loop != 'off' only",
+    )
+    sample_loop_end: float = Field(
+        100.0,
+        ge=0.0,
+        le=100.0,
+        description="% into the sample where the loop region ends, sample_loop != 'off' only",
+    )
+    sample_loop_crossfade: float = Field(
+        0.0,
+        ge=0.0,
+        le=100.0,
+        description="% crossfade at the loop point, sample_loop != 'off' only",
+    )
+    sample_frames: int = Field(
+        16,
+        ge=1,
+        le=256,
+        description="number of frames to slice sample_source into, slots 0-2 only. "
+        "Frame 0 is the sample's start (e.g. a drum hit's transient); the last frame is "
+        "its tail. More frames = finer morphing resolution as table_position scans.",
+    )
+    table_position: float = Field(
+        0.0, ge=0.0, le=256.0, description="wavetable frame position, slots 0-2 only"
+    )
+    warp_amount: float = Field(
+        0.0,
+        ge=0.0,
+        le=1.0,
+        description="slots 0-2 only. Also applies to granular_source/"
+        "spectral_source/multisample_source (GranularOsc/SpectralOsc/MultiSampleOsc share "
+        "the same kParamWarp amount knob as WTOsc/SampleOsc, though SpectralOsc's warp "
+        "MODE vocabulary is different -- see warp_mode).",
+    )
+    warp_mode: str = Field(
+        "fm",
+        description=f"slots 0-2 only, one of: {', '.join(sorted(SIMPLE_WARP_MODES))}. Also "
+        "applies to granular_source/multisample_source. For spectral_source specifically, "
+        "this curated list does NOT apply -- SpectralOsc has its own, much larger "
+        "warp-mode vocabulary "
+        "(spectral-domain effects like gating/robotizing/vocoding/Shepard tones, "
+        "unrelated names) -- pass the raw Serum name directly instead, e.g. "
+        "warp_mode='kGate', 'kSmear', 'kRobotize', 'kSpectralShift', 'kVocode_OSC', "
+        "'kMask_OSC', 'kShepardFilter' (any value not in the curated list above is "
+        "passed straight through unvalidated against a friendly-name table).",
+    )
+    granular_source: str | None = Field(
+        None,
+        description="slots 0-2 only. If set, uses Serum's GRANULAR engine (GranularOsc) "
+        "instead of the wavetable engine: an absolute path to a WAV file that gets copied "
+        "into Serum's Samples library (same mechanism as sample_playback_source) and "
+        "played back through Serum's grain-based synthesis instead of straight playback "
+        "-- continuously re-triggered short 'grains' sliced from the source, each with "
+        "randomizable pitch/pan/length/start-offset, for an evolving/textural/'clouds of "
+        "sound' character very different from both wavetable and sample_playback_source. "
+        "Use for pads/textures/soundscapes built FROM a sample (a field recording, a "
+        "vocal, a drone) rather than played back as itself. Takes priority over "
+        "wavetable/custom_harmonics/sample_source if set, but sample_playback_source "
+        "takes priority over this if BOTH are set (only one non-wavetable engine can be "
+        "active per slot). Decoded 2026-07-30 via a 626-preset corpus survey and VST3 "
+        "binary string mining, then confirmed live in real Serum 2 (including fixing two "
+        "real unit-conversion bugs found that way, see granular_density/"
+        "granular_grain_length below) -- genuinely produces a grain-cloud texture, "
+        "cross-validated against a real Factory Granular preset. Only the controls below "
+        "plus warp_amount/warp_mode are exposed; Serum's real GranularOsc has ~20 more "
+        "params (window shape, BPM-synced density/length, unison trigger pattern, a "
+        "second randomizable warp lane, a SCAN/playback-position system found live but "
+        "not yet wired up, ...) this project doesn't generate yet -- see "
+        "docs/PARAMETER_SCHEMA.md.",
+    )
+    granular_density: float = Field(
+        10.0,
+        ge=0.0,
+        le=30.0,
+        description="granular_source only. Grain trigger rate, on "
+        "the SAME 0-30 scale as Serum's own DENS knob (higher = denser/smoother/more "
+        "continuous-sounding grain cloud, lower = sparser/more rhythmic/glitchy individual "
+        "grains audible) -- confirmed live 2026-07-30 by reading back real Serum-saved "
+        "values (the raw storage format is a much steeper, unrelated quartic curve; this "
+        "field matches the UI number, not raw storage, same convention as every other "
+        "field in this project).",
+    )
+    granular_grain_length: float = Field(
+        100.0,
+        ge=0.0,
+        le=10000.0,
+        description="granular_source only. Length of each "
+        "individual grain in MILLISECONDS, on the SAME scale as Serum's own LENGTH knob "
+        "-- confirmed live 2026-07-30 by reading back a real Factory preset's own raw "
+        "value (808 - Texture's Osc B: raw 0.1243 -> displayed 124ms, matching this "
+        "formula to within rounding) in addition to the original 3-point calibration "
+        "(0.05/0.3/1.0 -> 50/300/1000x smaller raw). Shorter = more textural/glitchy, "
+        "longer = closer to overlapping mini-loops of the source; the real Factory "
+        "reference above used 124ms for a smooth/rich texture. IMPORTANT: earlier "
+        "versions of this project wrote this number directly as Serum's raw storage "
+        "value AND assumed the unit was seconds, not ms -- e.g. writing 0.15 intending "
+        "'150ms' actually produced 0.15ms (absurdly short) after the first fix and "
+        "'150 real seconds' (absurdly long, clamped) before it. Both bugs are now fixed; "
+        "this field is the literal millisecond number you'd type into Serum.",
+    )
+    granular_random_pitch: float = Field(
+        0.0,
+        ge=0.0,
+        le=12.0,
+        description="granular_source only. Random per-grain pitch "
+        "variation in semitones -- adds a chorus-like/detuned-cloud thickness. 0 = every "
+        "grain plays at the same pitch.",
+    )
+    granular_random_pan: float = Field(
+        0.0,
+        ge=0.0,
+        le=100.0,
+        description="granular_source only. % random per-grain stereo "
+        "placement -- higher = wider/more diffuse cloud, 0 = all grains centered.",
+    )
+    granular_random_grain_length: float = Field(
+        0.0,
+        ge=0.0,
+        le=100.0,
+        description="granular_source only. % random variation in "
+        "each grain's length around granular_grain_length -- adds organic irregularity to "
+        "the grain cloud instead of a perfectly uniform texture.",
+    )
+    granular_random_offset: float = Field(
+        0.0,
+        ge=0.0,
+        le=100.0,
+        description="granular_source only. % random per-grain start "
+        "offset within the source sample -- higher scatters each grain's read position "
+        "instead of every grain starting at the exact same point, adding texture/blur. "
+        "Wired 2026-08-01, always written explicitly (same low-risk pattern as "
+        "granular_random_pitch/pan/grain_length above) -- confidence='observed' in "
+        "schema.py (clearer real-corpus meaning than most of the other newly-wired "
+        "granular_* fields below, which are 'uncertain').",
+    )
+    granular_loop: bool = Field(
+        True,
+        description="granular_source only. Whether each grain loops within its "
+        "window instead of playing once. True is Serum's own corpus-observed default -- "
+        "leave it unless deliberately going for a choppier, non-looping grain character. "
+        "Wired 2026-08-01, confidence='uncertain' in schema.py (never independently "
+        "confirmed live, only decoded from corpus survey + VST3 binary mining).",
+    )
+    granular_jump_start: bool = Field(
+        False,
+        description="granular_source only. Presumed 'each grain jump-starts "
+        "mid-window rather than fading in' toggle -- not independently confirmed, "
+        "confidence='uncertain' in schema.py. Rare in real content; leave False unless "
+        "specifically matching a reference preset that uses it.",
+    )
+    granular_reverse: bool = Field(
+        False,
+        description="granular_source only. Plays grains in reverse. Plausible "
+        "explanation for a real Factory reference preset ('808 - Texture', Osc B) "
+        "observed playing in reverse during GranularOsc live-testing -- see "
+        "docs/PARAMETER_SCHEMA.md item 3 -- but that connection was never independently "
+        "confirmed (a negative granular_scan_rate, not yet wired, was an equally "
+        "plausible alternate explanation at the time). confidence='uncertain' in "
+        "schema.py.",
+    )
+    granular_length_key_track: bool = Field(
+        False,
+        description="granular_source only. Presumed 'grain length tracks the "
+        "played note' toggle (shorter grains on higher notes, or similar) -- not "
+        "independently confirmed, confidence='uncertain' in schema.py.",
+    )
+    granular_max_grains: float = Field(
+        16.0,
+        ge=1.0,
+        le=64.0,
+        description="granular_source only. Ceiling on simultaneous "
+        "overlapping grains -- higher allows denser/thicker clouds at high "
+        "granular_density at the cost of more voices/CPU. confidence='uncertain' in "
+        "schema.py (real corpus range observed, exact audible effect not independently "
+        "tested).",
+    )
+    granular_random_window_amount: float = Field(
+        0.0,
+        ge=0.0,
+        le=100.0,
+        description="granular_source only. % randomization of each "
+        "grain's amplitude envelope/window shape -- adds organic variation to the "
+        "grain-to-grain volume envelope, similar in spirit to granular_random_pan/"
+        "grain_length but for the window shape itself. confidence='uncertain' in "
+        "schema.py.",
+    )
+    granular_random_window_skew: float = Field(
+        0.0,
+        ge=0.0,
+        le=100.0,
+        description="granular_source only. % randomization of each "
+        "grain's window skew (attack/release balance within the grain) -- 0 = every "
+        "grain uses the same symmetric-ish window. confidence='uncertain' in schema.py.",
+    )
+    spectral_source: str | None = Field(
+        None,
+        description="slots 0-2 only. If set, uses Serum's SPECTRAL engine (SpectralOsc) "
+        "instead of the wavetable engine: an absolute path to a WAV file, resynthesized "
+        "through spectral-domain processing (FFT-based warping -- gating, robotizing, "
+        "spectral shifting, vocoding against the OTHER oscillators/filters via the "
+        "kMask_*/kVocode_* warp modes, Shepard-tone effects, and more, see warp_mode) "
+        "instead of straight playback or granular re-triggering. Use for glitchy/robotic/"
+        "vocoder/otherworldly textures specifically -- a materially different character "
+        "than sample_playback_source (unprocessed) or granular_source (grain clouds). "
+        "IMPORTANT LIMITATION: real SpectralOsc content commonly carries a hand-drawn "
+        "spectral filter/EQ CURVE across the frequency domain (53% of real samples "
+        "surveyed) that this project cannot yet generate (see "
+        "docs/PARAMETER_SCHEMA.md item 4) -- a generated SpectralOsc always has a flat/"
+        "neutral spectral response; only the frequency-range and warp controls below are "
+        "real. Takes priority over wavetable/custom_harmonics/sample_source, but "
+        "sample_playback_source/granular_source take priority over this if set. Only "
+        ".wav is supported. Confirmed live 2026-07-30 in real Serum 2 (warp_mode='kGate' "
+        "on a noise source produced the expected robotic/vocoder-like gated character, "
+        "with warp_amount=0 correctly falling back to a clean resynthesis of the source). "
+        "spectral_warp_freq_lo/freq_hi confirmed correct as literal Hz 2026-07-31 via "
+        "automated audio rendering (see docs/PARAMETER_SCHEMA.md item 3) -- a 20-500Hz "
+        "window and a 5000-20000Hz window on the same source produced spectral centroids "
+        "of 102Hz vs 6946Hz respectively, no conversion needed. filter_shift/filter_wet "
+        "remain unverified.",
+    )
+    spectral_warp_freq_lo: float = Field(
+        20.0,
+        ge=20.0,
+        le=20000.0,
+        description="spectral_source only. Hz, low edge of the "
+        "frequency range warp_mode's spectral effect applies to.",
+    )
+    spectral_warp_freq_hi: float = Field(
+        20000.0,
+        ge=20.0,
+        le=20000.0,
+        description="spectral_source only. Hz, high edge of "
+        "the frequency range warp_mode's spectral effect applies to -- narrow the "
+        "freq_lo..freq_hi range to target just a specific band (e.g. only warping the "
+        "upper harmonics while leaving the fundamental untouched).",
+    )
+    spectral_filter_shift: float = Field(
+        0.0,
+        ge=-100.0,
+        le=100.0,
+        description="spectral_source only. % shift applied to "
+        "the (always-flat, see the spectral_source limitation note) spectral filter "
+        "curve's effective position.",
+    )
+    spectral_filter_wet: float = Field(
+        100.0,
+        ge=0.0,
+        le=100.0,
+        description="spectral_source only. % wet/dry for the spectral filter/curve effect.",
+    )
+    multisample_source: str | None = Field(
+        None,
+        description=f"slots 0-2 only. If set, uses Serum's MULTISAMPLE engine "
+        f"(MultiSampleOsc) with a CURATED real Factory multisample instrument -- one of: "
+        f"{', '.join(sorted(MULTISAMPLE_INSTRUMENTS))}. Unlike granular_source/"
+        f"spectral_source/sample_playback_source (an arbitrary user WAV file),  "
+        f"MultiSampleOsc's real structure is a full SFZ-format keyzone mapping across many "
+        f"sample files -- too complex to build from an arbitrary user file this round (see "
+        f"docs/PARAMETER_SCHEMA.md item 3), so only these pre-verified real Factory "
+        f"instruments are selectable, each played back with correct per-note sample "
+        f"selection/pitch/looping exactly as Xfer's own sound designers configured it "
+        f"(unlike a single-sample engine playing one recording across the whole keyboard). "
+        f"Use for realistic multisampled instruments (choir, guitar, strings, ...) rather "
+        f"than synthesized/textural sources. Decoded 2026-07-31 via a 246-preset corpus "
+        f"survey -- NOT yet confirmed live for generation, treat as experimental until "
+        f"tested. Takes priority over wavetable/custom_harmonics/sample_source, but "
+        f"sample_playback_source/granular_source/spectral_source take priority over this "
+        f"if set on the same oscillator.",
+    )
+    multisample_env_attack: float = Field(
+        0.0,
+        ge=0.0,
+        le=0.4,
+        description="multisample_source only. Seconds -- an OSC-level "
+        "note-shaping attack stage layered on top of the instrument's own baked-in sample "
+        "envelope, NOT the primary voice envelope (Env0-3). Real range observed is short "
+        "(0-0.4s); for a longer/slower attack shape the fuller Env0-3 envelope is the "
+        "right tool instead.",
+    )
+    multisample_env_decay: float = Field(
+        0.0,
+        ge=0.0,
+        le=32.0,
+        description="multisample_source only. Seconds, same "
+        "OSC-level layered envelope as multisample_env_attack.",
+    )
+    multisample_env_release: float = Field(
+        0.0,
+        ge=0.0,
+        le=32.0,
+        description="multisample_source only. Seconds, same "
+        "OSC-level layered envelope as multisample_env_attack.",
+    )
+    warp_amount2: float = Field(
+        0.0,
+        ge=0.0,
+        le=1.0,
+        description="amount for the SECOND warp lane, slots 0-2 only -- see warp_mode2",
+    )
+    warp_mode2: str | None = Field(
+        None,
+        description=(
+            "slots 0-2 only, one of the same values as warp_mode, or None (default) for "
+            "no second warp lane at all -- most oscillators only use one. A SECOND, "
+            "independent warp stage applied after the first (e.g. warp_mode='fm' for an "
+            "FM character, THEN warp_mode2='filter_lpf' to tame/soften it) -- found live "
+            "2026-07-29: a real preset's primary oscillator used exactly this pattern "
+            "(kFM_NOISE then kFilterLPF at 56%), and a recreation missing the second lane "
+            "sounded harsh/aliased/'8-bit' despite the primary warp matching. If a "
+            "request implies a raw/digital/FM/noise character should still sound musical "
+            "rather than harsh, consider pairing it with warp_mode2='filter_lpf' or "
+            "'filter_hpf' to shape it, the same way real content commonly does."
+        ),
+    )
+    warp_var2: float | None = Field(
+        None,
+        ge=0.0,
+        le=1.0,
+        description="slots 0-2 only. A rarer, distinct third warp-related control -- not "
+        "the same as warp_amount2. Uncertain exact role (found live 2026-07-29 only as "
+        "a mod-matrix destination target, not independently understood); leave unset "
+        "unless specifically matching a real reference preset's value for this field.",
+    )
+    noise_type: str = Field(
+        "White", description="slot 3 (Noise) only, one of: White, Pink, Brown, Geiger"
+    )
+    sub_shape: str = Field(
+        "saw",
+        description=f"slot 4 (Sub) only, one of: {', '.join(sorted(SIMPLE_SUB_SHAPES))}",
+    )
+    filter_routing: Literal["filter", "master", "direct", "none"] | None = Field(
+        None,
+        description="Which path THIS oscillator's signal takes after leaving the "
+        "oscillator itself, backed by RoutingSlot{index} (see "
+        "docs/PARAMETER_SCHEMA.md §5 item 11 -- distinct from FilterSpec.output_routing, "
+        "which is each FILTER's own output routing, not an oscillator's input routing). "
+        "'filter' (Serum's real default when left unset) sends it through the enabled "
+        "VoiceFilter(s) normally -- see filter_balance when both filters are in use. "
+        "'master' bypasses both filters straight to the main output -- useful to keep a "
+        "bright/transient layer (a noise click, a sub) out of a resonant/saturating "
+        "filter chain shaping the rest of the stack. 'direct' bypasses filters AND the "
+        "FX bus system entirely. 'none' sends to neither filter nor master by default. "
+        "Leave unset unless deliberately routing a specific oscillator around the filter "
+        "stage.",
+    )
+    filter_balance: float | None = Field(
+        None,
+        ge=0.0,
+        le=100.0,
+        description="Only meaningful when filter_routing='filter' (or left unset) AND "
+        "two filters are enabled -- balance of this oscillator's signal between Filter 1 "
+        "and Filter 2. Exact scale not independently confirmed; higher values are "
+        "believed to lean toward Filter 2 (see docs/PARAMETER_SCHEMA.md). Leave unset to "
+        "use Serum's own default balance.",
+    )
+    fx_bus1_send: float | None = Field(
+        None,
+        ge=0.0,
+        le=100.0,
+        description="% of this oscillator's signal sent to FX Bus 1, independent of "
+        "filter_routing's main destination -- a genuine aux send, not mutually exclusive "
+        "with it. See GlobalSpec.fx_bus1_volume for the bus's own aggregate level. Leave "
+        "unset for no send (Serum's real default).",
+    )
+    fx_bus2_send: float | None = Field(
+        None,
+        ge=0.0,
+        le=100.0,
+        description="Same as fx_bus1_send, for FX Bus 2.",
+    )
+
+
+class FilterSpec(BaseModel):
+    enabled: bool = True
+    type: FilterTypeName = Field(
+        "lowpass_24", description=f"one of: {', '.join(sorted(SIMPLE_FILTER_TYPES))}"
+    )
+    cutoff: float = Field(0.5, ge=0.0, le=1.0, description="0=closed, 1=fully open")
+    resonance: float = Field(10.0, ge=0.0, le=100.0)
+    drive: float = Field(0.0, ge=0.0, le=100.0)
+    stereo: float = Field(
+        50.0,
+        ge=0.0,
+        le=100.0,
+        description="stereo width/spread %. 50 is centered/neutral -- confirmed live "
+        "(2026-07-28, real Serum 2) that 0 is NOT neutral despite being this field's "
+        "prior default: it introduces an audible, meter-visible hard-left bias on "
+        "VoiceFilter's per-channel processing. Values away from 50 in either direction "
+        "shift the balance.",
+    )
+    var: float = Field(
+        0.0,
+        ge=0.0,
+        le=100.0,
+        description="the 'Var' knob -- meaning changes per filter TYPE (e.g. comb "
+        "spacing for comb filters, formant blend for formant filters). Found live "
+        "2026-07-29: for `type='comb'` (or any DistComb/RMT-style raw type), this is a "
+        "MAJOR contributor to the filter's character, not a minor tweak -- a real comb "
+        "preset with var=65 sounded harsh/aliased/'8-bit' when this was left at the 0 "
+        "default. Check a real reference preset's value for this filter type rather "
+        "than assuming 0 is fine.",
+    )
+    key_track: bool = Field(
+        False, description="cutoff tracks the played note's pitch (higher notes = brighter)"
+    )
+    wet: float = Field(
+        100.0,
+        ge=0.0,
+        le=100.0,
+        description="this filter's own dry/wet mix -- distinct from the fx_chain's FX "
+        "wet knobs. Most filter uses want fully wet (the default); a low value "
+        "approaches an all-pass/bypass character while keeping resonance/drive coloring "
+        "subtle.",
+    )
+    level_out: float = Field(
+        0.5, ge=0.0, le=1.0, description="output level trim applied after the filter"
+    )
+    output_routing: Literal["parallel", "series"] | None = Field(
+        None,
+        description="how this filter's OWN output reaches the main signal path -- "
+        "'parallel' (the real Serum default: goes straight to output, independent of "
+        "the other filter) or 'series' (cascades into the OTHER filter, i.e. this "
+        "filter's output becomes the other filter's input). Leave unset to use "
+        "Serum's real default ('parallel') rather than writing anything explicit -- "
+        "found live 2026-07-29: a fixture bug had every serum-mcp preset with both "
+        "filters enabled silently running them in series (now fixed at the fixture "
+        "level, so 'parallel' no longer needs to be set explicitly to get it). Only "
+        "set 'series' when a genuinely cascaded dual-filter chain is wanted (e.g. "
+        "recreating a specific reference preset that uses it) -- setting BOTH "
+        "filters[0] and filters[1] to 'series' at once creates a routing cycle and "
+        "raises an error rather than producing a silently broken preset. Backed by "
+        "RoutingSlot5/RoutingSlot6, a top-level structure outside VoiceFilter this "
+        "project only partially understands -- see docs/PARAMETER_SCHEMA.md §5.",
+    )
+    fx_bus1_send: float | None = Field(
+        None,
+        ge=0.0,
+        le=100.0,
+        description="% of this filter's signal sent to FX Bus 1, independent of "
+        "output_routing's main destination -- a genuine aux send, not mutually "
+        "exclusive with it. See GlobalSpec.fx_bus1_volume for the bus's own aggregate "
+        "level. Leave unset for no send (Serum's real default).",
+    )
+    fx_bus2_send: float | None = Field(
+        None,
+        ge=0.0,
+        le=100.0,
+        description="Same as fx_bus1_send, for FX Bus 2.",
+    )
+
+
+class EnvelopeSpec(BaseModel):
+    attack: float = Field(0.0005, ge=0.0, le=10.0, description="seconds")
+    hold: float = Field(0.0, ge=0.0, le=5.2, description="seconds, full level before decay starts")
+    decay: float = Field(1.0, ge=0.0, le=32.0, description="seconds")
+    sustain: float = Field(1.0, ge=0.0, le=1.0)
+    release: float = Field(0.015, ge=0.0, le=32.0, description="seconds")
+    attack_curve: float = Field(
+        50.0,
+        ge=0.0,
+        le=100.0,
+        description="shape (linear/exponential/logarithmic-ish) of the attack ramp, "
+        "0-100. Found live 2026-07-29 present on 97% of all real envelopes surveyed "
+        "(3242/3333) -- effectively always set, not a rare/optional field, default "
+        "~50 is by far the most common real value. Segment mapping (attack/decay/"
+        "release, matching kParamCurve1/2/3's declaration order) is inferred, not "
+        "independently confirmed.",
+    )
+    decay_curve: float = Field(
+        66.6, ge=0.0, le=100.0, description="shape of the decay ramp, 0-100 -- see attack_curve"
+    )
+    release_curve: float = Field(
+        66.6, ge=0.0, le=100.0, description="shape of the release ramp, 0-100 -- see attack_curve"
+    )
+
+
+class LfoCurvePointSpec(BaseModel):
+    """One point of a hand-drawn LFO curve (``LfoSpec.curve``).
+
+    Decoded 2026-08-01 via ground-truth reverse calibration: the user
+    hand-drew a known shape directly in Serum's own curve editor, saved
+    it, and this project read back the raw ``curveData`` Serum itself
+    wrote. Confirmed Serum's own storage is Y-AXIS INVERTED (``0.0`` =
+    top of the display, ``1.0`` = bottom) -- this class's ``y`` field
+    uses the NATURAL convention instead (``0.0`` = bottom, ``1.0`` = top,
+    matching how anyone would describe a curve out loud), with the
+    inversion handled internally by ``mapping.py`` so callers never need
+    to think about it. See docs/PARAMETER_SCHEMA.md item 4 for the full
+    investigation, including why 3 rounds of forward-guessing (write data,
+    observe the render) produced confusing results before switching to
+    this reverse-calibration method.
+    """
+
+    x: float = Field(
+        ge=0.0,
+        le=1.0,
+        description="Horizontal position, 0=start of the LFO cycle, 1=end. The first "
+        "point in a curve must be x=0.0 and the last must be x=1.0 (Serum's own "
+        "invariant, confirmed across a 3051-sample corpus survey with 99.7% "
+        "compliance) -- points in between must be strictly increasing.",
+    )
+    y: float = Field(
+        ge=0.0,
+        le=1.0,
+        description="Height, NATURAL convention: 0.0=bottom of the curve display, "
+        "1.0=top (this is the OPPOSITE of Serum's own raw storage, which is Y-axis "
+        "inverted -- mapping.py flips it automatically, so just describe the shape "
+        "the way you'd say it out loud: 'starts low, rises to a peak, drops back down' "
+        "means y values like [0.1, 0.9, 0.1]).",
+    )
+    tension: float = Field(
+        0.5,
+        ge=0.0,
+        le=1.0,
+        description="Tension/shape of the segment LEADING INTO this point (i.e. "
+        "tension on point[i] shapes the segment from point[i-1] to point[i]; "
+        "meaningless/ignored on the first point, since no segment leads into it). "
+        "0.5 is exact linear (confirmed both by real-corpus frequency -- the "
+        "overwhelming majority value -- and by a live-Serum ground-truth test showing "
+        "a perfectly straight-sided segment). Values below 0.5 bow a RISING segment "
+        "concave/ease-out (fast start, slow finish toward this point); above 0.5 bows "
+        "it convex/ease-in (slow start, fast finish) -- confirmed live 2026-08-01 by "
+        "changing only one segment's tension against a known-straight ground-truth "
+        "reference and observing just that segment bow. The exact quantitative curve "
+        "(vs. just the qualitative direction) is not independently confirmed -- treat "
+        "extreme values (near 0.0 or 1.0) with more suspicion than moderate ones "
+        "(0.2-0.8) until verified further.",
+    )
+
+
+class LfoSpec(BaseModel):
+    rate: float = Field(
+        0.0,
+        ge=0.0,
+        le=100.0,
+        description="With mode='Free' and beat_sync=False (both required for this to "
+        "mean anything -- see beat_sync's own docstring for a real bug this project "
+        "shipped where free-Hz mode was silently unreachable, fixed 2026-08-01), this "
+        "IS literal Hz -- confirmed via audio-rendering calibration, exact 1:1 match at "
+        "raw 2/5/10/20/30 -> 2.0/5.0/10.0/20.0/30.0 Hz, and confirmed clean/glitch-free "
+        "by live listening all the way to 100 too (a live-Serum cross-check first found "
+        "visible 'jumps' near raw 35-40, but traced them to a per-voice LFO retriggering "
+        "on each note-on, not the rate itself -- see LfoSpec.mono; with that confound "
+        "removed the audio was smooth throughout, the remaining visible jumps being an "
+        "inaudible screen-refresh/stroboscopic illusion, not a real glitch). Safe to use "
+        "the full 0-100 range as literal-ish Hz; the exact number above ~35 just isn't "
+        "independently pinned down as precisely as the 2-30 range (this project's own "
+        "measurement tool has known limits at fast rates, see "
+        "schema.LFO_PARAMS['kParamRate'] and docs/PARAMETER_SCHEMA.md item 6a). "
+        "CORRECTED 2026-08-05 (an earlier version of this docstring wrongly implied "
+        "beat_sync being explicitly set changes this): mapping.py's omit-at-default "
+        "logic drops kParamRate UNCONDITIONALLY whenever this field equals its own "
+        "default 0.0 -- beat_sync has NO effect on that, so 'rate=0.0, beat_sync=False' "
+        "does NOT write a literal frozen/silent 0Hz LFO; it writes beat_sync=False and "
+        "OMITS rate entirely, same as leaving both untouched, landing on Serum's real "
+        "absent-state default ('1/4' BPM-synced). There is no way to request a literal "
+        "0Hz/frozen rate through this field -- the closest is a small nonzero value "
+        "(e.g. 0.02-0.1) for 'very slow'. This bites hardest on shape='lorenz'/'rossler': "
+        "a real live bug (found 2026-08-05, a generated 'dormant chaotic LFO, woken by "
+        "a macro raising its rate' bass preset) used rate=0.0 intending a frozen/inert "
+        "LFO -- since rate got silently omitted, the chaotic attractor was left in "
+        "Serum's own genuine default motion state instead of actually frozen, AND (per "
+        "mode='Free', mono not set -- see LfoSpec.mono) restarted from a fresh per-voice "
+        "state on every note-on, producing audibly inconsistent modulation note-to-note "
+        "and, on some notes, the resulting filter-cutoff swing closing the filter enough "
+        "to go silent. Fix used: a genuinely nonzero base rate (so it's actually written) "
+        "plus mono=True (one continuous shared instance instead of a per-voice restart) "
+        "for consistent, repeatable chaotic movement -- 'dormant until a macro wakes it' "
+        "is not achievable via rate=0.0 and needs a different mechanism (e.g. macro "
+        "controlling the MOD ROUTE AMOUNT into a destination, not the LFO's own rate).",
+    )
+    mode: str = Field("Free", description="'Free', 'Retrig', or 'Envelope'")
+    beat_sync: bool | None = Field(
+        None,
+        description="True = tempo-synced rate (BPM note values); False = free-running Hz; "
+        "None (default) = leave unset, which is Serum's own genuine default and is ALSO "
+        "tempo-synced, not Hz -- confirmed both by live UI probing and by audio "
+        "measurement (see LFO_PARAMS['kParamRate'] notes). "
+        "**Real bug, fixed 2026-08-01**: this field used to be a plain `bool` defaulting "
+        "to `False`, which made explicit free-Hz mode UNREACHABLE -- `False` was "
+        "indistinguishable from 'not set' and got silently omitted by mapping.py's "
+        "omit-at-default logic, always falling back to Serum's real (synced) default "
+        "regardless of intent. Found live by a user manually turning a calibration "
+        "preset's RATE knob and noticing it read 'BPM'/a note fraction instead of Hz, "
+        "which invalidated an earlier 'confirmed' free-Hz curve calibration that had "
+        "silently been measuring the BPM-synced curve instead (see PARAMETER_SCHEMA.md "
+        "item 6a's retraction). Pass `beat_sync=False` explicitly now to genuinely get "
+        "free-Hz mode; leave unset (None) for Serum's real tempo-synced default.",
+    )
+    delay: float = Field(
+        0.0,
+        ge=0.0,
+        le=3.6,
+        description="seconds before the LFO starts after note-on -- use for "
+        "'vibrato that kicks in after a moment' style requests, 0 = starts immediately",
+    )
+    rise: float = Field(0.0, ge=0.0, le=5.0, description="seconds to ramp up to full depth")
+    smooth: float = Field(
+        0.0, ge=0.0, le=100.0, description="% lag smoothing, higher = less steppy/more glidey"
+    )
+    shape: str | None = Field(
+        None,
+        description=(
+            "one of: random_sh, rossler, lorenz, path -- named algorithmic LFO shapes "
+            "(chaotic attractors / randomization). For a plain sine/triangle/square/saw "
+            "or any other hand-drawn shape, use `curve` instead (now generatable, see "
+            "that field) -- leaving BOTH unset keeps whatever curve the base preset "
+            "already has, it does NOT mean 'off'. Setting `shape` and `curve` together "
+            "is meaningless (Serum uses one or the other); prefer `curve` when the "
+            "caller has an actual shape description in mind. random_sh ('S&H' in "
+            "Serum's UI) is a stepped-random hold, good for glitchy/robotic movement; "
+            "rossler/lorenz are smooth-but-unpredictable organic chaotic modulation, "
+            "good for 'evolving'/'alive' textures; path is unconfirmed in character. "
+            "NOT yet confirmed live for generation (only confirmed reading real files) "
+            "-- treat as experimental until tested."
+        ),
+    )
+    curve: list[LfoCurvePointSpec] | None = Field(
+        None,
+        description="A hand-drawn LFO curve as an explicit list of points -- generatable "
+        "since 2026-08-01 (see LfoCurvePointSpec for the full story and its `y`/`tension` "
+        "semantics). Requires at least 2 points; the first must have x=0.0 and the last "
+        "x=1.0. **2-point curves have a real, confirmed Serum-side rendering bug**: only "
+        "a curve where the second point's y is HIGHER than the first's (a rising shape) "
+        "renders correctly -- a falling 2-point curve renders as a blank/inert graph. "
+        "This is enforced (raises ValueError) rather than silently shipping a broken "
+        "preset; use a 3rd point (even a redundant midpoint) to work around it for a "
+        "falling 2-point shape. Leave unset (together with `shape`) to keep whatever "
+        "curve the base preset already has.",
+    )
+    mono: bool = Field(
+        False,
+        description="a single shared LFO instance running continuously, independent of "
+        "note-on events, instead of a per-voice LFO that restarts its phase at every "
+        "note-on. Found live 2026-07-29: matters a lot for a FAST lfo under a fast "
+        "arpeggiator/sequencer -- a per-voice LFO barely completes any of its cycle "
+        "before being reset by the next note, which can read as choppy/'too fast' and "
+        "'frozen when nothing is playing'; mono=True keeps it running and visibly "
+        "moving regardless of note activity, closer to a genuinely independent, "
+        "continuously-evolving modulation source. Use for a fast/busy LFO (e.g. "
+        "shape='random_sh') paired with a fast arp/sequence, where the LFO is meant to "
+        "feel alive on its own rather than reset in lockstep with every note.",
+    )
+    swing: float = Field(
+        0.0,
+        ge=0.0,
+        le=1.0,
+        description="shuffle/swing amount for a stepped LFO (e.g. shape='random_sh'). "
+        "Only ever observed at 1.0 in real content -- uncertain exactly what "
+        "intermediate values do; leave at 0 unless specifically asked for a swung/"
+        "shuffled feel.",
+    )
+    dotted: bool = Field(
+        False,
+        description="dotted-rhythm timing for the LFO's rate, mirroring the "
+        "arpeggiator's identically-named field. Found live 2026-07-29, present on 16% "
+        "of real LFOs surveyed.",
+    )
+    triplets: bool = Field(False, description="triplet timing for the LFO's rate -- see dotted.")
+    rate10x: bool = Field(
+        False,
+        description="literal x10 rate multiplier -- CONFIRMED 2026-08-06 via the "
+        "serum-verify audio pipeline (rate=2 free-Hz measured 2.0Hz with this False/"
+        "omitted vs. exactly 20.0Hz with this True). Found live 2026-07-29 on real "
+        "chaotic-shape LFOs (rossler/lorenz) with a very low base rate -- matters for "
+        "whether a slow chaos LFO actually reads as 'moving' at a musically useful "
+        "speed.",
+    )
+
+
+class MacroSpec(BaseModel):
+    name: str = ""
+    value: float = Field(0.0, ge=0.0, le=100.0)
+
+
+class FxUnitSpec(BaseModel):
+    type: str = Field(description="one of the FX_TYPE_IDS names, e.g. 'FXReverb'")
+    wet: float = Field(50.0, ge=0.0, le=100.0)
+    params: dict[str, float | str] = Field(
+        default_factory=dict,
+        description="Type-specific plainParams, e.g. {'kParamRate': 2.0}. Key names and "
+        "ranges: see list_parameters()['fx_params'][type]. GOTCHA for FXDelay "
+        "specifically: kParamTimeL/kParamTimeR only mean literal seconds when "
+        "kParamBeatSync is ALSO passed here as explicit False -- e.g. "
+        "{'kParamTimeL': 0.25, 'kParamTimeR': 0.25, 'kParamBeatSync': False} for a "
+        "250ms delay. Omitting kParamBeatSync falls back to Serum's real (BPM-synced/"
+        "note-quantized) default, silently making kParamTimeL/R NOT mean seconds at all "
+        "-- confirmed live 2026-08-01 (same class of bug as LfoSpec.beat_sync). Bool "
+        "values like this work fine as plain Python True/False despite this field's "
+        "float|str type hint.",
+    )
+    rack: int = Field(
+        0,
+        ge=0,
+        le=2,
+        description="which of Serum's 3 PARALLEL fx racks this unit sits in. 0 is what "
+        "nearly every preset uses (a single serial chain) -- only set 1 or 2 for a "
+        "second/third independent signal path that processes in parallel with rack 0, "
+        "not after it (e.g. a dry chain in rack 0 and a separate wet/send chain in rack "
+        "1). Units within the same rack still process in list order. Found live "
+        "2026-07-29 in a real Unmute preset (a second rack with its own EQ/comp/reverb/"
+        "bode-shifter running alongside rack 0) -- this project had never read or "
+        "written anything but rack 0 before that.",
+    )
+    flex: list[dict[str, object]] | None = Field(
+        None,
+        description="OPAQUE passthrough for an FX unit's own point-based curve data "
+        "(e.g. FXDistortion's kXShaper mode uses 2 of these for its shaping curves) -- "
+        "found 2026-08-01 recreating a real preset (Galaxy), same {numPoints, xVals, "
+        "yVals, curveVals} structure as LfoSpec.curve's underlying storage, but NOT "
+        "independently verified to use the same Y-axis-inversion/tension semantics "
+        "(that was confirmed for the LFO curve WIDGET specifically via a live ground-"
+        "truth test, not for FX flex curves). Only ever set this by copying a value "
+        "extracted from an existing FX unit via extract_spec (round-trip/preserve an "
+        "existing curve) -- do NOT hand-author a new one expecting a specific "
+        "resulting shape, the semantics aren't confirmed enough for that yet. Leave "
+        "unset for a normal/flat curve (Serum's own default).",
+    )
+
+
+class GlobalSpec(BaseModel):
+    master_volume: float = Field(0.5, ge=0.0, le=1.0)
+    mono: bool = False
+    portamento_time: float = Field(
+        0.0,
+        ge=0.0,
+        le=3.0,
+        description="glide time between notes, seconds. Only audible for a legato-"
+        "overlapping note change, unless `porta_always=True` (confirmed, see that "
+        "field). NOT a flat constant duration regardless of interval size -- found "
+        "live 2026-08-06 via pitch-tracked audio measurement: a 24-semitone glide at "
+        "this=1.2 measured ~1.22s (matching this value almost exactly) but a "
+        "7-semitone glide at the SAME 1.2 setting measured only ~0.70s, so a smaller "
+        "interval genuinely completes faster, not just 'looks faster' -- treat this "
+        "value as roughly 'the glide time for a large (~2-octave+) interval', not a "
+        "literal fixed duration for every note change.",
+    )
+    poly_count: float = Field(8.0, ge=1.0, le=32.0, description="max simultaneous voices")
+    limit_same_note_polyphony: bool = Field(
+        False,
+        description="limit voice-stacking when the SAME note is retriggered rapidly (e.g. "
+        "under a fast arp/sequence) instead of letting overlapping voices for one note "
+        "pile up. Found live 2026-07-29, present on 39% of real presets surveyed.",
+    )
+    fx_bus1_volume: float | None = Field(
+        None,
+        ge=0.0,
+        description="Aggregate volume for FX Bus 1, fed by any oscillator's/filter's own "
+        "fx_bus1_send. CAN exceed 1.0 (a real boost/gain stage, not just 0-100%% "
+        "attenuation like most params in this schema) -- real values seen 0.26-1.75. "
+        "Leave unset to use Serum's own default (unity) rather than writing it "
+        "explicitly; only meaningful when at least one source has a nonzero "
+        "fx_bus1_send.",
+    )
+    fx_bus2_volume: float | None = Field(
+        None,
+        ge=0.0,
+        description="Same as fx_bus1_volume, for FX Bus 2.",
+    )
+    direct_volume: float | None = Field(
+        None,
+        ge=0.0,
+        description="Volume for signal from any source routed with "
+        "filter_routing/output_routing='direct' (bypasses both filters AND the FX bus "
+        "system entirely). Real values seen 0.21-0.43 -- well below the presumed unity "
+        "default, uncertain why. Leave unset unless deliberately using 'direct' routing.",
+    )
+    fx_bus1_destination: Literal["master", "direct"] | None = Field(
+        None,
+        description="Where FX Bus 1's OWN processed signal (after passing through its "
+        "FX chain) rejoins the main path -- distinct from fx_bus1_volume (that bus's "
+        "aggregate level) and each source's own fx_bus1_send (how much is sent INTO the "
+        "bus to begin with). 'master' (straight to main output) or 'direct' (a separate "
+        "bypass path, see direct_volume). Decoded 2026-07-30 from a 626-preset corpus "
+        "survey: real content only ever used these two values, never routing a bus back "
+        "into a filter or nowhere. Leave unset unless deliberately using the FX bus "
+        "system; only meaningful when at least one source has a nonzero fx_bus1_send.",
+    )
+    fx_bus2_destination: Literal["master", "direct"] | None = Field(
+        None,
+        description="Same as fx_bus1_destination, for FX Bus 2.",
+    )
+    # 15 more Global0 fields found 2026-08-05 in a full key audit (same
+    # technique/prompt as ArpSpec's 2026-08-05 batch: every kParam* ever
+    # observed in Global0 across the local corpus, not just already-modeled
+    # ones). 3 (kParamS1Compatibility/kParamGlobalTuning/kParamOversampling)
+    # were also directly confirmed against a real Serum GLOBAL-tab
+    # screenshot (see reference/serum_ui_screenshots/README.md's
+    # serum-global.png entry). Deliberately NOT modeled from that same
+    # survey: kParamModWheel (looks like a last-known CC1 performance-state
+    # value, not preset design data), kParamProgram (constant 6.0 across
+    # every sample -- an internal format/version marker), kParamMidiOut
+    # (constant 'ClipPlayer' -- internal routing target, only 1 distinct
+    # value ever observed).
+    bend_range_up: float | None = Field(
+        None,
+        description="Pitch bend range, upward, in semitones. Real values observed: 12, "
+        "24. Leave unset for Serum's own default.",
+    )
+    bend_range_down: float | None = Field(
+        None,
+        description="Pitch bend range, downward, in semitones -- stored as the raw "
+        "(typically negative) value, not a magnitude. Real values observed: -1, -12.",
+    )
+    legato: bool | None = Field(
+        None,
+        description="legato mode (notes played while holding another don't "
+        "retrigger envelopes). ~13% real-corpus presence, only ever observed True.",
+    )
+    porta_always: bool | None = Field(
+        None,
+        description="CONFIRMED 2026-08-06 via the serum-verify audio pipeline "
+        "(MIDI-driven 2-note render, non-overlapping/non-legato retrigger, pitch-"
+        "tracked with librosa pyin): forces `portamento_time` to apply to EVERY note "
+        "change, not just legato-overlapping ones. With this False/omitted, a "
+        "non-overlapping retrigger jumped instantly to the new note's pitch (no "
+        "glide at all); with this True, the same retrigger produced a clean, "
+        "monotonic glide from the previous note's pitch to the new one lasting almost "
+        "exactly `portamento_time` (measured 1.22s for a configured 1.2s). Only ever "
+        "observed True when present in real content.",
+    )
+    porta_scaled: bool | None = Field(
+        None,
+        description="TESTED 2026-08-06, no measurable audio effect found -- NOT fully "
+        "resolved. Original hypothesis: scale portamento_time by the pitch distance "
+        "being glided rather than a constant time regardless of distance. Audio test "
+        "(porta_always=True to force a glide, pitch-tracked via librosa pyin) found "
+        "an IDENTICAL glide curve/duration whether this was True, explicitly False, "
+        "or omitted -- including for a 24-semitone jump (glide ~1.22s in all 3 "
+        "conditions, exact same per-frame Hz values). Separately, and unexpectedly: "
+        "`portamento_time` itself already produces a distance-dependent glide "
+        "duration by default (a 7-semitone jump measured ~0.70s vs. ~1.22s for 24 "
+        "semitones at the same configured 1.2s time), so the field's own docstring's "
+        "old 'constant time regardless of distance' framing was already wrong before "
+        "`porta_scaled` enters the picture -- this may be why toggling `porta_scaled` "
+        "showed no further effect: the default might already BE the 'scaled' "
+        "behavior this field was hypothesized to enable, with the flag doing "
+        "something else entirely (or something audio alone can't isolate, e.g. only "
+        "mattering under legato/mono conditions this test didn't exercise). Needs a "
+        "live-Serum GUI check to fully resolve, same as `note_latch`.",
+    )
+    portamento_curve: float | None = Field(
+        None,
+        description="CONFIRMED 2026-08-06 via the serum-verify audio pipeline (MIDI-"
+        "driven 2-note glide, porta_always=True, pitch-tracked frame-by-frame with "
+        "librosa pyin, converted to semitones-of-progress vs. time): the glide's "
+        "easing shape, low=linear/constant-rate, high=front-loaded/fast-start. Tested "
+        "11/50/100 at portamento_time=1.2 against the unset baseline -- unset gave a "
+        "near-perfectly LINEAR pitch-vs-time ramp (progress at 10/25/50/75/90% of the "
+        "glide's own duration: 10/24/50/75/90%, i.e. matching straight-line t/T "
+        "almost exactly) lasting the full ~1.2s. Raising this value pulls the curve "
+        "progressively more front-loaded (an eased/exponential-decay-like approach to "
+        "the target) AND shortens the glide's overall audible duration: 11 was "
+        "barely different from unset (progress 15/36/64/85/94%, ~1.2s), 50 was "
+        "noticeably front-loaded (34/67/90/97/99%, ~1.0s), and 100 collapsed to an "
+        "almost-instant ~0.1s glide that still ramped up cleanly and monotonically "
+        "(no glitch/discontinuity -- verified against the raw per-frame pitch trace) "
+        "before holding rock-steady at the target for the rest of the note. Direction "
+        "and monotonic trend are solid; the exact mathematical curve formula isn't "
+        "pinned down. Real values observed: 11-100.",
+    )
+    swing: float | None = Field(
+        None,
+        ge=0.0,
+        le=100.0,
+        description="Global swing amount, % -- CONFIRMED 2026-08-06 via the "
+        "serum-verify audio pipeline (a held-note algorithmic arp at a confirmed "
+        "1/16-note rate, onset-detected via librosa): affects the ARPEGGIATOR's step "
+        "timing. 50 (explicit) produced the exact same steady, unswung onset grid as "
+        "leaving this field unset (confirming 50%=neutral/straight timing); 90 "
+        "produced large, repeating deviations from the grid (steps shifted by up to "
+        "~60ms in a non-trivial alternating pattern, not simple every-other-note "
+        "delay). Real values observed in content: 50-58% (a much subtler swing than "
+        "the 90 used for this calibration's clear test signal).",
+    )
+    swing_div: float | None = Field(
+        None,
+        description="PARTIALLY RESOLVED 2026-08-06: CONFIRMED to have a real, "
+        "independent effect on the resulting rhythm (swing_div=1 vs 2 at the same "
+        "swing=90 produced measurably different, non-identical onset timings -- "
+        "unlike `porta_scaled`, this is not a null result), but the exact "
+        "subdivision-selection semantics ('which note value does swing apply to') "
+        "are NOT pinned down -- the two conditions' onset patterns drift in and out "
+        "of phase with each other rather than showing a simple fixed offset, "
+        "suggesting an interaction with the arp's own step rate that a single test "
+        "point couldn't cleanly isolate. Real values observed: 1, 2. Needs either a "
+        "live-Serum GUI check or a larger test matrix (varying arp rate alongside "
+        "this) to fully resolve.",
+    )
+    transpose: float | None = Field(
+        None,
+        description="Global transpose, semitones -- applies to the whole instrument, "
+        "distinct from any per-oscillator/per-arp transpose. Real values observed: "
+        "-24 to +12.",
+    )
+    global_tuning: float | None = Field(
+        None,
+        gt=0.0,
+        description="Reference pitch for A4, Hz (e.g. 440.0 = standard concert pitch). "
+        "CONFIRMED via a real Serum GLOBAL tab screenshot ('TUNING: A = 440 Hz' "
+        "matches the raw kParamGlobalTuning value exactly). Real non-default values "
+        "observed: 432, 435 (alternate historical tunings). Leave unset for 440.0.",
+    )
+    oversampling: float | None = Field(
+        None,
+        description="Audio quality/oversampling setting -- CONFIRMED to correspond to "
+        "the GLOBAL tab's 'QUALITY' dropdown (screenshot showed 'High'), but only ONE "
+        "raw value (2.0) has actually been observed in real content, so the other "
+        "option(s)' ordinal(s) (e.g. for 'Low') aren't confirmed. Leave unset unless "
+        "copying a value extracted from a real preset.",
+    )
+    s1_compatibility: bool | None = Field(
+        None,
+        description="'S1 COMPATIBILITY MODE' in the GLOBAL tab (CONFIRMED via a real "
+        "screenshot) -- a legacy-behavior toggle for presets ported from Serum 1. Only "
+        "ever observed True when present; leave unset for new presets.",
+    )
+    use_ultra_on_render: bool | None = Field(
+        None,
+        description="UNCERTAIN exact meaning -- likely forces Serum's highest internal "
+        "quality mode specifically during offline/bounce rendering (vs. real-time "
+        "playback). Only ever observed True when present.",
+    )
+    voice_priority: str | None = Field(
+        None,
+        description="UNCERTAIN, raw Serum enum string (voice-stealing priority?) -- "
+        "only 'Low' observed so far, 1 sample. Written through UNVALIDATED (no known "
+        "enum set yet) -- only ever set this by copying a value extracted from a real "
+        "preset.",
+    )
+    note_latch: bool | None = Field(
+        None,
+        description="UNCERTAIN exact meaning (likely a note-hold/latch toggle, notes "
+        "keep sounding after release). Only 1 real sample observed, very low "
+        "confidence.",
+    )
+    voice_amp: float | None = Field(
+        None,
+        description="Static/base value for Global's voice-amp scaling -- DISTINCT from "
+        "using 'global.voice_amp' as a mod-matrix DESTINATION (already supported, see "
+        "ModRouteSpec): this is the same underlying kParamVoiceAmp key's own base "
+        "value, never modeled before. Only 1 real sample observed (0.43), very low "
+        "confidence -- leave unset unless copying a value extracted from a real "
+        "preset.",
+    )
+
+
+class ModRouteSpec(BaseModel):
+    """One mod-matrix route: ``source`` modulates ``destination`` by ``amount``.
+
+    Supported sources -- ``lfo0``..``lfo9``, ``macro0``..``macro7``,
+    ``velocity``, ``mod_wheel``, ``pitch_bend``, ``key_track`` (note number),
+    ``aftertouch``, ``poly_aftertouch``, ``env0``..``env3`` (an envelope's
+    own output used as a source, distinct from routing something INTO that
+    envelope), three independent per-note random sources (``random1``,
+    ``random2``, ``random_discrete``), and 5 per-voice/note "Note"-category
+    sources -- ``release_velo``, ``active_voices``, ``voice_index``,
+    ``voice_mod1``, ``voice_mod2`` -- routed to the destinations enumerated
+    in ``preset.schema.MOD_DEST_TARGETS`` (oscillator volume/pan/octave/
+    pitch/fine, filter cutoff/resonance/drive, envelope attack/decay/
+    sustain/release). ``velocity`` is a good fit for envelope attack/decay/
+    release (classic velocity-sensitivity) or filter cutoff (velocity-
+    sensitive brightness); ``key_track`` for filter cutoff that opens up on
+    higher notes; ``aftertouch``/``poly_aftertouch`` for post-note-on
+    expressive control (e.g. pressure adding vibrato or opening the filter);
+    ``random1``/``random2``/``random_discrete`` for per-note humanization
+    (e.g. small pan or pitch variation); ``release_velo``/``voice_mod1``/
+    ``voice_mod2``/``active_voices``/``voice_index`` exact musical meaning
+    unconfirmed beyond their Serum UI name (only their source IDs were
+    probed, not their live behavior) -- all IDs confirmed live 2026-07-29
+    via direct probing of a real Serum 2 instance. ``fixed`` is Serum's own
+    MATRIX-tab name for a CONSTANT modulation offset -- ``amount`` alone,
+    with no time-varying signal at all, useful for a permanent bias on a
+    destination (e.g. a fixed pitch/tuning offset) without dedicating an LFO
+    or macro to it.
+
+    Resolved 2026-08-01, closing nearly the entire remaining source list:
+    ``note_on_alt``/``note_on_alt2`` (Note category, meaning unconfirmed
+    beyond the UI name, same caveat as ``voice_mod1``/``2``);
+    ``expr_pan``/``expr_timbre``/``expr_press`` (MPE-style per-note note
+    expression -- ``mod_wheel``/``aftertouch``-style continuous control,
+    only meaningful with an MPE-capable controller/DAW routing); and 7
+    SELF-MODULATION sources -- ``oscillator0``..``oscillator4`` (that
+    oscillator SLOT's own audio-rate output, same 0-indexed convention as
+    the destination side: 0/1/2/3/4 = Osc A/B/C/Noise/Sub) and
+    ``filter0``/``filter1`` (that filter's own audio-rate output) -- a
+    module using its own signal to modulate something else, distinct from
+    routing something INTO that module. Live audible behavior of the
+    self-modulation and note-expression sources not yet independently
+    tested, same "IDs confirmed, behavior not" caveat as the Note-category
+    sources above.
+
+    ``lfo1_y`` (id 40, resolved 2026-08-01) closes the last of this
+    project's originally-flagged unknown source ids -- presumed to be the
+    Y-axis/secondary coordinate output of LFO slot 2 (``lfo1``) when using
+    a chaotic-attractor shape (Rossler/Lorenz), distinct from that LFO's
+    own primary output. Confirmed for this ONE specific slot only, by
+    reading a real Factory preset's own MATRIX tab directly -- whether
+    other LFO slots have an analogous ``_y`` source, and what id it would
+    use, is unknown; don't assume a contiguous family exists.
+
+    ``aux_source``/``aux_inverted`` expose Serum's general "Aux"/"Via"
+    system: an OPTIONAL second, independent source (same vocabulary as
+    ``source``, including ``fixed``) that scales/gates how much of
+    ``amount`` actually reaches ``destination``. Decoded 2026-07-30 via a
+    626-preset corpus survey: 1276 real routes across nearly every source
+    family use this, by far most commonly ``mod_wheel`` or ``aftertouch`` as
+    the aux (e.g. "LFO1 -> pitch" scaled by the mod wheel, a classic
+    controllable-vibrato pattern -- turn the wheel up to bring in an
+    already-configured LFO depth rather than routing the wheel directly to
+    pitch). Originally found narrowly on ``fixed`` routes and assumed to be
+    a `fixed`-only mechanism; the survey showed that was just the first
+    example encountered, not the whole feature. ``aux_inverted`` (rare, 2.8%
+    of aux-paired routes, always literally "on" when present) flips the aux
+    source before it scales ``amount``. **Combination formula confirmed
+    2026-07-31** via automated audio-rendering measurement (see
+    docs/PARAMETER_SCHEMA.md item 14): ``effective_amount = amount *
+    (aux_value / 100)``, or with ``aux_inverted=True``, ``effective_amount =
+    amount * (1 - aux_value / 100)`` -- a clean linear percentage scale,
+    verified by sweeping an aux macro's own value 0/25/50/75/100 and
+    measuring the resulting filter cutoff shift. A rarer curve-shaping param
+    (``kParamAuxCurve``) exists but is basically never used in real content
+    (0.16% of aux-paired routes) and isn't exposed here -- the linear
+    formula above is what applies whenever it's absent, i.e. essentially
+    always.
+    """
+
+    source: str = Field(
+        description=(
+            "'lfo0'..'lfo9', 'macro0'..'macro7', 'velocity', 'mod_wheel', "
+            "'pitch_bend', 'key_track', 'aftertouch', 'poly_aftertouch', "
+            "'env0'..'env3', 'random1', 'random2', 'random_discrete', "
+            "'release_velo', 'active_voices', 'voice_index', 'voice_mod1', "
+            "'voice_mod2', 'fixed' (a constant offset, see class docstring), "
+            "'note_on_alt', 'note_on_alt2', 'expr_pan', 'expr_timbre', "
+            "'expr_press', 'oscillator0'..'oscillator4', 'filter0'/'filter1' "
+            "(self-modulation sources), or 'lfo1_y' (LFO slot 2's Y-axis output, "
+            "see class docstring)"
+        )
+    )
+    destination: str = Field(description="e.g. 'filter0.cutoff', 'oscillator0.pitch', 'env0.decay'")
+    amount: float = Field(0.0, ge=-100.0, le=100.0)
+    bipolar: bool = False
+    aux_source: str | None = Field(
+        None,
+        description="Optional second source (same vocabulary as `source`) that scales/"
+        "gates how much of `amount` reaches `destination` -- Serum's 'Aux'/'Via' system, "
+        "see class docstring. Most commonly 'mod_wheel' or 'aftertouch' for expressive, "
+        "player-controllable modulation depth. Leave unset for an ordinary route with no "
+        "aux scaling (the common case).",
+    )
+    aux_inverted: bool = Field(
+        False,
+        description="Only meaningful when aux_source is set -- presumably inverts the aux "
+        "source's scaling effect. Leave False unless deliberately matching a specific "
+        "real reference preset's behavior.",
+    )
+
+
+class ArpPatternNoteSpec(BaseModel):
+    """One note in a custom hand-drawn arp pattern (``ArpSpec.pattern``,
+    ``shape='pattern'`` only). Quantized to a fixed grid (see
+    ``ArpSpec.pattern_step_beats``) rather than free timing -- the real
+    format supports arbitrary timestamps, but 1243 of 1507 real notes
+    surveyed used exactly a 0.25-beat (16th-note) grid, so a step grid
+    covers the overwhelming majority of real usage with a much simpler API.
+    """
+
+    step: int = Field(ge=0, le=1023, description="0-indexed position on the step grid")
+    note_offset: int = Field(
+        0,
+        ge=-48,
+        le=48,
+        description="pitch offset from the held/played note -- can be negative. Real "
+        "presets used a wide range (-26..+12 observed), not just +/-12.",
+    )
+    length_steps: float = Field(
+        1.0,
+        gt=0.0,
+        le=64.0,
+        description="note length in step-units; 1.0 (the default) fills exactly one "
+        "step with no gap or overlap, matching the most common real value.",
+    )
+
+
+class ArpSpec(BaseModel):
+    """Serum 2's arpeggiator. Always targets ArpClip slot 0 (the slot real
+    content overwhelmingly uses).
+
+    Reverse-engineered from real content -- first a 180-preset third-party
+    bank, then widened against 844 real presets total. Two distinct pattern
+    modes exist in the real format:
+
+    - Algorithmic (``shape`` = up/down/chord/random/... -- see
+      ``SIMPLE_ARP_SHAPES``): just a handful of knobs, no note data.
+    - ``shape='pattern'``: a real hand-drawn note-by-note sequence, set via
+      ``pattern`` (a list of ``ArpPatternNoteSpec``). Requires ``pattern`` to
+      be non-empty -- selecting ``shape='pattern'`` without it raises rather
+      than silently writing an empty/broken clip. Two aspects of this mode
+      are simplified vs. the full real format: every note is written with
+      the same fixed "attributes" vector (7 of its 8 values were constant
+      across all 1507 real notes surveyed; the 8th showed real variation
+      whose meaning isn't decoded, so it's not exposed here), and timing is
+      quantized to a step grid rather than the free timestamps real content
+      can use (see ``ArpPatternNoteSpec``).
+    """
+
+    enabled: bool = True
+    shape: str = Field(
+        "played",
+        description=f"one of: {', '.join(sorted(SIMPLE_ARP_SHAPES))}. 'played' repeats "
+        "the notes in the order/chord they were physically played (the closest to "
+        "'no pattern, just retrigger'); 'chord' plays all held notes together each "
+        "step; 'converge'/'diverge' sweep inward/outward from the middle of the held "
+        "notes; 'down'/'thumb_up' are directional (higher note first / lowest note "
+        "held as a constant 'thumb' with the pattern moving around it); "
+        "'up_down'/'down_up'/'up_and_down'/'down_and_up' ping-pong between the lowest "
+        "and highest held note -- CONFIRMED live 2026-08-05 (a held-chord audio test): "
+        "'down'-first vs 'up'-first sets which direction it starts in, and '_and_' "
+        "present vs absent sets whether the top/bottom note repeats once before "
+        "reversing direction (e.g. for a held C/E/G chord, 'up_down' plays "
+        "C-E-G-E-C-E-G-E..., while 'up_and_down' plays C-E-G-G-E-C-C-E-G-G..., "
+        "doubling the G and C at each turnaround); "
+        "'random_once'/'random_drift'/'random_no_dup' are randomized order variants. "
+        "Likely more exist but aren't confirmed yet -- see docs/PARAMETER_SCHEMA.md.",
+    )
+    rate: float = Field(
+        0.5,
+        ge=0.0,
+        le=1.0,
+        description="normalized step rate -- CONFIRMED 2026-08-05 via the serum-verify "
+        "audio pipeline (a held chord, algorithmic shape, onset-detection on the "
+        "resulting audio) to be a DISCRETE, tempo-synced note-division dial, NOT a "
+        "continuous Hz curve -- values snap between standard binary note lengths, "
+        "doubling in speed at each breakpoint (raw ranges measured at a 120bpm host "
+        "tempo, algorithmic shapes only): ~0.0-0.08 barely retriggers at all (no clean "
+        "onsets within a 6s hold -- effectively 'off'/a very long division); "
+        "0.10-0.20=1/2 note; 0.225-0.325=1/4; 0.35-0.425=1/8; 0.45-0.55=1/16; "
+        "0.575-0.65=1/32; 0.675+=1/64 (and presumably faster divisions beyond that, not "
+        "reliably measurable -- onset detection breaks down once note density exceeds "
+        "the test envelope's own decay time). IMPORTANT, found live SEPARATELY: for "
+        "shape='pattern' specifically, low values (this field's old default of 0.25, "
+        "which lands in the confirmed 1/4-note tier) made the pattern appear stuck/"
+        "frozen on its first note -- confirmed via an isolated diagnostic that the SAME "
+        "pattern only advanced through its steps once rate was raised to ~0.5 (1/16 "
+        "tier). Keep rate at 0.5 or above for shape='pattern' unless you've specifically "
+        "verified a lower value still steps through live; algorithmic shapes don't show "
+        "this issue -- the breakpoint table above was measured on an algorithmic shape "
+        "('played') and Pattern mode's own stepping may interact with this value "
+        "differently.",
+    )
+    gate: float = Field(
+        75.0,
+        ge=0.0,
+        le=200.0,
+        description="% note length relative to the step -- can exceed 100 for legato "
+        "overlap into the next step (observed up to ~146 in real presets).",
+    )
+    dotted: bool = Field(False, description="dotted-rhythm timing for the step rate")
+    triplets: bool = Field(False, description="triplet timing for the step rate")
+    transpose_shift: float = Field(
+        0.0, ge=-24.0, le=24.0, description="semitones, static transpose of the whole pattern"
+    )
+    transpose_shape: str | None = Field(
+        None,
+        description="optional, one of the same values as `shape` -- an independent "
+        "pattern for the transpose/pitch lane, so the pitch sequence can differ from "
+        "the note-trigger sequence. Leave unset for a plain transpose_shift with no "
+        "extra pitch pattern.",
+    )
+    pattern: list[ArpPatternNoteSpec] | None = Field(
+        None,
+        max_length=128,
+        description="custom hand-drawn note sequence, shape='pattern' ONLY. Required "
+        "(and must be non-empty) when shape='pattern'; ignored/must be left unset for "
+        "every other shape.",
+    )
+    pattern_step_beats: float = Field(
+        0.25,
+        gt=0.0,
+        le=4.0,
+        description="beats per grid step for `pattern` note positions/lengths -- 0.25 "
+        "(16th notes, the default) matches the most common real value, but the real "
+        "format allows any grid; use 0.5 for 8th notes, 1.0 for quarter notes, etc.",
+    )
+    chance: float | None = Field(
+        None,
+        ge=0.0,
+        le=100.0,
+        description="% chance each step actually plays a note (real presets observed "
+        "0-90%); unset (the default, ~7% real-corpus presence) means Serum's own "
+        "always-play default. Found live 2026-08-04 diagnosing a 'the arp sounds too "
+        "static/regular, gate never seems to evolve' report -- this project never wrote "
+        "kParamChance at all before, so every generated arp always played every step.",
+    )
+    offset: float | None = Field(
+        None,
+        description="CONFIRMED 2026-08-06 via the serum-verify audio pipeline "
+        "(held-note algorithmic arp, `shape='played'` over a 3-note chord, first-"
+        "onset spectral analysis): a starting-step-index shift into the pattern "
+        "sequence, taken MOD the pattern's own length -- rotates which note the arp "
+        "starts on rather than shifting overall timing. Baseline (offset unset) "
+        "started on the chord's 2nd note; `offset=1` shifted the start to the 3rd "
+        "note; `offset=-8` (a real observed corpus value) ALSO shifted to the 3rd "
+        "note -- exactly matching the mod-3 prediction (1+1=2 and 1-8=-7≡2 mod 3, "
+        "both landing on index 2), a clean cross-check between two very different "
+        "raw values converging on the identical predicted result. Real values "
+        "observed: -8, -6, 1. ~9% real-corpus presence. Leave unset unless copying a "
+        "value extracted from a real preset.",
+    )
+    transpose_range: float | None = Field(
+        None,
+        ge=0.0,
+        le=24.0,
+        description="semitone (approx.) range the transpose lane wraps/folds within -- "
+        "independent of `wrap_range`, which is the note-pattern's own wrap range. ~18% "
+        "real-corpus presence.",
+    )
+    retrig_rate: float | None = Field(
+        None,
+        description="TESTED 2026-08-06, no measurable audio effect found -- NOT "
+        "resolved. Original hypothesis: a ratchet/roll rate for micro-retriggers "
+        "within a single step, active alongside `note_retrig`. Tried 5 configurations "
+        "(all onset-detected, held-note rig): `shape='played'` with `note_retrig=True` "
+        "at retrig_rate omitted/4/11 (bit-for-bit identical onset timings across all "
+        "3), and `shape='pattern'` with a single 4-grid-unit-long sustained step at "
+        "retrig_rate omitted/4 (identical -- exactly 2 onsets in both, no internal "
+        "ratcheting). Confirmed the raw CBOR genuinely differed each time (not a "
+        "serialization bug). Joins `beat_retrig`/`launch_retrig` as a 3rd "
+        "retrigger/clock-timing-adjacent ArpClip field with zero measured effect this "
+        "session, vs. 3/3 confirmed on pure note-generation fields "
+        "(`offset`/`thru`/`repeats`) via the identical pipeline -- suspected shared "
+        "render-pipeline blind spot for retrigger/clock-timing ArpClip params, see "
+        "docs/PARAMETER_SCHEMA.md. Needs a live-Serum GUI check. Only meaningful "
+        "alongside `note_retrig`/`first_note_retrig`. Real values observed: 4, 5, "
+        "11. ~18% real-corpus presence.",
+    )
+    first_note_retrig: bool | None = Field(
+        None,
+        description="whether the arp's first note re-triggers like the rest of the "
+        "pattern (vs. sustaining through). ~13% real-corpus presence, only ever "
+        "observed True when present.",
+    )
+    note_retrig: bool | None = Field(
+        None,
+        description="whether notes re-trigger on each step. For shape='pattern' this "
+        "project always writes True regardless of this field (see ARPCLIP_PARAMS "
+        "notes) unless explicitly overridden here; for every other shape it's unset "
+        "(omitted) by default -- ~31% real-corpus presence, so it's a real, "
+        "independently-meaningful toggle outside Pattern mode too.",
+    )
+    velo_enabled: bool | None = Field(
+        None,
+        description="whether note velocity affects the arp (see `velo_target` for the "
+        "amount). ~18% real-corpus presence.",
+    )
+    velo_target: float | None = Field(
+        None,
+        ge=0.0,
+        le=100.0,
+        description="amount (%) velocity affects the arp when `velo_enabled` is True -- "
+        "exact target parameter UNCERTAIN. Real values observed: 3-95%. ~16% "
+        "real-corpus presence.",
+    )
+    wrap_range: float | None = Field(
+        None,
+        ge=0.0,
+        le=24.0,
+        description="semitone (approx.) range the note pattern wraps/folds within. For "
+        "shape='pattern' this project always writes 12.0 unless explicitly overridden "
+        "here; for every other shape it's unset (omitted) by default -- ~24% "
+        "real-corpus presence (real values observed: 1, 2, 12, 14), so it's a real, "
+        "independently-meaningful control outside Pattern mode too. Found live "
+        "2026-08-04: Galaxy's real value is 14.0 vs. this project's old Pattern-only "
+        "hardcoded 12.0, part of a real 'ARP range doesn't match' report.",
+    )
+    wrap_phantom_note: float | None = Field(
+        None,
+        ge=0.0,
+        le=100.0,
+        description="UNCERTAIN exact meaning (% chance of an extra 'phantom' note at "
+        "the wrap point?) -- real values observed: 20-82%. ~6% real-corpus presence, "
+        "low sample count, treat as lower-confidence than the other Arp fields.",
+    )
+    # 11 more fields found 2026-08-05 in a full audit of every real Arp0/
+    # ArpClip key across the corpus (prompted by a direct 'are all the ARP
+    # controls reverse-engineered?' question) -- see docs/PARAMETER_SCHEMA.md
+    # §4 Arpeggiator for the full survey. Presence rates are among
+    # arp-enabled presets specifically.
+    key_zone_min: float | None = Field(
+        None,
+        ge=0.0,
+        le=127.0,
+        description="Arp0-level (not per-clip): lowest MIDI note that triggers the "
+        "arp's own key-zone (notes below this presumably pass through/play normally "
+        "instead of arpeggiating). Real values observed: 12-84. ~5% real-corpus "
+        "presence.",
+    )
+    key_zone_max: float | None = Field(
+        None,
+        ge=0.0,
+        le=127.0,
+        description="Arp0-level: highest MIDI note of the key-zone (see "
+        "`key_zone_min`). Only ever observed at 126.0 in real content (~15% "
+        "real-corpus presence) -- likely just 'effectively no upper limit' in "
+        "practice, not a meaningfully-varied control.",
+    )
+    midi_select_octave: float | None = Field(
+        None,
+        description="Arp0-level: UNCERTAIN exact meaning -- likely an octave shift for "
+        "the key-zone/note-selection above. Real values observed: -2, 0, 1. ~3% "
+        "real-corpus presence, very low sample count.",
+    )
+    beat_retrig: bool | None = Field(
+        None,
+        description="TESTED 2026-08-06, no measurable audio effect found -- NOT "
+        "resolved. Original hypothesis: retrigger quantized to the beat grid. Audio "
+        "test (held single note, note-on deliberately placed OFF the arp's own "
+        "confirmed 1/16-note grid at t=0.05s, onset-detected) produced BIT-FOR-BIT "
+        "IDENTICAL onset timings whether this was False, True, or omitted. All 3 "
+        "conditions showed the SAME underlying behavior regardless: an almost-"
+        "immediate first note (~8ms after note-on), a short irregular second gap, "
+        "then locking onto the absolute transport-anchored 1/16 grid (exact "
+        "multiples of ~127.7ms from render start, NOT from note-on) from the 3rd "
+        "note onward -- i.e. Serum's arp already behaves like a persistent, "
+        "transport-locked clock by default, and this field didn't change that in "
+        "this test. Possibly hits the same render-pipeline blind spot as "
+        "`launch_retrig` (also a quantization/clock-adjacent ArpClip bool that "
+        "showed zero effect this session, unlike note-generation fields like "
+        "`thru`/`offset`/`repeats` which DID show clear differences). Needs a "
+        "live-Serum GUI check to resolve. Only ever observed True when present. "
+        "~62% real-corpus presence (the single most common of this batch).",
+    )
+    launch_retrig: bool | None = Field(
+        None,
+        description="TESTED 2026-08-06, no measurable audio effect found -- NOT "
+        "resolved. Original hypothesis: retrigger the pattern on launch/restart "
+        "(does re-pressing a held chord after a full release restart the pattern "
+        "sequence, or continue it?). Audio test (held-note algorithmic arp, a 3-note "
+        "chord pressed, released, then pressed again ~300ms later, first-onset "
+        "spectral analysis on each press) produced BIT-FOR-BIT IDENTICAL audio "
+        "(same onset timings, same peak frequencies) whether this was False, True, "
+        "or omitted -- confirmed the value really was written into the raw CBOR each "
+        "time (kParamLaunchRetrig 0.0/1.0/absent respectively), so this isn't a "
+        "serialization bug on this project's side. Needs a live-Serum GUI check to "
+        "resolve, same open-question shape as `note_latch`/`porta_scaled`. Only "
+        "ever observed False when present in real content. ~60% real-corpus "
+        "presence.",
+    )
+    velo_retrig: bool | None = Field(
+        None,
+        description="UNCERTAIN relationship to `velo_enabled`/`velo_target` -- possibly "
+        "'does velocity affect retrigger behavior specifically'. Only ever observed "
+        "True when present. ~26% real-corpus presence.",
+    )
+    velo_decay: float | None = Field(
+        None,
+        description="UNCERTAIN exact meaning/units -- paired with the other velo_* "
+        "fields. Real values observed cluster tightly (~3.9, not a round number), "
+        "suggesting this may be a UI-touch residue Serum writes once a velocity "
+        "control is touched rather than a meaningfully hand-tuned value. ~31% "
+        "real-corpus presence.",
+    )
+    repeats: float | None = Field(
+        None,
+        ge=0.0,
+        description="CONFIRMED core mechanism 2026-08-06 via the serum-verify audio "
+        "pipeline (held-note algorithmic arp, onset-detected via librosa): caps how "
+        "many times the arp plays before it goes SILENT, instead of looping "
+        "indefinitely while the note is held. Baseline (unset) looped continuously "
+        "(47 onsets across a 6.5s held note); repeats=1/4/8 fired only a small, "
+        "bounded number of notes (1/3/7 respectively) then fell silent for the rest "
+        "of the held note -- confirms this is a play-count LIMIT, not a per-step "
+        "retrigger multiplier as originally guessed. IMPORTANT CAVEAT: the exact "
+        "count formula isn't pinned down -- 4 and 8 both produced exactly "
+        "(value - 1) audible onsets starting on the normal step grid (~127.7ms after "
+        "note-on), but 1 produced exactly 1 onset starting almost immediately "
+        "(~35ms after note-on, not grid-delayed like the others) -- not a clean "
+        "single N-1 formula across all values, possibly an interaction with the "
+        "pattern's own start-quantization for very short repeat counts. Treat the "
+        "practical guidance (this makes the arp auto-stop after roughly `repeats` "
+        "notes rather than loop forever) as solid; don't rely on it for an exact "
+        "note count. Real values observed: 1, 4, 8. ~7% real-corpus presence, low "
+        "sample count.",
+    )
+    transpose_step: float | None = Field(
+        None,
+        description="PARTIALLY RESOLVED 2026-08-06 via the serum-verify audio "
+        "pipeline: CONFIRMED to be literal SEMITONES (not a fold/range-relative "
+        "unit) -- with `transpose_shape` set, `transpose_step=1` measured (via "
+        "precise `librosa.pyin` pitch tracking, needed since a coarse FFT-bin peak "
+        "wasn't sensitive enough to catch a single semitone) as almost exactly +1.0 "
+        "semitone vs. the unset baseline, and `transpose_step=12` measured as "
+        "exactly +12.0 semitones (one octave, confirmed even with a coarse method). "
+        "BUT the 'step size applied per wrap cycle' framing (implying the offset "
+        "WALKS/increases over time or across repeated cycles) was NOT confirmed -- "
+        "both a single long held note (8s, 63 arp steps) and 3 SEPARATE key-presses "
+        "showed a flat, constant offset the whole time, no incrementing/wrapping "
+        "behavior in either scenario. May need multiple simultaneous notes (a held "
+        "chord, so `transpose_shape` actually has more than one position to cycle "
+        "through) to reveal genuine step-by-step walking, if that behavior exists at "
+        "all. DISTINCT from `transpose_shift` (static whole-pattern transpose) and "
+        "`transpose_range` (total wrap range). Real values observed: 1, 2, 12. ~7% "
+        "real-corpus presence, low sample count.",
+    )
+    thru: bool | None = Field(
+        None,
+        description="CONFIRMED 2026-08-06 via the serum-verify audio pipeline "
+        "(held-note algorithmic arp over a 3-note chord, onset-detected via librosa): "
+        "a MIDI-thru toggle, passing the originally-held notes through as their own "
+        "audible trigger alongside the arpeggiated pattern. With this True, the "
+        "render had exactly ONE extra onset near t=0 (matching the moment the chord "
+        "was first pressed) that the same render with this False/omitted did not "
+        "have -- every subsequent onset in both renders lined up with the arp's own "
+        "regular step grid. Only ever observed True when present. ~3% real-corpus "
+        "presence, very low sample count.",
+    )
+    range_wrap_mode: str | None = Field(
+        None,
+        description="UNCERTAIN, raw Serum enum string -- only 'Phantom' observed so "
+        "far (likely paired with `wrap_phantom_note`; other option(s) presumably "
+        "exist but aren't confirmed). Written through UNVALIDATED (no known enum set "
+        "yet, unlike `shape`) -- only ever set this by copying a value extracted from "
+        "a real preset. ~25% real-corpus presence.",
+    )
+    playback_mode: str | None = Field(
+        None,
+        description="UNCERTAIN, raw Serum enum string and UNCERTAIN relationship to "
+        "`shape` -- observed values ('Random', 'RandomNoDup', 'Pendulum') overlap "
+        "partially with `shape`'s own vocabulary but use different spellings "
+        "('Random' vs. `shape`'s 'Rand') plus at least one value 'Pendulum' never "
+        "seen on `shape` at all, so this is NOT simply a duplicate/alias. Written "
+        "through UNVALIDATED, same caveat as `range_wrap_mode`. ~10% real-corpus "
+        "presence.",
+    )
+    playback_mode_time: float | None = Field(
+        None,
+        description="UNCERTAIN exact meaning/units -- paired with `playback_mode`. "
+        "Only ever observed at 2.0. ~5% real-corpus presence, low sample count.",
+    )
+    step_action: str | None = Field(
+        None,
+        description="UNCERTAIN, raw Serum enum string -- only 'Chord' observed so far. "
+        "Written through UNVALIDATED, same caveat as `range_wrap_mode`. ~11% "
+        "real-corpus presence, low sample count.",
+    )
+
+
+class VoiceUnisonSpec(BaseModel):
+    """Per-voice unison randomization -- Serum's GLOBAL tab "VOICE CONTROL"
+    panel (RANDOM/SEQ columns, PAN/DETUNE/CUTOFF/ENVS/MOD1/MOD2 rows, an
+    8-bar chart, one bar per unison voice). Decoded 2026-08-05 via a
+    ground-truth test: the user typed '-20' directly into a real Serum
+    instance's PAN bar for voice 6 and saved, and the raw
+    ``VoicePanel0.kParamVoice6Pan`` Serum itself wrote back was
+    ``-20.259740948677063``.
+
+    That, cross-checked against 47 other real values from a genuine Galaxy
+    preset, confirmed: **every per-voice value here is simply a percentage,
+    stored ~1:1 with the displayed number** (Serum quantizes internally to
+    steps of ``10/77 ~= 0.12987`` -- confirmed EVERY real per-voice value
+    sampled is an exact integer multiple of that step -- but this is far
+    finer than the display resolution and doesn't need to be replicated;
+    just write the plain percentage). Negative = Left / positive = Right
+    for ``pan`` specifically (confirmed by the '-20' -> '-20L' display).
+    The exact bipolar-vs-unipolar range for each OTHER field
+    (``detune``/``filter_cutoff``/``env_time``/``mod1``/``mod2``) is NOT
+    independently confirmed the same way -- real Galaxy data included both
+    signs for most of them (``mod1`` hit exactly -100/+100, suggesting a
+    genuine -100..100 range), so -100..100 is used as a permissive common
+    bound, not a confirmed per-field range.
+
+    This is now the ONLY model for ``VoicePanel0`` (the earlier opaque
+    ``PresetSpec.voice_panel`` dict was removed 2026-08-05 once every real
+    key found across the full corpus -- including the 2 global scaling
+    params, whose exact 1:1 percentage relationship was confirmed the same
+    day via the SAME '-20' ground-truth technique applied to the SCALING
+    row -- got a friendly home here). Like every other module in this
+    codebase, writing these fields MERGES onto ``VoicePanel0.plainParams``
+    (via ``_plain_params``) rather than replacing it wholesale, so editing
+    a preset that already has other/unknown ``VoicePanel0`` keys leaves
+    them untouched.
+
+    Each list entry can be ``None`` for a voice that doesn't set this
+    param at all (vs. ``0.0``, a real explicit value) -- found live
+    round-tripping a real preset where ``kParamVoice2EnvTime`` was
+    genuinely ABSENT (voice 2 alone, surrounded by voices that DID set
+    it): matches this project's established "presence forces the DSP
+    stage" pattern everywhere else in the codebase, so a genuine gap must
+    round-trip as a gap, not get silently coerced to a real 0.0 value.
+    """
+
+    pan: list[float | None] | None = Field(
+        None,
+        max_length=8,
+        description="Per-voice pan spread, one entry per unison voice (index 0 = "
+        "voice 1, etc, up to 8; `None` = that voice doesn't set this param, omit it, "
+        "distinct from an explicit 0.0). Percentage, negative=Left/positive=Right "
+        "(CONFIRMED live). Real Galaxy values ranged -29.9 to +37.7.",
+    )
+    detune: list[float | None] | None = Field(
+        None,
+        max_length=8,
+        description="Per-voice detune spread (see `pan` for the `None`-means-absent "
+        "convention). Percentage-like (same raw storage convention as `pan`), exact "
+        "scale/unit vs. cents UNCONFIRMED. Real Galaxy values ranged -7.8 to +18.2.",
+    )
+    filter_cutoff: list[float | None] | None = Field(
+        None,
+        max_length=8,
+        description="Per-voice filter cutoff spread (see `pan` for the "
+        "`None`-means-absent convention). Real Galaxy values were all positive "
+        "(52.0-75.3) -- possibly unipolar (0..100) rather than bipolar like `pan`, "
+        "unconfirmed either way.",
+    )
+    env_time: list[float | None] | None = Field(
+        None,
+        max_length=8,
+        description="Per-voice envelope time spread (see `pan` for the "
+        "`None`-means-absent convention). Real Galaxy values ranged -5.2 to +2.6.",
+    )
+    mod1: list[float | None] | None = Field(
+        None,
+        max_length=8,
+        description="Per-voice mod 1 spread (see `pan` for the `None`-means-absent "
+        "convention). Real Galaxy values were exactly -100.0 or +100.0 for every "
+        "voice that had one set -- consistent with a genuine -100..100 range, but "
+        "this preset only ever used the extremes.",
+    )
+    mod2: list[float | None] | None = Field(
+        None,
+        max_length=8,
+        description="Per-voice mod 2 spread (see `pan` for the `None`-means-absent "
+        "convention). Real Galaxy values ranged -22.1 to +37.7.",
+    )
+    random_pan: float | None = Field(
+        None,
+        ge=0.0,
+        le=100.0,
+        description="The GLOBAL tab's 'RANDOM' knob for pan (kParamGlobalRandomOscPan) "
+        "-- CONFIRMED via a real screenshot (18% displayed matched the raw value "
+        "exactly). A DIFFERENT, continuously-stored control from the per-voice `pan` "
+        "list above (not subject to the same internal quantization) -- likely an "
+        "overall randomization AMOUNT applied per-note, distinct from the SEQ pattern's "
+        "fixed per-voice values.",
+    )
+    random_detune: float | None = Field(
+        None,
+        ge=0.0,
+        description="The GLOBAL tab's 'RANDOM' knob for detune (kParamGlobalRandomOscDetune) "
+        "-- same convention as `random_pan`. Real values observed: near-integer 1-26%.",
+    )
+    random_detune_10x: bool | None = Field(
+        None,
+        description="UNCERTAIN exact meaning -- likely a x10 range multiplier/fine-"
+        "vs-coarse toggle for `random_detune`. Only ever observed True when present, "
+        "low sample count.",
+    )
+    random_env_time: float | None = Field(
+        None,
+        ge=0.0,
+        description="The GLOBAL tab's 'RANDOM' knob for envelope time "
+        "(kParamGlobalRandomEnvTime) -- same convention as `random_pan`. Real values "
+        "observed: near-integer 3-36%.",
+    )
+    random_filter_cutoff: float | None = Field(
+        None,
+        ge=0.0,
+        description="The GLOBAL tab's 'RANDOM' knob for filter cutoff "
+        "(kParamGlobalRandomFilterCutoff) -- same convention as `random_pan`. Real "
+        "values observed: near-integer 2-38%.",
+    )
+    scaling_env_time: float | None = Field(
+        None,
+        ge=0.0,
+        description="Global envelope-time scaling multiplier, %, 100=neutral -- "
+        "CONFIRMED 1:1 with the displayed 'ENVS' % via a live ground-truth test "
+        "2026-08-05 (typed 50 into the GLOBAL tab's SCALING row, saved, raw value "
+        "read back was 50.00000178235441). Galaxy's real value was 162% (envelope "
+        "times stretched to 1.62x).",
+    )
+    scaling_lfo_time: float | None = Field(
+        None,
+        ge=0.0,
+        description="Global LFO-time scaling multiplier, %, 100=neutral -- CONFIRMED "
+        "1:1 with the displayed 'LFOS...RATE' % via the same live test (typed 200, "
+        "raw value read back was 200.00002031953676). Root cause of a real 'the "
+        "recreated preset's LFOs sound uniformly faster' bug -- Galaxy's real value "
+        "was 1000% (LFO cycles stretched to 10x, i.e. 10x SLOWER).",
+    )
+    scaling_lfo_time_snap: bool | None = Field(
+        None,
+        description="UNCERTAIN exact meaning -- likely quantizes `scaling_lfo_time` "
+        "to musical/round increments. Only 1 real sample observed (True), very low "
+        "confidence.",
+    )
+    affects_osc_a: bool | None = Field(
+        None,
+        description="UNCERTAIN exact meaning -- the GLOBAL tab's 'OSC: S A B C N' "
+        "toggle row (visible in the same screenshot as the SEQ bar chart), likely "
+        "'does this unison randomization apply to Osc A's voices'. Only ever "
+        "observed False in the small sample collected so far.",
+    )
+    affects_osc_b: bool | None = Field(None, description="See `affects_osc_a`, for Osc B.")
+    affects_osc_c: bool | None = Field(None, description="See `affects_osc_a`, for Osc C.")
+    affects_osc_noise: bool | None = Field(
+        None, description="See `affects_osc_a`, for the Noise oscillator ('N')."
+    )
+    affects_osc_sub: bool | None = Field(
+        None, description="See `affects_osc_a`, for the Sub oscillator ('S')."
+    )
+    voice_count: float | None = Field(
+        None,
+        description="UNCERTAIN exact meaning/relationship to each oscillator's own "
+        "OscillatorSpec.unison count (kParamVoiceCount lives on VoicePanel0, a "
+        "singleton, not per-oscillator) -- only 1 real sample observed (2.0), very "
+        "low confidence. Possibly what the GLOBAL tab's bar-chart tooltip labels "
+        "'voice count' (found live 2026-08-05: hovering any SEQ bar shows this same "
+        "generic reading regardless of which bar, not that bar's own value).",
+    )
+
+
+class PresetSpec(BaseModel):
+    """The full target state for a generated or edited preset."""
+
+    name: str = Field(description="short preset name, Serum-style, e.g. 'BA - Acid Growl'")
+    description: str = Field(description="one-sentence description of the sound design intent")
+    oscillators: list[OscillatorSpec] = Field(
+        default_factory=list,
+        max_length=5,
+        description="index 0..4 = Osc A, B, C, Noise, Sub. Omit trailing slots to leave untouched.",
+    )
+    filters: list[FilterSpec] = Field(
+        default_factory=list,
+        max_length=2,
+        description="index 0..1 = Filter 1, Filter 2",
+    )
+    envelopes: list[EnvelopeSpec] = Field(
+        default_factory=list,
+        max_length=4,
+        description="index 0..3; Env 1 (index 0) is conventionally the amp envelope",
+    )
+    lfos: list[LfoSpec] = Field(default_factory=list, max_length=10)
+    macros: list[MacroSpec] = Field(default_factory=list, max_length=8)
+    fx_chain: list[FxUnitSpec] = Field(
+        default_factory=list,
+        max_length=32,
+        description="effects, across all 3 of Serum's fx racks -- see FxUnitSpec.rack. "
+        "Almost always just rack 0 (a single serial chain); only use rack 1/2 for a "
+        "genuinely separate PARALLEL signal path. Editing an existing preset: only the "
+        "racks actually represented among this list's entries get replaced -- a rack "
+        "with zero entries here is left untouched, so you don't need to know about "
+        "(or accidentally wipe) a rack you didn't intend to touch. Mod routes address "
+        "entries by their position in THIS flat list ('fx0.wet' = fx_chain[0]), "
+        "regardless of which rack they're in. Cap raised from an earlier 12 after "
+        "finding real third-party presets with up to 19 units in one rack; a preset "
+        "using multiple racks can have more total units than that across all of them. "
+        "This is a technical ceiling, not a recommendation: most good presets use far "
+        "fewer, see server.py's generation guidance.",
+    )
+    mod_routes: list[ModRouteSpec] = Field(
+        default_factory=list,
+        max_length=64,
+        description="modulation matrix routes; see ModRouteSpec for supported sources/"
+        "destinations. Cap matches the real mod matrix's 64 physical slots (see "
+        "mapping._free_modslot_indices) -- raised from an earlier 16 after finding real "
+        "third-party presets using up to 19.",
+    )
+    global_: GlobalSpec = Field(default_factory=GlobalSpec, alias="global")
+    arp: ArpSpec | None = Field(
+        None,
+        description="Serum's arpeggiator, algorithmic modes only (see ArpSpec). Unset "
+        "(the default) leaves the arp completely untouched -- omit it entirely rather "
+        "than passing ArpSpec(enabled=False) unless you specifically want to disable "
+        "an arp that's already on.",
+    )
+    voice_unison: VoiceUnisonSpec | None = Field(
+        None,
+        description="Everything on Serum's GLOBAL tab 'VOICE CONTROL'/'SCALING' "
+        "panels (VoicePanel0's raw module) -- see VoiceUnisonSpec for the full "
+        "decode story and field-by-field details.",
+    )
+
+    model_config = {"populate_by_name": True}

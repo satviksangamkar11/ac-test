@@ -1,0 +1,8 @@
+{
+  "test_b1_canonical_foundation.py::TestConceptRepresentation": true,
+  "test_b1_canonical_foundation.py::TestConceptDerivationEngine": true,
+  "test_b1_canonical_foundation.py::TestOperationInterpreter": true,
+  "test_b1_canonical_foundation.py::TestContextExtractor": true,
+  "test_b1_canonical_foundation.py::TestIntentFormation": true,
+  "test_b1_canonical_foundation.py::TestIntentValidator": true
+}
