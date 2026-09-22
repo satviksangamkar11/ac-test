@@ -27,13 +27,14 @@ import numpy as np
 from PIL import Image
 from typing import Tuple, Optional
 
-# USER-VERIFIED MATRIX ROI (from visual inspection of step3_04m35s_matrix_mod_routes.jpg)
-# These values should be filled in based on your visual inspection
-MATRIX_ROI = {
-    'x_min': None,  # Left edge of Matrix Amount column (user fills from inspection)
-    'x_max': None,  # Right edge of Matrix Amount column
-    'y_min': None,  # Top of first populated row
-    'y_max': None,  # Bottom of last populated row
+# MATRIX AMOUNT ROI (scan window from visual inspection of step3_04m35s_matrix_mod_routes.jpg)
+# This is a search window, NOT ground truth. The script will detect exact track
+# geometry within this ROI.
+MATRIX_AMOUNT_ROI = {
+    "x0": 180,   # Left margin for scanning
+    "x1": 420,   # Right margin for scanning
+    "y0": 135,   # Top of Matrix panel area
+    "y1": 305,   # Bottom of populated rows
 }
 
 # Populated routes in the Matrix (row_y values to be determined from inspection)
@@ -134,14 +135,10 @@ def matrix_amount_domain(normalized: float) -> float:
 def calibrate_routes():
     """Main calibration pipeline."""
 
-    # Validation: check that ROI is set
-    if MATRIX_ROI['x_min'] is None or MATRIX_ROI['x_max'] is None:
-        print("ERROR: MATRIX_ROI not set. User must provide visual inspection coordinates.")
-        print("Set MATRIX_ROI['x_min'], MATRIX_ROI['x_max'], and route row_y values before running.")
-        return
-
+    # Validation: check that row_y coordinates are provided
     if not any(r['row_y'] is not None for r in ROUTES):
-        print("ERROR: No route row_y coordinates set. User must provide from visual inspection.")
+        print("ERROR: No route row_y coordinates set. User must measure from the source image.")
+        print("Set ROUTES[i]['row_y'] for each populated route before running.")
         return
 
     # Load image
@@ -149,7 +146,8 @@ def calibrate_routes():
     img = Image.open(image_path)
     arr = np.array(img)
 
-    x_search_range = (MATRIX_ROI['x_min'], MATRIX_ROI['x_max'])
+    # Use the search ROI as the scanning window (not ground truth)
+    x_search_range = (MATRIX_AMOUNT_ROI["x0"], MATRIX_AMOUNT_ROI["x1"])
 
     print("="*80)
     print("MATRIX AMOUNT CALIBRATION — RAW PIXEL MEASUREMENTS")
@@ -251,24 +249,23 @@ def calibrate_routes():
 if __name__ == "__main__":
     print("""
 SETUP REQUIRED:
-Before running calibration, set these values based on visual inspection
-of step3_04m35s_matrix_mod_routes.jpg:
+Before running calibration, inspect the source image and set the row_y
+coordinates for each populated route.
 
-1. MATRIX_ROI coordinates:
-   - x_min: left edge of the Amount column (Matrix sliders start here)
-   - x_max: right edge of the Amount column
+The MATRIX_AMOUNT_ROI is a pre-set search window (180-420 x, 135-305 y),
+not ground truth. The script will detect exact track geometry within it.
 
-2. Route row_y coordinates (the y-pixel of each populated row):
-   - ROUTES[0]['row_y']: LFO 1 → A Fine
-   - ROUTES[1]['row_y']: LFO 1 → B Fine
-   - ROUTES[2]['row_y']: Env 3 → Noise Level
-   - ROUTES[3]['row_y']: Env 2 → Filter 1 Freq
+YOU MUST PROVIDE:
+Route row_y coordinates (the y-pixel at the center of each row):
+  - ROUTES[0]['row_y']: LFO 1 → A Fine
+  - ROUTES[1]['row_y']: LFO 1 → B Fine
+  - ROUTES[2]['row_y']: Env 3 → Noise Level
+  - ROUTES[3]['row_y']: Env 2 → Filter 1 Freq
 
-3. Empty row y-coordinate (for zero-reference verification):
-   - EMPTY_ROWS[0]['row_y']: one of the unassigned/empty matrix rows
+Optional (for zero-reference verification):
+  - EMPTY_ROWS[0]['row_y']: one of the unassigned/empty matrix rows
 
-Example (hypothetical, you must verify):
-  MATRIX_ROI = {'x_min': 200, 'x_max': 350, 'y_min': 155, 'y_max': 310}
+Example (you must measure these from the image):
   ROUTES[0]['row_y'] = 165  # LFO 1 → A Fine
   ROUTES[1]['row_y'] = 188  # LFO 1 → B Fine
   ROUTES[2]['row_y'] = 211  # Env 3 → Noise Level
@@ -276,6 +273,13 @@ Example (hypothetical, you must verify):
   EMPTY_ROWS[0]['row_y'] = 280  # Empty row
 
 Then run: python -Xutf8 calibrate_matrix_amounts_reproducible.py
+
+The script will:
+1. Scan within MATRIX_AMOUNT_ROI at each row_y
+2. Detect track plateau boundaries automatically
+3. Detect handle position automatically
+4. Apply GenericSliderCalibration
+5. Output raw coordinates + amounts for validation
 """)
 
     calibrate_routes()
