@@ -75,6 +75,8 @@ class VerifiedReferenceState:
     is_verified: bool = False
     verification_conflicts: List[str] = field(default_factory=list)
     unresolved_required: List[str] = field(default_factory=list)
+    claude_only_items: List[str] = field(default_factory=list)
+    required_not_visible: List[str] = field(default_factory=list)
 
     def add_verified_control(self, control: "VerifiedControlValue") -> None:
         """Add a verified control to the state."""
@@ -85,8 +87,52 @@ class VerifiedReferenceState:
         self.matrix_routes[route.route_id] = route
 
     def pass_completeness_gate(self) -> bool:
-        """Check if state passes completeness gate."""
-        return len(self.unresolved_required) == 0 and len(self.verification_conflicts) == 0
+        """Check if state passes complete verification gate.
+
+        ALL of these must pass:
+        1. unresolved_required == 0
+        2. verification_conflicts == 0
+        3. claude_only_items == 0
+        4. required_not_visible == 0
+        5. audit_provenance is present
+        6. system_manifest_hidden == True
+        7. audit_mode == DIRECT_VISUAL_INSPECTION
+        8. Every control has agreement=True
+        9. Every route has agreement=True
+        """
+        # Conditions 1-4: No unresolved/conflict items
+        if self.unresolved_required:
+            return False
+
+        if self.verification_conflicts:
+            return False
+
+        if self.claude_only_items:
+            return False
+
+        if self.required_not_visible:
+            return False
+
+        # Condition 5-7: Provenance checks
+        if not self.audit_provenance:
+            return False
+
+        if not self.audit_provenance.system_manifest_hidden:
+            return False
+
+        if self.audit_provenance.audit_mode != AuditMode.DIRECT_VISUAL_INSPECTION:
+            return False
+
+        # Conditions 8-9: Every represented item must have explicit agreement
+        for control in self.controls.values():
+            if not control.agreement:
+                return False
+
+        for route in self.matrix_routes.values():
+            if not route.agreement:
+                return False
+
+        return True
 
     def to_dict(self) -> Dict:
         return {
@@ -99,6 +145,8 @@ class VerifiedReferenceState:
             "is_verified": self.is_verified,
             "verification_conflicts": self.verification_conflicts,
             "unresolved_required": self.unresolved_required,
+            "claude_only_items": self.claude_only_items,
+            "required_not_visible": self.required_not_visible,
             "audit_provenance": self.audit_provenance.to_dict() if self.audit_provenance else None,
         }
 
@@ -181,11 +229,17 @@ class VerifiedStateBuilder:
         """Convert slider observation → verified control value.
 
         Takes calibration output and creates canonical ControlValue.
+        Preserves row_detail to distinguish matrix.amount rows.
         """
         from calibration_model import SliderObservation
 
+        # Preserve full row identity: matrix.amount[Env 2 → Filter 1 Freq]
+        canonical_id = slider_obs.canonical_id
+        if hasattr(slider_obs, 'row_detail') and slider_obs.row_detail:
+            canonical_id = f"{canonical_id}[{slider_obs.row_detail}]"
+
         verified_control = VerifiedControlValue(
-            canonical_id=slider_obs.canonical_id,
+            canonical_id=canonical_id,
             value=domain_value,
             unit="%",  # Matrix amount is typically percent
             modality="SLIDER_PIXEL",
@@ -235,16 +289,20 @@ class VerifiedStateBuilder:
         system_manifest,  # ReferenceStateManifest
         claude_manifest,  # ReferenceStateManifest (Claude's independent audit)
     ) -> Tuple[bool, List[str]]:
-        """Full state audit: controls + routes + topology.
+        """Full state audit: controls + routes + topology (bidirectional).
 
         Returns: (all_agree, conflicts_list)
         """
         conflicts = []
 
-        # 1. Audit controls
-        for cid in system_manifest.controls:
-            if cid not in claude_manifest.controls:
-                conflicts.append(f"CLAUDE_MISSING: {cid}")
+        # 1. Bidirectional control audit
+        system_cids = set(system_manifest.controls.keys())
+        claude_cids = set(claude_manifest.controls.keys())
+
+        # System → Claude
+        for cid in system_cids:
+            if cid not in claude_cids:
+                conflicts.append(f"CLAUDE_MISSING_CONTROL: {cid}")
                 continue
 
             system_ctrl = system_manifest.controls[cid]
@@ -255,72 +313,153 @@ class VerifiedStateBuilder:
                 tolerance = 0.01 * abs(system_ctrl.value) if system_ctrl.value != 0 else 0.01
                 if abs(system_ctrl.value - claude_ctrl.value) > tolerance:
                     conflicts.append(f"CONTROL_MISMATCH: {cid}")
+                else:
+                    # Agreement: update verified state
+                    if cid in self.verified_state.controls:
+                        self.verified_state.controls[cid].agreement = True
+                        self.verified_state.controls[cid].claude_value = claude_ctrl.value
+                        self.verified_state.controls[cid].audit_confidence = getattr(
+                            claude_ctrl, 'confidence', 0.0
+                        )
 
             # Text comparison
             elif system_ctrl.value_text and claude_ctrl.value_text:
                 if system_ctrl.value_text.lower() != claude_ctrl.value_text.lower():
                     conflicts.append(f"CONTROL_TEXT_MISMATCH: {cid}")
+                else:
+                    # Agreement: update verified state
+                    if cid in self.verified_state.controls:
+                        self.verified_state.controls[cid].agreement = True
+                        self.verified_state.controls[cid].audit_confidence = getattr(
+                            claude_ctrl, 'confidence', 0.0
+                        )
 
-        # 2. Detect Claude-only controls
-        system_cids = set(system_manifest.controls.keys())
-        claude_cids = set(claude_manifest.controls.keys())
-        claude_only = self.detect_claude_only_items(system_cids, claude_cids)
-        if claude_only:
-            conflicts.append(f"CLAUDE_ONLY_CONTROLS: {', '.join(claude_only)}")
+        # Claude → System (claude_only items)
+        claude_only_controls = claude_cids - system_cids
+        for cid in claude_only_controls:
+            conflicts.append(f"CLAUDE_ONLY_CONTROL: {cid}")
 
-        # 3. Audit matrix routes
+        # 2. Bidirectional route audit
         system_routes = {r.route_id: r for r in system_manifest.matrix_routes}
         claude_routes = {r.route_id: r for r in claude_manifest.matrix_routes}
+        system_route_ids = set(system_routes.keys())
+        claude_route_ids = set(claude_routes.keys())
 
-        for route_id in system_routes:
-            if route_id not in claude_routes:
+        # System → Claude
+        for route_id in system_route_ids:
+            if route_id not in claude_route_ids:
                 conflicts.append(f"CLAUDE_MISSING_ROUTE: {route_id}")
                 continue
 
             system_route = system_routes[route_id]
             claude_route = claude_routes[route_id]
 
-            if system_route.amount is not None and claude_route.amount is not None:
-                tolerance = 0.01
-                if abs(system_route.amount - claude_route.amount) > tolerance:
-                    conflicts.append(f"ROUTE_MISMATCH: {route_id}")
+            # Verify identity (source and destination)
+            if system_route.source != claude_route.source:
+                conflicts.append(f"ROUTE_SOURCE_MISMATCH: {route_id}")
+            if system_route.destination != claude_route.destination:
+                conflicts.append(f"ROUTE_DESTINATION_MISMATCH: {route_id}")
 
-        # 4. Audit topology
-        for module_id in system_manifest.topology:
-            if module_id not in claude_manifest.topology:
+            # Verify amount
+            if system_route.amount is None or claude_route.amount is None:
+                conflicts.append(f"ROUTE_UNVERIFIED: {route_id}")
+            elif abs(system_route.amount - claude_route.amount) > 0.01:
+                conflicts.append(f"ROUTE_MISMATCH: {route_id}")
+            else:
+                # Agreement: update verified state
+                if route_id in self.verified_state.matrix_routes:
+                    self.verified_state.matrix_routes[route_id].agreement = True
+                    self.verified_state.matrix_routes[route_id].claude_amount = claude_route.amount
+
+        # Claude → System (claude_only routes)
+        claude_only_routes = claude_route_ids - system_route_ids
+        for route_id in claude_only_routes:
+            conflicts.append(f"CLAUDE_ONLY_ROUTE: {route_id}")
+
+        # 3. Bidirectional topology audit
+        system_topology_ids = set(system_manifest.topology.keys())
+        claude_topology_ids = set(claude_manifest.topology.keys())
+
+        # System → Claude
+        for module_id in system_topology_ids:
+            if module_id not in claude_topology_ids:
                 conflicts.append(f"CLAUDE_MISSING_TOPOLOGY: {module_id}")
                 continue
 
             if system_manifest.topology[module_id] != claude_manifest.topology[module_id]:
                 conflicts.append(f"TOPOLOGY_MISMATCH: {module_id}")
 
+        # Claude → System (claude_only topology)
+        claude_only_topology = claude_topology_ids - system_topology_ids
+        for module_id in claude_only_topology:
+            conflicts.append(f"CLAUDE_ONLY_TOPOLOGY: {module_id}")
+
+        # Update verified state
+        self.verified_state.verification_conflicts = conflicts
+        self.verified_state.claude_only_items = [
+            c for c in conflicts if "CLAUDE_ONLY_" in c
+        ]
+
         return len(conflicts) == 0, conflicts
 
     def validate_required_visibility(self) -> List[str]:
-        """Check that NOT_VISIBLE items are allowed by expected inventory.
+        """Check that required items are visible and have usable evidence.
 
-        Returns: list of invalid NOT_VISIBLE items (required but invisible)
+        Uses ExpectedInventory to determine which items are genuinely required.
+        Returns: list of required items with insufficient visibility/evidence
         """
         invalid = []
 
-        for canonical_id, control in self.verified_state.controls.items():
-            # If NOT_VISIBLE_IN_FRAME, check if inventory says it's required
-            if control.value is None:  # Not observed
-                # For now, assume all items are required (Phase 4.3 will integrate ExpectedInventory)
-                invalid.append(canonical_id)
+        # Build required set from ExpectedInventory
+        required_ids = set()
+        for canonical_id, expected in self.expected_inventory.items():
+            if hasattr(expected, 'applicability') and expected.applicability:
+                if hasattr(expected, 'visibility_requirement'):
+                    if expected.visibility_requirement != "OPTIONAL":
+                        required_ids.add(canonical_id)
+                else:
+                    # No visibility_requirement means required by default
+                    required_ids.add(canonical_id)
 
+        # Determine what was observed
+        observed_ids = (
+            set(self.verified_state.controls.keys())
+            | set(self.verified_state.matrix_routes.keys())
+            | set(self.verified_state.topology.keys())
+        )
+
+        # Check each required item
+        for expected_id in required_ids:
+            if expected_id not in observed_ids:
+                # Required but not observed at all
+                invalid.append(expected_id)
+            elif expected_id in self.verified_state.controls:
+                # Control must have a value
+                control = self.verified_state.controls[expected_id]
+                if control.value is None and control.value_text is None:
+                    invalid.append(expected_id)
+            elif expected_id in self.verified_state.matrix_routes:
+                # Route must have an amount
+                route = self.verified_state.matrix_routes[expected_id]
+                if route.amount is None:
+                    invalid.append(expected_id)
+
+        self.verified_state.required_not_visible = sorted(set(invalid))
         return invalid
 
     def finalize(
         self,
         audit_provenance: Optional[BlindAuditProvenance] = None,
     ) -> VerifiedReferenceState:
-        """Finalize the verified state and check completion gate."""
+        """Finalize the verified state and check completion gate.
 
-        self.verified_state.audit_provenance = audit_provenance or BlindAuditProvenance(
-            observer="System",
-            audit_mode=AuditMode.SYSTEM_EXTRACTION,
-        )
+        Requires explicit provenance; does not manufacture SYSTEM audit.
+        """
+        # Provenance is mandatory
+        self.verified_state.audit_provenance = audit_provenance
+
+        # Validate required visibility against ExpectedInventory
+        self.validate_required_visibility()
 
         # Check completeness gate
         self.verified_state.is_verified = self.verified_state.pass_completeness_gate()
