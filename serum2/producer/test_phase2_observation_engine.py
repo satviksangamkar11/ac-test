@@ -18,7 +18,11 @@ from observation_engine import (
 def test_gate_a_regression_with_real_evidence():
     """Run 5 Gate-A test cases through observation engine using actual raw outputs.
 
-    VALIDATES: normalized_value matches ground_truth, outcome is correct.
+    VALIDATES: normalized_value matches the declared strategy normalization contract
+    (derived from Gate-A ground_truth format). Outcome is correct.
+
+    Note: ROUTE_TEXT preserves raw text for ledger parsing; normalized_value=None
+    is the contract, not a parsing failure.
     """
     engine = ObservationEngine()
 
@@ -188,6 +192,25 @@ def test_slider_pixel_outcome():
     return True
 
 
+def test_graph_derived_outcome():
+    """Verify GRAPH_DERIVED observations get NOT_APPLICABLE outcome."""
+    engine = ObservationEngine()
+
+    context = {
+        "control_id": "lfo1.chaos_curve",
+        "force_strategy": "GRAPH_DERIVED",
+        "graph_type": "lorenz_curve",
+        "derived_from": ["lfo1.shape"],
+    }
+
+    candidate = engine.observe(None, context)
+
+    assert candidate.outcome == OUTCOME_NOT_APPLICABLE, \
+        f"GRAPH_DERIVED should produce NOT_APPLICABLE, got {candidate.outcome}"
+    print("[PASS] GRAPH_DERIVED produces NOT_APPLICABLE outcome")
+    return True
+
+
 def test_unsafe_fallback_rejected():
     """Verify unknown metadata does NOT silently fall back to TEXT."""
     engine = ObservationEngine()
@@ -226,12 +249,15 @@ if __name__ == "__main__":
     print("\n--- Test 3: SLIDER_PIXEL Outcome ---")
     all_pass = test_slider_pixel_outcome() and all_pass
 
-    print("\n--- Test 4: Unsafe Fallback Rejected ---")
+    print("\n--- Test 4: GRAPH_DERIVED Outcome ---")
+    all_pass = test_graph_derived_outcome() and all_pass
+
+    print("\n--- Test 5: Unsafe Fallback Rejected ---")
     all_pass = test_unsafe_fallback_rejected() and all_pass
 
     print("\n" + "=" * 70)
     if all_pass:
-        print("All Phase 2 hardening tests PASSED")
+        print("All Phase 2 hardening tests PASSED (9/9: 5 regression + 4 explicit outcomes)")
         exit(0)
     else:
         print("Some tests FAILED")

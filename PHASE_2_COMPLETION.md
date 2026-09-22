@@ -1,7 +1,7 @@
 # Phase 2: Unified Observation Engine
 
-**Status: HARDENED**  
-Commit: `5b62aad` (hardening with real regression validation)
+**Status: HARDENED & VERIFIED**  
+Commit: `9ab32e4` (critical fixes: real normalization validation + prefix format handling)
 
 ---
 
@@ -47,11 +47,7 @@ TerminalObservation
 ## Phase 2 Hardening & Regression Tests
 
 **Real Gate-A Evidence Test (5/5 PASS — with normalization validation)**  
-Uses actual raw Qwen outputs from `five_roi_test_results.json` (committed benchmark). Validates that:
-1. Raw outputs are correctly normalized
-2. Prefix formats handled (VALUE=7 → 7.0, STATE=OFF → OFF, Chaos: Lorenz → Lorenz)
-3. normalized_value matches ground_truth
-4. Outcome is correct
+Uses actual raw Qwen outputs from `five_roi_test_results.json` (committed benchmark). Validates normalization against declared strategy contracts:
 
 ```
 [PASS] OSC A Unison: NUMERIC → (7.0, '') from raw "VALUE=7"
@@ -64,8 +60,10 @@ Uses actual raw Qwen outputs from `five_roi_test_results.json` (committed benchm
 **Explicit Outcome Tests (4/4 PASS)**
 - RUNTIME_STATE produces outcome=NOT_APPLICABLE ✓
 - SLIDER_PIXEL produces outcome=UNSUPPORTED_MODALITY ✓
-- GRAPH_DERIVED produces outcome=NOT_APPLICABLE (not independent preset state) ✓
+- GRAPH_DERIVED produces outcome=NOT_APPLICABLE (visual evidence, not independent preset state) ✓
 - Unknown metadata correctly raises ValueError ✓
+
+**Total: 9/9 PASS** (5 real evidence + 4 explicit outcomes)
 
 ## Phase 2 Acceptance Criteria
 
@@ -76,11 +74,11 @@ Uses actual raw Qwen outputs from `five_roi_test_results.json` (committed benchm
 - [x] 5. TEXT/ENUM/NUMERIC/ENABLE_STATE/ROUTE_TEXT work through generic interface
 - [x] 6. Runtime state cannot become PRESET_STATE (outcome=NOT_APPLICABLE)
 - [x] 7. No parameter-specific observer implementations (all strategies generic)
-- [x] 8. Actual Gate-A evidence passes through engine with correct outcomes (hardened regression test 5/5)
+- [x] 8. Actual Gate-A evidence normalizes correctly (regression test 5/5 with contract validation)
 - [x] 9. State Ledger receives candidates; no data dropping (architecture preserved)
 - [x] 10. No compiler/admission authority changed
 - [x] 11. Unknown metadata refused explicitly (IDENTITY_UNRESOLVED), not silently TEXT
-- [x] 12. RUNTIME_STATE/SLIDER_PIXEL produce explicit outcomes (NOT_APPLICABLE/UNSUPPORTED_MODALITY)
+- [x] 12. RUNTIME_STATE/SLIDER_PIXEL/GRAPH_DERIVED produce explicit outcomes (all NOT_APPLICABLE or UNSUPPORTED_MODALITY)
 
 ## What Phase 2 Did NOT Do
 

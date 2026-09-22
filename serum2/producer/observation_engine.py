@@ -276,14 +276,15 @@ class RouteTextObservationStrategy(ObservationStrategy):
 
 
 class GraphDerivedObservationStrategy(ObservationStrategy):
-    """Graph/curve shapes classified as derived from stored fields.
+    """Graph/curve shapes classified as non-independent visual evidence.
 
-    Per Phase 1 schema closure:
-      - LFO Chaos modes produce different curve animations based on kParamType enum
-      - OSC waveforms are derived from (wavetable name, wt_position)
+    Phase 1 schema closure identified stored source fields:
+      - LFO Chaos: kParamType enum determines curve type
+      - OSC waveforms: wavetable name + wt_position determine shape
 
-    These do not get independent observation. Mark as NOT_APPLICABLE since they are
-    derived visualizations, not independent preset-level parameters.
+    These source fields are retained. The rendering derivation is not claimed as fully
+    proven. Mark as NOT_APPLICABLE since visual shapes are not independent preset
+    parameters; they derive from stored fields or runtime animation.
     """
 
     def observe(self, raw_value: Any, context: Dict[str, Any]) -> ObservationCandidate:
@@ -298,7 +299,7 @@ class GraphDerivedObservationStrategy(ObservationStrategy):
             confidence=1.0,
             outcome=OUTCOME_NOT_APPLICABLE,
             evidence_hash=context.get("roi_hash") or context.get("frame_hash"),
-            modality_notes=f"derived visualization ({graph_type}) from {source_fields}; not independent preset state; Phase 1 schema classifies as derived",
+            modality_notes=f"visual evidence ({graph_type}) from source fields {source_fields}; not independent preset parameter; Phase 2 classifies as non-independent",
             vlm_source=False,
         )
 
