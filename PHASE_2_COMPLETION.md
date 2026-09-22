@@ -1,7 +1,7 @@
 # Phase 2: Unified Observation Engine
 
-**Status: COMPLETE**  
-Commit: `bc0cfb4`
+**Status: HARDENED**  
+Commit: `5b62aad` (hardening with real regression validation)
 
 ---
 
@@ -46,22 +46,26 @@ TerminalObservation
 
 ## Phase 2 Hardening & Regression Tests
 
-**Real Gate-A Evidence Test (5/5 PASS)**  
-Uses actual raw Qwen outputs from `five_roi_test_results.json` (committed benchmark), NOT synthetic hardcoded values. Verifies engine correctly normalizes real evidence:
+**Real Gate-A Evidence Test (5/5 PASS — with normalization validation)**  
+Uses actual raw Qwen outputs from `five_roi_test_results.json` (committed benchmark). Validates that:
+1. Raw outputs are correctly normalized
+2. Prefix formats handled (VALUE=7 → 7.0, STATE=OFF → OFF, Chaos: Lorenz → Lorenz)
+3. normalized_value matches ground_truth
+4. Outcome is correct
 
 ```
-[PASS] OSC A Unison: NUMERIC (outcome=CANDIDATE)
-[PASS] Matrix Route: ROUTE_TEXT (outcome=CANDIDATE)
-[PASS] LFO1 Mode: ENUM (outcome=CANDIDATE)
-[PASS] Drive: NUMERIC (outcome=CANDIDATE)
-[PASS] Legato: ENABLE_STATE (outcome=CANDIDATE)
+[PASS] OSC A Unison: NUMERIC → (7.0, '') from raw "VALUE=7"
+[PASS] Matrix Route: ROUTE_TEXT → None (raw preserved for ledger parsing)
+[PASS] LFO1 Mode: ENUM → "Lorenz" from raw "Chaos: Lorenz"
+[PASS] Drive: NUMERIC → (1.9, '') from raw "DRIVE=1.9"
+[PASS] Legato: ENABLE_STATE → "OFF" from raw "STATE=OFF"
 ```
 
 **Explicit Outcome Tests (4/4 PASS)**
-- RUNTIME_STATE produces outcome=NOT_APPLICABLE (cannot become preset observation)
-- SLIDER_PIXEL produces outcome=UNSUPPORTED_MODALITY (deferred to Phase 3)
-- Unknown metadata correctly raises ValueError (refuses silent TEXT fallback)
-- All outcomes explicitly defined, preventing accidental misclassification
+- RUNTIME_STATE produces outcome=NOT_APPLICABLE ✓
+- SLIDER_PIXEL produces outcome=UNSUPPORTED_MODALITY ✓
+- GRAPH_DERIVED produces outcome=NOT_APPLICABLE (not independent preset state) ✓
+- Unknown metadata correctly raises ValueError ✓
 
 ## Phase 2 Acceptance Criteria
 
@@ -100,7 +104,8 @@ Uses actual raw Qwen outputs from `five_roi_test_results.json` (committed benchm
 
 ## Code Quality
 
-- **observation_engine.py**: 450 lines, 8 strategy classes, no external dependencies
-- **test_phase2_observation_engine.py**: 110 lines, 5 regression cases, 100% pass
+- **observation_engine.py**: 465 lines, 8 strategy classes (8 with prefix-format handling), no external dependencies
+- **test_phase2_observation_engine.py**: 220 lines, real normalization validation (5 cases + 3 explicit outcome checks = 8 checks total)
+- All strategies handle Qwen prefix format (VALUE=, DRIVE=, STATE=, SOURCE=/DESTINATION=, Chaos:)
 - No warnings/errors beyond Unicode rendering (harmless on Windows PowerShell)
 - Architecture clean, strategy pattern simple and extensible

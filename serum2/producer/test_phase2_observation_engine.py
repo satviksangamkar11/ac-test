@@ -16,7 +16,10 @@ from observation_engine import (
 
 
 def test_gate_a_regression_with_real_evidence():
-    """Run 5 Gate-A test cases through observation engine using actual raw outputs."""
+    """Run 5 Gate-A test cases through observation engine using actual raw outputs.
+
+    VALIDATES: normalized_value matches ground_truth, outcome is correct.
+    """
     engine = ObservationEngine()
 
     # Load actual Gate-A evidence from committed benchmark
@@ -37,6 +40,7 @@ def test_gate_a_regression_with_real_evidence():
             "control_id": "oscA.unison",
             "element_kind": "CONTROL",
             "expected_outcome": OUTCOME_CANDIDATE,
+            "expected_normalized": (7.0, ""),  # numeric (float, unit)
         },
         {
             "name": "Test 2: Matrix Route",
@@ -44,6 +48,7 @@ def test_gate_a_regression_with_real_evidence():
             "control_id": "route:Env 2->Filter 1 Freq",
             "element_kind": "ROUTE",
             "expected_outcome": OUTCOME_CANDIDATE,
+            "expected_normalized": None,  # ROUTE_TEXT returns raw text; parsing deferred to ledger
         },
         {
             "name": "Test 3: LFO1 Mode",
@@ -51,6 +56,7 @@ def test_gate_a_regression_with_real_evidence():
             "control_id": "lfo1.shape",
             "element_kind": "SELECTOR",
             "expected_outcome": OUTCOME_CANDIDATE,
+            "expected_normalized": "Lorenz",  # extracted from "Chaos: Lorenz"
         },
         {
             "name": "Test 4: Drive Numeric",
@@ -58,6 +64,7 @@ def test_gate_a_regression_with_real_evidence():
             "control_id": "fx.overdrive.drive",
             "element_kind": "CONTROL",
             "expected_outcome": OUTCOME_CANDIDATE,
+            "expected_normalized": (1.9, ""),  # numeric (float, unit)
         },
         {
             "name": "Test 5: Legato Boolean",
@@ -65,6 +72,7 @@ def test_gate_a_regression_with_real_evidence():
             "control_id": "voicing.legato",
             "element_kind": "ENABLE_STATE",
             "expected_outcome": OUTCOME_CANDIDATE,
+            "expected_normalized": "OFF",
         },
     ]
 
@@ -77,6 +85,7 @@ def test_gate_a_regression_with_real_evidence():
             return False
 
         raw_output = roi_test["raw_output"]
+        ground_truth = roi_test["ground_truth"]
 
         # Get context from Gate-B manifest
         manifest_entry = next((e for e in manifest["entries"] if e["target"]["canonical_id"] == tc["control_id"].replace("route:", "route:")), None)
@@ -103,6 +112,17 @@ def test_gate_a_regression_with_real_evidence():
             print(f"FAIL: {tc['name']}: outcome mismatch. Expected {tc['expected_outcome']}, got {candidate.outcome}")
             return False
 
+        # CRITICAL: Verify normalized_value matches ground_truth
+        # This is what the previous test did NOT check
+        expected_normalized = tc["expected_normalized"]
+        if candidate.normalized_value != expected_normalized:
+            print(f"FAIL: {tc['name']}: normalized_value mismatch.")
+            print(f"      Raw output: {raw_output}")
+            print(f"      Ground truth: {ground_truth}")
+            print(f"      Expected normalized: {expected_normalized}")
+            print(f"      Got normalized: {candidate.normalized_value}")
+            return False
+
         # Verify confidence (should be high for correctly parsed values)
         if candidate.confidence < 0.5:
             print(f"WARN: {tc['name']}: low confidence {candidate.confidence}")
@@ -115,15 +135,18 @@ def test_gate_a_regression_with_real_evidence():
             "test": tc["name"],
             "control_id": tc["control_id"],
             "strategy": candidate.strategy,
+            "raw": raw_output,
+            "ground_truth": ground_truth,
             "normalized": candidate.normalized_value,
             "outcome": candidate.outcome,
             "confidence": candidate.confidence,
             "vlm_source": candidate.vlm_source,
             "passed": True,
         })
-        print(f"[PASS] {tc['name']}: {candidate.strategy} -> {candidate.normalized_value} (outcome={candidate.outcome}, confidence={candidate.confidence})")
+        print(f"[PASS] {tc['name']}: {candidate.strategy}")
+        print(f"       raw={raw_output}, ground_truth={ground_truth}, normalized={candidate.normalized_value}")
 
-    print(f"\nPhase 2 Hardening — Gate-A Regression: {len(results)}/5 PASSED")
+    print(f"\nPhase 2 Hardening — Gate-A Regression: {len(results)}/5 PASSED (with normalization validation)")
     return all(r["passed"] for r in results)
 
 

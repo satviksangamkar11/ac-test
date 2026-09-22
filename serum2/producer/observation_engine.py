@@ -83,11 +83,19 @@ class TextObservationStrategy(ObservationStrategy):
 
 
 class EnumObservationStrategy(ObservationStrategy):
-    """Enum/selector value — resolve to canonical domain entry."""
+    """Enum/selector value — resolve to canonical domain entry.
+
+    Handles Qwen output format like "Chaos: Lorenz" by extracting after the colon.
+    """
 
     def observe(self, raw_value: Any, context: Dict[str, Any]) -> ObservationCandidate:
         s = str(raw_value or "").strip()
         domain = context.get("enum_values", [])
+
+        # Handle Qwen prefix format: "Chaos: Lorenz" → extract "Lorenz"
+        if ":" in s:
+            parts = s.split(":", 1)
+            s = parts[1].strip()
 
         if not s:
             return ObservationCandidate(
@@ -135,7 +143,7 @@ class EnumObservationStrategy(ObservationStrategy):
         return ObservationCandidate(
             control_id=context.get("control_id", ""),
             raw_value=raw_value,
-            normalized_value=s,
+            normalized_value=None,
             strategy="ENUM",
             confidence=0.0,
             outcome=OUTCOME_CANDIDATE,
@@ -148,14 +156,21 @@ class EnumObservationStrategy(ObservationStrategy):
 class NumericObservationStrategy(ObservationStrategy):
     """Numeric value with optional unit — syntactic parsing only.
 
-    This strategy parses number + unit from raw value. Semantic validation
-    (unit conversion, range clamping) remains in state_ledger._coerce().
+    This strategy parses number + unit from raw value. Handles Qwen output format
+    like "VALUE=7" or "DRIVE=1.9" by extracting after the = prefix.
+    Semantic validation (unit conversion, range clamping) remains in state_ledger._coerce().
     """
 
     _NUM_PATTERN = re.compile(r"^\s*([+-]?\d+(?:\.\d+)?)\s*(ms|s|hz|khz|db|%|:1)?\s*$", re.I)
 
     def observe(self, raw_value: Any, context: Dict[str, Any]) -> ObservationCandidate:
         s = str(raw_value or "").strip()
+
+        # Handle Qwen prefix format: "VALUE=7", "DRIVE=1.9", etc.
+        if "=" in s:
+            parts = s.split("=", 1)
+            s = parts[1].strip()
+
         m = self._NUM_PATTERN.match(s)
 
         if not m:
@@ -187,15 +202,25 @@ class NumericObservationStrategy(ObservationStrategy):
 
 
 class EnableStateObservationStrategy(ObservationStrategy):
-    """Checkbox/toggle state — visual classification."""
+    """Checkbox/toggle state — visual classification.
+
+    Handles Qwen output format like "STATE=OFF" by extracting after the = prefix.
+    """
 
     def observe(self, raw_value: Any, context: Dict[str, Any]) -> ObservationCandidate:
-        s = str(raw_value or "").strip().lower()
+        s = str(raw_value or "").strip()
 
-        if s in ("on", "true", "checked", "enabled"):
+        # Handle Qwen prefix format: "STATE=ON", "STATE=OFF", etc.
+        if "=" in s:
+            parts = s.split("=", 1)
+            s = parts[1].strip()
+
+        s_lower = s.lower()
+
+        if s_lower in ("on", "true", "checked", "enabled"):
             result = "ON"
             conf = 1.0
-        elif s in ("off", "false", "unchecked", "disabled"):
+        elif s_lower in ("off", "false", "unchecked", "disabled"):
             result = "OFF"
             conf = 1.0
         else:
@@ -224,21 +249,28 @@ class EnableStateObservationStrategy(ObservationStrategy):
 
 
 class RouteTextObservationStrategy(ObservationStrategy):
-    """Modulation route source/destination — text validation."""
+    """Modulation route source/destination — text validation.
+
+    Handles Qwen output format like "SOURCE=Env 2\nDESTINATION=Filter 1 Freq".
+    Parsing of SOURCE/DESTINATION pairs is deferred to state_ledger; normalized_value is None.
+    Raw value preserved for ledger to extract key=value pairs.
+    """
 
     def observe(self, raw_value: Any, context: Dict[str, Any]) -> ObservationCandidate:
         s = str(raw_value or "").strip()
         route_type = context.get("route_element", "")  # "source" or "destination"
 
+        # ROUTE_TEXT preserves raw value for ledger parsing; no normalized_value
+        # (parsing of KEY=VALUE pairs deferred to state_ledger)
         return ObservationCandidate(
             control_id=context.get("control_id", ""),
             raw_value=raw_value,
-            normalized_value=s,
+            normalized_value=None,
             strategy="ROUTE_TEXT",
             confidence=1.0 if s else 0.0,
             outcome=OUTCOME_CANDIDATE,
             evidence_hash=context.get("roi_hash") or context.get("frame_hash"),
-            modality_notes=f"route {route_type}",
+            modality_notes=f"route {route_type} (raw text preserved for ledger parsing)",
             vlm_source=context.get("vlm_source", False),
         )
 
@@ -250,8 +282,8 @@ class GraphDerivedObservationStrategy(ObservationStrategy):
       - LFO Chaos modes produce different curve animations based on kParamType enum
       - OSC waveforms are derived from (wavetable name, wt_position)
 
-    These do not get independent observation. Mark as derived with source fields
-    so they do not accidentally become preset-level obligations.
+    These do not get independent observation. Mark as NOT_APPLICABLE since they are
+    derived visualizations, not independent preset-level parameters.
     """
 
     def observe(self, raw_value: Any, context: Dict[str, Any]) -> ObservationCandidate:
@@ -264,7 +296,7 @@ class GraphDerivedObservationStrategy(ObservationStrategy):
             normalized_value=None,
             strategy="GRAPH_DERIVED",
             confidence=1.0,
-            outcome=OUTCOME_CANDIDATE,
+            outcome=OUTCOME_NOT_APPLICABLE,
             evidence_hash=context.get("roi_hash") or context.get("frame_hash"),
             modality_notes=f"derived visualization ({graph_type}) from {source_fields}; not independent preset state; Phase 1 schema classifies as derived",
             vlm_source=False,
