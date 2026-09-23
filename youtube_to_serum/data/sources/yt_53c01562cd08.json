@@ -1,0 +1,22 @@
+{
+ "source_id": "yt_53c01562cd08",
+ "url": "https://www.youtube.com/shorts/QqYlEc_6E6A",
+ "video_id": "QqYlEc_6E6A",
+ "transcription": {
+  "status": "AVAILABLE",
+  "engine": "faster-whisper",
+  "language": "en",
+  "language_code": "en",
+  "is_generated": true,
+  "is_translated": false,
+  "selection_reason": "local speech transcription (tiny)",
+  "segment_count": 10,
+  "available_tracks": [],
+  "fallback_attempted": true
+ },
+ "artifacts": {
+  "raw_transcript": "data\\transcripts\\yt_53c01562cd08.json",
+  "structured_knowledge": "data/knowledge/yt_53c01562cd08.json"
+ },
+ "retrieval_timestamp": "2026-09-22T23:59:19.643758Z"
+}

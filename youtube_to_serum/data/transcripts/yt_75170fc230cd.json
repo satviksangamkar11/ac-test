@@ -1,0 +1,445 @@
+{
+ "source_id": "yt_75170fc230cd",
+ "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+ "video_id": "dQw4w9WgXcQ",
+ "engine": "youtube-transcript-api",
+ "language": "English",
+ "language_code": "en",
+ "is_generated": false,
+ "is_translated": false,
+ "original_language": null,
+ "translated_language": null,
+ "epistemic_status": "SOURCE_ORIGINAL",
+ "segment_count": 61,
+ "segments": [
+  {
+   "segment_id": 0,
+   "text": "[\u266a\u266a\u266a]",
+   "start": 1.36,
+   "start_time_sec": 1.36,
+   "duration": 1.68
+  },
+  {
+   "segment_id": 1,
+   "text": "\u266a We're no strangers to love \u266a",
+   "start": 18.64,
+   "start_time_sec": 18.64,
+   "duration": 3.24
+  },
+  {
+   "segment_id": 2,
+   "text": "\u266a You know the rules\nand so do I \u266a",
+   "start": 22.64,
+   "start_time_sec": 22.64,
+   "duration": 4.32
+  },
+  {
+   "segment_id": 3,
+   "text": "\u266a A full commitment's\nwhat I'm thinking of \u266a",
+   "start": 27.04,
+   "start_time_sec": 27.04,
+   "duration": 4.0
+  },
+  {
+   "segment_id": 4,
+   "text": "\u266a You wouldn't get this\nfrom any other guy \u266a",
+   "start": 31.12,
+   "start_time_sec": 31.12,
+   "duration": 3.96
+  },
+  {
+   "segment_id": 5,
+   "text": "\u266a I just wanna tell you\nhow I'm feeling \u266a",
+   "start": 35.16,
+   "start_time_sec": 35.16,
+   "duration": 4.36
+  },
+  {
+   "segment_id": 6,
+   "text": "\u266a Gotta make you understand \u266a",
+   "start": 40.52,
+   "start_time_sec": 40.52,
+   "duration": 2.4
+  },
+  {
+   "segment_id": 7,
+   "text": "\u266a Never gonna give you up \u266a",
+   "start": 43.0,
+   "start_time_sec": 43.0,
+   "duration": 2.12
+  },
+  {
+   "segment_id": 8,
+   "text": "\u266a Never gonna let you down \u266a",
+   "start": 45.2,
+   "start_time_sec": 45.2,
+   "duration": 1.88
+  },
+  {
+   "segment_id": 9,
+   "text": "\u266a Never gonna run around\nand desert you \u266a",
+   "start": 47.32,
+   "start_time_sec": 47.32,
+   "duration": 3.8
+  },
+  {
+   "segment_id": 10,
+   "text": "\u266a Never gonna make you cry \u266a",
+   "start": 51.48,
+   "start_time_sec": 51.48,
+   "duration": 2.0
+  },
+  {
+   "segment_id": 11,
+   "text": "\u266a Never gonna say goodbye \u266a",
+   "start": 53.6,
+   "start_time_sec": 53.6,
+   "duration": 1.92
+  },
+  {
+   "segment_id": 12,
+   "text": "\u266a Never gonna tell a lie\nand hurt you \u266a",
+   "start": 55.72,
+   "start_time_sec": 55.72,
+   "duration": 3.64
+  },
+  {
+   "segment_id": 13,
+   "text": "\u266a We've known each other\nfor so long \u266a",
+   "start": 60.8,
+   "start_time_sec": 60.8,
+   "duration": 4.0
+  },
+  {
+   "segment_id": 14,
+   "text": "\u266a Your heart's been aching\nbut you're too shy to say it \u266a",
+   "start": 64.88,
+   "start_time_sec": 64.88,
+   "duration": 4.16
+  },
+  {
+   "segment_id": 15,
+   "text": "\u266a Inside we both know\nwhat's been going \u266a",
+   "start": 69.12,
+   "start_time_sec": 69.12,
+   "duration": 3.84
+  },
+  {
+   "segment_id": 16,
+   "text": "\u266a We know the game\nand we're gonna play it \u266a",
+   "start": 73.36,
+   "start_time_sec": 73.36,
+   "duration": 3.84
+  },
+  {
+   "segment_id": 17,
+   "text": "\u266a And if you ask me\nhow I'm feeling \u266a",
+   "start": 77.4,
+   "start_time_sec": 77.4,
+   "duration": 4.64
+  },
+  {
+   "segment_id": 18,
+   "text": "\u266a Don't tell me\nyou're too blind to see \u266a",
+   "start": 82.4,
+   "start_time_sec": 82.4,
+   "duration": 2.84
+  },
+  {
+   "segment_id": 19,
+   "text": "\u266a Never gonna give you up \u266a",
+   "start": 85.32,
+   "start_time_sec": 85.32,
+   "duration": 1.96
+  },
+  {
+   "segment_id": 20,
+   "text": "\u266a Never gonna let you down \u266a",
+   "start": 87.36,
+   "start_time_sec": 87.36,
+   "duration": 1.96
+  },
+  {
+   "segment_id": 21,
+   "text": "\u266a Never gonna run around\nand desert you \u266a",
+   "start": 89.44,
+   "start_time_sec": 89.44,
+   "duration": 4.28
+  },
+  {
+   "segment_id": 22,
+   "text": "\u266a Never gonna make you cry \u266a",
+   "start": 93.8,
+   "start_time_sec": 93.8,
+   "duration": 1.8
+  },
+  {
+   "segment_id": 23,
+   "text": "\u266a Never gonna say goodbye \u266a",
+   "start": 95.76,
+   "start_time_sec": 95.76,
+   "duration": 2.24
+  },
+  {
+   "segment_id": 24,
+   "text": "\u266a Never gonna tell a lie\nand hurt you \u266a",
+   "start": 98.08,
+   "start_time_sec": 98.08,
+   "duration": 3.96
+  },
+  {
+   "segment_id": 25,
+   "text": "\u266a Never gonna give you up \u266a",
+   "start": 102.2,
+   "start_time_sec": 102.2,
+   "duration": 1.92
+  },
+  {
+   "segment_id": 26,
+   "text": "\u266a Never gonna let you down \u266a",
+   "start": 104.28,
+   "start_time_sec": 104.28,
+   "duration": 2.08
+  },
+  {
+   "segment_id": 27,
+   "text": "\u266a Never gonna run around\nand desert you \u266a",
+   "start": 106.48,
+   "start_time_sec": 106.48,
+   "duration": 3.6
+  },
+  {
+   "segment_id": 28,
+   "text": "\u266a Never gonna make you cry \u266a",
+   "start": 110.76,
+   "start_time_sec": 110.76,
+   "duration": 1.96
+  },
+  {
+   "segment_id": 29,
+   "text": "\u266a Never gonna say goodbye \u266a",
+   "start": 112.8,
+   "start_time_sec": 112.8,
+   "duration": 1.88
+  },
+  {
+   "segment_id": 30,
+   "text": "\u266a Never gonna tell a lie\nand hurt you \u266a",
+   "start": 114.96,
+   "start_time_sec": 114.96,
+   "duration": 3.8
+  },
+  {
+   "segment_id": 31,
+   "text": "\u266a (Ooh, give you up) \u266a",
+   "start": 119.84,
+   "start_time_sec": 119.84,
+   "duration": 3.12
+  },
+  {
+   "segment_id": 32,
+   "text": "\u266a (Ooh, give you up) \u266a",
+   "start": 123.72,
+   "start_time_sec": 123.72,
+   "duration": 3.64
+  },
+  {
+   "segment_id": 33,
+   "text": "\u266a Never gonna give,\nnever gonna give \u266a",
+   "start": 128.48,
+   "start_time_sec": 128.48,
+   "duration": 1.64
+  },
+  {
+   "segment_id": 34,
+   "text": "\u266a (Give you up) \u266a",
+   "start": 130.24,
+   "start_time_sec": 130.24,
+   "duration": 1.32
+  },
+  {
+   "segment_id": 35,
+   "text": "\u266a Never gonna give,\nnever gonna give \u266a",
+   "start": 132.48,
+   "start_time_sec": 132.48,
+   "duration": 1.76
+  },
+  {
+   "segment_id": 36,
+   "text": "\u266a (Give you up) \u266a",
+   "start": 134.36,
+   "start_time_sec": 134.36,
+   "duration": 1.56
+  },
+  {
+   "segment_id": 37,
+   "text": "\u266a We've known each other\nfor so long \u266a",
+   "start": 136.76,
+   "start_time_sec": 136.76,
+   "duration": 4.32
+  },
+  {
+   "segment_id": 38,
+   "text": "\u266a Your heart's been aching\nbut you're too shy to say it \u266a",
+   "start": 141.2,
+   "start_time_sec": 141.2,
+   "duration": 4.0
+  },
+  {
+   "segment_id": 39,
+   "text": "\u266a Inside we both know\nwhat's been going \u266a",
+   "start": 145.28,
+   "start_time_sec": 145.28,
+   "duration": 3.84
+  },
+  {
+   "segment_id": 40,
+   "text": "\u266a We know the game\nand we're gonna play it \u266a",
+   "start": 149.52,
+   "start_time_sec": 149.52,
+   "duration": 3.68
+  },
+  {
+   "segment_id": 41,
+   "text": "\u266a I just wanna tell you\nhow I'm feeling \u266a",
+   "start": 153.36,
+   "start_time_sec": 153.36,
+   "duration": 4.68
+  },
+  {
+   "segment_id": 42,
+   "text": "\u266a Gotta make you understand \u266a",
+   "start": 158.64,
+   "start_time_sec": 158.64,
+   "duration": 2.68
+  },
+  {
+   "segment_id": 43,
+   "text": "\u266a Never gonna give you up \u266a",
+   "start": 161.4,
+   "start_time_sec": 161.4,
+   "duration": 1.96
+  },
+  {
+   "segment_id": 44,
+   "text": "\u266a Never gonna let you down \u266a",
+   "start": 163.44,
+   "start_time_sec": 163.44,
+   "duration": 2.2
+  },
+  {
+   "segment_id": 45,
+   "text": "\u266a Never gonna run around\nand desert you \u266a",
+   "start": 165.72,
+   "start_time_sec": 165.72,
+   "duration": 4.0
+  },
+  {
+   "segment_id": 46,
+   "text": "\u266a Never gonna make you cry \u266a",
+   "start": 169.8,
+   "start_time_sec": 169.8,
+   "duration": 1.84
+  },
+  {
+   "segment_id": 47,
+   "text": "\u266a Never gonna say goodbye \u266a",
+   "start": 171.8,
+   "start_time_sec": 171.8,
+   "duration": 2.16
+  },
+  {
+   "segment_id": 48,
+   "text": "\u266a Never gonna tell a lie\nand hurt you \u266a",
+   "start": 174.04,
+   "start_time_sec": 174.04,
+   "duration": 3.56
+  },
+  {
+   "segment_id": 49,
+   "text": "\u266a Never gonna give you up \u266a",
+   "start": 178.2,
+   "start_time_sec": 178.2,
+   "duration": 2.04
+  },
+  {
+   "segment_id": 50,
+   "text": "\u266a Never gonna let you down \u266a",
+   "start": 180.32,
+   "start_time_sec": 180.32,
+   "duration": 2.12
+  },
+  {
+   "segment_id": 51,
+   "text": "\u266a Never gonna run around\nand desert you \u266a",
+   "start": 182.52,
+   "start_time_sec": 182.52,
+   "duration": 4.12
+  },
+  {
+   "segment_id": 52,
+   "text": "\u266a Never gonna make you cry \u266a",
+   "start": 186.72,
+   "start_time_sec": 186.72,
+   "duration": 2.0
+  },
+  {
+   "segment_id": 53,
+   "text": "\u266a Never gonna say goodbye \u266a",
+   "start": 188.84,
+   "start_time_sec": 188.84,
+   "duration": 1.88
+  },
+  {
+   "segment_id": 54,
+   "text": "\u266a Never gonna tell a lie\nand hurt you \u266a",
+   "start": 190.84,
+   "start_time_sec": 190.84,
+   "duration": 4.36
+  },
+  {
+   "segment_id": 55,
+   "text": "\u266a Never gonna give you up \u266a",
+   "start": 195.28,
+   "start_time_sec": 195.28,
+   "duration": 1.84
+  },
+  {
+   "segment_id": 56,
+   "text": "\u266a Never gonna let you down \u266a",
+   "start": 197.2,
+   "start_time_sec": 197.2,
+   "duration": 2.04
+  },
+  {
+   "segment_id": 57,
+   "text": "\u266a Never gonna run around\nand desert you \u266a",
+   "start": 199.4,
+   "start_time_sec": 199.4,
+   "duration": 3.72
+  },
+  {
+   "segment_id": 58,
+   "text": "\u266a Never gonna make you cry \u266a",
+   "start": 203.36,
+   "start_time_sec": 203.36,
+   "duration": 2.24
+  },
+  {
+   "segment_id": 59,
+   "text": "\u266a Never gonna say goodbye \u266a",
+   "start": 205.68,
+   "start_time_sec": 205.68,
+   "duration": 2.16
+  },
+  {
+   "segment_id": 60,
+   "text": "\u266a Never gonna tell a lie\nand hurt you \u266a",
+   "start": 207.92,
+   "start_time_sec": 207.92,
+   "duration": 3.4
+  }
+ ],
+ "retrieval_timestamp": "2026-09-22T23:59:35.951603Z",
+ "selection_reason": "manually-created English transcript"
+}

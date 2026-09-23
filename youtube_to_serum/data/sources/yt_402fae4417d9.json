@@ -1,0 +1,48 @@
+{
+ "source_id": "yt_402fae4417d9",
+ "url": "https://www.youtube.com/shorts/4vukJalYegE",
+ "video_id": "4vukJalYegE",
+ "transcription": {
+  "status": "AVAILABLE",
+  "engine": "youtube-transcript-api",
+  "language": "English (auto-generated)",
+  "language_code": "en",
+  "is_generated": true,
+  "is_translated": false,
+  "selection_reason": "generated English transcript",
+  "segment_count": 28,
+  "available_tracks": [
+   {
+    "language": "English (auto-generated)",
+    "language_code": "en",
+    "is_manual": false,
+    "is_generated": true,
+    "is_translatable": true,
+    "translation_languages": [
+     "ar",
+     "zh-Hant",
+     "nl",
+     "fr",
+     "de",
+     "hi",
+     "id",
+     "it",
+     "ja",
+     "ko",
+     "pt",
+     "ru",
+     "es",
+     "th",
+     "uk",
+     "vi"
+    ]
+   }
+  ],
+  "fallback_attempted": false
+ },
+ "artifacts": {
+  "raw_transcript": "data\\transcripts\\yt_402fae4417d9.json",
+  "structured_knowledge": "data/knowledge/yt_402fae4417d9.json"
+ },
+ "retrieval_timestamp": "2026-09-23T00:00:34.102558Z"
+}
