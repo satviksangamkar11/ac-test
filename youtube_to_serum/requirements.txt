@@ -1,0 +1,6 @@
+Flask==2.3.3
+flask-cors==4.0.0
+yt-dlp==2023.11.16
+youtube-transcript-api==0.6.2
+faster-whisper==0.9.1
+python-docx==0.8.11
