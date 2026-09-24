@@ -1,10 +1,10 @@
 {
   "counts": {
     "schema_generation_top_level_lists": 10,
-    "atlas_controls": 1136,
+    "atlas_controls": 1137,
     "host_parameters": 2623,
-    "canonical_registry_entries": 1136,
-    "mapped_schema_to_registry": 266,
+    "canonical_registry_entries": 1137,
+    "mapped_schema_to_registry": 283,
     "mapped_host_to_registry": 23,
     "host_only_unmapped": 2599,
     "host_conflicted": 1,
@@ -12,11 +12,11 @@
     "conflicts_unresolved": 1,
     "conflicts_resolved": 1,
     "unknown_domain": 142,
-    "unknown_enum": 14,
-    "unknown_body_binding": 1128,
+    "unknown_enum": 15,
+    "unknown_body_binding": 1129,
     "evidenced": 8,
     "structurally_executable": 8,
-    "unresolved": 805,
+    "unresolved": 806,
     "unknown_classification": 203
   },
   "by_section": {
@@ -27,7 +27,7 @@
     "ENVELOPE": 12,
     "FILTER": 76,
     "FX": 189,
-    "GLOBAL": 76,
+    "GLOBAL": 77,
     "GLOBAL_KEYBOARD": 21,
     "LFO": 126,
     "MACRO": 40,
@@ -43,7 +43,7 @@
   },
   "by_kind": {
     "UNKNOWN": 203,
-    "PRESET_PARAMETER": 777,
+    "PRESET_PARAMETER": 778,
     "STRUCTURAL_STATE": 36,
     "UI_STATE": 41,
     "TOPOLOGY": 79

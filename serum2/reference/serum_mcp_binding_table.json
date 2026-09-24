@@ -941,6 +941,12 @@
    "field": "voice_amp",
    "basis": "exact_normalized"
   },
+  "global.voice_priority": {
+   "kind": "singleton_field",
+   "attr": "global_",
+   "field": "voice_priority",
+   "basis": "exact_normalized"
+  },
   "lfo1.beat_sync": {
    "kind": "field",
    "module": "lfo",
@@ -1515,6 +1521,134 @@
    "list": "lfos",
    "index": 5,
    "field": "triplets",
+   "basis": "exact_normalized"
+  },
+  "macro1.name": {
+   "kind": "field",
+   "module": "macro",
+   "list": "macros",
+   "index": 0,
+   "field": "name",
+   "basis": "exact_normalized"
+  },
+  "macro1.value": {
+   "kind": "field",
+   "module": "macro",
+   "list": "macros",
+   "index": 0,
+   "field": "value",
+   "basis": "exact_normalized"
+  },
+  "macro2.name": {
+   "kind": "field",
+   "module": "macro",
+   "list": "macros",
+   "index": 1,
+   "field": "name",
+   "basis": "exact_normalized"
+  },
+  "macro2.value": {
+   "kind": "field",
+   "module": "macro",
+   "list": "macros",
+   "index": 1,
+   "field": "value",
+   "basis": "exact_normalized"
+  },
+  "macro3.name": {
+   "kind": "field",
+   "module": "macro",
+   "list": "macros",
+   "index": 2,
+   "field": "name",
+   "basis": "exact_normalized"
+  },
+  "macro3.value": {
+   "kind": "field",
+   "module": "macro",
+   "list": "macros",
+   "index": 2,
+   "field": "value",
+   "basis": "exact_normalized"
+  },
+  "macro4.name": {
+   "kind": "field",
+   "module": "macro",
+   "list": "macros",
+   "index": 3,
+   "field": "name",
+   "basis": "exact_normalized"
+  },
+  "macro4.value": {
+   "kind": "field",
+   "module": "macro",
+   "list": "macros",
+   "index": 3,
+   "field": "value",
+   "basis": "exact_normalized"
+  },
+  "macro5.name": {
+   "kind": "field",
+   "module": "macro",
+   "list": "macros",
+   "index": 4,
+   "field": "name",
+   "basis": "exact_normalized"
+  },
+  "macro5.value": {
+   "kind": "field",
+   "module": "macro",
+   "list": "macros",
+   "index": 4,
+   "field": "value",
+   "basis": "exact_normalized"
+  },
+  "macro6.name": {
+   "kind": "field",
+   "module": "macro",
+   "list": "macros",
+   "index": 5,
+   "field": "name",
+   "basis": "exact_normalized"
+  },
+  "macro6.value": {
+   "kind": "field",
+   "module": "macro",
+   "list": "macros",
+   "index": 5,
+   "field": "value",
+   "basis": "exact_normalized"
+  },
+  "macro7.name": {
+   "kind": "field",
+   "module": "macro",
+   "list": "macros",
+   "index": 6,
+   "field": "name",
+   "basis": "exact_normalized"
+  },
+  "macro7.value": {
+   "kind": "field",
+   "module": "macro",
+   "list": "macros",
+   "index": 6,
+   "field": "value",
+   "basis": "exact_normalized"
+  },
+  "macro8.name": {
+   "kind": "field",
+   "module": "macro",
+   "list": "macros",
+   "index": 7,
+   "field": "name",
+   "basis": "exact_normalized"
+  },
+  "macro8.value": {
+   "kind": "field",
+   "module": "macro",
+   "list": "macros",
+   "index": 7,
+   "field": "value",
    "basis": "exact_normalized"
   },
   "oscA.detune": {

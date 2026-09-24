@@ -1,6 +1,6 @@
 {
   "derived_from": "parameter_characterization/serum_mcp_mutable_surface.json",
-  "total_targets": 266,
+  "total_targets": 283,
   "families": {
     "ARP": [
       {
@@ -1122,6 +1122,14 @@
         "domain_status": "DOMAIN_UNVERIFIED",
         "enum_status": null,
         "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "global.voice_priority",
+        "mcp_editable_path": "global_.voice_priority",
+        "control_type": "enum",
+        "domain_status": null,
+        "enum_status": "ENUM_UNVERIFIED",
+        "evidence_status": "NO_EVIDENCE"
       }
     ],
     "LFOS": [
@@ -1698,6 +1706,136 @@
         "mcp_editable_path": "lfos[5].triplets",
         "control_type": "toggle",
         "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      }
+    ],
+    "MACROS": [
+      {
+        "canonical_id": "macro1.name",
+        "mcp_editable_path": "macros[0].name",
+        "control_type": "identity",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "macro1.value",
+        "mcp_editable_path": "macros[0].value",
+        "control_type": "continuous",
+        "domain_status": "VERIFIED",
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "macro2.name",
+        "mcp_editable_path": "macros[1].name",
+        "control_type": "identity",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "macro2.value",
+        "mcp_editable_path": "macros[1].value",
+        "control_type": "continuous",
+        "domain_status": "VERIFIED",
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "macro3.name",
+        "mcp_editable_path": "macros[2].name",
+        "control_type": "identity",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "macro3.value",
+        "mcp_editable_path": "macros[2].value",
+        "control_type": "continuous",
+        "domain_status": "VERIFIED",
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "macro4.name",
+        "mcp_editable_path": "macros[3].name",
+        "control_type": "identity",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "macro4.value",
+        "mcp_editable_path": "macros[3].value",
+        "control_type": "continuous",
+        "domain_status": "VERIFIED",
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "macro5.name",
+        "mcp_editable_path": "macros[4].name",
+        "control_type": "identity",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "macro5.value",
+        "mcp_editable_path": "macros[4].value",
+        "control_type": "continuous",
+        "domain_status": "VERIFIED",
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "macro6.name",
+        "mcp_editable_path": "macros[5].name",
+        "control_type": "identity",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "macro6.value",
+        "mcp_editable_path": "macros[5].value",
+        "control_type": "continuous",
+        "domain_status": "VERIFIED",
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "macro7.name",
+        "mcp_editable_path": "macros[6].name",
+        "control_type": "identity",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "macro7.value",
+        "mcp_editable_path": "macros[6].value",
+        "control_type": "continuous",
+        "domain_status": "VERIFIED",
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "macro8.name",
+        "mcp_editable_path": "macros[7].name",
+        "control_type": "identity",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "macro8.value",
+        "mcp_editable_path": "macros[7].value",
+        "control_type": "continuous",
+        "domain_status": "VERIFIED",
         "enum_status": null,
         "evidence_status": "NO_EVIDENCE"
       }

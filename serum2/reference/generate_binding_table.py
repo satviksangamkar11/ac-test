@@ -53,8 +53,8 @@ FX_UNIT_PARAM_ALIASES = {
     ("FXHyperD", "dimension"): {"wet": "kParamDimEWet", "size": "kParamDimESize"},
 }
 SPEC_LISTS = {"osc": ("oscillators", "Oscillator"), "env": ("envelopes", "Env"), "lfo": ("lfos", "LFO"),
-              "filter": ("filters", "VoiceFilter")}
-INSTANCE = re.compile(r"^(osc|env|lfo|filter)(?:([A-C])|(\d+))\.(.+)$")
+              "filter": ("filters", "VoiceFilter"), "macro": ("macros", "Macro")}
+INSTANCE = re.compile(r"^(osc|env|lfo|filter|macro)(?:([A-C])|(\d+))\.(.+)$")
 SPECIAL_OSC = {"oscNoise": 3, "sub": 4}
 FIELD_ALIASES = {"enabled": "enabled", "enable": "enabled"}
 
@@ -116,7 +116,8 @@ def main():
     from serum2.reference.serum_atlas import all_control_ids
     from serum2.producer.state_ledger import catalog
     cat = catalog()
-    models = {"osc": S.OscillatorSpec, "env": S.EnvelopeSpec, "lfo": S.LfoSpec, "filter": S.FilterSpec}
+    models = {"osc": S.OscillatorSpec, "env": S.EnvelopeSpec, "lfo": S.LfoSpec, "filter": S.FilterSpec,
+              "macro": S.MacroSpec}
     # Singleton (non-list, no numbered slot) PresetSpec objects. "global"
     # and "voice.voicing" BOTH target GlobalSpec -- confirmed by reading the
     # Atlas's own control_ids (voice.voicing.legato/mono/porta_* match

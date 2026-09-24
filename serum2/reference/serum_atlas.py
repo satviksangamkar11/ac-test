@@ -359,6 +359,24 @@ def _build_atlas() -> Dict[str, ReferenceControl]:
             snap["global"][kparam], aliases, source_tag + " GlobalSpec",
         )
 
+    # global.voice_priority: NOT in the schema snapshot's "global" section at
+    # all (schema.py deliberately omits kParamVoicePriority from GLOBAL_PARAMS
+    # -- "only 1 sample... no known enum set yet"), so the generic loop above
+    # can never reach it. mapping.py writes GlobalSpec.voice_priority
+    # unconditionally when set (unvalidated, allow_unknown=True) -- it IS a
+    # real MCP-mutable field, just one whose domain is confirmed unresolved
+    # rather than absent. Hand-authored (same pattern as oscSub.shape below)
+    # since there is no schema entry to drive _entry_from_schema from.
+    atlas["global.voice_priority"] = ReferenceControl(
+        control_id="global.voice_priority", display_name="Voice Priority", panel="GLOBAL",
+        control_type="enum", enum_values=(), aliases=("voice priority", "voice stealing"),
+        source=source_tag + " GlobalSpec.voice_priority",
+        notes="kParamVoicePriority has no GLOBAL_PARAMS schema entry (schema.py: only 'Low' "
+              "observed in real content, 1 sample) -- MCP writes it unconditionally but "
+              "unvalidated when set. Real MCP-mutable field; enum vocabulary ENUM_UNVERIFIED, "
+              "not absent.",
+    )
+
     # Matrix / modulation -- reuse qualify_modulation_route.py's already-real
     # source/destination domain vocabulary rather than re-deriving it here
     # (that module's SUPPORTED_SOURCE_PREFIXES/SUPPORTED_DESTINATION_FAMILIES

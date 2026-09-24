@@ -39,7 +39,9 @@ def test_every_atlas_control_is_either_mutable_or_explicitly_classified(surface)
 
 
 def test_non_mutable_classification_is_one_of_the_allowed_values(surface):
-    allowed = {"NOT_MCP_MUTABLE", "READ_ONLY", "PRESERVE_ONLY", "UI_ONLY", "PERFORMANCE_ONLY", "UNKNOWN"}
+    allowed = {"NOT_MCP_MUTABLE", "READ_ONLY", "PRESERVE_ONLY", "UI_ONLY", "PERFORMANCE_ONLY", "UNKNOWN",
+              "MCP_MUTABLE_STRUCTURAL_UNBOUND"}  # confirmed real MCP-mutable, needs a structural
+              # binding kind (route/topology/pattern-list) not yet built -- distinct from UNKNOWN
     for cid, e in surface["not_mcp_mutable"].items():
         assert e["status"] in allowed, cid
         assert e["reason"], "control %r has no reason recorded" % cid
@@ -83,6 +85,39 @@ def test_fx_kind_candidates_are_not_silently_dropped(surface):
 
 def surface_fx_count(surface):
     return sum(1 for e in surface["mcp_mutable_candidates"].values() if e["family"] == "FX")
+
+
+def test_macro_value_and_name_are_mcp_mutable(surface):
+    """Regression: macro1.value/macro1.name etc (18 Atlas entries) were
+    wrongly UNKNOWN before the generator gained a "macro" instance pattern
+    -- mapping.py's apply_spec() confirms it writes Macro{i}.name and
+    Macro{i}.plainParams.kParamValue for every PresetSpec.macros entry."""
+    mutable = surface["mcp_mutable_candidates"]
+    for i in range(1, 9):
+        assert "macro%d.value" % i in mutable
+        assert "macro%d.name" % i in mutable
+
+
+def test_confirmed_structural_mcp_surface_is_not_bucketed_as_unknown(surface):
+    """Regression: MATRIX (mod-route fields), *.routing (RoutingSlot0-6),
+    and ARP pattern-note fields are confirmed real MCP mutation targets in
+    mapping.py's apply_spec() -- they must never collapse into the generic
+    UNKNOWN "don't know if MCP can mutate this" bucket, even though no
+    scalar field-binding kind fits their structure yet."""
+    non_mutable = surface["not_mcp_mutable"]
+    matrix_entries = [e for e in non_mutable.values() if e["section"] == "MATRIX"]
+    assert matrix_entries and all(e["status"] == "MCP_MUTABLE_STRUCTURAL_UNBOUND" for e in matrix_entries)
+    assert non_mutable["oscA.routing"]["status"] == "MCP_MUTABLE_STRUCTURAL_UNBOUND"
+
+
+def test_global_voice_priority_is_mcp_mutable_with_unresolved_enum(surface):
+    """Regression: kParamVoicePriority has no GLOBAL_PARAMS schema catalog
+    entry, so the generic schema-snapshot-driven Atlas loop could never
+    reach it -- but mapping.py writes it unconditionally when set. Real
+    MCP-mutable field with an explicitly unresolved (not absent) enum."""
+    e = surface["mcp_mutable_candidates"]["global.voice_priority"]
+    assert e["enum_status"] == "ENUM_UNVERIFIED"
+    assert not e["enum_values"]
 
 
 def test_manifest_derives_from_surface_not_hand_maintained(manifest, surface):
