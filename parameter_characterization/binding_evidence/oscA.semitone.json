@@ -1,0 +1,34 @@
+{
+  "epoch": {
+    "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+    "product_version": "2.0.23",
+    "state_version": 9.0
+  },
+  "target": "oscA.semitone",
+  "host": {
+    "parameter_index": 24,
+    "name": "A Semi",
+    "value_before": 0.5,
+    "value_test": 0.6
+  },
+  "display": {
+    "text_before": " 0",
+    "text_after": "+3"
+  },
+  "noise_floor_count": 0,
+  "body_diff_filtered": [
+    {
+      "path": "Oscillator0.plainParams",
+      "before": "default",
+      "after": {
+        "kParamPitch": 2.40000057220459
+      }
+    }
+  ],
+  "restore": {
+    "verified": true,
+    "residual_diff": []
+  },
+  "run_id": "causal_probe_3host_20260924T183643Z",
+  "generated_at": "2026-09-24T18:36:43.350747+00:00"
+}

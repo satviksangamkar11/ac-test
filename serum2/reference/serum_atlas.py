@@ -91,8 +91,19 @@ _OSC_FIELDS = {
     "kParamVolume": ("level", ("level", "volume", "osc level")),
     "kParamPan": ("pan", ("pan",)),
     "kParamFine": ("fine", ("fine", "fine tune", "fin")),
-    "kParamCoarsePit": ("semitone", ("semitone", "sem", "coarse pitch")),
-    "kParamPitch": ("pitch", ("pitch",)),
+    # Evidence-corrected 2026-09 (parameter_characterization/binding_evidence/
+    # oscA_pitch_disambiguation.json): causal DawDreamer probing proved host
+    # #24 "A Semi" writes kParamPitch (body range -12..12, integer semitone
+    # display), while host #28 "A Coarse Pitch" writes kParamCoarsePit (body
+    # range -72..72, fractional display) -- a DIFFERENT field, not an alias.
+    # This matches serum-mcp's own canonical mapping ("semitone": "kParamPitch",
+    # preset/mapping.py) and a prior independently-qualified binding
+    # (qualification/binding_evidence/oscA.semitone.json). The previous table
+    # had these two suffixes swapped, so oscA.semitone was built from
+    # kParamCoarsePit's schema entry (wrong bounds, wrong field) instead of
+    # kParamPitch's.
+    "kParamCoarsePit": ("coarse_pitch", ("coarse pitch",)),
+    "kParamPitch": ("semitone", ("semitone", "sem", "semi", "pitch")),
     "kParamDetune": ("detune", ("detune",)),
     "kParamDetuneWid": ("detune_width", ("detune width", "unison width")),
     "kParamUnison": ("unison", ("unison", "voices")),

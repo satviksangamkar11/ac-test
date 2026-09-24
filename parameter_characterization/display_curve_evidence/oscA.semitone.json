@@ -1,0 +1,68 @@
+{
+  "epoch": {
+    "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+    "product_version": "2.0.23",
+    "state_version": 9.0
+  },
+  "target": "oscA.semitone",
+  "host_index": 24,
+  "host_name": "A Semi",
+  "body_field": "Oscillator0.plainParams.kParamPitch",
+  "samples": [
+    {
+      "host": 0.0,
+      "body": -12.0,
+      "display": "-12"
+    },
+    {
+      "host": 0.1,
+      "body": -9.599999964237213,
+      "display": "-10"
+    },
+    {
+      "host": 0.25,
+      "body": -6.0,
+      "display": "-6"
+    },
+    {
+      "host": 0.375,
+      "body": -3.0,
+      "display": "-3"
+    },
+    {
+      "host": 0.5,
+      "body": 0.0,
+      "display": " 0"
+    },
+    {
+      "host": 0.5001,
+      "body": 0.0024003982543945312,
+      "display": " 0"
+    },
+    {
+      "host": 0.6,
+      "body": 2.40000057220459,
+      "display": "+3"
+    },
+    {
+      "host": 0.75,
+      "body": 6.0,
+      "display": "+6"
+    },
+    {
+      "host": 0.875,
+      "body": 9.0,
+      "display": "+9"
+    },
+    {
+      "host": 1.0,
+      "body": 12.0,
+      "display": "+12"
+    }
+  ],
+  "restore": {
+    "verified": true,
+    "value_before": 0.5,
+    "text_before": " 0"
+  }
+}

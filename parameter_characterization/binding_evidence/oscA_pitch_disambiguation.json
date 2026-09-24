@@ -1,0 +1,75 @@
+{
+  "epoch": {
+    "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+    "product_version": "2.0.23",
+    "state_version": 9.0
+  },
+  "results": {
+    "oscA.octave": {
+      "host_index": 23,
+      "host_name": "A Octave",
+      "value_before": 0.5,
+      "value_test": 0.6,
+      "text_before": " 0",
+      "text_after": "+1",
+      "body_diff": [
+        {
+          "path": "Oscillator0.plainParams",
+          "before": "default",
+          "after": {
+            "kParamOctave": 1.0
+          }
+        }
+      ],
+      "restore_residual": []
+    },
+    "oscA.semitone": {
+      "host_index": 24,
+      "host_name": "A Semi",
+      "value_before": 0.5,
+      "value_test": 0.6,
+      "text_before": " 0",
+      "text_after": "+3",
+      "body_diff": [
+        {
+          "path": "Oscillator0.plainParams",
+          "before": "default",
+          "after": {
+            "kParamPitch": 2.40000057220459
+          }
+        }
+      ],
+      "restore_residual": []
+    },
+    "oscA.coarse_pitch": {
+      "host_index": 28,
+      "host_name": "A Coarse Pitch",
+      "value_before": 0.5,
+      "value_test": 0.6,
+      "text_before": "--",
+      "text_after": "12.80",
+      "body_diff": [
+        {
+          "path": "Oscillator0.plainParams",
+          "before": "default",
+          "after": {
+            "kParamCoarsePit": 12.800003051757812
+          }
+        }
+      ],
+      "restore_residual": []
+    }
+  },
+  "distinct_paths": {
+    "oscA.octave": [
+      "Oscillator0.plainParams"
+    ],
+    "oscA.semitone": [
+      "Oscillator0.plainParams"
+    ],
+    "oscA.coarse_pitch": [
+      "Oscillator0.plainParams"
+    ]
+  },
+  "all_distinct": false
+}

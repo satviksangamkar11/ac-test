@@ -128,6 +128,23 @@ def test_existing_stage_a_ingestion_unaffected():
     print("[PASS] test_existing_stage_a_ingestion_unaffected")
 
 
+def test_osca_semitone_not_conflated_with_coarse_pitch():
+    """Regression for the 2026-09 Atlas fix: oscA.semitone (VST3 kParamPitch,
+    host #24 'A Semi') and oscA.coarse_pitch (kParamCoarsePit, host #28 'A
+    Coarse Pitch') are causally distinct body fields with different ranges
+    (parameter_characterization/binding_evidence/oscA_pitch_disambiguation.json)
+    and must never share bounds or be treated as aliases of each other."""
+    from serum2.reference.serum_atlas import get_control
+
+    semitone = get_control("oscA.semitone")
+    coarse = get_control("oscA.coarse_pitch")
+    assert (semitone.min_value, semitone.max_value) == (-12.0, 12.0)
+    assert (coarse.min_value, coarse.max_value) == (-72.0, 72.0)
+    assert "coarse pitch" not in semitone.aliases
+    assert "semitone" not in coarse.aliases
+    print("[PASS] test_osca_semitone_not_conflated_with_coarse_pitch")
+
+
 if __name__ == "__main__":
     test_atlas_version_identity()
     test_canonical_ids_are_stable_across_calls()
@@ -136,4 +153,5 @@ if __name__ == "__main__":
     test_reference_default_state_is_not_episode_evidence()
     test_atlas_has_no_execution_authority_surface()
     test_existing_stage_a_ingestion_unaffected()
+    test_osca_semitone_not_conflated_with_coarse_pitch()
     print("\nAll Serum Reference Atlas tests passed.")

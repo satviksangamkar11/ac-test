@@ -1,0 +1,37 @@
+{
+  "epoch": {
+    "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+    "product_version": "2.0.23",
+    "state_version": 9.0
+  },
+  "target": "oscNoise.noise_type",
+  "resolver_operation_id": "oscillators[3].noise_type",
+  "operation_family": "ENUM",
+  "route_type": "SERUM_PRESET_STRUCTURAL_BINDING",
+  "baseline_value": "White",
+  "mutated_value": "Pink",
+  "run_status": "STRUCTURAL_VERIFIED",
+  "state_changed": true,
+  "persistence_verified": true,
+  "observed_body_diff": [
+    {
+      "path": "Oscillator3.NoiseOsc3.plainParams.kParamNoiseType",
+      "before": "White",
+      "after": "Pink"
+    }
+  ],
+  "restoration_verified": true,
+  "trace": [
+    "LOAD",
+    "READ_BASELINE",
+    "MUTATE",
+    "READ_AFTER_MUTATION",
+    "PERSIST",
+    "RELOAD",
+    "READ_AFTER_RELOAD",
+    "PERSISTENCE_CHECK_PASSED"
+  ],
+  "error": null,
+  "backend": "DawDreamerBackend (live engine, generic StructuralQualificationRunner)",
+  "generated_at": "2026-09-24T18:56:42.492811+00:00"
+}
