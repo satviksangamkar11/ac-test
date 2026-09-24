@@ -1,0 +1,3291 @@
+{
+ "harness": {
+  "architecture": "context-based bulk: parameter-by-parameter RAW mutation inside one qualification context",
+  "backend": "real Serum 2.0.23 VST3 in DawDreamer (headless): state readback + rendered band energy + host texts; not GUI",
+  "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+  "manifest": "D:\\ableton claude final best\\serum2\\qualification\\bulk_causal\\manifest_bulk_fx_eq_pilot_v1.json",
+  "manifest_sha256": "0a642c087b32a5491d5155fae7cbb367d40c0c76cc027a7f3eb1ae66ed42f926",
+  "context_presets": [
+   {
+    "context": "FX_EQ",
+    "path": "contexts\\QUAL_FX_EQ.SerumPreset",
+    "sha256": "82b4512dea52256868152af46e58339bf9f3835683f9ab995bbfb3582bec5ef1",
+    "parameters": 10
+   }
+  ],
+  "persistent_presets_written": 1,
+  "parameters": 10,
+  "values_observed": 88,
+  "state_loads": 100,
+  "sessions": 1,
+  "context_loads": 1,
+  "baseline_reloads": 11,
+  "transient_transport_files": "one per Serum session, overwritten on every load (not a preset)",
+  "authorizes_nothing": true,
+  "generated": "2026-09-24T22:18:18.629073+00:00"
+ },
+ "records": [
+  {
+   "atlas_id": "fx.equalizer.left_freq",
+   "context": "FX_EQ",
+   "candidate": {
+    "kind": "fx_param",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXEQ",
+     "plainParams",
+     "kParamFreq1"
+    ],
+    "kparam": "kParamFreq1"
+   },
+   "declared": {
+    "kind": "log",
+    "min": 21.5,
+    "max": 10000.0
+   },
+   "value_vector": {
+    "values": [
+     21.5,
+     99.84558018589446,
+     463.68092477478524,
+     2153.325160710256,
+     10000.0
+    ],
+    "probes": [
+     11000.0,
+     20000.0,
+     100000.0,
+     19.545454545454543,
+     10.75,
+     2.15
+    ]
+   },
+   "values": [
+    {
+     "written": 21.5,
+     "probe": false,
+     "state_value": 21.53320125,
+     "state_diff_keys": [
+      "kParamFreq1"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 99.84558018589446,
+     "probe": false,
+     "state_value": 99.84558018589446,
+     "state_diff_keys": [
+      "kParamFreq1"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 463.68092477478524,
+     "probe": false,
+     "state_value": 463.6809247747854,
+     "state_diff_keys": [
+      "kParamFreq1"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 2153.325160710256,
+     "probe": false,
+     "state_value": 2153.325160710256,
+     "state_diff_keys": [
+      "kParamFreq1"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 10000.0,
+     "probe": false,
+     "state_value": 10000.000000000005,
+     "state_diff_keys": [
+      "kParamFreq1"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 11000.0,
+     "probe": true,
+     "state_value": 11000.000000000004,
+     "state_diff_keys": [
+      "kParamFreq1"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 20000.0,
+     "probe": true,
+     "state_value": 20000.0,
+     "state_diff_keys": [
+      "kParamFreq1"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 100000.0,
+     "probe": true,
+     "state_value": 20000.0,
+     "state_diff_keys": [
+      "kParamFreq1"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 19.545454545454543,
+     "probe": true,
+     "state_value": 21.53320125,
+     "state_diff_keys": [
+      "kParamFreq1"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 10.75,
+     "probe": true,
+     "state_value": 21.53320125,
+     "state_diff_keys": [
+      "kParamFreq1"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 2.15,
+     "probe": true,
+     "state_value": 21.53320125,
+     "state_diff_keys": [
+      "kParamFreq1"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    }
+   ],
+   "range": {
+    "declared": {
+     "kind": "log",
+     "min": 21.5,
+     "max": 10000.0
+    },
+    "discovered_default": null,
+    "declared_default_matches": null,
+    "reachable_min": 21.53320125,
+    "reachable_max": 20000.0,
+    "clamp_high_at": 20000.0,
+    "clamp_low_at": 21.53320125,
+    "reaches_beyond_declared_max": false,
+    "probes_dropped": [],
+    "declared_matches_reachable": false,
+    "rows": [
+     {
+      "written": 21.5,
+      "stored": 21.53320125,
+      "fate": "clamped_to_min",
+      "probe": false
+     },
+     {
+      "written": 99.84558018589446,
+      "stored": 99.84558018589446,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 463.68092477478524,
+      "stored": 463.6809247747854,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 2153.325160710256,
+      "stored": 2153.325160710256,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 10000.0,
+      "stored": 10000.000000000005,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 11000.0,
+      "stored": 11000.000000000004,
+      "fate": "retained",
+      "probe": true
+     },
+     {
+      "written": 20000.0,
+      "stored": 20000.0,
+      "fate": "retained",
+      "probe": true
+     },
+     {
+      "written": 100000.0,
+      "stored": 20000.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 19.545454545454543,
+      "stored": 21.53320125,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": 10.75,
+      "stored": 21.53320125,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": 2.15,
+      "stored": 21.53320125,
+      "fate": "clamped_to_min",
+      "probe": true
+     }
+    ]
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.03,
+    "container_state_identical": true
+   },
+   "noise_floor_db": 0.5
+  },
+  {
+   "atlas_id": "fx.equalizer.left_gain",
+   "context": "FX_EQ",
+   "candidate": {
+    "kind": "fx_param",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXEQ",
+     "plainParams",
+     "kParamGain1"
+    ],
+    "kparam": "kParamGain1"
+   },
+   "declared": {
+    "kind": "signed",
+    "min": -24.0,
+    "max": 24.0,
+    "default": 0.0
+   },
+   "value_vector": {
+    "values": [
+     -24.0,
+     -12.0,
+     0.0,
+     12.0,
+     24.0
+    ],
+    "probes": [
+     28.8,
+     48.0,
+     120.0,
+     -28.8,
+     -48.0,
+     -120.0
+    ]
+   },
+   "values": [
+    {
+     "written": -24.0,
+     "probe": false,
+     "state_value": -24.0,
+     "state_diff_keys": [
+      "kParamGain1"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      49.46,
+      62.03,
+      59.22,
+      53.24,
+      48.65
+     ],
+     "band_delta_db": [
+      -19.28,
+      -3.62,
+      0.11,
+      0.04,
+      0.03
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": -12.0,
+     "probe": false,
+     "state_value": -12.0,
+     "state_diff_keys": [
+      "kParamGain1"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      58.16,
+      64.06,
+      59.18,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      -10.58,
+      -1.59,
+      0.07,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 0.0,
+     "probe": false,
+     "state_value": null,
+     "state_diff_keys": [],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 12.0,
+     "probe": false,
+     "state_value": 12.0,
+     "state_diff_keys": [
+      "kParamGain1"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      79.37,
+      67.87,
+      59.09,
+      53.22,
+      48.64
+     ],
+     "band_delta_db": [
+      10.63,
+      2.22,
+      -0.02,
+      0.02,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 24.0,
+     "probe": false,
+     "state_value": 24.0,
+     "state_diff_keys": [
+      "kParamGain1"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      88.07,
+      71.93,
+      59.05,
+      53.21,
+      48.64
+     ],
+     "band_delta_db": [
+      19.33,
+      6.28,
+      -0.06,
+      0.01,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 28.8,
+     "probe": true,
+     "state_value": 24.0,
+     "state_diff_keys": [
+      "kParamGain1"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      88.07,
+      71.93,
+      59.05,
+      53.21,
+      48.64
+     ],
+     "band_delta_db": [
+      19.33,
+      6.28,
+      -0.06,
+      0.01,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 48.0,
+     "probe": true,
+     "state_value": 24.0,
+     "state_diff_keys": [
+      "kParamGain1"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      88.07,
+      71.93,
+      59.05,
+      53.21,
+      48.64
+     ],
+     "band_delta_db": [
+      19.33,
+      6.28,
+      -0.06,
+      0.01,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 120.0,
+     "probe": true,
+     "state_value": 24.0,
+     "state_diff_keys": [
+      "kParamGain1"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      88.07,
+      71.93,
+      59.05,
+      53.21,
+      48.64
+     ],
+     "band_delta_db": [
+      19.33,
+      6.28,
+      -0.06,
+      0.01,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": -28.8,
+     "probe": true,
+     "state_value": -24.0,
+     "state_diff_keys": [
+      "kParamGain1"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      49.46,
+      62.03,
+      59.22,
+      53.24,
+      48.65
+     ],
+     "band_delta_db": [
+      -19.28,
+      -3.62,
+      0.11,
+      0.04,
+      0.03
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": -48.0,
+     "probe": true,
+     "state_value": -24.0,
+     "state_diff_keys": [
+      "kParamGain1"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      49.46,
+      62.03,
+      59.22,
+      53.24,
+      48.65
+     ],
+     "band_delta_db": [
+      -19.28,
+      -3.62,
+      0.11,
+      0.04,
+      0.03
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": -120.0,
+     "probe": true,
+     "state_value": -24.0,
+     "state_diff_keys": [
+      "kParamGain1"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      49.46,
+      62.03,
+      59.22,
+      53.24,
+      48.65
+     ],
+     "band_delta_db": [
+      -19.28,
+      -3.62,
+      0.11,
+      0.04,
+      0.03
+     ],
+     "host_params_changed": []
+    }
+   ],
+   "range": {
+    "declared": {
+     "kind": "signed",
+     "min": -24.0,
+     "max": 24.0,
+     "default": 0.0
+    },
+    "discovered_default": 0.0,
+    "declared_default_matches": true,
+    "reachable_min": -24.0,
+    "reachable_max": 24.0,
+    "clamp_high_at": 24.0,
+    "clamp_low_at": -24.0,
+    "reaches_beyond_declared_max": false,
+    "probes_dropped": [],
+    "declared_matches_reachable": true,
+    "rows": [
+     {
+      "written": -24.0,
+      "stored": -24.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": -12.0,
+      "stored": -12.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 0.0,
+      "stored": null,
+      "fate": "default_omitted",
+      "probe": false
+     },
+     {
+      "written": 12.0,
+      "stored": 12.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 24.0,
+      "stored": 24.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 28.8,
+      "stored": 24.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 48.0,
+      "stored": 24.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 120.0,
+      "stored": 24.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": -28.8,
+      "stored": -24.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": -48.0,
+      "stored": -24.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": -120.0,
+      "stored": -24.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     }
+    ]
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.03,
+    "container_state_identical": true
+   },
+   "noise_floor_db": 0.5
+  },
+  {
+   "atlas_id": "fx.equalizer.left_q",
+   "context": "FX_EQ",
+   "candidate": {
+    "kind": "fx_param",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXEQ",
+     "plainParams",
+     "kParamReso1"
+    ],
+    "kparam": "kParamReso1"
+   },
+   "declared": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0,
+    "default": 0.0
+   },
+   "value_vector": {
+    "values": [
+     0.0,
+     25.0,
+     50.0,
+     75.0,
+     100.0
+    ],
+    "probes": [
+     110.0,
+     150.0,
+     300.0,
+     -10.0,
+     -50.0,
+     -200.0
+    ]
+   },
+   "values": [
+    {
+     "written": 0.0,
+     "probe": false,
+     "state_value": 0.0,
+     "state_diff_keys": [
+      "kParamReso1"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 25.0,
+     "probe": false,
+     "state_value": 25.0,
+     "state_diff_keys": [
+      "kParamReso1"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 50.0,
+     "probe": false,
+     "state_value": 50.0,
+     "state_diff_keys": [
+      "kParamReso1"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 75.0,
+     "probe": false,
+     "state_value": 75.0,
+     "state_diff_keys": [
+      "kParamReso1"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 100.0,
+     "probe": false,
+     "state_value": 100.0,
+     "state_diff_keys": [
+      "kParamReso1"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 110.0,
+     "probe": true,
+     "state_value": 100.0,
+     "state_diff_keys": [
+      "kParamReso1"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 150.0,
+     "probe": true,
+     "state_value": 100.0,
+     "state_diff_keys": [
+      "kParamReso1"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 300.0,
+     "probe": true,
+     "state_value": 100.0,
+     "state_diff_keys": [
+      "kParamReso1"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": -10.0,
+     "probe": true,
+     "state_value": 0.0,
+     "state_diff_keys": [
+      "kParamReso1"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": -50.0,
+     "probe": true,
+     "state_value": 0.0,
+     "state_diff_keys": [
+      "kParamReso1"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": -200.0,
+     "probe": true,
+     "state_value": 0.0,
+     "state_diff_keys": [
+      "kParamReso1"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    }
+   ],
+   "range": {
+    "declared": {
+     "kind": "continuous",
+     "min": 0.0,
+     "max": 100.0,
+     "default": 0.0
+    },
+    "discovered_default": null,
+    "declared_default_matches": null,
+    "reachable_min": 0.0,
+    "reachable_max": 100.0,
+    "clamp_high_at": 100.0,
+    "clamp_low_at": 0.0,
+    "reaches_beyond_declared_max": false,
+    "probes_dropped": [],
+    "declared_matches_reachable": true,
+    "rows": [
+     {
+      "written": 0.0,
+      "stored": 0.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 25.0,
+      "stored": 25.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 50.0,
+      "stored": 50.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 75.0,
+      "stored": 75.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 100.0,
+      "stored": 100.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 110.0,
+      "stored": 100.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 150.0,
+      "stored": 100.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 300.0,
+      "stored": 100.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": -10.0,
+      "stored": 0.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": -50.0,
+      "stored": 0.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": -200.0,
+      "stored": 0.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     }
+    ]
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.03,
+    "container_state_identical": true
+   },
+   "noise_floor_db": 0.5
+  },
+  {
+   "atlas_id": "fx.equalizer.right_freq",
+   "context": "FX_EQ",
+   "candidate": {
+    "kind": "fx_param",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXEQ",
+     "plainParams",
+     "kParamFreq2"
+    ],
+    "kparam": "kParamFreq2"
+   },
+   "declared": {
+    "kind": "log",
+    "min": 21.5,
+    "max": 20000.0
+   },
+   "value_vector": {
+    "values": [
+     21.5,
+     118.73707435864041,
+     655.7438524302,
+     3621.446817033767,
+     20000.0
+    ],
+    "probes": [
+     22000.0,
+     40000.0,
+     200000.0,
+     19.545454545454543,
+     10.75,
+     2.15
+    ]
+   },
+   "values": [
+    {
+     "written": 21.5,
+     "probe": false,
+     "state_value": 21.53320125,
+     "state_diff_keys": [
+      "kParamFreq2"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 118.73707435864041,
+     "probe": false,
+     "state_value": 118.73707435864041,
+     "state_diff_keys": [
+      "kParamFreq2"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 655.7438524302,
+     "probe": false,
+     "state_value": 655.7438524302004,
+     "state_diff_keys": [
+      "kParamFreq2"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 3621.446817033767,
+     "probe": false,
+     "state_value": 3621.446817033768,
+     "state_diff_keys": [
+      "kParamFreq2"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 20000.0,
+     "probe": false,
+     "state_value": 20000.0,
+     "state_diff_keys": [
+      "kParamFreq2"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 22000.0,
+     "probe": true,
+     "state_value": 20000.0,
+     "state_diff_keys": [
+      "kParamFreq2"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 40000.0,
+     "probe": true,
+     "state_value": 20000.0,
+     "state_diff_keys": [
+      "kParamFreq2"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 200000.0,
+     "probe": true,
+     "state_value": 20000.0,
+     "state_diff_keys": [
+      "kParamFreq2"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 19.545454545454543,
+     "probe": true,
+     "state_value": 21.53320125,
+     "state_diff_keys": [
+      "kParamFreq2"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 10.75,
+     "probe": true,
+     "state_value": 21.53320125,
+     "state_diff_keys": [
+      "kParamFreq2"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 2.15,
+     "probe": true,
+     "state_value": 21.53320125,
+     "state_diff_keys": [
+      "kParamFreq2"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    }
+   ],
+   "range": {
+    "declared": {
+     "kind": "log",
+     "min": 21.5,
+     "max": 20000.0
+    },
+    "discovered_default": null,
+    "declared_default_matches": null,
+    "reachable_min": 21.53320125,
+    "reachable_max": 20000.0,
+    "clamp_high_at": 20000.0,
+    "clamp_low_at": 21.53320125,
+    "reaches_beyond_declared_max": false,
+    "probes_dropped": [],
+    "declared_matches_reachable": false,
+    "rows": [
+     {
+      "written": 21.5,
+      "stored": 21.53320125,
+      "fate": "clamped_to_min",
+      "probe": false
+     },
+     {
+      "written": 118.73707435864041,
+      "stored": 118.73707435864041,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 655.7438524302,
+      "stored": 655.7438524302004,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 3621.446817033767,
+      "stored": 3621.446817033768,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 20000.0,
+      "stored": 20000.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 22000.0,
+      "stored": 20000.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 40000.0,
+      "stored": 20000.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 200000.0,
+      "stored": 20000.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 19.545454545454543,
+      "stored": 21.53320125,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": 10.75,
+      "stored": 21.53320125,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": 2.15,
+      "stored": 21.53320125,
+      "fate": "clamped_to_min",
+      "probe": true
+     }
+    ]
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.03,
+    "container_state_identical": true
+   },
+   "noise_floor_db": 0.5
+  },
+  {
+   "atlas_id": "fx.equalizer.right_gain",
+   "context": "FX_EQ",
+   "candidate": {
+    "kind": "fx_param",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXEQ",
+     "plainParams",
+     "kParamGain2"
+    ],
+    "kparam": "kParamGain2"
+   },
+   "declared": {
+    "kind": "signed",
+    "min": -24.0,
+    "max": 24.0,
+    "default": 0.0
+   },
+   "value_vector": {
+    "values": [
+     -24.0,
+     -12.0,
+     0.0,
+     12.0,
+     24.0
+    ],
+    "probes": [
+     28.8,
+     48.0,
+     120.0,
+     -28.8,
+     -48.0,
+     -120.0
+    ]
+   },
+   "values": [
+    {
+     "written": -24.0,
+     "probe": false,
+     "state_value": -24.0,
+     "state_diff_keys": [
+      "kParamGain2"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.79,
+      65.71,
+      54.51,
+      31.77,
+      24.57
+     ],
+     "band_delta_db": [
+      0.05,
+      0.06,
+      -4.6,
+      -21.43,
+      -24.05
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": -12.0,
+     "probe": false,
+     "state_value": -12.0,
+     "state_diff_keys": [
+      "kParamGain2"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.72,
+      57.05,
+      41.79,
+      36.61
+     ],
+     "band_delta_db": [
+      0.03,
+      0.07,
+      -2.06,
+      -11.41,
+      -12.01
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 0.0,
+     "probe": false,
+     "state_value": null,
+     "state_diff_keys": [],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 12.0,
+     "probe": false,
+     "state_value": 12.0,
+     "state_diff_keys": [
+      "kParamGain2"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.76,
+      65.64,
+      63.08,
+      64.75,
+      60.68
+     ],
+     "band_delta_db": [
+      0.02,
+      -0.01,
+      3.97,
+      11.55,
+      12.06
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 24.0,
+     "probe": false,
+     "state_value": 24.0,
+     "state_diff_keys": [
+      "kParamGain2"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.67,
+      64.73,
+      65.77,
+      73.17,
+      69.32
+     ],
+     "band_delta_db": [
+      -0.07,
+      -0.92,
+      6.66,
+      19.97,
+      20.7
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 28.8,
+     "probe": true,
+     "state_value": 24.0,
+     "state_diff_keys": [
+      "kParamGain2"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.67,
+      64.73,
+      65.77,
+      73.17,
+      69.32
+     ],
+     "band_delta_db": [
+      -0.07,
+      -0.92,
+      6.66,
+      19.97,
+      20.7
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 48.0,
+     "probe": true,
+     "state_value": 24.0,
+     "state_diff_keys": [
+      "kParamGain2"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.67,
+      64.73,
+      65.77,
+      73.17,
+      69.32
+     ],
+     "band_delta_db": [
+      -0.07,
+      -0.92,
+      6.66,
+      19.97,
+      20.7
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 120.0,
+     "probe": true,
+     "state_value": 24.0,
+     "state_diff_keys": [
+      "kParamGain2"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.67,
+      64.73,
+      65.77,
+      73.16,
+      69.32
+     ],
+     "band_delta_db": [
+      -0.07,
+      -0.92,
+      6.66,
+      19.96,
+      20.7
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": -28.8,
+     "probe": true,
+     "state_value": -24.0,
+     "state_diff_keys": [
+      "kParamGain2"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.79,
+      65.71,
+      54.51,
+      31.77,
+      24.57
+     ],
+     "band_delta_db": [
+      0.05,
+      0.06,
+      -4.6,
+      -21.43,
+      -24.05
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": -48.0,
+     "probe": true,
+     "state_value": -24.0,
+     "state_diff_keys": [
+      "kParamGain2"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.79,
+      65.71,
+      54.51,
+      31.77,
+      24.57
+     ],
+     "band_delta_db": [
+      0.05,
+      0.06,
+      -4.6,
+      -21.43,
+      -24.05
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": -120.0,
+     "probe": true,
+     "state_value": -24.0,
+     "state_diff_keys": [
+      "kParamGain2"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.79,
+      65.71,
+      54.51,
+      31.77,
+      24.57
+     ],
+     "band_delta_db": [
+      0.05,
+      0.06,
+      -4.6,
+      -21.43,
+      -24.05
+     ],
+     "host_params_changed": []
+    }
+   ],
+   "range": {
+    "declared": {
+     "kind": "signed",
+     "min": -24.0,
+     "max": 24.0,
+     "default": 0.0
+    },
+    "discovered_default": 0.0,
+    "declared_default_matches": true,
+    "reachable_min": -24.0,
+    "reachable_max": 24.0,
+    "clamp_high_at": 24.0,
+    "clamp_low_at": -24.0,
+    "reaches_beyond_declared_max": false,
+    "probes_dropped": [],
+    "declared_matches_reachable": true,
+    "rows": [
+     {
+      "written": -24.0,
+      "stored": -24.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": -12.0,
+      "stored": -12.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 0.0,
+      "stored": null,
+      "fate": "default_omitted",
+      "probe": false
+     },
+     {
+      "written": 12.0,
+      "stored": 12.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 24.0,
+      "stored": 24.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 28.8,
+      "stored": 24.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 48.0,
+      "stored": 24.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 120.0,
+      "stored": 24.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": -28.8,
+      "stored": -24.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": -48.0,
+      "stored": -24.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": -120.0,
+      "stored": -24.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     }
+    ]
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.03,
+    "container_state_identical": true
+   },
+   "noise_floor_db": 0.5
+  },
+  {
+   "atlas_id": "fx.equalizer.right_q",
+   "context": "FX_EQ",
+   "candidate": {
+    "kind": "fx_param",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXEQ",
+     "plainParams",
+     "kParamReso2"
+    ],
+    "kparam": "kParamReso2"
+   },
+   "declared": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 95.0,
+    "default": 0.0
+   },
+   "value_vector": {
+    "values": [
+     0.0,
+     23.75,
+     47.5,
+     71.25,
+     95.0
+    ],
+    "probes": [
+     104.5,
+     142.5,
+     285.0,
+     -9.5,
+     -47.5,
+     -190.0
+    ]
+   },
+   "values": [
+    {
+     "written": 0.0,
+     "probe": false,
+     "state_value": 0.0,
+     "state_diff_keys": [
+      "kParamReso2"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 23.75,
+     "probe": false,
+     "state_value": 23.75,
+     "state_diff_keys": [
+      "kParamReso2"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 47.5,
+     "probe": false,
+     "state_value": 47.5,
+     "state_diff_keys": [
+      "kParamReso2"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 71.25,
+     "probe": false,
+     "state_value": 71.25,
+     "state_diff_keys": [
+      "kParamReso2"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 95.0,
+     "probe": false,
+     "state_value": 95.0,
+     "state_diff_keys": [
+      "kParamReso2"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 104.5,
+     "probe": true,
+     "state_value": 100.0,
+     "state_diff_keys": [
+      "kParamReso2"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 142.5,
+     "probe": true,
+     "state_value": 100.0,
+     "state_diff_keys": [
+      "kParamReso2"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 285.0,
+     "probe": true,
+     "state_value": 100.0,
+     "state_diff_keys": [
+      "kParamReso2"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": -9.5,
+     "probe": true,
+     "state_value": 0.0,
+     "state_diff_keys": [
+      "kParamReso2"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": -47.5,
+     "probe": true,
+     "state_value": 0.0,
+     "state_diff_keys": [
+      "kParamReso2"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": -190.0,
+     "probe": true,
+     "state_value": 0.0,
+     "state_diff_keys": [
+      "kParamReso2"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    }
+   ],
+   "range": {
+    "declared": {
+     "kind": "continuous",
+     "min": 0.0,
+     "max": 95.0,
+     "default": 0.0
+    },
+    "discovered_default": null,
+    "declared_default_matches": null,
+    "reachable_min": 0.0,
+    "reachable_max": 100.0,
+    "clamp_high_at": 100.0,
+    "clamp_low_at": 0.0,
+    "reaches_beyond_declared_max": false,
+    "probes_dropped": [],
+    "declared_matches_reachable": false,
+    "rows": [
+     {
+      "written": 0.0,
+      "stored": 0.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 23.75,
+      "stored": 23.75,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 47.5,
+      "stored": 47.5,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 71.25,
+      "stored": 71.25,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 95.0,
+      "stored": 95.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 104.5,
+      "stored": 100.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 142.5,
+      "stored": 100.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 285.0,
+      "stored": 100.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": -9.5,
+      "stored": 0.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": -47.5,
+      "stored": 0.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": -190.0,
+      "stored": 0.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     }
+    ]
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.03,
+    "container_state_identical": true
+   },
+   "noise_floor_db": 0.5
+  },
+  {
+   "atlas_id": "fx.equalizer.left_type",
+   "context": "FX_EQ",
+   "candidate": {
+    "kind": "fx_param",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXEQ",
+     "plainParams",
+     "kParamType1"
+    ],
+    "kparam": "kParamType1"
+   },
+   "declared": {
+    "kind": "enum",
+    "values": [
+     0,
+     1,
+     2
+    ],
+    "default": 0.0
+   },
+   "value_vector": {
+    "values": [
+     0.0,
+     1.0,
+     2.0
+    ],
+    "probes": [
+     3.0
+    ]
+   },
+   "values": [
+    {
+     "written": 0.0,
+     "probe": false,
+     "state_value": null,
+     "state_diff_keys": [],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 1.0,
+     "probe": false,
+     "state_value": 1.0,
+     "state_diff_keys": [
+      "kParamType1"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 2.0,
+     "probe": false,
+     "state_value": 2.0,
+     "state_diff_keys": [
+      "kParamType1"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      64.21,
+      70.43,
+      59.36,
+      53.24,
+      48.65
+     ],
+     "band_delta_db": [
+      -4.53,
+      4.78,
+      0.25,
+      0.04,
+      0.03
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 3.0,
+     "probe": true,
+     "state_value": 2.0,
+     "state_diff_keys": [
+      "kParamType1"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      64.21,
+      70.43,
+      59.36,
+      53.24,
+      48.65
+     ],
+     "band_delta_db": [
+      -4.53,
+      4.78,
+      0.25,
+      0.04,
+      0.03
+     ],
+     "host_params_changed": []
+    }
+   ],
+   "range": {
+    "declared": {
+     "kind": "enum",
+     "min": 0,
+     "max": 2,
+     "default": 0.0
+    },
+    "discovered_default": 0.0,
+    "declared_default_matches": true,
+    "reachable_min": 0.0,
+    "reachable_max": 2.0,
+    "clamp_high_at": 2.0,
+    "clamp_low_at": null,
+    "reaches_beyond_declared_max": false,
+    "probes_dropped": [],
+    "declared_matches_reachable": true,
+    "rows": [
+     {
+      "written": 0.0,
+      "stored": null,
+      "fate": "default_omitted",
+      "probe": false
+     },
+     {
+      "written": 1.0,
+      "stored": 1.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 2.0,
+      "stored": 2.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 3.0,
+      "stored": 2.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     }
+    ]
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.03,
+    "container_state_identical": true
+   },
+   "noise_floor_db": 0.5
+  },
+  {
+   "atlas_id": "fx.equalizer.right_type",
+   "context": "FX_EQ",
+   "candidate": {
+    "kind": "fx_param",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXEQ",
+     "plainParams",
+     "kParamType2"
+    ],
+    "kparam": "kParamType2"
+   },
+   "declared": {
+    "kind": "enum",
+    "values": [
+     0,
+     1,
+     2
+    ],
+    "default": 0.0
+   },
+   "value_vector": {
+    "values": [
+     0.0,
+     1.0,
+     2.0
+    ],
+    "probes": [
+     3.0
+    ]
+   },
+   "values": [
+    {
+     "written": 0.0,
+     "probe": false,
+     "state_value": null,
+     "state_diff_keys": [],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 1.0,
+     "probe": false,
+     "state_value": 1.0,
+     "state_diff_keys": [
+      "kParamType2"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 2.0,
+     "probe": false,
+     "state_value": 2.0,
+     "state_diff_keys": [
+      "kParamType2"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.8,
+      66.03,
+      63.68,
+      44.78,
+      17.23
+     ],
+     "band_delta_db": [
+      0.06,
+      0.38,
+      4.57,
+      -8.42,
+      -31.39
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 3.0,
+     "probe": true,
+     "state_value": 2.0,
+     "state_diff_keys": [
+      "kParamType2"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.8,
+      66.03,
+      63.68,
+      44.78,
+      17.23
+     ],
+     "band_delta_db": [
+      0.06,
+      0.38,
+      4.57,
+      -8.42,
+      -31.39
+     ],
+     "host_params_changed": []
+    }
+   ],
+   "range": {
+    "declared": {
+     "kind": "enum",
+     "min": 0,
+     "max": 2,
+     "default": 0.0
+    },
+    "discovered_default": 0.0,
+    "declared_default_matches": true,
+    "reachable_min": 0.0,
+    "reachable_max": 2.0,
+    "clamp_high_at": 2.0,
+    "clamp_low_at": null,
+    "reaches_beyond_declared_max": false,
+    "probes_dropped": [],
+    "declared_matches_reachable": true,
+    "rows": [
+     {
+      "written": 0.0,
+      "stored": null,
+      "fate": "default_omitted",
+      "probe": false
+     },
+     {
+      "written": 1.0,
+      "stored": 1.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 2.0,
+      "stored": 2.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 3.0,
+      "stored": 2.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     }
+    ]
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.03,
+    "container_state_identical": true
+   },
+   "noise_floor_db": 0.5
+  },
+  {
+   "atlas_id": "fx.equalizer.bypass(enable)",
+   "context": "FX_EQ",
+   "candidate": {
+    "kind": "fx_param",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXEQ",
+     "plainParams",
+     "kParamEnable"
+    ],
+    "kparam": "kParamEnable"
+   },
+   "declared": {
+    "kind": "bool",
+    "default": 1.0
+   },
+   "value_vector": {
+    "values": [
+     0.0,
+     1.0
+    ],
+    "probes": [
+     2.0
+    ]
+   },
+   "values": [
+    {
+     "written": 0.0,
+     "probe": false,
+     "state_value": 0.0,
+     "state_diff_keys": [
+      "kParamEnable"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 1.0,
+     "probe": false,
+     "state_value": null,
+     "state_diff_keys": [],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 2.0,
+     "probe": true,
+     "state_value": null,
+     "state_diff_keys": [],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    }
+   ],
+   "range": {
+    "declared": {
+     "kind": "bool",
+     "default": 1.0
+    },
+    "discovered_default": 1.0,
+    "declared_default_matches": true,
+    "reachable_min": 0.0,
+    "reachable_max": 1.0,
+    "clamp_high_at": null,
+    "clamp_low_at": null,
+    "reaches_beyond_declared_max": false,
+    "probes_dropped": [
+     2.0
+    ],
+    "declared_matches_reachable": false,
+    "rows": [
+     {
+      "written": 0.0,
+      "stored": 0.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 1.0,
+      "stored": null,
+      "fate": "default_omitted",
+      "probe": false
+     },
+     {
+      "written": 2.0,
+      "stored": null,
+      "fate": "dropped",
+      "probe": true
+     }
+    ]
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.03,
+    "container_state_identical": true
+   },
+   "noise_floor_db": 0.5
+  },
+  {
+   "atlas_id": "(exploratory) fxeq.level_out",
+   "context": "FX_EQ",
+   "candidate": {
+    "kind": "fx_param",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXEQ",
+     "plainParams",
+     "kParamLevelOut"
+    ],
+    "kparam": "kParamLevelOut"
+   },
+   "declared": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "value_vector": {
+    "values": [
+     0.0,
+     0.25,
+     0.5,
+     0.75,
+     1.0
+    ],
+    "probes": [
+     1.1,
+     1.5,
+     3.0,
+     -0.1,
+     -0.5,
+     -2.0
+    ]
+   },
+   "values": [
+    {
+     "written": 0.0,
+     "probe": false,
+     "state_value": 0.0,
+     "state_diff_keys": [
+      "kParamLevelOut"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      -120.0,
+      -120.0,
+      -120.0,
+      -120.0,
+      -120.0
+     ],
+     "band_delta_db": [
+      -188.74,
+      -185.65,
+      -179.11,
+      -173.2,
+      -168.62
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 0.25,
+     "probe": false,
+     "state_value": 0.25,
+     "state_diff_keys": [
+      "kParamLevelOut"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      56.72,
+      53.64,
+      47.09,
+      41.18,
+      36.6
+     ],
+     "band_delta_db": [
+      -12.02,
+      -12.01,
+      -12.02,
+      -12.02,
+      -12.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 0.5,
+     "probe": false,
+     "state_value": null,
+     "state_diff_keys": [],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "band_delta_db": [
+      0.03,
+      0.03,
+      0.03,
+      0.03,
+      0.02
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 0.75,
+     "probe": false,
+     "state_value": 0.75,
+     "state_diff_keys": [
+      "kParamLevelOut"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      75.81,
+      72.72,
+      66.18,
+      60.27,
+      55.69
+     ],
+     "band_delta_db": [
+      7.07,
+      7.07,
+      7.07,
+      7.07,
+      7.07
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 1.0,
+     "probe": false,
+     "state_value": 1.0,
+     "state_diff_keys": [
+      "kParamLevelOut"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      80.81,
+      77.72,
+      71.18,
+      65.27,
+      60.69
+     ],
+     "band_delta_db": [
+      12.07,
+      12.07,
+      12.07,
+      12.07,
+      12.07
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 1.1,
+     "probe": true,
+     "state_value": 1.0,
+     "state_diff_keys": [
+      "kParamLevelOut"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      80.81,
+      77.72,
+      71.18,
+      65.27,
+      60.69
+     ],
+     "band_delta_db": [
+      12.07,
+      12.07,
+      12.07,
+      12.07,
+      12.07
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 1.5,
+     "probe": true,
+     "state_value": 1.0,
+     "state_diff_keys": [
+      "kParamLevelOut"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      80.81,
+      77.72,
+      71.18,
+      65.27,
+      60.69
+     ],
+     "band_delta_db": [
+      12.07,
+      12.07,
+      12.07,
+      12.07,
+      12.07
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 3.0,
+     "probe": true,
+     "state_value": 1.0,
+     "state_diff_keys": [
+      "kParamLevelOut"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      80.81,
+      77.72,
+      71.18,
+      65.27,
+      60.69
+     ],
+     "band_delta_db": [
+      12.07,
+      12.07,
+      12.07,
+      12.07,
+      12.07
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": -0.1,
+     "probe": true,
+     "state_value": 0.0,
+     "state_diff_keys": [
+      "kParamLevelOut"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      -120.0,
+      -120.0,
+      -120.0,
+      -120.0,
+      -120.0
+     ],
+     "band_delta_db": [
+      -188.74,
+      -185.65,
+      -179.11,
+      -173.2,
+      -168.62
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": -0.5,
+     "probe": true,
+     "state_value": 0.0,
+     "state_diff_keys": [
+      "kParamLevelOut"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      -120.0,
+      -120.0,
+      -120.0,
+      -120.0,
+      -120.0
+     ],
+     "band_delta_db": [
+      -188.74,
+      -185.65,
+      -179.11,
+      -173.2,
+      -168.62
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": -2.0,
+     "probe": true,
+     "state_value": 0.0,
+     "state_diff_keys": [
+      "kParamLevelOut"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      -120.0,
+      -120.0,
+      -120.0,
+      -120.0,
+      -120.0
+     ],
+     "band_delta_db": [
+      -188.74,
+      -185.65,
+      -179.11,
+      -173.2,
+      -168.62
+     ],
+     "host_params_changed": []
+    }
+   ],
+   "range": {
+    "declared": {
+     "kind": "continuous",
+     "min": 0.0,
+     "max": 1.0
+    },
+    "discovered_default": 0.5,
+    "declared_default_matches": null,
+    "reachable_min": 0.0,
+    "reachable_max": 1.0,
+    "clamp_high_at": 1.0,
+    "clamp_low_at": 0.0,
+    "reaches_beyond_declared_max": false,
+    "probes_dropped": [],
+    "declared_matches_reachable": true,
+    "rows": [
+     {
+      "written": 0.0,
+      "stored": 0.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 0.25,
+      "stored": 0.25,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 0.5,
+      "stored": null,
+      "fate": "default_omitted",
+      "probe": false
+     },
+     {
+      "written": 0.75,
+      "stored": 0.75,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 1.0,
+      "stored": 1.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 1.1,
+      "stored": 1.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 1.5,
+      "stored": 1.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 3.0,
+      "stored": 1.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": -0.1,
+      "stored": 0.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": -0.5,
+      "stored": 0.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": -2.0,
+      "stored": 0.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     }
+    ]
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.03,
+    "container_state_identical": true
+   },
+   "noise_floor_db": 0.5
+  }
+ ]
+}

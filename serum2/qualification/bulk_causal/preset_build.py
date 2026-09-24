@@ -15,7 +15,7 @@ from range_plan import plan as range_plan  # noqa: E402
 from serum_mcp.generation.spec import FxUnitSpec  # noqa: E402
 from serum_mcp.preset.introspect import extract_spec  # noqa: E402
 from serum_mcp.preset.mapping import apply_spec  # noqa: E402
-from serum_mcp.preset.packer import SerumPreset, pack_file, unpack_file  # noqa: E402
+from serum_mcp.preset.packer import SerumPreset, pack_bytes, pack_file, unpack_bytes, unpack_file  # noqa: E402
 
 BASE = unpack_file(os.path.join(REPO, "vendor", "serum-mcp", "fixtures", "init_preset.SerumPreset"))
 SPEC0 = extract_spec(BASE.data)
@@ -71,3 +71,27 @@ def expand(test, cfg):
         if d.get("default") is not None:
             t["candidate"].setdefault("default", d["default"])
     return t
+
+
+# ---- context-based bulk verification: state construction WITHOUT a preset per observation --------------------------------
+def build_context_body(ctx: dict):
+    """Canonical base body for a qualification context: init preset + the context's FX units (+ spec_patch). Pure/deterministic.
+    ctx = {"fx": [{"type","params"}...], "spec_patch": {...}}"""
+    spec = SPEC0
+    if ctx.get("spec_patch"):
+        spec = type(SPEC0).model_validate(deep_merge(SPEC0.model_dump(), ctx["spec_patch"]))
+    units = [FxUnitSpec(type=u["type"], params=dict(u.get("params", {})), wet=u.get("wet", 100.0)) for u in ctx.get("fx", [])]
+    return copy.deepcopy(apply_spec(BASE.data, spec.model_copy(update={"fx_chain": units}))), dict(BASE.metadata)
+
+
+def write_context_preset(name, ctx, out_dir):
+    """The ONE persistent preset of a context (written once, reused for every parameter). Returns (path, body, meta)."""
+    body, meta = build_context_body(ctx)
+    path = os.path.join(out_dir, name + ".SerumPreset")
+    os.makedirs(out_dir, exist_ok=True)
+    pack_file(SerumPreset(metadata=dict(meta, presetName=name), data=body), path)
+    return path, body, meta
+
+
+def pack_unpack(meta, body):
+    return unpack_bytes(pack_bytes(SerumPreset(metadata=meta, data=body))).data

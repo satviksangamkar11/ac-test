@@ -1,0 +1,192 @@
+{
+ "version": 2,
+ "kind": "bulk_context",
+ "note": 48,
+ "render_sec": 1.0,
+ "bands": [
+  20,
+  200,
+  800,
+  3000,
+  8000,
+  20000
+ ],
+ "min_noise_floor_db": 0.5,
+ "session_size": 12,
+ "contexts": {
+  "FX_EQ": {
+   "preset_name": "QUAL_FX_EQ",
+   "fx": [
+    {
+     "type": "FXEQ",
+     "params": {}
+    }
+   ]
+  }
+ },
+ "parameters": [
+  {
+   "atlas_id": "fx.equalizer.left_freq",
+   "context": "FX_EQ",
+   "mutation": {
+    "kind": "fx_param",
+    "index": 0,
+    "module": "FXEQ",
+    "kparam": "kParamFreq1"
+   },
+   "domain": {
+    "kind": "log",
+    "min": 21.5,
+    "max": 10000.0
+   }
+  },
+  {
+   "atlas_id": "fx.equalizer.left_gain",
+   "context": "FX_EQ",
+   "mutation": {
+    "kind": "fx_param",
+    "index": 0,
+    "module": "FXEQ",
+    "kparam": "kParamGain1"
+   },
+   "domain": {
+    "kind": "signed",
+    "min": -24.0,
+    "max": 24.0,
+    "default": 0.0
+   }
+  },
+  {
+   "atlas_id": "fx.equalizer.left_q",
+   "context": "FX_EQ",
+   "mutation": {
+    "kind": "fx_param",
+    "index": 0,
+    "module": "FXEQ",
+    "kparam": "kParamReso1"
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0,
+    "default": 0.0
+   }
+  },
+  {
+   "atlas_id": "fx.equalizer.right_freq",
+   "context": "FX_EQ",
+   "mutation": {
+    "kind": "fx_param",
+    "index": 0,
+    "module": "FXEQ",
+    "kparam": "kParamFreq2"
+   },
+   "domain": {
+    "kind": "log",
+    "min": 21.5,
+    "max": 20000.0
+   }
+  },
+  {
+   "atlas_id": "fx.equalizer.right_gain",
+   "context": "FX_EQ",
+   "mutation": {
+    "kind": "fx_param",
+    "index": 0,
+    "module": "FXEQ",
+    "kparam": "kParamGain2"
+   },
+   "domain": {
+    "kind": "signed",
+    "min": -24.0,
+    "max": 24.0,
+    "default": 0.0
+   }
+  },
+  {
+   "atlas_id": "fx.equalizer.right_q",
+   "context": "FX_EQ",
+   "mutation": {
+    "kind": "fx_param",
+    "index": 0,
+    "module": "FXEQ",
+    "kparam": "kParamReso2"
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 95.0,
+    "default": 0.0
+   }
+  },
+  {
+   "atlas_id": "fx.equalizer.left_type",
+   "context": "FX_EQ",
+   "mutation": {
+    "kind": "fx_param",
+    "index": 0,
+    "module": "FXEQ",
+    "kparam": "kParamType1"
+   },
+   "domain": {
+    "kind": "enum",
+    "values": [
+     0,
+     1,
+     2
+    ],
+    "default": 0.0
+   }
+  },
+  {
+   "atlas_id": "fx.equalizer.right_type",
+   "context": "FX_EQ",
+   "mutation": {
+    "kind": "fx_param",
+    "index": 0,
+    "module": "FXEQ",
+    "kparam": "kParamType2"
+   },
+   "domain": {
+    "kind": "enum",
+    "values": [
+     0,
+     1,
+     2
+    ],
+    "default": 0.0
+   }
+  },
+  {
+   "atlas_id": "fx.equalizer.bypass(enable)",
+   "context": "FX_EQ",
+   "mutation": {
+    "kind": "fx_param",
+    "index": 0,
+    "module": "FXEQ",
+    "kparam": "kParamEnable"
+   },
+   "domain": {
+    "kind": "bool",
+    "default": 1.0
+   },
+   "note": "per-unit enable key seen as 0.0 in corpus (bypass); default treated as 1.0 (on)"
+  },
+  {
+   "atlas_id": "(exploratory) fxeq.level_out",
+   "context": "FX_EQ",
+   "mutation": {
+    "kind": "fx_param",
+    "index": 0,
+    "module": "FXEQ",
+    "kparam": "kParamLevelOut"
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "note": "domain UNVERIFIED: corpus values 0.39..0.67 only; 0..1 is exploratory"
+  }
+ ]
+}
