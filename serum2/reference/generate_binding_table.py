@@ -56,7 +56,19 @@ SPEC_LISTS = {"osc": ("oscillators", "Oscillator"), "env": ("envelopes", "Env"),
               "filter": ("filters", "VoiceFilter"), "macro": ("macros", "Macro")}
 INSTANCE = re.compile(r"^(osc|env|lfo|filter|macro)(?:([A-C])|(\d+))\.(.+)$")
 SPECIAL_OSC = {"oscNoise": 3, "sub": 4}
-FIELD_ALIASES = {"enabled": "enabled", "enable": "enabled"}
+FIELD_ALIASES = {"enabled": "enabled", "enable": "enabled",
+                 "bus1": "fx_bus1_send", "bus2": "fx_bus2_send"}
+# mixer.<slot>.<param>: the Atlas's OWN mixer-panel identity for oscillator/
+# filter fields that either don't ALSO have an oscA./filter1.-style id (e.g.
+# fx_bus1_send/fx_bus2_send have no such duplicate) or do (filter_balance,
+# pan) without colliding, since they resolve to the identical PresetSpec
+# list entry either way. Same (kind, list, index) shape as the INSTANCE
+# regex below -- just a second Atlas namespace pointing at the same slots.
+MIXER_SLOTS = {
+    "osc_a": ("osc", 0), "osc_b": ("osc", 1), "osc_c": ("osc", 2),
+    "noise": ("osc", 3), "sub": ("osc", 4),
+    "filter1": ("filter", 0), "filter2": ("filter", 1),
+}
 
 # value aliases that exact normalisation cannot express. Each must cite its evidence.
 _WT_UI = {"evidence": "ui_readback: Serum 2.0.23 UI displayed 'Default Shapes' as the wavetable name of an oscillator "
@@ -128,6 +140,15 @@ def main():
         "global": ("global_", S.GlobalSpec),
         "voice.voicing": ("global_", S.GlobalSpec),
         "arp": ("arp", S.ArpSpec),
+        # More specific than the bare "arp" prefix above (longest-prefix-match
+        # picks these first): the Atlas's "arp.pattern.*"/"arp.global.*"
+        # sub-namespaces still target the SAME singleton ArpSpec object, just
+        # with an extra UI-grouping segment ("pattern"/"global") that isn't
+        # part of any ArpSpec field name and must be stripped before matching
+        # (e.g. arp.pattern.rate -> ArpSpec.rate, not a field literally named
+        # "pattern.rate").
+        "arp.pattern": ("arp", S.ArpSpec),
+        "arp.global": ("arp", S.ArpSpec),
         # VoiceUnisonSpec's scalar (non-per-voice-list) fields. Traced through
         # mapping.py's spec.voice_unison block: random_pan/random_detune/
         # random_filter_cutoff/random_env_time map 1:1 to the Atlas's own
@@ -191,6 +212,18 @@ def main():
                 idx = (ord(letter) - 65) if letter else int(num) - 1
             else:
                 kind, idx, param = "osc", SPECIAL_OSC[top], cid.split(".", 1)[1]
+            fields = list(models[kind].model_fields)
+            want = FIELD_ALIASES.get(param, param)
+            hit = [f for f in fields if norm(f) == norm(want)]
+            if len(hit) == 1:
+                lst, _ = SPEC_LISTS[kind]
+                controls[cid] = {"kind": "field", "module": kind, "list": lst, "index": idx, "field": hit[0],
+                                 "basis": "exact_normalized" if norm(want) == norm(param) else "alias"}
+            else:
+                skipped += 1
+        elif cid.startswith("mixer.") and any(cid.startswith("mixer.%s." % s) for s in MIXER_SLOTS):
+            slot, _, param = cid[len("mixer."):].partition(".")
+            kind, idx = MIXER_SLOTS[slot]
             fields = list(models[kind].model_fields)
             want = FIELD_ALIASES.get(param, param)
             hit = [f for f in fields if norm(f) == norm(want)]

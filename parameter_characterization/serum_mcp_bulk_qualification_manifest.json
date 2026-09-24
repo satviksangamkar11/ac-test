@@ -1,8 +1,24 @@
 {
   "derived_from": "parameter_characterization/serum_mcp_mutable_surface.json",
-  "total_targets": 289,
+  "total_targets": 318,
   "families": {
     "ARP": [
+      {
+        "canonical_id": "arp.pattern.rate",
+        "mcp_editable_path": "arp.rate",
+        "control_type": "knob",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "arp.pattern.shape",
+        "mcp_editable_path": "arp.shape",
+        "control_type": "dropdown",
+        "domain_status": null,
+        "enum_status": "VERIFIED",
+        "evidence_status": "NO_EVIDENCE"
+      },
       {
         "canonical_id": "arp.transpose.range",
         "mcp_editable_path": "arp.transpose_range",
@@ -1884,6 +1900,224 @@
         "mcp_editable_path": "macros[7].value",
         "control_type": "continuous",
         "domain_status": "VERIFIED",
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      }
+    ],
+    "MIXER": [
+      {
+        "canonical_id": "mixer.filter1.bus1",
+        "mcp_editable_path": "filters[0].fx_bus1_send",
+        "control_type": "knob",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "mixer.filter1.bus2",
+        "mcp_editable_path": "filters[0].fx_bus2_send",
+        "control_type": "knob",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "mixer.filter1.enable",
+        "mcp_editable_path": "filters[0].enabled",
+        "control_type": "toggle",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "mixer.filter1.wet",
+        "mcp_editable_path": "filters[0].wet",
+        "control_type": "knob",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "mixer.filter2.bus1",
+        "mcp_editable_path": "filters[1].fx_bus1_send",
+        "control_type": "knob",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "mixer.filter2.bus2",
+        "mcp_editable_path": "filters[1].fx_bus2_send",
+        "control_type": "knob",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "mixer.filter2.enable",
+        "mcp_editable_path": "filters[1].enabled",
+        "control_type": "toggle",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "mixer.filter2.wet",
+        "mcp_editable_path": "filters[1].wet",
+        "control_type": "knob",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "mixer.noise.bus1",
+        "mcp_editable_path": "oscillators[3].fx_bus1_send",
+        "control_type": "knob",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "mixer.noise.bus2",
+        "mcp_editable_path": "oscillators[3].fx_bus2_send",
+        "control_type": "knob",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "mixer.noise.enable",
+        "mcp_editable_path": "oscillators[3].enabled",
+        "control_type": "toggle",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "mixer.noise.filter_balance",
+        "mcp_editable_path": "oscillators[3].filter_balance",
+        "control_type": "knob",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "mixer.noise.pan",
+        "mcp_editable_path": "oscillators[3].pan",
+        "control_type": "knob",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "mixer.osc_a.bus1",
+        "mcp_editable_path": "oscillators[0].fx_bus1_send",
+        "control_type": "knob",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "mixer.osc_a.bus2",
+        "mcp_editable_path": "oscillators[0].fx_bus2_send",
+        "control_type": "knob",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "mixer.osc_a.filter_balance",
+        "mcp_editable_path": "oscillators[0].filter_balance",
+        "control_type": "knob",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "mixer.osc_b.bus1",
+        "mcp_editable_path": "oscillators[1].fx_bus1_send",
+        "control_type": "knob",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "mixer.osc_b.bus2",
+        "mcp_editable_path": "oscillators[1].fx_bus2_send",
+        "control_type": "knob",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "mixer.osc_b.filter_balance",
+        "mcp_editable_path": "oscillators[1].filter_balance",
+        "control_type": "knob",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "mixer.osc_c.bus1",
+        "mcp_editable_path": "oscillators[2].fx_bus1_send",
+        "control_type": "knob",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "mixer.osc_c.bus2",
+        "mcp_editable_path": "oscillators[2].fx_bus2_send",
+        "control_type": "knob",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "mixer.osc_c.filter_balance",
+        "mcp_editable_path": "oscillators[2].filter_balance",
+        "control_type": "knob",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "mixer.sub.bus1",
+        "mcp_editable_path": "oscillators[4].fx_bus1_send",
+        "control_type": "knob",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "mixer.sub.bus2",
+        "mcp_editable_path": "oscillators[4].fx_bus2_send",
+        "control_type": "knob",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "mixer.sub.enable",
+        "mcp_editable_path": "oscillators[4].enabled",
+        "control_type": "toggle",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "mixer.sub.filter_balance",
+        "mcp_editable_path": "oscillators[4].filter_balance",
+        "control_type": "knob",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "mixer.sub.pan",
+        "mcp_editable_path": "oscillators[4].pan",
+        "control_type": "knob",
+        "domain_status": null,
         "enum_status": null,
         "evidence_status": "NO_EVIDENCE"
       }

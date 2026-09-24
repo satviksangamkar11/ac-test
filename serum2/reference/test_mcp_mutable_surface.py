@@ -159,6 +159,34 @@ def test_voice_count_display_is_read_only_not_mcp_mutable(surface):
     assert e["status"] == "READ_ONLY"
 
 
+def test_mixer_namespace_resolves_to_the_same_oscillator_filter_slots(surface):
+    """Regression: the Atlas's 'mixer.*' namespace (mixer.osc_a.*, mixer.
+    filter1.*, mixer.noise.*, mixer.sub.*) was never tried against any
+    PresetSpec model at all -- not a false negative, a missing prefix rule.
+    Extending the exact-match generator (no fuzzy matching, only the
+    already-established enable->enabled alias plus two new bus1/bus2->
+    fx_bus{1,2}_send aliases backed by the schema's own docstring wording)
+    surfaced 29 real matches, resolving to the SAME oscillators[i]/filters[i]
+    list entries oscA./filter1. style ids already use."""
+    mutable = surface["mcp_mutable_candidates"]
+    assert mutable["mixer.osc_a.filter_balance"]["mcp_editable_path"] == "oscillators[0].filter_balance"
+    assert mutable["mixer.osc_a.bus1"]["mcp_editable_path"] == "oscillators[0].fx_bus1_send"
+    assert mutable["mixer.noise.enable"]["mcp_editable_path"] == "oscillators[3].enabled"
+    assert mutable["mixer.filter1.wet"]["mcp_editable_path"] == "filters[0].wet"
+    assert mutable["mixer.filter2.enable"]["mcp_editable_path"] == "filters[1].enabled"
+
+
+def test_arp_pattern_and_global_subnamespace_strip_correctly(surface):
+    """Regression: arp.pattern.rate/arp.pattern.shape were missed because
+    the bare "arp" singleton prefix left "pattern.rate" as the field name
+    to match (no ArpSpec field is literally named that) -- fixed with two
+    more-specific singleton prefixes (arp.pattern, arp.global) that strip
+    the UI-grouping segment before matching, same ArpSpec target either way."""
+    mutable = surface["mcp_mutable_candidates"]
+    assert mutable["arp.pattern.rate"]["mcp_editable_path"] == "arp.rate"
+    assert mutable["arp.pattern.shape"]["mcp_editable_path"] == "arp.shape"
+
+
 def test_lfo_atlas_scope_remains_lfo1_through_6_not_expanded():
     """LFO7-10: mapping.py's `for i, lfo in enumerate(spec.lfos)` has NO
     index guard and would technically write LFO6-9 body state -- but the

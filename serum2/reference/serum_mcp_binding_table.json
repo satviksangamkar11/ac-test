@@ -3,6 +3,18 @@
  "generated_by": "serum2/reference/generate_binding_table.py",
  "rules": "exact normalised equality or reviewed alias only; no fuzzy/prefix/value-domain inference",
  "controls": {
+  "arp.pattern.rate": {
+   "kind": "singleton_field",
+   "attr": "arp",
+   "field": "rate",
+   "basis": "exact_normalized"
+  },
+  "arp.pattern.shape": {
+   "kind": "singleton_field",
+   "attr": "arp",
+   "field": "shape",
+   "basis": "exact_normalized"
+  },
   "arp.transpose.range": {
    "kind": "singleton_field",
    "attr": "arp",
@@ -1687,6 +1699,222 @@
    "field": "value",
    "basis": "exact_normalized"
   },
+  "mixer.filter1.bus1": {
+   "kind": "field",
+   "module": "filter",
+   "list": "filters",
+   "index": 0,
+   "field": "fx_bus1_send",
+   "basis": "alias"
+  },
+  "mixer.filter1.bus2": {
+   "kind": "field",
+   "module": "filter",
+   "list": "filters",
+   "index": 0,
+   "field": "fx_bus2_send",
+   "basis": "alias"
+  },
+  "mixer.filter1.enable": {
+   "kind": "field",
+   "module": "filter",
+   "list": "filters",
+   "index": 0,
+   "field": "enabled",
+   "basis": "alias"
+  },
+  "mixer.filter1.wet": {
+   "kind": "field",
+   "module": "filter",
+   "list": "filters",
+   "index": 0,
+   "field": "wet",
+   "basis": "exact_normalized"
+  },
+  "mixer.filter2.bus1": {
+   "kind": "field",
+   "module": "filter",
+   "list": "filters",
+   "index": 1,
+   "field": "fx_bus1_send",
+   "basis": "alias"
+  },
+  "mixer.filter2.bus2": {
+   "kind": "field",
+   "module": "filter",
+   "list": "filters",
+   "index": 1,
+   "field": "fx_bus2_send",
+   "basis": "alias"
+  },
+  "mixer.filter2.enable": {
+   "kind": "field",
+   "module": "filter",
+   "list": "filters",
+   "index": 1,
+   "field": "enabled",
+   "basis": "alias"
+  },
+  "mixer.filter2.wet": {
+   "kind": "field",
+   "module": "filter",
+   "list": "filters",
+   "index": 1,
+   "field": "wet",
+   "basis": "exact_normalized"
+  },
+  "mixer.noise.bus1": {
+   "kind": "field",
+   "module": "osc",
+   "list": "oscillators",
+   "index": 3,
+   "field": "fx_bus1_send",
+   "basis": "alias"
+  },
+  "mixer.noise.bus2": {
+   "kind": "field",
+   "module": "osc",
+   "list": "oscillators",
+   "index": 3,
+   "field": "fx_bus2_send",
+   "basis": "alias"
+  },
+  "mixer.noise.enable": {
+   "kind": "field",
+   "module": "osc",
+   "list": "oscillators",
+   "index": 3,
+   "field": "enabled",
+   "basis": "alias"
+  },
+  "mixer.noise.filter_balance": {
+   "kind": "field",
+   "module": "osc",
+   "list": "oscillators",
+   "index": 3,
+   "field": "filter_balance",
+   "basis": "exact_normalized"
+  },
+  "mixer.noise.pan": {
+   "kind": "field",
+   "module": "osc",
+   "list": "oscillators",
+   "index": 3,
+   "field": "pan",
+   "basis": "exact_normalized"
+  },
+  "mixer.osc_a.bus1": {
+   "kind": "field",
+   "module": "osc",
+   "list": "oscillators",
+   "index": 0,
+   "field": "fx_bus1_send",
+   "basis": "alias"
+  },
+  "mixer.osc_a.bus2": {
+   "kind": "field",
+   "module": "osc",
+   "list": "oscillators",
+   "index": 0,
+   "field": "fx_bus2_send",
+   "basis": "alias"
+  },
+  "mixer.osc_a.filter_balance": {
+   "kind": "field",
+   "module": "osc",
+   "list": "oscillators",
+   "index": 0,
+   "field": "filter_balance",
+   "basis": "exact_normalized"
+  },
+  "mixer.osc_b.bus1": {
+   "kind": "field",
+   "module": "osc",
+   "list": "oscillators",
+   "index": 1,
+   "field": "fx_bus1_send",
+   "basis": "alias"
+  },
+  "mixer.osc_b.bus2": {
+   "kind": "field",
+   "module": "osc",
+   "list": "oscillators",
+   "index": 1,
+   "field": "fx_bus2_send",
+   "basis": "alias"
+  },
+  "mixer.osc_b.filter_balance": {
+   "kind": "field",
+   "module": "osc",
+   "list": "oscillators",
+   "index": 1,
+   "field": "filter_balance",
+   "basis": "exact_normalized"
+  },
+  "mixer.osc_c.bus1": {
+   "kind": "field",
+   "module": "osc",
+   "list": "oscillators",
+   "index": 2,
+   "field": "fx_bus1_send",
+   "basis": "alias"
+  },
+  "mixer.osc_c.bus2": {
+   "kind": "field",
+   "module": "osc",
+   "list": "oscillators",
+   "index": 2,
+   "field": "fx_bus2_send",
+   "basis": "alias"
+  },
+  "mixer.osc_c.filter_balance": {
+   "kind": "field",
+   "module": "osc",
+   "list": "oscillators",
+   "index": 2,
+   "field": "filter_balance",
+   "basis": "exact_normalized"
+  },
+  "mixer.sub.bus1": {
+   "kind": "field",
+   "module": "osc",
+   "list": "oscillators",
+   "index": 4,
+   "field": "fx_bus1_send",
+   "basis": "alias"
+  },
+  "mixer.sub.bus2": {
+   "kind": "field",
+   "module": "osc",
+   "list": "oscillators",
+   "index": 4,
+   "field": "fx_bus2_send",
+   "basis": "alias"
+  },
+  "mixer.sub.enable": {
+   "kind": "field",
+   "module": "osc",
+   "list": "oscillators",
+   "index": 4,
+   "field": "enabled",
+   "basis": "alias"
+  },
+  "mixer.sub.filter_balance": {
+   "kind": "field",
+   "module": "osc",
+   "list": "oscillators",
+   "index": 4,
+   "field": "filter_balance",
+   "basis": "exact_normalized"
+  },
+  "mixer.sub.pan": {
+   "kind": "field",
+   "module": "osc",
+   "list": "oscillators",
+   "index": 4,
+   "field": "pan",
+   "basis": "exact_normalized"
+  },
   "oscA.detune": {
    "kind": "field",
    "module": "osc",
@@ -2196,5 +2424,5 @@
   "Env 4 Sustain": "env3.sustain",
   "Env 4 Release": "env3.release"
  },
- "unbound_atlas_ids": 559
+ "unbound_atlas_ids": 579
 }
