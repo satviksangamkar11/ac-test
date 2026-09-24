@@ -1,0 +1,51 @@
+{
+  "counts": {
+    "schema_generation_top_level_lists": 10,
+    "atlas_controls": 1136,
+    "host_parameters": 2623,
+    "canonical_registry_entries": 1136,
+    "mapped_schema_to_registry": 233,
+    "mapped_host_to_registry": 23,
+    "host_only_unmapped": 2599,
+    "host_conflicted": 1,
+    "conflicts_total": 2,
+    "conflicts_unresolved": 1,
+    "conflicts_resolved": 1,
+    "unknown_domain": 144,
+    "unknown_enum": 14,
+    "unknown_body_binding": 1128,
+    "evidenced": 8,
+    "structurally_executable": 8,
+    "unresolved": 805,
+    "unknown_classification": 203
+  },
+  "by_section": {
+    "ARP": 50,
+    "BROWSER": 41,
+    "CLIP": 30,
+    "ENV": 44,
+    "ENVELOPE": 12,
+    "FILTER": 76,
+    "FX": 189,
+    "GLOBAL": 76,
+    "GLOBAL_KEYBOARD": 21,
+    "LFO": 126,
+    "MACRO": 40,
+    "MACROS": 8,
+    "MATRIX": 98,
+    "MIXER": 57,
+    "OSCILLATOR": 96,
+    "OSC": 158,
+    "NOISE": 3,
+    "SUB": 1,
+    "TOPOLOGY": 2,
+    "VOICE": 8
+  },
+  "by_kind": {
+    "UNKNOWN": 203,
+    "PRESET_PARAMETER": 777,
+    "STRUCTURAL_STATE": 36,
+    "UI_STATE": 41,
+    "TOPOLOGY": 79
+  }
+}

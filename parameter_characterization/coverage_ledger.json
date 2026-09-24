@@ -1,0 +1,6696 @@
+{
+  "sections": {
+    "OSC (A/B/C/Noise/Sub)": {
+      "schema_field_count": 53,
+      "schema_fields": {
+        "enabled": {
+          "annotation": "<class 'bool'>",
+          "default": "True"
+        },
+        "octave": {
+          "annotation": "<class 'float'>",
+          "default": "0.0"
+        },
+        "semitone": {
+          "annotation": "<class 'float'>",
+          "default": "0.0"
+        },
+        "fine": {
+          "annotation": "<class 'float'>",
+          "default": "0.0"
+        },
+        "volume": {
+          "annotation": "<class 'float'>",
+          "default": "0.75"
+        },
+        "pan": {
+          "annotation": "<class 'float'>",
+          "default": "0.0"
+        },
+        "unison": {
+          "annotation": "<class 'float'>",
+          "default": "1.0"
+        },
+        "detune": {
+          "annotation": "<class 'float'>",
+          "default": "0.0"
+        },
+        "wavetable": {
+          "annotation": "<class 'str'>",
+          "default": "'default'"
+        },
+        "custom_harmonics": {
+          "annotation": "list[list[float]] | None",
+          "default": "None"
+        },
+        "sample_source": {
+          "annotation": "str | None",
+          "default": "None"
+        },
+        "sample_playback_source": {
+          "annotation": "str | None",
+          "default": "None"
+        },
+        "sample_center_pan": {
+          "annotation": "<class 'bool'>",
+          "default": "True"
+        },
+        "sample_loop": {
+          "annotation": "<class 'str'>",
+          "default": "'off'"
+        },
+        "sample_loop_start": {
+          "annotation": "<class 'float'>",
+          "default": "0.0"
+        },
+        "sample_loop_end": {
+          "annotation": "<class 'float'>",
+          "default": "100.0"
+        },
+        "sample_loop_crossfade": {
+          "annotation": "<class 'float'>",
+          "default": "0.0"
+        },
+        "sample_frames": {
+          "annotation": "<class 'int'>",
+          "default": "16"
+        },
+        "table_position": {
+          "annotation": "<class 'float'>",
+          "default": "0.0"
+        },
+        "warp_amount": {
+          "annotation": "<class 'float'>",
+          "default": "0.0"
+        },
+        "warp_mode": {
+          "annotation": "<class 'str'>",
+          "default": "'fm'"
+        },
+        "granular_source": {
+          "annotation": "str | None",
+          "default": "None"
+        },
+        "granular_density": {
+          "annotation": "<class 'float'>",
+          "default": "10.0"
+        },
+        "granular_grain_length": {
+          "annotation": "<class 'float'>",
+          "default": "100.0"
+        },
+        "granular_random_pitch": {
+          "annotation": "<class 'float'>",
+          "default": "0.0"
+        },
+        "granular_random_pan": {
+          "annotation": "<class 'float'>",
+          "default": "0.0"
+        },
+        "granular_random_grain_length": {
+          "annotation": "<class 'float'>",
+          "default": "0.0"
+        },
+        "granular_random_offset": {
+          "annotation": "<class 'float'>",
+          "default": "0.0"
+        },
+        "granular_loop": {
+          "annotation": "<class 'bool'>",
+          "default": "True"
+        },
+        "granular_jump_start": {
+          "annotation": "<class 'bool'>",
+          "default": "False"
+        },
+        "granular_reverse": {
+          "annotation": "<class 'bool'>",
+          "default": "False"
+        },
+        "granular_length_key_track": {
+          "annotation": "<class 'bool'>",
+          "default": "False"
+        },
+        "granular_max_grains": {
+          "annotation": "<class 'float'>",
+          "default": "16.0"
+        },
+        "granular_random_window_amount": {
+          "annotation": "<class 'float'>",
+          "default": "0.0"
+        },
+        "granular_random_window_skew": {
+          "annotation": "<class 'float'>",
+          "default": "0.0"
+        },
+        "spectral_source": {
+          "annotation": "str | None",
+          "default": "None"
+        },
+        "spectral_warp_freq_lo": {
+          "annotation": "<class 'float'>",
+          "default": "20.0"
+        },
+        "spectral_warp_freq_hi": {
+          "annotation": "<class 'float'>",
+          "default": "20000.0"
+        },
+        "spectral_filter_shift": {
+          "annotation": "<class 'float'>",
+          "default": "0.0"
+        },
+        "spectral_filter_wet": {
+          "annotation": "<class 'float'>",
+          "default": "100.0"
+        },
+        "multisample_source": {
+          "annotation": "str | None",
+          "default": "None"
+        },
+        "multisample_env_attack": {
+          "annotation": "<class 'float'>",
+          "default": "0.0"
+        },
+        "multisample_env_decay": {
+          "annotation": "<class 'float'>",
+          "default": "0.0"
+        },
+        "multisample_env_release": {
+          "annotation": "<class 'float'>",
+          "default": "0.0"
+        },
+        "warp_amount2": {
+          "annotation": "<class 'float'>",
+          "default": "0.0"
+        },
+        "warp_mode2": {
+          "annotation": "str | None",
+          "default": "None"
+        },
+        "warp_var2": {
+          "annotation": "float | None",
+          "default": "None"
+        },
+        "noise_type": {
+          "annotation": "<class 'str'>",
+          "default": "'White'"
+        },
+        "sub_shape": {
+          "annotation": "<class 'str'>",
+          "default": "'saw'"
+        },
+        "filter_routing": {
+          "annotation": "typing.Literal['filter', 'master', 'direct', 'none'] | None",
+          "default": "None"
+        },
+        "filter_balance": {
+          "annotation": "float | None",
+          "default": "None"
+        },
+        "fx_bus1_send": {
+          "annotation": "float | None",
+          "default": "None"
+        },
+        "fx_bus2_send": {
+          "annotation": "float | None",
+          "default": "None"
+        }
+      }
+    },
+    "FILTER": {
+      "schema_field_count": 13,
+      "schema_fields": {
+        "enabled": {
+          "annotation": "<class 'bool'>",
+          "default": "True"
+        },
+        "type": {
+          "annotation": "<class 'str'>",
+          "default": "'lowpass_24'"
+        },
+        "cutoff": {
+          "annotation": "<class 'float'>",
+          "default": "0.5"
+        },
+        "resonance": {
+          "annotation": "<class 'float'>",
+          "default": "10.0"
+        },
+        "drive": {
+          "annotation": "<class 'float'>",
+          "default": "0.0"
+        },
+        "stereo": {
+          "annotation": "<class 'float'>",
+          "default": "50.0"
+        },
+        "var": {
+          "annotation": "<class 'float'>",
+          "default": "0.0"
+        },
+        "key_track": {
+          "annotation": "<class 'bool'>",
+          "default": "False"
+        },
+        "wet": {
+          "annotation": "<class 'float'>",
+          "default": "100.0"
+        },
+        "level_out": {
+          "annotation": "<class 'float'>",
+          "default": "0.5"
+        },
+        "output_routing": {
+          "annotation": "typing.Literal['parallel', 'series'] | None",
+          "default": "None"
+        },
+        "fx_bus1_send": {
+          "annotation": "float | None",
+          "default": "None"
+        },
+        "fx_bus2_send": {
+          "annotation": "float | None",
+          "default": "None"
+        }
+      }
+    },
+    "ENV": {
+      "schema_field_count": 8,
+      "schema_fields": {
+        "attack": {
+          "annotation": "<class 'float'>",
+          "default": "0.0005"
+        },
+        "hold": {
+          "annotation": "<class 'float'>",
+          "default": "0.0"
+        },
+        "decay": {
+          "annotation": "<class 'float'>",
+          "default": "1.0"
+        },
+        "sustain": {
+          "annotation": "<class 'float'>",
+          "default": "1.0"
+        },
+        "release": {
+          "annotation": "<class 'float'>",
+          "default": "0.015"
+        },
+        "attack_curve": {
+          "annotation": "<class 'float'>",
+          "default": "50.0"
+        },
+        "decay_curve": {
+          "annotation": "<class 'float'>",
+          "default": "66.6"
+        },
+        "release_curve": {
+          "annotation": "<class 'float'>",
+          "default": "66.6"
+        }
+      }
+    },
+    "LFO": {
+      "schema_field_count": 13,
+      "schema_fields": {
+        "rate": {
+          "annotation": "<class 'float'>",
+          "default": "0.0"
+        },
+        "mode": {
+          "annotation": "<class 'str'>",
+          "default": "'Free'"
+        },
+        "beat_sync": {
+          "annotation": "bool | None",
+          "default": "None"
+        },
+        "delay": {
+          "annotation": "<class 'float'>",
+          "default": "0.0"
+        },
+        "rise": {
+          "annotation": "<class 'float'>",
+          "default": "0.0"
+        },
+        "smooth": {
+          "annotation": "<class 'float'>",
+          "default": "0.0"
+        },
+        "shape": {
+          "annotation": "str | None",
+          "default": "None"
+        },
+        "curve": {
+          "annotation": "list[serum_mcp.generation.spec.LfoCurvePointSpec] | None",
+          "default": "None"
+        },
+        "mono": {
+          "annotation": "<class 'bool'>",
+          "default": "False"
+        },
+        "swing": {
+          "annotation": "<class 'float'>",
+          "default": "0.0"
+        },
+        "dotted": {
+          "annotation": "<class 'bool'>",
+          "default": "False"
+        },
+        "triplets": {
+          "annotation": "<class 'bool'>",
+          "default": "False"
+        },
+        "rate10x": {
+          "annotation": "<class 'bool'>",
+          "default": "False"
+        }
+      }
+    },
+    "MACRO": {
+      "schema_field_count": 2,
+      "schema_fields": {
+        "name": {
+          "annotation": "<class 'str'>",
+          "default": "''"
+        },
+        "value": {
+          "annotation": "<class 'float'>",
+          "default": "0.0"
+        }
+      }
+    },
+    "FX_UNIT": {
+      "schema_field_count": 5,
+      "schema_fields": {
+        "type": {
+          "annotation": "<class 'str'>",
+          "default": "PydanticUndefined"
+        },
+        "wet": {
+          "annotation": "<class 'float'>",
+          "default": "50.0"
+        },
+        "params": {
+          "annotation": "dict[str, float | str]",
+          "default": "PydanticUndefined"
+        },
+        "rack": {
+          "annotation": "<class 'int'>",
+          "default": "0"
+        },
+        "flex": {
+          "annotation": "list[dict[str, object]] | None",
+          "default": "None"
+        }
+      }
+    },
+    "MOD_ROUTE": {
+      "schema_field_count": 6,
+      "schema_fields": {
+        "source": {
+          "annotation": "<class 'str'>",
+          "default": "PydanticUndefined"
+        },
+        "destination": {
+          "annotation": "<class 'str'>",
+          "default": "PydanticUndefined"
+        },
+        "amount": {
+          "annotation": "<class 'float'>",
+          "default": "0.0"
+        },
+        "bipolar": {
+          "annotation": "<class 'bool'>",
+          "default": "False"
+        },
+        "aux_source": {
+          "annotation": "str | None",
+          "default": "None"
+        },
+        "aux_inverted": {
+          "annotation": "<class 'bool'>",
+          "default": "False"
+        }
+      }
+    },
+    "GLOBAL": {
+      "schema_field_count": 26,
+      "schema_fields": {
+        "master_volume": {
+          "annotation": "<class 'float'>",
+          "default": "0.5"
+        },
+        "mono": {
+          "annotation": "<class 'bool'>",
+          "default": "False"
+        },
+        "portamento_time": {
+          "annotation": "<class 'float'>",
+          "default": "0.0"
+        },
+        "poly_count": {
+          "annotation": "<class 'float'>",
+          "default": "8.0"
+        },
+        "limit_same_note_polyphony": {
+          "annotation": "<class 'bool'>",
+          "default": "False"
+        },
+        "fx_bus1_volume": {
+          "annotation": "float | None",
+          "default": "None"
+        },
+        "fx_bus2_volume": {
+          "annotation": "float | None",
+          "default": "None"
+        },
+        "direct_volume": {
+          "annotation": "float | None",
+          "default": "None"
+        },
+        "fx_bus1_destination": {
+          "annotation": "typing.Literal['master', 'direct'] | None",
+          "default": "None"
+        },
+        "fx_bus2_destination": {
+          "annotation": "typing.Literal['master', 'direct'] | None",
+          "default": "None"
+        },
+        "bend_range_up": {
+          "annotation": "float | None",
+          "default": "None"
+        },
+        "bend_range_down": {
+          "annotation": "float | None",
+          "default": "None"
+        },
+        "legato": {
+          "annotation": "bool | None",
+          "default": "None"
+        },
+        "porta_always": {
+          "annotation": "bool | None",
+          "default": "None"
+        },
+        "porta_scaled": {
+          "annotation": "bool | None",
+          "default": "None"
+        },
+        "portamento_curve": {
+          "annotation": "float | None",
+          "default": "None"
+        },
+        "swing": {
+          "annotation": "float | None",
+          "default": "None"
+        },
+        "swing_div": {
+          "annotation": "float | None",
+          "default": "None"
+        },
+        "transpose": {
+          "annotation": "float | None",
+          "default": "None"
+        },
+        "global_tuning": {
+          "annotation": "float | None",
+          "default": "None"
+        },
+        "oversampling": {
+          "annotation": "float | None",
+          "default": "None"
+        },
+        "s1_compatibility": {
+          "annotation": "bool | None",
+          "default": "None"
+        },
+        "use_ultra_on_render": {
+          "annotation": "bool | None",
+          "default": "None"
+        },
+        "voice_priority": {
+          "annotation": "str | None",
+          "default": "None"
+        },
+        "note_latch": {
+          "annotation": "bool | None",
+          "default": "None"
+        },
+        "voice_amp": {
+          "annotation": "float | None",
+          "default": "None"
+        }
+      }
+    },
+    "ARP": {
+      "schema_field_count": 34,
+      "schema_fields": {
+        "enabled": {
+          "annotation": "<class 'bool'>",
+          "default": "True"
+        },
+        "shape": {
+          "annotation": "<class 'str'>",
+          "default": "'played'"
+        },
+        "rate": {
+          "annotation": "<class 'float'>",
+          "default": "0.5"
+        },
+        "gate": {
+          "annotation": "<class 'float'>",
+          "default": "75.0"
+        },
+        "dotted": {
+          "annotation": "<class 'bool'>",
+          "default": "False"
+        },
+        "triplets": {
+          "annotation": "<class 'bool'>",
+          "default": "False"
+        },
+        "transpose_shift": {
+          "annotation": "<class 'float'>",
+          "default": "0.0"
+        },
+        "transpose_shape": {
+          "annotation": "str | None",
+          "default": "None"
+        },
+        "pattern": {
+          "annotation": "list[serum_mcp.generation.spec.ArpPatternNoteSpec] | None",
+          "default": "None"
+        },
+        "pattern_step_beats": {
+          "annotation": "<class 'float'>",
+          "default": "0.25"
+        },
+        "chance": {
+          "annotation": "float | None",
+          "default": "None"
+        },
+        "offset": {
+          "annotation": "float | None",
+          "default": "None"
+        },
+        "transpose_range": {
+          "annotation": "float | None",
+          "default": "None"
+        },
+        "retrig_rate": {
+          "annotation": "float | None",
+          "default": "None"
+        },
+        "first_note_retrig": {
+          "annotation": "bool | None",
+          "default": "None"
+        },
+        "note_retrig": {
+          "annotation": "bool | None",
+          "default": "None"
+        },
+        "velo_enabled": {
+          "annotation": "bool | None",
+          "default": "None"
+        },
+        "velo_target": {
+          "annotation": "float | None",
+          "default": "None"
+        },
+        "wrap_range": {
+          "annotation": "float | None",
+          "default": "None"
+        },
+        "wrap_phantom_note": {
+          "annotation": "float | None",
+          "default": "None"
+        },
+        "key_zone_min": {
+          "annotation": "float | None",
+          "default": "None"
+        },
+        "key_zone_max": {
+          "annotation": "float | None",
+          "default": "None"
+        },
+        "midi_select_octave": {
+          "annotation": "float | None",
+          "default": "None"
+        },
+        "beat_retrig": {
+          "annotation": "bool | None",
+          "default": "None"
+        },
+        "launch_retrig": {
+          "annotation": "bool | None",
+          "default": "None"
+        },
+        "velo_retrig": {
+          "annotation": "bool | None",
+          "default": "None"
+        },
+        "velo_decay": {
+          "annotation": "float | None",
+          "default": "None"
+        },
+        "repeats": {
+          "annotation": "float | None",
+          "default": "None"
+        },
+        "transpose_step": {
+          "annotation": "float | None",
+          "default": "None"
+        },
+        "thru": {
+          "annotation": "bool | None",
+          "default": "None"
+        },
+        "range_wrap_mode": {
+          "annotation": "str | None",
+          "default": "None"
+        },
+        "playback_mode": {
+          "annotation": "str | None",
+          "default": "None"
+        },
+        "playback_mode_time": {
+          "annotation": "float | None",
+          "default": "None"
+        },
+        "step_action": {
+          "annotation": "str | None",
+          "default": "None"
+        }
+      }
+    },
+    "VOICE_CONTROL": {
+      "schema_field_count": 20,
+      "schema_fields": {
+        "pan": {
+          "annotation": "list[float | None] | None",
+          "default": "None"
+        },
+        "detune": {
+          "annotation": "list[float | None] | None",
+          "default": "None"
+        },
+        "filter_cutoff": {
+          "annotation": "list[float | None] | None",
+          "default": "None"
+        },
+        "env_time": {
+          "annotation": "list[float | None] | None",
+          "default": "None"
+        },
+        "mod1": {
+          "annotation": "list[float | None] | None",
+          "default": "None"
+        },
+        "mod2": {
+          "annotation": "list[float | None] | None",
+          "default": "None"
+        },
+        "random_pan": {
+          "annotation": "float | None",
+          "default": "None"
+        },
+        "random_detune": {
+          "annotation": "float | None",
+          "default": "None"
+        },
+        "random_detune_10x": {
+          "annotation": "bool | None",
+          "default": "None"
+        },
+        "random_env_time": {
+          "annotation": "float | None",
+          "default": "None"
+        },
+        "random_filter_cutoff": {
+          "annotation": "float | None",
+          "default": "None"
+        },
+        "scaling_env_time": {
+          "annotation": "float | None",
+          "default": "None"
+        },
+        "scaling_lfo_time": {
+          "annotation": "float | None",
+          "default": "None"
+        },
+        "scaling_lfo_time_snap": {
+          "annotation": "bool | None",
+          "default": "None"
+        },
+        "affects_osc_a": {
+          "annotation": "bool | None",
+          "default": "None"
+        },
+        "affects_osc_b": {
+          "annotation": "bool | None",
+          "default": "None"
+        },
+        "affects_osc_c": {
+          "annotation": "bool | None",
+          "default": "None"
+        },
+        "affects_osc_noise": {
+          "annotation": "bool | None",
+          "default": "None"
+        },
+        "affects_osc_sub": {
+          "annotation": "bool | None",
+          "default": "None"
+        },
+        "voice_count": {
+          "annotation": "float | None",
+          "default": "None"
+        }
+      }
+    }
+  },
+  "not_first_class_in_preset_spec": [
+    "CLIP (raw ARPCLIP_PARAMS exists; no PresetSpec.clip field)",
+    "Keyboard/Key/Scale/OscMapping (no PresetSpec field)",
+    "UI Preferences (not sound-design state)"
+  ],
+  "atlas_total_controls": 1136,
+  "atlas_by_panel": {
+    "ARP": {
+      "count": 50,
+      "evidenced_count": 0,
+      "controls": [
+        {
+          "control_id": "arp.global.bank",
+          "control_type": "resource_browser",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.global.edit_all",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.global.launch_quant",
+          "control_type": "draggable_value",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.midi_out",
+          "control_type": "dropdown",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.pattern.bpm_hz",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.pattern.dot",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.pattern.edit_toggle",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.pattern.editor.accent_row",
+          "control_type": "unknown",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.pattern.editor.add_lane_menu",
+          "control_type": "menu",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.pattern.editor.length",
+          "control_type": "multi_field_value",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.pattern.editor.mode",
+          "control_type": "dropdown",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.pattern.editor.pattern_select",
+          "control_type": "stepper",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.pattern.editor.pitch",
+          "control_type": "numeric",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.pattern.editor.range",
+          "control_type": "numeric",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.pattern.editor.step_grid",
+          "control_type": "graphical_step_editor",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.pattern.editor.step_mode",
+          "control_type": "dropdown",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.pattern.editor.strum_row",
+          "control_type": "unknown",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.pattern.editor.time",
+          "control_type": "unknown",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.pattern.editor.vel_rand_lane",
+          "control_type": "graphical_curve_editor",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.pattern.editor.velocity_lane",
+          "control_type": "graphical_curve_editor",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.pattern.editor.wrap",
+          "control_type": "dropdown",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.pattern.editor.wrap_phantom_note",
+          "control_type": "unknown",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.pattern.rate",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.pattern.shape",
+          "control_type": "dropdown",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.pattern.shape_pattern_mode",
+          "control_type": "dropdown_option",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.pattern.trip",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.playback.chance",
+          "control_type": "draggable_value",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.playback.chance_pre",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.playback.gate",
+          "control_type": "draggable_value",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.playback.latch",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.playback.offset",
+          "control_type": "draggable_value",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.playback.repeats",
+          "control_type": "draggable_value",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.playback.thru",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.retrigger.first",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.retrigger.launch",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.retrigger.note",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.retrigger.rate_enable",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.retrigger.rate_value",
+          "control_type": "draggable_value",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.slot.context_menu",
+          "control_type": "menu",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.slot.count",
+          "control_type": "structural_fact",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.slot.midi_keyboard_launch",
+          "control_type": "midi_trigger",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.slot.play_button",
+          "control_type": "launch_button",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.slot.summary_display",
+          "control_type": "display",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.transpose.range",
+          "control_type": "draggable_value",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.transpose.shape",
+          "control_type": "dropdown",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.transpose.shift",
+          "control_type": "draggable_value",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.velocity.decay",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.velocity.enable",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.velocity.retrig",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "arp.velocity.target",
+          "control_type": "knob",
+          "evidenced": false
+        }
+      ]
+    },
+    "BROWSER": {
+      "count": 41,
+      "evidenced_count": 0,
+      "controls": [
+        {
+          "control_id": "browser.categories_tags.category_list",
+          "control_type": "multi_select_list",
+          "evidenced": false
+        },
+        {
+          "control_id": "browser.categories_tags.rating_filter",
+          "control_type": "dropdown",
+          "evidenced": false
+        },
+        {
+          "control_id": "browser.categories_tags.tag_list",
+          "control_type": "multi_select_list",
+          "evidenced": false
+        },
+        {
+          "control_id": "browser.categories_tags.toggle",
+          "control_type": "tab_toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "browser.folders.create_export_pack",
+          "control_type": "menu_action",
+          "evidenced": false
+        },
+        {
+          "control_id": "browser.folders.tree",
+          "control_type": "tree",
+          "evidenced": false
+        },
+        {
+          "control_id": "browser.menu.auto_play_previews",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "browser.menu.delete_presets",
+          "control_type": "menu_action",
+          "evidenced": false
+        },
+        {
+          "control_id": "browser.menu.erase_rebuild_database",
+          "control_type": "menu_action",
+          "evidenced": false
+        },
+        {
+          "control_id": "browser.menu.hybridize",
+          "control_type": "menu_action",
+          "evidenced": false
+        },
+        {
+          "control_id": "browser.menu.hybridize_favoring_selected",
+          "control_type": "menu_action",
+          "evidenced": false
+        },
+        {
+          "control_id": "browser.menu.load_random_preset",
+          "control_type": "menu_action",
+          "evidenced": false
+        },
+        {
+          "control_id": "browser.menu.preview_fallback_clip",
+          "control_type": "submenu_select",
+          "evidenced": false
+        },
+        {
+          "control_id": "browser.menu.rename_move_preset",
+          "control_type": "menu_action",
+          "evidenced": false
+        },
+        {
+          "control_id": "browser.menu.rescan_database",
+          "control_type": "menu_action",
+          "evidenced": false
+        },
+        {
+          "control_id": "browser.menu.show_in_folder",
+          "control_type": "menu_action",
+          "evidenced": false
+        },
+        {
+          "control_id": "browser.metadata.author",
+          "control_type": "text_field",
+          "evidenced": false
+        },
+        {
+          "control_id": "browser.metadata.category",
+          "control_type": "text_field",
+          "evidenced": false
+        },
+        {
+          "control_id": "browser.metadata.description",
+          "control_type": "text_field",
+          "evidenced": false
+        },
+        {
+          "control_id": "browser.metadata.notes",
+          "control_type": "text_area",
+          "evidenced": false
+        },
+        {
+          "control_id": "browser.metadata.preset_name",
+          "control_type": "text_field",
+          "evidenced": false
+        },
+        {
+          "control_id": "browser.metadata.tags_panel",
+          "control_type": "tag_editor",
+          "evidenced": false
+        },
+        {
+          "control_id": "browser.navigation.preset_dropdown",
+          "control_type": "cascading_menu",
+          "evidenced": false
+        },
+        {
+          "control_id": "browser.navigation.prev_next",
+          "control_type": "button_pair",
+          "evidenced": false
+        },
+        {
+          "control_id": "browser.navigation.save_icon",
+          "control_type": "button",
+          "evidenced": false
+        },
+        {
+          "control_id": "browser.packs.get_packs",
+          "control_type": "menu_action",
+          "evidenced": false
+        },
+        {
+          "control_id": "browser.packs.import",
+          "control_type": "menu_action",
+          "evidenced": false
+        },
+        {
+          "control_id": "browser.preset_list.columns",
+          "control_type": "table",
+          "evidenced": false
+        },
+        {
+          "control_id": "browser.preset_list.rating_stars",
+          "control_type": "star_rating",
+          "evidenced": false
+        },
+        {
+          "control_id": "browser.preset_list.row_context_menu",
+          "control_type": "context_menu",
+          "evidenced": false
+        },
+        {
+          "control_id": "browser.preset_list.row_select_load",
+          "control_type": "action",
+          "evidenced": false
+        },
+        {
+          "control_id": "browser.search.clear",
+          "control_type": "button",
+          "evidenced": false
+        },
+        {
+          "control_id": "browser.search.field",
+          "control_type": "text_field",
+          "evidenced": false
+        },
+        {
+          "control_id": "browser.toggle",
+          "control_type": "button",
+          "evidenced": false
+        },
+        {
+          "control_id": "topmenu.resource.init_preset",
+          "control_type": "menu_action",
+          "evidenced": false
+        },
+        {
+          "control_id": "topmenu.resource.load_preset",
+          "control_type": "menu_action",
+          "evidenced": false
+        },
+        {
+          "control_id": "topmenu.resource.load_tuning",
+          "control_type": "menu_action",
+          "evidenced": false
+        },
+        {
+          "control_id": "topmenu.resource.open_presets_folder",
+          "control_type": "menu_action",
+          "evidenced": false
+        },
+        {
+          "control_id": "topmenu.resource.rescan_folders_on_disk",
+          "control_type": "menu_action",
+          "evidenced": false
+        },
+        {
+          "control_id": "topmenu.resource.revert_to_saved",
+          "control_type": "menu_action",
+          "evidenced": false
+        },
+        {
+          "control_id": "topmenu.resource.save_as_default_preset",
+          "control_type": "menu_action",
+          "evidenced": false
+        }
+      ]
+    },
+    "CLIP": {
+      "count": 30,
+      "evidenced_count": 0,
+      "controls": [
+        {
+          "control_id": "clip.editor.hear_selected",
+          "control_type": "button",
+          "evidenced": false
+        },
+        {
+          "control_id": "clip.editor.note_grid",
+          "control_type": "graphical_step_editor",
+          "evidenced": false
+        },
+        {
+          "control_id": "clip.editor.velocity_lane",
+          "control_type": "graphical_curve_editor",
+          "evidenced": false
+        },
+        {
+          "control_id": "clip.global.bank",
+          "control_type": "resource_browser",
+          "evidenced": false
+        },
+        {
+          "control_id": "clip.global.edit_all",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "clip.global.show_macros",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "clip.global.trigger_mode",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "clip.metronome",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "clip.midi_out",
+          "control_type": "dropdown",
+          "evidenced": false
+        },
+        {
+          "control_id": "clip.player.enable",
+          "control_type": "boolean",
+          "evidenced": false
+        },
+        {
+          "control_id": "clip.record",
+          "control_type": "button",
+          "evidenced": false
+        },
+        {
+          "control_id": "clip.record_mode",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "clip.settings.clip_select",
+          "control_type": "stepper",
+          "evidenced": false
+        },
+        {
+          "control_id": "clip.settings.kb_span",
+          "control_type": "dropdown",
+          "evidenced": false
+        },
+        {
+          "control_id": "clip.settings.launch_quant",
+          "control_type": "draggable_value",
+          "evidenced": false
+        },
+        {
+          "control_id": "clip.settings.length",
+          "control_type": "multi_field_value",
+          "evidenced": false
+        },
+        {
+          "control_id": "clip.settings.mode",
+          "control_type": "dropdown",
+          "evidenced": false
+        },
+        {
+          "control_id": "clip.settings.note_gate",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "clip.settings.offset",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "clip.settings.rate",
+          "control_type": "draggable_value",
+          "evidenced": false
+        },
+        {
+          "control_id": "clip.settings.rate_bpm_hz",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "clip.settings.rate_dot",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "clip.settings.rate_trip",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "clip.settings.retrig",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "clip.settings.time",
+          "control_type": "dropdown",
+          "evidenced": false
+        },
+        {
+          "control_id": "clip.settings.trans",
+          "control_type": "draggable_value",
+          "evidenced": false
+        },
+        {
+          "control_id": "clip.settings.velo_trig",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "clip.slot.context_menu",
+          "control_type": "menu",
+          "evidenced": false
+        },
+        {
+          "control_id": "clip.slot.count",
+          "control_type": "structural_fact",
+          "evidenced": false
+        },
+        {
+          "control_id": "clip.slot.play_button",
+          "control_type": "launch_button",
+          "evidenced": false
+        }
+      ]
+    },
+    "ENV": {
+      "count": 12,
+      "evidenced_count": 0,
+      "controls": [
+        {
+          "control_id": "env1.bpm",
+          "control_type": "boolean toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "env1.source",
+          "control_type": "unknown",
+          "evidenced": false
+        },
+        {
+          "control_id": "env1.voicestealretriggermode",
+          "control_type": "enum, 2 options",
+          "evidenced": false
+        },
+        {
+          "control_id": "env2.bpm",
+          "control_type": "boolean toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "env2.source",
+          "control_type": "unknown",
+          "evidenced": false
+        },
+        {
+          "control_id": "env2.voicestealretriggermode",
+          "control_type": "enum, 2 options",
+          "evidenced": false
+        },
+        {
+          "control_id": "env3.bpm",
+          "control_type": "boolean toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "env3.source",
+          "control_type": "unknown",
+          "evidenced": false
+        },
+        {
+          "control_id": "env3.voicestealretriggermode",
+          "control_type": "enum, 2 options",
+          "evidenced": false
+        },
+        {
+          "control_id": "env4.bpm",
+          "control_type": "boolean toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "env4.source",
+          "control_type": "unknown",
+          "evidenced": false
+        },
+        {
+          "control_id": "env4.voicestealretriggermode",
+          "control_type": "enum, 2 options",
+          "evidenced": false
+        }
+      ]
+    },
+    "ENV1": {
+      "count": 8,
+      "evidenced_count": 0,
+      "controls": [
+        {
+          "control_id": "env1.attack",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "env1.attack_curve",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "env1.decay",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "env1.decay_curve",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "env1.hold",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "env1.release",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "env1.release_curve",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "env1.sustain",
+          "control_type": "continuous",
+          "evidenced": false
+        }
+      ]
+    },
+    "ENV2": {
+      "count": 8,
+      "evidenced_count": 0,
+      "controls": [
+        {
+          "control_id": "env2.attack",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "env2.attack_curve",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "env2.decay",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "env2.decay_curve",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "env2.hold",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "env2.release",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "env2.release_curve",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "env2.sustain",
+          "control_type": "continuous",
+          "evidenced": false
+        }
+      ]
+    },
+    "ENV3": {
+      "count": 8,
+      "evidenced_count": 0,
+      "controls": [
+        {
+          "control_id": "env3.attack",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "env3.attack_curve",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "env3.decay",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "env3.decay_curve",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "env3.hold",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "env3.release",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "env3.release_curve",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "env3.sustain",
+          "control_type": "continuous",
+          "evidenced": false
+        }
+      ]
+    },
+    "ENV4": {
+      "count": 8,
+      "evidenced_count": 0,
+      "controls": [
+        {
+          "control_id": "env4.attack",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "env4.attack_curve",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "env4.decay",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "env4.decay_curve",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "env4.hold",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "env4.release",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "env4.release_curve",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "env4.sustain",
+          "control_type": "continuous",
+          "evidenced": false
+        }
+      ]
+    },
+    "ENVELOPE": {
+      "count": 12,
+      "evidenced_count": 0,
+      "controls": [
+        {
+          "control_id": "env1.curve_display",
+          "control_type": "graph",
+          "evidenced": false
+        },
+        {
+          "control_id": "env1.invert_legato",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "env1.time_mode",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "env2.curve_display",
+          "control_type": "graph",
+          "evidenced": false
+        },
+        {
+          "control_id": "env2.invert_legato",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "env2.time_mode",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "env3.curve_display",
+          "control_type": "graph",
+          "evidenced": false
+        },
+        {
+          "control_id": "env3.invert_legato",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "env3.time_mode",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "env4.curve_display",
+          "control_type": "graph",
+          "evidenced": false
+        },
+        {
+          "control_id": "env4.invert_legato",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "env4.time_mode",
+          "control_type": "enum",
+          "evidenced": false
+        }
+      ]
+    },
+    "FILTER": {
+      "count": 56,
+      "evidenced_count": 0,
+      "controls": [
+        {
+          "control_id": "filter1.drive_mode",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter1.mute",
+          "control_type": "structural",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter1.response_graph",
+          "control_type": "graph",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter1.routenoise",
+          "control_type": "structural",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter1.routeosca",
+          "control_type": "structural",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter1.routeoscb",
+          "control_type": "structural",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter1.routeoscc",
+          "control_type": "structural",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter1.routesub",
+          "control_type": "structural",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter1.type_specific.boeuf",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter1.type_specific.combfreq",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter1.type_specific.damp",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter1.type_specific.fat",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter1.type_specific.formant",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter1.type_specific.freq2",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter1.type_specific.freq2comb",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter1.type_specific.gaindb",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter1.type_specific.hlwidth",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter1.type_specific.hpfreq",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter1.type_specific.lpfreq",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter1.type_specific.mixalt",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter1.type_specific.morph",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter1.type_specific.pain",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter1.type_specific.screamamt",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter1.type_specific.smooth",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter1.type_specific.spread",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter1.type_specific.stages",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter1.type_specific.thru",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter1.type_specific.width",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter2.drive_mode",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter2.mute",
+          "control_type": "structural",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter2.response_graph",
+          "control_type": "graph",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter2.routenoise",
+          "control_type": "structural",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter2.routeosca",
+          "control_type": "structural",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter2.routeoscb",
+          "control_type": "structural",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter2.routeoscc",
+          "control_type": "structural",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter2.routesub",
+          "control_type": "structural",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter2.type_specific.boeuf",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter2.type_specific.combfreq",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter2.type_specific.damp",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter2.type_specific.fat",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter2.type_specific.formant",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter2.type_specific.freq2",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter2.type_specific.freq2comb",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter2.type_specific.gaindb",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter2.type_specific.hlwidth",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter2.type_specific.hpfreq",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter2.type_specific.lpfreq",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter2.type_specific.mixalt",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter2.type_specific.morph",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter2.type_specific.pain",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter2.type_specific.screamamt",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter2.type_specific.smooth",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter2.type_specific.spread",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter2.type_specific.stages",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter2.type_specific.thru",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter2.type_specific.width",
+          "control_type": "continuous",
+          "evidenced": false
+        }
+      ]
+    },
+    "FILTER1": {
+      "count": 10,
+      "evidenced_count": 0,
+      "controls": [
+        {
+          "control_id": "filter1.cutoff",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter1.drive",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter1.enabled",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter1.key_track",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter1.level_out",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter1.resonance",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter1.stereo",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter1.type",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter1.var",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter1.wet",
+          "control_type": "continuous",
+          "evidenced": false
+        }
+      ]
+    },
+    "FILTER2": {
+      "count": 10,
+      "evidenced_count": 0,
+      "controls": [
+        {
+          "control_id": "filter2.cutoff",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter2.drive",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter2.enabled",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter2.key_track",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter2.level_out",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter2.resonance",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter2.stereo",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter2.type",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter2.var",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "filter2.wet",
+          "control_type": "continuous",
+          "evidenced": false
+        }
+      ]
+    },
+    "FX": {
+      "count": 189,
+      "evidenced_count": 0,
+      "controls": [
+        {
+          "control_id": "fx.bode.balance",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.bode.blur",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.bode.bpm",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.bode.delay",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.bode.dir",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.bode.feed",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.bode.mono_input",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.bode.range",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.bode.shift",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.bode.shift_retrig",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.bode.wet",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.bode.width",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.chorus.bpm",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.chorus.delay1",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.chorus.delay2",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.chorus.depth",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.chorus.feedback",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.chorus.filter_cutoff",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.chorus.filter_mode",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.chorus.rate",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.chorus.wet",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.compressor.attack",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.compressor.band_graphic",
+          "control_type": "display_only",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.compressor.band_h",
+          "control_type": "draggable_value",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.compressor.band_l",
+          "control_type": "draggable_value",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.compressor.band_m",
+          "control_type": "draggable_value",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.compressor.below",
+          "control_type": "draggable_value",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.compressor.gain",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.compressor.mode",
+          "control_type": "toggle_buttons",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.compressor.ratio",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.compressor.release",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.compressor.thresh",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.compressor.wet",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.compressor.x_high",
+          "control_type": "draggable_value",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.compressor.x_low",
+          "control_type": "draggable_value",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.convolve.attack",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.convolve.bpm",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.convolve.damp",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.convolve.decay",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.convolve.ir_browser",
+          "control_type": "resource_browser",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.convolve.ir_gain",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.convolve.ir_next_prev",
+          "control_type": "resource_nav",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.convolve.load_ir_external",
+          "control_type": "file_dialog",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.convolve.min_phase",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.convolve.pre_dly",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.convolve.size",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.convolve.tone",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.convolve.wet",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.delay.bpm",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.delay.feedback",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.delay.filter_graph",
+          "control_type": "graphical_2d_control",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.delay.freq",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.delay.high_quality",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.delay.link",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.delay.mode",
+          "control_type": "dropdown",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.delay.q",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.delay.time_l",
+          "control_type": "draggable_value",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.delay.time_r",
+          "control_type": "draggable_value",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.delay.wet",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.dimension.size",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.dimension.wet",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.distortion.drive",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.distortion.filter_graph",
+          "control_type": "draggable_slider",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.distortion.filter_position",
+          "control_type": "toggle_buttons",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.distortion.freq",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.distortion.q",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.distortion.type",
+          "control_type": "dropdown",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.distortion.waveform_preview",
+          "control_type": "graphical_display",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.distortion.wet",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.distortion.xshaper_a",
+          "control_type": "graphical_editor_popup",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.distortion.xshaper_b",
+          "control_type": "graphical_editor_popup",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.distortion.xshaper_edit_pencil",
+          "control_type": "decorative_icon",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.equalizer.graph",
+          "control_type": "graphical_display",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.equalizer.left_freq",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.equalizer.left_gain",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.equalizer.left_q",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.equalizer.left_type",
+          "control_type": "toggle_buttons",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.equalizer.level",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.equalizer.right_freq",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.equalizer.right_gain",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.equalizer.right_q",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.equalizer.right_type",
+          "control_type": "toggle_buttons",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.filter.cutoff",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.filter.drive",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.filter.fat",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.filter.graph",
+          "control_type": "graphical_2d_control",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.filter.key_track",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.filter.pan",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.filter.res",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.filter.type",
+          "control_type": "nested_dropdown",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.filter.wet",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.flanger.bpm",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.flanger.depth",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.flanger.feedback",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.flanger.no_separate_delay_knob",
+          "control_type": "unknown",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.flanger.phase",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.flanger.rate",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.flanger.wet",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.fxbode",
+          "control_type": "module_identity",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.fxchorus",
+          "control_type": "module_identity",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.fxcomp",
+          "control_type": "module_identity",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.fxconv",
+          "control_type": "module_identity",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.fxdelay",
+          "control_type": "module_identity",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.fxdistortion",
+          "control_type": "module_identity",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.fxeq",
+          "control_type": "module_identity",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.fxfilter",
+          "control_type": "module_identity",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.fxflanger",
+          "control_type": "module_identity",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.fxhyperd",
+          "control_type": "module_identity",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.fxphaser",
+          "control_type": "module_identity",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.fxreverb",
+          "control_type": "module_identity",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.fxsplit",
+          "control_type": "module_identity",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.fxsplit3",
+          "control_type": "module_identity",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.fxsplitms",
+          "control_type": "module_identity",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.fxutils",
+          "control_type": "module_identity",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.hyper.detune",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.hyper.rate",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.hyper.retrig",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.hyper.unison",
+          "control_type": "stepper",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.hyper.wet",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.hyper_dimension.structure",
+          "control_type": "compound_module",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.phaser.bpm",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.phaser.depth",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.phaser.depth2",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.phaser.feedback",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.phaser.freq",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.phaser.phase",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.phaser.poles",
+          "control_type": "stepper",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.phaser.rate",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.phaser.wet",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.reverb.chorus_mod",
+          "control_type": "knob_group",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.reverb.damp_plate",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.reverb.damp_vintage",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.reverb.decay_hall",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.reverb.diff_a_vintage",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.reverb.diff_b_vintage",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.reverb.diffusion_nitrous",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.reverb.er_size_vintage",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.reverb.feedback_nitrous_basin",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.reverb.hi_cut",
+          "control_type": "draggable_value",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.reverb.lo_cut",
+          "control_type": "draggable_value",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.reverb.mode_nitrous",
+          "control_type": "dropdown",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.reverb.pre_dly",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.reverb.size",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.reverb.spin_hall",
+          "control_type": "knob_group",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.reverb.type",
+          "control_type": "dropdown",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.reverb.wet",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.reverb.width_plate",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.splitter_lh.highs_bypass",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.splitter_lh.highs_rack",
+          "control_type": "nested_rack",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.splitter_lh.highs_select",
+          "control_type": "tab_selector",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.splitter_lh.lows_bypass",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.splitter_lh.lows_rack",
+          "control_type": "nested_rack",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.splitter_lh.lows_select",
+          "control_type": "tab_selector",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.splitter_lh.split_freq",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.splitter_lh.structure",
+          "control_type": "topology_module",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.splitter_lh.wet",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.splitter_lmh.highs_bypass",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.splitter_lmh.highs_rack",
+          "control_type": "nested_rack",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.splitter_lmh.lows_bypass",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.splitter_lmh.lows_rack",
+          "control_type": "nested_rack",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.splitter_lmh.mids_bypass",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.splitter_lmh.mids_rack",
+          "control_type": "nested_rack",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.splitter_lmh.split_freq_low_mid",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.splitter_lmh.split_freq_mid_high",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.splitter_lmh.structure",
+          "control_type": "topology_module",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.splitter_lmh.wet",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.splitter_ms.mid_bypass",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.splitter_ms.mid_rack",
+          "control_type": "nested_rack",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.splitter_ms.side_bypass",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.splitter_ms.side_rack",
+          "control_type": "nested_rack",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.splitter_ms.structure",
+          "control_type": "topology_module",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.splitter_ms.wet",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.sys.add_fx_menu",
+          "control_type": "menu",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.sys.module_bypass",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.sys.module_context_menu",
+          "control_type": "menu",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.sys.module_list_panel",
+          "control_type": "list_with_controls",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.sys.module_param_context_menu",
+          "control_type": "menu",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.sys.rack_preset_browser",
+          "control_type": "dropdown_menu",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.sys.racks",
+          "control_type": "tab_selector",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.sys.reorder",
+          "control_type": "drag_reorder",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.utility.freq",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.utility.hpf",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.utility.lpf",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.utility.mono_bass",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.utility.pan",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.utility.polarity_inv_l",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.utility.polarity_inv_r",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.utility.wet",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "fx.utility.width",
+          "control_type": "knob",
+          "evidenced": false
+        }
+      ]
+    },
+    "GLOBAL": {
+      "count": 76,
+      "evidenced_count": 0,
+      "controls": [
+        {
+          "control_id": "global.bend_range_down",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.bend_range_up",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.direct_volume",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.fx_bus1_destination",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.fx_bus1_volume",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.fx_bus2_destination",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.fx_bus2_volume",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.global_tuning",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.info.build_date_display",
+          "control_type": "display",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.legato",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.limit_same_note_polyphony",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.master_volume",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.mono",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.note_latch",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.oversampling",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.poly_count",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.porta_always",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.porta_scaled",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.portamento_curve",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.portamento_time",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.preferences.default_waveform_view",
+          "control_type": "toggle_pair",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.preferences.double_click_params",
+          "control_type": "toggle_pair",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.preferences.help_tooltips",
+          "control_type": "toggle_pair",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.preferences.keyboard_shortcuts",
+          "control_type": "toggle_pair",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.preferences.mouse_wheel_param_control",
+          "control_type": "toggle_pair",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.preferences.mpe_enabled_by_default",
+          "control_type": "checkbox",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.preferences.mpe_expr_y_acts_bi_directional",
+          "control_type": "checkbox",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.preferences.mpe_pitch_bend_maps_to_expr_x",
+          "control_type": "checkbox",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.preferences.param_value_tooltips",
+          "control_type": "toggle_pair",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.quality.disable_smoothing",
+          "control_type": "checkbox",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.quality.oversampling",
+          "control_type": "dropdown",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.quality.oversampling_lock",
+          "control_type": "lock_toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.quality.s1_compatibility",
+          "control_type": "checkbox",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.retriggers.env_2",
+          "control_type": "boolean",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.retriggers.env_3",
+          "control_type": "boolean",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.retriggers.env_4",
+          "control_type": "boolean",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.retriggers.lfo_1",
+          "control_type": "boolean",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.retriggers.lfo_10",
+          "control_type": "boolean",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.retriggers.lfo_2",
+          "control_type": "boolean",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.retriggers.lfo_3",
+          "control_type": "boolean",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.retriggers.lfo_4",
+          "control_type": "boolean",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.retriggers.lfo_5",
+          "control_type": "boolean",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.retriggers.lfo_6",
+          "control_type": "boolean",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.retriggers.lfo_7",
+          "control_type": "boolean",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.retriggers.lfo_8",
+          "control_type": "boolean",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.retriggers.lfo_9",
+          "control_type": "boolean",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.retriggers.noise",
+          "control_type": "boolean",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.retriggers.note",
+          "control_type": "boolean",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.retriggers.osc_a",
+          "control_type": "boolean",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.retriggers.osc_b",
+          "control_type": "boolean",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.retriggers.osc_c",
+          "control_type": "boolean",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.retriggers.sub",
+          "control_type": "boolean",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.s1_compatibility",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.swing",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.swing_div",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.transpose",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.tuning.global_tuning",
+          "control_type": "stepper",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.tuning.lock",
+          "control_type": "lock_toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.tuning.tun_file",
+          "control_type": "file_loader",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.use_ultra_on_render",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.voice_amp",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.voice_control.osc_scope",
+          "control_type": "multi_toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.voice_control.preset_field",
+          "control_type": "resource_select",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.voice_control.random.cutoff",
+          "control_type": "stepper",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.voice_control.random.detune",
+          "control_type": "stepper",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.voice_control.random.envs",
+          "control_type": "stepper",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.voice_control.random.pan",
+          "control_type": "stepper",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.voice_control.scaling.envs",
+          "control_type": "stepper",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.voice_control.scaling.lfos",
+          "control_type": "stepper",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.voice_control.scaling.lfos_rate_toggle",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.voice_control.seq.cutoff",
+          "control_type": "step_sequencer",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.voice_control.seq.detune",
+          "control_type": "step_sequencer",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.voice_control.seq.envs",
+          "control_type": "step_sequencer",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.voice_control.seq.mod1",
+          "control_type": "step_sequencer",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.voice_control.seq.mod2",
+          "control_type": "step_sequencer",
+          "evidenced": false
+        },
+        {
+          "control_id": "global.voice_control.seq.pan",
+          "control_type": "step_sequencer",
+          "evidenced": false
+        }
+      ]
+    },
+    "GLOBAL_KEYBOARD": {
+      "count": 21,
+      "evidenced_count": 0,
+      "controls": [
+        {
+          "control_id": "keyboard.key",
+          "control_type": "dropdown",
+          "evidenced": false
+        },
+        {
+          "control_id": "keyboard.main_keyboard",
+          "control_type": "piano_keyboard",
+          "evidenced": false
+        },
+        {
+          "control_id": "keyboard.mod_wheel",
+          "control_type": "vertical_wheel",
+          "evidenced": false
+        },
+        {
+          "control_id": "keyboard.mod_wheel.source_indicator",
+          "control_type": "indicator_button",
+          "evidenced": false
+        },
+        {
+          "control_id": "keyboard.mpe.bend_range",
+          "control_type": "menu_numeric",
+          "evidenced": false
+        },
+        {
+          "control_id": "keyboard.mpe.enabled",
+          "control_type": "menu_checkbox",
+          "evidenced": false
+        },
+        {
+          "control_id": "keyboard.mpe.xyz_to_macros123",
+          "control_type": "menu_action",
+          "evidenced": false
+        },
+        {
+          "control_id": "keyboard.mpe.y_to_modwheel",
+          "control_type": "menu_action",
+          "evidenced": false
+        },
+        {
+          "control_id": "keyboard.mpe.yz_to_macros12",
+          "control_type": "menu_action",
+          "evidenced": false
+        },
+        {
+          "control_id": "keyboard.osc_mapping.arp_row_fold",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "keyboard.osc_mapping.arp_row_key_range",
+          "control_type": "range_slider",
+          "evidenced": false
+        },
+        {
+          "control_id": "keyboard.osc_mapping.arp_row_warp",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "keyboard.osc_mapping.editor",
+          "control_type": "graphical_editor_popup",
+          "evidenced": false
+        },
+        {
+          "control_id": "keyboard.osc_mapping.reset_all",
+          "control_type": "button",
+          "evidenced": false
+        },
+        {
+          "control_id": "keyboard.osc_mapping.vel_tab",
+          "control_type": "tab_selector",
+          "evidenced": false
+        },
+        {
+          "control_id": "keyboard.pitch_bend",
+          "control_type": "vertical_wheel",
+          "evidenced": false
+        },
+        {
+          "control_id": "keyboard.pitch_bend.bend_down",
+          "control_type": "numeric_stepper",
+          "evidenced": false
+        },
+        {
+          "control_id": "keyboard.pitch_bend.bend_up",
+          "control_type": "numeric_stepper",
+          "evidenced": false
+        },
+        {
+          "control_id": "keyboard.scale",
+          "control_type": "dropdown",
+          "evidenced": false
+        },
+        {
+          "control_id": "keyboard.swing",
+          "control_type": "draggable_value",
+          "evidenced": false
+        },
+        {
+          "control_id": "keyboard.transpose",
+          "control_type": "draggable_value",
+          "evidenced": false
+        }
+      ]
+    },
+    "LFO": {
+      "count": 54,
+      "evidenced_count": 0,
+      "controls": [
+        {
+          "control_id": "lfo1.chaos_mode",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo1.curve_display",
+          "control_type": "graph",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo1.division",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo1.grid_x",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo1.grid_y",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo1.phase",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo1.playback_direction",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo1.preset_identity",
+          "control_type": "text_identity",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo1.source",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo2.chaos_mode",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo2.curve_display",
+          "control_type": "graph",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo2.division",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo2.grid_x",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo2.grid_y",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo2.phase",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo2.playback_direction",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo2.preset_identity",
+          "control_type": "text_identity",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo2.source",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo3.chaos_mode",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo3.curve_display",
+          "control_type": "graph",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo3.division",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo3.grid_x",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo3.grid_y",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo3.phase",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo3.playback_direction",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo3.preset_identity",
+          "control_type": "text_identity",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo3.source",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo4.chaos_mode",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo4.curve_display",
+          "control_type": "graph",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo4.division",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo4.grid_x",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo4.grid_y",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo4.phase",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo4.playback_direction",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo4.preset_identity",
+          "control_type": "text_identity",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo4.source",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo5.chaos_mode",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo5.curve_display",
+          "control_type": "graph",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo5.division",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo5.grid_x",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo5.grid_y",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo5.phase",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo5.playback_direction",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo5.preset_identity",
+          "control_type": "text_identity",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo5.source",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo6.chaos_mode",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo6.curve_display",
+          "control_type": "graph",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo6.division",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo6.grid_x",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo6.grid_y",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo6.phase",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo6.playback_direction",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo6.preset_identity",
+          "control_type": "text_identity",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo6.source",
+          "control_type": "continuous",
+          "evidenced": false
+        }
+      ]
+    },
+    "LFO1": {
+      "count": 12,
+      "evidenced_count": 1,
+      "controls": [
+        {
+          "control_id": "lfo1.beat_sync",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo1.delay",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo1.dotted",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo1.mode",
+          "control_type": "enum",
+          "evidenced": true
+        },
+        {
+          "control_id": "lfo1.mono",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo1.rate",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo1.rate_10x",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo1.rise",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo1.shape",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo1.smooth",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo1.swing",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo1.triplets",
+          "control_type": "toggle",
+          "evidenced": false
+        }
+      ]
+    },
+    "LFO2": {
+      "count": 12,
+      "evidenced_count": 1,
+      "controls": [
+        {
+          "control_id": "lfo2.beat_sync",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo2.delay",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo2.dotted",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo2.mode",
+          "control_type": "enum",
+          "evidenced": true
+        },
+        {
+          "control_id": "lfo2.mono",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo2.rate",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo2.rate_10x",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo2.rise",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo2.shape",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo2.smooth",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo2.swing",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo2.triplets",
+          "control_type": "toggle",
+          "evidenced": false
+        }
+      ]
+    },
+    "LFO3": {
+      "count": 12,
+      "evidenced_count": 1,
+      "controls": [
+        {
+          "control_id": "lfo3.beat_sync",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo3.delay",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo3.dotted",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo3.mode",
+          "control_type": "enum",
+          "evidenced": true
+        },
+        {
+          "control_id": "lfo3.mono",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo3.rate",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo3.rate_10x",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo3.rise",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo3.shape",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo3.smooth",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo3.swing",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo3.triplets",
+          "control_type": "toggle",
+          "evidenced": false
+        }
+      ]
+    },
+    "LFO4": {
+      "count": 12,
+      "evidenced_count": 1,
+      "controls": [
+        {
+          "control_id": "lfo4.beat_sync",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo4.delay",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo4.dotted",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo4.mode",
+          "control_type": "enum",
+          "evidenced": true
+        },
+        {
+          "control_id": "lfo4.mono",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo4.rate",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo4.rate_10x",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo4.rise",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo4.shape",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo4.smooth",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo4.swing",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo4.triplets",
+          "control_type": "toggle",
+          "evidenced": false
+        }
+      ]
+    },
+    "LFO5": {
+      "count": 12,
+      "evidenced_count": 0,
+      "controls": [
+        {
+          "control_id": "lfo5.beat_sync",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo5.delay",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo5.dotted",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo5.mode",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo5.mono",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo5.rate",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo5.rate_10x",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo5.rise",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo5.shape",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo5.smooth",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo5.swing",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo5.triplets",
+          "control_type": "toggle",
+          "evidenced": false
+        }
+      ]
+    },
+    "LFO6": {
+      "count": 12,
+      "evidenced_count": 0,
+      "controls": [
+        {
+          "control_id": "lfo6.beat_sync",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo6.delay",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo6.dotted",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo6.mode",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo6.mono",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo6.rate",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo6.rate_10x",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo6.rise",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo6.shape",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo6.smooth",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo6.swing",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "lfo6.triplets",
+          "control_type": "toggle",
+          "evidenced": false
+        }
+      ]
+    },
+    "MACRO": {
+      "count": 40,
+      "evidenced_count": 0,
+      "controls": [
+        {
+          "control_id": "macro.sys.add_remove_slot",
+          "control_type": "structural_action",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro.sys.apply_and_delete_macro",
+          "control_type": "context_menu_action",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro.sys.assign_drag",
+          "control_type": "gesture/structural",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro.sys.assign_matrix_source",
+          "control_type": "dropdown_option",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro.sys.aux_curve",
+          "control_type": "graph_editor",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro.sys.aux_invert",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro.sys.aux_output",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro.sys.aux_source",
+          "control_type": "dropdown_option",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro.sys.bipolar_unipolar",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro.sys.browser_view_access",
+          "control_type": "panel_presence",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro.sys.center_toggle_modifier",
+          "control_type": "modifier_gesture",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro.sys.clip_view_access",
+          "control_type": "panel_presence",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro.sys.copy_paste",
+          "control_type": "context_menu_action",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro.sys.delete_route",
+          "control_type": "button",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro.sys.fx_expanded_not_assignable",
+          "control_type": "negative_finding",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro.sys.init_module",
+          "control_type": "context_menu_action",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro.sys.knob_context_menu",
+          "control_type": "context_menu",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro.sys.lock_parameter",
+          "control_type": "context_menu_action",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro.sys.macro_depth_reconcile",
+          "control_type": "reconciliation_flag",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro.sys.macro_specific_preset",
+          "control_type": "unknown",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro.sys.multi_assign_one_macro",
+          "control_type": "structural_behavior",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro.sys.multi_macro_summed_dest",
+          "control_type": "structural_behavior",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro.sys.output_monitor",
+          "control_type": "indicator",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro.sys.range_direction_drag",
+          "control_type": "gesture",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro.sys.rename_mechanism",
+          "control_type": "unknown",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro.sys.reset_value",
+          "control_type": "context_menu_action",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro.sys.rise_fall_smooth",
+          "control_type": "continuous_pair",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro.sys.route_amount",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro.sys.source_curve",
+          "control_type": "graph_editor",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro.sys.temp_bypass",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro.sys.unassign_rightclick",
+          "control_type": "context_menu_action",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro.sys.value_as_mod_destination",
+          "control_type": "structural_behavior",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro1.name",
+          "control_type": "identity",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro2.name",
+          "control_type": "identity",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro3.name",
+          "control_type": "identity",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro4.name",
+          "control_type": "identity",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro5.name",
+          "control_type": "identity",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro6.name",
+          "control_type": "identity",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro7.name",
+          "control_type": "identity",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro8.name",
+          "control_type": "identity",
+          "evidenced": false
+        }
+      ]
+    },
+    "MACROS": {
+      "count": 8,
+      "evidenced_count": 0,
+      "controls": [
+        {
+          "control_id": "macro1.value",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro2.value",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro3.value",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro4.value",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro5.value",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro6.value",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro7.value",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "macro8.value",
+          "control_type": "continuous",
+          "evidenced": false
+        }
+      ]
+    },
+    "MATRIX": {
+      "count": 98,
+      "evidenced_count": 0,
+      "controls": [
+        {
+          "control_id": "matrix.amount",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.aux_curve",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.aux_inverted",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.aux_source",
+          "control_type": "topology",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.bipolar",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.bypass",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.curve_in",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.delay_beat_sync",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.delay_offset",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.destination.lfo_n_conditional",
+          "control_type": "destination_target_conditional",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.destination_vocabulary",
+          "control_type": "topology",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.lfo_bus.01",
+          "control_type": "destination_target",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.lfo_bus.02",
+          "control_type": "destination_target",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.lfo_bus.03",
+          "control_type": "destination_target",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.lfo_bus.04",
+          "control_type": "destination_target",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.lfo_bus.05",
+          "control_type": "destination_target",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.lfo_bus.06",
+          "control_type": "destination_target",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.lfo_bus.07",
+          "control_type": "destination_target",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.lfo_bus.08",
+          "control_type": "destination_target",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.lfo_bus.09",
+          "control_type": "destination_target",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.lfo_bus.10",
+          "control_type": "destination_target",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.lfo_bus.11",
+          "control_type": "destination_target",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.lfo_bus.12",
+          "control_type": "destination_target",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.lfo_bus.13",
+          "control_type": "destination_target",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.lfo_bus.14",
+          "control_type": "destination_target",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.lfo_bus.15",
+          "control_type": "destination_target",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.lfo_bus.16",
+          "control_type": "destination_target",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.mod",
+          "control_type": "unknown",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.order",
+          "control_type": "topology",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.out",
+          "control_type": "slider",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.out_indicator",
+          "control_type": "display_only",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.routes",
+          "control_type": "topology",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.routing.signal_balance",
+          "control_type": "destination_target_family",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.smooth_fall",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.smooth_link",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.smooth_rise",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.active_voices",
+          "control_type": "structural_source_selection",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.aftertouch",
+          "control_type": "structural_source_selection",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.env_1",
+          "control_type": "structural_source_selection",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.env_2",
+          "control_type": "structural_source_selection",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.env_3",
+          "control_type": "structural_source_selection",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.env_4",
+          "control_type": "structural_source_selection",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.expr_x_pan",
+          "control_type": "structural_source_selection",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.expr_y_timbre",
+          "control_type": "structural_source_selection",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.expr_z_press",
+          "control_type": "structural_source_selection",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.filter_1",
+          "control_type": "source_target",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.filter_2",
+          "control_type": "source_target",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.fixed",
+          "control_type": "structural_source_selection",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.lfo_1",
+          "control_type": "structural_source_selection",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.lfo_10",
+          "control_type": "structural_source_selection",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.lfo_2",
+          "control_type": "structural_source_selection",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.lfo_3",
+          "control_type": "structural_source_selection",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.lfo_4",
+          "control_type": "structural_source_selection",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.lfo_5",
+          "control_type": "structural_source_selection",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.lfo_6",
+          "control_type": "structural_source_selection",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.lfo_7",
+          "control_type": "structural_source_selection",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.lfo_8",
+          "control_type": "structural_source_selection",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.lfo_9",
+          "control_type": "structural_source_selection",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.macro_1",
+          "control_type": "structural_source_selection",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.macro_2",
+          "control_type": "structural_source_selection",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.macro_3",
+          "control_type": "structural_source_selection",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.macro_4",
+          "control_type": "structural_source_selection",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.macro_5",
+          "control_type": "structural_source_selection",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.macro_6",
+          "control_type": "structural_source_selection",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.macro_7",
+          "control_type": "structural_source_selection",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.macro_8",
+          "control_type": "structural_source_selection",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.mod_wheel",
+          "control_type": "structural_source_selection",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.noise_osc",
+          "control_type": "source_target",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.notenum",
+          "control_type": "structural_source_selection",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.noteon_alt",
+          "control_type": "structural_source_selection",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.noteon_alt2",
+          "control_type": "structural_source_selection",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.noteon_rand1",
+          "control_type": "structural_source_selection",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.noteon_rand2",
+          "control_type": "structural_source_selection",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.noteon_rand_discrete",
+          "control_type": "structural_source_selection",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.osc_a",
+          "control_type": "source_target",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.osc_b",
+          "control_type": "source_target",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.osc_c",
+          "control_type": "source_target",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.pitch_bend",
+          "control_type": "structural_source_selection",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.poly_aftertch",
+          "control_type": "structural_source_selection",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.release_velo",
+          "control_type": "structural_source_selection",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.sub_osc",
+          "control_type": "source_target",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.velo",
+          "control_type": "structural_source_selection",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.voice_index",
+          "control_type": "structural_source_selection",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.voice_mod_1",
+          "control_type": "structural_source_selection",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source.voice_mod_2",
+          "control_type": "structural_source_selection",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source_curve",
+          "control_type": "curve",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.source_vocabulary",
+          "control_type": "topology",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.sys.apply_and_delete_macros",
+          "control_type": "menu_action",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.sys.create_velo_amp_assignment",
+          "control_type": "menu_action",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.sys.create_vibrato",
+          "control_type": "menu_action",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.sys.duplicate_route_policy",
+          "control_type": "structural_policy",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.sys.dynamic_visualization",
+          "control_type": "unknown",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.sys.expanded_view",
+          "control_type": "structural_display_toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.sys.lock_matrix",
+          "control_type": "menu_toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.sys.max_routes",
+          "control_type": "system_limit",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.sys.menu",
+          "control_type": "menu",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.sys.sort_by_destination",
+          "control_type": "menu_action",
+          "evidenced": false
+        },
+        {
+          "control_id": "matrix.sys.sort_by_source",
+          "control_type": "menu_action",
+          "evidenced": false
+        }
+      ]
+    },
+    "MIXER": {
+      "count": 57,
+      "evidenced_count": 0,
+      "controls": [
+        {
+          "control_id": "mixer.bus1.enable",
+          "control_type": "unknown",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.bus1.level",
+          "control_type": "fader",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.bus1.routing",
+          "control_type": "dropdown",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.bus2.enable",
+          "control_type": "unknown",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.bus2.level",
+          "control_type": "fader",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.bus2.routing",
+          "control_type": "dropdown",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.direct.level",
+          "control_type": "fader",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.filter1.bus1",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.filter1.bus2",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.filter1.enable",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.filter1.env1_bypass",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.filter1.graphic_cutoff_resonance",
+          "control_type": "graphical_2d_control",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.filter1.level",
+          "control_type": "fader",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.filter1.pan",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.filter1.routing",
+          "control_type": "dropdown",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.filter1.wet",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.filter2.bus1",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.filter2.bus2",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.filter2.enable",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.filter2.env1_bypass",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.filter2.graphic_cutoff_resonance",
+          "control_type": "graphical_2d_control",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.filter2.level",
+          "control_type": "fader",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.filter2.pan",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.filter2.routing",
+          "control_type": "dropdown",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.filter2.wet",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.main.level",
+          "control_type": "fader",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.noise.bus1",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.noise.bus2",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.noise.enable",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.noise.env1_bypass",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.noise.filter_balance",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.noise.level",
+          "control_type": "fader",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.noise.pan",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.noise.routing",
+          "control_type": "dropdown",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.osc_a.bus1",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.osc_a.bus2",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.osc_a.env1_bypass",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.osc_a.filter_balance",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.osc_a.routing",
+          "control_type": "dropdown",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.osc_b.bus1",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.osc_b.bus2",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.osc_b.env1_bypass",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.osc_b.filter_balance",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.osc_b.routing",
+          "control_type": "dropdown",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.osc_c.bus1",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.osc_c.bus2",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.osc_c.env1_bypass",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.osc_c.filter_balance",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.osc_c.routing",
+          "control_type": "dropdown",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.sub.bus1",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.sub.bus2",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.sub.enable",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.sub.env1_bypass",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.sub.filter_balance",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.sub.level",
+          "control_type": "fader",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.sub.pan",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "mixer.sub.routing",
+          "control_type": "dropdown",
+          "evidenced": false
+        }
+      ]
+    },
+    "NOISE": {
+      "count": 3,
+      "evidenced_count": 1,
+      "controls": [
+        {
+          "control_id": "oscNoise.color",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscNoise.noise_type",
+          "control_type": "enum",
+          "evidenced": true
+        },
+        {
+          "control_id": "oscNoise.one_shot",
+          "control_type": "toggle",
+          "evidenced": false
+        }
+      ]
+    },
+    "OSC": {
+      "count": 77,
+      "evidenced_count": 0,
+      "controls": [
+        {
+          "control_id": "oscA.end",
+          "control_type": "scalar",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.hz_offset",
+          "control_type": "scalar",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.position",
+          "control_type": "scalar",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.ratio",
+          "control_type": "scalar",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.relative_loop",
+          "control_type": "boolean",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.reverse",
+          "control_type": "boolean",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.scan_bpm_rate",
+          "control_type": "integer",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.scan_key_track",
+          "control_type": "boolean",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.scan_rate",
+          "control_type": "scalar",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.single_slice",
+          "control_type": "integer",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.slice_play_mode",
+          "control_type": "boolean",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.start",
+          "control_type": "scalar",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.uni_rand_start",
+          "control_type": "scalar",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.uni_span",
+          "control_type": "scalar",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.uni_stack",
+          "control_type": "integer",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.uni_warp",
+          "control_type": "scalar",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.uni_warp_2",
+          "control_type": "scalar",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.uni_width",
+          "control_type": "scalar",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.uni_wt_pos",
+          "control_type": "scalar",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.warp_2_var",
+          "control_type": "scalar",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.warp_var",
+          "control_type": "scalar",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.end",
+          "control_type": "scalar",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.hz_offset",
+          "control_type": "scalar",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.position",
+          "control_type": "scalar",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.ratio",
+          "control_type": "scalar",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.relative_loop",
+          "control_type": "boolean",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.reverse",
+          "control_type": "boolean",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.scan_bpm_rate",
+          "control_type": "integer",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.scan_key_track",
+          "control_type": "boolean",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.scan_rate",
+          "control_type": "scalar",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.single_slice",
+          "control_type": "integer",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.slice_play_mode",
+          "control_type": "boolean",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.start",
+          "control_type": "scalar",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.uni_rand_start",
+          "control_type": "scalar",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.uni_span",
+          "control_type": "scalar",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.uni_stack",
+          "control_type": "integer",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.uni_warp",
+          "control_type": "scalar",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.uni_warp_2",
+          "control_type": "scalar",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.uni_width",
+          "control_type": "scalar",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.uni_wt_pos",
+          "control_type": "scalar",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.warp_2_var",
+          "control_type": "scalar",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.warp_var",
+          "control_type": "scalar",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.end",
+          "control_type": "scalar",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.hz_offset",
+          "control_type": "scalar",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.position",
+          "control_type": "scalar",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.ratio",
+          "control_type": "scalar",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.relative_loop",
+          "control_type": "boolean",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.reverse",
+          "control_type": "boolean",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.scan_bpm_rate",
+          "control_type": "integer",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.scan_key_track",
+          "control_type": "boolean",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.scan_rate",
+          "control_type": "scalar",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.single_slice",
+          "control_type": "integer",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.slice_play_mode",
+          "control_type": "boolean",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.start",
+          "control_type": "scalar",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.uni_rand_start",
+          "control_type": "scalar",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.uni_span",
+          "control_type": "scalar",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.uni_stack",
+          "control_type": "integer",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.uni_warp",
+          "control_type": "scalar",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.uni_warp_2",
+          "control_type": "scalar",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.uni_width",
+          "control_type": "scalar",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.uni_wt_pos",
+          "control_type": "scalar",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.warp_2_var",
+          "control_type": "scalar",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.warp_var",
+          "control_type": "scalar",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscNoise.fine",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscNoise.level",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscNoise.pan",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscNoise.phase",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscNoise.pitch",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscNoise.pitch_track",
+          "control_type": "unknown",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscNoise.rand_phase",
+          "control_type": "unknown",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscSub.coarse_pitch",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscSub.cont_phase",
+          "control_type": "unknown",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscSub.level",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscSub.octave",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscSub.pan",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscSub.phase",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscSub.pitch_track",
+          "control_type": "unknown",
+          "evidenced": false
+        }
+      ]
+    },
+    "OSCA": {
+      "count": 27,
+      "evidenced_count": 1,
+      "controls": [
+        {
+          "control_id": "oscA.coarse_pitch",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.detune",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.detune_width",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.enabled",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.engine_type",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.fine",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.level",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.octave",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.pan",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.phase",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.pitch_track",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.random_phase",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.sample_loop_crossfade",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.sample_loop_end",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.sample_loop_mode",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.sample_loop_start",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.semitone",
+          "control_type": "continuous",
+          "evidenced": true
+        },
+        {
+          "control_id": "oscA.unison",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.unison_stereo_width",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.warp_amount",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.warp_amount2",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.warp_mode",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.warp_mode2",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.warp_var2",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.wavetable",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.wt_interpolation_mode",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.wt_position",
+          "control_type": "continuous",
+          "evidenced": false
+        }
+      ]
+    },
+    "OSCB": {
+      "count": 27,
+      "evidenced_count": 1,
+      "controls": [
+        {
+          "control_id": "oscB.coarse_pitch",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.detune",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.detune_width",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.enabled",
+          "control_type": "toggle",
+          "evidenced": true
+        },
+        {
+          "control_id": "oscB.engine_type",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.fine",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.level",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.octave",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.pan",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.phase",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.pitch_track",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.random_phase",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.sample_loop_crossfade",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.sample_loop_end",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.sample_loop_mode",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.sample_loop_start",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.semitone",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.unison",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.unison_stereo_width",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.warp_amount",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.warp_amount2",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.warp_mode",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.warp_mode2",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.warp_var2",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.wavetable",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.wt_interpolation_mode",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.wt_position",
+          "control_type": "continuous",
+          "evidenced": false
+        }
+      ]
+    },
+    "OSCC": {
+      "count": 27,
+      "evidenced_count": 1,
+      "controls": [
+        {
+          "control_id": "oscC.coarse_pitch",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.detune",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.detune_width",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.enabled",
+          "control_type": "toggle",
+          "evidenced": true
+        },
+        {
+          "control_id": "oscC.engine_type",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.fine",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.level",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.octave",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.pan",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.phase",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.pitch_track",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.random_phase",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.sample_loop_crossfade",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.sample_loop_end",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.sample_loop_mode",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.sample_loop_start",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.semitone",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.unison",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.unison_stereo_width",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.warp_amount",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.warp_amount2",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.warp_mode",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.warp_mode2",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.warp_var2",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.wavetable",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.wt_interpolation_mode",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.wt_position",
+          "control_type": "continuous",
+          "evidenced": false
+        }
+      ]
+    },
+    "OSCILLATOR": {
+      "count": 96,
+      "evidenced_count": 0,
+      "controls": [
+        {
+          "control_id": "oscA.blend",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.crs",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.density",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.direction",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.grain_count",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.grain_rand_1",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.grain_rand_2",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.grain_rand_3",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.instrument_identity",
+          "control_type": "text_identity",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.keyzone_display",
+          "control_type": "graph",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.length",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.loop_region",
+          "control_type": "region",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.mode",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.offset",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.pitch",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.routing",
+          "control_type": "topology",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.sample_display",
+          "control_type": "graph",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.sample_envelope",
+          "control_type": "curve",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.sample_identity",
+          "control_type": "text_identity",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.sample_region",
+          "control_type": "region",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.scan",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.slicing_mode",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.spectral_cut",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.spectral_display",
+          "control_type": "graph",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.spectral_filter",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.spectral_freq_range",
+          "control_type": "region",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.spectral_mix",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.timbre",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.tuning_mode",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.vel_track",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.waveform_display",
+          "control_type": "graph",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscA.window_amount",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.blend",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.crs",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.density",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.direction",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.grain_count",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.grain_rand_1",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.grain_rand_2",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.grain_rand_3",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.instrument_identity",
+          "control_type": "text_identity",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.keyzone_display",
+          "control_type": "graph",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.length",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.loop_region",
+          "control_type": "region",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.mode",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.offset",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.pitch",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.routing",
+          "control_type": "topology",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.sample_display",
+          "control_type": "graph",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.sample_envelope",
+          "control_type": "curve",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.sample_identity",
+          "control_type": "text_identity",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.sample_region",
+          "control_type": "region",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.scan",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.slicing_mode",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.spectral_cut",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.spectral_display",
+          "control_type": "graph",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.spectral_filter",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.spectral_freq_range",
+          "control_type": "region",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.spectral_mix",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.timbre",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.tuning_mode",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.vel_track",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.waveform_display",
+          "control_type": "graph",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscB.window_amount",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.blend",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.crs",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.density",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.direction",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.grain_count",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.grain_rand_1",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.grain_rand_2",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.grain_rand_3",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.instrument_identity",
+          "control_type": "text_identity",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.keyzone_display",
+          "control_type": "graph",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.length",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.loop_region",
+          "control_type": "region",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.mode",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.offset",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.pitch",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.routing",
+          "control_type": "topology",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.sample_display",
+          "control_type": "graph",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.sample_envelope",
+          "control_type": "curve",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.sample_identity",
+          "control_type": "text_identity",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.sample_region",
+          "control_type": "region",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.scan",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.slicing_mode",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.spectral_cut",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.spectral_display",
+          "control_type": "graph",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.spectral_filter",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.spectral_freq_range",
+          "control_type": "region",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.spectral_mix",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.timbre",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.tuning_mode",
+          "control_type": "enum",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.vel_track",
+          "control_type": "continuous",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.waveform_display",
+          "control_type": "graph",
+          "evidenced": false
+        },
+        {
+          "control_id": "oscC.window_amount",
+          "control_type": "continuous",
+          "evidenced": false
+        }
+      ]
+    },
+    "SUB": {
+      "count": 1,
+      "evidenced_count": 0,
+      "controls": [
+        {
+          "control_id": "oscSub.shape",
+          "control_type": "enum",
+          "evidenced": false
+        }
+      ]
+    },
+    "TOPOLOGY": {
+      "count": 2,
+      "evidenced_count": 0,
+      "controls": [
+        {
+          "control_id": "topology.filter_output_routing",
+          "control_type": "topology",
+          "evidenced": false
+        },
+        {
+          "control_id": "topology.oscillator_filter_routing",
+          "control_type": "topology",
+          "evidenced": false
+        }
+      ]
+    },
+    "VOICE": {
+      "count": 8,
+      "evidenced_count": 0,
+      "controls": [
+        {
+          "control_id": "voice.voicing.legato",
+          "control_type": "checkbox",
+          "evidenced": false
+        },
+        {
+          "control_id": "voice.voicing.mono",
+          "control_type": "checkbox",
+          "evidenced": false
+        },
+        {
+          "control_id": "voice.voicing.poly",
+          "control_type": "stepper",
+          "evidenced": false
+        },
+        {
+          "control_id": "voice.voicing.porta_always",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "voice.voicing.porta_curve",
+          "control_type": "draggable_value",
+          "evidenced": false
+        },
+        {
+          "control_id": "voice.voicing.porta_scaled",
+          "control_type": "toggle",
+          "evidenced": false
+        },
+        {
+          "control_id": "voice.voicing.porta_time",
+          "control_type": "knob",
+          "evidenced": false
+        },
+        {
+          "control_id": "voice.voicing.voice_count_display",
+          "control_type": "display",
+          "evidenced": false
+        }
+      ]
+    }
+  },
+  "evidenced_targets": [
+    "lfo1.mode",
+    "lfo2.mode",
+    "lfo3.mode",
+    "lfo4.mode",
+    "oscA.semitone",
+    "oscA_pitch_disambiguation",
+    "oscB.enabled",
+    "oscC.enabled",
+    "oscNoise.noise_type"
+  ],
+  "evidenced_count": 9,
+  "known_gaps": {
+    "lfo_slots_in_atlas": [
+      "lfo1",
+      "lfo2",
+      "lfo3",
+      "lfo4",
+      "lfo5",
+      "lfo6"
+    ],
+    "lfo_slots_in_preset_spec_schema": "lfos: list[LfoSpec], maxItems=10 (LFO1-10)",
+    "gap": "Atlas only indexes LFO1-6; PresetSpec schema supports up to LFO10"
+  }
+}
