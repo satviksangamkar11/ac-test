@@ -941,6 +941,42 @@
    "field": "voice_amp",
    "basis": "exact_normalized"
   },
+  "global.voice_control.random.cutoff": {
+   "kind": "singleton_field",
+   "attr": "voice_unison",
+   "field": "random_filter_cutoff",
+   "basis": "alias"
+  },
+  "global.voice_control.random.detune": {
+   "kind": "singleton_field",
+   "attr": "voice_unison",
+   "field": "random_detune",
+   "basis": "alias"
+  },
+  "global.voice_control.random.envs": {
+   "kind": "singleton_field",
+   "attr": "voice_unison",
+   "field": "random_env_time",
+   "basis": "alias"
+  },
+  "global.voice_control.random.pan": {
+   "kind": "singleton_field",
+   "attr": "voice_unison",
+   "field": "random_pan",
+   "basis": "alias"
+  },
+  "global.voice_control.scaling.envs": {
+   "kind": "singleton_field",
+   "attr": "voice_unison",
+   "field": "scaling_env_time",
+   "basis": "alias"
+  },
+  "global.voice_control.scaling.lfos": {
+   "kind": "singleton_field",
+   "attr": "voice_unison",
+   "field": "scaling_lfo_time",
+   "basis": "alias"
+  },
   "global.voice_priority": {
    "kind": "singleton_field",
    "attr": "global_",
@@ -2160,5 +2196,5 @@
   "Env 4 Sustain": "env3.sustain",
   "Env 4 Release": "env3.release"
  },
- "unbound_atlas_ids": 565
+ "unbound_atlas_ids": 559
 }

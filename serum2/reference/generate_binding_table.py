@@ -128,6 +128,45 @@ def main():
         "global": ("global_", S.GlobalSpec),
         "voice.voicing": ("global_", S.GlobalSpec),
         "arp": ("arp", S.ArpSpec),
+        # VoiceUnisonSpec's scalar (non-per-voice-list) fields. Traced through
+        # mapping.py's spec.voice_unison block: random_pan/random_detune/
+        # random_filter_cutoff/random_env_time map 1:1 to the Atlas's own
+        # "RANDOM column (4 rows: PAN/DETUNE/CUTOFF/ENVS) in GLOBAL's Voice
+        # Control panel" -- and scaling_env_time/scaling_lfo_time to the
+        # Atlas's SCALING row entries (tooltip-confirmed "Envelope Scaling"/
+        # "LFO Scaling"). The per-voice LIST fields (pan/detune/filter_cutoff/
+        # env_time/mod1/mod2, the Atlas's "seq" column) and affects_osc_*
+        # (the Atlas's single combined "osc_scope" multi-toggle) are
+        # deliberately NOT here -- they don't fit a scalar accessor.
+        "global.voice_control.random": ("voice_unison", S.VoiceUnisonSpec),
+        "global.voice_control.scaling": ("voice_unison", S.VoiceUnisonSpec),
+    }
+    # (prefix, atlas_param) -> real PresetSpec field name. Each pair is
+    # independently established by the Atlas's own recorded evidence (the
+    # exact row/column grouping documented in its notes), not guessed:
+    # random.cutoff/envs and scaling.envs/lfos don't exact-normalize to
+    # their VoiceUnisonSpec field names (filter_cutoff/env_time) but the
+    # Atlas's own "4 rows: PAN/DETUNE/CUTOFF/ENVS" grouping is the same
+    # RANDOM column VoiceUnisonSpec's own docstring describes.
+    SINGLETON_FIELD_ALIASES = {
+        # ALL FOUR random.* entries are explicit, not just cutoff/envs:
+        # VoiceUnisonSpec ALSO has per-voice-list fields literally named
+        # "pan"/"detune" -- bare exact-normalized matching on "pan"/"detune"
+        # would silently hit those wrong (structural) fields instead of the
+        # scalar random_pan/random_detune this Atlas entry actually means.
+        # Caught live: the first version of this table let "pan"/"detune"
+        # fall through to bare matching and got exactly that collision.
+        ("global.voice_control.random", "pan"): "random_pan",
+        ("global.voice_control.random", "detune"): "random_detune",
+        ("global.voice_control.random", "cutoff"): "random_filter_cutoff",
+        ("global.voice_control.random", "envs"): "random_env_time",
+        ("global.voice_control.scaling", "envs"): "scaling_env_time",
+        ("global.voice_control.scaling", "lfos"): "scaling_lfo_time",
+        # scaling.lfos_rate_toggle deliberately NOT aliased to
+        # scaling_lfo_time_snap: the Atlas's own note records it as an
+        # untoggled read-only observation with no evidence pinning it to
+        # that specific field vs. e.g. a %/RATE display-mode switch --
+        # left unbound rather than guessed.
     }
     controls, skipped = {}, 0
     for cid in all_control_ids():
@@ -139,7 +178,7 @@ def main():
             attr, model = SINGLETON_SPECS[singleton_prefix]
             param = cid[len(singleton_prefix) + 1:]
             fields = list(model.model_fields)
-            want = FIELD_ALIASES.get(param, param)
+            want = SINGLETON_FIELD_ALIASES.get((singleton_prefix, param), FIELD_ALIASES.get(param, param))
             hit = [f for f in fields if norm(f) == norm(want)]
             if len(hit) == 1:
                 controls[cid] = {"kind": "singleton_field", "attr": attr, "field": hit[0],

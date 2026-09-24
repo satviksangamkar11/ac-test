@@ -1,6 +1,6 @@
 {
   "derived_from": "parameter_characterization/serum_mcp_mutable_surface.json",
-  "total_targets": 283,
+  "total_targets": 289,
   "families": {
     "ARP": [
       {
@@ -1120,6 +1120,54 @@
         "mcp_editable_path": "global_.voice_amp",
         "control_type": "continuous",
         "domain_status": "DOMAIN_UNVERIFIED",
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "global.voice_control.random.cutoff",
+        "mcp_editable_path": "voice_unison.random_filter_cutoff",
+        "control_type": "stepper",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "global.voice_control.random.detune",
+        "mcp_editable_path": "voice_unison.random_detune",
+        "control_type": "stepper",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "global.voice_control.random.envs",
+        "mcp_editable_path": "voice_unison.random_env_time",
+        "control_type": "stepper",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "global.voice_control.random.pan",
+        "mcp_editable_path": "voice_unison.random_pan",
+        "control_type": "stepper",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "global.voice_control.scaling.envs",
+        "mcp_editable_path": "voice_unison.scaling_env_time",
+        "control_type": "stepper",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "global.voice_control.scaling.lfos",
+        "mcp_editable_path": "voice_unison.scaling_lfo_time",
+        "control_type": "stepper",
+        "domain_status": null,
         "enum_status": null,
         "evidence_status": "NO_EVIDENCE"
       },

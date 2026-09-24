@@ -120,6 +120,64 @@ def test_global_voice_priority_is_mcp_mutable_with_unresolved_enum(surface):
     assert not e["enum_values"]
 
 
+def test_voiceunison_scalar_random_fields_are_mcp_mutable(surface):
+    """Regression: traced VoiceUnisonSpec through mapping.py's spec.voice_unison
+    block. random_pan/random_detune/random_filter_cutoff/random_env_time and
+    scaling_env_time/scaling_lfo_time are scalar fields written directly onto
+    VoicePanel0.plainParams -- distinct from VoiceUnisonSpec's per-voice LIST
+    fields (pan/detune/filter_cutoff/env_time/mod1/mod2), which structurally
+    coincide in field NAME (pan/detune) but are a completely different kParam
+    family (kParamVoice{n}Pan vs kParamGlobalRandomOscPan). A first version of
+    this matcher let bare exact-normalization collide the two; this asserts
+    the fix landed on the correct (scalar) field, not the list field."""
+    mutable = surface["mcp_mutable_candidates"]
+    assert mutable["global.voice_control.random.pan"]["mcp_editable_path"] == "voice_unison.random_pan"
+    assert mutable["global.voice_control.random.detune"]["mcp_editable_path"] == "voice_unison.random_detune"
+    assert mutable["global.voice_control.random.cutoff"]["mcp_editable_path"] == "voice_unison.random_filter_cutoff"
+    assert mutable["global.voice_control.random.envs"]["mcp_editable_path"] == "voice_unison.random_env_time"
+    assert mutable["global.voice_control.scaling.envs"]["mcp_editable_path"] == "voice_unison.scaling_env_time"
+    assert mutable["global.voice_control.scaling.lfos"]["mcp_editable_path"] == "voice_unison.scaling_lfo_time"
+
+
+def test_voiceunison_per_voice_list_fields_are_structural_unbound(surface):
+    """The Atlas's 'seq' column (per-voice pan/detune/filter_cutoff/env_time/
+    mod1/mod2) and 'osc_scope' (affects_osc_a/b/c/noise/sub) are confirmed
+    real MCP mutation targets (mapping.py writes them) but are list/multi-
+    field groups, not scalars -- must be MCP_MUTABLE_STRUCTURAL_UNBOUND, not
+    silently dropped into UNKNOWN or falsely marked NOT_MCP_MUTABLE."""
+    non_mutable = surface["not_mcp_mutable"]
+    for cid in ("global.voice_control.seq.pan", "global.voice_control.seq.detune",
+               "global.voice_control.seq.mod1", "global.voice_control.osc_scope"):
+        assert non_mutable[cid]["status"] == "MCP_MUTABLE_STRUCTURAL_UNBOUND", cid
+
+
+def test_voice_count_display_is_read_only_not_mcp_mutable(surface):
+    """Regression: the Atlas's own evidence explicitly classifies this
+    PROVEN_NOT_USER_CONTROL (a derived display, not a settable control) --
+    must not be surfaced as MCP-mutable or left as unexplained UNKNOWN."""
+    e = surface["not_mcp_mutable"]["voice.voicing.voice_count_display"]
+    assert e["status"] == "READ_ONLY"
+
+
+def test_lfo_atlas_scope_remains_lfo1_through_6_not_expanded():
+    """LFO7-10: mapping.py's `for i, lfo in enumerate(spec.lfos)` has NO
+    index guard and would technically write LFO6-9 body state -- but the
+    Atlas's own direct-UI-testing evidence (SERUM2_SEMANTIC_INVENTORY_FINAL,
+    LFO closure) confirms LFO7-10 are headless source-only instances with
+    ZERO accessible edit parameters (assigned as a mod source, no edit panel
+    ever appeared). No canonical identity is created for lfo7.mode etc --
+    doing so without evidence establishing what a write would even mean
+    (no UI to verify against) would violate the no-guessing rule."""
+    import sys
+    from pathlib import Path
+    ROOT = Path(__file__).resolve().parents[2]
+    sys.path.insert(0, str(ROOT))
+    from serum2.reference.serum_atlas import get_control, _LFO_SLOTS
+    assert _LFO_SLOTS == tuple("lfo%d" % i for i in range(1, 7))
+    for i in range(7, 11):
+        assert get_control("lfo%d.mode" % i) is None, "lfo%d.mode must not exist without evidence" % i
+
+
 def test_manifest_derives_from_surface_not_hand_maintained(manifest, surface):
     manifest_ids = {i["canonical_id"] for items in manifest["families"].values() for i in items}
     surface_ids = set(surface["mcp_mutable_candidates"])
