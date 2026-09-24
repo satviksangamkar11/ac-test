@@ -63,3 +63,36 @@ def classify(rec: dict) -> dict:
     return {"status": "AMBIGUOUS" if moved else "NOT_OBSERVED",
             "reasons": reasons + (["effect observed, no expectation declared"] if moved else ["no change above noise floor %.2f dB" % floor]),
             "expectations": []}
+
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Evidence hierarchy (never collapsed into one status):
+#   causal status PROVEN            -> tier CAUSAL_RAW_PROVEN  (raw kParam is real, writable, restorable; behaviour changes)
+#   + GUI observations agree        -> tier SEMANTIC_BINDING_PROVEN (this raw value shows as this Atlas label on this control)
+# The registry disposition is a third, separate axis and only changes when the binding actually lands.
+# ---------------------------------------------------------------------------------------------------------------------
+def semantic_classify(causal: dict, gui: list, atlas_labels: list) -> dict:
+    """causal: a worker record; gui: observations [{written, kind, displayed_label, agrees_with_causal}] for the SAME
+    test; atlas_labels: the Atlas control's enum labels. -> {status, tier, raw_to_label, reasons}"""
+    reasons = []
+    if causal.get("status") != "PROVEN":
+        return {"status": "SEMANTIC_NOT_ATTEMPTED", "tier": None, "raw_to_label": {}, "reasons": ["causal status is %s" % causal.get("status")]}
+    vals = [g for g in gui if g["kind"] in ("value",)]
+    m = {("null" if g["written"] is None else repr(g["written"])): g["displayed_label"] for g in vals}
+    if not vals:
+        return {"status": "SEMANTIC_INCOMPLETE", "tier": "CAUSAL_RAW_PROVEN", "raw_to_label": m, "reasons": ["no GUI observations"]}
+    off_vocab = sorted({g["displayed_label"] for g in vals} - set(atlas_labels))
+    if off_vocab:
+        reasons.append("labels not in Atlas vocabulary: %s" % off_vocab)
+    disagree = [g["written"] for g in vals if not g.get("agrees_with_causal", False)]
+    if disagree:
+        reasons.append("GUI disagrees with causal evidence for %s" % disagree)
+    # every value the causal test wrote must have a GUI observation
+    causal_vals = {k for k, o in causal["observations"].items() if not o.get("probe")}
+    missing = sorted(causal_vals - set(m))
+    if missing:
+        reasons.append("no GUI observation for values %s" % missing)
+    if reasons:
+        return {"status": "SEMANTIC_MISMATCH" if (off_vocab or disagree) else "SEMANTIC_INCOMPLETE", "tier": "CAUSAL_RAW_PROVEN",
+                "raw_to_label": m, "reasons": reasons}
+    return {"status": "SEMANTIC_BINDING_PROVEN", "tier": "SEMANTIC_BINDING_PROVEN", "raw_to_label": m, "reasons": []}

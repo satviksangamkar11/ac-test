@@ -114,6 +114,13 @@ def main():
                      "final_disposition": disp, "disposition": disp, "control_type": ctype, "reason": why,
                      "rationale": why, "missing_evidence": missing, "pre_existing_binding": bound.get(cid),
                      "newly_bound": False}
+    # separate evidence axis (never folded into `disposition`): how far the bulk causal + GUI harness got per candidate
+    sem = ROOT / "parameter_characterization" / "bulk_causal_evidence" / "semantic_fx_v1.json"
+    if sem.exists():
+        for v in json.loads(sem.read_text())["tests"].values():
+            if v["atlas_id"] in rows:
+                rows[v["atlas_id"]].update({"evidence_tier": v["tier"], "semantic_status": v["status"], "semantic_raw_to_label": v["raw_to_label"],
+                                            "candidate_kparam": rows[v["atlas_id"]]["candidate_kparam"] or v["candidate"]["kparam"]})
     counts = {d: sum(r["disposition"] == d for r in rows.values())
               for d in ("DIRECT_BIND", "STRUCTURAL", "UI_ONLY", "BROWSER_EXTERNAL", "UNRESOLVED")}
     ids = lambda d: [c for c, r in rows.items() if r["disposition"] == d]

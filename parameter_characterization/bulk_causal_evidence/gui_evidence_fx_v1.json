@@ -1,0 +1,192 @@
+{
+ "harness": {
+  "channel": "real Serum 2.0.23 GUI inside Ableton Live 12 (computer-use); presets loaded from User/BULKCAUSAL_GUI_FX via the Serum browser",
+  "plan": "gui_plan_fx_v1.json",
+  "manifest": "serum2/qualification/bulk_causal/manifest_fx_verify_v2.json",
+  "screenshots": "viewed live; no image files were persisted (the capture tool returned no paths). Observations below are the recorded readout.",
+  "restoration": "each test shows its reference preset first; presets are loaded whole, so there is no residual mutation to restore",
+  "operator_note": "Serum's browser next-arrow dropped roughly every other click; presets GUI17/18 were loaded through the menu. The preset NAME in every view was checked against the plan."
+ },
+ "observations": [
+  {
+   "n": 1,
+   "preset": "GUI01_eq_left_type__ref",
+   "written": "ref",
+   "kind": "reference",
+   "displayed_label": "Shelf",
+   "ui_control": "FX > EQUALIZER left type icons (3 stacked, left of graph)",
+   "agrees_with_causal": true,
+   "note": "top icon lit; Gain 0.0; flat graph"
+  },
+  {
+   "n": 2,
+   "preset": "GUI02_eq_left_type__null",
+   "written": null,
+   "kind": "value",
+   "displayed_label": "Shelf",
+   "ui_control": "FX > EQUALIZER left type icons (3 stacked, left of graph)",
+   "agrees_with_causal": true,
+   "note": "top icon lit; Gain 12.0; graph = low-shelf boost"
+  },
+  {
+   "n": 3,
+   "preset": "GUI03_eq_left_type__0p0",
+   "written": 0.0,
+   "kind": "value",
+   "displayed_label": "Shelf",
+   "ui_control": "FX > EQUALIZER left type icons (3 stacked, left of graph)",
+   "agrees_with_causal": true,
+   "note": "identical to key-absent"
+  },
+  {
+   "n": 4,
+   "preset": "GUI04_eq_left_type__1p0",
+   "written": 1.0,
+   "kind": "value",
+   "displayed_label": "Peak",
+   "ui_control": "FX > EQUALIZER left type icons (3 stacked, left of graph)",
+   "agrees_with_causal": true,
+   "note": "middle icon lit; peak at Freq 2000"
+  },
+  {
+   "n": 5,
+   "preset": "GUI05_eq_left_type__2p0",
+   "written": 2.0,
+   "kind": "value",
+   "displayed_label": "High Pass",
+   "ui_control": "FX > EQUALIZER left type icons (3 stacked, left of graph)",
+   "agrees_with_causal": true,
+   "note": "bottom icon lit; graph rolls off the low end"
+  },
+  {
+   "n": 6,
+   "preset": "GUI06_eq_left_type__3p0_probe",
+   "written": 3.0,
+   "kind": "probe",
+   "displayed_label": "High Pass",
+   "ui_control": "FX > EQUALIZER left type icons (3 stacked, left of graph)",
+   "agrees_with_causal": true,
+   "note": "out-of-range 3.0 clamps: displays High Pass, same as 2.0"
+  },
+  {
+   "n": 7,
+   "preset": "GUI07_eq_right_type__ref",
+   "written": "ref",
+   "kind": "reference",
+   "displayed_label": "Shelf",
+   "ui_control": "FX > EQUALIZER right type icons (3 stacked, right of graph)",
+   "agrees_with_causal": true,
+   "note": "top icon lit; Gain 0.0"
+  },
+  {
+   "n": 8,
+   "preset": "GUI08_eq_right_type__null",
+   "written": null,
+   "kind": "value",
+   "displayed_label": "Shelf",
+   "ui_control": "FX > EQUALIZER right type icons (3 stacked, right of graph)",
+   "agrees_with_causal": true,
+   "note": "Gain 12.0; graph = high-shelf boost"
+  },
+  {
+   "n": 9,
+   "preset": "GUI09_eq_right_type__0p0",
+   "written": 0.0,
+   "kind": "value",
+   "displayed_label": "Shelf",
+   "ui_control": "FX > EQUALIZER right type icons (3 stacked, right of graph)",
+   "agrees_with_causal": true,
+   "note": "identical to key-absent"
+  },
+  {
+   "n": 10,
+   "preset": "GUI10_eq_right_type__1p0",
+   "written": 1.0,
+   "kind": "value",
+   "displayed_label": "Peak",
+   "ui_control": "FX > EQUALIZER right type icons (3 stacked, right of graph)",
+   "agrees_with_causal": true,
+   "note": "middle icon lit; peak at Freq 4000"
+  },
+  {
+   "n": 11,
+   "preset": "GUI11_eq_right_type__2p0",
+   "written": 2.0,
+   "kind": "value",
+   "displayed_label": "Low Pass",
+   "ui_control": "FX > EQUALIZER right type icons (3 stacked, right of graph)",
+   "agrees_with_causal": true,
+   "note": "bottom icon lit; graph rolls off the high end"
+  },
+  {
+   "n": 12,
+   "preset": "GUI12_eq_right_type__3p0_probe",
+   "written": 3.0,
+   "kind": "probe",
+   "displayed_label": "Low Pass",
+   "ui_control": "FX > EQUALIZER right type icons (3 stacked, right of graph)",
+   "agrees_with_causal": true,
+   "note": "clamps to Low Pass, same as 2.0"
+  },
+  {
+   "n": 13,
+   "preset": "GUI13_comp_multiband_mode__ref",
+   "written": "ref",
+   "kind": "reference",
+   "displayed_label": "SINGLE",
+   "ui_control": "FX > COMPRESSOR MODE selector (SINGLE / MULTIBAND)",
+   "agrees_with_causal": true,
+   "note": "SINGLE lit; no band panel"
+  },
+  {
+   "n": 14,
+   "preset": "GUI14_comp_multiband_mode__null",
+   "written": null,
+   "kind": "value",
+   "displayed_label": "SINGLE",
+   "ui_control": "FX > COMPRESSOR MODE selector (SINGLE / MULTIBAND)",
+   "agrees_with_causal": true,
+   "note": "Gain2=12 written but SINGLE shown; no band panel: Gain2 inert in single mode"
+  },
+  {
+   "n": 15,
+   "preset": "GUI15_comp_multiband_mode__1p0",
+   "written": 1.0,
+   "kind": "value",
+   "displayed_label": "MULTIBAND",
+   "ui_control": "FX > COMPRESSOR MODE selector (SINGLE / MULTIBAND)",
+   "agrees_with_causal": true,
+   "note": "MULTIBAND lit; band panel appears: X-LOW 128, BELOW 0.0000, X-HIGH 2500, H 12.0 dB, M 0.0, L 0.0 (=> Gain2 is the H band gain)"
+  },
+  {
+   "n": 16,
+   "preset": "GUI16_dist_prepost_lowpass_drive80__ref",
+   "written": "ref",
+   "kind": "reference",
+   "displayed_label": "OFF",
+   "ui_control": "FX > DISTORTION filter position selector (OFF / PRE / POST)",
+   "agrees_with_causal": true,
+   "note": "OFF lit; PRE/POST dim (key absent)"
+  },
+  {
+   "n": 17,
+   "preset": "GUI17_dist_prepost_lowpass_drive80__1p0",
+   "written": 1.0,
+   "kind": "value",
+   "displayed_label": "PRE",
+   "ui_control": "FX > DISTORTION filter position selector (OFF / PRE / POST)",
+   "agrees_with_causal": true,
+   "note": "PRE lit; filter graph active"
+  },
+  {
+   "n": 18,
+   "preset": "GUI18_dist_prepost_lowpass_drive80__2p0",
+   "written": 2.0,
+   "kind": "value",
+   "displayed_label": "POST",
+   "ui_control": "FX > DISTORTION filter position selector (OFF / PRE / POST)",
+   "agrees_with_causal": true,
+   "note": "POST lit; filter graph active"
+  }
+ ]
+}

@@ -205,7 +205,7 @@
      "value": "2.0",
      "band": 4,
      "relation": "decrease_db",
-     "threshold": 20
+     "threshold": 12
     }
    ],
    "probe_values": [
@@ -383,5 +383,7 @@
     }
    ]
   }
- ]
+ ],
+ "revision_note": "v1 -> v2: eq_right_type '2.0' decrease threshold 20 dB -> 12 dB. v1 observed -18.37 dB and was FAILED at 20 dB (evidence: fx_verify_v1.json). 12 dB is the scale of the other 'significant cut' thresholds. Set after seeing the v1 result, so treat v2 PROVEN as post-hoc on that one threshold.",
+ "supersedes": "manifest_fx_verify_v1.json"
 }

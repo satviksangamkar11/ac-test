@@ -102,7 +102,7 @@
    "family": "FX",
    "ui_identity": "Mode -- Single/Multiband branch selector",
    "fx_type": "FXComp",
-   "candidate_kparam": null,
+   "candidate_kparam": "kParamMultiband",
    "schema_present": false,
    "mapping_supported": null,
    "introspect_supported": null,
@@ -115,7 +115,13 @@
    "rationale": "SINGLE/MULTIBAND branch; FXComp FX_PARAMS (Thresh/Ratio/Attack/Release/Makeup/Wet) has no mode key and no corpus/mapping evidence names one",
    "missing_evidence": "raw kParam key (and value encoding) that toggles Multiband, via a preset diff of Single vs Multiband saved by real Serum",
    "pre_existing_binding": null,
-   "newly_bound": false
+   "newly_bound": false,
+   "evidence_tier": "SEMANTIC_BINDING_PROVEN",
+   "semantic_status": "SEMANTIC_BINDING_PROVEN",
+   "semantic_raw_to_label": {
+    "null": "SINGLE",
+    "1.0": "MULTIBAND"
+   }
   },
   "fx.convolve.ir_browser": {
    "atlas_id": "fx.convolve.ir_browser",
@@ -182,7 +188,7 @@
    "family": "FX",
    "ui_identity": "Filter position -- OFF/PRE/POST",
    "fx_type": "FXDistortion",
-   "candidate_kparam": null,
+   "candidate_kparam": "kParamPrePost",
    "schema_present": false,
    "mapping_supported": null,
    "introspect_supported": null,
@@ -195,7 +201,13 @@
    "rationale": "OFF/PRE/POST; FXDistortion FX_PARAMS has no such key. targets.py lists 'PrePost' but the control matrix marks it NOT_YET_DERIVED",
    "missing_evidence": "raw key + value encoding from a Serum-saved preset toggled OFF/PRE/POST (POST was never observed in the UI either)",
    "pre_existing_binding": null,
-   "newly_bound": false
+   "newly_bound": false,
+   "evidence_tier": "SEMANTIC_BINDING_PROVEN",
+   "semantic_status": "SEMANTIC_BINDING_PROVEN",
+   "semantic_raw_to_label": {
+    "1.0": "PRE",
+    "2.0": "POST"
+   }
   },
   "fx.distortion.xshaper_edit_pencil": {
    "atlas_id": "fx.distortion.xshaper_edit_pencil",
@@ -235,7 +247,15 @@
    "rationale": "FXEQ.kParamType1 exists in real preset corpora (upstream mapping.py notes; local body_state fixtures) and survives write+introspection, but which band it is and what value means Shelf/Peak/HP is unproven",
    "missing_evidence": "Serum-saved preset diffs clicking Left icon Shelf->Peak->HighPass proving Type1==Left and the raw value per icon",
    "pre_existing_binding": null,
-   "newly_bound": false
+   "newly_bound": false,
+   "evidence_tier": "SEMANTIC_BINDING_PROVEN",
+   "semantic_status": "SEMANTIC_BINDING_PROVEN",
+   "semantic_raw_to_label": {
+    "null": "Shelf",
+    "0.0": "Shelf",
+    "1.0": "Peak",
+    "2.0": "High Pass"
+   }
   },
   "fx.equalizer.right_type": {
    "atlas_id": "fx.equalizer.right_type",
@@ -255,7 +275,15 @@
    "rationale": "FXEQ.kParamType2 candidate, same situation; Right's 3rd option is Low Pass (differs from Left)",
    "missing_evidence": "Serum-saved preset diffs clicking Right icon Shelf->Peak->LowPass proving Type2==Right and the raw value per icon",
    "pre_existing_binding": null,
-   "newly_bound": false
+   "newly_bound": false,
+   "evidence_tier": "SEMANTIC_BINDING_PROVEN",
+   "semantic_status": "SEMANTIC_BINDING_PROVEN",
+   "semantic_raw_to_label": {
+    "null": "Shelf",
+    "0.0": "Shelf",
+    "1.0": "Peak",
+    "2.0": "Low Pass"
+   }
   },
   "fx.filter.type": {
    "atlas_id": "fx.filter.type",

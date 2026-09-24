@@ -1,0 +1,269 @@
+{
+ "manifest": "D:\\ableton claude final best\\serum2\\qualification\\bulk_causal\\manifest_fx_verify_v2.json",
+ "presets": [
+  {
+   "n": 1,
+   "preset": "GUI01_eq_left_type__ref",
+   "test": "eq_left_type",
+   "atlas_id": "fx.equalizer.left_type",
+   "module": "FXEQ",
+   "kparam": "kParamType1",
+   "written": null,
+   "kind": "reference",
+   "raw_params": {
+    "kParamFreq1": 2000.0,
+    "kParamGain1": 0.0
+   }
+  },
+  {
+   "n": 2,
+   "preset": "GUI02_eq_left_type__null",
+   "test": "eq_left_type",
+   "atlas_id": "fx.equalizer.left_type",
+   "module": "FXEQ",
+   "kparam": "kParamType1",
+   "written": null,
+   "kind": "value",
+   "raw_params": {
+    "kParamFreq1": 2000.0,
+    "kParamGain1": 12.0
+   }
+  },
+  {
+   "n": 3,
+   "preset": "GUI03_eq_left_type__0p0",
+   "test": "eq_left_type",
+   "atlas_id": "fx.equalizer.left_type",
+   "module": "FXEQ",
+   "kparam": "kParamType1",
+   "written": 0.0,
+   "kind": "value",
+   "raw_params": {
+    "kParamFreq1": 2000.0,
+    "kParamGain1": 12.0,
+    "kParamType1": 0.0
+   }
+  },
+  {
+   "n": 4,
+   "preset": "GUI04_eq_left_type__1p0",
+   "test": "eq_left_type",
+   "atlas_id": "fx.equalizer.left_type",
+   "module": "FXEQ",
+   "kparam": "kParamType1",
+   "written": 1.0,
+   "kind": "value",
+   "raw_params": {
+    "kParamFreq1": 2000.0,
+    "kParamGain1": 12.0,
+    "kParamType1": 1.0
+   }
+  },
+  {
+   "n": 5,
+   "preset": "GUI05_eq_left_type__2p0",
+   "test": "eq_left_type",
+   "atlas_id": "fx.equalizer.left_type",
+   "module": "FXEQ",
+   "kparam": "kParamType1",
+   "written": 2.0,
+   "kind": "value",
+   "raw_params": {
+    "kParamFreq1": 2000.0,
+    "kParamGain1": 12.0,
+    "kParamType1": 2.0
+   }
+  },
+  {
+   "n": 6,
+   "preset": "GUI06_eq_left_type__3p0_probe",
+   "test": "eq_left_type",
+   "atlas_id": "fx.equalizer.left_type",
+   "module": "FXEQ",
+   "kparam": "kParamType1",
+   "written": 3.0,
+   "kind": "probe",
+   "raw_params": {
+    "kParamFreq1": 2000.0,
+    "kParamGain1": 12.0,
+    "kParamType1": 3.0
+   }
+  },
+  {
+   "n": 7,
+   "preset": "GUI07_eq_right_type__ref",
+   "test": "eq_right_type",
+   "atlas_id": "fx.equalizer.right_type",
+   "module": "FXEQ",
+   "kparam": "kParamType2",
+   "written": null,
+   "kind": "reference",
+   "raw_params": {
+    "kParamFreq2": 4000.0,
+    "kParamGain2": 0.0
+   }
+  },
+  {
+   "n": 8,
+   "preset": "GUI08_eq_right_type__null",
+   "test": "eq_right_type",
+   "atlas_id": "fx.equalizer.right_type",
+   "module": "FXEQ",
+   "kparam": "kParamType2",
+   "written": null,
+   "kind": "value",
+   "raw_params": {
+    "kParamFreq2": 4000.0,
+    "kParamGain2": 12.0
+   }
+  },
+  {
+   "n": 9,
+   "preset": "GUI09_eq_right_type__0p0",
+   "test": "eq_right_type",
+   "atlas_id": "fx.equalizer.right_type",
+   "module": "FXEQ",
+   "kparam": "kParamType2",
+   "written": 0.0,
+   "kind": "value",
+   "raw_params": {
+    "kParamFreq2": 4000.0,
+    "kParamGain2": 12.0,
+    "kParamType2": 0.0
+   }
+  },
+  {
+   "n": 10,
+   "preset": "GUI10_eq_right_type__1p0",
+   "test": "eq_right_type",
+   "atlas_id": "fx.equalizer.right_type",
+   "module": "FXEQ",
+   "kparam": "kParamType2",
+   "written": 1.0,
+   "kind": "value",
+   "raw_params": {
+    "kParamFreq2": 4000.0,
+    "kParamGain2": 12.0,
+    "kParamType2": 1.0
+   }
+  },
+  {
+   "n": 11,
+   "preset": "GUI11_eq_right_type__2p0",
+   "test": "eq_right_type",
+   "atlas_id": "fx.equalizer.right_type",
+   "module": "FXEQ",
+   "kparam": "kParamType2",
+   "written": 2.0,
+   "kind": "value",
+   "raw_params": {
+    "kParamFreq2": 4000.0,
+    "kParamGain2": 12.0,
+    "kParamType2": 2.0
+   }
+  },
+  {
+   "n": 12,
+   "preset": "GUI12_eq_right_type__3p0_probe",
+   "test": "eq_right_type",
+   "atlas_id": "fx.equalizer.right_type",
+   "module": "FXEQ",
+   "kparam": "kParamType2",
+   "written": 3.0,
+   "kind": "probe",
+   "raw_params": {
+    "kParamFreq2": 4000.0,
+    "kParamGain2": 12.0,
+    "kParamType2": 3.0
+   }
+  },
+  {
+   "n": 13,
+   "preset": "GUI13_comp_multiband_mode__ref",
+   "test": "comp_multiband_mode",
+   "atlas_id": "fx.compressor.mode",
+   "module": "FXComp",
+   "kparam": "kParamMultiband",
+   "written": null,
+   "kind": "reference",
+   "raw_params": {}
+  },
+  {
+   "n": 14,
+   "preset": "GUI14_comp_multiband_mode__null",
+   "test": "comp_multiband_mode",
+   "atlas_id": "fx.compressor.mode",
+   "module": "FXComp",
+   "kparam": "kParamMultiband",
+   "written": null,
+   "kind": "value",
+   "raw_params": {
+    "kParamGain2": 12.0
+   }
+  },
+  {
+   "n": 15,
+   "preset": "GUI15_comp_multiband_mode__1p0",
+   "test": "comp_multiband_mode",
+   "atlas_id": "fx.compressor.mode",
+   "module": "FXComp",
+   "kparam": "kParamMultiband",
+   "written": 1.0,
+   "kind": "value",
+   "raw_params": {
+    "kParamGain2": 12.0,
+    "kParamMultiband": 1.0
+   }
+  },
+  {
+   "n": 16,
+   "preset": "GUI16_dist_prepost_lowpass_drive80__ref",
+   "test": "dist_prepost_lowpass_drive80",
+   "atlas_id": "fx.distortion.filter_position",
+   "module": "FXDistortion",
+   "kparam": "kParamPrePost",
+   "written": null,
+   "kind": "reference",
+   "raw_params": {
+    "kParamMode": "kOverdrive",
+    "kParamDrive": 80.0,
+    "kParamFreq": 0.3,
+    "kParamLPHP": 0.0
+   }
+  },
+  {
+   "n": 17,
+   "preset": "GUI17_dist_prepost_lowpass_drive80__1p0",
+   "test": "dist_prepost_lowpass_drive80",
+   "atlas_id": "fx.distortion.filter_position",
+   "module": "FXDistortion",
+   "kparam": "kParamPrePost",
+   "written": 1.0,
+   "kind": "value",
+   "raw_params": {
+    "kParamMode": "kOverdrive",
+    "kParamDrive": 80.0,
+    "kParamFreq": 0.3,
+    "kParamLPHP": 0.0,
+    "kParamPrePost": 1.0
+   }
+  },
+  {
+   "n": 18,
+   "preset": "GUI18_dist_prepost_lowpass_drive80__2p0",
+   "test": "dist_prepost_lowpass_drive80",
+   "atlas_id": "fx.distortion.filter_position",
+   "module": "FXDistortion",
+   "kparam": "kParamPrePost",
+   "written": 2.0,
+   "kind": "value",
+   "raw_params": {
+    "kParamMode": "kOverdrive",
+    "kParamDrive": 80.0,
+    "kParamFreq": 0.3,
+    "kParamLPHP": 0.0,
+    "kParamPrePost": 2.0
+   }
+  }
+ ]
+}

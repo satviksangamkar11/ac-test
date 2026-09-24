@@ -1,0 +1,93 @@
+{
+ "sources": {
+  "causal": "parameter_characterization/bulk_causal_evidence/fx_verify_v2.json",
+  "gui": "parameter_characterization/bulk_causal_evidence/gui_evidence_fx_v1.json"
+ },
+ "tests": {
+  "eq_left_type": {
+   "atlas_id": "fx.equalizer.left_type",
+   "candidate": {
+    "module": "FXEQ",
+    "kparam": "kParamType1",
+    "default": 0.0
+   },
+   "causal_status": "PROVEN",
+   "atlas_labels": [
+    "Shelf",
+    "Peak",
+    "High Pass"
+   ],
+   "status": "SEMANTIC_BINDING_PROVEN",
+   "tier": "SEMANTIC_BINDING_PROVEN",
+   "raw_to_label": {
+    "null": "Shelf",
+    "0.0": "Shelf",
+    "1.0": "Peak",
+    "2.0": "High Pass"
+   },
+   "reasons": []
+  },
+  "eq_right_type": {
+   "atlas_id": "fx.equalizer.right_type",
+   "candidate": {
+    "module": "FXEQ",
+    "kparam": "kParamType2",
+    "default": 0.0
+   },
+   "causal_status": "PROVEN",
+   "atlas_labels": [
+    "Shelf",
+    "Peak",
+    "Low Pass"
+   ],
+   "status": "SEMANTIC_BINDING_PROVEN",
+   "tier": "SEMANTIC_BINDING_PROVEN",
+   "raw_to_label": {
+    "null": "Shelf",
+    "0.0": "Shelf",
+    "1.0": "Peak",
+    "2.0": "Low Pass"
+   },
+   "reasons": []
+  },
+  "comp_multiband_mode": {
+   "atlas_id": "fx.compressor.mode",
+   "candidate": {
+    "module": "FXComp",
+    "kparam": "kParamMultiband"
+   },
+   "causal_status": "PROVEN",
+   "atlas_labels": [
+    "SINGLE",
+    "MULTIBAND"
+   ],
+   "status": "SEMANTIC_BINDING_PROVEN",
+   "tier": "SEMANTIC_BINDING_PROVEN",
+   "raw_to_label": {
+    "null": "SINGLE",
+    "1.0": "MULTIBAND"
+   },
+   "reasons": []
+  },
+  "dist_prepost_lowpass_drive80": {
+   "atlas_id": "fx.distortion.filter_position",
+   "candidate": {
+    "module": "FXDistortion",
+    "kparam": "kParamPrePost"
+   },
+   "causal_status": "PROVEN",
+   "atlas_labels": [
+    "OFF",
+    "PRE",
+    "POST"
+   ],
+   "status": "SEMANTIC_BINDING_PROVEN",
+   "tier": "SEMANTIC_BINDING_PROVEN",
+   "raw_to_label": {
+    "1.0": "PRE",
+    "2.0": "POST"
+   },
+   "reasons": []
+  }
+ }
+}
