@@ -1,7 +1,33 @@
 {
   "derived_from": "parameter_characterization/serum_mcp_mutable_surface.json",
-  "total_targets": 233,
+  "total_targets": 266,
   "families": {
+    "ARP": [
+      {
+        "canonical_id": "arp.transpose.range",
+        "mcp_editable_path": "arp.transpose_range",
+        "control_type": "draggable_value",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "arp.transpose.shape",
+        "mcp_editable_path": "arp.transpose_shape",
+        "control_type": "dropdown",
+        "domain_status": null,
+        "enum_status": "VERIFIED",
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "arp.transpose.shift",
+        "mcp_editable_path": "arp.transpose_shift",
+        "control_type": "draggable_value",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      }
+    ],
     "ENVELOPES": [
       {
         "canonical_id": "env1.attack",
@@ -632,8 +658,16 @@
         "evidence_status": "NO_EVIDENCE"
       },
       {
+        "canonical_id": "fx.dimension.size",
+        "mcp_editable_path": "fx_chain[?].params.kParamDimESize (type=FXHyperD)",
+        "control_type": "knob",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
         "canonical_id": "fx.dimension.wet",
-        "mcp_editable_path": "fx_chain[?].params.kParamWet (type=FXHyperD)",
+        "mcp_editable_path": "fx_chain[?].params.kParamDimEWet (type=FXHyperD)",
         "control_type": "knob",
         "domain_status": null,
         "enum_status": null,
@@ -884,6 +918,208 @@
         "mcp_editable_path": "fx_chain[?].params.kParamWet (type=FXReverb)",
         "control_type": "knob",
         "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      }
+    ],
+    "GLOBAL": [
+      {
+        "canonical_id": "global.bend_range_down",
+        "mcp_editable_path": "global_.bend_range_down",
+        "control_type": "continuous",
+        "domain_status": "VERIFIED",
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "global.bend_range_up",
+        "mcp_editable_path": "global_.bend_range_up",
+        "control_type": "continuous",
+        "domain_status": "VERIFIED",
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "global.direct_volume",
+        "mcp_editable_path": "global_.direct_volume",
+        "control_type": "continuous",
+        "domain_status": "DOMAIN_UNVERIFIED",
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "global.fx_bus1_destination",
+        "mcp_editable_path": "global_.fx_bus1_destination",
+        "control_type": "continuous",
+        "domain_status": "VERIFIED",
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "global.fx_bus1_volume",
+        "mcp_editable_path": "global_.fx_bus1_volume",
+        "control_type": "continuous",
+        "domain_status": "DOMAIN_UNVERIFIED",
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "global.fx_bus2_destination",
+        "mcp_editable_path": "global_.fx_bus2_destination",
+        "control_type": "continuous",
+        "domain_status": "VERIFIED",
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "global.fx_bus2_volume",
+        "mcp_editable_path": "global_.fx_bus2_volume",
+        "control_type": "continuous",
+        "domain_status": "DOMAIN_UNVERIFIED",
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "global.global_tuning",
+        "mcp_editable_path": "global_.global_tuning",
+        "control_type": "continuous",
+        "domain_status": "DOMAIN_UNVERIFIED",
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "global.legato",
+        "mcp_editable_path": "global_.legato",
+        "control_type": "toggle",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "global.limit_same_note_polyphony",
+        "mcp_editable_path": "global_.limit_same_note_polyphony",
+        "control_type": "toggle",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "global.master_volume",
+        "mcp_editable_path": "global_.master_volume",
+        "control_type": "continuous",
+        "domain_status": "VERIFIED",
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "global.mono",
+        "mcp_editable_path": "global_.mono",
+        "control_type": "toggle",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "global.note_latch",
+        "mcp_editable_path": "global_.note_latch",
+        "control_type": "toggle",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "global.oversampling",
+        "mcp_editable_path": "global_.oversampling",
+        "control_type": "continuous",
+        "domain_status": "DOMAIN_UNVERIFIED",
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "global.poly_count",
+        "mcp_editable_path": "global_.poly_count",
+        "control_type": "continuous",
+        "domain_status": "VERIFIED",
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "global.porta_always",
+        "mcp_editable_path": "global_.porta_always",
+        "control_type": "toggle",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "global.porta_scaled",
+        "mcp_editable_path": "global_.porta_scaled",
+        "control_type": "toggle",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "global.portamento_curve",
+        "mcp_editable_path": "global_.portamento_curve",
+        "control_type": "continuous",
+        "domain_status": "DOMAIN_UNVERIFIED",
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "global.portamento_time",
+        "mcp_editable_path": "global_.portamento_time",
+        "control_type": "continuous",
+        "domain_status": "VERIFIED",
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "global.s1_compatibility",
+        "mcp_editable_path": "global_.s1_compatibility",
+        "control_type": "toggle",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "global.swing",
+        "mcp_editable_path": "global_.swing",
+        "control_type": "continuous",
+        "domain_status": "VERIFIED",
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "global.swing_div",
+        "mcp_editable_path": "global_.swing_div",
+        "control_type": "continuous",
+        "domain_status": "DOMAIN_UNVERIFIED",
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "global.transpose",
+        "mcp_editable_path": "global_.transpose",
+        "control_type": "continuous",
+        "domain_status": "VERIFIED",
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "global.use_ultra_on_render",
+        "mcp_editable_path": "global_.use_ultra_on_render",
+        "control_type": "toggle",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "global.voice_amp",
+        "mcp_editable_path": "global_.voice_amp",
+        "control_type": "continuous",
+        "domain_status": "DOMAIN_UNVERIFIED",
         "enum_status": null,
         "evidence_status": "NO_EVIDENCE"
       }
@@ -1855,7 +2091,7 @@
         "canonical_id": "oscNoise.fine",
         "mcp_editable_path": "oscillators[3].fine",
         "control_type": "continuous",
-        "domain_status": "DOMAIN_UNVERIFIED",
+        "domain_status": "VERIFIED",
         "enum_status": null,
         "evidence_status": "NO_EVIDENCE"
       },
@@ -1871,7 +2107,41 @@
         "canonical_id": "oscNoise.pan",
         "mcp_editable_path": "oscillators[3].pan",
         "control_type": "continuous",
-        "domain_status": "DOMAIN_UNVERIFIED",
+        "domain_status": "VERIFIED",
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      }
+    ],
+    "VOICE_CONTROL": [
+      {
+        "canonical_id": "voice.voicing.legato",
+        "mcp_editable_path": "global_.legato",
+        "control_type": "checkbox",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "voice.voicing.mono",
+        "mcp_editable_path": "global_.mono",
+        "control_type": "checkbox",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "voice.voicing.porta_always",
+        "mcp_editable_path": "global_.porta_always",
+        "control_type": "toggle",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "voice.voicing.porta_scaled",
+        "mcp_editable_path": "global_.porta_scaled",
+        "control_type": "toggle",
+        "domain_status": null,
         "enum_status": null,
         "evidence_status": "NO_EVIDENCE"
       }

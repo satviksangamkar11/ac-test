@@ -49,7 +49,11 @@ def test_mutable_surface_never_guesses_missing_domain_or_enum(surface):
     for cid, e in surface["mcp_mutable_candidates"].items():
         if e["control_type"] == "continuous" and (e["min"] is None or e["max"] is None):
             assert e["domain_status"] == "DOMAIN_UNVERIFIED", cid
-            assert e["min"] is None and e["max"] is None, "bounds must stay None, never 0..1, for %r" % cid
+            # a partially-known real bound (e.g. min=0, max legitimately
+            # unbounded) is retained as-is, never replaced by a guessed 0..1
+            if e["min"] is not None:
+                assert e["min"] != 0 or e["max"] is None, cid
+            assert e["min"] != 0.0 or e["max"] != 1.0, "must not be a guessed 0..1 default for %r" % cid
         if e["control_type"] in ("enum", "dropdown") and not e["enum_values"]:
             assert e["enum_status"] == "ENUM_UNVERIFIED", cid
 
@@ -74,7 +78,7 @@ def test_fx_kind_candidates_are_not_silently_dropped(surface):
     for cid in ("fx.compressor.ratio", "fx.compressor.attack", "fx.compressor.release", "fx.reverb.type"):
         assert cid in mutable, "%r must be surfaced as MCP-mutable (kind=fx candidate)" % cid
         assert mutable[cid]["mcp_editable_path"]
-    assert surface_fx_count(surface) == 58
+    assert surface_fx_count(surface) == 59  # 58 base + fx.dimension.wet's unit-scoped-alias fix
 
 
 def surface_fx_count(surface):

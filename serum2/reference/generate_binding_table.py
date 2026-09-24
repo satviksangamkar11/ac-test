@@ -38,6 +38,20 @@ FX_PARAM_ALIASES = {
     "FXHyperD": {"unison": "kParamUnison"},
     "FXFilter": {"type": "kParamType", "cutoff": "kParamFreq", "res": "kParamReso"},
 }
+# unit-scoped overrides: FX_UNIT_TYPES maps BOTH "hyper" and "dimension" to
+# the single FXHyperD module (schema.FX_PARAMS['FXHyperD'] confirms it's one
+# combined DSP unit with 6 kParams), but the live-UI audit for these two
+# Atlas control families independently observed them as separate on-screen
+# controls ("Dimension section... MIX knob... independent from Hyper's own
+# MIX" / "distinct from Dimension's separate MIX"). Plain exact-normalized
+# matching collapses fx.dimension.wet onto the same kParamWet as fx.hyper.wet
+# (norm() only sees "wet"), which is wrong: the schema separately catalogs
+# kParamDimESize/kParamDimEWet for Dimension's own controls. This table
+# disambiguates by (fx_type, unit) BEFORE the generic exact match runs --
+# checked here, not invented as a new matching algorithm.
+FX_UNIT_PARAM_ALIASES = {
+    ("FXHyperD", "dimension"): {"wet": "kParamDimEWet", "size": "kParamDimESize"},
+}
 SPEC_LISTS = {"osc": ("oscillators", "Oscillator"), "env": ("envelopes", "Env"), "lfo": ("lfos", "LFO"),
               "filter": ("filters", "VoiceFilter")}
 INSTANCE = re.compile(r"^(osc|env|lfo|filter)(?:([A-C])|(\d+))\.(.+)$")
@@ -103,11 +117,35 @@ def main():
     from serum2.producer.state_ledger import catalog
     cat = catalog()
     models = {"osc": S.OscillatorSpec, "env": S.EnvelopeSpec, "lfo": S.LfoSpec, "filter": S.FilterSpec}
+    # Singleton (non-list, no numbered slot) PresetSpec objects. "global"
+    # and "voice.voicing" BOTH target GlobalSpec -- confirmed by reading the
+    # Atlas's own control_ids (voice.voicing.legato/mono/porta_* match
+    # GlobalSpec field names exactly, not VoiceUnisonSpec, despite the
+    # panel name suggesting otherwise). "global_" is PresetSpec's actual
+    # Python attribute (a leading underscore-free "global" is a keyword).
+    SINGLETON_SPECS = {
+        "global": ("global_", S.GlobalSpec),
+        "voice.voicing": ("global_", S.GlobalSpec),
+        "arp": ("arp", S.ArpSpec),
+    }
     controls, skipped = {}, 0
     for cid in all_control_ids():
-        m = INSTANCE.match(cid)
+        singleton_prefix = next((p for p in sorted(SINGLETON_SPECS, key=len, reverse=True)
+                                 if cid == p or cid.startswith(p + ".")), None)
+        m = None if singleton_prefix else INSTANCE.match(cid)
         top = cid.split(".")[0]
-        if m or top in SPECIAL_OSC:
+        if singleton_prefix:
+            attr, model = SINGLETON_SPECS[singleton_prefix]
+            param = cid[len(singleton_prefix) + 1:]
+            fields = list(model.model_fields)
+            want = FIELD_ALIASES.get(param, param)
+            hit = [f for f in fields if norm(f) == norm(want)]
+            if len(hit) == 1:
+                controls[cid] = {"kind": "singleton_field", "attr": attr, "field": hit[0],
+                                 "basis": "exact_normalized" if norm(want) == norm(param) else "alias"}
+            else:
+                skipped += 1
+        elif m or top in SPECIAL_OSC:
             if m:
                 kind, letter, num, param = m.groups()
                 idx = (ord(letter) - 65) if letter else int(num) - 1
@@ -129,9 +167,12 @@ def main():
                 skipped += 1
                 continue
             keys = list(cat["fx_params"].get(ftype, {}))
+            unit_alias = FX_UNIT_PARAM_ALIASES.get((ftype, unit), {}).get(param)
             exact = [k for k in keys if norm(k) == norm(param)]
             alias = FX_PARAM_ALIASES.get(ftype, {}).get(param)
-            if len(exact) == 1:
+            if unit_alias and unit_alias in keys:
+                controls[cid] = {"kind": "fx", "fx_type": ftype, "param": unit_alias, "basis": "alias"}
+            elif len(exact) == 1:
                 controls[cid] = {"kind": "fx", "fx_type": ftype, "param": exact[0], "basis": "exact_normalized"}
             elif alias and alias in keys:
                 controls[cid] = {"kind": "fx", "fx_type": ftype, "param": alias, "basis": "alias"}

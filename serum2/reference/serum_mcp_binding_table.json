@@ -3,6 +3,24 @@
  "generated_by": "serum2/reference/generate_binding_table.py",
  "rules": "exact normalised equality or reviewed alias only; no fuzzy/prefix/value-domain inference",
  "controls": {
+  "arp.transpose.range": {
+   "kind": "singleton_field",
+   "attr": "arp",
+   "field": "transpose_range",
+   "basis": "exact_normalized"
+  },
+  "arp.transpose.shape": {
+   "kind": "singleton_field",
+   "attr": "arp",
+   "field": "transpose_shape",
+   "basis": "exact_normalized"
+  },
+  "arp.transpose.shift": {
+   "kind": "singleton_field",
+   "attr": "arp",
+   "field": "transpose_shift",
+   "basis": "exact_normalized"
+  },
   "env1.attack": {
    "kind": "field",
    "module": "env",
@@ -575,11 +593,17 @@
    "param": "kParamWet",
    "basis": "exact_normalized"
   },
+  "fx.dimension.size": {
+   "kind": "fx",
+   "fx_type": "FXHyperD",
+   "param": "kParamDimESize",
+   "basis": "alias"
+  },
   "fx.dimension.wet": {
    "kind": "fx",
    "fx_type": "FXHyperD",
-   "param": "kParamWet",
-   "basis": "exact_normalized"
+   "param": "kParamDimEWet",
+   "basis": "alias"
   },
   "fx.distortion.drive": {
    "kind": "fx",
@@ -765,6 +789,156 @@
    "kind": "fx",
    "fx_type": "FXReverb",
    "param": "kParamWet",
+   "basis": "exact_normalized"
+  },
+  "global.bend_range_down": {
+   "kind": "singleton_field",
+   "attr": "global_",
+   "field": "bend_range_down",
+   "basis": "exact_normalized"
+  },
+  "global.bend_range_up": {
+   "kind": "singleton_field",
+   "attr": "global_",
+   "field": "bend_range_up",
+   "basis": "exact_normalized"
+  },
+  "global.direct_volume": {
+   "kind": "singleton_field",
+   "attr": "global_",
+   "field": "direct_volume",
+   "basis": "exact_normalized"
+  },
+  "global.fx_bus1_destination": {
+   "kind": "singleton_field",
+   "attr": "global_",
+   "field": "fx_bus1_destination",
+   "basis": "exact_normalized"
+  },
+  "global.fx_bus1_volume": {
+   "kind": "singleton_field",
+   "attr": "global_",
+   "field": "fx_bus1_volume",
+   "basis": "exact_normalized"
+  },
+  "global.fx_bus2_destination": {
+   "kind": "singleton_field",
+   "attr": "global_",
+   "field": "fx_bus2_destination",
+   "basis": "exact_normalized"
+  },
+  "global.fx_bus2_volume": {
+   "kind": "singleton_field",
+   "attr": "global_",
+   "field": "fx_bus2_volume",
+   "basis": "exact_normalized"
+  },
+  "global.global_tuning": {
+   "kind": "singleton_field",
+   "attr": "global_",
+   "field": "global_tuning",
+   "basis": "exact_normalized"
+  },
+  "global.legato": {
+   "kind": "singleton_field",
+   "attr": "global_",
+   "field": "legato",
+   "basis": "exact_normalized"
+  },
+  "global.limit_same_note_polyphony": {
+   "kind": "singleton_field",
+   "attr": "global_",
+   "field": "limit_same_note_polyphony",
+   "basis": "exact_normalized"
+  },
+  "global.master_volume": {
+   "kind": "singleton_field",
+   "attr": "global_",
+   "field": "master_volume",
+   "basis": "exact_normalized"
+  },
+  "global.mono": {
+   "kind": "singleton_field",
+   "attr": "global_",
+   "field": "mono",
+   "basis": "exact_normalized"
+  },
+  "global.note_latch": {
+   "kind": "singleton_field",
+   "attr": "global_",
+   "field": "note_latch",
+   "basis": "exact_normalized"
+  },
+  "global.oversampling": {
+   "kind": "singleton_field",
+   "attr": "global_",
+   "field": "oversampling",
+   "basis": "exact_normalized"
+  },
+  "global.poly_count": {
+   "kind": "singleton_field",
+   "attr": "global_",
+   "field": "poly_count",
+   "basis": "exact_normalized"
+  },
+  "global.porta_always": {
+   "kind": "singleton_field",
+   "attr": "global_",
+   "field": "porta_always",
+   "basis": "exact_normalized"
+  },
+  "global.porta_scaled": {
+   "kind": "singleton_field",
+   "attr": "global_",
+   "field": "porta_scaled",
+   "basis": "exact_normalized"
+  },
+  "global.portamento_curve": {
+   "kind": "singleton_field",
+   "attr": "global_",
+   "field": "portamento_curve",
+   "basis": "exact_normalized"
+  },
+  "global.portamento_time": {
+   "kind": "singleton_field",
+   "attr": "global_",
+   "field": "portamento_time",
+   "basis": "exact_normalized"
+  },
+  "global.s1_compatibility": {
+   "kind": "singleton_field",
+   "attr": "global_",
+   "field": "s1_compatibility",
+   "basis": "exact_normalized"
+  },
+  "global.swing": {
+   "kind": "singleton_field",
+   "attr": "global_",
+   "field": "swing",
+   "basis": "exact_normalized"
+  },
+  "global.swing_div": {
+   "kind": "singleton_field",
+   "attr": "global_",
+   "field": "swing_div",
+   "basis": "exact_normalized"
+  },
+  "global.transpose": {
+   "kind": "singleton_field",
+   "attr": "global_",
+   "field": "transpose",
+   "basis": "exact_normalized"
+  },
+  "global.use_ultra_on_render": {
+   "kind": "singleton_field",
+   "attr": "global_",
+   "field": "use_ultra_on_render",
+   "basis": "exact_normalized"
+  },
+  "global.voice_amp": {
+   "kind": "singleton_field",
+   "attr": "global_",
+   "field": "voice_amp",
    "basis": "exact_normalized"
   },
   "lfo1.beat_sync": {
@@ -1750,6 +1924,30 @@
    "index": 3,
    "field": "pan",
    "basis": "exact_normalized"
+  },
+  "voice.voicing.legato": {
+   "kind": "singleton_field",
+   "attr": "global_",
+   "field": "legato",
+   "basis": "exact_normalized"
+  },
+  "voice.voicing.mono": {
+   "kind": "singleton_field",
+   "attr": "global_",
+   "field": "mono",
+   "basis": "exact_normalized"
+  },
+  "voice.voicing.porta_always": {
+   "kind": "singleton_field",
+   "attr": "global_",
+   "field": "porta_always",
+   "basis": "exact_normalized"
+  },
+  "voice.voicing.porta_scaled": {
+   "kind": "singleton_field",
+   "attr": "global_",
+   "field": "porta_scaled",
+   "basis": "exact_normalized"
   }
  },
  "value_aliases": {
@@ -1828,5 +2026,5 @@
   "Env 4 Sustain": "env3.sustain",
   "Env 4 Release": "env3.release"
  },
- "unbound_atlas_ids": 464
+ "unbound_atlas_ids": 565
 }

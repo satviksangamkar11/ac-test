@@ -1,25 +1,28 @@
 {
   "total_atlas_controls": 1136,
-  "total_mcp_mutable_candidates": 233,
-  "total_not_mcp_mutable": 903,
+  "total_mcp_mutable_candidates": 266,
+  "total_not_mcp_mutable": 870,
   "mcp_mutable_by_family": {
+    "ARP": 3,
     "ENVELOPES": 32,
     "FILTERS": 20,
-    "FX": 58,
+    "FX": 59,
+    "GLOBAL": 25,
     "LFOS": 72,
-    "OSCILLATORS": 51
+    "OSCILLATORS": 51,
+    "VOICE_CONTROL": 4
   },
   "not_mcp_mutable_by_status": {
-    "UNKNOWN": 699,
+    "UNKNOWN": 666,
     "NOT_MCP_MUTABLE": 83,
     "UI_ONLY": 41,
     "PRESERVE_ONLY": 30,
     "READ_ONLY": 29,
     "PERFORMANCE_ONLY": 21
   },
-  "identity_complete": 233,
-  "domain_complete": 231,
-  "enum_complete": 233,
+  "identity_complete": 266,
+  "domain_complete": 258,
+  "enum_complete": 266,
   "binding_proven": 8,
   "contract_available": 8,
   "admitted": 8

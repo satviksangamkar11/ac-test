@@ -278,6 +278,24 @@ def _build_atlas() -> Dict[str, ReferenceControl]:
             cid, suffix.replace("_", " ").title(), "NOISE",
             snap["noise_oscillator"][kparam], aliases, source_tag + " NoiseOscillator",
         )
+
+    # oscNoise.fine/pan: schema.py's OscillatorSpec docstring is explicit that
+    # fine/pan are "shared fields [that] apply to all 5 oscillator slots
+    # (A/B/C/Noise/Sub)", but the generic _OSC_FIELDS loop above only covers
+    # _OSC_SLOTS = (oscA, oscB, oscC) -- Noise's own fine/pan entries exist
+    # only via the audit bridge (serum_audit.py), which never captured bounds
+    # (a live-UI observation pass, not a schema dump). Deterministic fix:
+    # the SAME slot-agnostic snap["oscillator"] domain oscA.fine/oscA.pan
+    # already use also applies here -- pulled from the identical schema
+    # source, not guessed or copied from a semantically different field.
+    for kparam, suffix in (("kParamFine", "fine"), ("kParamPan", "pan")):
+        cid = "oscNoise.%s" % suffix
+        if kparam in snap["oscillator"] and cid not in atlas:
+            atlas[cid] = _entry_from_schema(
+                cid, suffix.replace("_", " ").title(), "NOISE",
+                snap["oscillator"][kparam], _OSC_FIELDS[kparam][1], source_tag + " OscillatorSpec (shared, Noise slot)",
+            )
+
     if "kParamShape" in snap["sub_oscillator"]:
         atlas["oscSub.shape"] = ReferenceControl(
             control_id="oscSub.shape", display_name="Sub Shape", panel="SUB",
