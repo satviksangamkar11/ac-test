@@ -1,6 +1,6 @@
 {
   "derived_from": "parameter_characterization/serum_mcp_mutable_surface.json",
-  "total_targets": 318,
+  "total_targets": 330,
   "families": {
     "ARP": [
       {
@@ -17,6 +17,70 @@
         "control_type": "dropdown",
         "domain_status": null,
         "enum_status": "VERIFIED",
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "arp.playback.chance",
+        "mcp_editable_path": "arp.chance",
+        "control_type": "draggable_value",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "arp.playback.gate",
+        "mcp_editable_path": "arp.gate",
+        "control_type": "draggable_value",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "arp.playback.offset",
+        "mcp_editable_path": "arp.offset",
+        "control_type": "draggable_value",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "arp.playback.repeats",
+        "mcp_editable_path": "arp.repeats",
+        "control_type": "draggable_value",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "arp.playback.thru",
+        "mcp_editable_path": "arp.thru",
+        "control_type": "toggle",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "arp.retrigger.first",
+        "mcp_editable_path": "arp.first_note_retrig",
+        "control_type": "toggle",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "arp.retrigger.launch",
+        "mcp_editable_path": "arp.launch_retrig",
+        "control_type": "toggle",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "arp.retrigger.note",
+        "mcp_editable_path": "arp.note_retrig",
+        "control_type": "toggle",
+        "domain_status": null,
+        "enum_status": null,
         "evidence_status": "NO_EVIDENCE"
       },
       {
@@ -39,6 +103,38 @@
         "canonical_id": "arp.transpose.shift",
         "mcp_editable_path": "arp.transpose_shift",
         "control_type": "draggable_value",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "arp.velocity.decay",
+        "mcp_editable_path": "arp.velo_decay",
+        "control_type": "knob",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "arp.velocity.enable",
+        "mcp_editable_path": "arp.velo_enabled",
+        "control_type": "toggle",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "arp.velocity.retrig",
+        "mcp_editable_path": "arp.velo_retrig",
+        "control_type": "toggle",
+        "domain_status": null,
+        "enum_status": null,
+        "evidence_status": "NO_EVIDENCE"
+      },
+      {
+        "canonical_id": "arp.velocity.target",
+        "mcp_editable_path": "arp.velo_target",
+        "control_type": "knob",
         "domain_status": null,
         "enum_status": null,
         "evidence_status": "NO_EVIDENCE"

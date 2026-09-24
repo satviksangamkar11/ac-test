@@ -82,6 +82,258 @@
         "source": "serum_mcp_binding_table.json"
       }
     },
+    "arp.playback.chance": {
+      "canonical_id": "arp.playback.chance",
+      "mcp_editable_path": "arp.chance",
+      "schema_field": "arp.chance",
+      "semantic_section": "ARP",
+      "family": "ARP",
+      "kind": "PRESET_PARAMETER",
+      "control_type": "draggable_value",
+      "unit": null,
+      "default": "100",
+      "min": null,
+      "max": null,
+      "enum_values": null,
+      "domain_status": null,
+      "enum_status": null,
+      "conditional_context": null,
+      "atlas_identity": "arp.playback.chance",
+      "mapping_identity": "exact_normalized",
+      "evidence_status": "NO_EVIDENCE",
+      "contract_status": "NOT_APPLICABLE",
+      "admission_status": "NOT_APPLICABLE",
+      "compiler_status": "NOT_AUDITED",
+      "file_readback_status": "NOT_AUDITED",
+      "ui_readback_status": "NOT_AUDITED",
+      "status": "MCP_MUTABLE_CANDIDATE",
+      "provenance": {
+        "basis": "exact_normalized",
+        "source": "serum_mcp_binding_table.json"
+      }
+    },
+    "arp.playback.gate": {
+      "canonical_id": "arp.playback.gate",
+      "mcp_editable_path": "arp.gate",
+      "schema_field": "arp.gate",
+      "semantic_section": "ARP",
+      "family": "ARP",
+      "kind": "PRESET_PARAMETER",
+      "control_type": "draggable_value",
+      "unit": null,
+      "default": "100",
+      "min": null,
+      "max": null,
+      "enum_values": null,
+      "domain_status": null,
+      "enum_status": null,
+      "conditional_context": null,
+      "atlas_identity": "arp.playback.gate",
+      "mapping_identity": "exact_normalized",
+      "evidence_status": "NO_EVIDENCE",
+      "contract_status": "NOT_APPLICABLE",
+      "admission_status": "NOT_APPLICABLE",
+      "compiler_status": "NOT_AUDITED",
+      "file_readback_status": "NOT_AUDITED",
+      "ui_readback_status": "NOT_AUDITED",
+      "status": "MCP_MUTABLE_CANDIDATE",
+      "provenance": {
+        "basis": "exact_normalized",
+        "source": "serum_mcp_binding_table.json"
+      }
+    },
+    "arp.playback.offset": {
+      "canonical_id": "arp.playback.offset",
+      "mcp_editable_path": "arp.offset",
+      "schema_field": "arp.offset",
+      "semantic_section": "ARP",
+      "family": "ARP",
+      "kind": "PRESET_PARAMETER",
+      "control_type": "draggable_value",
+      "unit": null,
+      "default": "0",
+      "min": null,
+      "max": null,
+      "enum_values": null,
+      "domain_status": null,
+      "enum_status": null,
+      "conditional_context": null,
+      "atlas_identity": "arp.playback.offset",
+      "mapping_identity": "exact_normalized",
+      "evidence_status": "NO_EVIDENCE",
+      "contract_status": "NOT_APPLICABLE",
+      "admission_status": "NOT_APPLICABLE",
+      "compiler_status": "NOT_AUDITED",
+      "file_readback_status": "NOT_AUDITED",
+      "ui_readback_status": "NOT_AUDITED",
+      "status": "MCP_MUTABLE_CANDIDATE",
+      "provenance": {
+        "basis": "exact_normalized",
+        "source": "serum_mcp_binding_table.json"
+      }
+    },
+    "arp.playback.repeats": {
+      "canonical_id": "arp.playback.repeats",
+      "mcp_editable_path": "arp.repeats",
+      "schema_field": "arp.repeats",
+      "semantic_section": "ARP",
+      "family": "ARP",
+      "kind": "PRESET_PARAMETER",
+      "control_type": "draggable_value",
+      "unit": null,
+      "default": "inf",
+      "min": null,
+      "max": null,
+      "enum_values": null,
+      "domain_status": null,
+      "enum_status": null,
+      "conditional_context": null,
+      "atlas_identity": "arp.playback.repeats",
+      "mapping_identity": "exact_normalized",
+      "evidence_status": "NO_EVIDENCE",
+      "contract_status": "NOT_APPLICABLE",
+      "admission_status": "NOT_APPLICABLE",
+      "compiler_status": "NOT_AUDITED",
+      "file_readback_status": "NOT_AUDITED",
+      "ui_readback_status": "NOT_AUDITED",
+      "status": "MCP_MUTABLE_CANDIDATE",
+      "provenance": {
+        "basis": "exact_normalized",
+        "source": "serum_mcp_binding_table.json"
+      }
+    },
+    "arp.playback.thru": {
+      "canonical_id": "arp.playback.thru",
+      "mcp_editable_path": "arp.thru",
+      "schema_field": "arp.thru",
+      "semantic_section": "ARP",
+      "family": "ARP",
+      "kind": "PRESET_PARAMETER",
+      "control_type": "toggle",
+      "unit": null,
+      "default": "Off",
+      "min": null,
+      "max": null,
+      "enum_values": [
+        "On",
+        "Off"
+      ],
+      "domain_status": null,
+      "enum_status": null,
+      "conditional_context": null,
+      "atlas_identity": "arp.playback.thru",
+      "mapping_identity": "exact_normalized",
+      "evidence_status": "NO_EVIDENCE",
+      "contract_status": "NOT_APPLICABLE",
+      "admission_status": "NOT_APPLICABLE",
+      "compiler_status": "NOT_AUDITED",
+      "file_readback_status": "NOT_AUDITED",
+      "ui_readback_status": "NOT_AUDITED",
+      "status": "MCP_MUTABLE_CANDIDATE",
+      "provenance": {
+        "basis": "exact_normalized",
+        "source": "serum_mcp_binding_table.json"
+      }
+    },
+    "arp.retrigger.first": {
+      "canonical_id": "arp.retrigger.first",
+      "mcp_editable_path": "arp.first_note_retrig",
+      "schema_field": "arp.first_note_retrig",
+      "semantic_section": "ARP",
+      "family": "ARP",
+      "kind": "PRESET_PARAMETER",
+      "control_type": "toggle",
+      "unit": null,
+      "default": "Off",
+      "min": null,
+      "max": null,
+      "enum_values": [
+        "On",
+        "Off"
+      ],
+      "domain_status": null,
+      "enum_status": null,
+      "conditional_context": "NOTE == On",
+      "atlas_identity": "arp.retrigger.first",
+      "mapping_identity": "alias",
+      "evidence_status": "NO_EVIDENCE",
+      "contract_status": "NOT_APPLICABLE",
+      "admission_status": "NOT_APPLICABLE",
+      "compiler_status": "NOT_AUDITED",
+      "file_readback_status": "NOT_AUDITED",
+      "ui_readback_status": "NOT_AUDITED",
+      "status": "MCP_MUTABLE_CANDIDATE",
+      "provenance": {
+        "basis": "alias",
+        "source": "serum_mcp_binding_table.json"
+      }
+    },
+    "arp.retrigger.launch": {
+      "canonical_id": "arp.retrigger.launch",
+      "mcp_editable_path": "arp.launch_retrig",
+      "schema_field": "arp.launch_retrig",
+      "semantic_section": "ARP",
+      "family": "ARP",
+      "kind": "PRESET_PARAMETER",
+      "control_type": "toggle",
+      "unit": null,
+      "default": "On",
+      "min": null,
+      "max": null,
+      "enum_values": [
+        "On",
+        "Off"
+      ],
+      "domain_status": null,
+      "enum_status": null,
+      "conditional_context": null,
+      "atlas_identity": "arp.retrigger.launch",
+      "mapping_identity": "alias",
+      "evidence_status": "NO_EVIDENCE",
+      "contract_status": "NOT_APPLICABLE",
+      "admission_status": "NOT_APPLICABLE",
+      "compiler_status": "NOT_AUDITED",
+      "file_readback_status": "NOT_AUDITED",
+      "ui_readback_status": "NOT_AUDITED",
+      "status": "MCP_MUTABLE_CANDIDATE",
+      "provenance": {
+        "basis": "alias",
+        "source": "serum_mcp_binding_table.json"
+      }
+    },
+    "arp.retrigger.note": {
+      "canonical_id": "arp.retrigger.note",
+      "mcp_editable_path": "arp.note_retrig",
+      "schema_field": "arp.note_retrig",
+      "semantic_section": "ARP",
+      "family": "ARP",
+      "kind": "PRESET_PARAMETER",
+      "control_type": "toggle",
+      "unit": null,
+      "default": "Off",
+      "min": null,
+      "max": null,
+      "enum_values": [
+        "On",
+        "Off"
+      ],
+      "domain_status": null,
+      "enum_status": null,
+      "conditional_context": null,
+      "atlas_identity": "arp.retrigger.note",
+      "mapping_identity": "alias",
+      "evidence_status": "NO_EVIDENCE",
+      "contract_status": "NOT_APPLICABLE",
+      "admission_status": "NOT_APPLICABLE",
+      "compiler_status": "NOT_AUDITED",
+      "file_readback_status": "NOT_AUDITED",
+      "ui_readback_status": "NOT_AUDITED",
+      "status": "MCP_MUTABLE_CANDIDATE",
+      "provenance": {
+        "basis": "alias",
+        "source": "serum_mcp_binding_table.json"
+      }
+    },
     "arp.transpose.range": {
       "canonical_id": "arp.transpose.range",
       "mcp_editable_path": "arp.transpose_range",
@@ -188,6 +440,132 @@
       "status": "MCP_MUTABLE_CANDIDATE",
       "provenance": {
         "basis": "exact_normalized",
+        "source": "serum_mcp_binding_table.json"
+      }
+    },
+    "arp.velocity.decay": {
+      "canonical_id": "arp.velocity.decay",
+      "mcp_editable_path": "arp.velo_decay",
+      "schema_field": "arp.velo_decay",
+      "semantic_section": "ARP",
+      "family": "ARP",
+      "kind": "PRESET_PARAMETER",
+      "control_type": "knob",
+      "unit": null,
+      "default": null,
+      "min": null,
+      "max": null,
+      "enum_values": null,
+      "domain_status": null,
+      "enum_status": null,
+      "conditional_context": null,
+      "atlas_identity": "arp.velocity.decay",
+      "mapping_identity": "alias",
+      "evidence_status": "NO_EVIDENCE",
+      "contract_status": "NOT_APPLICABLE",
+      "admission_status": "NOT_APPLICABLE",
+      "compiler_status": "NOT_AUDITED",
+      "file_readback_status": "NOT_AUDITED",
+      "ui_readback_status": "NOT_AUDITED",
+      "status": "MCP_MUTABLE_CANDIDATE",
+      "provenance": {
+        "basis": "alias",
+        "source": "serum_mcp_binding_table.json"
+      }
+    },
+    "arp.velocity.enable": {
+      "canonical_id": "arp.velocity.enable",
+      "mcp_editable_path": "arp.velo_enabled",
+      "schema_field": "arp.velo_enabled",
+      "semantic_section": "ARP",
+      "family": "ARP",
+      "kind": "PRESET_PARAMETER",
+      "control_type": "toggle",
+      "unit": null,
+      "default": "Off",
+      "min": null,
+      "max": null,
+      "enum_values": [
+        "On",
+        "Off"
+      ],
+      "domain_status": null,
+      "enum_status": null,
+      "conditional_context": null,
+      "atlas_identity": "arp.velocity.enable",
+      "mapping_identity": "alias",
+      "evidence_status": "NO_EVIDENCE",
+      "contract_status": "NOT_APPLICABLE",
+      "admission_status": "NOT_APPLICABLE",
+      "compiler_status": "NOT_AUDITED",
+      "file_readback_status": "NOT_AUDITED",
+      "ui_readback_status": "NOT_AUDITED",
+      "status": "MCP_MUTABLE_CANDIDATE",
+      "provenance": {
+        "basis": "alias",
+        "source": "serum_mcp_binding_table.json"
+      }
+    },
+    "arp.velocity.retrig": {
+      "canonical_id": "arp.velocity.retrig",
+      "mcp_editable_path": "arp.velo_retrig",
+      "schema_field": "arp.velo_retrig",
+      "semantic_section": "ARP",
+      "family": "ARP",
+      "kind": "PRESET_PARAMETER",
+      "control_type": "toggle",
+      "unit": null,
+      "default": "Off",
+      "min": null,
+      "max": null,
+      "enum_values": [
+        "On",
+        "Off"
+      ],
+      "domain_status": null,
+      "enum_status": null,
+      "conditional_context": null,
+      "atlas_identity": "arp.velocity.retrig",
+      "mapping_identity": "alias",
+      "evidence_status": "NO_EVIDENCE",
+      "contract_status": "NOT_APPLICABLE",
+      "admission_status": "NOT_APPLICABLE",
+      "compiler_status": "NOT_AUDITED",
+      "file_readback_status": "NOT_AUDITED",
+      "ui_readback_status": "NOT_AUDITED",
+      "status": "MCP_MUTABLE_CANDIDATE",
+      "provenance": {
+        "basis": "alias",
+        "source": "serum_mcp_binding_table.json"
+      }
+    },
+    "arp.velocity.target": {
+      "canonical_id": "arp.velocity.target",
+      "mcp_editable_path": "arp.velo_target",
+      "schema_field": "arp.velo_target",
+      "semantic_section": "ARP",
+      "family": "ARP",
+      "kind": "PRESET_PARAMETER",
+      "control_type": "knob",
+      "unit": null,
+      "default": null,
+      "min": null,
+      "max": null,
+      "enum_values": null,
+      "domain_status": null,
+      "enum_status": null,
+      "conditional_context": null,
+      "atlas_identity": "arp.velocity.target",
+      "mapping_identity": "alias",
+      "evidence_status": "NO_EVIDENCE",
+      "contract_status": "NOT_APPLICABLE",
+      "admission_status": "NOT_APPLICABLE",
+      "compiler_status": "NOT_AUDITED",
+      "file_readback_status": "NOT_AUDITED",
+      "ui_readback_status": "NOT_AUDITED",
+      "status": "MCP_MUTABLE_CANDIDATE",
+      "provenance": {
+        "basis": "alias",
         "source": "serum_mcp_binding_table.json"
       }
     },
@@ -10250,13 +10628,6 @@
       "section": "ARP",
       "kind": "PRESET_PARAMETER"
     },
-    "arp.playback.chance": {
-      "canonical_id": "arp.playback.chance",
-      "status": "UNKNOWN",
-      "reason": "PRESET_PARAMETER-kind Atlas control with NO serum_mcp_binding_table.json candidate. OSC/FILTER/ENV/LFO1-4/FX/GLOBAL/VOICE/MACRO/ARP(scalar) are now covered by that table's exact-normalized matching; a control still landing here means no PresetSpec field name matched it by exact normalization -- this task's scope forbids inventing an unproven fuzzy match to close that gap. VoiceUnisonSpec's per-voice pan/detune/filter_cutoff/env_time/mod1/mod2 fields are confirmed real (mapping.py writes VoicePanel0.plainParams from them) but have NO Atlas identity at all yet -- a genuinely different gap (missing Atlas record, not a missing binding) from everything else in this bucket. LFO7-10 are the same: PresetSpec.lfos allows them but the Atlas only indexes LFO1-6.",
-      "section": "ARP",
-      "kind": "PRESET_PARAMETER"
-    },
     "arp.playback.chance_pre": {
       "canonical_id": "arp.playback.chance_pre",
       "status": "UNKNOWN",
@@ -10264,57 +10635,8 @@
       "section": "ARP",
       "kind": "PRESET_PARAMETER"
     },
-    "arp.playback.gate": {
-      "canonical_id": "arp.playback.gate",
-      "status": "UNKNOWN",
-      "reason": "PRESET_PARAMETER-kind Atlas control with NO serum_mcp_binding_table.json candidate. OSC/FILTER/ENV/LFO1-4/FX/GLOBAL/VOICE/MACRO/ARP(scalar) are now covered by that table's exact-normalized matching; a control still landing here means no PresetSpec field name matched it by exact normalization -- this task's scope forbids inventing an unproven fuzzy match to close that gap. VoiceUnisonSpec's per-voice pan/detune/filter_cutoff/env_time/mod1/mod2 fields are confirmed real (mapping.py writes VoicePanel0.plainParams from them) but have NO Atlas identity at all yet -- a genuinely different gap (missing Atlas record, not a missing binding) from everything else in this bucket. LFO7-10 are the same: PresetSpec.lfos allows them but the Atlas only indexes LFO1-6.",
-      "section": "ARP",
-      "kind": "PRESET_PARAMETER"
-    },
     "arp.playback.latch": {
       "canonical_id": "arp.playback.latch",
-      "status": "UNKNOWN",
-      "reason": "PRESET_PARAMETER-kind Atlas control with NO serum_mcp_binding_table.json candidate. OSC/FILTER/ENV/LFO1-4/FX/GLOBAL/VOICE/MACRO/ARP(scalar) are now covered by that table's exact-normalized matching; a control still landing here means no PresetSpec field name matched it by exact normalization -- this task's scope forbids inventing an unproven fuzzy match to close that gap. VoiceUnisonSpec's per-voice pan/detune/filter_cutoff/env_time/mod1/mod2 fields are confirmed real (mapping.py writes VoicePanel0.plainParams from them) but have NO Atlas identity at all yet -- a genuinely different gap (missing Atlas record, not a missing binding) from everything else in this bucket. LFO7-10 are the same: PresetSpec.lfos allows them but the Atlas only indexes LFO1-6.",
-      "section": "ARP",
-      "kind": "PRESET_PARAMETER"
-    },
-    "arp.playback.offset": {
-      "canonical_id": "arp.playback.offset",
-      "status": "UNKNOWN",
-      "reason": "PRESET_PARAMETER-kind Atlas control with NO serum_mcp_binding_table.json candidate. OSC/FILTER/ENV/LFO1-4/FX/GLOBAL/VOICE/MACRO/ARP(scalar) are now covered by that table's exact-normalized matching; a control still landing here means no PresetSpec field name matched it by exact normalization -- this task's scope forbids inventing an unproven fuzzy match to close that gap. VoiceUnisonSpec's per-voice pan/detune/filter_cutoff/env_time/mod1/mod2 fields are confirmed real (mapping.py writes VoicePanel0.plainParams from them) but have NO Atlas identity at all yet -- a genuinely different gap (missing Atlas record, not a missing binding) from everything else in this bucket. LFO7-10 are the same: PresetSpec.lfos allows them but the Atlas only indexes LFO1-6.",
-      "section": "ARP",
-      "kind": "PRESET_PARAMETER"
-    },
-    "arp.playback.repeats": {
-      "canonical_id": "arp.playback.repeats",
-      "status": "UNKNOWN",
-      "reason": "PRESET_PARAMETER-kind Atlas control with NO serum_mcp_binding_table.json candidate. OSC/FILTER/ENV/LFO1-4/FX/GLOBAL/VOICE/MACRO/ARP(scalar) are now covered by that table's exact-normalized matching; a control still landing here means no PresetSpec field name matched it by exact normalization -- this task's scope forbids inventing an unproven fuzzy match to close that gap. VoiceUnisonSpec's per-voice pan/detune/filter_cutoff/env_time/mod1/mod2 fields are confirmed real (mapping.py writes VoicePanel0.plainParams from them) but have NO Atlas identity at all yet -- a genuinely different gap (missing Atlas record, not a missing binding) from everything else in this bucket. LFO7-10 are the same: PresetSpec.lfos allows them but the Atlas only indexes LFO1-6.",
-      "section": "ARP",
-      "kind": "PRESET_PARAMETER"
-    },
-    "arp.playback.thru": {
-      "canonical_id": "arp.playback.thru",
-      "status": "UNKNOWN",
-      "reason": "PRESET_PARAMETER-kind Atlas control with NO serum_mcp_binding_table.json candidate. OSC/FILTER/ENV/LFO1-4/FX/GLOBAL/VOICE/MACRO/ARP(scalar) are now covered by that table's exact-normalized matching; a control still landing here means no PresetSpec field name matched it by exact normalization -- this task's scope forbids inventing an unproven fuzzy match to close that gap. VoiceUnisonSpec's per-voice pan/detune/filter_cutoff/env_time/mod1/mod2 fields are confirmed real (mapping.py writes VoicePanel0.plainParams from them) but have NO Atlas identity at all yet -- a genuinely different gap (missing Atlas record, not a missing binding) from everything else in this bucket. LFO7-10 are the same: PresetSpec.lfos allows them but the Atlas only indexes LFO1-6.",
-      "section": "ARP",
-      "kind": "PRESET_PARAMETER"
-    },
-    "arp.retrigger.first": {
-      "canonical_id": "arp.retrigger.first",
-      "status": "UNKNOWN",
-      "reason": "PRESET_PARAMETER-kind Atlas control with NO serum_mcp_binding_table.json candidate. OSC/FILTER/ENV/LFO1-4/FX/GLOBAL/VOICE/MACRO/ARP(scalar) are now covered by that table's exact-normalized matching; a control still landing here means no PresetSpec field name matched it by exact normalization -- this task's scope forbids inventing an unproven fuzzy match to close that gap. VoiceUnisonSpec's per-voice pan/detune/filter_cutoff/env_time/mod1/mod2 fields are confirmed real (mapping.py writes VoicePanel0.plainParams from them) but have NO Atlas identity at all yet -- a genuinely different gap (missing Atlas record, not a missing binding) from everything else in this bucket. LFO7-10 are the same: PresetSpec.lfos allows them but the Atlas only indexes LFO1-6.",
-      "section": "ARP",
-      "kind": "PRESET_PARAMETER"
-    },
-    "arp.retrigger.launch": {
-      "canonical_id": "arp.retrigger.launch",
-      "status": "UNKNOWN",
-      "reason": "PRESET_PARAMETER-kind Atlas control with NO serum_mcp_binding_table.json candidate. OSC/FILTER/ENV/LFO1-4/FX/GLOBAL/VOICE/MACRO/ARP(scalar) are now covered by that table's exact-normalized matching; a control still landing here means no PresetSpec field name matched it by exact normalization -- this task's scope forbids inventing an unproven fuzzy match to close that gap. VoiceUnisonSpec's per-voice pan/detune/filter_cutoff/env_time/mod1/mod2 fields are confirmed real (mapping.py writes VoicePanel0.plainParams from them) but have NO Atlas identity at all yet -- a genuinely different gap (missing Atlas record, not a missing binding) from everything else in this bucket. LFO7-10 are the same: PresetSpec.lfos allows them but the Atlas only indexes LFO1-6.",
-      "section": "ARP",
-      "kind": "PRESET_PARAMETER"
-    },
-    "arp.retrigger.note": {
-      "canonical_id": "arp.retrigger.note",
       "status": "UNKNOWN",
       "reason": "PRESET_PARAMETER-kind Atlas control with NO serum_mcp_binding_table.json candidate. OSC/FILTER/ENV/LFO1-4/FX/GLOBAL/VOICE/MACRO/ARP(scalar) are now covered by that table's exact-normalized matching; a control still landing here means no PresetSpec field name matched it by exact normalization -- this task's scope forbids inventing an unproven fuzzy match to close that gap. VoiceUnisonSpec's per-voice pan/detune/filter_cutoff/env_time/mod1/mod2 fields are confirmed real (mapping.py writes VoicePanel0.plainParams from them) but have NO Atlas identity at all yet -- a genuinely different gap (missing Atlas record, not a missing binding) from everything else in this bucket. LFO7-10 are the same: PresetSpec.lfos allows them but the Atlas only indexes LFO1-6.",
       "section": "ARP",
@@ -10368,34 +10690,6 @@
       "reason": "CONFIRMED real MCP mutation surface for shape='pattern' -- mapping.py's _build_arp_clip() writes real ArpClip0.clip pattern-note data from ArpSpec.pattern. Not bound here: pattern note data is a list-of-notes structure, not a scalar field -- needs its own structural binding kind, not yet built.",
       "section": "ARP",
       "kind": "STRUCTURAL_STATE"
-    },
-    "arp.velocity.decay": {
-      "canonical_id": "arp.velocity.decay",
-      "status": "UNKNOWN",
-      "reason": "PRESET_PARAMETER-kind Atlas control with NO serum_mcp_binding_table.json candidate. OSC/FILTER/ENV/LFO1-4/FX/GLOBAL/VOICE/MACRO/ARP(scalar) are now covered by that table's exact-normalized matching; a control still landing here means no PresetSpec field name matched it by exact normalization -- this task's scope forbids inventing an unproven fuzzy match to close that gap. VoiceUnisonSpec's per-voice pan/detune/filter_cutoff/env_time/mod1/mod2 fields are confirmed real (mapping.py writes VoicePanel0.plainParams from them) but have NO Atlas identity at all yet -- a genuinely different gap (missing Atlas record, not a missing binding) from everything else in this bucket. LFO7-10 are the same: PresetSpec.lfos allows them but the Atlas only indexes LFO1-6.",
-      "section": "ARP",
-      "kind": "PRESET_PARAMETER"
-    },
-    "arp.velocity.enable": {
-      "canonical_id": "arp.velocity.enable",
-      "status": "UNKNOWN",
-      "reason": "PRESET_PARAMETER-kind Atlas control with NO serum_mcp_binding_table.json candidate. OSC/FILTER/ENV/LFO1-4/FX/GLOBAL/VOICE/MACRO/ARP(scalar) are now covered by that table's exact-normalized matching; a control still landing here means no PresetSpec field name matched it by exact normalization -- this task's scope forbids inventing an unproven fuzzy match to close that gap. VoiceUnisonSpec's per-voice pan/detune/filter_cutoff/env_time/mod1/mod2 fields are confirmed real (mapping.py writes VoicePanel0.plainParams from them) but have NO Atlas identity at all yet -- a genuinely different gap (missing Atlas record, not a missing binding) from everything else in this bucket. LFO7-10 are the same: PresetSpec.lfos allows them but the Atlas only indexes LFO1-6.",
-      "section": "ARP",
-      "kind": "PRESET_PARAMETER"
-    },
-    "arp.velocity.retrig": {
-      "canonical_id": "arp.velocity.retrig",
-      "status": "UNKNOWN",
-      "reason": "PRESET_PARAMETER-kind Atlas control with NO serum_mcp_binding_table.json candidate. OSC/FILTER/ENV/LFO1-4/FX/GLOBAL/VOICE/MACRO/ARP(scalar) are now covered by that table's exact-normalized matching; a control still landing here means no PresetSpec field name matched it by exact normalization -- this task's scope forbids inventing an unproven fuzzy match to close that gap. VoiceUnisonSpec's per-voice pan/detune/filter_cutoff/env_time/mod1/mod2 fields are confirmed real (mapping.py writes VoicePanel0.plainParams from them) but have NO Atlas identity at all yet -- a genuinely different gap (missing Atlas record, not a missing binding) from everything else in this bucket. LFO7-10 are the same: PresetSpec.lfos allows them but the Atlas only indexes LFO1-6.",
-      "section": "ARP",
-      "kind": "PRESET_PARAMETER"
-    },
-    "arp.velocity.target": {
-      "canonical_id": "arp.velocity.target",
-      "status": "UNKNOWN",
-      "reason": "PRESET_PARAMETER-kind Atlas control with NO serum_mcp_binding_table.json candidate. OSC/FILTER/ENV/LFO1-4/FX/GLOBAL/VOICE/MACRO/ARP(scalar) are now covered by that table's exact-normalized matching; a control still landing here means no PresetSpec field name matched it by exact normalization -- this task's scope forbids inventing an unproven fuzzy match to close that gap. VoiceUnisonSpec's per-voice pan/detune/filter_cutoff/env_time/mod1/mod2 fields are confirmed real (mapping.py writes VoicePanel0.plainParams from them) but have NO Atlas identity at all yet -- a genuinely different gap (missing Atlas record, not a missing binding) from everything else in this bucket. LFO7-10 are the same: PresetSpec.lfos allows them but the Atlas only indexes LFO1-6.",
-      "section": "ARP",
-      "kind": "PRESET_PARAMETER"
     },
     "browser.categories_tags.category_list": {
       "canonical_id": "browser.categories_tags.category_list",

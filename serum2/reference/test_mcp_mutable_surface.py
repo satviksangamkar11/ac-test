@@ -187,6 +187,38 @@ def test_arp_pattern_and_global_subnamespace_strip_correctly(surface):
     assert mutable["arp.pattern.shape"]["mcp_editable_path"] == "arp.shape"
 
 
+def test_arp_playback_retrigger_velocity_subnamespaces_are_mcp_mutable(surface):
+    """Regression: verified a pasted claim that ARP was under-covered against
+    the actual vendored source before acting -- most of the claim's specific
+    field examples (warp_mode2/warp_amount2/warp_var2/sample_loop_*/
+    voice_priority) were ALREADY bound from earlier passes this session, but
+    arp.playback.*/arp.retrigger.*/arp.velocity.* genuinely were not tried.
+    arp.playback.* matches ArpSpec fields by EXACT name (chance/gate/offset/
+    repeats/thru); arp.retrigger.*/arp.velocity.* need their tail word
+    contextualized by the sub-namespace (e.g. "retrigger.first" ->
+    first_note_retrig), same rigor as the earlier voice_control aliases."""
+    mutable = surface["mcp_mutable_candidates"]
+    for cid, expected_field in [
+        ("arp.playback.chance", "chance"), ("arp.playback.gate", "gate"),
+        ("arp.playback.offset", "offset"), ("arp.playback.repeats", "repeats"),
+        ("arp.playback.thru", "thru"), ("arp.retrigger.first", "first_note_retrig"),
+        ("arp.retrigger.launch", "launch_retrig"), ("arp.retrigger.note", "note_retrig"),
+        ("arp.velocity.decay", "velo_decay"), ("arp.velocity.enable", "velo_enabled"),
+        ("arp.velocity.retrig", "velo_retrig"), ("arp.velocity.target", "velo_target"),
+    ]:
+        assert mutable[cid]["mcp_editable_path"] == "arp." + expected_field, cid
+
+
+def test_arp_ambiguous_retrigger_rate_pair_left_unbound(surface):
+    """arp.retrigger.rate_enable/rate_value both plausibly correspond to
+    ArpSpec's single retrig_rate field (a checkbox+spinner UI pair) -- binding
+    both to the same field would be ambiguous about which write "owns" the
+    value, so neither is bound. Must not be silently guessed either way."""
+    mutable = surface["mcp_mutable_candidates"]
+    assert "arp.retrigger.rate_enable" not in mutable
+    assert "arp.retrigger.rate_value" not in mutable
+
+
 def test_lfo_atlas_scope_remains_lfo1_through_6_not_expanded():
     """LFO7-10: mapping.py's `for i, lfo in enumerate(spec.lfos)` has NO
     index guard and would technically write LFO6-9 body state -- but the

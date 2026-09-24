@@ -15,6 +15,54 @@
    "field": "shape",
    "basis": "exact_normalized"
   },
+  "arp.playback.chance": {
+   "kind": "singleton_field",
+   "attr": "arp",
+   "field": "chance",
+   "basis": "exact_normalized"
+  },
+  "arp.playback.gate": {
+   "kind": "singleton_field",
+   "attr": "arp",
+   "field": "gate",
+   "basis": "exact_normalized"
+  },
+  "arp.playback.offset": {
+   "kind": "singleton_field",
+   "attr": "arp",
+   "field": "offset",
+   "basis": "exact_normalized"
+  },
+  "arp.playback.repeats": {
+   "kind": "singleton_field",
+   "attr": "arp",
+   "field": "repeats",
+   "basis": "exact_normalized"
+  },
+  "arp.playback.thru": {
+   "kind": "singleton_field",
+   "attr": "arp",
+   "field": "thru",
+   "basis": "exact_normalized"
+  },
+  "arp.retrigger.first": {
+   "kind": "singleton_field",
+   "attr": "arp",
+   "field": "first_note_retrig",
+   "basis": "alias"
+  },
+  "arp.retrigger.launch": {
+   "kind": "singleton_field",
+   "attr": "arp",
+   "field": "launch_retrig",
+   "basis": "alias"
+  },
+  "arp.retrigger.note": {
+   "kind": "singleton_field",
+   "attr": "arp",
+   "field": "note_retrig",
+   "basis": "alias"
+  },
   "arp.transpose.range": {
    "kind": "singleton_field",
    "attr": "arp",
@@ -32,6 +80,30 @@
    "attr": "arp",
    "field": "transpose_shift",
    "basis": "exact_normalized"
+  },
+  "arp.velocity.decay": {
+   "kind": "singleton_field",
+   "attr": "arp",
+   "field": "velo_decay",
+   "basis": "alias"
+  },
+  "arp.velocity.enable": {
+   "kind": "singleton_field",
+   "attr": "arp",
+   "field": "velo_enabled",
+   "basis": "alias"
+  },
+  "arp.velocity.retrig": {
+   "kind": "singleton_field",
+   "attr": "arp",
+   "field": "velo_retrig",
+   "basis": "alias"
+  },
+  "arp.velocity.target": {
+   "kind": "singleton_field",
+   "attr": "arp",
+   "field": "velo_target",
+   "basis": "alias"
   },
   "env1.attack": {
    "kind": "field",
@@ -2424,5 +2496,5 @@
   "Env 4 Sustain": "env3.sustain",
   "Env 4 Release": "env3.release"
  },
- "unbound_atlas_ids": 579
+ "unbound_atlas_ids": 567
 }

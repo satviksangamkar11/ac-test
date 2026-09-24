@@ -149,6 +149,9 @@ def main():
         # "pattern.rate").
         "arp.pattern": ("arp", S.ArpSpec),
         "arp.global": ("arp", S.ArpSpec),
+        "arp.playback": ("arp", S.ArpSpec),
+        "arp.retrigger": ("arp", S.ArpSpec),
+        "arp.velocity": ("arp", S.ArpSpec),
         # VoiceUnisonSpec's scalar (non-per-voice-list) fields. Traced through
         # mapping.py's spec.voice_unison block: random_pan/random_detune/
         # random_filter_cutoff/random_env_time map 1:1 to the Atlas's own
@@ -188,6 +191,27 @@ def main():
         # untoggled read-only observation with no evidence pinning it to
         # that specific field vs. e.g. a %/RATE display-mode switch --
         # left unbound rather than guessed.
+
+        # ArpSpec: arp.retrigger.*/arp.velocity.* are two more Atlas
+        # sub-namespaces (like global.voice_control.random/scaling above)
+        # whose tail words are shortened relative to their ArpSpec field
+        # names -- each alias here is the field CONTEXTUALIZED by its own
+        # Atlas sub-namespace prefix (e.g. "retrigger.first" unambiguously
+        # means ArpSpec.first_note_retrig, not some other "first"), not a
+        # blind global rename.
+        ("arp.retrigger", "first"): "first_note_retrig",
+        ("arp.retrigger", "launch"): "launch_retrig",
+        ("arp.retrigger", "note"): "note_retrig",
+        ("arp.velocity", "decay"): "velo_decay",
+        ("arp.velocity", "enable"): "velo_enabled",
+        ("arp.velocity", "retrig"): "velo_retrig",
+        ("arp.velocity", "target"): "velo_target",
+        # arp.retrigger.rate_enable / rate_value deliberately NOT aliased:
+        # ArpSpec has ONE field (retrig_rate, Optional[float]) that plausibly
+        # corresponds to a checkbox+spinner UI pair, but binding BOTH Atlas
+        # ids to the same field would be ambiguous (which one does an
+        # edit_preset write actually mean?) -- left unbound rather than
+        # guessed which of the two "owns" the value.
     }
     controls, skipped = {}, 0
     for cid in all_control_ids():
