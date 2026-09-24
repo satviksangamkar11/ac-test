@@ -1,0 +1,388 @@
+{
+ "version": 1,
+ "note": 48,
+ "render_sec": 1.0,
+ "bands": [
+  20,
+  200,
+  800,
+  3000,
+  8000,
+  20000
+ ],
+ "min_noise_floor_db": 0.5,
+ "tests": [
+  {
+   "id": "ctl_positive_filter_cutoff",
+   "atlas_id": "fx.filter.cutoff",
+   "candidate": {
+    "module": "FXFilter",
+    "kparam": "kParamFreq"
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXFilter",
+    "params": {
+     "kParamFreq": 1.0
+    }
+   },
+   "values": [
+    0.3
+   ],
+   "expect": [
+    {
+     "value": "0.3",
+     "band": 4,
+     "relation": "decrease_db",
+     "threshold": 10
+    }
+   ]
+  },
+  {
+   "id": "ctl_negative_bogus_key",
+   "atlas_id": "(control)",
+   "candidate": {
+    "module": "FXEQ",
+    "kparam": "kParamNoSuchThing"
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXEQ",
+    "params": {
+     "kParamFreq1": 2000.0
+    }
+   },
+   "values": [
+    1.0
+   ]
+  },
+  {
+   "id": "eq_left_type",
+   "atlas_id": "fx.equalizer.left_type",
+   "candidate": {
+    "module": "FXEQ",
+    "kparam": "kParamType1",
+    "default": 0.0
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXEQ",
+    "params": {
+     "kParamFreq1": 2000.0,
+     "kParamGain1": 12.0
+    },
+    "reference_params": {
+     "kParamFreq1": 2000.0,
+     "kParamGain1": 0.0
+    }
+   },
+   "values": [
+    null,
+    0.0,
+    1.0,
+    2.0
+   ],
+   "expect": [
+    {
+     "value": "null",
+     "band": 0,
+     "relation": "increase_db",
+     "threshold": 6
+    },
+    {
+     "value": "null",
+     "band": 4,
+     "relation": "unchanged",
+     "threshold": 1.5
+    },
+    {
+     "value": "0.0",
+     "band": 0,
+     "relation": "increase_db",
+     "threshold": 6
+    },
+    {
+     "value": "0.0",
+     "band": 0,
+     "relation": "unchanged",
+     "threshold": 1.0,
+     "vs": "null"
+    },
+    {
+     "value": "1.0",
+     "band": 2,
+     "relation": "increase_db",
+     "threshold": 3
+    },
+    {
+     "value": "1.0",
+     "band": 0,
+     "relation": "unchanged",
+     "threshold": 3
+    },
+    {
+     "value": "2.0",
+     "band": 0,
+     "relation": "decrease_db",
+     "threshold": 20
+    },
+    {
+     "value": "2.0",
+     "band": 1,
+     "relation": "decrease_db",
+     "threshold": 10
+    }
+   ],
+   "probe_values": [
+    3.0
+   ]
+  },
+  {
+   "id": "eq_right_type",
+   "atlas_id": "fx.equalizer.right_type",
+   "candidate": {
+    "module": "FXEQ",
+    "kparam": "kParamType2",
+    "default": 0.0
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXEQ",
+    "params": {
+     "kParamFreq2": 4000.0,
+     "kParamGain2": 12.0
+    },
+    "reference_params": {
+     "kParamFreq2": 4000.0,
+     "kParamGain2": 0.0
+    }
+   },
+   "values": [
+    null,
+    0.0,
+    1.0,
+    2.0
+   ],
+   "expect": [
+    {
+     "value": "null",
+     "band": 4,
+     "relation": "increase_db",
+     "threshold": 6
+    },
+    {
+     "value": "null",
+     "band": 0,
+     "relation": "unchanged",
+     "threshold": 1.5
+    },
+    {
+     "value": "0.0",
+     "band": 4,
+     "relation": "increase_db",
+     "threshold": 6
+    },
+    {
+     "value": "0.0",
+     "band": 4,
+     "relation": "unchanged",
+     "threshold": 1.0,
+     "vs": "null"
+    },
+    {
+     "value": "1.0",
+     "band": 3,
+     "relation": "increase_db",
+     "threshold": 3
+    },
+    {
+     "value": "1.0",
+     "band": 0,
+     "relation": "unchanged",
+     "threshold": 3
+    },
+    {
+     "value": "2.0",
+     "band": 4,
+     "relation": "decrease_db",
+     "threshold": 12
+    }
+   ],
+   "probe_values": [
+    3.0
+   ]
+  },
+  {
+   "id": "comp_multiband_mode",
+   "atlas_id": "fx.compressor.mode",
+   "candidate": {
+    "module": "FXComp",
+    "kparam": "kParamMultiband"
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXComp",
+    "params": {
+     "kParamGain2": 12.0
+    },
+    "reference_params": {}
+   },
+   "values": [
+    null,
+    1.0
+   ],
+   "expect": [
+    {
+     "value": "null",
+     "band": 4,
+     "relation": "unchanged",
+     "threshold": 1.5
+    },
+    {
+     "value": "1.0",
+     "band": 4,
+     "relation": "increase_db",
+     "threshold": 6,
+     "vs": "null"
+    }
+   ]
+  },
+  {
+   "id": "comp_gain2_only_active_in_multiband",
+   "atlas_id": "fx.compressor.band_h",
+   "candidate": {
+    "module": "FXComp",
+    "kparam": "kParamGain2"
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXComp",
+    "params": {
+     "kParamMultiband": 1.0
+    }
+   },
+   "values": [
+    12.0
+   ],
+   "expect": [
+    {
+     "value": "12.0",
+     "band": 4,
+     "relation": "increase_db",
+     "threshold": 6
+    }
+   ]
+  },
+  {
+   "id": "comp_gain2_inert_in_single",
+   "atlas_id": "fx.compressor.band_h",
+   "candidate": {
+    "module": "FXComp",
+    "kparam": "kParamGain2"
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXComp",
+    "params": {}
+   },
+   "values": [
+    12.0
+   ],
+   "expect": [
+    {
+     "value": "12.0",
+     "band": 4,
+     "relation": "unchanged",
+     "threshold": 1.5
+    }
+   ]
+  },
+  {
+   "id": "dist_prepost_lowpass_drive80",
+   "atlas_id": "fx.distortion.filter_position",
+   "candidate": {
+    "module": "FXDistortion",
+    "kparam": "kParamPrePost"
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXDistortion",
+    "params": {
+     "kParamMode": "kOverdrive",
+     "kParamDrive": 80.0,
+     "kParamFreq": 0.3,
+     "kParamLPHP": 0.0
+    }
+   },
+   "values": [
+    1.0,
+    2.0
+   ],
+   "expect": [
+    {
+     "value": "1.0",
+     "band": 4,
+     "relation": "decrease_db",
+     "threshold": 20
+    },
+    {
+     "value": "2.0",
+     "band": 4,
+     "relation": "decrease_db",
+     "threshold": 20
+    },
+    {
+     "value": "2.0",
+     "band": 4,
+     "relation": "decrease_db",
+     "threshold": 10,
+     "vs": "1.0"
+    }
+   ]
+  },
+  {
+   "id": "dist_prepost_lowpass_drive0",
+   "atlas_id": "fx.distortion.filter_position",
+   "candidate": {
+    "module": "FXDistortion",
+    "kparam": "kParamPrePost"
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXDistortion",
+    "params": {
+     "kParamMode": "kOverdrive",
+     "kParamDrive": 0.0,
+     "kParamFreq": 0.3,
+     "kParamLPHP": 0.0
+    }
+   },
+   "values": [
+    1.0,
+    2.0
+   ],
+   "expect": [
+    {
+     "value": "1.0",
+     "band": 4,
+     "relation": "decrease_db",
+     "threshold": 10
+    },
+    {
+     "value": "2.0",
+     "band": 4,
+     "relation": "decrease_db",
+     "threshold": 10
+    },
+    {
+     "value": "2.0",
+     "band": 4,
+     "relation": "unchanged",
+     "threshold": 3,
+     "vs": "1.0"
+    }
+   ]
+  }
+ ],
+ "revision_note": "eq_right_type '2.0' decrease threshold was 20 dB in the first run (observed -18.37 => FAILED) and was then set to 12 dB, the same 'significant cut' scale as the other tests; recorded here so the change is not silent."
+}

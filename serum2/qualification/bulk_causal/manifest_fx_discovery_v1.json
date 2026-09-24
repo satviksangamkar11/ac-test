@@ -1,0 +1,190 @@
+{
+ "version": 1,
+ "note": 48,
+ "render_sec": 1.0,
+ "bands": [
+  20,
+  200,
+  800,
+  3000,
+  8000,
+  20000
+ ],
+ "min_noise_floor_db": 0.5,
+ "tests": [
+  {
+   "id": "ctl_positive_filter_cutoff",
+   "atlas_id": "fx.filter.cutoff",
+   "candidate": {
+    "module": "FXFilter",
+    "kparam": "kParamFreq"
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXFilter",
+    "params": {
+     "kParamFreq": 1.0
+    }
+   },
+   "values": [
+    0.3
+   ],
+   "expect": [
+    {
+     "value": "0.3",
+     "band": 4,
+     "relation": "decrease_db",
+     "threshold": 10
+    }
+   ]
+  },
+  {
+   "id": "ctl_negative_bogus_key",
+   "atlas_id": "(control)",
+   "candidate": {
+    "module": "FXEQ",
+    "kparam": "kParamNoSuchThing"
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXEQ",
+    "params": {
+     "kParamFreq1": 2000.0
+    }
+   },
+   "values": [
+    1.0
+   ]
+  },
+  {
+   "id": "disc_eq_left_type",
+   "atlas_id": "fx.equalizer.left_type",
+   "candidate": {
+    "module": "FXEQ",
+    "kparam": "kParamType1"
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXEQ",
+    "params": {
+     "kParamFreq1": 2000.0,
+     "kParamGain1": 12.0
+    }
+   },
+   "values": [
+    null,
+    0.0,
+    1.0,
+    2.0,
+    3.0
+   ]
+  },
+  {
+   "id": "disc_eq_right_type",
+   "atlas_id": "fx.equalizer.right_type",
+   "candidate": {
+    "module": "FXEQ",
+    "kparam": "kParamType2"
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXEQ",
+    "params": {
+     "kParamFreq2": 4000.0,
+     "kParamGain2": 12.0
+    }
+   },
+   "values": [
+    null,
+    0.0,
+    1.0,
+    2.0,
+    3.0
+   ]
+  },
+  {
+   "id": "disc_comp_multiband_gain0",
+   "atlas_id": "fx.compressor.mode",
+   "candidate": {
+    "module": "FXComp",
+    "kparam": "kParamMultiband"
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXComp",
+    "params": {
+     "kParamGain0": 12.0
+    }
+   },
+   "values": [
+    null,
+    1.0
+   ]
+  },
+  {
+   "id": "disc_comp_multiband_gain2",
+   "atlas_id": "fx.compressor.mode",
+   "candidate": {
+    "module": "FXComp",
+    "kparam": "kParamMultiband"
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXComp",
+    "params": {
+     "kParamGain2": 12.0
+    }
+   },
+   "values": [
+    null,
+    1.0
+   ]
+  },
+  {
+   "id": "disc_dist_prepost",
+   "atlas_id": "fx.distortion.filter_position",
+   "candidate": {
+    "module": "FXDistortion",
+    "kparam": "kParamPrePost"
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXDistortion",
+    "params": {
+     "kParamMode": "kOverdrive",
+     "kParamDrive": 80.0,
+     "kParamFreq": 0.3,
+     "kParamLPHP": 0.0
+    }
+   },
+   "values": [
+    null,
+    1.0,
+    2.0
+   ]
+  },
+  {
+   "id": "disc_dist_prepost_lphp100",
+   "atlas_id": "fx.distortion.filter_position",
+   "candidate": {
+    "module": "FXDistortion",
+    "kparam": "kParamPrePost"
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXDistortion",
+    "params": {
+     "kParamMode": "kOverdrive",
+     "kParamDrive": 80.0,
+     "kParamFreq": 0.3,
+     "kParamLPHP": 100.0
+    }
+   },
+   "values": [
+    null,
+    1.0,
+    2.0
+   ]
+  }
+ ]
+}

@@ -1,0 +1,929 @@
+{
+ "binds_nothing": true,
+ "corpus_presets": 866,
+ "corpus_units_by_type": {
+  "FXBode": 165,
+  "FXDelay": 503,
+  "FXDistortion": 469,
+  "FXConv": 252,
+  "FXHyperD": 208,
+  "FXComp": 555,
+  "FXEQ": 746,
+  "FXReverb": 560,
+  "FXPhaser": 110,
+  "FXFilter": 393,
+  "FXUtils": 202,
+  "FXFlanger": 52,
+  "FXChorus": 215,
+  "FXSplit": 44,
+  "FXSplit3": 19,
+  "FXSplitMS": 15
+ },
+ "tiers": {
+  "T4_WEAK": 18,
+  "T3_STRONG": 38,
+  "T5_NO_KEY": 16,
+  "T2_EXACT_UNCATALOGUED": 6,
+  "NOT_A_PARAM": 7,
+  "T1_RULE_GAP": 4
+ },
+ "unknown_fx_controls_not_reviewed": [
+  "fx.convolve.ir_browser",
+  "fx.convolve.ir_next_prev",
+  "fx.convolve.load_ir_external",
+  "fx.distortion.xshaper_edit_pencil",
+  "fx.flanger.no_separate_delay_knob"
+ ],
+ "controls": {
+  "fx.bode.balance": {
+   "fx_type": "FXBode",
+   "candidate_kparam": "kParamOutputMix",
+   "tier": "T4_WEAK",
+   "in_schema_FX_PARAMS": true,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 39,
+   "corpus_units_of_type": 165,
+   "evidence_or_gap": "ambiguous: kParamOutputMix (-100..100) vs kParamDelayBalance"
+  },
+  "fx.bode.bpm": {
+   "fx_type": "FXBode",
+   "candidate_kparam": "kParamBeatSync",
+   "tier": "T3_STRONG",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 27,
+   "corpus_units_of_type": 165,
+   "evidence_or_gap": "tooltip 'Bode BPM: delay time synced'; precedent fx.delay.bpm->kParamBeatSync"
+  },
+  "fx.bode.delay": {
+   "fx_type": "FXBode",
+   "candidate_kparam": "kParamDelayTime",
+   "tier": "T3_STRONG",
+   "in_schema_FX_PARAMS": true,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 43,
+   "corpus_units_of_type": 165,
+   "evidence_or_gap": "unique delay-time key (seconds)"
+  },
+  "fx.bode.dir": {
+   "fx_type": "FXBode",
+   "candidate_kparam": null,
+   "tier": "T5_NO_KEY",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": false,
+   "corpus_units_with_key": null,
+   "corpus_units_of_type": 165,
+   "evidence_or_gap": "kParamDirection is in the binary but never in a Bode unit"
+  },
+  "fx.bode.feed": {
+   "fx_type": "FXBode",
+   "candidate_kparam": "kParamFeedback",
+   "tier": "T3_STRONG",
+   "in_schema_FX_PARAMS": true,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 46,
+   "corpus_units_of_type": 165,
+   "evidence_or_gap": "unique feedback key"
+  },
+  "fx.bode.mono_input": {
+   "fx_type": "FXBode",
+   "candidate_kparam": "kParamMonoInput",
+   "tier": "T2_EXACT_UNCATALOGUED",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 10,
+   "corpus_units_of_type": 165,
+   "evidence_or_gap": "exact-normalised to a real key absent from FX_PARAMS; mapping.py writes it via allow_unknown"
+  },
+  "fx.bode.shift_retrig": {
+   "fx_type": "FXBode",
+   "candidate_kparam": "kParamRetrig",
+   "tier": "T3_STRONG",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 9,
+   "corpus_units_of_type": 165,
+   "evidence_or_gap": "only Retrig key in Bode; 9 units, 1.0"
+  },
+  "fx.bode.width": {
+   "fx_type": "FXBode",
+   "candidate_kparam": "kParamOutputWidth",
+   "tier": "T4_WEAK",
+   "in_schema_FX_PARAMS": true,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 42,
+   "corpus_units_of_type": 165,
+   "evidence_or_gap": "OutputWidth vs 'Width -- stereo width': plausible, unproven"
+  },
+  "fx.chorus.bpm": {
+   "fx_type": "FXChorus",
+   "candidate_kparam": "kParamBeatSync",
+   "tier": "T3_STRONG",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 5,
+   "corpus_units_of_type": 215,
+   "evidence_or_gap": "rate sync; precedent"
+  },
+  "fx.chorus.delay1": {
+   "fx_type": "FXChorus",
+   "candidate_kparam": "kParamDelay",
+   "tier": "T3_STRONG",
+   "in_schema_FX_PARAMS": true,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 82,
+   "corpus_units_of_type": 215,
+   "evidence_or_gap": "unsuffixed==first; kParamDelay/kParamDelay2 pair (57 units carry both)"
+  },
+  "fx.chorus.delay2": {
+   "fx_type": "FXChorus",
+   "candidate_kparam": "kParamDelay2",
+   "tier": "T2_EXACT_UNCATALOGUED",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 65,
+   "corpus_units_of_type": 215,
+   "evidence_or_gap": "exact-normalised to a real key absent from FX_PARAMS; mapping.py writes it via allow_unknown"
+  },
+  "fx.chorus.filter_cutoff": {
+   "fx_type": "FXChorus",
+   "candidate_kparam": "kParamFilt",
+   "tier": "T3_STRONG",
+   "in_schema_FX_PARAMS": true,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 150,
+   "corpus_units_of_type": 215,
+   "evidence_or_gap": "unique filter freq key (50..20000Hz)"
+  },
+  "fx.chorus.filter_mode": {
+   "fx_type": "FXChorus",
+   "candidate_kparam": "kParamFiltMode",
+   "tier": "T3_STRONG",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 17,
+   "corpus_units_of_type": 215,
+   "evidence_or_gap": "17/17 units carrying it also carry Filt; value 1.0==HPF vs LPF is UNPROVEN"
+  },
+  "fx.compressor.band_h": {
+   "fx_type": "FXComp",
+   "candidate_kparam": "kParamGain2",
+   "tier": "T4_WEAK",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 139,
+   "corpus_units_of_type": 555,
+   "evidence_or_gap": "index<->band order unproven"
+  },
+  "fx.compressor.band_l": {
+   "fx_type": "FXComp",
+   "candidate_kparam": "kParamGain0",
+   "tier": "T4_WEAK",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 119,
+   "corpus_units_of_type": 555,
+   "evidence_or_gap": "per-band gain keys Gain0/1/2 exist; which index is L/M/H is unproven"
+  },
+  "fx.compressor.band_m": {
+   "fx_type": "FXComp",
+   "candidate_kparam": "kParamGain1",
+   "tier": "T4_WEAK",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 84,
+   "corpus_units_of_type": 555,
+   "evidence_or_gap": "index<->band order unproven"
+  },
+  "fx.compressor.below": {
+   "fx_type": "FXComp",
+   "candidate_kparam": "kParamRatioBelow",
+   "tier": "T3_STRONG",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 132,
+   "corpus_units_of_type": 555,
+   "evidence_or_gap": "Serum tooltip internal name 'Comp RatioB'"
+  },
+  "fx.compressor.mode": {
+   "fx_type": "FXComp",
+   "candidate_kparam": "kParamMultiband",
+   "tier": "T3_STRONG",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 212,
+   "corpus_units_of_type": 555,
+   "evidence_or_gap": "raw 'Multiband'==UI MULTIBAND; only ever 1.0 (absent==SINGLE); multiband-only keys co-occur (XoverLow 89/100 with it) -- value 1.0==MULTIBAND is inferred"
+  },
+  "fx.compressor.x_high": {
+   "fx_type": "FXComp",
+   "candidate_kparam": "kParamXoverHi",
+   "tier": "T3_STRONG",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 80,
+   "corpus_units_of_type": 555,
+   "evidence_or_gap": "X-HIGH crossover; co-occurs with Multiband 70/80"
+  },
+  "fx.compressor.x_low": {
+   "fx_type": "FXComp",
+   "candidate_kparam": "kParamXoverLow",
+   "tier": "T3_STRONG",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 100,
+   "corpus_units_of_type": 555,
+   "evidence_or_gap": "X-LOW crossover; co-occurs with Multiband 89/100"
+  },
+  "fx.convolve.attack": {
+   "fx_type": "FXConv",
+   "candidate_kparam": "kParamAttack",
+   "tier": "T2_EXACT_UNCATALOGUED",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 16,
+   "corpus_units_of_type": 252,
+   "evidence_or_gap": "exact-normalised to a real key absent from FX_PARAMS; mapping.py writes it via allow_unknown"
+  },
+  "fx.convolve.bpm": {
+   "fx_type": "FXConv",
+   "candidate_kparam": "kParamPredelayBeatSync",
+   "tier": "T3_STRONG",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 5,
+   "corpus_units_of_type": 252,
+   "evidence_or_gap": "UI 'pre-delay sync toggle'"
+  },
+  "fx.convolve.damp": {
+   "fx_type": "FXConv",
+   "candidate_kparam": "kParamDamping",
+   "tier": "T3_STRONG",
+   "in_schema_FX_PARAMS": true,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 43,
+   "corpus_units_of_type": 252,
+   "evidence_or_gap": "unique damping key"
+  },
+  "fx.convolve.ir_gain": {
+   "fx_type": "FXConv",
+   "candidate_kparam": "kParamIpTrim",
+   "tier": "T3_STRONG",
+   "in_schema_FX_PARAMS": true,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 151,
+   "corpus_units_of_type": 252,
+   "evidence_or_gap": "remaining key after Size/Decay/Tone/Damping/Attack/Predelay; 'Ip'=IR trim inferred"
+  },
+  "fx.convolve.min_phase": {
+   "fx_type": "FXConv",
+   "candidate_kparam": "kParamMinPhase",
+   "tier": "T2_EXACT_UNCATALOGUED",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 17,
+   "corpus_units_of_type": 252,
+   "evidence_or_gap": "exact-normalised to a real key absent from FX_PARAMS; mapping.py writes it via allow_unknown"
+  },
+  "fx.convolve.pre_dly": {
+   "fx_type": "FXConv",
+   "candidate_kparam": "kParamPredelay",
+   "tier": "T3_STRONG",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 37,
+   "corpus_units_of_type": 252,
+   "evidence_or_gap": "Conv spells it 'Predelay' (Reverb: 'PreDelay')"
+  },
+  "fx.delay.high_quality": {
+   "fx_type": "FXDelay",
+   "candidate_kparam": "kParamHQ",
+   "tier": "T3_STRONG",
+   "in_schema_FX_PARAMS": true,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 1,
+   "corpus_units_of_type": 503,
+   "evidence_or_gap": "schema key; corpus has explicit 0.0 => default is ON"
+  },
+  "fx.delay.q": {
+   "fx_type": "FXDelay",
+   "candidate_kparam": "kParamBW",
+   "tier": "T3_STRONG",
+   "in_schema_FX_PARAMS": true,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 450,
+   "corpus_units_of_type": 503,
+   "evidence_or_gap": "unique remaining tone-filter key alongside Freq; 450/505 units"
+  },
+  "fx.distortion.filter_position": {
+   "fx_type": "FXDistortion",
+   "candidate_kparam": "kParamPrePost",
+   "tier": "T3_STRONG",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 178,
+   "corpus_units_of_type": 469,
+   "evidence_or_gap": "filter keys (BW/Freq/LPHP) present ~10x more often when PrePost is present (BW 166/178 vs 40/291) => absent==OFF; which of 1.0/2.0 is PRE vs POST is UNPROVEN"
+  },
+  "fx.distortion.q": {
+   "fx_type": "FXDistortion",
+   "candidate_kparam": "kParamBW",
+   "tier": "T3_STRONG",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 206,
+   "corpus_units_of_type": 469,
+   "evidence_or_gap": "unique remaining filter key; 206 units; Atlas 'Q -- filter resonance'"
+  },
+  "fx.equalizer.left_type": {
+   "fx_type": "FXEQ",
+   "candidate_kparam": "kParamType1",
+   "tier": "T3_STRONG",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 516,
+   "corpus_units_of_type": 746,
+   "evidence_or_gap": "Freq1==left (existing alias); Type1=2.0 has median Freq1 119Hz and Gain1 present in 29% (HP: gain moot) vs Type1=1.0 Gain1 85% (Peak); absent==Shelf inferred"
+  },
+  "fx.equalizer.level": {
+   "fx_type": "FXEQ",
+   "candidate_kparam": null,
+   "tier": "NOT_A_PARAM",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": false,
+   "corpus_units_with_key": null,
+   "corpus_units_of_type": 746,
+   "evidence_or_gap": "Atlas: confirmed absent control"
+  },
+  "fx.equalizer.right_type": {
+   "fx_type": "FXEQ",
+   "candidate_kparam": "kParamType2",
+   "tier": "T3_STRONG",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 334,
+   "corpus_units_of_type": 746,
+   "evidence_or_gap": "Type2=2.0 median Freq2 8.8kHz, Gain2 present 30% (LP) vs Type2=1.0 89% (Peak); absent==Shelf inferred"
+  },
+  "fx.filter.fat": {
+   "fx_type": "FXFilter",
+   "candidate_kparam": "kParamVar",
+   "tier": "T3_STRONG",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 156,
+   "corpus_units_of_type": 393,
+   "evidence_or_gap": "shared filter engine: voice filter kParamVar is bound as filter1.var"
+  },
+  "fx.filter.key_track": {
+   "fx_type": "FXFilter",
+   "candidate_kparam": "kParamKeyTrack",
+   "tier": "T4_WEAK",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 0,
+   "corpus_units_of_type": 393,
+   "evidence_or_gap": "in binary + voice filter, never in an FXFilter unit in the corpus"
+  },
+  "fx.filter.pan": {
+   "fx_type": "FXFilter",
+   "candidate_kparam": "kParamStereo",
+   "tier": "T3_STRONG",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 21,
+   "corpus_units_of_type": 393,
+   "evidence_or_gap": "shared engine; kParamStereo 50==centre matches Pan"
+  },
+  "fx.flanger.bpm": {
+   "fx_type": "FXFlanger",
+   "candidate_kparam": "kParamBeatSync",
+   "tier": "T3_STRONG",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 9,
+   "corpus_units_of_type": 52,
+   "evidence_or_gap": "rate sync; precedent"
+  },
+  "fx.flanger.phase": {
+   "fx_type": "FXFlanger",
+   "candidate_kparam": "kParamWidth",
+   "tier": "T3_STRONG",
+   "in_schema_FX_PARAMS": true,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 10,
+   "corpus_units_of_type": 52,
+   "evidence_or_gap": "only remaining key; 0..360 deg, default 180"
+  },
+  "fx.hyper.retrig": {
+   "fx_type": "FXHyperD",
+   "candidate_kparam": "kParamRetrig",
+   "tier": "T2_EXACT_UNCATALOGUED",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 12,
+   "corpus_units_of_type": 208,
+   "evidence_or_gap": "exact-normalised to a real key absent from FX_PARAMS; mapping.py writes it via allow_unknown"
+  },
+  "fx.phaser.bpm": {
+   "fx_type": "FXPhaser",
+   "candidate_kparam": "kParamBeatSync",
+   "tier": "T3_STRONG",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 37,
+   "corpus_units_of_type": 110,
+   "evidence_or_gap": "rate sync; precedent"
+  },
+  "fx.phaser.depth2": {
+   "fx_type": "FXPhaser",
+   "candidate_kparam": "kParamDepth2",
+   "tier": "T2_EXACT_UNCATALOGUED",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 45,
+   "corpus_units_of_type": 110,
+   "evidence_or_gap": "exact-normalised to a real key absent from FX_PARAMS; mapping.py writes it via allow_unknown"
+  },
+  "fx.phaser.phase": {
+   "fx_type": "FXPhaser",
+   "candidate_kparam": "kParamWidth",
+   "tier": "T3_STRONG",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 16,
+   "corpus_units_of_type": 110,
+   "evidence_or_gap": "only remaining key (degrees)"
+  },
+  "fx.phaser.poles": {
+   "fx_type": "FXPhaser",
+   "candidate_kparam": "kParamNumPoles",
+   "tier": "T3_STRONG",
+   "in_schema_FX_PARAMS": true,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 48,
+   "corpus_units_of_type": 110,
+   "evidence_or_gap": "schema key 1..18 'number of allpass stages'"
+  },
+  "fx.reverb.chorus_mod": {
+   "fx_type": "FXReverb",
+   "candidate_kparam": null,
+   "tier": "T5_NO_KEY",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": false,
+   "corpus_units_with_key": null,
+   "corpus_units_of_type": 560,
+   "evidence_or_gap": "Rate/Depth pair; no Rate/Depth key in any FXReverb unit"
+  },
+  "fx.reverb.damp_plate": {
+   "fx_type": "FXReverb",
+   "candidate_kparam": null,
+   "tier": "T5_NO_KEY",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": false,
+   "corpus_units_with_key": null,
+   "corpus_units_of_type": 560,
+   "evidence_or_gap": "none"
+  },
+  "fx.reverb.damp_vintage": {
+   "fx_type": "FXReverb",
+   "candidate_kparam": "kParamDamping",
+   "tier": "T4_WEAK",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 1,
+   "corpus_units_of_type": 560,
+   "evidence_or_gap": "1 corpus unit"
+  },
+  "fx.reverb.decay_hall": {
+   "fx_type": "FXReverb",
+   "candidate_kparam": "kParamDecay",
+   "tier": "T4_WEAK",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 1,
+   "corpus_units_of_type": 560,
+   "evidence_or_gap": "1 corpus unit"
+  },
+  "fx.reverb.diff_a_vintage": {
+   "fx_type": "FXReverb",
+   "candidate_kparam": "kParamDiffA",
+   "tier": "T4_WEAK",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": false,
+   "corpus_units_with_key": 1,
+   "corpus_units_of_type": 560,
+   "evidence_or_gap": "1 corpus unit"
+  },
+  "fx.reverb.diff_b_vintage": {
+   "fx_type": "FXReverb",
+   "candidate_kparam": "kParamDiffB",
+   "tier": "T4_WEAK",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": false,
+   "corpus_units_with_key": 1,
+   "corpus_units_of_type": 560,
+   "evidence_or_gap": "1 corpus unit"
+  },
+  "fx.reverb.diffusion_nitrous": {
+   "fx_type": "FXReverb",
+   "candidate_kparam": null,
+   "tier": "T5_NO_KEY",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": false,
+   "corpus_units_with_key": null,
+   "corpus_units_of_type": 560,
+   "evidence_or_gap": "none"
+  },
+  "fx.reverb.er_size_vintage": {
+   "fx_type": "FXReverb",
+   "candidate_kparam": null,
+   "tier": "T5_NO_KEY",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": false,
+   "corpus_units_with_key": null,
+   "corpus_units_of_type": 560,
+   "evidence_or_gap": "none"
+  },
+  "fx.reverb.feedback_nitrous_basin": {
+   "fx_type": "FXReverb",
+   "candidate_kparam": "kParamFeedback",
+   "tier": "T4_WEAK",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 203,
+   "corpus_units_of_type": 560,
+   "evidence_or_gap": "type-conditional; raw type enum has 4 (Hall/Vintage/Abyss/Space) vs 5 UI types"
+  },
+  "fx.reverb.hi_cut": {
+   "fx_type": "FXReverb",
+   "candidate_kparam": null,
+   "tier": "T5_NO_KEY",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": false,
+   "corpus_units_with_key": null,
+   "corpus_units_of_type": 560,
+   "evidence_or_gap": "candidates kParamFreq/kParamFreqB unproven"
+  },
+  "fx.reverb.lo_cut": {
+   "fx_type": "FXReverb",
+   "candidate_kparam": null,
+   "tier": "T5_NO_KEY",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": false,
+   "corpus_units_with_key": null,
+   "corpus_units_of_type": 560,
+   "evidence_or_gap": "same"
+  },
+  "fx.reverb.mode_nitrous": {
+   "fx_type": "FXReverb",
+   "candidate_kparam": null,
+   "tier": "T5_NO_KEY",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": false,
+   "corpus_units_with_key": null,
+   "corpus_units_of_type": 560,
+   "evidence_or_gap": "kParamMode is continuous (0..100) in corpus, contradicting a 5-way dropdown"
+  },
+  "fx.reverb.pre_dly": {
+   "fx_type": "FXReverb",
+   "candidate_kparam": "kParamPreDelay",
+   "tier": "T4_WEAK",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 151,
+   "corpus_units_of_type": 560,
+   "evidence_or_gap": "ambiguous with kParamDelay (ms, 419 units) -- both look like pre-delay"
+  },
+  "fx.reverb.spin_hall": {
+   "fx_type": "FXReverb",
+   "candidate_kparam": null,
+   "tier": "T5_NO_KEY",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": false,
+   "corpus_units_with_key": null,
+   "corpus_units_of_type": 560,
+   "evidence_or_gap": "same"
+  },
+  "fx.reverb.width_plate": {
+   "fx_type": "FXReverb",
+   "candidate_kparam": "kParamWidth",
+   "tier": "T4_WEAK",
+   "in_schema_FX_PARAMS": true,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 335,
+   "corpus_units_of_type": 560,
+   "evidence_or_gap": "type-conditional (Plate not in raw type enum)"
+  },
+  "fx.splitter_lh.highs_bypass": {
+   "fx_type": "FXSplit",
+   "candidate_kparam": "kParamBand2Bypass",
+   "tier": "T4_WEAK",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 0,
+   "corpus_units_of_type": 44,
+   "evidence_or_gap": "key is in the binary; never in a corpus FX unit; band index order by convention only"
+  },
+  "fx.splitter_lh.highs_select": {
+   "fx_type": null,
+   "candidate_kparam": null,
+   "tier": "T5_NO_KEY",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": false,
+   "corpus_units_with_key": null,
+   "corpus_units_of_type": null,
+   "evidence_or_gap": "tab selector (UI state)"
+  },
+  "fx.splitter_lh.lows_bypass": {
+   "fx_type": "FXSplit",
+   "candidate_kparam": "kParamBand1Bypass",
+   "tier": "T4_WEAK",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 0,
+   "corpus_units_of_type": 44,
+   "evidence_or_gap": "key is in the binary; never in a corpus FX unit; band index order by convention only"
+  },
+  "fx.splitter_lh.lows_select": {
+   "fx_type": null,
+   "candidate_kparam": null,
+   "tier": "T5_NO_KEY",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": false,
+   "corpus_units_with_key": null,
+   "corpus_units_of_type": null,
+   "evidence_or_gap": "tab selector (UI state)"
+  },
+  "fx.splitter_lh.split_freq": {
+   "fx_type": "FXSplit",
+   "candidate_kparam": "kParamFreq",
+   "tier": "T3_STRONG",
+   "in_schema_FX_PARAMS": true,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 39,
+   "corpus_units_of_type": 44,
+   "evidence_or_gap": "schema note: crossover band1/band2; tooltip 'Split Freq'"
+  },
+  "fx.splitter_lh.wet": {
+   "fx_type": null,
+   "candidate_kparam": null,
+   "tier": "T5_NO_KEY",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": false,
+   "corpus_units_with_key": null,
+   "corpus_units_of_type": null,
+   "evidence_or_gap": "FXSplit has no Wet in schema or corpus"
+  },
+  "fx.splitter_lmh.highs_bypass": {
+   "fx_type": "FXSplit3",
+   "candidate_kparam": "kParamBand3Bypass",
+   "tier": "T4_WEAK",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 0,
+   "corpus_units_of_type": 19,
+   "evidence_or_gap": "key is in the binary; never in a corpus FX unit; band index order by convention only"
+  },
+  "fx.splitter_lmh.lows_bypass": {
+   "fx_type": "FXSplit3",
+   "candidate_kparam": "kParamBand1Bypass",
+   "tier": "T4_WEAK",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 0,
+   "corpus_units_of_type": 19,
+   "evidence_or_gap": "key is in the binary; never in a corpus FX unit; band index order by convention only"
+  },
+  "fx.splitter_lmh.mids_bypass": {
+   "fx_type": "FXSplit3",
+   "candidate_kparam": "kParamBand2Bypass",
+   "tier": "T4_WEAK",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 0,
+   "corpus_units_of_type": 19,
+   "evidence_or_gap": "key is in the binary; never in a corpus FX unit; band index order by convention only"
+  },
+  "fx.splitter_lmh.split_freq_low_mid": {
+   "fx_type": "FXSplit3",
+   "candidate_kparam": "kParamFreq",
+   "tier": "T3_STRONG",
+   "in_schema_FX_PARAMS": true,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 16,
+   "corpus_units_of_type": 19,
+   "evidence_or_gap": "tooltip internal name 'Split3 Freq'"
+  },
+  "fx.splitter_lmh.split_freq_mid_high": {
+   "fx_type": "FXSplit3",
+   "candidate_kparam": "kParamFreq2",
+   "tier": "T3_STRONG",
+   "in_schema_FX_PARAMS": true,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 17,
+   "corpus_units_of_type": 19,
+   "evidence_or_gap": "kParamFreq2 crossover band2/band3"
+  },
+  "fx.splitter_lmh.wet": {
+   "fx_type": null,
+   "candidate_kparam": null,
+   "tier": "T5_NO_KEY",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": false,
+   "corpus_units_with_key": null,
+   "corpus_units_of_type": null,
+   "evidence_or_gap": "no Wet key"
+  },
+  "fx.splitter_ms.mid_bypass": {
+   "fx_type": null,
+   "candidate_kparam": null,
+   "tier": "T5_NO_KEY",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": false,
+   "corpus_units_with_key": null,
+   "corpus_units_of_type": null,
+   "evidence_or_gap": "no bypass key seen for FXSplitMS"
+  },
+  "fx.splitter_ms.side_bypass": {
+   "fx_type": null,
+   "candidate_kparam": null,
+   "tier": "T5_NO_KEY",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": false,
+   "corpus_units_with_key": null,
+   "corpus_units_of_type": null,
+   "evidence_or_gap": "same"
+  },
+  "fx.splitter_ms.wet": {
+   "fx_type": null,
+   "candidate_kparam": null,
+   "tier": "T5_NO_KEY",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": false,
+   "corpus_units_with_key": null,
+   "corpus_units_of_type": null,
+   "evidence_or_gap": "Atlas confirms no Mix knob exists"
+  },
+  "fx.sys.add_fx_menu": {
+   "fx_type": null,
+   "candidate_kparam": null,
+   "tier": "NOT_A_PARAM",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": false,
+   "corpus_units_with_key": null,
+   "corpus_units_of_type": null,
+   "evidence_or_gap": "menu/browser/rack topology"
+  },
+  "fx.sys.module_bypass": {
+   "fx_type": "*",
+   "candidate_kparam": "kParamEnable",
+   "tier": "T3_STRONG",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 24,
+   "corpus_units_of_type": null,
+   "evidence_or_gap": "present in every FX type, only ever 0.0 (== bypassed); not per-type: generic per-unit key"
+  },
+  "fx.sys.module_context_menu": {
+   "fx_type": null,
+   "candidate_kparam": null,
+   "tier": "NOT_A_PARAM",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": false,
+   "corpus_units_with_key": null,
+   "corpus_units_of_type": null,
+   "evidence_or_gap": "menu/browser/rack topology"
+  },
+  "fx.sys.module_list_panel": {
+   "fx_type": null,
+   "candidate_kparam": null,
+   "tier": "NOT_A_PARAM",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": false,
+   "corpus_units_with_key": null,
+   "corpus_units_of_type": null,
+   "evidence_or_gap": "menu/browser/rack topology"
+  },
+  "fx.sys.module_param_context_menu": {
+   "fx_type": null,
+   "candidate_kparam": null,
+   "tier": "NOT_A_PARAM",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": false,
+   "corpus_units_with_key": null,
+   "corpus_units_of_type": null,
+   "evidence_or_gap": "menu/browser/rack topology"
+  },
+  "fx.sys.rack_preset_browser": {
+   "fx_type": null,
+   "candidate_kparam": null,
+   "tier": "NOT_A_PARAM",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": false,
+   "corpus_units_with_key": null,
+   "corpus_units_of_type": null,
+   "evidence_or_gap": "menu/browser/rack topology"
+  },
+  "fx.sys.racks": {
+   "fx_type": null,
+   "candidate_kparam": null,
+   "tier": "NOT_A_PARAM",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": false,
+   "corpus_units_with_key": null,
+   "corpus_units_of_type": null,
+   "evidence_or_gap": "menu/browser/rack topology"
+  },
+  "fx.utility.freq": {
+   "fx_type": "FXUtils",
+   "candidate_kparam": "kParamLFXover",
+   "tier": "T3_STRONG",
+   "in_schema_FX_PARAMS": true,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 70,
+   "corpus_units_of_type": 202,
+   "evidence_or_gap": "Mono Bass threshold; LFXover"
+  },
+  "fx.utility.hpf": {
+   "fx_type": "FXUtils",
+   "candidate_kparam": "kParamHPF",
+   "tier": "T1_RULE_GAP",
+   "in_schema_FX_PARAMS": true,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 57,
+   "corpus_units_of_type": 202,
+   "evidence_or_gap": "exact; 'utility' missing from FX_UNIT_TYPES"
+  },
+  "fx.utility.lpf": {
+   "fx_type": "FXUtils",
+   "candidate_kparam": "kParamLPF",
+   "tier": "T1_RULE_GAP",
+   "in_schema_FX_PARAMS": true,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 31,
+   "corpus_units_of_type": 202,
+   "evidence_or_gap": "exact; unit rule missing"
+  },
+  "fx.utility.mono_bass": {
+   "fx_type": "FXUtils",
+   "candidate_kparam": "kParamLFMono",
+   "tier": "T3_STRONG",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 75,
+   "corpus_units_of_type": 202,
+   "evidence_or_gap": "'LF Mono'; 75 units, 1.0"
+  },
+  "fx.utility.pan": {
+   "fx_type": "FXUtils",
+   "candidate_kparam": "kParamBalance",
+   "tier": "T3_STRONG",
+   "in_schema_FX_PARAMS": true,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 25,
+   "corpus_units_of_type": 202,
+   "evidence_or_gap": "only remaining key; -100..100"
+  },
+  "fx.utility.polarity_inv_l": {
+   "fx_type": "FXUtils",
+   "candidate_kparam": "kParamPolarityL",
+   "tier": "T3_STRONG",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 1,
+   "corpus_units_of_type": 202,
+   "evidence_or_gap": "tooltip internal name 'Utils Polarity L'"
+  },
+  "fx.utility.polarity_inv_r": {
+   "fx_type": "FXUtils",
+   "candidate_kparam": "kParamPolarityR",
+   "tier": "T3_STRONG",
+   "in_schema_FX_PARAMS": false,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 4,
+   "corpus_units_of_type": 202,
+   "evidence_or_gap": "L/R pair"
+  },
+  "fx.utility.wet": {
+   "fx_type": "FXUtils",
+   "candidate_kparam": "kParamWet",
+   "tier": "T1_RULE_GAP",
+   "in_schema_FX_PARAMS": true,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 6,
+   "corpus_units_of_type": 202,
+   "evidence_or_gap": "exact; unit rule missing (Atlas label 'Mix')"
+  },
+  "fx.utility.width": {
+   "fx_type": "FXUtils",
+   "candidate_kparam": "kParamWidth",
+   "tier": "T1_RULE_GAP",
+   "in_schema_FX_PARAMS": true,
+   "in_serum_binary": true,
+   "corpus_units_with_key": 94,
+   "corpus_units_of_type": 202,
+   "evidence_or_gap": "exact; unit rule missing"
+  }
+ }
+}

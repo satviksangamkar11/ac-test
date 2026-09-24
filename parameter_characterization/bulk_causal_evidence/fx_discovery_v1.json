@@ -1,0 +1,728 @@
+{
+ "harness": {
+  "backend": "real Serum 2.0.23 VST3 in DawDreamer (headless); observation = state readback + rendered band energy, NOT GUI pixels",
+  "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+  "product_version": "2.0.23",
+  "state_version": 9.0,
+  "manifest": "D:\\ableton claude final best\\serum2\\qualification\\bulk_causal\\manifest_fx_discovery_v1.json",
+  "manifest_sha256": "dec24825ef8eccc6186f82ccd6fe0eed7fd80149ef85d6f59c4f083ce63428b8",
+  "session_size": 8,
+  "authorizes_nothing": true
+ },
+ "records": [
+  {
+   "id": "ctl_positive_filter_cutoff",
+   "atlas_id": "fx.filter.cutoff",
+   "candidate": {
+    "module": "FXFilter",
+    "kparam": "kParamFreq"
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXFilter",
+    "params": {
+     "kParamFreq": 1.0
+    }
+   },
+   "spec_patch": null,
+   "baseline": {
+    "band_db": [
+     68.72,
+     65.62,
+     59.01,
+     52.61,
+     44.94
+    ],
+    "state_value": 1.0
+   },
+   "observations": {
+    "0.3": {
+     "written": 0.3,
+     "state_value": 0.3,
+     "state_retained": true,
+     "band_db": [
+      63.68,
+      53.97,
+      35.89,
+      19.34,
+      4.15
+     ],
+     "host_params_changed": []
+    }
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.03,
+    "state_value": 1.0,
+    "detail": "drift 0.03 dB vs floor 0.50"
+   },
+   "file_roundtrip": {
+    "ok": true
+   },
+   "noise_floor_db": 0.5,
+   "expect": [
+    {
+     "value": "0.3",
+     "band": 4,
+     "relation": "decrease_db",
+     "threshold": 10
+    }
+   ],
+   "preset_sha256": {
+    "baseline": "ce6295cc83c90f57af836a8d73126671823757d6503fe7327a0714e8ad11fa77",
+    "0.3": "8209166471c2fbb6e75cc98bfd2ee8ade0c7f218fdab9bd873d9003aa68e0fdd"
+   },
+   "timestamp": "2026-09-24T21:11:40.321892+00:00",
+   "status": "PROVEN",
+   "reasons": [],
+   "expectations": [
+    {
+     "value": "0.3",
+     "band": 4,
+     "relation": "decrease_db",
+     "threshold": 10,
+     "observed_delta_db": -40.79,
+     "held": true
+    }
+   ]
+  },
+  {
+   "id": "ctl_negative_bogus_key",
+   "atlas_id": "(control)",
+   "candidate": {
+    "module": "FXEQ",
+    "kparam": "kParamNoSuchThing"
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXEQ",
+    "params": {
+     "kParamFreq1": 2000.0
+    }
+   },
+   "spec_patch": null,
+   "baseline": {
+    "band_db": [
+     68.77,
+     65.68,
+     59.14,
+     53.23,
+     48.64
+    ],
+    "state_value": null
+   },
+   "observations": {
+    "1.0": {
+     "written": 1.0,
+     "state_value": null,
+     "state_retained": false,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    }
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.0,
+    "state_value": null,
+    "detail": "drift 0.00 dB vs floor 0.50"
+   },
+   "file_roundtrip": {
+    "ok": true
+   },
+   "noise_floor_db": 0.5,
+   "expect": [],
+   "preset_sha256": {
+    "baseline": "c717e012a8dc14607d3a020457675882a32900cdd85bd1d60eef90d1c49f4e5a",
+    "1.0": "77b9228f6b7cd8158abe46809551ab415fed29aee2c0cfac71235453fc27c1b7"
+   },
+   "timestamp": "2026-09-24T21:11:40.835725+00:00",
+   "status": "REJECTED",
+   "reasons": [
+    "Serum did not retain the written key for values ['1.0']"
+   ],
+   "expectations": []
+  },
+  {
+   "id": "disc_eq_left_type",
+   "atlas_id": "fx.equalizer.left_type",
+   "candidate": {
+    "module": "FXEQ",
+    "kparam": "kParamType1"
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXEQ",
+    "params": {
+     "kParamFreq1": 2000.0,
+     "kParamGain1": 12.0
+    }
+   },
+   "spec_patch": null,
+   "baseline": {
+    "band_db": [
+     80.77,
+     77.72,
+     68.95,
+     53.73,
+     48.61
+    ],
+    "state_value": null
+   },
+   "observations": {
+    "null": {
+     "written": null,
+     "state_value": null,
+     "state_retained": true,
+     "band_db": [
+      80.77,
+      77.72,
+      68.95,
+      53.73,
+      48.61
+     ],
+     "host_params_changed": []
+    },
+    "0.0": {
+     "written": 0.0,
+     "state_value": null,
+     "state_retained": false,
+     "band_db": [
+      80.77,
+      77.72,
+      68.95,
+      53.73,
+      48.61
+     ],
+     "host_params_changed": []
+    },
+    "1.0": {
+     "written": 1.0,
+     "state_value": 1.0,
+     "state_retained": true,
+     "band_db": [
+      68.78,
+      65.8,
+      64.55,
+      54.22,
+      48.7
+     ],
+     "host_params_changed": []
+    },
+    "2.0": {
+     "written": 2.0,
+     "state_value": 2.0,
+     "state_retained": true,
+     "band_db": [
+      21.31,
+      41.74,
+      61.63,
+      55.35,
+      48.81
+     ],
+     "host_params_changed": []
+    },
+    "3.0": {
+     "written": 3.0,
+     "state_value": 2.0,
+     "state_retained": false,
+     "band_db": [
+      21.31,
+      41.74,
+      61.63,
+      55.35,
+      48.81
+     ],
+     "host_params_changed": []
+    }
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.0,
+    "state_value": null,
+    "detail": "drift 0.00 dB vs floor 0.50"
+   },
+   "file_roundtrip": {
+    "ok": true
+   },
+   "noise_floor_db": 0.5,
+   "expect": [],
+   "preset_sha256": {
+    "baseline": "79be72ee8ba4b4963cb90052e832a1122d628e31ebb12b4866c943cf1d2c57b8",
+    "null": "79be72ee8ba4b4963cb90052e832a1122d628e31ebb12b4866c943cf1d2c57b8",
+    "0.0": "17b256965bb2d0d7d9da7cb27fa10ca9b76fd2c9babf964a5cfcf27aa731574c",
+    "1.0": "a16a8bab3106d7f0a00da816ba2a855495d0fb6ace0604fb71d54286a0d3ab1a",
+    "2.0": "d11e03722e9f17e35710729fcdf526bc01702930a9b31adb10c6eab6eec6d84e",
+    "3.0": "b981af1f881f3c41a83b5b63a722310dfdbd5ee877634b1a8afd0e7023ac4c81"
+   },
+   "timestamp": "2026-09-24T21:11:41.923694+00:00",
+   "status": "AMBIGUOUS",
+   "reasons": [
+    "effect observed, no expectation declared"
+   ],
+   "expectations": []
+  },
+  {
+   "id": "disc_eq_right_type",
+   "atlas_id": "fx.equalizer.right_type",
+   "candidate": {
+    "module": "FXEQ",
+    "kparam": "kParamType2"
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXEQ",
+    "params": {
+     "kParamFreq2": 4000.0,
+     "kParamGain2": 12.0
+    }
+   },
+   "spec_patch": null,
+   "baseline": {
+    "band_db": [
+     68.76,
+     65.66,
+     59.39,
+     61.28,
+     60.66
+    ],
+    "state_value": null
+   },
+   "observations": {
+    "null": {
+     "written": null,
+     "state_value": null,
+     "state_retained": true,
+     "band_db": [
+      68.76,
+      65.66,
+      59.39,
+      61.28,
+      60.66
+     ],
+     "host_params_changed": []
+    },
+    "0.0": {
+     "written": 0.0,
+     "state_value": null,
+     "state_retained": false,
+     "band_db": [
+      68.76,
+      65.66,
+      59.39,
+      61.28,
+      60.66
+     ],
+     "host_params_changed": []
+    },
+    "1.0": {
+     "written": 1.0,
+     "state_value": 1.0,
+     "state_retained": true,
+     "band_db": [
+      68.77,
+      65.71,
+      59.79,
+      60.43,
+      48.91
+     ],
+     "host_params_changed": []
+    },
+    "2.0": {
+     "written": 2.0,
+     "state_value": 2.0,
+     "state_retained": true,
+     "band_db": [
+      68.77,
+      65.76,
+      60.62,
+      58.35,
+      30.27
+     ],
+     "host_params_changed": []
+    },
+    "3.0": {
+     "written": 3.0,
+     "state_value": 2.0,
+     "state_retained": false,
+     "band_db": [
+      68.77,
+      65.76,
+      60.62,
+      58.35,
+      30.27
+     ],
+     "host_params_changed": []
+    }
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.0,
+    "state_value": null,
+    "detail": "drift 0.00 dB vs floor 0.50"
+   },
+   "file_roundtrip": {
+    "ok": true
+   },
+   "noise_floor_db": 0.5,
+   "expect": [],
+   "preset_sha256": {
+    "baseline": "83e170e5a321d0563d66665ad6f812eb1fdfb94b0332916ebeaac2f69c3f2fd4",
+    "null": "83e170e5a321d0563d66665ad6f812eb1fdfb94b0332916ebeaac2f69c3f2fd4",
+    "0.0": "4e2fe71b96d76499abe9291db4a6449401723360cee0a1cd55c9ba8a5814059d",
+    "1.0": "be62d3e942eaeaf3b79c9f757b3f2267f230a1b10dc71944520e35bf868dd21d",
+    "2.0": "db59d03b51d9ac0043b1ae6318996e759b6644db6e69e51e5399bff1420deead",
+    "3.0": "6a30f0040e9d4cebc064f7b1f6fab869a9eb2b33b52a18d8105b9e23be2f20b9"
+   },
+   "timestamp": "2026-09-24T21:11:43.025771+00:00",
+   "status": "AMBIGUOUS",
+   "reasons": [
+    "effect observed, no expectation declared"
+   ],
+   "expectations": []
+  },
+  {
+   "id": "disc_comp_multiband_gain0",
+   "atlas_id": "fx.compressor.mode",
+   "candidate": {
+    "module": "FXComp",
+    "kparam": "kParamMultiband"
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXComp",
+    "params": {
+     "kParamGain0": 12.0
+    }
+   },
+   "spec_patch": null,
+   "baseline": {
+    "band_db": [
+     68.29,
+     65.23,
+     58.7,
+     52.79,
+     48.2
+    ],
+    "state_value": null
+   },
+   "observations": {
+    "null": {
+     "written": null,
+     "state_value": null,
+     "state_retained": true,
+     "band_db": [
+      68.29,
+      65.23,
+      58.7,
+      52.79,
+      48.2
+     ],
+     "host_params_changed": []
+    },
+    "1.0": {
+     "written": 1.0,
+     "state_value": 1.0,
+     "state_retained": true,
+     "band_db": [
+      69.7,
+      58.56,
+      52.01,
+      50.02,
+      46.27
+     ],
+     "host_params_changed": []
+    }
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.0,
+    "state_value": null,
+    "detail": "drift 0.00 dB vs floor 0.50"
+   },
+   "file_roundtrip": {
+    "ok": true
+   },
+   "noise_floor_db": 0.5,
+   "expect": [],
+   "preset_sha256": {
+    "baseline": "b127c694a8329589edd99d025522120c38bf7231d8283ade3316f86e99fa4d37",
+    "null": "b127c694a8329589edd99d025522120c38bf7231d8283ade3316f86e99fa4d37",
+    "1.0": "919c38d7cf2abc6c3581423d09a454b3b792adacf56e54deceecbddc379008e6"
+   },
+   "timestamp": "2026-09-24T21:11:43.687507+00:00",
+   "status": "AMBIGUOUS",
+   "reasons": [
+    "effect observed, no expectation declared"
+   ],
+   "expectations": []
+  },
+  {
+   "id": "disc_comp_multiband_gain2",
+   "atlas_id": "fx.compressor.mode",
+   "candidate": {
+    "module": "FXComp",
+    "kparam": "kParamMultiband"
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXComp",
+    "params": {
+     "kParamGain2": 12.0
+    }
+   },
+   "spec_patch": null,
+   "baseline": {
+    "band_db": [
+     68.29,
+     65.23,
+     58.7,
+     52.79,
+     48.2
+    ],
+    "state_value": null
+   },
+   "observations": {
+    "null": {
+     "written": null,
+     "state_value": null,
+     "state_retained": true,
+     "band_db": [
+      68.29,
+      65.23,
+      58.7,
+      52.79,
+      48.2
+     ],
+     "host_params_changed": []
+    },
+    "1.0": {
+     "written": 1.0,
+     "state_value": 1.0,
+     "state_retained": true,
+     "band_db": [
+      61.4,
+      57.61,
+      57.7,
+      61.59,
+      58.26
+     ],
+     "host_params_changed": []
+    }
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.0,
+    "state_value": null,
+    "detail": "drift 0.00 dB vs floor 0.50"
+   },
+   "file_roundtrip": {
+    "ok": true
+   },
+   "noise_floor_db": 0.5,
+   "expect": [],
+   "preset_sha256": {
+    "baseline": "471271848eb4f141f516a67f96ce15951fac15fd53ffe57ec75e2c49ce115702",
+    "null": "471271848eb4f141f516a67f96ce15951fac15fd53ffe57ec75e2c49ce115702",
+    "1.0": "c4e607eda083f0bc6b7907b9305483981d3fd42be7aafece396a24b37fd50fe1"
+   },
+   "timestamp": "2026-09-24T21:11:44.365402+00:00",
+   "status": "AMBIGUOUS",
+   "reasons": [
+    "effect observed, no expectation declared"
+   ],
+   "expectations": []
+  },
+  {
+   "id": "disc_dist_prepost",
+   "atlas_id": "fx.distortion.filter_position",
+   "candidate": {
+    "module": "FXDistortion",
+    "kparam": "kParamPrePost"
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXDistortion",
+    "params": {
+     "kParamMode": "kOverdrive",
+     "kParamDrive": 80.0,
+     "kParamFreq": 0.3,
+     "kParamLPHP": 0.0
+    }
+   },
+   "spec_patch": null,
+   "baseline": {
+    "band_db": [
+     77.49,
+     71.49,
+     63.95,
+     57.61,
+     51.21
+    ],
+    "state_value": null
+   },
+   "observations": {
+    "null": {
+     "written": null,
+     "state_value": null,
+     "state_retained": true,
+     "band_db": [
+      77.49,
+      71.49,
+      63.95,
+      57.61,
+      51.21
+     ],
+     "host_params_changed": []
+    },
+    "1.0": {
+     "written": 1.0,
+     "state_value": 1.0,
+     "state_retained": true,
+     "band_db": [
+      79.89,
+      65.23,
+      49.84,
+      26.45,
+      0.98
+     ],
+     "host_params_changed": []
+    },
+    "2.0": {
+     "written": 2.0,
+     "state_value": 2.0,
+     "state_retained": true,
+     "band_db": [
+      70.86,
+      48.83,
+      16.47,
+      -10.59,
+      -34.5
+     ],
+     "host_params_changed": []
+    }
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.0,
+    "state_value": null,
+    "detail": "drift 0.00 dB vs floor 0.50"
+   },
+   "file_roundtrip": {
+    "ok": true
+   },
+   "noise_floor_db": 0.5,
+   "expect": [],
+   "preset_sha256": {
+    "baseline": "d24758476bc7ed6b1d3ef775be0c470a5a9773f472a9b400f963974750041875",
+    "null": "d24758476bc7ed6b1d3ef775be0c470a5a9773f472a9b400f963974750041875",
+    "1.0": "be17a532eca7b1a312071d7368375f1843d80848d3c579cb20d4bc99bc498252",
+    "2.0": "616f75f5aeea282686dd69fdb9da8d0ea5f8def20e77d42487b54e99fe4e1b0c"
+   },
+   "timestamp": "2026-09-24T21:11:45.164713+00:00",
+   "status": "AMBIGUOUS",
+   "reasons": [
+    "effect observed, no expectation declared"
+   ],
+   "expectations": []
+  },
+  {
+   "id": "disc_dist_prepost_lphp100",
+   "atlas_id": "fx.distortion.filter_position",
+   "candidate": {
+    "module": "FXDistortion",
+    "kparam": "kParamPrePost"
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXDistortion",
+    "params": {
+     "kParamMode": "kOverdrive",
+     "kParamDrive": 80.0,
+     "kParamFreq": 0.3,
+     "kParamLPHP": 100.0
+    }
+   },
+   "spec_patch": null,
+   "baseline": {
+    "band_db": [
+     77.49,
+     71.49,
+     63.95,
+     57.61,
+     51.22
+    ],
+    "state_value": null
+   },
+   "observations": {
+    "null": {
+     "written": null,
+     "state_value": null,
+     "state_retained": true,
+     "band_db": [
+      77.49,
+      71.49,
+      63.95,
+      57.61,
+      51.22
+     ],
+     "host_params_changed": []
+    },
+    "1.0": {
+     "written": 1.0,
+     "state_value": 1.0,
+     "state_retained": true,
+     "band_db": [
+      77.78,
+      66.62,
+      56.02,
+      48.98,
+      43.03
+     ],
+     "host_params_changed": []
+    },
+    "2.0": {
+     "written": 2.0,
+     "state_value": 2.0,
+     "state_retained": true,
+     "band_db": [
+      77.99,
+      69.53,
+      61.77,
+      55.24,
+      47.38
+     ],
+     "host_params_changed": []
+    }
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.01,
+    "state_value": null,
+    "detail": "drift 0.01 dB vs floor 0.50"
+   },
+   "file_roundtrip": {
+    "ok": true
+   },
+   "noise_floor_db": 0.5,
+   "expect": [],
+   "preset_sha256": {
+    "baseline": "130f8d84e2cf644ed8cca02a35c699e5928f98d32c6d854e893bae23b983355e",
+    "null": "130f8d84e2cf644ed8cca02a35c699e5928f98d32c6d854e893bae23b983355e",
+    "1.0": "8d51fcda376bc73945f09b4fcf1eeb1a18d56a42eb8be3eaecbc6972b58303d8",
+    "2.0": "9144a93c9c9aa8c8cb9bcc413c9d1802fa1b19d48337ef6d1cb9aeec93fe4806"
+   },
+   "timestamp": "2026-09-24T21:11:45.976739+00:00",
+   "status": "AMBIGUOUS",
+   "reasons": [
+    "effect observed, no expectation declared"
+   ],
+   "expectations": []
+  }
+ ]
+}
