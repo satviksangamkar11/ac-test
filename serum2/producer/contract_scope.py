@@ -69,7 +69,7 @@ def kparam_for(module: str, fld: str, catalog: Dict[str, Any]) -> Optional[str]:
 
 
 def op_operand(op: Dict[str, Any]) -> str:
-    return {"SET": "numeric", "SELECT": "enum", "TOGGLE_ON": "numeric", "TOGGLE_OFF": "numeric",
+    return {"SET": "numeric", "SELECT": "enum", "TOGGLE_ON": "boolean", "TOGGLE_OFF": "boolean",
             "ADD": "structured"}.get(op["operation"], "unknown")
 
 
