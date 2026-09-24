@@ -1,0 +1,244 @@
+{
+ "harness": {
+  "channel": "real Serum 2.0.23 GUI in Ableton Live 12 (computer-use), FX tab; presets from User/BULKCAUSAL_GUI_RANGE",
+  "plan": "gui_plan_range_v1.json",
+  "manifest": "serum2/qualification/bulk_causal/manifest_fx_range_v1.json",
+  "coverage": "5 of 6 selected tests displayed numerically; dist_drive (GUI19-24) NOT verified: the Drive knob shows no numeric text",
+  "screenshots": "viewed live; no image files persisted",
+  "operator_note": "browser next-arrow drops some clicks; every name was checked against the plan"
+ },
+ "observations": [
+  {
+   "n": 1,
+   "preset": "GUI01_range_eq_freq1__ref",
+   "displayed_value": 210,
+   "unit": "Hz",
+   "ui_control": "EQ left FREQ",
+   "note": "default (key absent)"
+  },
+  {
+   "n": 2,
+   "preset": "GUI02_range_eq_freq1__21p5",
+   "displayed_value": 22,
+   "unit": "Hz",
+   "ui_control": "EQ left FREQ",
+   "note": "stored 21.5332"
+  },
+  {
+   "n": 3,
+   "preset": "GUI03_range_eq_freq1__10000",
+   "displayed_value": 10000,
+   "unit": "Hz",
+   "ui_control": "EQ left FREQ",
+   "note": ""
+  },
+  {
+   "n": 4,
+   "preset": "GUI04_range_eq_freq1__11000_probe",
+   "displayed_value": 11000,
+   "unit": "Hz",
+   "ui_control": "EQ left FREQ",
+   "note": "above the schema max 10000: accepted"
+  },
+  {
+   "n": 5,
+   "preset": "GUI05_range_eq_freq1__100000_probe",
+   "displayed_value": 20000,
+   "unit": "Hz",
+   "ui_control": "EQ left FREQ",
+   "note": "clamps at 20000"
+  },
+  {
+   "n": 6,
+   "preset": "GUI06_range_eq_freq1__19p5455_probe",
+   "displayed_value": 22,
+   "unit": "Hz",
+   "ui_control": "EQ left FREQ",
+   "note": "clamps at ~21.5 Hz"
+  },
+  {
+   "n": 7,
+   "preset": "GUI07_range_eq_reso2__ref",
+   "displayed_value": 60,
+   "unit": "",
+   "ui_control": "EQ right Q",
+   "note": "default (key absent) displays 60; schema default said 0"
+  },
+  {
+   "n": 8,
+   "preset": "GUI08_range_eq_reso2__0",
+   "displayed_value": 0,
+   "unit": "",
+   "ui_control": "EQ right Q",
+   "note": ""
+  },
+  {
+   "n": 9,
+   "preset": "GUI09_range_eq_reso2__95",
+   "displayed_value": 95,
+   "unit": "",
+   "ui_control": "EQ right Q",
+   "note": ""
+  },
+  {
+   "n": 10,
+   "preset": "GUI10_range_eq_reso2__104p5_probe",
+   "displayed_value": 100,
+   "unit": "",
+   "ui_control": "EQ right Q",
+   "note": "above schema max 95: accepted, clamps at 100"
+  },
+  {
+   "n": 11,
+   "preset": "GUI11_range_eq_reso2__285_probe",
+   "displayed_value": 100,
+   "unit": "",
+   "ui_control": "EQ right Q",
+   "note": "clamp"
+  },
+  {
+   "n": 12,
+   "preset": "GUI12_range_eq_reso2__m9p5_probe",
+   "displayed_value": 0,
+   "unit": "",
+   "ui_control": "EQ right Q",
+   "note": "clamp"
+  },
+  {
+   "n": 13,
+   "preset": "GUI13_range_comp_makeup__ref",
+   "displayed_value": 0.0,
+   "unit": "dB",
+   "ui_control": "Compressor GAIN",
+   "note": "default (makeup absent)"
+  },
+  {
+   "n": 14,
+   "preset": "GUI14_range_comp_makeup__1",
+   "displayed_value": 0.0,
+   "unit": "dB",
+   "ui_control": "Compressor GAIN",
+   "note": "makeup 1.0"
+  },
+  {
+   "n": 15,
+   "preset": "GUI15_range_comp_makeup__32",
+   "displayed_value": 29.8,
+   "unit": "dB",
+   "ui_control": "Compressor GAIN",
+   "note": "makeup 32 -> 20log10(31)=29.83 dB: clamp at 31"
+  },
+  {
+   "n": 16,
+   "preset": "GUI16_range_comp_makeup__35p2_probe",
+   "displayed_value": 29.8,
+   "unit": "dB",
+   "ui_control": "Compressor GAIN",
+   "note": "clamp"
+  },
+  {
+   "n": 17,
+   "preset": "GUI17_range_comp_makeup__320_probe",
+   "displayed_value": 29.8,
+   "unit": "dB",
+   "ui_control": "Compressor GAIN",
+   "note": "clamp"
+  },
+  {
+   "n": 18,
+   "preset": "GUI18_range_comp_makeup__0p909091_probe",
+   "displayed_value": 29.8,
+   "unit": "dB",
+   "ui_control": "Compressor GAIN",
+   "note": "makeup 0.909 (BELOW min 1.0) shows the MAXIMUM 29.8 dB, also when loaded straight from the reference preset (0.0 dB) -- not a stale display"
+  },
+  {
+   "n": 25,
+   "preset": "GUI25_range_dist_freq__ref",
+   "displayed_value": 425,
+   "unit": "Hz",
+   "ui_control": "Distortion FREQ",
+   "note": "default (key absent) 0.5 -> 425 Hz"
+  },
+  {
+   "n": 26,
+   "preset": "GUI26_range_dist_freq__0",
+   "displayed_value": 8,
+   "unit": "Hz",
+   "ui_control": "Distortion FREQ",
+   "note": "0.0 -> 8 Hz"
+  },
+  {
+   "n": 27,
+   "preset": "GUI27_range_dist_freq__1",
+   "displayed_value": 13290,
+   "unit": "Hz",
+   "ui_control": "Distortion FREQ",
+   "note": "1.0 -> 13290 Hz"
+  },
+  {
+   "n": 28,
+   "preset": "GUI28_range_dist_freq__1p1_probe",
+   "displayed_value": 22050,
+   "unit": "Hz",
+   "ui_control": "Distortion FREQ",
+   "note": "1.1 -> 22050 Hz: NOT clamped at 1.0"
+  },
+  {
+   "n": 29,
+   "preset": "GUI29_range_dist_freq__3_probe",
+   "displayed_value": 22050,
+   "unit": "Hz",
+   "ui_control": "Distortion FREQ",
+   "note": "3.0 -> 22050 Hz"
+  },
+  {
+   "n": 30,
+   "preset": "GUI30_range_dist_freq__m0p1_probe",
+   "displayed_value": 8,
+   "unit": "Hz",
+   "ui_control": "Distortion FREQ",
+   "note": "-0.1 -> 8 Hz"
+  },
+  {
+   "n": 31,
+   "preset": "GUI31_range_dist_numstages__ref",
+   "displayed_value": 1,
+   "unit": "",
+   "ui_control": "Distortion STACK",
+   "note": "default (key absent) shows 1; schema said min/default 2"
+  },
+  {
+   "n": 32,
+   "preset": "GUI32_range_dist_numstages__2",
+   "displayed_value": 2,
+   "unit": "",
+   "ui_control": "Distortion STACK",
+   "note": ""
+  },
+  {
+   "n": 33,
+   "preset": "GUI33_range_dist_numstages__16",
+   "displayed_value": 16,
+   "unit": "",
+   "ui_control": "Distortion STACK",
+   "note": ""
+  },
+  {
+   "n": 34,
+   "preset": "GUI34_range_dist_numstages__17_probe",
+   "displayed_value": 16,
+   "unit": "",
+   "ui_control": "Distortion STACK",
+   "note": "clamp"
+  },
+  {
+   "n": 35,
+   "preset": "GUI35_range_dist_numstages__1_probe",
+   "displayed_value": 1,
+   "unit": "",
+   "ui_control": "Distortion STACK",
+   "note": "1.0 -> 1 (valid, = default)"
+  }
+ ]
+}

@@ -1,0 +1,468 @@
+{
+ "manifest": "D:\\ableton claude final best\\serum2\\qualification\\bulk_causal\\manifest_fx_range_v1.json",
+ "presets": [
+  {
+   "n": 1,
+   "preset": "GUI01_range_eq_freq1__ref",
+   "test": "range_eq_freq1",
+   "atlas_id": "fx.equalizer.left_freq",
+   "module": "FXEQ",
+   "kparam": "kParamFreq1",
+   "written": null,
+   "kind": "reference",
+   "raw_params": {}
+  },
+  {
+   "n": 2,
+   "preset": "GUI02_range_eq_freq1__21p5",
+   "test": "range_eq_freq1",
+   "atlas_id": "fx.equalizer.left_freq",
+   "module": "FXEQ",
+   "kparam": "kParamFreq1",
+   "written": 21.5,
+   "kind": "value",
+   "raw_params": {
+    "kParamFreq1": 21.5
+   }
+  },
+  {
+   "n": 3,
+   "preset": "GUI03_range_eq_freq1__10000",
+   "test": "range_eq_freq1",
+   "atlas_id": "fx.equalizer.left_freq",
+   "module": "FXEQ",
+   "kparam": "kParamFreq1",
+   "written": 10000.0,
+   "kind": "value",
+   "raw_params": {
+    "kParamFreq1": 10000.0
+   }
+  },
+  {
+   "n": 4,
+   "preset": "GUI04_range_eq_freq1__11000_probe",
+   "test": "range_eq_freq1",
+   "atlas_id": "fx.equalizer.left_freq",
+   "module": "FXEQ",
+   "kparam": "kParamFreq1",
+   "written": 11000.0,
+   "kind": "probe",
+   "raw_params": {
+    "kParamFreq1": 11000.0
+   }
+  },
+  {
+   "n": 5,
+   "preset": "GUI05_range_eq_freq1__100000_probe",
+   "test": "range_eq_freq1",
+   "atlas_id": "fx.equalizer.left_freq",
+   "module": "FXEQ",
+   "kparam": "kParamFreq1",
+   "written": 100000.0,
+   "kind": "probe",
+   "raw_params": {
+    "kParamFreq1": 100000.0
+   }
+  },
+  {
+   "n": 6,
+   "preset": "GUI06_range_eq_freq1__19p5455_probe",
+   "test": "range_eq_freq1",
+   "atlas_id": "fx.equalizer.left_freq",
+   "module": "FXEQ",
+   "kparam": "kParamFreq1",
+   "written": 19.545454545454543,
+   "kind": "probe",
+   "raw_params": {
+    "kParamFreq1": 19.545454545454543
+   }
+  },
+  {
+   "n": 7,
+   "preset": "GUI07_range_eq_reso2__ref",
+   "test": "range_eq_reso2",
+   "atlas_id": "fx.equalizer.right_q",
+   "module": "FXEQ",
+   "kparam": "kParamReso2",
+   "written": null,
+   "kind": "reference",
+   "raw_params": {}
+  },
+  {
+   "n": 8,
+   "preset": "GUI08_range_eq_reso2__0",
+   "test": "range_eq_reso2",
+   "atlas_id": "fx.equalizer.right_q",
+   "module": "FXEQ",
+   "kparam": "kParamReso2",
+   "written": 0.0,
+   "kind": "value",
+   "raw_params": {
+    "kParamReso2": 0.0
+   }
+  },
+  {
+   "n": 9,
+   "preset": "GUI09_range_eq_reso2__95",
+   "test": "range_eq_reso2",
+   "atlas_id": "fx.equalizer.right_q",
+   "module": "FXEQ",
+   "kparam": "kParamReso2",
+   "written": 95.0,
+   "kind": "value",
+   "raw_params": {
+    "kParamReso2": 95.0
+   }
+  },
+  {
+   "n": 10,
+   "preset": "GUI10_range_eq_reso2__104p5_probe",
+   "test": "range_eq_reso2",
+   "atlas_id": "fx.equalizer.right_q",
+   "module": "FXEQ",
+   "kparam": "kParamReso2",
+   "written": 104.5,
+   "kind": "probe",
+   "raw_params": {
+    "kParamReso2": 104.5
+   }
+  },
+  {
+   "n": 11,
+   "preset": "GUI11_range_eq_reso2__285_probe",
+   "test": "range_eq_reso2",
+   "atlas_id": "fx.equalizer.right_q",
+   "module": "FXEQ",
+   "kparam": "kParamReso2",
+   "written": 285.0,
+   "kind": "probe",
+   "raw_params": {
+    "kParamReso2": 285.0
+   }
+  },
+  {
+   "n": 12,
+   "preset": "GUI12_range_eq_reso2__m9p5_probe",
+   "test": "range_eq_reso2",
+   "atlas_id": "fx.equalizer.right_q",
+   "module": "FXEQ",
+   "kparam": "kParamReso2",
+   "written": -9.5,
+   "kind": "probe",
+   "raw_params": {
+    "kParamReso2": -9.5
+   }
+  },
+  {
+   "n": 13,
+   "preset": "GUI13_range_comp_makeup__ref",
+   "test": "range_comp_makeup",
+   "atlas_id": "fx.compressor.gain",
+   "module": "FXComp",
+   "kparam": "kParamMakeup",
+   "written": null,
+   "kind": "reference",
+   "raw_params": {}
+  },
+  {
+   "n": 14,
+   "preset": "GUI14_range_comp_makeup__1",
+   "test": "range_comp_makeup",
+   "atlas_id": "fx.compressor.gain",
+   "module": "FXComp",
+   "kparam": "kParamMakeup",
+   "written": 1.0,
+   "kind": "value",
+   "raw_params": {
+    "kParamMakeup": 1.0
+   }
+  },
+  {
+   "n": 15,
+   "preset": "GUI15_range_comp_makeup__32",
+   "test": "range_comp_makeup",
+   "atlas_id": "fx.compressor.gain",
+   "module": "FXComp",
+   "kparam": "kParamMakeup",
+   "written": 32.0,
+   "kind": "value",
+   "raw_params": {
+    "kParamMakeup": 32.0
+   }
+  },
+  {
+   "n": 16,
+   "preset": "GUI16_range_comp_makeup__35p2_probe",
+   "test": "range_comp_makeup",
+   "atlas_id": "fx.compressor.gain",
+   "module": "FXComp",
+   "kparam": "kParamMakeup",
+   "written": 35.2,
+   "kind": "probe",
+   "raw_params": {
+    "kParamMakeup": 35.2
+   }
+  },
+  {
+   "n": 17,
+   "preset": "GUI17_range_comp_makeup__320_probe",
+   "test": "range_comp_makeup",
+   "atlas_id": "fx.compressor.gain",
+   "module": "FXComp",
+   "kparam": "kParamMakeup",
+   "written": 320.0,
+   "kind": "probe",
+   "raw_params": {
+    "kParamMakeup": 320.0
+   }
+  },
+  {
+   "n": 18,
+   "preset": "GUI18_range_comp_makeup__0p909091_probe",
+   "test": "range_comp_makeup",
+   "atlas_id": "fx.compressor.gain",
+   "module": "FXComp",
+   "kparam": "kParamMakeup",
+   "written": 0.9090909090909091,
+   "kind": "probe",
+   "raw_params": {
+    "kParamMakeup": 0.9090909090909091
+   }
+  },
+  {
+   "n": 19,
+   "preset": "GUI19_range_dist_drive__ref",
+   "test": "range_dist_drive",
+   "atlas_id": "fx.distortion.drive",
+   "module": "FXDistortion",
+   "kparam": "kParamDrive",
+   "written": null,
+   "kind": "reference",
+   "raw_params": {
+    "kParamMode": "kOverdrive"
+   }
+  },
+  {
+   "n": 20,
+   "preset": "GUI20_range_dist_drive__0",
+   "test": "range_dist_drive",
+   "atlas_id": "fx.distortion.drive",
+   "module": "FXDistortion",
+   "kparam": "kParamDrive",
+   "written": 0.0,
+   "kind": "value",
+   "raw_params": {
+    "kParamMode": "kOverdrive",
+    "kParamDrive": 0.0
+   }
+  },
+  {
+   "n": 21,
+   "preset": "GUI21_range_dist_drive__100",
+   "test": "range_dist_drive",
+   "atlas_id": "fx.distortion.drive",
+   "module": "FXDistortion",
+   "kparam": "kParamDrive",
+   "written": 100.0,
+   "kind": "value",
+   "raw_params": {
+    "kParamMode": "kOverdrive",
+    "kParamDrive": 100.0
+   }
+  },
+  {
+   "n": 22,
+   "preset": "GUI22_range_dist_drive__110_probe",
+   "test": "range_dist_drive",
+   "atlas_id": "fx.distortion.drive",
+   "module": "FXDistortion",
+   "kparam": "kParamDrive",
+   "written": 110.0,
+   "kind": "probe",
+   "raw_params": {
+    "kParamMode": "kOverdrive",
+    "kParamDrive": 110.0
+   }
+  },
+  {
+   "n": 23,
+   "preset": "GUI23_range_dist_drive__300_probe",
+   "test": "range_dist_drive",
+   "atlas_id": "fx.distortion.drive",
+   "module": "FXDistortion",
+   "kparam": "kParamDrive",
+   "written": 300.0,
+   "kind": "probe",
+   "raw_params": {
+    "kParamMode": "kOverdrive",
+    "kParamDrive": 300.0
+   }
+  },
+  {
+   "n": 24,
+   "preset": "GUI24_range_dist_drive__m10_probe",
+   "test": "range_dist_drive",
+   "atlas_id": "fx.distortion.drive",
+   "module": "FXDistortion",
+   "kparam": "kParamDrive",
+   "written": -10.0,
+   "kind": "probe",
+   "raw_params": {
+    "kParamMode": "kOverdrive",
+    "kParamDrive": -10.0
+   }
+  },
+  {
+   "n": 25,
+   "preset": "GUI25_range_dist_freq__ref",
+   "test": "range_dist_freq",
+   "atlas_id": "fx.distortion.freq",
+   "module": "FXDistortion",
+   "kparam": "kParamFreq",
+   "written": null,
+   "kind": "reference",
+   "raw_params": {
+    "kParamMode": "kOverdrive"
+   }
+  },
+  {
+   "n": 26,
+   "preset": "GUI26_range_dist_freq__0",
+   "test": "range_dist_freq",
+   "atlas_id": "fx.distortion.freq",
+   "module": "FXDistortion",
+   "kparam": "kParamFreq",
+   "written": 0.0,
+   "kind": "value",
+   "raw_params": {
+    "kParamMode": "kOverdrive",
+    "kParamFreq": 0.0
+   }
+  },
+  {
+   "n": 27,
+   "preset": "GUI27_range_dist_freq__1",
+   "test": "range_dist_freq",
+   "atlas_id": "fx.distortion.freq",
+   "module": "FXDistortion",
+   "kparam": "kParamFreq",
+   "written": 1.0,
+   "kind": "value",
+   "raw_params": {
+    "kParamMode": "kOverdrive",
+    "kParamFreq": 1.0
+   }
+  },
+  {
+   "n": 28,
+   "preset": "GUI28_range_dist_freq__1p1_probe",
+   "test": "range_dist_freq",
+   "atlas_id": "fx.distortion.freq",
+   "module": "FXDistortion",
+   "kparam": "kParamFreq",
+   "written": 1.1,
+   "kind": "probe",
+   "raw_params": {
+    "kParamMode": "kOverdrive",
+    "kParamFreq": 1.1
+   }
+  },
+  {
+   "n": 29,
+   "preset": "GUI29_range_dist_freq__3_probe",
+   "test": "range_dist_freq",
+   "atlas_id": "fx.distortion.freq",
+   "module": "FXDistortion",
+   "kparam": "kParamFreq",
+   "written": 3.0,
+   "kind": "probe",
+   "raw_params": {
+    "kParamMode": "kOverdrive",
+    "kParamFreq": 3.0
+   }
+  },
+  {
+   "n": 30,
+   "preset": "GUI30_range_dist_freq__m0p1_probe",
+   "test": "range_dist_freq",
+   "atlas_id": "fx.distortion.freq",
+   "module": "FXDistortion",
+   "kparam": "kParamFreq",
+   "written": -0.1,
+   "kind": "probe",
+   "raw_params": {
+    "kParamMode": "kOverdrive",
+    "kParamFreq": -0.1
+   }
+  },
+  {
+   "n": 31,
+   "preset": "GUI31_range_dist_numstages__ref",
+   "test": "range_dist_numstages",
+   "atlas_id": "(range)",
+   "module": "FXDistortion",
+   "kparam": "kParamNumStages",
+   "written": null,
+   "kind": "reference",
+   "raw_params": {
+    "kParamMode": "kOverdrive"
+   }
+  },
+  {
+   "n": 32,
+   "preset": "GUI32_range_dist_numstages__2",
+   "test": "range_dist_numstages",
+   "atlas_id": "(range)",
+   "module": "FXDistortion",
+   "kparam": "kParamNumStages",
+   "written": 2.0,
+   "kind": "value",
+   "raw_params": {
+    "kParamMode": "kOverdrive",
+    "kParamNumStages": 2.0
+   }
+  },
+  {
+   "n": 33,
+   "preset": "GUI33_range_dist_numstages__16",
+   "test": "range_dist_numstages",
+   "atlas_id": "(range)",
+   "module": "FXDistortion",
+   "kparam": "kParamNumStages",
+   "written": 16.0,
+   "kind": "value",
+   "raw_params": {
+    "kParamMode": "kOverdrive",
+    "kParamNumStages": 16.0
+   }
+  },
+  {
+   "n": 34,
+   "preset": "GUI34_range_dist_numstages__17_probe",
+   "test": "range_dist_numstages",
+   "atlas_id": "(range)",
+   "module": "FXDistortion",
+   "kparam": "kParamNumStages",
+   "written": 17.0,
+   "kind": "probe",
+   "raw_params": {
+    "kParamMode": "kOverdrive",
+    "kParamNumStages": 17.0
+   }
+  },
+  {
+   "n": 35,
+   "preset": "GUI35_range_dist_numstages__1_probe",
+   "test": "range_dist_numstages",
+   "atlas_id": "(range)",
+   "module": "FXDistortion",
+   "kparam": "kParamNumStages",
+   "written": 1.0,
+   "kind": "probe",
+   "raw_params": {
+    "kParamMode": "kOverdrive",
+    "kParamNumStages": 1.0
+   }
+  }
+ ]
+}

@@ -1,0 +1,242 @@
+{
+ "sources": {
+  "causal": "parameter_characterization/bulk_causal_evidence/fx_range_v1.json",
+  "gui": "parameter_characterization/bulk_causal_evidence/gui_range_evidence_v1.json"
+ },
+ "tests": {
+  "range_eq_freq1": {
+   "atlas_id": "fx.equalizer.left_freq",
+   "candidate": {
+    "module": "FXEQ",
+    "kparam": "kParamFreq1"
+   },
+   "default_display": 210,
+   "unit": "Hz",
+   "effective_display_range": [
+    22,
+    20000
+   ],
+   "violations": [],
+   "status": "DISPLAY_CONSISTENT",
+   "display_map": [
+    {
+     "written": 19.545454545454543,
+     "kind": "probe",
+     "shows": 22
+    },
+    {
+     "written": 21.5,
+     "kind": "value",
+     "shows": 22
+    },
+    {
+     "written": 10000.0,
+     "kind": "value",
+     "shows": 10000
+    },
+    {
+     "written": 11000.0,
+     "kind": "probe",
+     "shows": 11000
+    },
+    {
+     "written": 100000.0,
+     "kind": "probe",
+     "shows": 20000
+    }
+   ]
+  },
+  "range_eq_reso2": {
+   "atlas_id": "fx.equalizer.right_q",
+   "candidate": {
+    "module": "FXEQ",
+    "kparam": "kParamReso2",
+    "default": 0.0
+   },
+   "default_display": 60,
+   "unit": "",
+   "effective_display_range": [
+    0,
+    100
+   ],
+   "violations": [],
+   "status": "DISPLAY_CONSISTENT",
+   "display_map": [
+    {
+     "written": -9.5,
+     "kind": "probe",
+     "shows": 0
+    },
+    {
+     "written": 0.0,
+     "kind": "value",
+     "shows": 0
+    },
+    {
+     "written": 95.0,
+     "kind": "value",
+     "shows": 95
+    },
+    {
+     "written": 104.5,
+     "kind": "probe",
+     "shows": 100
+    },
+    {
+     "written": 285.0,
+     "kind": "probe",
+     "shows": 100
+    }
+   ]
+  },
+  "range_comp_makeup": {
+   "atlas_id": "fx.compressor.gain",
+   "candidate": {
+    "module": "FXComp",
+    "kparam": "kParamMakeup"
+   },
+   "default_display": 0.0,
+   "unit": "dB",
+   "effective_display_range": [
+    0.0,
+    29.8
+   ],
+   "violations": [
+    {
+     "rule": "R2",
+     "displayed_in_written_order": [
+      29.8,
+      0.0,
+      29.8,
+      29.8,
+      29.8
+     ]
+    }
+   ],
+   "status": "GUI_DISAGREES_WITH_STATE_READBACK",
+   "display_map": [
+    {
+     "written": 0.9090909090909091,
+     "kind": "probe",
+     "shows": 29.8
+    },
+    {
+     "written": 1.0,
+     "kind": "value",
+     "shows": 0.0
+    },
+    {
+     "written": 32.0,
+     "kind": "value",
+     "shows": 29.8
+    },
+    {
+     "written": 35.2,
+     "kind": "probe",
+     "shows": 29.8
+    },
+    {
+     "written": 320.0,
+     "kind": "probe",
+     "shows": 29.8
+    }
+   ]
+  },
+  "range_dist_freq": {
+   "atlas_id": "fx.distortion.freq",
+   "candidate": {
+    "module": "FXDistortion",
+    "kparam": "kParamFreq"
+   },
+   "default_display": 425,
+   "unit": "Hz",
+   "effective_display_range": [
+    8,
+    22050
+   ],
+   "violations": [
+    {
+     "rule": "R1",
+     "written": 1.1,
+     "state_readback_stored": 1.0,
+     "gui_shows": 22050,
+     "expected_from_value": 1.0,
+     "that_value_shows": 13290
+    },
+    {
+     "rule": "R1",
+     "written": 3.0,
+     "state_readback_stored": 1.0,
+     "gui_shows": 22050,
+     "expected_from_value": 1.0,
+     "that_value_shows": 13290
+    }
+   ],
+   "status": "GUI_DISAGREES_WITH_STATE_READBACK",
+   "display_map": [
+    {
+     "written": -0.1,
+     "kind": "probe",
+     "shows": 8
+    },
+    {
+     "written": 0.0,
+     "kind": "value",
+     "shows": 8
+    },
+    {
+     "written": 1.0,
+     "kind": "value",
+     "shows": 13290
+    },
+    {
+     "written": 1.1,
+     "kind": "probe",
+     "shows": 22050
+    },
+    {
+     "written": 3.0,
+     "kind": "probe",
+     "shows": 22050
+    }
+   ]
+  },
+  "range_dist_numstages": {
+   "atlas_id": "(range)",
+   "candidate": {
+    "module": "FXDistortion",
+    "kparam": "kParamNumStages"
+   },
+   "default_display": 1,
+   "unit": "",
+   "effective_display_range": [
+    1,
+    16
+   ],
+   "violations": [],
+   "status": "DISPLAY_CONSISTENT",
+   "display_map": [
+    {
+     "written": 1.0,
+     "kind": "probe",
+     "shows": 1
+    },
+    {
+     "written": 2.0,
+     "kind": "value",
+     "shows": 2
+    },
+    {
+     "written": 16.0,
+     "kind": "value",
+     "shows": 16
+    },
+    {
+     "written": 17.0,
+     "kind": "probe",
+     "shows": 16
+    }
+   ]
+  }
+ }
+}

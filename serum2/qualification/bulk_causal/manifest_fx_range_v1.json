@@ -1,0 +1,344 @@
+{
+ "version": 1,
+ "note": 48,
+ "render_sec": 1.0,
+ "bands": [
+  20,
+  200,
+  800,
+  3000,
+  8000,
+  20000
+ ],
+ "min_noise_floor_db": 0.5,
+ "contexts": {
+  "QUAL_FX_EQ": {
+   "unit": {
+    "index": 0,
+    "type": "FXEQ",
+    "params": {}
+   }
+  },
+  "QUAL_FX_COMP": {
+   "unit": {
+    "index": 0,
+    "type": "FXComp",
+    "params": {}
+   }
+  },
+  "QUAL_FX_DIST": {
+   "unit": {
+    "index": 0,
+    "type": "FXDistortion",
+    "params": {
+     "kParamMode": "kOverdrive"
+    }
+   }
+  }
+ },
+ "tests": [
+  {
+   "id": "range_eq_freq1",
+   "atlas_id": "fx.equalizer.left_freq",
+   "context": "QUAL_FX_EQ",
+   "purpose": "range",
+   "candidate": {
+    "module": "FXEQ",
+    "kparam": "kParamFreq1"
+   },
+   "unit": {},
+   "domain": {
+    "kind": "log",
+    "min": 21.5,
+    "max": 10000.0
+   }
+  },
+  {
+   "id": "range_eq_gain1",
+   "atlas_id": "fx.equalizer.left_gain",
+   "context": "QUAL_FX_EQ",
+   "purpose": "range",
+   "candidate": {
+    "module": "FXEQ",
+    "kparam": "kParamGain1"
+   },
+   "unit": {},
+   "domain": {
+    "kind": "signed",
+    "min": -24.0,
+    "max": 24.0,
+    "default": 0.0
+   }
+  },
+  {
+   "id": "range_eq_reso1",
+   "atlas_id": "fx.equalizer.left_q",
+   "context": "QUAL_FX_EQ",
+   "purpose": "range",
+   "candidate": {
+    "module": "FXEQ",
+    "kparam": "kParamReso1"
+   },
+   "unit": {},
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0,
+    "default": 0.0
+   }
+  },
+  {
+   "id": "range_eq_freq2",
+   "atlas_id": "fx.equalizer.right_freq",
+   "context": "QUAL_FX_EQ",
+   "purpose": "range",
+   "candidate": {
+    "module": "FXEQ",
+    "kparam": "kParamFreq2"
+   },
+   "unit": {},
+   "domain": {
+    "kind": "log",
+    "min": 21.5,
+    "max": 20000.0
+   }
+  },
+  {
+   "id": "range_eq_gain2",
+   "atlas_id": "fx.equalizer.right_gain",
+   "context": "QUAL_FX_EQ",
+   "purpose": "range",
+   "candidate": {
+    "module": "FXEQ",
+    "kparam": "kParamGain2"
+   },
+   "unit": {},
+   "domain": {
+    "kind": "signed",
+    "min": -24.0,
+    "max": 24.0,
+    "default": 0.0
+   }
+  },
+  {
+   "id": "range_eq_reso2",
+   "atlas_id": "fx.equalizer.right_q",
+   "context": "QUAL_FX_EQ",
+   "purpose": "range",
+   "candidate": {
+    "module": "FXEQ",
+    "kparam": "kParamReso2"
+   },
+   "unit": {},
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 95.0,
+    "default": 0.0
+   }
+  },
+  {
+   "id": "range_eq_type1",
+   "atlas_id": "fx.equalizer.left_type",
+   "context": "QUAL_FX_EQ",
+   "purpose": "range",
+   "candidate": {
+    "module": "FXEQ",
+    "kparam": "kParamType1"
+   },
+   "unit": {},
+   "domain": {
+    "kind": "enum",
+    "values": [
+     0,
+     1,
+     2
+    ],
+    "default": 0.0
+   }
+  },
+  {
+   "id": "range_eq_type2",
+   "atlas_id": "fx.equalizer.right_type",
+   "context": "QUAL_FX_EQ",
+   "purpose": "range",
+   "candidate": {
+    "module": "FXEQ",
+    "kparam": "kParamType2"
+   },
+   "unit": {},
+   "domain": {
+    "kind": "enum",
+    "values": [
+     0,
+     1,
+     2
+    ],
+    "default": 0.0
+   }
+  },
+  {
+   "id": "range_comp_thresh",
+   "atlas_id": "fx.compressor.thresh",
+   "context": "QUAL_FX_COMP",
+   "purpose": "range",
+   "candidate": {
+    "module": "FXComp",
+    "kparam": "kParamThresh"
+   },
+   "unit": {},
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   }
+  },
+  {
+   "id": "range_comp_ratio",
+   "atlas_id": "fx.compressor.ratio",
+   "context": "QUAL_FX_COMP",
+   "purpose": "range",
+   "candidate": {
+    "module": "FXComp",
+    "kparam": "kParamRatio"
+   },
+   "unit": {},
+   "domain": {
+    "kind": "log",
+    "min": 1.0,
+    "max": 1000000.0
+   }
+  },
+  {
+   "id": "range_comp_attack",
+   "atlas_id": "fx.compressor.attack",
+   "context": "QUAL_FX_COMP",
+   "purpose": "range",
+   "candidate": {
+    "module": "FXComp",
+    "kparam": "kParamAttack"
+   },
+   "unit": {},
+   "domain": {
+    "kind": "log",
+    "min": 0.1,
+    "max": 1000.0
+   }
+  },
+  {
+   "id": "range_comp_release",
+   "atlas_id": "fx.compressor.release",
+   "context": "QUAL_FX_COMP",
+   "purpose": "range",
+   "candidate": {
+    "module": "FXComp",
+    "kparam": "kParamRelease"
+   },
+   "unit": {},
+   "domain": {
+    "kind": "log",
+    "min": 0.1,
+    "max": 1000.0
+   }
+  },
+  {
+   "id": "range_comp_makeup",
+   "atlas_id": "fx.compressor.gain",
+   "context": "QUAL_FX_COMP",
+   "purpose": "range",
+   "candidate": {
+    "module": "FXComp",
+    "kparam": "kParamMakeup"
+   },
+   "unit": {},
+   "domain": {
+    "kind": "log",
+    "min": 1.0,
+    "max": 32.0
+   }
+  },
+  {
+   "id": "range_comp_multiband",
+   "atlas_id": "fx.compressor.mode",
+   "context": "QUAL_FX_COMP",
+   "purpose": "range",
+   "candidate": {
+    "module": "FXComp",
+    "kparam": "kParamMultiband"
+   },
+   "unit": {},
+   "domain": {
+    "kind": "bool",
+    "default": 0.0
+   }
+  },
+  {
+   "id": "range_dist_drive",
+   "atlas_id": "fx.distortion.drive",
+   "context": "QUAL_FX_DIST",
+   "purpose": "range",
+   "candidate": {
+    "module": "FXDistortion",
+    "kparam": "kParamDrive"
+   },
+   "unit": {},
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "id": "range_dist_freq",
+   "atlas_id": "fx.distortion.freq",
+   "context": "QUAL_FX_DIST",
+   "purpose": "range",
+   "candidate": {
+    "module": "FXDistortion",
+    "kparam": "kParamFreq"
+   },
+   "unit": {},
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   }
+  },
+  {
+   "id": "range_dist_prepost",
+   "atlas_id": "fx.distortion.filter_position",
+   "context": "QUAL_FX_DIST",
+   "purpose": "range",
+   "candidate": {
+    "module": "FXDistortion",
+    "kparam": "kParamPrePost"
+   },
+   "unit": {},
+   "domain": {
+    "kind": "enum",
+    "values": [
+     0,
+     1,
+     2
+    ],
+    "default": 0.0
+   }
+  },
+  {
+   "id": "range_dist_numstages",
+   "atlas_id": "(range)",
+   "context": "QUAL_FX_DIST",
+   "purpose": "range",
+   "candidate": {
+    "module": "FXDistortion",
+    "kparam": "kParamNumStages"
+   },
+   "unit": {},
+   "domain": {
+    "kind": "int",
+    "min": 2,
+    "max": 16
+   }
+  }
+ ]
+}

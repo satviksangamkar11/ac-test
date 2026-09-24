@@ -1,0 +1,5244 @@
+{
+ "harness": {
+  "backend": "real Serum 2.0.23 VST3 in DawDreamer (headless); observation = state readback + rendered band energy, NOT GUI pixels",
+  "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+  "product_version": "2.0.23",
+  "state_version": 9.0,
+  "manifest": "D:\\ableton claude final best\\serum2\\qualification\\bulk_causal\\manifest_fx_range_v1.json",
+  "manifest_sha256": "7bfc860a620c7889ed44e2c7a4f47d1c8c10837806250e0ff49d211d8c3205b2",
+  "session_size": 10,
+  "authorizes_nothing": true
+ },
+ "records": [
+  {
+   "id": "range_eq_freq1",
+   "atlas_id": "fx.equalizer.left_freq",
+   "candidate": {
+    "module": "FXEQ",
+    "kparam": "kParamFreq1"
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXEQ",
+    "params": {}
+   },
+   "spec_patch": null,
+   "baseline": {
+    "band_db": [
+     68.74,
+     65.65,
+     59.11,
+     53.2,
+     48.62
+    ],
+    "state_value": null
+   },
+   "observations": {
+    "21.5": {
+     "written": 21.5,
+     "state_value": 21.53320125,
+     "state_retained": false,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "99.84558018589446": {
+     "written": 99.84558018589446,
+     "state_value": 99.84558018589446,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "463.68092477478524": {
+     "written": 463.68092477478524,
+     "state_value": 463.6809247747854,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "2153.325160710256": {
+     "written": 2153.325160710256,
+     "state_value": 2153.325160710256,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "10000.0": {
+     "written": 10000.0,
+     "state_value": 10000.000000000005,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "11000.0": {
+     "written": 11000.0,
+     "state_value": 11000.000000000004,
+     "state_retained": true,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "20000.0": {
+     "written": 20000.0,
+     "state_value": 20000.0,
+     "state_retained": true,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "100000.0": {
+     "written": 100000.0,
+     "state_value": 20000.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "19.545454545454543": {
+     "written": 19.545454545454543,
+     "state_value": 21.53320125,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "10.75": {
+     "written": 10.75,
+     "state_value": 21.53320125,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "2.15": {
+     "written": 2.15,
+     "state_value": 21.53320125,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    }
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.03,
+    "state_value": null,
+    "detail": "drift 0.03 dB vs floor 0.50"
+   },
+   "file_roundtrip": {
+    "ok": true
+   },
+   "noise_floor_db": 0.5,
+   "expect": [],
+   "preset_sha256": {
+    "baseline": "b0e13dcb870ddda4668908145220038db0175c4549625b3bc2857979b2c0589f",
+    "21.5": "f0597bc458305010b199c0e4899ecdafcf0aa8f9771ce2176f562acef6447305",
+    "99.84558018589446": "961533bdd3b82820f8001eee956f483bd239bb0d962205a815a49efd3a07ef1c",
+    "463.68092477478524": "dfe5ea858763c72fbeb269cfac0f47aa9f8349342c030eb290710e94741f883f",
+    "2153.325160710256": "fdc3008431252081efc68ddfc95f5bde57d8aa3bfcdd118b4d741264e187b47d",
+    "10000.0": "848e36010cf72ae9d2ee6effa0c6c81f759f3f06737079a4813cf5adc935230a",
+    "11000.0": "761acb4ac97edfbf05cbcd22df50dbf7d70d4d5e49521cf19b9aad4d70e0b88e",
+    "20000.0": "47799cc3b62d60b3a0ee82b0d9441e7e6c2c8748c585936a18805ba5d71ccb93",
+    "100000.0": "44d3ecb9e4c507273dcb103a7370b90f9ce3546b1117b674c1eaa2056df9b279",
+    "19.545454545454543": "41b470bd0c528fd0cf317291e74f1c4008ecb9df9d50d0021ef718cfed87dc35",
+    "10.75": "36340bcf038a09328d2c0086c4e5c31034dea2e790e63aec788680891a91c56a",
+    "2.15": "d42093f4f44e26d416e1f0c210c2cf4ded9647bde0a16a0a3179230ca9cd869b"
+   },
+   "purpose": "range",
+   "context": "QUAL_FX_EQ",
+   "domain": {
+    "kind": "log",
+    "min": 21.5,
+    "max": 10000.0
+   },
+   "value_vector": {
+    "values": [
+     21.5,
+     99.84558018589446,
+     463.68092477478524,
+     2153.325160710256,
+     10000.0
+    ],
+    "probes": [
+     11000.0,
+     20000.0,
+     100000.0,
+     19.545454545454543,
+     10.75,
+     2.15
+    ]
+   },
+   "timestamp": "2026-09-24T21:58:33.514073+00:00",
+   "range": {
+    "declared": {
+     "kind": "log",
+     "min": 21.5,
+     "max": 10000.0
+    },
+    "discovered_default": null,
+    "declared_default_matches": null,
+    "reachable_min": 21.53320125,
+    "reachable_max": 20000.0,
+    "clamp_high_at": 20000.0,
+    "clamp_low_at": 21.53320125,
+    "reaches_beyond_declared_max": false,
+    "probes_dropped": [],
+    "declared_matches_reachable": false,
+    "rows": [
+     {
+      "written": 21.5,
+      "stored": 21.53320125,
+      "fate": "clamped_to_min",
+      "probe": false
+     },
+     {
+      "written": 99.84558018589446,
+      "stored": 99.84558018589446,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 463.68092477478524,
+      "stored": 463.6809247747854,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 2153.325160710256,
+      "stored": 2153.325160710256,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 10000.0,
+      "stored": 10000.000000000005,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 11000.0,
+      "stored": 11000.000000000004,
+      "fate": "retained",
+      "probe": true
+     },
+     {
+      "written": 20000.0,
+      "stored": 20000.0,
+      "fate": "retained",
+      "probe": true
+     },
+     {
+      "written": 100000.0,
+      "stored": 20000.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 19.545454545454543,
+      "stored": 21.53320125,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": 10.75,
+      "stored": 21.53320125,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": 2.15,
+      "stored": 21.53320125,
+      "fate": "clamped_to_min",
+      "probe": true
+     }
+    ]
+   },
+   "status": "RANGE_CHARACTERIZED",
+   "reasons": [],
+   "expectations": []
+  },
+  {
+   "id": "range_eq_gain1",
+   "atlas_id": "fx.equalizer.left_gain",
+   "candidate": {
+    "module": "FXEQ",
+    "kparam": "kParamGain1",
+    "default": 0.0
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXEQ",
+    "params": {}
+   },
+   "spec_patch": null,
+   "baseline": {
+    "band_db": [
+     68.77,
+     65.68,
+     59.14,
+     53.23,
+     48.64
+    ],
+    "state_value": null
+   },
+   "observations": {
+    "-24.0": {
+     "written": -24.0,
+     "state_value": -24.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      49.46,
+      62.03,
+      59.22,
+      53.24,
+      48.65
+     ],
+     "host_params_changed": []
+    },
+    "-12.0": {
+     "written": -12.0,
+     "state_value": -12.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      58.16,
+      64.06,
+      59.18,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "0.0": {
+     "written": 0.0,
+     "state_value": null,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "12.0": {
+     "written": 12.0,
+     "state_value": 12.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      79.37,
+      67.87,
+      59.09,
+      53.22,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "24.0": {
+     "written": 24.0,
+     "state_value": 24.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      88.07,
+      71.93,
+      59.05,
+      53.21,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "28.8": {
+     "written": 28.8,
+     "state_value": 24.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      88.07,
+      71.93,
+      59.05,
+      53.21,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "48.0": {
+     "written": 48.0,
+     "state_value": 24.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      88.07,
+      71.93,
+      59.05,
+      53.21,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "120.0": {
+     "written": 120.0,
+     "state_value": 24.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      88.07,
+      71.93,
+      59.05,
+      53.21,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "-28.8": {
+     "written": -28.8,
+     "state_value": -24.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      49.46,
+      62.03,
+      59.22,
+      53.24,
+      48.65
+     ],
+     "host_params_changed": []
+    },
+    "-48.0": {
+     "written": -48.0,
+     "state_value": -24.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      49.46,
+      62.03,
+      59.22,
+      53.24,
+      48.65
+     ],
+     "host_params_changed": []
+    },
+    "-120.0": {
+     "written": -120.0,
+     "state_value": -24.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      49.46,
+      62.03,
+      59.22,
+      53.24,
+      48.65
+     ],
+     "host_params_changed": []
+    }
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.0,
+    "state_value": null,
+    "detail": "drift 0.00 dB vs floor 0.50"
+   },
+   "file_roundtrip": {
+    "ok": true
+   },
+   "noise_floor_db": 0.5,
+   "expect": [],
+   "preset_sha256": {
+    "baseline": "b0e13dcb870ddda4668908145220038db0175c4549625b3bc2857979b2c0589f",
+    "-24.0": "bb0ee7e7c748d1655f245105aef1fba583aa803b7d9cdef2d392f7d356e982f8",
+    "-12.0": "db0e7ef5c5353fe06c7a8725af3f4a6c1655932fa912f2106c35b3f87124aef6",
+    "0.0": "5812259c6994e2bb1cd724751b4702f2623f20ef015917d50de802074543c46f",
+    "12.0": "0bfd31a345b5a9757cdc95d65a8649dabeda5c098d30de5793ad641c0eea4386",
+    "24.0": "c71319a51c89755e0be2776c8610bb7e068d8064dbd4ad12dbe625c1ee4f7ca6",
+    "28.8": "6f7d6039c404cb486179456284ddc34b5eb08462febe603b3785b4c71c6148a8",
+    "48.0": "d4d632fa864a6533cd26e3b733e483ede26680beffe2189b0d0b2ec2292b5935",
+    "120.0": "47aba835dca96e0b014180155d00a255462d346399122144698056fba394cee4",
+    "-28.8": "e2f99d55566fb327cce8070718ac78d1893d19f11eda0dd8b1948aabc1192ecb",
+    "-48.0": "dd785fe48bd64fd153719c87d3d68be0cb9806f9059f9547c3b15772407c0dcf",
+    "-120.0": "cda069ee88116d753a41524c0ae5cd85842f05440d3e953430022418ecd44a6c"
+   },
+   "purpose": "range",
+   "context": "QUAL_FX_EQ",
+   "domain": {
+    "kind": "signed",
+    "min": -24.0,
+    "max": 24.0,
+    "default": 0.0
+   },
+   "value_vector": {
+    "values": [
+     -24.0,
+     -12.0,
+     0.0,
+     12.0,
+     24.0
+    ],
+    "probes": [
+     28.8,
+     48.0,
+     120.0,
+     -28.8,
+     -48.0,
+     -120.0
+    ]
+   },
+   "timestamp": "2026-09-24T21:58:35.522427+00:00",
+   "range": {
+    "declared": {
+     "kind": "signed",
+     "min": -24.0,
+     "max": 24.0,
+     "default": 0.0
+    },
+    "discovered_default": 0.0,
+    "declared_default_matches": true,
+    "reachable_min": -24.0,
+    "reachable_max": 24.0,
+    "clamp_high_at": 24.0,
+    "clamp_low_at": -24.0,
+    "reaches_beyond_declared_max": false,
+    "probes_dropped": [],
+    "declared_matches_reachable": true,
+    "rows": [
+     {
+      "written": -24.0,
+      "stored": -24.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": -12.0,
+      "stored": -12.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 0.0,
+      "stored": null,
+      "fate": "default_omitted",
+      "probe": false
+     },
+     {
+      "written": 12.0,
+      "stored": 12.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 24.0,
+      "stored": 24.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 28.8,
+      "stored": 24.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 48.0,
+      "stored": 24.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 120.0,
+      "stored": 24.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": -28.8,
+      "stored": -24.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": -48.0,
+      "stored": -24.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": -120.0,
+      "stored": -24.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     }
+    ]
+   },
+   "status": "RANGE_CHARACTERIZED",
+   "reasons": [],
+   "expectations": []
+  },
+  {
+   "id": "range_eq_reso1",
+   "atlas_id": "fx.equalizer.left_q",
+   "candidate": {
+    "module": "FXEQ",
+    "kparam": "kParamReso1",
+    "default": 0.0
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXEQ",
+    "params": {}
+   },
+   "spec_patch": null,
+   "baseline": {
+    "band_db": [
+     68.77,
+     65.68,
+     59.14,
+     53.23,
+     48.64
+    ],
+    "state_value": null
+   },
+   "observations": {
+    "0.0": {
+     "written": 0.0,
+     "state_value": 0.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "25.0": {
+     "written": 25.0,
+     "state_value": 25.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "50.0": {
+     "written": 50.0,
+     "state_value": 50.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "75.0": {
+     "written": 75.0,
+     "state_value": 75.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "100.0": {
+     "written": 100.0,
+     "state_value": 100.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "110.0": {
+     "written": 110.0,
+     "state_value": 100.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "150.0": {
+     "written": 150.0,
+     "state_value": 100.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "300.0": {
+     "written": 300.0,
+     "state_value": 100.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "-10.0": {
+     "written": -10.0,
+     "state_value": 0.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "-50.0": {
+     "written": -50.0,
+     "state_value": 0.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "-200.0": {
+     "written": -200.0,
+     "state_value": 0.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    }
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.0,
+    "state_value": null,
+    "detail": "drift 0.00 dB vs floor 0.50"
+   },
+   "file_roundtrip": {
+    "ok": true
+   },
+   "noise_floor_db": 0.5,
+   "expect": [],
+   "preset_sha256": {
+    "baseline": "b0e13dcb870ddda4668908145220038db0175c4549625b3bc2857979b2c0589f",
+    "0.0": "ee33b6db1741502970d774a99b460f083df1739e19196b8cee4280773254cf9d",
+    "25.0": "f51b3edb8e5501f6ea36e2236de026369308dc399546e9912be54acd71487e10",
+    "50.0": "cd4abee598d66af1018a76536ad96755fd7370f509730978b5f5736b0aaecaf3",
+    "75.0": "9555058025516c84b6a49f35bb52b7833a04fa98f875c9553d8ac255e54bcf25",
+    "100.0": "12dddc969eb98d4f1813fa2a1896d8f56d823bd5812008921a146bc00b3079a3",
+    "110.0": "efde43f43dc25b01791943a25be5ee41e9408fbfa1f3b6e1ae6dbde8e010d3de",
+    "150.0": "14bb8bddea2068602d5f1fb719fb8241e4982d62280d7e806ab196eac94a0411",
+    "300.0": "05fd986584c9bd3d69f70e04436e45e257a4213886413d64e79d8a5674ca79f3",
+    "-10.0": "28abbb71533f30eb83ea3c595cee702a2cd3546c223e9d2a78b64c7b68c7226f",
+    "-50.0": "fda08a5f4129a84706b00daae19c89e294a2e9090a900a66ece522c7e781e6cc",
+    "-200.0": "027c3d99189857e7ecd7e9644fb6610010ca12577f4ce879a75cd5e2e52b69e7"
+   },
+   "purpose": "range",
+   "context": "QUAL_FX_EQ",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0,
+    "default": 0.0
+   },
+   "value_vector": {
+    "values": [
+     0.0,
+     25.0,
+     50.0,
+     75.0,
+     100.0
+    ],
+    "probes": [
+     110.0,
+     150.0,
+     300.0,
+     -10.0,
+     -50.0,
+     -200.0
+    ]
+   },
+   "timestamp": "2026-09-24T21:58:37.543122+00:00",
+   "range": {
+    "declared": {
+     "kind": "continuous",
+     "min": 0.0,
+     "max": 100.0,
+     "default": 0.0
+    },
+    "discovered_default": null,
+    "declared_default_matches": null,
+    "reachable_min": 0.0,
+    "reachable_max": 100.0,
+    "clamp_high_at": 100.0,
+    "clamp_low_at": 0.0,
+    "reaches_beyond_declared_max": false,
+    "probes_dropped": [],
+    "declared_matches_reachable": true,
+    "rows": [
+     {
+      "written": 0.0,
+      "stored": 0.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 25.0,
+      "stored": 25.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 50.0,
+      "stored": 50.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 75.0,
+      "stored": 75.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 100.0,
+      "stored": 100.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 110.0,
+      "stored": 100.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 150.0,
+      "stored": 100.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 300.0,
+      "stored": 100.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": -10.0,
+      "stored": 0.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": -50.0,
+      "stored": 0.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": -200.0,
+      "stored": 0.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     }
+    ]
+   },
+   "status": "RANGE_CHARACTERIZED",
+   "reasons": [],
+   "expectations": []
+  },
+  {
+   "id": "range_eq_freq2",
+   "atlas_id": "fx.equalizer.right_freq",
+   "candidate": {
+    "module": "FXEQ",
+    "kparam": "kParamFreq2"
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXEQ",
+    "params": {}
+   },
+   "spec_patch": null,
+   "baseline": {
+    "band_db": [
+     68.77,
+     65.68,
+     59.14,
+     53.23,
+     48.64
+    ],
+    "state_value": null
+   },
+   "observations": {
+    "21.5": {
+     "written": 21.5,
+     "state_value": 21.53320125,
+     "state_retained": false,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "118.73707435864041": {
+     "written": 118.73707435864041,
+     "state_value": 118.73707435864041,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "655.7438524302": {
+     "written": 655.7438524302,
+     "state_value": 655.7438524302004,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "3621.446817033767": {
+     "written": 3621.446817033767,
+     "state_value": 3621.446817033768,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "20000.0": {
+     "written": 20000.0,
+     "state_value": 20000.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "22000.0": {
+     "written": 22000.0,
+     "state_value": 20000.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "40000.0": {
+     "written": 40000.0,
+     "state_value": 20000.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "200000.0": {
+     "written": 200000.0,
+     "state_value": 20000.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "19.545454545454543": {
+     "written": 19.545454545454543,
+     "state_value": 21.53320125,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "10.75": {
+     "written": 10.75,
+     "state_value": 21.53320125,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "2.15": {
+     "written": 2.15,
+     "state_value": 21.53320125,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    }
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.0,
+    "state_value": null,
+    "detail": "drift 0.00 dB vs floor 0.50"
+   },
+   "file_roundtrip": {
+    "ok": true
+   },
+   "noise_floor_db": 0.5,
+   "expect": [],
+   "preset_sha256": {
+    "baseline": "b0e13dcb870ddda4668908145220038db0175c4549625b3bc2857979b2c0589f",
+    "21.5": "edbee9802fd5c9e7dbb2d5c9895a586d696be4b5f8ae9a8284eb85fa7839110c",
+    "118.73707435864041": "84499be5613e8f5a123d6f105b1ee8f7257b9cb36731b82226072b8e9472e008",
+    "655.7438524302": "21a740a1fdc52a558ce88e7efde37a81f596bef856816873b82967a4b0fb0592",
+    "3621.446817033767": "eb4dcfddc58203e25bd9d83c19e83d02332005c48ed022b9c09122458375aac6",
+    "20000.0": "3abee0777e02cd78c107de393543e96f444a71af2ac50636517959d74ed74373",
+    "22000.0": "748bfef6382e4d290c8796abd8eaa344158e62953b9f2d71dad4147ab67d0135",
+    "40000.0": "22ecbbe91886e48d4f73d558a553ceaa51a8e44dfa892be7c5592b3e40f180fc",
+    "200000.0": "013fd2e0062d3b973785dc4aadd450886c5befc226ea87dc60f3b86b88574e3f",
+    "19.545454545454543": "f580e0879ba905b29005d268498ce09ef87706167c9f5328b7a43880477dbcaa",
+    "10.75": "67a81c7abac5583f16ffec29d0650d26ae7d3f4a9bcf67debffbc18e547ad360",
+    "2.15": "46a42dee65191af003ace2988418cd78b7eeab0314819f8691da365f107b8385"
+   },
+   "purpose": "range",
+   "context": "QUAL_FX_EQ",
+   "domain": {
+    "kind": "log",
+    "min": 21.5,
+    "max": 20000.0
+   },
+   "value_vector": {
+    "values": [
+     21.5,
+     118.73707435864041,
+     655.7438524302,
+     3621.446817033767,
+     20000.0
+    ],
+    "probes": [
+     22000.0,
+     40000.0,
+     200000.0,
+     19.545454545454543,
+     10.75,
+     2.15
+    ]
+   },
+   "timestamp": "2026-09-24T21:58:39.590340+00:00",
+   "range": {
+    "declared": {
+     "kind": "log",
+     "min": 21.5,
+     "max": 20000.0
+    },
+    "discovered_default": null,
+    "declared_default_matches": null,
+    "reachable_min": 21.53320125,
+    "reachable_max": 20000.0,
+    "clamp_high_at": 20000.0,
+    "clamp_low_at": 21.53320125,
+    "reaches_beyond_declared_max": false,
+    "probes_dropped": [],
+    "declared_matches_reachable": false,
+    "rows": [
+     {
+      "written": 21.5,
+      "stored": 21.53320125,
+      "fate": "clamped_to_min",
+      "probe": false
+     },
+     {
+      "written": 118.73707435864041,
+      "stored": 118.73707435864041,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 655.7438524302,
+      "stored": 655.7438524302004,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 3621.446817033767,
+      "stored": 3621.446817033768,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 20000.0,
+      "stored": 20000.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 22000.0,
+      "stored": 20000.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 40000.0,
+      "stored": 20000.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 200000.0,
+      "stored": 20000.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 19.545454545454543,
+      "stored": 21.53320125,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": 10.75,
+      "stored": 21.53320125,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": 2.15,
+      "stored": 21.53320125,
+      "fate": "clamped_to_min",
+      "probe": true
+     }
+    ]
+   },
+   "status": "RANGE_CHARACTERIZED",
+   "reasons": [],
+   "expectations": []
+  },
+  {
+   "id": "range_eq_gain2",
+   "atlas_id": "fx.equalizer.right_gain",
+   "candidate": {
+    "module": "FXEQ",
+    "kparam": "kParamGain2",
+    "default": 0.0
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXEQ",
+    "params": {}
+   },
+   "spec_patch": null,
+   "baseline": {
+    "band_db": [
+     68.77,
+     65.68,
+     59.14,
+     53.23,
+     48.64
+    ],
+    "state_value": null
+   },
+   "observations": {
+    "-24.0": {
+     "written": -24.0,
+     "state_value": -24.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.79,
+      65.71,
+      54.51,
+      31.77,
+      24.57
+     ],
+     "host_params_changed": []
+    },
+    "-12.0": {
+     "written": -12.0,
+     "state_value": -12.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.77,
+      65.72,
+      57.05,
+      41.79,
+      36.61
+     ],
+     "host_params_changed": []
+    },
+    "0.0": {
+     "written": 0.0,
+     "state_value": null,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "12.0": {
+     "written": 12.0,
+     "state_value": 12.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.76,
+      65.64,
+      63.08,
+      64.75,
+      60.68
+     ],
+     "host_params_changed": []
+    },
+    "24.0": {
+     "written": 24.0,
+     "state_value": 24.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.67,
+      64.73,
+      65.77,
+      73.17,
+      69.32
+     ],
+     "host_params_changed": []
+    },
+    "28.8": {
+     "written": 28.8,
+     "state_value": 24.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.67,
+      64.73,
+      65.77,
+      73.16,
+      69.32
+     ],
+     "host_params_changed": []
+    },
+    "48.0": {
+     "written": 48.0,
+     "state_value": 24.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.67,
+      64.73,
+      65.77,
+      73.17,
+      69.32
+     ],
+     "host_params_changed": []
+    },
+    "120.0": {
+     "written": 120.0,
+     "state_value": 24.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.67,
+      64.73,
+      65.77,
+      73.16,
+      69.32
+     ],
+     "host_params_changed": []
+    },
+    "-28.8": {
+     "written": -28.8,
+     "state_value": -24.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.79,
+      65.71,
+      54.51,
+      31.77,
+      24.57
+     ],
+     "host_params_changed": []
+    },
+    "-48.0": {
+     "written": -48.0,
+     "state_value": -24.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.79,
+      65.71,
+      54.51,
+      31.77,
+      24.57
+     ],
+     "host_params_changed": []
+    },
+    "-120.0": {
+     "written": -120.0,
+     "state_value": -24.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.79,
+      65.71,
+      54.51,
+      31.77,
+      24.57
+     ],
+     "host_params_changed": []
+    }
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.0,
+    "state_value": null,
+    "detail": "drift 0.00 dB vs floor 0.50"
+   },
+   "file_roundtrip": {
+    "ok": true
+   },
+   "noise_floor_db": 0.5,
+   "expect": [],
+   "preset_sha256": {
+    "baseline": "b0e13dcb870ddda4668908145220038db0175c4549625b3bc2857979b2c0589f",
+    "-24.0": "7a3690375355fb7b7d3b77eb95918200d8f94c33808e0178e1a3c5d0dad911b3",
+    "-12.0": "9fbe1e7811cd42d3d7cc5afe5fd8f951580dd87468418003ebba2061b63b9443",
+    "0.0": "0a769a8b398edf5d3e24eb25f530df39296dbd719f80f0d9a2996b585ba4084f",
+    "12.0": "60952d4026a9d5fe49b6e7ac14be154ab2dc77162d57de9230ef9b5fcd194204",
+    "24.0": "54dd74fb94a1f0379e5d004dd3e0bf1540af28c22fa9d654ec2b1c52109d5211",
+    "28.8": "126ac66d2f1d46b9ae2208c561fb3006073e17f4a8a619b01d86b84e9d40f587",
+    "48.0": "3e6fbda6dc851764efc1518e1c436656aec22a18f5cb33831062c13045977e13",
+    "120.0": "83e9737f70a931f5e745206ec5bfac358437ad1e98963ae7c3ed4bf34a1764be",
+    "-28.8": "cd3261484e0b831bc92379ee4ccae7e051ed862639ef0eb029f9d17121ac4977",
+    "-48.0": "b692b7f7e08f91330d41232c65b5f2357b94b3fc5dd2be20625db73c182454c7",
+    "-120.0": "48e8c6895db936e91c483ef3acab2ebce6adf6aa31c22a51cb7c0517c8d6153e"
+   },
+   "purpose": "range",
+   "context": "QUAL_FX_EQ",
+   "domain": {
+    "kind": "signed",
+    "min": -24.0,
+    "max": 24.0,
+    "default": 0.0
+   },
+   "value_vector": {
+    "values": [
+     -24.0,
+     -12.0,
+     0.0,
+     12.0,
+     24.0
+    ],
+    "probes": [
+     28.8,
+     48.0,
+     120.0,
+     -28.8,
+     -48.0,
+     -120.0
+    ]
+   },
+   "timestamp": "2026-09-24T21:58:41.667320+00:00",
+   "range": {
+    "declared": {
+     "kind": "signed",
+     "min": -24.0,
+     "max": 24.0,
+     "default": 0.0
+    },
+    "discovered_default": 0.0,
+    "declared_default_matches": true,
+    "reachable_min": -24.0,
+    "reachable_max": 24.0,
+    "clamp_high_at": 24.0,
+    "clamp_low_at": -24.0,
+    "reaches_beyond_declared_max": false,
+    "probes_dropped": [],
+    "declared_matches_reachable": true,
+    "rows": [
+     {
+      "written": -24.0,
+      "stored": -24.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": -12.0,
+      "stored": -12.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 0.0,
+      "stored": null,
+      "fate": "default_omitted",
+      "probe": false
+     },
+     {
+      "written": 12.0,
+      "stored": 12.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 24.0,
+      "stored": 24.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 28.8,
+      "stored": 24.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 48.0,
+      "stored": 24.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 120.0,
+      "stored": 24.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": -28.8,
+      "stored": -24.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": -48.0,
+      "stored": -24.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": -120.0,
+      "stored": -24.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     }
+    ]
+   },
+   "status": "RANGE_CHARACTERIZED",
+   "reasons": [],
+   "expectations": []
+  },
+  {
+   "id": "range_eq_reso2",
+   "atlas_id": "fx.equalizer.right_q",
+   "candidate": {
+    "module": "FXEQ",
+    "kparam": "kParamReso2",
+    "default": 0.0
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXEQ",
+    "params": {}
+   },
+   "spec_patch": null,
+   "baseline": {
+    "band_db": [
+     68.77,
+     65.68,
+     59.14,
+     53.23,
+     48.64
+    ],
+    "state_value": null
+   },
+   "observations": {
+    "0.0": {
+     "written": 0.0,
+     "state_value": 0.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "23.75": {
+     "written": 23.75,
+     "state_value": 23.75,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "47.5": {
+     "written": 47.5,
+     "state_value": 47.5,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "71.25": {
+     "written": 71.25,
+     "state_value": 71.25,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "95.0": {
+     "written": 95.0,
+     "state_value": 95.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "104.5": {
+     "written": 104.5,
+     "state_value": 100.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "142.5": {
+     "written": 142.5,
+     "state_value": 100.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "285.0": {
+     "written": 285.0,
+     "state_value": 100.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "-9.5": {
+     "written": -9.5,
+     "state_value": 0.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "-47.5": {
+     "written": -47.5,
+     "state_value": 0.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "-190.0": {
+     "written": -190.0,
+     "state_value": 0.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    }
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.0,
+    "state_value": null,
+    "detail": "drift 0.00 dB vs floor 0.50"
+   },
+   "file_roundtrip": {
+    "ok": true
+   },
+   "noise_floor_db": 0.5,
+   "expect": [],
+   "preset_sha256": {
+    "baseline": "b0e13dcb870ddda4668908145220038db0175c4549625b3bc2857979b2c0589f",
+    "0.0": "a79933b579ba79f9f6de9bfa8f10330dab0099dd83dbb7fb89dc755e10021f1c",
+    "23.75": "d69050739922ab1ee6d78b11f13a99ad80c7406b1019e1bcbbbeb17d0459c389",
+    "47.5": "37ae0de86d40c8905920d2bb852e1ca9a42369cd0a519631f582f641b3c92a75",
+    "71.25": "7fd4661cf124c9df3117edce7cb6483e18b177f5edcb1fda4017bd9cc9bbc29f",
+    "95.0": "1da033d171ce7f9609f4023a62c7fb6a02cedd684836861cf45e021b481de0ee",
+    "104.5": "f3c650124c297ba53e01643b75d08933962d5c3a2d3c0596b141c3398beb773f",
+    "142.5": "9a26378d1f7ed62c8a70f5232991e9b23e33da5b33017752aa8e8482edb5d663",
+    "285.0": "7c9f359bca9b806f346f23f1b40d9b59068af23f01b5ba8c7832e68ba21c7828",
+    "-9.5": "50aef7e0e1493dc2b22686b51e902370eec3726b2b20931450a774c198145cc3",
+    "-47.5": "5c12083d0ab6fea2a77f93d067844c253b85d1224351140f363e03942aec15b8",
+    "-190.0": "3ca19951bf2ebc31b4885d154db49f026688cc7738b61f3a3223784b119f35a1"
+   },
+   "purpose": "range",
+   "context": "QUAL_FX_EQ",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 95.0,
+    "default": 0.0
+   },
+   "value_vector": {
+    "values": [
+     0.0,
+     23.75,
+     47.5,
+     71.25,
+     95.0
+    ],
+    "probes": [
+     104.5,
+     142.5,
+     285.0,
+     -9.5,
+     -47.5,
+     -190.0
+    ]
+   },
+   "timestamp": "2026-09-24T21:58:43.722397+00:00",
+   "range": {
+    "declared": {
+     "kind": "continuous",
+     "min": 0.0,
+     "max": 95.0,
+     "default": 0.0
+    },
+    "discovered_default": null,
+    "declared_default_matches": null,
+    "reachable_min": 0.0,
+    "reachable_max": 100.0,
+    "clamp_high_at": 100.0,
+    "clamp_low_at": 0.0,
+    "reaches_beyond_declared_max": false,
+    "probes_dropped": [],
+    "declared_matches_reachable": false,
+    "rows": [
+     {
+      "written": 0.0,
+      "stored": 0.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 23.75,
+      "stored": 23.75,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 47.5,
+      "stored": 47.5,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 71.25,
+      "stored": 71.25,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 95.0,
+      "stored": 95.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 104.5,
+      "stored": 100.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 142.5,
+      "stored": 100.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 285.0,
+      "stored": 100.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": -9.5,
+      "stored": 0.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": -47.5,
+      "stored": 0.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": -190.0,
+      "stored": 0.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     }
+    ]
+   },
+   "status": "RANGE_CHARACTERIZED",
+   "reasons": [],
+   "expectations": []
+  },
+  {
+   "id": "range_eq_type1",
+   "atlas_id": "fx.equalizer.left_type",
+   "candidate": {
+    "module": "FXEQ",
+    "kparam": "kParamType1",
+    "default": 0.0
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXEQ",
+    "params": {}
+   },
+   "spec_patch": null,
+   "baseline": {
+    "band_db": [
+     68.77,
+     65.68,
+     59.14,
+     53.23,
+     48.64
+    ],
+    "state_value": null
+   },
+   "observations": {
+    "0.0": {
+     "written": 0.0,
+     "state_value": null,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "1.0": {
+     "written": 1.0,
+     "state_value": 1.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "2.0": {
+     "written": 2.0,
+     "state_value": 2.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      64.21,
+      70.43,
+      59.36,
+      53.24,
+      48.65
+     ],
+     "host_params_changed": []
+    },
+    "3.0": {
+     "written": 3.0,
+     "state_value": 2.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      64.21,
+      70.43,
+      59.36,
+      53.24,
+      48.65
+     ],
+     "host_params_changed": []
+    }
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.0,
+    "state_value": null,
+    "detail": "drift 0.00 dB vs floor 0.50"
+   },
+   "file_roundtrip": {
+    "ok": true
+   },
+   "noise_floor_db": 0.5,
+   "expect": [],
+   "preset_sha256": {
+    "baseline": "b0e13dcb870ddda4668908145220038db0175c4549625b3bc2857979b2c0589f",
+    "0.0": "816d1ec749cd19ce451256f0680ffd3fa771dac310887293d5f257030586d7b3",
+    "1.0": "385b62061e4356cee2a09e5ab751aa0e381f0ef7394729b94f0cbaf001ffb322",
+    "2.0": "83b47fbc50ed7a58725eb23a6a2025a24edd8afdbff4fc34cc5ec985c7c468c6",
+    "3.0": "c670260ea91e13f980aa65ae0d11185df41e767f162a5482588a09604c17f64c"
+   },
+   "purpose": "range",
+   "context": "QUAL_FX_EQ",
+   "domain": {
+    "kind": "enum",
+    "values": [
+     0,
+     1,
+     2
+    ],
+    "default": 0.0
+   },
+   "value_vector": {
+    "values": [
+     0.0,
+     1.0,
+     2.0
+    ],
+    "probes": [
+     3.0
+    ]
+   },
+   "timestamp": "2026-09-24T21:58:44.701140+00:00",
+   "range": {
+    "declared": {
+     "kind": "enum",
+     "min": 0,
+     "max": 2,
+     "default": 0.0
+    },
+    "discovered_default": 0.0,
+    "declared_default_matches": true,
+    "reachable_min": 0.0,
+    "reachable_max": 2.0,
+    "clamp_high_at": 2.0,
+    "clamp_low_at": null,
+    "reaches_beyond_declared_max": false,
+    "probes_dropped": [],
+    "declared_matches_reachable": true,
+    "rows": [
+     {
+      "written": 0.0,
+      "stored": null,
+      "fate": "default_omitted",
+      "probe": false
+     },
+     {
+      "written": 1.0,
+      "stored": 1.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 2.0,
+      "stored": 2.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 3.0,
+      "stored": 2.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     }
+    ]
+   },
+   "status": "RANGE_CHARACTERIZED",
+   "reasons": [],
+   "expectations": []
+  },
+  {
+   "id": "range_eq_type2",
+   "atlas_id": "fx.equalizer.right_type",
+   "candidate": {
+    "module": "FXEQ",
+    "kparam": "kParamType2",
+    "default": 0.0
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXEQ",
+    "params": {}
+   },
+   "spec_patch": null,
+   "baseline": {
+    "band_db": [
+     68.77,
+     65.68,
+     59.14,
+     53.23,
+     48.64
+    ],
+    "state_value": null
+   },
+   "observations": {
+    "0.0": {
+     "written": 0.0,
+     "state_value": null,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "1.0": {
+     "written": 1.0,
+     "state_value": 1.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.64
+     ],
+     "host_params_changed": []
+    },
+    "2.0": {
+     "written": 2.0,
+     "state_value": 2.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.8,
+      66.03,
+      63.68,
+      44.78,
+      17.23
+     ],
+     "host_params_changed": []
+    },
+    "3.0": {
+     "written": 3.0,
+     "state_value": 2.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.8,
+      66.03,
+      63.68,
+      44.78,
+      17.23
+     ],
+     "host_params_changed": []
+    }
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.0,
+    "state_value": null,
+    "detail": "drift 0.00 dB vs floor 0.50"
+   },
+   "file_roundtrip": {
+    "ok": true
+   },
+   "noise_floor_db": 0.5,
+   "expect": [],
+   "preset_sha256": {
+    "baseline": "b0e13dcb870ddda4668908145220038db0175c4549625b3bc2857979b2c0589f",
+    "0.0": "8ebe0bdd271f6724e31c9309d6a947a6de0e2330b0603797dd3ff7c4dad78d4a",
+    "1.0": "a71a2eff742ba81948f0bf64a831f382bd35fa27f1830950e55dd2c1824762e0",
+    "2.0": "365b1916be5f5d3f10e39aaad754a680a3a93abc115a6eb330d2faf51e86bc67",
+    "3.0": "c07b1e4a459fb3476480ef7ffc9a544f49d338a1ee3e0e4d4fa554b7995b1849"
+   },
+   "purpose": "range",
+   "context": "QUAL_FX_EQ",
+   "domain": {
+    "kind": "enum",
+    "values": [
+     0,
+     1,
+     2
+    ],
+    "default": 0.0
+   },
+   "value_vector": {
+    "values": [
+     0.0,
+     1.0,
+     2.0
+    ],
+    "probes": [
+     3.0
+    ]
+   },
+   "timestamp": "2026-09-24T21:58:45.674666+00:00",
+   "range": {
+    "declared": {
+     "kind": "enum",
+     "min": 0,
+     "max": 2,
+     "default": 0.0
+    },
+    "discovered_default": 0.0,
+    "declared_default_matches": true,
+    "reachable_min": 0.0,
+    "reachable_max": 2.0,
+    "clamp_high_at": 2.0,
+    "clamp_low_at": null,
+    "reaches_beyond_declared_max": false,
+    "probes_dropped": [],
+    "declared_matches_reachable": true,
+    "rows": [
+     {
+      "written": 0.0,
+      "stored": null,
+      "fate": "default_omitted",
+      "probe": false
+     },
+     {
+      "written": 1.0,
+      "stored": 1.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 2.0,
+      "stored": 2.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 3.0,
+      "stored": 2.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     }
+    ]
+   },
+   "status": "RANGE_CHARACTERIZED",
+   "reasons": [],
+   "expectations": []
+  },
+  {
+   "id": "range_comp_thresh",
+   "atlas_id": "fx.compressor.thresh",
+   "candidate": {
+    "module": "FXComp",
+    "kparam": "kParamThresh"
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXComp",
+    "params": {}
+   },
+   "spec_patch": null,
+   "baseline": {
+    "band_db": [
+     68.29,
+     65.23,
+     58.7,
+     52.79,
+     48.2
+    ],
+    "state_value": null
+   },
+   "observations": {
+    "0.0": {
+     "written": 0.0,
+     "state_value": 0.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.73,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "host_params_changed": []
+    },
+    "0.25": {
+     "written": 0.25,
+     "state_value": 0.25,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.73,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "host_params_changed": []
+    },
+    "0.5": {
+     "written": 0.5,
+     "state_value": null,
+     "state_retained": false,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.29,
+      65.23,
+      58.7,
+      52.79,
+      48.2
+     ],
+     "host_params_changed": []
+    },
+    "0.75": {
+     "written": 0.75,
+     "state_value": 0.75,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      57.81,
+      54.75,
+      48.22,
+      42.31,
+      37.72
+     ],
+     "host_params_changed": []
+    },
+    "1.0": {
+     "written": 1.0,
+     "state_value": 1.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      -4.69,
+      -7.75,
+      -14.29,
+      -20.2,
+      -24.79
+     ],
+     "host_params_changed": []
+    },
+    "1.1": {
+     "written": 1.1,
+     "state_value": 1.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      -4.7,
+      -7.76,
+      -14.29,
+      -20.2,
+      -24.79
+     ],
+     "host_params_changed": []
+    },
+    "1.5": {
+     "written": 1.5,
+     "state_value": 1.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      -4.69,
+      -7.75,
+      -14.29,
+      -20.2,
+      -24.78
+     ],
+     "host_params_changed": []
+    },
+    "3.0": {
+     "written": 3.0,
+     "state_value": 1.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      -4.69,
+      -7.75,
+      -14.29,
+      -20.2,
+      -24.79
+     ],
+     "host_params_changed": []
+    },
+    "-0.1": {
+     "written": -0.1,
+     "state_value": 0.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.73,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "host_params_changed": []
+    },
+    "-0.5": {
+     "written": -0.5,
+     "state_value": 0.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.73,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "host_params_changed": []
+    },
+    "-2.0": {
+     "written": -2.0,
+     "state_value": 0.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.73,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "host_params_changed": []
+    }
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.0,
+    "state_value": null,
+    "detail": "drift 0.00 dB vs floor 0.50"
+   },
+   "file_roundtrip": {
+    "ok": true
+   },
+   "noise_floor_db": 0.5,
+   "expect": [],
+   "preset_sha256": {
+    "baseline": "8012c7df95759354c285b710b170e471fc28643d98851bfeae8b5754304b7ca2",
+    "0.0": "15e5be48fa934f0cb17b05f1a4bbcd59721439867a50f57fdc72ff1829161fd3",
+    "0.25": "7226e65e1a939170c8dcc0963bb19ae8d3bd8ae601f347231de4aa5496c95a71",
+    "0.5": "607449b0416ff159b27f1ae91a58d6ec48f4324c2d7edf5ec9eb7ca824f0fff7",
+    "0.75": "bdc0f157f91f2a7aaf00c34bc6580b8ff6e095c22247c30d4a645ea73b62f5c3",
+    "1.0": "ab2ccac1e4245d53ad4c1daba4951df486a796b843dd8571f64538da00eca350",
+    "1.1": "39eaa6d0b52363e900e9de37d07e3702e88c01039d9fe0552e70fcd6fd23c08c",
+    "1.5": "9ab9cca8f8f1754af7fa99373520f16c85ff0766e0e85d722a3974266e99ca2b",
+    "3.0": "e7a1612a836f0945cc53d49e83caf4788ecbb506446e5c5acdc103ae34e9fdb5",
+    "-0.1": "fdd6a0d0e1509c009674406658be69419c51058385838326f7cb629d1b032224",
+    "-0.5": "17d51d3726a9748324525365559ccaf21627198d5ee6076c0092154f9ad9cd47",
+    "-2.0": "fbecb9067fa5da6a4deb4ccccfcc30123a9f44a347ebbc0af73dd44511f6afc7"
+   },
+   "purpose": "range",
+   "context": "QUAL_FX_COMP",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "value_vector": {
+    "values": [
+     0.0,
+     0.25,
+     0.5,
+     0.75,
+     1.0
+    ],
+    "probes": [
+     1.1,
+     1.5,
+     3.0,
+     -0.1,
+     -0.5,
+     -2.0
+    ]
+   },
+   "timestamp": "2026-09-24T21:58:47.795822+00:00",
+   "range": {
+    "declared": {
+     "kind": "continuous",
+     "min": 0.0,
+     "max": 1.0
+    },
+    "discovered_default": 0.5,
+    "declared_default_matches": null,
+    "reachable_min": 0.0,
+    "reachable_max": 1.0,
+    "clamp_high_at": 1.0,
+    "clamp_low_at": 0.0,
+    "reaches_beyond_declared_max": false,
+    "probes_dropped": [],
+    "declared_matches_reachable": true,
+    "rows": [
+     {
+      "written": 0.0,
+      "stored": 0.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 0.25,
+      "stored": 0.25,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 0.5,
+      "stored": null,
+      "fate": "default_omitted",
+      "probe": false
+     },
+     {
+      "written": 0.75,
+      "stored": 0.75,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 1.0,
+      "stored": 1.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 1.1,
+      "stored": 1.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 1.5,
+      "stored": 1.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 3.0,
+      "stored": 1.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": -0.1,
+      "stored": 0.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": -0.5,
+      "stored": 0.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": -2.0,
+      "stored": 0.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     }
+    ]
+   },
+   "status": "RANGE_CHARACTERIZED",
+   "reasons": [],
+   "expectations": []
+  },
+  {
+   "id": "range_comp_ratio",
+   "atlas_id": "fx.compressor.ratio",
+   "candidate": {
+    "module": "FXComp",
+    "kparam": "kParamRatio"
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXComp",
+    "params": {}
+   },
+   "spec_patch": null,
+   "baseline": {
+    "band_db": [
+     68.29,
+     65.23,
+     58.7,
+     52.79,
+     48.2
+    ],
+    "state_value": null
+   },
+   "observations": {
+    "1.0": {
+     "written": 1.0,
+     "state_value": 1.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.73,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "host_params_changed": []
+    },
+    "31.622776601683793": {
+     "written": 31.622776601683793,
+     "state_value": 31.62277660168377,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.16,
+      65.1,
+      58.57,
+      52.66,
+      48.07
+     ],
+     "host_params_changed": []
+    },
+    "1000.0": {
+     "written": 1000.0,
+     "state_value": 1000.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      63.96,
+      60.34,
+      53.87,
+      47.96,
+      43.38
+     ],
+     "host_params_changed": []
+    },
+    "31622.776601683792": {
+     "written": 31622.776601683792,
+     "state_value": 31622.7766016712,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      63.96,
+      60.34,
+      53.87,
+      47.96,
+      43.38
+     ],
+     "host_params_changed": []
+    },
+    "1000000.0": {
+     "written": 1000000.0,
+     "state_value": 1000000.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      63.96,
+      60.34,
+      53.87,
+      47.96,
+      43.38
+     ],
+     "host_params_changed": []
+    },
+    "1100000.0": {
+     "written": 1100000.0,
+     "state_value": 1000000.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      63.96,
+      60.34,
+      53.87,
+      47.96,
+      43.38
+     ],
+     "host_params_changed": []
+    },
+    "2000000.0": {
+     "written": 2000000.0,
+     "state_value": 1000000.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      63.97,
+      60.34,
+      53.88,
+      47.96,
+      43.38
+     ],
+     "host_params_changed": []
+    },
+    "10000000.0": {
+     "written": 10000000.0,
+     "state_value": 1000000.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      63.97,
+      60.34,
+      53.88,
+      47.96,
+      43.38
+     ],
+     "host_params_changed": []
+    },
+    "0.9090909090909091": {
+     "written": 0.9090909090909091,
+     "state_value": 1.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.73,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "host_params_changed": []
+    },
+    "0.5": {
+     "written": 0.5,
+     "state_value": 1.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.73,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "host_params_changed": []
+    },
+    "0.1": {
+     "written": 0.1,
+     "state_value": 1.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.73,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "host_params_changed": []
+    }
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.0,
+    "state_value": null,
+    "detail": "drift 0.00 dB vs floor 0.50"
+   },
+   "file_roundtrip": {
+    "ok": true
+   },
+   "noise_floor_db": 0.5,
+   "expect": [],
+   "preset_sha256": {
+    "baseline": "8012c7df95759354c285b710b170e471fc28643d98851bfeae8b5754304b7ca2",
+    "1.0": "28c2055947370d6bd710dabc3d4ed2ca918bafcbaad2c2f28e2ba1d8c8676eaf",
+    "31.622776601683793": "5954c10abb7e813b7b200552f5da40aa6b02da8db67f9aa8bbe8badd61484cfd",
+    "1000.0": "e56cb8a3c689f010f37d833d530bb1d6aa45857f395e272b269e6cfbd8f00bb7",
+    "31622.776601683792": "4a787aa95b6c64fad371aaf5b043acbb86125bf8ee42ab931449b790b3f41692",
+    "1000000.0": "f6f0222ff4564ae1bb0204e920e907c81285ba5f82210995d21bee35e48cc3cd",
+    "1100000.0": "315024d906f0b7ce5aea407b1948c917784bd9e085889ed2145f71753624ff7e",
+    "2000000.0": "defbd074bac75e286e7349ee7fda0d0b93fa31aa883e427efa588cd51a2f6973",
+    "10000000.0": "441dd0ab7fe6d4c0880d0e4b529cfb5baf337fca662310d90b3c387fbe9ac02d",
+    "0.9090909090909091": "39f3eaa404c50f2567532eca695588870b4a76ead691d7544743f193ef4203f8",
+    "0.5": "9b537da7963821d4f03fa2e0b97a87cfec52f4604804b8191be3a743c45b218f",
+    "0.1": "27e2efdc94251a2cc8a69b3ffe19102dd5955b00cb108955fbf5d42331970837"
+   },
+   "purpose": "range",
+   "context": "QUAL_FX_COMP",
+   "domain": {
+    "kind": "log",
+    "min": 1.0,
+    "max": 1000000.0
+   },
+   "value_vector": {
+    "values": [
+     1.0,
+     31.622776601683793,
+     1000.0,
+     31622.776601683792,
+     1000000.0
+    ],
+    "probes": [
+     1100000.0,
+     2000000.0,
+     10000000.0,
+     0.9090909090909091,
+     0.5,
+     0.1
+    ]
+   },
+   "timestamp": "2026-09-24T21:58:49.874162+00:00",
+   "range": {
+    "declared": {
+     "kind": "log",
+     "min": 1.0,
+     "max": 1000000.0
+    },
+    "discovered_default": null,
+    "declared_default_matches": null,
+    "reachable_min": 1.0,
+    "reachable_max": 1000000.0,
+    "clamp_high_at": 1000000.0,
+    "clamp_low_at": 1.0,
+    "reaches_beyond_declared_max": false,
+    "probes_dropped": [],
+    "declared_matches_reachable": true,
+    "rows": [
+     {
+      "written": 1.0,
+      "stored": 1.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 31.622776601683793,
+      "stored": 31.62277660168377,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 1000.0,
+      "stored": 1000.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 31622.776601683792,
+      "stored": 31622.7766016712,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 1000000.0,
+      "stored": 1000000.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 1100000.0,
+      "stored": 1000000.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 2000000.0,
+      "stored": 1000000.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 10000000.0,
+      "stored": 1000000.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 0.9090909090909091,
+      "stored": 1.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": 0.5,
+      "stored": 1.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": 0.1,
+      "stored": 1.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     }
+    ]
+   },
+   "status": "RANGE_CHARACTERIZED",
+   "reasons": [],
+   "expectations": []
+  },
+  {
+   "id": "range_comp_attack",
+   "atlas_id": "fx.compressor.attack",
+   "candidate": {
+    "module": "FXComp",
+    "kparam": "kParamAttack"
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXComp",
+    "params": {}
+   },
+   "spec_patch": null,
+   "baseline": {
+    "band_db": [
+     68.26,
+     65.21,
+     58.67,
+     52.76,
+     48.18
+    ],
+    "state_value": null
+   },
+   "observations": {
+    "0.1": {
+     "written": 0.1,
+     "state_value": 0.10000000149011612,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      65.35,
+      62.29,
+      55.76,
+      49.87,
+      45.25
+     ],
+     "host_params_changed": []
+    },
+    "1.0": {
+     "written": 1.0,
+     "state_value": 1.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      66.68,
+      63.63,
+      57.1,
+      51.22,
+      46.6
+     ],
+     "host_params_changed": []
+    },
+    "10.0": {
+     "written": 10.0,
+     "state_value": 10.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      67.54,
+      64.48,
+      57.94,
+      52.03,
+      47.44
+     ],
+     "host_params_changed": []
+    },
+    "100.0": {
+     "written": 100.0,
+     "state_value": 100.00000000000001,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.32,
+      65.26,
+      58.72,
+      52.81,
+      48.23
+     ],
+     "host_params_changed": []
+    },
+    "1000.0": {
+     "written": 1000.0,
+     "state_value": 1000.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.67,
+      65.62,
+      59.08,
+      53.17,
+      48.59
+     ],
+     "host_params_changed": []
+    },
+    "1100.0": {
+     "written": 1100.0,
+     "state_value": 1000.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.67,
+      65.62,
+      59.08,
+      53.17,
+      48.59
+     ],
+     "host_params_changed": []
+    },
+    "2000.0": {
+     "written": 2000.0,
+     "state_value": 1000.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.67,
+      65.62,
+      59.08,
+      53.17,
+      48.59
+     ],
+     "host_params_changed": []
+    },
+    "10000.0": {
+     "written": 10000.0,
+     "state_value": 1000.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.67,
+      65.62,
+      59.08,
+      53.17,
+      48.59
+     ],
+     "host_params_changed": []
+    },
+    "0.09090909090909091": {
+     "written": 0.09090909090909091,
+     "state_value": 0.10000000149011612,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      65.35,
+      62.3,
+      55.76,
+      49.87,
+      45.25
+     ],
+     "host_params_changed": []
+    },
+    "0.05": {
+     "written": 0.05,
+     "state_value": 0.10000000149011612,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      65.35,
+      62.3,
+      55.76,
+      49.87,
+      45.25
+     ],
+     "host_params_changed": []
+    },
+    "0.01": {
+     "written": 0.01,
+     "state_value": 0.10000000149011612,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      65.35,
+      62.3,
+      55.76,
+      49.87,
+      45.25
+     ],
+     "host_params_changed": []
+    }
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.03,
+    "state_value": null,
+    "detail": "drift 0.03 dB vs floor 0.50"
+   },
+   "file_roundtrip": {
+    "ok": true
+   },
+   "noise_floor_db": 0.5,
+   "expect": [],
+   "preset_sha256": {
+    "baseline": "8012c7df95759354c285b710b170e471fc28643d98851bfeae8b5754304b7ca2",
+    "0.1": "ec488b46b1492e86732a33d152f8c6519db1484862d5e4cd9cc1e4bee58e8b01",
+    "1.0": "8d2eacf0724e8186aecc35adb3ae92b98355fa0828fd20d6903f945116ec10d1",
+    "10.0": "6cab2cd352457a4c7d21ac1898866ab57dca30c8e77ba301e876d86b7714a68a",
+    "100.0": "c40c8c8a36042f3b942dac96c41277e55241b2db840d435d1592fc595a5bbcf3",
+    "1000.0": "17f014927dcb35b0b66c8a242d44a774410f02ebcbf9b4f201ad23b32ca24583",
+    "1100.0": "f0e5c6e66fbff9e6b485ca5217bf312e96b1ebcb2eab4f750c795b7077025274",
+    "2000.0": "6a9795ccf629d7286f18f7d2fe2095ca6f9ad826559a0606036ec7539f7389aa",
+    "10000.0": "7f2ae176125652de809cad40bd9ea8caa10a1310cafb2489107c9db35cfb03a7",
+    "0.09090909090909091": "c4c85d735c6d1298eb2a45216ebe43d0b2e201172dab1fcb4b8982173c01d874",
+    "0.05": "e2462cf5d7b9d912cbff670fa9a237a46f00a60074dcf2c1660b0a458904311b",
+    "0.01": "bdd25ade2fe599b4cc54a63bc0a70fd553a831ae67970b569a80e2798fde52ef"
+   },
+   "purpose": "range",
+   "context": "QUAL_FX_COMP",
+   "domain": {
+    "kind": "log",
+    "min": 0.1,
+    "max": 1000.0
+   },
+   "value_vector": {
+    "values": [
+     0.1,
+     1.0,
+     10.0,
+     100.0,
+     1000.0
+    ],
+    "probes": [
+     1100.0,
+     2000.0,
+     10000.0,
+     0.09090909090909091,
+     0.05,
+     0.01
+    ]
+   },
+   "timestamp": "2026-09-24T21:58:52.332502+00:00",
+   "range": {
+    "declared": {
+     "kind": "log",
+     "min": 0.1,
+     "max": 1000.0
+    },
+    "discovered_default": null,
+    "declared_default_matches": null,
+    "reachable_min": 0.10000000149011612,
+    "reachable_max": 1000.0,
+    "clamp_high_at": 1000.0,
+    "clamp_low_at": 0.10000000149011612,
+    "reaches_beyond_declared_max": false,
+    "probes_dropped": [],
+    "declared_matches_reachable": true,
+    "rows": [
+     {
+      "written": 0.1,
+      "stored": 0.10000000149011612,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 1.0,
+      "stored": 1.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 10.0,
+      "stored": 10.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 100.0,
+      "stored": 100.00000000000001,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 1000.0,
+      "stored": 1000.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 1100.0,
+      "stored": 1000.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 2000.0,
+      "stored": 1000.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 10000.0,
+      "stored": 1000.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 0.09090909090909091,
+      "stored": 0.10000000149011612,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": 0.05,
+      "stored": 0.10000000149011612,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": 0.01,
+      "stored": 0.10000000149011612,
+      "fate": "clamped_to_min",
+      "probe": true
+     }
+    ]
+   },
+   "status": "RANGE_CHARACTERIZED",
+   "reasons": [],
+   "expectations": []
+  },
+  {
+   "id": "range_comp_release",
+   "atlas_id": "fx.compressor.release",
+   "candidate": {
+    "module": "FXComp",
+    "kparam": "kParamRelease"
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXComp",
+    "params": {}
+   },
+   "spec_patch": null,
+   "baseline": {
+    "band_db": [
+     68.29,
+     65.23,
+     58.7,
+     52.79,
+     48.2
+    ],
+    "state_value": null
+   },
+   "observations": {
+    "0.1": {
+     "written": 0.1,
+     "state_value": 0.10000000149011612,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.73,
+      65.66,
+      59.12,
+      53.21,
+      48.63
+     ],
+     "host_params_changed": []
+    },
+    "1.0": {
+     "written": 1.0,
+     "state_value": 1.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.72,
+      65.65,
+      59.12,
+      53.21,
+      48.63
+     ],
+     "host_params_changed": []
+    },
+    "10.0": {
+     "written": 10.0,
+     "state_value": 10.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.66,
+      65.6,
+      59.06,
+      53.15,
+      48.57
+     ],
+     "host_params_changed": []
+    },
+    "100.0": {
+     "written": 100.0,
+     "state_value": 100.00000000000001,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.26,
+      65.2,
+      58.67,
+      52.76,
+      48.17
+     ],
+     "host_params_changed": []
+    },
+    "1000.0": {
+     "written": 1000.0,
+     "state_value": 1000.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      67.62,
+      64.56,
+      58.02,
+      52.11,
+      47.53
+     ],
+     "host_params_changed": []
+    },
+    "1100.0": {
+     "written": 1100.0,
+     "state_value": 1000.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      67.62,
+      64.56,
+      58.02,
+      52.12,
+      47.53
+     ],
+     "host_params_changed": []
+    },
+    "2000.0": {
+     "written": 2000.0,
+     "state_value": 1000.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      67.62,
+      64.56,
+      58.02,
+      52.12,
+      47.53
+     ],
+     "host_params_changed": []
+    },
+    "10000.0": {
+     "written": 10000.0,
+     "state_value": 1000.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      67.62,
+      64.56,
+      58.02,
+      52.11,
+      47.53
+     ],
+     "host_params_changed": []
+    },
+    "0.09090909090909091": {
+     "written": 0.09090909090909091,
+     "state_value": 0.10000000149011612,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.73,
+      65.66,
+      59.12,
+      53.21,
+      48.63
+     ],
+     "host_params_changed": []
+    },
+    "0.05": {
+     "written": 0.05,
+     "state_value": 0.10000000149011612,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.73,
+      65.66,
+      59.12,
+      53.21,
+      48.63
+     ],
+     "host_params_changed": []
+    },
+    "0.01": {
+     "written": 0.01,
+     "state_value": 0.10000000149011612,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.73,
+      65.66,
+      59.12,
+      53.21,
+      48.63
+     ],
+     "host_params_changed": []
+    }
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.0,
+    "state_value": null,
+    "detail": "drift 0.00 dB vs floor 0.50"
+   },
+   "file_roundtrip": {
+    "ok": true
+   },
+   "noise_floor_db": 0.5,
+   "expect": [],
+   "preset_sha256": {
+    "baseline": "8012c7df95759354c285b710b170e471fc28643d98851bfeae8b5754304b7ca2",
+    "0.1": "23c75c01eec1acb8d319ca4678f4be58eeaa95453cffe7481e92d8b6c83e5471",
+    "1.0": "c4c687b3996c3322e958075c6dde29a92dda180fbe23c08cc7068be75b0ea961",
+    "10.0": "2b2c98d0a67f80b446df5de20a21dd26ab6007dd1e90b20822367146a6d04e14",
+    "100.0": "6335ecfd46c5e063b29b857fa86f79d5c284f30235580adf663fbe6810f52a2c",
+    "1000.0": "48aef740c6fb0e10cd894ca84401046070fea10d1da87f1dbd38892461593d48",
+    "1100.0": "183905849b1d2121dee9048ac31b036b63faa406a25ea270ad20e1bd995a063a",
+    "2000.0": "468f1355ff9170da7e939953ad6c16aff67f49a5ebb408275f54e1cfa3f86180",
+    "10000.0": "52ccb493dbc225c8f8e7a34636fd8bb1ccf84865b60082ccd402deeeef5017ac",
+    "0.09090909090909091": "3ae56fe039394a37222706b99359327b03790441dc55942289bfe02baae3a5f5",
+    "0.05": "35208b4baa9e17e6f2f242205c20ba997545d9395f48ec8662d98e67e78709bf",
+    "0.01": "100a76acc0f523a8d7c6d9b2649912094efc9f1cc2b83b85dda2701d9901c2a0"
+   },
+   "purpose": "range",
+   "context": "QUAL_FX_COMP",
+   "domain": {
+    "kind": "log",
+    "min": 0.1,
+    "max": 1000.0
+   },
+   "value_vector": {
+    "values": [
+     0.1,
+     1.0,
+     10.0,
+     100.0,
+     1000.0
+    ],
+    "probes": [
+     1100.0,
+     2000.0,
+     10000.0,
+     0.09090909090909091,
+     0.05,
+     0.01
+    ]
+   },
+   "timestamp": "2026-09-24T21:58:54.521521+00:00",
+   "range": {
+    "declared": {
+     "kind": "log",
+     "min": 0.1,
+     "max": 1000.0
+    },
+    "discovered_default": null,
+    "declared_default_matches": null,
+    "reachable_min": 0.10000000149011612,
+    "reachable_max": 1000.0,
+    "clamp_high_at": 1000.0,
+    "clamp_low_at": 0.10000000149011612,
+    "reaches_beyond_declared_max": false,
+    "probes_dropped": [],
+    "declared_matches_reachable": true,
+    "rows": [
+     {
+      "written": 0.1,
+      "stored": 0.10000000149011612,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 1.0,
+      "stored": 1.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 10.0,
+      "stored": 10.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 100.0,
+      "stored": 100.00000000000001,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 1000.0,
+      "stored": 1000.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 1100.0,
+      "stored": 1000.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 2000.0,
+      "stored": 1000.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 10000.0,
+      "stored": 1000.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 0.09090909090909091,
+      "stored": 0.10000000149011612,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": 0.05,
+      "stored": 0.10000000149011612,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": 0.01,
+      "stored": 0.10000000149011612,
+      "fate": "clamped_to_min",
+      "probe": true
+     }
+    ]
+   },
+   "status": "RANGE_CHARACTERIZED",
+   "reasons": [],
+   "expectations": []
+  },
+  {
+   "id": "range_comp_makeup",
+   "atlas_id": "fx.compressor.gain",
+   "candidate": {
+    "module": "FXComp",
+    "kparam": "kParamMakeup"
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXComp",
+    "params": {}
+   },
+   "spec_patch": null,
+   "baseline": {
+    "band_db": [
+     68.29,
+     65.23,
+     58.7,
+     52.79,
+     48.2
+    ],
+    "state_value": null
+   },
+   "observations": {
+    "1.0": {
+     "written": 1.0,
+     "state_value": null,
+     "state_retained": false,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.29,
+      65.23,
+      58.7,
+      52.79,
+      48.2
+     ],
+     "host_params_changed": []
+    },
+    "2.378414230005442": {
+     "written": 2.378414230005442,
+     "state_value": 2.378414230005442,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      75.98,
+      72.93,
+      66.39,
+      60.48,
+      55.9
+     ],
+     "host_params_changed": []
+    },
+    "5.656854249492381": {
+     "written": 5.656854249492381,
+     "state_value": 5.656854249492381,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      83.57,
+      80.51,
+      73.81,
+      67.27,
+      61.72
+     ],
+     "host_params_changed": []
+    },
+    "13.454342644059432": {
+     "written": 13.454342644059432,
+     "state_value": 13.45434264405943,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      88.74,
+      80.27,
+      74.54,
+      68.58,
+      63.84
+     ],
+     "host_params_changed": []
+    },
+    "32.0": {
+     "written": 32.0,
+     "state_value": 31.0,
+     "state_retained": false,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      89.86,
+      80.0,
+      74.42,
+      68.74,
+      64.74
+     ],
+     "host_params_changed": []
+    },
+    "35.2": {
+     "written": 35.2,
+     "state_value": 31.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      89.86,
+      80.0,
+      74.42,
+      68.74,
+      64.74
+     ],
+     "host_params_changed": []
+    },
+    "64.0": {
+     "written": 64.0,
+     "state_value": 31.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      89.86,
+      80.0,
+      74.42,
+      68.74,
+      64.74
+     ],
+     "host_params_changed": []
+    },
+    "320.0": {
+     "written": 320.0,
+     "state_value": 31.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      89.86,
+      80.0,
+      74.42,
+      68.74,
+      64.74
+     ],
+     "host_params_changed": []
+    },
+    "0.9090909090909091": {
+     "written": 0.9090909090909091,
+     "state_value": null,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.29,
+      65.23,
+      58.7,
+      52.79,
+      48.2
+     ],
+     "host_params_changed": []
+    },
+    "0.5": {
+     "written": 0.5,
+     "state_value": null,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.29,
+      65.23,
+      58.7,
+      52.79,
+      48.2
+     ],
+     "host_params_changed": []
+    },
+    "0.1": {
+     "written": 0.1,
+     "state_value": null,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      68.29,
+      65.23,
+      58.7,
+      52.79,
+      48.2
+     ],
+     "host_params_changed": []
+    }
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.0,
+    "state_value": null,
+    "detail": "drift 0.00 dB vs floor 0.50"
+   },
+   "file_roundtrip": {
+    "ok": true
+   },
+   "noise_floor_db": 0.5,
+   "expect": [],
+   "preset_sha256": {
+    "baseline": "8012c7df95759354c285b710b170e471fc28643d98851bfeae8b5754304b7ca2",
+    "1.0": "2115b2f691183ea4af977578d44bbb7aaae04f4fe0ab5dcd122906051343f0c7",
+    "2.378414230005442": "96935beb68b467c8c10333934ea8b780e24ee878c3e7dc5d97d73ba521e9688f",
+    "5.656854249492381": "b1a9fb302b5a3ce9d79e11c0175eb79045880470288d3c4253a10e33115b9906",
+    "13.454342644059432": "4c450859c32b7ec0a983bf6bd5278ce3de1686edc445cd1147f3da0ceb089e62",
+    "32.0": "4b2b224374484b3d13dd44f8e22bb19db7a17012e5febee2cae2124d277b4b73",
+    "35.2": "212cc1faedbf4eb4cb84bf85a376c48059ce6f6dd5d0479880bfc2effde7961f",
+    "64.0": "5075c80901b16e0ae5a8b4b9665ab248fc1e1718620e0f335bc297483e880116",
+    "320.0": "449759ae0620d56205e6c9074afd55f107909d7aeca74c6bdcfd6d075ecf0829",
+    "0.9090909090909091": "ddac7aa4935f3da26876a765f379872ff44a70acbcfbcf48b6ef480781540754",
+    "0.5": "0807c7ef7cafe518139b9d15a4a15e151bb32c966931f655a15656c4c6e029b3",
+    "0.1": "d495a42dd1589f17b0a9847ff146d0b05b50e355934825c306accc8a87f9e1f3"
+   },
+   "purpose": "range",
+   "context": "QUAL_FX_COMP",
+   "domain": {
+    "kind": "log",
+    "min": 1.0,
+    "max": 32.0
+   },
+   "value_vector": {
+    "values": [
+     1.0,
+     2.378414230005442,
+     5.656854249492381,
+     13.454342644059432,
+     32.0
+    ],
+    "probes": [
+     35.2,
+     64.0,
+     320.0,
+     0.9090909090909091,
+     0.5,
+     0.1
+    ]
+   },
+   "timestamp": "2026-09-24T21:58:56.699802+00:00",
+   "range": {
+    "declared": {
+     "kind": "log",
+     "min": 1.0,
+     "max": 32.0
+    },
+    "discovered_default": 1.0,
+    "declared_default_matches": null,
+    "reachable_min": 1.0,
+    "reachable_max": 31.0,
+    "clamp_high_at": 31.0,
+    "clamp_low_at": 1.0,
+    "reaches_beyond_declared_max": false,
+    "probes_dropped": [],
+    "declared_matches_reachable": false,
+    "rows": [
+     {
+      "written": 1.0,
+      "stored": null,
+      "fate": "default_omitted",
+      "probe": false
+     },
+     {
+      "written": 2.378414230005442,
+      "stored": 2.378414230005442,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 5.656854249492381,
+      "stored": 5.656854249492381,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 13.454342644059432,
+      "stored": 13.45434264405943,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 32.0,
+      "stored": 31.0,
+      "fate": "clamped_to_max",
+      "probe": false
+     },
+     {
+      "written": 35.2,
+      "stored": 31.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 64.0,
+      "stored": 31.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 320.0,
+      "stored": 31.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 0.9090909090909091,
+      "stored": null,
+      "fate": "clamped_to_min_default_omitted",
+      "probe": true
+     },
+     {
+      "written": 0.5,
+      "stored": null,
+      "fate": "clamped_to_min_default_omitted",
+      "probe": true
+     },
+     {
+      "written": 0.1,
+      "stored": null,
+      "fate": "clamped_to_min_default_omitted",
+      "probe": true
+     }
+    ]
+   },
+   "status": "RANGE_CHARACTERIZED",
+   "reasons": [],
+   "expectations": []
+  },
+  {
+   "id": "range_comp_multiband",
+   "atlas_id": "fx.compressor.mode",
+   "candidate": {
+    "module": "FXComp",
+    "kparam": "kParamMultiband",
+    "default": 0.0
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXComp",
+    "params": {}
+   },
+   "spec_patch": null,
+   "baseline": {
+    "band_db": [
+     68.29,
+     65.23,
+     58.7,
+     52.79,
+     48.2
+    ],
+    "state_value": null
+   },
+   "observations": {
+    "0.0": {
+     "written": 0.0,
+     "state_value": null,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      68.29,
+      65.23,
+      58.7,
+      52.79,
+      48.2
+     ],
+     "host_params_changed": []
+    },
+    "1.0": {
+     "written": 1.0,
+     "state_value": 1.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      61.39,
+      57.58,
+      51.98,
+      50.02,
+      46.27
+     ],
+     "host_params_changed": []
+    },
+    "2.0": {
+     "written": 2.0,
+     "state_value": 1.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      61.39,
+      57.58,
+      51.98,
+      50.02,
+      46.27
+     ],
+     "host_params_changed": []
+    }
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.0,
+    "state_value": null,
+    "detail": "drift 0.00 dB vs floor 0.50"
+   },
+   "file_roundtrip": {
+    "ok": true
+   },
+   "noise_floor_db": 0.5,
+   "expect": [],
+   "preset_sha256": {
+    "baseline": "8012c7df95759354c285b710b170e471fc28643d98851bfeae8b5754304b7ca2",
+    "0.0": "592402958d93b61160f918c14e020028a6a925f47555e4c469fed845da65c093",
+    "1.0": "95abb0fc40f97f562cc936544a541a2f71077c38d051d7d44b9c20c3f5eca26a",
+    "2.0": "31862bb483abeca67e34b07c5e9b682d294f44231fed5cfedd969e8790ec0e8b"
+   },
+   "purpose": "range",
+   "context": "QUAL_FX_COMP",
+   "domain": {
+    "kind": "bool",
+    "default": 0.0
+   },
+   "value_vector": {
+    "values": [
+     0.0,
+     1.0
+    ],
+    "probes": [
+     2.0
+    ]
+   },
+   "timestamp": "2026-09-24T21:58:57.589045+00:00",
+   "range": {
+    "declared": {
+     "kind": "bool",
+     "default": 0.0
+    },
+    "discovered_default": 0.0,
+    "declared_default_matches": true,
+    "reachable_min": 0.0,
+    "reachable_max": 1.0,
+    "clamp_high_at": 1.0,
+    "clamp_low_at": null,
+    "reaches_beyond_declared_max": false,
+    "probes_dropped": [],
+    "declared_matches_reachable": false,
+    "rows": [
+     {
+      "written": 0.0,
+      "stored": null,
+      "fate": "default_omitted",
+      "probe": false
+     },
+     {
+      "written": 1.0,
+      "stored": 1.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 2.0,
+      "stored": 1.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     }
+    ]
+   },
+   "status": "RANGE_CHARACTERIZED",
+   "reasons": [],
+   "expectations": []
+  },
+  {
+   "id": "range_dist_drive",
+   "atlas_id": "fx.distortion.drive",
+   "candidate": {
+    "module": "FXDistortion",
+    "kparam": "kParamDrive"
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXDistortion",
+    "params": {
+     "kParamMode": "kOverdrive"
+    }
+   },
+   "spec_patch": null,
+   "baseline": {
+    "band_db": [
+     69.85,
+     66.77,
+     60.16,
+     53.83,
+     48.67
+    ],
+    "state_value": null
+   },
+   "observations": {
+    "0.0": {
+     "written": 0.0,
+     "state_value": 0.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      60.11,
+      57.04,
+      50.49,
+      44.58,
+      40.0
+     ],
+     "host_params_changed": []
+    },
+    "25.0": {
+     "written": 25.0,
+     "state_value": null,
+     "state_retained": false,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      69.85,
+      66.77,
+      60.16,
+      53.83,
+      48.66
+     ],
+     "host_params_changed": []
+    },
+    "50.0": {
+     "written": 50.0,
+     "state_value": 50.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      75.74,
+      70.81,
+      62.95,
+      56.54,
+      49.91
+     ],
+     "host_params_changed": []
+    },
+    "75.0": {
+     "written": 75.0,
+     "state_value": 75.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      77.21,
+      71.37,
+      63.79,
+      57.43,
+      50.99
+     ],
+     "host_params_changed": []
+    },
+    "100.0": {
+     "written": 100.0,
+     "state_value": 100.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      78.52,
+      71.87,
+      64.58,
+      58.41,
+      52.15
+     ],
+     "host_params_changed": []
+    },
+    "110.0": {
+     "written": 110.0,
+     "state_value": 100.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      78.52,
+      71.87,
+      64.58,
+      58.41,
+      52.15
+     ],
+     "host_params_changed": []
+    },
+    "150.0": {
+     "written": 150.0,
+     "state_value": 100.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      78.52,
+      71.87,
+      64.58,
+      58.41,
+      52.15
+     ],
+     "host_params_changed": []
+    },
+    "300.0": {
+     "written": 300.0,
+     "state_value": 100.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      78.52,
+      71.87,
+      64.58,
+      58.41,
+      52.15
+     ],
+     "host_params_changed": []
+    },
+    "-10.0": {
+     "written": -10.0,
+     "state_value": 0.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      60.11,
+      57.04,
+      50.49,
+      44.58,
+      40.0
+     ],
+     "host_params_changed": []
+    },
+    "-50.0": {
+     "written": -50.0,
+     "state_value": 0.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      60.11,
+      57.04,
+      50.49,
+      44.58,
+      40.0
+     ],
+     "host_params_changed": []
+    },
+    "-200.0": {
+     "written": -200.0,
+     "state_value": 0.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      60.11,
+      57.04,
+      50.49,
+      44.58,
+      40.0
+     ],
+     "host_params_changed": []
+    }
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.0,
+    "state_value": null,
+    "detail": "drift 0.00 dB vs floor 0.50"
+   },
+   "file_roundtrip": {
+    "ok": true
+   },
+   "noise_floor_db": 0.5,
+   "expect": [],
+   "preset_sha256": {
+    "baseline": "1e33b21ae358d5412c08b639db38650e07ff0a1c908010ea678e02f3e6f4c26b",
+    "0.0": "2252eac8948668ffad19776e6cae6bce7be20cfa53a0a6f22faab3446ce91581",
+    "25.0": "51d73ab816bcc701e0f19d13f7c9304c8a914cf0d837f3b1ed3de61426324568",
+    "50.0": "1c45d4d338ea33d74650c6268a4e2beed7cf2b90f58ec18efeb1db9911845f3b",
+    "75.0": "8a41da54a0fb7c4b23caff67369997cc4a112fa3fb65155a299e60b87ea8e76f",
+    "100.0": "1bdf9a4c32b896d2011aa61b6b6cd31e66cf4331cf9b168c4e4dc2d47817aec9",
+    "110.0": "c1d1612af9a7648b54fdad0add11fb7ea22ead8d33f608d5d83498e5a4091e86",
+    "150.0": "e5af9943baa4898912b906ab2b58b4f37a2841aad9179ab0df39bbbebefd0586",
+    "300.0": "b0831367f80c4618c7e1cdc961b9be1729dc8a0e224b32ee1127a3a9efef2ee1",
+    "-10.0": "2c70fce909b4f0f3714a16bb030265e45a2e7126e2f751121fab8fb7e990bad2",
+    "-50.0": "62dee372cbd58e5ba6f0c53e339d9f068df058f9063766492a4f530e95398e8b",
+    "-200.0": "76028f7ae6f89a90db96c70a709503faf737dada559bbcf00cdf9e9d701ef936"
+   },
+   "purpose": "range",
+   "context": "QUAL_FX_DIST",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "value_vector": {
+    "values": [
+     0.0,
+     25.0,
+     50.0,
+     75.0,
+     100.0
+    ],
+    "probes": [
+     110.0,
+     150.0,
+     300.0,
+     -10.0,
+     -50.0,
+     -200.0
+    ]
+   },
+   "timestamp": "2026-09-24T21:58:59.815415+00:00",
+   "range": {
+    "declared": {
+     "kind": "continuous",
+     "min": 0.0,
+     "max": 100.0
+    },
+    "discovered_default": 25.0,
+    "declared_default_matches": null,
+    "reachable_min": 0.0,
+    "reachable_max": 100.0,
+    "clamp_high_at": 100.0,
+    "clamp_low_at": 0.0,
+    "reaches_beyond_declared_max": false,
+    "probes_dropped": [],
+    "declared_matches_reachable": true,
+    "rows": [
+     {
+      "written": 0.0,
+      "stored": 0.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 25.0,
+      "stored": null,
+      "fate": "default_omitted",
+      "probe": false
+     },
+     {
+      "written": 50.0,
+      "stored": 50.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 75.0,
+      "stored": 75.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 100.0,
+      "stored": 100.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 110.0,
+      "stored": 100.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 150.0,
+      "stored": 100.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 300.0,
+      "stored": 100.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": -10.0,
+      "stored": 0.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": -50.0,
+      "stored": 0.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": -200.0,
+      "stored": 0.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     }
+    ]
+   },
+   "status": "RANGE_CHARACTERIZED",
+   "reasons": [],
+   "expectations": []
+  },
+  {
+   "id": "range_dist_freq",
+   "atlas_id": "fx.distortion.freq",
+   "candidate": {
+    "module": "FXDistortion",
+    "kparam": "kParamFreq"
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXDistortion",
+    "params": {
+     "kParamMode": "kOverdrive"
+    }
+   },
+   "spec_patch": null,
+   "baseline": {
+    "band_db": [
+     69.85,
+     66.77,
+     60.16,
+     53.83,
+     48.66
+    ],
+    "state_value": null
+   },
+   "observations": {
+    "0.0": {
+     "written": 0.0,
+     "state_value": 0.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      69.85,
+      66.77,
+      60.16,
+      53.83,
+      48.67
+     ],
+     "host_params_changed": []
+    },
+    "0.25": {
+     "written": 0.25,
+     "state_value": 0.25,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      69.85,
+      66.77,
+      60.16,
+      53.83,
+      48.66
+     ],
+     "host_params_changed": []
+    },
+    "0.5": {
+     "written": 0.5,
+     "state_value": null,
+     "state_retained": false,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      69.85,
+      66.77,
+      60.16,
+      53.83,
+      48.67
+     ],
+     "host_params_changed": []
+    },
+    "0.75": {
+     "written": 0.75,
+     "state_value": 0.75,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      69.85,
+      66.77,
+      60.16,
+      53.83,
+      48.67
+     ],
+     "host_params_changed": []
+    },
+    "1.0": {
+     "written": 1.0,
+     "state_value": 1.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      69.85,
+      66.77,
+      60.16,
+      53.83,
+      48.67
+     ],
+     "host_params_changed": []
+    },
+    "1.1": {
+     "written": 1.1,
+     "state_value": 1.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      69.85,
+      66.77,
+      60.16,
+      53.83,
+      48.66
+     ],
+     "host_params_changed": []
+    },
+    "1.5": {
+     "written": 1.5,
+     "state_value": 1.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      69.85,
+      66.77,
+      60.16,
+      53.83,
+      48.67
+     ],
+     "host_params_changed": []
+    },
+    "3.0": {
+     "written": 3.0,
+     "state_value": 1.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      69.85,
+      66.77,
+      60.16,
+      53.83,
+      48.67
+     ],
+     "host_params_changed": []
+    },
+    "-0.1": {
+     "written": -0.1,
+     "state_value": 0.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      69.85,
+      66.77,
+      60.16,
+      53.83,
+      48.66
+     ],
+     "host_params_changed": []
+    },
+    "-0.5": {
+     "written": -0.5,
+     "state_value": 0.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      69.85,
+      66.77,
+      60.16,
+      53.83,
+      48.66
+     ],
+     "host_params_changed": []
+    },
+    "-2.0": {
+     "written": -2.0,
+     "state_value": 0.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      69.85,
+      66.77,
+      60.16,
+      53.83,
+      48.66
+     ],
+     "host_params_changed": []
+    }
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.0,
+    "state_value": null,
+    "detail": "drift 0.00 dB vs floor 0.50"
+   },
+   "file_roundtrip": {
+    "ok": true
+   },
+   "noise_floor_db": 0.5,
+   "expect": [],
+   "preset_sha256": {
+    "baseline": "1e33b21ae358d5412c08b639db38650e07ff0a1c908010ea678e02f3e6f4c26b",
+    "0.0": "14619a666bd0e9b6e583c6dca4f8fd4011abfc01c1615ab45bf02aeb785fcd06",
+    "0.25": "18ad6aa0343db05a3aba15eccb4a701117b676ec5d8235d53b7856dfde445f71",
+    "0.5": "d9324af58b536f3a48bd79e2b050d753c2a2630277270eeb7cac488571c9afdb",
+    "0.75": "9d24ed7b0fd6dc543778d5bc3340b24d209aba530ea9f7b66ba0169d9e83b1aa",
+    "1.0": "a4bb64a2d58ce7de374f732600c53d99e63f0456b70c9315b23f8e425122c83e",
+    "1.1": "3eb8e72c50fc71691fb14efa57a3343345bccfea8dfc6a255a2a7ea0b1deb8e4",
+    "1.5": "6cdd7a6b70f14e3da136cb51b2c00384586db4c357366546aaa0a0f891ff6667",
+    "3.0": "7408347984b41fc4d04fb6c7cd8b056c2abe2396fbf3881e9fac7b806f310dab",
+    "-0.1": "af2669a484c208d5afc178ce96e2a0e410e34992c003f58d8a217a335ca5b1d7",
+    "-0.5": "c6942472a6dc5bc20c2d9e9f9d43bca53d2d68e360a3df31fb3c81fcef93ab37",
+    "-2.0": "1a7af657474401770e1ae72379ffcee1b6f32bb5cf52222d53848ca5b929e440"
+   },
+   "purpose": "range",
+   "context": "QUAL_FX_DIST",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "value_vector": {
+    "values": [
+     0.0,
+     0.25,
+     0.5,
+     0.75,
+     1.0
+    ],
+    "probes": [
+     1.1,
+     1.5,
+     3.0,
+     -0.1,
+     -0.5,
+     -2.0
+    ]
+   },
+   "timestamp": "2026-09-24T21:59:01.955908+00:00",
+   "range": {
+    "declared": {
+     "kind": "continuous",
+     "min": 0.0,
+     "max": 1.0
+    },
+    "discovered_default": 0.5,
+    "declared_default_matches": null,
+    "reachable_min": 0.0,
+    "reachable_max": 1.0,
+    "clamp_high_at": 1.0,
+    "clamp_low_at": 0.0,
+    "reaches_beyond_declared_max": false,
+    "probes_dropped": [],
+    "declared_matches_reachable": true,
+    "rows": [
+     {
+      "written": 0.0,
+      "stored": 0.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 0.25,
+      "stored": 0.25,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 0.5,
+      "stored": null,
+      "fate": "default_omitted",
+      "probe": false
+     },
+     {
+      "written": 0.75,
+      "stored": 0.75,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 1.0,
+      "stored": 1.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 1.1,
+      "stored": 1.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 1.5,
+      "stored": 1.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 3.0,
+      "stored": 1.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": -0.1,
+      "stored": 0.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": -0.5,
+      "stored": 0.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": -2.0,
+      "stored": 0.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     }
+    ]
+   },
+   "status": "RANGE_CHARACTERIZED",
+   "reasons": [],
+   "expectations": []
+  },
+  {
+   "id": "range_dist_prepost",
+   "atlas_id": "fx.distortion.filter_position",
+   "candidate": {
+    "module": "FXDistortion",
+    "kparam": "kParamPrePost",
+    "default": 0.0
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXDistortion",
+    "params": {
+     "kParamMode": "kOverdrive"
+    }
+   },
+   "spec_patch": null,
+   "baseline": {
+    "band_db": [
+     69.85,
+     66.77,
+     60.16,
+     53.83,
+     48.67
+    ],
+    "state_value": null
+   },
+   "observations": {
+    "0.0": {
+     "written": 0.0,
+     "state_value": null,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      69.85,
+      66.77,
+      60.16,
+      53.83,
+      48.66
+     ],
+     "host_params_changed": []
+    },
+    "1.0": {
+     "written": 1.0,
+     "state_value": 1.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      70.5,
+      69.47,
+      44.53,
+      19.47,
+      -6.94
+     ],
+     "host_params_changed": []
+    },
+    "2.0": {
+     "written": 2.0,
+     "state_value": 2.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      69.76,
+      67.4,
+      41.85,
+      13.73,
+      -10.64
+     ],
+     "host_params_changed": []
+    },
+    "3.0": {
+     "written": 3.0,
+     "state_value": 2.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      69.76,
+      67.4,
+      41.85,
+      13.73,
+      -10.64
+     ],
+     "host_params_changed": []
+    }
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.01,
+    "state_value": null,
+    "detail": "drift 0.01 dB vs floor 0.50"
+   },
+   "file_roundtrip": {
+    "ok": true
+   },
+   "noise_floor_db": 0.5,
+   "expect": [],
+   "preset_sha256": {
+    "baseline": "1e33b21ae358d5412c08b639db38650e07ff0a1c908010ea678e02f3e6f4c26b",
+    "0.0": "d67bf1e3b11f7d4f218a69fe3def0e5843f99e47dd15f8b768293292c32f1177",
+    "1.0": "3ad4ec6312c7f24dbe66de762cf8bb459144a550fabaa8246bc9a5adb93f2c1b",
+    "2.0": "34b5b83f6357417dfb2dd233d31b8881f238dea702014e6f85e68bbfd3078599",
+    "3.0": "2bbe03770ae86d5c8626c0cfc87b91f7ee54328c430349daa0b50acbbad006f5"
+   },
+   "purpose": "range",
+   "context": "QUAL_FX_DIST",
+   "domain": {
+    "kind": "enum",
+    "values": [
+     0,
+     1,
+     2
+    ],
+    "default": 0.0
+   },
+   "value_vector": {
+    "values": [
+     0.0,
+     1.0,
+     2.0
+    ],
+    "probes": [
+     3.0
+    ]
+   },
+   "timestamp": "2026-09-24T21:59:03.044520+00:00",
+   "range": {
+    "declared": {
+     "kind": "enum",
+     "min": 0,
+     "max": 2,
+     "default": 0.0
+    },
+    "discovered_default": 0.0,
+    "declared_default_matches": true,
+    "reachable_min": 0.0,
+    "reachable_max": 2.0,
+    "clamp_high_at": 2.0,
+    "clamp_low_at": null,
+    "reaches_beyond_declared_max": false,
+    "probes_dropped": [],
+    "declared_matches_reachable": true,
+    "rows": [
+     {
+      "written": 0.0,
+      "stored": null,
+      "fate": "default_omitted",
+      "probe": false
+     },
+     {
+      "written": 1.0,
+      "stored": 1.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 2.0,
+      "stored": 2.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 3.0,
+      "stored": 2.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     }
+    ]
+   },
+   "status": "RANGE_CHARACTERIZED",
+   "reasons": [],
+   "expectations": []
+  },
+  {
+   "id": "range_dist_numstages",
+   "atlas_id": "(range)",
+   "candidate": {
+    "module": "FXDistortion",
+    "kparam": "kParamNumStages"
+   },
+   "unit": {
+    "index": 0,
+    "type": "FXDistortion",
+    "params": {
+     "kParamMode": "kOverdrive"
+    }
+   },
+   "spec_patch": null,
+   "baseline": {
+    "band_db": [
+     69.85,
+     66.77,
+     60.16,
+     53.83,
+     48.66
+    ],
+    "state_value": null
+   },
+   "observations": {
+    "2.0": {
+     "written": 2.0,
+     "state_value": 2.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      73.47,
+      68.74,
+      58.43,
+      52.59,
+      46.24
+     ],
+     "host_params_changed": []
+    },
+    "3.0": {
+     "written": 3.0,
+     "state_value": 3.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      75.36,
+      68.71,
+      54.81,
+      48.46,
+      42.85
+     ],
+     "host_params_changed": []
+    },
+    "6.0": {
+     "written": 6.0,
+     "state_value": 6.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      78.37,
+      67.44,
+      55.54,
+      46.39,
+      40.44
+     ],
+     "host_params_changed": []
+    },
+    "9.0": {
+     "written": 9.0,
+     "state_value": 9.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      79.0,
+      65.28,
+      51.87,
+      45.7,
+      41.66
+     ],
+     "host_params_changed": []
+    },
+    "12.0": {
+     "written": 12.0,
+     "state_value": 12.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      79.42,
+      63.04,
+      56.02,
+      50.1,
+      46.1
+     ],
+     "host_params_changed": []
+    },
+    "15.0": {
+     "written": 15.0,
+     "state_value": 15.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      79.35,
+      58.71,
+      45.02,
+      18.35,
+      -6.3
+     ],
+     "host_params_changed": []
+    },
+    "16.0": {
+     "written": 16.0,
+     "state_value": 16.0,
+     "state_retained": true,
+     "probe": false,
+     "mcp_validator_accepts": true,
+     "band_db": [
+      79.42,
+      60.01,
+      45.22,
+      19.43,
+      -6.35
+     ],
+     "host_params_changed": []
+    },
+    "17.0": {
+     "written": 17.0,
+     "state_value": 16.0,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      79.42,
+      60.01,
+      45.22,
+      19.43,
+      -6.35
+     ],
+     "host_params_changed": []
+    },
+    "1.0": {
+     "written": 1.0,
+     "state_value": null,
+     "state_retained": false,
+     "probe": true,
+     "mcp_validator_accepts": false,
+     "band_db": [
+      69.85,
+      66.77,
+      60.16,
+      53.83,
+      48.67
+     ],
+     "host_params_changed": []
+    }
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.01,
+    "state_value": null,
+    "detail": "drift 0.01 dB vs floor 0.50"
+   },
+   "file_roundtrip": {
+    "ok": true
+   },
+   "noise_floor_db": 0.5,
+   "expect": [],
+   "preset_sha256": {
+    "baseline": "1e33b21ae358d5412c08b639db38650e07ff0a1c908010ea678e02f3e6f4c26b",
+    "2.0": "4ff69dc238ced47f87cdcc8ebb36f8baccbf42a804d90d58d0fbb97cb622c194",
+    "3.0": "984e5659863fda4b6a3245b3319ef324b0d8b2027ab87eccd1d6f41757ca8d41",
+    "6.0": "b5add55b667a3947723e69c0237ce8f31e64be7cb35fb76190cc9dc8e6c493d8",
+    "9.0": "d4f25a780197dcdb28e4f79ccc6f5efc070eadd2d07e4999aed40ad27486b3a0",
+    "12.0": "af33b30443aae731f7a02b9f3d73b5d3a09e0b544588e34b55ea2c85b4749695",
+    "15.0": "56b237ddc49051016475b4962b2088ebdc7b91fd69104d327222e052e5ce8fb1",
+    "16.0": "1c095f0ebc49cd068b6c65530bdbef7f7e31771e9c1773c094f91e4fd0cbadc1",
+    "17.0": "7f740c5858c41f05ee09b14cb46c8a6f269dd25180818606f9afd515135bd2d6",
+    "1.0": "5a41e1f91e731b60b592eb7de7f62d1fcea61a3d005985a23c08f8fc7e37d001"
+   },
+   "purpose": "range",
+   "context": "QUAL_FX_DIST",
+   "domain": {
+    "kind": "int",
+    "min": 2,
+    "max": 16
+   },
+   "value_vector": {
+    "values": [
+     2.0,
+     3.0,
+     6.0,
+     9.0,
+     12.0,
+     15.0,
+     16.0
+    ],
+    "probes": [
+     17.0,
+     1.0
+    ]
+   },
+   "timestamp": "2026-09-24T21:59:05.088371+00:00",
+   "range": {
+    "declared": {
+     "kind": "int",
+     "min": 2,
+     "max": 16
+    },
+    "discovered_default": null,
+    "declared_default_matches": null,
+    "reachable_min": 2.0,
+    "reachable_max": 16.0,
+    "clamp_high_at": 16.0,
+    "clamp_low_at": null,
+    "reaches_beyond_declared_max": false,
+    "probes_dropped": [
+     1.0
+    ],
+    "declared_matches_reachable": true,
+    "rows": [
+     {
+      "written": 2.0,
+      "stored": 2.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 3.0,
+      "stored": 3.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 6.0,
+      "stored": 6.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 9.0,
+      "stored": 9.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 12.0,
+      "stored": 12.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 15.0,
+      "stored": 15.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 16.0,
+      "stored": 16.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 17.0,
+      "stored": 16.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 1.0,
+      "stored": null,
+      "fate": "dropped",
+      "probe": true
+     }
+    ]
+   },
+   "status": "RANGE_CHARACTERIZED",
+   "reasons": [],
+   "expectations": []
+  }
+ ]
+}

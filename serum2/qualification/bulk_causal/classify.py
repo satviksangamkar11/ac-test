@@ -9,6 +9,7 @@ Statuses:
   AMBIGUOUS      an effect was observed but the manifest declared no expectation (discovery run; identity unproven)
   NOT_OBSERVED   Serum retained the key but no observable change exceeded the noise floor for any value
   REJECTED       Serum did not retain the key/value (dropped or rewritten): not a real writable parameter here
+  RANGE_CHARACTERIZED  purpose=='range': domain swept, restored, retained values recorded (see rec['range'])
   RESTORE_FAILED baseline did not come back after the mutations (session contaminated; nothing else is trusted)
 """
 from __future__ import annotations
@@ -43,6 +44,8 @@ def classify(rec: dict) -> dict:
     rejected = [k for k, o in obs.items() if not o["state_retained"] and not o.get("probe")]
     if rejected and len(rejected) == len([o for o in obs.values() if not o.get("probe")]):
         return {"status": "REJECTED", "reasons": ["Serum did not retain the written key for values %s" % rejected], "expectations": []}
+    if rec.get("purpose") == "range":  # range characterization: the fingerprint is the result, not an effect expectation
+        return {"status": "RANGE_CHARACTERIZED", "reasons": [], "expectations": []}
     floor = rec.get("noise_floor_db", 0.5)
     checked = []
     for e in rec.get("expect", []):
