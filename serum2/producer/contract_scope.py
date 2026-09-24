@@ -19,6 +19,7 @@ _INST = re.compile(r"^([A-Za-z]+?)(\d+)\.plainParams\.(kParam\w+)$")
 _STRUCT = re.compile(r"^([A-Za-z]+?)(\d+)(?:\.(\w+))?$")
 
 _OPERAND = {"mutate_numeric_value": "numeric", "mutate_numeric": "numeric", "mutate_enum_value": "enum",
+            "mutate_boolean_value": "boolean",
             "mutate_structured_value": "structured", "unknown_operation": "unknown"}
 _ROOT = {"env": ("Env", ["envelope"]),
          "osc": ("Oscillator", ["oscillator", "wavetable_oscillator", "noise_oscillator"]),

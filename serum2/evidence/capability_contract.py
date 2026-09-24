@@ -28,6 +28,7 @@ from .record import PASS, NOT_RUN
 # actually present in evidence, never assumed from the field name ----
 MUTATE_NUMERIC = "mutate_numeric_value"
 MUTATE_ENUM = "mutate_enum_value"
+MUTATE_BOOLEAN = "mutate_boolean_value"
 MUTATE_STRUCTURED = "mutate_structured_value"
 CONSTRUCT_ONLY = "construct_persist_only"   # no operation semantics proven beyond this
 UNKNOWN_OPERATION = "unknown_operation"
@@ -140,7 +141,7 @@ class CapabilityContract:
 
 def _mutation_value_kind(value) -> str:
     if isinstance(value, bool):
-        return MUTATE_ENUM  # booleans behave as a 2-valued enum, not a continuous range
+        return MUTATE_BOOLEAN
     if isinstance(value, (int, float)):
         return MUTATE_NUMERIC
     if isinstance(value, str):
