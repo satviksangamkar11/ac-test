@@ -619,7 +619,14 @@ class EnvelopeSpec(BaseModel):
     attack: float = Field(0.0005, ge=0.0, le=10.0, description="seconds")
     hold: float = Field(0.0, ge=0.0, le=5.2, description="seconds, full level before decay starts")
     decay: float = Field(1.0, ge=0.0, le=32.0, description="seconds")
-    sustain: float = Field(1.0, ge=0.0, le=1.0)
+    sustain: float = Field(
+        1.0,
+        ge=0.0,
+        le=1.0,
+        description="raw 0..1; Serum displays it as raw^2 x 100 % (raw 0.25/0.50/0.81 read 6%/25%/66% "
+        "live, 2026-09-24), so a displayed p% needs raw (p/100)^(1/2).",
+        json_schema_extra={"display_curve": {"kind": "power", "exponent": 2}},
+    )
     release: float = Field(0.015, ge=0.0, le=32.0, description="seconds")
     attack_curve: float = Field(
         50.0,

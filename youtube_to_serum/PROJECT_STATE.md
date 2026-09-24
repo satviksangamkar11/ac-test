@@ -1,57 +1,55 @@
 # PROJECT STATE
 
-## Latest update: 2026-09-24 — Phase A.2-A.4 trial rerun after boolean fix (VERIFICATION_BLOCKED)
+## Latest update: 2026-09-24 — Generic percent display-curve gate CLOSED; trial3 LIVE_UI_VERIFIED (coverage PARTIAL)
 
 ## Hardened core status
 - Repository: satviksangamkar11/ac-test
-- Fix branch: fix/boolean-operand-kind-classification
-- Base branch: generic-binding-contracts (76528dc)
-- Test suite: 1013 passed, 2 skipped (5 pre-existing, unrelated failures in test_step1_complete_integration.py deselected — a VerifiedStateBuilder.add_matrix_route_observation signature mismatch, untouched by this branch's diff)
-- Boolean/toggle-specific tests: 18/18 passed both before and after this trial's additional fix
+- Branch: fix/boolean-operand-kind-classification (base: generic-binding-contracts 76528dc)
+- Test suite (local only — no CI runs exist for this branch): 1056 passed, 2 skipped, 5 failed. The 5 failures are the same pre-existing `serum2/producer/test_step1_complete_integration.py` failures present before both gates (VerifiedStateBuilder.add_matrix_route_observation signature mismatch); no new failures.
+- Boolean tests 18/18; display-curve tests 43/43 (`serum2/producer/test_display_curve.py`)
 
-## Boolean operand_kind fix — CONFIRMED (both parts required)
-Two generic, non-parameter-specific fixes were needed, not one:
-1. `serum2/producer/contract_scope.py`: `op_operand()` — TOGGLE_ON/TOGGLE_OFF now map to "boolean" (commit 3533365, prior session).
-2. `serum2/evidence/capability_contract.py` + `contract_scope.py` (this session): `_mutation_value_kind()` classified every Python `bool` evidence value as `MUTATE_ENUM`, so contracts proven from boolean evidence were typed "enum", still mismatching the (already-fixed) "boolean" operation side. Added `MUTATE_BOOLEAN` constant and `"mutate_boolean_value": "boolean"` mapping. Fix #1 alone was necessary but not sufficient — the contract-side classification was the second half of the same generic gap.
+## Gate status
+| Gate | Status |
+|---|---|
+| A.1 Boolean operand typing | CLOSED |
+| A.2 Trial rerun | COMPLETE |
+| A.3 File + live UI verification | COMPLETE — LIVE_UI_VERIFIED for all 15 compiled ops |
+| A.4 Trial/replay state | RECORDED |
+| Percent display-curve correction | CLOSED |
+| Overall Phase A (reference_verified) | NOT CLOSED — coverage PARTIAL |
 
-Both fixes are keyed only on the operation family (TOGGLE_ON/OFF) and the evidence value's Python type (`bool`) respectively — no control-name branches.
+## Percent display-curve fix
+- Root cause: `state_ledger._to_target_unit()` converted every `%` observation into a 0..1 raw field linearly (`raw = pct/100`). Serum displays ENV sustain as `raw² × 100`, so reference 60% compiled to raw 0.60 and Serum showed 36%.
+- Evidence: SUSTAIN_CURVE_TEST preset in live Serum — raw 0.25/0.50/0.81 displayed 6%/25%/66%. Supporting evidence only, not an authority artifact.
+- Metadata source: no existing Atlas/schema field encoded a display curve (checked serum_ui_atlas.py, serum-mcp ParamDef, EnvelopeSpec). Minimal extension: structured pydantic field metadata `json_schema_extra={"display_curve": {"kind": "power", "exponent": N}}` on the authoritative spec field. Currently declared only on `EnvelopeSpec.sustain` (exponent 2) — the only field with measured evidence.
+- Generic rule: `raw = (percent/100) ** (1/exponent)`. Exponent is data; linear is exponent 1. No control-name, field-name or envelope-index branching; no hardcoded values.
+- Undeclared/invalid curve on a `%` → 0..1 conversion is refused with an explicit reason (not guessed). The FX-catalog path already refused `%` into normalized fields.
 
-## Trial `qUNIEASFZSs_trial2_boolfix` — result: VERIFICATION_BLOCKED
-Location: `D:/ableton claude final best/serum2/data/runs/qUNIEASFZSs_trial2_boolfix/`
-(The prior verified trial `qUNIEASFZSs/` was NOT touched or overwritten.)
-
+## Current trial: `qUNIEASFZSs_trial3_sustain_curve`
+Location: `serum2/data/runs/qUNIEASFZSs_trial3_sustain_curve/` (gitignored run artifacts)
+- ledger 139 rows, 33 OPERATION_DERIVED
 - admission: ADMITTED 15, INCOMPATIBLE_OPERATION 2, NO_CAPABILITY 10, EPOCH_MISMATCH 6
-- compiled: 15/15
-- file readback: 10 exact, 5 normalized, 0 mismatches
-- **live Serum UI readback (real — preset loaded into the running Serum 2 plugin in Ableton, read via computer-use screenshot of the actual plugin GUI, not describe_preset)**: 10 exact, 4 normalized, **1 MISMATCH** (`env2.sustain`: authorized 60% vs live-observed 36%)
-- proof_level: **UI_READBACK_FAILED_OR_INCOMPLETE**
-- coverage_status: **FAILED**
-- reference_verified: **false**
+- compiled 15/15
+- file readback: 10 exact, 5 normalized, 0 mismatch
+- live Serum UI: 10 exact, 5 normalized, 0 mismatch, 0 not observed
+- env2.sustain: reference 60% → raw 0.7745966692414834 → file 0.77 → Serum UI 60%
+- oscA.enabled / filter1.enabled: UI VERIFIED_EXACT
+- proof_level = LIVE_UI_VERIFIED, coverage_status = PARTIAL, reference_verified = false
+- preset sha256 f094a75b29eaf5933480040a2e3fe30ab99f738a0c660053063714c8b5155eb4
+- forensic report: `final_report/FORENSIC_REPORT.md`
 
-### Boolean boundary result (this trial's actual objective) — FIXED AND LIVE-UI-VERIFIED
-- `oscA.enabled`: TOGGLE_ON → ADMITTED → compiled → file VERIFIED_EXACT → **live UI VERIFIED_EXACT** (Serum GUI shows OSC A lit ON)
-- `filter1.enabled`: TOGGLE_ON → ADMITTED → compiled → file VERIFIED_EXACT → **live UI VERIFIED_EXACT** (Serum GUI shows Filter 1 lit ON)
-- Both fully traced through the canonical chain with no admission/compiler weakening.
-
-### New finding this trial (not a regression, not silently patched)
-`oscB.enabled` / `oscC.enabled` are now INCOMPATIBLE_OPERATION. Their contracts come from legacy Pass-1 pickled EvidenceRecords storing the mutation value as a raw float `1.0` with no declared `value_domain` — never proven boolean. Before the fix they were admitted only by coincidence (both operation and contract said "numeric"). The system now correctly refuses this false-positive match. This is a genuine pre-existing evidence gap, tracked as unresolved (see below), not papered over.
-
-### Non-admitted (pre-existing, unrelated to boolean fix)
-- NO_CAPABILITY (10): oscA.semitone, lfo1-4.mode, oscNoise.noise_type, fx.reverb.type, fx.compressor.ratio/attack/release
-- EPOCH_MISMATCH (6): fx.equalizer.* — contracts qualified on Serum 2.0.21, this run's epoch is 2.0.23
-
-### Unresolved
-1. `env2.sustain`: authorized/reference value 60% (operand 0.6) compiled into the preset, but the live Serum GUI displays 36% for the same field — a genuine compiler/UI percentage-encoding mismatch, uninvestigated (out of this trial's scope). This is the row that blocks proof_level from reaching LIVE_UI_VERIFIED.
-2. `oscB.enabled`/`oscC.enabled` need re-qualification through the generic binding-evidence loader (like oscA.enabled/filter1.enabled) instead of the legacy Pass-1 records.
-
-## Forensic report
-`serum2/data/runs/qUNIEASFZSs_trial2_boolfix/final_report/FORENSIC_REPORT.md` — full source/observation/execution/verification/provenance breakdown, generated from the actual run artifact (`reference_reproduction_run.json`), not hand-authored.
-
-## Historical (superseded by this trial's real counts — kept for reference only)
-- Original `qUNIEASFZSs` trial (frozen, unmodified): 15 compiled, file readback 10 exact/5 normalized, UI comparison used a FABRICATED placeholder (`serum_ui/ui_readback.json` had literal `"preset_sha256": "trial-preset-sha256"` — not real evidence, discovered and NOT reused this session).
+## Remaining blockers to reference_verified
+1. oscB.enabled / oscC.enabled — INCOMPATIBLE_OPERATION: legacy Pass-1 evidence stores raw float 1.0 with no boolean value_domain; needs re-qualification through the generic binding-evidence loader.
+2. NO_CAPABILITY (10): oscA.semitone, lfo1-4.mode, oscNoise.noise_type, fx.reverb.type, fx.compressor.ratio/attack/release.
+3. EPOCH_MISMATCH (6): fx.equalizer.* contracts qualified on Serum 2.0.21.
+4. 106 non-derived ledger rows (38 unreadable, 30 unbound, 17 unresolved, 16 unsupported, ...).
 
 ## Next exact action
-Root-cause the `env2.sustain` compiler/UI %-encoding mismatch (trace `EnvelopeSpec.sustain` through the generic compiler's percent→raw conversion vs. Serum's own ENV sustain % display curve) — this is the one row blocking LIVE_UI_VERIFIED / COMPLETE closure of Phase A.
+Re-qualify oscB.enabled and oscC.enabled through the generic binding-evidence loader (candidate_binding_qualifier → binding_evidence JSON with value_domain.kind "bool"), the same path that already covers oscA.enabled/filter1.enabled.
+
+## Historical
+- `qUNIEASFZSs/` (frozen, untouched): 15 compiled; its `serum_ui/ui_readback.json` used placeholder hashes ("trial-preset-sha256") — not real UI evidence.
+- `qUNIEASFZSs_trial2_boolfix/`: Boolean fix verified live; UI 10 exact / 4 normalized / 1 mismatch (env2.sustain 60% → 36%); proof UI_READBACK_FAILED_OR_INCOMPLETE.
 
 ## Persistent rule
 After every meaningful project prompt, update this state with verified facts, exact test/run identifiers, and the next action. Do not replace verified facts with assumptions.

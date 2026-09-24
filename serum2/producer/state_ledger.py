@@ -161,7 +161,22 @@ def _numeric(value: Any, unit: Optional[str]) -> Optional[Tuple[float, str]]:
     return (float(m.group(1)), (m.group(2) or (unit or "")).lower()) if m else None
 
 
-def _to_target_unit(num: float, unit: str, target_unit: str, lo, hi) -> Tuple[Optional[float], str]:
+def _display_curve(fi) -> Optional[Dict[str, Any]]:
+    extra = getattr(fi, "json_schema_extra", None)
+    return extra.get("display_curve") if isinstance(extra, dict) else None
+
+
+def _display_exponent(curve) -> Optional[float]:
+    """display_fraction = raw ** exponent. Returns the exponent, or None when the curve is undeclared/invalid."""
+    if isinstance(curve, dict) and curve.get("kind") == "power":
+        n = curve.get("exponent")
+        if isinstance(n, (int, float)) and not isinstance(n, bool) and n > 0:
+            return float(n)
+    return None
+
+
+def _to_target_unit(num: float, unit: str, target_unit: str, lo, hi,
+                    curve: Optional[Dict[str, Any]] = None) -> Tuple[Optional[float], str]:
     tu = _UNIT_ALIAS.get((target_unit or "").lower(), (target_unit or "").lower())
     unit = _UNIT_ALIAS.get(unit, unit)
     if unit == tu or not unit:
@@ -175,7 +190,10 @@ def _to_target_unit(num: float, unit: str, target_unit: str, lo, hi) -> Tuple[Op
     if unit == "db" and (lo, hi) == (0.0, 1.0) and tu in ("", "normalized", "linear"):
         return None, "dB -> normalized 0..1 has no calibrated mapping"
     if unit == "%" and hi is not None and hi <= 1.0:
-        return num / 100.0, ""
+        n = _display_exponent(curve)
+        if n is None:
+            return None, "%% -> normalized 0..1 has no declared display_curve (got %r)" % (curve,)
+        return (num / 100.0) ** (1.0 / n), ""
     if unit == "%" and tu in ("%", "percent", ""):
         return num, ""
     return None, "no conversion %s -> %s" % (unit, target_unit or "unitless")
@@ -274,7 +292,8 @@ def _coerce(row: Row, t: Dict[str, Any], canon: str, tempo: Optional[float]) -> 
         if n is None:
             return "value %r is not numeric for field %s" % (v, t["field"])
         lo, hi = _field_range(fi)
-        val, why = _to_target_unit(n[0], n[1], "seconds" if "seconds" in (fi.description or "").lower() else "", lo, hi)
+        val, why = _to_target_unit(n[0], n[1], "seconds" if "seconds" in (fi.description or "").lower() else "", lo, hi,
+                                   _display_curve(fi))
         if val is None:
             return why
         bad = _clamp_check(val, lo, hi)

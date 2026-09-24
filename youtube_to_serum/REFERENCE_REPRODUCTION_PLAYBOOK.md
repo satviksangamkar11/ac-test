@@ -1323,7 +1323,8 @@ Phase A — Current authoritative reproduction
 - Phase A.2 (rerun the current trial with the fix, new trial directory, explicit binding_evidence_dir): **COMPLETE**. Trial `qUNIEASFZSs_trial2_boolfix` — 15 admitted/compiled, oscA.enabled and filter1.enabled both ADMITTED (previously INCOMPATIBLE_OPERATION).
 - Phase A.3 (file readback + live Serum UI verification): **COMPLETE, result VERIFICATION_BLOCKED**. File readback 10 exact/5 normalized, 0 mismatches. Live Serum UI readback (real: preset loaded into the running Serum 2 plugin in Ableton, read via screenshot of the actual GUI) — 10 exact/4 normalized/**1 MISMATCH** (`env2.sustain`, unrelated to the boolean fix). Both target rows (oscA.enabled, filter1.enabled) verified UI_VERIFIED_EXACT.
 - Phase A.4 (freeze trial state/replay artifacts): **COMPLETE**. Preset, forensic report, replay pins, and PROJECT_STATE.md all frozen under `qUNIEASFZSs_trial2_boolfix/`; the prior verified `qUNIEASFZSs/` trial was not touched.
-- Overall Phase A closure: **NOT COMPLETE** — blocked on the `env2.sustain` UI mismatch (proof_level capped at UI_READBACK_FAILED_OR_INCOMPLETE, coverage_status FAILED). This is a separate, newly-surfaced compiler/UI encoding issue, not a boolean-classification issue.
+- Percent display-curve gate: **COMPLETE**. `%` → 0..1 conversion now uses the target field's declared power-curve exponent (`raw = (pct/100)^(1/N)`); undeclared curves are refused. Trial `qUNIEASFZSs_trial3_sustain_curve`: env2.sustain 60% verified live; all 15 compiled ops LIVE_UI_VERIFIED.
+- Overall Phase A closure: **NOT COMPLETE** — proof_level LIVE_UI_VERIFIED but coverage_status PARTIAL (2 INCOMPATIBLE_OPERATION, 10 NO_CAPABILITY, 6 EPOCH_MISMATCH, plus non-derived ledger rows). reference_verified = false.
 
 1. diagnose two incompatible operations
 2. finish 13-control live UI verification

@@ -22,3 +22,13 @@
 - No admission bypass and no compiler weakening were introduced to make any operation pass; the fix was made entirely in the operand-kind type-inference layer (contract typing), which both admission and the compiler consume unchanged.
 - A contract whose underlying evidence never proved a `bool`/`value_domain:"bool"` value (e.g. legacy Pass-1 records storing raw floats with no declared domain) is correctly refused as INCOMPATIBLE_OPERATION against a boolean operation, even if it happened to admit before under a coincidental numeric/numeric match. This is treated as an honest, pre-existing evidence-typing gap to be re-qualified, not a regression to hide.
 - Verification result: `oscA.enabled` and `filter1.enabled` traced through the full canonical chain (ledger → operation → target → capability → admission → compiler → serum-mcp → file readback → live Serum UI) and both reached `VERIFIED_EXACT` against a real, live-loaded Serum 2 plugin instance (not `describe_preset`, not file self-comparison). `oscB.enabled`/`oscC.enabled` remain correctly blocked pending Pass-1 evidence re-qualification. The trial's overall proof_level was separately capped by an unrelated `env2.sustain` UI mismatch (see PROJECT_STATE.md), confirming the boolean fix did not mask or paper over that unrelated finding.
+
+## 2026-09-24 — Percentage conversion is not universally linear; the curve is field metadata
+
+- Percent → raw conversion for a normalized 0..1 field is driven by the target field's declared display curve: `json_schema_extra={"display_curve": {"kind": "power", "exponent": N}}`, meaning Serum displays `raw**N * 100`.
+- One generic rule: `raw = (percent/100) ** (1/N)`. Linear is `N = 1`; Serum ENV sustain is `N = 2` (measured live: raw 0.25/0.50/0.81 → 6%/25%/66%).
+- No control-name branching, no field-name branching, no envelope-index branching, no hardcoded numeric answers. Which fields carry which exponent is data, backed by measured evidence.
+- An undeclared or invalid curve on a `%` → 0..1 conversion is refused with an explicit reason; it is never guessed (linear or otherwise).
+- Conversion stays downstream of evidence (the observed `%` is unchanged) and upstream of authorization (admission/compiler unchanged).
+- Independent of the Boolean operand-kind fix; that fix is unchanged.
+- Verification: trial `qUNIEASFZSs_trial3_sustain_curve` — env2.sustain reference 60% → raw 0.7746 → Serum UI 60%; all 15 compiled ops LIVE_UI_VERIFIED; coverage PARTIAL.
