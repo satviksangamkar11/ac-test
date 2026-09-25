@@ -10,127 +10,123 @@ bulk_engine.py (frozen v1)
     ↓
 bulk_worker.py (orchestration)
     ↓
-    optional: gui_observer callback/hook
+    optional: gui_observer hooks
     ↓
     evidence consolidation (unify.py)
 ```
 
-## Pattern: Engine remains unchanged
+## Pattern: two hooks, two distinct lifecycle points
 
-### Current bulk_worker.py flow:
-```python
-for param in manifest['parameters']:
-    rec = run_parameter(base_body, base_obs, floor, param, backend, cfg, counters, meta=meta)
-    # rec has: written, state_value, band_db, restoration, etc.
-    records.append(rec)
+GUI observation attached only after restore cannot prove anything about the mutated value — by
+the time it runs, the parameter is already back at baseline. The engine exposes **two** optional
+hooks, at the two points where each kind of evidence actually exists:
+
+```
+baseline
+  ↓
+mutate value                              (run_parameter, per value in the sweep)
+  ↓
+state/band observation
+  ↓
+on_value_observe(row, o, backend, param)  ← sees the JUST-MUTATED backend, pre-restore
+  ↓                                          this is the ONLY hook that can see mutated GUI evidence
+  ... (repeat for every value tried)
+  ↓
+restore context baseline                  (once, after all values for this parameter)
+  ↓
+on_gui_restore(rec, backend, param)       ← sees the RESTORED backend
+                                             proves restoration reached the GUI; NOT mutation evidence
 ```
 
-### With GUI observation (orchestration layer):
+### bulk_engine.py signatures
 ```python
-for param in manifest['parameters']:
-    # Engine: baseline state
-    rec = run_parameter(base_body, base_obs, floor, param, backend, cfg, counters, meta=meta)
-    
-    # NEW: At worker level, optionally call observer (does NOT call engine)
-    if enable_gui_observation:
-        gui_obs = gui_observe_parameter(backend, param, rec)  # optional hook
-        rec['gui'] = gui_obs
-    
-    records.append(rec)
+def run_parameter(base_body, base_obs, floor, param, backend, cfg, counters, meta=None, on_value_observe=None):
+    ...
+    if on_value_observe:
+        on_value_observe(rows[-1], o, backend, param)   # backend in JUST-MUTATED state (pre-restore)
+
+def run_context(..., on_value_observe=None, on_gui_restore=None):
+    ...
+    rec = run_parameter(..., on_value_observe=on_value_observe)
+    ...
+    backend.load(base_body)          # restore
+    if on_gui_restore:
+        on_gui_restore(rec, backend, param)              # backend in RESTORED state
 ```
 
-The engine does its job. The worker orchestrates optional observers.
-
-## Observer hook pattern
-
-### gui_observation.py defines:
+### bulk_worker.py wiring
 ```python
-def gui_observe_parameter(backend, param, engine_record):
-    """Optional observer: reads GUI after engine has finished, without modifying state.
-    
-    Takes the backend (already loaded with the mutated state via engine),
-    reads the live UI display, then returns without further mutation.
-    The engine's restore has already happened by the time this is called
-    (or it's called after restoration to verify GUI restoration).
-    """
-    path = engine_record['candidate']['path']
-    kparam = path[-1]
-    
-    # Read GUI (manual, OCR, or host-text fallback)
-    gui_display = manual_gui_read(kparam)  # tooltip, displayed value, etc.
-    
-    return {
-        'atlas_id': param['atlas_id'],
-        'kparam': kparam,
-        'gui_display_value': gui_display['value'],
-        'gui_tooltip': gui_display['tooltip'],
-        'observation_method': 'manual_hover',
-        'matches_state': match_verdict(engine_record['state_value'], gui_display['value']),
-    }
-```
-
-### bulk_worker.py calls it at orchestration level:
-```python
-rec = run_parameter(...)  # engine intact, frozen
-
-if gui_observer:
-    rec['gui_after'] = gui_observe_parameter(backend, param, rec)
-
-backend.load(base_body)  # restore (already in run_parameter)
-counters['baseline_reloads'] += 1
-
-if gui_observer:
-    rec['gui_restore'] = gui_observe_parameter(backend, param, rec)  # optional: verify restoration via GUI
-
-records.append(rec)
+on_value_observe, on_gui_restore = gui_observer_factory(use_host_text=True) if args.gui_observe else (None, None)
+run_context(..., on_value_observe=on_value_observe, on_gui_restore=on_gui_restore)
 ```
 
 ## What stays frozen
 - `bulk_engine.py` — mutation, state readback, band energy, restore logic **unchanged**
 - `ENGINE_CONTRACT_VERSION = 1` — still valid
 - No per-parameter execution branches added
-- No GUI semantics embedded in the engine
+- No GUI semantics embedded in the engine — the two hooks are generic callback points; all GUI-specific
+  logic (host-text lookup, manual observation, verdicts) lives entirely in `gui_observation.py`
 
 ## What's new
-- `gui_observation.py` — optional observer interface (does not call engine)
-- Modified `bulk_worker.py` — orchestration-level GUI hooks (before/after mutation, after restore)
-- Evidence format extended: each record optionally includes `gui_*` fields
+- `gui_observation.py` — `gui_observer_factory()` returns `(on_value_observe, on_gui_restore)`
+- Modified `bulk_worker.py` — orchestration-level GUI hooks wired at both lifecycle points
+- Modified `bulk_engine.py` — added the two optional hook parameters (no GUI code inside the engine itself)
+- Evidence format extended: each per-value row optionally carries `gui_mutated`; each parameter record
+  optionally carries `gui_restore`
 
 ## Evidence row structure (extended, not changed)
 
 ```json
 {
   "atlas_id": "oscA.semitone",
-  "context": "INIT",
+  "context": "OSC_A",
   "candidate": {...},
   "declared": {...},
-  "values": [...],
+  "values": [
+    {
+      "written": -12.0,
+      "state_value": -12.0,
+      "host_params_changed": ["A Semi"],
+      "gui_mutated": {
+        "written": -12.0,
+        "host_text_display": {"A Semi": "-12"},
+        "observation_method": "host_text_fallback",
+        "note": "machine-readable fallback (gui_mutated); does not replace manual UI observation"
+      }
+    }
+  ],
   "range": {...},
-  "restoration": {...},
-  
-  "gui_after": {
-    "gui_display_value": "-6 semitones",
-    "gui_tooltip": "A Semitone",
-    "observation_method": "manual_hover",
-    "matches_state": true
-  },
-  
+  "restoration": {"ok": true, ...},
+
   "gui_restore": {
-    "gui_display_value": "0 semitones",
-    "matches_baseline": true
+    "host_text_display": {"A Semi": " 0"},
+    "observation_method": "host_text_fallback",
+    "note": "post-restore GUI readback; NOT mutation evidence"
   }
 }
 ```
 
-The engine's evidence is unchanged. GUI evidence is additive.
+The engine's evidence is unchanged. GUI evidence is additive, and is only ever populated when
+`--gui-observe` is passed.
+
+## Live-Serum proof (2.0.23, oscA.semitone, 2026-09-25)
+```
+written=-12.0  gui_mutated={'A Semi': '-12'}
+written=+12.0  gui_mutated={'A Semi': '+12'}
+...restore...  gui_restore={'A Semi': ' 0'}
+```
+Mutated and restored GUI text are distinct — the hook is genuinely reading two different states,
+not reporting the restored value twice.
 
 ## B.1 implementation checklist
-- [ ] Define `gui_observe_parameter()` interface in gui_observation.py
-- [ ] Add optional orchestration hooks to bulk_worker.py (gui_after, gui_restore)
-- [ ] Add `--gui-observe` flag to bulk_worker.py (optional, off by default)
-- [ ] Define `manual_gui_read()` workflow (how to capture tooltips/values)
-- [ ] Test on one context (e.g., INIT with 2–3 parameters)
-- [ ] Verify engine v1 contract unchanged (no modifications to bulk_engine.py)
+- [x] Define `gui_observer_factory()` returning `(on_value_observe, on_gui_restore)` in gui_observation.py
+- [x] Add optional orchestration hooks to bulk_engine.py/bulk_worker.py at both lifecycle points
+- [x] Add `--gui-observe` flag to bulk_worker.py (optional, off by default) — verified wired end-to-end
+- [x] Define `gui_observe_manual()` placeholder for a future manual hover-based workflow
+- [x] Test on one context (OSC_A, 2 parameters) against live Serum 2.0.23
+- [x] Verify engine v1 contract unchanged (bulk_engine.py mutation/restore logic untouched; only additive
+      optional hook parameters); 44/44 tests pass including a FakeBackend regression that fails if
+      `on_value_observe` is not actually wired to the pre-restore point
 
 ## B.2–B.6 follow existing sequence
 - B.2: One context, many sequential GUI checks (existing orchestration pattern)
@@ -139,4 +135,4 @@ The engine's evidence is unchanged. GUI evidence is additive.
 - B.5: Run full GUI campaign
 - B.6: Build closure_ledger_v2
 
-Engine frozen. Evidence layered. Attribution preserved.
+Engine frozen. Evidence layered at the correct lifecycle point. Attribution preserved.

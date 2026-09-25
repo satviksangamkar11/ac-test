@@ -217,3 +217,23 @@ def test_gui_observer_sees_the_mutated_value_before_restore_not_only_the_restore
     assert len(restore_calls) == 1                                   # once per parameter, after the sweep
     assert restore_calls[0]["body_sha"] == base_sha                  # by definition: post-restore
     assert restore_calls[0]["hosts"] == baseline_hosts                # restoration must reach the GUI/host text too
+
+
+def test_gui_restore_survives_on_record_serialization():
+    """Regression: bulk_worker.py's crash-safe --progress mode serializes each rec via on_record and, when a
+    campaign is resumed/assembled from the progress file, reconstructs `records` entirely from those serialized
+    lines. If on_record fires before on_gui_restore mutates rec in-place, the serialized line -- and therefore
+    every record in a --progress run -- silently loses gui_restore. on_gui_restore must run BEFORE on_record."""
+    serialized = []
+
+    def on_record(rec):
+        serialized.append(copy.deepcopy(rec))     # simulates bulk_worker.py's json.dumps(rec) to the progress file
+
+    def on_gui_restore(rec, backend, p):
+        rec["gui_restore"] = {"marker": "present"}
+
+    be.run_context("C", BASE, params("a"), FakeBackend, {"session_size": 10}, {},
+                   on_record=on_record, on_gui_restore=on_gui_restore)
+
+    assert len(serialized) == 1
+    assert serialized[0].get("gui_restore") == {"marker": "present"}, "on_record serialized rec before on_gui_restore ran"

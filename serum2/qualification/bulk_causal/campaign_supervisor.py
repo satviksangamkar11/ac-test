@@ -30,10 +30,13 @@ def progress_state(path):
     return started, done, crashed
 
 
-def main(manifest, final, progress, max_restarts=80):
+def main(manifest, final, progress, max_restarts=80, gui_observe=False):
     manifest, final, progress = (str(Path(x).resolve()) for x in (manifest, final, progress))   # the worker runs with cwd=HERE
     cfg = json.loads(Path(manifest).read_text())
     ids = [p["atlas_id"] for p in cfg["parameters"]]
+    cmd = [sys.executable, str(HERE / "bulk_worker.py"), manifest, final, "--progress", progress]
+    if gui_observe:
+        cmd.append("--gui-observe")
     for attempt in range(max_restarts):
         started, done, crashed = progress_state(progress)
         # a param that was started but never finished when the previous worker died is the crash cause
@@ -46,11 +49,11 @@ def main(manifest, final, progress, max_restarts=80):
         if all(i in done for i in ids):
             break
         print("attempt %d: %d/%d done" % (attempt, len(done), len(ids)), flush=True)
-        r = subprocess.run([sys.executable, str(HERE / "bulk_worker.py"), manifest, final, "--progress", progress], cwd=str(HERE))
+        r = subprocess.run(cmd, cwd=str(HERE))
         print("worker exit code", r.returncode, flush=True)
     started, done, crashed = progress_state(progress)
     print("finished: %d/%d params accounted, %d marked SERUM_CRASH" % (len(done), len(ids), len(crashed)), flush=True)
 
 
 if __name__ == "__main__":
-    main(sys.argv[1], sys.argv[2], sys.argv[3])
+    main(sys.argv[1], sys.argv[2], sys.argv[3], gui_observe="--gui-observe" in sys.argv)

@@ -176,9 +176,10 @@ def run_context(name, base_body, params, backend_factory, cfg, counters=None, me
             on_start(p)
         rec = run_parameter(base_body, base_obs, floor, p, backend, cfg, counters, meta, on_value_observe=on_value_observe)
         records.append(rec)
+        if on_gui_restore:
+            on_gui_restore(rec, backend, p)  # must run BEFORE on_record: on_record may serialize rec to disk (progress
+            # file) and reload it from there later, discarding any in-place mutation made after that point
         if on_record:
             on_record(rec)
-        if on_gui_restore:
-            on_gui_restore(rec, backend, p)  # optional: add GUI restoration evidence to rec in-place (post-restore only)
     assert sha(base_body) == pristine, "the context body must never be mutated in place"
     return records
