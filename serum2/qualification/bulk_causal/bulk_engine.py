@@ -13,6 +13,8 @@ Backend protocol (implemented by serum_backend.SerumBackend and by test fakes):
     load(body: dict)  -> None   put this full preset body into the live instance
     observe()         -> {"state": body-as-Serum-re-saved-it, "band_db": [...], "hosts": {name: display text}}
 """
+ENGINE_CONTRACT_VERSION = 1   # FROZEN: bump only with a written migration (record/row keys are pinned by test_unify.py)
+
 import copy
 import hashlib
 import json

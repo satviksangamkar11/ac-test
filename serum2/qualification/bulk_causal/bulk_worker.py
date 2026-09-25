@@ -19,7 +19,7 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import serum_backend as sb  # noqa: E402  (imports the old repo's serum2; keep this file out of this repo's normal imports)
-from bulk_engine import run_context  # noqa: E402
+from bulk_engine import ENGINE_CONTRACT_VERSION, run_context  # noqa: E402
 from preset_build import write_context_preset  # noqa: E402
 
 PINNED_SHA = "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
@@ -46,7 +46,7 @@ def main(manifest, out):
                                                              r["range"]["reachable_min"], r["range"]["reachable_max"]))
         records += recs
     values = sum(len(r["values"]) for r in records)
-    json.dump({"harness": {"architecture": "context-based bulk: parameter-by-parameter RAW mutation inside one qualification context",
+    json.dump({"harness": {"engine_contract_version": ENGINE_CONTRACT_VERSION, "product_version": "2.0.23", "state_version": 9.0, "architecture": "context-based bulk: parameter-by-parameter RAW mutation inside one qualification context",
                            "backend": "real Serum 2.0.23 VST3 in DawDreamer (headless): state readback + rendered band energy + host texts; not GUI",
                            "serum_sha256": got, "manifest": os.path.abspath(manifest), "manifest_sha256": sha(manifest),
                            "context_presets": presets, "persistent_presets_written": len(presets), "parameters": len(records),

@@ -1,0 +1,15 @@
+{
+ "version": 1,
+ "incidents": [
+  {
+   "id": "ableton-crash-2026-09-25",
+   "when": "2026-09-25 ~17:00 local (Ableton crash report 170039, Live 12.3.2)",
+   "scope": "GUI observation session for BULKCAUSAL_GUI_OSC: presets GUI01-19 read before, GUI20-39 after Ableton recovered; Serum came back with its original preset",
+   "cause": "NOT DETERMINED (candidates: earlier stray clicks while the plugin window was displaced; low free RAM ~1.2 GB of 15.6 GB)",
+   "effect_on_evidence": "none observed: every preset name was checked against the plan and the GUI readouts agree with the independent state readback; the headless DawDreamer causal/range runs are not hosted in Ableton",
+   "applies_to": [
+    "gui"
+   ]
+  }
+ ]
+}

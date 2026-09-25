@@ -1,0 +1,1835 @@
+{
+ "engine_contract_version": 1,
+ "authorizes_nothing": true,
+ "changes_no_authority_file": true,
+ "summary": {
+  "records": 26,
+  "eligible_for_promotion_review": 9,
+  "atlas_domain_conflicts": 2,
+  "blocked_reasons": {
+   "MISSING_DOMAIN": 8,
+   "NO_ATLAS_IDENTITY": 7,
+   "ATLAS_DOMAIN_CONFLICT": 2
+  }
+ },
+ "incidents": [
+  {
+   "id": "ableton-crash-2026-09-25",
+   "when": "2026-09-25 ~17:00 local (Ableton crash report 170039, Live 12.3.2)",
+   "scope": "GUI observation session for BULKCAUSAL_GUI_OSC: presets GUI01-19 read before, GUI20-39 after Ableton recovered; Serum came back with its original preset",
+   "cause": "NOT DETERMINED (candidates: earlier stray clicks while the plugin window was displaced; low free RAM ~1.2 GB of 15.6 GB)",
+   "effect_on_evidence": "none observed: every preset name was checked against the plan and the GUI readouts agree with the independent state readback; the headless DawDreamer causal/range runs are not hosted in Ableton",
+   "applies_to": [
+    "gui"
+   ]
+  }
+ ],
+ "records": [
+  {
+   "atlas_id": "fx.equalizer.left_freq",
+   "context": "FX_EQ",
+   "candidate": {
+    "kind": "fx_param",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXEQ",
+     "plainParams",
+     "kParamFreq1"
+    ],
+    "kparam": "kParamFreq1"
+   },
+   "engine_contract_version": 1,
+   "source_manifest_sha256": "0a642c087b32a5491d5155fae7cbb367d40c0c76cc027a7f3eb1ae66ed42f926",
+   "tiers": {
+    "causal_raw": {
+     "ok": true,
+     "reasons": []
+    },
+    "range": {
+     "discovered_default": null,
+     "reachable_min": 21.53320125,
+     "reachable_max": 20000.0,
+     "clamp_low_at": 21.53320125,
+     "clamp_high_at": 20000.0,
+     "declared_matches_reachable": false
+    },
+    "display": {
+     "status": "DISPLAY_CONSISTENT",
+     "default_display": 210,
+     "effective_display_range": [
+      22,
+      20000
+     ]
+    },
+    "semantic": null
+   },
+   "atlas": {
+    "control_type": "knob",
+    "min": null,
+    "max": null
+   },
+   "atlas_domain_conflicts": [],
+   "promotion_input": {
+    "target": "fx.equalizer.left_freq",
+    "derived_body_path": "FXRack0.FX.0.FXEQ.plainParams.kParamFreq1",
+    "epoch": {
+     "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+     "product_version": "2.0.23",
+     "state_version": 9.0
+    },
+    "run_status": "STRUCTURAL_VERIFIED",
+    "restoration_verified": true,
+    "baseline_value": null,
+    "mutated_value": 10000.000000000005,
+    "persistence_verified": true,
+    "state_changed": true,
+    "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
+   },
+   "promotion_input_gap": [],
+   "promotion_dry_run": {
+    "promoted": false,
+    "reason": "MISSING_DOMAIN",
+    "detail": "Atlas control_type='knob' has no generic operand mapping",
+    "contract_status": null
+   },
+   "blocked_by": [
+    "MISSING_DOMAIN"
+   ],
+   "eligible_for_promotion_review": false,
+   "incidents": [
+    "ableton-crash-2026-09-25"
+   ]
+  },
+  {
+   "atlas_id": "fx.equalizer.left_gain",
+   "context": "FX_EQ",
+   "candidate": {
+    "kind": "fx_param",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXEQ",
+     "plainParams",
+     "kParamGain1"
+    ],
+    "kparam": "kParamGain1"
+   },
+   "engine_contract_version": 1,
+   "source_manifest_sha256": "0a642c087b32a5491d5155fae7cbb367d40c0c76cc027a7f3eb1ae66ed42f926",
+   "tiers": {
+    "causal_raw": {
+     "ok": true,
+     "reasons": []
+    },
+    "range": {
+     "discovered_default": 0.0,
+     "reachable_min": -24.0,
+     "reachable_max": 24.0,
+     "clamp_low_at": -24.0,
+     "clamp_high_at": 24.0,
+     "declared_matches_reachable": true
+    },
+    "display": null,
+    "semantic": null
+   },
+   "atlas": {
+    "control_type": "knob",
+    "min": null,
+    "max": null
+   },
+   "atlas_domain_conflicts": [],
+   "promotion_input": {
+    "target": "fx.equalizer.left_gain",
+    "derived_body_path": "FXRack0.FX.0.FXEQ.plainParams.kParamGain1",
+    "epoch": {
+     "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+     "product_version": "2.0.23",
+     "state_version": 9.0
+    },
+    "run_status": "STRUCTURAL_VERIFIED",
+    "restoration_verified": true,
+    "baseline_value": 0.0,
+    "mutated_value": -12.0,
+    "persistence_verified": true,
+    "state_changed": true,
+    "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
+   },
+   "promotion_input_gap": [],
+   "promotion_dry_run": {
+    "promoted": false,
+    "reason": "MISSING_DOMAIN",
+    "detail": "Atlas control_type='knob' has no generic operand mapping",
+    "contract_status": null
+   },
+   "blocked_by": [
+    "MISSING_DOMAIN"
+   ],
+   "eligible_for_promotion_review": false,
+   "incidents": []
+  },
+  {
+   "atlas_id": "fx.equalizer.left_q",
+   "context": "FX_EQ",
+   "candidate": {
+    "kind": "fx_param",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXEQ",
+     "plainParams",
+     "kParamReso1"
+    ],
+    "kparam": "kParamReso1"
+   },
+   "engine_contract_version": 1,
+   "source_manifest_sha256": "0a642c087b32a5491d5155fae7cbb367d40c0c76cc027a7f3eb1ae66ed42f926",
+   "tiers": {
+    "causal_raw": {
+     "ok": true,
+     "reasons": []
+    },
+    "range": {
+     "discovered_default": null,
+     "reachable_min": 0.0,
+     "reachable_max": 100.0,
+     "clamp_low_at": 0.0,
+     "clamp_high_at": 100.0,
+     "declared_matches_reachable": true
+    },
+    "display": null,
+    "semantic": null
+   },
+   "atlas": {
+    "control_type": "knob",
+    "min": null,
+    "max": null
+   },
+   "atlas_domain_conflicts": [],
+   "promotion_input": {
+    "target": "fx.equalizer.left_q",
+    "derived_body_path": "FXRack0.FX.0.FXEQ.plainParams.kParamReso1",
+    "epoch": {
+     "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+     "product_version": "2.0.23",
+     "state_version": 9.0
+    },
+    "run_status": "STRUCTURAL_VERIFIED",
+    "restoration_verified": true,
+    "baseline_value": 0.0,
+    "mutated_value": 50.0,
+    "persistence_verified": true,
+    "state_changed": true,
+    "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
+   },
+   "promotion_input_gap": [],
+   "promotion_dry_run": {
+    "promoted": false,
+    "reason": "MISSING_DOMAIN",
+    "detail": "Atlas control_type='knob' has no generic operand mapping",
+    "contract_status": null
+   },
+   "blocked_by": [
+    "MISSING_DOMAIN"
+   ],
+   "eligible_for_promotion_review": false,
+   "incidents": []
+  },
+  {
+   "atlas_id": "fx.equalizer.right_freq",
+   "context": "FX_EQ",
+   "candidate": {
+    "kind": "fx_param",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXEQ",
+     "plainParams",
+     "kParamFreq2"
+    ],
+    "kparam": "kParamFreq2"
+   },
+   "engine_contract_version": 1,
+   "source_manifest_sha256": "0a642c087b32a5491d5155fae7cbb367d40c0c76cc027a7f3eb1ae66ed42f926",
+   "tiers": {
+    "causal_raw": {
+     "ok": true,
+     "reasons": []
+    },
+    "range": {
+     "discovered_default": null,
+     "reachable_min": 21.53320125,
+     "reachable_max": 20000.0,
+     "clamp_low_at": 21.53320125,
+     "clamp_high_at": 20000.0,
+     "declared_matches_reachable": false
+    },
+    "display": null,
+    "semantic": null
+   },
+   "atlas": {
+    "control_type": "knob",
+    "min": null,
+    "max": null
+   },
+   "atlas_domain_conflicts": [],
+   "promotion_input": {
+    "target": "fx.equalizer.right_freq",
+    "derived_body_path": "FXRack0.FX.0.FXEQ.plainParams.kParamFreq2",
+    "epoch": {
+     "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+     "product_version": "2.0.23",
+     "state_version": 9.0
+    },
+    "run_status": "STRUCTURAL_VERIFIED",
+    "restoration_verified": true,
+    "baseline_value": null,
+    "mutated_value": 3621.446817033768,
+    "persistence_verified": true,
+    "state_changed": true,
+    "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
+   },
+   "promotion_input_gap": [],
+   "promotion_dry_run": {
+    "promoted": false,
+    "reason": "MISSING_DOMAIN",
+    "detail": "Atlas control_type='knob' has no generic operand mapping",
+    "contract_status": null
+   },
+   "blocked_by": [
+    "MISSING_DOMAIN"
+   ],
+   "eligible_for_promotion_review": false,
+   "incidents": []
+  },
+  {
+   "atlas_id": "fx.equalizer.right_gain",
+   "context": "FX_EQ",
+   "candidate": {
+    "kind": "fx_param",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXEQ",
+     "plainParams",
+     "kParamGain2"
+    ],
+    "kparam": "kParamGain2"
+   },
+   "engine_contract_version": 1,
+   "source_manifest_sha256": "0a642c087b32a5491d5155fae7cbb367d40c0c76cc027a7f3eb1ae66ed42f926",
+   "tiers": {
+    "causal_raw": {
+     "ok": true,
+     "reasons": []
+    },
+    "range": {
+     "discovered_default": 0.0,
+     "reachable_min": -24.0,
+     "reachable_max": 24.0,
+     "clamp_low_at": -24.0,
+     "clamp_high_at": 24.0,
+     "declared_matches_reachable": true
+    },
+    "display": null,
+    "semantic": null
+   },
+   "atlas": {
+    "control_type": "knob",
+    "min": null,
+    "max": null
+   },
+   "atlas_domain_conflicts": [],
+   "promotion_input": {
+    "target": "fx.equalizer.right_gain",
+    "derived_body_path": "FXRack0.FX.0.FXEQ.plainParams.kParamGain2",
+    "epoch": {
+     "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+     "product_version": "2.0.23",
+     "state_version": 9.0
+    },
+    "run_status": "STRUCTURAL_VERIFIED",
+    "restoration_verified": true,
+    "baseline_value": 0.0,
+    "mutated_value": -12.0,
+    "persistence_verified": true,
+    "state_changed": true,
+    "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
+   },
+   "promotion_input_gap": [],
+   "promotion_dry_run": {
+    "promoted": false,
+    "reason": "MISSING_DOMAIN",
+    "detail": "Atlas control_type='knob' has no generic operand mapping",
+    "contract_status": null
+   },
+   "blocked_by": [
+    "MISSING_DOMAIN"
+   ],
+   "eligible_for_promotion_review": false,
+   "incidents": []
+  },
+  {
+   "atlas_id": "fx.equalizer.right_q",
+   "context": "FX_EQ",
+   "candidate": {
+    "kind": "fx_param",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXEQ",
+     "plainParams",
+     "kParamReso2"
+    ],
+    "kparam": "kParamReso2"
+   },
+   "engine_contract_version": 1,
+   "source_manifest_sha256": "0a642c087b32a5491d5155fae7cbb367d40c0c76cc027a7f3eb1ae66ed42f926",
+   "tiers": {
+    "causal_raw": {
+     "ok": true,
+     "reasons": []
+    },
+    "range": {
+     "discovered_default": null,
+     "reachable_min": 0.0,
+     "reachable_max": 100.0,
+     "clamp_low_at": 0.0,
+     "clamp_high_at": 100.0,
+     "declared_matches_reachable": false
+    },
+    "display": {
+     "status": "DISPLAY_CONSISTENT",
+     "default_display": 60,
+     "effective_display_range": [
+      0,
+      100
+     ]
+    },
+    "semantic": null
+   },
+   "atlas": {
+    "control_type": "knob",
+    "min": null,
+    "max": null
+   },
+   "atlas_domain_conflicts": [],
+   "promotion_input": {
+    "target": "fx.equalizer.right_q",
+    "derived_body_path": "FXRack0.FX.0.FXEQ.plainParams.kParamReso2",
+    "epoch": {
+     "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+     "product_version": "2.0.23",
+     "state_version": 9.0
+    },
+    "run_status": "STRUCTURAL_VERIFIED",
+    "restoration_verified": true,
+    "baseline_value": 0.0,
+    "mutated_value": 47.5,
+    "persistence_verified": true,
+    "state_changed": true,
+    "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
+   },
+   "promotion_input_gap": [],
+   "promotion_dry_run": {
+    "promoted": false,
+    "reason": "MISSING_DOMAIN",
+    "detail": "Atlas control_type='knob' has no generic operand mapping",
+    "contract_status": null
+   },
+   "blocked_by": [
+    "MISSING_DOMAIN"
+   ],
+   "eligible_for_promotion_review": false,
+   "incidents": [
+    "ableton-crash-2026-09-25"
+   ]
+  },
+  {
+   "atlas_id": "fx.equalizer.left_type",
+   "context": "FX_EQ",
+   "candidate": {
+    "kind": "fx_param",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXEQ",
+     "plainParams",
+     "kParamType1"
+    ],
+    "kparam": "kParamType1"
+   },
+   "engine_contract_version": 1,
+   "source_manifest_sha256": "0a642c087b32a5491d5155fae7cbb367d40c0c76cc027a7f3eb1ae66ed42f926",
+   "tiers": {
+    "causal_raw": {
+     "ok": true,
+     "reasons": []
+    },
+    "range": {
+     "discovered_default": 0.0,
+     "reachable_min": 0.0,
+     "reachable_max": 2.0,
+     "clamp_low_at": null,
+     "clamp_high_at": 2.0,
+     "declared_matches_reachable": true
+    },
+    "display": null,
+    "semantic": {
+     "status": "SEMANTIC_BINDING_PROVEN",
+     "raw_to_label": {
+      "null": "Shelf",
+      "0.0": "Shelf",
+      "1.0": "Peak",
+      "2.0": "High Pass"
+     }
+    }
+   },
+   "atlas": {
+    "control_type": "toggle_buttons",
+    "min": null,
+    "max": null
+   },
+   "atlas_domain_conflicts": [],
+   "promotion_input": {
+    "target": "fx.equalizer.left_type",
+    "derived_body_path": "FXRack0.FX.0.FXEQ.plainParams.kParamType1",
+    "epoch": {
+     "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+     "product_version": "2.0.23",
+     "state_version": 9.0
+    },
+    "run_status": "STRUCTURAL_VERIFIED",
+    "restoration_verified": true,
+    "baseline_value": "Shelf",
+    "mutated_value": "Peak",
+    "persistence_verified": true,
+    "state_changed": true,
+    "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
+   },
+   "promotion_input_gap": [],
+   "promotion_dry_run": {
+    "promoted": false,
+    "reason": "MISSING_DOMAIN",
+    "detail": "Atlas control_type='toggle_buttons' has no generic operand mapping",
+    "contract_status": null
+   },
+   "blocked_by": [
+    "MISSING_DOMAIN"
+   ],
+   "eligible_for_promotion_review": false,
+   "incidents": []
+  },
+  {
+   "atlas_id": "fx.equalizer.right_type",
+   "context": "FX_EQ",
+   "candidate": {
+    "kind": "fx_param",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXEQ",
+     "plainParams",
+     "kParamType2"
+    ],
+    "kparam": "kParamType2"
+   },
+   "engine_contract_version": 1,
+   "source_manifest_sha256": "0a642c087b32a5491d5155fae7cbb367d40c0c76cc027a7f3eb1ae66ed42f926",
+   "tiers": {
+    "causal_raw": {
+     "ok": true,
+     "reasons": []
+    },
+    "range": {
+     "discovered_default": 0.0,
+     "reachable_min": 0.0,
+     "reachable_max": 2.0,
+     "clamp_low_at": null,
+     "clamp_high_at": 2.0,
+     "declared_matches_reachable": true
+    },
+    "display": null,
+    "semantic": {
+     "status": "SEMANTIC_BINDING_PROVEN",
+     "raw_to_label": {
+      "null": "Shelf",
+      "0.0": "Shelf",
+      "1.0": "Peak",
+      "2.0": "Low Pass"
+     }
+    }
+   },
+   "atlas": {
+    "control_type": "toggle_buttons",
+    "min": null,
+    "max": null
+   },
+   "atlas_domain_conflicts": [],
+   "promotion_input": {
+    "target": "fx.equalizer.right_type",
+    "derived_body_path": "FXRack0.FX.0.FXEQ.plainParams.kParamType2",
+    "epoch": {
+     "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+     "product_version": "2.0.23",
+     "state_version": 9.0
+    },
+    "run_status": "STRUCTURAL_VERIFIED",
+    "restoration_verified": true,
+    "baseline_value": "Shelf",
+    "mutated_value": "Peak",
+    "persistence_verified": true,
+    "state_changed": true,
+    "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
+   },
+   "promotion_input_gap": [],
+   "promotion_dry_run": {
+    "promoted": false,
+    "reason": "MISSING_DOMAIN",
+    "detail": "Atlas control_type='toggle_buttons' has no generic operand mapping",
+    "contract_status": null
+   },
+   "blocked_by": [
+    "MISSING_DOMAIN"
+   ],
+   "eligible_for_promotion_review": false,
+   "incidents": []
+  },
+  {
+   "atlas_id": "fx.equalizer.bypass(enable)",
+   "context": "FX_EQ",
+   "candidate": {
+    "kind": "fx_param",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXEQ",
+     "plainParams",
+     "kParamEnable"
+    ],
+    "kparam": "kParamEnable"
+   },
+   "engine_contract_version": 1,
+   "source_manifest_sha256": "0a642c087b32a5491d5155fae7cbb367d40c0c76cc027a7f3eb1ae66ed42f926",
+   "tiers": {
+    "causal_raw": {
+     "ok": true,
+     "reasons": []
+    },
+    "range": {
+     "discovered_default": 1.0,
+     "reachable_min": 0.0,
+     "reachable_max": 1.0,
+     "clamp_low_at": null,
+     "clamp_high_at": null,
+     "declared_matches_reachable": false
+    },
+    "display": null,
+    "semantic": null
+   },
+   "atlas": null,
+   "atlas_domain_conflicts": [],
+   "promotion_input": {
+    "target": "fx.equalizer.bypass(enable)",
+    "derived_body_path": "FXRack0.FX.0.FXEQ.plainParams.kParamEnable",
+    "epoch": {
+     "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+     "product_version": "2.0.23",
+     "state_version": 9.0
+    },
+    "run_status": "STRUCTURAL_VERIFIED",
+    "restoration_verified": true,
+    "baseline_value": 1.0,
+    "mutated_value": 0.0,
+    "persistence_verified": true,
+    "state_changed": true,
+    "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
+   },
+   "promotion_input_gap": [],
+   "promotion_dry_run": {
+    "promoted": false,
+    "reason": "NO_ATLAS_IDENTITY",
+    "detail": "fx.equalizer.bypass(enable)",
+    "contract_status": null
+   },
+   "blocked_by": [
+    "NO_ATLAS_IDENTITY"
+   ],
+   "eligible_for_promotion_review": false,
+   "incidents": []
+  },
+  {
+   "atlas_id": "(exploratory) fxeq.level_out",
+   "context": "FX_EQ",
+   "candidate": {
+    "kind": "fx_param",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXEQ",
+     "plainParams",
+     "kParamLevelOut"
+    ],
+    "kparam": "kParamLevelOut"
+   },
+   "engine_contract_version": 1,
+   "source_manifest_sha256": "0a642c087b32a5491d5155fae7cbb367d40c0c76cc027a7f3eb1ae66ed42f926",
+   "tiers": {
+    "causal_raw": {
+     "ok": true,
+     "reasons": []
+    },
+    "range": {
+     "discovered_default": 0.5,
+     "reachable_min": 0.0,
+     "reachable_max": 1.0,
+     "clamp_low_at": 0.0,
+     "clamp_high_at": 1.0,
+     "declared_matches_reachable": true
+    },
+    "display": null,
+    "semantic": null
+   },
+   "atlas": null,
+   "atlas_domain_conflicts": [],
+   "promotion_input": {
+    "target": "(exploratory) fxeq.level_out",
+    "derived_body_path": "FXRack0.FX.0.FXEQ.plainParams.kParamLevelOut",
+    "epoch": {
+     "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+     "product_version": "2.0.23",
+     "state_version": 9.0
+    },
+    "run_status": "STRUCTURAL_VERIFIED",
+    "restoration_verified": true,
+    "baseline_value": 0.5,
+    "mutated_value": 0.25,
+    "persistence_verified": true,
+    "state_changed": true,
+    "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
+   },
+   "promotion_input_gap": [],
+   "promotion_dry_run": {
+    "promoted": false,
+    "reason": "NO_ATLAS_IDENTITY",
+    "detail": "(exploratory) fxeq.level_out",
+    "contract_status": null
+   },
+   "blocked_by": [
+    "NO_ATLAS_IDENTITY"
+   ],
+   "eligible_for_promotion_review": false,
+   "incidents": []
+  },
+  {
+   "atlas_id": "oscA.enabled",
+   "context": "OSC_A",
+   "candidate": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamEnable"
+    ],
+    "kparam": "kParamEnable"
+   },
+   "engine_contract_version": 1,
+   "source_manifest_sha256": "f29e69ba93677a60d86a739a7944ff84aced7d52780a70fb9ead9c92d65cd16c",
+   "tiers": {
+    "causal_raw": {
+     "ok": true,
+     "reasons": []
+    },
+    "range": {
+     "discovered_default": 1.0,
+     "reachable_min": 0.0,
+     "reachable_max": 1.0,
+     "clamp_low_at": null,
+     "clamp_high_at": null,
+     "declared_matches_reachable": false
+    },
+    "display": {
+     "status": "DISPLAY_CONSISTENT",
+     "default_display": 1,
+     "effective_display_range": [
+      0,
+      1
+     ]
+    },
+    "semantic": null
+   },
+   "atlas": {
+    "control_type": "toggle",
+    "min": null,
+    "max": null
+   },
+   "atlas_domain_conflicts": [],
+   "promotion_input": {
+    "target": "oscA.enabled",
+    "derived_body_path": "Oscillator0.plainParams.kParamEnable",
+    "epoch": {
+     "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+     "product_version": "2.0.23",
+     "state_version": 9.0
+    },
+    "run_status": "STRUCTURAL_VERIFIED",
+    "restoration_verified": true,
+    "baseline_value": 1.0,
+    "mutated_value": 0.0,
+    "persistence_verified": true,
+    "state_changed": true,
+    "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
+   },
+   "promotion_input_gap": [],
+   "promotion_dry_run": {
+    "promoted": true,
+    "reason": "PROMOTED",
+    "detail": "",
+    "contract_status": "STRUCTURAL_ONLY"
+   },
+   "blocked_by": [],
+   "eligible_for_promotion_review": true,
+   "incidents": [
+    "ableton-crash-2026-09-25"
+   ]
+  },
+  {
+   "atlas_id": "oscA.octave",
+   "context": "OSC_A",
+   "candidate": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamOctave"
+    ],
+    "kparam": "kParamOctave"
+   },
+   "engine_contract_version": 1,
+   "source_manifest_sha256": "f29e69ba93677a60d86a739a7944ff84aced7d52780a70fb9ead9c92d65cd16c",
+   "tiers": {
+    "causal_raw": {
+     "ok": true,
+     "reasons": []
+    },
+    "range": {
+     "discovered_default": 0.0,
+     "reachable_min": -4.0,
+     "reachable_max": 4.0,
+     "clamp_low_at": null,
+     "clamp_high_at": 4.0,
+     "declared_matches_reachable": true
+    },
+    "display": {
+     "status": "DISPLAY_CONSISTENT",
+     "default_display": 0,
+     "effective_display_range": [
+      -4,
+      4
+     ]
+    },
+    "semantic": null
+   },
+   "atlas": {
+    "control_type": "continuous",
+    "min": -4.0,
+    "max": 4.0
+   },
+   "atlas_domain_conflicts": [],
+   "promotion_input": {
+    "target": "oscA.octave",
+    "derived_body_path": "Oscillator0.plainParams.kParamOctave",
+    "epoch": {
+     "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+     "product_version": "2.0.23",
+     "state_version": 9.0
+    },
+    "run_status": "STRUCTURAL_VERIFIED",
+    "restoration_verified": true,
+    "baseline_value": 0.0,
+    "mutated_value": -2.0,
+    "persistence_verified": true,
+    "state_changed": true,
+    "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
+   },
+   "promotion_input_gap": [],
+   "promotion_dry_run": {
+    "promoted": true,
+    "reason": "PROMOTED",
+    "detail": "",
+    "contract_status": "STRUCTURAL_ONLY"
+   },
+   "blocked_by": [],
+   "eligible_for_promotion_review": true,
+   "incidents": [
+    "ableton-crash-2026-09-25"
+   ]
+  },
+  {
+   "atlas_id": "oscA.semitone",
+   "context": "OSC_A",
+   "candidate": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamPitch"
+    ],
+    "kparam": "kParamPitch"
+   },
+   "engine_contract_version": 1,
+   "source_manifest_sha256": "f29e69ba93677a60d86a739a7944ff84aced7d52780a70fb9ead9c92d65cd16c",
+   "tiers": {
+    "causal_raw": {
+     "ok": true,
+     "reasons": []
+    },
+    "range": {
+     "discovered_default": 0.0,
+     "reachable_min": -12.0,
+     "reachable_max": 12.0,
+     "clamp_low_at": null,
+     "clamp_high_at": 12.0,
+     "declared_matches_reachable": true
+    },
+    "display": {
+     "status": "DISPLAY_CONSISTENT",
+     "default_display": 0,
+     "effective_display_range": [
+      -12,
+      12
+     ]
+    },
+    "semantic": null
+   },
+   "atlas": {
+    "control_type": "continuous",
+    "min": -12.0,
+    "max": 12.0
+   },
+   "atlas_domain_conflicts": [],
+   "promotion_input": {
+    "target": "oscA.semitone",
+    "derived_body_path": "Oscillator0.plainParams.kParamPitch",
+    "epoch": {
+     "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+     "product_version": "2.0.23",
+     "state_version": 9.0
+    },
+    "run_status": "STRUCTURAL_VERIFIED",
+    "restoration_verified": true,
+    "baseline_value": 0.0,
+    "mutated_value": -6.0,
+    "persistence_verified": true,
+    "state_changed": true,
+    "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
+   },
+   "promotion_input_gap": [],
+   "promotion_dry_run": {
+    "promoted": true,
+    "reason": "PROMOTED",
+    "detail": "",
+    "contract_status": "STRUCTURAL_ONLY"
+   },
+   "blocked_by": [],
+   "eligible_for_promotion_review": true,
+   "incidents": [
+    "ableton-crash-2026-09-25"
+   ]
+  },
+  {
+   "atlas_id": "oscA.coarse_pitch",
+   "context": "OSC_A",
+   "candidate": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamCoarsePit"
+    ],
+    "kparam": "kParamCoarsePit"
+   },
+   "engine_contract_version": 1,
+   "source_manifest_sha256": "f29e69ba93677a60d86a739a7944ff84aced7d52780a70fb9ead9c92d65cd16c",
+   "tiers": {
+    "causal_raw": {
+     "ok": true,
+     "reasons": []
+    },
+    "range": {
+     "discovered_default": 0.0,
+     "reachable_min": -64.0,
+     "reachable_max": 64.0,
+     "clamp_low_at": null,
+     "clamp_high_at": 64.0,
+     "declared_matches_reachable": false
+    },
+    "display": {
+     "status": "DISPLAY_CONSISTENT",
+     "default_display": 0,
+     "effective_display_range": [
+      -64,
+      64
+     ]
+    },
+    "semantic": null
+   },
+   "atlas": {
+    "control_type": "continuous",
+    "min": -72.0,
+    "max": 72.0
+   },
+   "atlas_domain_conflicts": [
+    {
+     "atlas_declared": [
+      -72.0,
+      72.0
+     ],
+     "serum_reachable": [
+      -64.0,
+      64.0
+     ]
+    }
+   ],
+   "promotion_input": {
+    "target": "oscA.coarse_pitch",
+    "derived_body_path": "Oscillator0.plainParams.kParamCoarsePit",
+    "epoch": {
+     "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+     "product_version": "2.0.23",
+     "state_version": 9.0
+    },
+    "run_status": "STRUCTURAL_VERIFIED",
+    "restoration_verified": true,
+    "baseline_value": 0.0,
+    "mutated_value": -36.0,
+    "persistence_verified": true,
+    "state_changed": true,
+    "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
+   },
+   "promotion_input_gap": [],
+   "promotion_dry_run": {
+    "promoted": true,
+    "reason": "PROMOTED",
+    "detail": "",
+    "contract_status": "STRUCTURAL_ONLY"
+   },
+   "blocked_by": [
+    "ATLAS_DOMAIN_CONFLICT"
+   ],
+   "eligible_for_promotion_review": false,
+   "incidents": [
+    "ableton-crash-2026-09-25"
+   ]
+  },
+  {
+   "atlas_id": "oscA.fine",
+   "context": "OSC_A",
+   "candidate": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamFine"
+    ],
+    "kparam": "kParamFine"
+   },
+   "engine_contract_version": 1,
+   "source_manifest_sha256": "f29e69ba93677a60d86a739a7944ff84aced7d52780a70fb9ead9c92d65cd16c",
+   "tiers": {
+    "causal_raw": {
+     "ok": true,
+     "reasons": []
+    },
+    "range": {
+     "discovered_default": 0.0,
+     "reachable_min": -100.0,
+     "reachable_max": 100.0,
+     "clamp_low_at": -100.0,
+     "clamp_high_at": 100.0,
+     "declared_matches_reachable": false
+    },
+    "display": {
+     "status": "DISPLAY_CONSISTENT",
+     "default_display": 0,
+     "effective_display_range": [
+      -96,
+      100
+     ]
+    },
+    "semantic": null
+   },
+   "atlas": {
+    "control_type": "continuous",
+    "min": -80.0,
+    "max": 80.0
+   },
+   "atlas_domain_conflicts": [
+    {
+     "atlas_declared": [
+      -80.0,
+      80.0
+     ],
+     "serum_reachable": [
+      -100.0,
+      100.0
+     ]
+    }
+   ],
+   "promotion_input": {
+    "target": "oscA.fine",
+    "derived_body_path": "Oscillator0.plainParams.kParamFine",
+    "epoch": {
+     "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+     "product_version": "2.0.23",
+     "state_version": 9.0
+    },
+    "run_status": "STRUCTURAL_VERIFIED",
+    "restoration_verified": true,
+    "baseline_value": 0.0,
+    "mutated_value": -40.0,
+    "persistence_verified": true,
+    "state_changed": true,
+    "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
+   },
+   "promotion_input_gap": [],
+   "promotion_dry_run": {
+    "promoted": true,
+    "reason": "PROMOTED",
+    "detail": "",
+    "contract_status": "STRUCTURAL_ONLY"
+   },
+   "blocked_by": [
+    "ATLAS_DOMAIN_CONFLICT"
+   ],
+   "eligible_for_promotion_review": false,
+   "incidents": [
+    "ableton-crash-2026-09-25"
+   ]
+  },
+  {
+   "atlas_id": "oscA.level",
+   "context": "OSC_A",
+   "candidate": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamVolume"
+    ],
+    "kparam": "kParamVolume"
+   },
+   "engine_contract_version": 1,
+   "source_manifest_sha256": "f29e69ba93677a60d86a739a7944ff84aced7d52780a70fb9ead9c92d65cd16c",
+   "tiers": {
+    "causal_raw": {
+     "ok": true,
+     "reasons": []
+    },
+    "range": {
+     "discovered_default": null,
+     "reachable_min": 0.0,
+     "reachable_max": 1.0,
+     "clamp_low_at": 0.0,
+     "clamp_high_at": 1.0,
+     "declared_matches_reachable": true
+    },
+    "display": null,
+    "semantic": null
+   },
+   "atlas": {
+    "control_type": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "atlas_domain_conflicts": [],
+   "promotion_input": {
+    "target": "oscA.level",
+    "derived_body_path": "Oscillator0.plainParams.kParamVolume",
+    "epoch": {
+     "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+     "product_version": "2.0.23",
+     "state_version": 9.0
+    },
+    "run_status": "STRUCTURAL_VERIFIED",
+    "restoration_verified": true,
+    "baseline_value": 0.75,
+    "mutated_value": 0.5000000000000001,
+    "persistence_verified": true,
+    "state_changed": true,
+    "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
+   },
+   "promotion_input_gap": [],
+   "promotion_dry_run": {
+    "promoted": true,
+    "reason": "PROMOTED",
+    "detail": "",
+    "contract_status": "STRUCTURAL_ONLY"
+   },
+   "blocked_by": [],
+   "eligible_for_promotion_review": true,
+   "incidents": []
+  },
+  {
+   "atlas_id": "oscA.pan",
+   "context": "OSC_A",
+   "candidate": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamPan"
+    ],
+    "kparam": "kParamPan"
+   },
+   "engine_contract_version": 1,
+   "source_manifest_sha256": "f29e69ba93677a60d86a739a7944ff84aced7d52780a70fb9ead9c92d65cd16c",
+   "tiers": {
+    "causal_raw": {
+     "ok": true,
+     "reasons": []
+    },
+    "range": {
+     "discovered_default": 0.0,
+     "reachable_min": -50.0,
+     "reachable_max": 50.0,
+     "clamp_low_at": -50.0,
+     "clamp_high_at": 50.0,
+     "declared_matches_reachable": true
+    },
+    "display": null,
+    "semantic": null
+   },
+   "atlas": {
+    "control_type": "continuous",
+    "min": -50.0,
+    "max": 50.0
+   },
+   "atlas_domain_conflicts": [],
+   "promotion_input": {
+    "target": "oscA.pan",
+    "derived_body_path": "Oscillator0.plainParams.kParamPan",
+    "epoch": {
+     "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+     "product_version": "2.0.23",
+     "state_version": 9.0
+    },
+    "run_status": "STRUCTURAL_VERIFIED",
+    "restoration_verified": true,
+    "baseline_value": 0.0,
+    "mutated_value": -25.0,
+    "persistence_verified": true,
+    "state_changed": true,
+    "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
+   },
+   "promotion_input_gap": [],
+   "promotion_dry_run": {
+    "promoted": true,
+    "reason": "PROMOTED",
+    "detail": "",
+    "contract_status": "STRUCTURAL_ONLY"
+   },
+   "blocked_by": [],
+   "eligible_for_promotion_review": true,
+   "incidents": []
+  },
+  {
+   "atlas_id": "oscA.unison",
+   "context": "OSC_A",
+   "candidate": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamUnison"
+    ],
+    "kparam": "kParamUnison"
+   },
+   "engine_contract_version": 1,
+   "source_manifest_sha256": "f29e69ba93677a60d86a739a7944ff84aced7d52780a70fb9ead9c92d65cd16c",
+   "tiers": {
+    "causal_raw": {
+     "ok": true,
+     "reasons": []
+    },
+    "range": {
+     "discovered_default": 1.0,
+     "reachable_min": 1.0,
+     "reachable_max": 16.0,
+     "clamp_low_at": 1.0,
+     "clamp_high_at": 16.0,
+     "declared_matches_reachable": true
+    },
+    "display": {
+     "status": "DISPLAY_CONSISTENT",
+     "default_display": 1,
+     "effective_display_range": [
+      1,
+      16
+     ]
+    },
+    "semantic": null
+   },
+   "atlas": {
+    "control_type": "continuous",
+    "min": 1.0,
+    "max": 16.0
+   },
+   "atlas_domain_conflicts": [],
+   "promotion_input": {
+    "target": "oscA.unison",
+    "derived_body_path": "Oscillator0.plainParams.kParamUnison",
+    "epoch": {
+     "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+     "product_version": "2.0.23",
+     "state_version": 9.0
+    },
+    "run_status": "STRUCTURAL_VERIFIED",
+    "restoration_verified": true,
+    "baseline_value": 1.0,
+    "mutated_value": 9.0,
+    "persistence_verified": true,
+    "state_changed": true,
+    "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
+   },
+   "promotion_input_gap": [],
+   "promotion_dry_run": {
+    "promoted": true,
+    "reason": "PROMOTED",
+    "detail": "",
+    "contract_status": "STRUCTURAL_ONLY"
+   },
+   "blocked_by": [],
+   "eligible_for_promotion_review": true,
+   "incidents": [
+    "ableton-crash-2026-09-25"
+   ]
+  },
+  {
+   "atlas_id": "oscA.detune",
+   "context": "OSC_A",
+   "candidate": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamDetune"
+    ],
+    "kparam": "kParamDetune"
+   },
+   "engine_contract_version": 1,
+   "source_manifest_sha256": "f29e69ba93677a60d86a739a7944ff84aced7d52780a70fb9ead9c92d65cd16c",
+   "tiers": {
+    "causal_raw": {
+     "ok": true,
+     "reasons": []
+    },
+    "range": {
+     "discovered_default": 0.25,
+     "reachable_min": 0.0,
+     "reachable_max": 1.0,
+     "clamp_low_at": 0.0,
+     "clamp_high_at": 1.0,
+     "declared_matches_reachable": true
+    },
+    "display": null,
+    "semantic": null
+   },
+   "atlas": {
+    "control_type": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "atlas_domain_conflicts": [],
+   "promotion_input": {
+    "target": "oscA.detune",
+    "derived_body_path": "Oscillator0.plainParams.kParamDetune",
+    "epoch": {
+     "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+     "product_version": "2.0.23",
+     "state_version": 9.0
+    },
+    "run_status": "STRUCTURAL_VERIFIED",
+    "restoration_verified": true,
+    "baseline_value": 0.25,
+    "mutated_value": 0.5000000000000001,
+    "persistence_verified": true,
+    "state_changed": true,
+    "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
+   },
+   "promotion_input_gap": [],
+   "promotion_dry_run": {
+    "promoted": true,
+    "reason": "PROMOTED",
+    "detail": "",
+    "contract_status": "STRUCTURAL_ONLY"
+   },
+   "blocked_by": [],
+   "eligible_for_promotion_review": true,
+   "incidents": []
+  },
+  {
+   "atlas_id": "oscA.unison_width",
+   "context": "OSC_A",
+   "candidate": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamDetuneWid"
+    ],
+    "kparam": "kParamDetuneWid"
+   },
+   "engine_contract_version": 1,
+   "source_manifest_sha256": "f29e69ba93677a60d86a739a7944ff84aced7d52780a70fb9ead9c92d65cd16c",
+   "tiers": {
+    "causal_raw": {
+     "ok": true,
+     "reasons": []
+    },
+    "range": {
+     "discovered_default": 75.0,
+     "reachable_min": 0.0,
+     "reachable_max": 100.0,
+     "clamp_low_at": 0.0,
+     "clamp_high_at": 100.0,
+     "declared_matches_reachable": true
+    },
+    "display": null,
+    "semantic": null
+   },
+   "atlas": null,
+   "atlas_domain_conflicts": [],
+   "promotion_input": {
+    "target": "oscA.unison_width",
+    "derived_body_path": "Oscillator0.plainParams.kParamDetuneWid",
+    "epoch": {
+     "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+     "product_version": "2.0.23",
+     "state_version": 9.0
+    },
+    "run_status": "STRUCTURAL_VERIFIED",
+    "restoration_verified": true,
+    "baseline_value": 75.0,
+    "mutated_value": 50.0,
+    "persistence_verified": true,
+    "state_changed": true,
+    "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
+   },
+   "promotion_input_gap": [],
+   "promotion_dry_run": {
+    "promoted": false,
+    "reason": "NO_ATLAS_IDENTITY",
+    "detail": "oscA.unison_width",
+    "contract_status": null
+   },
+   "blocked_by": [
+    "NO_ATLAS_IDENTITY"
+   ],
+   "eligible_for_promotion_review": false,
+   "incidents": []
+  },
+  {
+   "atlas_id": "oscA.unison_stereo",
+   "context": "OSC_A",
+   "candidate": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamUnisonStereo"
+    ],
+    "kparam": "kParamUnisonStereo"
+   },
+   "engine_contract_version": 1,
+   "source_manifest_sha256": "f29e69ba93677a60d86a739a7944ff84aced7d52780a70fb9ead9c92d65cd16c",
+   "tiers": {
+    "causal_raw": {
+     "ok": true,
+     "reasons": []
+    },
+    "range": {
+     "discovered_default": 100.0,
+     "reachable_min": -100.0,
+     "reachable_max": 100.0,
+     "clamp_low_at": -100.0,
+     "clamp_high_at": 100.0,
+     "declared_matches_reachable": true
+    },
+    "display": null,
+    "semantic": null
+   },
+   "atlas": null,
+   "atlas_domain_conflicts": [],
+   "promotion_input": {
+    "target": "oscA.unison_stereo",
+    "derived_body_path": "Oscillator0.plainParams.kParamUnisonStereo",
+    "epoch": {
+     "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+     "product_version": "2.0.23",
+     "state_version": 9.0
+    },
+    "run_status": "STRUCTURAL_VERIFIED",
+    "restoration_verified": true,
+    "baseline_value": 100.0,
+    "mutated_value": 0.0,
+    "persistence_verified": true,
+    "state_changed": true,
+    "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
+   },
+   "promotion_input_gap": [],
+   "promotion_dry_run": {
+    "promoted": false,
+    "reason": "NO_ATLAS_IDENTITY",
+    "detail": "oscA.unison_stereo",
+    "contract_status": null
+   },
+   "blocked_by": [
+    "NO_ATLAS_IDENTITY"
+   ],
+   "eligible_for_promotion_review": false,
+   "incidents": []
+  },
+  {
+   "atlas_id": "oscA.pitch_track",
+   "context": "OSC_A",
+   "candidate": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamPitchTrack"
+    ],
+    "kparam": "kParamPitchTrack"
+   },
+   "engine_contract_version": 1,
+   "source_manifest_sha256": "f29e69ba93677a60d86a739a7944ff84aced7d52780a70fb9ead9c92d65cd16c",
+   "tiers": {
+    "causal_raw": {
+     "ok": true,
+     "reasons": []
+    },
+    "range": {
+     "discovered_default": 1.0,
+     "reachable_min": 0.0,
+     "reachable_max": 1.0,
+     "clamp_low_at": null,
+     "clamp_high_at": null,
+     "declared_matches_reachable": false
+    },
+    "display": null,
+    "semantic": null
+   },
+   "atlas": {
+    "control_type": "toggle",
+    "min": null,
+    "max": null
+   },
+   "atlas_domain_conflicts": [],
+   "promotion_input": {
+    "target": "oscA.pitch_track",
+    "derived_body_path": "Oscillator0.plainParams.kParamPitchTrack",
+    "epoch": {
+     "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+     "product_version": "2.0.23",
+     "state_version": 9.0
+    },
+    "run_status": "STRUCTURAL_VERIFIED",
+    "restoration_verified": true,
+    "baseline_value": 1.0,
+    "mutated_value": 0.0,
+    "persistence_verified": true,
+    "state_changed": true,
+    "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
+   },
+   "promotion_input_gap": [],
+   "promotion_dry_run": {
+    "promoted": true,
+    "reason": "PROMOTED",
+    "detail": "",
+    "contract_status": "STRUCTURAL_ONLY"
+   },
+   "blocked_by": [],
+   "eligible_for_promotion_review": true,
+   "incidents": []
+  },
+  {
+   "atlas_id": "oscA.wt_pos",
+   "context": "OSC_A",
+   "candidate": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "WTOsc0",
+     "plainParams",
+     "kParamTablePos"
+    ],
+    "kparam": "kParamTablePos"
+   },
+   "engine_contract_version": 1,
+   "source_manifest_sha256": "f29e69ba93677a60d86a739a7944ff84aced7d52780a70fb9ead9c92d65cd16c",
+   "tiers": {
+    "causal_raw": {
+     "ok": true,
+     "reasons": []
+    },
+    "range": {
+     "discovered_default": 0.0,
+     "reachable_min": 0.0,
+     "reachable_max": 256.0,
+     "clamp_low_at": 0.0,
+     "clamp_high_at": 256.0,
+     "declared_matches_reachable": true
+    },
+    "display": null,
+    "semantic": null
+   },
+   "atlas": null,
+   "atlas_domain_conflicts": [],
+   "promotion_input": {
+    "target": "oscA.wt_pos",
+    "derived_body_path": "Oscillator0.WTOsc0.plainParams.kParamTablePos",
+    "epoch": {
+     "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+     "product_version": "2.0.23",
+     "state_version": 9.0
+    },
+    "run_status": "STRUCTURAL_VERIFIED",
+    "restoration_verified": true,
+    "baseline_value": 0.0,
+    "mutated_value": 128.0,
+    "persistence_verified": true,
+    "state_changed": true,
+    "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
+   },
+   "promotion_input_gap": [],
+   "promotion_dry_run": {
+    "promoted": false,
+    "reason": "NO_ATLAS_IDENTITY",
+    "detail": "oscA.wt_pos",
+    "contract_status": null
+   },
+   "blocked_by": [
+    "NO_ATLAS_IDENTITY"
+   ],
+   "eligible_for_promotion_review": false,
+   "incidents": []
+  },
+  {
+   "atlas_id": "oscA.warp",
+   "context": "OSC_A",
+   "candidate": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "WTOsc0",
+     "plainParams",
+     "kParamWarp"
+    ],
+    "kparam": "kParamWarp"
+   },
+   "engine_contract_version": 1,
+   "source_manifest_sha256": "f29e69ba93677a60d86a739a7944ff84aced7d52780a70fb9ead9c92d65cd16c",
+   "tiers": {
+    "causal_raw": {
+     "ok": true,
+     "reasons": []
+    },
+    "range": {
+     "discovered_default": 0.0,
+     "reachable_min": 0.0,
+     "reachable_max": 1.0,
+     "clamp_low_at": 0.0,
+     "clamp_high_at": 1.0,
+     "declared_matches_reachable": true
+    },
+    "display": null,
+    "semantic": null
+   },
+   "atlas": null,
+   "atlas_domain_conflicts": [],
+   "promotion_input": {
+    "target": "oscA.warp",
+    "derived_body_path": "Oscillator0.WTOsc0.plainParams.kParamWarp",
+    "epoch": {
+     "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+     "product_version": "2.0.23",
+     "state_version": 9.0
+    },
+    "run_status": "STRUCTURAL_VERIFIED",
+    "restoration_verified": true,
+    "baseline_value": 0.0,
+    "mutated_value": 0.5,
+    "persistence_verified": true,
+    "state_changed": true,
+    "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
+   },
+   "promotion_input_gap": [],
+   "promotion_dry_run": {
+    "promoted": false,
+    "reason": "NO_ATLAS_IDENTITY",
+    "detail": "oscA.warp",
+    "contract_status": null
+   },
+   "blocked_by": [
+    "NO_ATLAS_IDENTITY"
+   ],
+   "eligible_for_promotion_review": false,
+   "incidents": []
+  },
+  {
+   "atlas_id": "oscA.initial_phase",
+   "context": "OSC_A",
+   "candidate": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "WTOsc0",
+     "plainParams",
+     "kParamInitialPhase"
+    ],
+    "kparam": "kParamInitialPhase"
+   },
+   "engine_contract_version": 1,
+   "source_manifest_sha256": "f29e69ba93677a60d86a739a7944ff84aced7d52780a70fb9ead9c92d65cd16c",
+   "tiers": {
+    "causal_raw": {
+     "ok": true,
+     "reasons": []
+    },
+    "range": {
+     "discovered_default": 180.0,
+     "reachable_min": 0.0,
+     "reachable_max": 360.0,
+     "clamp_low_at": 0.0,
+     "clamp_high_at": 360.0,
+     "declared_matches_reachable": true
+    },
+    "display": {
+     "status": "DISPLAY_CONSISTENT",
+     "default_display": 180,
+     "effective_display_range": [
+      0,
+      360
+     ]
+    },
+    "semantic": null
+   },
+   "atlas": null,
+   "atlas_domain_conflicts": [],
+   "promotion_input": {
+    "target": "oscA.initial_phase",
+    "derived_body_path": "Oscillator0.WTOsc0.plainParams.kParamInitialPhase",
+    "epoch": {
+     "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+     "product_version": "2.0.23",
+     "state_version": 9.0
+    },
+    "run_status": "STRUCTURAL_VERIFIED",
+    "restoration_verified": true,
+    "baseline_value": 180.0,
+    "mutated_value": 90.0,
+    "persistence_verified": true,
+    "state_changed": true,
+    "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
+   },
+   "promotion_input_gap": [],
+   "promotion_dry_run": {
+    "promoted": false,
+    "reason": "NO_ATLAS_IDENTITY",
+    "detail": "oscA.initial_phase",
+    "contract_status": null
+   },
+   "blocked_by": [
+    "NO_ATLAS_IDENTITY"
+   ],
+   "eligible_for_promotion_review": false,
+   "incidents": [
+    "ableton-crash-2026-09-25"
+   ]
+  },
+  {
+   "atlas_id": "oscA.random_phase",
+   "context": "OSC_A",
+   "candidate": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "WTOsc0",
+     "plainParams",
+     "kParamRandomPhase"
+    ],
+    "kparam": "kParamRandomPhase"
+   },
+   "engine_contract_version": 1,
+   "source_manifest_sha256": "f29e69ba93677a60d86a739a7944ff84aced7d52780a70fb9ead9c92d65cd16c",
+   "tiers": {
+    "causal_raw": {
+     "ok": true,
+     "reasons": []
+    },
+    "range": {
+     "discovered_default": 100.0,
+     "reachable_min": 0.0,
+     "reachable_max": 100.0,
+     "clamp_low_at": 0.0,
+     "clamp_high_at": 100.0,
+     "declared_matches_reachable": true
+    },
+    "display": {
+     "status": "DISPLAY_CONSISTENT",
+     "default_display": 100,
+     "effective_display_range": [
+      0,
+      100
+     ]
+    },
+    "semantic": null
+   },
+   "atlas": {
+    "control_type": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "atlas_domain_conflicts": [],
+   "promotion_input": {
+    "target": "oscA.random_phase",
+    "derived_body_path": "Oscillator0.WTOsc0.plainParams.kParamRandomPhase",
+    "epoch": {
+     "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+     "product_version": "2.0.23",
+     "state_version": 9.0
+    },
+    "run_status": "STRUCTURAL_VERIFIED",
+    "restoration_verified": true,
+    "baseline_value": 100.0,
+    "mutated_value": 50.0,
+    "persistence_verified": true,
+    "state_changed": true,
+    "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
+   },
+   "promotion_input_gap": [],
+   "promotion_dry_run": {
+    "promoted": true,
+    "reason": "PROMOTED",
+    "detail": "",
+    "contract_status": "STRUCTURAL_ONLY"
+   },
+   "blocked_by": [],
+   "eligible_for_promotion_review": true,
+   "incidents": [
+    "ableton-crash-2026-09-25"
+   ]
+  }
+ ]
+}
