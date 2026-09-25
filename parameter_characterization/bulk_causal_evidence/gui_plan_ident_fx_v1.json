@@ -1,0 +1,77 @@
+{
+ "manifest": "D:\\ableton claude final best\\serum2\\qualification\\bulk_causal\\manifest_bulk_fx_eq_pilot_v1.json",
+ "presets": [
+  {
+   "n": 1,
+   "preset": "GUI01_kParamEnable__ref",
+   "test": "fx.equalizer.bypass(enable)",
+   "atlas_id": "fx.equalizer.bypass(enable)",
+   "module": "FX_EQ",
+   "kparam": "kParamEnable",
+   "written": null,
+   "kind": "reference",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXEQ",
+    "plainParams",
+    "kParamEnable"
+   ]
+  },
+  {
+   "n": 2,
+   "preset": "GUI02_kParamEnable__0",
+   "test": "fx.equalizer.bypass(enable)",
+   "atlas_id": "fx.equalizer.bypass(enable)",
+   "module": "FX_EQ",
+   "kparam": "kParamEnable",
+   "written": 0.0,
+   "kind": "value",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXEQ",
+    "plainParams",
+    "kParamEnable"
+   ]
+  },
+  {
+   "n": 3,
+   "preset": "GUI03_kParamLevelOut__ref",
+   "test": "(exploratory) fxeq.level_out",
+   "atlas_id": "(exploratory) fxeq.level_out",
+   "module": "FX_EQ",
+   "kparam": "kParamLevelOut",
+   "written": null,
+   "kind": "reference",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXEQ",
+    "plainParams",
+    "kParamLevelOut"
+   ]
+  },
+  {
+   "n": 4,
+   "preset": "GUI04_kParamLevelOut__0p9",
+   "test": "(exploratory) fxeq.level_out",
+   "atlas_id": "(exploratory) fxeq.level_out",
+   "module": "FX_EQ",
+   "kparam": "kParamLevelOut",
+   "written": 0.9,
+   "kind": "value",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXEQ",
+    "plainParams",
+    "kParamLevelOut"
+   ]
+  }
+ ]
+}

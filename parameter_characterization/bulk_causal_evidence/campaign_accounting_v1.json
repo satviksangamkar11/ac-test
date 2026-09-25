@@ -1,0 +1,4405 @@
+{
+ "total_candidates": 330,
+ "derived": 258,
+ "not_derived": 72,
+ "not_derived_reasons": {
+  "STRING_OR_COMPLEX_FIELD": 37,
+  "NO_DECLARED_BOUNDS on the PresetSpec field": 19,
+  "FX param with enum semantics or no schema bounds": 4,
+  "NOT_A_SINGLE_LEAF": 12
+ },
+ "authorizes_nothing": true,
+ "candidates": [
+  {
+   "atlas_id": "arp.pattern.rate",
+   "family": "arp",
+   "derived": true,
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamRate"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   }
+  },
+  {
+   "atlas_id": "arp.pattern.shape",
+   "family": "arp",
+   "derived": false,
+   "reason": "STRING_OR_COMPLEX_FIELD (enum/label semantics need GUI-proven labels)"
+  },
+  {
+   "atlas_id": "arp.playback.chance",
+   "family": "arp",
+   "derived": true,
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamChance"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "arp.playback.gate",
+   "family": "arp",
+   "derived": true,
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamGate"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 200.0
+   }
+  },
+  {
+   "atlas_id": "arp.playback.offset",
+   "family": "arp",
+   "derived": false,
+   "reason": "NO_DECLARED_BOUNDS on the PresetSpec field"
+  },
+  {
+   "atlas_id": "arp.playback.repeats",
+   "family": "arp",
+   "derived": false,
+   "reason": "NO_DECLARED_BOUNDS on the PresetSpec field"
+  },
+  {
+   "atlas_id": "arp.playback.thru",
+   "family": "arp",
+   "derived": true,
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamThru"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "arp.retrigger.first",
+   "family": "arp",
+   "derived": true,
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamFirstNoteRetrig"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "arp.retrigger.launch",
+   "family": "arp",
+   "derived": true,
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamLaunchRetrig"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "arp.retrigger.note",
+   "family": "arp",
+   "derived": true,
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamNoteRetrig"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "arp.transpose.range",
+   "family": "arp",
+   "derived": true,
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamTransposeRange"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 24.0
+   }
+  },
+  {
+   "atlas_id": "arp.transpose.shape",
+   "family": "arp",
+   "derived": false,
+   "reason": "STRING_OR_COMPLEX_FIELD (enum/label semantics need GUI-proven labels)"
+  },
+  {
+   "atlas_id": "arp.transpose.shift",
+   "family": "arp",
+   "derived": true,
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamTransposeShift"
+   ],
+   "domain": {
+    "kind": "signed",
+    "min": -24.0,
+    "max": 24.0
+   }
+  },
+  {
+   "atlas_id": "arp.velocity.decay",
+   "family": "arp",
+   "derived": false,
+   "reason": "NO_DECLARED_BOUNDS on the PresetSpec field"
+  },
+  {
+   "atlas_id": "arp.velocity.enable",
+   "family": "arp",
+   "derived": true,
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamVeloEnabled"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "arp.velocity.retrig",
+   "family": "arp",
+   "derived": true,
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamVeloRetrig"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "arp.velocity.target",
+   "family": "arp",
+   "derived": true,
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamVeloTarget"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "env1.attack",
+   "family": "envelopes",
+   "derived": true,
+   "raw_path": [
+    "Env0",
+    "plainParams",
+    "kParamAttack"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 10.0
+   }
+  },
+  {
+   "atlas_id": "env1.attack_curve",
+   "family": "envelopes",
+   "derived": true,
+   "raw_path": [
+    "Env0",
+    "plainParams",
+    "kParamCurve1"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "env1.decay",
+   "family": "envelopes",
+   "derived": true,
+   "raw_path": [
+    "Env0",
+    "plainParams",
+    "kParamDecay"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 32.0
+   }
+  },
+  {
+   "atlas_id": "env1.decay_curve",
+   "family": "envelopes",
+   "derived": true,
+   "raw_path": [
+    "Env0",
+    "plainParams",
+    "kParamCurve2"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "env1.hold",
+   "family": "envelopes",
+   "derived": true,
+   "raw_path": [
+    "Env0",
+    "plainParams",
+    "kParamHold"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 5.2
+   }
+  },
+  {
+   "atlas_id": "env1.release",
+   "family": "envelopes",
+   "derived": true,
+   "raw_path": [
+    "Env0",
+    "plainParams",
+    "kParamRelease"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 32.0
+   }
+  },
+  {
+   "atlas_id": "env1.release_curve",
+   "family": "envelopes",
+   "derived": true,
+   "raw_path": [
+    "Env0",
+    "plainParams",
+    "kParamCurve3"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "env1.sustain",
+   "family": "envelopes",
+   "derived": true,
+   "raw_path": [
+    "Env0",
+    "plainParams",
+    "kParamSustain"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   }
+  },
+  {
+   "atlas_id": "env2.attack",
+   "family": "envelopes",
+   "derived": true,
+   "raw_path": [
+    "Env1",
+    "plainParams",
+    "kParamAttack"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 10.0
+   }
+  },
+  {
+   "atlas_id": "env2.attack_curve",
+   "family": "envelopes",
+   "derived": true,
+   "raw_path": [
+    "Env1",
+    "plainParams",
+    "kParamCurve1"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "env2.decay",
+   "family": "envelopes",
+   "derived": true,
+   "raw_path": [
+    "Env1",
+    "plainParams",
+    "kParamDecay"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 32.0
+   }
+  },
+  {
+   "atlas_id": "env2.decay_curve",
+   "family": "envelopes",
+   "derived": true,
+   "raw_path": [
+    "Env1",
+    "plainParams",
+    "kParamCurve2"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "env2.hold",
+   "family": "envelopes",
+   "derived": true,
+   "raw_path": [
+    "Env1",
+    "plainParams",
+    "kParamHold"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 5.2
+   }
+  },
+  {
+   "atlas_id": "env2.release",
+   "family": "envelopes",
+   "derived": true,
+   "raw_path": [
+    "Env1",
+    "plainParams",
+    "kParamRelease"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 32.0
+   }
+  },
+  {
+   "atlas_id": "env2.release_curve",
+   "family": "envelopes",
+   "derived": true,
+   "raw_path": [
+    "Env1",
+    "plainParams",
+    "kParamCurve3"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "env2.sustain",
+   "family": "envelopes",
+   "derived": true,
+   "raw_path": [
+    "Env1",
+    "plainParams",
+    "kParamSustain"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   }
+  },
+  {
+   "atlas_id": "env3.attack",
+   "family": "envelopes",
+   "derived": true,
+   "raw_path": [
+    "Env2",
+    "plainParams",
+    "kParamAttack"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 10.0
+   }
+  },
+  {
+   "atlas_id": "env3.attack_curve",
+   "family": "envelopes",
+   "derived": true,
+   "raw_path": [
+    "Env2",
+    "plainParams",
+    "kParamCurve1"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "env3.decay",
+   "family": "envelopes",
+   "derived": true,
+   "raw_path": [
+    "Env2",
+    "plainParams",
+    "kParamDecay"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 32.0
+   }
+  },
+  {
+   "atlas_id": "env3.decay_curve",
+   "family": "envelopes",
+   "derived": true,
+   "raw_path": [
+    "Env2",
+    "plainParams",
+    "kParamCurve2"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "env3.hold",
+   "family": "envelopes",
+   "derived": true,
+   "raw_path": [
+    "Env2",
+    "plainParams",
+    "kParamHold"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 5.2
+   }
+  },
+  {
+   "atlas_id": "env3.release",
+   "family": "envelopes",
+   "derived": true,
+   "raw_path": [
+    "Env2",
+    "plainParams",
+    "kParamRelease"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 32.0
+   }
+  },
+  {
+   "atlas_id": "env3.release_curve",
+   "family": "envelopes",
+   "derived": true,
+   "raw_path": [
+    "Env2",
+    "plainParams",
+    "kParamCurve3"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "env3.sustain",
+   "family": "envelopes",
+   "derived": true,
+   "raw_path": [
+    "Env2",
+    "plainParams",
+    "kParamSustain"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   }
+  },
+  {
+   "atlas_id": "env4.attack",
+   "family": "envelopes",
+   "derived": true,
+   "raw_path": [
+    "Env3",
+    "plainParams",
+    "kParamAttack"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 10.0
+   }
+  },
+  {
+   "atlas_id": "env4.attack_curve",
+   "family": "envelopes",
+   "derived": true,
+   "raw_path": [
+    "Env3",
+    "plainParams",
+    "kParamCurve1"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "env4.decay",
+   "family": "envelopes",
+   "derived": true,
+   "raw_path": [
+    "Env3",
+    "plainParams",
+    "kParamDecay"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 32.0
+   }
+  },
+  {
+   "atlas_id": "env4.decay_curve",
+   "family": "envelopes",
+   "derived": true,
+   "raw_path": [
+    "Env3",
+    "plainParams",
+    "kParamCurve2"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "env4.hold",
+   "family": "envelopes",
+   "derived": true,
+   "raw_path": [
+    "Env3",
+    "plainParams",
+    "kParamHold"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 5.2
+   }
+  },
+  {
+   "atlas_id": "env4.release",
+   "family": "envelopes",
+   "derived": true,
+   "raw_path": [
+    "Env3",
+    "plainParams",
+    "kParamRelease"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 32.0
+   }
+  },
+  {
+   "atlas_id": "env4.release_curve",
+   "family": "envelopes",
+   "derived": true,
+   "raw_path": [
+    "Env3",
+    "plainParams",
+    "kParamCurve3"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "env4.sustain",
+   "family": "envelopes",
+   "derived": true,
+   "raw_path": [
+    "Env3",
+    "plainParams",
+    "kParamSustain"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   }
+  },
+  {
+   "atlas_id": "filter1.cutoff",
+   "family": "filters",
+   "derived": true,
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamFreq"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   }
+  },
+  {
+   "atlas_id": "filter1.drive",
+   "family": "filters",
+   "derived": true,
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamDrive"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "filter1.enabled",
+   "family": "filters",
+   "derived": true,
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamEnable"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "filter1.key_track",
+   "family": "filters",
+   "derived": true,
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamKeyTrack"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "filter1.level_out",
+   "family": "filters",
+   "derived": true,
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamLevelOut"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   }
+  },
+  {
+   "atlas_id": "filter1.resonance",
+   "family": "filters",
+   "derived": true,
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamReso"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "filter1.stereo",
+   "family": "filters",
+   "derived": true,
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamStereo"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "filter1.type",
+   "family": "filters",
+   "derived": false,
+   "reason": "STRING_OR_COMPLEX_FIELD (enum/label semantics need GUI-proven labels)"
+  },
+  {
+   "atlas_id": "filter1.var",
+   "family": "filters",
+   "derived": true,
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamVar"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "filter1.wet",
+   "family": "filters",
+   "derived": true,
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamWet"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "filter2.cutoff",
+   "family": "filters",
+   "derived": true,
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamFreq"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   }
+  },
+  {
+   "atlas_id": "filter2.drive",
+   "family": "filters",
+   "derived": true,
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamDrive"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "filter2.enabled",
+   "family": "filters",
+   "derived": true,
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamEnable"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "filter2.key_track",
+   "family": "filters",
+   "derived": true,
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamKeyTrack"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "filter2.level_out",
+   "family": "filters",
+   "derived": true,
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamLevelOut"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   }
+  },
+  {
+   "atlas_id": "filter2.resonance",
+   "family": "filters",
+   "derived": true,
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamReso"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "filter2.stereo",
+   "family": "filters",
+   "derived": true,
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamStereo"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "filter2.type",
+   "family": "filters",
+   "derived": false,
+   "reason": "STRING_OR_COMPLEX_FIELD (enum/label semantics need GUI-proven labels)"
+  },
+  {
+   "atlas_id": "filter2.var",
+   "family": "filters",
+   "derived": true,
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamVar"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "filter2.wet",
+   "family": "filters",
+   "derived": true,
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamWet"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "fx.bode.blur",
+   "family": "FX_FXBode",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXBode",
+    "plainParams",
+    "kParamBlur"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "fx.bode.range",
+   "family": "FX_FXBode",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXBode",
+    "plainParams",
+    "kParamRange"
+   ],
+   "domain": {
+    "kind": "log",
+    "min": 0.1,
+    "max": 3043.2
+   }
+  },
+  {
+   "atlas_id": "fx.bode.shift",
+   "family": "FX_FXBode",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXBode",
+    "plainParams",
+    "kParamShift"
+   ],
+   "domain": {
+    "kind": "signed",
+    "min": -100.0,
+    "max": 82.0
+   }
+  },
+  {
+   "atlas_id": "fx.bode.wet",
+   "family": "FX_FXBode",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXBode",
+    "plainParams",
+    "kParamWet"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "fx.chorus.depth",
+   "family": "FX_FXChorus",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXChorus",
+    "plainParams",
+    "kParamDepth"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 26.0
+   }
+  },
+  {
+   "atlas_id": "fx.chorus.feedback",
+   "family": "FX_FXChorus",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXChorus",
+    "plainParams",
+    "kParamFeedback"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 75.0
+   }
+  },
+  {
+   "atlas_id": "fx.chorus.rate",
+   "family": "FX_FXChorus",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXChorus",
+    "plainParams",
+    "kParamRate"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 20.0
+   }
+  },
+  {
+   "atlas_id": "fx.chorus.wet",
+   "family": "FX_FXChorus",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXChorus",
+    "plainParams",
+    "kParamWet"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "fx.compressor.attack",
+   "family": "FX_FXComp",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXComp",
+    "plainParams",
+    "kParamAttack"
+   ],
+   "domain": {
+    "kind": "log",
+    "min": 0.1,
+    "max": 1000.0
+   }
+  },
+  {
+   "atlas_id": "fx.compressor.gain",
+   "family": "FX_FXComp",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXComp",
+    "plainParams",
+    "kParamMakeup"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 1.0,
+    "max": 32.0
+   }
+  },
+  {
+   "atlas_id": "fx.compressor.ratio",
+   "family": "FX_FXComp",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXComp",
+    "plainParams",
+    "kParamRatio"
+   ],
+   "domain": {
+    "kind": "log",
+    "min": 1.0,
+    "max": 1000000.0
+   }
+  },
+  {
+   "atlas_id": "fx.compressor.release",
+   "family": "FX_FXComp",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXComp",
+    "plainParams",
+    "kParamRelease"
+   ],
+   "domain": {
+    "kind": "log",
+    "min": 0.1,
+    "max": 1000.0
+   }
+  },
+  {
+   "atlas_id": "fx.compressor.thresh",
+   "family": "FX_FXComp",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXComp",
+    "plainParams",
+    "kParamThresh"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   }
+  },
+  {
+   "atlas_id": "fx.compressor.wet",
+   "family": "FX_FXComp",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXComp",
+    "plainParams",
+    "kParamWet"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "fx.convolve.decay",
+   "family": "FX_FXConv",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXConv",
+    "plainParams",
+    "kParamDecay"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 40.0
+   }
+  },
+  {
+   "atlas_id": "fx.convolve.size",
+   "family": "FX_FXConv",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXConv",
+    "plainParams",
+    "kParamSize"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 10.0,
+    "max": 1000.0
+   }
+  },
+  {
+   "atlas_id": "fx.convolve.tone",
+   "family": "FX_FXConv",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXConv",
+    "plainParams",
+    "kParamTone"
+   ],
+   "domain": {
+    "kind": "signed",
+    "min": -100.0,
+    "max": 85.0
+   }
+  },
+  {
+   "atlas_id": "fx.convolve.wet",
+   "family": "FX_FXConv",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXConv",
+    "plainParams",
+    "kParamWet"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "fx.delay.bpm",
+   "family": "FX_FXDelay",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXDelay",
+    "plainParams",
+    "kParamBeatSync"
+   ],
+   "domain": {
+    "kind": "bool"
+   }
+  },
+  {
+   "atlas_id": "fx.delay.feedback",
+   "family": "FX_FXDelay",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXDelay",
+    "plainParams",
+    "kParamFeedback"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 90.0
+   }
+  },
+  {
+   "atlas_id": "fx.delay.freq",
+   "family": "FX_FXDelay",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXDelay",
+    "plainParams",
+    "kParamFreq"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 49.5,
+    "max": 17981.0
+   }
+  },
+  {
+   "atlas_id": "fx.delay.link",
+   "family": "FX_FXDelay",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXDelay",
+    "plainParams",
+    "kParamLink"
+   ],
+   "domain": {
+    "kind": "bool"
+   }
+  },
+  {
+   "atlas_id": "fx.delay.mode",
+   "family": "FX_FXDelay",
+   "derived": false,
+   "reason": "FX param with enum semantics or no schema bounds"
+  },
+  {
+   "atlas_id": "fx.delay.time_l",
+   "family": "FX_FXDelay",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXDelay",
+    "plainParams",
+    "kParamTimeL"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.001,
+    "max": 0.34
+   }
+  },
+  {
+   "atlas_id": "fx.delay.time_r",
+   "family": "FX_FXDelay",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXDelay",
+    "plainParams",
+    "kParamTimeR"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.001,
+    "max": 0.32
+   }
+  },
+  {
+   "atlas_id": "fx.delay.wet",
+   "family": "FX_FXDelay",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXDelay",
+    "plainParams",
+    "kParamWet"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "fx.dimension.size",
+   "family": "FX_FXHyperD",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXHyperD",
+    "plainParams",
+    "kParamDimESize"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "fx.dimension.wet",
+   "family": "FX_FXHyperD",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXHyperD",
+    "plainParams",
+    "kParamDimEWet"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "fx.distortion.drive",
+   "family": "FX_FXDistortion",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXDistortion",
+    "plainParams",
+    "kParamDrive"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "fx.distortion.freq",
+   "family": "FX_FXDistortion",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXDistortion",
+    "plainParams",
+    "kParamFreq"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   }
+  },
+  {
+   "atlas_id": "fx.distortion.type",
+   "family": "FX_FXDistortion",
+   "derived": false,
+   "reason": "FX param with enum semantics or no schema bounds"
+  },
+  {
+   "atlas_id": "fx.distortion.wet",
+   "family": "FX_FXDistortion",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXDistortion",
+    "plainParams",
+    "kParamWet"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "fx.equalizer.left_freq",
+   "family": "FX_FXEQ",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXEQ",
+    "plainParams",
+    "kParamFreq1"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 21.5,
+    "max": 10000.0
+   }
+  },
+  {
+   "atlas_id": "fx.equalizer.left_gain",
+   "family": "FX_FXEQ",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXEQ",
+    "plainParams",
+    "kParamGain1"
+   ],
+   "domain": {
+    "kind": "signed",
+    "min": -24.0,
+    "max": 24.0
+   }
+  },
+  {
+   "atlas_id": "fx.equalizer.left_q",
+   "family": "FX_FXEQ",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXEQ",
+    "plainParams",
+    "kParamReso1"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "fx.equalizer.right_freq",
+   "family": "FX_FXEQ",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXEQ",
+    "plainParams",
+    "kParamFreq2"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 21.5,
+    "max": 20000.0
+   }
+  },
+  {
+   "atlas_id": "fx.equalizer.right_gain",
+   "family": "FX_FXEQ",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXEQ",
+    "plainParams",
+    "kParamGain2"
+   ],
+   "domain": {
+    "kind": "signed",
+    "min": -24.0,
+    "max": 24.0
+   }
+  },
+  {
+   "atlas_id": "fx.equalizer.right_q",
+   "family": "FX_FXEQ",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXEQ",
+    "plainParams",
+    "kParamReso2"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 95.0
+   }
+  },
+  {
+   "atlas_id": "fx.filter.cutoff",
+   "family": "FX_FXFilter",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXFilter",
+    "plainParams",
+    "kParamFreq"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   }
+  },
+  {
+   "atlas_id": "fx.filter.drive",
+   "family": "FX_FXFilter",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXFilter",
+    "plainParams",
+    "kParamDrive"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "fx.filter.res",
+   "family": "FX_FXFilter",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXFilter",
+    "plainParams",
+    "kParamReso"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "fx.filter.type",
+   "family": "FX_FXFilter",
+   "derived": false,
+   "reason": "FX param with enum semantics or no schema bounds"
+  },
+  {
+   "atlas_id": "fx.filter.wet",
+   "family": "FX_FXFilter",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXFilter",
+    "plainParams",
+    "kParamWet"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "fx.flanger.depth",
+   "family": "FX_FXFlanger",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXFlanger",
+    "plainParams",
+    "kParamDepth"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "fx.flanger.feedback",
+   "family": "FX_FXFlanger",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXFlanger",
+    "plainParams",
+    "kParamFeedback"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "fx.flanger.rate",
+   "family": "FX_FXFlanger",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXFlanger",
+    "plainParams",
+    "kParamRate"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 10.0
+   }
+  },
+  {
+   "atlas_id": "fx.flanger.wet",
+   "family": "FX_FXFlanger",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXFlanger",
+    "plainParams",
+    "kParamWet"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "fx.hyper.detune",
+   "family": "FX_FXHyperD",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXHyperD",
+    "plainParams",
+    "kParamDetune"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "fx.hyper.rate",
+   "family": "FX_FXHyperD",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXHyperD",
+    "plainParams",
+    "kParamRate"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "fx.hyper.unison",
+   "family": "FX_FXHyperD",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXHyperD",
+    "plainParams",
+    "kParamUnison"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 7.0
+   }
+  },
+  {
+   "atlas_id": "fx.hyper.wet",
+   "family": "FX_FXHyperD",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXHyperD",
+    "plainParams",
+    "kParamWet"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "fx.phaser.depth",
+   "family": "FX_FXPhaser",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXPhaser",
+    "plainParams",
+    "kParamDepth"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "fx.phaser.feedback",
+   "family": "FX_FXPhaser",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXPhaser",
+    "plainParams",
+    "kParamFeedback"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "fx.phaser.freq",
+   "family": "FX_FXPhaser",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXPhaser",
+    "plainParams",
+    "kParamFreq"
+   ],
+   "domain": {
+    "kind": "log",
+    "min": 20.0,
+    "max": 20000.0
+   }
+  },
+  {
+   "atlas_id": "fx.phaser.rate",
+   "family": "FX_FXPhaser",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXPhaser",
+    "plainParams",
+    "kParamRate"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 20.0
+   }
+  },
+  {
+   "atlas_id": "fx.phaser.wet",
+   "family": "FX_FXPhaser",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXPhaser",
+    "plainParams",
+    "kParamWet"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "fx.reverb.size",
+   "family": "FX_FXReverb",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXReverb",
+    "plainParams",
+    "kParamSize"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "fx.reverb.type",
+   "family": "FX_FXReverb",
+   "derived": false,
+   "reason": "FX param with enum semantics or no schema bounds"
+  },
+  {
+   "atlas_id": "fx.reverb.wet",
+   "family": "FX_FXReverb",
+   "derived": true,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXReverb",
+    "plainParams",
+    "kParamWet"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "global.bend_range_down",
+   "family": "global_",
+   "derived": false,
+   "reason": "NO_DECLARED_BOUNDS on the PresetSpec field"
+  },
+  {
+   "atlas_id": "global.bend_range_up",
+   "family": "global_",
+   "derived": false,
+   "reason": "NO_DECLARED_BOUNDS on the PresetSpec field"
+  },
+  {
+   "atlas_id": "global.direct_volume",
+   "family": "global_",
+   "derived": false,
+   "reason": "NO_DECLARED_BOUNDS on the PresetSpec field"
+  },
+  {
+   "atlas_id": "global.fx_bus1_destination",
+   "family": "global_",
+   "derived": false,
+   "reason": "STRING_OR_COMPLEX_FIELD (enum/label semantics need GUI-proven labels)"
+  },
+  {
+   "atlas_id": "global.fx_bus1_volume",
+   "family": "global_",
+   "derived": false,
+   "reason": "NO_DECLARED_BOUNDS on the PresetSpec field"
+  },
+  {
+   "atlas_id": "global.fx_bus2_destination",
+   "family": "global_",
+   "derived": false,
+   "reason": "STRING_OR_COMPLEX_FIELD (enum/label semantics need GUI-proven labels)"
+  },
+  {
+   "atlas_id": "global.fx_bus2_volume",
+   "family": "global_",
+   "derived": false,
+   "reason": "NO_DECLARED_BOUNDS on the PresetSpec field"
+  },
+  {
+   "atlas_id": "global.global_tuning",
+   "family": "global_",
+   "derived": false,
+   "reason": "NO_DECLARED_BOUNDS on the PresetSpec field"
+  },
+  {
+   "atlas_id": "global.legato",
+   "family": "global_",
+   "derived": true,
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamLegato"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "global.limit_same_note_polyphony",
+   "family": "global_",
+   "derived": true,
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamLimitSameNotePolyphony"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "global.master_volume",
+   "family": "global_",
+   "derived": true,
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamMasterVolume"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   }
+  },
+  {
+   "atlas_id": "global.mono",
+   "family": "global_",
+   "derived": true,
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamMonoToggle"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "global.note_latch",
+   "family": "global_",
+   "derived": true,
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamNoteLatch"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "global.oversampling",
+   "family": "global_",
+   "derived": false,
+   "reason": "NO_DECLARED_BOUNDS on the PresetSpec field"
+  },
+  {
+   "atlas_id": "global.poly_count",
+   "family": "global_",
+   "derived": true,
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamPolyCount"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 1.0,
+    "max": 32.0
+   }
+  },
+  {
+   "atlas_id": "global.porta_always",
+   "family": "global_",
+   "derived": true,
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamPortaAlways"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "global.porta_scaled",
+   "family": "global_",
+   "derived": true,
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamPortaScaled"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "global.portamento_curve",
+   "family": "global_",
+   "derived": false,
+   "reason": "NO_DECLARED_BOUNDS on the PresetSpec field"
+  },
+  {
+   "atlas_id": "global.portamento_time",
+   "family": "global_",
+   "derived": true,
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamPortamentoTime"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 3.0
+   }
+  },
+  {
+   "atlas_id": "global.s1_compatibility",
+   "family": "global_",
+   "derived": true,
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamS1Compatibility"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "global.swing",
+   "family": "global_",
+   "derived": true,
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamSwing"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "global.swing_div",
+   "family": "global_",
+   "derived": false,
+   "reason": "NO_DECLARED_BOUNDS on the PresetSpec field"
+  },
+  {
+   "atlas_id": "global.transpose",
+   "family": "global_",
+   "derived": false,
+   "reason": "NO_DECLARED_BOUNDS on the PresetSpec field"
+  },
+  {
+   "atlas_id": "global.use_ultra_on_render",
+   "family": "global_",
+   "derived": true,
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamUseUltraOnRender"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "global.voice_amp",
+   "family": "global_",
+   "derived": false,
+   "reason": "NO_DECLARED_BOUNDS on the PresetSpec field"
+  },
+  {
+   "atlas_id": "global.voice_control.random.cutoff",
+   "family": "voice_unison",
+   "derived": false,
+   "reason": "NO_DECLARED_BOUNDS on the PresetSpec field"
+  },
+  {
+   "atlas_id": "global.voice_control.random.detune",
+   "family": "voice_unison",
+   "derived": false,
+   "reason": "NO_DECLARED_BOUNDS on the PresetSpec field"
+  },
+  {
+   "atlas_id": "global.voice_control.random.envs",
+   "family": "voice_unison",
+   "derived": false,
+   "reason": "NO_DECLARED_BOUNDS on the PresetSpec field"
+  },
+  {
+   "atlas_id": "global.voice_control.random.pan",
+   "family": "voice_unison",
+   "derived": true,
+   "raw_path": [
+    "VoicePanel0",
+    "plainParams",
+    "kParamGlobalRandomOscPan"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "global.voice_control.scaling.envs",
+   "family": "voice_unison",
+   "derived": false,
+   "reason": "NO_DECLARED_BOUNDS on the PresetSpec field"
+  },
+  {
+   "atlas_id": "global.voice_control.scaling.lfos",
+   "family": "voice_unison",
+   "derived": false,
+   "reason": "NO_DECLARED_BOUNDS on the PresetSpec field"
+  },
+  {
+   "atlas_id": "global.voice_priority",
+   "family": "global_",
+   "derived": false,
+   "reason": "STRING_OR_COMPLEX_FIELD (enum/label semantics need GUI-proven labels)"
+  },
+  {
+   "atlas_id": "lfo1.beat_sync",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamBeatSync"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "lfo1.delay",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamDelay"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 3.6
+   }
+  },
+  {
+   "atlas_id": "lfo1.dotted",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamDotted"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "lfo1.mode",
+   "family": "lfos",
+   "derived": false,
+   "reason": "STRING_OR_COMPLEX_FIELD (enum/label semantics need GUI-proven labels)"
+  },
+  {
+   "atlas_id": "lfo1.mono",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamMono"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "lfo1.rate",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamRate"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "lfo1.rate_10x",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamRate10x"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "lfo1.rise",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamRise"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 5.0
+   }
+  },
+  {
+   "atlas_id": "lfo1.shape",
+   "family": "lfos",
+   "derived": false,
+   "reason": "STRING_OR_COMPLEX_FIELD (enum/label semantics need GUI-proven labels)"
+  },
+  {
+   "atlas_id": "lfo1.smooth",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamSmooth"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "lfo1.swing",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamSwing"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   }
+  },
+  {
+   "atlas_id": "lfo1.triplets",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamTriplets"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "lfo2.beat_sync",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamBeatSync"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "lfo2.delay",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamDelay"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 3.6
+   }
+  },
+  {
+   "atlas_id": "lfo2.dotted",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamDotted"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "lfo2.mode",
+   "family": "lfos",
+   "derived": false,
+   "reason": "STRING_OR_COMPLEX_FIELD (enum/label semantics need GUI-proven labels)"
+  },
+  {
+   "atlas_id": "lfo2.mono",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamMono"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "lfo2.rate",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamRate"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "lfo2.rate_10x",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamRate10x"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "lfo2.rise",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamRise"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 5.0
+   }
+  },
+  {
+   "atlas_id": "lfo2.shape",
+   "family": "lfos",
+   "derived": false,
+   "reason": "STRING_OR_COMPLEX_FIELD (enum/label semantics need GUI-proven labels)"
+  },
+  {
+   "atlas_id": "lfo2.smooth",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamSmooth"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "lfo2.swing",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamSwing"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   }
+  },
+  {
+   "atlas_id": "lfo2.triplets",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamTriplets"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "lfo3.beat_sync",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamBeatSync"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "lfo3.delay",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamDelay"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 3.6
+   }
+  },
+  {
+   "atlas_id": "lfo3.dotted",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamDotted"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "lfo3.mode",
+   "family": "lfos",
+   "derived": false,
+   "reason": "STRING_OR_COMPLEX_FIELD (enum/label semantics need GUI-proven labels)"
+  },
+  {
+   "atlas_id": "lfo3.mono",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamMono"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "lfo3.rate",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamRate"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "lfo3.rate_10x",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamRate10x"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "lfo3.rise",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamRise"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 5.0
+   }
+  },
+  {
+   "atlas_id": "lfo3.shape",
+   "family": "lfos",
+   "derived": false,
+   "reason": "STRING_OR_COMPLEX_FIELD (enum/label semantics need GUI-proven labels)"
+  },
+  {
+   "atlas_id": "lfo3.smooth",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamSmooth"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "lfo3.swing",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamSwing"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   }
+  },
+  {
+   "atlas_id": "lfo3.triplets",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamTriplets"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "lfo4.beat_sync",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamBeatSync"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "lfo4.delay",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamDelay"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 3.6
+   }
+  },
+  {
+   "atlas_id": "lfo4.dotted",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamDotted"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "lfo4.mode",
+   "family": "lfos",
+   "derived": false,
+   "reason": "STRING_OR_COMPLEX_FIELD (enum/label semantics need GUI-proven labels)"
+  },
+  {
+   "atlas_id": "lfo4.mono",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamMono"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "lfo4.rate",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamRate"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "lfo4.rate_10x",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamRate10x"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "lfo4.rise",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamRise"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 5.0
+   }
+  },
+  {
+   "atlas_id": "lfo4.shape",
+   "family": "lfos",
+   "derived": false,
+   "reason": "STRING_OR_COMPLEX_FIELD (enum/label semantics need GUI-proven labels)"
+  },
+  {
+   "atlas_id": "lfo4.smooth",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamSmooth"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "lfo4.swing",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamSwing"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   }
+  },
+  {
+   "atlas_id": "lfo4.triplets",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamTriplets"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "lfo5.beat_sync",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamBeatSync"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "lfo5.delay",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamDelay"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 3.6
+   }
+  },
+  {
+   "atlas_id": "lfo5.dotted",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamDotted"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "lfo5.mode",
+   "family": "lfos",
+   "derived": false,
+   "reason": "STRING_OR_COMPLEX_FIELD (enum/label semantics need GUI-proven labels)"
+  },
+  {
+   "atlas_id": "lfo5.mono",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamMono"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "lfo5.rate",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamRate"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "lfo5.rate_10x",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamRate10x"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "lfo5.rise",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamRise"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 5.0
+   }
+  },
+  {
+   "atlas_id": "lfo5.shape",
+   "family": "lfos",
+   "derived": false,
+   "reason": "STRING_OR_COMPLEX_FIELD (enum/label semantics need GUI-proven labels)"
+  },
+  {
+   "atlas_id": "lfo5.smooth",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamSmooth"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "lfo5.swing",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamSwing"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   }
+  },
+  {
+   "atlas_id": "lfo5.triplets",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamTriplets"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "lfo6.beat_sync",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamBeatSync"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "lfo6.delay",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamDelay"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 3.6
+   }
+  },
+  {
+   "atlas_id": "lfo6.dotted",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamDotted"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "lfo6.mode",
+   "family": "lfos",
+   "derived": false,
+   "reason": "STRING_OR_COMPLEX_FIELD (enum/label semantics need GUI-proven labels)"
+  },
+  {
+   "atlas_id": "lfo6.mono",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamMono"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "lfo6.rate",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamRate"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "lfo6.rate_10x",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamRate10x"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "lfo6.rise",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamRise"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 5.0
+   }
+  },
+  {
+   "atlas_id": "lfo6.shape",
+   "family": "lfos",
+   "derived": false,
+   "reason": "STRING_OR_COMPLEX_FIELD (enum/label semantics need GUI-proven labels)"
+  },
+  {
+   "atlas_id": "lfo6.smooth",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamSmooth"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "lfo6.swing",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamSwing"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   }
+  },
+  {
+   "atlas_id": "lfo6.triplets",
+   "family": "lfos",
+   "derived": true,
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamTriplets"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "macro1.name",
+   "family": "macros",
+   "derived": false,
+   "reason": "STRING_OR_COMPLEX_FIELD (enum/label semantics need GUI-proven labels)"
+  },
+  {
+   "atlas_id": "macro1.value",
+   "family": "macros",
+   "derived": true,
+   "raw_path": [
+    "Macro0",
+    "plainParams",
+    "kParamValue"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "macro2.name",
+   "family": "macros",
+   "derived": false,
+   "reason": "STRING_OR_COMPLEX_FIELD (enum/label semantics need GUI-proven labels)"
+  },
+  {
+   "atlas_id": "macro2.value",
+   "family": "macros",
+   "derived": true,
+   "raw_path": [
+    "Macro1",
+    "plainParams",
+    "kParamValue"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "macro3.name",
+   "family": "macros",
+   "derived": false,
+   "reason": "STRING_OR_COMPLEX_FIELD (enum/label semantics need GUI-proven labels)"
+  },
+  {
+   "atlas_id": "macro3.value",
+   "family": "macros",
+   "derived": true,
+   "raw_path": [
+    "Macro2",
+    "plainParams",
+    "kParamValue"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "macro4.name",
+   "family": "macros",
+   "derived": false,
+   "reason": "STRING_OR_COMPLEX_FIELD (enum/label semantics need GUI-proven labels)"
+  },
+  {
+   "atlas_id": "macro4.value",
+   "family": "macros",
+   "derived": true,
+   "raw_path": [
+    "Macro3",
+    "plainParams",
+    "kParamValue"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "macro5.name",
+   "family": "macros",
+   "derived": false,
+   "reason": "STRING_OR_COMPLEX_FIELD (enum/label semantics need GUI-proven labels)"
+  },
+  {
+   "atlas_id": "macro5.value",
+   "family": "macros",
+   "derived": true,
+   "raw_path": [
+    "Macro4",
+    "plainParams",
+    "kParamValue"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "macro6.name",
+   "family": "macros",
+   "derived": false,
+   "reason": "STRING_OR_COMPLEX_FIELD (enum/label semantics need GUI-proven labels)"
+  },
+  {
+   "atlas_id": "macro6.value",
+   "family": "macros",
+   "derived": true,
+   "raw_path": [
+    "Macro5",
+    "plainParams",
+    "kParamValue"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "macro7.name",
+   "family": "macros",
+   "derived": false,
+   "reason": "STRING_OR_COMPLEX_FIELD (enum/label semantics need GUI-proven labels)"
+  },
+  {
+   "atlas_id": "macro7.value",
+   "family": "macros",
+   "derived": true,
+   "raw_path": [
+    "Macro6",
+    "plainParams",
+    "kParamValue"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "macro8.name",
+   "family": "macros",
+   "derived": false,
+   "reason": "STRING_OR_COMPLEX_FIELD (enum/label semantics need GUI-proven labels)"
+  },
+  {
+   "atlas_id": "macro8.value",
+   "family": "macros",
+   "derived": true,
+   "raw_path": [
+    "Macro7",
+    "plainParams",
+    "kParamValue"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "mixer.filter1.bus1",
+   "family": "filters",
+   "derived": true,
+   "raw_path": [
+    "RoutingSlot5",
+    "plainParams"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "mixer.filter1.bus2",
+   "family": "filters",
+   "derived": true,
+   "raw_path": [
+    "RoutingSlot5",
+    "plainParams"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "mixer.filter1.enable",
+   "family": "filters",
+   "derived": true,
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamEnable"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "mixer.filter1.wet",
+   "family": "filters",
+   "derived": true,
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamWet"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "mixer.filter2.bus1",
+   "family": "filters",
+   "derived": true,
+   "raw_path": [
+    "RoutingSlot6",
+    "plainParams"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "mixer.filter2.bus2",
+   "family": "filters",
+   "derived": true,
+   "raw_path": [
+    "RoutingSlot6",
+    "plainParams"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "mixer.filter2.enable",
+   "family": "filters",
+   "derived": true,
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamEnable"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "mixer.filter2.wet",
+   "family": "filters",
+   "derived": true,
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamWet"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "mixer.noise.bus1",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "RoutingSlot3",
+    "plainParams"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "mixer.noise.bus2",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "RoutingSlot3",
+    "plainParams"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "mixer.noise.enable",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "Oscillator3",
+    "plainParams",
+    "kParamEnable"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "mixer.noise.filter_balance",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "RoutingSlot3",
+    "plainParams"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "mixer.noise.pan",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "Oscillator3",
+    "plainParams",
+    "kParamPan"
+   ],
+   "domain": {
+    "kind": "signed",
+    "min": -50.0,
+    "max": 50.0
+   }
+  },
+  {
+   "atlas_id": "mixer.osc_a.bus1",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "RoutingSlot0",
+    "plainParams"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "mixer.osc_a.bus2",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "RoutingSlot0",
+    "plainParams"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "mixer.osc_a.filter_balance",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "RoutingSlot0",
+    "plainParams"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "mixer.osc_b.bus1",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "RoutingSlot1",
+    "plainParams"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "mixer.osc_b.bus2",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "RoutingSlot1",
+    "plainParams"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "mixer.osc_b.filter_balance",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "RoutingSlot1",
+    "plainParams"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "mixer.osc_c.bus1",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "RoutingSlot2",
+    "plainParams"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "mixer.osc_c.bus2",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "RoutingSlot2",
+    "plainParams"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "mixer.osc_c.filter_balance",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "RoutingSlot2",
+    "plainParams"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "mixer.sub.bus1",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "RoutingSlot4",
+    "plainParams"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "mixer.sub.bus2",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "RoutingSlot4",
+    "plainParams"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "mixer.sub.enable",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "Oscillator4",
+    "plainParams",
+    "kParamEnable"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "mixer.sub.filter_balance",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "RoutingSlot4",
+    "plainParams"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   }
+  },
+  {
+   "atlas_id": "mixer.sub.pan",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "Oscillator4",
+    "plainParams",
+    "kParamPan"
+   ],
+   "domain": {
+    "kind": "signed",
+    "min": -50.0,
+    "max": 50.0
+   }
+  },
+  {
+   "atlas_id": "oscA.detune",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamDetune"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   }
+  },
+  {
+   "atlas_id": "oscA.enabled",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamEnable"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "oscA.fine",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamFine"
+   ],
+   "domain": {
+    "kind": "signed",
+    "min": -80.0,
+    "max": 80.0
+   }
+  },
+  {
+   "atlas_id": "oscA.octave",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamOctave"
+   ],
+   "domain": {
+    "kind": "signed",
+    "min": -4.0,
+    "max": 4.0
+   }
+  },
+  {
+   "atlas_id": "oscA.pan",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamPan"
+   ],
+   "domain": {
+    "kind": "signed",
+    "min": -50.0,
+    "max": 50.0
+   }
+  },
+  {
+   "atlas_id": "oscA.sample_loop_crossfade",
+   "family": "oscillators",
+   "derived": false,
+   "reason": "NOT_A_SINGLE_LEAF (0 leaves changed for 50.0; 0 leaves changed for 30.0)"
+  },
+  {
+   "atlas_id": "oscA.sample_loop_end",
+   "family": "oscillators",
+   "derived": false,
+   "reason": "NOT_A_SINGLE_LEAF (0 leaves changed for 50.0; 0 leaves changed for 30.0)"
+  },
+  {
+   "atlas_id": "oscA.sample_loop_start",
+   "family": "oscillators",
+   "derived": false,
+   "reason": "NOT_A_SINGLE_LEAF (0 leaves changed for 50.0; 0 leaves changed for 30.0)"
+  },
+  {
+   "atlas_id": "oscA.semitone",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamPitch"
+   ],
+   "domain": {
+    "kind": "signed",
+    "min": -12.0,
+    "max": 12.0
+   }
+  },
+  {
+   "atlas_id": "oscA.unison",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamUnison"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 1.0,
+    "max": 16.0
+   }
+  },
+  {
+   "atlas_id": "oscA.warp_amount",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "Oscillator0",
+    "WTOsc0",
+    "plainParams",
+    "kParamWarp"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   }
+  },
+  {
+   "atlas_id": "oscA.warp_amount2",
+   "family": "oscillators",
+   "derived": false,
+   "reason": "NOT_A_SINGLE_LEAF (0 leaves changed for 0.5; 0 leaves changed for 0.3)"
+  },
+  {
+   "atlas_id": "oscA.warp_mode",
+   "family": "oscillators",
+   "derived": false,
+   "reason": "STRING_OR_COMPLEX_FIELD (enum/label semantics need GUI-proven labels)"
+  },
+  {
+   "atlas_id": "oscA.warp_mode2",
+   "family": "oscillators",
+   "derived": false,
+   "reason": "STRING_OR_COMPLEX_FIELD (enum/label semantics need GUI-proven labels)"
+  },
+  {
+   "atlas_id": "oscA.warp_var2",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "Oscillator0",
+    "WTOsc0",
+    "plainParams",
+    "kParamWarpVar2"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   }
+  },
+  {
+   "atlas_id": "oscA.wavetable",
+   "family": "oscillators",
+   "derived": false,
+   "reason": "STRING_OR_COMPLEX_FIELD (enum/label semantics need GUI-proven labels)"
+  },
+  {
+   "atlas_id": "oscB.detune",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "Oscillator1",
+    "plainParams",
+    "kParamDetune"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   }
+  },
+  {
+   "atlas_id": "oscB.enabled",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "Oscillator1",
+    "plainParams",
+    "kParamEnable"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "oscB.fine",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "Oscillator1",
+    "plainParams",
+    "kParamFine"
+   ],
+   "domain": {
+    "kind": "signed",
+    "min": -80.0,
+    "max": 80.0
+   }
+  },
+  {
+   "atlas_id": "oscB.octave",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "Oscillator1",
+    "plainParams",
+    "kParamOctave"
+   ],
+   "domain": {
+    "kind": "signed",
+    "min": -4.0,
+    "max": 4.0
+   }
+  },
+  {
+   "atlas_id": "oscB.pan",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "Oscillator1",
+    "plainParams",
+    "kParamPan"
+   ],
+   "domain": {
+    "kind": "signed",
+    "min": -50.0,
+    "max": 50.0
+   }
+  },
+  {
+   "atlas_id": "oscB.sample_loop_crossfade",
+   "family": "oscillators",
+   "derived": false,
+   "reason": "NOT_A_SINGLE_LEAF (0 leaves changed for 50.0; 0 leaves changed for 30.0)"
+  },
+  {
+   "atlas_id": "oscB.sample_loop_end",
+   "family": "oscillators",
+   "derived": false,
+   "reason": "NOT_A_SINGLE_LEAF (0 leaves changed for 50.0; 0 leaves changed for 30.0)"
+  },
+  {
+   "atlas_id": "oscB.sample_loop_start",
+   "family": "oscillators",
+   "derived": false,
+   "reason": "NOT_A_SINGLE_LEAF (0 leaves changed for 50.0; 0 leaves changed for 30.0)"
+  },
+  {
+   "atlas_id": "oscB.semitone",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "Oscillator1",
+    "plainParams",
+    "kParamPitch"
+   ],
+   "domain": {
+    "kind": "signed",
+    "min": -12.0,
+    "max": 12.0
+   }
+  },
+  {
+   "atlas_id": "oscB.unison",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "Oscillator1",
+    "plainParams",
+    "kParamUnison"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 1.0,
+    "max": 16.0
+   }
+  },
+  {
+   "atlas_id": "oscB.warp_amount",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "Oscillator1",
+    "WTOsc1",
+    "plainParams",
+    "kParamWarp"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   }
+  },
+  {
+   "atlas_id": "oscB.warp_amount2",
+   "family": "oscillators",
+   "derived": false,
+   "reason": "NOT_A_SINGLE_LEAF (0 leaves changed for 0.5; 0 leaves changed for 0.3)"
+  },
+  {
+   "atlas_id": "oscB.warp_mode",
+   "family": "oscillators",
+   "derived": false,
+   "reason": "STRING_OR_COMPLEX_FIELD (enum/label semantics need GUI-proven labels)"
+  },
+  {
+   "atlas_id": "oscB.warp_mode2",
+   "family": "oscillators",
+   "derived": false,
+   "reason": "STRING_OR_COMPLEX_FIELD (enum/label semantics need GUI-proven labels)"
+  },
+  {
+   "atlas_id": "oscB.warp_var2",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "Oscillator1",
+    "WTOsc1",
+    "plainParams",
+    "kParamWarpVar2"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   }
+  },
+  {
+   "atlas_id": "oscB.wavetable",
+   "family": "oscillators",
+   "derived": false,
+   "reason": "STRING_OR_COMPLEX_FIELD (enum/label semantics need GUI-proven labels)"
+  },
+  {
+   "atlas_id": "oscC.detune",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "Oscillator2",
+    "plainParams",
+    "kParamDetune"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   }
+  },
+  {
+   "atlas_id": "oscC.enabled",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "Oscillator2",
+    "plainParams",
+    "kParamEnable"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "oscC.fine",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "Oscillator2",
+    "plainParams",
+    "kParamFine"
+   ],
+   "domain": {
+    "kind": "signed",
+    "min": -80.0,
+    "max": 80.0
+   }
+  },
+  {
+   "atlas_id": "oscC.octave",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "Oscillator2",
+    "plainParams",
+    "kParamOctave"
+   ],
+   "domain": {
+    "kind": "signed",
+    "min": -4.0,
+    "max": 4.0
+   }
+  },
+  {
+   "atlas_id": "oscC.pan",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "Oscillator2",
+    "plainParams",
+    "kParamPan"
+   ],
+   "domain": {
+    "kind": "signed",
+    "min": -50.0,
+    "max": 50.0
+   }
+  },
+  {
+   "atlas_id": "oscC.sample_loop_crossfade",
+   "family": "oscillators",
+   "derived": false,
+   "reason": "NOT_A_SINGLE_LEAF (0 leaves changed for 50.0; 0 leaves changed for 30.0)"
+  },
+  {
+   "atlas_id": "oscC.sample_loop_end",
+   "family": "oscillators",
+   "derived": false,
+   "reason": "NOT_A_SINGLE_LEAF (0 leaves changed for 50.0; 0 leaves changed for 30.0)"
+  },
+  {
+   "atlas_id": "oscC.sample_loop_start",
+   "family": "oscillators",
+   "derived": false,
+   "reason": "NOT_A_SINGLE_LEAF (0 leaves changed for 50.0; 0 leaves changed for 30.0)"
+  },
+  {
+   "atlas_id": "oscC.semitone",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "Oscillator2",
+    "plainParams",
+    "kParamPitch"
+   ],
+   "domain": {
+    "kind": "signed",
+    "min": -12.0,
+    "max": 12.0
+   }
+  },
+  {
+   "atlas_id": "oscC.unison",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "Oscillator2",
+    "plainParams",
+    "kParamUnison"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 1.0,
+    "max": 16.0
+   }
+  },
+  {
+   "atlas_id": "oscC.warp_amount",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "Oscillator2",
+    "WTOsc2",
+    "plainParams",
+    "kParamWarp"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   }
+  },
+  {
+   "atlas_id": "oscC.warp_amount2",
+   "family": "oscillators",
+   "derived": false,
+   "reason": "NOT_A_SINGLE_LEAF (0 leaves changed for 0.5; 0 leaves changed for 0.3)"
+  },
+  {
+   "atlas_id": "oscC.warp_mode",
+   "family": "oscillators",
+   "derived": false,
+   "reason": "STRING_OR_COMPLEX_FIELD (enum/label semantics need GUI-proven labels)"
+  },
+  {
+   "atlas_id": "oscC.warp_mode2",
+   "family": "oscillators",
+   "derived": false,
+   "reason": "STRING_OR_COMPLEX_FIELD (enum/label semantics need GUI-proven labels)"
+  },
+  {
+   "atlas_id": "oscC.warp_var2",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "Oscillator2",
+    "WTOsc2",
+    "plainParams",
+    "kParamWarpVar2"
+   ],
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   }
+  },
+  {
+   "atlas_id": "oscC.wavetable",
+   "family": "oscillators",
+   "derived": false,
+   "reason": "STRING_OR_COMPLEX_FIELD (enum/label semantics need GUI-proven labels)"
+  },
+  {
+   "atlas_id": "oscNoise.fine",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "Oscillator3",
+    "plainParams",
+    "kParamFine"
+   ],
+   "domain": {
+    "kind": "signed",
+    "min": -80.0,
+    "max": 80.0
+   }
+  },
+  {
+   "atlas_id": "oscNoise.noise_type",
+   "family": "oscillators",
+   "derived": false,
+   "reason": "STRING_OR_COMPLEX_FIELD (enum/label semantics need GUI-proven labels)"
+  },
+  {
+   "atlas_id": "oscNoise.pan",
+   "family": "oscillators",
+   "derived": true,
+   "raw_path": [
+    "Oscillator3",
+    "plainParams",
+    "kParamPan"
+   ],
+   "domain": {
+    "kind": "signed",
+    "min": -50.0,
+    "max": 50.0
+   }
+  },
+  {
+   "atlas_id": "voice.voicing.legato",
+   "family": "global_",
+   "derived": true,
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamLegato"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "voice.voicing.mono",
+   "family": "global_",
+   "derived": true,
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamMonoToggle"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "voice.voicing.porta_always",
+   "family": "global_",
+   "derived": true,
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamPortaAlways"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  },
+  {
+   "atlas_id": "voice.voicing.porta_scaled",
+   "family": "global_",
+   "derived": true,
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamPortaScaled"
+   ],
+   "domain": {
+    "kind": "bool",
+    "default": null
+   }
+  }
+ ]
+}

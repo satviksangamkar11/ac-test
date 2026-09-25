@@ -1,0 +1,1020 @@
+{
+ "harness": {
+  "engine_contract_version": 1,
+  "product_version": "2.0.23",
+  "state_version": 9.0,
+  "architecture": "context-based bulk: parameter-by-parameter RAW mutation inside one qualification context",
+  "backend": "real Serum 2.0.23 VST3 in DawDreamer (headless): state readback + rendered band energy + host texts; not GUI",
+  "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+  "manifest": "D:\\ableton claude final best\\serum2\\qualification\\bulk_causal\\manifest_bulk_osc_a_boundary_v1.json",
+  "manifest_sha256": "4dc66fa4e0d5ea84b0f2a203b94068766cc41a335e2b284b2c73e1b1582759bc",
+  "context_presets": [
+   {
+    "context": "OSC_A",
+    "path": "contexts\\QUAL_OSC_A.SerumPreset",
+    "sha256": "4a4cf84cea3768bde8523ac33d7f14b0ca5ffda882e79008096d0c1bb574f506",
+    "parameters": 2
+   }
+  ],
+  "persistent_presets_written": 1,
+  "parameters": 2,
+  "values_observed": 26,
+  "state_loads": 30,
+  "sessions": 1,
+  "context_loads": 1,
+  "baseline_reloads": 3,
+  "transient_transport_files": "one per Serum session, overwritten on every load (not a preset)",
+  "authorizes_nothing": true,
+  "generated": "2026-09-25T11:54:59.852560+00:00"
+ },
+ "records": [
+  {
+   "atlas_id": "oscA.coarse_pitch",
+   "context": "OSC_A",
+   "candidate": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamCoarsePit"
+    ],
+    "kparam": "kParamCoarsePit"
+   },
+   "declared": {
+    "kind": "explicit",
+    "values": [
+     -64.0,
+     -63.0,
+     -1.0,
+     0.0,
+     1.0,
+     63.0,
+     64.0
+    ],
+    "min": -64.0,
+    "max": 64.0,
+    "default": 0.0,
+    "probes": [
+     -65.0,
+     -64.5,
+     64.5,
+     65.0,
+     -72.0,
+     72.0
+    ]
+   },
+   "value_vector": {
+    "values": [
+     -64.0,
+     -63.0,
+     -1.0,
+     0.0,
+     1.0,
+     63.0,
+     64.0
+    ],
+    "probes": [
+     -65.0,
+     -64.5,
+     64.5,
+     65.0,
+     -72.0,
+     72.0
+    ]
+   },
+   "values": [
+    {
+     "written": -64.0,
+     "probe": false,
+     "state_value": -64.0,
+     "state_diff_keys": [
+      "kParamCoarsePit"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      60.85,
+      49.9,
+      44.59,
+      34.95,
+      -47.17
+     ],
+     "band_delta_db": [
+      -7.89,
+      -15.76,
+      -14.52,
+      -18.25,
+      -95.79
+     ],
+     "host_params_changed": [
+      "A Coarse Pitch"
+     ]
+    },
+    {
+     "written": -63.0,
+     "probe": false,
+     "state_value": -63.0,
+     "state_diff_keys": [
+      "kParamCoarsePit"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      60.98,
+      50.0,
+      44.59,
+      36.02,
+      -47.32
+     ],
+     "band_delta_db": [
+      -7.76,
+      -15.66,
+      -14.52,
+      -17.18,
+      -95.94
+     ],
+     "host_params_changed": [
+      "A Coarse Pitch"
+     ]
+    },
+    {
+     "written": -1.0,
+     "probe": false,
+     "state_value": -1.0,
+     "state_diff_keys": [
+      "kParamCoarsePit"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.28,
+      52.76,
+      48.47
+     ],
+     "band_delta_db": [
+      0.03,
+      0.02,
+      0.17,
+      -0.44,
+      -0.15
+     ],
+     "host_params_changed": [
+      "A Coarse Pitch"
+     ]
+    },
+    {
+     "written": 0.0,
+     "probe": false,
+     "state_value": null,
+     "state_diff_keys": [],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "band_delta_db": [
+      0.03,
+      0.02,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 1.0,
+     "probe": false,
+     "state_value": 1.0,
+     "state_diff_keys": [
+      "kParamCoarsePit"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.43,
+      60.06,
+      53.37,
+      48.97
+     ],
+     "band_delta_db": [
+      0.03,
+      -0.23,
+      0.95,
+      0.17,
+      0.35
+     ],
+     "host_params_changed": [
+      "A Coarse Pitch"
+     ]
+    },
+    {
+     "written": 63.0,
+     "probe": false,
+     "state_value": 63.0,
+     "state_diff_keys": [
+      "kParamCoarsePit"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      -77.97,
+      -67.94,
+      -56.69,
+      68.72,
+      65.01
+     ],
+     "band_delta_db": [
+      -146.71,
+      -133.6,
+      -115.8,
+      15.52,
+      16.39
+     ],
+     "host_params_changed": [
+      "A Coarse Pitch"
+     ]
+    },
+    {
+     "written": 64.0,
+     "probe": false,
+     "state_value": 64.0,
+     "state_diff_keys": [
+      "kParamCoarsePit"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      -83.78,
+      -69.43,
+      -53.63,
+      68.72,
+      64.32
+     ],
+     "band_delta_db": [
+      -152.52,
+      -135.09,
+      -112.74,
+      15.52,
+      15.7
+     ],
+     "host_params_changed": [
+      "A Coarse Pitch"
+     ]
+    },
+    {
+     "written": -65.0,
+     "probe": true,
+     "state_value": -64.0,
+     "state_diff_keys": [
+      "kParamCoarsePit"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      60.42,
+      49.45,
+      44.14,
+      34.51,
+      -47.47
+     ],
+     "band_delta_db": [
+      -8.32,
+      -16.21,
+      -14.97,
+      -18.69,
+      -96.09
+     ],
+     "host_params_changed": [
+      "A Coarse Pitch"
+     ]
+    },
+    {
+     "written": -64.5,
+     "probe": true,
+     "state_value": -64.0,
+     "state_diff_keys": [
+      "kParamCoarsePit"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      60.73,
+      49.78,
+      44.47,
+      34.84,
+      -47.23
+     ],
+     "band_delta_db": [
+      -8.01,
+      -15.88,
+      -14.64,
+      -18.36,
+      -95.85
+     ],
+     "host_params_changed": [
+      "A Coarse Pitch"
+     ]
+    },
+    {
+     "written": 64.5,
+     "probe": true,
+     "state_value": 64.0,
+     "state_diff_keys": [
+      "kParamCoarsePit"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      -83.74,
+      -69.51,
+      -53.63,
+      68.72,
+      64.32
+     ],
+     "band_delta_db": [
+      -152.48,
+      -135.17,
+      -112.74,
+      15.52,
+      15.7
+     ],
+     "host_params_changed": [
+      "A Coarse Pitch"
+     ]
+    },
+    {
+     "written": 65.0,
+     "probe": true,
+     "state_value": 64.0,
+     "state_diff_keys": [
+      "kParamCoarsePit"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      -84.0,
+      -69.54,
+      -53.63,
+      68.72,
+      64.32
+     ],
+     "band_delta_db": [
+      -152.74,
+      -135.2,
+      -112.74,
+      15.52,
+      15.7
+     ],
+     "host_params_changed": [
+      "A Coarse Pitch"
+     ]
+    },
+    {
+     "written": -72.0,
+     "probe": true,
+     "state_value": -64.0,
+     "state_diff_keys": [
+      "kParamCoarsePit"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      60.39,
+      49.42,
+      44.11,
+      34.48,
+      -47.47
+     ],
+     "band_delta_db": [
+      -8.35,
+      -16.24,
+      -15.0,
+      -18.72,
+      -96.09
+     ],
+     "host_params_changed": [
+      "A Coarse Pitch"
+     ]
+    },
+    {
+     "written": 72.0,
+     "probe": true,
+     "state_value": 64.0,
+     "state_diff_keys": [
+      "kParamCoarsePit"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      -83.21,
+      -69.58,
+      -53.62,
+      68.72,
+      64.32
+     ],
+     "band_delta_db": [
+      -151.95,
+      -135.24,
+      -112.73,
+      15.52,
+      15.7
+     ],
+     "host_params_changed": [
+      "A Coarse Pitch"
+     ]
+    }
+   ],
+   "range": {
+    "declared": {
+     "kind": "explicit",
+     "min": -64.0,
+     "max": 64.0,
+     "default": 0.0
+    },
+    "discovered_default": 0.0,
+    "declared_default_matches": true,
+    "reachable_min": -64.0,
+    "reachable_max": 64.0,
+    "clamp_high_at": 64.0,
+    "clamp_low_at": -64.0,
+    "reaches_beyond_declared_max": false,
+    "probes_dropped": [],
+    "declared_matches_reachable": true,
+    "rows": [
+     {
+      "written": -64.0,
+      "stored": -64.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": -63.0,
+      "stored": -63.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": -1.0,
+      "stored": -1.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 0.0,
+      "stored": null,
+      "fate": "default_omitted",
+      "probe": false
+     },
+     {
+      "written": 1.0,
+      "stored": 1.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 63.0,
+      "stored": 63.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 64.0,
+      "stored": 64.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": -65.0,
+      "stored": -64.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": -64.5,
+      "stored": -64.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": 64.5,
+      "stored": 64.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 65.0,
+      "stored": 64.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": -72.0,
+      "stored": -64.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": 72.0,
+      "stored": 64.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     }
+    ]
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.03,
+    "container_state_identical": true
+   },
+   "noise_floor_db": 0.5
+  },
+  {
+   "atlas_id": "oscA.fine",
+   "context": "OSC_A",
+   "candidate": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamFine"
+    ],
+    "kparam": "kParamFine"
+   },
+   "declared": {
+    "kind": "explicit",
+    "values": [
+     -100.0,
+     -99.0,
+     -1.0,
+     0.0,
+     1.0,
+     99.0,
+     100.0
+    ],
+    "min": -100.0,
+    "max": 100.0,
+    "default": 0.0,
+    "probes": [
+     -101.0,
+     -100.5,
+     100.5,
+     101.0,
+     -80.0,
+     80.0
+    ]
+   },
+   "value_vector": {
+    "values": [
+     -100.0,
+     -99.0,
+     -1.0,
+     0.0,
+     1.0,
+     99.0,
+     100.0
+    ],
+    "probes": [
+     -101.0,
+     -100.5,
+     100.5,
+     101.0,
+     -80.0,
+     80.0
+    ]
+   },
+   "values": [
+    {
+     "written": -100.0,
+     "probe": false,
+     "state_value": -100.0,
+     "state_diff_keys": [
+      "kParamFine"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.28,
+      52.76,
+      48.47
+     ],
+     "band_delta_db": [
+      0.03,
+      0.02,
+      0.17,
+      -0.44,
+      -0.15
+     ],
+     "host_params_changed": [
+      "A Fine"
+     ]
+    },
+    {
+     "written": -99.0,
+     "probe": false,
+     "state_value": -99.0,
+     "state_diff_keys": [
+      "kParamFine"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.28,
+      52.76,
+      48.47
+     ],
+     "band_delta_db": [
+      0.03,
+      0.02,
+      0.17,
+      -0.44,
+      -0.15
+     ],
+     "host_params_changed": [
+      "A Fine"
+     ]
+    },
+    {
+     "written": -1.0,
+     "probe": false,
+     "state_value": -1.0,
+     "state_diff_keys": [
+      "kParamFine"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "band_delta_db": [
+      0.03,
+      0.02,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "host_params_changed": [
+      "A Fine"
+     ]
+    },
+    {
+     "written": 0.0,
+     "probe": false,
+     "state_value": null,
+     "state_diff_keys": [],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "band_delta_db": [
+      0.03,
+      0.02,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "host_params_changed": []
+    },
+    {
+     "written": 1.0,
+     "probe": false,
+     "state_value": 1.0,
+     "state_diff_keys": [
+      "kParamFine"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "band_delta_db": [
+      0.03,
+      0.02,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "host_params_changed": [
+      "A Fine"
+     ]
+    },
+    {
+     "written": 99.0,
+     "probe": false,
+     "state_value": 99.0,
+     "state_diff_keys": [
+      "kParamFine"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.43,
+      60.06,
+      53.37,
+      48.97
+     ],
+     "band_delta_db": [
+      0.03,
+      -0.23,
+      0.95,
+      0.17,
+      0.35
+     ],
+     "host_params_changed": [
+      "A Fine"
+     ]
+    },
+    {
+     "written": 100.0,
+     "probe": false,
+     "state_value": 100.0,
+     "state_diff_keys": [
+      "kParamFine"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.43,
+      60.06,
+      53.37,
+      48.97
+     ],
+     "band_delta_db": [
+      0.03,
+      -0.23,
+      0.95,
+      0.17,
+      0.35
+     ],
+     "host_params_changed": [
+      "A Fine"
+     ]
+    },
+    {
+     "written": -101.0,
+     "probe": true,
+     "state_value": -100.0,
+     "state_diff_keys": [
+      "kParamFine"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.28,
+      52.76,
+      48.47
+     ],
+     "band_delta_db": [
+      0.03,
+      0.02,
+      0.17,
+      -0.44,
+      -0.15
+     ],
+     "host_params_changed": [
+      "A Fine"
+     ]
+    },
+    {
+     "written": -100.5,
+     "probe": true,
+     "state_value": -100.0,
+     "state_diff_keys": [
+      "kParamFine"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.28,
+      52.76,
+      48.47
+     ],
+     "band_delta_db": [
+      0.03,
+      0.02,
+      0.17,
+      -0.44,
+      -0.15
+     ],
+     "host_params_changed": [
+      "A Fine"
+     ]
+    },
+    {
+     "written": 100.5,
+     "probe": true,
+     "state_value": 100.0,
+     "state_diff_keys": [
+      "kParamFine"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.43,
+      60.06,
+      53.37,
+      48.97
+     ],
+     "band_delta_db": [
+      0.03,
+      -0.23,
+      0.95,
+      0.17,
+      0.35
+     ],
+     "host_params_changed": [
+      "A Fine"
+     ]
+    },
+    {
+     "written": 101.0,
+     "probe": true,
+     "state_value": 100.0,
+     "state_diff_keys": [
+      "kParamFine"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.43,
+      60.06,
+      53.37,
+      48.97
+     ],
+     "band_delta_db": [
+      0.03,
+      -0.23,
+      0.95,
+      0.17,
+      0.35
+     ],
+     "host_params_changed": [
+      "A Fine"
+     ]
+    },
+    {
+     "written": -80.0,
+     "probe": true,
+     "state_value": -80.0,
+     "state_diff_keys": [
+      "kParamFine"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.68,
+      59.28,
+      52.76,
+      48.45
+     ],
+     "band_delta_db": [
+      0.03,
+      0.02,
+      0.17,
+      -0.44,
+      -0.17
+     ],
+     "host_params_changed": [
+      "A Fine"
+     ]
+    },
+    {
+     "written": 80.0,
+     "probe": true,
+     "state_value": 80.0,
+     "state_diff_keys": [
+      "kParamFine"
+     ],
+     "file_roundtrip": true,
+     "band_db": [
+      68.77,
+      65.43,
+      60.06,
+      53.41,
+      48.87
+     ],
+     "band_delta_db": [
+      0.03,
+      -0.23,
+      0.95,
+      0.21,
+      0.25
+     ],
+     "host_params_changed": [
+      "A Fine"
+     ]
+    }
+   ],
+   "range": {
+    "declared": {
+     "kind": "explicit",
+     "min": -100.0,
+     "max": 100.0,
+     "default": 0.0
+    },
+    "discovered_default": 0.0,
+    "declared_default_matches": true,
+    "reachable_min": -100.0,
+    "reachable_max": 100.0,
+    "clamp_high_at": 100.0,
+    "clamp_low_at": -100.0,
+    "reaches_beyond_declared_max": false,
+    "probes_dropped": [],
+    "declared_matches_reachable": true,
+    "rows": [
+     {
+      "written": -100.0,
+      "stored": -100.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": -99.0,
+      "stored": -99.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": -1.0,
+      "stored": -1.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 0.0,
+      "stored": null,
+      "fate": "default_omitted",
+      "probe": false
+     },
+     {
+      "written": 1.0,
+      "stored": 1.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 99.0,
+      "stored": 99.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 100.0,
+      "stored": 100.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": -101.0,
+      "stored": -100.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": -100.5,
+      "stored": -100.0,
+      "fate": "clamped_to_min",
+      "probe": true
+     },
+     {
+      "written": 100.5,
+      "stored": 100.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": 101.0,
+      "stored": 100.0,
+      "fate": "clamped_to_max",
+      "probe": true
+     },
+     {
+      "written": -80.0,
+      "stored": -80.0,
+      "fate": "retained",
+      "probe": true
+     },
+     {
+      "written": 80.0,
+      "stored": 80.0,
+      "fate": "retained",
+      "probe": true
+     }
+    ]
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.03,
+    "container_state_identical": true
+   },
+   "noise_floor_db": 0.5
+  }
+ ]
+}

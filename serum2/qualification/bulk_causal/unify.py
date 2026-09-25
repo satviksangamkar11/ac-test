@@ -64,21 +64,37 @@ def pick_pair(rec, control, labels):
     return base, v["state_value"], None
 
 
-def to_binding_evidence(rec, harness, control, labels):
+def parameter_contract(rec, labels, ui, source):
+    """Operand kind + verified domain come from the SWEPT DOMAIN and the evidence, never from the Atlas widget type."""
+    kind = rec["declared"]["kind"]
+    g = rec["range"]
+    if labels:
+        return {"operand_kind": "enum", "domain": {"enum_values": sorted(set(labels.values()), key=list(labels.values()).index)},
+                "ui_semantics": ui, "domain_source": source}
+    if kind == "bool":
+        return {"operand_kind": "boolean", "domain": {}, "ui_semantics": ui, "domain_source": source}
+    if kind == "enum":
+        return None      # an enum with no GUI-proven labels has no contract: raw numbers are not semantics
+    return {"operand_kind": "numeric", "domain": {"lo": g["reachable_min"], "hi": g["reachable_max"]}, "ui_semantics": ui, "domain_source": source}
+
+
+def to_binding_evidence(rec, harness, control, labels, target, ui, source):
     ok, why = causal_ok(rec)
     base, mut, gap = pick_pair(rec, control, labels)
-    if not ok or gap:
-        return None, why + ([gap] if gap else [])
+    pc = parameter_contract(rec, labels, ui, source)
+    if not ok or gap or pc is None:
+        return None, why + ([gap] if gap else []) + ([] if pc is not None else ["enum without GUI-proven labels"])
     path = ".".join(str(p) for p in rec["candidate"]["path"])
-    return {"target": rec["atlas_id"], "derived_body_path": path,
+    return {"target": target, "derived_body_path": path,
             "epoch": {"serum_sha256": harness["serum_sha256"], "product_version": harness.get("product_version", "2.0.23"),
                       "state_version": harness.get("state_version", 9.0)},
             "run_status": "STRUCTURAL_VERIFIED", "restoration_verified": rec["restoration"]["ok"],
             "baseline_value": base, "mutated_value": mut, "persistence_verified": True, "state_changed": True,
+            "parameter_contract": pc,
             "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"}, []
 
 
-def unify(runs, gui_merges, semantic, incidents):
+def unify(runs, gui_merges, semantic, incidents, identity=None, boundary=None):
     from serum2.qualification.evidence_promotion import promote_verified_evidence
     from serum2.reference.serum_atlas import get_control
     display = {}
@@ -86,13 +102,16 @@ def unify(runs, gui_merges, semantic, incidents):
         for t in m["tests"].values():
             display[t["atlas_id"]] = t
     sem = {t["atlas_id"]: t for t in (semantic or {"tests": {}})["tests"].values()}
+    ident = {r["pilot_atlas_id"]: r for r in (identity or {"resolutions": []})["resolutions"]}
+    bnd = {c["atlas_id"]: c for c in (boundary or {"conflicts": []})["conflicts"]}
     out = []
     for run in runs:
         h = run["harness"]
         for rec in run["records"]:
-            aid = rec["atlas_id"]
+            pilot_id = rec["atlas_id"]
+            aid = (ident.get(pilot_id) or {}).get("resolved_atlas_id", pilot_id)   # resolved against EXISTING Atlas ids only
             control = get_control(aid)
-            s = sem.get(aid) or {}
+            s = sem.get(pilot_id) or {}
             labels = s.get("raw_to_label") if s.get("status") == "SEMANTIC_BINDING_PROVEN" else None
             ok, why = causal_ok(rec)
             g = rec["range"]
@@ -101,17 +120,30 @@ def unify(runs, gui_merges, semantic, incidents):
                 if not close(g["reachable_min"], control.min_value) or not close(g["reachable_max"], control.max_value):
                     conflicts.append({"atlas_declared": [control.min_value, control.max_value],
                                       "serum_reachable": [g["reachable_min"], g["reachable_max"]]})
-            ev, gap = to_binding_evidence(rec, h, control, labels)
+            d = display.get(pilot_id)
+            if d is not None and d["status"] == "DISPLAY_CONSISTENT":
+                ui = {"status": "VERIFIED", "evidence": "gui display merge: DISPLAY_CONSISTENT (%s)" % d["effective_display_range"]}
+            elif s.get("status") == "SEMANTIC_BINDING_PROVEN":
+                ui = {"status": "VERIFIED", "evidence": "gui semantic labels"}
+            elif pilot_id in ident:
+                ui = {"status": "PARTIAL", "evidence": "identity by GUI tooltip/readout at sampled values only; domain edges not shown in the UI"}
+            else:
+                ui = {"status": "NOT_VERIFIED", "evidence": None}
+            if pilot_id in bnd:    # boundary + one-beyond evidence (state AND GUI) resolves the domain
+                g = dict(rec["range"], reachable_min=bnd[pilot_id]["resolved_domain"][0], reachable_max=bnd[pilot_id]["resolved_domain"][1])
+                rec = dict(rec, range=g)
+                ui = {"status": "VERIFIED", "evidence": "boundary + one-beyond, state and GUI (atlas_conflict_resolution_v1.json)"}
+            ev, gap = to_binding_evidence(rec, h, control, labels, aid, ui, "bulk_causal:%s" % h.get("manifest", "?").split("/")[-1].split("\\")[-1])
             dry = None
             if ev is not None:
                 r = promote_verified_evidence(ev)
                 dry = {"promoted": r.promoted, "reason": r.reason, "detail": r.detail, "contract_status": getattr(r.contract, "status", None)}
-            d = display.get(aid)
             blocked = ([] if control is not None else ["NO_ATLAS_IDENTITY"]) + (["ATLAS_DOMAIN_CONFLICT"] if conflicts else []) \
                 + (gap if ev is None else []) + ([dry["reason"]] if dry and not dry["promoted"] else [])
             blocked = list(dict.fromkeys(blocked))
             out.append({
-                "atlas_id": aid, "context": rec["context"], "candidate": rec["candidate"],
+                "atlas_id": aid, "pilot_atlas_id": pilot_id, "duplicate_atlas_ids": (ident.get(pilot_id) or {}).get("duplicate_atlas_ids", []),
+                "ui_semantics": ui, "context": rec["context"], "candidate": rec["candidate"],
                 "engine_contract_version": h.get("engine_contract_version", 1), "source_manifest_sha256": h["manifest_sha256"],
                 "tiers": {"causal_raw": {"ok": ok, "reasons": why},
                           "range": {k: g[k] for k in ("discovered_default", "reachable_min", "reachable_max", "clamp_low_at", "clamp_high_at",
@@ -130,7 +162,7 @@ def main(out_path):
     runs = [r for r in (load("bulk_fx_eq_pilot_v1.json"), load("bulk_osc_a_pilot_v1.json")) if r]
     merges = [m for m in (load("gui_range_merge_v1.json"), load("gui_osc_merge_v1.json")) if m]
     inc = load("incidents_v1.json")["incidents"]
-    recs = unify(runs, merges, load("semantic_fx_v1.json"), inc)
+    recs = unify(runs, merges, load("semantic_fx_v1.json"), inc, load("identity_resolution_v1.json"), load("atlas_conflict_resolution_v1.json"))
     summary = {"records": len(recs), "eligible_for_promotion_review": sum(r["eligible_for_promotion_review"] for r in recs),
                "atlas_domain_conflicts": sum(1 for r in recs if r["atlas_domain_conflicts"]), "blocked_reasons": {}}
     for r in recs:

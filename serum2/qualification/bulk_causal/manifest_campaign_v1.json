@@ -1,0 +1,4865 @@
+{
+ "version": 2,
+ "kind": "bulk_context",
+ "note": 48,
+ "render_sec": 1.0,
+ "bands": [
+  20,
+  200,
+  800,
+  3000,
+  8000,
+  20000
+ ],
+ "min_noise_floor_db": 0.5,
+ "session_size": 30,
+ "contexts": {
+  "INIT": {
+   "preset_name": "QUAL_INIT",
+   "fx": []
+  },
+  "FX_FXBode": {
+   "preset_name": "QUAL_FX_FXBode",
+   "fx": [
+    {
+     "type": "FXBode",
+     "params": {}
+    }
+   ]
+  },
+  "FX_FXChorus": {
+   "preset_name": "QUAL_FX_FXChorus",
+   "fx": [
+    {
+     "type": "FXChorus",
+     "params": {}
+    }
+   ]
+  },
+  "FX_FXComp": {
+   "preset_name": "QUAL_FX_FXComp",
+   "fx": [
+    {
+     "type": "FXComp",
+     "params": {}
+    }
+   ]
+  },
+  "FX_FXConv": {
+   "preset_name": "QUAL_FX_FXConv",
+   "fx": [
+    {
+     "type": "FXConv",
+     "params": {}
+    }
+   ]
+  },
+  "FX_FXDelay": {
+   "preset_name": "QUAL_FX_FXDelay",
+   "fx": [
+    {
+     "type": "FXDelay",
+     "params": {}
+    }
+   ]
+  },
+  "FX_FXHyperD": {
+   "preset_name": "QUAL_FX_FXHyperD",
+   "fx": [
+    {
+     "type": "FXHyperD",
+     "params": {}
+    }
+   ]
+  },
+  "FX_FXDistortion": {
+   "preset_name": "QUAL_FX_FXDistortion",
+   "fx": [
+    {
+     "type": "FXDistortion",
+     "params": {}
+    }
+   ]
+  },
+  "FX_FXEQ": {
+   "preset_name": "QUAL_FX_FXEQ",
+   "fx": [
+    {
+     "type": "FXEQ",
+     "params": {}
+    }
+   ]
+  },
+  "FX_FXFilter": {
+   "preset_name": "QUAL_FX_FXFilter",
+   "fx": [
+    {
+     "type": "FXFilter",
+     "params": {}
+    }
+   ]
+  },
+  "FX_FXFlanger": {
+   "preset_name": "QUAL_FX_FXFlanger",
+   "fx": [
+    {
+     "type": "FXFlanger",
+     "params": {}
+    }
+   ]
+  },
+  "FX_FXPhaser": {
+   "preset_name": "QUAL_FX_FXPhaser",
+   "fx": [
+    {
+     "type": "FXPhaser",
+     "params": {}
+    }
+   ]
+  },
+  "FX_FXReverb": {
+   "preset_name": "QUAL_FX_FXReverb",
+   "fx": [
+    {
+     "type": "FXReverb",
+     "params": {}
+    }
+   ]
+  }
+ },
+ "parameters": [
+  {
+   "atlas_id": "arp.pattern.rate",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "ArpClip0",
+     "plainParams",
+     "kParamRate"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "arp.playback.chance",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "ArpClip0",
+     "plainParams",
+     "kParamChance"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "arp.playback.gate",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "ArpClip0",
+     "plainParams",
+     "kParamGate"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 200.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "arp.playback.thru",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "ArpClip0",
+     "plainParams",
+     "kParamThru"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "arp.retrigger.first",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "ArpClip0",
+     "plainParams",
+     "kParamFirstNoteRetrig"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "arp.retrigger.launch",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "ArpClip0",
+     "plainParams",
+     "kParamLaunchRetrig"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "arp.retrigger.note",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "ArpClip0",
+     "plainParams",
+     "kParamNoteRetrig"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "arp.transpose.range",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "ArpClip0",
+     "plainParams",
+     "kParamTransposeRange"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 24.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "arp.transpose.shift",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "ArpClip0",
+     "plainParams",
+     "kParamTransposeShift"
+    ]
+   },
+   "domain": {
+    "kind": "signed",
+    "min": -24.0,
+    "max": 24.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "arp.velocity.enable",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "ArpClip0",
+     "plainParams",
+     "kParamVeloEnabled"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "arp.velocity.retrig",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "ArpClip0",
+     "plainParams",
+     "kParamVeloRetrig"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "arp.velocity.target",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "ArpClip0",
+     "plainParams",
+     "kParamVeloTarget"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "env1.attack",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Env0",
+     "plainParams",
+     "kParamAttack"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 10.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "env1.attack_curve",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Env0",
+     "plainParams",
+     "kParamCurve1"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "env1.decay",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Env0",
+     "plainParams",
+     "kParamDecay"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 32.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "env1.decay_curve",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Env0",
+     "plainParams",
+     "kParamCurve2"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "env1.hold",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Env0",
+     "plainParams",
+     "kParamHold"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 5.2
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "env1.release",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Env0",
+     "plainParams",
+     "kParamRelease"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 32.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "env1.release_curve",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Env0",
+     "plainParams",
+     "kParamCurve3"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "env1.sustain",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Env0",
+     "plainParams",
+     "kParamSustain"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "env2.attack",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Env1",
+     "plainParams",
+     "kParamAttack"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 10.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "env2.attack_curve",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Env1",
+     "plainParams",
+     "kParamCurve1"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "env2.decay",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Env1",
+     "plainParams",
+     "kParamDecay"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 32.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "env2.decay_curve",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Env1",
+     "plainParams",
+     "kParamCurve2"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "env2.hold",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Env1",
+     "plainParams",
+     "kParamHold"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 5.2
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "env2.release",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Env1",
+     "plainParams",
+     "kParamRelease"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 32.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "env2.release_curve",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Env1",
+     "plainParams",
+     "kParamCurve3"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "env2.sustain",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Env1",
+     "plainParams",
+     "kParamSustain"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "env3.attack",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Env2",
+     "plainParams",
+     "kParamAttack"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 10.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "env3.attack_curve",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Env2",
+     "plainParams",
+     "kParamCurve1"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "env3.decay",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Env2",
+     "plainParams",
+     "kParamDecay"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 32.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "env3.decay_curve",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Env2",
+     "plainParams",
+     "kParamCurve2"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "env3.hold",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Env2",
+     "plainParams",
+     "kParamHold"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 5.2
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "env3.release",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Env2",
+     "plainParams",
+     "kParamRelease"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 32.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "env3.release_curve",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Env2",
+     "plainParams",
+     "kParamCurve3"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "env3.sustain",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Env2",
+     "plainParams",
+     "kParamSustain"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "env4.attack",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Env3",
+     "plainParams",
+     "kParamAttack"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 10.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "env4.attack_curve",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Env3",
+     "plainParams",
+     "kParamCurve1"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "env4.decay",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Env3",
+     "plainParams",
+     "kParamDecay"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 32.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "env4.decay_curve",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Env3",
+     "plainParams",
+     "kParamCurve2"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "env4.hold",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Env3",
+     "plainParams",
+     "kParamHold"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 5.2
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "env4.release",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Env3",
+     "plainParams",
+     "kParamRelease"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 32.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "env4.release_curve",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Env3",
+     "plainParams",
+     "kParamCurve3"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "env4.sustain",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Env3",
+     "plainParams",
+     "kParamSustain"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "filter1.cutoff",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "VoiceFilter0",
+     "plainParams",
+     "kParamFreq"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "filter1.drive",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "VoiceFilter0",
+     "plainParams",
+     "kParamDrive"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "filter1.enabled",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "VoiceFilter0",
+     "plainParams",
+     "kParamEnable"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "filter1.key_track",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "VoiceFilter0",
+     "plainParams",
+     "kParamKeyTrack"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "filter1.level_out",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "VoiceFilter0",
+     "plainParams",
+     "kParamLevelOut"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "filter1.resonance",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "VoiceFilter0",
+     "plainParams",
+     "kParamReso"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "filter1.stereo",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "VoiceFilter0",
+     "plainParams",
+     "kParamStereo"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "filter1.var",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "VoiceFilter0",
+     "plainParams",
+     "kParamVar"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "filter1.wet",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "VoiceFilter0",
+     "plainParams",
+     "kParamWet"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "filter2.cutoff",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "VoiceFilter1",
+     "plainParams",
+     "kParamFreq"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "filter2.drive",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "VoiceFilter1",
+     "plainParams",
+     "kParamDrive"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "filter2.enabled",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "VoiceFilter1",
+     "plainParams",
+     "kParamEnable"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "filter2.key_track",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "VoiceFilter1",
+     "plainParams",
+     "kParamKeyTrack"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "filter2.level_out",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "VoiceFilter1",
+     "plainParams",
+     "kParamLevelOut"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "filter2.resonance",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "VoiceFilter1",
+     "plainParams",
+     "kParamReso"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "filter2.stereo",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "VoiceFilter1",
+     "plainParams",
+     "kParamStereo"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "filter2.var",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "VoiceFilter1",
+     "plainParams",
+     "kParamVar"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "filter2.wet",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "VoiceFilter1",
+     "plainParams",
+     "kParamWet"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "fx.bode.blur",
+   "context": "FX_FXBode",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXBode",
+     "plainParams",
+     "kParamBlur"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.bode.range",
+   "context": "FX_FXBode",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXBode",
+     "plainParams",
+     "kParamRange"
+    ]
+   },
+   "domain": {
+    "kind": "log",
+    "min": 0.1,
+    "max": 3043.2
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.bode.shift",
+   "context": "FX_FXBode",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXBode",
+     "plainParams",
+     "kParamShift"
+    ]
+   },
+   "domain": {
+    "kind": "signed",
+    "min": -100.0,
+    "max": 82.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.bode.wet",
+   "context": "FX_FXBode",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXBode",
+     "plainParams",
+     "kParamWet"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.chorus.depth",
+   "context": "FX_FXChorus",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXChorus",
+     "plainParams",
+     "kParamDepth"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 26.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.chorus.feedback",
+   "context": "FX_FXChorus",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXChorus",
+     "plainParams",
+     "kParamFeedback"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 75.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.chorus.rate",
+   "context": "FX_FXChorus",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXChorus",
+     "plainParams",
+     "kParamRate"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 20.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.chorus.wet",
+   "context": "FX_FXChorus",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXChorus",
+     "plainParams",
+     "kParamWet"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.compressor.attack",
+   "context": "FX_FXComp",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXComp",
+     "plainParams",
+     "kParamAttack"
+    ]
+   },
+   "domain": {
+    "kind": "log",
+    "min": 0.1,
+    "max": 1000.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.compressor.gain",
+   "context": "FX_FXComp",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXComp",
+     "plainParams",
+     "kParamMakeup"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 1.0,
+    "max": 32.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.compressor.ratio",
+   "context": "FX_FXComp",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXComp",
+     "plainParams",
+     "kParamRatio"
+    ]
+   },
+   "domain": {
+    "kind": "log",
+    "min": 1.0,
+    "max": 1000000.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.compressor.release",
+   "context": "FX_FXComp",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXComp",
+     "plainParams",
+     "kParamRelease"
+    ]
+   },
+   "domain": {
+    "kind": "log",
+    "min": 0.1,
+    "max": 1000.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.compressor.thresh",
+   "context": "FX_FXComp",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXComp",
+     "plainParams",
+     "kParamThresh"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.compressor.wet",
+   "context": "FX_FXComp",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXComp",
+     "plainParams",
+     "kParamWet"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.convolve.decay",
+   "context": "FX_FXConv",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXConv",
+     "plainParams",
+     "kParamDecay"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 40.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.convolve.size",
+   "context": "FX_FXConv",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXConv",
+     "plainParams",
+     "kParamSize"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 10.0,
+    "max": 1000.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.convolve.tone",
+   "context": "FX_FXConv",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXConv",
+     "plainParams",
+     "kParamTone"
+    ]
+   },
+   "domain": {
+    "kind": "signed",
+    "min": -100.0,
+    "max": 85.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.convolve.wet",
+   "context": "FX_FXConv",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXConv",
+     "plainParams",
+     "kParamWet"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.delay.bpm",
+   "context": "FX_FXDelay",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXDelay",
+     "plainParams",
+     "kParamBeatSync"
+    ]
+   },
+   "domain": {
+    "kind": "bool"
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.delay.feedback",
+   "context": "FX_FXDelay",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXDelay",
+     "plainParams",
+     "kParamFeedback"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 90.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.delay.freq",
+   "context": "FX_FXDelay",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXDelay",
+     "plainParams",
+     "kParamFreq"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 49.5,
+    "max": 17981.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.delay.link",
+   "context": "FX_FXDelay",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXDelay",
+     "plainParams",
+     "kParamLink"
+    ]
+   },
+   "domain": {
+    "kind": "bool"
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.delay.time_l",
+   "context": "FX_FXDelay",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXDelay",
+     "plainParams",
+     "kParamTimeL"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.001,
+    "max": 0.34
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.delay.time_r",
+   "context": "FX_FXDelay",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXDelay",
+     "plainParams",
+     "kParamTimeR"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.001,
+    "max": 0.32
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.delay.wet",
+   "context": "FX_FXDelay",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXDelay",
+     "plainParams",
+     "kParamWet"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.dimension.size",
+   "context": "FX_FXHyperD",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXHyperD",
+     "plainParams",
+     "kParamDimESize"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.dimension.wet",
+   "context": "FX_FXHyperD",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXHyperD",
+     "plainParams",
+     "kParamDimEWet"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.distortion.drive",
+   "context": "FX_FXDistortion",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXDistortion",
+     "plainParams",
+     "kParamDrive"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.distortion.freq",
+   "context": "FX_FXDistortion",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXDistortion",
+     "plainParams",
+     "kParamFreq"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.distortion.wet",
+   "context": "FX_FXDistortion",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXDistortion",
+     "plainParams",
+     "kParamWet"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.equalizer.left_freq",
+   "context": "FX_FXEQ",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXEQ",
+     "plainParams",
+     "kParamFreq1"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 21.5,
+    "max": 10000.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.equalizer.left_gain",
+   "context": "FX_FXEQ",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXEQ",
+     "plainParams",
+     "kParamGain1"
+    ]
+   },
+   "domain": {
+    "kind": "signed",
+    "min": -24.0,
+    "max": 24.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.equalizer.left_q",
+   "context": "FX_FXEQ",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXEQ",
+     "plainParams",
+     "kParamReso1"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.equalizer.right_freq",
+   "context": "FX_FXEQ",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXEQ",
+     "plainParams",
+     "kParamFreq2"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 21.5,
+    "max": 20000.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.equalizer.right_gain",
+   "context": "FX_FXEQ",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXEQ",
+     "plainParams",
+     "kParamGain2"
+    ]
+   },
+   "domain": {
+    "kind": "signed",
+    "min": -24.0,
+    "max": 24.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.equalizer.right_q",
+   "context": "FX_FXEQ",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXEQ",
+     "plainParams",
+     "kParamReso2"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 95.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.filter.cutoff",
+   "context": "FX_FXFilter",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXFilter",
+     "plainParams",
+     "kParamFreq"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.filter.drive",
+   "context": "FX_FXFilter",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXFilter",
+     "plainParams",
+     "kParamDrive"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.filter.res",
+   "context": "FX_FXFilter",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXFilter",
+     "plainParams",
+     "kParamReso"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.filter.wet",
+   "context": "FX_FXFilter",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXFilter",
+     "plainParams",
+     "kParamWet"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.flanger.depth",
+   "context": "FX_FXFlanger",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXFlanger",
+     "plainParams",
+     "kParamDepth"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.flanger.feedback",
+   "context": "FX_FXFlanger",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXFlanger",
+     "plainParams",
+     "kParamFeedback"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.flanger.rate",
+   "context": "FX_FXFlanger",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXFlanger",
+     "plainParams",
+     "kParamRate"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 10.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.flanger.wet",
+   "context": "FX_FXFlanger",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXFlanger",
+     "plainParams",
+     "kParamWet"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.hyper.detune",
+   "context": "FX_FXHyperD",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXHyperD",
+     "plainParams",
+     "kParamDetune"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.hyper.rate",
+   "context": "FX_FXHyperD",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXHyperD",
+     "plainParams",
+     "kParamRate"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.hyper.unison",
+   "context": "FX_FXHyperD",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXHyperD",
+     "plainParams",
+     "kParamUnison"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 7.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.hyper.wet",
+   "context": "FX_FXHyperD",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXHyperD",
+     "plainParams",
+     "kParamWet"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.phaser.depth",
+   "context": "FX_FXPhaser",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXPhaser",
+     "plainParams",
+     "kParamDepth"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.phaser.feedback",
+   "context": "FX_FXPhaser",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXPhaser",
+     "plainParams",
+     "kParamFeedback"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.phaser.freq",
+   "context": "FX_FXPhaser",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXPhaser",
+     "plainParams",
+     "kParamFreq"
+    ]
+   },
+   "domain": {
+    "kind": "log",
+    "min": 20.0,
+    "max": 20000.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.phaser.rate",
+   "context": "FX_FXPhaser",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXPhaser",
+     "plainParams",
+     "kParamRate"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 20.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.phaser.wet",
+   "context": "FX_FXPhaser",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXPhaser",
+     "plainParams",
+     "kParamWet"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.reverb.size",
+   "context": "FX_FXReverb",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXReverb",
+     "plainParams",
+     "kParamSize"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.reverb.wet",
+   "context": "FX_FXReverb",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXReverb",
+     "plainParams",
+     "kParamWet"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "global.legato",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Global0",
+     "plainParams",
+     "kParamLegato"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "global.limit_same_note_polyphony",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Global0",
+     "plainParams",
+     "kParamLimitSameNotePolyphony"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "global.master_volume",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Global0",
+     "plainParams",
+     "kParamMasterVolume"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "global.mono",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Global0",
+     "plainParams",
+     "kParamMonoToggle"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "global.note_latch",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Global0",
+     "plainParams",
+     "kParamNoteLatch"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "global.poly_count",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Global0",
+     "plainParams",
+     "kParamPolyCount"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 1.0,
+    "max": 32.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "global.porta_always",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Global0",
+     "plainParams",
+     "kParamPortaAlways"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "global.porta_scaled",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Global0",
+     "plainParams",
+     "kParamPortaScaled"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "global.portamento_time",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Global0",
+     "plainParams",
+     "kParamPortamentoTime"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 3.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "global.s1_compatibility",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Global0",
+     "plainParams",
+     "kParamS1Compatibility"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "global.swing",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Global0",
+     "plainParams",
+     "kParamSwing"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "global.use_ultra_on_render",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Global0",
+     "plainParams",
+     "kParamUseUltraOnRender"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "global.voice_control.random.pan",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "VoicePanel0",
+     "plainParams",
+     "kParamGlobalRandomOscPan"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo1.beat_sync",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO0",
+     "plainParams",
+     "kParamBeatSync"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo1.delay",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO0",
+     "plainParams",
+     "kParamDelay"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 3.6
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo1.dotted",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO0",
+     "plainParams",
+     "kParamDotted"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo1.mono",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO0",
+     "plainParams",
+     "kParamMono"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo1.rate",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO0",
+     "plainParams",
+     "kParamRate"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo1.rate_10x",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO0",
+     "plainParams",
+     "kParamRate10x"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo1.rise",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO0",
+     "plainParams",
+     "kParamRise"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 5.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo1.smooth",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO0",
+     "plainParams",
+     "kParamSmooth"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo1.swing",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO0",
+     "plainParams",
+     "kParamSwing"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo1.triplets",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO0",
+     "plainParams",
+     "kParamTriplets"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo2.beat_sync",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO1",
+     "plainParams",
+     "kParamBeatSync"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo2.delay",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO1",
+     "plainParams",
+     "kParamDelay"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 3.6
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo2.dotted",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO1",
+     "plainParams",
+     "kParamDotted"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo2.mono",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO1",
+     "plainParams",
+     "kParamMono"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo2.rate",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO1",
+     "plainParams",
+     "kParamRate"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo2.rate_10x",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO1",
+     "plainParams",
+     "kParamRate10x"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo2.rise",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO1",
+     "plainParams",
+     "kParamRise"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 5.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo2.smooth",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO1",
+     "plainParams",
+     "kParamSmooth"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo2.swing",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO1",
+     "plainParams",
+     "kParamSwing"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo2.triplets",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO1",
+     "plainParams",
+     "kParamTriplets"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo3.beat_sync",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO2",
+     "plainParams",
+     "kParamBeatSync"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo3.delay",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO2",
+     "plainParams",
+     "kParamDelay"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 3.6
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo3.dotted",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO2",
+     "plainParams",
+     "kParamDotted"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo3.mono",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO2",
+     "plainParams",
+     "kParamMono"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo3.rate",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO2",
+     "plainParams",
+     "kParamRate"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo3.rate_10x",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO2",
+     "plainParams",
+     "kParamRate10x"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo3.rise",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO2",
+     "plainParams",
+     "kParamRise"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 5.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo3.smooth",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO2",
+     "plainParams",
+     "kParamSmooth"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo3.swing",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO2",
+     "plainParams",
+     "kParamSwing"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo3.triplets",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO2",
+     "plainParams",
+     "kParamTriplets"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo4.beat_sync",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO3",
+     "plainParams",
+     "kParamBeatSync"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo4.delay",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO3",
+     "plainParams",
+     "kParamDelay"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 3.6
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo4.dotted",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO3",
+     "plainParams",
+     "kParamDotted"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo4.mono",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO3",
+     "plainParams",
+     "kParamMono"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo4.rate",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO3",
+     "plainParams",
+     "kParamRate"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo4.rate_10x",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO3",
+     "plainParams",
+     "kParamRate10x"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo4.rise",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO3",
+     "plainParams",
+     "kParamRise"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 5.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo4.smooth",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO3",
+     "plainParams",
+     "kParamSmooth"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo4.swing",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO3",
+     "plainParams",
+     "kParamSwing"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo4.triplets",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO3",
+     "plainParams",
+     "kParamTriplets"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo5.beat_sync",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO4",
+     "plainParams",
+     "kParamBeatSync"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo5.delay",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO4",
+     "plainParams",
+     "kParamDelay"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 3.6
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo5.dotted",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO4",
+     "plainParams",
+     "kParamDotted"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo5.mono",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO4",
+     "plainParams",
+     "kParamMono"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo5.rate",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO4",
+     "plainParams",
+     "kParamRate"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo5.rate_10x",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO4",
+     "plainParams",
+     "kParamRate10x"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo5.rise",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO4",
+     "plainParams",
+     "kParamRise"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 5.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo5.smooth",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO4",
+     "plainParams",
+     "kParamSmooth"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo5.swing",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO4",
+     "plainParams",
+     "kParamSwing"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo5.triplets",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO4",
+     "plainParams",
+     "kParamTriplets"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo6.beat_sync",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO5",
+     "plainParams",
+     "kParamBeatSync"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo6.delay",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO5",
+     "plainParams",
+     "kParamDelay"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 3.6
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo6.dotted",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO5",
+     "plainParams",
+     "kParamDotted"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo6.mono",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO5",
+     "plainParams",
+     "kParamMono"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo6.rate",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO5",
+     "plainParams",
+     "kParamRate"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo6.rate_10x",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO5",
+     "plainParams",
+     "kParamRate10x"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo6.rise",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO5",
+     "plainParams",
+     "kParamRise"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 5.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo6.smooth",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO5",
+     "plainParams",
+     "kParamSmooth"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo6.swing",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO5",
+     "plainParams",
+     "kParamSwing"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo6.triplets",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO5",
+     "plainParams",
+     "kParamTriplets"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "macro1.value",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Macro0",
+     "plainParams",
+     "kParamValue"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "macro2.value",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Macro1",
+     "plainParams",
+     "kParamValue"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "macro3.value",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Macro2",
+     "plainParams",
+     "kParamValue"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "macro4.value",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Macro3",
+     "plainParams",
+     "kParamValue"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "macro5.value",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Macro4",
+     "plainParams",
+     "kParamValue"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "macro6.value",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Macro5",
+     "plainParams",
+     "kParamValue"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "macro7.value",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Macro6",
+     "plainParams",
+     "kParamValue"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "macro8.value",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Macro7",
+     "plainParams",
+     "kParamValue"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "mixer.filter1.bus1",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "RoutingSlot5",
+     "plainParams"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "mixer.filter1.bus2",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "RoutingSlot5",
+     "plainParams"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "mixer.filter1.enable",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "VoiceFilter0",
+     "plainParams",
+     "kParamEnable"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "mixer.filter1.wet",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "VoiceFilter0",
+     "plainParams",
+     "kParamWet"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "mixer.filter2.bus1",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "RoutingSlot6",
+     "plainParams"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "mixer.filter2.bus2",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "RoutingSlot6",
+     "plainParams"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "mixer.filter2.enable",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "VoiceFilter1",
+     "plainParams",
+     "kParamEnable"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "mixer.filter2.wet",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "VoiceFilter1",
+     "plainParams",
+     "kParamWet"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "mixer.noise.bus1",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "RoutingSlot3",
+     "plainParams"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "mixer.noise.bus2",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "RoutingSlot3",
+     "plainParams"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "mixer.noise.enable",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator3",
+     "plainParams",
+     "kParamEnable"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "mixer.noise.filter_balance",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "RoutingSlot3",
+     "plainParams"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "mixer.noise.pan",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator3",
+     "plainParams",
+     "kParamPan"
+    ]
+   },
+   "domain": {
+    "kind": "signed",
+    "min": -50.0,
+    "max": 50.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "mixer.osc_a.bus1",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "RoutingSlot0",
+     "plainParams"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "mixer.osc_a.bus2",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "RoutingSlot0",
+     "plainParams"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "mixer.osc_a.filter_balance",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "RoutingSlot0",
+     "plainParams"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "mixer.osc_b.bus1",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "RoutingSlot1",
+     "plainParams"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "mixer.osc_b.bus2",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "RoutingSlot1",
+     "plainParams"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "mixer.osc_b.filter_balance",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "RoutingSlot1",
+     "plainParams"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "mixer.osc_c.bus1",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "RoutingSlot2",
+     "plainParams"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "mixer.osc_c.bus2",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "RoutingSlot2",
+     "plainParams"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "mixer.osc_c.filter_balance",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "RoutingSlot2",
+     "plainParams"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "mixer.sub.bus1",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "RoutingSlot4",
+     "plainParams"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "mixer.sub.bus2",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "RoutingSlot4",
+     "plainParams"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "mixer.sub.enable",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator4",
+     "plainParams",
+     "kParamEnable"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "mixer.sub.filter_balance",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "RoutingSlot4",
+     "plainParams"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "mixer.sub.pan",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator4",
+     "plainParams",
+     "kParamPan"
+    ]
+   },
+   "domain": {
+    "kind": "signed",
+    "min": -50.0,
+    "max": 50.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscA.detune",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamDetune"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscA.enabled",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamEnable"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscA.fine",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamFine"
+    ]
+   },
+   "domain": {
+    "kind": "signed",
+    "min": -80.0,
+    "max": 80.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscA.octave",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamOctave"
+    ]
+   },
+   "domain": {
+    "kind": "signed",
+    "min": -4.0,
+    "max": 4.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscA.pan",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamPan"
+    ]
+   },
+   "domain": {
+    "kind": "signed",
+    "min": -50.0,
+    "max": 50.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscA.semitone",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamPitch"
+    ]
+   },
+   "domain": {
+    "kind": "signed",
+    "min": -12.0,
+    "max": 12.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscA.unison",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamUnison"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 1.0,
+    "max": 16.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscA.warp_amount",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "WTOsc0",
+     "plainParams",
+     "kParamWarp"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscA.warp_var2",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "WTOsc0",
+     "plainParams",
+     "kParamWarpVar2"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscB.detune",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator1",
+     "plainParams",
+     "kParamDetune"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscB.enabled",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator1",
+     "plainParams",
+     "kParamEnable"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscB.fine",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator1",
+     "plainParams",
+     "kParamFine"
+    ]
+   },
+   "domain": {
+    "kind": "signed",
+    "min": -80.0,
+    "max": 80.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscB.octave",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator1",
+     "plainParams",
+     "kParamOctave"
+    ]
+   },
+   "domain": {
+    "kind": "signed",
+    "min": -4.0,
+    "max": 4.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscB.pan",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator1",
+     "plainParams",
+     "kParamPan"
+    ]
+   },
+   "domain": {
+    "kind": "signed",
+    "min": -50.0,
+    "max": 50.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscB.semitone",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator1",
+     "plainParams",
+     "kParamPitch"
+    ]
+   },
+   "domain": {
+    "kind": "signed",
+    "min": -12.0,
+    "max": 12.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscB.unison",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator1",
+     "plainParams",
+     "kParamUnison"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 1.0,
+    "max": 16.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscB.warp_amount",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator1",
+     "WTOsc1",
+     "plainParams",
+     "kParamWarp"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscB.warp_var2",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator1",
+     "WTOsc1",
+     "plainParams",
+     "kParamWarpVar2"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscC.detune",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator2",
+     "plainParams",
+     "kParamDetune"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscC.enabled",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator2",
+     "plainParams",
+     "kParamEnable"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscC.fine",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator2",
+     "plainParams",
+     "kParamFine"
+    ]
+   },
+   "domain": {
+    "kind": "signed",
+    "min": -80.0,
+    "max": 80.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscC.octave",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator2",
+     "plainParams",
+     "kParamOctave"
+    ]
+   },
+   "domain": {
+    "kind": "signed",
+    "min": -4.0,
+    "max": 4.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscC.pan",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator2",
+     "plainParams",
+     "kParamPan"
+    ]
+   },
+   "domain": {
+    "kind": "signed",
+    "min": -50.0,
+    "max": 50.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscC.semitone",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator2",
+     "plainParams",
+     "kParamPitch"
+    ]
+   },
+   "domain": {
+    "kind": "signed",
+    "min": -12.0,
+    "max": 12.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscC.unison",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator2",
+     "plainParams",
+     "kParamUnison"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 1.0,
+    "max": 16.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscC.warp_amount",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator2",
+     "WTOsc2",
+     "plainParams",
+     "kParamWarp"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscC.warp_var2",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator2",
+     "WTOsc2",
+     "plainParams",
+     "kParamWarpVar2"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscNoise.fine",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator3",
+     "plainParams",
+     "kParamFine"
+    ]
+   },
+   "domain": {
+    "kind": "signed",
+    "min": -80.0,
+    "max": 80.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscNoise.pan",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator3",
+     "plainParams",
+     "kParamPan"
+    ]
+   },
+   "domain": {
+    "kind": "signed",
+    "min": -50.0,
+    "max": 50.0
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "voice.voicing.legato",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Global0",
+     "plainParams",
+     "kParamLegato"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "voice.voicing.mono",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Global0",
+     "plainParams",
+     "kParamMonoToggle"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "voice.voicing.porta_always",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Global0",
+     "plainParams",
+     "kParamPortaAlways"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "voice.voicing.porta_scaled",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Global0",
+     "plainParams",
+     "kParamPortaScaled"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  }
+ ]
+}

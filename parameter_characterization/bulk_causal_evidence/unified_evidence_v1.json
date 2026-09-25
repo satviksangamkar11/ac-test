@@ -4,11 +4,10 @@
  "changes_no_authority_file": true,
  "summary": {
   "records": 26,
-  "eligible_for_promotion_review": 9,
+  "eligible_for_promotion_review": 10,
   "atlas_domain_conflicts": 2,
   "blocked_reasons": {
-   "MISSING_DOMAIN": 8,
-   "NO_ATLAS_IDENTITY": 7,
+   "UI_SEMANTICS_NOT_VERIFIED": 14,
    "ATLAS_DOMAIN_CONFLICT": 2
   }
  },
@@ -27,6 +26,12 @@
  "records": [
   {
    "atlas_id": "fx.equalizer.left_freq",
+   "pilot_atlas_id": "fx.equalizer.left_freq",
+   "duplicate_atlas_ids": [],
+   "ui_semantics": {
+    "status": "VERIFIED",
+    "evidence": "gui display merge: DISPLAY_CONSISTENT ([22, 20000])"
+   },
    "context": "FX_EQ",
    "candidate": {
     "kind": "fx_param",
@@ -85,25 +90,41 @@
     "mutated_value": 10000.000000000005,
     "persistence_verified": true,
     "state_changed": true,
+    "parameter_contract": {
+     "operand_kind": "numeric",
+     "domain": {
+      "lo": 21.53320125,
+      "hi": 20000.0
+     },
+     "ui_semantics": {
+      "status": "VERIFIED",
+      "evidence": "gui display merge: DISPLAY_CONSISTENT ([22, 20000])"
+     },
+     "domain_source": "bulk_causal:manifest_bulk_fx_eq_pilot_v1.json"
+    },
     "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
    },
    "promotion_input_gap": [],
    "promotion_dry_run": {
-    "promoted": false,
-    "reason": "MISSING_DOMAIN",
-    "detail": "Atlas control_type='knob' has no generic operand mapping",
-    "contract_status": null
+    "promoted": true,
+    "reason": "PROMOTED",
+    "detail": "",
+    "contract_status": "STRUCTURAL_ONLY"
    },
-   "blocked_by": [
-    "MISSING_DOMAIN"
-   ],
-   "eligible_for_promotion_review": false,
+   "blocked_by": [],
+   "eligible_for_promotion_review": true,
    "incidents": [
     "ableton-crash-2026-09-25"
    ]
   },
   {
    "atlas_id": "fx.equalizer.left_gain",
+   "pilot_atlas_id": "fx.equalizer.left_gain",
+   "duplicate_atlas_ids": [],
+   "ui_semantics": {
+    "status": "NOT_VERIFIED",
+    "evidence": null
+   },
    "context": "FX_EQ",
    "candidate": {
     "kind": "fx_param",
@@ -155,23 +176,41 @@
     "mutated_value": -12.0,
     "persistence_verified": true,
     "state_changed": true,
+    "parameter_contract": {
+     "operand_kind": "numeric",
+     "domain": {
+      "lo": -24.0,
+      "hi": 24.0
+     },
+     "ui_semantics": {
+      "status": "NOT_VERIFIED",
+      "evidence": null
+     },
+     "domain_source": "bulk_causal:manifest_bulk_fx_eq_pilot_v1.json"
+    },
     "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
    },
    "promotion_input_gap": [],
    "promotion_dry_run": {
     "promoted": false,
-    "reason": "MISSING_DOMAIN",
-    "detail": "Atlas control_type='knob' has no generic operand mapping",
+    "reason": "UI_SEMANTICS_NOT_VERIFIED",
+    "detail": "ui_semantics='NOT_VERIFIED'",
     "contract_status": null
    },
    "blocked_by": [
-    "MISSING_DOMAIN"
+    "UI_SEMANTICS_NOT_VERIFIED"
    ],
    "eligible_for_promotion_review": false,
    "incidents": []
   },
   {
    "atlas_id": "fx.equalizer.left_q",
+   "pilot_atlas_id": "fx.equalizer.left_q",
+   "duplicate_atlas_ids": [],
+   "ui_semantics": {
+    "status": "NOT_VERIFIED",
+    "evidence": null
+   },
    "context": "FX_EQ",
    "candidate": {
     "kind": "fx_param",
@@ -223,23 +262,41 @@
     "mutated_value": 50.0,
     "persistence_verified": true,
     "state_changed": true,
+    "parameter_contract": {
+     "operand_kind": "numeric",
+     "domain": {
+      "lo": 0.0,
+      "hi": 100.0
+     },
+     "ui_semantics": {
+      "status": "NOT_VERIFIED",
+      "evidence": null
+     },
+     "domain_source": "bulk_causal:manifest_bulk_fx_eq_pilot_v1.json"
+    },
     "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
    },
    "promotion_input_gap": [],
    "promotion_dry_run": {
     "promoted": false,
-    "reason": "MISSING_DOMAIN",
-    "detail": "Atlas control_type='knob' has no generic operand mapping",
+    "reason": "UI_SEMANTICS_NOT_VERIFIED",
+    "detail": "ui_semantics='NOT_VERIFIED'",
     "contract_status": null
    },
    "blocked_by": [
-    "MISSING_DOMAIN"
+    "UI_SEMANTICS_NOT_VERIFIED"
    ],
    "eligible_for_promotion_review": false,
    "incidents": []
   },
   {
    "atlas_id": "fx.equalizer.right_freq",
+   "pilot_atlas_id": "fx.equalizer.right_freq",
+   "duplicate_atlas_ids": [],
+   "ui_semantics": {
+    "status": "NOT_VERIFIED",
+    "evidence": null
+   },
    "context": "FX_EQ",
    "candidate": {
     "kind": "fx_param",
@@ -291,23 +348,41 @@
     "mutated_value": 3621.446817033768,
     "persistence_verified": true,
     "state_changed": true,
+    "parameter_contract": {
+     "operand_kind": "numeric",
+     "domain": {
+      "lo": 21.53320125,
+      "hi": 20000.0
+     },
+     "ui_semantics": {
+      "status": "NOT_VERIFIED",
+      "evidence": null
+     },
+     "domain_source": "bulk_causal:manifest_bulk_fx_eq_pilot_v1.json"
+    },
     "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
    },
    "promotion_input_gap": [],
    "promotion_dry_run": {
     "promoted": false,
-    "reason": "MISSING_DOMAIN",
-    "detail": "Atlas control_type='knob' has no generic operand mapping",
+    "reason": "UI_SEMANTICS_NOT_VERIFIED",
+    "detail": "ui_semantics='NOT_VERIFIED'",
     "contract_status": null
    },
    "blocked_by": [
-    "MISSING_DOMAIN"
+    "UI_SEMANTICS_NOT_VERIFIED"
    ],
    "eligible_for_promotion_review": false,
    "incidents": []
   },
   {
    "atlas_id": "fx.equalizer.right_gain",
+   "pilot_atlas_id": "fx.equalizer.right_gain",
+   "duplicate_atlas_ids": [],
+   "ui_semantics": {
+    "status": "NOT_VERIFIED",
+    "evidence": null
+   },
    "context": "FX_EQ",
    "candidate": {
     "kind": "fx_param",
@@ -359,23 +434,41 @@
     "mutated_value": -12.0,
     "persistence_verified": true,
     "state_changed": true,
+    "parameter_contract": {
+     "operand_kind": "numeric",
+     "domain": {
+      "lo": -24.0,
+      "hi": 24.0
+     },
+     "ui_semantics": {
+      "status": "NOT_VERIFIED",
+      "evidence": null
+     },
+     "domain_source": "bulk_causal:manifest_bulk_fx_eq_pilot_v1.json"
+    },
     "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
    },
    "promotion_input_gap": [],
    "promotion_dry_run": {
     "promoted": false,
-    "reason": "MISSING_DOMAIN",
-    "detail": "Atlas control_type='knob' has no generic operand mapping",
+    "reason": "UI_SEMANTICS_NOT_VERIFIED",
+    "detail": "ui_semantics='NOT_VERIFIED'",
     "contract_status": null
    },
    "blocked_by": [
-    "MISSING_DOMAIN"
+    "UI_SEMANTICS_NOT_VERIFIED"
    ],
    "eligible_for_promotion_review": false,
    "incidents": []
   },
   {
    "atlas_id": "fx.equalizer.right_q",
+   "pilot_atlas_id": "fx.equalizer.right_q",
+   "duplicate_atlas_ids": [],
+   "ui_semantics": {
+    "status": "VERIFIED",
+    "evidence": "gui display merge: DISPLAY_CONSISTENT ([0, 100])"
+   },
    "context": "FX_EQ",
    "candidate": {
     "kind": "fx_param",
@@ -434,25 +527,41 @@
     "mutated_value": 47.5,
     "persistence_verified": true,
     "state_changed": true,
+    "parameter_contract": {
+     "operand_kind": "numeric",
+     "domain": {
+      "lo": 0.0,
+      "hi": 100.0
+     },
+     "ui_semantics": {
+      "status": "VERIFIED",
+      "evidence": "gui display merge: DISPLAY_CONSISTENT ([0, 100])"
+     },
+     "domain_source": "bulk_causal:manifest_bulk_fx_eq_pilot_v1.json"
+    },
     "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
    },
    "promotion_input_gap": [],
    "promotion_dry_run": {
-    "promoted": false,
-    "reason": "MISSING_DOMAIN",
-    "detail": "Atlas control_type='knob' has no generic operand mapping",
-    "contract_status": null
+    "promoted": true,
+    "reason": "PROMOTED",
+    "detail": "",
+    "contract_status": "STRUCTURAL_ONLY"
    },
-   "blocked_by": [
-    "MISSING_DOMAIN"
-   ],
-   "eligible_for_promotion_review": false,
+   "blocked_by": [],
+   "eligible_for_promotion_review": true,
    "incidents": [
     "ableton-crash-2026-09-25"
    ]
   },
   {
    "atlas_id": "fx.equalizer.left_type",
+   "pilot_atlas_id": "fx.equalizer.left_type",
+   "duplicate_atlas_ids": [],
+   "ui_semantics": {
+    "status": "VERIFIED",
+    "evidence": "gui semantic labels"
+   },
    "context": "FX_EQ",
    "candidate": {
     "kind": "fx_param",
@@ -512,23 +621,42 @@
     "mutated_value": "Peak",
     "persistence_verified": true,
     "state_changed": true,
+    "parameter_contract": {
+     "operand_kind": "enum",
+     "domain": {
+      "enum_values": [
+       "Shelf",
+       "Peak",
+       "High Pass"
+      ]
+     },
+     "ui_semantics": {
+      "status": "VERIFIED",
+      "evidence": "gui semantic labels"
+     },
+     "domain_source": "bulk_causal:manifest_bulk_fx_eq_pilot_v1.json"
+    },
     "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
    },
    "promotion_input_gap": [],
    "promotion_dry_run": {
-    "promoted": false,
-    "reason": "MISSING_DOMAIN",
-    "detail": "Atlas control_type='toggle_buttons' has no generic operand mapping",
-    "contract_status": null
+    "promoted": true,
+    "reason": "PROMOTED",
+    "detail": "",
+    "contract_status": "STRUCTURAL_ONLY"
    },
-   "blocked_by": [
-    "MISSING_DOMAIN"
-   ],
-   "eligible_for_promotion_review": false,
+   "blocked_by": [],
+   "eligible_for_promotion_review": true,
    "incidents": []
   },
   {
    "atlas_id": "fx.equalizer.right_type",
+   "pilot_atlas_id": "fx.equalizer.right_type",
+   "duplicate_atlas_ids": [],
+   "ui_semantics": {
+    "status": "VERIFIED",
+    "evidence": "gui semantic labels"
+   },
    "context": "FX_EQ",
    "candidate": {
     "kind": "fx_param",
@@ -588,23 +716,42 @@
     "mutated_value": "Peak",
     "persistence_verified": true,
     "state_changed": true,
+    "parameter_contract": {
+     "operand_kind": "enum",
+     "domain": {
+      "enum_values": [
+       "Shelf",
+       "Peak",
+       "Low Pass"
+      ]
+     },
+     "ui_semantics": {
+      "status": "VERIFIED",
+      "evidence": "gui semantic labels"
+     },
+     "domain_source": "bulk_causal:manifest_bulk_fx_eq_pilot_v1.json"
+    },
     "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
    },
    "promotion_input_gap": [],
    "promotion_dry_run": {
-    "promoted": false,
-    "reason": "MISSING_DOMAIN",
-    "detail": "Atlas control_type='toggle_buttons' has no generic operand mapping",
-    "contract_status": null
+    "promoted": true,
+    "reason": "PROMOTED",
+    "detail": "",
+    "contract_status": "STRUCTURAL_ONLY"
    },
-   "blocked_by": [
-    "MISSING_DOMAIN"
-   ],
-   "eligible_for_promotion_review": false,
+   "blocked_by": [],
+   "eligible_for_promotion_review": true,
    "incidents": []
   },
   {
-   "atlas_id": "fx.equalizer.bypass(enable)",
+   "atlas_id": "fx.sys.module_bypass",
+   "pilot_atlas_id": "fx.equalizer.bypass(enable)",
+   "duplicate_atlas_ids": [],
+   "ui_semantics": {
+    "status": "PARTIAL",
+    "evidence": "identity by GUI tooltip/readout at sampled values only; domain edges not shown in the UI"
+   },
    "context": "FX_EQ",
    "candidate": {
     "kind": "fx_param",
@@ -636,10 +783,14 @@
     "display": null,
     "semantic": null
    },
-   "atlas": null,
+   "atlas": {
+    "control_type": "toggle",
+    "min": null,
+    "max": null
+   },
    "atlas_domain_conflicts": [],
    "promotion_input": {
-    "target": "fx.equalizer.bypass(enable)",
+    "target": "fx.sys.module_bypass",
     "derived_body_path": "FXRack0.FX.0.FXEQ.plainParams.kParamEnable",
     "epoch": {
      "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
@@ -652,23 +803,38 @@
     "mutated_value": 0.0,
     "persistence_verified": true,
     "state_changed": true,
+    "parameter_contract": {
+     "operand_kind": "boolean",
+     "domain": {},
+     "ui_semantics": {
+      "status": "PARTIAL",
+      "evidence": "identity by GUI tooltip/readout at sampled values only; domain edges not shown in the UI"
+     },
+     "domain_source": "bulk_causal:manifest_bulk_fx_eq_pilot_v1.json"
+    },
     "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
    },
    "promotion_input_gap": [],
    "promotion_dry_run": {
     "promoted": false,
-    "reason": "NO_ATLAS_IDENTITY",
-    "detail": "fx.equalizer.bypass(enable)",
+    "reason": "UI_SEMANTICS_NOT_VERIFIED",
+    "detail": "ui_semantics='PARTIAL'",
     "contract_status": null
    },
    "blocked_by": [
-    "NO_ATLAS_IDENTITY"
+    "UI_SEMANTICS_NOT_VERIFIED"
    ],
    "eligible_for_promotion_review": false,
    "incidents": []
   },
   {
-   "atlas_id": "(exploratory) fxeq.level_out",
+   "atlas_id": "fx.equalizer.level",
+   "pilot_atlas_id": "(exploratory) fxeq.level_out",
+   "duplicate_atlas_ids": [],
+   "ui_semantics": {
+    "status": "PARTIAL",
+    "evidence": "identity by GUI tooltip/readout at sampled values only; domain edges not shown in the UI"
+   },
    "context": "FX_EQ",
    "candidate": {
     "kind": "fx_param",
@@ -700,10 +866,14 @@
     "display": null,
     "semantic": null
    },
-   "atlas": null,
+   "atlas": {
+    "control_type": "knob",
+    "min": null,
+    "max": null
+   },
    "atlas_domain_conflicts": [],
    "promotion_input": {
-    "target": "(exploratory) fxeq.level_out",
+    "target": "fx.equalizer.level",
     "derived_body_path": "FXRack0.FX.0.FXEQ.plainParams.kParamLevelOut",
     "epoch": {
      "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
@@ -716,23 +886,41 @@
     "mutated_value": 0.25,
     "persistence_verified": true,
     "state_changed": true,
+    "parameter_contract": {
+     "operand_kind": "numeric",
+     "domain": {
+      "lo": 0.0,
+      "hi": 1.0
+     },
+     "ui_semantics": {
+      "status": "PARTIAL",
+      "evidence": "identity by GUI tooltip/readout at sampled values only; domain edges not shown in the UI"
+     },
+     "domain_source": "bulk_causal:manifest_bulk_fx_eq_pilot_v1.json"
+    },
     "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
    },
    "promotion_input_gap": [],
    "promotion_dry_run": {
     "promoted": false,
-    "reason": "NO_ATLAS_IDENTITY",
-    "detail": "(exploratory) fxeq.level_out",
+    "reason": "UI_SEMANTICS_NOT_VERIFIED",
+    "detail": "ui_semantics='PARTIAL'",
     "contract_status": null
    },
    "blocked_by": [
-    "NO_ATLAS_IDENTITY"
+    "UI_SEMANTICS_NOT_VERIFIED"
    ],
    "eligible_for_promotion_review": false,
    "incidents": []
   },
   {
    "atlas_id": "oscA.enabled",
+   "pilot_atlas_id": "oscA.enabled",
+   "duplicate_atlas_ids": [],
+   "ui_semantics": {
+    "status": "VERIFIED",
+    "evidence": "gui display merge: DISPLAY_CONSISTENT ([0, 1])"
+   },
    "context": "OSC_A",
    "candidate": {
     "kind": "raw_path",
@@ -788,6 +976,15 @@
     "mutated_value": 0.0,
     "persistence_verified": true,
     "state_changed": true,
+    "parameter_contract": {
+     "operand_kind": "boolean",
+     "domain": {},
+     "ui_semantics": {
+      "status": "VERIFIED",
+      "evidence": "gui display merge: DISPLAY_CONSISTENT ([0, 1])"
+     },
+     "domain_source": "bulk_causal:manifest_bulk_osc_a_pilot_v1.json"
+    },
     "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
    },
    "promotion_input_gap": [],
@@ -805,6 +1002,12 @@
   },
   {
    "atlas_id": "oscA.octave",
+   "pilot_atlas_id": "oscA.octave",
+   "duplicate_atlas_ids": [],
+   "ui_semantics": {
+    "status": "VERIFIED",
+    "evidence": "gui display merge: DISPLAY_CONSISTENT ([-4, 4])"
+   },
    "context": "OSC_A",
    "candidate": {
     "kind": "raw_path",
@@ -860,6 +1063,18 @@
     "mutated_value": -2.0,
     "persistence_verified": true,
     "state_changed": true,
+    "parameter_contract": {
+     "operand_kind": "numeric",
+     "domain": {
+      "lo": -4.0,
+      "hi": 4.0
+     },
+     "ui_semantics": {
+      "status": "VERIFIED",
+      "evidence": "gui display merge: DISPLAY_CONSISTENT ([-4, 4])"
+     },
+     "domain_source": "bulk_causal:manifest_bulk_osc_a_pilot_v1.json"
+    },
     "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
    },
    "promotion_input_gap": [],
@@ -877,6 +1092,12 @@
   },
   {
    "atlas_id": "oscA.semitone",
+   "pilot_atlas_id": "oscA.semitone",
+   "duplicate_atlas_ids": [],
+   "ui_semantics": {
+    "status": "VERIFIED",
+    "evidence": "gui display merge: DISPLAY_CONSISTENT ([-12, 12])"
+   },
    "context": "OSC_A",
    "candidate": {
     "kind": "raw_path",
@@ -932,6 +1153,18 @@
     "mutated_value": -6.0,
     "persistence_verified": true,
     "state_changed": true,
+    "parameter_contract": {
+     "operand_kind": "numeric",
+     "domain": {
+      "lo": -12.0,
+      "hi": 12.0
+     },
+     "ui_semantics": {
+      "status": "VERIFIED",
+      "evidence": "gui display merge: DISPLAY_CONSISTENT ([-12, 12])"
+     },
+     "domain_source": "bulk_causal:manifest_bulk_osc_a_pilot_v1.json"
+    },
     "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
    },
    "promotion_input_gap": [],
@@ -949,6 +1182,14 @@
   },
   {
    "atlas_id": "oscA.coarse_pitch",
+   "pilot_atlas_id": "oscA.coarse_pitch",
+   "duplicate_atlas_ids": [
+    "oscA.crs"
+   ],
+   "ui_semantics": {
+    "status": "VERIFIED",
+    "evidence": "boundary + one-beyond, state and GUI (atlas_conflict_resolution_v1.json)"
+   },
    "context": "OSC_A",
    "candidate": {
     "kind": "raw_path",
@@ -1015,14 +1256,26 @@
     "mutated_value": -36.0,
     "persistence_verified": true,
     "state_changed": true,
+    "parameter_contract": {
+     "operand_kind": "numeric",
+     "domain": {
+      "lo": -64.0,
+      "hi": 64.0
+     },
+     "ui_semantics": {
+      "status": "VERIFIED",
+      "evidence": "boundary + one-beyond, state and GUI (atlas_conflict_resolution_v1.json)"
+     },
+     "domain_source": "bulk_causal:manifest_bulk_osc_a_pilot_v1.json"
+    },
     "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
    },
    "promotion_input_gap": [],
    "promotion_dry_run": {
-    "promoted": true,
-    "reason": "PROMOTED",
-    "detail": "",
-    "contract_status": "STRUCTURAL_ONLY"
+    "promoted": false,
+    "reason": "ATLAS_DOMAIN_CONFLICT",
+    "detail": "Atlas declares [-72.0,72.0], evidence verified [-64.0,64.0]",
+    "contract_status": null
    },
    "blocked_by": [
     "ATLAS_DOMAIN_CONFLICT"
@@ -1034,6 +1287,12 @@
   },
   {
    "atlas_id": "oscA.fine",
+   "pilot_atlas_id": "oscA.fine",
+   "duplicate_atlas_ids": [],
+   "ui_semantics": {
+    "status": "VERIFIED",
+    "evidence": "boundary + one-beyond, state and GUI (atlas_conflict_resolution_v1.json)"
+   },
    "context": "OSC_A",
    "candidate": {
     "kind": "raw_path",
@@ -1100,14 +1359,26 @@
     "mutated_value": -40.0,
     "persistence_verified": true,
     "state_changed": true,
+    "parameter_contract": {
+     "operand_kind": "numeric",
+     "domain": {
+      "lo": -100.0,
+      "hi": 100.0
+     },
+     "ui_semantics": {
+      "status": "VERIFIED",
+      "evidence": "boundary + one-beyond, state and GUI (atlas_conflict_resolution_v1.json)"
+     },
+     "domain_source": "bulk_causal:manifest_bulk_osc_a_pilot_v1.json"
+    },
     "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
    },
    "promotion_input_gap": [],
    "promotion_dry_run": {
-    "promoted": true,
-    "reason": "PROMOTED",
-    "detail": "",
-    "contract_status": "STRUCTURAL_ONLY"
+    "promoted": false,
+    "reason": "ATLAS_DOMAIN_CONFLICT",
+    "detail": "Atlas declares [-80.0,80.0], evidence verified [-100.0,100.0]",
+    "contract_status": null
    },
    "blocked_by": [
     "ATLAS_DOMAIN_CONFLICT"
@@ -1119,6 +1390,12 @@
   },
   {
    "atlas_id": "oscA.level",
+   "pilot_atlas_id": "oscA.level",
+   "duplicate_atlas_ids": [],
+   "ui_semantics": {
+    "status": "NOT_VERIFIED",
+    "evidence": null
+   },
    "context": "OSC_A",
    "candidate": {
     "kind": "raw_path",
@@ -1167,21 +1444,41 @@
     "mutated_value": 0.5000000000000001,
     "persistence_verified": true,
     "state_changed": true,
+    "parameter_contract": {
+     "operand_kind": "numeric",
+     "domain": {
+      "lo": 0.0,
+      "hi": 1.0
+     },
+     "ui_semantics": {
+      "status": "NOT_VERIFIED",
+      "evidence": null
+     },
+     "domain_source": "bulk_causal:manifest_bulk_osc_a_pilot_v1.json"
+    },
     "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
    },
    "promotion_input_gap": [],
    "promotion_dry_run": {
-    "promoted": true,
-    "reason": "PROMOTED",
-    "detail": "",
-    "contract_status": "STRUCTURAL_ONLY"
+    "promoted": false,
+    "reason": "UI_SEMANTICS_NOT_VERIFIED",
+    "detail": "ui_semantics='NOT_VERIFIED'",
+    "contract_status": null
    },
-   "blocked_by": [],
-   "eligible_for_promotion_review": true,
+   "blocked_by": [
+    "UI_SEMANTICS_NOT_VERIFIED"
+   ],
+   "eligible_for_promotion_review": false,
    "incidents": []
   },
   {
    "atlas_id": "oscA.pan",
+   "pilot_atlas_id": "oscA.pan",
+   "duplicate_atlas_ids": [],
+   "ui_semantics": {
+    "status": "NOT_VERIFIED",
+    "evidence": null
+   },
    "context": "OSC_A",
    "candidate": {
     "kind": "raw_path",
@@ -1230,21 +1527,41 @@
     "mutated_value": -25.0,
     "persistence_verified": true,
     "state_changed": true,
+    "parameter_contract": {
+     "operand_kind": "numeric",
+     "domain": {
+      "lo": -50.0,
+      "hi": 50.0
+     },
+     "ui_semantics": {
+      "status": "NOT_VERIFIED",
+      "evidence": null
+     },
+     "domain_source": "bulk_causal:manifest_bulk_osc_a_pilot_v1.json"
+    },
     "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
    },
    "promotion_input_gap": [],
    "promotion_dry_run": {
-    "promoted": true,
-    "reason": "PROMOTED",
-    "detail": "",
-    "contract_status": "STRUCTURAL_ONLY"
+    "promoted": false,
+    "reason": "UI_SEMANTICS_NOT_VERIFIED",
+    "detail": "ui_semantics='NOT_VERIFIED'",
+    "contract_status": null
    },
-   "blocked_by": [],
-   "eligible_for_promotion_review": true,
+   "blocked_by": [
+    "UI_SEMANTICS_NOT_VERIFIED"
+   ],
+   "eligible_for_promotion_review": false,
    "incidents": []
   },
   {
    "atlas_id": "oscA.unison",
+   "pilot_atlas_id": "oscA.unison",
+   "duplicate_atlas_ids": [],
+   "ui_semantics": {
+    "status": "VERIFIED",
+    "evidence": "gui display merge: DISPLAY_CONSISTENT ([1, 16])"
+   },
    "context": "OSC_A",
    "candidate": {
     "kind": "raw_path",
@@ -1300,6 +1617,18 @@
     "mutated_value": 9.0,
     "persistence_verified": true,
     "state_changed": true,
+    "parameter_contract": {
+     "operand_kind": "numeric",
+     "domain": {
+      "lo": 1.0,
+      "hi": 16.0
+     },
+     "ui_semantics": {
+      "status": "VERIFIED",
+      "evidence": "gui display merge: DISPLAY_CONSISTENT ([1, 16])"
+     },
+     "domain_source": "bulk_causal:manifest_bulk_osc_a_pilot_v1.json"
+    },
     "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
    },
    "promotion_input_gap": [],
@@ -1317,6 +1646,12 @@
   },
   {
    "atlas_id": "oscA.detune",
+   "pilot_atlas_id": "oscA.detune",
+   "duplicate_atlas_ids": [],
+   "ui_semantics": {
+    "status": "NOT_VERIFIED",
+    "evidence": null
+   },
    "context": "OSC_A",
    "candidate": {
     "kind": "raw_path",
@@ -1365,21 +1700,43 @@
     "mutated_value": 0.5000000000000001,
     "persistence_verified": true,
     "state_changed": true,
+    "parameter_contract": {
+     "operand_kind": "numeric",
+     "domain": {
+      "lo": 0.0,
+      "hi": 1.0
+     },
+     "ui_semantics": {
+      "status": "NOT_VERIFIED",
+      "evidence": null
+     },
+     "domain_source": "bulk_causal:manifest_bulk_osc_a_pilot_v1.json"
+    },
     "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
    },
    "promotion_input_gap": [],
    "promotion_dry_run": {
-    "promoted": true,
-    "reason": "PROMOTED",
-    "detail": "",
-    "contract_status": "STRUCTURAL_ONLY"
+    "promoted": false,
+    "reason": "UI_SEMANTICS_NOT_VERIFIED",
+    "detail": "ui_semantics='NOT_VERIFIED'",
+    "contract_status": null
    },
-   "blocked_by": [],
-   "eligible_for_promotion_review": true,
+   "blocked_by": [
+    "UI_SEMANTICS_NOT_VERIFIED"
+   ],
+   "eligible_for_promotion_review": false,
    "incidents": []
   },
   {
-   "atlas_id": "oscA.unison_width",
+   "atlas_id": "oscA.blend",
+   "pilot_atlas_id": "oscA.unison_width",
+   "duplicate_atlas_ids": [
+    "oscA.detune_width"
+   ],
+   "ui_semantics": {
+    "status": "PARTIAL",
+    "evidence": "identity by GUI tooltip/readout at sampled values only; domain edges not shown in the UI"
+   },
    "context": "OSC_A",
    "candidate": {
     "kind": "raw_path",
@@ -1408,10 +1765,14 @@
     "display": null,
     "semantic": null
    },
-   "atlas": null,
+   "atlas": {
+    "control_type": "continuous",
+    "min": null,
+    "max": null
+   },
    "atlas_domain_conflicts": [],
    "promotion_input": {
-    "target": "oscA.unison_width",
+    "target": "oscA.blend",
     "derived_body_path": "Oscillator0.plainParams.kParamDetuneWid",
     "epoch": {
      "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
@@ -1424,23 +1785,43 @@
     "mutated_value": 50.0,
     "persistence_verified": true,
     "state_changed": true,
+    "parameter_contract": {
+     "operand_kind": "numeric",
+     "domain": {
+      "lo": 0.0,
+      "hi": 100.0
+     },
+     "ui_semantics": {
+      "status": "PARTIAL",
+      "evidence": "identity by GUI tooltip/readout at sampled values only; domain edges not shown in the UI"
+     },
+     "domain_source": "bulk_causal:manifest_bulk_osc_a_pilot_v1.json"
+    },
     "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
    },
    "promotion_input_gap": [],
    "promotion_dry_run": {
     "promoted": false,
-    "reason": "NO_ATLAS_IDENTITY",
-    "detail": "oscA.unison_width",
+    "reason": "UI_SEMANTICS_NOT_VERIFIED",
+    "detail": "ui_semantics='PARTIAL'",
     "contract_status": null
    },
    "blocked_by": [
-    "NO_ATLAS_IDENTITY"
+    "UI_SEMANTICS_NOT_VERIFIED"
    ],
    "eligible_for_promotion_review": false,
    "incidents": []
   },
   {
-   "atlas_id": "oscA.unison_stereo",
+   "atlas_id": "oscA.uni_width",
+   "pilot_atlas_id": "oscA.unison_stereo",
+   "duplicate_atlas_ids": [
+    "oscA.unison_stereo_width"
+   ],
+   "ui_semantics": {
+    "status": "PARTIAL",
+    "evidence": "identity by GUI tooltip/readout at sampled values only; domain edges not shown in the UI"
+   },
    "context": "OSC_A",
    "candidate": {
     "kind": "raw_path",
@@ -1469,10 +1850,14 @@
     "display": null,
     "semantic": null
    },
-   "atlas": null,
+   "atlas": {
+    "control_type": "scalar",
+    "min": null,
+    "max": null
+   },
    "atlas_domain_conflicts": [],
    "promotion_input": {
-    "target": "oscA.unison_stereo",
+    "target": "oscA.uni_width",
     "derived_body_path": "Oscillator0.plainParams.kParamUnisonStereo",
     "epoch": {
      "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
@@ -1485,23 +1870,41 @@
     "mutated_value": 0.0,
     "persistence_verified": true,
     "state_changed": true,
+    "parameter_contract": {
+     "operand_kind": "numeric",
+     "domain": {
+      "lo": -100.0,
+      "hi": 100.0
+     },
+     "ui_semantics": {
+      "status": "PARTIAL",
+      "evidence": "identity by GUI tooltip/readout at sampled values only; domain edges not shown in the UI"
+     },
+     "domain_source": "bulk_causal:manifest_bulk_osc_a_pilot_v1.json"
+    },
     "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
    },
    "promotion_input_gap": [],
    "promotion_dry_run": {
     "promoted": false,
-    "reason": "NO_ATLAS_IDENTITY",
-    "detail": "oscA.unison_stereo",
+    "reason": "UI_SEMANTICS_NOT_VERIFIED",
+    "detail": "ui_semantics='PARTIAL'",
     "contract_status": null
    },
    "blocked_by": [
-    "NO_ATLAS_IDENTITY"
+    "UI_SEMANTICS_NOT_VERIFIED"
    ],
    "eligible_for_promotion_review": false,
    "incidents": []
   },
   {
    "atlas_id": "oscA.pitch_track",
+   "pilot_atlas_id": "oscA.pitch_track",
+   "duplicate_atlas_ids": [],
+   "ui_semantics": {
+    "status": "NOT_VERIFIED",
+    "evidence": null
+   },
    "context": "OSC_A",
    "candidate": {
     "kind": "raw_path",
@@ -1550,21 +1953,38 @@
     "mutated_value": 0.0,
     "persistence_verified": true,
     "state_changed": true,
+    "parameter_contract": {
+     "operand_kind": "boolean",
+     "domain": {},
+     "ui_semantics": {
+      "status": "NOT_VERIFIED",
+      "evidence": null
+     },
+     "domain_source": "bulk_causal:manifest_bulk_osc_a_pilot_v1.json"
+    },
     "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
    },
    "promotion_input_gap": [],
    "promotion_dry_run": {
-    "promoted": true,
-    "reason": "PROMOTED",
-    "detail": "",
-    "contract_status": "STRUCTURAL_ONLY"
+    "promoted": false,
+    "reason": "UI_SEMANTICS_NOT_VERIFIED",
+    "detail": "ui_semantics='NOT_VERIFIED'",
+    "contract_status": null
    },
-   "blocked_by": [],
-   "eligible_for_promotion_review": true,
+   "blocked_by": [
+    "UI_SEMANTICS_NOT_VERIFIED"
+   ],
+   "eligible_for_promotion_review": false,
    "incidents": []
   },
   {
-   "atlas_id": "oscA.wt_pos",
+   "atlas_id": "oscA.wt_position",
+   "pilot_atlas_id": "oscA.wt_pos",
+   "duplicate_atlas_ids": [],
+   "ui_semantics": {
+    "status": "PARTIAL",
+    "evidence": "identity by GUI tooltip/readout at sampled values only; domain edges not shown in the UI"
+   },
    "context": "OSC_A",
    "candidate": {
     "kind": "raw_path",
@@ -1594,10 +2014,14 @@
     "display": null,
     "semantic": null
    },
-   "atlas": null,
+   "atlas": {
+    "control_type": "continuous",
+    "min": 0.0,
+    "max": 256.0
+   },
    "atlas_domain_conflicts": [],
    "promotion_input": {
-    "target": "oscA.wt_pos",
+    "target": "oscA.wt_position",
     "derived_body_path": "Oscillator0.WTOsc0.plainParams.kParamTablePos",
     "epoch": {
      "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
@@ -1610,23 +2034,41 @@
     "mutated_value": 128.0,
     "persistence_verified": true,
     "state_changed": true,
+    "parameter_contract": {
+     "operand_kind": "numeric",
+     "domain": {
+      "lo": 0.0,
+      "hi": 256.0
+     },
+     "ui_semantics": {
+      "status": "PARTIAL",
+      "evidence": "identity by GUI tooltip/readout at sampled values only; domain edges not shown in the UI"
+     },
+     "domain_source": "bulk_causal:manifest_bulk_osc_a_pilot_v1.json"
+    },
     "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
    },
    "promotion_input_gap": [],
    "promotion_dry_run": {
     "promoted": false,
-    "reason": "NO_ATLAS_IDENTITY",
-    "detail": "oscA.wt_pos",
+    "reason": "UI_SEMANTICS_NOT_VERIFIED",
+    "detail": "ui_semantics='PARTIAL'",
     "contract_status": null
    },
    "blocked_by": [
-    "NO_ATLAS_IDENTITY"
+    "UI_SEMANTICS_NOT_VERIFIED"
    ],
    "eligible_for_promotion_review": false,
    "incidents": []
   },
   {
-   "atlas_id": "oscA.warp",
+   "atlas_id": "oscA.warp_amount",
+   "pilot_atlas_id": "oscA.warp",
+   "duplicate_atlas_ids": [],
+   "ui_semantics": {
+    "status": "PARTIAL",
+    "evidence": "identity by GUI tooltip/readout at sampled values only; domain edges not shown in the UI"
+   },
    "context": "OSC_A",
    "candidate": {
     "kind": "raw_path",
@@ -1656,10 +2098,14 @@
     "display": null,
     "semantic": null
    },
-   "atlas": null,
+   "atlas": {
+    "control_type": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
    "atlas_domain_conflicts": [],
    "promotion_input": {
-    "target": "oscA.warp",
+    "target": "oscA.warp_amount",
     "derived_body_path": "Oscillator0.WTOsc0.plainParams.kParamWarp",
     "epoch": {
      "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
@@ -1672,23 +2118,41 @@
     "mutated_value": 0.5,
     "persistence_verified": true,
     "state_changed": true,
+    "parameter_contract": {
+     "operand_kind": "numeric",
+     "domain": {
+      "lo": 0.0,
+      "hi": 1.0
+     },
+     "ui_semantics": {
+      "status": "PARTIAL",
+      "evidence": "identity by GUI tooltip/readout at sampled values only; domain edges not shown in the UI"
+     },
+     "domain_source": "bulk_causal:manifest_bulk_osc_a_pilot_v1.json"
+    },
     "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
    },
    "promotion_input_gap": [],
    "promotion_dry_run": {
     "promoted": false,
-    "reason": "NO_ATLAS_IDENTITY",
-    "detail": "oscA.warp",
+    "reason": "UI_SEMANTICS_NOT_VERIFIED",
+    "detail": "ui_semantics='PARTIAL'",
     "contract_status": null
    },
    "blocked_by": [
-    "NO_ATLAS_IDENTITY"
+    "UI_SEMANTICS_NOT_VERIFIED"
    ],
    "eligible_for_promotion_review": false,
    "incidents": []
   },
   {
-   "atlas_id": "oscA.initial_phase",
+   "atlas_id": "oscA.phase",
+   "pilot_atlas_id": "oscA.initial_phase",
+   "duplicate_atlas_ids": [],
+   "ui_semantics": {
+    "status": "VERIFIED",
+    "evidence": "gui display merge: DISPLAY_CONSISTENT ([0, 360])"
+   },
    "context": "OSC_A",
    "candidate": {
     "kind": "raw_path",
@@ -1725,10 +2189,14 @@
     },
     "semantic": null
    },
-   "atlas": null,
+   "atlas": {
+    "control_type": "continuous",
+    "min": 0.0,
+    "max": 360.0
+   },
    "atlas_domain_conflicts": [],
    "promotion_input": {
-    "target": "oscA.initial_phase",
+    "target": "oscA.phase",
     "derived_body_path": "Oscillator0.WTOsc0.plainParams.kParamInitialPhase",
     "epoch": {
      "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
@@ -1741,25 +2209,41 @@
     "mutated_value": 90.0,
     "persistence_verified": true,
     "state_changed": true,
+    "parameter_contract": {
+     "operand_kind": "numeric",
+     "domain": {
+      "lo": 0.0,
+      "hi": 360.0
+     },
+     "ui_semantics": {
+      "status": "VERIFIED",
+      "evidence": "gui display merge: DISPLAY_CONSISTENT ([0, 360])"
+     },
+     "domain_source": "bulk_causal:manifest_bulk_osc_a_pilot_v1.json"
+    },
     "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
    },
    "promotion_input_gap": [],
    "promotion_dry_run": {
-    "promoted": false,
-    "reason": "NO_ATLAS_IDENTITY",
-    "detail": "oscA.initial_phase",
-    "contract_status": null
+    "promoted": true,
+    "reason": "PROMOTED",
+    "detail": "",
+    "contract_status": "STRUCTURAL_ONLY"
    },
-   "blocked_by": [
-    "NO_ATLAS_IDENTITY"
-   ],
-   "eligible_for_promotion_review": false,
+   "blocked_by": [],
+   "eligible_for_promotion_review": true,
    "incidents": [
     "ableton-crash-2026-09-25"
    ]
   },
   {
    "atlas_id": "oscA.random_phase",
+   "pilot_atlas_id": "oscA.random_phase",
+   "duplicate_atlas_ids": [],
+   "ui_semantics": {
+    "status": "VERIFIED",
+    "evidence": "gui display merge: DISPLAY_CONSISTENT ([0, 100])"
+   },
    "context": "OSC_A",
    "candidate": {
     "kind": "raw_path",
@@ -1816,6 +2300,18 @@
     "mutated_value": 50.0,
     "persistence_verified": true,
     "state_changed": true,
+    "parameter_contract": {
+     "operand_kind": "numeric",
+     "domain": {
+      "lo": 0.0,
+      "hi": 100.0
+     },
+     "ui_semantics": {
+      "status": "VERIFIED",
+      "evidence": "gui display merge: DISPLAY_CONSISTENT ([0, 100])"
+     },
+     "domain_source": "bulk_causal:manifest_bulk_osc_a_pilot_v1.json"
+    },
     "backend": "bulk_causal engine v1 (real Serum VST3 in DawDreamer; state readback)"
    },
    "promotion_input_gap": [],

@@ -47,9 +47,14 @@ REJECT_MISSING_VERIFICATION = "MISSING_VERIFICATION"
 REJECT_RESTORATION_NOT_VERIFIED = "RESTORATION_NOT_VERIFIED"
 REJECT_NO_ATLAS_IDENTITY = "NO_ATLAS_IDENTITY"
 REJECT_INCONSISTENT_OPERAND_KIND = "INCONSISTENT_OPERAND_KIND"
+REJECT_ATLAS_DOMAIN_CONFLICT = "ATLAS_DOMAIN_CONFLICT"
+REJECT_UI_SEMANTICS_NOT_VERIFIED = "UI_SEMANTICS_NOT_VERIFIED"
+REJECT_BAD_PARAMETER_CONTRACT = "BAD_PARAMETER_CONTRACT"
 
 _VERIFIED_STATUSES = {"BINDING_VERIFIED", "STRUCTURAL_VERIFIED"}
-_ATLAS_KIND_TO_OPERAND = {"toggle": MUTATE_BOOLEAN, "continuous": MUTATE_NUMERIC, "enum": MUTATE_ENUM}
+_ATLAS_KIND_TO_OPERAND = {"toggle": MUTATE_BOOLEAN, "continuous": MUTATE_NUMERIC, "enum": MUTATE_ENUM}   # LEGACY path only
+_CONTRACT_KIND_TO_OPERAND = {"boolean": MUTATE_BOOLEAN, "numeric": MUTATE_NUMERIC, "enum": MUTATE_ENUM}
+_BOUND_TOL = 1e-3
 
 
 @dataclass(frozen=True)
@@ -141,6 +146,60 @@ def _mutation_values(evidence: Dict[str, Any]) -> Tuple[Any, Any]:
     return None, None
 
 
+
+def _promote_from_parameter_contract(evidence, target, control, epoch, body_path, accessor, baseline_value, mutated_value, pc):
+    """Operand kind and domain come from the evidenced PARAMETER CONTRACT (the swept domain + verified range + live-UI semantics),
+    never from the Atlas UI widget type: a 'knob' is not thereby numeric and 'toggle_buttons' is not thereby boolean. The Atlas
+    supplies identity only, and is checked AGAINST the evidence: a declared bound the evidence contradicts is a rejection (fix the
+    Atlas first), not something to paper over."""
+    kind = _CONTRACT_KIND_TO_OPERAND.get(pc.get("operand_kind"))
+    dom = pc.get("domain")
+    if kind is None or not isinstance(dom, dict):
+        return PromotionResult(False, REJECT_BAD_PARAMETER_CONTRACT, detail="operand_kind=%r domain=%r" % (pc.get("operand_kind"), dom))
+    ui = pc.get("ui_semantics") or {}
+    if ui.get("status") != "VERIFIED":
+        return PromotionResult(False, REJECT_UI_SEMANTICS_NOT_VERIFIED, detail="ui_semantics=%r" % (ui.get("status"),))
+    if mutated_value is None:
+        return PromotionResult(False, REJECT_MISSING_VERIFICATION, detail="no mutation value recorded")
+
+    domain: Dict[str, Any] = {"kind": kind}
+    if kind == MUTATE_BOOLEAN:
+        if not (isinstance(mutated_value, bool) or mutated_value in (0, 1, 0.0, 1.0)):
+            return PromotionResult(False, REJECT_INCONSISTENT_OPERAND_KIND, detail="boolean contract but mutation value %r" % (mutated_value,))
+    elif kind == MUTATE_NUMERIC:
+        lo, hi = dom.get("lo"), dom.get("hi")
+        if lo is None or hi is None:
+            return PromotionResult(False, REJECT_MISSING_DOMAIN, detail="numeric contract without verified lo/hi")
+        if isinstance(mutated_value, bool) or not isinstance(mutated_value, (int, float)) or not (lo <= mutated_value <= hi):
+            return PromotionResult(False, REJECT_INCONSISTENT_OPERAND_KIND, detail="numeric contract [%s,%s] but mutation value %r" % (lo, hi, mutated_value))
+        a_lo, a_hi = getattr(control, "min_value", None), getattr(control, "max_value", None)
+        if a_lo is not None and a_hi is not None and (abs(a_lo - lo) > _BOUND_TOL * max(1.0, abs(lo)) or abs(a_hi - hi) > _BOUND_TOL * max(1.0, abs(hi))):
+            return PromotionResult(False, REJECT_ATLAS_DOMAIN_CONFLICT,
+                                   detail="Atlas declares [%s,%s], evidence verified [%s,%s]" % (a_lo, a_hi, lo, hi))
+        domain.update({"lo": lo, "hi": hi})
+    else:
+        labels = dom.get("enum_values")
+        if not labels or not isinstance(mutated_value, str) or mutated_value not in labels:
+            return PromotionResult(False, REJECT_INCONSISTENT_OPERAND_KIND, detail="enum contract %r but mutation value %r" % (labels, mutated_value))
+        a_enum = tuple(getattr(control, "enum_values", None) or ())
+        if a_enum and set(labels) - set(a_enum):
+            return PromotionResult(False, REJECT_ATLAS_DOMAIN_CONFLICT, detail="evidence labels %r not all in Atlas enum %r" % (labels, a_enum))
+        domain.update({"enum_values": list(labels)})
+
+    binding = ExecutionBinding(
+        mutation_type="SERUM_PRESET_STRUCTURAL", body_path=body_path, binding_source="evidence_promotion:%s" % target,
+        binding_version=digest({"target": target, "body_path": body_path, "accessor": accessor}), resolver_operation_id=accessor)
+    contract = CapabilityContract(
+        target=target, allowed_operation=kind, status=STRUCTURAL_ONLY, prerequisites=(),
+        verified={"load": "PASS", "persistence": "PASS", "causal": "NOT_RUN"}, measurement=None,
+        scope={"tested_context_only": True, "domain": domain, "baseline_value": baseline_value, "mutated_value": mutated_value},
+        provenance={"promoted_from": "serum2.qualification.evidence_promotion.promote_verified_evidence",
+                    "evidence_epoch_sha": epoch["sha"], "atlas_control_type": control.control_type,
+                    "operand_kind_source": "parameter_contract", "domain_source": pc.get("domain_source"), "ui_semantics": ui.get("evidence")},
+        limitations=("STRUCTURAL_ONLY: proven via parameter-state diff (host/body write observed and restored), not an audio-measured causal effect",),
+        execution_binding=binding)
+    return PromotionResult(True, "PROMOTED", contract)
+
 def promote_verified_evidence(evidence: Dict[str, Any]) -> PromotionResult:
     """Pure function of one evidence dict -> PromotionResult. No branch on
     `target`'s identity anywhere in this function; every per-control fact
@@ -179,12 +238,16 @@ def promote_verified_evidence(evidence: Dict[str, Any]) -> PromotionResult:
     if control is None:
         return PromotionResult(False, REJECT_NO_ATLAS_IDENTITY, detail=target)
 
+    baseline_value, mutated_value = _mutation_values(evidence)
+    pc = evidence.get("parameter_contract")
+    if pc is not None:
+        return _promote_from_parameter_contract(evidence, target, control, epoch, body_path, accessor, baseline_value, mutated_value, pc)
+
     operand_kind = _ATLAS_KIND_TO_OPERAND.get(control.control_type)
     if operand_kind is None:
         return PromotionResult(False, REJECT_MISSING_DOMAIN,
                                detail="Atlas control_type=%r has no generic operand mapping" % control.control_type)
 
-    baseline_value, mutated_value = _mutation_values(evidence)
     if mutated_value is None:
         return PromotionResult(False, REJECT_MISSING_VERIFICATION, detail="no mutation value recorded")
 

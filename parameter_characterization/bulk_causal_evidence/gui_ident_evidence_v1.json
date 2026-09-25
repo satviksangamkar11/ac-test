@@ -1,0 +1,137 @@
+{
+ "harness": {
+  "channel": "real Serum 2.0.23 GUI in Ableton Live 12 (computer-use); hover tooltips / panel readouts",
+  "screenshots": "viewed live; no image files persisted",
+  "note": "presets from User/BULKCAUSAL_GUI_IDENT, _IDENT_FX, _BOUNDARY; every preset name was read on screen; the browser next-arrow drops clicks so most presets were loaded through the menu"
+ },
+ "observations": [
+  {
+   "plan": "gui_plan_ident_osc_v1.json",
+   "n": 2,
+   "preset": "GUI02_kParamDetune__0p5",
+   "reading": "tooltip on DETUNE knob: 'A Uni Detune : 0.50'",
+   "control": "OSC A DETUNE",
+   "method": "hover tooltip"
+  },
+  {
+   "plan": "gui_plan_ident_osc_v1.json",
+   "n": 3,
+   "preset": "GUI03_kParamDetuneWid__ref",
+   "reading": "tooltip on BLEND knob: 'A Uni Blend (75)' -- 'Sets the mix amount for the Unison voices' (default 75 == state-readback discovered kParamDetuneWid default)",
+   "control": "OSC A BLEND",
+   "method": "hover tooltip"
+  },
+  {
+   "plan": "gui_plan_ident_osc_v1.json",
+   "n": 4,
+   "preset": "GUI04_kParamDetuneWid__30",
+   "reading": "tooltip on BLEND knob: 'A Uni Blend (30)'",
+   "control": "OSC A BLEND",
+   "method": "hover tooltip"
+  },
+  {
+   "plan": "gui_plan_ident_osc_v1.json",
+   "n": 6,
+   "preset": "GUI06_kParamUnisonStereo__m50",
+   "reading": "UNISON settings panel (gear beside the unison count) shows WIDTH -50 (also MODE LINEAR, STACK OFF, RANGE 2, WT POS 0, WARP 1 0, WARP 2 0)",
+   "control": "OSC A UNISON panel WIDTH",
+   "method": "panel readout"
+  },
+  {
+   "plan": "gui_plan_ident_osc_v1.json",
+   "n": 8,
+   "preset": "GUI08_kParamTablePos__128",
+   "reading": "tooltip on WT POS knob: 'A WT Pos (5)' -- controls which of the (up to 256) sub-tables is heard; frame box shows 5 (raw 128 -> frame 5 of the loaded table)",
+   "control": "OSC A WT POS",
+   "method": "hover tooltip"
+  },
+  {
+   "plan": "gui_plan_ident_osc_v1.json",
+   "n": 10,
+   "preset": "GUI10_kParamWarp__0p5",
+   "reading": "tooltip on WARP knob 1: 'A Warp (50 %)' -- alters the current Wavetable based on the Warp Menu selection",
+   "control": "OSC A WARP 1",
+   "method": "hover tooltip"
+  },
+  {
+   "plan": "gui_plan_ident_fx_v1.json",
+   "n": 2,
+   "preset": "GUI02_kParamEnable__0",
+   "reading": "EQUALIZER module bypass icon turns RED in the module list row and in the module header (reference preset: icon dim)",
+   "control": "FX module bypass toggle",
+   "method": "visual state"
+  },
+  {
+   "plan": "gui_plan_ident_fx_v1.json",
+   "n": 4,
+   "preset": "GUI04_kParamLevelOut__0p9",
+   "reading": "the vertical fader at the module's right edge moves from mid (reference) to near the top; no tooltip captured",
+   "control": "FX module output LEVEL fader",
+   "method": "visual state"
+  },
+  {
+   "plan": "gui_plan_boundary_v1.json",
+   "n": 2,
+   "preset": "GUI02_kParamCoarsePit__m65",
+   "reading": "CRS box -64.00",
+   "control": "OSC A CRS",
+   "method": "box readout"
+  },
+  {
+   "plan": "gui_plan_boundary_v1.json",
+   "n": 3,
+   "preset": "GUI03_kParamCoarsePit__m64",
+   "reading": "CRS box -64.00",
+   "control": "OSC A CRS",
+   "method": "box readout"
+  },
+  {
+   "plan": "gui_plan_boundary_v1.json",
+   "n": 4,
+   "preset": "GUI04_kParamCoarsePit__64",
+   "reading": "CRS box 64.00; tooltip 'A Coarse Pitch (64.00)'",
+   "control": "OSC A CRS",
+   "method": "box readout + tooltip"
+  },
+  {
+   "plan": "gui_plan_boundary_v1.json",
+   "n": 5,
+   "preset": "GUI05_kParamCoarsePit__65",
+   "reading": "CRS box 64.00",
+   "control": "OSC A CRS",
+   "method": "box readout"
+  },
+  {
+   "plan": "gui_plan_boundary_v1.json",
+   "n": 7,
+   "preset": "GUI07_kParamFine__m101",
+   "reading": "FIN box -100",
+   "control": "OSC A FIN",
+   "method": "box readout"
+  },
+  {
+   "plan": "gui_plan_boundary_v1.json",
+   "n": 8,
+   "preset": "GUI08_kParamFine__m100",
+   "reading": "FIN box -100",
+   "control": "OSC A FIN",
+   "method": "box readout"
+  },
+  {
+   "plan": "gui_plan_boundary_v1.json",
+   "n": 9,
+   "preset": "GUI09_kParamFine__100",
+   "reading": "FIN box 100",
+   "control": "OSC A FIN",
+   "method": "box readout"
+  },
+  {
+   "plan": "gui_plan_boundary_v1.json",
+   "n": 10,
+   "preset": "GUI10_kParamFine__101",
+   "reading": "FIN box 100",
+   "control": "OSC A FIN",
+   "method": "box readout"
+  }
+ ]
+}

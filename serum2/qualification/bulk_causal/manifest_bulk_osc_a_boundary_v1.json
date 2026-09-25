@@ -1,0 +1,96 @@
+{
+ "version": 2,
+ "kind": "bulk_context",
+ "note": 48,
+ "render_sec": 1.0,
+ "bands": [
+  20,
+  200,
+  800,
+  3000,
+  8000,
+  20000
+ ],
+ "min_noise_floor_db": 0.5,
+ "session_size": 10,
+ "contexts": {
+  "OSC_A": {
+   "preset_name": "QUAL_OSC_A",
+   "fx": []
+  }
+ },
+ "parameters": [
+  {
+   "atlas_id": "oscA.coarse_pitch",
+   "context": "OSC_A",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamCoarsePit"
+    ]
+   },
+   "domain": {
+    "kind": "explicit",
+    "values": [
+     -64.0,
+     -63.0,
+     -1.0,
+     0.0,
+     1.0,
+     63.0,
+     64.0
+    ],
+    "min": -64.0,
+    "max": 64.0,
+    "default": 0.0,
+    "probes": [
+     -65.0,
+     -64.5,
+     64.5,
+     65.0,
+     -72.0,
+     72.0
+    ]
+   },
+   "note": "boundary +-64; probes one beyond"
+  },
+  {
+   "atlas_id": "oscA.fine",
+   "context": "OSC_A",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamFine"
+    ]
+   },
+   "domain": {
+    "kind": "explicit",
+    "values": [
+     -100.0,
+     -99.0,
+     -1.0,
+     0.0,
+     1.0,
+     99.0,
+     100.0
+    ],
+    "min": -100.0,
+    "max": 100.0,
+    "default": 0.0,
+    "probes": [
+     -101.0,
+     -100.5,
+     100.5,
+     101.0,
+     -80.0,
+     80.0
+    ]
+   },
+   "note": "boundary +-100; probes one beyond"
+  }
+ ]
+}

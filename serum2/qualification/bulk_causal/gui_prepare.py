@@ -33,7 +33,7 @@ def edge_values(t):
     return keep, [x for x in (hi[:1] + hi[1:3][-1:] + lo[:1]) if x is not None]
 
 
-def main_bulk(cfg, manifest, out_dir, ids, edges):
+def main_bulk(cfg, manifest, out_dir, ids, edges, sets=None):
     """Bulk (context + parameters) manifests: UI-verification presets are made ONLY here, only for the selected parameters (matched by
     atlas_id or kparam) and only for the edge values a screen has to show; the causal engine itself never writes them."""
     os.makedirs(out_dir, exist_ok=True)
@@ -44,6 +44,8 @@ def main_bulk(cfg, manifest, out_dir, ids, edges):
         vec = range_plan(p["domain"])
         t = {"values": vec["values"], "probe_values": vec["probes"]}
         vals, probes = edge_values(t) if edges else (vec["values"], vec["probes"])
+        if sets and (p["atlas_id"] in sets or path[-1] in sets):   # identity/tooltip mode: exactly the requested values
+            vals, probes = sets.get(p["atlas_id"], sets.get(path[-1])), []
         for kind, v in [("reference", "ref")] + [("value", x) for x in vals] + [("probe", x) for x in probes]:
             n += 1
             name = "GUI%02d_%s__%s%s" % (n, path[-1], "ref" if v == "ref" else vkey(v), "_probe" if kind == "probe" else "")
@@ -57,10 +59,10 @@ def main_bulk(cfg, manifest, out_dir, ids, edges):
     print(n, "presets ->", out_dir)
 
 
-def main(manifest, out_dir, ids, edges=False):
+def main(manifest, out_dir, ids, edges=False, sets=None):
     cfg = json.load(open(manifest))
     if cfg.get("kind") == "bulk_context":
-        return main_bulk(cfg, manifest, out_dir, ids, edges)
+        return main_bulk(cfg, manifest, out_dir, ids, edges, sets)
     os.makedirs(out_dir, exist_ok=True)
     plan, n = [], 0
     for raw in [t for t in cfg["tests"] if t["id"] in ids]:
@@ -81,4 +83,7 @@ def main(manifest, out_dir, ids, edges=False):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1], sys.argv[2], sys.argv[3].split(","), "--edges" in sys.argv)
+    sets = None
+    if "--set" in sys.argv:   # --set kParamTablePos=128,kParamWarp=0.5[:0.75]  (several values per key with ':')
+        sets = {k: [float(x) for x in v.split(":")] for k, v in (kv.split("=") for kv in sys.argv[sys.argv.index("--set") + 1].split(","))}
+    main(sys.argv[1], sys.argv[2], sys.argv[3].split(","), "--edges" in sys.argv, sets)

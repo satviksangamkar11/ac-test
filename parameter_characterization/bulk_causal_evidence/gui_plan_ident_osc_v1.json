@@ -1,0 +1,159 @@
+{
+ "manifest": "D:\\ableton claude final best\\serum2\\qualification\\bulk_causal\\manifest_bulk_osc_a_pilot_v1.json",
+ "presets": [
+  {
+   "n": 1,
+   "preset": "GUI01_kParamDetune__ref",
+   "test": "oscA.detune",
+   "atlas_id": "oscA.detune",
+   "module": "OSC_A",
+   "kparam": "kParamDetune",
+   "written": null,
+   "kind": "reference",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamDetune"
+   ]
+  },
+  {
+   "n": 2,
+   "preset": "GUI02_kParamDetune__0p5",
+   "test": "oscA.detune",
+   "atlas_id": "oscA.detune",
+   "module": "OSC_A",
+   "kparam": "kParamDetune",
+   "written": 0.5,
+   "kind": "value",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamDetune"
+   ]
+  },
+  {
+   "n": 3,
+   "preset": "GUI03_kParamDetuneWid__ref",
+   "test": "oscA.unison_width",
+   "atlas_id": "oscA.unison_width",
+   "module": "OSC_A",
+   "kparam": "kParamDetuneWid",
+   "written": null,
+   "kind": "reference",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamDetuneWid"
+   ]
+  },
+  {
+   "n": 4,
+   "preset": "GUI04_kParamDetuneWid__30",
+   "test": "oscA.unison_width",
+   "atlas_id": "oscA.unison_width",
+   "module": "OSC_A",
+   "kparam": "kParamDetuneWid",
+   "written": 30.0,
+   "kind": "value",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamDetuneWid"
+   ]
+  },
+  {
+   "n": 5,
+   "preset": "GUI05_kParamUnisonStereo__ref",
+   "test": "oscA.unison_stereo",
+   "atlas_id": "oscA.unison_stereo",
+   "module": "OSC_A",
+   "kparam": "kParamUnisonStereo",
+   "written": null,
+   "kind": "reference",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamUnisonStereo"
+   ]
+  },
+  {
+   "n": 6,
+   "preset": "GUI06_kParamUnisonStereo__m50",
+   "test": "oscA.unison_stereo",
+   "atlas_id": "oscA.unison_stereo",
+   "module": "OSC_A",
+   "kparam": "kParamUnisonStereo",
+   "written": -50.0,
+   "kind": "value",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamUnisonStereo"
+   ]
+  },
+  {
+   "n": 7,
+   "preset": "GUI07_kParamTablePos__ref",
+   "test": "oscA.wt_pos",
+   "atlas_id": "oscA.wt_pos",
+   "module": "OSC_A",
+   "kparam": "kParamTablePos",
+   "written": null,
+   "kind": "reference",
+   "raw_path": [
+    "Oscillator0",
+    "WTOsc0",
+    "plainParams",
+    "kParamTablePos"
+   ]
+  },
+  {
+   "n": 8,
+   "preset": "GUI08_kParamTablePos__128",
+   "test": "oscA.wt_pos",
+   "atlas_id": "oscA.wt_pos",
+   "module": "OSC_A",
+   "kparam": "kParamTablePos",
+   "written": 128.0,
+   "kind": "value",
+   "raw_path": [
+    "Oscillator0",
+    "WTOsc0",
+    "plainParams",
+    "kParamTablePos"
+   ]
+  },
+  {
+   "n": 9,
+   "preset": "GUI09_kParamWarp__ref",
+   "test": "oscA.warp",
+   "atlas_id": "oscA.warp",
+   "module": "OSC_A",
+   "kparam": "kParamWarp",
+   "written": null,
+   "kind": "reference",
+   "raw_path": [
+    "Oscillator0",
+    "WTOsc0",
+    "plainParams",
+    "kParamWarp"
+   ]
+  },
+  {
+   "n": 10,
+   "preset": "GUI10_kParamWarp__0p5",
+   "test": "oscA.warp",
+   "atlas_id": "oscA.warp",
+   "module": "OSC_A",
+   "kparam": "kParamWarp",
+   "written": 0.5,
+   "kind": "value",
+   "raw_path": [
+    "Oscillator0",
+    "WTOsc0",
+    "plainParams",
+    "kParamWarp"
+   ]
+  }
+ ]
+}

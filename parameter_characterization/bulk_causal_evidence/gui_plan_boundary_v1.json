@@ -1,0 +1,155 @@
+{
+ "manifest": "D:\\ableton claude final best\\serum2\\qualification\\bulk_causal\\manifest_bulk_osc_a_boundary_v1.json",
+ "presets": [
+  {
+   "n": 1,
+   "preset": "GUI01_kParamCoarsePit__ref",
+   "test": "oscA.coarse_pitch",
+   "atlas_id": "oscA.coarse_pitch",
+   "module": "OSC_A",
+   "kparam": "kParamCoarsePit",
+   "written": null,
+   "kind": "reference",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamCoarsePit"
+   ]
+  },
+  {
+   "n": 2,
+   "preset": "GUI02_kParamCoarsePit__m65",
+   "test": "oscA.coarse_pitch",
+   "atlas_id": "oscA.coarse_pitch",
+   "module": "OSC_A",
+   "kparam": "kParamCoarsePit",
+   "written": -65.0,
+   "kind": "value",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamCoarsePit"
+   ]
+  },
+  {
+   "n": 3,
+   "preset": "GUI03_kParamCoarsePit__m64",
+   "test": "oscA.coarse_pitch",
+   "atlas_id": "oscA.coarse_pitch",
+   "module": "OSC_A",
+   "kparam": "kParamCoarsePit",
+   "written": -64.0,
+   "kind": "value",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamCoarsePit"
+   ]
+  },
+  {
+   "n": 4,
+   "preset": "GUI04_kParamCoarsePit__64",
+   "test": "oscA.coarse_pitch",
+   "atlas_id": "oscA.coarse_pitch",
+   "module": "OSC_A",
+   "kparam": "kParamCoarsePit",
+   "written": 64.0,
+   "kind": "value",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamCoarsePit"
+   ]
+  },
+  {
+   "n": 5,
+   "preset": "GUI05_kParamCoarsePit__65",
+   "test": "oscA.coarse_pitch",
+   "atlas_id": "oscA.coarse_pitch",
+   "module": "OSC_A",
+   "kparam": "kParamCoarsePit",
+   "written": 65.0,
+   "kind": "value",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamCoarsePit"
+   ]
+  },
+  {
+   "n": 6,
+   "preset": "GUI06_kParamFine__ref",
+   "test": "oscA.fine",
+   "atlas_id": "oscA.fine",
+   "module": "OSC_A",
+   "kparam": "kParamFine",
+   "written": null,
+   "kind": "reference",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamFine"
+   ]
+  },
+  {
+   "n": 7,
+   "preset": "GUI07_kParamFine__m101",
+   "test": "oscA.fine",
+   "atlas_id": "oscA.fine",
+   "module": "OSC_A",
+   "kparam": "kParamFine",
+   "written": -101.0,
+   "kind": "value",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamFine"
+   ]
+  },
+  {
+   "n": 8,
+   "preset": "GUI08_kParamFine__m100",
+   "test": "oscA.fine",
+   "atlas_id": "oscA.fine",
+   "module": "OSC_A",
+   "kparam": "kParamFine",
+   "written": -100.0,
+   "kind": "value",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamFine"
+   ]
+  },
+  {
+   "n": 9,
+   "preset": "GUI09_kParamFine__100",
+   "test": "oscA.fine",
+   "atlas_id": "oscA.fine",
+   "module": "OSC_A",
+   "kparam": "kParamFine",
+   "written": 100.0,
+   "kind": "value",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamFine"
+   ]
+  },
+  {
+   "n": 10,
+   "preset": "GUI10_kParamFine__101",
+   "test": "oscA.fine",
+   "atlas_id": "oscA.fine",
+   "module": "OSC_A",
+   "kparam": "kParamFine",
+   "written": 101.0,
+   "kind": "value",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamFine"
+   ]
+  }
+ ]
+}

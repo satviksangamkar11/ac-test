@@ -17,8 +17,8 @@ from unify import CONTRACT_KEYS  # noqa: E402
 UNIFIED = ED / "unified_evidence_v1.json"
 AUTHORITY = ["serum2/reference/serum_mcp_binding_table.json", "parameter_characterization/serum_mcp_mutable_surface.json",
              "parameter_characterization/serum2_master_parameter_registry.json", "parameter_characterization/serum_mcp_mutable_coverage.json",
-             "serum2/reference/serum_atlas.py", "serum2/evidence/admission.py", "serum2/evidence/capability_contract.py",
-             "serum2/qualification/evidence_promotion.py"]
+             "serum2/reference/serum_atlas.py", "serum2/evidence/admission.py", "serum2/evidence/capability_contract.py"]
+# evidence_promotion.py is deliberately NOT frozen any more: Phase 2.3 gave it the parameter-contract path (test_evidence_promotion_contract.py)
 
 
 def test_engine_contract_is_versioned_and_pinned():
@@ -40,6 +40,7 @@ def test_unified_evidence_invariants():
     assert d["summary"]["records"] == len(d["records"]) == 26
     assert d["incidents"][0]["id"] == "ableton-crash-2026-09-25"
     for r in d["records"]:
+        assert r["atlas"] is not None or "NO_ATLAS_IDENTITY" in r["blocked_by"]     # no id is ever invented
         assert r["eligible_for_promotion_review"] == (not r["blocked_by"])
         if r["eligible_for_promotion_review"]:
             assert r["promotion_dry_run"]["promoted"] and not r["atlas_domain_conflicts"] and r["tiers"]["causal_raw"]["ok"]
@@ -49,8 +50,8 @@ def test_unified_evidence_invariants():
     by = {r["atlas_id"]: r for r in d["records"]}
     assert by["oscA.coarse_pitch"]["atlas_domain_conflicts"][0]["serum_reachable"] == [-64.0, 64.0]   # Atlas says +-72
     assert by["oscA.fine"]["atlas_domain_conflicts"][0]["serum_reachable"][1] == 100.0                # Atlas says +-80
-    assert by["fx.equalizer.left_type"]["tiers"]["semantic"]["status"] == "SEMANTIC_BINDING_PROVEN"
-    assert by["fx.equalizer.left_type"]["blocked_by"] == ["MISSING_DOMAIN"]   # existing pipeline has no operand mapping for 'toggle_buttons'
+    assert by["fx.equalizer.left_type"]["promotion_dry_run"]["promoted"] and not by["fx.equalizer.left_type"]["blocked_by"]  # enum via contract, not boolean
+    assert by["oscA.blend"]["pilot_atlas_id"] == "oscA.unison_width" and by["oscA.blend"]["blocked_by"] == ["UI_SEMANTICS_NOT_VERIFIED"]
 
 
 def test_unify_writes_only_its_output_artifact():

@@ -1,0 +1,100 @@
+{
+ "version": 1,
+ "rule": "identities are resolved against EXISTING Atlas ids by GUI evidence; no id is created; duplicates are reported, not merged",
+ "resolutions": [
+  {
+   "pilot_atlas_id": "oscA.unison_width",
+   "raw": "Oscillator0.plainParams.kParamDetuneWid",
+   "resolved_atlas_id": "oscA.blend",
+   "duplicate_atlas_ids": [
+    "oscA.detune_width"
+   ],
+   "evidence": [
+    "gui_ident_evidence_v1.json (n3, n4 osc)"
+   ],
+   "basis": "GUI tooltip 'A Uni Blend (75)/(30)' tracks the raw value; default 75 matches the state-readback default",
+   "open": "the Atlas holds TWO ids for this control (oscA.blend from the UI inventory, oscA.detune_width from the schema); the registry must merge them -- not done here"
+  },
+  {
+   "pilot_atlas_id": "oscA.unison_stereo",
+   "raw": "Oscillator0.plainParams.kParamUnisonStereo",
+   "resolved_atlas_id": "oscA.uni_width",
+   "duplicate_atlas_ids": [
+    "oscA.unison_stereo_width"
+   ],
+   "evidence": [
+    "gui_ident_evidence_v1.json (n6 osc)"
+   ],
+   "basis": "raw -50 shows as WIDTH -50 in the UNISON settings panel; 'Uni Width' (UI inventory) and 'Unison Stereo Width' (schema, -100..100, default 100) are the same control",
+   "open": "duplicate Atlas ids; the panel's other fields (MODE, STACK, RANGE, WT POS, WARP 1/2) have their own raw keys not yet mapped"
+  },
+  {
+   "pilot_atlas_id": "oscA.wt_pos",
+   "raw": "Oscillator0.WTOsc0.plainParams.kParamTablePos",
+   "resolved_atlas_id": "oscA.wt_position",
+   "duplicate_atlas_ids": [],
+   "evidence": [
+    "gui_ident_evidence_v1.json (n8 osc)"
+   ],
+   "basis": "tooltip 'A WT Pos'; raw 128 displays as frame 5",
+   "open": "the display is table-dependent (frame index): 0..256 is the RAW domain only"
+  },
+  {
+   "pilot_atlas_id": "oscA.warp",
+   "raw": "Oscillator0.WTOsc0.plainParams.kParamWarp",
+   "resolved_atlas_id": "oscA.warp_amount",
+   "duplicate_atlas_ids": [],
+   "evidence": [
+    "gui_ident_evidence_v1.json (n10 osc)"
+   ],
+   "basis": "tooltip 'A Warp (50 %)' for raw 0.5; also upstream mapping.py warp_amount -> kParamWarp",
+   "open": null
+  },
+  {
+   "pilot_atlas_id": "oscA.initial_phase",
+   "raw": "Oscillator0.WTOsc0.plainParams.kParamInitialPhase",
+   "resolved_atlas_id": "oscA.phase",
+   "duplicate_atlas_ids": [],
+   "evidence": [
+    "gui_osc_evidence_v1.json (GUI28-33 phase readout)"
+   ],
+   "basis": "raw value shows in the OSC A phase readout (degrees); default displays 180",
+   "open": "Atlas default says 0; observed default is 180"
+  },
+  {
+   "pilot_atlas_id": "oscA.coarse_pitch",
+   "raw": "Oscillator0.plainParams.kParamCoarsePit",
+   "resolved_atlas_id": "oscA.coarse_pitch",
+   "duplicate_atlas_ids": [
+    "oscA.crs"
+   ],
+   "evidence": [
+    "gui_ident_evidence_v1.json (boundary n4)"
+   ],
+   "basis": "CRS box tracks the raw value; tooltip 'A Coarse Pitch (64.00)'",
+   "open": "the Atlas note said the CRS <-> kParamCoarsePit relation was not established: it is now (two Atlas ids, one control)"
+  },
+  {
+   "pilot_atlas_id": "fx.equalizer.bypass(enable)",
+   "raw": "FXRack0.FX.<i>.<module>.plainParams.kParamEnable",
+   "resolved_atlas_id": "fx.sys.module_bypass",
+   "duplicate_atlas_ids": [],
+   "evidence": [
+    "gui_ident_evidence_v1.json (n2 fx)"
+   ],
+   "basis": "raw 0.0 turns the module bypass icon red (Atlas: blue=active, red=bypassed)",
+   "open": "a per-module-INSTANCE control (fx_chain index), not one global scalar"
+  },
+  {
+   "pilot_atlas_id": "(exploratory) fxeq.level_out",
+   "raw": "FXRack0.FX.<i>.FXEQ.plainParams.kParamLevelOut",
+   "resolved_atlas_id": "fx.equalizer.level",
+   "duplicate_atlas_ids": [],
+   "evidence": [
+    "gui_ident_evidence_v1.json (n4 fx)"
+   ],
+   "basis": "raw 0.9 moves the module's right-edge output LEVEL fader",
+   "open": "the Atlas entry says 'no separate Level control, confirmed absent' and flags a retest: the control exists (a fader, not a knob), so that entry needs correcting; only visual evidence, no numeric readout"
+  }
+ ]
+}

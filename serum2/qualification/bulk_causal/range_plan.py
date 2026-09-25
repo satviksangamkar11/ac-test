@@ -25,6 +25,8 @@ def plan(d: dict) -> dict:
     k = d["kind"]
     if k == "bool":
         return {"values": [0.0, 1.0], "probes": [2.0]}
+    if k == "explicit":   # boundary work: caller states exactly which values (retained-required) and probes to write
+        return {"values": _uniq(d["values"]), "probes": _uniq(d.get("probes", []))}
     if k == "enum":
         v = sorted(float(x) for x in d["values"])
         return {"values": _uniq(v), "probes": _uniq([v[-1] + 1] + ([v[0] - 1] if v[0] > 0 else []))}
