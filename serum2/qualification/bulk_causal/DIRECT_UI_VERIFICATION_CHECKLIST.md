@@ -21,13 +21,16 @@ Evidence goes in `parameter_characterization/bulk_causal_evidence/direct_ui_evid
       the fold) -- the core architecture claim is now visually proven, not just asserted
 - [x] FX page, partial numeric: fx.compressor.attack MATCH (100.0); fx.compressor.ratio and .release MISMATCH (open finding)
 - [ ] FX page, remaining: Bode/Chorus/Convolve/Delay/Hyper/Distortion/Equalizer/Filter/Flanger/Phaser/Reverb's other ~45 numeric params (need hover per knob)
-- [ ] MATRIX page (mod routes, if any candidates land there)
-- [ ] GLOBAL page (global.*, voice.voicing.* not already covered)
+- [x] MATRIX page: confirmed empty (no mod-route candidates in the manifest) -- nothing to check
+- [x] GLOBAL page, partial: `global.voice_control.random.pan` (50%, MATCH), `global.s1_compatibility` (checked, MATCH)
+- [ ] GLOBAL page, remaining: bend_range_up/down, fx_bus1/2_destination, note_latch, oversampling, tuning fields
 - [x] Bottom bar, partial: global TRANSPOSE (-24, MATCH), VOICING MONO/POLY/LEGATO visible (not field-compared)
 - [ ] ARP page/panel (dedicated: transpose.shift, chance, gate, retrigger.*, velocity.*, pattern.*) -- **do not click the
       ARP toggle to get there** (accidentally toggled ARP on/off once already, caught via the "*" modified-title
       indicator and fixed by reloading the preset fresh); find the real ARP detail page or use hover-only
-- [ ] ENV1-4 panels (attack/hold/decay/sustain/release/curves) -- ENV1 numeric row already visible (5.00s/2.60s/16.0s/-12.0dB/16.0s), not yet cross-checked against plan targets
+- [x] ENV1-4 panels, attack/hold/decay/release: **all 16 fields MATCH** (5.00s / 2.60s / 16.0s / 16.0s, identical
+      across all four envelopes as expected since all four share the same campaign targets)
+- [ ] ENV1-4 sustain: open finding, see below (not yet resolved)
 - [ ] LFO1-6 panels (rate, mode, shape, delay, rise, smooth, sync) -- LFO1 mode already checked (see open finding below); rate/delay/etc not yet checked
 - [ ] FILTER1/FILTER2 panels (cutoff, resonance, drive, key_track) -- type already checked (filter2 NORMALIZED_MATCH); numeric knobs need hover (no tooltip appeared on first attempt at this panel's collapsed view, worth retrying on the full panel)
 - [ ] MACRO panel (8 macro values)
@@ -44,6 +47,9 @@ Evidence goes in `parameter_characterization/bulk_causal_evidence/direct_ui_evid
       ratio); screen shows `RATIO 1.0` (no compression). Needs the raw-to-display curve checked before ruling.
 - [ ] **`fx.compressor.release`**: target 100.0, screen shows `30.4`. Needs the raw-to-display curve checked
       (possibly a nonlinear ms mapping, same family of question as ratio above).
+- [ ] **`env1/2/3/4.sustain`**: all four share raw target 0.5, but ENV1 displays `-12.0dB` while ENV2/3/4 display
+      `25%` for the identical target -- a per-envelope display-unit toggle, not obviously a value bug, but neither
+      reading is the naive linear 0.5 -> 50% one might expect. Needs the sustain curve/unit checked before ruling.
 
 ## Not applicable to this pass (accounted for separately)
 - 26 `NO_USABLE_TARGET_VALUE` -- no retained non-probe value in the GUI campaign; not in either preset
