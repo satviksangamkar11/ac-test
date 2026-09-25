@@ -36,16 +36,20 @@ Evidence goes in `parameter_characterization/bulk_causal_evidence/direct_ui_evid
 - [ ] MACRO panel (8 macro values)
 - [ ] Secondary preset `VERIFY_SECONDARY_OSC_WARP2` (3 candidates) not yet loaded/scanned
 
-## Open findings -- RESOLVED (root cause identified, see DIRECT_UI_FINDING_RAW_WRITE_GAP.md)
-All 4 findings from the first checkpoint are now confirmed genuine MISMATCHes via isolated single-field
-reproduction tests, with a common root cause: the causal engine's raw `body_set()` bypasses `serum_mcp`'s
-`apply_spec()` semantic encoder for `DIRECT_RAW`/`ENUM_RAW`-mechanism candidates. DawDreamer's session
-state-readback echoes the raw write back unchanged (looks retained) but does not predict what Serum's native
-`.SerumPreset` file loader actually honors. This is not fixed here (no enum expanded, no domain widened, no
-schema touched) -- it's reported as-is for the closure ledger.
+## Open findings -- RESOLVED (root cause identified for 3 of 4; lfo1.mode corrected, see DIRECT_UI_FINDING_RAW_WRITE_GAP.md)
+`fx.compressor.ratio`/`.release` and `env1-4.sustain` are confirmed genuine MISMATCHes with a common root
+cause: the causal engine's raw `body_set()` bypasses `serum_mcp`'s `apply_spec()` semantic encoder for
+`DIRECT_RAW`-mechanism candidates. DawDreamer's session state-readback echoes the raw write back unchanged
+(looks retained) but does not predict what Serum's native `.SerumPreset` file loader actually honors. This is
+not fixed here (no enum expanded, no domain widened, no schema touched) -- it's reported as-is for the closure
+ledger. **`lfo1.mode`'s original diagnosis was corrected** (see the CORRECTION section of
+DIRECT_UI_FINDING_RAW_WRITE_GAP.md) after a methodology error was found: the original "S&H"/"Normal" readings
+were `lfo1.shape`'s dropdown (an adjacent control), not the actual `FREE`/`RETRIG`/`ENVELOPE` mode toggle.
 - [x] **`lfo1.mode`**: target `"Envelope"` (schema-confirmed valid, vocabulary is exactly Free/Retrig/Envelope).
-      Giant preset shows `S&H`; an ISOLATED single-field test (nothing else touched) shows `Normal` -- a THIRD
-      different value. Mechanism: `ENUM_RAW`.
+      CORRECTED re-test reading the right control: isolated single-field write AND structural-merge-only write
+      both correctly show `ENVELOPE` highlighted -- the raw write method itself works. Only the full
+      299-candidate giant preset shows `FREE`. Confirmed real mismatch, but root cause is an unidentified
+      interaction with the other 298 candidates, NOT the encoder-bypass story below. Needs further bisection.
 - [x] **`fx.compressor.ratio`**: target `31622.78` (a legitimate point in the declared log-domain sweep, not an
       edge probe). Giant preset shows `RATIO 1.0`; isolated test shows `RATIO 0.9` -- different wrong value for
       the same target. `fx.compressor.attack` (same FX unit, same mechanism) MATCHED exactly in both tests,

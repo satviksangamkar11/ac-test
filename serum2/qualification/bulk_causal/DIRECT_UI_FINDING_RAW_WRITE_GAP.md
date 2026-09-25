@@ -1,9 +1,27 @@
 # Finding: causal state-readback does not prove native-file/GUI truth for some raw writes
 
+## CORRECTION (after further isolation testing)
+The original version of this document claimed `lfo1.mode` shared the same root cause as the compressor and
+sustain findings ("raw write bypasses `apply_spec`'s encoder"). **That claim was wrong and is retracted below,
+in section 1.** A methodology error (reading Serum's LFO *shape* dropdown, not the *mode* buttons -- they sit
+directly above/below each other in the same panel) produced the original "S&H" / "Normal" readings entirely.
+Once corrected to read the actual `FREE`/`RETRIG`/`ENVELOPE` toggle buttons, two escalating isolation tests
+(a single-field write, and a structural-merge-only write) both show the raw write working CORRECTLY --
+`ENVELOPE` lights up as expected. Only the full 299-candidate giant preset shows `FREE` instead. This means
+`lfo1.mode`'s failure mode is real but is NOT the same "raw write is fundamentally unreliable for this field"
+story as the other 3 findings -- it's an unresolved interaction with something else among the other 298
+candidates, not yet bisected. See section 1 below for the full, corrected trail.
+
+Per c27645b/82d86f5 remaining untouched as historical checkpoints: this correction is a NEW addition on top
+of the prior commit (f0cfb2e), not a rewrite of it. The prior commit's claim about `lfo1.mode` was incorrect;
+this document says so plainly rather than quietly editing the record.
+
 ## Summary
-Investigated all 4 open findings from the DIRECT_UI screen scan. 3 are confirmed genuine, isolated,
-reproducible mismatches with a common root cause. The 4th (env sustain) resolves to a smaller but still
-real version of the same root cause, not a display-unit red herring.
+Investigated all 4 open findings from the DIRECT_UI screen scan. 2 (`fx.compressor.ratio`/`.release`) are
+confirmed genuine, isolated, reproducible mismatches with a common root cause (raw write bypasses the
+`apply_spec` encoder). The 3rd (`env*.sustain`) resolves to a smaller but still real version of the same root
+cause, not a display-unit red herring. The 4th (`lfo1.mode`) is a confirmed real mismatch but with a DIFFERENT,
+not-yet-identified root cause -- see the correction above and section 1 below.
 
 ## Root cause
 The causal engine (`bulk_engine.py`) has exactly one write mechanism: `body_set()` writes a raw Python value
@@ -31,16 +49,29 @@ concrete reason the exhaustive scan must continue rather than stopping at "state
 
 ## The 4 findings, resolved
 
-### 1. `lfo1.mode` -- CONFIRMED MISMATCH
+### 1. `lfo1.mode` -- CONFIRMED MISMATCH, root cause NOT YET IDENTIFIED (corrected)
 - Declared domain (schema-verified against `serum_mcp`'s `LfoSpec.mode` / `schema.py` LFO_MODE enum):
   exactly `Free`, `Retrig`, `Envelope`. Target written: `"Envelope"` (valid per this vocabulary).
-- Campaign's causal state-readback: `state_value == "Envelope"` (looked retained).
-- **Giant preset, real Serum GUI**: displays `S&H` -- not even in the declared 3-word vocabulary.
-- **Isolated single-field test** (pure init body, only `kParamMode` touched, nothing else): displays
-  `Normal` -- a THIRD different value, also not in the vocabulary.
-- Three loads, three different outcomes (`Envelope` claimed / `S&H` / `Normal`), none matching each other.
-  Proves the raw string write is not reliably interpreted by Serum's native loader for this field, regardless
-  of what else is in the preset. Mechanism: `ENUM_RAW`.
+- Serum's LFO1 panel has TWO adjacent controls that are easy to conflate: a `shape` dropdown (kParamType,
+  e.g. "S&H", "Normal") directly above a `FREE`/`RETRIG`/`ENVELOPE` three-way toggle (kParamMode, the real
+  mode). The first pass of this investigation read the shape dropdown and mistook it for the mode control --
+  its "S&H" (giant preset) and "Normal" (isolated test) readings were `lfo1.shape`'s values, not `lfo1.mode`'s.
+  (Fittingly, `lfo1.shape`'s own target is `"RandomSH"`, and "S&H" is very plausibly its display label --
+  likely a MATCH, not investigated further here since it wasn't one of the 4 open findings.)
+- **Corrected re-test, isolated single-field write** (pure init body, only `kParamMode='Envelope'` touched):
+  `ENVELOPE` button correctly highlighted. MATCH.
+- **Corrected re-test, structural-merge-only** (12-FX-slot + OSC_SAMPLE merge, THEN only `kParamMode` written,
+  none of the other 298 candidates applied): `ENVELOPE` correctly highlighted. MATCH.
+- **Corrected re-test, full giant preset** (all 299 candidates applied, including `lfo1.mode='Envelope'`):
+  `FREE` highlighted, not `ENVELOPE`. Ruled out a stale-UI redraw (switched to the LFO2 tab and back --
+  still shows `FREE`). The packed file itself was independently double-checked (both the builder's own
+  assertion and the separate fresh-`unpack_file` readback test) and both confirm `kParamMode == 'Envelope'`
+  in the actual file bytes.
+- **Net**: the raw string write method itself is proven reliable for this field (both isolation tests pass).
+  The giant preset's failure is a real, reproduced mismatch between file content and Serum's native rendering,
+  but the trigger is an unidentified interaction with one or more of the other 298 candidates (possibly the
+  other 5 LFOs also being set to `Envelope` simultaneously, possibly something else) -- not yet bisected.
+  Retracts the original claim that this shares the compressor/sustain "encoder-bypass" root cause.
 
 ### 2 & 3. `fx.compressor.ratio` / `fx.compressor.release` -- CONFIRMED MISMATCH
 - Both `mechanism: DIRECT_RAW`, domain `kind: "log"` sourced from `schema.FX_PARAMS ParamDef` (generation
