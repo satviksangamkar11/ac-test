@@ -1,0 +1,1491 @@
+{
+ "harness": {
+  "engine_contract_version": 1,
+  "product_version": "2.0.23",
+  "state_version": 9.0,
+  "architecture": "context-based bulk: parameter-by-parameter RAW mutation inside one qualification context",
+  "backend": "real Serum 2.0.23 VST3 in DawDreamer (headless): state readback + rendered band energy + host texts; not GUI",
+  "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+  "manifest": "D:\\ableton claude final best\\serum2\\qualification\\bulk_causal\\manifest_lfo_rate_rerun.json",
+  "manifest_sha256": "6d2af6e6ed61a9bbb097b9eacc692a78c98d60f0300d6dbe849401f20fa0cbbb",
+  "context_presets": [
+   {
+    "context": "INIT",
+    "path": "contexts\\QUAL_INIT.SerumPreset",
+    "sha256": "d9eeb9151b1aff8fe0d66c683a734356559551d74a0b7aa62c46328fa0de4923",
+    "parameters": 6
+   },
+   {
+    "context": "FX_FXBode",
+    "path": "contexts\\QUAL_FX_FXBode.SerumPreset",
+    "sha256": "bdb4c3385f2c0a19715dab78415afce7769ef19494b8289c4ab85fb77e428b0b",
+    "parameters": 0
+   },
+   {
+    "context": "FX_FXChorus",
+    "path": "contexts\\QUAL_FX_FXChorus.SerumPreset",
+    "sha256": "4fae2a0e4c047bc098428b98216b6caf4b6d26194248bf9f646b5c34d7a13376",
+    "parameters": 0
+   },
+   {
+    "context": "FX_FXComp",
+    "path": "contexts\\QUAL_FX_FXComp.SerumPreset",
+    "sha256": "9ea6891168c1172f7f7a8993c5ec7d2d0dd3577eb5d7d0c119adc2e29daf5356",
+    "parameters": 0
+   },
+   {
+    "context": "FX_FXConv",
+    "path": "contexts\\QUAL_FX_FXConv.SerumPreset",
+    "sha256": "89a2f6960fa2be0cbf8e564f85047fa2aff1a5dd5bf078a3fa9f0bb0d2180791",
+    "parameters": 0
+   },
+   {
+    "context": "FX_FXDelay",
+    "path": "contexts\\QUAL_FX_FXDelay.SerumPreset",
+    "sha256": "be34f68886bda6ea1c69980976d83a3ec41ea5d48e98eaa29b4dc9379cf11e1a",
+    "parameters": 0
+   },
+   {
+    "context": "FX_FXHyperD",
+    "path": "contexts\\QUAL_FX_FXHyperD.SerumPreset",
+    "sha256": "041135d4f7cb15674811fa4acbda26ca9178cb867877d7be57bdf49b0ac9d1c6",
+    "parameters": 0
+   },
+   {
+    "context": "FX_FXDistortion",
+    "path": "contexts\\QUAL_FX_FXDistortion.SerumPreset",
+    "sha256": "63ce2297440821504b9b67bef1803f4cd9a9dbe0c1e66505a915a505def82847",
+    "parameters": 0
+   },
+   {
+    "context": "FX_FXEQ",
+    "path": "contexts\\QUAL_FX_FXEQ.SerumPreset",
+    "sha256": "33d75c60b69551ed206095a4c6abdba29f57bd2f91f611db60550539c589f878",
+    "parameters": 0
+   },
+   {
+    "context": "FX_FXFilter",
+    "path": "contexts\\QUAL_FX_FXFilter.SerumPreset",
+    "sha256": "de80f4938e2b87126cc408a511df8069d7c3b6266fd3f026d5785c6f66b9d810",
+    "parameters": 0
+   },
+   {
+    "context": "FX_FXFlanger",
+    "path": "contexts\\QUAL_FX_FXFlanger.SerumPreset",
+    "sha256": "90320ae41f9ebe9d1bde1a96accc639f3620dc28d266d4a7150d14b2c27e4998",
+    "parameters": 0
+   },
+   {
+    "context": "FX_FXPhaser",
+    "path": "contexts\\QUAL_FX_FXPhaser.SerumPreset",
+    "sha256": "f0d847b440ce160794c6801631c28722a1f22b556b7964804011d0f8de8748d9",
+    "parameters": 0
+   },
+   {
+    "context": "FX_FXReverb",
+    "path": "contexts\\QUAL_FX_FXReverb.SerumPreset",
+    "sha256": "0999b55bcd53054d09659557ce39f730d1d715fb8b0b2a6580629d9bf836be2d",
+    "parameters": 0
+   },
+   {
+    "context": "OSC_SAMPLE",
+    "path": "contexts\\QUAL_OSC_SAMPLE.SerumPreset",
+    "sha256": "f8304b6b3a4a3b2d05c658f72c8e2a6c405748d09a3a6f19f5e17b66b2736b05",
+    "parameters": 0
+   },
+   {
+    "context": "OSC_WARP2",
+    "path": "contexts\\QUAL_OSC_WARP2.SerumPreset",
+    "sha256": "df796403039463dca89f22b53e00b0083868cc59d4384e0aae78b0562d5c457d",
+    "parameters": 0
+   }
+  ],
+  "persistent_presets_written": 15,
+  "parameters": 6,
+  "values_observed": 30,
+  "state_loads": 38,
+  "sessions": 1,
+  "context_loads": 1,
+  "baseline_reloads": 7,
+  "transient_transport_files": "one per Serum session, overwritten on every load (not a preset)",
+  "authorizes_nothing": true,
+  "serum_crashes": [],
+  "generated": "2026-09-25T12:45:00.350411+00:00"
+ },
+ "records": [
+  {
+   "atlas_id": "lfo1.rate",
+   "context": "INIT",
+   "candidate": {
+    "kind": "raw_path",
+    "path": [
+     "LFO0",
+     "plainParams",
+     "kParamRate"
+    ],
+    "kparam": "kParamRate"
+   },
+   "declared": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "value_vector": {
+    "values": [
+     0.0,
+     25.0,
+     50.0,
+     75.0,
+     100.0
+    ],
+    "probes": []
+   },
+   "values": [
+    {
+     "written": 0.0,
+     "probe": false,
+     "state_value": 0.0,
+     "load_error": null,
+     "state_diff_keys": [
+      "kParamRate"
+     ],
+     "file_roundtrip": true,
+     "leaves_written": null,
+     "leaf_states": null,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "band_delta_db": [
+      0.03,
+      0.02,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "host_params_changed": [
+      "LFO 1 Rate"
+     ]
+    },
+    {
+     "written": 25.0,
+     "probe": false,
+     "state_value": 25.000000000000007,
+     "load_error": null,
+     "state_diff_keys": [
+      "kParamRate"
+     ],
+     "file_roundtrip": true,
+     "leaves_written": null,
+     "leaf_states": null,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "band_delta_db": [
+      0.03,
+      0.02,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "host_params_changed": [
+      "LFO 1 Rate"
+     ]
+    },
+    {
+     "written": 50.0,
+     "probe": false,
+     "state_value": 49.999999999999986,
+     "load_error": null,
+     "state_diff_keys": [
+      "kParamRate"
+     ],
+     "file_roundtrip": true,
+     "leaves_written": null,
+     "leaf_states": null,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "band_delta_db": [
+      0.03,
+      0.02,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "host_params_changed": [
+      "LFO 1 Rate"
+     ]
+    },
+    {
+     "written": 75.0,
+     "probe": false,
+     "state_value": 74.99999999999999,
+     "load_error": null,
+     "state_diff_keys": [
+      "kParamRate"
+     ],
+     "file_roundtrip": true,
+     "leaves_written": null,
+     "leaf_states": null,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "band_delta_db": [
+      0.03,
+      0.02,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "host_params_changed": [
+      "LFO 1 Rate"
+     ]
+    },
+    {
+     "written": 100.0,
+     "probe": false,
+     "state_value": 100.0,
+     "load_error": null,
+     "state_diff_keys": [
+      "kParamRate"
+     ],
+     "file_roundtrip": true,
+     "leaves_written": null,
+     "leaf_states": null,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "band_delta_db": [
+      0.03,
+      0.02,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "host_params_changed": [
+      "LFO 1 Rate"
+     ]
+    }
+   ],
+   "range": {
+    "declared": {
+     "kind": "continuous",
+     "min": 0.0,
+     "max": 100.0
+    },
+    "discovered_default": null,
+    "declared_default_matches": null,
+    "reachable_min": 0.0,
+    "reachable_max": 100.0,
+    "clamp_high_at": null,
+    "clamp_low_at": null,
+    "reaches_beyond_declared_max": false,
+    "probes_dropped": [],
+    "declared_matches_reachable": true,
+    "rows": [
+     {
+      "written": 0.0,
+      "stored": 0.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 25.0,
+      "stored": 25.000000000000007,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 50.0,
+      "stored": 49.999999999999986,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 75.0,
+      "stored": 74.99999999999999,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 100.0,
+      "stored": 100.0,
+      "fate": "retained",
+      "probe": false
+     }
+    ]
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.03,
+    "container_state_identical": true
+   },
+   "noise_floor_db": 0.5
+  },
+  {
+   "atlas_id": "lfo2.rate",
+   "context": "INIT",
+   "candidate": {
+    "kind": "raw_path",
+    "path": [
+     "LFO1",
+     "plainParams",
+     "kParamRate"
+    ],
+    "kparam": "kParamRate"
+   },
+   "declared": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "value_vector": {
+    "values": [
+     0.0,
+     25.0,
+     50.0,
+     75.0,
+     100.0
+    ],
+    "probes": []
+   },
+   "values": [
+    {
+     "written": 0.0,
+     "probe": false,
+     "state_value": 0.0,
+     "load_error": null,
+     "state_diff_keys": [
+      "kParamRate"
+     ],
+     "file_roundtrip": true,
+     "leaves_written": null,
+     "leaf_states": null,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "band_delta_db": [
+      0.03,
+      0.02,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "host_params_changed": [
+      "LFO 2 Rate"
+     ]
+    },
+    {
+     "written": 25.0,
+     "probe": false,
+     "state_value": 25.000000000000007,
+     "load_error": null,
+     "state_diff_keys": [
+      "kParamRate"
+     ],
+     "file_roundtrip": true,
+     "leaves_written": null,
+     "leaf_states": null,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "band_delta_db": [
+      0.03,
+      0.02,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "host_params_changed": [
+      "LFO 2 Rate"
+     ]
+    },
+    {
+     "written": 50.0,
+     "probe": false,
+     "state_value": 49.999999999999986,
+     "load_error": null,
+     "state_diff_keys": [
+      "kParamRate"
+     ],
+     "file_roundtrip": true,
+     "leaves_written": null,
+     "leaf_states": null,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "band_delta_db": [
+      0.03,
+      0.02,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "host_params_changed": [
+      "LFO 2 Rate"
+     ]
+    },
+    {
+     "written": 75.0,
+     "probe": false,
+     "state_value": 74.99999999999999,
+     "load_error": null,
+     "state_diff_keys": [
+      "kParamRate"
+     ],
+     "file_roundtrip": true,
+     "leaves_written": null,
+     "leaf_states": null,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "band_delta_db": [
+      0.03,
+      0.02,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "host_params_changed": [
+      "LFO 2 Rate"
+     ]
+    },
+    {
+     "written": 100.0,
+     "probe": false,
+     "state_value": 100.0,
+     "load_error": null,
+     "state_diff_keys": [
+      "kParamRate"
+     ],
+     "file_roundtrip": true,
+     "leaves_written": null,
+     "leaf_states": null,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "band_delta_db": [
+      0.03,
+      0.02,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "host_params_changed": [
+      "LFO 2 Rate"
+     ]
+    }
+   ],
+   "range": {
+    "declared": {
+     "kind": "continuous",
+     "min": 0.0,
+     "max": 100.0
+    },
+    "discovered_default": null,
+    "declared_default_matches": null,
+    "reachable_min": 0.0,
+    "reachable_max": 100.0,
+    "clamp_high_at": null,
+    "clamp_low_at": null,
+    "reaches_beyond_declared_max": false,
+    "probes_dropped": [],
+    "declared_matches_reachable": true,
+    "rows": [
+     {
+      "written": 0.0,
+      "stored": 0.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 25.0,
+      "stored": 25.000000000000007,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 50.0,
+      "stored": 49.999999999999986,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 75.0,
+      "stored": 74.99999999999999,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 100.0,
+      "stored": 100.0,
+      "fate": "retained",
+      "probe": false
+     }
+    ]
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.03,
+    "container_state_identical": true
+   },
+   "noise_floor_db": 0.5
+  },
+  {
+   "atlas_id": "lfo3.rate",
+   "context": "INIT",
+   "candidate": {
+    "kind": "raw_path",
+    "path": [
+     "LFO2",
+     "plainParams",
+     "kParamRate"
+    ],
+    "kparam": "kParamRate"
+   },
+   "declared": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "value_vector": {
+    "values": [
+     0.0,
+     25.0,
+     50.0,
+     75.0,
+     100.0
+    ],
+    "probes": []
+   },
+   "values": [
+    {
+     "written": 0.0,
+     "probe": false,
+     "state_value": 0.0,
+     "load_error": null,
+     "state_diff_keys": [
+      "kParamRate"
+     ],
+     "file_roundtrip": true,
+     "leaves_written": null,
+     "leaf_states": null,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "band_delta_db": [
+      0.03,
+      0.02,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "host_params_changed": [
+      "LFO 3 Rate"
+     ]
+    },
+    {
+     "written": 25.0,
+     "probe": false,
+     "state_value": 25.000000000000007,
+     "load_error": null,
+     "state_diff_keys": [
+      "kParamRate"
+     ],
+     "file_roundtrip": true,
+     "leaves_written": null,
+     "leaf_states": null,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "band_delta_db": [
+      0.03,
+      0.02,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "host_params_changed": [
+      "LFO 3 Rate"
+     ]
+    },
+    {
+     "written": 50.0,
+     "probe": false,
+     "state_value": 49.999999999999986,
+     "load_error": null,
+     "state_diff_keys": [
+      "kParamRate"
+     ],
+     "file_roundtrip": true,
+     "leaves_written": null,
+     "leaf_states": null,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "band_delta_db": [
+      0.03,
+      0.02,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "host_params_changed": [
+      "LFO 3 Rate"
+     ]
+    },
+    {
+     "written": 75.0,
+     "probe": false,
+     "state_value": 74.99999999999999,
+     "load_error": null,
+     "state_diff_keys": [
+      "kParamRate"
+     ],
+     "file_roundtrip": true,
+     "leaves_written": null,
+     "leaf_states": null,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "band_delta_db": [
+      0.03,
+      0.02,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "host_params_changed": [
+      "LFO 3 Rate"
+     ]
+    },
+    {
+     "written": 100.0,
+     "probe": false,
+     "state_value": 100.0,
+     "load_error": null,
+     "state_diff_keys": [
+      "kParamRate"
+     ],
+     "file_roundtrip": true,
+     "leaves_written": null,
+     "leaf_states": null,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "band_delta_db": [
+      0.03,
+      0.02,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "host_params_changed": [
+      "LFO 3 Rate"
+     ]
+    }
+   ],
+   "range": {
+    "declared": {
+     "kind": "continuous",
+     "min": 0.0,
+     "max": 100.0
+    },
+    "discovered_default": null,
+    "declared_default_matches": null,
+    "reachable_min": 0.0,
+    "reachable_max": 100.0,
+    "clamp_high_at": null,
+    "clamp_low_at": null,
+    "reaches_beyond_declared_max": false,
+    "probes_dropped": [],
+    "declared_matches_reachable": true,
+    "rows": [
+     {
+      "written": 0.0,
+      "stored": 0.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 25.0,
+      "stored": 25.000000000000007,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 50.0,
+      "stored": 49.999999999999986,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 75.0,
+      "stored": 74.99999999999999,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 100.0,
+      "stored": 100.0,
+      "fate": "retained",
+      "probe": false
+     }
+    ]
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.03,
+    "container_state_identical": true
+   },
+   "noise_floor_db": 0.5
+  },
+  {
+   "atlas_id": "lfo4.rate",
+   "context": "INIT",
+   "candidate": {
+    "kind": "raw_path",
+    "path": [
+     "LFO3",
+     "plainParams",
+     "kParamRate"
+    ],
+    "kparam": "kParamRate"
+   },
+   "declared": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "value_vector": {
+    "values": [
+     0.0,
+     25.0,
+     50.0,
+     75.0,
+     100.0
+    ],
+    "probes": []
+   },
+   "values": [
+    {
+     "written": 0.0,
+     "probe": false,
+     "state_value": 0.0,
+     "load_error": null,
+     "state_diff_keys": [
+      "kParamRate"
+     ],
+     "file_roundtrip": true,
+     "leaves_written": null,
+     "leaf_states": null,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "band_delta_db": [
+      0.03,
+      0.02,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "host_params_changed": [
+      "LFO 4 Rate"
+     ]
+    },
+    {
+     "written": 25.0,
+     "probe": false,
+     "state_value": 25.000000000000007,
+     "load_error": null,
+     "state_diff_keys": [
+      "kParamRate"
+     ],
+     "file_roundtrip": true,
+     "leaves_written": null,
+     "leaf_states": null,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "band_delta_db": [
+      0.03,
+      0.02,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "host_params_changed": [
+      "LFO 4 Rate"
+     ]
+    },
+    {
+     "written": 50.0,
+     "probe": false,
+     "state_value": 49.999999999999986,
+     "load_error": null,
+     "state_diff_keys": [
+      "kParamRate"
+     ],
+     "file_roundtrip": true,
+     "leaves_written": null,
+     "leaf_states": null,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "band_delta_db": [
+      0.03,
+      0.02,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "host_params_changed": [
+      "LFO 4 Rate"
+     ]
+    },
+    {
+     "written": 75.0,
+     "probe": false,
+     "state_value": 74.99999999999999,
+     "load_error": null,
+     "state_diff_keys": [
+      "kParamRate"
+     ],
+     "file_roundtrip": true,
+     "leaves_written": null,
+     "leaf_states": null,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "band_delta_db": [
+      0.03,
+      0.02,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "host_params_changed": [
+      "LFO 4 Rate"
+     ]
+    },
+    {
+     "written": 100.0,
+     "probe": false,
+     "state_value": 100.0,
+     "load_error": null,
+     "state_diff_keys": [
+      "kParamRate"
+     ],
+     "file_roundtrip": true,
+     "leaves_written": null,
+     "leaf_states": null,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "band_delta_db": [
+      0.03,
+      0.02,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "host_params_changed": [
+      "LFO 4 Rate"
+     ]
+    }
+   ],
+   "range": {
+    "declared": {
+     "kind": "continuous",
+     "min": 0.0,
+     "max": 100.0
+    },
+    "discovered_default": null,
+    "declared_default_matches": null,
+    "reachable_min": 0.0,
+    "reachable_max": 100.0,
+    "clamp_high_at": null,
+    "clamp_low_at": null,
+    "reaches_beyond_declared_max": false,
+    "probes_dropped": [],
+    "declared_matches_reachable": true,
+    "rows": [
+     {
+      "written": 0.0,
+      "stored": 0.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 25.0,
+      "stored": 25.000000000000007,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 50.0,
+      "stored": 49.999999999999986,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 75.0,
+      "stored": 74.99999999999999,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 100.0,
+      "stored": 100.0,
+      "fate": "retained",
+      "probe": false
+     }
+    ]
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.03,
+    "container_state_identical": true
+   },
+   "noise_floor_db": 0.5
+  },
+  {
+   "atlas_id": "lfo5.rate",
+   "context": "INIT",
+   "candidate": {
+    "kind": "raw_path",
+    "path": [
+     "LFO4",
+     "plainParams",
+     "kParamRate"
+    ],
+    "kparam": "kParamRate"
+   },
+   "declared": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "value_vector": {
+    "values": [
+     0.0,
+     25.0,
+     50.0,
+     75.0,
+     100.0
+    ],
+    "probes": []
+   },
+   "values": [
+    {
+     "written": 0.0,
+     "probe": false,
+     "state_value": 0.0,
+     "load_error": null,
+     "state_diff_keys": [
+      "kParamRate"
+     ],
+     "file_roundtrip": true,
+     "leaves_written": null,
+     "leaf_states": null,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "band_delta_db": [
+      0.03,
+      0.02,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "host_params_changed": [
+      "LFO 5 Rate"
+     ]
+    },
+    {
+     "written": 25.0,
+     "probe": false,
+     "state_value": 25.000000000000007,
+     "load_error": null,
+     "state_diff_keys": [
+      "kParamRate"
+     ],
+     "file_roundtrip": true,
+     "leaves_written": null,
+     "leaf_states": null,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "band_delta_db": [
+      0.03,
+      0.02,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "host_params_changed": [
+      "LFO 5 Rate"
+     ]
+    },
+    {
+     "written": 50.0,
+     "probe": false,
+     "state_value": 49.999999999999986,
+     "load_error": null,
+     "state_diff_keys": [
+      "kParamRate"
+     ],
+     "file_roundtrip": true,
+     "leaves_written": null,
+     "leaf_states": null,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "band_delta_db": [
+      0.03,
+      0.02,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "host_params_changed": [
+      "LFO 5 Rate"
+     ]
+    },
+    {
+     "written": 75.0,
+     "probe": false,
+     "state_value": 74.99999999999999,
+     "load_error": null,
+     "state_diff_keys": [
+      "kParamRate"
+     ],
+     "file_roundtrip": true,
+     "leaves_written": null,
+     "leaf_states": null,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "band_delta_db": [
+      0.03,
+      0.02,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "host_params_changed": [
+      "LFO 5 Rate"
+     ]
+    },
+    {
+     "written": 100.0,
+     "probe": false,
+     "state_value": 100.0,
+     "load_error": null,
+     "state_diff_keys": [
+      "kParamRate"
+     ],
+     "file_roundtrip": true,
+     "leaves_written": null,
+     "leaf_states": null,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "band_delta_db": [
+      0.03,
+      0.02,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "host_params_changed": [
+      "LFO 5 Rate"
+     ]
+    }
+   ],
+   "range": {
+    "declared": {
+     "kind": "continuous",
+     "min": 0.0,
+     "max": 100.0
+    },
+    "discovered_default": null,
+    "declared_default_matches": null,
+    "reachable_min": 0.0,
+    "reachable_max": 100.0,
+    "clamp_high_at": null,
+    "clamp_low_at": null,
+    "reaches_beyond_declared_max": false,
+    "probes_dropped": [],
+    "declared_matches_reachable": true,
+    "rows": [
+     {
+      "written": 0.0,
+      "stored": 0.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 25.0,
+      "stored": 25.000000000000007,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 50.0,
+      "stored": 49.999999999999986,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 75.0,
+      "stored": 74.99999999999999,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 100.0,
+      "stored": 100.0,
+      "fate": "retained",
+      "probe": false
+     }
+    ]
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.03,
+    "container_state_identical": true
+   },
+   "noise_floor_db": 0.5
+  },
+  {
+   "atlas_id": "lfo6.rate",
+   "context": "INIT",
+   "candidate": {
+    "kind": "raw_path",
+    "path": [
+     "LFO5",
+     "plainParams",
+     "kParamRate"
+    ],
+    "kparam": "kParamRate"
+   },
+   "declared": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "value_vector": {
+    "values": [
+     0.0,
+     25.0,
+     50.0,
+     75.0,
+     100.0
+    ],
+    "probes": []
+   },
+   "values": [
+    {
+     "written": 0.0,
+     "probe": false,
+     "state_value": 0.0,
+     "load_error": null,
+     "state_diff_keys": [
+      "kParamRate"
+     ],
+     "file_roundtrip": true,
+     "leaves_written": null,
+     "leaf_states": null,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "band_delta_db": [
+      0.03,
+      0.02,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "host_params_changed": [
+      "LFO 6 Rate"
+     ]
+    },
+    {
+     "written": 25.0,
+     "probe": false,
+     "state_value": 25.000000000000007,
+     "load_error": null,
+     "state_diff_keys": [
+      "kParamRate"
+     ],
+     "file_roundtrip": true,
+     "leaves_written": null,
+     "leaf_states": null,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "band_delta_db": [
+      0.03,
+      0.02,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "host_params_changed": [
+      "LFO 6 Rate"
+     ]
+    },
+    {
+     "written": 50.0,
+     "probe": false,
+     "state_value": 49.999999999999986,
+     "load_error": null,
+     "state_diff_keys": [
+      "kParamRate"
+     ],
+     "file_roundtrip": true,
+     "leaves_written": null,
+     "leaf_states": null,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "band_delta_db": [
+      0.03,
+      0.02,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "host_params_changed": [
+      "LFO 6 Rate"
+     ]
+    },
+    {
+     "written": 75.0,
+     "probe": false,
+     "state_value": 74.99999999999999,
+     "load_error": null,
+     "state_diff_keys": [
+      "kParamRate"
+     ],
+     "file_roundtrip": true,
+     "leaves_written": null,
+     "leaf_states": null,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "band_delta_db": [
+      0.03,
+      0.02,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "host_params_changed": [
+      "LFO 6 Rate"
+     ]
+    },
+    {
+     "written": 100.0,
+     "probe": false,
+     "state_value": 100.0,
+     "load_error": null,
+     "state_diff_keys": [
+      "kParamRate"
+     ],
+     "file_roundtrip": true,
+     "leaves_written": null,
+     "leaf_states": null,
+     "band_db": [
+      68.77,
+      65.68,
+      59.14,
+      53.23,
+      48.65
+     ],
+     "band_delta_db": [
+      0.03,
+      0.02,
+      0.03,
+      0.03,
+      0.03
+     ],
+     "host_params_changed": [
+      "LFO 6 Rate"
+     ]
+    }
+   ],
+   "range": {
+    "declared": {
+     "kind": "continuous",
+     "min": 0.0,
+     "max": 100.0
+    },
+    "discovered_default": null,
+    "declared_default_matches": null,
+    "reachable_min": 0.0,
+    "reachable_max": 100.0,
+    "clamp_high_at": null,
+    "clamp_low_at": null,
+    "reaches_beyond_declared_max": false,
+    "probes_dropped": [],
+    "declared_matches_reachable": true,
+    "rows": [
+     {
+      "written": 0.0,
+      "stored": 0.0,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 25.0,
+      "stored": 25.000000000000007,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 50.0,
+      "stored": 49.999999999999986,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 75.0,
+      "stored": 74.99999999999999,
+      "fate": "retained",
+      "probe": false
+     },
+     {
+      "written": 100.0,
+      "stored": 100.0,
+      "fate": "retained",
+      "probe": false
+     }
+    ]
+   },
+   "restoration": {
+    "ok": true,
+    "band_drift_db": 0.03,
+    "container_state_identical": true
+   },
+   "noise_floor_db": 0.5
+  }
+ ]
+}

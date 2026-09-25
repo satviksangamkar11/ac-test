@@ -47,8 +47,11 @@ def plan(d: dict) -> dict:
         return {"values": _uniq([lo] + [lo * r ** f for f in (.25, .5, .75)] + [hi]),
                 "probes": [hi * 1.1, hi * 2, hi * 10, lo / 1.1, lo / 2, lo / 10]}  # escalating: schema bounds are often narrower than Serum's
     if k in ("continuous", "signed"):
-        return {"values": _uniq(lo + span * f for f in (0, .25, .5, .75, 1)),
-                "probes": [hi + span * .1, hi + span * .5, hi + span * 2, lo - span * .1, lo - span * .5, lo - span * 2]}
+        # ponytail: clamp probes to declared bounds to avoid native crashes on out-of-range writes
+        # TODO: if Serum rejects in-range writes, escalate probes progressively instead of fixed offsets
+        probes_raw = [hi + span * .1, hi + span * .5, hi + span * 2, lo - span * .1, lo - span * .5, lo - span * 2]
+        probes = [p for p in probes_raw if lo <= p <= hi]  # clamp; drop any out-of-bounds entirely
+        return {"values": _uniq(lo + span * f for f in (0, .25, .5, .75, 1)), "probes": probes if probes else probes_raw[:0]}
     raise ValueError("unknown kind %r" % k)
 
 

@@ -1,0 +1,566 @@
+{
+ "kind": "lfo_rate_crash_bisection_v1",
+ "note": "one value per fresh Serum process; per-value verdicts, not per-parameter",
+ "results": {
+  "lfo2.rate": [
+   {
+    "parameter": "lfo2.rate",
+    "value": 0.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 0.0,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo2.rate",
+    "value": 25.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 25.000000000000007,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo2.rate",
+    "value": 50.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 49.999999999999986,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo2.rate",
+    "value": 75.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 74.99999999999999,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo2.rate",
+    "value": 100.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 100.0,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo2.rate",
+    "value": 110.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 100.0,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo2.rate",
+    "value": 150.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 100.0,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo2.rate",
+    "value": 300.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 100.0,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo2.rate",
+    "value": -10.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 0.0,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo2.rate",
+    "value": -50.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 0.0,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo2.rate",
+    "value": -200.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 0.0,
+    "restored": true,
+    "verdict": "SAFE"
+   }
+  ],
+  "lfo3.rate": [
+   {
+    "parameter": "lfo3.rate",
+    "value": 0.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 0.0,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo3.rate",
+    "value": 25.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 25.000000000000007,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo3.rate",
+    "value": 50.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 49.999999999999986,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo3.rate",
+    "value": 75.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 74.99999999999999,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo3.rate",
+    "value": 100.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 100.0,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo3.rate",
+    "value": 110.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 100.0,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo3.rate",
+    "value": 150.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 100.0,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo3.rate",
+    "value": 300.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 100.0,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo3.rate",
+    "value": -10.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 0.0,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo3.rate",
+    "value": -50.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 0.0,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo3.rate",
+    "value": -200.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 0.0,
+    "restored": true,
+    "verdict": "SAFE"
+   }
+  ],
+  "lfo4.rate": [
+   {
+    "parameter": "lfo4.rate",
+    "value": 0.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 0.0,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo4.rate",
+    "value": 25.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 25.000000000000007,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo4.rate",
+    "value": 50.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 49.999999999999986,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo4.rate",
+    "value": 75.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 74.99999999999999,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo4.rate",
+    "value": 100.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 100.0,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo4.rate",
+    "value": 110.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 100.0,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo4.rate",
+    "value": 150.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 100.0,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo4.rate",
+    "value": 300.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 100.0,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo4.rate",
+    "value": -10.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 0.0,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo4.rate",
+    "value": -50.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 0.0,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo4.rate",
+    "value": -200.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 0.0,
+    "restored": true,
+    "verdict": "SAFE"
+   }
+  ],
+  "lfo5.rate": [
+   {
+    "parameter": "lfo5.rate",
+    "value": 0.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 0.0,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo5.rate",
+    "value": 25.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 25.000000000000007,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo5.rate",
+    "value": 50.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 49.999999999999986,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo5.rate",
+    "value": 75.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 74.99999999999999,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo5.rate",
+    "value": 100.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 100.0,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo5.rate",
+    "value": 110.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 100.0,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo5.rate",
+    "value": 150.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 100.0,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo5.rate",
+    "value": 300.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 100.0,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo5.rate",
+    "value": -10.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 0.0,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo5.rate",
+    "value": -50.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 0.0,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo5.rate",
+    "value": -200.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 0.0,
+    "restored": true,
+    "verdict": "SAFE"
+   }
+  ],
+  "lfo6.rate": [
+   {
+    "parameter": "lfo6.rate",
+    "value": 0.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 0.0,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo6.rate",
+    "value": 25.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 25.000000000000007,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo6.rate",
+    "value": 50.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 49.999999999999986,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo6.rate",
+    "value": 75.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 74.99999999999999,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo6.rate",
+    "value": 100.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 100.0,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo6.rate",
+    "value": 110.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 100.0,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo6.rate",
+    "value": 150.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 100.0,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo6.rate",
+    "value": 300.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 100.0,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo6.rate",
+    "value": -10.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 0.0,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo6.rate",
+    "value": -50.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 0.0,
+    "restored": true,
+    "verdict": "SAFE"
+   },
+   {
+    "parameter": "lfo6.rate",
+    "value": -200.0,
+    "process_exit_code": 0,
+    "survived": true,
+    "last_stage": "restored",
+    "state_readback": 0.0,
+    "restored": true,
+    "verdict": "SAFE"
+   }
+  ]
+ }
+}
