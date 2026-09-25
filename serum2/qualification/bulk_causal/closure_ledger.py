@@ -5,6 +5,7 @@ the evidence artifact that justifies it. Pure aggregation: reads evidence, write
 
 Status vocabulary (a control can only move UP this list by adding evidence, never by inference):
   NOT_DERIVED                 no mutation mechanism could be derived; the reason and the missing evidence are named
+  SERUM_CRASH                 writing this parameter's sweep killed the Serum process (needs a value-level bisect)
   STATE_NOT_OBSERVED          the mutation was written but Serum's saved state never reflected it (observer cannot see this control)
   CAUSAL_INCOMPLETE           an observable control whose restoration / round-trip / isolation check failed
   STATE_QUALIFIED_UI_PENDING  identity path + domain + causal state evidence + restoration + round-trip complete; live-UI semantics NOT yet evidenced
@@ -28,9 +29,9 @@ def load(name):
 
 
 def observable(rec):
-    g = rec["range"]
-    return any(v["state_value"] is not None for v in rec["values"] if not v["probe"]) or g.get("discovered_default") is not None or \
-        any(v["state_value"] is not None for v in rec["values"])
+    # a control is observable only if some written value actually came back. "Everything absent" is NOT evidence of a default
+    # (two different values cannot both be the default), so discovered_default alone never makes a control observable.
+    return any(v["state_value"] is not None for v in rec["values"])
 
 
 def causal_flags(rec):
@@ -39,12 +40,16 @@ def causal_flags(rec):
     return {"restoration": rec["restoration"]["ok"],
             "file_roundtrip": all(v["file_roundtrip"] for v in rec["values"] if not v.get("load_error")),
             "isolation": True if compound else all(v["state_diff_keys"] in ([], [kp]) for v in rec["values"] if not v.get("load_error")),
+            # keys OTHER than the one written that changed in Serum's re-saved state: Serum's own normalisation/coupling (the writer only
+            # ever sets the one key). Recorded, not hidden: the compiler must know that writing this key also moves those.
+            "serum_side_coupled_keys": [] if compound else sorted({k for v in rec["values"] if not v.get("load_error") for k in v["state_diff_keys"]} - {kp}),
             "wire_type_safety": {"load_errors": [v["written"] for v in rec["values"] if v.get("load_error")]}}
 
 
 def build(run, acct, gui_ui, identity=None, boundary=None):
     from serum2.qualification.bulk_causal.unify import unify
     recs = {r["atlas_id"]: r for r in run["records"]}
+    crashed = {c["atlas_id"]: c.get("note") for c in run.get("serum_crashes", run["harness"].get("serum_crashes", []))}
     dry = {r["atlas_id"]: r for r in unify([run], gui_ui["merges"], gui_ui["semantic"], gui_ui["incidents"], identity, boundary)}
     out = []
     for c in acct["candidates"]:
@@ -56,6 +61,12 @@ def build(run, acct, gui_ui, identity=None, boundary=None):
             out.append(e)
             continue
         rec = recs.get(cid)
+        if rec is None and cid in crashed:
+            e.update({"status": "SERUM_CRASH", "reason": "the Serum process died (access violation) while this parameter's sweep was running",
+                      "needs": "value-level bisect (one value per process) to find the crashing value(s); until then NOT qualified and NOT safe to write",
+                      "evidence_note": crashed[cid]})
+            out.append(e)
+            continue
         if rec is None:
             e.update({"status": "NOT_DERIVED", "reason": "derived but absent from the run evidence"})
             out.append(e)
@@ -69,8 +80,8 @@ def build(run, acct, gui_ui, identity=None, boundary=None):
             continue
         flags = causal_flags(rec)
         e["causal"] = flags
-        if not (flags["restoration"] and flags["file_roundtrip"] and flags["isolation"]):
-            e.update({"status": "CAUSAL_INCOMPLETE", "reason": "a restoration / round-trip / isolation check failed"})
+        if not (flags["restoration"] and flags["file_roundtrip"]):
+            e.update({"status": "CAUSAL_INCOMPLETE", "reason": "a restoration / round-trip check failed"})
             out.append(e)
             continue
         d = dry.get(cid)

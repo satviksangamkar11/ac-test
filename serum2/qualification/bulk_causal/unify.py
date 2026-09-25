@@ -26,7 +26,9 @@ def load(name):
 
 
 def close(a, b):
-    return a is not None and b is not None and abs(a - b) <= 1e-3 * max(1.0, abs(b))
+    if isinstance(a, (int, float)) and isinstance(b, (int, float)) and not isinstance(a, bool) and not isinstance(b, bool):
+        return abs(a - b) <= 1e-3 * max(1.0, abs(b))
+    return a is not None and a == b        # strings / bools / sentinels: equality only
 
 
 def causal_ok(rec):
@@ -52,14 +54,17 @@ def pick_pair(rec, control, labels):
     if kind == "bool":
         m = next((v["state_value"] for v in kept if v["state_value"] in (0.0, 1.0)), None)
         return base, m, None if m is not None else "no retained 0/1 value differing from the default"
-    if kind == "enum":
+    if kind in ("enum", "enum_str", "text"):
         if not labels:
-            return base, None, "enum control needs GUI semantic labels (none recorded)"
+            return base, None, "%s control needs GUI semantic labels (none recorded)" % kind
         m = next((labels[repr(v["written"])] for v in kept if repr(v["written"]) in labels), None)
         return labels.get("null", base), m, None if m else "no raw value with a GUI semantic label"
-    if not kept:
-        return base, None, "no retained in-range value differing from the default"
     lo, hi = g["reachable_min"], g["reachable_max"]
+    kept = [v for v in kept if isinstance(v["state_value"], (int, float)) and not isinstance(v["state_value"], bool)]
+    if not kept:
+        return base, None, "no retained numeric in-range value differing from the default"
+    if lo is None or hi is None:
+        return base, None, "no verified numeric range (observed nothing to bound it)"
     v = min(kept, key=lambda r: abs(r["state_value"] - (lo + hi) / 2))
     return base, v["state_value"], None
 
@@ -73,8 +78,8 @@ def parameter_contract(rec, labels, ui, source):
                 "ui_semantics": ui, "domain_source": source}
     if kind == "bool":
         return {"operand_kind": "boolean", "domain": {}, "ui_semantics": ui, "domain_source": source}
-    if kind == "enum":
-        return None      # an enum with no GUI-proven labels has no contract: raw numbers are not semantics
+    if kind in ("enum", "enum_str", "text"):
+        return None      # an enum with no GUI-proven labels has no contract: raw numbers/words are not semantics
     return {"operand_kind": "numeric", "domain": {"lo": g["reachable_min"], "hi": g["reachable_max"]}, "ui_semantics": ui, "domain_source": source}
 
 
