@@ -1,0 +1,18 @@
+{
+  "method": "direct_ui_screen_scan",
+  "description": "Genuine screen-level (pixel) observation of Serum 2's own plugin window, loaded via a composite VERIFY_<context>.SerumPreset built by build_verification_presets.py. Distinct from host_text_evidence: this is what a human sees on screen, not a VST3 host-reported string.",
+  "preset_loaded": "VERIFY_INIT.SerumPreset",
+  "context": "INIT",
+  "load_path": "Ableton Live 12 -> MIDI track 'QUAL_UI_VERIFY_TEMP' -> Serum 2 (VST3) -> User/BULKCAUSAL_VERIFY/VERIFY_INIT",
+  "observations": [
+    {"atlas_id": "oscB.octave",   "expected_target": -2.0,  "screen_displayed": "-2",  "verdict": "MATCH"},
+    {"atlas_id": "oscB.semitone", "expected_target": -6.0,  "screen_displayed": "-6",  "verdict": "MATCH"},
+    {"atlas_id": "oscB.fine",     "expected_target": -40.0, "screen_displayed": "-40", "verdict": "MATCH"},
+    {"atlas_id": "oscC.octave",   "expected_target": -2.0,  "screen_displayed": "-2",  "verdict": "MATCH"},
+    {"atlas_id": "oscC.semitone", "expected_target": -6.0,  "screen_displayed": "-6",  "verdict": "MATCH"},
+    {"atlas_id": "oscC.fine",     "expected_target": -40.0, "screen_displayed": "-40", "verdict": "MATCH"}
+  ],
+  "not_yet_scanned_this_context": "199 of 205 applied INIT candidates are visible in the same loaded preset (filter/env/lfo/arp/voicing/mixer panels) but were not individually zoom-read/recorded in this pass -- proof of concept only, not a completed scan",
+  "status": "PROOF_OF_CONCEPT: pipeline verified (composite preset load -> real Serum window -> screen-level read -> compare to plan). Full 15-context / 272-candidate scan not yet performed.",
+  "authorizes_nothing": true
+}

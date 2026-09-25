@@ -1,0 +1,5912 @@
+{
+ "source_run": "D:\\ableton claude final best\\parameter_characterization\\bulk_causal_evidence\\campaign_run_gui_v1.json",
+ "source_manifest": "D:\\ableton claude final best\\serum2\\qualification\\bulk_causal\\manifest_campaign_v1.json",
+ "contexts": {
+  "INIT": {
+   "preset": "VERIFY_INIT.SerumPreset",
+   "applied_count": 205,
+   "excluded_count": 52,
+   "applied": [
+    {
+     "atlas_id": "arp.pattern.rate",
+     "kparam": "kParamRate",
+     "raw_path": [
+      "ArpClip0",
+      "plainParams",
+      "kParamRate"
+     ],
+     "target_value": 0.25,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 1.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "arp.playback.chance",
+     "kparam": "kParamChance",
+     "raw_path": [
+      "ArpClip0",
+      "plainParams",
+      "kParamChance"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "arp.playback.gate",
+     "kparam": "kParamGate",
+     "raw_path": [
+      "ArpClip0",
+      "plainParams",
+      "kParamGate"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 200.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 200.0
+     }
+    },
+    {
+     "atlas_id": "arp.playback.thru",
+     "kparam": "kParamThru",
+     "raw_path": [
+      "ArpClip0",
+      "plainParams",
+      "kParamThru"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "arp.retrigger.first",
+     "kparam": "kParamFirstNoteRetrig",
+     "raw_path": [
+      "ArpClip0",
+      "plainParams",
+      "kParamFirstNoteRetrig"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "arp.retrigger.launch",
+     "kparam": "kParamLaunchRetrig",
+     "raw_path": [
+      "ArpClip0",
+      "plainParams",
+      "kParamLaunchRetrig"
+     ],
+     "target_value": 0.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "arp.retrigger.note",
+     "kparam": "kParamNoteRetrig",
+     "raw_path": [
+      "ArpClip0",
+      "plainParams",
+      "kParamNoteRetrig"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "arp.transpose.range",
+     "kparam": "kParamTransposeRange",
+     "raw_path": [
+      "ArpClip0",
+      "plainParams",
+      "kParamTransposeRange"
+     ],
+     "target_value": 6.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 24.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 8.0
+     }
+    },
+    {
+     "atlas_id": "arp.transpose.shift",
+     "kparam": "kParamTransposeShift",
+     "raw_path": [
+      "ArpClip0",
+      "plainParams",
+      "kParamTransposeShift"
+     ],
+     "target_value": -12.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "signed",
+      "min": -24.0,
+      "max": 24.0
+     },
+     "reachable_range": {
+      "min": -24.0,
+      "max": 24.0
+     }
+    },
+    {
+     "atlas_id": "arp.velocity.enable",
+     "kparam": "kParamVeloEnabled",
+     "raw_path": [
+      "ArpClip0",
+      "plainParams",
+      "kParamVeloEnabled"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "arp.velocity.retrig",
+     "kparam": "kParamVeloRetrig",
+     "raw_path": [
+      "ArpClip0",
+      "plainParams",
+      "kParamVeloRetrig"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "arp.velocity.target",
+     "kparam": "kParamVeloTarget",
+     "raw_path": [
+      "ArpClip0",
+      "plainParams",
+      "kParamVeloTarget"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "env1.attack",
+     "kparam": "kParamAttack",
+     "raw_path": [
+      "Env0",
+      "plainParams",
+      "kParamAttack"
+     ],
+     "target_value": 5.000000000000001,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 10.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 9.999999999999996
+     }
+    },
+    {
+     "atlas_id": "env1.attack_curve",
+     "kparam": "kParamCurve1",
+     "raw_path": [
+      "Env0",
+      "plainParams",
+      "kParamCurve1"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "env1.decay",
+     "kparam": "kParamDecay",
+     "raw_path": [
+      "Env0",
+      "plainParams",
+      "kParamDecay"
+     ],
+     "target_value": 15.999999999999998,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 32.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 32.0
+     }
+    },
+    {
+     "atlas_id": "env1.decay_curve",
+     "kparam": "kParamCurve2",
+     "raw_path": [
+      "Env0",
+      "plainParams",
+      "kParamCurve2"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "env1.hold",
+     "kparam": "kParamHold",
+     "raw_path": [
+      "Env0",
+      "plainParams",
+      "kParamHold"
+     ],
+     "target_value": 2.599999999999999,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 5.2
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 5.200000000000001
+     }
+    },
+    {
+     "atlas_id": "env1.release",
+     "kparam": "kParamRelease",
+     "raw_path": [
+      "Env0",
+      "plainParams",
+      "kParamRelease"
+     ],
+     "target_value": 15.999999999999998,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 32.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 32.0
+     }
+    },
+    {
+     "atlas_id": "env1.release_curve",
+     "kparam": "kParamCurve3",
+     "raw_path": [
+      "Env0",
+      "plainParams",
+      "kParamCurve3"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "env1.sustain",
+     "kparam": "kParamSustain",
+     "raw_path": [
+      "Env0",
+      "plainParams",
+      "kParamSustain"
+     ],
+     "target_value": 0.5,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 1.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "env2.attack",
+     "kparam": "kParamAttack",
+     "raw_path": [
+      "Env1",
+      "plainParams",
+      "kParamAttack"
+     ],
+     "target_value": 5.000000000000001,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 10.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 9.999999999999996
+     }
+    },
+    {
+     "atlas_id": "env2.attack_curve",
+     "kparam": "kParamCurve1",
+     "raw_path": [
+      "Env1",
+      "plainParams",
+      "kParamCurve1"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "env2.decay",
+     "kparam": "kParamDecay",
+     "raw_path": [
+      "Env1",
+      "plainParams",
+      "kParamDecay"
+     ],
+     "target_value": 15.999999999999998,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 32.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 32.0
+     }
+    },
+    {
+     "atlas_id": "env2.decay_curve",
+     "kparam": "kParamCurve2",
+     "raw_path": [
+      "Env1",
+      "plainParams",
+      "kParamCurve2"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "env2.hold",
+     "kparam": "kParamHold",
+     "raw_path": [
+      "Env1",
+      "plainParams",
+      "kParamHold"
+     ],
+     "target_value": 2.599999999999999,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 5.2
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 5.200000000000001
+     }
+    },
+    {
+     "atlas_id": "env2.release",
+     "kparam": "kParamRelease",
+     "raw_path": [
+      "Env1",
+      "plainParams",
+      "kParamRelease"
+     ],
+     "target_value": 15.999999999999998,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 32.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 32.0
+     }
+    },
+    {
+     "atlas_id": "env2.release_curve",
+     "kparam": "kParamCurve3",
+     "raw_path": [
+      "Env1",
+      "plainParams",
+      "kParamCurve3"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "env2.sustain",
+     "kparam": "kParamSustain",
+     "raw_path": [
+      "Env1",
+      "plainParams",
+      "kParamSustain"
+     ],
+     "target_value": 0.5,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 1.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "env3.attack",
+     "kparam": "kParamAttack",
+     "raw_path": [
+      "Env2",
+      "plainParams",
+      "kParamAttack"
+     ],
+     "target_value": 5.000000000000001,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 10.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 9.999999999999996
+     }
+    },
+    {
+     "atlas_id": "env3.attack_curve",
+     "kparam": "kParamCurve1",
+     "raw_path": [
+      "Env2",
+      "plainParams",
+      "kParamCurve1"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "env3.decay",
+     "kparam": "kParamDecay",
+     "raw_path": [
+      "Env2",
+      "plainParams",
+      "kParamDecay"
+     ],
+     "target_value": 15.999999999999998,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 32.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 32.0
+     }
+    },
+    {
+     "atlas_id": "env3.decay_curve",
+     "kparam": "kParamCurve2",
+     "raw_path": [
+      "Env2",
+      "plainParams",
+      "kParamCurve2"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "env3.hold",
+     "kparam": "kParamHold",
+     "raw_path": [
+      "Env2",
+      "plainParams",
+      "kParamHold"
+     ],
+     "target_value": 2.599999999999999,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 5.2
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 5.200000000000001
+     }
+    },
+    {
+     "atlas_id": "env3.release",
+     "kparam": "kParamRelease",
+     "raw_path": [
+      "Env2",
+      "plainParams",
+      "kParamRelease"
+     ],
+     "target_value": 15.999999999999998,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 32.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 32.0
+     }
+    },
+    {
+     "atlas_id": "env3.release_curve",
+     "kparam": "kParamCurve3",
+     "raw_path": [
+      "Env2",
+      "plainParams",
+      "kParamCurve3"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "env3.sustain",
+     "kparam": "kParamSustain",
+     "raw_path": [
+      "Env2",
+      "plainParams",
+      "kParamSustain"
+     ],
+     "target_value": 0.5,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 1.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "env4.attack",
+     "kparam": "kParamAttack",
+     "raw_path": [
+      "Env3",
+      "plainParams",
+      "kParamAttack"
+     ],
+     "target_value": 5.000000000000001,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 10.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 9.999999999999996
+     }
+    },
+    {
+     "atlas_id": "env4.attack_curve",
+     "kparam": "kParamCurve1",
+     "raw_path": [
+      "Env3",
+      "plainParams",
+      "kParamCurve1"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "env4.decay",
+     "kparam": "kParamDecay",
+     "raw_path": [
+      "Env3",
+      "plainParams",
+      "kParamDecay"
+     ],
+     "target_value": 15.999999999999998,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 32.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 32.0
+     }
+    },
+    {
+     "atlas_id": "env4.decay_curve",
+     "kparam": "kParamCurve2",
+     "raw_path": [
+      "Env3",
+      "plainParams",
+      "kParamCurve2"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "env4.hold",
+     "kparam": "kParamHold",
+     "raw_path": [
+      "Env3",
+      "plainParams",
+      "kParamHold"
+     ],
+     "target_value": 2.599999999999999,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 5.2
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 5.200000000000001
+     }
+    },
+    {
+     "atlas_id": "env4.release",
+     "kparam": "kParamRelease",
+     "raw_path": [
+      "Env3",
+      "plainParams",
+      "kParamRelease"
+     ],
+     "target_value": 15.999999999999998,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 32.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 32.0
+     }
+    },
+    {
+     "atlas_id": "env4.release_curve",
+     "kparam": "kParamCurve3",
+     "raw_path": [
+      "Env3",
+      "plainParams",
+      "kParamCurve3"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "env4.sustain",
+     "kparam": "kParamSustain",
+     "raw_path": [
+      "Env3",
+      "plainParams",
+      "kParamSustain"
+     ],
+     "target_value": 0.5,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 1.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "filter1.cutoff",
+     "kparam": "kParamFreq",
+     "raw_path": [
+      "VoiceFilter0",
+      "plainParams",
+      "kParamFreq"
+     ],
+     "target_value": 0.25,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 1.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "filter1.drive",
+     "kparam": "kParamDrive",
+     "raw_path": [
+      "VoiceFilter0",
+      "plainParams",
+      "kParamDrive"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "filter1.enabled",
+     "kparam": "kParamEnable",
+     "raw_path": [
+      "VoiceFilter0",
+      "plainParams",
+      "kParamEnable"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "filter1.key_track",
+     "kparam": "kParamKeyTrack",
+     "raw_path": [
+      "VoiceFilter0",
+      "plainParams",
+      "kParamKeyTrack"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "filter1.level_out",
+     "kparam": "kParamLevelOut",
+     "raw_path": [
+      "VoiceFilter0",
+      "plainParams",
+      "kParamLevelOut"
+     ],
+     "target_value": 0.25,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 1.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "filter1.resonance",
+     "kparam": "kParamReso",
+     "raw_path": [
+      "VoiceFilter0",
+      "plainParams",
+      "kParamReso"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "filter1.stereo",
+     "kparam": "kParamStereo",
+     "raw_path": [
+      "VoiceFilter0",
+      "plainParams",
+      "kParamStereo"
+     ],
+     "target_value": 25.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "filter1.var",
+     "kparam": "kParamVar",
+     "raw_path": [
+      "VoiceFilter0",
+      "plainParams",
+      "kParamVar"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "filter1.wet",
+     "kparam": "kParamWet",
+     "raw_path": [
+      "VoiceFilter0",
+      "plainParams",
+      "kParamWet"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "filter2.cutoff",
+     "kparam": "kParamFreq",
+     "raw_path": [
+      "VoiceFilter1",
+      "plainParams",
+      "kParamFreq"
+     ],
+     "target_value": 0.25,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 1.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "filter2.drive",
+     "kparam": "kParamDrive",
+     "raw_path": [
+      "VoiceFilter1",
+      "plainParams",
+      "kParamDrive"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "filter2.enabled",
+     "kparam": "kParamEnable",
+     "raw_path": [
+      "VoiceFilter1",
+      "plainParams",
+      "kParamEnable"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "filter2.key_track",
+     "kparam": "kParamKeyTrack",
+     "raw_path": [
+      "VoiceFilter1",
+      "plainParams",
+      "kParamKeyTrack"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "filter2.level_out",
+     "kparam": "kParamLevelOut",
+     "raw_path": [
+      "VoiceFilter1",
+      "plainParams",
+      "kParamLevelOut"
+     ],
+     "target_value": 0.25,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 1.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "filter2.resonance",
+     "kparam": "kParamReso",
+     "raw_path": [
+      "VoiceFilter1",
+      "plainParams",
+      "kParamReso"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "filter2.stereo",
+     "kparam": "kParamStereo",
+     "raw_path": [
+      "VoiceFilter1",
+      "plainParams",
+      "kParamStereo"
+     ],
+     "target_value": 25.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "filter2.var",
+     "kparam": "kParamVar",
+     "raw_path": [
+      "VoiceFilter1",
+      "plainParams",
+      "kParamVar"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "filter2.wet",
+     "kparam": "kParamWet",
+     "raw_path": [
+      "VoiceFilter1",
+      "plainParams",
+      "kParamWet"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "global.bend_range_down",
+     "kparam": "kParamBendRangeDn",
+     "raw_path": [
+      "Global0",
+      "plainParams",
+      "kParamBendRangeDn"
+     ],
+     "target_value": -12.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": -48.0,
+      "max": 0.0
+     },
+     "reachable_range": {
+      "min": -24.0,
+      "max": 0.0
+     }
+    },
+    {
+     "atlas_id": "global.bend_range_up",
+     "kparam": "kParamBendRangeUp",
+     "raw_path": [
+      "Global0",
+      "plainParams",
+      "kParamBendRangeUp"
+     ],
+     "target_value": 12.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 48.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 24.0
+     }
+    },
+    {
+     "atlas_id": "global.legato",
+     "kparam": "kParamLegato",
+     "raw_path": [
+      "Global0",
+      "plainParams",
+      "kParamLegato"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "global.limit_same_note_polyphony",
+     "kparam": "kParamLimitSameNotePolyphony",
+     "raw_path": [
+      "Global0",
+      "plainParams",
+      "kParamLimitSameNotePolyphony"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "global.master_volume",
+     "kparam": "kParamMasterVolume",
+     "raw_path": [
+      "Global0",
+      "plainParams",
+      "kParamMasterVolume"
+     ],
+     "target_value": 0.5000000000000001,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 1.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "global.mono",
+     "kparam": "kParamMonoToggle",
+     "raw_path": [
+      "Global0",
+      "plainParams",
+      "kParamMonoToggle"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "global.note_latch",
+     "kparam": "kParamNoteLatch",
+     "raw_path": [
+      "Global0",
+      "plainParams",
+      "kParamNoteLatch"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "global.poly_count",
+     "kparam": "kParamPolyCount",
+     "raw_path": [
+      "Global0",
+      "plainParams",
+      "kParamPolyCount"
+     ],
+     "target_value": 17.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 1.0,
+      "max": 32.0
+     },
+     "reachable_range": {
+      "min": 1.0,
+      "max": 32.0
+     }
+    },
+    {
+     "atlas_id": "global.porta_always",
+     "kparam": "kParamPortaAlways",
+     "raw_path": [
+      "Global0",
+      "plainParams",
+      "kParamPortaAlways"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "global.porta_scaled",
+     "kparam": "kParamPortaScaled",
+     "raw_path": [
+      "Global0",
+      "plainParams",
+      "kParamPortaScaled"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "global.portamento_time",
+     "kparam": "kParamPortamentoTime",
+     "raw_path": [
+      "Global0",
+      "plainParams",
+      "kParamPortamentoTime"
+     ],
+     "target_value": 1.5000000000000002,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 3.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 3.0
+     }
+    },
+    {
+     "atlas_id": "global.s1_compatibility",
+     "kparam": "kParamS1Compatibility",
+     "raw_path": [
+      "Global0",
+      "plainParams",
+      "kParamS1Compatibility"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "global.swing",
+     "kparam": "kParamSwing",
+     "raw_path": [
+      "Global0",
+      "plainParams",
+      "kParamSwing"
+     ],
+     "target_value": 25.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 12.5,
+      "max": 87.5
+     }
+    },
+    {
+     "atlas_id": "global.transpose",
+     "kparam": "kParamTranspose",
+     "raw_path": [
+      "Global0",
+      "plainParams",
+      "kParamTranspose"
+     ],
+     "target_value": -24.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "signed",
+      "min": -48.0,
+      "max": 48.0
+     },
+     "reachable_range": {
+      "min": -24.0,
+      "max": 24.0
+     }
+    },
+    {
+     "atlas_id": "global.voice_control.random.pan",
+     "kparam": "kParamGlobalRandomOscPan",
+     "raw_path": [
+      "VoicePanel0",
+      "plainParams",
+      "kParamGlobalRandomOscPan"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "lfo1.beat_sync",
+     "kparam": "kParamBeatSync",
+     "raw_path": [
+      "LFO0",
+      "plainParams",
+      "kParamBeatSync"
+     ],
+     "target_value": 0.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "lfo1.delay",
+     "kparam": "kParamDelay",
+     "raw_path": [
+      "LFO0",
+      "plainParams",
+      "kParamDelay"
+     ],
+     "target_value": 1.8,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 3.6
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 3.6
+     }
+    },
+    {
+     "atlas_id": "lfo1.dotted",
+     "kparam": "kParamDotted",
+     "raw_path": [
+      "LFO0",
+      "plainParams",
+      "kParamDotted"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "lfo1.mono",
+     "kparam": "kParamMono",
+     "raw_path": [
+      "LFO0",
+      "plainParams",
+      "kParamMono"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "lfo1.rate",
+     "kparam": "kParamRate",
+     "raw_path": [
+      "LFO0",
+      "plainParams",
+      "kParamRate"
+     ],
+     "target_value": 49.999999999999986,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "lfo1.rate_10x",
+     "kparam": "kParamRate10x",
+     "raw_path": [
+      "LFO0",
+      "plainParams",
+      "kParamRate10x"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "lfo1.rise",
+     "kparam": "kParamRise",
+     "raw_path": [
+      "LFO0",
+      "plainParams",
+      "kParamRise"
+     ],
+     "target_value": 2.5,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 5.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 4.0
+     }
+    },
+    {
+     "atlas_id": "lfo1.smooth",
+     "kparam": "kParamSmooth",
+     "raw_path": [
+      "LFO0",
+      "plainParams",
+      "kParamSmooth"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "lfo1.swing",
+     "kparam": "kParamSwing",
+     "raw_path": [
+      "LFO0",
+      "plainParams",
+      "kParamSwing"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 1.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "lfo1.triplets",
+     "kparam": "kParamTriplets",
+     "raw_path": [
+      "LFO0",
+      "plainParams",
+      "kParamTriplets"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "lfo2.beat_sync",
+     "kparam": "kParamBeatSync",
+     "raw_path": [
+      "LFO1",
+      "plainParams",
+      "kParamBeatSync"
+     ],
+     "target_value": 0.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "lfo2.delay",
+     "kparam": "kParamDelay",
+     "raw_path": [
+      "LFO1",
+      "plainParams",
+      "kParamDelay"
+     ],
+     "target_value": 1.8,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 3.6
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 3.6
+     }
+    },
+    {
+     "atlas_id": "lfo2.dotted",
+     "kparam": "kParamDotted",
+     "raw_path": [
+      "LFO1",
+      "plainParams",
+      "kParamDotted"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "lfo2.mono",
+     "kparam": "kParamMono",
+     "raw_path": [
+      "LFO1",
+      "plainParams",
+      "kParamMono"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "lfo2.rate",
+     "kparam": "kParamRate",
+     "raw_path": [
+      "LFO1",
+      "plainParams",
+      "kParamRate"
+     ],
+     "target_value": 49.999999999999986,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "lfo2.rate_10x",
+     "kparam": "kParamRate10x",
+     "raw_path": [
+      "LFO1",
+      "plainParams",
+      "kParamRate10x"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "lfo2.rise",
+     "kparam": "kParamRise",
+     "raw_path": [
+      "LFO1",
+      "plainParams",
+      "kParamRise"
+     ],
+     "target_value": 2.5,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 5.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 4.0
+     }
+    },
+    {
+     "atlas_id": "lfo2.smooth",
+     "kparam": "kParamSmooth",
+     "raw_path": [
+      "LFO1",
+      "plainParams",
+      "kParamSmooth"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "lfo2.swing",
+     "kparam": "kParamSwing",
+     "raw_path": [
+      "LFO1",
+      "plainParams",
+      "kParamSwing"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 1.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "lfo2.triplets",
+     "kparam": "kParamTriplets",
+     "raw_path": [
+      "LFO1",
+      "plainParams",
+      "kParamTriplets"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "lfo3.beat_sync",
+     "kparam": "kParamBeatSync",
+     "raw_path": [
+      "LFO2",
+      "plainParams",
+      "kParamBeatSync"
+     ],
+     "target_value": 0.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "lfo3.delay",
+     "kparam": "kParamDelay",
+     "raw_path": [
+      "LFO2",
+      "plainParams",
+      "kParamDelay"
+     ],
+     "target_value": 1.8,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 3.6
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 3.6
+     }
+    },
+    {
+     "atlas_id": "lfo3.dotted",
+     "kparam": "kParamDotted",
+     "raw_path": [
+      "LFO2",
+      "plainParams",
+      "kParamDotted"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "lfo3.mono",
+     "kparam": "kParamMono",
+     "raw_path": [
+      "LFO2",
+      "plainParams",
+      "kParamMono"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "lfo3.rate",
+     "kparam": "kParamRate",
+     "raw_path": [
+      "LFO2",
+      "plainParams",
+      "kParamRate"
+     ],
+     "target_value": 49.999999999999986,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "lfo3.rate_10x",
+     "kparam": "kParamRate10x",
+     "raw_path": [
+      "LFO2",
+      "plainParams",
+      "kParamRate10x"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "lfo3.rise",
+     "kparam": "kParamRise",
+     "raw_path": [
+      "LFO2",
+      "plainParams",
+      "kParamRise"
+     ],
+     "target_value": 2.5,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 5.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 4.0
+     }
+    },
+    {
+     "atlas_id": "lfo3.smooth",
+     "kparam": "kParamSmooth",
+     "raw_path": [
+      "LFO2",
+      "plainParams",
+      "kParamSmooth"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "lfo3.swing",
+     "kparam": "kParamSwing",
+     "raw_path": [
+      "LFO2",
+      "plainParams",
+      "kParamSwing"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 1.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "lfo3.triplets",
+     "kparam": "kParamTriplets",
+     "raw_path": [
+      "LFO2",
+      "plainParams",
+      "kParamTriplets"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "lfo4.beat_sync",
+     "kparam": "kParamBeatSync",
+     "raw_path": [
+      "LFO3",
+      "plainParams",
+      "kParamBeatSync"
+     ],
+     "target_value": 0.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "lfo4.delay",
+     "kparam": "kParamDelay",
+     "raw_path": [
+      "LFO3",
+      "plainParams",
+      "kParamDelay"
+     ],
+     "target_value": 1.8,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 3.6
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 3.6
+     }
+    },
+    {
+     "atlas_id": "lfo4.dotted",
+     "kparam": "kParamDotted",
+     "raw_path": [
+      "LFO3",
+      "plainParams",
+      "kParamDotted"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "lfo4.mono",
+     "kparam": "kParamMono",
+     "raw_path": [
+      "LFO3",
+      "plainParams",
+      "kParamMono"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "lfo4.rate",
+     "kparam": "kParamRate",
+     "raw_path": [
+      "LFO3",
+      "plainParams",
+      "kParamRate"
+     ],
+     "target_value": 49.999999999999986,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "lfo4.rate_10x",
+     "kparam": "kParamRate10x",
+     "raw_path": [
+      "LFO3",
+      "plainParams",
+      "kParamRate10x"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "lfo4.rise",
+     "kparam": "kParamRise",
+     "raw_path": [
+      "LFO3",
+      "plainParams",
+      "kParamRise"
+     ],
+     "target_value": 2.5,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 5.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 4.0
+     }
+    },
+    {
+     "atlas_id": "lfo4.smooth",
+     "kparam": "kParamSmooth",
+     "raw_path": [
+      "LFO3",
+      "plainParams",
+      "kParamSmooth"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "lfo4.swing",
+     "kparam": "kParamSwing",
+     "raw_path": [
+      "LFO3",
+      "plainParams",
+      "kParamSwing"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 1.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "lfo4.triplets",
+     "kparam": "kParamTriplets",
+     "raw_path": [
+      "LFO3",
+      "plainParams",
+      "kParamTriplets"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "lfo5.beat_sync",
+     "kparam": "kParamBeatSync",
+     "raw_path": [
+      "LFO4",
+      "plainParams",
+      "kParamBeatSync"
+     ],
+     "target_value": 0.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "lfo5.delay",
+     "kparam": "kParamDelay",
+     "raw_path": [
+      "LFO4",
+      "plainParams",
+      "kParamDelay"
+     ],
+     "target_value": 1.8,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 3.6
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 3.6
+     }
+    },
+    {
+     "atlas_id": "lfo5.dotted",
+     "kparam": "kParamDotted",
+     "raw_path": [
+      "LFO4",
+      "plainParams",
+      "kParamDotted"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "lfo5.mono",
+     "kparam": "kParamMono",
+     "raw_path": [
+      "LFO4",
+      "plainParams",
+      "kParamMono"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "lfo5.rate",
+     "kparam": "kParamRate",
+     "raw_path": [
+      "LFO4",
+      "plainParams",
+      "kParamRate"
+     ],
+     "target_value": 49.999999999999986,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "lfo5.rate_10x",
+     "kparam": "kParamRate10x",
+     "raw_path": [
+      "LFO4",
+      "plainParams",
+      "kParamRate10x"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "lfo5.rise",
+     "kparam": "kParamRise",
+     "raw_path": [
+      "LFO4",
+      "plainParams",
+      "kParamRise"
+     ],
+     "target_value": 2.5,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 5.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 4.0
+     }
+    },
+    {
+     "atlas_id": "lfo5.smooth",
+     "kparam": "kParamSmooth",
+     "raw_path": [
+      "LFO4",
+      "plainParams",
+      "kParamSmooth"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "lfo5.swing",
+     "kparam": "kParamSwing",
+     "raw_path": [
+      "LFO4",
+      "plainParams",
+      "kParamSwing"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 1.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "lfo5.triplets",
+     "kparam": "kParamTriplets",
+     "raw_path": [
+      "LFO4",
+      "plainParams",
+      "kParamTriplets"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "lfo6.beat_sync",
+     "kparam": "kParamBeatSync",
+     "raw_path": [
+      "LFO5",
+      "plainParams",
+      "kParamBeatSync"
+     ],
+     "target_value": 0.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "lfo6.delay",
+     "kparam": "kParamDelay",
+     "raw_path": [
+      "LFO5",
+      "plainParams",
+      "kParamDelay"
+     ],
+     "target_value": 1.8,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 3.6
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 3.6
+     }
+    },
+    {
+     "atlas_id": "lfo6.dotted",
+     "kparam": "kParamDotted",
+     "raw_path": [
+      "LFO5",
+      "plainParams",
+      "kParamDotted"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "lfo6.mono",
+     "kparam": "kParamMono",
+     "raw_path": [
+      "LFO5",
+      "plainParams",
+      "kParamMono"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "lfo6.rate",
+     "kparam": "kParamRate",
+     "raw_path": [
+      "LFO5",
+      "plainParams",
+      "kParamRate"
+     ],
+     "target_value": 49.999999999999986,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "lfo6.rate_10x",
+     "kparam": "kParamRate10x",
+     "raw_path": [
+      "LFO5",
+      "plainParams",
+      "kParamRate10x"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "lfo6.rise",
+     "kparam": "kParamRise",
+     "raw_path": [
+      "LFO5",
+      "plainParams",
+      "kParamRise"
+     ],
+     "target_value": 2.5,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 5.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 4.0
+     }
+    },
+    {
+     "atlas_id": "lfo6.smooth",
+     "kparam": "kParamSmooth",
+     "raw_path": [
+      "LFO5",
+      "plainParams",
+      "kParamSmooth"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "lfo6.swing",
+     "kparam": "kParamSwing",
+     "raw_path": [
+      "LFO5",
+      "plainParams",
+      "kParamSwing"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 1.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "lfo6.triplets",
+     "kparam": "kParamTriplets",
+     "raw_path": [
+      "LFO5",
+      "plainParams",
+      "kParamTriplets"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "macro1.value",
+     "kparam": "kParamValue",
+     "raw_path": [
+      "Macro0",
+      "plainParams",
+      "kParamValue"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "macro2.value",
+     "kparam": "kParamValue",
+     "raw_path": [
+      "Macro1",
+      "plainParams",
+      "kParamValue"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "macro3.value",
+     "kparam": "kParamValue",
+     "raw_path": [
+      "Macro2",
+      "plainParams",
+      "kParamValue"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "macro4.value",
+     "kparam": "kParamValue",
+     "raw_path": [
+      "Macro3",
+      "plainParams",
+      "kParamValue"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "macro5.value",
+     "kparam": "kParamValue",
+     "raw_path": [
+      "Macro4",
+      "plainParams",
+      "kParamValue"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "macro6.value",
+     "kparam": "kParamValue",
+     "raw_path": [
+      "Macro5",
+      "plainParams",
+      "kParamValue"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "macro7.value",
+     "kparam": "kParamValue",
+     "raw_path": [
+      "Macro6",
+      "plainParams",
+      "kParamValue"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "macro8.value",
+     "kparam": "kParamValue",
+     "raw_path": [
+      "Macro7",
+      "plainParams",
+      "kParamValue"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "mixer.filter1.bus1",
+     "kparam": "kParamFXBus1Level",
+     "raw_path": [
+      "RoutingSlot5",
+      "plainParams",
+      "kParamFXBus1Level"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "mixer.filter1.bus2",
+     "kparam": "kParamFXBus2Level",
+     "raw_path": [
+      "RoutingSlot5",
+      "plainParams",
+      "kParamFXBus2Level"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "mixer.filter1.enable",
+     "kparam": "kParamEnable",
+     "raw_path": [
+      "VoiceFilter0",
+      "plainParams",
+      "kParamEnable"
+     ],
+     "target_value": 1.0,
+     "alias_of": "filter1.enabled",
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "mixer.filter1.wet",
+     "kparam": "kParamWet",
+     "raw_path": [
+      "VoiceFilter0",
+      "plainParams",
+      "kParamWet"
+     ],
+     "target_value": 50.0,
+     "alias_of": "filter1.wet",
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "mixer.filter2.bus1",
+     "kparam": "kParamFXBus1Level",
+     "raw_path": [
+      "RoutingSlot6",
+      "plainParams",
+      "kParamFXBus1Level"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "mixer.filter2.bus2",
+     "kparam": "kParamFXBus2Level",
+     "raw_path": [
+      "RoutingSlot6",
+      "plainParams",
+      "kParamFXBus2Level"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "mixer.filter2.enable",
+     "kparam": "kParamEnable",
+     "raw_path": [
+      "VoiceFilter1",
+      "plainParams",
+      "kParamEnable"
+     ],
+     "target_value": 1.0,
+     "alias_of": "filter2.enabled",
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "mixer.filter2.wet",
+     "kparam": "kParamWet",
+     "raw_path": [
+      "VoiceFilter1",
+      "plainParams",
+      "kParamWet"
+     ],
+     "target_value": 50.0,
+     "alias_of": "filter2.wet",
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "mixer.noise.bus1",
+     "kparam": "kParamFXBus1Level",
+     "raw_path": [
+      "RoutingSlot3",
+      "plainParams",
+      "kParamFXBus1Level"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "mixer.noise.bus2",
+     "kparam": "kParamFXBus2Level",
+     "raw_path": [
+      "RoutingSlot3",
+      "plainParams",
+      "kParamFXBus2Level"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "mixer.noise.enable",
+     "kparam": "kParamEnable",
+     "raw_path": [
+      "Oscillator3",
+      "plainParams",
+      "kParamEnable"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "mixer.noise.filter_balance",
+     "kparam": "kParamFilterBalance",
+     "raw_path": [
+      "RoutingSlot3",
+      "plainParams",
+      "kParamFilterBalance"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "mixer.noise.pan",
+     "kparam": "kParamPan",
+     "raw_path": [
+      "Oscillator3",
+      "plainParams",
+      "kParamPan"
+     ],
+     "target_value": -25.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "signed",
+      "min": -50.0,
+      "max": 50.0
+     },
+     "reachable_range": {
+      "min": -50.0,
+      "max": 50.0
+     }
+    },
+    {
+     "atlas_id": "mixer.osc_a.bus1",
+     "kparam": "kParamFXBus1Level",
+     "raw_path": [
+      "RoutingSlot0",
+      "plainParams",
+      "kParamFXBus1Level"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "mixer.osc_a.bus2",
+     "kparam": "kParamFXBus2Level",
+     "raw_path": [
+      "RoutingSlot0",
+      "plainParams",
+      "kParamFXBus2Level"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "mixer.osc_a.filter_balance",
+     "kparam": "kParamFilterBalance",
+     "raw_path": [
+      "RoutingSlot0",
+      "plainParams",
+      "kParamFilterBalance"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "mixer.osc_b.bus1",
+     "kparam": "kParamFXBus1Level",
+     "raw_path": [
+      "RoutingSlot1",
+      "plainParams",
+      "kParamFXBus1Level"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "mixer.osc_b.bus2",
+     "kparam": "kParamFXBus2Level",
+     "raw_path": [
+      "RoutingSlot1",
+      "plainParams",
+      "kParamFXBus2Level"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "mixer.osc_b.filter_balance",
+     "kparam": "kParamFilterBalance",
+     "raw_path": [
+      "RoutingSlot1",
+      "plainParams",
+      "kParamFilterBalance"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "mixer.osc_c.bus1",
+     "kparam": "kParamFXBus1Level",
+     "raw_path": [
+      "RoutingSlot2",
+      "plainParams",
+      "kParamFXBus1Level"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "mixer.osc_c.bus2",
+     "kparam": "kParamFXBus2Level",
+     "raw_path": [
+      "RoutingSlot2",
+      "plainParams",
+      "kParamFXBus2Level"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "mixer.osc_c.filter_balance",
+     "kparam": "kParamFilterBalance",
+     "raw_path": [
+      "RoutingSlot2",
+      "plainParams",
+      "kParamFilterBalance"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "mixer.sub.bus1",
+     "kparam": "kParamFXBus1Level",
+     "raw_path": [
+      "RoutingSlot4",
+      "plainParams",
+      "kParamFXBus1Level"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "mixer.sub.bus2",
+     "kparam": "kParamFXBus2Level",
+     "raw_path": [
+      "RoutingSlot4",
+      "plainParams",
+      "kParamFXBus2Level"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "mixer.sub.enable",
+     "kparam": "kParamEnable",
+     "raw_path": [
+      "Oscillator4",
+      "plainParams",
+      "kParamEnable"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "mixer.sub.filter_balance",
+     "kparam": "kParamFilterBalance",
+     "raw_path": [
+      "RoutingSlot4",
+      "plainParams",
+      "kParamFilterBalance"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "mixer.sub.pan",
+     "kparam": "kParamPan",
+     "raw_path": [
+      "Oscillator4",
+      "plainParams",
+      "kParamPan"
+     ],
+     "target_value": -25.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "signed",
+      "min": -50.0,
+      "max": 50.0
+     },
+     "reachable_range": {
+      "min": -50.0,
+      "max": 50.0
+     }
+    },
+    {
+     "atlas_id": "oscA.detune",
+     "kparam": "kParamDetune",
+     "raw_path": [
+      "Oscillator0",
+      "plainParams",
+      "kParamDetune"
+     ],
+     "target_value": 0.5000000000000001,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 1.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "oscA.enabled",
+     "kparam": "kParamEnable",
+     "raw_path": [
+      "Oscillator0",
+      "plainParams",
+      "kParamEnable"
+     ],
+     "target_value": 0.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "oscA.fine",
+     "kparam": "kParamFine",
+     "raw_path": [
+      "Oscillator0",
+      "plainParams",
+      "kParamFine"
+     ],
+     "target_value": -40.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "signed",
+      "min": -80.0,
+      "max": 80.0
+     },
+     "reachable_range": {
+      "min": -80.0,
+      "max": 80.0
+     }
+    },
+    {
+     "atlas_id": "oscA.octave",
+     "kparam": "kParamOctave",
+     "raw_path": [
+      "Oscillator0",
+      "plainParams",
+      "kParamOctave"
+     ],
+     "target_value": -2.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "signed",
+      "min": -4.0,
+      "max": 4.0
+     },
+     "reachable_range": {
+      "min": -4.0,
+      "max": 4.0
+     }
+    },
+    {
+     "atlas_id": "oscA.pan",
+     "kparam": "kParamPan",
+     "raw_path": [
+      "Oscillator0",
+      "plainParams",
+      "kParamPan"
+     ],
+     "target_value": -25.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "signed",
+      "min": -50.0,
+      "max": 50.0
+     },
+     "reachable_range": {
+      "min": -50.0,
+      "max": 50.0
+     }
+    },
+    {
+     "atlas_id": "oscA.semitone",
+     "kparam": "kParamPitch",
+     "raw_path": [
+      "Oscillator0",
+      "plainParams",
+      "kParamPitch"
+     ],
+     "target_value": -6.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "signed",
+      "min": -12.0,
+      "max": 12.0
+     },
+     "reachable_range": {
+      "min": -12.0,
+      "max": 12.0
+     }
+    },
+    {
+     "atlas_id": "oscA.unison",
+     "kparam": "kParamUnison",
+     "raw_path": [
+      "Oscillator0",
+      "plainParams",
+      "kParamUnison"
+     ],
+     "target_value": 9.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 1.0,
+      "max": 16.0
+     },
+     "reachable_range": {
+      "min": 1.0,
+      "max": 16.0
+     }
+    },
+    {
+     "atlas_id": "oscA.warp_amount",
+     "kparam": "kParamWarp",
+     "raw_path": [
+      "Oscillator0",
+      "WTOsc0",
+      "plainParams",
+      "kParamWarp"
+     ],
+     "target_value": 0.5,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 1.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "oscA.warp_var2",
+     "kparam": "kParamWarpVar2",
+     "raw_path": [
+      "Oscillator0",
+      "WTOsc0",
+      "plainParams",
+      "kParamWarpVar2"
+     ],
+     "target_value": 0.5,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 1.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "oscB.detune",
+     "kparam": "kParamDetune",
+     "raw_path": [
+      "Oscillator1",
+      "plainParams",
+      "kParamDetune"
+     ],
+     "target_value": 0.5000000000000001,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 1.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "oscB.enabled",
+     "kparam": "kParamEnable",
+     "raw_path": [
+      "Oscillator1",
+      "plainParams",
+      "kParamEnable"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "oscB.fine",
+     "kparam": "kParamFine",
+     "raw_path": [
+      "Oscillator1",
+      "plainParams",
+      "kParamFine"
+     ],
+     "target_value": -40.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "signed",
+      "min": -80.0,
+      "max": 80.0
+     },
+     "reachable_range": {
+      "min": -80.0,
+      "max": 80.0
+     }
+    },
+    {
+     "atlas_id": "oscB.octave",
+     "kparam": "kParamOctave",
+     "raw_path": [
+      "Oscillator1",
+      "plainParams",
+      "kParamOctave"
+     ],
+     "target_value": -2.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "signed",
+      "min": -4.0,
+      "max": 4.0
+     },
+     "reachable_range": {
+      "min": -4.0,
+      "max": 4.0
+     }
+    },
+    {
+     "atlas_id": "oscB.pan",
+     "kparam": "kParamPan",
+     "raw_path": [
+      "Oscillator1",
+      "plainParams",
+      "kParamPan"
+     ],
+     "target_value": -25.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "signed",
+      "min": -50.0,
+      "max": 50.0
+     },
+     "reachable_range": {
+      "min": -50.0,
+      "max": 50.0
+     }
+    },
+    {
+     "atlas_id": "oscB.semitone",
+     "kparam": "kParamPitch",
+     "raw_path": [
+      "Oscillator1",
+      "plainParams",
+      "kParamPitch"
+     ],
+     "target_value": -6.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "signed",
+      "min": -12.0,
+      "max": 12.0
+     },
+     "reachable_range": {
+      "min": -12.0,
+      "max": 12.0
+     }
+    },
+    {
+     "atlas_id": "oscB.unison",
+     "kparam": "kParamUnison",
+     "raw_path": [
+      "Oscillator1",
+      "plainParams",
+      "kParamUnison"
+     ],
+     "target_value": 9.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 1.0,
+      "max": 16.0
+     },
+     "reachable_range": {
+      "min": 1.0,
+      "max": 16.0
+     }
+    },
+    {
+     "atlas_id": "oscB.warp_amount",
+     "kparam": "kParamWarp",
+     "raw_path": [
+      "Oscillator1",
+      "WTOsc1",
+      "plainParams",
+      "kParamWarp"
+     ],
+     "target_value": 0.5,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 1.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "oscB.warp_var2",
+     "kparam": "kParamWarpVar2",
+     "raw_path": [
+      "Oscillator1",
+      "WTOsc1",
+      "plainParams",
+      "kParamWarpVar2"
+     ],
+     "target_value": 0.5,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 1.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "oscC.detune",
+     "kparam": "kParamDetune",
+     "raw_path": [
+      "Oscillator2",
+      "plainParams",
+      "kParamDetune"
+     ],
+     "target_value": 0.5000000000000001,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 1.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "oscC.enabled",
+     "kparam": "kParamEnable",
+     "raw_path": [
+      "Oscillator2",
+      "plainParams",
+      "kParamEnable"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "oscC.fine",
+     "kparam": "kParamFine",
+     "raw_path": [
+      "Oscillator2",
+      "plainParams",
+      "kParamFine"
+     ],
+     "target_value": -40.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "signed",
+      "min": -80.0,
+      "max": 80.0
+     },
+     "reachable_range": {
+      "min": -80.0,
+      "max": 80.0
+     }
+    },
+    {
+     "atlas_id": "oscC.octave",
+     "kparam": "kParamOctave",
+     "raw_path": [
+      "Oscillator2",
+      "plainParams",
+      "kParamOctave"
+     ],
+     "target_value": -2.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "signed",
+      "min": -4.0,
+      "max": 4.0
+     },
+     "reachable_range": {
+      "min": -4.0,
+      "max": 4.0
+     }
+    },
+    {
+     "atlas_id": "oscC.pan",
+     "kparam": "kParamPan",
+     "raw_path": [
+      "Oscillator2",
+      "plainParams",
+      "kParamPan"
+     ],
+     "target_value": -25.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "signed",
+      "min": -50.0,
+      "max": 50.0
+     },
+     "reachable_range": {
+      "min": -50.0,
+      "max": 50.0
+     }
+    },
+    {
+     "atlas_id": "oscC.semitone",
+     "kparam": "kParamPitch",
+     "raw_path": [
+      "Oscillator2",
+      "plainParams",
+      "kParamPitch"
+     ],
+     "target_value": -6.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "signed",
+      "min": -12.0,
+      "max": 12.0
+     },
+     "reachable_range": {
+      "min": -12.0,
+      "max": 12.0
+     }
+    },
+    {
+     "atlas_id": "oscC.unison",
+     "kparam": "kParamUnison",
+     "raw_path": [
+      "Oscillator2",
+      "plainParams",
+      "kParamUnison"
+     ],
+     "target_value": 9.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 1.0,
+      "max": 16.0
+     },
+     "reachable_range": {
+      "min": 1.0,
+      "max": 16.0
+     }
+    },
+    {
+     "atlas_id": "oscC.warp_amount",
+     "kparam": "kParamWarp",
+     "raw_path": [
+      "Oscillator2",
+      "WTOsc2",
+      "plainParams",
+      "kParamWarp"
+     ],
+     "target_value": 0.5,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 1.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "oscC.warp_var2",
+     "kparam": "kParamWarpVar2",
+     "raw_path": [
+      "Oscillator2",
+      "WTOsc2",
+      "plainParams",
+      "kParamWarpVar2"
+     ],
+     "target_value": 0.5,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 1.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "oscNoise.fine",
+     "kparam": "kParamFine",
+     "raw_path": [
+      "Oscillator3",
+      "plainParams",
+      "kParamFine"
+     ],
+     "target_value": -40.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "signed",
+      "min": -80.0,
+      "max": 80.0
+     },
+     "reachable_range": {
+      "min": -80.0,
+      "max": 80.0
+     }
+    },
+    {
+     "atlas_id": "oscNoise.pan",
+     "kparam": "kParamPan",
+     "raw_path": [
+      "Oscillator3",
+      "plainParams",
+      "kParamPan"
+     ],
+     "target_value": -25.0,
+     "alias_of": "mixer.noise.pan",
+     "declared_domain": {
+      "kind": "signed",
+      "min": -50.0,
+      "max": 50.0
+     },
+     "reachable_range": {
+      "min": -50.0,
+      "max": 50.0
+     }
+    },
+    {
+     "atlas_id": "voice.voicing.legato",
+     "kparam": "kParamLegato",
+     "raw_path": [
+      "Global0",
+      "plainParams",
+      "kParamLegato"
+     ],
+     "target_value": 1.0,
+     "alias_of": "global.legato",
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "voice.voicing.mono",
+     "kparam": "kParamMonoToggle",
+     "raw_path": [
+      "Global0",
+      "plainParams",
+      "kParamMonoToggle"
+     ],
+     "target_value": 1.0,
+     "alias_of": "global.mono",
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "voice.voicing.porta_always",
+     "kparam": "kParamPortaAlways",
+     "raw_path": [
+      "Global0",
+      "plainParams",
+      "kParamPortaAlways"
+     ],
+     "target_value": 1.0,
+     "alias_of": "global.porta_always",
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "voice.voicing.porta_scaled",
+     "kparam": "kParamPortaScaled",
+     "raw_path": [
+      "Global0",
+      "plainParams",
+      "kParamPortaScaled"
+     ],
+     "target_value": 1.0,
+     "alias_of": "global.porta_scaled",
+     "declared_domain": {
+      "kind": "bool",
+      "default": null
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    }
+   ],
+   "excluded": [
+    {
+     "atlas_id": "arp.pattern.shape",
+     "reason": "enum/text needs GUI-proven labels; not resolved at this evidence stage"
+    },
+    {
+     "atlas_id": "arp.playback.offset",
+     "reason": "no retained value in this run (STATE_NOT_OBSERVED)"
+    },
+    {
+     "atlas_id": "arp.playback.repeats",
+     "reason": "no retained value in this run (STATE_NOT_OBSERVED)"
+    },
+    {
+     "atlas_id": "arp.velocity.decay",
+     "reason": "no retained value in this run (STATE_NOT_OBSERVED)"
+    },
+    {
+     "atlas_id": "filter1.type",
+     "reason": "enum/text needs GUI-proven labels; not resolved at this evidence stage"
+    },
+    {
+     "atlas_id": "filter2.type",
+     "reason": "enum/text needs GUI-proven labels; not resolved at this evidence stage"
+    },
+    {
+     "atlas_id": "global.direct_volume",
+     "reason": "no retained value in this run (STATE_NOT_OBSERVED)"
+    },
+    {
+     "atlas_id": "global.fx_bus1_destination",
+     "reason": "enum/text needs GUI-proven labels; not resolved at this evidence stage"
+    },
+    {
+     "atlas_id": "global.fx_bus1_volume",
+     "reason": "no retained value in this run (STATE_NOT_OBSERVED)"
+    },
+    {
+     "atlas_id": "global.fx_bus2_destination",
+     "reason": "enum/text needs GUI-proven labels; not resolved at this evidence stage"
+    },
+    {
+     "atlas_id": "global.fx_bus2_volume",
+     "reason": "no retained value in this run (STATE_NOT_OBSERVED)"
+    },
+    {
+     "atlas_id": "global.global_tuning",
+     "reason": "no retained value in this run (STATE_NOT_OBSERVED)"
+    },
+    {
+     "atlas_id": "global.oversampling",
+     "reason": "no retained value in this run (STATE_NOT_OBSERVED)"
+    },
+    {
+     "atlas_id": "global.portamento_curve",
+     "reason": "no retained value in this run (STATE_NOT_OBSERVED)"
+    },
+    {
+     "atlas_id": "global.swing_div",
+     "reason": "no retained value in this run (STATE_NOT_OBSERVED)"
+    },
+    {
+     "atlas_id": "global.use_ultra_on_render",
+     "reason": "no retained value in this run (STATE_NOT_OBSERVED)"
+    },
+    {
+     "atlas_id": "global.voice_amp",
+     "reason": "no retained value in this run (STATE_NOT_OBSERVED)"
+    },
+    {
+     "atlas_id": "global.voice_control.random.cutoff",
+     "reason": "no retained value in this run (STATE_NOT_OBSERVED)"
+    },
+    {
+     "atlas_id": "global.voice_control.random.detune",
+     "reason": "no retained value in this run (STATE_NOT_OBSERVED)"
+    },
+    {
+     "atlas_id": "global.voice_control.random.envs",
+     "reason": "no retained value in this run (STATE_NOT_OBSERVED)"
+    },
+    {
+     "atlas_id": "global.voice_control.scaling.envs",
+     "reason": "no retained value in this run (STATE_NOT_OBSERVED)"
+    },
+    {
+     "atlas_id": "global.voice_control.scaling.lfos",
+     "reason": "no retained value in this run (STATE_NOT_OBSERVED)"
+    },
+    {
+     "atlas_id": "lfo1.mode",
+     "reason": "enum/text needs GUI-proven labels; not resolved at this evidence stage"
+    },
+    {
+     "atlas_id": "lfo1.shape",
+     "reason": "enum/text needs GUI-proven labels; not resolved at this evidence stage"
+    },
+    {
+     "atlas_id": "lfo2.mode",
+     "reason": "enum/text needs GUI-proven labels; not resolved at this evidence stage"
+    },
+    {
+     "atlas_id": "lfo2.shape",
+     "reason": "enum/text needs GUI-proven labels; not resolved at this evidence stage"
+    },
+    {
+     "atlas_id": "lfo3.mode",
+     "reason": "enum/text needs GUI-proven labels; not resolved at this evidence stage"
+    },
+    {
+     "atlas_id": "lfo3.shape",
+     "reason": "enum/text needs GUI-proven labels; not resolved at this evidence stage"
+    },
+    {
+     "atlas_id": "lfo4.mode",
+     "reason": "enum/text needs GUI-proven labels; not resolved at this evidence stage"
+    },
+    {
+     "atlas_id": "lfo4.shape",
+     "reason": "enum/text needs GUI-proven labels; not resolved at this evidence stage"
+    },
+    {
+     "atlas_id": "lfo5.mode",
+     "reason": "enum/text needs GUI-proven labels; not resolved at this evidence stage"
+    },
+    {
+     "atlas_id": "lfo5.shape",
+     "reason": "enum/text needs GUI-proven labels; not resolved at this evidence stage"
+    },
+    {
+     "atlas_id": "lfo6.mode",
+     "reason": "enum/text needs GUI-proven labels; not resolved at this evidence stage"
+    },
+    {
+     "atlas_id": "lfo6.shape",
+     "reason": "enum/text needs GUI-proven labels; not resolved at this evidence stage"
+    },
+    {
+     "atlas_id": "macro1.name",
+     "reason": "no retained value in this run (STATE_NOT_OBSERVED)"
+    },
+    {
+     "atlas_id": "macro2.name",
+     "reason": "no retained value in this run (STATE_NOT_OBSERVED)"
+    },
+    {
+     "atlas_id": "macro3.name",
+     "reason": "no retained value in this run (STATE_NOT_OBSERVED)"
+    },
+    {
+     "atlas_id": "macro4.name",
+     "reason": "no retained value in this run (STATE_NOT_OBSERVED)"
+    },
+    {
+     "atlas_id": "macro5.name",
+     "reason": "no retained value in this run (STATE_NOT_OBSERVED)"
+    },
+    {
+     "atlas_id": "macro6.name",
+     "reason": "no retained value in this run (STATE_NOT_OBSERVED)"
+    },
+    {
+     "atlas_id": "macro7.name",
+     "reason": "no retained value in this run (STATE_NOT_OBSERVED)"
+    },
+    {
+     "atlas_id": "macro8.name",
+     "reason": "no retained value in this run (STATE_NOT_OBSERVED)"
+    },
+    {
+     "atlas_id": "oscA.warp_mode",
+     "reason": "enum/text needs GUI-proven labels; not resolved at this evidence stage"
+    },
+    {
+     "atlas_id": "oscA.warp_mode2",
+     "reason": "enum/text needs GUI-proven labels; not resolved at this evidence stage"
+    },
+    {
+     "atlas_id": "oscA.wavetable",
+     "reason": "enum/text needs GUI-proven labels; not resolved at this evidence stage"
+    },
+    {
+     "atlas_id": "oscB.warp_mode",
+     "reason": "enum/text needs GUI-proven labels; not resolved at this evidence stage"
+    },
+    {
+     "atlas_id": "oscB.warp_mode2",
+     "reason": "enum/text needs GUI-proven labels; not resolved at this evidence stage"
+    },
+    {
+     "atlas_id": "oscB.wavetable",
+     "reason": "enum/text needs GUI-proven labels; not resolved at this evidence stage"
+    },
+    {
+     "atlas_id": "oscC.warp_mode",
+     "reason": "enum/text needs GUI-proven labels; not resolved at this evidence stage"
+    },
+    {
+     "atlas_id": "oscC.warp_mode2",
+     "reason": "enum/text needs GUI-proven labels; not resolved at this evidence stage"
+    },
+    {
+     "atlas_id": "oscC.wavetable",
+     "reason": "enum/text needs GUI-proven labels; not resolved at this evidence stage"
+    },
+    {
+     "atlas_id": "oscNoise.noise_type",
+     "reason": "enum/text needs GUI-proven labels; not resolved at this evidence stage"
+    }
+   ]
+  },
+  "FX_FXBode": {
+   "preset": "VERIFY_FX_FXBode.SerumPreset",
+   "applied_count": 4,
+   "excluded_count": 0,
+   "applied": [
+    {
+     "atlas_id": "fx.bode.blur",
+     "kparam": "kParamBlur",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXBode",
+      "plainParams",
+      "kParamBlur"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "fx.bode.range",
+     "kparam": "kParamRange",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXBode",
+      "plainParams",
+      "kParamRange"
+     ],
+     "target_value": 3043.1999999999975,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "log",
+      "min": 0.1,
+      "max": 3043.2
+     },
+     "reachable_range": {
+      "min": 0.1,
+      "max": 5000.0
+     }
+    },
+    {
+     "atlas_id": "fx.bode.shift",
+     "kparam": "kParamShift",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXBode",
+      "plainParams",
+      "kParamShift"
+     ],
+     "target_value": -9.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "signed",
+      "min": -100.0,
+      "max": 82.0
+     },
+     "reachable_range": {
+      "min": -100.0,
+      "max": 82.0
+     }
+    },
+    {
+     "atlas_id": "fx.bode.wet",
+     "kparam": "kParamWet",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXBode",
+      "plainParams",
+      "kParamWet"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    }
+   ],
+   "excluded": []
+  },
+  "FX_FXChorus": {
+   "preset": "VERIFY_FX_FXChorus.SerumPreset",
+   "applied_count": 4,
+   "excluded_count": 0,
+   "applied": [
+    {
+     "atlas_id": "fx.chorus.depth",
+     "kparam": "kParamDepth",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXChorus",
+      "plainParams",
+      "kParamDepth"
+     ],
+     "target_value": 13.000000000000004,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 26.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 26.0
+     }
+    },
+    {
+     "atlas_id": "fx.chorus.feedback",
+     "kparam": "kParamFeedback",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXChorus",
+      "plainParams",
+      "kParamFeedback"
+     ],
+     "target_value": 37.5,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 75.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 75.0
+     }
+    },
+    {
+     "atlas_id": "fx.chorus.rate",
+     "kparam": "kParamRate",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXChorus",
+      "plainParams",
+      "kParamRate"
+     ],
+     "target_value": 9.999999999999998,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 20.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 20.0
+     }
+    },
+    {
+     "atlas_id": "fx.chorus.wet",
+     "kparam": "kParamWet",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXChorus",
+      "plainParams",
+      "kParamWet"
+     ],
+     "target_value": 25.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    }
+   ],
+   "excluded": []
+  },
+  "FX_FXComp": {
+   "preset": "VERIFY_FX_FXComp.SerumPreset",
+   "applied_count": 6,
+   "excluded_count": 0,
+   "applied": [
+    {
+     "atlas_id": "fx.compressor.attack",
+     "kparam": "kParamAttack",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXComp",
+      "plainParams",
+      "kParamAttack"
+     ],
+     "target_value": 100.00000000000001,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "log",
+      "min": 0.1,
+      "max": 1000.0
+     },
+     "reachable_range": {
+      "min": 0.10000000149011612,
+      "max": 1000.0
+     }
+    },
+    {
+     "atlas_id": "fx.compressor.gain",
+     "kparam": "kParamMakeup",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXComp",
+      "plainParams",
+      "kParamMakeup"
+     ],
+     "target_value": 16.500000000000007,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 1.0,
+      "max": 32.0
+     },
+     "reachable_range": {
+      "min": 1.0,
+      "max": 31.0
+     }
+    },
+    {
+     "atlas_id": "fx.compressor.ratio",
+     "kparam": "kParamRatio",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXComp",
+      "plainParams",
+      "kParamRatio"
+     ],
+     "target_value": 31622.7766016712,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "log",
+      "min": 1.0,
+      "max": 1000000.0
+     },
+     "reachable_range": {
+      "min": 1.0,
+      "max": 1000000.0
+     }
+    },
+    {
+     "atlas_id": "fx.compressor.release",
+     "kparam": "kParamRelease",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXComp",
+      "plainParams",
+      "kParamRelease"
+     ],
+     "target_value": 100.00000000000001,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "log",
+      "min": 0.1,
+      "max": 1000.0
+     },
+     "reachable_range": {
+      "min": 0.10000000149011612,
+      "max": 1000.0
+     }
+    },
+    {
+     "atlas_id": "fx.compressor.thresh",
+     "kparam": "kParamThresh",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXComp",
+      "plainParams",
+      "kParamThresh"
+     ],
+     "target_value": 0.25,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 1.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "fx.compressor.wet",
+     "kparam": "kParamWet",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXComp",
+      "plainParams",
+      "kParamWet"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    }
+   ],
+   "excluded": []
+  },
+  "FX_FXConv": {
+   "preset": "VERIFY_FX_FXConv.SerumPreset",
+   "applied_count": 4,
+   "excluded_count": 0,
+   "applied": [
+    {
+     "atlas_id": "fx.convolve.decay",
+     "kparam": "kParamDecay",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXConv",
+      "plainParams",
+      "kParamDecay"
+     ],
+     "target_value": 19.999999999999996,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 40.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 40.0
+     }
+    },
+    {
+     "atlas_id": "fx.convolve.size",
+     "kparam": "kParamSize",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXConv",
+      "plainParams",
+      "kParamSize"
+     ],
+     "target_value": 505.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 10.0,
+      "max": 1000.0
+     },
+     "reachable_range": {
+      "min": 10.0,
+      "max": 1000.0
+     }
+    },
+    {
+     "atlas_id": "fx.convolve.tone",
+     "kparam": "kParamTone",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXConv",
+      "plainParams",
+      "kParamTone"
+     ],
+     "target_value": -7.5,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "signed",
+      "min": -100.0,
+      "max": 85.0
+     },
+     "reachable_range": {
+      "min": -100.0,
+      "max": 85.0
+     }
+    },
+    {
+     "atlas_id": "fx.convolve.wet",
+     "kparam": "kParamWet",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXConv",
+      "plainParams",
+      "kParamWet"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    }
+   ],
+   "excluded": []
+  },
+  "FX_FXDelay": {
+   "preset": "VERIFY_FX_FXDelay.SerumPreset",
+   "applied_count": 7,
+   "excluded_count": 1,
+   "applied": [
+    {
+     "atlas_id": "fx.delay.bpm",
+     "kparam": "kParamBeatSync",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXDelay",
+      "plainParams",
+      "kParamBeatSync"
+     ],
+     "target_value": 0.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool"
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "fx.delay.feedback",
+     "kparam": "kParamFeedback",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXDelay",
+      "plainParams",
+      "kParamFeedback"
+     ],
+     "target_value": 45.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 90.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 90.0
+     }
+    },
+    {
+     "atlas_id": "fx.delay.freq",
+     "kparam": "kParamFreq",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXDelay",
+      "plainParams",
+      "kParamFreq"
+     ],
+     "target_value": 9015.249999999995,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 49.5,
+      "max": 17981.0
+     },
+     "reachable_range": {
+      "min": 49.5,
+      "max": 17980.99999999999
+     }
+    },
+    {
+     "atlas_id": "fx.delay.link",
+     "kparam": "kParamLink",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXDelay",
+      "plainParams",
+      "kParamLink"
+     ],
+     "target_value": 1.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "bool"
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "fx.delay.time_l",
+     "kparam": "kParamTimeL",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXDelay",
+      "plainParams",
+      "kParamTimeL"
+     ],
+     "target_value": 0.1705,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.001,
+      "max": 0.34
+     },
+     "reachable_range": {
+      "min": 0.001,
+      "max": 0.34
+     }
+    },
+    {
+     "atlas_id": "fx.delay.time_r",
+     "kparam": "kParamTimeR",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXDelay",
+      "plainParams",
+      "kParamTimeR"
+     ],
+     "target_value": 0.1605,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.001,
+      "max": 0.32
+     },
+     "reachable_range": {
+      "min": 0.001,
+      "max": 0.31999999999999995
+     }
+    },
+    {
+     "atlas_id": "fx.delay.wet",
+     "kparam": "kParamWet",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXDelay",
+      "plainParams",
+      "kParamWet"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    }
+   ],
+   "excluded": [
+    {
+     "atlas_id": "fx.delay.mode",
+     "reason": "no retained value in this run (STATE_NOT_OBSERVED)"
+    }
+   ]
+  },
+  "FX_FXHyperD": {
+   "preset": "VERIFY_FX_FXHyperD.SerumPreset",
+   "applied_count": 6,
+   "excluded_count": 0,
+   "applied": [
+    {
+     "atlas_id": "fx.dimension.size",
+     "kparam": "kParamDimESize",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXHyperD",
+      "plainParams",
+      "kParamDimESize"
+     ],
+     "target_value": 25.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "fx.dimension.wet",
+     "kparam": "kParamDimEWet",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXHyperD",
+      "plainParams",
+      "kParamDimEWet"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "fx.hyper.detune",
+     "kparam": "kParamDetune",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXHyperD",
+      "plainParams",
+      "kParamDetune"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "fx.hyper.rate",
+     "kparam": "kParamRate",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXHyperD",
+      "plainParams",
+      "kParamRate"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "fx.hyper.unison",
+     "kparam": "kParamUnison",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXHyperD",
+      "plainParams",
+      "kParamUnison"
+     ],
+     "target_value": 3.5,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 7.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 7.0
+     }
+    },
+    {
+     "atlas_id": "fx.hyper.wet",
+     "kparam": "kParamWet",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXHyperD",
+      "plainParams",
+      "kParamWet"
+     ],
+     "target_value": 25.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    }
+   ],
+   "excluded": []
+  },
+  "FX_FXDistortion": {
+   "preset": "VERIFY_FX_FXDistortion.SerumPreset",
+   "applied_count": 3,
+   "excluded_count": 1,
+   "applied": [
+    {
+     "atlas_id": "fx.distortion.drive",
+     "kparam": "kParamDrive",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXDistortion",
+      "plainParams",
+      "kParamDrive"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "fx.distortion.freq",
+     "kparam": "kParamFreq",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXDistortion",
+      "plainParams",
+      "kParamFreq"
+     ],
+     "target_value": 0.25,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 1.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "fx.distortion.wet",
+     "kparam": "kParamWet",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXDistortion",
+      "plainParams",
+      "kParamWet"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    }
+   ],
+   "excluded": [
+    {
+     "atlas_id": "fx.distortion.type",
+     "reason": "enum/text needs GUI-proven labels; not resolved at this evidence stage"
+    }
+   ]
+  },
+  "FX_FXEQ": {
+   "preset": "VERIFY_FX_FXEQ.SerumPreset",
+   "applied_count": 6,
+   "excluded_count": 0,
+   "applied": [
+    {
+     "atlas_id": "fx.equalizer.left_freq",
+     "kparam": "kParamFreq1",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXEQ",
+      "plainParams",
+      "kParamFreq1"
+     ],
+     "target_value": 5010.750000000001,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 21.5,
+      "max": 10000.0
+     },
+     "reachable_range": {
+      "min": 21.53320125,
+      "max": 10000.000000000005
+     }
+    },
+    {
+     "atlas_id": "fx.equalizer.left_gain",
+     "kparam": "kParamGain1",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXEQ",
+      "plainParams",
+      "kParamGain1"
+     ],
+     "target_value": -12.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "signed",
+      "min": -24.0,
+      "max": 24.0
+     },
+     "reachable_range": {
+      "min": -24.0,
+      "max": 24.0
+     }
+    },
+    {
+     "atlas_id": "fx.equalizer.left_q",
+     "kparam": "kParamReso1",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXEQ",
+      "plainParams",
+      "kParamReso1"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "fx.equalizer.right_freq",
+     "kparam": "kParamFreq2",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXEQ",
+      "plainParams",
+      "kParamFreq2"
+     ],
+     "target_value": 10010.750000000002,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 21.5,
+      "max": 20000.0
+     },
+     "reachable_range": {
+      "min": 21.53320125,
+      "max": 20000.0
+     }
+    },
+    {
+     "atlas_id": "fx.equalizer.right_gain",
+     "kparam": "kParamGain2",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXEQ",
+      "plainParams",
+      "kParamGain2"
+     ],
+     "target_value": -12.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "signed",
+      "min": -24.0,
+      "max": 24.0
+     },
+     "reachable_range": {
+      "min": -24.0,
+      "max": 24.0
+     }
+    },
+    {
+     "atlas_id": "fx.equalizer.right_q",
+     "kparam": "kParamReso2",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXEQ",
+      "plainParams",
+      "kParamReso2"
+     ],
+     "target_value": 47.5,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 95.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 95.0
+     }
+    }
+   ],
+   "excluded": []
+  },
+  "FX_FXFilter": {
+   "preset": "VERIFY_FX_FXFilter.SerumPreset",
+   "applied_count": 4,
+   "excluded_count": 1,
+   "applied": [
+    {
+     "atlas_id": "fx.filter.cutoff",
+     "kparam": "kParamFreq",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXFilter",
+      "plainParams",
+      "kParamFreq"
+     ],
+     "target_value": 0.25,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 1.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "fx.filter.drive",
+     "kparam": "kParamDrive",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXFilter",
+      "plainParams",
+      "kParamDrive"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "fx.filter.res",
+     "kparam": "kParamReso",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXFilter",
+      "plainParams",
+      "kParamReso"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "fx.filter.wet",
+     "kparam": "kParamWet",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXFilter",
+      "plainParams",
+      "kParamWet"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    }
+   ],
+   "excluded": [
+    {
+     "atlas_id": "fx.filter.type",
+     "reason": "enum/text needs GUI-proven labels; not resolved at this evidence stage"
+    }
+   ]
+  },
+  "FX_FXFlanger": {
+   "preset": "VERIFY_FX_FXFlanger.SerumPreset",
+   "applied_count": 4,
+   "excluded_count": 0,
+   "applied": [
+    {
+     "atlas_id": "fx.flanger.depth",
+     "kparam": "kParamDepth",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXFlanger",
+      "plainParams",
+      "kParamDepth"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "fx.flanger.feedback",
+     "kparam": "kParamFeedback",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXFlanger",
+      "plainParams",
+      "kParamFeedback"
+     ],
+     "target_value": 25.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "fx.flanger.rate",
+     "kparam": "kParamRate",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXFlanger",
+      "plainParams",
+      "kParamRate"
+     ],
+     "target_value": 5.000000000000001,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 10.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 9.999999999999998
+     }
+    },
+    {
+     "atlas_id": "fx.flanger.wet",
+     "kparam": "kParamWet",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXFlanger",
+      "plainParams",
+      "kParamWet"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    }
+   ],
+   "excluded": []
+  },
+  "FX_FXPhaser": {
+   "preset": "VERIFY_FX_FXPhaser.SerumPreset",
+   "applied_count": 5,
+   "excluded_count": 0,
+   "applied": [
+    {
+     "atlas_id": "fx.phaser.depth",
+     "kparam": "kParamDepth",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXPhaser",
+      "plainParams",
+      "kParamDepth"
+     ],
+     "target_value": 25.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "fx.phaser.feedback",
+     "kparam": "kParamFeedback",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXPhaser",
+      "plainParams",
+      "kParamFeedback"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "fx.phaser.freq",
+     "kparam": "kParamFreq",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXPhaser",
+      "plainParams",
+      "kParamFreq"
+     ],
+     "target_value": 3556.5588200778457,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "log",
+      "min": 20.0,
+      "max": 20000.0
+     },
+     "reachable_range": {
+      "min": 20.0,
+      "max": 18000.0
+     }
+    },
+    {
+     "atlas_id": "fx.phaser.rate",
+     "kparam": "kParamRate",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXPhaser",
+      "plainParams",
+      "kParamRate"
+     ],
+     "target_value": 9.999999999999998,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 20.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 20.0
+     }
+    },
+    {
+     "atlas_id": "fx.phaser.wet",
+     "kparam": "kParamWet",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXPhaser",
+      "plainParams",
+      "kParamWet"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    }
+   ],
+   "excluded": []
+  },
+  "FX_FXReverb": {
+   "preset": "VERIFY_FX_FXReverb.SerumPreset",
+   "applied_count": 2,
+   "excluded_count": 1,
+   "applied": [
+    {
+     "atlas_id": "fx.reverb.size",
+     "kparam": "kParamSize",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXReverb",
+      "plainParams",
+      "kParamSize"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "fx.reverb.wet",
+     "kparam": "kParamWet",
+     "raw_path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXReverb",
+      "plainParams",
+      "kParamWet"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    }
+   ],
+   "excluded": [
+    {
+     "atlas_id": "fx.reverb.type",
+     "reason": "enum/text needs GUI-proven labels; not resolved at this evidence stage"
+    }
+   ]
+  },
+  "OSC_SAMPLE": {
+   "preset": "VERIFY_OSC_SAMPLE.SerumPreset",
+   "applied_count": 9,
+   "excluded_count": 0,
+   "applied": [
+    {
+     "atlas_id": "oscA.sample_loop_crossfade",
+     "kparam": "kParamLoopCrossfade",
+     "raw_path": [
+      "Oscillator0",
+      "plainParams",
+      "kParamLoopCrossfade"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "oscA.sample_loop_end",
+     "kparam": "kParamLoopEnd",
+     "raw_path": [
+      "Oscillator0",
+      "plainParams",
+      "kParamLoopEnd"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "oscA.sample_loop_start",
+     "kparam": "kParamLoopStart",
+     "raw_path": [
+      "Oscillator0",
+      "plainParams",
+      "kParamLoopStart"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "oscB.sample_loop_crossfade",
+     "kparam": "kParamLoopCrossfade",
+     "raw_path": [
+      "Oscillator1",
+      "plainParams",
+      "kParamLoopCrossfade"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "oscB.sample_loop_end",
+     "kparam": "kParamLoopEnd",
+     "raw_path": [
+      "Oscillator1",
+      "plainParams",
+      "kParamLoopEnd"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "oscB.sample_loop_start",
+     "kparam": "kParamLoopStart",
+     "raw_path": [
+      "Oscillator1",
+      "plainParams",
+      "kParamLoopStart"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "oscC.sample_loop_crossfade",
+     "kparam": "kParamLoopCrossfade",
+     "raw_path": [
+      "Oscillator2",
+      "plainParams",
+      "kParamLoopCrossfade"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "oscC.sample_loop_end",
+     "kparam": "kParamLoopEnd",
+     "raw_path": [
+      "Oscillator2",
+      "plainParams",
+      "kParamLoopEnd"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    },
+    {
+     "atlas_id": "oscC.sample_loop_start",
+     "kparam": "kParamLoopStart",
+     "raw_path": [
+      "Oscillator2",
+      "plainParams",
+      "kParamLoopStart"
+     ],
+     "target_value": 50.0,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 100.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 100.0
+     }
+    }
+   ],
+   "excluded": []
+  },
+  "OSC_WARP2": {
+   "preset": "VERIFY_OSC_WARP2.SerumPreset",
+   "applied_count": 3,
+   "excluded_count": 0,
+   "applied": [
+    {
+     "atlas_id": "oscA.warp_amount2",
+     "kparam": "kParamWarp2",
+     "raw_path": [
+      "Oscillator0",
+      "WTOsc0",
+      "plainParams",
+      "kParamWarp2"
+     ],
+     "target_value": 0.5,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 1.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "oscB.warp_amount2",
+     "kparam": "kParamWarp2",
+     "raw_path": [
+      "Oscillator1",
+      "WTOsc1",
+      "plainParams",
+      "kParamWarp2"
+     ],
+     "target_value": 0.5,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 1.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    {
+     "atlas_id": "oscC.warp_amount2",
+     "kparam": "kParamWarp2",
+     "raw_path": [
+      "Oscillator2",
+      "WTOsc2",
+      "plainParams",
+      "kParamWarp2"
+     ],
+     "target_value": 0.5,
+     "alias_of": null,
+     "declared_domain": {
+      "kind": "continuous",
+      "min": 0.0,
+      "max": 1.0
+     },
+     "reachable_range": {
+      "min": 0.0,
+      "max": 1.0
+     }
+    }
+   ],
+   "excluded": []
+  }
+ },
+ "summary": {
+  "total_candidates_in_manifest": 328,
+  "total_applied": 272,
+  "total_excluded": 56
+ }
+}
