@@ -42,8 +42,8 @@ encoding does not match what serum-mcp's schema claims it should be.
 Examples:
 - `fx.compressor.ratio`: schema domain says `kind: "log"` min 1.0 max 1,000,000. But Serum's native file
   loader interprets that raw slot differently, producing `1.0` and `30.4` for targets `31622.78` / `100.0`.
-- `env*.sustain`: schema domain says `kind: continuous [0,1]` linear. But Serum interprets it as dB internally
-  and displays it as `-12.0dB` (corresponding to `~0.251` linear) when written `0.5`.
+- `env*.sustain`: schema domain says `kind: continuous [0,1]` linear. Written `0.5`, Serum displays `-12.0dB` /
+  `25%` (~0.251). The stored-value -> display curve is NOT yet known (dB, squared, or other); unverified.
 
 For most candidates this is fine: the raw dict slot genuinely holds the value Serum reads. But for a subset,
 there is a genuine mismatch between what the schema claims the encoding is and what Serum's native preset

@@ -1,87 +1,44 @@
-"""Dump get_parameter_text for all parameters from VERIFY_REFERENCE_FULL.SerumPreset.
+"""Step 2 of the DIRECT_UI speed-up: read Serum's OWN display text for every host parameter of a preset, no clicking.
 
-Usage:
-  python dump_reference_parameter_text.py [preset_path] [output_json_path]
+    python dump_reference_parameter_text.py [preset] [out.json]
+    (defaults: giant_verify_out/VERIFY_REFERENCE_FULL.SerumPreset -> giant_verify_out/reference_parameter_text.json)
 
-Loads the reference preset through serum_backend.py, calls get_parameter_text for every
-parameter in the backend's parameter list, and writes a JSON file mapping atlas_id -> display_text.
-
-Output format:
-  {
-    "preset_file": "/path/to/VERIFY_REFERENCE_FULL.SerumPreset",
-    "parameters": {
-      "atlas_id": "display_text_label",
-      ...
-    },
-    "missing_parameters": ["atlas_id", ...]  // atlas IDs with no get_parameter_text result
-  }
+Windows / DawDreamer machine only (imports serum_backend, i.e. the real Serum VST3). The preset's body goes through the
+exact load path the campaign used (SerumBackend.load), then every host parameter's get_parameter_text is recorded, plus
+the same dump for the plain init body so each parameter's change from init is visible. Host names are Serum's own
+(e.g. 'Env 1 Sustain'); mapping them to atlas_ids happens offline, not here.
 """
 import json
-import sys
 import os
+import sys
 
-# Adjust path as needed for serum_backend import
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-sys.path.insert(0, os.path.join(HERE, '..'))
+from preset_build import BASE, unpack_file  # noqa: E402
+import serum_backend as sb  # noqa: E402
 
-try:
-    from serum_backend import SerumBackend
-except ImportError:
-    print("ERROR: serum_backend module not found. Ensure it is in the path.")
-    print(f"Current path: {sys.path}")
-    sys.exit(1)
+SKIP = ("CC", "Pitch Bend Chan", "Aftertouch", "Mod ")
 
 
-def main(preset_path, output_path):
-    """Load preset and dump parameter display text."""
-    if not os.path.exists(preset_path):
-        print(f"ERROR: Preset not found: {preset_path}")
-        sys.exit(1)
-
-    print(f"Loading {preset_path}...")
-    backend = SerumBackend()
-    backend.load(preset_path)
-
-    # Get all available parameters
-    all_params = backend.list_parameters()
-
-    output = {
-        "preset_file": os.path.abspath(preset_path),
-        "parameters": {},
-        "missing_parameters": [],
-    }
-
-    print(f"Found {len(all_params)} parameters, dumping display text...")
-
-    for param_id in sorted(all_params.keys()):
-        try:
-            display_text = backend.get_parameter_text(param_id)
-            if display_text is not None:
-                output["parameters"][param_id] = display_text
-            else:
-                output["missing_parameters"].append(param_id)
-        except Exception as e:
-            print(f"  WARNING: {param_id} failed: {e}")
-            output["missing_parameters"].append(param_id)
-
-    print(f"Successfully retrieved text for {len(output['parameters'])} parameters.")
-    print(f"Missing/failed: {len(output['missing_parameters'])}")
-
-    with open(output_path, 'w') as f:
-        json.dump(output, f, indent=2)
-
-    print(f"Output written to {output_path}")
+def host_texts(backend):
+    syn = backend.syn
+    return {d["name"]: {"index": d["index"], "text": syn.get_parameter_text(d["index"]), "value": syn.get_parameter(d["index"])}
+            for d in syn.get_parameters_description() if not d["name"].startswith(SKIP)}
 
 
-if __name__ == '__main__':
-    if len(sys.argv) < 3:
-        print("Usage: python dump_reference_parameter_text.py <preset_path> <output_path>")
-        print()
-        print("Example:")
-        print("  python dump_reference_parameter_text.py \\")
-        print("    giant_verify_out/VERIFY_REFERENCE_FULL.SerumPreset \\")
-        print("    giant_verify_out/reference_parameter_text.json")
-        sys.exit(1)
+def main(preset_path, out_path):
+    backend = sb.SerumBackend({})         # cfg is only used for rendering bands, which this script never does
+    backend.load(BASE.data)
+    init = host_texts(backend)
+    backend.load(unpack_file(preset_path).data)
+    ref = host_texts(backend)
+    changed = sorted(n for n in ref if ref[n]["text"] != init.get(n, {}).get("text"))
+    json.dump({"preset_file": os.path.abspath(preset_path), "n_host_params": len(ref), "changed_from_init": changed,
+               "reference": ref, "init": init}, open(out_path, "w"), indent=1)
+    print("%d host params, %d display differently from init -> %s" % (len(ref), len(changed), out_path))
 
-    main(sys.argv[1], sys.argv[2])
+
+if __name__ == "__main__":
+    a = sys.argv[1:] + [None] * 2
+    main(a[0] or os.path.join(HERE, "giant_verify_out", "VERIFY_REFERENCE_FULL.SerumPreset"),
+         a[1] or os.path.join(HERE, "giant_verify_out", "reference_parameter_text.json"))
