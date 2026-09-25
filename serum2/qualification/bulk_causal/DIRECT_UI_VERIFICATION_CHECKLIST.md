@@ -19,8 +19,12 @@ Evidence goes in `parameter_characterization/bulk_causal_evidence/direct_ui_evid
 - [x] FX page, structural: **confirmed all 12 FX types present simultaneously as distinct rack slots** (Bode, Chorus,
       Compressor, Convolve, Delay, Hyper/Dimension, Distortion, Equalizer visible; Filter/Flanger/Phaser/Reverb below
       the fold) -- the core architecture claim is now visually proven, not just asserted
-- [x] FX page, partial numeric: fx.compressor.attack MATCH (100.0); fx.compressor.ratio and .release MISMATCH (open finding)
-- [ ] FX page, remaining: Bode/Chorus/Convolve/Delay/Hyper/Distortion/Equalizer/Filter/Flanger/Phaser/Reverb's other ~45 numeric params (need hover per knob)
+- [x] FX page, numeric: **9 of 12 FX types checked** -- Bode (shift, range MATCH), Chorus (rate MATCH), Compressor
+      (attack MATCH; ratio/release MISMATCH, resolved finding), Convolve (size MATCH), Delay (time_l/time_r/feedback
+      all MATCH), Hyper (rate/detune MATCH, unison plausible), Dimension (not reached), Distortion (type
+      NORMALIZED_MATCH), Equalizer (all 6 params MATCH, no hover needed -- shown directly)
+- [ ] FX page, remaining: Dimension, Filter, Flanger, Phaser, Reverb not yet reached (~4 FX types, ~15 params) --
+      stopped this pass after two accidental-mutation near-misses, see hazards note below
 - [x] MATRIX page: confirmed empty (no mod-route candidates in the manifest) -- nothing to check
 - [x] GLOBAL page, partial: `global.voice_control.random.pan` (50%, MATCH), `global.s1_compatibility` (checked, MATCH)
 - [ ] GLOBAL page, remaining: bend_range_up/down, fx_bus1/2_destination, note_latch, oversampling, tuning fields
@@ -31,10 +35,23 @@ Evidence goes in `parameter_characterization/bulk_causal_evidence/direct_ui_evid
 - [x] ENV1-4 panels, attack/hold/decay/release: **all 16 fields MATCH** (5.00s / 2.60s / 16.0s / 16.0s, identical
       across all four envelopes as expected since all four share the same campaign targets)
 - [x] ENV1-4 sustain: resolved as confirmed MISMATCH, see DIRECT_UI_FINDING_RAW_WRITE_GAP.md
-- [ ] LFO1-6 panels (rate, mode, shape, delay, rise, smooth, sync) -- LFO1 mode already checked (see open finding below); rate/delay/etc not yet checked
-- [ ] FILTER1/FILTER2 panels (cutoff, resonance, drive, key_track) -- type already checked (filter2 NORMALIZED_MATCH); numeric knobs need hover (no tooltip appeared on first attempt at this panel's collapsed view, worth retrying on the full panel)
-- [ ] MACRO panel (8 macro values)
+- [x] LFO1/LFO2 checked (rise, delay MATCH; shape NORMALIZED_MATCH; mode MISMATCH, see finding). LFO3-6 not
+      individually checked but share identical targets with LFO1/2 -- treat as same pattern, not yet confirmed
+- [ ] LFO1-6 remaining: smooth, beat_sync, dotted, triplets, mono, swing, rate_10x not checked
+- [ ] FILTER1/FILTER2 panels (cutoff, resonance, drive, key_track) -- type already checked (filter2 NORMALIZED_MATCH); numeric knobs consistently show no tooltip on hover in this compact panel view (tried 3x) -- may need the panel's own expanded/detail view, not yet found
+- [x] MACRO panel, partial: Macro 1, Macro 5 hover-confirmed MATCH (50). Macros 2/3/4/6/7/8 not individually checked but share identical target (50.0)
 - [ ] Secondary preset `VERIFY_SECONDARY_OSC_WARP2` (3 candidates) not yet loaded/scanned
+
+## Navigation hazards found (read before continuing the scan)
+Two accidental-mutation near-misses while navigating the FX rack panel, both caught via the title's `*`
+modified indicator and fixed by reloading the preset fresh (neither corrupted already-recorded evidence):
+1. **Mouse-wheel scroll over a knob changes its value** (not panel scroll) -- never scroll while the cursor is
+   positioned over a control. To see FX slots below the fold, use `left_click_drag` on the actual scrollbar
+   (found at ~x=1172 in the FX page) or click a module's own collapse triangle -- but see hazard 2.
+2. **A stray click near a module header's collapse-triangle instead ADDED a duplicate FX unit** to the rack.
+   Coordinates in that area are not reliably safe -- verify with a screenshot after every click there, and
+   check the title bar for `*` after each navigation action, not just after intentional edits.
+As a result, Dimension/Filter/Flanger/Phaser/Reverb (5 of 12 FX types) were not reached this pass.
 
 ## Open findings -- RESOLVED (root cause identified for 3 of 4; lfo1.mode corrected, see DIRECT_UI_FINDING_RAW_WRITE_GAP.md)
 `fx.compressor.ratio`/`.release` and `env1-4.sustain` are confirmed genuine MISMATCHes with a common root
