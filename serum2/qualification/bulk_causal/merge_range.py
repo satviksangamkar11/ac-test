@@ -19,7 +19,8 @@ def close(a, b):
 
 def analyse(rec, rows):
     """rec: causal range record; rows: [{written, kind, displayed_value}] for the same test."""
-    stored = {o["written"]: o["state_value"] for o in rec["observations"].values() if o["written"] is not None}
+    obs = rec["observations"].values() if "observations" in rec else rec["values"]   # legacy per-test record | bulk record
+    stored = {o["written"]: o["state_value"] for o in obs if o["written"] is not None}
     ref = next((r for r in rows if r["kind"] == "reference"), None)
     pts = sorted([r for r in rows if r["kind"] != "reference"], key=lambda r: r["written"])
     disp = {r["written"]: r["displayed_value"] for r in pts}
@@ -44,7 +45,7 @@ def analyse(rec, rows):
 
 
 def main(causal, plan, gui, out):
-    recs = {r["id"]: r for r in json.load(open(causal))["records"]}
+    recs = {r.get("id") or r["atlas_id"]: r for r in json.load(open(causal))["records"]}   # legacy: test id; bulk: atlas id
     by_n = {p["n"]: p for p in json.load(open(plan))["presets"]}
     tests = {}
     for o in json.load(open(gui))["observations"]:

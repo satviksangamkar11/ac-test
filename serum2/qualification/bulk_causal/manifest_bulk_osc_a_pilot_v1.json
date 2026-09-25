@@ -1,0 +1,313 @@
+{
+ "version": 2,
+ "kind": "bulk_context",
+ "note": 48,
+ "render_sec": 1.0,
+ "bands": [
+  20,
+  200,
+  800,
+  3000,
+  8000,
+  20000
+ ],
+ "min_noise_floor_db": 0.5,
+ "session_size": 20,
+ "contexts": {
+  "OSC_A": {
+   "preset_name": "QUAL_OSC_A",
+   "fx": []
+  }
+ },
+ "parameters": [
+  {
+   "atlas_id": "oscA.enabled",
+   "context": "OSC_A",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamEnable"
+    ]
+   },
+   "domain": {
+    "kind": "bool"
+   },
+   "note": "schema default False, but the init preset plays OSC A: state readback decides"
+  },
+  {
+   "atlas_id": "oscA.octave",
+   "context": "OSC_A",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamOctave"
+    ]
+   },
+   "domain": {
+    "kind": "int",
+    "min": -4,
+    "max": 4,
+    "default": 0.0
+   }
+  },
+  {
+   "atlas_id": "oscA.semitone",
+   "context": "OSC_A",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamPitch"
+    ]
+   },
+   "domain": {
+    "kind": "int",
+    "min": -12,
+    "max": 12,
+    "default": 0.0
+   }
+  },
+  {
+   "atlas_id": "oscA.coarse_pitch",
+   "context": "OSC_A",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamCoarsePit"
+    ]
+   },
+   "domain": {
+    "kind": "int",
+    "min": -72,
+    "max": 72,
+    "default": 0.0
+   }
+  },
+  {
+   "atlas_id": "oscA.fine",
+   "context": "OSC_A",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamFine"
+    ]
+   },
+   "domain": {
+    "kind": "signed",
+    "min": -80.0,
+    "max": 80.0,
+    "default": 0.0
+   }
+  },
+  {
+   "atlas_id": "oscA.level",
+   "context": "OSC_A",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamVolume"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0,
+    "default": 0.75
+   }
+  },
+  {
+   "atlas_id": "oscA.pan",
+   "context": "OSC_A",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamPan"
+    ]
+   },
+   "domain": {
+    "kind": "signed",
+    "min": -50.0,
+    "max": 50.0,
+    "default": 0.0
+   }
+  },
+  {
+   "atlas_id": "oscA.unison",
+   "context": "OSC_A",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamUnison"
+    ]
+   },
+   "domain": {
+    "kind": "int",
+    "min": 1,
+    "max": 16,
+    "default": 1.0
+   }
+  },
+  {
+   "atlas_id": "oscA.detune",
+   "context": "OSC_A",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamDetune"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0,
+    "default": 0.0
+   }
+  },
+  {
+   "atlas_id": "oscA.unison_width",
+   "context": "OSC_A",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamDetuneWid"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0,
+    "default": 0.0
+   }
+  },
+  {
+   "atlas_id": "oscA.unison_stereo",
+   "context": "OSC_A",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamUnisonStereo"
+    ]
+   },
+   "domain": {
+    "kind": "signed",
+    "min": -100.0,
+    "max": 100.0,
+    "default": 100.0
+   }
+  },
+  {
+   "atlas_id": "oscA.pitch_track",
+   "context": "OSC_A",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamPitchTrack"
+    ]
+   },
+   "domain": {
+    "kind": "bool",
+    "default": 1.0
+   }
+  },
+  {
+   "atlas_id": "oscA.wt_pos",
+   "context": "OSC_A",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "WTOsc0",
+     "plainParams",
+     "kParamTablePos"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 256.0,
+    "default": 0.0
+   },
+   "note": "WTOsc0 sub-dict (nested container)"
+  },
+  {
+   "atlas_id": "oscA.warp",
+   "context": "OSC_A",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "WTOsc0",
+     "plainParams",
+     "kParamWarp"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0,
+    "default": 0.0
+   }
+  },
+  {
+   "atlas_id": "oscA.initial_phase",
+   "context": "OSC_A",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "WTOsc0",
+     "plainParams",
+     "kParamInitialPhase"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 360.0,
+    "default": 0.0
+   }
+  },
+  {
+   "atlas_id": "oscA.random_phase",
+   "context": "OSC_A",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "WTOsc0",
+     "plainParams",
+     "kParamRandomPhase"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0,
+    "default": 0.0
+   }
+  }
+ ]
+}

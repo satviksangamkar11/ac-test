@@ -1,0 +1,341 @@
+{
+ "sources": {
+  "causal": "parameter_characterization/bulk_causal_evidence/bulk_osc_a_pilot_v1.json",
+  "gui": "parameter_characterization/bulk_causal_evidence/gui_osc_evidence_v1.json"
+ },
+ "tests": {
+  "oscA.enabled": {
+   "atlas_id": "oscA.enabled",
+   "candidate": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamEnable"
+    ],
+    "kparam": "kParamEnable"
+   },
+   "default_display": 1,
+   "unit": "",
+   "effective_display_range": [
+    0,
+    1
+   ],
+   "violations": [],
+   "status": "DISPLAY_CONSISTENT",
+   "display_map": [
+    {
+     "written": 0.0,
+     "kind": "value",
+     "shows": 0
+    },
+    {
+     "written": 1.0,
+     "kind": "value",
+     "shows": 1
+    },
+    {
+     "written": 2.0,
+     "kind": "probe",
+     "shows": 1
+    }
+   ]
+  },
+  "oscA.octave": {
+   "atlas_id": "oscA.octave",
+   "candidate": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamOctave"
+    ],
+    "kparam": "kParamOctave"
+   },
+   "default_display": 0,
+   "unit": "",
+   "effective_display_range": [
+    -4,
+    4
+   ],
+   "violations": [],
+   "status": "DISPLAY_CONSISTENT",
+   "display_map": [
+    {
+     "written": -4.0,
+     "kind": "value",
+     "shows": -4
+    },
+    {
+     "written": 4.0,
+     "kind": "value",
+     "shows": 4
+    },
+    {
+     "written": 5.0,
+     "kind": "probe",
+     "shows": 4
+    }
+   ]
+  },
+  "oscA.semitone": {
+   "atlas_id": "oscA.semitone",
+   "candidate": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamPitch"
+    ],
+    "kparam": "kParamPitch"
+   },
+   "default_display": 0,
+   "unit": "",
+   "effective_display_range": [
+    -12,
+    12
+   ],
+   "violations": [],
+   "status": "DISPLAY_CONSISTENT",
+   "display_map": [
+    {
+     "written": -12.0,
+     "kind": "value",
+     "shows": -12
+    },
+    {
+     "written": 12.0,
+     "kind": "value",
+     "shows": 12
+    },
+    {
+     "written": 13.0,
+     "kind": "probe",
+     "shows": 12
+    }
+   ]
+  },
+  "oscA.coarse_pitch": {
+   "atlas_id": "oscA.coarse_pitch",
+   "candidate": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamCoarsePit"
+    ],
+    "kparam": "kParamCoarsePit"
+   },
+   "default_display": 0,
+   "unit": "",
+   "effective_display_range": [
+    -64,
+    64
+   ],
+   "violations": [],
+   "status": "DISPLAY_CONSISTENT",
+   "display_map": [
+    {
+     "written": -72.0,
+     "kind": "value",
+     "shows": -64
+    },
+    {
+     "written": 72.0,
+     "kind": "value",
+     "shows": 64
+    },
+    {
+     "written": 73.0,
+     "kind": "probe",
+     "shows": 64
+    }
+   ]
+  },
+  "oscA.fine": {
+   "atlas_id": "oscA.fine",
+   "candidate": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamFine"
+    ],
+    "kparam": "kParamFine"
+   },
+   "default_display": 0,
+   "unit": "",
+   "effective_display_range": [
+    -96,
+    100
+   ],
+   "violations": [],
+   "status": "DISPLAY_CONSISTENT",
+   "display_map": [
+    {
+     "written": -96.0,
+     "kind": "probe",
+     "shows": -96
+    },
+    {
+     "written": -80.0,
+     "kind": "value",
+     "shows": -80
+    },
+    {
+     "written": 80.0,
+     "kind": "value",
+     "shows": 80
+    },
+    {
+     "written": 96.0,
+     "kind": "probe",
+     "shows": 96
+    },
+    {
+     "written": 400.0,
+     "kind": "probe",
+     "shows": 100
+    }
+   ]
+  },
+  "oscA.unison": {
+   "atlas_id": "oscA.unison",
+   "candidate": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamUnison"
+    ],
+    "kparam": "kParamUnison"
+   },
+   "default_display": 1,
+   "unit": "",
+   "effective_display_range": [
+    1,
+    16
+   ],
+   "violations": [],
+   "status": "DISPLAY_CONSISTENT",
+   "display_map": [
+    {
+     "written": 0.0,
+     "kind": "probe",
+     "shows": 1
+    },
+    {
+     "written": 1.0,
+     "kind": "value",
+     "shows": 1
+    },
+    {
+     "written": 16.0,
+     "kind": "value",
+     "shows": 16
+    },
+    {
+     "written": 17.0,
+     "kind": "probe",
+     "shows": 16
+    }
+   ]
+  },
+  "oscA.initial_phase": {
+   "atlas_id": "oscA.initial_phase",
+   "candidate": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "WTOsc0",
+     "plainParams",
+     "kParamInitialPhase"
+    ],
+    "kparam": "kParamInitialPhase"
+   },
+   "default_display": 180,
+   "unit": "",
+   "effective_display_range": [
+    0,
+    360
+   ],
+   "violations": [],
+   "status": "DISPLAY_CONSISTENT",
+   "display_map": [
+    {
+     "written": -36.0,
+     "kind": "probe",
+     "shows": 0
+    },
+    {
+     "written": 0.0,
+     "kind": "value",
+     "shows": 0
+    },
+    {
+     "written": 360.0,
+     "kind": "value",
+     "shows": 360
+    },
+    {
+     "written": 396.0,
+     "kind": "probe",
+     "shows": 360
+    },
+    {
+     "written": 1080.0,
+     "kind": "probe",
+     "shows": 360
+    }
+   ]
+  },
+  "oscA.random_phase": {
+   "atlas_id": "oscA.random_phase",
+   "candidate": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "WTOsc0",
+     "plainParams",
+     "kParamRandomPhase"
+    ],
+    "kparam": "kParamRandomPhase"
+   },
+   "default_display": 100,
+   "unit": "",
+   "effective_display_range": [
+    0,
+    100
+   ],
+   "violations": [],
+   "status": "DISPLAY_CONSISTENT",
+   "display_map": [
+    {
+     "written": -10.0,
+     "kind": "probe",
+     "shows": 0
+    },
+    {
+     "written": 0.0,
+     "kind": "value",
+     "shows": 0
+    },
+    {
+     "written": 100.0,
+     "kind": "value",
+     "shows": 100
+    },
+    {
+     "written": 110.0,
+     "kind": "probe",
+     "shows": 100
+    },
+    {
+     "written": 300.0,
+     "kind": "probe",
+     "shows": 100
+    }
+   ]
+  }
+ }
+}

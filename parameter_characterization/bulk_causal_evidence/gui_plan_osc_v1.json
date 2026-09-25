@@ -1,0 +1,602 @@
+{
+ "manifest": "D:\\ableton claude final best\\serum2\\qualification\\bulk_causal\\manifest_bulk_osc_a_pilot_v1.json",
+ "presets": [
+  {
+   "n": 1,
+   "preset": "GUI01_kParamEnable__ref",
+   "test": "oscA.enabled",
+   "atlas_id": "oscA.enabled",
+   "module": "OSC_A",
+   "kparam": "kParamEnable",
+   "written": null,
+   "kind": "reference",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamEnable"
+   ]
+  },
+  {
+   "n": 2,
+   "preset": "GUI02_kParamEnable__0",
+   "test": "oscA.enabled",
+   "atlas_id": "oscA.enabled",
+   "module": "OSC_A",
+   "kparam": "kParamEnable",
+   "written": 0.0,
+   "kind": "value",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamEnable"
+   ]
+  },
+  {
+   "n": 3,
+   "preset": "GUI03_kParamEnable__1",
+   "test": "oscA.enabled",
+   "atlas_id": "oscA.enabled",
+   "module": "OSC_A",
+   "kparam": "kParamEnable",
+   "written": 1.0,
+   "kind": "value",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamEnable"
+   ]
+  },
+  {
+   "n": 4,
+   "preset": "GUI04_kParamEnable__2_probe",
+   "test": "oscA.enabled",
+   "atlas_id": "oscA.enabled",
+   "module": "OSC_A",
+   "kparam": "kParamEnable",
+   "written": 2.0,
+   "kind": "probe",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamEnable"
+   ]
+  },
+  {
+   "n": 5,
+   "preset": "GUI05_kParamOctave__ref",
+   "test": "oscA.octave",
+   "atlas_id": "oscA.octave",
+   "module": "OSC_A",
+   "kparam": "kParamOctave",
+   "written": null,
+   "kind": "reference",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamOctave"
+   ]
+  },
+  {
+   "n": 6,
+   "preset": "GUI06_kParamOctave__m4",
+   "test": "oscA.octave",
+   "atlas_id": "oscA.octave",
+   "module": "OSC_A",
+   "kparam": "kParamOctave",
+   "written": -4.0,
+   "kind": "value",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamOctave"
+   ]
+  },
+  {
+   "n": 7,
+   "preset": "GUI07_kParamOctave__4",
+   "test": "oscA.octave",
+   "atlas_id": "oscA.octave",
+   "module": "OSC_A",
+   "kparam": "kParamOctave",
+   "written": 4.0,
+   "kind": "value",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamOctave"
+   ]
+  },
+  {
+   "n": 8,
+   "preset": "GUI08_kParamOctave__5_probe",
+   "test": "oscA.octave",
+   "atlas_id": "oscA.octave",
+   "module": "OSC_A",
+   "kparam": "kParamOctave",
+   "written": 5.0,
+   "kind": "probe",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamOctave"
+   ]
+  },
+  {
+   "n": 9,
+   "preset": "GUI09_kParamPitch__ref",
+   "test": "oscA.semitone",
+   "atlas_id": "oscA.semitone",
+   "module": "OSC_A",
+   "kparam": "kParamPitch",
+   "written": null,
+   "kind": "reference",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamPitch"
+   ]
+  },
+  {
+   "n": 10,
+   "preset": "GUI10_kParamPitch__m12",
+   "test": "oscA.semitone",
+   "atlas_id": "oscA.semitone",
+   "module": "OSC_A",
+   "kparam": "kParamPitch",
+   "written": -12.0,
+   "kind": "value",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamPitch"
+   ]
+  },
+  {
+   "n": 11,
+   "preset": "GUI11_kParamPitch__12",
+   "test": "oscA.semitone",
+   "atlas_id": "oscA.semitone",
+   "module": "OSC_A",
+   "kparam": "kParamPitch",
+   "written": 12.0,
+   "kind": "value",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamPitch"
+   ]
+  },
+  {
+   "n": 12,
+   "preset": "GUI12_kParamPitch__13_probe",
+   "test": "oscA.semitone",
+   "atlas_id": "oscA.semitone",
+   "module": "OSC_A",
+   "kparam": "kParamPitch",
+   "written": 13.0,
+   "kind": "probe",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamPitch"
+   ]
+  },
+  {
+   "n": 13,
+   "preset": "GUI13_kParamCoarsePit__ref",
+   "test": "oscA.coarse_pitch",
+   "atlas_id": "oscA.coarse_pitch",
+   "module": "OSC_A",
+   "kparam": "kParamCoarsePit",
+   "written": null,
+   "kind": "reference",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamCoarsePit"
+   ]
+  },
+  {
+   "n": 14,
+   "preset": "GUI14_kParamCoarsePit__m72",
+   "test": "oscA.coarse_pitch",
+   "atlas_id": "oscA.coarse_pitch",
+   "module": "OSC_A",
+   "kparam": "kParamCoarsePit",
+   "written": -72.0,
+   "kind": "value",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamCoarsePit"
+   ]
+  },
+  {
+   "n": 15,
+   "preset": "GUI15_kParamCoarsePit__72",
+   "test": "oscA.coarse_pitch",
+   "atlas_id": "oscA.coarse_pitch",
+   "module": "OSC_A",
+   "kparam": "kParamCoarsePit",
+   "written": 72.0,
+   "kind": "value",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamCoarsePit"
+   ]
+  },
+  {
+   "n": 16,
+   "preset": "GUI16_kParamCoarsePit__73_probe",
+   "test": "oscA.coarse_pitch",
+   "atlas_id": "oscA.coarse_pitch",
+   "module": "OSC_A",
+   "kparam": "kParamCoarsePit",
+   "written": 73.0,
+   "kind": "probe",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamCoarsePit"
+   ]
+  },
+  {
+   "n": 17,
+   "preset": "GUI17_kParamFine__ref",
+   "test": "oscA.fine",
+   "atlas_id": "oscA.fine",
+   "module": "OSC_A",
+   "kparam": "kParamFine",
+   "written": null,
+   "kind": "reference",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamFine"
+   ]
+  },
+  {
+   "n": 18,
+   "preset": "GUI18_kParamFine__m80",
+   "test": "oscA.fine",
+   "atlas_id": "oscA.fine",
+   "module": "OSC_A",
+   "kparam": "kParamFine",
+   "written": -80.0,
+   "kind": "value",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamFine"
+   ]
+  },
+  {
+   "n": 19,
+   "preset": "GUI19_kParamFine__80",
+   "test": "oscA.fine",
+   "atlas_id": "oscA.fine",
+   "module": "OSC_A",
+   "kparam": "kParamFine",
+   "written": 80.0,
+   "kind": "value",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamFine"
+   ]
+  },
+  {
+   "n": 20,
+   "preset": "GUI20_kParamFine__96_probe",
+   "test": "oscA.fine",
+   "atlas_id": "oscA.fine",
+   "module": "OSC_A",
+   "kparam": "kParamFine",
+   "written": 96.0,
+   "kind": "probe",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamFine"
+   ]
+  },
+  {
+   "n": 21,
+   "preset": "GUI21_kParamFine__400_probe",
+   "test": "oscA.fine",
+   "atlas_id": "oscA.fine",
+   "module": "OSC_A",
+   "kparam": "kParamFine",
+   "written": 400.0,
+   "kind": "probe",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamFine"
+   ]
+  },
+  {
+   "n": 22,
+   "preset": "GUI22_kParamFine__m96_probe",
+   "test": "oscA.fine",
+   "atlas_id": "oscA.fine",
+   "module": "OSC_A",
+   "kparam": "kParamFine",
+   "written": -96.0,
+   "kind": "probe",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamFine"
+   ]
+  },
+  {
+   "n": 23,
+   "preset": "GUI23_kParamUnison__ref",
+   "test": "oscA.unison",
+   "atlas_id": "oscA.unison",
+   "module": "OSC_A",
+   "kparam": "kParamUnison",
+   "written": null,
+   "kind": "reference",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamUnison"
+   ]
+  },
+  {
+   "n": 24,
+   "preset": "GUI24_kParamUnison__1",
+   "test": "oscA.unison",
+   "atlas_id": "oscA.unison",
+   "module": "OSC_A",
+   "kparam": "kParamUnison",
+   "written": 1.0,
+   "kind": "value",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamUnison"
+   ]
+  },
+  {
+   "n": 25,
+   "preset": "GUI25_kParamUnison__16",
+   "test": "oscA.unison",
+   "atlas_id": "oscA.unison",
+   "module": "OSC_A",
+   "kparam": "kParamUnison",
+   "written": 16.0,
+   "kind": "value",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamUnison"
+   ]
+  },
+  {
+   "n": 26,
+   "preset": "GUI26_kParamUnison__17_probe",
+   "test": "oscA.unison",
+   "atlas_id": "oscA.unison",
+   "module": "OSC_A",
+   "kparam": "kParamUnison",
+   "written": 17.0,
+   "kind": "probe",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamUnison"
+   ]
+  },
+  {
+   "n": 27,
+   "preset": "GUI27_kParamUnison__0_probe",
+   "test": "oscA.unison",
+   "atlas_id": "oscA.unison",
+   "module": "OSC_A",
+   "kparam": "kParamUnison",
+   "written": 0.0,
+   "kind": "probe",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamUnison"
+   ]
+  },
+  {
+   "n": 28,
+   "preset": "GUI28_kParamInitialPhase__ref",
+   "test": "oscA.initial_phase",
+   "atlas_id": "oscA.initial_phase",
+   "module": "OSC_A",
+   "kparam": "kParamInitialPhase",
+   "written": null,
+   "kind": "reference",
+   "raw_path": [
+    "Oscillator0",
+    "WTOsc0",
+    "plainParams",
+    "kParamInitialPhase"
+   ]
+  },
+  {
+   "n": 29,
+   "preset": "GUI29_kParamInitialPhase__0",
+   "test": "oscA.initial_phase",
+   "atlas_id": "oscA.initial_phase",
+   "module": "OSC_A",
+   "kparam": "kParamInitialPhase",
+   "written": 0.0,
+   "kind": "value",
+   "raw_path": [
+    "Oscillator0",
+    "WTOsc0",
+    "plainParams",
+    "kParamInitialPhase"
+   ]
+  },
+  {
+   "n": 30,
+   "preset": "GUI30_kParamInitialPhase__360",
+   "test": "oscA.initial_phase",
+   "atlas_id": "oscA.initial_phase",
+   "module": "OSC_A",
+   "kparam": "kParamInitialPhase",
+   "written": 360.0,
+   "kind": "value",
+   "raw_path": [
+    "Oscillator0",
+    "WTOsc0",
+    "plainParams",
+    "kParamInitialPhase"
+   ]
+  },
+  {
+   "n": 31,
+   "preset": "GUI31_kParamInitialPhase__396_probe",
+   "test": "oscA.initial_phase",
+   "atlas_id": "oscA.initial_phase",
+   "module": "OSC_A",
+   "kparam": "kParamInitialPhase",
+   "written": 396.0,
+   "kind": "probe",
+   "raw_path": [
+    "Oscillator0",
+    "WTOsc0",
+    "plainParams",
+    "kParamInitialPhase"
+   ]
+  },
+  {
+   "n": 32,
+   "preset": "GUI32_kParamInitialPhase__1080_probe",
+   "test": "oscA.initial_phase",
+   "atlas_id": "oscA.initial_phase",
+   "module": "OSC_A",
+   "kparam": "kParamInitialPhase",
+   "written": 1080.0,
+   "kind": "probe",
+   "raw_path": [
+    "Oscillator0",
+    "WTOsc0",
+    "plainParams",
+    "kParamInitialPhase"
+   ]
+  },
+  {
+   "n": 33,
+   "preset": "GUI33_kParamInitialPhase__m36_probe",
+   "test": "oscA.initial_phase",
+   "atlas_id": "oscA.initial_phase",
+   "module": "OSC_A",
+   "kparam": "kParamInitialPhase",
+   "written": -36.0,
+   "kind": "probe",
+   "raw_path": [
+    "Oscillator0",
+    "WTOsc0",
+    "plainParams",
+    "kParamInitialPhase"
+   ]
+  },
+  {
+   "n": 34,
+   "preset": "GUI34_kParamRandomPhase__ref",
+   "test": "oscA.random_phase",
+   "atlas_id": "oscA.random_phase",
+   "module": "OSC_A",
+   "kparam": "kParamRandomPhase",
+   "written": null,
+   "kind": "reference",
+   "raw_path": [
+    "Oscillator0",
+    "WTOsc0",
+    "plainParams",
+    "kParamRandomPhase"
+   ]
+  },
+  {
+   "n": 35,
+   "preset": "GUI35_kParamRandomPhase__0",
+   "test": "oscA.random_phase",
+   "atlas_id": "oscA.random_phase",
+   "module": "OSC_A",
+   "kparam": "kParamRandomPhase",
+   "written": 0.0,
+   "kind": "value",
+   "raw_path": [
+    "Oscillator0",
+    "WTOsc0",
+    "plainParams",
+    "kParamRandomPhase"
+   ]
+  },
+  {
+   "n": 36,
+   "preset": "GUI36_kParamRandomPhase__100",
+   "test": "oscA.random_phase",
+   "atlas_id": "oscA.random_phase",
+   "module": "OSC_A",
+   "kparam": "kParamRandomPhase",
+   "written": 100.0,
+   "kind": "value",
+   "raw_path": [
+    "Oscillator0",
+    "WTOsc0",
+    "plainParams",
+    "kParamRandomPhase"
+   ]
+  },
+  {
+   "n": 37,
+   "preset": "GUI37_kParamRandomPhase__110_probe",
+   "test": "oscA.random_phase",
+   "atlas_id": "oscA.random_phase",
+   "module": "OSC_A",
+   "kparam": "kParamRandomPhase",
+   "written": 110.0,
+   "kind": "probe",
+   "raw_path": [
+    "Oscillator0",
+    "WTOsc0",
+    "plainParams",
+    "kParamRandomPhase"
+   ]
+  },
+  {
+   "n": 38,
+   "preset": "GUI38_kParamRandomPhase__300_probe",
+   "test": "oscA.random_phase",
+   "atlas_id": "oscA.random_phase",
+   "module": "OSC_A",
+   "kparam": "kParamRandomPhase",
+   "written": 300.0,
+   "kind": "probe",
+   "raw_path": [
+    "Oscillator0",
+    "WTOsc0",
+    "plainParams",
+    "kParamRandomPhase"
+   ]
+  },
+  {
+   "n": 39,
+   "preset": "GUI39_kParamRandomPhase__m10_probe",
+   "test": "oscA.random_phase",
+   "atlas_id": "oscA.random_phase",
+   "module": "OSC_A",
+   "kparam": "kParamRandomPhase",
+   "written": -10.0,
+   "kind": "probe",
+   "raw_path": [
+    "Oscillator0",
+    "WTOsc0",
+    "plainParams",
+    "kParamRandomPhase"
+   ]
+  }
+ ]
+}

@@ -116,7 +116,10 @@ def test_pilot_is_parameter_by_parameter_inside_one_context():
     assert h["persistent_presets_written"] == 1 and len(h["context_presets"]) == 1
     assert h["parameters"] >= 10 and h["values_observed"] >= 80 and h["sessions"] == 1 and h["context_loads"] == 1
     assert h["state_loads"] > 5 * h["persistent_presets_written"] * h["parameters"] / 5   # many loads, still one preset
-    assert not [p for p in glob.glob(str(HERE / "**" / "*.SerumPreset"), recursive=True) if not p.endswith("QUAL_FX_EQ.SerumPreset")]
+    # the only .SerumPreset files under bulk_causal/ are the one-per-context presets (never one per parameter/value)
+    ctx_names = {c.get("preset_name", n) for f in HERE.glob("manifest_bulk_*.json") for n, c in json.loads(f.read_text())["contexts"].items()}
+    found = {Path(p).stem for p in glob.glob(str(HERE / "**" / "*.SerumPreset"), recursive=True)}
+    assert found == ctx_names and all(Path(p).parent.name == "contexts" for p in glob.glob(str(HERE / "**" / "*.SerumPreset"), recursive=True))
     for r in d["records"]:
         assert r["restoration"]["ok"], r["candidate"]["kparam"]
         assert all(v["file_roundtrip"] for v in r["values"])
@@ -134,3 +137,54 @@ def test_historical_evidence_is_still_present():
     v2 = json.loads((ED / "fx_verify_v2.json").read_text())["records"]
     assert {r["id"]: r["status"] for r in v1}["eq_right_type"] == "FAILED" and {r["id"]: r["status"] for r in v2}["eq_right_type"] == "PROVEN"
     assert len(json.loads((ED / "fx_range_v1.json").read_text())["records"]) == 18
+
+
+# ------------------------------------------------------------------ repeatability + second family ---------------------------
+from repeatability import AUDIO_TOL_DB, compare as repeat  # noqa: E402
+
+
+def test_repeatability_contract_detects_each_kind_of_drift():
+    base = {"records": [{"context": "C", "candidate": {"kparam": "k", "path": ["p"]}, "range": {"a": 1}, "restoration": {"ok": True},
+                         "values": [{"written": 1.0, "state_value": 1.0, "state_diff_keys": ["k"], "file_roundtrip": True, "band_db": [10.0, 20.0]}]}]}
+    assert repeat(base, copy.deepcopy(base))["all_ok"]
+    for mutate, kind in ((lambda r: r["values"][0].update(state_value=2.0), "per_value_state"), (lambda r: r.update(range={"a": 2}), "range_fingerprint"),
+                         (lambda r: r["restoration"].update(ok=False), "restoration"), (lambda r: r["values"][0].update(band_db=[10.0, 20.0 + AUDIO_TOL_DB + 0.1]), "audio")):
+        other = copy.deepcopy(base)
+        mutate(other["records"][0])
+        res = repeat(base, other)
+        assert not res["all_ok"] and kind in res["parameters"]["k"]["failed"], kind
+    within = copy.deepcopy(base)
+    within["records"][0]["values"][0]["band_db"] = [10.0 + AUDIO_TOL_DB * 0.9, 20.0]
+    assert repeat(base, within)["all_ok"]                # audio within tolerance is accepted
+
+
+@pytest.mark.parametrize("name", ["bulk_fx_eq_pilot", "bulk_osc_a_pilot"])
+def test_second_run_of_each_pilot_repeats_within_the_predefined_contract(name):
+    p = ED / ("%s_repeatability_v1.json" % name)
+    if not p.exists():
+        pytest.skip("repeatability evidence not present")
+    r = json.loads(p.read_text())
+    assert r["all_ok"] and r["same_parameters"] and r["max_audio_diff_db"] <= AUDIO_TOL_DB
+    # and it is a genuine re-derivation from the two stored runs, not a stored verdict
+    again = repeat(json.loads((ED / ("%s_v1.json" % name)).read_text()), json.loads((ED / ("%s_v1_run2.json" % name)).read_text()))
+    assert again == r
+
+
+OSC = ED / "bulk_osc_a_pilot_v1.json"
+
+
+@pytest.mark.skipif(not OSC.exists(), reason="oscillator pilot evidence not present")
+def test_oscillator_pilot_runs_on_the_same_engine_with_raw_paths_only():
+    d = json.loads(OSC.read_text())
+    h = d["harness"]
+    assert h["persistent_presets_written"] == 1 and h["sessions"] == 1 and h["context_loads"] == 1 and h["parameters"] >= 16
+    assert all(r["candidate"]["kind"] == "raw_path" for r in d["records"])          # no FX-specific mutation kind was needed
+    assert {r["candidate"]["path"][0] for r in d["records"]} == {"Oscillator0"}     # incl. the nested WTOsc0 container
+    assert any(r["candidate"]["path"][1] == "WTOsc0" for r in d["records"])
+    for r in d["records"]:
+        assert r["restoration"]["ok"] and all(v["file_roundtrip"] for v in r["values"]), r["candidate"]["kparam"]
+        assert all(v["state_diff_keys"] in ([], [r["candidate"]["kparam"]]) for v in r["values"])
+    by = {r["candidate"]["kparam"]: r["range"] for r in d["records"]}
+    assert by["kParamCoarsePit"]["clamp_high_at"] == 64.0      # schema declared 72
+    assert by["kParamFine"]["clamp_high_at"] == 100.0          # schema declared 80
+    assert by["kParamInitialPhase"]["discovered_default"] == 180.0   # schema default said 0

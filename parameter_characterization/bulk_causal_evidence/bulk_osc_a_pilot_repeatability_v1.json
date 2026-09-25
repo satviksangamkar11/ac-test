@@ -1,0 +1,88 @@
+{
+ "same_parameters": true,
+ "audio_tolerance_db": 1.0,
+ "parameters": {
+  "kParamCoarsePit": {
+   "ok": true,
+   "failed": [],
+   "max_audio_diff_db": 0.0
+  },
+  "kParamPan": {
+   "ok": true,
+   "failed": [],
+   "max_audio_diff_db": 0.0
+  },
+  "kParamPitch": {
+   "ok": true,
+   "failed": [],
+   "max_audio_diff_db": 0.0
+  },
+  "kParamFine": {
+   "ok": true,
+   "failed": [],
+   "max_audio_diff_db": 0.0
+  },
+  "kParamWarp": {
+   "ok": true,
+   "failed": [],
+   "max_audio_diff_db": 0.0
+  },
+  "kParamPitchTrack": {
+   "ok": true,
+   "failed": [],
+   "max_audio_diff_db": 0.0
+  },
+  "kParamUnison": {
+   "ok": true,
+   "failed": [],
+   "max_audio_diff_db": 0.0
+  },
+  "kParamOctave": {
+   "ok": true,
+   "failed": [],
+   "max_audio_diff_db": 0.0
+  },
+  "kParamVolume": {
+   "ok": true,
+   "failed": [],
+   "max_audio_diff_db": 0.0
+  },
+  "kParamDetuneWid": {
+   "ok": true,
+   "failed": [],
+   "max_audio_diff_db": 0.0
+  },
+  "kParamUnisonStereo": {
+   "ok": true,
+   "failed": [],
+   "max_audio_diff_db": 0.0
+  },
+  "kParamInitialPhase": {
+   "ok": true,
+   "failed": [],
+   "max_audio_diff_db": 0.0
+  },
+  "kParamDetune": {
+   "ok": true,
+   "failed": [],
+   "max_audio_diff_db": 0.0
+  },
+  "kParamTablePos": {
+   "ok": true,
+   "failed": [],
+   "max_audio_diff_db": 0.0
+  },
+  "kParamEnable": {
+   "ok": true,
+   "failed": [],
+   "max_audio_diff_db": 0.0
+  },
+  "kParamRandomPhase": {
+   "ok": true,
+   "failed": [],
+   "max_audio_diff_db": 0.0
+  }
+ },
+ "all_ok": true,
+ "max_audio_diff_db": 0.0
+}

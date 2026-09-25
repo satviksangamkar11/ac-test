@@ -1,0 +1,324 @@
+{
+ "harness": {
+  "channel": "real Serum 2.0.23 GUI in Ableton Live 12 (computer-use), OSC tab; presets from User/BULKCAUSAL_GUI_OSC",
+  "plan": "gui_plan_osc_v1.json",
+  "manifest": "serum2/qualification/bulk_causal/manifest_bulk_osc_a_pilot_v1.json",
+  "coverage": "8 of 16 pilot parameters (those with a numeric/on-off readout on the OSC A panel); level, pan, detune, width, stereo, wt_pos, warp, pitch_track have no numeric text and were NOT verified",
+  "screenshots": "viewed live; no image files persisted",
+  "operator_note": "GUI01-19 were read before Ableton crashed and recovered mid-session; GUI20-39 after. Every preset name was checked against the plan. Ableton crash report 2026-09-25 17:00:39 appeared during this work (cause not determined)."
+ },
+ "observations": [
+  {
+   "n": 1,
+   "preset": "GUI01_kParamEnable__ref",
+   "displayed_value": 1,
+   "unit": "",
+   "ui_control": "OSC A on/off dot (1=ON, 0=OFF)",
+   "note": ""
+  },
+  {
+   "n": 2,
+   "preset": "GUI02_kParamEnable__0",
+   "displayed_value": 0,
+   "unit": "",
+   "ui_control": "OSC A on/off dot (1=ON, 0=OFF)",
+   "note": ""
+  },
+  {
+   "n": 3,
+   "preset": "GUI03_kParamEnable__1",
+   "displayed_value": 1,
+   "unit": "",
+   "ui_control": "OSC A on/off dot (1=ON, 0=OFF)",
+   "note": ""
+  },
+  {
+   "n": 4,
+   "preset": "GUI04_kParamEnable__2_probe",
+   "displayed_value": 1,
+   "unit": "",
+   "ui_control": "OSC A on/off dot (1=ON, 0=OFF)",
+   "note": ""
+  },
+  {
+   "n": 5,
+   "preset": "GUI05_kParamOctave__ref",
+   "displayed_value": 0,
+   "unit": "",
+   "ui_control": "OSC A OCT box",
+   "note": ""
+  },
+  {
+   "n": 6,
+   "preset": "GUI06_kParamOctave__m4",
+   "displayed_value": -4,
+   "unit": "",
+   "ui_control": "OSC A OCT box",
+   "note": ""
+  },
+  {
+   "n": 7,
+   "preset": "GUI07_kParamOctave__4",
+   "displayed_value": 4,
+   "unit": "",
+   "ui_control": "OSC A OCT box",
+   "note": ""
+  },
+  {
+   "n": 8,
+   "preset": "GUI08_kParamOctave__5_probe",
+   "displayed_value": 4,
+   "unit": "",
+   "ui_control": "OSC A OCT box",
+   "note": ""
+  },
+  {
+   "n": 9,
+   "preset": "GUI09_kParamPitch__ref",
+   "displayed_value": 0,
+   "unit": "",
+   "ui_control": "OSC A SEM box",
+   "note": ""
+  },
+  {
+   "n": 10,
+   "preset": "GUI10_kParamPitch__m12",
+   "displayed_value": -12,
+   "unit": "",
+   "ui_control": "OSC A SEM box",
+   "note": ""
+  },
+  {
+   "n": 11,
+   "preset": "GUI11_kParamPitch__12",
+   "displayed_value": 12,
+   "unit": "",
+   "ui_control": "OSC A SEM box",
+   "note": ""
+  },
+  {
+   "n": 12,
+   "preset": "GUI12_kParamPitch__13_probe",
+   "displayed_value": 12,
+   "unit": "",
+   "ui_control": "OSC A SEM box",
+   "note": ""
+  },
+  {
+   "n": 13,
+   "preset": "GUI13_kParamCoarsePit__ref",
+   "displayed_value": 0,
+   "unit": "",
+   "ui_control": "OSC A CRS box ('-' == 0)",
+   "note": "CRS box shows '-' for the default (0)"
+  },
+  {
+   "n": 14,
+   "preset": "GUI14_kParamCoarsePit__m72",
+   "displayed_value": -64,
+   "unit": "",
+   "ui_control": "OSC A CRS box ('-' == 0)",
+   "note": ""
+  },
+  {
+   "n": 15,
+   "preset": "GUI15_kParamCoarsePit__72",
+   "displayed_value": 64,
+   "unit": "",
+   "ui_control": "OSC A CRS box ('-' == 0)",
+   "note": ""
+  },
+  {
+   "n": 16,
+   "preset": "GUI16_kParamCoarsePit__73_probe",
+   "displayed_value": 64,
+   "unit": "",
+   "ui_control": "OSC A CRS box ('-' == 0)",
+   "note": ""
+  },
+  {
+   "n": 17,
+   "preset": "GUI17_kParamFine__ref",
+   "displayed_value": 0,
+   "unit": "",
+   "ui_control": "OSC A FIN box",
+   "note": ""
+  },
+  {
+   "n": 18,
+   "preset": "GUI18_kParamFine__m80",
+   "displayed_value": -80,
+   "unit": "",
+   "ui_control": "OSC A FIN box",
+   "note": ""
+  },
+  {
+   "n": 19,
+   "preset": "GUI19_kParamFine__80",
+   "displayed_value": 80,
+   "unit": "",
+   "ui_control": "OSC A FIN box",
+   "note": ""
+  },
+  {
+   "n": 20,
+   "preset": "GUI20_kParamFine__96_probe",
+   "displayed_value": 96,
+   "unit": "",
+   "ui_control": "OSC A FIN box",
+   "note": ""
+  },
+  {
+   "n": 21,
+   "preset": "GUI21_kParamFine__400_probe",
+   "displayed_value": 100,
+   "unit": "",
+   "ui_control": "OSC A FIN box",
+   "note": ""
+  },
+  {
+   "n": 22,
+   "preset": "GUI22_kParamFine__m96_probe",
+   "displayed_value": -96,
+   "unit": "",
+   "ui_control": "OSC A FIN box",
+   "note": ""
+  },
+  {
+   "n": 23,
+   "preset": "GUI23_kParamUnison__ref",
+   "displayed_value": 1,
+   "unit": "",
+   "ui_control": "OSC A UNISON count",
+   "note": ""
+  },
+  {
+   "n": 24,
+   "preset": "GUI24_kParamUnison__1",
+   "displayed_value": 1,
+   "unit": "",
+   "ui_control": "OSC A UNISON count",
+   "note": ""
+  },
+  {
+   "n": 25,
+   "preset": "GUI25_kParamUnison__16",
+   "displayed_value": 16,
+   "unit": "",
+   "ui_control": "OSC A UNISON count",
+   "note": ""
+  },
+  {
+   "n": 26,
+   "preset": "GUI26_kParamUnison__17_probe",
+   "displayed_value": 16,
+   "unit": "",
+   "ui_control": "OSC A UNISON count",
+   "note": ""
+  },
+  {
+   "n": 27,
+   "preset": "GUI27_kParamUnison__0_probe",
+   "displayed_value": 1,
+   "unit": "",
+   "ui_control": "OSC A UNISON count",
+   "note": ""
+  },
+  {
+   "n": 28,
+   "preset": "GUI28_kParamInitialPhase__ref",
+   "displayed_value": 180,
+   "unit": "",
+   "ui_control": "OSC A phase (degrees)",
+   "note": ""
+  },
+  {
+   "n": 29,
+   "preset": "GUI29_kParamInitialPhase__0",
+   "displayed_value": 0,
+   "unit": "",
+   "ui_control": "OSC A phase (degrees)",
+   "note": ""
+  },
+  {
+   "n": 30,
+   "preset": "GUI30_kParamInitialPhase__360",
+   "displayed_value": 360,
+   "unit": "",
+   "ui_control": "OSC A phase (degrees)",
+   "note": ""
+  },
+  {
+   "n": 31,
+   "preset": "GUI31_kParamInitialPhase__396_probe",
+   "displayed_value": 360,
+   "unit": "",
+   "ui_control": "OSC A phase (degrees)",
+   "note": ""
+  },
+  {
+   "n": 32,
+   "preset": "GUI32_kParamInitialPhase__1080_probe",
+   "displayed_value": 360,
+   "unit": "",
+   "ui_control": "OSC A phase (degrees)",
+   "note": ""
+  },
+  {
+   "n": 33,
+   "preset": "GUI33_kParamInitialPhase__m36_probe",
+   "displayed_value": 0,
+   "unit": "",
+   "ui_control": "OSC A phase (degrees)",
+   "note": ""
+  },
+  {
+   "n": 34,
+   "preset": "GUI34_kParamRandomPhase__ref",
+   "displayed_value": 100,
+   "unit": "",
+   "ui_control": "OSC A RAND",
+   "note": ""
+  },
+  {
+   "n": 35,
+   "preset": "GUI35_kParamRandomPhase__0",
+   "displayed_value": 0,
+   "unit": "",
+   "ui_control": "OSC A RAND",
+   "note": ""
+  },
+  {
+   "n": 36,
+   "preset": "GUI36_kParamRandomPhase__100",
+   "displayed_value": 100,
+   "unit": "",
+   "ui_control": "OSC A RAND",
+   "note": ""
+  },
+  {
+   "n": 37,
+   "preset": "GUI37_kParamRandomPhase__110_probe",
+   "displayed_value": 100,
+   "unit": "",
+   "ui_control": "OSC A RAND",
+   "note": ""
+  },
+  {
+   "n": 38,
+   "preset": "GUI38_kParamRandomPhase__300_probe",
+   "displayed_value": 100,
+   "unit": "",
+   "ui_control": "OSC A RAND",
+   "note": ""
+  },
+  {
+   "n": 39,
+   "preset": "GUI39_kParamRandomPhase__m10_probe",
+   "displayed_value": 0,
+   "unit": "",
+   "ui_control": "OSC A RAND",
+   "note": ""
+  }
+ ]
+}

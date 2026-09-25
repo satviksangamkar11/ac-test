@@ -1,0 +1,58 @@
+{
+ "same_parameters": true,
+ "audio_tolerance_db": 1.0,
+ "parameters": {
+  "kParamGain2": {
+   "ok": true,
+   "failed": [],
+   "max_audio_diff_db": 0.0
+  },
+  "kParamLevelOut": {
+   "ok": true,
+   "failed": [],
+   "max_audio_diff_db": 0.0
+  },
+  "kParamFreq1": {
+   "ok": true,
+   "failed": [],
+   "max_audio_diff_db": 0.0
+  },
+  "kParamReso2": {
+   "ok": true,
+   "failed": [],
+   "max_audio_diff_db": 0.0
+  },
+  "kParamFreq2": {
+   "ok": true,
+   "failed": [],
+   "max_audio_diff_db": 0.0
+  },
+  "kParamGain1": {
+   "ok": true,
+   "failed": [],
+   "max_audio_diff_db": 0.0
+  },
+  "kParamType1": {
+   "ok": true,
+   "failed": [],
+   "max_audio_diff_db": 0.0
+  },
+  "kParamType2": {
+   "ok": true,
+   "failed": [],
+   "max_audio_diff_db": 0.0
+  },
+  "kParamReso1": {
+   "ok": true,
+   "failed": [],
+   "max_audio_diff_db": 0.0
+  },
+  "kParamEnable": {
+   "ok": true,
+   "failed": [],
+   "max_audio_diff_db": 0.0
+  }
+ },
+ "all_ok": true,
+ "max_audio_diff_db": 0.0
+}

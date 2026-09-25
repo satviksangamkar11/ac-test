@@ -43,3 +43,13 @@ def test_fx_range_merge_findings():
     assert d["range_dist_freq"]["status"] == "GUI_DISAGREES_WITH_STATE_READBACK" and d["range_dist_freq"]["effective_display_range"] == [8, 22050]
     assert d["range_comp_makeup"]["status"] == "GUI_DISAGREES_WITH_STATE_READBACK"
     assert d["range_dist_numstages"]["default_display"] == 1                   # schema said default/min 2
+
+
+@pytest.mark.skipif(not (ED / "gui_osc_merge_v1.json").exists(), reason="osc GUI merge not present")
+def test_oscillator_gui_agrees_with_state_readback_and_confirms_ranges():
+    d = json.loads((ED / "gui_osc_merge_v1.json").read_text())["tests"]
+    assert len(d) == 8 and all(v["status"] == "DISPLAY_CONSISTENT" for v in d.values())
+    assert d["oscA.coarse_pitch"]["effective_display_range"] == [-64, 64]        # schema declared +-72
+    assert d["oscA.fine"]["effective_display_range"][1] == 100                   # schema declared 80
+    assert d["oscA.initial_phase"]["default_display"] == 180 and d["oscA.random_phase"]["default_display"] == 100  # schema defaults said 0
+    assert d["oscA.unison"]["default_display"] == 1 and d["oscA.enabled"]["default_display"] == 1
