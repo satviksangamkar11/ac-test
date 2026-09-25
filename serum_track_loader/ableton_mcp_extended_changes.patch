@@ -1,0 +1,130 @@
+diff --git a/MCP_Server/server.py b/MCP_Server/server.py
+index 696c0cf..8e9aa94 100644
+--- a/MCP_Server/server.py
++++ b/MCP_Server/server.py
+@@ -9,6 +9,10 @@ import time
+ from dataclasses import dataclass
+ from contextlib import asynccontextmanager
+ from typing import AsyncIterator, Dict, Any, List, Union
++try:
++    from MCP_Server.plugin_aliases import get_categories, get_alias_for_param, resolve_alias
++except ImportError:  # launched as a script (python MCP_Server/server.py)
++    from plugin_aliases import get_categories, get_alias_for_param, resolve_alias
+ 
+ # Configure logging
+ logging.basicConfig(level=logging.INFO, 
+@@ -426,6 +430,78 @@ def create_midi_track(ctx: Context, index: int = -1) -> str:
+         return f"Error creating MIDI track: {str(e)}"
+ 
+ 
++@mcp.tool()
++def create_serum_track(ctx: Context, preset_path: str, name: str = "") -> str:
++    """Create a MIDI track with Serum 2 and load an existing .SerumPreset through Serum's OWN native loader
++    (real Windows OLE drag/drop onto the Serum editor). No parameter reconstruction.
++
++    Takes over the mouse for ~2 s (waits for 3 s of mouse idle first). On any failure the track it created is deleted.
++    Returns JSON with status LOADED_VISUAL (drop accepted + preset-name bar changed) or FAILED. There is no state readback
++    yet, so a positive result is never called VERIFIED.
++
++    Parameters:
++    - preset_path: Absolute path to the .SerumPreset file.
++    - name: Final track name (default: preset file name).
++    """
++    import os
++    import secrets
++    from MCP_Server import serum_loader as sl
++
++    ev = {"preset_path": preset_path, "steps": []}
++    track_index = None
++
++    def out(status, reason=""):
++        ev.update(status=status, reason=reason)
++        return json.dumps(ev, indent=2)
++
++    try:
++        if not (os.path.isfile(preset_path) and preset_path.lower().endswith(".serumpreset")):
++            return out("FAILED", "PRESET_FILE_INVALID")
++        ableton = get_ableton_connection()
++        sl.ensure_live_visible()
++        nonce = "SRM" + secrets.token_hex(3).upper()
++        ableton.send_command("create_midi_track", {"index": -1})
++        track_index = ableton.send_command("get_session_info").get("track_count")  # 1-based index of the new last track
++        ti = _to_zero_based(track_index, "track_index")
++        ableton.send_command("set_track_name", {"track_index": ti, "name": nonce})
++        ev["steps"].append("track created as " + nonce)
++        r = load_external_plugin(ctx, track_index, "Serum 2", exact_match=True)
++        if not str(r).startswith("Loaded"):
++            return out("FAILED", "SERUM_LOAD_FAILED: " + str(r))
++        wins = sl.wait_for_window(nonce)
++        if len(wins) != 1:
++            return out("FAILED", "EDITOR_NOT_OPEN" if not wins else "MULTIPLE_SERUM_WINDOWS_FOUND")
++        hwnd = wins[0]
++        sha = sl.serum_module_sha256()
++        ev["serum_module_sha256"] = sha
++        if not sha or any(v != sl.PINNED_SHA256 for v in sha.values()):
++            return out("FAILED", "SERUM_VERSION_MISMATCH (expected 2.0.23 sha %s)" % sl.PINNED_SHA256[:12])
++        before = sl.capture(hwnd)
++        ev["drop_effect"] = sl.ole_drop(hwnd, preset_path)
++        if not ev["drop_effect"]:
++            return out("FAILED", "DRAG_DROP_REJECTED")
++        time.sleep(2.0)
++        after = sl.capture(hwnd)
++        ev["name_bar_changed"] = round(sl.changed_fraction(before, after, sl.NAME_BAR), 4)
++        ev["editor_pixels_changed"] = round(sl.changed_fraction(before, after), 4)
++        if ev["name_bar_changed"] < 0.02:
++            return out("FAILED", "PRESET_NAME_BAR_UNCHANGED")
++        ableton.send_command("set_track_name", {"track_index": ti, "name": name or os.path.splitext(os.path.basename(preset_path))[0]})
++        ev["track_index"] = track_index
++        track_index = None  # committed: keep the track
++        return out("LOADED_VISUAL")
++    except Exception as e:
++        logger.error("create_serum_track failed: %s", e)
++        return out("FAILED", "%s: %s" % (type(e).__name__, e))
++    finally:
++        if track_index is not None:  # rollback: only ever the track created by this call
++            try:
++                delete_track(ctx, track_index)
++                ev["rolled_back_track"] = track_index
++            except Exception as e:
++                logger.error("rollback failed: %s", e)
++
++
+ @mcp.tool()
+ def set_track_name(ctx: Context, track_index: int, name: str) -> str:
+     """
+@@ -1694,8 +1770,6 @@ def get_device_parameters(
+     Specify category or show_all=True for full parameter details.
+     """
+     try:
+-        from MCP_Server.plugin_aliases import get_categories, get_alias_for_param
+-
+         ableton = get_ableton_connection()
+         ti = _to_zero_based(track_index, "track_index")
+         di = _to_zero_based(device_index, "device_index")
+@@ -1784,8 +1858,6 @@ def set_device_parameter(
+     - value: Normalized value 0.0-1.0.
+     """
+     try:
+-        from MCP_Server.plugin_aliases import resolve_alias
+-
+         ableton = get_ableton_connection()
+         ti = _to_zero_based(track_index, "track_index")
+         di = _to_zero_based(device_index, "device_index")
+diff --git a/pyproject.toml b/pyproject.toml
+index 279f52b..f06d1c7 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -13,9 +13,12 @@ classifiers = [
+     "Operating System :: OS Independent",
+ ]
+ dependencies = [
+-    "mcp[cli]>=1.3.0",
++    "mcp[cli]>=1.3.0,<2",
+     "elevenlabs>=0.2.26",
+     "python-dotenv>=1.0.0",
++    "psutil>=5.9",
++    "pillow>=10",
++    "pywin32>=306; sys_platform == 'win32'",
+ ]
+ 
+ [project.scripts]
