@@ -116,11 +116,12 @@ def test_pilot_is_parameter_by_parameter_inside_one_context():
     assert h["persistent_presets_written"] == 1 and len(h["context_presets"]) == 1
     assert h["parameters"] >= 10 and h["values_observed"] >= 80 and h["sessions"] == 1 and h["context_loads"] == 1
     assert h["state_loads"] > 5 * h["persistent_presets_written"] * h["parameters"] / 5   # many loads, still one preset
-    # the only .SerumPreset files the CAUSAL engine writes are the one-per-context presets (never one per parameter/value).
-    # verify_out/ is a separate, later stage (build_verification_presets.py: composite DIRECT_UI verification presets,
-    # built from finished evidence, not written by the causal engine) and is excluded from this guard on purpose.
+    # the only .SerumPreset files the CAUSAL engine writes live directly under contexts/ (never one per parameter/value).
+    # DIRECT_UI verification presets (build_verification_presets.py, build_giant_verification_preset.py) are a
+    # separate, later stage built from finished evidence, not written by the causal engine, and live in their own
+    # out dirs (verify_out/, giant_verify_out/) -- deliberately excluded from this guard by only looking in contexts/.
     ctx_names = {c.get("preset_name", n) for f in HERE.glob("manifest_*.json") if json.loads(f.read_text()).get("kind") == "bulk_context" for n, c in json.loads(f.read_text())["contexts"].items()}
-    causal_presets = [p for p in glob.glob(str(HERE / "**" / "*.SerumPreset"), recursive=True) if "verify_out" not in Path(p).parts]
+    causal_presets = list(glob.glob(str(HERE / "contexts" / "*.SerumPreset")))
     found = {Path(p).stem for p in causal_presets}
     assert found == ctx_names and all(Path(p).parent.name == "contexts" for p in causal_presets)
     for r in d["records"]:
