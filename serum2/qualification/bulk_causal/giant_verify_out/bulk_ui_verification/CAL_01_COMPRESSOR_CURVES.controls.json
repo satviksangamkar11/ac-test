@@ -1,0 +1,125 @@
+{
+ "preset": "CAL_01_COMPRESSOR_CURVES.SerumPreset",
+ "generated_only": true,
+ "read_instructions": "FX page: read the 5-value header row (THRESH | RATIO | ATTACK | RELEASE | GAIN) of each of the 8 COMPRESSOR units top to bottom (use the left FX list to select units; never scroll over knobs). Then LFO 1 tab: expect shape S&H with ENVELOPE greyed out and FREE lit.",
+ "units": [
+  {
+   "unit": 1,
+   "rack_slot": 0,
+   "fx.compressor.ratio": 1.0,
+   "fx.compressor.attack": 0.1,
+   "fx.compressor.release": 0.1,
+   "fx.compressor.gain": 1.0,
+   "fx.compressor.thresh": 0.05
+  },
+  {
+   "unit": 2,
+   "rack_slot": 1,
+   "fx.compressor.ratio": 1.5,
+   "fx.compressor.attack": 0.5,
+   "fx.compressor.release": 1.0,
+   "fx.compressor.gain": 2.0,
+   "fx.compressor.thresh": 0.15
+  },
+  {
+   "unit": 3,
+   "rack_slot": 2,
+   "fx.compressor.ratio": 2.0,
+   "fx.compressor.attack": 2.0,
+   "fx.compressor.release": 5.0,
+   "fx.compressor.gain": 3.0,
+   "fx.compressor.thresh": 0.3
+  },
+  {
+   "unit": 4,
+   "rack_slot": 3,
+   "fx.compressor.ratio": 3.0,
+   "fx.compressor.attack": 5.0,
+   "fx.compressor.release": 20.0,
+   "fx.compressor.gain": 5.0,
+   "fx.compressor.thresh": 0.45
+  },
+  {
+   "unit": 5,
+   "rack_slot": 4,
+   "fx.compressor.ratio": 4.0,
+   "fx.compressor.attack": 30.0,
+   "fx.compressor.release": 50.0,
+   "fx.compressor.gain": 12.0,
+   "fx.compressor.thresh": 0.6
+  },
+  {
+   "unit": 6,
+   "rack_slot": 5,
+   "fx.compressor.ratio": 8.0,
+   "fx.compressor.attack": 150.0,
+   "fx.compressor.release": 250.0,
+   "fx.compressor.gain": 20.0,
+   "fx.compressor.thresh": 0.7
+  },
+  {
+   "unit": 7,
+   "rack_slot": 6,
+   "fx.compressor.ratio": 20.0,
+   "fx.compressor.attack": 500.0,
+   "fx.compressor.release": 600.0,
+   "fx.compressor.gain": 27.0,
+   "fx.compressor.thresh": 0.85
+  },
+  {
+   "unit": 8,
+   "rack_slot": 7,
+   "fx.compressor.ratio": 100.0,
+   "fx.compressor.attack": 1000.0,
+   "fx.compressor.release": 1000.0,
+   "fx.compressor.gain": 32.0,
+   "fx.compressor.thresh": 1.0
+  }
+ ],
+ "lfo1_conflict_reference": {
+  "leaves": [
+   [
+    [
+     "LFO0",
+     "plainParams",
+     "kParamType"
+    ],
+    "RandomSH"
+   ],
+   [
+    [
+     "LFO0",
+     "plainParams",
+     "kParamMode"
+    ],
+    "Envelope"
+   ]
+  ],
+  "expect": "S&H shown, ENVELOPE greyed, FREE lit"
+ },
+ "earlier_points": {
+  "fx.compressor.thresh": {
+   "0.25": "-7.5 dB",
+   "0.4": "-13.3 dB",
+   "0.49": "-17.5 dB"
+  },
+  "fx.compressor.ratio": {
+   "210": "Limit",
+   "430": "Limit",
+   "31622.78": "Limit"
+  },
+  "fx.compressor.attack": {
+   "10": "0.1 ms",
+   "22": "0.2 ms",
+   "100": "1.0 ms"
+  },
+  "fx.compressor.release": {
+   "100": "100.0 ms"
+  },
+  "fx.compressor.gain": {
+   "8": "23.8 dB",
+   "11": "26.7 dB",
+   "16.5": "30.4 dB"
+  }
+ }
+}
