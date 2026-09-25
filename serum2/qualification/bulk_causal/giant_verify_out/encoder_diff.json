@@ -1,0 +1,4667 @@
+{
+ "source_plan": "giant_verify_out/giant_verification_plan.json",
+ "source_manifest": "manifest_campaign_v1.json",
+ "verdict_counts": {
+  "IDENTICAL": 302,
+  "NOT_COMPARABLE": 28
+ },
+ "candidates": [
+  {
+   "atlas_id": "arp.pattern.rate",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 0.25,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "raw_leaf": 0.25,
+   "encoded_leaf": 0.25,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "arp.pattern.shape",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": "Chord",
+   "mechanism": "ENUM_RAW",
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "Chord",
+     "Converge",
+     "Diverge",
+     "ConvAndDiv",
+     "Down",
+     "UpDown",
+     "DownUp",
+     "UpAndDown",
+     "DownAndUp",
+     "ThumbUp",
+     "ThumbUD",
+     "Rand",
+     "RandOnce",
+     "RandDrift",
+     "RandNoDup"
+    ]
+   },
+   "raw_leaf": "Chord",
+   "encoded_leaf": "Chord",
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "arp.playback.chance",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "arp.playback.gate",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 200.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "arp.playback.offset",
+   "plan_status": "NO_USABLE_TARGET_VALUE",
+   "target_value": null,
+   "verdict": "NOT_COMPARABLE",
+   "reason": "no target value (NO_USABLE_TARGET_VALUE)"
+  },
+  {
+   "atlas_id": "arp.playback.repeats",
+   "plan_status": "NO_USABLE_TARGET_VALUE",
+   "target_value": null,
+   "verdict": "NOT_COMPARABLE",
+   "reason": "no target value (NO_USABLE_TARGET_VALUE)"
+  },
+  {
+   "atlas_id": "arp.playback.thru",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "arp.retrigger.first",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "arp.retrigger.launch",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 0.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 0.0,
+   "encoded_leaf": 0.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "arp.retrigger.note",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "arp.transpose.range",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 6.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 24.0
+   },
+   "raw_leaf": 6.0,
+   "encoded_leaf": 6.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "arp.transpose.shift",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": -12.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "signed",
+    "min": -24.0,
+    "max": 24.0
+   },
+   "raw_leaf": -12.0,
+   "encoded_leaf": -12.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "arp.velocity.decay",
+   "plan_status": "NO_USABLE_TARGET_VALUE",
+   "target_value": null,
+   "verdict": "NOT_COMPARABLE",
+   "reason": "no target value (NO_USABLE_TARGET_VALUE)"
+  },
+  {
+   "atlas_id": "arp.velocity.enable",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "arp.velocity.retrig",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "arp.velocity.target",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "env1.attack",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 5.000000000000001,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 10.0
+   },
+   "raw_leaf": 5.000000000000001,
+   "encoded_leaf": 5.000000000000001,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "env1.attack_curve",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "env1.decay",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 15.999999999999998,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 32.0
+   },
+   "raw_leaf": 15.999999999999998,
+   "encoded_leaf": 15.999999999999998,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "env1.decay_curve",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "env1.hold",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 2.599999999999999,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 5.2
+   },
+   "raw_leaf": 2.599999999999999,
+   "encoded_leaf": 2.599999999999999,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "env1.release",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 15.999999999999998,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 32.0
+   },
+   "raw_leaf": 15.999999999999998,
+   "encoded_leaf": 15.999999999999998,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "env1.release_curve",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "env1.sustain",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 0.5,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "raw_leaf": 0.5,
+   "encoded_leaf": 0.5,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "env2.attack",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 5.000000000000001,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 10.0
+   },
+   "raw_leaf": 5.000000000000001,
+   "encoded_leaf": 5.000000000000001,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "env2.attack_curve",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "env2.decay",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 15.999999999999998,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 32.0
+   },
+   "raw_leaf": 15.999999999999998,
+   "encoded_leaf": 15.999999999999998,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "env2.decay_curve",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "env2.hold",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 2.599999999999999,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 5.2
+   },
+   "raw_leaf": 2.599999999999999,
+   "encoded_leaf": 2.599999999999999,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "env2.release",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 15.999999999999998,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 32.0
+   },
+   "raw_leaf": 15.999999999999998,
+   "encoded_leaf": 15.999999999999998,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "env2.release_curve",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "env2.sustain",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 0.5,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "raw_leaf": 0.5,
+   "encoded_leaf": 0.5,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "env3.attack",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 5.000000000000001,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 10.0
+   },
+   "raw_leaf": 5.000000000000001,
+   "encoded_leaf": 5.000000000000001,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "env3.attack_curve",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "env3.decay",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 15.999999999999998,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 32.0
+   },
+   "raw_leaf": 15.999999999999998,
+   "encoded_leaf": 15.999999999999998,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "env3.decay_curve",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "env3.hold",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 2.599999999999999,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 5.2
+   },
+   "raw_leaf": 2.599999999999999,
+   "encoded_leaf": 2.599999999999999,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "env3.release",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 15.999999999999998,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 32.0
+   },
+   "raw_leaf": 15.999999999999998,
+   "encoded_leaf": 15.999999999999998,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "env3.release_curve",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "env3.sustain",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 0.5,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "raw_leaf": 0.5,
+   "encoded_leaf": 0.5,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "env4.attack",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 5.000000000000001,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 10.0
+   },
+   "raw_leaf": 5.000000000000001,
+   "encoded_leaf": 5.000000000000001,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "env4.attack_curve",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "env4.decay",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 15.999999999999998,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 32.0
+   },
+   "raw_leaf": 15.999999999999998,
+   "encoded_leaf": 15.999999999999998,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "env4.decay_curve",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "env4.hold",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 2.599999999999999,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 5.2
+   },
+   "raw_leaf": 2.599999999999999,
+   "encoded_leaf": 2.599999999999999,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "env4.release",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 15.999999999999998,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 32.0
+   },
+   "raw_leaf": 15.999999999999998,
+   "encoded_leaf": 15.999999999999998,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "env4.release_curve",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "env4.sustain",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 0.5,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "raw_leaf": 0.5,
+   "encoded_leaf": 0.5,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "filter1.cutoff",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 0.25,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "raw_leaf": 0.25,
+   "encoded_leaf": 0.25,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "filter1.drive",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "filter1.enabled",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "filter1.key_track",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "filter1.level_out",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 0.25,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "raw_leaf": 0.25,
+   "encoded_leaf": 0.25,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "filter1.resonance",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "filter1.stereo",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 25.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 25.0,
+   "encoded_leaf": 25.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "filter1.type",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": "L12",
+   "mechanism": "ENUM_RAW",
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "L12",
+     "L24",
+     "H12",
+     "H24",
+     "B12",
+     "B24",
+     "N24",
+     "MgL24",
+     "CombN",
+     "FormantONE"
+    ]
+   },
+   "raw_leaf": "L12",
+   "encoded_leaf": "L12",
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "filter1.var",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "filter1.wet",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "filter2.cutoff",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 0.25,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "raw_leaf": 0.25,
+   "encoded_leaf": 0.25,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "filter2.drive",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "filter2.enabled",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "filter2.key_track",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "filter2.level_out",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 0.25,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "raw_leaf": 0.25,
+   "encoded_leaf": 0.25,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "filter2.resonance",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "filter2.stereo",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 25.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 25.0,
+   "encoded_leaf": 25.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "filter2.type",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": "L12",
+   "mechanism": "ENUM_RAW",
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "L12",
+     "L24",
+     "H12",
+     "H24",
+     "B12",
+     "B24",
+     "N24",
+     "MgL24",
+     "CombN",
+     "FormantONE"
+    ]
+   },
+   "raw_leaf": "L12",
+   "encoded_leaf": "L12",
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "filter2.var",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "filter2.wet",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "global.bend_range_down",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": -12.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": -48.0,
+    "max": 0.0
+   },
+   "raw_leaf": -12.0,
+   "encoded_leaf": -12.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "global.bend_range_up",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 12.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 48.0
+   },
+   "raw_leaf": 12.0,
+   "encoded_leaf": 12.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "global.direct_volume",
+   "plan_status": "NO_USABLE_TARGET_VALUE",
+   "target_value": null,
+   "verdict": "NOT_COMPARABLE",
+   "reason": "no target value (NO_USABLE_TARGET_VALUE)"
+  },
+  {
+   "atlas_id": "global.fx_bus1_destination",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "ENUM_RAW",
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     1.0,
+     2.0
+    ]
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "global.fx_bus1_volume",
+   "plan_status": "NO_USABLE_TARGET_VALUE",
+   "target_value": null,
+   "verdict": "NOT_COMPARABLE",
+   "reason": "no target value (NO_USABLE_TARGET_VALUE)"
+  },
+  {
+   "atlas_id": "global.fx_bus2_destination",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "ENUM_RAW",
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     1.0,
+     2.0
+    ]
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "global.fx_bus2_volume",
+   "plan_status": "NO_USABLE_TARGET_VALUE",
+   "target_value": null,
+   "verdict": "NOT_COMPARABLE",
+   "reason": "no target value (NO_USABLE_TARGET_VALUE)"
+  },
+  {
+   "atlas_id": "global.global_tuning",
+   "plan_status": "NO_USABLE_TARGET_VALUE",
+   "target_value": null,
+   "verdict": "NOT_COMPARABLE",
+   "reason": "no target value (NO_USABLE_TARGET_VALUE)"
+  },
+  {
+   "atlas_id": "global.legato",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "global.limit_same_note_polyphony",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "global.master_volume",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 0.5000000000000001,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "raw_leaf": 0.5000000000000001,
+   "encoded_leaf": 0.5000000000000001,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "global.mono",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "global.note_latch",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "global.oversampling",
+   "plan_status": "NO_USABLE_TARGET_VALUE",
+   "target_value": null,
+   "verdict": "NOT_COMPARABLE",
+   "reason": "no target value (NO_USABLE_TARGET_VALUE)"
+  },
+  {
+   "atlas_id": "global.poly_count",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 17.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 1.0,
+    "max": 32.0
+   },
+   "raw_leaf": 17.0,
+   "encoded_leaf": 17.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "global.porta_always",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "global.porta_scaled",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "global.portamento_curve",
+   "plan_status": "NO_USABLE_TARGET_VALUE",
+   "target_value": null,
+   "verdict": "NOT_COMPARABLE",
+   "reason": "no target value (NO_USABLE_TARGET_VALUE)"
+  },
+  {
+   "atlas_id": "global.portamento_time",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.5000000000000002,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 3.0
+   },
+   "raw_leaf": 1.5000000000000002,
+   "encoded_leaf": 1.5000000000000002,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "global.s1_compatibility",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "global.swing",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 25.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 25.0,
+   "encoded_leaf": 25.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "global.swing_div",
+   "plan_status": "NO_USABLE_TARGET_VALUE",
+   "target_value": null,
+   "verdict": "NOT_COMPARABLE",
+   "reason": "no target value (NO_USABLE_TARGET_VALUE)"
+  },
+  {
+   "atlas_id": "global.transpose",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": -24.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "signed",
+    "min": -48.0,
+    "max": 48.0
+   },
+   "raw_leaf": -24.0,
+   "encoded_leaf": -24.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "global.use_ultra_on_render",
+   "plan_status": "NO_USABLE_TARGET_VALUE",
+   "target_value": null,
+   "verdict": "NOT_COMPARABLE",
+   "reason": "no target value (NO_USABLE_TARGET_VALUE)"
+  },
+  {
+   "atlas_id": "global.voice_amp",
+   "plan_status": "NO_USABLE_TARGET_VALUE",
+   "target_value": null,
+   "verdict": "NOT_COMPARABLE",
+   "reason": "no target value (NO_USABLE_TARGET_VALUE)"
+  },
+  {
+   "atlas_id": "global.voice_control.random.cutoff",
+   "plan_status": "NO_USABLE_TARGET_VALUE",
+   "target_value": null,
+   "verdict": "NOT_COMPARABLE",
+   "reason": "no target value (NO_USABLE_TARGET_VALUE)"
+  },
+  {
+   "atlas_id": "global.voice_control.random.detune",
+   "plan_status": "NO_USABLE_TARGET_VALUE",
+   "target_value": null,
+   "verdict": "NOT_COMPARABLE",
+   "reason": "no target value (NO_USABLE_TARGET_VALUE)"
+  },
+  {
+   "atlas_id": "global.voice_control.random.envs",
+   "plan_status": "NO_USABLE_TARGET_VALUE",
+   "target_value": null,
+   "verdict": "NOT_COMPARABLE",
+   "reason": "no target value (NO_USABLE_TARGET_VALUE)"
+  },
+  {
+   "atlas_id": "global.voice_control.random.pan",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "global.voice_control.scaling.envs",
+   "plan_status": "NO_USABLE_TARGET_VALUE",
+   "target_value": null,
+   "verdict": "NOT_COMPARABLE",
+   "reason": "no target value (NO_USABLE_TARGET_VALUE)"
+  },
+  {
+   "atlas_id": "global.voice_control.scaling.lfos",
+   "plan_status": "NO_USABLE_TARGET_VALUE",
+   "target_value": null,
+   "verdict": "NOT_COMPARABLE",
+   "reason": "no target value (NO_USABLE_TARGET_VALUE)"
+  },
+  {
+   "atlas_id": "lfo1.beat_sync",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 0.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 0.0,
+   "encoded_leaf": 0.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo1.delay",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.8,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 3.6
+   },
+   "raw_leaf": 1.8,
+   "encoded_leaf": 1.8,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo1.dotted",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo1.mode",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": "Envelope",
+   "mechanism": "ENUM_RAW",
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "Retrig",
+     "Envelope"
+    ]
+   },
+   "raw_leaf": "Envelope",
+   "encoded_leaf": "Envelope",
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo1.mono",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo1.rate",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 49.999999999999986,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 49.999999999999986,
+   "encoded_leaf": 49.999999999999986,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo1.rate_10x",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo1.rise",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 2.5,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 5.0
+   },
+   "raw_leaf": 2.5,
+   "encoded_leaf": 2.5,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo1.shape",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": "RandomSH",
+   "mechanism": "ENUM_RAW",
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "RandomSH",
+     "Rossler",
+     "Lorenz",
+     "Path"
+    ]
+   },
+   "raw_leaf": "RandomSH",
+   "encoded_leaf": "RandomSH",
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo1.smooth",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo1.swing",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo1.triplets",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo2.beat_sync",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 0.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 0.0,
+   "encoded_leaf": 0.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo2.delay",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.8,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 3.6
+   },
+   "raw_leaf": 1.8,
+   "encoded_leaf": 1.8,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo2.dotted",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo2.mode",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": "Envelope",
+   "mechanism": "ENUM_RAW",
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "Retrig",
+     "Envelope"
+    ]
+   },
+   "raw_leaf": "Envelope",
+   "encoded_leaf": "Envelope",
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo2.mono",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo2.rate",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 49.999999999999986,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 49.999999999999986,
+   "encoded_leaf": 49.999999999999986,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo2.rate_10x",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo2.rise",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 2.5,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 5.0
+   },
+   "raw_leaf": 2.5,
+   "encoded_leaf": 2.5,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo2.shape",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": "RandomSH",
+   "mechanism": "ENUM_RAW",
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "RandomSH",
+     "Rossler",
+     "Lorenz",
+     "Path"
+    ]
+   },
+   "raw_leaf": "RandomSH",
+   "encoded_leaf": "RandomSH",
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo2.smooth",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo2.swing",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo2.triplets",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo3.beat_sync",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 0.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 0.0,
+   "encoded_leaf": 0.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo3.delay",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.8,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 3.6
+   },
+   "raw_leaf": 1.8,
+   "encoded_leaf": 1.8,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo3.dotted",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo3.mode",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": "Envelope",
+   "mechanism": "ENUM_RAW",
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "Retrig",
+     "Envelope"
+    ]
+   },
+   "raw_leaf": "Envelope",
+   "encoded_leaf": "Envelope",
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo3.mono",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo3.rate",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 49.999999999999986,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 49.999999999999986,
+   "encoded_leaf": 49.999999999999986,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo3.rate_10x",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo3.rise",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 2.5,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 5.0
+   },
+   "raw_leaf": 2.5,
+   "encoded_leaf": 2.5,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo3.shape",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": "RandomSH",
+   "mechanism": "ENUM_RAW",
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "RandomSH",
+     "Rossler",
+     "Lorenz",
+     "Path"
+    ]
+   },
+   "raw_leaf": "RandomSH",
+   "encoded_leaf": "RandomSH",
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo3.smooth",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo3.swing",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo3.triplets",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo4.beat_sync",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 0.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 0.0,
+   "encoded_leaf": 0.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo4.delay",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.8,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 3.6
+   },
+   "raw_leaf": 1.8,
+   "encoded_leaf": 1.8,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo4.dotted",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo4.mode",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": "Envelope",
+   "mechanism": "ENUM_RAW",
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "Retrig",
+     "Envelope"
+    ]
+   },
+   "raw_leaf": "Envelope",
+   "encoded_leaf": "Envelope",
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo4.mono",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo4.rate",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 49.999999999999986,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 49.999999999999986,
+   "encoded_leaf": 49.999999999999986,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo4.rate_10x",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo4.rise",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 2.5,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 5.0
+   },
+   "raw_leaf": 2.5,
+   "encoded_leaf": 2.5,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo4.shape",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": "RandomSH",
+   "mechanism": "ENUM_RAW",
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "RandomSH",
+     "Rossler",
+     "Lorenz",
+     "Path"
+    ]
+   },
+   "raw_leaf": "RandomSH",
+   "encoded_leaf": "RandomSH",
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo4.smooth",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo4.swing",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo4.triplets",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo5.beat_sync",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 0.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 0.0,
+   "encoded_leaf": 0.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo5.delay",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.8,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 3.6
+   },
+   "raw_leaf": 1.8,
+   "encoded_leaf": 1.8,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo5.dotted",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo5.mode",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": "Envelope",
+   "mechanism": "ENUM_RAW",
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "Retrig",
+     "Envelope"
+    ]
+   },
+   "raw_leaf": "Envelope",
+   "encoded_leaf": "Envelope",
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo5.mono",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo5.rate",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 49.999999999999986,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 49.999999999999986,
+   "encoded_leaf": 49.999999999999986,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo5.rate_10x",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo5.rise",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 2.5,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 5.0
+   },
+   "raw_leaf": 2.5,
+   "encoded_leaf": 2.5,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo5.shape",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": "RandomSH",
+   "mechanism": "ENUM_RAW",
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "RandomSH",
+     "Rossler",
+     "Lorenz",
+     "Path"
+    ]
+   },
+   "raw_leaf": "RandomSH",
+   "encoded_leaf": "RandomSH",
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo5.smooth",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo5.swing",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo5.triplets",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo6.beat_sync",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 0.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 0.0,
+   "encoded_leaf": 0.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo6.delay",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.8,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 3.6
+   },
+   "raw_leaf": 1.8,
+   "encoded_leaf": 1.8,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo6.dotted",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo6.mode",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": "Envelope",
+   "mechanism": "ENUM_RAW",
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "Retrig",
+     "Envelope"
+    ]
+   },
+   "raw_leaf": "Envelope",
+   "encoded_leaf": "Envelope",
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo6.mono",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo6.rate",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 49.999999999999986,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 49.999999999999986,
+   "encoded_leaf": 49.999999999999986,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo6.rate_10x",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo6.rise",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 2.5,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 5.0
+   },
+   "raw_leaf": 2.5,
+   "encoded_leaf": 2.5,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo6.shape",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": "RandomSH",
+   "mechanism": "ENUM_RAW",
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "RandomSH",
+     "Rossler",
+     "Lorenz",
+     "Path"
+    ]
+   },
+   "raw_leaf": "RandomSH",
+   "encoded_leaf": "RandomSH",
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo6.smooth",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo6.swing",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "lfo6.triplets",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "macro1.name",
+   "plan_status": "NO_USABLE_TARGET_VALUE",
+   "target_value": null,
+   "verdict": "NOT_COMPARABLE",
+   "reason": "no target value (NO_USABLE_TARGET_VALUE)"
+  },
+  {
+   "atlas_id": "macro1.value",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "macro2.name",
+   "plan_status": "NO_USABLE_TARGET_VALUE",
+   "target_value": null,
+   "verdict": "NOT_COMPARABLE",
+   "reason": "no target value (NO_USABLE_TARGET_VALUE)"
+  },
+  {
+   "atlas_id": "macro2.value",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "macro3.name",
+   "plan_status": "NO_USABLE_TARGET_VALUE",
+   "target_value": null,
+   "verdict": "NOT_COMPARABLE",
+   "reason": "no target value (NO_USABLE_TARGET_VALUE)"
+  },
+  {
+   "atlas_id": "macro3.value",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "macro4.name",
+   "plan_status": "NO_USABLE_TARGET_VALUE",
+   "target_value": null,
+   "verdict": "NOT_COMPARABLE",
+   "reason": "no target value (NO_USABLE_TARGET_VALUE)"
+  },
+  {
+   "atlas_id": "macro4.value",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "macro5.name",
+   "plan_status": "NO_USABLE_TARGET_VALUE",
+   "target_value": null,
+   "verdict": "NOT_COMPARABLE",
+   "reason": "no target value (NO_USABLE_TARGET_VALUE)"
+  },
+  {
+   "atlas_id": "macro5.value",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "macro6.name",
+   "plan_status": "NO_USABLE_TARGET_VALUE",
+   "target_value": null,
+   "verdict": "NOT_COMPARABLE",
+   "reason": "no target value (NO_USABLE_TARGET_VALUE)"
+  },
+  {
+   "atlas_id": "macro6.value",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "macro7.name",
+   "plan_status": "NO_USABLE_TARGET_VALUE",
+   "target_value": null,
+   "verdict": "NOT_COMPARABLE",
+   "reason": "no target value (NO_USABLE_TARGET_VALUE)"
+  },
+  {
+   "atlas_id": "macro7.value",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "macro8.name",
+   "plan_status": "NO_USABLE_TARGET_VALUE",
+   "target_value": null,
+   "verdict": "NOT_COMPARABLE",
+   "reason": "no target value (NO_USABLE_TARGET_VALUE)"
+  },
+  {
+   "atlas_id": "macro8.value",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "mixer.filter1.bus1",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "mixer.filter1.bus2",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "mixer.filter1.enable",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "mixer.filter1.wet",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "mixer.filter2.bus1",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "mixer.filter2.bus2",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "mixer.filter2.enable",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "mixer.filter2.wet",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "mixer.noise.bus1",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "mixer.noise.bus2",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "mixer.noise.enable",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "mixer.noise.filter_balance",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "mixer.noise.pan",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": -25.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "signed",
+    "min": -50.0,
+    "max": 50.0
+   },
+   "raw_leaf": -25.0,
+   "encoded_leaf": -25.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "mixer.osc_a.bus1",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "mixer.osc_a.bus2",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "mixer.osc_a.filter_balance",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "mixer.osc_b.bus1",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "mixer.osc_b.bus2",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "mixer.osc_b.filter_balance",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "mixer.osc_c.bus1",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "mixer.osc_c.bus2",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "mixer.osc_c.filter_balance",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "mixer.sub.bus1",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "mixer.sub.bus2",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "mixer.sub.enable",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "mixer.sub.filter_balance",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "mixer.sub.pan",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": -25.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "signed",
+    "min": -50.0,
+    "max": 50.0
+   },
+   "raw_leaf": -25.0,
+   "encoded_leaf": -25.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscA.detune",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 0.5000000000000001,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "raw_leaf": 0.5000000000000001,
+   "encoded_leaf": 0.5000000000000001,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscA.enabled",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 0.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 0.0,
+   "encoded_leaf": 0.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscA.fine",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": -40.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "signed",
+    "min": -80.0,
+    "max": 80.0
+   },
+   "raw_leaf": -40.0,
+   "encoded_leaf": -40.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscA.octave",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": -2.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "signed",
+    "min": -4.0,
+    "max": 4.0
+   },
+   "raw_leaf": -2.0,
+   "encoded_leaf": -2.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscA.pan",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": -25.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "signed",
+    "min": -50.0,
+    "max": 50.0
+   },
+   "raw_leaf": -25.0,
+   "encoded_leaf": -25.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscA.semitone",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": -6.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "signed",
+    "min": -12.0,
+    "max": 12.0
+   },
+   "raw_leaf": -6.0,
+   "encoded_leaf": -6.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscA.unison",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 9.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 1.0,
+    "max": 16.0
+   },
+   "raw_leaf": 9.0,
+   "encoded_leaf": 9.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscA.warp_amount",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 0.5,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "raw_leaf": 0.5,
+   "encoded_leaf": 0.5,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscA.warp_mode",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": "kAM_OSC",
+   "mechanism": "ENUM_RAW",
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "kAM_OSC",
+     "kSync",
+     "kPWM",
+     "kBendPos",
+     "kDistLinFold",
+     "kDistSoftClip",
+     "kDistHardClip",
+     "kQuantize",
+     "kFilterLPF",
+     "kFilterHPF"
+    ]
+   },
+   "raw_leaf": "kAM_OSC",
+   "encoded_leaf": "kAM_OSC",
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscA.warp_mode2",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": "fm",
+   "mechanism": "LEAF_SET",
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "fm",
+     "am",
+     "sync",
+     "pwm",
+     "bend",
+     "fold",
+     "soft_clip",
+     "hard_clip",
+     "quantize",
+     "filter_lpf",
+     "filter_hpf"
+    ]
+   },
+   "raw_leaf": "kFM_OSC",
+   "encoded_leaf": "kFM_OSC",
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscA.warp_var2",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 0.5,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "raw_leaf": 0.5,
+   "encoded_leaf": 0.5,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscA.wavetable",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": "S2 Tables/Default Shapes.wav",
+   "mechanism": "LEAF_SET",
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "default",
+     "analog_basic",
+     "analog_warm",
+     "pwm",
+     "analog_mini",
+     "warm_sub",
+     "digital_fm",
+     "harmonic_smooth",
+     "dying_sine",
+     "acid",
+     "fm_piano",
+     "flute"
+    ]
+   },
+   "raw_leaf": "S2 Tables/Default Shapes.wav",
+   "encoded_leaf": "S2 Tables/Default Shapes.wav",
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscB.detune",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 0.5000000000000001,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "raw_leaf": 0.5000000000000001,
+   "encoded_leaf": 0.5000000000000001,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscB.enabled",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscB.fine",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": -40.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "signed",
+    "min": -80.0,
+    "max": 80.0
+   },
+   "raw_leaf": -40.0,
+   "encoded_leaf": -40.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscB.octave",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": -2.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "signed",
+    "min": -4.0,
+    "max": 4.0
+   },
+   "raw_leaf": -2.0,
+   "encoded_leaf": -2.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscB.pan",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": -25.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "signed",
+    "min": -50.0,
+    "max": 50.0
+   },
+   "raw_leaf": -25.0,
+   "encoded_leaf": -25.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscB.semitone",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": -6.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "signed",
+    "min": -12.0,
+    "max": 12.0
+   },
+   "raw_leaf": -6.0,
+   "encoded_leaf": -6.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscB.unison",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 9.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 1.0,
+    "max": 16.0
+   },
+   "raw_leaf": 9.0,
+   "encoded_leaf": 9.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscB.warp_amount",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 0.5,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "raw_leaf": 0.5,
+   "encoded_leaf": 0.5,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscB.warp_mode",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": "kAM_OSC",
+   "mechanism": "ENUM_RAW",
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "kAM_OSC",
+     "kSync",
+     "kPWM",
+     "kBendPos",
+     "kDistLinFold",
+     "kDistSoftClip",
+     "kDistHardClip",
+     "kQuantize",
+     "kFilterLPF",
+     "kFilterHPF"
+    ]
+   },
+   "raw_leaf": "kAM_OSC",
+   "encoded_leaf": "kAM_OSC",
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscB.warp_mode2",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": "fm",
+   "mechanism": "LEAF_SET",
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "fm",
+     "am",
+     "sync",
+     "pwm",
+     "bend",
+     "fold",
+     "soft_clip",
+     "hard_clip",
+     "quantize",
+     "filter_lpf",
+     "filter_hpf"
+    ]
+   },
+   "raw_leaf": "kFM_OSC",
+   "encoded_leaf": "kFM_OSC",
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscB.warp_var2",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 0.5,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "raw_leaf": 0.5,
+   "encoded_leaf": 0.5,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscB.wavetable",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": "S2 Tables/Default Shapes.wav",
+   "mechanism": "LEAF_SET",
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "default",
+     "analog_basic",
+     "analog_warm",
+     "pwm",
+     "analog_mini",
+     "warm_sub",
+     "digital_fm",
+     "harmonic_smooth",
+     "dying_sine",
+     "acid",
+     "fm_piano",
+     "flute"
+    ]
+   },
+   "raw_leaf": "S2 Tables/Default Shapes.wav",
+   "encoded_leaf": "S2 Tables/Default Shapes.wav",
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscC.detune",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 0.5000000000000001,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "raw_leaf": 0.5000000000000001,
+   "encoded_leaf": 0.5000000000000001,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscC.enabled",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscC.fine",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": -40.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "signed",
+    "min": -80.0,
+    "max": 80.0
+   },
+   "raw_leaf": -40.0,
+   "encoded_leaf": -40.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscC.octave",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": -2.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "signed",
+    "min": -4.0,
+    "max": 4.0
+   },
+   "raw_leaf": -2.0,
+   "encoded_leaf": -2.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscC.pan",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": -25.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "signed",
+    "min": -50.0,
+    "max": 50.0
+   },
+   "raw_leaf": -25.0,
+   "encoded_leaf": -25.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscC.semitone",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": -6.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "signed",
+    "min": -12.0,
+    "max": 12.0
+   },
+   "raw_leaf": -6.0,
+   "encoded_leaf": -6.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscC.unison",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 9.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 1.0,
+    "max": 16.0
+   },
+   "raw_leaf": 9.0,
+   "encoded_leaf": 9.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscC.warp_amount",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 0.5,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "raw_leaf": 0.5,
+   "encoded_leaf": 0.5,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscC.warp_mode",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": "kAM_OSC",
+   "mechanism": "ENUM_RAW",
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "kAM_OSC",
+     "kSync",
+     "kPWM",
+     "kBendPos",
+     "kDistLinFold",
+     "kDistSoftClip",
+     "kDistHardClip",
+     "kQuantize",
+     "kFilterLPF",
+     "kFilterHPF"
+    ]
+   },
+   "raw_leaf": "kAM_OSC",
+   "encoded_leaf": "kAM_OSC",
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscC.warp_mode2",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": "fm",
+   "mechanism": "LEAF_SET",
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "fm",
+     "am",
+     "sync",
+     "pwm",
+     "bend",
+     "fold",
+     "soft_clip",
+     "hard_clip",
+     "quantize",
+     "filter_lpf",
+     "filter_hpf"
+    ]
+   },
+   "raw_leaf": "kFM_OSC",
+   "encoded_leaf": "kFM_OSC",
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscC.warp_var2",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 0.5,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "raw_leaf": 0.5,
+   "encoded_leaf": 0.5,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscC.wavetable",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": "S2 Tables/Default Shapes.wav",
+   "mechanism": "LEAF_SET",
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "default",
+     "analog_basic",
+     "analog_warm",
+     "pwm",
+     "analog_mini",
+     "warm_sub",
+     "digital_fm",
+     "harmonic_smooth",
+     "dying_sine",
+     "acid",
+     "fm_piano",
+     "flute"
+    ]
+   },
+   "raw_leaf": "S2 Tables/Default Shapes.wav",
+   "encoded_leaf": "S2 Tables/Default Shapes.wav",
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscNoise.fine",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": -40.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "signed",
+    "min": -80.0,
+    "max": 80.0
+   },
+   "raw_leaf": -40.0,
+   "encoded_leaf": -40.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscNoise.noise_type",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": "Pink",
+   "mechanism": "ENUM_RAW",
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "Pink",
+     "Brown",
+     "Geiger"
+    ]
+   },
+   "raw_leaf": "Pink",
+   "encoded_leaf": "Pink",
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscNoise.pan",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": -25.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "signed",
+    "min": -50.0,
+    "max": 50.0
+   },
+   "raw_leaf": -25.0,
+   "encoded_leaf": -25.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "voice.voicing.legato",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "voice.voicing.mono",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "voice.voicing.porta_always",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "voice.voicing.porta_scaled",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool",
+    "default": null
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.bode.blur",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.bode.range",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 3043.1999999999975,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "log",
+    "min": 0.1,
+    "max": 3043.2
+   },
+   "raw_leaf": 3043.1999999999975,
+   "encoded_leaf": 3043.1999999999975,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.bode.shift",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": -9.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "signed",
+    "min": -100.0,
+    "max": 82.0
+   },
+   "raw_leaf": -9.0,
+   "encoded_leaf": -9.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.bode.wet",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.chorus.depth",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 13.000000000000004,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 26.0
+   },
+   "raw_leaf": 13.000000000000004,
+   "encoded_leaf": 13.000000000000004,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.chorus.feedback",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 37.5,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 75.0
+   },
+   "raw_leaf": 37.5,
+   "encoded_leaf": 37.5,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.chorus.rate",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 9.999999999999998,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 20.0
+   },
+   "raw_leaf": 9.999999999999998,
+   "encoded_leaf": 9.999999999999998,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.chorus.wet",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 25.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 25.0,
+   "encoded_leaf": 25.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.compressor.attack",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 100.00000000000001,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "log",
+    "min": 0.1,
+    "max": 1000.0
+   },
+   "raw_leaf": 100.00000000000001,
+   "encoded_leaf": 100.00000000000001,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.compressor.gain",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 16.500000000000007,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 1.0,
+    "max": 32.0
+   },
+   "raw_leaf": 16.500000000000007,
+   "encoded_leaf": 16.500000000000007,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.compressor.ratio",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 31622.7766016712,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "log",
+    "min": 1.0,
+    "max": 1000000.0
+   },
+   "raw_leaf": 31622.7766016712,
+   "encoded_leaf": 31622.7766016712,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.compressor.release",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 100.00000000000001,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "log",
+    "min": 0.1,
+    "max": 1000.0
+   },
+   "raw_leaf": 100.00000000000001,
+   "encoded_leaf": 100.00000000000001,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.compressor.thresh",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 0.25,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "raw_leaf": 0.25,
+   "encoded_leaf": 0.25,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.compressor.wet",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.convolve.decay",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 19.999999999999996,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 40.0
+   },
+   "raw_leaf": 19.999999999999996,
+   "encoded_leaf": 19.999999999999996,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.convolve.size",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 505.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 10.0,
+    "max": 1000.0
+   },
+   "raw_leaf": 505.0,
+   "encoded_leaf": 505.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.convolve.tone",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": -7.5,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "signed",
+    "min": -100.0,
+    "max": 85.0
+   },
+   "raw_leaf": -7.5,
+   "encoded_leaf": -7.5,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.convolve.wet",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.delay.bpm",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 0.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool"
+   },
+   "raw_leaf": 0.0,
+   "encoded_leaf": 0.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.delay.feedback",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 45.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 90.0
+   },
+   "raw_leaf": 45.0,
+   "encoded_leaf": 45.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.delay.freq",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 9015.249999999995,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 49.5,
+    "max": 17981.0
+   },
+   "raw_leaf": 9015.249999999995,
+   "encoded_leaf": 9015.249999999995,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.delay.link",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 1.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "bool"
+   },
+   "raw_leaf": 1.0,
+   "encoded_leaf": 1.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.delay.mode",
+   "plan_status": "NO_USABLE_TARGET_VALUE",
+   "target_value": null,
+   "verdict": "NOT_COMPARABLE",
+   "reason": "no target value (NO_USABLE_TARGET_VALUE)"
+  },
+  {
+   "atlas_id": "fx.delay.time_l",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 0.1705,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.001,
+    "max": 0.34
+   },
+   "raw_leaf": 0.1705,
+   "encoded_leaf": 0.1705,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.delay.time_r",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 0.1605,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.001,
+    "max": 0.32
+   },
+   "raw_leaf": 0.1605,
+   "encoded_leaf": 0.1605,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.delay.wet",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.dimension.size",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 25.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 25.0,
+   "encoded_leaf": 25.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.dimension.wet",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.hyper.detune",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.hyper.rate",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.hyper.unison",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 3.5,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 7.0
+   },
+   "raw_leaf": 3.5,
+   "encoded_leaf": 3.5,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.hyper.wet",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 25.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 25.0,
+   "encoded_leaf": 25.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.distortion.drive",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.distortion.freq",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 0.25,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "raw_leaf": 0.25,
+   "encoded_leaf": 0.25,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.distortion.type",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": "kAsym",
+   "mechanism": "ENUM_RAW",
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "kAsym",
+     "kDiode1",
+     "kDiode2",
+     "kDownsample",
+     "kHardClip",
+     "kLinFold",
+     "kOverdrive",
+     "kRectify",
+     "kSinFold",
+     "kSineShaper",
+     "kSoftClip",
+     "kSoftSat",
+     "kStompBox",
+     "kTapeSat",
+     "kXShaper",
+     "kXShaperAsym",
+     "kZeroSquare"
+    ]
+   },
+   "raw_leaf": "kAsym",
+   "encoded_leaf": "kAsym",
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.distortion.wet",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.equalizer.left_freq",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 5010.750000000001,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 21.5,
+    "max": 10000.0
+   },
+   "raw_leaf": 5010.750000000001,
+   "encoded_leaf": 5010.750000000001,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.equalizer.left_gain",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": -12.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "signed",
+    "min": -24.0,
+    "max": 24.0
+   },
+   "raw_leaf": -12.0,
+   "encoded_leaf": -12.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.equalizer.left_q",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.equalizer.right_freq",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 10010.750000000002,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 21.5,
+    "max": 20000.0
+   },
+   "raw_leaf": 10010.750000000002,
+   "encoded_leaf": 10010.750000000002,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.equalizer.right_gain",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": -12.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "signed",
+    "min": -24.0,
+    "max": 24.0
+   },
+   "raw_leaf": -12.0,
+   "encoded_leaf": -12.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.equalizer.right_q",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 47.5,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 95.0
+   },
+   "raw_leaf": 47.5,
+   "encoded_leaf": 47.5,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.filter.cutoff",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 0.25,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "raw_leaf": 0.25,
+   "encoded_leaf": 0.25,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.filter.drive",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.filter.res",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.filter.type",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": "L6",
+   "mechanism": "ENUM_RAW",
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "L6",
+     "L12",
+     "L18",
+     "L24",
+     "H6",
+     "H12",
+     "H18",
+     "H24",
+     "B12",
+     "B24",
+     "N24",
+     "BN12",
+     "NN12",
+     "BPN12",
+     "BPN24",
+     "BandReject",
+     "Allpasses",
+     "LH12",
+     "HB12",
+     "LBH12",
+     "LBH24",
+     "LNH12",
+     "LNH24",
+     "LPH24",
+     "LN12",
+     "PP12",
+     "HP12",
+     "MgL6",
+     "MgL12",
+     "MgL18",
+     "MgL24",
+     "LadderMg",
+     "LadderAcid",
+     "LadderEMS",
+     "DirtyMg",
+     "Comb2",
+     "CombN",
+     "CombP",
+     "CombH6N",
+     "CombHL6P",
+     "DistComb2LP",
+     "DistComb2BP",
+     "FlangeN",
+     "FlangeP",
+     "FlangePhase12HL6P",
+     "Phase24P",
+     "Phase36N",
+     "Phase36P",
+     "Phase48H6P",
+     "Phase48HL6P",
+     "Phase48P",
+     "FormantONE",
+     "FormantTWB",
+     "FormantTWO",
+     "DJMixer",
+     "Diffuser",
+     "Exp",
+     "ExpBPF",
+     "PZ_SVF",
+     "RM",
+     "RMT",
+     "Reverb1",
+     "Scream",
+     "Scream3LP",
+     "Wsp",
+     "ADD_BASS",
+     "BEQ12",
+     "BP12",
+     "CombHL6N",
+     "CombL6N",
+     "Combs",
+     "DistComb1BP",
+     "DistComb1LP",
+     "FlangeH6P",
+     "FlangeL6P",
+     "HEQ12",
+     "HN12",
+     "LB12",
+     "N12",
+     "P12",
+     "FlangeHL6N",
+     "HEQ6",
+     "LPH12",
+     "PN12",
+     "Phase12N",
+     "Phase12P",
+     "SNH1",
+     "ZDF_A",
+     "Scream3BP",
+     "Phase48HL6N",
+     "Phase48N",
+     "FlangeHL6P",
+     "Phase24N",
+     "FlangeL6N",
+     "SNH2",
+     "CombH6P",
+     "LEQ12"
+    ]
+   },
+   "raw_leaf": "L6",
+   "encoded_leaf": "L6",
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.filter.wet",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.flanger.depth",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.flanger.feedback",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 25.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 25.0,
+   "encoded_leaf": 25.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.flanger.rate",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 5.000000000000001,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 10.0
+   },
+   "raw_leaf": 5.000000000000001,
+   "encoded_leaf": 5.000000000000001,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.flanger.wet",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.phaser.depth",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 25.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 25.0,
+   "encoded_leaf": 25.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.phaser.feedback",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.phaser.freq",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 3556.5588200778457,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "log",
+    "min": 20.0,
+    "max": 20000.0
+   },
+   "raw_leaf": 3556.5588200778457,
+   "encoded_leaf": 3556.5588200778457,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.phaser.rate",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 9.999999999999998,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 20.0
+   },
+   "raw_leaf": 9.999999999999998,
+   "encoded_leaf": 9.999999999999998,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.phaser.wet",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.reverb.size",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.reverb.type",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": "kAbyss",
+   "mechanism": "ENUM_RAW",
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "kAbyss",
+     "kHall",
+     "kSpace",
+     "kVintage"
+    ]
+   },
+   "raw_leaf": "kAbyss",
+   "encoded_leaf": "kAbyss",
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "fx.reverb.wet",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "DIRECT_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscA.sample_loop_crossfade",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "CONTEXTUAL_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscA.sample_loop_end",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "CONTEXTUAL_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscA.sample_loop_start",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "CONTEXTUAL_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscB.sample_loop_crossfade",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "CONTEXTUAL_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscB.sample_loop_end",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "CONTEXTUAL_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscB.sample_loop_start",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "CONTEXTUAL_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscC.sample_loop_crossfade",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "CONTEXTUAL_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscC.sample_loop_end",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "CONTEXTUAL_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscC.sample_loop_start",
+   "plan_status": "APPLIED_TO_GIANT_PRESET",
+   "target_value": 50.0,
+   "mechanism": "CONTEXTUAL_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "raw_leaf": 50.0,
+   "encoded_leaf": 50.0,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscA.warp_amount2",
+   "plan_status": "APPLIED_TO_SECONDARY_PRESET",
+   "target_value": 0.5,
+   "mechanism": "CONTEXTUAL_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "raw_leaf": 0.5,
+   "encoded_leaf": 0.5,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscB.warp_amount2",
+   "plan_status": "APPLIED_TO_SECONDARY_PRESET",
+   "target_value": 0.5,
+   "mechanism": "CONTEXTUAL_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "raw_leaf": 0.5,
+   "encoded_leaf": 0.5,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "oscC.warp_amount2",
+   "plan_status": "APPLIED_TO_SECONDARY_PRESET",
+   "target_value": 0.5,
+   "mechanism": "CONTEXTUAL_RAW",
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "raw_leaf": 0.5,
+   "encoded_leaf": 0.5,
+   "verdict": "IDENTICAL"
+  },
+  {
+   "atlas_id": "arp.transpose.shape",
+   "plan_status": "NOT_DERIVED",
+   "target_value": null,
+   "verdict": "NOT_COMPARABLE",
+   "reason": "no target value (NOT_DERIVED)"
+  },
+  {
+   "atlas_id": "global.voice_priority",
+   "plan_status": "NOT_DERIVED",
+   "target_value": null,
+   "verdict": "NOT_COMPARABLE",
+   "reason": "no target value (NOT_DERIVED)"
+  }
+ ]
+}
