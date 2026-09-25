@@ -1,5 +1,20 @@
 # Finding: causal state-readback does not prove native-file/GUI truth for some raw writes
 
+## CORRECTION 2 (2026-09-26 UI re-scan, full evidence in giant_verify_out/ui_scan_2026-09-26.md)
+Two statements below are superseded. They stay in place as the historical record.
+- **Compressor, sections 2 & 3: the earlier readings were one column off.** Hovering each knob gives Thresh -7.5 dB,
+  Ratio "Limit", Attack 1.0 ms, Release 100.0 ms, Gain 30.4 dB. So `fx.compressor.release` MATCHES (100) and
+  `fx.compressor.attack` is the MISMATCH (raw 100 -> 1.0 ms). "RATIO 1.0" was the Attack column and "RELEASE 30.4" was
+  Gain. `ratio` shows "Limit", the top of Serum's range, not a numeric value. `gain` (raw 16.5 -> 30.4 dB) is a
+  new mismatch. Attack and release hold the same raw number with the same declared domain but display differently.
+- **`lfo1.mode`, section 1: root cause found, no bisect needed.** With shape S&H, Serum greys out the ENVELOPE mode
+  button and ignores clicks. Switching only the shape to Normal on the loaded instance made ENVELOPE clickable. The
+  giant preset sets `lfo*.shape = RandomSH` together with `lfo*.mode = Envelope`, and Serum drops the mode. The isolation
+  tests kept the default shape (Normal). This is a cross-parameter constraint, not a write bug: CONTEXT_CONFLICT.
+- New in the same scan: `fx.reverb.type` `kAbyss` shows as NITROUS; Serum 2.0.23's list is Plate/Hall/Vintage/Nitrous/Basin,
+  but serum-mcp's schema says Abyss/Hall/Space/Vintage. `osc*.warp_*` cannot be observed here: the oscillators run in
+  SAMPLE mode, so the panel shows `SampleOsc1` warp, not the `WTOsc1` slots that were written.
+
 ## CORRECTION (after further isolation testing)
 The original version of this document claimed `lfo1.mode` shared the same root cause as the compressor and
 sustain findings ("raw write bypasses `apply_spec`'s encoder"). **That claim was wrong and is retracted below,
