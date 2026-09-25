@@ -91,7 +91,7 @@ def diff_keys(a, b) -> list:
 
 
 # ---------------------------------------------------------------- the engine -------------------------------------------
-def run_parameter(base_body, base_obs, floor, param, backend, cfg, counters, meta=None):
+def run_parameter(base_body, base_obs, floor, param, backend, cfg, counters, meta=None, on_value_observe=None):
     path = resolve_path(param["mutation"])
     kp = path[-1]
     domain = param["domain"]
@@ -127,6 +127,8 @@ def run_parameter(base_body, base_obs, floor, param, backend, cfg, counters, met
                      "leaves_written": [[lp, lv] for lp, lv in leaves] if len(leaves) > 1 else None, "leaf_states": leaf_states,
                      "band_db": o["band_db"], "band_delta_db": [round(a - b, 2) for a, b in zip(o["band_db"], base_obs["band_db"])],
                      "host_params_changed": sorted(k for k in o["hosts"] if o["hosts"][k] != base_obs["hosts"].get(k))[:8]})
+        if on_value_observe:
+            on_value_observe(rows[-1], o, backend, param)  # backend is in the JUST-MUTATED state (pre-restore)
         obs[repr(v)] = {"written": v, "state_value": sv, "probe": probe, "load_error": err}
     backend.load(base_body)                       # restore the context baseline ...
     counters["state_loads"] += 1
@@ -140,9 +142,17 @@ def run_parameter(base_body, base_obs, floor, param, backend, cfg, counters, met
             "noise_floor_db": floor}
 
 
-def run_context(name, base_body, params, backend_factory, cfg, counters=None, meta=None, on_start=None, on_record=None):
+def run_context(name, base_body, params, backend_factory, cfg, counters=None, meta=None, on_start=None, on_record=None,
+                 on_value_observe=None, on_gui_restore=None):
     """Sweep `params` (all belonging to context `name`) against base_body. A fresh backend (Serum instance) is built every
-    cfg['session_size'] parameters and the context base is loaded once into each; returns the per-parameter evidence."""
+    cfg['session_size'] parameters and the context base is loaded once into each; returns the per-parameter evidence.
+
+    Two optional GUI observation hooks, at two distinct lifecycle points (never confuse the two):
+      on_value_observe(row, o, backend, p): called once per VALUE, right after that value's mutation is observed,
+        backend still in the JUST-MUTATED state (pre-restore). This is the only hook that can see mutated GUI evidence.
+      on_gui_restore(rec, backend, p): called once per PARAMETER, after the engine has restored the context baseline.
+        Proves restoration reached the GUI too; does NOT see the mutated value.
+    """
     counters = counters if counters is not None else {}
     counters.setdefault("state_loads", 0)
     counters.setdefault("sessions", 0)
@@ -164,9 +174,11 @@ def run_context(name, base_body, params, backend_factory, cfg, counters=None, me
             floor = max(cfg.get("min_noise_floor_db", 0.5), 2 * max(abs(a - b) for a, b in zip(base_obs["band_db"], again["band_db"])))
         if on_start:
             on_start(p)
-        rec = run_parameter(base_body, base_obs, floor, p, backend, cfg, counters, meta)
+        rec = run_parameter(base_body, base_obs, floor, p, backend, cfg, counters, meta, on_value_observe=on_value_observe)
         records.append(rec)
         if on_record:
             on_record(rec)
+        if on_gui_restore:
+            on_gui_restore(rec, backend, p)  # optional: add GUI restoration evidence to rec in-place (post-restore only)
     assert sha(base_body) == pristine, "the context body must never be mutated in place"
     return records

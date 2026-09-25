@@ -188,3 +188,32 @@ def test_oscillator_pilot_runs_on_the_same_engine_with_raw_paths_only():
     assert by["kParamCoarsePit"]["clamp_high_at"] == 64.0      # schema declared 72
     assert by["kParamFine"]["clamp_high_at"] == 100.0          # schema declared 80
     assert by["kParamInitialPhase"]["discovered_default"] == 180.0   # schema default said 0
+
+
+def test_gui_observer_sees_the_mutated_value_before_restore_not_only_the_restored_value():
+    """Regression for the observer-timing bug: a GUI/host-text hook wired only to fire AFTER restoration
+    can never see mutated-state evidence -- every observation would silently equal the baseline. The engine
+    must offer a hook at the per-VALUE, pre-restore point (on_value_observe) distinct from the post-restore
+    check (on_gui_restore); this fails if either hook stops seeing what its name promises."""
+    mutated_calls, restore_calls = [], []
+
+    def on_value_observe(row, o, backend, p):
+        mutated_calls.append({"written": row["written"], "hosts": dict(o["hosts"]), "body_sha": be.sha(backend.body)})
+
+    def on_gui_restore(rec, backend, p):
+        restore_calls.append({"hosts": dict(backend.observe()["hosts"]), "body_sha": be.sha(backend.body)})
+
+    r = be.run_context("C", BASE, params("a"), FakeBackend, {"session_size": 10}, {},
+                        on_value_observe=on_value_observe, on_gui_restore=on_gui_restore)
+
+    base_sha = be.sha(BASE)
+    baseline_hosts = FakeBackend().load(BASE) or FakeBackend.instances[-1].observe()["hosts"]
+
+    assert len(mutated_calls) == len(r[0]["values"]) > 1            # one call per value tried, not just once
+    # at least one mutated observation must be seen in the JUST-MUTATED body (not the restored baseline)
+    assert any(c["body_sha"] != base_sha for c in mutated_calls), "on_value_observe never saw a mutated body"
+    assert any(c["hosts"] != baseline_hosts for c in mutated_calls), "on_value_observe never saw mutated host text"
+
+    assert len(restore_calls) == 1                                   # once per parameter, after the sweep
+    assert restore_calls[0]["body_sha"] == base_sha                  # by definition: post-restore
+    assert restore_calls[0]["hosts"] == baseline_hosts                # restoration must reach the GUI/host text too

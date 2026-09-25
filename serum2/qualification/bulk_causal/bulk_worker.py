@@ -21,6 +21,7 @@ sys.path.insert(0, HERE)
 import serum_backend as sb  # noqa: E402  (imports the old repo's serum2; keep this file out of this repo's normal imports)
 from bulk_engine import ENGINE_CONTRACT_VERSION, run_context  # noqa: E402
 from preset_build import write_context_preset  # noqa: E402
+from gui_observation import gui_observer_factory  # noqa: E402
 
 PINNED_SHA = "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
 
@@ -29,9 +30,14 @@ def sha(path):
     return hashlib.sha256(open(path, "rb").read()).hexdigest()
 
 
-def main(manifest, out, progress=None):
+def main(manifest, out, progress=None, gui_observe=False):
+    """Run bulk qualification with optional GUI observation layer.
+
+    gui_observe: if True, add optional observer callback for GUI evidence (non-breaking).
+    """
     cfg = json.load(open(manifest))
     done_ids, prev = set(), []
+    on_value_observe, on_gui_restore = gui_observer_factory(use_host_text=gui_observe) if gui_observe else (None, None)
     if progress and os.path.exists(progress):    # resume: skip what a previous (possibly crashed) worker already recorded
         for line in open(progress).read().splitlines():
             if line.strip():
@@ -58,7 +64,8 @@ def main(manifest, out, progress=None):
         params = [p for p in params_all if p["atlas_id"] not in done_ids]
         path, body, meta = write_context_preset(ctx.get("preset_name", name), ctx, ctx_dir)   # the ONE persistent preset
         presets.append({"context": name, "path": os.path.relpath(path, HERE), "sha256": sha(path), "parameters": len(params_all)})
-        recs = run_context(name, body, params, lambda: sb.SerumBackend(cfg), cfg, counters, meta=meta, on_start=on_start, on_record=on_record) if params else []
+        recs = run_context(name, body, params, lambda: sb.SerumBackend(cfg), cfg, counters, meta=meta, on_start=on_start, on_record=on_record,
+                           on_value_observe=on_value_observe, on_gui_restore=on_gui_restore) if params else []
         for r in recs:
             print("%-30s %-14s restore=%s reach=[%s,%s]" % (r["atlas_id"], r["candidate"]["kparam"], r["restoration"]["ok"],
                                                              r["range"]["reachable_min"], r["range"]["reachable_max"]))
@@ -87,4 +94,5 @@ def main(manifest, out, progress=None):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1], sys.argv[2], sys.argv[sys.argv.index("--progress") + 1] if "--progress" in sys.argv else None)
+    main(sys.argv[1], sys.argv[2], sys.argv[sys.argv.index("--progress") + 1] if "--progress" in sys.argv else None,
+         gui_observe="--gui-observe" in sys.argv)
