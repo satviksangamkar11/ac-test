@@ -1,0 +1,4540 @@
+{
+ "round": 1,
+ "pool": [
+  {
+   "atlas_id": "arp.pattern.rate",
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamRate"
+   ],
+   "target_value": 0.25
+  },
+  {
+   "atlas_id": "arp.pattern.shape",
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamShape"
+   ],
+   "target_value": "Chord"
+  },
+  {
+   "atlas_id": "arp.playback.chance",
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamChance"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "arp.playback.gate",
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamGate"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "arp.playback.thru",
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamThru"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "arp.retrigger.first",
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamFirstNoteRetrig"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "arp.retrigger.launch",
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamLaunchRetrig"
+   ],
+   "target_value": 0.0
+  },
+  {
+   "atlas_id": "arp.retrigger.note",
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamNoteRetrig"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "arp.transpose.range",
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamTransposeRange"
+   ],
+   "target_value": 6.0
+  },
+  {
+   "atlas_id": "arp.transpose.shift",
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamTransposeShift"
+   ],
+   "target_value": -12.0
+  },
+  {
+   "atlas_id": "arp.velocity.enable",
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamVeloEnabled"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "arp.velocity.retrig",
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamVeloRetrig"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "arp.velocity.target",
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamVeloTarget"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "env1.attack",
+   "raw_path": [
+    "Env0",
+    "plainParams",
+    "kParamAttack"
+   ],
+   "target_value": 5.000000000000001
+  },
+  {
+   "atlas_id": "env1.attack_curve",
+   "raw_path": [
+    "Env0",
+    "plainParams",
+    "kParamCurve1"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "env1.decay",
+   "raw_path": [
+    "Env0",
+    "plainParams",
+    "kParamDecay"
+   ],
+   "target_value": 15.999999999999998
+  },
+  {
+   "atlas_id": "env1.decay_curve",
+   "raw_path": [
+    "Env0",
+    "plainParams",
+    "kParamCurve2"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "env1.hold",
+   "raw_path": [
+    "Env0",
+    "plainParams",
+    "kParamHold"
+   ],
+   "target_value": 2.599999999999999
+  },
+  {
+   "atlas_id": "env1.release",
+   "raw_path": [
+    "Env0",
+    "plainParams",
+    "kParamRelease"
+   ],
+   "target_value": 15.999999999999998
+  },
+  {
+   "atlas_id": "env1.release_curve",
+   "raw_path": [
+    "Env0",
+    "plainParams",
+    "kParamCurve3"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "env1.sustain",
+   "raw_path": [
+    "Env0",
+    "plainParams",
+    "kParamSustain"
+   ],
+   "target_value": 0.5
+  },
+  {
+   "atlas_id": "env2.attack",
+   "raw_path": [
+    "Env1",
+    "plainParams",
+    "kParamAttack"
+   ],
+   "target_value": 5.000000000000001
+  },
+  {
+   "atlas_id": "env2.attack_curve",
+   "raw_path": [
+    "Env1",
+    "plainParams",
+    "kParamCurve1"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "env2.decay",
+   "raw_path": [
+    "Env1",
+    "plainParams",
+    "kParamDecay"
+   ],
+   "target_value": 15.999999999999998
+  },
+  {
+   "atlas_id": "env2.decay_curve",
+   "raw_path": [
+    "Env1",
+    "plainParams",
+    "kParamCurve2"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "env2.hold",
+   "raw_path": [
+    "Env1",
+    "plainParams",
+    "kParamHold"
+   ],
+   "target_value": 2.599999999999999
+  },
+  {
+   "atlas_id": "env2.release",
+   "raw_path": [
+    "Env1",
+    "plainParams",
+    "kParamRelease"
+   ],
+   "target_value": 15.999999999999998
+  },
+  {
+   "atlas_id": "env2.release_curve",
+   "raw_path": [
+    "Env1",
+    "plainParams",
+    "kParamCurve3"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "env2.sustain",
+   "raw_path": [
+    "Env1",
+    "plainParams",
+    "kParamSustain"
+   ],
+   "target_value": 0.5
+  },
+  {
+   "atlas_id": "env3.attack",
+   "raw_path": [
+    "Env2",
+    "plainParams",
+    "kParamAttack"
+   ],
+   "target_value": 5.000000000000001
+  },
+  {
+   "atlas_id": "env3.attack_curve",
+   "raw_path": [
+    "Env2",
+    "plainParams",
+    "kParamCurve1"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "env3.decay",
+   "raw_path": [
+    "Env2",
+    "plainParams",
+    "kParamDecay"
+   ],
+   "target_value": 15.999999999999998
+  },
+  {
+   "atlas_id": "env3.decay_curve",
+   "raw_path": [
+    "Env2",
+    "plainParams",
+    "kParamCurve2"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "env3.hold",
+   "raw_path": [
+    "Env2",
+    "plainParams",
+    "kParamHold"
+   ],
+   "target_value": 2.599999999999999
+  },
+  {
+   "atlas_id": "env3.release",
+   "raw_path": [
+    "Env2",
+    "plainParams",
+    "kParamRelease"
+   ],
+   "target_value": 15.999999999999998
+  },
+  {
+   "atlas_id": "env3.release_curve",
+   "raw_path": [
+    "Env2",
+    "plainParams",
+    "kParamCurve3"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "env3.sustain",
+   "raw_path": [
+    "Env2",
+    "plainParams",
+    "kParamSustain"
+   ],
+   "target_value": 0.5
+  },
+  {
+   "atlas_id": "env4.attack",
+   "raw_path": [
+    "Env3",
+    "plainParams",
+    "kParamAttack"
+   ],
+   "target_value": 5.000000000000001
+  },
+  {
+   "atlas_id": "env4.attack_curve",
+   "raw_path": [
+    "Env3",
+    "plainParams",
+    "kParamCurve1"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "env4.decay",
+   "raw_path": [
+    "Env3",
+    "plainParams",
+    "kParamDecay"
+   ],
+   "target_value": 15.999999999999998
+  },
+  {
+   "atlas_id": "env4.decay_curve",
+   "raw_path": [
+    "Env3",
+    "plainParams",
+    "kParamCurve2"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "env4.hold",
+   "raw_path": [
+    "Env3",
+    "plainParams",
+    "kParamHold"
+   ],
+   "target_value": 2.599999999999999
+  },
+  {
+   "atlas_id": "env4.release",
+   "raw_path": [
+    "Env3",
+    "plainParams",
+    "kParamRelease"
+   ],
+   "target_value": 15.999999999999998
+  },
+  {
+   "atlas_id": "env4.release_curve",
+   "raw_path": [
+    "Env3",
+    "plainParams",
+    "kParamCurve3"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "env4.sustain",
+   "raw_path": [
+    "Env3",
+    "plainParams",
+    "kParamSustain"
+   ],
+   "target_value": 0.5
+  },
+  {
+   "atlas_id": "filter1.cutoff",
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamFreq"
+   ],
+   "target_value": 0.25
+  },
+  {
+   "atlas_id": "filter1.drive",
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamDrive"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "filter1.enabled",
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamEnable"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "filter1.key_track",
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamKeyTrack"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "filter1.level_out",
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamLevelOut"
+   ],
+   "target_value": 0.25
+  },
+  {
+   "atlas_id": "filter1.resonance",
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamReso"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "filter1.stereo",
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamStereo"
+   ],
+   "target_value": 25.0
+  },
+  {
+   "atlas_id": "filter1.type",
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamType"
+   ],
+   "target_value": "L12"
+  },
+  {
+   "atlas_id": "filter1.var",
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamVar"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "filter1.wet",
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamWet"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "filter2.cutoff",
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamFreq"
+   ],
+   "target_value": 0.25
+  },
+  {
+   "atlas_id": "filter2.drive",
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamDrive"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "filter2.enabled",
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamEnable"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "filter2.key_track",
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamKeyTrack"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "filter2.level_out",
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamLevelOut"
+   ],
+   "target_value": 0.25
+  },
+  {
+   "atlas_id": "filter2.resonance",
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamReso"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "filter2.stereo",
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamStereo"
+   ],
+   "target_value": 25.0
+  },
+  {
+   "atlas_id": "filter2.type",
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamType"
+   ],
+   "target_value": "L12"
+  },
+  {
+   "atlas_id": "filter2.var",
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamVar"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "filter2.wet",
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamWet"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "global.bend_range_down",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamBendRangeDn"
+   ],
+   "target_value": -12.0
+  },
+  {
+   "atlas_id": "global.bend_range_up",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamBendRangeUp"
+   ],
+   "target_value": 12.0
+  },
+  {
+   "atlas_id": "global.fx_bus1_destination",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamFXBus1Dest"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "global.fx_bus2_destination",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamFXBus2Dest"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "global.legato",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamLegato"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "global.limit_same_note_polyphony",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamLimitSameNotePolyphony"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "global.master_volume",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamMasterVolume"
+   ],
+   "target_value": 0.5000000000000001
+  },
+  {
+   "atlas_id": "global.mono",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamMonoToggle"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "global.note_latch",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamNoteLatch"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "global.poly_count",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamPolyCount"
+   ],
+   "target_value": 17.0
+  },
+  {
+   "atlas_id": "global.porta_always",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamPortaAlways"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "global.porta_scaled",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamPortaScaled"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "global.portamento_time",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamPortamentoTime"
+   ],
+   "target_value": 1.5000000000000002
+  },
+  {
+   "atlas_id": "global.s1_compatibility",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamS1Compatibility"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "global.swing",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamSwing"
+   ],
+   "target_value": 25.0
+  },
+  {
+   "atlas_id": "global.transpose",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamTranspose"
+   ],
+   "target_value": -24.0
+  },
+  {
+   "atlas_id": "global.voice_control.random.pan",
+   "raw_path": [
+    "VoicePanel0",
+    "plainParams",
+    "kParamGlobalRandomOscPan"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "lfo1.beat_sync",
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamBeatSync"
+   ],
+   "target_value": 0.0
+  },
+  {
+   "atlas_id": "lfo1.delay",
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamDelay"
+   ],
+   "target_value": 1.8
+  },
+  {
+   "atlas_id": "lfo1.dotted",
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamDotted"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "lfo1.mono",
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamMono"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "lfo1.rate",
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamRate"
+   ],
+   "target_value": 49.999999999999986
+  },
+  {
+   "atlas_id": "lfo1.rate_10x",
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamRate10x"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "lfo1.rise",
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamRise"
+   ],
+   "target_value": 2.5
+  },
+  {
+   "atlas_id": "lfo1.shape",
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamType"
+   ],
+   "target_value": "RandomSH"
+  },
+  {
+   "atlas_id": "lfo1.smooth",
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamSmooth"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "lfo1.swing",
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamSwing"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "lfo1.triplets",
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamTriplets"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "lfo2.beat_sync",
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamBeatSync"
+   ],
+   "target_value": 0.0
+  },
+  {
+   "atlas_id": "lfo2.delay",
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamDelay"
+   ],
+   "target_value": 1.8
+  },
+  {
+   "atlas_id": "lfo2.dotted",
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamDotted"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "lfo2.mode",
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamMode"
+   ],
+   "target_value": "Envelope"
+  },
+  {
+   "atlas_id": "lfo2.mono",
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamMono"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "lfo2.rate",
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamRate"
+   ],
+   "target_value": 49.999999999999986
+  },
+  {
+   "atlas_id": "lfo2.rate_10x",
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamRate10x"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "lfo2.rise",
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamRise"
+   ],
+   "target_value": 2.5
+  },
+  {
+   "atlas_id": "lfo2.shape",
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamType"
+   ],
+   "target_value": "RandomSH"
+  },
+  {
+   "atlas_id": "lfo2.smooth",
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamSmooth"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "lfo2.swing",
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamSwing"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "lfo2.triplets",
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamTriplets"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "lfo3.beat_sync",
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamBeatSync"
+   ],
+   "target_value": 0.0
+  },
+  {
+   "atlas_id": "lfo3.delay",
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamDelay"
+   ],
+   "target_value": 1.8
+  },
+  {
+   "atlas_id": "lfo3.dotted",
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamDotted"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "lfo3.mode",
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamMode"
+   ],
+   "target_value": "Envelope"
+  },
+  {
+   "atlas_id": "lfo3.mono",
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamMono"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "lfo3.rate",
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamRate"
+   ],
+   "target_value": 49.999999999999986
+  },
+  {
+   "atlas_id": "lfo3.rate_10x",
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamRate10x"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "lfo3.rise",
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamRise"
+   ],
+   "target_value": 2.5
+  },
+  {
+   "atlas_id": "lfo3.shape",
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamType"
+   ],
+   "target_value": "RandomSH"
+  },
+  {
+   "atlas_id": "lfo3.smooth",
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamSmooth"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "lfo3.swing",
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamSwing"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "lfo3.triplets",
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamTriplets"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "lfo4.beat_sync",
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamBeatSync"
+   ],
+   "target_value": 0.0
+  },
+  {
+   "atlas_id": "lfo4.delay",
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamDelay"
+   ],
+   "target_value": 1.8
+  },
+  {
+   "atlas_id": "lfo4.dotted",
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamDotted"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "lfo4.mode",
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamMode"
+   ],
+   "target_value": "Envelope"
+  },
+  {
+   "atlas_id": "lfo4.mono",
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamMono"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "lfo4.rate",
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamRate"
+   ],
+   "target_value": 49.999999999999986
+  },
+  {
+   "atlas_id": "lfo4.rate_10x",
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamRate10x"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "lfo4.rise",
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamRise"
+   ],
+   "target_value": 2.5
+  },
+  {
+   "atlas_id": "lfo4.shape",
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamType"
+   ],
+   "target_value": "RandomSH"
+  },
+  {
+   "atlas_id": "lfo4.smooth",
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamSmooth"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "lfo4.swing",
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamSwing"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "lfo4.triplets",
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamTriplets"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "lfo5.beat_sync",
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamBeatSync"
+   ],
+   "target_value": 0.0
+  },
+  {
+   "atlas_id": "lfo5.delay",
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamDelay"
+   ],
+   "target_value": 1.8
+  },
+  {
+   "atlas_id": "lfo5.dotted",
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamDotted"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "lfo5.mode",
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamMode"
+   ],
+   "target_value": "Envelope"
+  },
+  {
+   "atlas_id": "lfo5.mono",
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamMono"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "lfo5.rate",
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamRate"
+   ],
+   "target_value": 49.999999999999986
+  },
+  {
+   "atlas_id": "lfo5.rate_10x",
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamRate10x"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "lfo5.rise",
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamRise"
+   ],
+   "target_value": 2.5
+  },
+  {
+   "atlas_id": "lfo5.shape",
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamType"
+   ],
+   "target_value": "RandomSH"
+  },
+  {
+   "atlas_id": "lfo5.smooth",
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamSmooth"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "lfo5.swing",
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamSwing"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "lfo5.triplets",
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamTriplets"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "lfo6.beat_sync",
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamBeatSync"
+   ],
+   "target_value": 0.0
+  },
+  {
+   "atlas_id": "lfo6.delay",
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamDelay"
+   ],
+   "target_value": 1.8
+  },
+  {
+   "atlas_id": "lfo6.dotted",
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamDotted"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "lfo6.mode",
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamMode"
+   ],
+   "target_value": "Envelope"
+  },
+  {
+   "atlas_id": "lfo6.mono",
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamMono"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "lfo6.rate",
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamRate"
+   ],
+   "target_value": 49.999999999999986
+  },
+  {
+   "atlas_id": "lfo6.rate_10x",
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamRate10x"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "lfo6.rise",
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamRise"
+   ],
+   "target_value": 2.5
+  }
+ ],
+ "history": [
+  {
+   "round": 0,
+   "A_count": 149,
+   "B_count": 149,
+   "A_ids": [
+    "arp.pattern.rate",
+    "arp.pattern.shape",
+    "arp.playback.chance",
+    "arp.playback.gate",
+    "arp.playback.thru",
+    "arp.retrigger.first",
+    "arp.retrigger.launch",
+    "arp.retrigger.note",
+    "arp.transpose.range",
+    "arp.transpose.shift",
+    "arp.velocity.enable",
+    "arp.velocity.retrig",
+    "arp.velocity.target",
+    "env1.attack",
+    "env1.attack_curve",
+    "env1.decay",
+    "env1.decay_curve",
+    "env1.hold",
+    "env1.release",
+    "env1.release_curve",
+    "env1.sustain",
+    "env2.attack",
+    "env2.attack_curve",
+    "env2.decay",
+    "env2.decay_curve",
+    "env2.hold",
+    "env2.release",
+    "env2.release_curve",
+    "env2.sustain",
+    "env3.attack",
+    "env3.attack_curve",
+    "env3.decay",
+    "env3.decay_curve",
+    "env3.hold",
+    "env3.release",
+    "env3.release_curve",
+    "env3.sustain",
+    "env4.attack",
+    "env4.attack_curve",
+    "env4.decay",
+    "env4.decay_curve",
+    "env4.hold",
+    "env4.release",
+    "env4.release_curve",
+    "env4.sustain",
+    "filter1.cutoff",
+    "filter1.drive",
+    "filter1.enabled",
+    "filter1.key_track",
+    "filter1.level_out",
+    "filter1.resonance",
+    "filter1.stereo",
+    "filter1.type",
+    "filter1.var",
+    "filter1.wet",
+    "filter2.cutoff",
+    "filter2.drive",
+    "filter2.enabled",
+    "filter2.key_track",
+    "filter2.level_out",
+    "filter2.resonance",
+    "filter2.stereo",
+    "filter2.type",
+    "filter2.var",
+    "filter2.wet",
+    "global.bend_range_down",
+    "global.bend_range_up",
+    "global.fx_bus1_destination",
+    "global.fx_bus2_destination",
+    "global.legato",
+    "global.limit_same_note_polyphony",
+    "global.master_volume",
+    "global.mono",
+    "global.note_latch",
+    "global.poly_count",
+    "global.porta_always",
+    "global.porta_scaled",
+    "global.portamento_time",
+    "global.s1_compatibility",
+    "global.swing",
+    "global.transpose",
+    "global.voice_control.random.pan",
+    "lfo1.beat_sync",
+    "lfo1.delay",
+    "lfo1.dotted",
+    "lfo1.mono",
+    "lfo1.rate",
+    "lfo1.rate_10x",
+    "lfo1.rise",
+    "lfo1.shape",
+    "lfo1.smooth",
+    "lfo1.swing",
+    "lfo1.triplets",
+    "lfo2.beat_sync",
+    "lfo2.delay",
+    "lfo2.dotted",
+    "lfo2.mode",
+    "lfo2.mono",
+    "lfo2.rate",
+    "lfo2.rate_10x",
+    "lfo2.rise",
+    "lfo2.shape",
+    "lfo2.smooth",
+    "lfo2.swing",
+    "lfo2.triplets",
+    "lfo3.beat_sync",
+    "lfo3.delay",
+    "lfo3.dotted",
+    "lfo3.mode",
+    "lfo3.mono",
+    "lfo3.rate",
+    "lfo3.rate_10x",
+    "lfo3.rise",
+    "lfo3.shape",
+    "lfo3.smooth",
+    "lfo3.swing",
+    "lfo3.triplets",
+    "lfo4.beat_sync",
+    "lfo4.delay",
+    "lfo4.dotted",
+    "lfo4.mode",
+    "lfo4.mono",
+    "lfo4.rate",
+    "lfo4.rate_10x",
+    "lfo4.rise",
+    "lfo4.shape",
+    "lfo4.smooth",
+    "lfo4.swing",
+    "lfo4.triplets",
+    "lfo5.beat_sync",
+    "lfo5.delay",
+    "lfo5.dotted",
+    "lfo5.mode",
+    "lfo5.mono",
+    "lfo5.rate",
+    "lfo5.rate_10x",
+    "lfo5.rise",
+    "lfo5.shape",
+    "lfo5.smooth",
+    "lfo5.swing",
+    "lfo5.triplets",
+    "lfo6.beat_sync",
+    "lfo6.delay",
+    "lfo6.dotted",
+    "lfo6.mode",
+    "lfo6.mono",
+    "lfo6.rate",
+    "lfo6.rate_10x",
+    "lfo6.rise"
+   ],
+   "B_ids": [
+    "lfo6.shape",
+    "lfo6.smooth",
+    "lfo6.swing",
+    "lfo6.triplets",
+    "macro1.value",
+    "macro2.value",
+    "macro3.value",
+    "macro4.value",
+    "macro5.value",
+    "macro6.value",
+    "macro7.value",
+    "macro8.value",
+    "mixer.filter1.bus1",
+    "mixer.filter1.bus2",
+    "mixer.filter1.enable",
+    "mixer.filter1.wet",
+    "mixer.filter2.bus1",
+    "mixer.filter2.bus2",
+    "mixer.filter2.enable",
+    "mixer.filter2.wet",
+    "mixer.noise.bus1",
+    "mixer.noise.bus2",
+    "mixer.noise.enable",
+    "mixer.noise.filter_balance",
+    "mixer.noise.pan",
+    "mixer.osc_a.bus1",
+    "mixer.osc_a.bus2",
+    "mixer.osc_a.filter_balance",
+    "mixer.osc_b.bus1",
+    "mixer.osc_b.bus2",
+    "mixer.osc_b.filter_balance",
+    "mixer.osc_c.bus1",
+    "mixer.osc_c.bus2",
+    "mixer.osc_c.filter_balance",
+    "mixer.sub.bus1",
+    "mixer.sub.bus2",
+    "mixer.sub.enable",
+    "mixer.sub.filter_balance",
+    "mixer.sub.pan",
+    "oscA.detune",
+    "oscA.enabled",
+    "oscA.fine",
+    "oscA.octave",
+    "oscA.pan",
+    "oscA.semitone",
+    "oscA.unison",
+    "oscA.warp_amount",
+    "oscA.warp_mode",
+    "oscA.warp_mode2",
+    "oscA.warp_var2",
+    "oscA.wavetable",
+    "oscB.detune",
+    "oscB.enabled",
+    "oscB.fine",
+    "oscB.octave",
+    "oscB.pan",
+    "oscB.semitone",
+    "oscB.unison",
+    "oscB.warp_amount",
+    "oscB.warp_mode",
+    "oscB.warp_mode2",
+    "oscB.warp_var2",
+    "oscB.wavetable",
+    "oscC.detune",
+    "oscC.enabled",
+    "oscC.fine",
+    "oscC.octave",
+    "oscC.pan",
+    "oscC.semitone",
+    "oscC.unison",
+    "oscC.warp_amount",
+    "oscC.warp_mode",
+    "oscC.warp_mode2",
+    "oscC.warp_var2",
+    "oscC.wavetable",
+    "oscNoise.fine",
+    "oscNoise.noise_type",
+    "oscNoise.pan",
+    "voice.voicing.legato",
+    "voice.voicing.mono",
+    "voice.voicing.porta_always",
+    "voice.voicing.porta_scaled",
+    "fx.bode.blur",
+    "fx.bode.range",
+    "fx.bode.shift",
+    "fx.bode.wet",
+    "fx.chorus.depth",
+    "fx.chorus.feedback",
+    "fx.chorus.rate",
+    "fx.chorus.wet",
+    "fx.compressor.attack",
+    "fx.compressor.gain",
+    "fx.compressor.ratio",
+    "fx.compressor.release",
+    "fx.compressor.thresh",
+    "fx.compressor.wet",
+    "fx.convolve.decay",
+    "fx.convolve.size",
+    "fx.convolve.tone",
+    "fx.convolve.wet",
+    "fx.delay.bpm",
+    "fx.delay.feedback",
+    "fx.delay.freq",
+    "fx.delay.link",
+    "fx.delay.time_l",
+    "fx.delay.time_r",
+    "fx.delay.wet",
+    "fx.dimension.size",
+    "fx.dimension.wet",
+    "fx.hyper.detune",
+    "fx.hyper.rate",
+    "fx.hyper.unison",
+    "fx.hyper.wet",
+    "fx.distortion.drive",
+    "fx.distortion.freq",
+    "fx.distortion.type",
+    "fx.distortion.wet",
+    "fx.equalizer.left_freq",
+    "fx.equalizer.left_gain",
+    "fx.equalizer.left_q",
+    "fx.equalizer.right_freq",
+    "fx.equalizer.right_gain",
+    "fx.equalizer.right_q",
+    "fx.filter.cutoff",
+    "fx.filter.drive",
+    "fx.filter.res",
+    "fx.filter.type",
+    "fx.filter.wet",
+    "fx.flanger.depth",
+    "fx.flanger.feedback",
+    "fx.flanger.rate",
+    "fx.flanger.wet",
+    "fx.phaser.depth",
+    "fx.phaser.feedback",
+    "fx.phaser.freq",
+    "fx.phaser.rate",
+    "fx.phaser.wet",
+    "fx.reverb.size",
+    "fx.reverb.type",
+    "fx.reverb.wet",
+    "oscA.sample_loop_crossfade",
+    "oscA.sample_loop_end",
+    "oscA.sample_loop_start",
+    "oscB.sample_loop_crossfade",
+    "oscB.sample_loop_end",
+    "oscB.sample_loop_start",
+    "oscC.sample_loop_crossfade",
+    "oscC.sample_loop_end",
+    "oscC.sample_loop_start"
+   ],
+   "which_corrupted": "both",
+   "verdict": "both A and B independently show FREE with 149 candidates each -- rules out simple single-culprit binary search, suggests either a size-dependent threshold effect or multiple independent causes"
+  },
+  {
+   "round": 0,
+   "A_count": 149,
+   "B_count": 149,
+   "note": "BOTH A and B independently corrupted to FREE -- not a single-culprit case. Continuing to bisect A to find its minimal corrupting subset; B (149 candidates) retained separately for a later independent check."
+  }
+ ],
+ "pool_B_for_later": [
+  {
+   "atlas_id": "lfo6.shape",
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamType"
+   ],
+   "target_value": "RandomSH"
+  },
+  {
+   "atlas_id": "lfo6.smooth",
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamSmooth"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "lfo6.swing",
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamSwing"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "lfo6.triplets",
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamTriplets"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "macro1.value",
+   "raw_path": [
+    "Macro0",
+    "plainParams",
+    "kParamValue"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "macro2.value",
+   "raw_path": [
+    "Macro1",
+    "plainParams",
+    "kParamValue"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "macro3.value",
+   "raw_path": [
+    "Macro2",
+    "plainParams",
+    "kParamValue"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "macro4.value",
+   "raw_path": [
+    "Macro3",
+    "plainParams",
+    "kParamValue"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "macro5.value",
+   "raw_path": [
+    "Macro4",
+    "plainParams",
+    "kParamValue"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "macro6.value",
+   "raw_path": [
+    "Macro5",
+    "plainParams",
+    "kParamValue"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "macro7.value",
+   "raw_path": [
+    "Macro6",
+    "plainParams",
+    "kParamValue"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "macro8.value",
+   "raw_path": [
+    "Macro7",
+    "plainParams",
+    "kParamValue"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "mixer.filter1.bus1",
+   "raw_path": [
+    "RoutingSlot5",
+    "plainParams",
+    "kParamFXBus1Level"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "mixer.filter1.bus2",
+   "raw_path": [
+    "RoutingSlot5",
+    "plainParams",
+    "kParamFXBus2Level"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "mixer.filter1.enable",
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamEnable"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "mixer.filter1.wet",
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamWet"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "mixer.filter2.bus1",
+   "raw_path": [
+    "RoutingSlot6",
+    "plainParams",
+    "kParamFXBus1Level"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "mixer.filter2.bus2",
+   "raw_path": [
+    "RoutingSlot6",
+    "plainParams",
+    "kParamFXBus2Level"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "mixer.filter2.enable",
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamEnable"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "mixer.filter2.wet",
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamWet"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "mixer.noise.bus1",
+   "raw_path": [
+    "RoutingSlot3",
+    "plainParams",
+    "kParamFXBus1Level"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "mixer.noise.bus2",
+   "raw_path": [
+    "RoutingSlot3",
+    "plainParams",
+    "kParamFXBus2Level"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "mixer.noise.enable",
+   "raw_path": [
+    "Oscillator3",
+    "plainParams",
+    "kParamEnable"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "mixer.noise.filter_balance",
+   "raw_path": [
+    "RoutingSlot3",
+    "plainParams",
+    "kParamFilterBalance"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "mixer.noise.pan",
+   "raw_path": [
+    "Oscillator3",
+    "plainParams",
+    "kParamPan"
+   ],
+   "target_value": -25.0
+  },
+  {
+   "atlas_id": "mixer.osc_a.bus1",
+   "raw_path": [
+    "RoutingSlot0",
+    "plainParams",
+    "kParamFXBus1Level"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "mixer.osc_a.bus2",
+   "raw_path": [
+    "RoutingSlot0",
+    "plainParams",
+    "kParamFXBus2Level"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "mixer.osc_a.filter_balance",
+   "raw_path": [
+    "RoutingSlot0",
+    "plainParams",
+    "kParamFilterBalance"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "mixer.osc_b.bus1",
+   "raw_path": [
+    "RoutingSlot1",
+    "plainParams",
+    "kParamFXBus1Level"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "mixer.osc_b.bus2",
+   "raw_path": [
+    "RoutingSlot1",
+    "plainParams",
+    "kParamFXBus2Level"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "mixer.osc_b.filter_balance",
+   "raw_path": [
+    "RoutingSlot1",
+    "plainParams",
+    "kParamFilterBalance"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "mixer.osc_c.bus1",
+   "raw_path": [
+    "RoutingSlot2",
+    "plainParams",
+    "kParamFXBus1Level"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "mixer.osc_c.bus2",
+   "raw_path": [
+    "RoutingSlot2",
+    "plainParams",
+    "kParamFXBus2Level"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "mixer.osc_c.filter_balance",
+   "raw_path": [
+    "RoutingSlot2",
+    "plainParams",
+    "kParamFilterBalance"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "mixer.sub.bus1",
+   "raw_path": [
+    "RoutingSlot4",
+    "plainParams",
+    "kParamFXBus1Level"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "mixer.sub.bus2",
+   "raw_path": [
+    "RoutingSlot4",
+    "plainParams",
+    "kParamFXBus2Level"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "mixer.sub.enable",
+   "raw_path": [
+    "Oscillator4",
+    "plainParams",
+    "kParamEnable"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "mixer.sub.filter_balance",
+   "raw_path": [
+    "RoutingSlot4",
+    "plainParams",
+    "kParamFilterBalance"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "mixer.sub.pan",
+   "raw_path": [
+    "Oscillator4",
+    "plainParams",
+    "kParamPan"
+   ],
+   "target_value": -25.0
+  },
+  {
+   "atlas_id": "oscA.detune",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamDetune"
+   ],
+   "target_value": 0.5000000000000001
+  },
+  {
+   "atlas_id": "oscA.enabled",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamEnable"
+   ],
+   "target_value": 0.0
+  },
+  {
+   "atlas_id": "oscA.fine",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamFine"
+   ],
+   "target_value": -40.0
+  },
+  {
+   "atlas_id": "oscA.octave",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamOctave"
+   ],
+   "target_value": -2.0
+  },
+  {
+   "atlas_id": "oscA.pan",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamPan"
+   ],
+   "target_value": -25.0
+  },
+  {
+   "atlas_id": "oscA.semitone",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamPitch"
+   ],
+   "target_value": -6.0
+  },
+  {
+   "atlas_id": "oscA.unison",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamUnison"
+   ],
+   "target_value": 9.0
+  },
+  {
+   "atlas_id": "oscA.warp_amount",
+   "raw_path": [
+    "Oscillator0",
+    "WTOsc0",
+    "plainParams",
+    "kParamWarp"
+   ],
+   "target_value": 0.5
+  },
+  {
+   "atlas_id": "oscA.warp_mode",
+   "raw_path": [
+    "Oscillator0",
+    "WTOsc0",
+    "plainParams",
+    "kParamWarpMenu"
+   ],
+   "target_value": "kAM_OSC"
+  },
+  {
+   "atlas_id": "oscA.warp_mode2",
+   "raw_path": [
+    "Oscillator0",
+    "WTOsc0",
+    "plainParams",
+    "kParamWarpMenu2"
+   ],
+   "target_value": "fm"
+  },
+  {
+   "atlas_id": "oscA.warp_var2",
+   "raw_path": [
+    "Oscillator0",
+    "WTOsc0",
+    "plainParams",
+    "kParamWarpVar2"
+   ],
+   "target_value": 0.5
+  },
+  {
+   "atlas_id": "oscA.wavetable",
+   "raw_path": [
+    "Oscillator0",
+    "WTOsc0",
+    "relativePathToWT"
+   ],
+   "target_value": "S2 Tables/Default Shapes.wav"
+  },
+  {
+   "atlas_id": "oscB.detune",
+   "raw_path": [
+    "Oscillator1",
+    "plainParams",
+    "kParamDetune"
+   ],
+   "target_value": 0.5000000000000001
+  },
+  {
+   "atlas_id": "oscB.enabled",
+   "raw_path": [
+    "Oscillator1",
+    "plainParams",
+    "kParamEnable"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "oscB.fine",
+   "raw_path": [
+    "Oscillator1",
+    "plainParams",
+    "kParamFine"
+   ],
+   "target_value": -40.0
+  },
+  {
+   "atlas_id": "oscB.octave",
+   "raw_path": [
+    "Oscillator1",
+    "plainParams",
+    "kParamOctave"
+   ],
+   "target_value": -2.0
+  },
+  {
+   "atlas_id": "oscB.pan",
+   "raw_path": [
+    "Oscillator1",
+    "plainParams",
+    "kParamPan"
+   ],
+   "target_value": -25.0
+  },
+  {
+   "atlas_id": "oscB.semitone",
+   "raw_path": [
+    "Oscillator1",
+    "plainParams",
+    "kParamPitch"
+   ],
+   "target_value": -6.0
+  },
+  {
+   "atlas_id": "oscB.unison",
+   "raw_path": [
+    "Oscillator1",
+    "plainParams",
+    "kParamUnison"
+   ],
+   "target_value": 9.0
+  },
+  {
+   "atlas_id": "oscB.warp_amount",
+   "raw_path": [
+    "Oscillator1",
+    "WTOsc1",
+    "plainParams",
+    "kParamWarp"
+   ],
+   "target_value": 0.5
+  },
+  {
+   "atlas_id": "oscB.warp_mode",
+   "raw_path": [
+    "Oscillator1",
+    "WTOsc1",
+    "plainParams",
+    "kParamWarpMenu"
+   ],
+   "target_value": "kAM_OSC"
+  },
+  {
+   "atlas_id": "oscB.warp_mode2",
+   "raw_path": [
+    "Oscillator1",
+    "WTOsc1",
+    "plainParams",
+    "kParamWarpMenu2"
+   ],
+   "target_value": "fm"
+  },
+  {
+   "atlas_id": "oscB.warp_var2",
+   "raw_path": [
+    "Oscillator1",
+    "WTOsc1",
+    "plainParams",
+    "kParamWarpVar2"
+   ],
+   "target_value": 0.5
+  },
+  {
+   "atlas_id": "oscB.wavetable",
+   "raw_path": [
+    "Oscillator1",
+    "WTOsc1",
+    "relativePathToWT"
+   ],
+   "target_value": "S2 Tables/Default Shapes.wav"
+  },
+  {
+   "atlas_id": "oscC.detune",
+   "raw_path": [
+    "Oscillator2",
+    "plainParams",
+    "kParamDetune"
+   ],
+   "target_value": 0.5000000000000001
+  },
+  {
+   "atlas_id": "oscC.enabled",
+   "raw_path": [
+    "Oscillator2",
+    "plainParams",
+    "kParamEnable"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "oscC.fine",
+   "raw_path": [
+    "Oscillator2",
+    "plainParams",
+    "kParamFine"
+   ],
+   "target_value": -40.0
+  },
+  {
+   "atlas_id": "oscC.octave",
+   "raw_path": [
+    "Oscillator2",
+    "plainParams",
+    "kParamOctave"
+   ],
+   "target_value": -2.0
+  },
+  {
+   "atlas_id": "oscC.pan",
+   "raw_path": [
+    "Oscillator2",
+    "plainParams",
+    "kParamPan"
+   ],
+   "target_value": -25.0
+  },
+  {
+   "atlas_id": "oscC.semitone",
+   "raw_path": [
+    "Oscillator2",
+    "plainParams",
+    "kParamPitch"
+   ],
+   "target_value": -6.0
+  },
+  {
+   "atlas_id": "oscC.unison",
+   "raw_path": [
+    "Oscillator2",
+    "plainParams",
+    "kParamUnison"
+   ],
+   "target_value": 9.0
+  },
+  {
+   "atlas_id": "oscC.warp_amount",
+   "raw_path": [
+    "Oscillator2",
+    "WTOsc2",
+    "plainParams",
+    "kParamWarp"
+   ],
+   "target_value": 0.5
+  },
+  {
+   "atlas_id": "oscC.warp_mode",
+   "raw_path": [
+    "Oscillator2",
+    "WTOsc2",
+    "plainParams",
+    "kParamWarpMenu"
+   ],
+   "target_value": "kAM_OSC"
+  },
+  {
+   "atlas_id": "oscC.warp_mode2",
+   "raw_path": [
+    "Oscillator2",
+    "WTOsc2",
+    "plainParams",
+    "kParamWarpMenu2"
+   ],
+   "target_value": "fm"
+  },
+  {
+   "atlas_id": "oscC.warp_var2",
+   "raw_path": [
+    "Oscillator2",
+    "WTOsc2",
+    "plainParams",
+    "kParamWarpVar2"
+   ],
+   "target_value": 0.5
+  },
+  {
+   "atlas_id": "oscC.wavetable",
+   "raw_path": [
+    "Oscillator2",
+    "WTOsc2",
+    "relativePathToWT"
+   ],
+   "target_value": "S2 Tables/Default Shapes.wav"
+  },
+  {
+   "atlas_id": "oscNoise.fine",
+   "raw_path": [
+    "Oscillator3",
+    "plainParams",
+    "kParamFine"
+   ],
+   "target_value": -40.0
+  },
+  {
+   "atlas_id": "oscNoise.noise_type",
+   "raw_path": [
+    "Oscillator3",
+    "NoiseOsc3",
+    "plainParams",
+    "kParamNoiseType"
+   ],
+   "target_value": "Pink"
+  },
+  {
+   "atlas_id": "oscNoise.pan",
+   "raw_path": [
+    "Oscillator3",
+    "plainParams",
+    "kParamPan"
+   ],
+   "target_value": -25.0
+  },
+  {
+   "atlas_id": "voice.voicing.legato",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamLegato"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "voice.voicing.mono",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamMonoToggle"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "voice.voicing.porta_always",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamPortaAlways"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "voice.voicing.porta_scaled",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamPortaScaled"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "fx.bode.blur",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXBode",
+    "plainParams",
+    "kParamBlur"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "fx.bode.range",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXBode",
+    "plainParams",
+    "kParamRange"
+   ],
+   "target_value": 3043.1999999999975
+  },
+  {
+   "atlas_id": "fx.bode.shift",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXBode",
+    "plainParams",
+    "kParamShift"
+   ],
+   "target_value": -9.0
+  },
+  {
+   "atlas_id": "fx.bode.wet",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXBode",
+    "plainParams",
+    "kParamWet"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "fx.chorus.depth",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    1,
+    "FXChorus",
+    "plainParams",
+    "kParamDepth"
+   ],
+   "target_value": 13.000000000000004
+  },
+  {
+   "atlas_id": "fx.chorus.feedback",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    1,
+    "FXChorus",
+    "plainParams",
+    "kParamFeedback"
+   ],
+   "target_value": 37.5
+  },
+  {
+   "atlas_id": "fx.chorus.rate",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    1,
+    "FXChorus",
+    "plainParams",
+    "kParamRate"
+   ],
+   "target_value": 9.999999999999998
+  },
+  {
+   "atlas_id": "fx.chorus.wet",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    1,
+    "FXChorus",
+    "plainParams",
+    "kParamWet"
+   ],
+   "target_value": 25.0
+  },
+  {
+   "atlas_id": "fx.compressor.attack",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    2,
+    "FXComp",
+    "plainParams",
+    "kParamAttack"
+   ],
+   "target_value": 100.00000000000001
+  },
+  {
+   "atlas_id": "fx.compressor.gain",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    2,
+    "FXComp",
+    "plainParams",
+    "kParamMakeup"
+   ],
+   "target_value": 16.500000000000007
+  },
+  {
+   "atlas_id": "fx.compressor.ratio",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    2,
+    "FXComp",
+    "plainParams",
+    "kParamRatio"
+   ],
+   "target_value": 31622.7766016712
+  },
+  {
+   "atlas_id": "fx.compressor.release",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    2,
+    "FXComp",
+    "plainParams",
+    "kParamRelease"
+   ],
+   "target_value": 100.00000000000001
+  },
+  {
+   "atlas_id": "fx.compressor.thresh",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    2,
+    "FXComp",
+    "plainParams",
+    "kParamThresh"
+   ],
+   "target_value": 0.25
+  },
+  {
+   "atlas_id": "fx.compressor.wet",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    2,
+    "FXComp",
+    "plainParams",
+    "kParamWet"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "fx.convolve.decay",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    3,
+    "FXConv",
+    "plainParams",
+    "kParamDecay"
+   ],
+   "target_value": 19.999999999999996
+  },
+  {
+   "atlas_id": "fx.convolve.size",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    3,
+    "FXConv",
+    "plainParams",
+    "kParamSize"
+   ],
+   "target_value": 505.0
+  },
+  {
+   "atlas_id": "fx.convolve.tone",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    3,
+    "FXConv",
+    "plainParams",
+    "kParamTone"
+   ],
+   "target_value": -7.5
+  },
+  {
+   "atlas_id": "fx.convolve.wet",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    3,
+    "FXConv",
+    "plainParams",
+    "kParamWet"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "fx.delay.bpm",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    4,
+    "FXDelay",
+    "plainParams",
+    "kParamBeatSync"
+   ],
+   "target_value": 0.0
+  },
+  {
+   "atlas_id": "fx.delay.feedback",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    4,
+    "FXDelay",
+    "plainParams",
+    "kParamFeedback"
+   ],
+   "target_value": 45.0
+  },
+  {
+   "atlas_id": "fx.delay.freq",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    4,
+    "FXDelay",
+    "plainParams",
+    "kParamFreq"
+   ],
+   "target_value": 9015.249999999995
+  },
+  {
+   "atlas_id": "fx.delay.link",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    4,
+    "FXDelay",
+    "plainParams",
+    "kParamLink"
+   ],
+   "target_value": 1.0
+  },
+  {
+   "atlas_id": "fx.delay.time_l",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    4,
+    "FXDelay",
+    "plainParams",
+    "kParamTimeL"
+   ],
+   "target_value": 0.1705
+  },
+  {
+   "atlas_id": "fx.delay.time_r",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    4,
+    "FXDelay",
+    "plainParams",
+    "kParamTimeR"
+   ],
+   "target_value": 0.1605
+  },
+  {
+   "atlas_id": "fx.delay.wet",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    4,
+    "FXDelay",
+    "plainParams",
+    "kParamWet"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "fx.dimension.size",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    5,
+    "FXHyperD",
+    "plainParams",
+    "kParamDimESize"
+   ],
+   "target_value": 25.0
+  },
+  {
+   "atlas_id": "fx.dimension.wet",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    5,
+    "FXHyperD",
+    "plainParams",
+    "kParamDimEWet"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "fx.hyper.detune",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    5,
+    "FXHyperD",
+    "plainParams",
+    "kParamDetune"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "fx.hyper.rate",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    5,
+    "FXHyperD",
+    "plainParams",
+    "kParamRate"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "fx.hyper.unison",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    5,
+    "FXHyperD",
+    "plainParams",
+    "kParamUnison"
+   ],
+   "target_value": 3.5
+  },
+  {
+   "atlas_id": "fx.hyper.wet",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    5,
+    "FXHyperD",
+    "plainParams",
+    "kParamWet"
+   ],
+   "target_value": 25.0
+  },
+  {
+   "atlas_id": "fx.distortion.drive",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    6,
+    "FXDistortion",
+    "plainParams",
+    "kParamDrive"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "fx.distortion.freq",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    6,
+    "FXDistortion",
+    "plainParams",
+    "kParamFreq"
+   ],
+   "target_value": 0.25
+  },
+  {
+   "atlas_id": "fx.distortion.type",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    6,
+    "FXDistortion",
+    "plainParams",
+    "kParamMode"
+   ],
+   "target_value": "kAsym"
+  },
+  {
+   "atlas_id": "fx.distortion.wet",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    6,
+    "FXDistortion",
+    "plainParams",
+    "kParamWet"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "fx.equalizer.left_freq",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    7,
+    "FXEQ",
+    "plainParams",
+    "kParamFreq1"
+   ],
+   "target_value": 5010.750000000001
+  },
+  {
+   "atlas_id": "fx.equalizer.left_gain",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    7,
+    "FXEQ",
+    "plainParams",
+    "kParamGain1"
+   ],
+   "target_value": -12.0
+  },
+  {
+   "atlas_id": "fx.equalizer.left_q",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    7,
+    "FXEQ",
+    "plainParams",
+    "kParamReso1"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "fx.equalizer.right_freq",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    7,
+    "FXEQ",
+    "plainParams",
+    "kParamFreq2"
+   ],
+   "target_value": 10010.750000000002
+  },
+  {
+   "atlas_id": "fx.equalizer.right_gain",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    7,
+    "FXEQ",
+    "plainParams",
+    "kParamGain2"
+   ],
+   "target_value": -12.0
+  },
+  {
+   "atlas_id": "fx.equalizer.right_q",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    7,
+    "FXEQ",
+    "plainParams",
+    "kParamReso2"
+   ],
+   "target_value": 47.5
+  },
+  {
+   "atlas_id": "fx.filter.cutoff",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    8,
+    "FXFilter",
+    "plainParams",
+    "kParamFreq"
+   ],
+   "target_value": 0.25
+  },
+  {
+   "atlas_id": "fx.filter.drive",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    8,
+    "FXFilter",
+    "plainParams",
+    "kParamDrive"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "fx.filter.res",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    8,
+    "FXFilter",
+    "plainParams",
+    "kParamReso"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "fx.filter.type",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    8,
+    "FXFilter",
+    "plainParams",
+    "kParamType"
+   ],
+   "target_value": "L6"
+  },
+  {
+   "atlas_id": "fx.filter.wet",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    8,
+    "FXFilter",
+    "plainParams",
+    "kParamWet"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "fx.flanger.depth",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    9,
+    "FXFlanger",
+    "plainParams",
+    "kParamDepth"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "fx.flanger.feedback",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    9,
+    "FXFlanger",
+    "plainParams",
+    "kParamFeedback"
+   ],
+   "target_value": 25.0
+  },
+  {
+   "atlas_id": "fx.flanger.rate",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    9,
+    "FXFlanger",
+    "plainParams",
+    "kParamRate"
+   ],
+   "target_value": 5.000000000000001
+  },
+  {
+   "atlas_id": "fx.flanger.wet",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    9,
+    "FXFlanger",
+    "plainParams",
+    "kParamWet"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "fx.phaser.depth",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    10,
+    "FXPhaser",
+    "plainParams",
+    "kParamDepth"
+   ],
+   "target_value": 25.0
+  },
+  {
+   "atlas_id": "fx.phaser.feedback",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    10,
+    "FXPhaser",
+    "plainParams",
+    "kParamFeedback"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "fx.phaser.freq",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    10,
+    "FXPhaser",
+    "plainParams",
+    "kParamFreq"
+   ],
+   "target_value": 3556.5588200778457
+  },
+  {
+   "atlas_id": "fx.phaser.rate",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    10,
+    "FXPhaser",
+    "plainParams",
+    "kParamRate"
+   ],
+   "target_value": 9.999999999999998
+  },
+  {
+   "atlas_id": "fx.phaser.wet",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    10,
+    "FXPhaser",
+    "plainParams",
+    "kParamWet"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "fx.reverb.size",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    11,
+    "FXReverb",
+    "plainParams",
+    "kParamSize"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "fx.reverb.type",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    11,
+    "FXReverb",
+    "plainParams",
+    "kParamType"
+   ],
+   "target_value": "kAbyss"
+  },
+  {
+   "atlas_id": "fx.reverb.wet",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    11,
+    "FXReverb",
+    "plainParams",
+    "kParamWet"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "oscA.sample_loop_crossfade",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamLoopCrossfade"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "oscA.sample_loop_end",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamLoopEnd"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "oscA.sample_loop_start",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamLoopStart"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "oscB.sample_loop_crossfade",
+   "raw_path": [
+    "Oscillator1",
+    "plainParams",
+    "kParamLoopCrossfade"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "oscB.sample_loop_end",
+   "raw_path": [
+    "Oscillator1",
+    "plainParams",
+    "kParamLoopEnd"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "oscB.sample_loop_start",
+   "raw_path": [
+    "Oscillator1",
+    "plainParams",
+    "kParamLoopStart"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "oscC.sample_loop_crossfade",
+   "raw_path": [
+    "Oscillator2",
+    "plainParams",
+    "kParamLoopCrossfade"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "oscC.sample_loop_end",
+   "raw_path": [
+    "Oscillator2",
+    "plainParams",
+    "kParamLoopEnd"
+   ],
+   "target_value": 50.0
+  },
+  {
+   "atlas_id": "oscC.sample_loop_start",
+   "raw_path": [
+    "Oscillator2",
+    "plainParams",
+    "kParamLoopStart"
+   ],
+   "target_value": 50.0
+  }
+ ],
+ "pending_split": {
+  "A": [
+   {
+    "atlas_id": "arp.pattern.rate",
+    "raw_path": [
+     "ArpClip0",
+     "plainParams",
+     "kParamRate"
+    ],
+    "target_value": 0.25
+   },
+   {
+    "atlas_id": "arp.pattern.shape",
+    "raw_path": [
+     "ArpClip0",
+     "plainParams",
+     "kParamShape"
+    ],
+    "target_value": "Chord"
+   },
+   {
+    "atlas_id": "arp.playback.chance",
+    "raw_path": [
+     "ArpClip0",
+     "plainParams",
+     "kParamChance"
+    ],
+    "target_value": 50.0
+   },
+   {
+    "atlas_id": "arp.playback.gate",
+    "raw_path": [
+     "ArpClip0",
+     "plainParams",
+     "kParamGate"
+    ],
+    "target_value": 50.0
+   },
+   {
+    "atlas_id": "arp.playback.thru",
+    "raw_path": [
+     "ArpClip0",
+     "plainParams",
+     "kParamThru"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "arp.retrigger.first",
+    "raw_path": [
+     "ArpClip0",
+     "plainParams",
+     "kParamFirstNoteRetrig"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "arp.retrigger.launch",
+    "raw_path": [
+     "ArpClip0",
+     "plainParams",
+     "kParamLaunchRetrig"
+    ],
+    "target_value": 0.0
+   },
+   {
+    "atlas_id": "arp.retrigger.note",
+    "raw_path": [
+     "ArpClip0",
+     "plainParams",
+     "kParamNoteRetrig"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "arp.transpose.range",
+    "raw_path": [
+     "ArpClip0",
+     "plainParams",
+     "kParamTransposeRange"
+    ],
+    "target_value": 6.0
+   },
+   {
+    "atlas_id": "arp.transpose.shift",
+    "raw_path": [
+     "ArpClip0",
+     "plainParams",
+     "kParamTransposeShift"
+    ],
+    "target_value": -12.0
+   },
+   {
+    "atlas_id": "arp.velocity.enable",
+    "raw_path": [
+     "ArpClip0",
+     "plainParams",
+     "kParamVeloEnabled"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "arp.velocity.retrig",
+    "raw_path": [
+     "ArpClip0",
+     "plainParams",
+     "kParamVeloRetrig"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "arp.velocity.target",
+    "raw_path": [
+     "ArpClip0",
+     "plainParams",
+     "kParamVeloTarget"
+    ],
+    "target_value": 50.0
+   },
+   {
+    "atlas_id": "env1.attack",
+    "raw_path": [
+     "Env0",
+     "plainParams",
+     "kParamAttack"
+    ],
+    "target_value": 5.000000000000001
+   },
+   {
+    "atlas_id": "env1.attack_curve",
+    "raw_path": [
+     "Env0",
+     "plainParams",
+     "kParamCurve1"
+    ],
+    "target_value": 50.0
+   },
+   {
+    "atlas_id": "env1.decay",
+    "raw_path": [
+     "Env0",
+     "plainParams",
+     "kParamDecay"
+    ],
+    "target_value": 15.999999999999998
+   },
+   {
+    "atlas_id": "env1.decay_curve",
+    "raw_path": [
+     "Env0",
+     "plainParams",
+     "kParamCurve2"
+    ],
+    "target_value": 50.0
+   },
+   {
+    "atlas_id": "env1.hold",
+    "raw_path": [
+     "Env0",
+     "plainParams",
+     "kParamHold"
+    ],
+    "target_value": 2.599999999999999
+   },
+   {
+    "atlas_id": "env1.release",
+    "raw_path": [
+     "Env0",
+     "plainParams",
+     "kParamRelease"
+    ],
+    "target_value": 15.999999999999998
+   },
+   {
+    "atlas_id": "env1.release_curve",
+    "raw_path": [
+     "Env0",
+     "plainParams",
+     "kParamCurve3"
+    ],
+    "target_value": 50.0
+   },
+   {
+    "atlas_id": "env1.sustain",
+    "raw_path": [
+     "Env0",
+     "plainParams",
+     "kParamSustain"
+    ],
+    "target_value": 0.5
+   },
+   {
+    "atlas_id": "env2.attack",
+    "raw_path": [
+     "Env1",
+     "plainParams",
+     "kParamAttack"
+    ],
+    "target_value": 5.000000000000001
+   },
+   {
+    "atlas_id": "env2.attack_curve",
+    "raw_path": [
+     "Env1",
+     "plainParams",
+     "kParamCurve1"
+    ],
+    "target_value": 50.0
+   },
+   {
+    "atlas_id": "env2.decay",
+    "raw_path": [
+     "Env1",
+     "plainParams",
+     "kParamDecay"
+    ],
+    "target_value": 15.999999999999998
+   },
+   {
+    "atlas_id": "env2.decay_curve",
+    "raw_path": [
+     "Env1",
+     "plainParams",
+     "kParamCurve2"
+    ],
+    "target_value": 50.0
+   },
+   {
+    "atlas_id": "env2.hold",
+    "raw_path": [
+     "Env1",
+     "plainParams",
+     "kParamHold"
+    ],
+    "target_value": 2.599999999999999
+   },
+   {
+    "atlas_id": "env2.release",
+    "raw_path": [
+     "Env1",
+     "plainParams",
+     "kParamRelease"
+    ],
+    "target_value": 15.999999999999998
+   },
+   {
+    "atlas_id": "env2.release_curve",
+    "raw_path": [
+     "Env1",
+     "plainParams",
+     "kParamCurve3"
+    ],
+    "target_value": 50.0
+   },
+   {
+    "atlas_id": "env2.sustain",
+    "raw_path": [
+     "Env1",
+     "plainParams",
+     "kParamSustain"
+    ],
+    "target_value": 0.5
+   },
+   {
+    "atlas_id": "env3.attack",
+    "raw_path": [
+     "Env2",
+     "plainParams",
+     "kParamAttack"
+    ],
+    "target_value": 5.000000000000001
+   },
+   {
+    "atlas_id": "env3.attack_curve",
+    "raw_path": [
+     "Env2",
+     "plainParams",
+     "kParamCurve1"
+    ],
+    "target_value": 50.0
+   },
+   {
+    "atlas_id": "env3.decay",
+    "raw_path": [
+     "Env2",
+     "plainParams",
+     "kParamDecay"
+    ],
+    "target_value": 15.999999999999998
+   },
+   {
+    "atlas_id": "env3.decay_curve",
+    "raw_path": [
+     "Env2",
+     "plainParams",
+     "kParamCurve2"
+    ],
+    "target_value": 50.0
+   },
+   {
+    "atlas_id": "env3.hold",
+    "raw_path": [
+     "Env2",
+     "plainParams",
+     "kParamHold"
+    ],
+    "target_value": 2.599999999999999
+   },
+   {
+    "atlas_id": "env3.release",
+    "raw_path": [
+     "Env2",
+     "plainParams",
+     "kParamRelease"
+    ],
+    "target_value": 15.999999999999998
+   },
+   {
+    "atlas_id": "env3.release_curve",
+    "raw_path": [
+     "Env2",
+     "plainParams",
+     "kParamCurve3"
+    ],
+    "target_value": 50.0
+   },
+   {
+    "atlas_id": "env3.sustain",
+    "raw_path": [
+     "Env2",
+     "plainParams",
+     "kParamSustain"
+    ],
+    "target_value": 0.5
+   },
+   {
+    "atlas_id": "env4.attack",
+    "raw_path": [
+     "Env3",
+     "plainParams",
+     "kParamAttack"
+    ],
+    "target_value": 5.000000000000001
+   },
+   {
+    "atlas_id": "env4.attack_curve",
+    "raw_path": [
+     "Env3",
+     "plainParams",
+     "kParamCurve1"
+    ],
+    "target_value": 50.0
+   },
+   {
+    "atlas_id": "env4.decay",
+    "raw_path": [
+     "Env3",
+     "plainParams",
+     "kParamDecay"
+    ],
+    "target_value": 15.999999999999998
+   },
+   {
+    "atlas_id": "env4.decay_curve",
+    "raw_path": [
+     "Env3",
+     "plainParams",
+     "kParamCurve2"
+    ],
+    "target_value": 50.0
+   },
+   {
+    "atlas_id": "env4.hold",
+    "raw_path": [
+     "Env3",
+     "plainParams",
+     "kParamHold"
+    ],
+    "target_value": 2.599999999999999
+   },
+   {
+    "atlas_id": "env4.release",
+    "raw_path": [
+     "Env3",
+     "plainParams",
+     "kParamRelease"
+    ],
+    "target_value": 15.999999999999998
+   },
+   {
+    "atlas_id": "env4.release_curve",
+    "raw_path": [
+     "Env3",
+     "plainParams",
+     "kParamCurve3"
+    ],
+    "target_value": 50.0
+   },
+   {
+    "atlas_id": "env4.sustain",
+    "raw_path": [
+     "Env3",
+     "plainParams",
+     "kParamSustain"
+    ],
+    "target_value": 0.5
+   },
+   {
+    "atlas_id": "filter1.cutoff",
+    "raw_path": [
+     "VoiceFilter0",
+     "plainParams",
+     "kParamFreq"
+    ],
+    "target_value": 0.25
+   },
+   {
+    "atlas_id": "filter1.drive",
+    "raw_path": [
+     "VoiceFilter0",
+     "plainParams",
+     "kParamDrive"
+    ],
+    "target_value": 50.0
+   },
+   {
+    "atlas_id": "filter1.enabled",
+    "raw_path": [
+     "VoiceFilter0",
+     "plainParams",
+     "kParamEnable"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "filter1.key_track",
+    "raw_path": [
+     "VoiceFilter0",
+     "plainParams",
+     "kParamKeyTrack"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "filter1.level_out",
+    "raw_path": [
+     "VoiceFilter0",
+     "plainParams",
+     "kParamLevelOut"
+    ],
+    "target_value": 0.25
+   },
+   {
+    "atlas_id": "filter1.resonance",
+    "raw_path": [
+     "VoiceFilter0",
+     "plainParams",
+     "kParamReso"
+    ],
+    "target_value": 50.0
+   },
+   {
+    "atlas_id": "filter1.stereo",
+    "raw_path": [
+     "VoiceFilter0",
+     "plainParams",
+     "kParamStereo"
+    ],
+    "target_value": 25.0
+   },
+   {
+    "atlas_id": "filter1.type",
+    "raw_path": [
+     "VoiceFilter0",
+     "plainParams",
+     "kParamType"
+    ],
+    "target_value": "L12"
+   },
+   {
+    "atlas_id": "filter1.var",
+    "raw_path": [
+     "VoiceFilter0",
+     "plainParams",
+     "kParamVar"
+    ],
+    "target_value": 50.0
+   },
+   {
+    "atlas_id": "filter1.wet",
+    "raw_path": [
+     "VoiceFilter0",
+     "plainParams",
+     "kParamWet"
+    ],
+    "target_value": 50.0
+   },
+   {
+    "atlas_id": "filter2.cutoff",
+    "raw_path": [
+     "VoiceFilter1",
+     "plainParams",
+     "kParamFreq"
+    ],
+    "target_value": 0.25
+   },
+   {
+    "atlas_id": "filter2.drive",
+    "raw_path": [
+     "VoiceFilter1",
+     "plainParams",
+     "kParamDrive"
+    ],
+    "target_value": 50.0
+   },
+   {
+    "atlas_id": "filter2.enabled",
+    "raw_path": [
+     "VoiceFilter1",
+     "plainParams",
+     "kParamEnable"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "filter2.key_track",
+    "raw_path": [
+     "VoiceFilter1",
+     "plainParams",
+     "kParamKeyTrack"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "filter2.level_out",
+    "raw_path": [
+     "VoiceFilter1",
+     "plainParams",
+     "kParamLevelOut"
+    ],
+    "target_value": 0.25
+   },
+   {
+    "atlas_id": "filter2.resonance",
+    "raw_path": [
+     "VoiceFilter1",
+     "plainParams",
+     "kParamReso"
+    ],
+    "target_value": 50.0
+   },
+   {
+    "atlas_id": "filter2.stereo",
+    "raw_path": [
+     "VoiceFilter1",
+     "plainParams",
+     "kParamStereo"
+    ],
+    "target_value": 25.0
+   },
+   {
+    "atlas_id": "filter2.type",
+    "raw_path": [
+     "VoiceFilter1",
+     "plainParams",
+     "kParamType"
+    ],
+    "target_value": "L12"
+   },
+   {
+    "atlas_id": "filter2.var",
+    "raw_path": [
+     "VoiceFilter1",
+     "plainParams",
+     "kParamVar"
+    ],
+    "target_value": 50.0
+   },
+   {
+    "atlas_id": "filter2.wet",
+    "raw_path": [
+     "VoiceFilter1",
+     "plainParams",
+     "kParamWet"
+    ],
+    "target_value": 50.0
+   },
+   {
+    "atlas_id": "global.bend_range_down",
+    "raw_path": [
+     "Global0",
+     "plainParams",
+     "kParamBendRangeDn"
+    ],
+    "target_value": -12.0
+   },
+   {
+    "atlas_id": "global.bend_range_up",
+    "raw_path": [
+     "Global0",
+     "plainParams",
+     "kParamBendRangeUp"
+    ],
+    "target_value": 12.0
+   },
+   {
+    "atlas_id": "global.fx_bus1_destination",
+    "raw_path": [
+     "Global0",
+     "plainParams",
+     "kParamFXBus1Dest"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "global.fx_bus2_destination",
+    "raw_path": [
+     "Global0",
+     "plainParams",
+     "kParamFXBus2Dest"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "global.legato",
+    "raw_path": [
+     "Global0",
+     "plainParams",
+     "kParamLegato"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "global.limit_same_note_polyphony",
+    "raw_path": [
+     "Global0",
+     "plainParams",
+     "kParamLimitSameNotePolyphony"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "global.master_volume",
+    "raw_path": [
+     "Global0",
+     "plainParams",
+     "kParamMasterVolume"
+    ],
+    "target_value": 0.5000000000000001
+   },
+   {
+    "atlas_id": "global.mono",
+    "raw_path": [
+     "Global0",
+     "plainParams",
+     "kParamMonoToggle"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "global.note_latch",
+    "raw_path": [
+     "Global0",
+     "plainParams",
+     "kParamNoteLatch"
+    ],
+    "target_value": 1.0
+   }
+  ],
+  "B": [
+   {
+    "atlas_id": "global.poly_count",
+    "raw_path": [
+     "Global0",
+     "plainParams",
+     "kParamPolyCount"
+    ],
+    "target_value": 17.0
+   },
+   {
+    "atlas_id": "global.porta_always",
+    "raw_path": [
+     "Global0",
+     "plainParams",
+     "kParamPortaAlways"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "global.porta_scaled",
+    "raw_path": [
+     "Global0",
+     "plainParams",
+     "kParamPortaScaled"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "global.portamento_time",
+    "raw_path": [
+     "Global0",
+     "plainParams",
+     "kParamPortamentoTime"
+    ],
+    "target_value": 1.5000000000000002
+   },
+   {
+    "atlas_id": "global.s1_compatibility",
+    "raw_path": [
+     "Global0",
+     "plainParams",
+     "kParamS1Compatibility"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "global.swing",
+    "raw_path": [
+     "Global0",
+     "plainParams",
+     "kParamSwing"
+    ],
+    "target_value": 25.0
+   },
+   {
+    "atlas_id": "global.transpose",
+    "raw_path": [
+     "Global0",
+     "plainParams",
+     "kParamTranspose"
+    ],
+    "target_value": -24.0
+   },
+   {
+    "atlas_id": "global.voice_control.random.pan",
+    "raw_path": [
+     "VoicePanel0",
+     "plainParams",
+     "kParamGlobalRandomOscPan"
+    ],
+    "target_value": 50.0
+   },
+   {
+    "atlas_id": "lfo1.beat_sync",
+    "raw_path": [
+     "LFO0",
+     "plainParams",
+     "kParamBeatSync"
+    ],
+    "target_value": 0.0
+   },
+   {
+    "atlas_id": "lfo1.delay",
+    "raw_path": [
+     "LFO0",
+     "plainParams",
+     "kParamDelay"
+    ],
+    "target_value": 1.8
+   },
+   {
+    "atlas_id": "lfo1.dotted",
+    "raw_path": [
+     "LFO0",
+     "plainParams",
+     "kParamDotted"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "lfo1.mono",
+    "raw_path": [
+     "LFO0",
+     "plainParams",
+     "kParamMono"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "lfo1.rate",
+    "raw_path": [
+     "LFO0",
+     "plainParams",
+     "kParamRate"
+    ],
+    "target_value": 49.999999999999986
+   },
+   {
+    "atlas_id": "lfo1.rate_10x",
+    "raw_path": [
+     "LFO0",
+     "plainParams",
+     "kParamRate10x"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "lfo1.rise",
+    "raw_path": [
+     "LFO0",
+     "plainParams",
+     "kParamRise"
+    ],
+    "target_value": 2.5
+   },
+   {
+    "atlas_id": "lfo1.shape",
+    "raw_path": [
+     "LFO0",
+     "plainParams",
+     "kParamType"
+    ],
+    "target_value": "RandomSH"
+   },
+   {
+    "atlas_id": "lfo1.smooth",
+    "raw_path": [
+     "LFO0",
+     "plainParams",
+     "kParamSmooth"
+    ],
+    "target_value": 50.0
+   },
+   {
+    "atlas_id": "lfo1.swing",
+    "raw_path": [
+     "LFO0",
+     "plainParams",
+     "kParamSwing"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "lfo1.triplets",
+    "raw_path": [
+     "LFO0",
+     "plainParams",
+     "kParamTriplets"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "lfo2.beat_sync",
+    "raw_path": [
+     "LFO1",
+     "plainParams",
+     "kParamBeatSync"
+    ],
+    "target_value": 0.0
+   },
+   {
+    "atlas_id": "lfo2.delay",
+    "raw_path": [
+     "LFO1",
+     "plainParams",
+     "kParamDelay"
+    ],
+    "target_value": 1.8
+   },
+   {
+    "atlas_id": "lfo2.dotted",
+    "raw_path": [
+     "LFO1",
+     "plainParams",
+     "kParamDotted"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "lfo2.mode",
+    "raw_path": [
+     "LFO1",
+     "plainParams",
+     "kParamMode"
+    ],
+    "target_value": "Envelope"
+   },
+   {
+    "atlas_id": "lfo2.mono",
+    "raw_path": [
+     "LFO1",
+     "plainParams",
+     "kParamMono"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "lfo2.rate",
+    "raw_path": [
+     "LFO1",
+     "plainParams",
+     "kParamRate"
+    ],
+    "target_value": 49.999999999999986
+   },
+   {
+    "atlas_id": "lfo2.rate_10x",
+    "raw_path": [
+     "LFO1",
+     "plainParams",
+     "kParamRate10x"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "lfo2.rise",
+    "raw_path": [
+     "LFO1",
+     "plainParams",
+     "kParamRise"
+    ],
+    "target_value": 2.5
+   },
+   {
+    "atlas_id": "lfo2.shape",
+    "raw_path": [
+     "LFO1",
+     "plainParams",
+     "kParamType"
+    ],
+    "target_value": "RandomSH"
+   },
+   {
+    "atlas_id": "lfo2.smooth",
+    "raw_path": [
+     "LFO1",
+     "plainParams",
+     "kParamSmooth"
+    ],
+    "target_value": 50.0
+   },
+   {
+    "atlas_id": "lfo2.swing",
+    "raw_path": [
+     "LFO1",
+     "plainParams",
+     "kParamSwing"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "lfo2.triplets",
+    "raw_path": [
+     "LFO1",
+     "plainParams",
+     "kParamTriplets"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "lfo3.beat_sync",
+    "raw_path": [
+     "LFO2",
+     "plainParams",
+     "kParamBeatSync"
+    ],
+    "target_value": 0.0
+   },
+   {
+    "atlas_id": "lfo3.delay",
+    "raw_path": [
+     "LFO2",
+     "plainParams",
+     "kParamDelay"
+    ],
+    "target_value": 1.8
+   },
+   {
+    "atlas_id": "lfo3.dotted",
+    "raw_path": [
+     "LFO2",
+     "plainParams",
+     "kParamDotted"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "lfo3.mode",
+    "raw_path": [
+     "LFO2",
+     "plainParams",
+     "kParamMode"
+    ],
+    "target_value": "Envelope"
+   },
+   {
+    "atlas_id": "lfo3.mono",
+    "raw_path": [
+     "LFO2",
+     "plainParams",
+     "kParamMono"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "lfo3.rate",
+    "raw_path": [
+     "LFO2",
+     "plainParams",
+     "kParamRate"
+    ],
+    "target_value": 49.999999999999986
+   },
+   {
+    "atlas_id": "lfo3.rate_10x",
+    "raw_path": [
+     "LFO2",
+     "plainParams",
+     "kParamRate10x"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "lfo3.rise",
+    "raw_path": [
+     "LFO2",
+     "plainParams",
+     "kParamRise"
+    ],
+    "target_value": 2.5
+   },
+   {
+    "atlas_id": "lfo3.shape",
+    "raw_path": [
+     "LFO2",
+     "plainParams",
+     "kParamType"
+    ],
+    "target_value": "RandomSH"
+   },
+   {
+    "atlas_id": "lfo3.smooth",
+    "raw_path": [
+     "LFO2",
+     "plainParams",
+     "kParamSmooth"
+    ],
+    "target_value": 50.0
+   },
+   {
+    "atlas_id": "lfo3.swing",
+    "raw_path": [
+     "LFO2",
+     "plainParams",
+     "kParamSwing"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "lfo3.triplets",
+    "raw_path": [
+     "LFO2",
+     "plainParams",
+     "kParamTriplets"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "lfo4.beat_sync",
+    "raw_path": [
+     "LFO3",
+     "plainParams",
+     "kParamBeatSync"
+    ],
+    "target_value": 0.0
+   },
+   {
+    "atlas_id": "lfo4.delay",
+    "raw_path": [
+     "LFO3",
+     "plainParams",
+     "kParamDelay"
+    ],
+    "target_value": 1.8
+   },
+   {
+    "atlas_id": "lfo4.dotted",
+    "raw_path": [
+     "LFO3",
+     "plainParams",
+     "kParamDotted"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "lfo4.mode",
+    "raw_path": [
+     "LFO3",
+     "plainParams",
+     "kParamMode"
+    ],
+    "target_value": "Envelope"
+   },
+   {
+    "atlas_id": "lfo4.mono",
+    "raw_path": [
+     "LFO3",
+     "plainParams",
+     "kParamMono"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "lfo4.rate",
+    "raw_path": [
+     "LFO3",
+     "plainParams",
+     "kParamRate"
+    ],
+    "target_value": 49.999999999999986
+   },
+   {
+    "atlas_id": "lfo4.rate_10x",
+    "raw_path": [
+     "LFO3",
+     "plainParams",
+     "kParamRate10x"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "lfo4.rise",
+    "raw_path": [
+     "LFO3",
+     "plainParams",
+     "kParamRise"
+    ],
+    "target_value": 2.5
+   },
+   {
+    "atlas_id": "lfo4.shape",
+    "raw_path": [
+     "LFO3",
+     "plainParams",
+     "kParamType"
+    ],
+    "target_value": "RandomSH"
+   },
+   {
+    "atlas_id": "lfo4.smooth",
+    "raw_path": [
+     "LFO3",
+     "plainParams",
+     "kParamSmooth"
+    ],
+    "target_value": 50.0
+   },
+   {
+    "atlas_id": "lfo4.swing",
+    "raw_path": [
+     "LFO3",
+     "plainParams",
+     "kParamSwing"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "lfo4.triplets",
+    "raw_path": [
+     "LFO3",
+     "plainParams",
+     "kParamTriplets"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "lfo5.beat_sync",
+    "raw_path": [
+     "LFO4",
+     "plainParams",
+     "kParamBeatSync"
+    ],
+    "target_value": 0.0
+   },
+   {
+    "atlas_id": "lfo5.delay",
+    "raw_path": [
+     "LFO4",
+     "plainParams",
+     "kParamDelay"
+    ],
+    "target_value": 1.8
+   },
+   {
+    "atlas_id": "lfo5.dotted",
+    "raw_path": [
+     "LFO4",
+     "plainParams",
+     "kParamDotted"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "lfo5.mode",
+    "raw_path": [
+     "LFO4",
+     "plainParams",
+     "kParamMode"
+    ],
+    "target_value": "Envelope"
+   },
+   {
+    "atlas_id": "lfo5.mono",
+    "raw_path": [
+     "LFO4",
+     "plainParams",
+     "kParamMono"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "lfo5.rate",
+    "raw_path": [
+     "LFO4",
+     "plainParams",
+     "kParamRate"
+    ],
+    "target_value": 49.999999999999986
+   },
+   {
+    "atlas_id": "lfo5.rate_10x",
+    "raw_path": [
+     "LFO4",
+     "plainParams",
+     "kParamRate10x"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "lfo5.rise",
+    "raw_path": [
+     "LFO4",
+     "plainParams",
+     "kParamRise"
+    ],
+    "target_value": 2.5
+   },
+   {
+    "atlas_id": "lfo5.shape",
+    "raw_path": [
+     "LFO4",
+     "plainParams",
+     "kParamType"
+    ],
+    "target_value": "RandomSH"
+   },
+   {
+    "atlas_id": "lfo5.smooth",
+    "raw_path": [
+     "LFO4",
+     "plainParams",
+     "kParamSmooth"
+    ],
+    "target_value": 50.0
+   },
+   {
+    "atlas_id": "lfo5.swing",
+    "raw_path": [
+     "LFO4",
+     "plainParams",
+     "kParamSwing"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "lfo5.triplets",
+    "raw_path": [
+     "LFO4",
+     "plainParams",
+     "kParamTriplets"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "lfo6.beat_sync",
+    "raw_path": [
+     "LFO5",
+     "plainParams",
+     "kParamBeatSync"
+    ],
+    "target_value": 0.0
+   },
+   {
+    "atlas_id": "lfo6.delay",
+    "raw_path": [
+     "LFO5",
+     "plainParams",
+     "kParamDelay"
+    ],
+    "target_value": 1.8
+   },
+   {
+    "atlas_id": "lfo6.dotted",
+    "raw_path": [
+     "LFO5",
+     "plainParams",
+     "kParamDotted"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "lfo6.mode",
+    "raw_path": [
+     "LFO5",
+     "plainParams",
+     "kParamMode"
+    ],
+    "target_value": "Envelope"
+   },
+   {
+    "atlas_id": "lfo6.mono",
+    "raw_path": [
+     "LFO5",
+     "plainParams",
+     "kParamMono"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "lfo6.rate",
+    "raw_path": [
+     "LFO5",
+     "plainParams",
+     "kParamRate"
+    ],
+    "target_value": 49.999999999999986
+   },
+   {
+    "atlas_id": "lfo6.rate_10x",
+    "raw_path": [
+     "LFO5",
+     "plainParams",
+     "kParamRate10x"
+    ],
+    "target_value": 1.0
+   },
+   {
+    "atlas_id": "lfo6.rise",
+    "raw_path": [
+     "LFO5",
+     "plainParams",
+     "kParamRise"
+    ],
+    "target_value": 2.5
+   }
+  ]
+ }
+}
