@@ -1,0 +1,413 @@
+{
+ "preset": "BULK_02_SAMPLE_CALIBRATION.SerumPreset",
+ "sha256": "fc4e3c8fda9082d7d744eeaa9723e56922c8f1fb40a5b23afcb580842d6d4630",
+ "engine_mode_osc_ABC": "SAMPLE",
+ "fx_rack_slots": {
+  "0": "FXComp",
+  "1": "FXReverb"
+ },
+ "controls": [
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.compressor.attack",
+   "aliases": [],
+   "value": 10.0,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXComp",
+    "plainParams",
+    "kParamAttack"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      0,
+      "FXComp",
+      "plainParams",
+      "kParamAttack"
+     ],
+     10.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_compressor",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "calibration_rider",
+   "anchor": true
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.compressor.gain",
+   "aliases": [],
+   "value": 8.0,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXComp",
+    "plainParams",
+    "kParamMakeup"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      0,
+      "FXComp",
+      "plainParams",
+      "kParamMakeup"
+     ],
+     8.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_compressor",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "calibration_rider",
+   "anchor": true
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.compressor.ratio",
+   "aliases": [],
+   "value": 210.0,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXComp",
+    "plainParams",
+    "kParamRatio"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      0,
+      "FXComp",
+      "plainParams",
+      "kParamRatio"
+     ],
+     210.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_compressor",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "calibration_rider",
+   "anchor": true
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.compressor.thresh",
+   "aliases": [],
+   "value": 0.4,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXComp",
+    "plainParams",
+    "kParamThresh"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      0,
+      "FXComp",
+      "plainParams",
+      "kParamThresh"
+     ],
+     0.4
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_compressor",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "calibration_rider",
+   "anchor": true
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.reverb.type",
+   "aliases": [],
+   "value": "kSpace",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    1,
+    "FXReverb",
+    "plainParams",
+    "kParamType"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      1,
+      "FXReverb",
+      "plainParams",
+      "kParamType"
+     ],
+     "kSpace"
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_reverb",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "calibration_rider",
+   "anchor": true
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo3.shape",
+   "aliases": [],
+   "value": "RandomSH",
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamType"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO2",
+      "plainParams",
+      "kParamType"
+     ],
+     "RandomSH"
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO3",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo4.shape",
+   "aliases": [],
+   "value": "Rossler",
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamType"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO3",
+      "plainParams",
+      "kParamType"
+     ],
+     "Rossler"
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO4",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo5.shape",
+   "aliases": [],
+   "value": "Lorenz",
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamType"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO4",
+      "plainParams",
+      "kParamType"
+     ],
+     "Lorenz"
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO5",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo6.shape",
+   "aliases": [],
+   "value": "Path",
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamType"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO5",
+      "plainParams",
+      "kParamType"
+     ],
+     "Path"
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO6",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 83.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "oscA.sample_loop_crossfade",
+   "aliases": [],
+   "value": 83.0,
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamLoopCrossfade"
+   ],
+   "leaves": [
+    [
+     [
+      "Oscillator0",
+      "plainParams",
+      "kParamLoopCrossfade"
+     ],
+     83.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/OSC_A",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 56.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "oscB.sample_loop_crossfade",
+   "aliases": [],
+   "value": 56.0,
+   "raw_path": [
+    "Oscillator1",
+    "plainParams",
+    "kParamLoopCrossfade"
+   ],
+   "leaves": [
+    [
+     [
+      "Oscillator1",
+      "plainParams",
+      "kParamLoopCrossfade"
+     ],
+     56.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/OSC_B",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 30.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "oscC.sample_loop_crossfade",
+   "aliases": [],
+   "value": 30.0,
+   "raw_path": [
+    "Oscillator2",
+    "plainParams",
+    "kParamLoopCrossfade"
+   ],
+   "leaves": [
+    [
+     [
+      "Oscillator2",
+      "plainParams",
+      "kParamLoopCrossfade"
+     ],
+     30.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/OSC_C",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  }
+ ],
+ "references": [],
+ "views": [
+  "FX/FX_compressor",
+  "FX/FX_reverb",
+  "OSC/LFO3",
+  "OSC/LFO4",
+  "OSC/LFO5",
+  "OSC/LFO6",
+  "OSC/OSC_A",
+  "OSC/OSC_B",
+  "OSC/OSC_C"
+ ]
+}

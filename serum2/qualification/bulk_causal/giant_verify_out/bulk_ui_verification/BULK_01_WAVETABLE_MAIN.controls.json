@@ -1,0 +1,8061 @@
+{
+ "preset": "BULK_01_WAVETABLE_MAIN.SerumPreset",
+ "sha256": "e7b118fbf41aede2bbaa5f3cd63a01bda8b9eb39ba637e9083c26221f6d70705",
+ "engine_mode_osc_ABC": "WAVETABLE",
+ "fx_rack_slots": {
+  "0": "FXBode",
+  "1": "FXChorus",
+  "2": "FXComp",
+  "3": "FXConv",
+  "4": "FXDelay",
+  "5": "FXHyperD",
+  "6": "FXDistortion",
+  "7": "FXEQ",
+  "8": "FXFilter",
+  "9": "FXFlanger",
+  "10": "FXPhaser",
+  "11": "FXReverb"
+ },
+ "controls": [
+  {
+   "predicted_display": null,
+   "atlas_id": "oscA.warp_mode2",
+   "aliases": [],
+   "value": "am",
+   "raw_path": [
+    "Oscillator0",
+    "WTOsc0",
+    "plainParams",
+    "kParamWarpMenu2"
+   ],
+   "leaves": [
+    [
+     [
+      "Oscillator0",
+      "WTOsc0",
+      "plainParams",
+      "kParamWarpMenu2"
+     ],
+     "kAM_OSC"
+    ],
+    [
+     [
+      "Oscillator0",
+      "WTOsc0",
+      "plainParams",
+      "kParamWarp2"
+     ],
+     0.0
+    ],
+    [
+     [
+      "Oscillator0",
+      "WTOsc0",
+      "plainParams",
+      "kParamXfadeMode"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/OSC_A",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": true,
+   "superseded_side_leaves": [
+    {
+     "leaf": [
+      "Oscillator0",
+      "WTOsc0",
+      "plainParams",
+      "kParamWarp2"
+     ],
+     "wrote": 0.0,
+     "then_set_by": "oscA.warp_amount2",
+     "final": 0.63
+    }
+   ]
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "oscA.wavetable",
+   "aliases": [],
+   "value": "analog_basic",
+   "raw_path": [
+    "Oscillator0",
+    "WTOsc0",
+    "relativePathToWT"
+   ],
+   "leaves": [
+    [
+     [
+      "Oscillator0",
+      "WTOsc0",
+      "relativePathToWT"
+     ],
+     "Analog/Basic Shapes.wav"
+    ],
+    [
+     [
+      "Oscillator0",
+      "WTOsc0",
+      "numFrames"
+     ],
+     14336
+    ]
+   ],
+   "baseline_value": "S2 Tables/Default Shapes.wav",
+   "view": "OSC/OSC_A",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "oscB.warp_mode2",
+   "aliases": [],
+   "value": "sync",
+   "raw_path": [
+    "Oscillator1",
+    "WTOsc1",
+    "plainParams",
+    "kParamWarpMenu2"
+   ],
+   "leaves": [
+    [
+     [
+      "Oscillator1",
+      "WTOsc1",
+      "plainParams",
+      "kParamWarpMenu2"
+     ],
+     "kSync"
+    ],
+    [
+     [
+      "Oscillator1",
+      "WTOsc1",
+      "plainParams",
+      "kParamWarp2"
+     ],
+     0.0
+    ],
+    [
+     [
+      "Oscillator1",
+      "WTOsc1",
+      "plainParams",
+      "kParamXfadeMode"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/OSC_B",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": true,
+   "superseded_side_leaves": [
+    {
+     "leaf": [
+      "Oscillator1",
+      "WTOsc1",
+      "plainParams",
+      "kParamWarp2"
+     ],
+     "wrote": 0.0,
+     "then_set_by": "oscB.warp_amount2",
+     "final": 0.32
+    }
+   ]
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "oscB.wavetable",
+   "aliases": [],
+   "value": "analog_warm",
+   "raw_path": [
+    "Oscillator1",
+    "WTOsc1",
+    "relativePathToWT"
+   ],
+   "leaves": [
+    [
+     [
+      "Oscillator1",
+      "WTOsc1",
+      "relativePathToWT"
+     ],
+     "S2 Tables/Analog/DM - OSCAR.wav"
+    ],
+    [
+     [
+      "Oscillator1",
+      "WTOsc1",
+      "numFrames"
+     ],
+     8192
+    ]
+   ],
+   "baseline_value": "S2 Tables/Default Shapes.wav",
+   "view": "OSC/OSC_B",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "oscC.warp_mode2",
+   "aliases": [],
+   "value": "pwm",
+   "raw_path": [
+    "Oscillator2",
+    "WTOsc2",
+    "plainParams",
+    "kParamWarpMenu2"
+   ],
+   "leaves": [
+    [
+     [
+      "Oscillator2",
+      "WTOsc2",
+      "plainParams",
+      "kParamWarpMenu2"
+     ],
+     "kPWM"
+    ],
+    [
+     [
+      "Oscillator2",
+      "WTOsc2",
+      "plainParams",
+      "kParamWarp2"
+     ],
+     0.0
+    ],
+    [
+     [
+      "Oscillator2",
+      "WTOsc2",
+      "plainParams",
+      "kParamXfadeMode"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/OSC_C",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": true,
+   "superseded_side_leaves": [
+    {
+     "leaf": [
+      "Oscillator2",
+      "WTOsc2",
+      "plainParams",
+      "kParamWarp2"
+     ],
+     "wrote": 0.0,
+     "then_set_by": "oscC.warp_amount2",
+     "final": 0.61
+    }
+   ]
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "oscC.wavetable",
+   "aliases": [],
+   "value": "analog_mini",
+   "raw_path": [
+    "Oscillator2",
+    "WTOsc2",
+    "relativePathToWT"
+   ],
+   "leaves": [
+    [
+     [
+      "Oscillator2",
+      "WTOsc2",
+      "relativePathToWT"
+     ],
+     "Analog/Basic Mini.wav"
+    ],
+    [
+     [
+      "Oscillator2",
+      "WTOsc2",
+      "numFrames"
+     ],
+     8192
+    ]
+   ],
+   "baseline_value": "S2 Tables/Default Shapes.wav",
+   "view": "OSC/OSC_C",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "arp.pattern.rate",
+   "aliases": [],
+   "value": 0.4,
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamRate"
+   ],
+   "leaves": [
+    [
+     [
+      "ArpClip0",
+      "plainParams",
+      "kParamRate"
+     ],
+     0.4
+    ]
+   ],
+   "baseline_value": null,
+   "view": "ARP/ARP",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "arp.pattern.shape",
+   "aliases": [],
+   "value": "Chord",
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamShape"
+   ],
+   "leaves": [
+    [
+     [
+      "ArpClip0",
+      "plainParams",
+      "kParamShape"
+     ],
+     "Chord"
+    ]
+   ],
+   "baseline_value": null,
+   "view": "ARP/ARP",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "arp.playback.chance",
+   "aliases": [],
+   "value": 50.0,
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamChance"
+   ],
+   "leaves": [
+    [
+     [
+      "ArpClip0",
+      "plainParams",
+      "kParamChance"
+     ],
+     50.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "ARP/ARP",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "arp.playback.gate",
+   "aliases": [],
+   "value": 47.0,
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamGate"
+   ],
+   "leaves": [
+    [
+     [
+      "ArpClip0",
+      "plainParams",
+      "kParamGate"
+     ],
+     47.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "ARP/ARP",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "arp.playback.offset",
+   "aliases": [],
+   "value": 0.0,
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamOffset"
+   ],
+   "leaves": [
+    [
+     [
+      "ArpClip0",
+      "plainParams",
+      "kParamOffset"
+     ],
+     0.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "ARP/ARP",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "arp.playback.repeats",
+   "aliases": [],
+   "value": 10.0,
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamRepeats"
+   ],
+   "leaves": [
+    [
+     [
+      "ArpClip0",
+      "plainParams",
+      "kParamRepeats"
+     ],
+     10.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "ARP/ARP",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "arp.playback.thru",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamThru"
+   ],
+   "leaves": [
+    [
+     [
+      "ArpClip0",
+      "plainParams",
+      "kParamThru"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "ARP/ARP",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "arp.retrigger.first",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamFirstNoteRetrig"
+   ],
+   "leaves": [
+    [
+     [
+      "ArpClip0",
+      "plainParams",
+      "kParamFirstNoteRetrig"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "ARP/ARP",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "arp.retrigger.launch",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamLaunchRetrig"
+   ],
+   "leaves": [
+    [
+     [
+      "ArpClip0",
+      "plainParams",
+      "kParamLaunchRetrig"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "ARP/ARP",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "arp.retrigger.note",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamNoteRetrig"
+   ],
+   "leaves": [
+    [
+     [
+      "ArpClip0",
+      "plainParams",
+      "kParamNoteRetrig"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "ARP/ARP",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "arp.transpose.range",
+   "aliases": [],
+   "value": 16.0,
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamTransposeRange"
+   ],
+   "leaves": [
+    [
+     [
+      "ArpClip0",
+      "plainParams",
+      "kParamTransposeRange"
+     ],
+     16.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "ARP/ARP",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "arp.transpose.shift",
+   "aliases": [],
+   "value": 3.0,
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamTransposeShift"
+   ],
+   "leaves": [
+    [
+     [
+      "ArpClip0",
+      "plainParams",
+      "kParamTransposeShift"
+     ],
+     3.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "ARP/ARP",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "arp.velocity.decay",
+   "aliases": [],
+   "value": 0.9999999999999998,
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamVeloDecay"
+   ],
+   "leaves": [
+    [
+     [
+      "ArpClip0",
+      "plainParams",
+      "kParamVeloDecay"
+     ],
+     0.9999999999999998
+    ]
+   ],
+   "baseline_value": null,
+   "view": "ARP/ARP",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "arp.velocity.enable",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamVeloEnabled"
+   ],
+   "leaves": [
+    [
+     [
+      "ArpClip0",
+      "plainParams",
+      "kParamVeloEnabled"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "ARP/ARP",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "arp.velocity.retrig",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamVeloRetrig"
+   ],
+   "leaves": [
+    [
+     [
+      "ArpClip0",
+      "plainParams",
+      "kParamVeloRetrig"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "ARP/ARP",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "arp.velocity.target",
+   "aliases": [],
+   "value": 30.0,
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamVeloTarget"
+   ],
+   "leaves": [
+    [
+     [
+      "ArpClip0",
+      "plainParams",
+      "kParamVeloTarget"
+     ],
+     30.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "ARP/ARP",
+   "gui_readability": {
+    "class": "NO_TOOLTIP",
+    "note": "no tooltip (visual only)"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 80.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "env1.attack_curve",
+   "aliases": [],
+   "value": 80.0,
+   "raw_path": [
+    "Env0",
+    "plainParams",
+    "kParamCurve1"
+   ],
+   "leaves": [
+    [
+     [
+      "Env0",
+      "plainParams",
+      "kParamCurve1"
+     ],
+     80.0
+    ]
+   ],
+   "baseline_value": 50.0,
+   "view": "OSC/ENV1",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 69.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "env1.decay_curve",
+   "aliases": [],
+   "value": 69.0,
+   "raw_path": [
+    "Env0",
+    "plainParams",
+    "kParamCurve2"
+   ],
+   "leaves": [
+    [
+     [
+      "Env0",
+      "plainParams",
+      "kParamCurve2"
+     ],
+     69.0
+    ]
+   ],
+   "baseline_value": 66.6,
+   "view": "OSC/ENV1",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 43.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "env1.release_curve",
+   "aliases": [],
+   "value": 43.0,
+   "raw_path": [
+    "Env0",
+    "plainParams",
+    "kParamCurve3"
+   ],
+   "leaves": [
+    [
+     [
+      "Env0",
+      "plainParams",
+      "kParamCurve3"
+     ],
+     43.0
+    ]
+   ],
+   "baseline_value": 66.6,
+   "view": "OSC/ENV1",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": -31.84,
+    "model": "db_square",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "env1.sustain",
+   "aliases": [],
+   "value": 0.16,
+   "raw_path": [
+    "Env0",
+    "plainParams",
+    "kParamSustain"
+   ],
+   "leaves": [
+    [
+     [
+      "Env0",
+      "plainParams",
+      "kParamSustain"
+     ],
+     0.16
+    ]
+   ],
+   "baseline_value": 1.0,
+   "view": "OSC/ENV1",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": true
+  },
+  {
+   "predicted_display": {
+    "value": 59.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "env2.attack_curve",
+   "aliases": [],
+   "value": 59.0,
+   "raw_path": [
+    "Env1",
+    "plainParams",
+    "kParamCurve1"
+   ],
+   "leaves": [
+    [
+     [
+      "Env1",
+      "plainParams",
+      "kParamCurve1"
+     ],
+     59.0
+    ]
+   ],
+   "baseline_value": 50.0,
+   "view": "OSC/ENV2",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 49.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "env2.decay_curve",
+   "aliases": [],
+   "value": 49.0,
+   "raw_path": [
+    "Env1",
+    "plainParams",
+    "kParamCurve2"
+   ],
+   "leaves": [
+    [
+     [
+      "Env1",
+      "plainParams",
+      "kParamCurve2"
+     ],
+     49.0
+    ]
+   ],
+   "baseline_value": 66.6,
+   "view": "OSC/ENV2",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 39.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "env2.release_curve",
+   "aliases": [],
+   "value": 39.0,
+   "raw_path": [
+    "Env1",
+    "plainParams",
+    "kParamCurve3"
+   ],
+   "leaves": [
+    [
+     [
+      "Env1",
+      "plainParams",
+      "kParamCurve3"
+     ],
+     39.0
+    ]
+   ],
+   "baseline_value": 66.6,
+   "view": "OSC/ENV2",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 30.25,
+    "model": "percent_square",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "env2.sustain",
+   "aliases": [],
+   "value": 0.55,
+   "raw_path": [
+    "Env1",
+    "plainParams",
+    "kParamSustain"
+   ],
+   "leaves": [
+    [
+     [
+      "Env1",
+      "plainParams",
+      "kParamSustain"
+     ],
+     0.55
+    ]
+   ],
+   "baseline_value": 1.0,
+   "view": "OSC/ENV2",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": true
+  },
+  {
+   "predicted_display": {
+    "value": 72.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "env3.attack_curve",
+   "aliases": [],
+   "value": 72.0,
+   "raw_path": [
+    "Env2",
+    "plainParams",
+    "kParamCurve1"
+   ],
+   "leaves": [
+    [
+     [
+      "Env2",
+      "plainParams",
+      "kParamCurve1"
+     ],
+     72.0
+    ]
+   ],
+   "baseline_value": 50.0,
+   "view": "OSC/ENV3",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 51.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "env3.decay_curve",
+   "aliases": [],
+   "value": 51.0,
+   "raw_path": [
+    "Env2",
+    "plainParams",
+    "kParamCurve2"
+   ],
+   "leaves": [
+    [
+     [
+      "Env2",
+      "plainParams",
+      "kParamCurve2"
+     ],
+     51.0
+    ]
+   ],
+   "baseline_value": 66.6,
+   "view": "OSC/ENV3",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 66.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "env3.release_curve",
+   "aliases": [],
+   "value": 66.0,
+   "raw_path": [
+    "Env2",
+    "plainParams",
+    "kParamCurve3"
+   ],
+   "leaves": [
+    [
+     [
+      "Env2",
+      "plainParams",
+      "kParamCurve3"
+     ],
+     66.0
+    ]
+   ],
+   "baseline_value": 66.6,
+   "view": "OSC/ENV3",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 31.36,
+    "model": "percent_square",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "env3.sustain",
+   "aliases": [],
+   "value": 0.56,
+   "raw_path": [
+    "Env2",
+    "plainParams",
+    "kParamSustain"
+   ],
+   "leaves": [
+    [
+     [
+      "Env2",
+      "plainParams",
+      "kParamSustain"
+     ],
+     0.56
+    ]
+   ],
+   "baseline_value": 1.0,
+   "view": "OSC/ENV3",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": true
+  },
+  {
+   "predicted_display": {
+    "value": 29.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "env4.attack_curve",
+   "aliases": [],
+   "value": 29.0,
+   "raw_path": [
+    "Env3",
+    "plainParams",
+    "kParamCurve1"
+   ],
+   "leaves": [
+    [
+     [
+      "Env3",
+      "plainParams",
+      "kParamCurve1"
+     ],
+     29.0
+    ]
+   ],
+   "baseline_value": 50.0,
+   "view": "OSC/ENV4",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 62.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "env4.decay_curve",
+   "aliases": [],
+   "value": 62.0,
+   "raw_path": [
+    "Env3",
+    "plainParams",
+    "kParamCurve2"
+   ],
+   "leaves": [
+    [
+     [
+      "Env3",
+      "plainParams",
+      "kParamCurve2"
+     ],
+     62.0
+    ]
+   ],
+   "baseline_value": 66.6,
+   "view": "OSC/ENV4",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 82.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "env4.release_curve",
+   "aliases": [],
+   "value": 82.0,
+   "raw_path": [
+    "Env3",
+    "plainParams",
+    "kParamCurve3"
+   ],
+   "leaves": [
+    [
+     [
+      "Env3",
+      "plainParams",
+      "kParamCurve3"
+     ],
+     82.0
+    ]
+   ],
+   "baseline_value": 66.6,
+   "view": "OSC/ENV4",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 20.25,
+    "model": "percent_square",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "env4.sustain",
+   "aliases": [],
+   "value": 0.45,
+   "raw_path": [
+    "Env3",
+    "plainParams",
+    "kParamSustain"
+   ],
+   "leaves": [
+    [
+     [
+      "Env3",
+      "plainParams",
+      "kParamSustain"
+     ],
+     0.45
+    ]
+   ],
+   "baseline_value": 1.0,
+   "view": "OSC/ENV4",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": true
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "filter1.cutoff",
+   "aliases": [],
+   "value": 0.19,
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamFreq"
+   ],
+   "leaves": [
+    [
+     [
+      "VoiceFilter0",
+      "plainParams",
+      "kParamFreq"
+     ],
+     0.19
+    ]
+   ],
+   "baseline_value": 0.5,
+   "view": "OSC/FILTER1",
+   "gui_readability": {
+    "class": "NO_TOOLTIP",
+    "note": "numeric knobs showed no tooltip in the compact panel (3 tries); expanded view not found"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 83.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "filter1.drive",
+   "aliases": [],
+   "value": 83.0,
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamDrive"
+   ],
+   "leaves": [
+    [
+     [
+      "VoiceFilter0",
+      "plainParams",
+      "kParamDrive"
+     ],
+     83.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/FILTER1",
+   "gui_readability": {
+    "class": "NO_TOOLTIP",
+    "note": "numeric knobs showed no tooltip in the compact panel (3 tries); expanded view not found"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "filter1.enabled",
+   "aliases": [
+    "mixer.filter1.enable"
+   ],
+   "value": 1.0,
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamEnable"
+   ],
+   "leaves": [
+    [
+     [
+      "VoiceFilter0",
+      "plainParams",
+      "kParamEnable"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": 0.0,
+   "view": "OSC/FILTER1",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "filter1.key_track",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamKeyTrack"
+   ],
+   "leaves": [
+    [
+     [
+      "VoiceFilter0",
+      "plainParams",
+      "kParamKeyTrack"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": 0.0,
+   "view": "OSC/FILTER1",
+   "gui_readability": {
+    "class": "NO_TOOLTIP",
+    "note": "numeric knobs showed no tooltip in the compact panel (3 tries); expanded view not found"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "filter1.level_out",
+   "aliases": [],
+   "value": 0.73,
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamLevelOut"
+   ],
+   "leaves": [
+    [
+     [
+      "VoiceFilter0",
+      "plainParams",
+      "kParamLevelOut"
+     ],
+     0.73
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/FILTER1",
+   "gui_readability": {
+    "class": "NO_TOOLTIP",
+    "note": "numeric knobs showed no tooltip in the compact panel (3 tries); expanded view not found"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 86.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "filter1.resonance",
+   "aliases": [],
+   "value": 86.0,
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamReso"
+   ],
+   "leaves": [
+    [
+     [
+      "VoiceFilter0",
+      "plainParams",
+      "kParamReso"
+     ],
+     86.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/FILTER1",
+   "gui_readability": {
+    "class": "NO_TOOLTIP",
+    "note": "numeric knobs showed no tooltip in the compact panel (3 tries); expanded view not found"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 87.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "filter1.stereo",
+   "aliases": [],
+   "value": 87.0,
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamStereo"
+   ],
+   "leaves": [
+    [
+     [
+      "VoiceFilter0",
+      "plainParams",
+      "kParamStereo"
+     ],
+     87.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/FILTER1",
+   "gui_readability": {
+    "class": "NO_TOOLTIP",
+    "note": "numeric knobs showed no tooltip in the compact panel (3 tries); expanded view not found"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "filter1.type",
+   "aliases": [],
+   "value": "L12",
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamType"
+   ],
+   "leaves": [
+    [
+     [
+      "VoiceFilter0",
+      "plainParams",
+      "kParamType"
+     ],
+     "L12"
+    ]
+   ],
+   "baseline_value": "MgL12",
+   "view": "OSC/FILTER1",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 14.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "filter1.var",
+   "aliases": [],
+   "value": 14.0,
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamVar"
+   ],
+   "leaves": [
+    [
+     [
+      "VoiceFilter0",
+      "plainParams",
+      "kParamVar"
+     ],
+     14.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/FILTER1",
+   "gui_readability": {
+    "class": "NO_TOOLTIP",
+    "note": "numeric knobs showed no tooltip in the compact panel (3 tries); expanded view not found"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 13.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "filter1.wet",
+   "aliases": [
+    "mixer.filter1.wet"
+   ],
+   "value": 13.0,
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamWet"
+   ],
+   "leaves": [
+    [
+     [
+      "VoiceFilter0",
+      "plainParams",
+      "kParamWet"
+     ],
+     13.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/FILTER1",
+   "gui_readability": {
+    "class": "NO_TOOLTIP",
+    "note": "numeric knobs showed no tooltip in the compact panel (3 tries); expanded view not found"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "filter2.cutoff",
+   "aliases": [],
+   "value": 0.41,
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamFreq"
+   ],
+   "leaves": [
+    [
+     [
+      "VoiceFilter1",
+      "plainParams",
+      "kParamFreq"
+     ],
+     0.41
+    ]
+   ],
+   "baseline_value": 0.5,
+   "view": "OSC/FILTER2",
+   "gui_readability": {
+    "class": "NO_TOOLTIP",
+    "note": "numeric knobs showed no tooltip in the compact panel (3 tries); expanded view not found"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 12.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "filter2.drive",
+   "aliases": [],
+   "value": 12.0,
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamDrive"
+   ],
+   "leaves": [
+    [
+     [
+      "VoiceFilter1",
+      "plainParams",
+      "kParamDrive"
+     ],
+     12.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/FILTER2",
+   "gui_readability": {
+    "class": "NO_TOOLTIP",
+    "note": "numeric knobs showed no tooltip in the compact panel (3 tries); expanded view not found"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "filter2.enabled",
+   "aliases": [
+    "mixer.filter2.enable"
+   ],
+   "value": 1.0,
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamEnable"
+   ],
+   "leaves": [
+    [
+     [
+      "VoiceFilter1",
+      "plainParams",
+      "kParamEnable"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": 0.0,
+   "view": "OSC/FILTER2",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "filter2.key_track",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamKeyTrack"
+   ],
+   "leaves": [
+    [
+     [
+      "VoiceFilter1",
+      "plainParams",
+      "kParamKeyTrack"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": 0.0,
+   "view": "OSC/FILTER2",
+   "gui_readability": {
+    "class": "NO_TOOLTIP",
+    "note": "numeric knobs showed no tooltip in the compact panel (3 tries); expanded view not found"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "filter2.level_out",
+   "aliases": [],
+   "value": 0.47,
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamLevelOut"
+   ],
+   "leaves": [
+    [
+     [
+      "VoiceFilter1",
+      "plainParams",
+      "kParamLevelOut"
+     ],
+     0.47
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/FILTER2",
+   "gui_readability": {
+    "class": "NO_TOOLTIP",
+    "note": "numeric knobs showed no tooltip in the compact panel (3 tries); expanded view not found"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 8.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "filter2.resonance",
+   "aliases": [],
+   "value": 8.0,
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamReso"
+   ],
+   "leaves": [
+    [
+     [
+      "VoiceFilter1",
+      "plainParams",
+      "kParamReso"
+     ],
+     8.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/FILTER2",
+   "gui_readability": {
+    "class": "NO_TOOLTIP",
+    "note": "numeric knobs showed no tooltip in the compact panel (3 tries); expanded view not found"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 88.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "filter2.stereo",
+   "aliases": [],
+   "value": 88.0,
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamStereo"
+   ],
+   "leaves": [
+    [
+     [
+      "VoiceFilter1",
+      "plainParams",
+      "kParamStereo"
+     ],
+     88.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/FILTER2",
+   "gui_readability": {
+    "class": "NO_TOOLTIP",
+    "note": "numeric knobs showed no tooltip in the compact panel (3 tries); expanded view not found"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 89.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "filter2.var",
+   "aliases": [],
+   "value": 89.0,
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamVar"
+   ],
+   "leaves": [
+    [
+     [
+      "VoiceFilter1",
+      "plainParams",
+      "kParamVar"
+     ],
+     89.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/FILTER2",
+   "gui_readability": {
+    "class": "NO_TOOLTIP",
+    "note": "numeric knobs showed no tooltip in the compact panel (3 tries); expanded view not found"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 90.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "filter2.wet",
+   "aliases": [
+    "mixer.filter2.wet"
+   ],
+   "value": 90.0,
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamWet"
+   ],
+   "leaves": [
+    [
+     [
+      "VoiceFilter1",
+      "plainParams",
+      "kParamWet"
+     ],
+     90.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/FILTER2",
+   "gui_readability": {
+    "class": "NO_TOOLTIP",
+    "note": "numeric knobs showed no tooltip in the compact panel (3 tries); expanded view not found"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.bode.blur",
+   "aliases": [],
+   "value": 52.0,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXBode",
+    "plainParams",
+    "kParamBlur"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      0,
+      "FXBode",
+      "plainParams",
+      "kParamBlur"
+     ],
+     52.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_bode",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.bode.wet",
+   "aliases": [],
+   "value": 26.0,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXBode",
+    "plainParams",
+    "kParamWet"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      0,
+      "FXBode",
+      "plainParams",
+      "kParamWet"
+     ],
+     26.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_bode",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.chorus.depth",
+   "aliases": [],
+   "value": 18.0,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    1,
+    "FXChorus",
+    "plainParams",
+    "kParamDepth"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      1,
+      "FXChorus",
+      "plainParams",
+      "kParamDepth"
+     ],
+     18.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_chorus",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.chorus.feedback",
+   "aliases": [],
+   "value": 32.0,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    1,
+    "FXChorus",
+    "plainParams",
+    "kParamFeedback"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      1,
+      "FXChorus",
+      "plainParams",
+      "kParamFeedback"
+     ],
+     32.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_chorus",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.chorus.wet",
+   "aliases": [],
+   "value": 15.0,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    1,
+    "FXChorus",
+    "plainParams",
+    "kParamWet"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      1,
+      "FXChorus",
+      "plainParams",
+      "kParamWet"
+     ],
+     15.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_chorus",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.compressor.attack",
+   "aliases": [],
+   "value": 22.0,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    2,
+    "FXComp",
+    "plainParams",
+    "kParamAttack"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      2,
+      "FXComp",
+      "plainParams",
+      "kParamAttack"
+     ],
+     22.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_compressor",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": true
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.compressor.gain",
+   "aliases": [],
+   "value": 11.0,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    2,
+    "FXComp",
+    "plainParams",
+    "kParamMakeup"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      2,
+      "FXComp",
+      "plainParams",
+      "kParamMakeup"
+     ],
+     11.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_compressor",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": true
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.compressor.ratio",
+   "aliases": [],
+   "value": 430.0,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    2,
+    "FXComp",
+    "plainParams",
+    "kParamRatio"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      2,
+      "FXComp",
+      "plainParams",
+      "kParamRatio"
+     ],
+     430.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_compressor",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": true
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.compressor.thresh",
+   "aliases": [],
+   "value": 0.49,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    2,
+    "FXComp",
+    "plainParams",
+    "kParamThresh"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      2,
+      "FXComp",
+      "plainParams",
+      "kParamThresh"
+     ],
+     0.49
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_compressor",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": true
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.compressor.wet",
+   "aliases": [],
+   "value": 65.0,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    2,
+    "FXComp",
+    "plainParams",
+    "kParamWet"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      2,
+      "FXComp",
+      "plainParams",
+      "kParamWet"
+     ],
+     65.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_compressor",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.convolve.decay",
+   "aliases": [],
+   "value": 33.0,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    3,
+    "FXConv",
+    "plainParams",
+    "kParamDecay"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      3,
+      "FXConv",
+      "plainParams",
+      "kParamDecay"
+     ],
+     33.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_convolve",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.convolve.tone",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    3,
+    "FXConv",
+    "plainParams",
+    "kParamTone"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      3,
+      "FXConv",
+      "plainParams",
+      "kParamTone"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_convolve",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.convolve.wet",
+   "aliases": [],
+   "value": 28.0,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    3,
+    "FXConv",
+    "plainParams",
+    "kParamWet"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      3,
+      "FXConv",
+      "plainParams",
+      "kParamWet"
+     ],
+     28.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_convolve",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.delay.bpm",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    4,
+    "FXDelay",
+    "plainParams",
+    "kParamBeatSync"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      4,
+      "FXDelay",
+      "plainParams",
+      "kParamBeatSync"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_delay",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.delay.freq",
+   "aliases": [],
+   "value": 12843.0,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    4,
+    "FXDelay",
+    "plainParams",
+    "kParamFreq"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      4,
+      "FXDelay",
+      "plainParams",
+      "kParamFreq"
+     ],
+     12843.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_delay",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.delay.link",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    4,
+    "FXDelay",
+    "plainParams",
+    "kParamLink"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      4,
+      "FXDelay",
+      "plainParams",
+      "kParamLink"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_delay",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.delay.mode",
+   "aliases": [],
+   "value": 2.0,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    4,
+    "FXDelay",
+    "plainParams",
+    "kParamMode"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      4,
+      "FXDelay",
+      "plainParams",
+      "kParamMode"
+     ],
+     2.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_delay",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.delay.wet",
+   "aliases": [],
+   "value": 45.0,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    4,
+    "FXDelay",
+    "plainParams",
+    "kParamWet"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      4,
+      "FXDelay",
+      "plainParams",
+      "kParamWet"
+     ],
+     45.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_delay",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.dimension.size",
+   "aliases": [],
+   "value": 61.0,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    5,
+    "FXHyperD",
+    "plainParams",
+    "kParamDimESize"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      5,
+      "FXHyperD",
+      "plainParams",
+      "kParamDimESize"
+     ],
+     61.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_dimension",
+   "gui_readability": {
+    "class": "NO_TOOLTIP",
+    "note": "no tooltip (visual knob estimate only)"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.dimension.wet",
+   "aliases": [],
+   "value": 34.0,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    5,
+    "FXHyperD",
+    "plainParams",
+    "kParamDimEWet"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      5,
+      "FXHyperD",
+      "plainParams",
+      "kParamDimEWet"
+     ],
+     34.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_dimension",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.distortion.drive",
+   "aliases": [],
+   "value": 78.0,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    6,
+    "FXDistortion",
+    "plainParams",
+    "kParamDrive"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      6,
+      "FXDistortion",
+      "plainParams",
+      "kParamDrive"
+     ],
+     78.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_distortion",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.distortion.freq",
+   "aliases": [],
+   "value": 0.51,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    6,
+    "FXDistortion",
+    "plainParams",
+    "kParamFreq"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      6,
+      "FXDistortion",
+      "plainParams",
+      "kParamFreq"
+     ],
+     0.51
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_distortion",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.distortion.wet",
+   "aliases": [],
+   "value": 24.0,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    6,
+    "FXDistortion",
+    "plainParams",
+    "kParamWet"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      6,
+      "FXDistortion",
+      "plainParams",
+      "kParamWet"
+     ],
+     24.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_distortion",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.filter.cutoff",
+   "aliases": [],
+   "value": 0.67,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    8,
+    "FXFilter",
+    "plainParams",
+    "kParamFreq"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      8,
+      "FXFilter",
+      "plainParams",
+      "kParamFreq"
+     ],
+     0.67
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_filter",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.filter.drive",
+   "aliases": [],
+   "value": 41.0,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    8,
+    "FXFilter",
+    "plainParams",
+    "kParamDrive"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      8,
+      "FXFilter",
+      "plainParams",
+      "kParamDrive"
+     ],
+     41.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_filter",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.filter.res",
+   "aliases": [],
+   "value": 84.0,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    8,
+    "FXFilter",
+    "plainParams",
+    "kParamReso"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      8,
+      "FXFilter",
+      "plainParams",
+      "kParamReso"
+     ],
+     84.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_filter",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.filter.type",
+   "aliases": [],
+   "value": "L6",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    8,
+    "FXFilter",
+    "plainParams",
+    "kParamType"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      8,
+      "FXFilter",
+      "plainParams",
+      "kParamType"
+     ],
+     "L6"
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_filter",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.filter.wet",
+   "aliases": [],
+   "value": 57.0,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    8,
+    "FXFilter",
+    "plainParams",
+    "kParamWet"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      8,
+      "FXFilter",
+      "plainParams",
+      "kParamWet"
+     ],
+     57.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_filter",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.flanger.depth",
+   "aliases": [],
+   "value": 74.0,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    9,
+    "FXFlanger",
+    "plainParams",
+    "kParamDepth"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      9,
+      "FXFlanger",
+      "plainParams",
+      "kParamDepth"
+     ],
+     74.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_flanger",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.flanger.feedback",
+   "aliases": [],
+   "value": 20.0,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    9,
+    "FXFlanger",
+    "plainParams",
+    "kParamFeedback"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      9,
+      "FXFlanger",
+      "plainParams",
+      "kParamFeedback"
+     ],
+     20.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_flanger",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.flanger.rate",
+   "aliases": [],
+   "value": 6.4,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    9,
+    "FXFlanger",
+    "plainParams",
+    "kParamRate"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      9,
+      "FXFlanger",
+      "plainParams",
+      "kParamRate"
+     ],
+     6.4
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_flanger",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.flanger.wet",
+   "aliases": [],
+   "value": 37.0,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    9,
+    "FXFlanger",
+    "plainParams",
+    "kParamWet"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      9,
+      "FXFlanger",
+      "plainParams",
+      "kParamWet"
+     ],
+     37.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_flanger",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.hyper.unison",
+   "aliases": [],
+   "value": 6.0,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    5,
+    "FXHyperD",
+    "plainParams",
+    "kParamUnison"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      5,
+      "FXHyperD",
+      "plainParams",
+      "kParamUnison"
+     ],
+     6.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_hyper",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.hyper.wet",
+   "aliases": [],
+   "value": 53.0,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    5,
+    "FXHyperD",
+    "plainParams",
+    "kParamWet"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      5,
+      "FXHyperD",
+      "plainParams",
+      "kParamWet"
+     ],
+     53.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_hyper",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.phaser.depth",
+   "aliases": [],
+   "value": 27.0,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    10,
+    "FXPhaser",
+    "plainParams",
+    "kParamDepth"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      10,
+      "FXPhaser",
+      "plainParams",
+      "kParamDepth"
+     ],
+     27.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_phaser",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.phaser.feedback",
+   "aliases": [],
+   "value": 70.0,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    10,
+    "FXPhaser",
+    "plainParams",
+    "kParamFeedback"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      10,
+      "FXPhaser",
+      "plainParams",
+      "kParamFeedback"
+     ],
+     70.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_phaser",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.phaser.freq",
+   "aliases": [],
+   "value": 390.0,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    10,
+    "FXPhaser",
+    "plainParams",
+    "kParamFreq"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      10,
+      "FXPhaser",
+      "plainParams",
+      "kParamFreq"
+     ],
+     390.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_phaser",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.phaser.rate",
+   "aliases": [],
+   "value": 3.3,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    10,
+    "FXPhaser",
+    "plainParams",
+    "kParamRate"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      10,
+      "FXPhaser",
+      "plainParams",
+      "kParamRate"
+     ],
+     3.3
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_phaser",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.phaser.wet",
+   "aliases": [],
+   "value": 60.0,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    10,
+    "FXPhaser",
+    "plainParams",
+    "kParamWet"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      10,
+      "FXPhaser",
+      "plainParams",
+      "kParamWet"
+     ],
+     60.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_phaser",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.reverb.size",
+   "aliases": [],
+   "value": 76.0,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    11,
+    "FXReverb",
+    "plainParams",
+    "kParamSize"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      11,
+      "FXReverb",
+      "plainParams",
+      "kParamSize"
+     ],
+     76.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_reverb",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.reverb.type",
+   "aliases": [],
+   "value": "kHall",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    11,
+    "FXReverb",
+    "plainParams",
+    "kParamType"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      11,
+      "FXReverb",
+      "plainParams",
+      "kParamType"
+     ],
+     "kHall"
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_reverb",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": true
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "fx.reverb.wet",
+   "aliases": [],
+   "value": 23.0,
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    11,
+    "FXReverb",
+    "plainParams",
+    "kParamWet"
+   ],
+   "leaves": [
+    [
+     [
+      "FXRack0",
+      "FX",
+      11,
+      "FXReverb",
+      "plainParams",
+      "kParamWet"
+     ],
+     23.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "FX/FX_reverb",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "global.bend_range_down",
+   "aliases": [],
+   "value": -8.0,
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamBendRangeDn"
+   ],
+   "leaves": [
+    [
+     [
+      "Global0",
+      "plainParams",
+      "kParamBendRangeDn"
+     ],
+     -8.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "GLOBAL/GLOBAL",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "global.bend_range_up",
+   "aliases": [],
+   "value": 9.0,
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamBendRangeUp"
+   ],
+   "leaves": [
+    [
+     [
+      "Global0",
+      "plainParams",
+      "kParamBendRangeUp"
+     ],
+     9.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "GLOBAL/GLOBAL",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "global.direct_volume",
+   "aliases": [],
+   "value": 0.09999999999999999,
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamDirectVol"
+   ],
+   "leaves": [
+    [
+     [
+      "Global0",
+      "plainParams",
+      "kParamDirectVol"
+     ],
+     0.09999999999999999
+    ]
+   ],
+   "baseline_value": null,
+   "view": "GLOBAL/GLOBAL",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "global.fx_bus1_destination",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamFXBus1Dest"
+   ],
+   "leaves": [
+    [
+     [
+      "Global0",
+      "plainParams",
+      "kParamFXBus1Dest"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "GLOBAL/GLOBAL",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "global.fx_bus1_volume",
+   "aliases": [],
+   "value": 1.0000000000000002,
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamFXBus1Vol"
+   ],
+   "leaves": [
+    [
+     [
+      "Global0",
+      "plainParams",
+      "kParamFXBus1Vol"
+     ],
+     1.0000000000000002
+    ]
+   ],
+   "baseline_value": null,
+   "view": "GLOBAL/GLOBAL",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "global.fx_bus2_destination",
+   "aliases": [],
+   "value": 2.0,
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamFXBus2Dest"
+   ],
+   "leaves": [
+    [
+     [
+      "Global0",
+      "plainParams",
+      "kParamFXBus2Dest"
+     ],
+     2.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "GLOBAL/GLOBAL",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "global.fx_bus2_volume",
+   "aliases": [],
+   "value": 0.001,
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamFXBus2Vol"
+   ],
+   "leaves": [
+    [
+     [
+      "Global0",
+      "plainParams",
+      "kParamFXBus2Vol"
+     ],
+     0.001
+    ]
+   ],
+   "baseline_value": null,
+   "view": "GLOBAL/GLOBAL",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "global.global_tuning",
+   "aliases": [],
+   "value": 450.0,
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamGlobalTuning"
+   ],
+   "leaves": [
+    [
+     [
+      "Global0",
+      "plainParams",
+      "kParamGlobalTuning"
+     ],
+     450.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "GLOBAL/GLOBAL",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "global.legato",
+   "aliases": [
+    "voice.voicing.legato"
+   ],
+   "value": 1.0,
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamLegato"
+   ],
+   "leaves": [
+    [
+     [
+      "Global0",
+      "plainParams",
+      "kParamLegato"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "GLOBAL/GLOBAL",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "global.limit_same_note_polyphony",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamLimitSameNotePolyphony"
+   ],
+   "leaves": [
+    [
+     [
+      "Global0",
+      "plainParams",
+      "kParamLimitSameNotePolyphony"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "GLOBAL/GLOBAL",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "global.master_volume",
+   "aliases": [],
+   "value": 0.82,
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamMasterVolume"
+   ],
+   "leaves": [
+    [
+     [
+      "Global0",
+      "plainParams",
+      "kParamMasterVolume"
+     ],
+     0.82
+    ]
+   ],
+   "baseline_value": 0.5,
+   "view": "GLOBAL/GLOBAL",
+   "gui_readability": {
+    "class": "NO_TOOLTIP",
+    "note": "no tooltip"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "global.mono",
+   "aliases": [
+    "voice.voicing.mono"
+   ],
+   "value": 1.0,
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamMonoToggle"
+   ],
+   "leaves": [
+    [
+     [
+      "Global0",
+      "plainParams",
+      "kParamMonoToggle"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "GLOBAL/GLOBAL",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "global.note_latch",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamNoteLatch"
+   ],
+   "leaves": [
+    [
+     [
+      "Global0",
+      "plainParams",
+      "kParamNoteLatch"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "GLOBAL/GLOBAL",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "global.oversampling",
+   "aliases": [],
+   "value": 2.0,
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamOversampling"
+   ],
+   "leaves": [
+    [
+     [
+      "Global0",
+      "plainParams",
+      "kParamOversampling"
+     ],
+     2.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "GLOBAL/GLOBAL",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "global.poly_count",
+   "aliases": [],
+   "value": 7.0,
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamPolyCount"
+   ],
+   "leaves": [
+    [
+     [
+      "Global0",
+      "plainParams",
+      "kParamPolyCount"
+     ],
+     7.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "GLOBAL/GLOBAL",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "global.porta_always",
+   "aliases": [
+    "voice.voicing.porta_always"
+   ],
+   "value": 1.0,
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamPortaAlways"
+   ],
+   "leaves": [
+    [
+     [
+      "Global0",
+      "plainParams",
+      "kParamPortaAlways"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "GLOBAL/GLOBAL",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "global.porta_scaled",
+   "aliases": [
+    "voice.voicing.porta_scaled"
+   ],
+   "value": 1.0,
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamPortaScaled"
+   ],
+   "leaves": [
+    [
+     [
+      "Global0",
+      "plainParams",
+      "kParamPortaScaled"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "GLOBAL/GLOBAL",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "global.portamento_curve",
+   "aliases": [],
+   "value": -0.0010000000000047748,
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamPortamentoCurve"
+   ],
+   "leaves": [
+    [
+     [
+      "Global0",
+      "plainParams",
+      "kParamPortamentoCurve"
+     ],
+     -0.0010000000000047748
+    ]
+   ],
+   "baseline_value": null,
+   "view": "GLOBAL/GLOBAL",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "global.portamento_time",
+   "aliases": [],
+   "value": 1.9,
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamPortamentoTime"
+   ],
+   "leaves": [
+    [
+     [
+      "Global0",
+      "plainParams",
+      "kParamPortamentoTime"
+     ],
+     1.9
+    ]
+   ],
+   "baseline_value": null,
+   "view": "GLOBAL/GLOBAL",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "global.swing",
+   "aliases": [],
+   "value": 35.0,
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamSwing"
+   ],
+   "leaves": [
+    [
+     [
+      "Global0",
+      "plainParams",
+      "kParamSwing"
+     ],
+     35.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "GLOBAL/GLOBAL",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "global.swing_div",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamSwingDiv"
+   ],
+   "leaves": [
+    [
+     [
+      "Global0",
+      "plainParams",
+      "kParamSwingDiv"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "GLOBAL/GLOBAL",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "global.voice_amp",
+   "aliases": [],
+   "value": 0.0,
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamVoiceAmp"
+   ],
+   "leaves": [
+    [
+     [
+      "Global0",
+      "plainParams",
+      "kParamVoiceAmp"
+     ],
+     0.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "GLOBAL/GLOBAL",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "global.voice_control.random.cutoff",
+   "aliases": [],
+   "value": 0.1,
+   "raw_path": [
+    "VoicePanel0",
+    "plainParams",
+    "kParamGlobalRandomFilterCutoff"
+   ],
+   "leaves": [
+    [
+     [
+      "VoicePanel0",
+      "plainParams",
+      "kParamGlobalRandomFilterCutoff"
+     ],
+     0.1
+    ]
+   ],
+   "baseline_value": null,
+   "view": "GLOBAL/GLOBAL",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "global.voice_control.random.detune",
+   "aliases": [],
+   "value": 0.01,
+   "raw_path": [
+    "VoicePanel0",
+    "plainParams",
+    "kParamGlobalRandomOscDetune"
+   ],
+   "leaves": [
+    [
+     [
+      "VoicePanel0",
+      "plainParams",
+      "kParamGlobalRandomOscDetune"
+     ],
+     0.01
+    ]
+   ],
+   "baseline_value": null,
+   "view": "GLOBAL/GLOBAL",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "global.voice_control.random.envs",
+   "aliases": [],
+   "value": 100.0,
+   "raw_path": [
+    "VoicePanel0",
+    "plainParams",
+    "kParamGlobalRandomEnvTime"
+   ],
+   "leaves": [
+    [
+     [
+      "VoicePanel0",
+      "plainParams",
+      "kParamGlobalRandomEnvTime"
+     ],
+     100.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "GLOBAL/GLOBAL",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "global.voice_control.scaling.envs",
+   "aliases": [],
+   "value": 1000.0,
+   "raw_path": [
+    "VoicePanel0",
+    "plainParams",
+    "kParamGlobalScalingEnvTime"
+   ],
+   "leaves": [
+    [
+     [
+      "VoicePanel0",
+      "plainParams",
+      "kParamGlobalScalingEnvTime"
+     ],
+     1000.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "GLOBAL/GLOBAL",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "global.voice_control.scaling.lfos",
+   "aliases": [],
+   "value": 10.0,
+   "raw_path": [
+    "VoicePanel0",
+    "plainParams",
+    "kParamGlobalScalingLfoTime"
+   ],
+   "leaves": [
+    [
+     [
+      "VoicePanel0",
+      "plainParams",
+      "kParamGlobalScalingLfoTime"
+     ],
+     10.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "GLOBAL/GLOBAL",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo1.beat_sync",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamBeatSync"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO0",
+      "plainParams",
+      "kParamBeatSync"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO1",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo1.dotted",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamDotted"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO0",
+      "plainParams",
+      "kParamDotted"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO1",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo1.mode",
+   "aliases": [],
+   "value": "Envelope",
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamMode"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO0",
+      "plainParams",
+      "kParamMode"
+     ],
+     "Envelope"
+    ]
+   ],
+   "baseline_value": "Free",
+   "view": "OSC/LFO1",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": true
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo1.mono",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamMono"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO0",
+      "plainParams",
+      "kParamMono"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO1",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo1.rate",
+   "aliases": [],
+   "value": 5.0,
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamRate"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO0",
+      "plainParams",
+      "kParamRate"
+     ],
+     5.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO1",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo1.rate_10x",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamRate10x"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO0",
+      "plainParams",
+      "kParamRate10x"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO1",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 91.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "lfo1.smooth",
+   "aliases": [],
+   "value": 91.0,
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamSmooth"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO0",
+      "plainParams",
+      "kParamSmooth"
+     ],
+     91.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO1",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo1.swing",
+   "aliases": [],
+   "value": 0.54,
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamSwing"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO0",
+      "plainParams",
+      "kParamSwing"
+     ],
+     0.54
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO1",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo1.triplets",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamTriplets"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO0",
+      "plainParams",
+      "kParamTriplets"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO1",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo2.beat_sync",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamBeatSync"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO1",
+      "plainParams",
+      "kParamBeatSync"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO2",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo2.delay",
+   "aliases": [],
+   "value": 2.28,
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamDelay"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO1",
+      "plainParams",
+      "kParamDelay"
+     ],
+     2.28
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO2",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo2.dotted",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamDotted"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO1",
+      "plainParams",
+      "kParamDotted"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO2",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo2.mode",
+   "aliases": [],
+   "value": "Envelope",
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamMode"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO1",
+      "plainParams",
+      "kParamMode"
+     ],
+     "Envelope"
+    ]
+   ],
+   "baseline_value": "Free",
+   "view": "OSC/LFO2",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": true
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo2.mono",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamMono"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO1",
+      "plainParams",
+      "kParamMono"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO2",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo2.rate",
+   "aliases": [],
+   "value": 4.0,
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamRate"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO1",
+      "plainParams",
+      "kParamRate"
+     ],
+     4.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO2",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo2.rate_10x",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamRate10x"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO1",
+      "plainParams",
+      "kParamRate10x"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO2",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo2.rise",
+   "aliases": [],
+   "value": 1.7,
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamRise"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO1",
+      "plainParams",
+      "kParamRise"
+     ],
+     1.7
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO2",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 92.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "lfo2.smooth",
+   "aliases": [],
+   "value": 92.0,
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamSmooth"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO1",
+      "plainParams",
+      "kParamSmooth"
+     ],
+     92.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO2",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo2.swing",
+   "aliases": [],
+   "value": 0.23,
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamSwing"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO1",
+      "plainParams",
+      "kParamSwing"
+     ],
+     0.23
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO2",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo2.triplets",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamTriplets"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO1",
+      "plainParams",
+      "kParamTriplets"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO2",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo3.beat_sync",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamBeatSync"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO2",
+      "plainParams",
+      "kParamBeatSync"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO3",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo3.delay",
+   "aliases": [],
+   "value": 2.98,
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamDelay"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO2",
+      "plainParams",
+      "kParamDelay"
+     ],
+     2.98
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO3",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo3.dotted",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamDotted"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO2",
+      "plainParams",
+      "kParamDotted"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO3",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo3.mode",
+   "aliases": [],
+   "value": "Envelope",
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamMode"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO2",
+      "plainParams",
+      "kParamMode"
+     ],
+     "Envelope"
+    ]
+   ],
+   "baseline_value": "Free",
+   "view": "OSC/LFO3",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": true
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo3.mono",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamMono"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO2",
+      "plainParams",
+      "kParamMono"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO3",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo3.rate",
+   "aliases": [],
+   "value": 16.9,
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamRate"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO2",
+      "plainParams",
+      "kParamRate"
+     ],
+     16.9
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO3",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo3.rate_10x",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamRate10x"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO2",
+      "plainParams",
+      "kParamRate10x"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO3",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo3.rise",
+   "aliases": [],
+   "value": 2.1,
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamRise"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO2",
+      "plainParams",
+      "kParamRise"
+     ],
+     2.1
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO3",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 93.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "lfo3.smooth",
+   "aliases": [],
+   "value": 93.0,
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamSmooth"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO2",
+      "plainParams",
+      "kParamSmooth"
+     ],
+     93.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO3",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo3.swing",
+   "aliases": [],
+   "value": 0.74,
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamSwing"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO2",
+      "plainParams",
+      "kParamSwing"
+     ],
+     0.74
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO3",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo3.triplets",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamTriplets"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO2",
+      "plainParams",
+      "kParamTriplets"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO3",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo4.beat_sync",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamBeatSync"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO3",
+      "plainParams",
+      "kParamBeatSync"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO4",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo4.delay",
+   "aliases": [],
+   "value": 2.64,
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamDelay"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO3",
+      "plainParams",
+      "kParamDelay"
+     ],
+     2.64
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO4",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo4.dotted",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamDotted"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO3",
+      "plainParams",
+      "kParamDotted"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO4",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo4.mode",
+   "aliases": [],
+   "value": "Envelope",
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamMode"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO3",
+      "plainParams",
+      "kParamMode"
+     ],
+     "Envelope"
+    ]
+   ],
+   "baseline_value": "Free",
+   "view": "OSC/LFO4",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": true
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo4.mono",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamMono"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO3",
+      "plainParams",
+      "kParamMono"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO4",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo4.rate",
+   "aliases": [],
+   "value": 12.2,
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamRate"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO3",
+      "plainParams",
+      "kParamRate"
+     ],
+     12.2
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO4",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo4.rate_10x",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamRate10x"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO3",
+      "plainParams",
+      "kParamRate10x"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO4",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo4.rise",
+   "aliases": [],
+   "value": 1.1,
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamRise"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO3",
+      "plainParams",
+      "kParamRise"
+     ],
+     1.1
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO4",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 94.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "lfo4.smooth",
+   "aliases": [],
+   "value": 94.0,
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamSmooth"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO3",
+      "plainParams",
+      "kParamSmooth"
+     ],
+     94.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO4",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo4.swing",
+   "aliases": [],
+   "value": 0.28,
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamSwing"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO3",
+      "plainParams",
+      "kParamSwing"
+     ],
+     0.28
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO4",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo4.triplets",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamTriplets"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO3",
+      "plainParams",
+      "kParamTriplets"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO4",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo5.beat_sync",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamBeatSync"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO4",
+      "plainParams",
+      "kParamBeatSync"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO5",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo5.delay",
+   "aliases": [],
+   "value": 3.08,
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamDelay"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO4",
+      "plainParams",
+      "kParamDelay"
+     ],
+     3.08
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO5",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo5.dotted",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamDotted"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO4",
+      "plainParams",
+      "kParamDotted"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO5",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo5.mode",
+   "aliases": [],
+   "value": "Envelope",
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamMode"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO4",
+      "plainParams",
+      "kParamMode"
+     ],
+     "Envelope"
+    ]
+   ],
+   "baseline_value": "Free",
+   "view": "OSC/LFO5",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": true
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo5.mono",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamMono"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO4",
+      "plainParams",
+      "kParamMono"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO5",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo5.rate",
+   "aliases": [],
+   "value": 18.3,
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamRate"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO4",
+      "plainParams",
+      "kParamRate"
+     ],
+     18.3
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO5",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo5.rate_10x",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamRate10x"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO4",
+      "plainParams",
+      "kParamRate10x"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO5",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo5.rise",
+   "aliases": [],
+   "value": 2.3,
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamRise"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO4",
+      "plainParams",
+      "kParamRise"
+     ],
+     2.3
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO5",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 95.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "lfo5.smooth",
+   "aliases": [],
+   "value": 95.0,
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamSmooth"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO4",
+      "plainParams",
+      "kParamSmooth"
+     ],
+     95.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO5",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo5.swing",
+   "aliases": [],
+   "value": 0.36,
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamSwing"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO4",
+      "plainParams",
+      "kParamSwing"
+     ],
+     0.36
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO5",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo5.triplets",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamTriplets"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO4",
+      "plainParams",
+      "kParamTriplets"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO5",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo6.beat_sync",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamBeatSync"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO5",
+      "plainParams",
+      "kParamBeatSync"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO6",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo6.delay",
+   "aliases": [],
+   "value": 3.23,
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamDelay"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO5",
+      "plainParams",
+      "kParamDelay"
+     ],
+     3.23
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO6",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo6.dotted",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamDotted"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO5",
+      "plainParams",
+      "kParamDotted"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO6",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo6.mode",
+   "aliases": [],
+   "value": "Envelope",
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamMode"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO5",
+      "plainParams",
+      "kParamMode"
+     ],
+     "Envelope"
+    ]
+   ],
+   "baseline_value": "Free",
+   "view": "OSC/LFO6",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": true
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo6.mono",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamMono"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO5",
+      "plainParams",
+      "kParamMono"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO6",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo6.rate",
+   "aliases": [],
+   "value": 20.3,
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamRate"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO5",
+      "plainParams",
+      "kParamRate"
+     ],
+     20.3
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO6",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo6.rate_10x",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamRate10x"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO5",
+      "plainParams",
+      "kParamRate10x"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO6",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo6.rise",
+   "aliases": [],
+   "value": 2.7,
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamRise"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO5",
+      "plainParams",
+      "kParamRise"
+     ],
+     2.7
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO6",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 96.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "lfo6.smooth",
+   "aliases": [],
+   "value": 96.0,
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamSmooth"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO5",
+      "plainParams",
+      "kParamSmooth"
+     ],
+     96.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO6",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo6.swing",
+   "aliases": [],
+   "value": 0.44,
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamSwing"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO5",
+      "plainParams",
+      "kParamSwing"
+     ],
+     0.44
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO6",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "lfo6.triplets",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamTriplets"
+   ],
+   "leaves": [
+    [
+     [
+      "LFO5",
+      "plainParams",
+      "kParamTriplets"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/LFO6",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "macro1.name",
+   "aliases": [],
+   "value": "FP_MACRO1_NAME",
+   "raw_path": [
+    "Macro0",
+    "name"
+   ],
+   "leaves": [
+    [
+     [
+      "Macro0",
+      "name"
+     ],
+     "FP_MACRO1_NAME"
+    ]
+   ],
+   "baseline_value": null,
+   "view": "BOTTOM/MACROS",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "macro2.name",
+   "aliases": [],
+   "value": "FP_MACRO2_NAME",
+   "raw_path": [
+    "Macro1",
+    "name"
+   ],
+   "leaves": [
+    [
+     [
+      "Macro1",
+      "name"
+     ],
+     "FP_MACRO2_NAME"
+    ]
+   ],
+   "baseline_value": null,
+   "view": "BOTTOM/MACROS",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 73.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "macro2.value",
+   "aliases": [],
+   "value": 73.0,
+   "raw_path": [
+    "Macro1",
+    "plainParams",
+    "kParamValue"
+   ],
+   "leaves": [
+    [
+     [
+      "Macro1",
+      "plainParams",
+      "kParamValue"
+     ],
+     73.0
+    ]
+   ],
+   "baseline_value": 0.0,
+   "view": "BOTTOM/MACROS",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "macro3.name",
+   "aliases": [],
+   "value": "FP_MACRO3_NAME",
+   "raw_path": [
+    "Macro2",
+    "name"
+   ],
+   "leaves": [
+    [
+     [
+      "Macro2",
+      "name"
+     ],
+     "FP_MACRO3_NAME"
+    ]
+   ],
+   "baseline_value": null,
+   "view": "BOTTOM/MACROS",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 46.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "macro3.value",
+   "aliases": [],
+   "value": 46.0,
+   "raw_path": [
+    "Macro2",
+    "plainParams",
+    "kParamValue"
+   ],
+   "leaves": [
+    [
+     [
+      "Macro2",
+      "plainParams",
+      "kParamValue"
+     ],
+     46.0
+    ]
+   ],
+   "baseline_value": 0.0,
+   "view": "BOTTOM/MACROS",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "macro4.name",
+   "aliases": [],
+   "value": "FP_MACRO4_NAME",
+   "raw_path": [
+    "Macro3",
+    "name"
+   ],
+   "leaves": [
+    [
+     [
+      "Macro3",
+      "name"
+     ],
+     "FP_MACRO4_NAME"
+    ]
+   ],
+   "baseline_value": null,
+   "view": "BOTTOM/MACROS",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 19.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "macro4.value",
+   "aliases": [],
+   "value": 19.0,
+   "raw_path": [
+    "Macro3",
+    "plainParams",
+    "kParamValue"
+   ],
+   "leaves": [
+    [
+     [
+      "Macro3",
+      "plainParams",
+      "kParamValue"
+     ],
+     19.0
+    ]
+   ],
+   "baseline_value": 0.0,
+   "view": "BOTTOM/MACROS",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "macro5.name",
+   "aliases": [],
+   "value": "FP_MACRO5_NAME",
+   "raw_path": [
+    "Macro4",
+    "name"
+   ],
+   "leaves": [
+    [
+     [
+      "Macro4",
+      "name"
+     ],
+     "FP_MACRO5_NAME"
+    ]
+   ],
+   "baseline_value": null,
+   "view": "BOTTOM/MACROS",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "macro6.name",
+   "aliases": [],
+   "value": "FP_MACRO6_NAME",
+   "raw_path": [
+    "Macro5",
+    "name"
+   ],
+   "leaves": [
+    [
+     [
+      "Macro5",
+      "name"
+     ],
+     "FP_MACRO6_NAME"
+    ]
+   ],
+   "baseline_value": null,
+   "view": "BOTTOM/MACROS",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 63.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "macro6.value",
+   "aliases": [],
+   "value": 63.0,
+   "raw_path": [
+    "Macro5",
+    "plainParams",
+    "kParamValue"
+   ],
+   "leaves": [
+    [
+     [
+      "Macro5",
+      "plainParams",
+      "kParamValue"
+     ],
+     63.0
+    ]
+   ],
+   "baseline_value": 0.0,
+   "view": "BOTTOM/MACROS",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "macro7.name",
+   "aliases": [],
+   "value": "FP_MACRO7_NAME",
+   "raw_path": [
+    "Macro6",
+    "name"
+   ],
+   "leaves": [
+    [
+     [
+      "Macro6",
+      "name"
+     ],
+     "FP_MACRO7_NAME"
+    ]
+   ],
+   "baseline_value": null,
+   "view": "BOTTOM/MACROS",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 36.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "macro7.value",
+   "aliases": [],
+   "value": 36.0,
+   "raw_path": [
+    "Macro6",
+    "plainParams",
+    "kParamValue"
+   ],
+   "leaves": [
+    [
+     [
+      "Macro6",
+      "plainParams",
+      "kParamValue"
+     ],
+     36.0
+    ]
+   ],
+   "baseline_value": 0.0,
+   "view": "BOTTOM/MACROS",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "macro8.name",
+   "aliases": [],
+   "value": "FP_MACRO8_NAME",
+   "raw_path": [
+    "Macro7",
+    "name"
+   ],
+   "leaves": [
+    [
+     [
+      "Macro7",
+      "name"
+     ],
+     "FP_MACRO8_NAME"
+    ]
+   ],
+   "baseline_value": null,
+   "view": "BOTTOM/MACROS",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 79.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "macro8.value",
+   "aliases": [],
+   "value": 79.0,
+   "raw_path": [
+    "Macro7",
+    "plainParams",
+    "kParamValue"
+   ],
+   "leaves": [
+    [
+     [
+      "Macro7",
+      "plainParams",
+      "kParamValue"
+     ],
+     79.0
+    ]
+   ],
+   "baseline_value": 0.0,
+   "view": "BOTTOM/MACROS",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 25.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "mixer.filter1.bus1",
+   "aliases": [],
+   "value": 25.0,
+   "raw_path": [
+    "RoutingSlot5",
+    "plainParams",
+    "kParamFXBus1Level"
+   ],
+   "leaves": [
+    [
+     [
+      "RoutingSlot5",
+      "plainParams",
+      "kParamFXBus1Level"
+     ],
+     25.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "MIX/MIX",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 48.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "mixer.filter1.bus2",
+   "aliases": [],
+   "value": 48.0,
+   "raw_path": [
+    "RoutingSlot5",
+    "plainParams",
+    "kParamFXBus2Level"
+   ],
+   "leaves": [
+    [
+     [
+      "RoutingSlot5",
+      "plainParams",
+      "kParamFXBus2Level"
+     ],
+     48.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "MIX/MIX",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 68.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "mixer.filter2.bus1",
+   "aliases": [],
+   "value": 68.0,
+   "raw_path": [
+    "RoutingSlot6",
+    "plainParams",
+    "kParamFXBus1Level"
+   ],
+   "leaves": [
+    [
+     [
+      "RoutingSlot6",
+      "plainParams",
+      "kParamFXBus1Level"
+     ],
+     68.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "MIX/MIX",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 21.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "mixer.filter2.bus2",
+   "aliases": [],
+   "value": 21.0,
+   "raw_path": [
+    "RoutingSlot6",
+    "plainParams",
+    "kParamFXBus2Level"
+   ],
+   "leaves": [
+    [
+     [
+      "RoutingSlot6",
+      "plainParams",
+      "kParamFXBus2Level"
+     ],
+     21.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "MIX/MIX",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 42.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "mixer.noise.bus1",
+   "aliases": [],
+   "value": 42.0,
+   "raw_path": [
+    "RoutingSlot3",
+    "plainParams",
+    "kParamFXBus1Level"
+   ],
+   "leaves": [
+    [
+     [
+      "RoutingSlot3",
+      "plainParams",
+      "kParamFXBus1Level"
+     ],
+     42.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "MIX/MIX",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 64.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "mixer.noise.bus2",
+   "aliases": [],
+   "value": 64.0,
+   "raw_path": [
+    "RoutingSlot3",
+    "plainParams",
+    "kParamFXBus2Level"
+   ],
+   "leaves": [
+    [
+     [
+      "RoutingSlot3",
+      "plainParams",
+      "kParamFXBus2Level"
+     ],
+     64.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "MIX/MIX",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "mixer.noise.enable",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "Oscillator3",
+    "plainParams",
+    "kParamEnable"
+   ],
+   "leaves": [
+    [
+     [
+      "Oscillator3",
+      "plainParams",
+      "kParamEnable"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": 0.0,
+   "view": "MIX/MIX",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 44.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "mixer.noise.filter_balance",
+   "aliases": [],
+   "value": 44.0,
+   "raw_path": [
+    "RoutingSlot3",
+    "plainParams",
+    "kParamFilterBalance"
+   ],
+   "leaves": [
+    [
+     [
+      "RoutingSlot3",
+      "plainParams",
+      "kParamFilterBalance"
+     ],
+     44.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "MIX/MIX",
+   "gui_readability": {
+    "class": "NOT_LOCATED",
+    "note": "not located on the MIX page (icon under each strip is the Env1 routing toggle)"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": -20.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "mixer.noise.pan",
+   "aliases": [
+    "oscNoise.pan"
+   ],
+   "value": -20.0,
+   "raw_path": [
+    "Oscillator3",
+    "plainParams",
+    "kParamPan"
+   ],
+   "leaves": [
+    [
+     [
+      "Oscillator3",
+      "plainParams",
+      "kParamPan"
+     ],
+     -20.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "MIX/MIX",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 85.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "mixer.osc_a.bus1",
+   "aliases": [],
+   "value": 85.0,
+   "raw_path": [
+    "RoutingSlot0",
+    "plainParams",
+    "kParamFXBus1Level"
+   ],
+   "leaves": [
+    [
+     [
+      "RoutingSlot0",
+      "plainParams",
+      "kParamFXBus1Level"
+     ],
+     85.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "MIX/MIX",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 38.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "mixer.osc_a.bus2",
+   "aliases": [],
+   "value": 38.0,
+   "raw_path": [
+    "RoutingSlot0",
+    "plainParams",
+    "kParamFXBus2Level"
+   ],
+   "leaves": [
+    [
+     [
+      "RoutingSlot0",
+      "plainParams",
+      "kParamFXBus2Level"
+     ],
+     38.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "MIX/MIX",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 17.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "mixer.osc_a.filter_balance",
+   "aliases": [],
+   "value": 17.0,
+   "raw_path": [
+    "RoutingSlot0",
+    "plainParams",
+    "kParamFilterBalance"
+   ],
+   "leaves": [
+    [
+     [
+      "RoutingSlot0",
+      "plainParams",
+      "kParamFilterBalance"
+     ],
+     17.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "MIX/MIX",
+   "gui_readability": {
+    "class": "NOT_LOCATED",
+    "note": "not located on the MIX page (icon under each strip is the Env1 routing toggle)"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 58.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "mixer.osc_b.bus1",
+   "aliases": [],
+   "value": 58.0,
+   "raw_path": [
+    "RoutingSlot1",
+    "plainParams",
+    "kParamFXBus1Level"
+   ],
+   "leaves": [
+    [
+     [
+      "RoutingSlot1",
+      "plainParams",
+      "kParamFXBus1Level"
+     ],
+     58.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "MIX/MIX",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 81.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "mixer.osc_b.bus2",
+   "aliases": [],
+   "value": 81.0,
+   "raw_path": [
+    "RoutingSlot1",
+    "plainParams",
+    "kParamFXBus2Level"
+   ],
+   "leaves": [
+    [
+     [
+      "RoutingSlot1",
+      "plainParams",
+      "kParamFXBus2Level"
+     ],
+     81.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "MIX/MIX",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 77.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "mixer.osc_b.filter_balance",
+   "aliases": [],
+   "value": 77.0,
+   "raw_path": [
+    "RoutingSlot1",
+    "plainParams",
+    "kParamFilterBalance"
+   ],
+   "leaves": [
+    [
+     [
+      "RoutingSlot1",
+      "plainParams",
+      "kParamFilterBalance"
+     ],
+     77.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "MIX/MIX",
+   "gui_readability": {
+    "class": "NOT_LOCATED",
+    "note": "not located on the MIX page (icon under each strip is the Env1 routing toggle)"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 31.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "mixer.osc_c.bus1",
+   "aliases": [],
+   "value": 31.0,
+   "raw_path": [
+    "RoutingSlot2",
+    "plainParams",
+    "kParamFXBus1Level"
+   ],
+   "leaves": [
+    [
+     [
+      "RoutingSlot2",
+      "plainParams",
+      "kParamFXBus1Level"
+     ],
+     31.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "MIX/MIX",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 54.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "mixer.osc_c.bus2",
+   "aliases": [],
+   "value": 54.0,
+   "raw_path": [
+    "RoutingSlot2",
+    "plainParams",
+    "kParamFXBus2Level"
+   ],
+   "leaves": [
+    [
+     [
+      "RoutingSlot2",
+      "plainParams",
+      "kParamFXBus2Level"
+     ],
+     54.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "MIX/MIX",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 67.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "mixer.osc_c.filter_balance",
+   "aliases": [],
+   "value": 67.0,
+   "raw_path": [
+    "RoutingSlot2",
+    "plainParams",
+    "kParamFilterBalance"
+   ],
+   "leaves": [
+    [
+     [
+      "RoutingSlot2",
+      "plainParams",
+      "kParamFilterBalance"
+     ],
+     67.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "MIX/MIX",
+   "gui_readability": {
+    "class": "NOT_LOCATED",
+    "note": "not located on the MIX page (icon under each strip is the Env1 routing toggle)"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 75.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "mixer.sub.bus1",
+   "aliases": [],
+   "value": 75.0,
+   "raw_path": [
+    "RoutingSlot4",
+    "plainParams",
+    "kParamFXBus1Level"
+   ],
+   "leaves": [
+    [
+     [
+      "RoutingSlot4",
+      "plainParams",
+      "kParamFXBus1Level"
+     ],
+     75.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "MIX/MIX",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 71.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "mixer.sub.bus2",
+   "aliases": [],
+   "value": 71.0,
+   "raw_path": [
+    "RoutingSlot4",
+    "plainParams",
+    "kParamFXBus2Level"
+   ],
+   "leaves": [
+    [
+     [
+      "RoutingSlot4",
+      "plainParams",
+      "kParamFXBus2Level"
+     ],
+     71.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "MIX/MIX",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "mixer.sub.enable",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "Oscillator4",
+    "plainParams",
+    "kParamEnable"
+   ],
+   "leaves": [
+    [
+     [
+      "Oscillator4",
+      "plainParams",
+      "kParamEnable"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": 0.0,
+   "view": "MIX/MIX",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 40.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "mixer.sub.filter_balance",
+   "aliases": [],
+   "value": 40.0,
+   "raw_path": [
+    "RoutingSlot4",
+    "plainParams",
+    "kParamFilterBalance"
+   ],
+   "leaves": [
+    [
+     [
+      "RoutingSlot4",
+      "plainParams",
+      "kParamFilterBalance"
+     ],
+     40.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "MIX/MIX",
+   "gui_readability": {
+    "class": "NOT_LOCATED",
+    "note": "not located on the MIX page (icon under each strip is the Env1 routing toggle)"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": -4.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "mixer.sub.pan",
+   "aliases": [],
+   "value": -4.0,
+   "raw_path": [
+    "Oscillator4",
+    "plainParams",
+    "kParamPan"
+   ],
+   "leaves": [
+    [
+     [
+      "Oscillator4",
+      "plainParams",
+      "kParamPan"
+     ],
+     -4.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "MIX/MIX",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "oscA.enabled",
+   "aliases": [],
+   "value": 0.0,
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamEnable"
+   ],
+   "leaves": [
+    [
+     [
+      "Oscillator0",
+      "plainParams",
+      "kParamEnable"
+     ],
+     0.0
+    ]
+   ],
+   "baseline_value": 1.0,
+   "view": "OSC/OSC_A",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": -26.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "oscA.fine",
+   "aliases": [],
+   "value": -26.0,
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamFine"
+   ],
+   "leaves": [
+    [
+     [
+      "Oscillator0",
+      "plainParams",
+      "kParamFine"
+     ],
+     -26.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/OSC_A",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": -2.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "oscA.octave",
+   "aliases": [],
+   "value": -2.0,
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamOctave"
+   ],
+   "leaves": [
+    [
+     [
+      "Oscillator0",
+      "plainParams",
+      "kParamOctave"
+     ],
+     -2.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/OSC_A",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": -5.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "oscA.semitone",
+   "aliases": [],
+   "value": -5.0,
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamPitch"
+   ],
+   "leaves": [
+    [
+     [
+      "Oscillator0",
+      "plainParams",
+      "kParamPitch"
+     ],
+     -5.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/OSC_A",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 46.0,
+    "model": "percent_linear",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "oscA.warp_amount",
+   "aliases": [],
+   "value": 0.46,
+   "raw_path": [
+    "Oscillator0",
+    "WTOsc0",
+    "plainParams",
+    "kParamWarp"
+   ],
+   "leaves": [
+    [
+     [
+      "Oscillator0",
+      "WTOsc0",
+      "plainParams",
+      "kParamWarp"
+     ],
+     0.46
+    ]
+   ],
+   "baseline_value": 0.0,
+   "view": "OSC/OSC_A",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": true
+  },
+  {
+   "predicted_display": {
+    "value": 63.0,
+    "model": "percent_linear",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "oscA.warp_amount2",
+   "aliases": [],
+   "value": 0.63,
+   "raw_path": [
+    "Oscillator0",
+    "WTOsc0",
+    "plainParams",
+    "kParamWarp2"
+   ],
+   "leaves": [
+    [
+     [
+      "Oscillator0",
+      "WTOsc0",
+      "plainParams",
+      "kParamWarp2"
+     ],
+     0.63
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/OSC_A",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": true
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "oscA.warp_mode",
+   "aliases": [],
+   "value": "kSync",
+   "raw_path": [
+    "Oscillator0",
+    "WTOsc0",
+    "plainParams",
+    "kParamWarpMenu"
+   ],
+   "leaves": [
+    [
+     [
+      "Oscillator0",
+      "WTOsc0",
+      "plainParams",
+      "kParamWarpMenu"
+     ],
+     "kSync"
+    ]
+   ],
+   "baseline_value": "kFM_OSC",
+   "view": "OSC/OSC_A",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": true
+  },
+  {
+   "predicted_display": {
+    "value": 0.79,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "oscA.warp_var2",
+   "aliases": [],
+   "value": 0.79,
+   "raw_path": [
+    "Oscillator0",
+    "WTOsc0",
+    "plainParams",
+    "kParamWarpVar2"
+   ],
+   "leaves": [
+    [
+     [
+      "Oscillator0",
+      "WTOsc0",
+      "plainParams",
+      "kParamWarpVar2"
+     ],
+     0.79
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/OSC_A",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": true
+  },
+  {
+   "predicted_display": {
+    "value": 0.53,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "oscB.detune",
+   "aliases": [],
+   "value": 0.53,
+   "raw_path": [
+    "Oscillator1",
+    "plainParams",
+    "kParamDetune"
+   ],
+   "leaves": [
+    [
+     [
+      "Oscillator1",
+      "plainParams",
+      "kParamDetune"
+     ],
+     0.53
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/OSC_B",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "oscB.enabled",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "Oscillator1",
+    "plainParams",
+    "kParamEnable"
+   ],
+   "leaves": [
+    [
+     [
+      "Oscillator1",
+      "plainParams",
+      "kParamEnable"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": 0.0,
+   "view": "OSC/OSC_B",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": -24.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "oscB.pan",
+   "aliases": [],
+   "value": -24.0,
+   "raw_path": [
+    "Oscillator1",
+    "plainParams",
+    "kParamPan"
+   ],
+   "leaves": [
+    [
+     [
+      "Oscillator1",
+      "plainParams",
+      "kParamPan"
+     ],
+     -24.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/OSC_B",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 42.0,
+    "model": "percent_linear",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "oscB.warp_amount",
+   "aliases": [],
+   "value": 0.42,
+   "raw_path": [
+    "Oscillator1",
+    "WTOsc1",
+    "plainParams",
+    "kParamWarp"
+   ],
+   "leaves": [
+    [
+     [
+      "Oscillator1",
+      "WTOsc1",
+      "plainParams",
+      "kParamWarp"
+     ],
+     0.42
+    ]
+   ],
+   "baseline_value": 0.0,
+   "view": "OSC/OSC_B",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": true
+  },
+  {
+   "predicted_display": {
+    "value": 32.0,
+    "model": "percent_linear",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "oscB.warp_amount2",
+   "aliases": [],
+   "value": 0.32,
+   "raw_path": [
+    "Oscillator1",
+    "WTOsc1",
+    "plainParams",
+    "kParamWarp2"
+   ],
+   "leaves": [
+    [
+     [
+      "Oscillator1",
+      "WTOsc1",
+      "plainParams",
+      "kParamWarp2"
+     ],
+     0.32
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/OSC_B",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": true
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "oscB.warp_mode",
+   "aliases": [],
+   "value": "kPWM",
+   "raw_path": [
+    "Oscillator1",
+    "WTOsc1",
+    "plainParams",
+    "kParamWarpMenu"
+   ],
+   "leaves": [
+    [
+     [
+      "Oscillator1",
+      "WTOsc1",
+      "plainParams",
+      "kParamWarpMenu"
+     ],
+     "kPWM"
+    ]
+   ],
+   "baseline_value": "kFM_OSC",
+   "view": "OSC/OSC_B",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": true
+  },
+  {
+   "predicted_display": {
+    "value": 0.22,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "oscB.warp_var2",
+   "aliases": [],
+   "value": 0.22,
+   "raw_path": [
+    "Oscillator1",
+    "WTOsc1",
+    "plainParams",
+    "kParamWarpVar2"
+   ],
+   "leaves": [
+    [
+     [
+      "Oscillator1",
+      "WTOsc1",
+      "plainParams",
+      "kParamWarpVar2"
+     ],
+     0.22
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/OSC_B",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": true
+  },
+  {
+   "predicted_display": {
+    "value": 0.65,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "oscC.detune",
+   "aliases": [],
+   "value": 0.65,
+   "raw_path": [
+    "Oscillator2",
+    "plainParams",
+    "kParamDetune"
+   ],
+   "leaves": [
+    [
+     [
+      "Oscillator2",
+      "plainParams",
+      "kParamDetune"
+     ],
+     0.65
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/OSC_C",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "oscC.enabled",
+   "aliases": [],
+   "value": 1.0,
+   "raw_path": [
+    "Oscillator2",
+    "plainParams",
+    "kParamEnable"
+   ],
+   "leaves": [
+    [
+     [
+      "Oscillator2",
+      "plainParams",
+      "kParamEnable"
+     ],
+     1.0
+    ]
+   ],
+   "baseline_value": 0.0,
+   "view": "OSC/OSC_C",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": -11.0,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "oscC.pan",
+   "aliases": [],
+   "value": -11.0,
+   "raw_path": [
+    "Oscillator2",
+    "plainParams",
+    "kParamPan"
+   ],
+   "leaves": [
+    [
+     [
+      "Oscillator2",
+      "plainParams",
+      "kParamPan"
+     ],
+     -11.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/OSC_C",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": {
+    "value": 18.0,
+    "model": "percent_linear",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "oscC.warp_amount",
+   "aliases": [],
+   "value": 0.18,
+   "raw_path": [
+    "Oscillator2",
+    "WTOsc2",
+    "plainParams",
+    "kParamWarp"
+   ],
+   "leaves": [
+    [
+     [
+      "Oscillator2",
+      "WTOsc2",
+      "plainParams",
+      "kParamWarp"
+     ],
+     0.18
+    ]
+   ],
+   "baseline_value": 0.0,
+   "view": "OSC/OSC_C",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": true
+  },
+  {
+   "predicted_display": {
+    "value": 61.0,
+    "model": "percent_linear",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "oscC.warp_amount2",
+   "aliases": [],
+   "value": 0.61,
+   "raw_path": [
+    "Oscillator2",
+    "WTOsc2",
+    "plainParams",
+    "kParamWarp2"
+   ],
+   "leaves": [
+    [
+     [
+      "Oscillator2",
+      "WTOsc2",
+      "plainParams",
+      "kParamWarp2"
+     ],
+     0.61
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/OSC_C",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": true
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "oscC.warp_mode",
+   "aliases": [],
+   "value": "kBendPos",
+   "raw_path": [
+    "Oscillator2",
+    "WTOsc2",
+    "plainParams",
+    "kParamWarpMenu"
+   ],
+   "leaves": [
+    [
+     [
+      "Oscillator2",
+      "WTOsc2",
+      "plainParams",
+      "kParamWarpMenu"
+     ],
+     "kBendPos"
+    ]
+   ],
+   "baseline_value": "kFM_OSC",
+   "view": "OSC/OSC_C",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": true
+  },
+  {
+   "predicted_display": {
+    "value": 0.35,
+    "model": "identity",
+    "tier": "B_host_text_model (hypothesis)"
+   },
+   "atlas_id": "oscC.warp_var2",
+   "aliases": [],
+   "value": 0.35,
+   "raw_path": [
+    "Oscillator2",
+    "WTOsc2",
+    "plainParams",
+    "kParamWarpVar2"
+   ],
+   "leaves": [
+    [
+     [
+      "Oscillator2",
+      "WTOsc2",
+      "plainParams",
+      "kParamWarpVar2"
+     ],
+     0.35
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/OSC_C",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": true
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "oscNoise.fine",
+   "aliases": [],
+   "value": -53.0,
+   "raw_path": [
+    "Oscillator3",
+    "plainParams",
+    "kParamFine"
+   ],
+   "leaves": [
+    [
+     [
+      "Oscillator3",
+      "plainParams",
+      "kParamFine"
+     ],
+     -53.0
+    ]
+   ],
+   "baseline_value": null,
+   "view": "OSC/NOISE",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  },
+  {
+   "predicted_display": null,
+   "atlas_id": "oscNoise.noise_type",
+   "aliases": [],
+   "value": "Pink",
+   "raw_path": [
+    "Oscillator3",
+    "NoiseOsc3",
+    "plainParams",
+    "kParamNoiseType"
+   ],
+   "leaves": [
+    [
+     [
+      "Oscillator3",
+      "NoiseOsc3",
+      "plainParams",
+      "kParamNoiseType"
+     ],
+     "Pink"
+    ]
+   ],
+   "baseline_value": "White",
+   "view": "OSC/NOISE",
+   "gui_readability": {
+    "class": "UNKNOWN_OR_READABLE",
+    "note": "no scan note says otherwise; tooltip availability not mapped yet"
+   },
+   "role": "verify",
+   "anchor": false
+  }
+ ],
+ "references": [
+  {
+   "reference": "LFO7_CONTEXT_CONFLICT",
+   "leaves": [
+    [
+     [
+      "LFO6",
+      "plainParams",
+      "kParamType"
+     ],
+     "RandomSH"
+    ],
+    [
+     [
+      "LFO6",
+      "plainParams",
+      "kParamMode"
+     ],
+     "Envelope"
+    ]
+   ],
+   "expect": "LFO 7: shape S&H, ENVELOPE greyed and FREE lit (native constraint); not one of the 330"
+  }
+ ],
+ "views": [
+  "ARP/ARP",
+  "BOTTOM/MACROS",
+  "FX/FX_bode",
+  "FX/FX_chorus",
+  "FX/FX_compressor",
+  "FX/FX_convolve",
+  "FX/FX_delay",
+  "FX/FX_dimension",
+  "FX/FX_distortion",
+  "FX/FX_filter",
+  "FX/FX_flanger",
+  "FX/FX_hyper",
+  "FX/FX_phaser",
+  "FX/FX_reverb",
+  "GLOBAL/GLOBAL",
+  "MIX/MIX",
+  "OSC/ENV1",
+  "OSC/ENV2",
+  "OSC/ENV3",
+  "OSC/ENV4",
+  "OSC/FILTER1",
+  "OSC/FILTER2",
+  "OSC/LFO1",
+  "OSC/LFO2",
+  "OSC/LFO3",
+  "OSC/LFO4",
+  "OSC/LFO5",
+  "OSC/LFO6",
+  "OSC/NOISE",
+  "OSC/OSC_A",
+  "OSC/OSC_B",
+  "OSC/OSC_C"
+ ]
+}

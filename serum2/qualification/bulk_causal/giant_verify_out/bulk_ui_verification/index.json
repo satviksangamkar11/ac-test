@@ -1,0 +1,282 @@
+{
+ "generated_only": true,
+ "rendered": false,
+ "verified": false,
+ "n_presets": 2,
+ "lower_bound_presets": 2,
+ "presets": [
+  {
+   "name": "BULK_01_WAVETABLE_MAIN",
+   "file": "BULK_01_WAVETABLE_MAIN.SerumPreset",
+   "n_controls": 251,
+   "n_controls_incl_aliases": 260,
+   "views": [
+    "ARP/ARP",
+    "BOTTOM/MACROS",
+    "FX/FX_bode",
+    "FX/FX_chorus",
+    "FX/FX_compressor",
+    "FX/FX_convolve",
+    "FX/FX_delay",
+    "FX/FX_dimension",
+    "FX/FX_distortion",
+    "FX/FX_filter",
+    "FX/FX_flanger",
+    "FX/FX_hyper",
+    "FX/FX_phaser",
+    "FX/FX_reverb",
+    "GLOBAL/GLOBAL",
+    "MIX/MIX",
+    "OSC/ENV1",
+    "OSC/ENV2",
+    "OSC/ENV3",
+    "OSC/ENV4",
+    "OSC/FILTER1",
+    "OSC/FILTER2",
+    "OSC/LFO1",
+    "OSC/LFO2",
+    "OSC/LFO3",
+    "OSC/LFO4",
+    "OSC/LFO5",
+    "OSC/LFO6",
+    "OSC/NOISE",
+    "OSC/OSC_A",
+    "OSC/OSC_B",
+    "OSC/OSC_C"
+   ]
+  },
+  {
+   "name": "BULK_02_SAMPLE_CALIBRATION",
+   "file": "BULK_02_SAMPLE_CALIBRATION.SerumPreset",
+   "n_controls": 12,
+   "n_controls_incl_aliases": 12,
+   "views": [
+    "FX/FX_compressor",
+    "FX/FX_reverb",
+    "OSC/LFO3",
+    "OSC/LFO4",
+    "OSC/LFO5",
+    "OSC/LFO6",
+    "OSC/OSC_A",
+    "OSC/OSC_B",
+    "OSC/OSC_C"
+   ]
+  }
+ ],
+ "conflict_edges": [
+  {
+   "a": "lfo3.mode",
+   "b": "lfo3.shape",
+   "why": "lfo3.shape (shape test) and lfo3.mode (mode=Envelope test) on the same LFO: shape/mode coupling"
+  },
+  {
+   "a": "lfo4.mode",
+   "b": "lfo4.shape",
+   "why": "lfo4.shape (shape test) and lfo4.mode (mode=Envelope test) on the same LFO: shape/mode coupling"
+  },
+  {
+   "a": "lfo5.mode",
+   "b": "lfo5.shape",
+   "why": "lfo5.shape (shape test) and lfo5.mode (mode=Envelope test) on the same LFO: shape/mode coupling"
+  },
+  {
+   "a": "lfo6.mode",
+   "b": "lfo6.shape",
+   "why": "lfo6.shape (shape test) and lfo6.mode (mode=Envelope test) on the same LFO: shape/mode coupling"
+  },
+  {
+   "a": "oscA.sample_loop_crossfade",
+   "b": "oscA.warp_amount",
+   "why": "oscA.sample_loop_crossfade needs SAMPLE mode, oscA.warp_amount needs WAVETABLE mode on the same oscillator slot Oscillator0"
+  },
+  {
+   "a": "oscA.sample_loop_crossfade",
+   "b": "oscA.warp_amount2",
+   "why": "oscA.sample_loop_crossfade needs SAMPLE mode, oscA.warp_amount2 needs WAVETABLE mode on the same oscillator slot Oscillator0"
+  },
+  {
+   "a": "oscA.sample_loop_crossfade",
+   "b": "oscA.warp_mode",
+   "why": "oscA.sample_loop_crossfade needs SAMPLE mode, oscA.warp_mode needs WAVETABLE mode on the same oscillator slot Oscillator0"
+  },
+  {
+   "a": "oscA.sample_loop_crossfade",
+   "b": "oscA.warp_mode2",
+   "why": "oscA.sample_loop_crossfade needs SAMPLE mode, oscA.warp_mode2 needs WAVETABLE mode on the same oscillator slot Oscillator0"
+  },
+  {
+   "a": "oscA.sample_loop_crossfade",
+   "b": "oscA.warp_var2",
+   "why": "oscA.sample_loop_crossfade needs SAMPLE mode, oscA.warp_var2 needs WAVETABLE mode on the same oscillator slot Oscillator0"
+  },
+  {
+   "a": "oscA.sample_loop_crossfade",
+   "b": "oscA.wavetable",
+   "why": "oscA.sample_loop_crossfade needs SAMPLE mode, oscA.wavetable needs WAVETABLE mode on the same oscillator slot Oscillator0"
+  },
+  {
+   "a": "oscB.sample_loop_crossfade",
+   "b": "oscB.warp_amount",
+   "why": "oscB.sample_loop_crossfade needs SAMPLE mode, oscB.warp_amount needs WAVETABLE mode on the same oscillator slot Oscillator1"
+  },
+  {
+   "a": "oscB.sample_loop_crossfade",
+   "b": "oscB.warp_amount2",
+   "why": "oscB.sample_loop_crossfade needs SAMPLE mode, oscB.warp_amount2 needs WAVETABLE mode on the same oscillator slot Oscillator1"
+  },
+  {
+   "a": "oscB.sample_loop_crossfade",
+   "b": "oscB.warp_mode",
+   "why": "oscB.sample_loop_crossfade needs SAMPLE mode, oscB.warp_mode needs WAVETABLE mode on the same oscillator slot Oscillator1"
+  },
+  {
+   "a": "oscB.sample_loop_crossfade",
+   "b": "oscB.warp_mode2",
+   "why": "oscB.sample_loop_crossfade needs SAMPLE mode, oscB.warp_mode2 needs WAVETABLE mode on the same oscillator slot Oscillator1"
+  },
+  {
+   "a": "oscB.sample_loop_crossfade",
+   "b": "oscB.warp_var2",
+   "why": "oscB.sample_loop_crossfade needs SAMPLE mode, oscB.warp_var2 needs WAVETABLE mode on the same oscillator slot Oscillator1"
+  },
+  {
+   "a": "oscB.sample_loop_crossfade",
+   "b": "oscB.wavetable",
+   "why": "oscB.sample_loop_crossfade needs SAMPLE mode, oscB.wavetable needs WAVETABLE mode on the same oscillator slot Oscillator1"
+  },
+  {
+   "a": "oscC.sample_loop_crossfade",
+   "b": "oscC.warp_amount",
+   "why": "oscC.sample_loop_crossfade needs SAMPLE mode, oscC.warp_amount needs WAVETABLE mode on the same oscillator slot Oscillator2"
+  },
+  {
+   "a": "oscC.sample_loop_crossfade",
+   "b": "oscC.warp_amount2",
+   "why": "oscC.sample_loop_crossfade needs SAMPLE mode, oscC.warp_amount2 needs WAVETABLE mode on the same oscillator slot Oscillator2"
+  },
+  {
+   "a": "oscC.sample_loop_crossfade",
+   "b": "oscC.warp_mode",
+   "why": "oscC.sample_loop_crossfade needs SAMPLE mode, oscC.warp_mode needs WAVETABLE mode on the same oscillator slot Oscillator2"
+  },
+  {
+   "a": "oscC.sample_loop_crossfade",
+   "b": "oscC.warp_mode2",
+   "why": "oscC.sample_loop_crossfade needs SAMPLE mode, oscC.warp_mode2 needs WAVETABLE mode on the same oscillator slot Oscillator2"
+  },
+  {
+   "a": "oscC.sample_loop_crossfade",
+   "b": "oscC.warp_var2",
+   "why": "oscC.sample_loop_crossfade needs SAMPLE mode, oscC.warp_var2 needs WAVETABLE mode on the same oscillator slot Oscillator2"
+  },
+  {
+   "a": "oscC.sample_loop_crossfade",
+   "b": "oscC.wavetable",
+   "why": "oscC.sample_loop_crossfade needs SAMPLE mode, oscC.wavetable needs WAVETABLE mode on the same oscillator slot Oscillator2"
+  }
+ ],
+ "residual": {
+  "arp.transpose.shape": "NOT_DERIVED: raw stored vocabulary unknown, so no valid raw value can be written",
+  "global.use_ultra_on_render": "Serum never stored any written value for this key in the campaign (STATE_NOT_OBSERVED): no preset can carry it",
+  "global.voice_priority": "NOT_DERIVED: raw stored vocabulary unknown, so no valid raw value can be written"
+ },
+ "validation": {
+  "BULK_01_WAVETABLE_MAIN": {
+   "numeric_values_globally_unique": true,
+   "shared_values_by_necessity": {
+    "0.0": [
+     "arp.playback.offset",
+     "global.voice_amp",
+     "oscA.enabled"
+    ],
+    "10.0": [
+     "arp.playback.repeats",
+     "global.voice_control.scaling.lfos"
+    ],
+    "1.0": [
+     "arp.playback.thru",
+     "arp.retrigger.first",
+     "arp.retrigger.launch",
+     "arp.retrigger.note",
+     "arp.velocity.enable",
+     "arp.velocity.retrig",
+     "filter1.enabled",
+     "filter1.key_track",
+     "filter2.enabled",
+     "filter2.key_track",
+     "fx.delay.bpm",
+     "fx.delay.link",
+     "global.fx_bus1_destination",
+     "global.legato",
+     "global.limit_same_note_polyphony",
+     "global.mono",
+     "global.note_latch",
+     "global.porta_always",
+     "global.porta_scaled",
+     "global.swing_div",
+     "lfo1.beat_sync",
+     "lfo1.dotted",
+     "lfo1.mono",
+     "lfo1.rate_10x",
+     "lfo1.triplets",
+     "lfo2.beat_sync",
+     "lfo2.dotted",
+     "lfo2.mono",
+     "lfo2.rate_10x",
+     "lfo2.triplets",
+     "lfo3.beat_sync",
+     "lfo3.dotted",
+     "lfo3.mono",
+     "lfo3.rate_10x",
+     "lfo3.triplets",
+     "lfo4.beat_sync",
+     "lfo4.dotted",
+     "lfo4.mono",
+     "lfo4.rate_10x",
+     "lfo4.triplets",
+     "lfo5.beat_sync",
+     "lfo5.dotted",
+     "lfo5.mono",
+     "lfo5.rate_10x",
+     "lfo5.triplets",
+     "lfo6.beat_sync",
+     "lfo6.dotted",
+     "lfo6.mono",
+     "lfo6.rate_10x",
+     "lfo6.triplets",
+     "mixer.noise.enable",
+     "mixer.sub.enable",
+     "oscB.enabled",
+     "oscC.enabled"
+    ],
+    "2.0": [
+     "fx.delay.mode",
+     "global.fx_bus2_destination",
+     "global.oversampling"
+    ],
+    "\"Envelope\"": [
+     "lfo1.mode",
+     "lfo2.mode",
+     "lfo3.mode",
+     "lfo4.mode",
+     "lfo5.mode",
+     "lfo6.mode"
+    ]
+   },
+   "roundtrip": true,
+   "unintended_leaves": 0,
+   "all_leaves_landed": true,
+   "fingerprint_collisions": []
+  },
+  "BULK_02_SAMPLE_CALIBRATION": {
+   "numeric_values_globally_unique": true,
+   "shared_values_by_necessity": {},
+   "roundtrip": true,
+   "unintended_leaves": 0,
+   "all_leaves_landed": true,
+   "fingerprint_collisions": []
+  }
+ },
+ "work_controls": 258,
+ "isolation_corpus_loads": 1035
+}
