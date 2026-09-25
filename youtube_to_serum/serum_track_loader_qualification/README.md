@@ -25,7 +25,20 @@ These are experiments, not a test suite. Nothing here is a verified-correctness 
    taskbar or another app's window (attempts 1-3) blocks forever with zero callbacks.
 3. With a process-owned 60x60 source window, real mouse_event press/move/release onto the preset-name bar loads the preset.
 
+## Qualification result (2026-09-26): SERUM_NATIVE_PRESET_LOAD = QUALIFIED
+- `qual20.py` ran the unchanged `create_serum_track` 20 consecutive times, cycling the 4 presets in one Live/Serum session.
+- `evidence/qual20_results.json`: 20/20 LOADED_VISUAL, 0 failures, 0 rollback/cleanup leaks, 0 wrong Serum version,
+  drop effect 7 every run, preset-name bar changed 5.3-6.3 % (threshold 2 %), track renamed to the preset every run.
+- `evidence/qual20_attempt1_interrupted_by_live_restart.json`: first attempt, 15/15 then run 16 broke because Ableton was
+  restarted mid-run. It exposed a rollback that deleted by track INDEX (could hit a user track after a restart); fixed to
+  delete by the nonce NAME, and the rollback result is now in the returned JSON. The 20/20 run used the fixed code.
+- Smoke test through the real MCP server then found the tool's `serum_loader` import failed when server.py runs as a
+  script (the campaign imported it as a package, so could not see this). Fixed with a fallback import; after that the
+  real tool returned LOADED_VISUAL, renamed the track, and a missing file returned FAILED: PRESET_FILE_INVALID with no side effects.
+
 ## Limits
-- Only 4 presets run end-to-end; the 20-consecutive-run qualification was NOT done.
+- Qualification = native drag/drop loading only. State verification is NOT included. Parameter reproduction is NOT included.
 - No readback of Serum parameter state. Status is `LOADED_VISUAL` (drop accepted + preset-name bar changed), never "verified".
-- Scripts hardcode the scratch paths/nonces used in the session.
+- `qual20.py` takes the presets, run count and output path as arguments (nothing built in). The run recorded here was:
+  `qual20.py --out qual20_results.json --runs 20 "Prague Lead - Phase 5.SerumPreset" probe_noise_pink.SerumPreset probe_lfo4_retrig.SerumPreset probe_noise_white.SerumPreset`
+- The other scripts are one-off experiment tools; `ole_drop.py`/`capture.py`/`serum_tree.py` take the nonce/file on the command line.

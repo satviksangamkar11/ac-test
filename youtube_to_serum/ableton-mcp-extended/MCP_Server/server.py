@@ -445,12 +445,21 @@ def create_serum_track(ctx: Context, preset_path: str, name: str = "") -> str:
     """
     import os
     import secrets
-    from MCP_Server import serum_loader as sl
+    try:
+        from MCP_Server import serum_loader as sl
+    except ImportError:  # launched as a script (python MCP_Server/server.py)
+        import serum_loader as sl
 
     ev = {"preset_path": preset_path, "steps": []}
-    track_index = None
+    created = None  # nonce name of the track this call created; rollback deletes by this name only
 
-    def out(status, reason=""):
+    def out(status, reason=""):  # every exit goes through here, so the rollback result lands in the returned JSON
+        if status == "FAILED" and created:  # rollback by nonce NAME, never by index: an index can point at a user track after a Live restart
+            try:
+                ev["rollback"] = delete_track(ctx, 0, created)
+            except Exception as e:
+                ev["rollback"] = "rollback failed: %s" % e
+                logger.error("rollback failed: %s", e)
         ev.update(status=status, reason=reason)
         return json.dumps(ev, indent=2)
 
@@ -464,6 +473,7 @@ def create_serum_track(ctx: Context, preset_path: str, name: str = "") -> str:
         track_index = ableton.send_command("get_session_info").get("track_count")  # 1-based index of the new last track
         ti = _to_zero_based(track_index, "track_index")
         ableton.send_command("set_track_name", {"track_index": ti, "name": nonce})
+        created = nonce
         ev["steps"].append("track created as " + nonce)
         r = load_external_plugin(ctx, track_index, "Serum 2", exact_match=True)
         if not str(r).startswith("Loaded"):
@@ -488,18 +498,11 @@ def create_serum_track(ctx: Context, preset_path: str, name: str = "") -> str:
             return out("FAILED", "PRESET_NAME_BAR_UNCHANGED")
         ableton.send_command("set_track_name", {"track_index": ti, "name": name or os.path.splitext(os.path.basename(preset_path))[0]})
         ev["track_index"] = track_index
-        track_index = None  # committed: keep the track
+        created = None  # committed: keep the track
         return out("LOADED_VISUAL")
     except Exception as e:
         logger.error("create_serum_track failed: %s", e)
         return out("FAILED", "%s: %s" % (type(e).__name__, e))
-    finally:
-        if track_index is not None:  # rollback: only ever the track created by this call
-            try:
-                delete_track(ctx, track_index)
-                ev["rolled_back_track"] = track_index
-            except Exception as e:
-                logger.error("rollback failed: %s", e)
 
 
 @mcp.tool()
