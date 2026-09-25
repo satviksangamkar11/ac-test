@@ -20,7 +20,7 @@ Evidence goes in `parameter_characterization/bulk_causal_evidence/direct_ui_evid
       Compressor, Convolve, Delay, Hyper/Dimension, Distortion, Equalizer visible; Filter/Flanger/Phaser/Reverb below
       the fold) -- the core architecture claim is now visually proven, not just asserted
 - [x] FX page, numeric: **9 of 12 FX types checked** -- Bode (shift, range MATCH), Chorus (rate MATCH), Compressor
-      (attack MATCH; ratio/release MISMATCH, resolved finding), Convolve (size MATCH), Delay (time_l/time_r/feedback
+      (re-scan 56cd943, earlier readings were one column off: release MATCH; attack, gain MISMATCH; ratio 'Limit'), Convolve (size MATCH), Delay (time_l/time_r/feedback
       all MATCH), Hyper (rate/detune MATCH, unison plausible), Dimension (not reached), Distortion (type
       NORMALIZED_MATCH), Equalizer (all 6 params MATCH, no hover needed -- shown directly)
 - [ ] FX page, remaining: Dimension, Filter, Flanger, Phaser, Reverb not yet reached (~4 FX types, ~15 params) --
@@ -35,7 +35,7 @@ Evidence goes in `parameter_characterization/bulk_causal_evidence/direct_ui_evid
 - [x] ENV1-4 panels, attack/hold/decay/release: **all 16 fields MATCH** (5.00s / 2.60s / 16.0s / 16.0s, identical
       across all four envelopes as expected since all four share the same campaign targets)
 - [x] ENV1-4 sustain: resolved as confirmed MISMATCH, see DIRECT_UI_FINDING_RAW_WRITE_GAP.md
-- [x] LFO1/LFO2 checked (rise, delay MATCH; shape NORMALIZED_MATCH; mode MISMATCH, see finding). LFO3-6 not
+- [x] LFO1/LFO2 checked (rise, delay MATCH; shape NORMALIZED_MATCH; mode CONTEXT_CONFLICT with shape=S&H, see finding). LFO3-6 not
       individually checked but share identical targets with LFO1/2 -- treat as same pattern, not yet confirmed
 - [ ] LFO1-6 remaining: smooth, beat_sync, dotted, triplets, mono, swing, rate_10x not checked
 - [ ] FILTER1/FILTER2 panels (cutoff, resonance, drive, key_track) -- type already checked (filter2 NORMALIZED_MATCH); numeric knobs consistently show no tooltip on hover in this compact panel view (tried 3x) -- may need the panel's own expanded/detail view, not yet found
@@ -53,30 +53,24 @@ modified indicator and fixed by reloading the preset fresh (neither corrupted al
    check the title bar for `*` after each navigation action, not just after intentional edits.
 As a result, Dimension/Filter/Flanger/Phaser/Reverb (5 of 12 FX types) were not reached this pass.
 
-## Open findings -- RESOLVED (root cause identified for 3 of 4; lfo1.mode corrected, see DIRECT_UI_FINDING_RAW_WRITE_GAP.md)
-`fx.compressor.ratio`/`.release` and `env1-4.sustain` are confirmed genuine MISMATCHes with a common root
-cause: the causal engine's raw `body_set()` bypasses `serum_mcp`'s `apply_spec()` semantic encoder for
-`DIRECT_RAW`-mechanism candidates. DawDreamer's session state-readback echoes the raw write back unchanged
-(looks retained) but does not predict what Serum's native `.SerumPreset` file loader actually honors. This is
-not fixed here (no enum expanded, no domain widened, no schema touched) -- it's reported as-is for the closure
-ledger. **`lfo1.mode`'s original diagnosis was corrected** (see the CORRECTION section of
-DIRECT_UI_FINDING_RAW_WRITE_GAP.md) after a methodology error was found: the original "S&H"/"Normal" readings
-were `lfo1.shape`'s dropdown (an adjacent control), not the actual `FREE`/`RETRIG`/`ENVELOPE` mode toggle.
-- [x] **`lfo1.mode`**: target `"Envelope"` (schema-confirmed valid, vocabulary is exactly Free/Retrig/Envelope).
-      CORRECTED re-test reading the right control: isolated single-field write AND structural-merge-only write
-      both correctly show `ENVELOPE` highlighted -- the raw write method itself works. Only the full
-      299-candidate giant preset shows `FREE`. Confirmed real mismatch, but root cause is an unidentified
-      interaction with the other 298 candidates, NOT the encoder-bypass story below. Needs further bisection.
-- [x] **`fx.compressor.ratio`**: target `31622.78` (a legitimate point in the declared log-domain sweep, not an
-      edge probe). Giant preset shows `RATIO 1.0`; isolated test shows `RATIO 0.9` -- different wrong value for
-      the same target. `fx.compressor.attack` (same FX unit, same mechanism) MATCHED exactly in both tests,
-      proving this is specific to `ratio`, not the whole panel. Mechanism: `DIRECT_RAW`.
-- [x] **`fx.compressor.release`**: target `100.0`. Giant preset shows `30.4`; isolated test shows `0.0` --
-      different wrong value again. Same mechanism/root cause as `ratio`.
-- [x] **`env1/2/3/4.sustain`**: target `0.5`. `env1` displays `-12.0dB`, `env2/3/4` display `25%` -- these two
-      readings are mutually consistent (`10**(-12/20) ~= 0.251 ~= 25%`), so it's one real underlying value
-      (~0.251) shown in two different per-envelope unit choices, NOT a display-unit red herring -- but that
-      value is still not the target (0.5). Same root cause, smaller magnitude.
+## Open findings (current as of the 2026-09-26 re-scan, 56cd943; history in DIRECT_UI_FINDING_RAW_WRITE_GAP.md)
+The earlier "raw `body_set()` bypasses `apply_spec()`" explanation is **withdrawn**: `encoder_diff.py` shows the raw
+write and `apply_spec` produce identical bodies for every comparable candidate. The remaining mismatches come from
+serum-mcp's schema domains or vocabularies, not from the write path. No schema, domain or Atlas file is changed here.
+- [x] **`lfo1-6.mode`**: CONTEXT_CONFLICT, not MISMATCH. Serum disables ENVELOPE while shape is S&H, and the giant
+      preset also sets `lfo*.shape = RandomSH`. The isolation tests (single field; structural merge only) still show
+      ENVELOPE, so the raw field works. No bisect needed. Re-verify mode=Envelope with the default shape.
+- [x] **`fx.compressor.*`**: earlier readings were one column off. release MATCH (100 ms); attack MISMATCH (raw 100
+      -> 1.0 ms); gain MISMATCH (raw 16.5 -> 30.4 dB); ratio shows "Limit" (schema max 1e6 exceeds Serum's range);
+      thresh -7.5 dB, curve unverified. The isolated-test readings ("RATIO 0.9, RELEASE 0.0") likely share the
+      column shift and need a re-read.
+- [x] **`env1-4.sustain`**: MISMATCH. Target 0.5 shows -12.0 dB / 25% (~0.251). The stored-value-to-display
+      curve is unknown.
+- [x] **`fx.reverb.type`**: VOCABULARY_MISMATCH. `kAbyss` shows NITROUS; Serum's list is Plate/Hall/Vintage/Nitrous/Basin,
+      the schema's is kAbyss/kHall/kSpace/kVintage.
+- [x] **`arp.transpose.shape`**: 18-label display vocabulary enumerated; raw stored strings still unknown.
+- [x] **`osc*.warp_amount/_mode/_mode2/_var2`** (12): NOT_OBSERVABLE_IN_CONTEXT. The oscillators are in SAMPLE mode, so
+      the warp panel shows SampleOsc warp. Needs a wavetable-mode preset; also check `warp_mode2`'s raw `'fm'` word there.
 
 ## Not applicable to this pass (accounted for separately)
 - 26 `NO_USABLE_TARGET_VALUE` -- no retained non-probe value in the GUI campaign; not in either preset
@@ -84,7 +78,7 @@ were `lfo1.shape`'s dropdown (an adjacent control), not the actual `FREE`/`RETRI
 - 3 `APPLIED_TO_SECONDARY_PRESET` -- see secondary preset scan above
 
 ## Next ledger step (after scan complete)
-- [ ] Build `closure_ledger_v3` from `direct_ui_evidence_v2.json`, keeping `DIRECT_UI` strictly separate from
+- [x] Build `closure_ledger_v3` from `direct_ui_evidence_v2.json`, keeping `DIRECT_UI` strictly separate from
       `host_text_evidence` (per closure_ledger_v2's enforced separation)
 - [ ] Only then prepare batched authority-delta review (binding table / Atlas / registry / contracts / admission
       remain untouched through this entire evidence pass)
