@@ -1,0 +1,2646 @@
+{
+ "tier": "B_host_text",
+ "is_direct_ui": false,
+ "source": "BULK_01/02_host_texts.json (DawDreamer, 395277f)",
+ "status_counts": {
+  "NO_RELIABLE_HOST_IDENTITY": 129,
+  "HOST_MATCHES_PREDICTION": 74,
+  "HOST_LANDED": 56,
+  "HOST_UNCHANGED_FROM_INIT": 1,
+  "HOST_DIFFERS_FROM_PREDICTION": 3,
+  "HOST_LANDED_MODE_DEPENDENT_CURVE": 4
+ },
+ "controls": {
+  "arp.pattern.rate": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "arp.pattern.shape": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "arp.playback.chance": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "arp.playback.gate": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "arp.playback.offset": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "arp.playback.repeats": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "arp.playback.thru": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "arp.retrigger.first": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "arp.retrigger.launch": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "arp.retrigger.note": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "arp.transpose.range": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "arp.transpose.shape": [],
+  "arp.transpose.shift": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "arp.velocity.decay": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "arp.velocity.enable": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "arp.velocity.retrig": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "arp.velocity.target": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "env1.attack": [],
+  "env1.attack_curve": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 80.0,
+    "host_param": "Env 1 Atk Curve",
+    "host_index": 229,
+    "host_text": "80",
+    "init_text": "60",
+    "predicted_display": 80.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "env1.decay": [],
+  "env1.decay_curve": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 69.0,
+    "host_param": "Env 1 Dec Curve",
+    "host_index": 230,
+    "host_text": "69",
+    "init_text": "60",
+    "predicted_display": 69.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "env1.hold": [],
+  "env1.release": [],
+  "env1.release_curve": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 43.0,
+    "host_param": "Env 1 Rel Curve",
+    "host_index": 231,
+    "host_text": "43",
+    "init_text": "60",
+    "predicted_display": 43.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "env1.sustain": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 0.16,
+    "host_param": "Env 1 Sustain",
+    "host_index": 227,
+    "host_text": "-31.8 dB",
+    "init_text": "0.0 dB",
+    "predicted_display": -31.84,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "env2.attack": [],
+  "env2.attack_curve": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 59.0,
+    "host_param": "Env 2 Atk Curve",
+    "host_index": 237,
+    "host_text": "59",
+    "init_text": "40",
+    "predicted_display": 59.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "env2.decay": [],
+  "env2.decay_curve": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 49.0,
+    "host_param": "Env 2 Dec Curve",
+    "host_index": 238,
+    "host_text": "49",
+    "init_text": "60",
+    "predicted_display": 49.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "env2.hold": [],
+  "env2.release": [],
+  "env2.release_curve": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 39.0,
+    "host_param": "Env 2 Rel Curve",
+    "host_index": 239,
+    "host_text": "39",
+    "init_text": "60",
+    "predicted_display": 39.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "env2.sustain": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 0.55,
+    "host_param": "Env 2 Sustain",
+    "host_index": 235,
+    "host_text": "30%",
+    "init_text": "100%",
+    "predicted_display": 30.25,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "env3.attack": [],
+  "env3.attack_curve": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 72.0,
+    "host_param": "Env 3 Atk Curve",
+    "host_index": 247,
+    "host_text": "72",
+    "init_text": "40",
+    "predicted_display": 72.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "env3.decay": [],
+  "env3.decay_curve": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 51.0,
+    "host_param": "Env 3 Dec Curve",
+    "host_index": 248,
+    "host_text": "51",
+    "init_text": "60",
+    "predicted_display": 51.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "env3.hold": [],
+  "env3.release": [],
+  "env3.release_curve": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 66.0,
+    "host_param": "Env 3 Rel Curve",
+    "host_index": 249,
+    "host_text": "66",
+    "init_text": "60",
+    "predicted_display": 66.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "env3.sustain": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 0.56,
+    "host_param": "Env 3 Sustain",
+    "host_index": 245,
+    "host_text": "31%",
+    "init_text": "100%",
+    "predicted_display": 31.36,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "env4.attack": [],
+  "env4.attack_curve": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 29.0,
+    "host_param": "Env 4 Atk Curve",
+    "host_index": 257,
+    "host_text": "29",
+    "init_text": "40",
+    "predicted_display": 29.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "env4.decay": [],
+  "env4.decay_curve": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 62.0,
+    "host_param": "Env 4 Dec Curve",
+    "host_index": 258,
+    "host_text": "62",
+    "init_text": "60",
+    "predicted_display": 62.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "env4.hold": [],
+  "env4.release": [],
+  "env4.release_curve": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 82.0,
+    "host_param": "Env 4 Rel Curve",
+    "host_index": 259,
+    "host_text": "82",
+    "init_text": "60",
+    "predicted_display": 82.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "env4.sustain": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 0.45,
+    "host_param": "Env 4 Sustain",
+    "host_index": 255,
+    "host_text": "20%",
+    "init_text": "100%",
+    "predicted_display": 20.25,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "filter1.cutoff": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 0.19,
+    "host_param": "Filter 1 Freq",
+    "host_index": 205,
+    "host_text": "172",
+    "init_text": "425",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "filter1.drive": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 83.0,
+    "host_param": "Filter 1 Drive",
+    "host_index": 207,
+    "host_text": "83",
+    "init_text": "0",
+    "predicted_display": 83.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "filter1.enabled": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 1.0,
+    "host_param": "Filter 1 On",
+    "host_index": 203,
+    "host_text": "On",
+    "init_text": "Off",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "filter1.key_track": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 1.0,
+    "host_param": "Filter 1 Freq",
+    "host_index": 205,
+    "host_text": "172",
+    "init_text": "425",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "filter1.level_out": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 0.73,
+    "host_param": "Filter 1 Level",
+    "host_index": 202,
+    "host_text": "6.5 dB",
+    "init_text": "0.0 dB",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "filter1.resonance": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 86.0,
+    "host_param": "Filter 1 Res",
+    "host_index": 206,
+    "host_text": "86",
+    "init_text": "10",
+    "predicted_display": 86.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "filter1.stereo": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 87.0,
+    "host_param": "Filter 1 Stereo",
+    "host_index": 210,
+    "host_text": "87",
+    "init_text": "50",
+    "predicted_display": 87.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "filter1.type": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": "L12",
+    "host_param": "Filter 1 Type",
+    "host_index": 204,
+    "host_text": "Low 12",
+    "init_text": "MG Low 12",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "filter1.var": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 14.0,
+    "host_param": "Filter 1 Var",
+    "host_index": 208,
+    "host_text": "14",
+    "init_text": "0",
+    "predicted_display": 14.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "filter1.wet": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 13.0,
+    "host_param": "Filter 1 Wet",
+    "host_index": 209,
+    "host_text": "13",
+    "init_text": "100",
+    "predicted_display": 13.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "filter2.cutoff": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 0.41,
+    "host_param": "Filter 2 Freq",
+    "host_index": 216,
+    "host_text": "873",
+    "init_text": "425",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "filter2.drive": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 12.0,
+    "host_param": "Filter 2 Drive",
+    "host_index": 218,
+    "host_text": "12",
+    "init_text": "0",
+    "predicted_display": 12.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "filter2.enabled": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 1.0,
+    "host_param": "Filter 2 On",
+    "host_index": 214,
+    "host_text": "On",
+    "init_text": "Off",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "filter2.key_track": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 1.0,
+    "host_param": "Filter 2 Freq",
+    "host_index": 216,
+    "host_text": "873",
+    "init_text": "425",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "filter2.level_out": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 0.47,
+    "host_param": "Filter 2 Level",
+    "host_index": 213,
+    "host_text": "-1.1 dB",
+    "init_text": "0.0 dB",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "filter2.resonance": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 8.0,
+    "host_param": "Filter 2 Res",
+    "host_index": 217,
+    "host_text": "8",
+    "init_text": "10",
+    "predicted_display": 8.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "filter2.stereo": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 88.0,
+    "host_param": "Filter 2 Stereo",
+    "host_index": 221,
+    "host_text": "88",
+    "init_text": "50",
+    "predicted_display": 88.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "filter2.type": [],
+  "filter2.var": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 89.0,
+    "host_param": "Filter 2 Var",
+    "host_index": 219,
+    "host_text": "89",
+    "init_text": "0",
+    "predicted_display": 89.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "filter2.wet": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 90.0,
+    "host_param": "Filter 2 Wet",
+    "host_index": 220,
+    "host_text": "90",
+    "init_text": "100",
+    "predicted_display": 90.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "fx.bode.blur": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "fx.bode.range": [],
+  "fx.bode.shift": [],
+  "fx.bode.wet": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "fx.chorus.depth": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "fx.chorus.feedback": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "fx.chorus.rate": [],
+  "fx.chorus.wet": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "fx.compressor.attack": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "fx.compressor.gain": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "fx.compressor.ratio": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "fx.compressor.release": [],
+  "fx.compressor.thresh": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "fx.compressor.wet": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "fx.convolve.decay": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "fx.convolve.size": [],
+  "fx.convolve.tone": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "fx.convolve.wet": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "fx.delay.bpm": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "fx.delay.feedback": [],
+  "fx.delay.freq": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "fx.delay.link": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "fx.delay.mode": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "fx.delay.time_l": [],
+  "fx.delay.time_r": [],
+  "fx.delay.wet": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "fx.dimension.size": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "fx.dimension.wet": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "fx.distortion.drive": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "fx.distortion.freq": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "fx.distortion.type": [],
+  "fx.distortion.wet": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "fx.equalizer.left_freq": [],
+  "fx.equalizer.left_gain": [],
+  "fx.equalizer.left_q": [],
+  "fx.equalizer.right_freq": [],
+  "fx.equalizer.right_gain": [],
+  "fx.equalizer.right_q": [],
+  "fx.filter.cutoff": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "fx.filter.drive": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "fx.filter.res": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "fx.filter.type": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "fx.filter.wet": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "fx.flanger.depth": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "fx.flanger.feedback": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "fx.flanger.rate": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "fx.flanger.wet": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "fx.hyper.detune": [],
+  "fx.hyper.rate": [],
+  "fx.hyper.unison": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "fx.hyper.wet": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "fx.phaser.depth": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "fx.phaser.feedback": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "fx.phaser.freq": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "fx.phaser.rate": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "fx.phaser.wet": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "fx.reverb.size": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "fx.reverb.type": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "fx.reverb.wet": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "global.bend_range_down": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": -8.0,
+    "host_param": "Bend Down",
+    "host_index": 6,
+    "host_text": "-8",
+    "init_text": "-2",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "global.bend_range_up": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 9.0,
+    "host_param": "Bend Up",
+    "host_index": 5,
+    "host_text": "9",
+    "init_text": "2",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "global.direct_volume": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "global.fx_bus1_destination": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "global.fx_bus1_volume": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "global.fx_bus2_destination": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "global.fx_bus2_volume": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "global.global_tuning": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "global.legato": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 1.0,
+    "host_param": "Legato",
+    "host_index": 10,
+    "host_text": "On",
+    "init_text": "Off",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "global.limit_same_note_polyphony": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "global.master_volume": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 0.82,
+    "host_param": "Main Vol",
+    "host_index": 0,
+    "host_text": "91% [1.3 dB]",
+    "init_text": "50% [-9.0 dB]",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "global.mono": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 1.0,
+    "host_param": "Mono Toggle",
+    "host_index": 9,
+    "host_text": "On",
+    "init_text": "Off",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "global.note_latch": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "global.oversampling": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "global.poly_count": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "global.porta_always": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 1.0,
+    "host_param": "Porta Always",
+    "host_index": 11,
+    "host_text": "On",
+    "init_text": "Off",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "global.porta_scaled": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 1.0,
+    "host_param": "Porta Scaled",
+    "host_index": 12,
+    "host_text": "On",
+    "init_text": "Off",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "global.portamento_curve": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "global.portamento_time": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 1.9,
+    "host_param": "Porta Time",
+    "host_index": 3,
+    "host_text": "1.90 s",
+    "init_text": "0.0 ms",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "global.s1_compatibility": [],
+  "global.swing": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 35.0,
+    "host_param": "Swing",
+    "host_index": 13,
+    "host_text": "35.0%",
+    "init_text": "OFF",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "global.swing_div": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "global.transpose": [],
+  "global.use_ultra_on_render": [],
+  "global.voice_amp": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "global.voice_control.random.cutoff": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "global.voice_control.random.detune": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "global.voice_control.random.envs": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "global.voice_control.random.pan": [],
+  "global.voice_control.scaling.envs": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "global.voice_control.scaling.lfos": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "global.voice_priority": [],
+  "lfo1.beat_sync": [
+   {
+    "explanation": "written value did not change the host text: possible clamp or ignored key; needs a screen read",
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 1.0,
+    "host_param": "LFO 1 Delay",
+    "host_index": 265,
+    "host_text": "Off",
+    "init_text": "Off",
+    "predicted_display": null,
+    "status": "HOST_UNCHANGED_FROM_INIT"
+   }
+  ],
+  "lfo1.delay": [],
+  "lfo1.dotted": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "lfo1.mode": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "lfo1.mono": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "lfo1.rate": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 5.0,
+    "host_param": "LFO 1 Rate",
+    "host_index": 262,
+    "host_text": "1/2 t",
+    "init_text": "1/4",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "lfo1.rate_10x": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (LFO 1 Rate); not used as evidence"
+   }
+  ],
+  "lfo1.rise": [],
+  "lfo1.shape": [],
+  "lfo1.smooth": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 91.0,
+    "host_param": "LFO 1 Smooth",
+    "host_index": 263,
+    "host_text": "91",
+    "init_text": "0.0",
+    "predicted_display": 91.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "lfo1.swing": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "lfo1.triplets": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "lfo2.beat_sync": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 1.0,
+    "host_param": "LFO 2 Delay",
+    "host_index": 270,
+    "host_text": "1/2",
+    "init_text": "Off",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "lfo2.delay": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 2.28,
+    "host_param": "LFO 2 Delay",
+    "host_index": 270,
+    "host_text": "1/2",
+    "init_text": "Off",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "lfo2.dotted": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "lfo2.mode": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "lfo2.mono": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "lfo2.rate": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 4.0,
+    "host_param": "LFO 2 Rate",
+    "host_index": 267,
+    "host_text": "1/4.",
+    "init_text": "1/4",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "lfo2.rate_10x": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (LFO 2 Rate); not used as evidence"
+   }
+  ],
+  "lfo2.rise": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 1.7,
+    "host_param": "LFO 2 Rise",
+    "host_index": 269,
+    "host_text": "1/8",
+    "init_text": "Off",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "lfo2.shape": [],
+  "lfo2.smooth": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 92.0,
+    "host_param": "LFO 2 Smooth",
+    "host_index": 268,
+    "host_text": "92",
+    "init_text": "0.0",
+    "predicted_display": 92.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "lfo2.swing": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "lfo2.triplets": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "lfo3.beat_sync": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 1.0,
+    "host_param": "LFO 3 Delay",
+    "host_index": 275,
+    "host_text": "4 bar t",
+    "init_text": "Off",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "lfo3.delay": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 2.98,
+    "host_param": "LFO 3 Delay",
+    "host_index": 275,
+    "host_text": "4 bar t",
+    "init_text": "Off",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "lfo3.dotted": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "lfo3.mode": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "lfo3.mono": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "lfo3.rate": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 16.9,
+    "host_param": "LFO 3 Rate",
+    "host_index": 272,
+    "host_text": "1/16",
+    "init_text": "1/4",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "lfo3.rate_10x": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (LFO 3 Rate); not used as evidence"
+   }
+  ],
+  "lfo3.rise": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 2.1,
+    "host_param": "LFO 3 Rise",
+    "host_index": 274,
+    "host_text": "1/2 t",
+    "init_text": "Off",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "lfo3.shape": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "lfo3.smooth": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 93.0,
+    "host_param": "LFO 3 Smooth",
+    "host_index": 273,
+    "host_text": "93",
+    "init_text": "0.0",
+    "predicted_display": 93.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "lfo3.swing": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "lfo3.triplets": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "lfo4.beat_sync": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 1.0,
+    "host_param": "LFO 4 Delay",
+    "host_index": 280,
+    "host_text": "2 bar t",
+    "init_text": "Off",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "lfo4.delay": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 2.64,
+    "host_param": "LFO 4 Delay",
+    "host_index": 280,
+    "host_text": "2 bar t",
+    "init_text": "Off",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "lfo4.dotted": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "lfo4.mode": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "lfo4.mono": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "lfo4.rate": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 12.2,
+    "host_param": "LFO 4 Rate",
+    "host_index": 277,
+    "host_text": "1/16.",
+    "init_text": "1/4",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "lfo4.rate_10x": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (LFO 4 Rate); not used as evidence"
+   }
+  ],
+  "lfo4.rise": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 1.1,
+    "host_param": "LFO 4 Rise",
+    "host_index": 279,
+    "host_text": "1/32",
+    "init_text": "Off",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "lfo4.shape": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "lfo4.smooth": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 94.0,
+    "host_param": "LFO 4 Smooth",
+    "host_index": 278,
+    "host_text": "94",
+    "init_text": "0.0",
+    "predicted_display": 94.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "lfo4.swing": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "lfo4.triplets": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "lfo5.beat_sync": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 1.0,
+    "host_param": "LFO 5 Delay",
+    "host_index": 285,
+    "host_text": "3 bar",
+    "init_text": "Off",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "lfo5.delay": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 3.08,
+    "host_param": "LFO 5 Delay",
+    "host_index": 285,
+    "host_text": "3 bar",
+    "init_text": "Off",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "lfo5.dotted": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "lfo5.mode": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "lfo5.mono": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "lfo5.rate": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 18.3,
+    "host_param": "LFO 5 Rate",
+    "host_index": 282,
+    "host_text": "1/16",
+    "init_text": "1/4",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "lfo5.rate_10x": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (LFO 5 Rate); not used as evidence"
+   }
+  ],
+  "lfo5.rise": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 2.3,
+    "host_param": "LFO 5 Rise",
+    "host_index": 284,
+    "host_text": "1/2",
+    "init_text": "Off",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "lfo5.shape": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "lfo5.smooth": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 95.0,
+    "host_param": "LFO 5 Smooth",
+    "host_index": 283,
+    "host_text": "95",
+    "init_text": "0.0",
+    "predicted_display": 95.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "lfo5.swing": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "lfo5.triplets": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "lfo6.beat_sync": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 1.0,
+    "host_param": "LFO 6 Delay",
+    "host_index": 290,
+    "host_text": "8 bar t",
+    "init_text": "Off",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "lfo6.delay": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 3.23,
+    "host_param": "LFO 6 Delay",
+    "host_index": 290,
+    "host_text": "8 bar t",
+    "init_text": "Off",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "lfo6.dotted": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "lfo6.mode": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "lfo6.mono": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "lfo6.rate": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 20.3,
+    "host_param": "LFO 6 Rate",
+    "host_index": 287,
+    "host_text": "1/32.",
+    "init_text": "1/4",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "lfo6.rate_10x": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (LFO 6 Rate); not used as evidence"
+   }
+  ],
+  "lfo6.rise": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 2.7,
+    "host_param": "LFO 6 Rise",
+    "host_index": 289,
+    "host_text": "2 bar t",
+    "init_text": "Off",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "lfo6.shape": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "lfo6.smooth": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 96.0,
+    "host_param": "LFO 6 Smooth",
+    "host_index": 288,
+    "host_text": "96",
+    "init_text": "0.0",
+    "predicted_display": 96.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "lfo6.swing": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "lfo6.triplets": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "macro1.name": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (Macro 1); not used as evidence"
+   }
+  ],
+  "macro1.value": [],
+  "macro2.name": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (Macro 2); not used as evidence"
+   }
+  ],
+  "macro2.value": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 73.0,
+    "host_param": "Macro 2",
+    "host_index": 441,
+    "host_text": "73",
+    "init_text": "0",
+    "predicted_display": 73.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "macro3.name": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (Macro 3); not used as evidence"
+   }
+  ],
+  "macro3.value": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 46.0,
+    "host_param": "Macro 3",
+    "host_index": 442,
+    "host_text": "46",
+    "init_text": "0",
+    "predicted_display": 46.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "macro4.name": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (Macro 4); not used as evidence"
+   }
+  ],
+  "macro4.value": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 19.0,
+    "host_param": "Macro 4",
+    "host_index": 443,
+    "host_text": "19",
+    "init_text": "0",
+    "predicted_display": 19.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "macro5.name": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (Macro 5); not used as evidence"
+   }
+  ],
+  "macro5.value": [],
+  "macro6.name": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (Macro 6); not used as evidence"
+   }
+  ],
+  "macro6.value": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 63.0,
+    "host_param": "Macro 6",
+    "host_index": 445,
+    "host_text": "63",
+    "init_text": "0",
+    "predicted_display": 63.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "macro7.name": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (Macro 7); not used as evidence"
+   }
+  ],
+  "macro7.value": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 36.0,
+    "host_param": "Macro 7",
+    "host_index": 446,
+    "host_text": "36",
+    "init_text": "0",
+    "predicted_display": 36.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "macro8.name": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (Macro 8); not used as evidence"
+   }
+  ],
+  "macro8.value": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 79.0,
+    "host_param": "Macro 8",
+    "host_index": 447,
+    "host_text": "79",
+    "init_text": "0",
+    "predicted_display": 79.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "mixer.filter1.bus1": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 25.0,
+    "host_param": "Filter 1>BUS1",
+    "host_index": 463,
+    "host_text": "25%",
+    "init_text": "--",
+    "predicted_display": 25.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "mixer.filter1.bus2": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 48.0,
+    "host_param": "Filter 1>BUS2",
+    "host_index": 464,
+    "host_text": "48%",
+    "init_text": "--",
+    "predicted_display": 48.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "mixer.filter1.enable": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 1.0,
+    "host_param": "Filter 1 On",
+    "host_index": 203,
+    "host_text": "On",
+    "init_text": "Off",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "mixer.filter1.wet": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 13.0,
+    "host_param": "Filter 1 Wet",
+    "host_index": 209,
+    "host_text": "13",
+    "init_text": "100",
+    "predicted_display": 13.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "mixer.filter2.bus1": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 68.0,
+    "host_param": "Filter 2>BUS1",
+    "host_index": 465,
+    "host_text": "68%",
+    "init_text": "--",
+    "predicted_display": 68.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "mixer.filter2.bus2": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 21.0,
+    "host_param": "Filter 2>BUS2",
+    "host_index": 466,
+    "host_text": "21%",
+    "init_text": "--",
+    "predicted_display": 21.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "mixer.filter2.enable": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 1.0,
+    "host_param": "Filter 2 On",
+    "host_index": 214,
+    "host_text": "On",
+    "init_text": "Off",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "mixer.filter2.wet": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 90.0,
+    "host_param": "Filter 2 Wet",
+    "host_index": 220,
+    "host_text": "90",
+    "init_text": "100",
+    "predicted_display": 90.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "mixer.noise.bus1": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 42.0,
+    "host_param": "Noise>BUS1",
+    "host_index": 458,
+    "host_text": "42%",
+    "init_text": "--",
+    "predicted_display": 42.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "mixer.noise.bus2": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 64.0,
+    "host_param": "Noise>BUS2",
+    "host_index": 459,
+    "host_text": "64%",
+    "init_text": "--",
+    "predicted_display": 64.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "mixer.noise.enable": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 1.0,
+    "host_param": "Noise Enable",
+    "host_index": 185,
+    "host_text": "On",
+    "init_text": "Off",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "mixer.noise.filter_balance": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 44.0,
+    "host_param": "Noise>Filter Balance",
+    "host_index": 457,
+    "host_text": "44",
+    "init_text": "-100",
+    "predicted_display": 44.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "mixer.noise.pan": [
+   {
+    "explanation": "off by one unit (-20 -> '-19 L', -4 -> '-3 L') although -25 showed -25 on screen earlier: pan display rounding/scale open",
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": -20.0,
+    "host_param": "Noise Pan",
+    "host_index": 187,
+    "host_text": "-19 L",
+    "init_text": "0",
+    "predicted_display": -20.0,
+    "status": "HOST_DIFFERS_FROM_PREDICTION"
+   }
+  ],
+  "mixer.osc_a.bus1": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 85.0,
+    "host_param": "A>BUS1",
+    "host_index": 449,
+    "host_text": "85%",
+    "init_text": "--",
+    "predicted_display": 85.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "mixer.osc_a.bus2": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 38.0,
+    "host_param": "A>BUS2",
+    "host_index": 450,
+    "host_text": "38%",
+    "init_text": "--",
+    "predicted_display": 38.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "mixer.osc_a.filter_balance": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 17.0,
+    "host_param": "A>Filter Balance",
+    "host_index": 448,
+    "host_text": "17",
+    "init_text": "-100",
+    "predicted_display": 17.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "mixer.osc_b.bus1": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 58.0,
+    "host_param": "B>BUS1",
+    "host_index": 452,
+    "host_text": "58%",
+    "init_text": "--",
+    "predicted_display": 58.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "mixer.osc_b.bus2": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 81.0,
+    "host_param": "B>BUS2",
+    "host_index": 453,
+    "host_text": "81%",
+    "init_text": "--",
+    "predicted_display": 81.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "mixer.osc_b.filter_balance": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 77.0,
+    "host_param": "B>Filter Balance",
+    "host_index": 451,
+    "host_text": "77",
+    "init_text": "-100",
+    "predicted_display": 77.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "mixer.osc_c.bus1": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 31.0,
+    "host_param": "C>BUS1",
+    "host_index": 455,
+    "host_text": "31%",
+    "init_text": "--",
+    "predicted_display": 31.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "mixer.osc_c.bus2": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 54.0,
+    "host_param": "C>BUS2",
+    "host_index": 456,
+    "host_text": "54%",
+    "init_text": "--",
+    "predicted_display": 54.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "mixer.osc_c.filter_balance": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 67.0,
+    "host_param": "C>Filter Balance",
+    "host_index": 454,
+    "host_text": "67",
+    "init_text": "-100",
+    "predicted_display": 67.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "mixer.sub.bus1": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 75.0,
+    "host_param": "Sub Osc>BUS1",
+    "host_index": 461,
+    "host_text": "75%",
+    "init_text": "--",
+    "predicted_display": 75.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "mixer.sub.bus2": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 71.0,
+    "host_param": "Sub Osc>BUS2",
+    "host_index": 462,
+    "host_text": "71%",
+    "init_text": "--",
+    "predicted_display": 71.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "mixer.sub.enable": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 1.0,
+    "host_param": "Sub Enable",
+    "host_index": 193,
+    "host_text": "On",
+    "init_text": "Off",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "mixer.sub.filter_balance": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 40.0,
+    "host_param": "Sub Osc>Filter Balance",
+    "host_index": 460,
+    "host_text": "40",
+    "init_text": "-100",
+    "predicted_display": 40.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "mixer.sub.pan": [
+   {
+    "explanation": "off by one unit (-20 -> '-19 L', -4 -> '-3 L') although -25 showed -25 on screen earlier: pan display rounding/scale open",
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": -4.0,
+    "host_param": "Sub Pan",
+    "host_index": 195,
+    "host_text": "-3 L",
+    "init_text": "0",
+    "predicted_display": -4.0,
+    "status": "HOST_DIFFERS_FROM_PREDICTION"
+   }
+  ],
+  "oscA.detune": [],
+  "oscA.enabled": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 0.0,
+    "host_param": "A Enable",
+    "host_index": 20,
+    "host_text": "Off",
+    "init_text": "On",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "oscA.fine": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": -26.0,
+    "host_param": "A Fine",
+    "host_index": 25,
+    "host_text": "-26",
+    "init_text": "0",
+    "predicted_display": -26.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "oscA.octave": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": -2.0,
+    "host_param": "A Octave",
+    "host_index": 23,
+    "host_text": "-2",
+    "init_text": "0",
+    "predicted_display": -2.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "oscA.pan": [],
+  "oscA.sample_loop_crossfade": [
+   {
+    "explanation": null,
+    "preset": "BULK_02_SAMPLE_CALIBRATION",
+    "value_written": 83.0,
+    "host_param": "A Loop X-Fade",
+    "host_index": 39,
+    "host_text": "83",
+    "init_text": "0",
+    "predicted_display": 83.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "oscA.sample_loop_end": [],
+  "oscA.sample_loop_start": [],
+  "oscA.semitone": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": -5.0,
+    "host_param": "A Semi",
+    "host_index": 24,
+    "host_text": "-5",
+    "init_text": "0",
+    "predicted_display": -5.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "oscA.unison": [],
+  "oscA.warp_amount": [
+   {
+    "explanation": "explained: warp amount display depends on warp mode (PWM = (1-raw)*100, Sync nonlinear); prediction assumed linear",
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 0.46,
+    "host_param": "A Warp",
+    "host_index": 53,
+    "host_text": "2.46",
+    "init_text": "No Warp Type",
+    "predicted_display": 46.0,
+    "status": "HOST_LANDED_MODE_DEPENDENT_CURVE"
+   }
+  ],
+  "oscA.warp_amount2": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 0.63,
+    "host_param": "A Warp 2",
+    "host_index": 56,
+    "host_text": "63",
+    "init_text": "No Warp Type",
+    "predicted_display": 63.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "oscA.warp_mode": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": "kSync",
+    "host_param": "A Warp Mode",
+    "host_index": 55,
+    "host_text": "Sync",
+    "init_text": "Off",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "oscA.warp_mode2": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": "am",
+    "host_param": "A Warp 2 Mode",
+    "host_index": 58,
+    "host_text": "AM (B)",
+    "init_text": "Off",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "oscA.warp_var2": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 0.79,
+    "host_param": "A Warp 2 Var",
+    "host_index": 57,
+    "host_text": "0.7900",
+    "init_text": "0.0000",
+    "predicted_display": 0.79,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "oscA.wavetable": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "oscB.detune": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 0.53,
+    "host_param": "B Uni Detune",
+    "host_index": 101,
+    "host_text": "0.53",
+    "init_text": "0.25",
+    "predicted_display": 0.53,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "oscB.enabled": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 1.0,
+    "host_param": "B Enable",
+    "host_index": 75,
+    "host_text": "On",
+    "init_text": "Off",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "oscB.fine": [],
+  "oscB.octave": [],
+  "oscB.pan": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": -24.0,
+    "host_param": "B Pan",
+    "host_index": 77,
+    "host_text": "-24 L",
+    "init_text": "0",
+    "predicted_display": -24.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "oscB.sample_loop_crossfade": [
+   {
+    "explanation": null,
+    "preset": "BULK_02_SAMPLE_CALIBRATION",
+    "value_written": 56.0,
+    "host_param": "B Loop X-Fade",
+    "host_index": 94,
+    "host_text": "56",
+    "init_text": "0",
+    "predicted_display": 56.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "oscB.sample_loop_end": [],
+  "oscB.sample_loop_start": [],
+  "oscB.semitone": [],
+  "oscB.unison": [],
+  "oscB.warp_amount": [
+   {
+    "explanation": "explained: warp amount display depends on warp mode (PWM = (1-raw)*100, Sync nonlinear); prediction assumed linear",
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 0.42,
+    "host_param": "B Warp",
+    "host_index": 108,
+    "host_text": "58",
+    "init_text": "No Warp Type",
+    "predicted_display": 42.0,
+    "status": "HOST_LANDED_MODE_DEPENDENT_CURVE"
+   }
+  ],
+  "oscB.warp_amount2": [
+   {
+    "explanation": "explained: warp amount display depends on warp mode (PWM = (1-raw)*100, Sync nonlinear); prediction assumed linear",
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 0.32,
+    "host_param": "B Warp 2",
+    "host_index": 111,
+    "host_text": "1.49",
+    "init_text": "No Warp Type",
+    "predicted_display": 32.0,
+    "status": "HOST_LANDED_MODE_DEPENDENT_CURVE"
+   }
+  ],
+  "oscB.warp_mode": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": "kPWM",
+    "host_param": "B Warp Mode",
+    "host_index": 110,
+    "host_text": "PWM",
+    "init_text": "Off",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "oscB.warp_mode2": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": "sync",
+    "host_param": "B Warp 2 Mode",
+    "host_index": 113,
+    "host_text": "Sync",
+    "init_text": "Off",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "oscB.warp_var2": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 0.22,
+    "host_param": "B Warp 2 Var",
+    "host_index": 112,
+    "host_text": "0.2200",
+    "init_text": "0.0000",
+    "predicted_display": 0.22,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "oscB.wavetable": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "oscC.detune": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 0.65,
+    "host_param": "C Uni Detune",
+    "host_index": 156,
+    "host_text": "0.65",
+    "init_text": "0.25",
+    "predicted_display": 0.65,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "oscC.enabled": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 1.0,
+    "host_param": "C Enable",
+    "host_index": 130,
+    "host_text": "On",
+    "init_text": "Off",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "oscC.fine": [],
+  "oscC.octave": [],
+  "oscC.pan": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": -11.0,
+    "host_param": "C Pan",
+    "host_index": 132,
+    "host_text": "-11 L",
+    "init_text": "0",
+    "predicted_display": -11.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "oscC.sample_loop_crossfade": [
+   {
+    "explanation": null,
+    "preset": "BULK_02_SAMPLE_CALIBRATION",
+    "value_written": 30.0,
+    "host_param": "C Loop X-Fade",
+    "host_index": 149,
+    "host_text": "30",
+    "init_text": "0",
+    "predicted_display": 30.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "oscC.sample_loop_end": [],
+  "oscC.sample_loop_start": [],
+  "oscC.semitone": [],
+  "oscC.unison": [],
+  "oscC.warp_amount": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 0.18,
+    "host_param": "C Warp",
+    "host_index": 163,
+    "host_text": "18",
+    "init_text": "No Warp Type",
+    "predicted_display": 18.0,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "oscC.warp_amount2": [
+   {
+    "explanation": "explained: warp amount display depends on warp mode (PWM = (1-raw)*100, Sync nonlinear); prediction assumed linear",
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 0.61,
+    "host_param": "C Warp 2",
+    "host_index": 166,
+    "host_text": "39",
+    "init_text": "No Warp Type",
+    "predicted_display": 61.0,
+    "status": "HOST_LANDED_MODE_DEPENDENT_CURVE"
+   }
+  ],
+  "oscC.warp_mode": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": "kBendPos",
+    "host_param": "C Warp Mode",
+    "host_index": 165,
+    "host_text": "Bend +",
+    "init_text": "Off",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "oscC.warp_mode2": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": "pwm",
+    "host_param": "C Warp 2 Mode",
+    "host_index": 168,
+    "host_text": "PWM",
+    "init_text": "Off",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "oscC.warp_var2": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 0.35,
+    "host_param": "C Warp 2 Var",
+    "host_index": 167,
+    "host_text": "0.3500",
+    "init_text": "0.0000",
+    "predicted_display": 0.35,
+    "status": "HOST_MATCHES_PREDICTION"
+   }
+  ],
+  "oscC.wavetable": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "oscNoise.fine": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (Noise Fine); not used as evidence"
+   }
+  ],
+  "oscNoise.noise_type": [
+   {
+    "status": "NO_RELIABLE_HOST_IDENTITY",
+    "note": "only a name-heuristic guess (None); not used as evidence"
+   }
+  ],
+  "oscNoise.pan": [
+   {
+    "explanation": "off by one unit (-20 -> '-19 L', -4 -> '-3 L') although -25 showed -25 on screen earlier: pan display rounding/scale open",
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": -20.0,
+    "host_param": "Noise Pan",
+    "host_index": 187,
+    "host_text": "-19 L",
+    "init_text": "0",
+    "predicted_display": -20.0,
+    "status": "HOST_DIFFERS_FROM_PREDICTION"
+   }
+  ],
+  "voice.voicing.legato": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 1.0,
+    "host_param": "Legato",
+    "host_index": 10,
+    "host_text": "On",
+    "init_text": "Off",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "voice.voicing.mono": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 1.0,
+    "host_param": "Mono Toggle",
+    "host_index": 9,
+    "host_text": "On",
+    "init_text": "Off",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "voice.voicing.porta_always": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 1.0,
+    "host_param": "Porta Always",
+    "host_index": 11,
+    "host_text": "On",
+    "init_text": "Off",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ],
+  "voice.voicing.porta_scaled": [
+   {
+    "explanation": null,
+    "preset": "BULK_01_WAVETABLE_MAIN",
+    "value_written": 1.0,
+    "host_param": "Porta Scaled",
+    "host_index": 12,
+    "host_text": "On",
+    "init_text": "Off",
+    "predicted_display": null,
+    "status": "HOST_LANDED"
+   }
+  ]
+ }
+}
