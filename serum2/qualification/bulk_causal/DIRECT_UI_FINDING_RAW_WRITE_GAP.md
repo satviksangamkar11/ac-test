@@ -18,22 +18,37 @@ this document says so plainly rather than quietly editing the record.
 
 ## Summary
 Investigated all 4 open findings from the DIRECT_UI screen scan. 2 (`fx.compressor.ratio`/`.release`) are
-confirmed genuine, isolated, reproducible mismatches with a common root cause (raw write bypasses the
-`apply_spec` encoder). The 3rd (`env*.sustain`) resolves to a smaller but still real version of the same root
-cause, not a display-unit red herring. The 4th (`lfo1.mode`) is a confirmed real mismatch but with a DIFFERENT,
-not-yet-identified root cause -- see the correction above and section 1 below.
+confirmed genuine, isolated, reproducible mismatches with a common root cause (serum-mcp's schema domain for
+these parameters does not match Serum's actual on-disk encoding). The 3rd (`env*.sustain`) resolves to a smaller
+but still real version of the same root cause, not a display-unit red herring. The 4th (`lfo1.mode`) is a
+confirmed real mismatch but with a DIFFERENT, not-yet-identified root cause -- see the correction above and
+section 1 below.
 
 ## Root cause
 The causal engine (`bulk_engine.py`) has exactly one write mechanism: `body_set()` writes a raw Python value
 directly into the packed `.SerumPreset` dict at a `raw_path`. It never goes through `serum_mcp`'s structured
 `apply_spec()` / `FxUnitSpec` / `PresetSpec` encoder -- the path real preset *generation* uses.
 
+**CRITICAL CORRECTION**: The encoder does NOT bypass these values. The `apply_spec()` encoder passes values
+through unchanged (verified by `encoder_diff.py`: for all 302 comparable controls, `apply_spec` and raw write
+produce identical bodies). The problem is **serum-mcp's own schema domains are wrong** for these specific
+parameters. The domain metadata (`min`/`max`/`kind`/enum vocabulary) was taken from schema metadata written
+for the *structured* generation path (`"mechanism": "DIRECT_RAW"`/`"ENUM_RAW"`, etc.) -- but this metadata
+describes constraints/transformations that apply during generation, not the actual on-disk encoding that
+Serum's native loader reads. When the causal engine writes what the schema says should be valid directly into
+the raw slot, Serum interprets that same byte/value differently because Serum's interpretation of the raw
+encoding does not match what serum-mcp's schema claims it should be.
+
+Examples:
+- `fx.compressor.ratio`: schema domain says `kind: "log"` min 1.0 max 1,000,000. But Serum's native file
+  loader interprets that raw slot differently, producing `1.0` and `30.4` for targets `31622.78` / `100.0`.
+- `env*.sustain`: schema domain says `kind: continuous [0,1]` linear. But Serum interprets it as dB internally
+  and displays it as `-12.0dB` (corresponding to `~0.251` linear) when written `0.5`.
+
 For most candidates this is fine: the raw dict slot genuinely holds the value Serum reads. But for a subset,
-the domain used to drive the sweep (`min`/`max`/`kind`/enum vocabulary) was taken from schema metadata
-written for the *structured* generation path (`"mechanism": "DIRECT_RAW"`/`"ENUM_RAW"`, `"derivation":
-"differential of upstream apply_spec..."` or `"domain from schema.FX_PARAMS ParamDef"`) -- metadata that
-describes what `apply_spec()` accepts as *input*, not necessarily the raw on-disk encoding. When the causal
-engine writes that same number/string directly into the raw slot, two different things can happen:
+there is a genuine mismatch between what the schema claims the encoding is and what Serum's native preset
+loader actually does with it. When the causal engine writes that number/string directly into the raw slot,
+two different things can happen:
 
 1. **DawDreamer's live session** (`backend.load(body)` + `backend.observe()` -> `save_state()`/`decode()`)
    echoes the value back unchanged. This is what the campaign recorded as `state_value`, and it is what
@@ -101,6 +116,11 @@ concrete reason the exhaustive scan must continue rather than stopping at "state
   confirmed MATCHes (including `fx.compressor.attack`, itself DIRECT_RAW) are also raw writes that landed
   correctly. The gap is real but not universal, and only the screen can tell which candidates fall on which
   side.
+- **IMPORTANT**: It DOES mean that presets generated through serum-mcp's `apply_spec()` for these same
+  parameters (`fx.compressor.ratio`, `fx.compressor.release`, `env*.sustain`) will be equally wrong when loaded
+  in the native Serum GUI, because the schema domain is wrong for ALL paths, not just the raw-write causal path.
+  The encoder is not the problem; the schema specification itself is the problem. Fixing the write path fixes
+  nothing. The schema domains must be corrected.
 - No enum was expanded, no domain was widened, and no schema/Atlas file was touched to "fix" this -- per
   instruction, these are reported as open findings for the closure ledger to carry forward, not resolved by
   guessing a corrected encoding.
