@@ -5,3 +5,5 @@ __pycache__/
 # Large generated/cache artifacts — never commit these
 experiments/_corpus_cache.pkl
 *.corpus_cache.pkl
+
+cloud_bridge/.venv/
