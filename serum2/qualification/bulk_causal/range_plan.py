@@ -25,6 +25,11 @@ def plan(d: dict) -> dict:
     k = d["kind"]
     if k == "bool":
         return {"values": [0.0, 1.0], "probes": [2.0]}
+    if k == "open":       # no declared bounds anywhere: everything is a probe; the clamp (if any) is discovered from what Serum stores
+        m = [1e-3, 1e-2, 0.1, 1.0, 10.0, 100.0, 1e3, 1e4, 1e5, 1e6]
+        return {"values": [], "probes": _uniq([x for v in m for x in (v, -v)])}
+    if k in ("enum_str", "text"):   # string domains: every vocabulary word must be retained; one invalid word probes what Serum does with it
+        return {"values": list(dict.fromkeys(d["values"])), "probes": ["__NOT_A_VALUE__"]}
     if k == "explicit":   # boundary work: caller states exactly which values (retained-required) and probes to write
         return {"values": _uniq(d["values"]), "probes": _uniq(d.get("probes", []))}
     if k == "enum":
@@ -48,6 +53,8 @@ def plan(d: dict) -> dict:
 
 
 def close(a, b):
+    if isinstance(a, str) or isinstance(b, str):
+        return a is not None and a == b
     return a is not None and b is not None and abs(a - b) <= 1e-6 * max(1.0, abs(b))
 
 
@@ -58,18 +65,25 @@ def characterize(domain: dict, obs: dict) -> dict:
     default (`discovered_default`); an out-of-range probe that comes back absent is a clamp onto a default boundary
     when it fits, else a drop."""
     vals = domain.get("values")
+    if domain.get("kind") in ("enum_str", "text"):
+        return _characterize_str(domain, obs)
     dmin = domain.get("min", min(vals) if vals else None)
     dmax = domain.get("max", max(vals) if vals else None)
     live = [o for o in obs.values() if o["written"] is not None]
-    inrange_absent = [o["written"] for o in live if not o.get("probe") and o["state_value"] is None]
+    inrange_absent = [o["written"] for o in live if not o.get("probe") and o["state_value"] is None and not o.get("load_error")]
     default = domain.get("default")
     discovered = inrange_absent[0] if inrange_absent else None
+    extra_absent = inrange_absent[1:]      # a second, different in-range value that ALSO vanished cannot also be the default
     eff_default = discovered if discovered is not None else default
     rows = []
     for o in live:
         v, s = o["written"], o["state_value"]
-        if close(s, v):
+        if o.get("load_error"):
+            fate = "load_rejected"
+        elif close(s, v):
             fate = "retained"
+        elif s is None and not o.get("probe") and v in extra_absent:
+            fate = "not_retained"
         elif s is None and not o.get("probe"):
             fate = "default_omitted"
         elif s is None:
@@ -79,10 +93,12 @@ def characterize(domain: dict, obs: dict) -> dict:
                 fate = "clamped_to_max_default_omitted"
             else:
                 fate = "dropped"
+        elif not (isinstance(s, (int, float)) and isinstance(v, (int, float))) or isinstance(s, bool) or isinstance(v, bool):
+            fate = "rewritten_type"          # Serum stored a different TYPE than was written (e.g. a sentinel string)
         else:
             fate = "clamped_to_max" if s < v else "clamped_to_min"
         rows.append({"written": v, "stored": s, "fate": fate, "probe": bool(o.get("probe"))})
-    kept = [r["stored"] for r in rows if r["stored"] is not None]
+    kept = [r["stored"] for r in rows if isinstance(r["stored"], (int, float)) and not isinstance(r["stored"], bool)]
     if eff_default is not None and any("default_omitted" in r["fate"] for r in rows):
         kept.append(float(eff_default))
     hi = [r["stored"] if r["stored"] is not None else eff_default for r in rows if r["probe"] and r["fate"].startswith("clamped_to_max")]
@@ -96,3 +112,31 @@ def characterize(domain: dict, obs: dict) -> dict:
             "probes_dropped": [r["written"] for r in rows if r["probe"] and r["fate"] == "dropped"],
             "declared_matches_reachable": bool(kept) and dmin is not None and dmax is not None and abs(rmin - dmin) <= 1e-3 * max(1.0, abs(dmin)) and abs(rmax - dmax) <= 1e-3 * max(1.0, abs(dmax)),
             "rows": rows}
+
+
+def _characterize_str(domain, obs):
+    """String domains: which vocabulary words Serum retained, which it omitted (== its default), and what became of the invalid probe."""
+    rows, default_word = [], None
+    for o in obs.values():
+        v, s = o["written"], o["state_value"]
+        if v is None:
+            continue
+        if o.get("load_error"):
+            fate = "load_rejected"
+        elif close(s, v):
+            fate = "retained"
+        elif s is None and not o.get("probe") and default_word is not None:
+            fate = "not_retained"
+        elif s is None and not o.get("probe"):
+            fate, default_word = "default_omitted", v
+        elif s is None:
+            fate = "dropped_or_defaulted"
+        else:
+            fate = "rewritten"
+        rows.append({"written": v, "stored": s, "fate": fate, "probe": bool(o.get("probe"))})
+    return {"declared": {"kind": domain["kind"], "values": domain.get("values")}, "discovered_default": default_word, "declared_default_matches": None,
+            "reachable_min": None, "reachable_max": None, "clamp_high_at": None, "clamp_low_at": None,
+            "vocabulary_retained": [r["written"] for r in rows if not r["probe"] and r["fate"] in ("retained", "default_omitted")],
+            "vocabulary_rejected": [r["written"] for r in rows if not r["probe"] and r["fate"] not in ("retained", "default_omitted")],
+            "probes_dropped": [r["written"] for r in rows if r["probe"] and r["fate"] != "retained"],
+            "declared_matches_reachable": all(r["fate"] in ("retained", "default_omitted") for r in rows if not r["probe"]), "rows": rows}

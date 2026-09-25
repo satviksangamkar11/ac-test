@@ -125,6 +125,1272 @@
      "params": {}
     }
    ]
+  },
+  "OSC_SAMPLE": {
+   "preset_name": "QUAL_OSC_SAMPLE",
+   "fx": [],
+   "spec_patch": {
+    "name": "",
+    "description": "",
+    "oscillators": [
+     {
+      "enabled": true,
+      "octave": 0.0,
+      "semitone": 0.0,
+      "fine": 0.0,
+      "volume": 0.75,
+      "pan": 0.0,
+      "unison": 1.0,
+      "detune": 0.0,
+      "wavetable": "default",
+      "custom_harmonics": null,
+      "sample_source": null,
+      "sample_playback_source": "D:\\ableton claude final best\\serum2\\qualification\\bulk_causal\\contexts\\qual_sample.wav",
+      "sample_center_pan": true,
+      "sample_loop": "forward",
+      "sample_loop_start": 0.0,
+      "sample_loop_end": 100.0,
+      "sample_loop_crossfade": 0.0,
+      "sample_frames": 16,
+      "table_position": 0.0,
+      "warp_amount": 0.0,
+      "warp_mode": "fm",
+      "granular_source": null,
+      "granular_density": 10.0,
+      "granular_grain_length": 100.0,
+      "granular_random_pitch": 0.0,
+      "granular_random_pan": 0.0,
+      "granular_random_grain_length": 0.0,
+      "granular_random_offset": 0.0,
+      "granular_loop": true,
+      "granular_jump_start": false,
+      "granular_reverse": false,
+      "granular_length_key_track": false,
+      "granular_max_grains": 16.0,
+      "granular_random_window_amount": 0.0,
+      "granular_random_window_skew": 0.0,
+      "spectral_source": null,
+      "spectral_warp_freq_lo": 20.0,
+      "spectral_warp_freq_hi": 20000.0,
+      "spectral_filter_shift": 0.0,
+      "spectral_filter_wet": 100.0,
+      "multisample_source": null,
+      "multisample_env_attack": 0.0,
+      "multisample_env_decay": 0.0,
+      "multisample_env_release": 0.0,
+      "warp_amount2": 0.0,
+      "warp_mode2": null,
+      "warp_var2": null,
+      "noise_type": "White",
+      "sub_shape": "saw",
+      "filter_routing": null,
+      "filter_balance": null,
+      "fx_bus1_send": null,
+      "fx_bus2_send": null
+     },
+     {
+      "enabled": false,
+      "octave": 0.0,
+      "semitone": 0.0,
+      "fine": 0.0,
+      "volume": 0.75,
+      "pan": 0.0,
+      "unison": 1.0,
+      "detune": 0.0,
+      "wavetable": "default",
+      "custom_harmonics": null,
+      "sample_source": null,
+      "sample_playback_source": "D:\\ableton claude final best\\serum2\\qualification\\bulk_causal\\contexts\\qual_sample.wav",
+      "sample_center_pan": true,
+      "sample_loop": "forward",
+      "sample_loop_start": 0.0,
+      "sample_loop_end": 100.0,
+      "sample_loop_crossfade": 0.0,
+      "sample_frames": 16,
+      "table_position": 0.0,
+      "warp_amount": 0.0,
+      "warp_mode": "fm",
+      "granular_source": null,
+      "granular_density": 10.0,
+      "granular_grain_length": 100.0,
+      "granular_random_pitch": 0.0,
+      "granular_random_pan": 0.0,
+      "granular_random_grain_length": 0.0,
+      "granular_random_offset": 0.0,
+      "granular_loop": true,
+      "granular_jump_start": false,
+      "granular_reverse": false,
+      "granular_length_key_track": false,
+      "granular_max_grains": 16.0,
+      "granular_random_window_amount": 0.0,
+      "granular_random_window_skew": 0.0,
+      "spectral_source": null,
+      "spectral_warp_freq_lo": 20.0,
+      "spectral_warp_freq_hi": 20000.0,
+      "spectral_filter_shift": 0.0,
+      "spectral_filter_wet": 100.0,
+      "multisample_source": null,
+      "multisample_env_attack": 0.0,
+      "multisample_env_decay": 0.0,
+      "multisample_env_release": 0.0,
+      "warp_amount2": 0.0,
+      "warp_mode2": null,
+      "warp_var2": null,
+      "noise_type": "White",
+      "sub_shape": "saw",
+      "filter_routing": null,
+      "filter_balance": null,
+      "fx_bus1_send": null,
+      "fx_bus2_send": null
+     },
+     {
+      "enabled": false,
+      "octave": 0.0,
+      "semitone": 0.0,
+      "fine": 0.0,
+      "volume": 0.75,
+      "pan": 0.0,
+      "unison": 1.0,
+      "detune": 0.0,
+      "wavetable": "default",
+      "custom_harmonics": null,
+      "sample_source": null,
+      "sample_playback_source": "D:\\ableton claude final best\\serum2\\qualification\\bulk_causal\\contexts\\qual_sample.wav",
+      "sample_center_pan": true,
+      "sample_loop": "forward",
+      "sample_loop_start": 0.0,
+      "sample_loop_end": 100.0,
+      "sample_loop_crossfade": 0.0,
+      "sample_frames": 16,
+      "table_position": 0.0,
+      "warp_amount": 0.0,
+      "warp_mode": "fm",
+      "granular_source": null,
+      "granular_density": 10.0,
+      "granular_grain_length": 100.0,
+      "granular_random_pitch": 0.0,
+      "granular_random_pan": 0.0,
+      "granular_random_grain_length": 0.0,
+      "granular_random_offset": 0.0,
+      "granular_loop": true,
+      "granular_jump_start": false,
+      "granular_reverse": false,
+      "granular_length_key_track": false,
+      "granular_max_grains": 16.0,
+      "granular_random_window_amount": 0.0,
+      "granular_random_window_skew": 0.0,
+      "spectral_source": null,
+      "spectral_warp_freq_lo": 20.0,
+      "spectral_warp_freq_hi": 20000.0,
+      "spectral_filter_shift": 0.0,
+      "spectral_filter_wet": 100.0,
+      "multisample_source": null,
+      "multisample_env_attack": 0.0,
+      "multisample_env_decay": 0.0,
+      "multisample_env_release": 0.0,
+      "warp_amount2": 0.0,
+      "warp_mode2": null,
+      "warp_var2": null,
+      "noise_type": "White",
+      "sub_shape": "saw",
+      "filter_routing": null,
+      "filter_balance": null,
+      "fx_bus1_send": null,
+      "fx_bus2_send": null
+     },
+     {
+      "enabled": false,
+      "octave": 0.0,
+      "semitone": 0.0,
+      "fine": 0.0,
+      "volume": 0.75,
+      "pan": 0.0,
+      "unison": 1.0,
+      "detune": 0.0,
+      "wavetable": "default",
+      "custom_harmonics": null,
+      "sample_source": null,
+      "sample_playback_source": null,
+      "sample_center_pan": true,
+      "sample_loop": "off",
+      "sample_loop_start": 0.0,
+      "sample_loop_end": 100.0,
+      "sample_loop_crossfade": 0.0,
+      "sample_frames": 16,
+      "table_position": 0.0,
+      "warp_amount": 0.0,
+      "warp_mode": "fm",
+      "granular_source": null,
+      "granular_density": 10.0,
+      "granular_grain_length": 100.0,
+      "granular_random_pitch": 0.0,
+      "granular_random_pan": 0.0,
+      "granular_random_grain_length": 0.0,
+      "granular_random_offset": 0.0,
+      "granular_loop": true,
+      "granular_jump_start": false,
+      "granular_reverse": false,
+      "granular_length_key_track": false,
+      "granular_max_grains": 16.0,
+      "granular_random_window_amount": 0.0,
+      "granular_random_window_skew": 0.0,
+      "spectral_source": null,
+      "spectral_warp_freq_lo": 20.0,
+      "spectral_warp_freq_hi": 20000.0,
+      "spectral_filter_shift": 0.0,
+      "spectral_filter_wet": 100.0,
+      "multisample_source": null,
+      "multisample_env_attack": 0.0,
+      "multisample_env_decay": 0.0,
+      "multisample_env_release": 0.0,
+      "warp_amount2": 0.0,
+      "warp_mode2": null,
+      "warp_var2": null,
+      "noise_type": "White",
+      "sub_shape": "saw",
+      "filter_routing": null,
+      "filter_balance": null,
+      "fx_bus1_send": null,
+      "fx_bus2_send": null
+     },
+     {
+      "enabled": false,
+      "octave": 0.0,
+      "semitone": 0.0,
+      "fine": 0.0,
+      "volume": 0.75,
+      "pan": 0.0,
+      "unison": 1.0,
+      "detune": 0.0,
+      "wavetable": "default",
+      "custom_harmonics": null,
+      "sample_source": null,
+      "sample_playback_source": null,
+      "sample_center_pan": true,
+      "sample_loop": "off",
+      "sample_loop_start": 0.0,
+      "sample_loop_end": 100.0,
+      "sample_loop_crossfade": 0.0,
+      "sample_frames": 16,
+      "table_position": 0.0,
+      "warp_amount": 0.0,
+      "warp_mode": "fm",
+      "granular_source": null,
+      "granular_density": 10.0,
+      "granular_grain_length": 100.0,
+      "granular_random_pitch": 0.0,
+      "granular_random_pan": 0.0,
+      "granular_random_grain_length": 0.0,
+      "granular_random_offset": 0.0,
+      "granular_loop": true,
+      "granular_jump_start": false,
+      "granular_reverse": false,
+      "granular_length_key_track": false,
+      "granular_max_grains": 16.0,
+      "granular_random_window_amount": 0.0,
+      "granular_random_window_skew": 0.0,
+      "spectral_source": null,
+      "spectral_warp_freq_lo": 20.0,
+      "spectral_warp_freq_hi": 20000.0,
+      "spectral_filter_shift": 0.0,
+      "spectral_filter_wet": 100.0,
+      "multisample_source": null,
+      "multisample_env_attack": 0.0,
+      "multisample_env_decay": 0.0,
+      "multisample_env_release": 0.0,
+      "warp_amount2": 0.0,
+      "warp_mode2": null,
+      "warp_var2": null,
+      "noise_type": "White",
+      "sub_shape": "saw",
+      "filter_routing": null,
+      "filter_balance": null,
+      "fx_bus1_send": null,
+      "fx_bus2_send": null
+     }
+    ],
+    "filters": [
+     {
+      "enabled": false,
+      "type": "moog_lowpass_12",
+      "cutoff": 0.5,
+      "resonance": 10.0,
+      "drive": 0.0,
+      "stereo": 50.0,
+      "var": 0.0,
+      "key_track": false,
+      "wet": 100.0,
+      "level_out": 0.5,
+      "output_routing": null,
+      "fx_bus1_send": null,
+      "fx_bus2_send": null
+     },
+     {
+      "enabled": false,
+      "type": "moog_lowpass_12",
+      "cutoff": 0.5,
+      "resonance": 10.0,
+      "drive": 0.0,
+      "stereo": 50.0,
+      "var": 0.0,
+      "key_track": false,
+      "wet": 100.0,
+      "level_out": 0.5,
+      "output_routing": null,
+      "fx_bus1_send": null,
+      "fx_bus2_send": null
+     }
+    ],
+    "envelopes": [
+     {
+      "attack": 0.0005,
+      "hold": 0.0,
+      "decay": 1.0,
+      "sustain": 1.0,
+      "release": 0.015,
+      "attack_curve": 50.0,
+      "decay_curve": 66.6,
+      "release_curve": 66.6
+     },
+     {
+      "attack": 0.0005,
+      "hold": 0.0,
+      "decay": 1.0,
+      "sustain": 1.0,
+      "release": 0.015,
+      "attack_curve": 50.0,
+      "decay_curve": 66.6,
+      "release_curve": 66.6
+     },
+     {
+      "attack": 0.0005,
+      "hold": 0.0,
+      "decay": 1.0,
+      "sustain": 1.0,
+      "release": 0.015,
+      "attack_curve": 50.0,
+      "decay_curve": 66.6,
+      "release_curve": 66.6
+     },
+     {
+      "attack": 0.0005,
+      "hold": 0.0,
+      "decay": 1.0,
+      "sustain": 1.0,
+      "release": 0.015,
+      "attack_curve": 50.0,
+      "decay_curve": 66.6,
+      "release_curve": 66.6
+     }
+    ],
+    "lfos": [
+     {
+      "rate": 0.0,
+      "mode": "Free",
+      "beat_sync": null,
+      "delay": 0.0,
+      "rise": 0.0,
+      "smooth": 0.0,
+      "shape": null,
+      "curve": null,
+      "mono": false,
+      "swing": 0.0,
+      "dotted": false,
+      "triplets": false,
+      "rate10x": false
+     },
+     {
+      "rate": 0.0,
+      "mode": "Free",
+      "beat_sync": null,
+      "delay": 0.0,
+      "rise": 0.0,
+      "smooth": 0.0,
+      "shape": null,
+      "curve": null,
+      "mono": false,
+      "swing": 0.0,
+      "dotted": false,
+      "triplets": false,
+      "rate10x": false
+     },
+     {
+      "rate": 0.0,
+      "mode": "Free",
+      "beat_sync": null,
+      "delay": 0.0,
+      "rise": 0.0,
+      "smooth": 0.0,
+      "shape": null,
+      "curve": null,
+      "mono": false,
+      "swing": 0.0,
+      "dotted": false,
+      "triplets": false,
+      "rate10x": false
+     },
+     {
+      "rate": 0.0,
+      "mode": "Free",
+      "beat_sync": null,
+      "delay": 0.0,
+      "rise": 0.0,
+      "smooth": 0.0,
+      "shape": null,
+      "curve": null,
+      "mono": false,
+      "swing": 0.0,
+      "dotted": false,
+      "triplets": false,
+      "rate10x": false
+     },
+     {
+      "rate": 0.0,
+      "mode": "Free",
+      "beat_sync": null,
+      "delay": 0.0,
+      "rise": 0.0,
+      "smooth": 0.0,
+      "shape": null,
+      "curve": null,
+      "mono": false,
+      "swing": 0.0,
+      "dotted": false,
+      "triplets": false,
+      "rate10x": false
+     },
+     {
+      "rate": 0.0,
+      "mode": "Free",
+      "beat_sync": null,
+      "delay": 0.0,
+      "rise": 0.0,
+      "smooth": 0.0,
+      "shape": null,
+      "curve": null,
+      "mono": false,
+      "swing": 0.0,
+      "dotted": false,
+      "triplets": false,
+      "rate10x": false
+     },
+     {
+      "rate": 0.0,
+      "mode": "Free",
+      "beat_sync": null,
+      "delay": 0.0,
+      "rise": 0.0,
+      "smooth": 0.0,
+      "shape": null,
+      "curve": null,
+      "mono": false,
+      "swing": 0.0,
+      "dotted": false,
+      "triplets": false,
+      "rate10x": false
+     },
+     {
+      "rate": 0.0,
+      "mode": "Free",
+      "beat_sync": null,
+      "delay": 0.0,
+      "rise": 0.0,
+      "smooth": 0.0,
+      "shape": null,
+      "curve": null,
+      "mono": false,
+      "swing": 0.0,
+      "dotted": false,
+      "triplets": false,
+      "rate10x": false
+     },
+     {
+      "rate": 0.0,
+      "mode": "Free",
+      "beat_sync": null,
+      "delay": 0.0,
+      "rise": 0.0,
+      "smooth": 0.0,
+      "shape": null,
+      "curve": null,
+      "mono": false,
+      "swing": 0.0,
+      "dotted": false,
+      "triplets": false,
+      "rate10x": false
+     },
+     {
+      "rate": 0.0,
+      "mode": "Free",
+      "beat_sync": null,
+      "delay": 0.0,
+      "rise": 0.0,
+      "smooth": 0.0,
+      "shape": null,
+      "curve": null,
+      "mono": false,
+      "swing": 0.0,
+      "dotted": false,
+      "triplets": false,
+      "rate10x": false
+     }
+    ],
+    "macros": [
+     {
+      "name": "",
+      "value": 0.0
+     },
+     {
+      "name": "",
+      "value": 0.0
+     },
+     {
+      "name": "",
+      "value": 0.0
+     },
+     {
+      "name": "",
+      "value": 0.0
+     },
+     {
+      "name": "",
+      "value": 0.0
+     },
+     {
+      "name": "",
+      "value": 0.0
+     },
+     {
+      "name": "",
+      "value": 0.0
+     },
+     {
+      "name": "",
+      "value": 0.0
+     }
+    ],
+    "fx_chain": [],
+    "mod_routes": [],
+    "global_": {
+     "master_volume": 0.5,
+     "mono": false,
+     "portamento_time": 0.0,
+     "poly_count": 8.0,
+     "limit_same_note_polyphony": false,
+     "fx_bus1_volume": null,
+     "fx_bus2_volume": null,
+     "direct_volume": null,
+     "fx_bus1_destination": null,
+     "fx_bus2_destination": null,
+     "bend_range_up": null,
+     "bend_range_down": null,
+     "legato": null,
+     "porta_always": null,
+     "porta_scaled": null,
+     "portamento_curve": null,
+     "swing": null,
+     "swing_div": null,
+     "transpose": null,
+     "global_tuning": null,
+     "oversampling": null,
+     "s1_compatibility": null,
+     "use_ultra_on_render": null,
+     "voice_priority": null,
+     "note_latch": null,
+     "voice_amp": null
+    },
+    "arp": {
+     "enabled": true,
+     "shape": "played",
+     "rate": 0.5,
+     "gate": 75.0,
+     "dotted": false,
+     "triplets": false,
+     "transpose_shift": 0.0,
+     "transpose_shape": null,
+     "pattern": null,
+     "pattern_step_beats": 0.25,
+     "chance": null,
+     "offset": null,
+     "transpose_range": null,
+     "retrig_rate": null,
+     "first_note_retrig": null,
+     "note_retrig": null,
+     "velo_enabled": null,
+     "velo_target": null,
+     "wrap_range": null,
+     "wrap_phantom_note": null,
+     "key_zone_min": null,
+     "key_zone_max": null,
+     "midi_select_octave": null,
+     "beat_retrig": null,
+     "launch_retrig": null,
+     "velo_retrig": null,
+     "velo_decay": null,
+     "repeats": null,
+     "transpose_step": null,
+     "thru": null,
+     "range_wrap_mode": null,
+     "playback_mode": null,
+     "playback_mode_time": null,
+     "step_action": null
+    },
+    "voice_unison": {
+     "pan": null,
+     "detune": null,
+     "filter_cutoff": null,
+     "env_time": null,
+     "mod1": null,
+     "mod2": null,
+     "random_pan": null,
+     "random_detune": null,
+     "random_detune_10x": null,
+     "random_env_time": null,
+     "random_filter_cutoff": null,
+     "scaling_env_time": null,
+     "scaling_lfo_time": null,
+     "scaling_lfo_time_snap": null,
+     "affects_osc_a": null,
+     "affects_osc_b": null,
+     "affects_osc_c": null,
+     "affects_osc_noise": null,
+     "affects_osc_sub": null,
+     "voice_count": null
+    }
+   }
+  },
+  "OSC_WARP2": {
+   "preset_name": "QUAL_OSC_WARP2",
+   "fx": [],
+   "spec_patch": {
+    "name": "",
+    "description": "",
+    "oscillators": [
+     {
+      "enabled": true,
+      "octave": 0.0,
+      "semitone": 0.0,
+      "fine": 0.0,
+      "volume": 0.75,
+      "pan": 0.0,
+      "unison": 1.0,
+      "detune": 0.0,
+      "wavetable": "default",
+      "custom_harmonics": null,
+      "sample_source": null,
+      "sample_playback_source": null,
+      "sample_center_pan": true,
+      "sample_loop": "off",
+      "sample_loop_start": 0.0,
+      "sample_loop_end": 100.0,
+      "sample_loop_crossfade": 0.0,
+      "sample_frames": 16,
+      "table_position": 0.0,
+      "warp_amount": 0.0,
+      "warp_mode": "fm",
+      "granular_source": null,
+      "granular_density": 10.0,
+      "granular_grain_length": 100.0,
+      "granular_random_pitch": 0.0,
+      "granular_random_pan": 0.0,
+      "granular_random_grain_length": 0.0,
+      "granular_random_offset": 0.0,
+      "granular_loop": true,
+      "granular_jump_start": false,
+      "granular_reverse": false,
+      "granular_length_key_track": false,
+      "granular_max_grains": 16.0,
+      "granular_random_window_amount": 0.0,
+      "granular_random_window_skew": 0.0,
+      "spectral_source": null,
+      "spectral_warp_freq_lo": 20.0,
+      "spectral_warp_freq_hi": 20000.0,
+      "spectral_filter_shift": 0.0,
+      "spectral_filter_wet": 100.0,
+      "multisample_source": null,
+      "multisample_env_attack": 0.0,
+      "multisample_env_decay": 0.0,
+      "multisample_env_release": 0.0,
+      "warp_amount2": 0.0,
+      "warp_mode2": "fm",
+      "warp_var2": null,
+      "noise_type": "White",
+      "sub_shape": "saw",
+      "filter_routing": null,
+      "filter_balance": null,
+      "fx_bus1_send": null,
+      "fx_bus2_send": null
+     },
+     {
+      "enabled": false,
+      "octave": 0.0,
+      "semitone": 0.0,
+      "fine": 0.0,
+      "volume": 0.75,
+      "pan": 0.0,
+      "unison": 1.0,
+      "detune": 0.0,
+      "wavetable": "default",
+      "custom_harmonics": null,
+      "sample_source": null,
+      "sample_playback_source": null,
+      "sample_center_pan": true,
+      "sample_loop": "off",
+      "sample_loop_start": 0.0,
+      "sample_loop_end": 100.0,
+      "sample_loop_crossfade": 0.0,
+      "sample_frames": 16,
+      "table_position": 0.0,
+      "warp_amount": 0.0,
+      "warp_mode": "fm",
+      "granular_source": null,
+      "granular_density": 10.0,
+      "granular_grain_length": 100.0,
+      "granular_random_pitch": 0.0,
+      "granular_random_pan": 0.0,
+      "granular_random_grain_length": 0.0,
+      "granular_random_offset": 0.0,
+      "granular_loop": true,
+      "granular_jump_start": false,
+      "granular_reverse": false,
+      "granular_length_key_track": false,
+      "granular_max_grains": 16.0,
+      "granular_random_window_amount": 0.0,
+      "granular_random_window_skew": 0.0,
+      "spectral_source": null,
+      "spectral_warp_freq_lo": 20.0,
+      "spectral_warp_freq_hi": 20000.0,
+      "spectral_filter_shift": 0.0,
+      "spectral_filter_wet": 100.0,
+      "multisample_source": null,
+      "multisample_env_attack": 0.0,
+      "multisample_env_decay": 0.0,
+      "multisample_env_release": 0.0,
+      "warp_amount2": 0.0,
+      "warp_mode2": "fm",
+      "warp_var2": null,
+      "noise_type": "White",
+      "sub_shape": "saw",
+      "filter_routing": null,
+      "filter_balance": null,
+      "fx_bus1_send": null,
+      "fx_bus2_send": null
+     },
+     {
+      "enabled": false,
+      "octave": 0.0,
+      "semitone": 0.0,
+      "fine": 0.0,
+      "volume": 0.75,
+      "pan": 0.0,
+      "unison": 1.0,
+      "detune": 0.0,
+      "wavetable": "default",
+      "custom_harmonics": null,
+      "sample_source": null,
+      "sample_playback_source": null,
+      "sample_center_pan": true,
+      "sample_loop": "off",
+      "sample_loop_start": 0.0,
+      "sample_loop_end": 100.0,
+      "sample_loop_crossfade": 0.0,
+      "sample_frames": 16,
+      "table_position": 0.0,
+      "warp_amount": 0.0,
+      "warp_mode": "fm",
+      "granular_source": null,
+      "granular_density": 10.0,
+      "granular_grain_length": 100.0,
+      "granular_random_pitch": 0.0,
+      "granular_random_pan": 0.0,
+      "granular_random_grain_length": 0.0,
+      "granular_random_offset": 0.0,
+      "granular_loop": true,
+      "granular_jump_start": false,
+      "granular_reverse": false,
+      "granular_length_key_track": false,
+      "granular_max_grains": 16.0,
+      "granular_random_window_amount": 0.0,
+      "granular_random_window_skew": 0.0,
+      "spectral_source": null,
+      "spectral_warp_freq_lo": 20.0,
+      "spectral_warp_freq_hi": 20000.0,
+      "spectral_filter_shift": 0.0,
+      "spectral_filter_wet": 100.0,
+      "multisample_source": null,
+      "multisample_env_attack": 0.0,
+      "multisample_env_decay": 0.0,
+      "multisample_env_release": 0.0,
+      "warp_amount2": 0.0,
+      "warp_mode2": "fm",
+      "warp_var2": null,
+      "noise_type": "White",
+      "sub_shape": "saw",
+      "filter_routing": null,
+      "filter_balance": null,
+      "fx_bus1_send": null,
+      "fx_bus2_send": null
+     },
+     {
+      "enabled": false,
+      "octave": 0.0,
+      "semitone": 0.0,
+      "fine": 0.0,
+      "volume": 0.75,
+      "pan": 0.0,
+      "unison": 1.0,
+      "detune": 0.0,
+      "wavetable": "default",
+      "custom_harmonics": null,
+      "sample_source": null,
+      "sample_playback_source": null,
+      "sample_center_pan": true,
+      "sample_loop": "off",
+      "sample_loop_start": 0.0,
+      "sample_loop_end": 100.0,
+      "sample_loop_crossfade": 0.0,
+      "sample_frames": 16,
+      "table_position": 0.0,
+      "warp_amount": 0.0,
+      "warp_mode": "fm",
+      "granular_source": null,
+      "granular_density": 10.0,
+      "granular_grain_length": 100.0,
+      "granular_random_pitch": 0.0,
+      "granular_random_pan": 0.0,
+      "granular_random_grain_length": 0.0,
+      "granular_random_offset": 0.0,
+      "granular_loop": true,
+      "granular_jump_start": false,
+      "granular_reverse": false,
+      "granular_length_key_track": false,
+      "granular_max_grains": 16.0,
+      "granular_random_window_amount": 0.0,
+      "granular_random_window_skew": 0.0,
+      "spectral_source": null,
+      "spectral_warp_freq_lo": 20.0,
+      "spectral_warp_freq_hi": 20000.0,
+      "spectral_filter_shift": 0.0,
+      "spectral_filter_wet": 100.0,
+      "multisample_source": null,
+      "multisample_env_attack": 0.0,
+      "multisample_env_decay": 0.0,
+      "multisample_env_release": 0.0,
+      "warp_amount2": 0.0,
+      "warp_mode2": null,
+      "warp_var2": null,
+      "noise_type": "White",
+      "sub_shape": "saw",
+      "filter_routing": null,
+      "filter_balance": null,
+      "fx_bus1_send": null,
+      "fx_bus2_send": null
+     },
+     {
+      "enabled": false,
+      "octave": 0.0,
+      "semitone": 0.0,
+      "fine": 0.0,
+      "volume": 0.75,
+      "pan": 0.0,
+      "unison": 1.0,
+      "detune": 0.0,
+      "wavetable": "default",
+      "custom_harmonics": null,
+      "sample_source": null,
+      "sample_playback_source": null,
+      "sample_center_pan": true,
+      "sample_loop": "off",
+      "sample_loop_start": 0.0,
+      "sample_loop_end": 100.0,
+      "sample_loop_crossfade": 0.0,
+      "sample_frames": 16,
+      "table_position": 0.0,
+      "warp_amount": 0.0,
+      "warp_mode": "fm",
+      "granular_source": null,
+      "granular_density": 10.0,
+      "granular_grain_length": 100.0,
+      "granular_random_pitch": 0.0,
+      "granular_random_pan": 0.0,
+      "granular_random_grain_length": 0.0,
+      "granular_random_offset": 0.0,
+      "granular_loop": true,
+      "granular_jump_start": false,
+      "granular_reverse": false,
+      "granular_length_key_track": false,
+      "granular_max_grains": 16.0,
+      "granular_random_window_amount": 0.0,
+      "granular_random_window_skew": 0.0,
+      "spectral_source": null,
+      "spectral_warp_freq_lo": 20.0,
+      "spectral_warp_freq_hi": 20000.0,
+      "spectral_filter_shift": 0.0,
+      "spectral_filter_wet": 100.0,
+      "multisample_source": null,
+      "multisample_env_attack": 0.0,
+      "multisample_env_decay": 0.0,
+      "multisample_env_release": 0.0,
+      "warp_amount2": 0.0,
+      "warp_mode2": null,
+      "warp_var2": null,
+      "noise_type": "White",
+      "sub_shape": "saw",
+      "filter_routing": null,
+      "filter_balance": null,
+      "fx_bus1_send": null,
+      "fx_bus2_send": null
+     }
+    ],
+    "filters": [
+     {
+      "enabled": false,
+      "type": "moog_lowpass_12",
+      "cutoff": 0.5,
+      "resonance": 10.0,
+      "drive": 0.0,
+      "stereo": 50.0,
+      "var": 0.0,
+      "key_track": false,
+      "wet": 100.0,
+      "level_out": 0.5,
+      "output_routing": null,
+      "fx_bus1_send": null,
+      "fx_bus2_send": null
+     },
+     {
+      "enabled": false,
+      "type": "moog_lowpass_12",
+      "cutoff": 0.5,
+      "resonance": 10.0,
+      "drive": 0.0,
+      "stereo": 50.0,
+      "var": 0.0,
+      "key_track": false,
+      "wet": 100.0,
+      "level_out": 0.5,
+      "output_routing": null,
+      "fx_bus1_send": null,
+      "fx_bus2_send": null
+     }
+    ],
+    "envelopes": [
+     {
+      "attack": 0.0005,
+      "hold": 0.0,
+      "decay": 1.0,
+      "sustain": 1.0,
+      "release": 0.015,
+      "attack_curve": 50.0,
+      "decay_curve": 66.6,
+      "release_curve": 66.6
+     },
+     {
+      "attack": 0.0005,
+      "hold": 0.0,
+      "decay": 1.0,
+      "sustain": 1.0,
+      "release": 0.015,
+      "attack_curve": 50.0,
+      "decay_curve": 66.6,
+      "release_curve": 66.6
+     },
+     {
+      "attack": 0.0005,
+      "hold": 0.0,
+      "decay": 1.0,
+      "sustain": 1.0,
+      "release": 0.015,
+      "attack_curve": 50.0,
+      "decay_curve": 66.6,
+      "release_curve": 66.6
+     },
+     {
+      "attack": 0.0005,
+      "hold": 0.0,
+      "decay": 1.0,
+      "sustain": 1.0,
+      "release": 0.015,
+      "attack_curve": 50.0,
+      "decay_curve": 66.6,
+      "release_curve": 66.6
+     }
+    ],
+    "lfos": [
+     {
+      "rate": 0.0,
+      "mode": "Free",
+      "beat_sync": null,
+      "delay": 0.0,
+      "rise": 0.0,
+      "smooth": 0.0,
+      "shape": null,
+      "curve": null,
+      "mono": false,
+      "swing": 0.0,
+      "dotted": false,
+      "triplets": false,
+      "rate10x": false
+     },
+     {
+      "rate": 0.0,
+      "mode": "Free",
+      "beat_sync": null,
+      "delay": 0.0,
+      "rise": 0.0,
+      "smooth": 0.0,
+      "shape": null,
+      "curve": null,
+      "mono": false,
+      "swing": 0.0,
+      "dotted": false,
+      "triplets": false,
+      "rate10x": false
+     },
+     {
+      "rate": 0.0,
+      "mode": "Free",
+      "beat_sync": null,
+      "delay": 0.0,
+      "rise": 0.0,
+      "smooth": 0.0,
+      "shape": null,
+      "curve": null,
+      "mono": false,
+      "swing": 0.0,
+      "dotted": false,
+      "triplets": false,
+      "rate10x": false
+     },
+     {
+      "rate": 0.0,
+      "mode": "Free",
+      "beat_sync": null,
+      "delay": 0.0,
+      "rise": 0.0,
+      "smooth": 0.0,
+      "shape": null,
+      "curve": null,
+      "mono": false,
+      "swing": 0.0,
+      "dotted": false,
+      "triplets": false,
+      "rate10x": false
+     },
+     {
+      "rate": 0.0,
+      "mode": "Free",
+      "beat_sync": null,
+      "delay": 0.0,
+      "rise": 0.0,
+      "smooth": 0.0,
+      "shape": null,
+      "curve": null,
+      "mono": false,
+      "swing": 0.0,
+      "dotted": false,
+      "triplets": false,
+      "rate10x": false
+     },
+     {
+      "rate": 0.0,
+      "mode": "Free",
+      "beat_sync": null,
+      "delay": 0.0,
+      "rise": 0.0,
+      "smooth": 0.0,
+      "shape": null,
+      "curve": null,
+      "mono": false,
+      "swing": 0.0,
+      "dotted": false,
+      "triplets": false,
+      "rate10x": false
+     },
+     {
+      "rate": 0.0,
+      "mode": "Free",
+      "beat_sync": null,
+      "delay": 0.0,
+      "rise": 0.0,
+      "smooth": 0.0,
+      "shape": null,
+      "curve": null,
+      "mono": false,
+      "swing": 0.0,
+      "dotted": false,
+      "triplets": false,
+      "rate10x": false
+     },
+     {
+      "rate": 0.0,
+      "mode": "Free",
+      "beat_sync": null,
+      "delay": 0.0,
+      "rise": 0.0,
+      "smooth": 0.0,
+      "shape": null,
+      "curve": null,
+      "mono": false,
+      "swing": 0.0,
+      "dotted": false,
+      "triplets": false,
+      "rate10x": false
+     },
+     {
+      "rate": 0.0,
+      "mode": "Free",
+      "beat_sync": null,
+      "delay": 0.0,
+      "rise": 0.0,
+      "smooth": 0.0,
+      "shape": null,
+      "curve": null,
+      "mono": false,
+      "swing": 0.0,
+      "dotted": false,
+      "triplets": false,
+      "rate10x": false
+     },
+     {
+      "rate": 0.0,
+      "mode": "Free",
+      "beat_sync": null,
+      "delay": 0.0,
+      "rise": 0.0,
+      "smooth": 0.0,
+      "shape": null,
+      "curve": null,
+      "mono": false,
+      "swing": 0.0,
+      "dotted": false,
+      "triplets": false,
+      "rate10x": false
+     }
+    ],
+    "macros": [
+     {
+      "name": "",
+      "value": 0.0
+     },
+     {
+      "name": "",
+      "value": 0.0
+     },
+     {
+      "name": "",
+      "value": 0.0
+     },
+     {
+      "name": "",
+      "value": 0.0
+     },
+     {
+      "name": "",
+      "value": 0.0
+     },
+     {
+      "name": "",
+      "value": 0.0
+     },
+     {
+      "name": "",
+      "value": 0.0
+     },
+     {
+      "name": "",
+      "value": 0.0
+     }
+    ],
+    "fx_chain": [],
+    "mod_routes": [],
+    "global_": {
+     "master_volume": 0.5,
+     "mono": false,
+     "portamento_time": 0.0,
+     "poly_count": 8.0,
+     "limit_same_note_polyphony": false,
+     "fx_bus1_volume": null,
+     "fx_bus2_volume": null,
+     "direct_volume": null,
+     "fx_bus1_destination": null,
+     "fx_bus2_destination": null,
+     "bend_range_up": null,
+     "bend_range_down": null,
+     "legato": null,
+     "porta_always": null,
+     "porta_scaled": null,
+     "portamento_curve": null,
+     "swing": null,
+     "swing_div": null,
+     "transpose": null,
+     "global_tuning": null,
+     "oversampling": null,
+     "s1_compatibility": null,
+     "use_ultra_on_render": null,
+     "voice_priority": null,
+     "note_latch": null,
+     "voice_amp": null
+    },
+    "arp": {
+     "enabled": true,
+     "shape": "played",
+     "rate": 0.5,
+     "gate": 75.0,
+     "dotted": false,
+     "triplets": false,
+     "transpose_shift": 0.0,
+     "transpose_shape": null,
+     "pattern": null,
+     "pattern_step_beats": 0.25,
+     "chance": null,
+     "offset": null,
+     "transpose_range": null,
+     "retrig_rate": null,
+     "first_note_retrig": null,
+     "note_retrig": null,
+     "velo_enabled": null,
+     "velo_target": null,
+     "wrap_range": null,
+     "wrap_phantom_note": null,
+     "key_zone_min": null,
+     "key_zone_max": null,
+     "midi_select_octave": null,
+     "beat_retrig": null,
+     "launch_retrig": null,
+     "velo_retrig": null,
+     "velo_decay": null,
+     "repeats": null,
+     "transpose_step": null,
+     "thru": null,
+     "range_wrap_mode": null,
+     "playback_mode": null,
+     "playback_mode_time": null,
+     "step_action": null
+    },
+    "voice_unison": {
+     "pan": null,
+     "detune": null,
+     "filter_cutoff": null,
+     "env_time": null,
+     "mod1": null,
+     "mod2": null,
+     "random_pan": null,
+     "random_detune": null,
+     "random_detune_10x": null,
+     "random_env_time": null,
+     "random_filter_cutoff": null,
+     "scaling_env_time": null,
+     "scaling_lfo_time": null,
+     "scaling_lfo_time_snap": null,
+     "affects_osc_a": null,
+     "affects_osc_b": null,
+     "affects_osc_c": null,
+     "affects_osc_noise": null,
+     "affects_osc_sub": null,
+     "voice_count": null
+    }
+   }
   }
  },
  "parameters": [
@@ -144,7 +1410,63 @@
     "min": 0.0,
     "max": 1.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "arp.pattern.shape",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "ArpClip0",
+     "plainParams",
+     "kParamShape"
+    ]
+   },
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "Chord",
+     "Converge",
+     "Diverge",
+     "ConvAndDiv",
+     "Down",
+     "UpDown",
+     "DownUp",
+     "UpAndDown",
+     "DownAndUp",
+     "ThumbUp",
+     "ThumbUD",
+     "Rand",
+     "RandOnce",
+     "RandDrift",
+     "RandNoDup"
+    ]
+   },
+   "mechanism": "ENUM_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field",
+   "vocabulary_map": {
+    "played": null,
+    "chord": "Chord",
+    "converge": "Converge",
+    "diverge": "Diverge",
+    "converge_diverge": "ConvAndDiv",
+    "down": "Down",
+    "up_down": "UpDown",
+    "down_up": "DownUp",
+    "up_and_down": "UpAndDown",
+    "down_and_up": "DownAndUp",
+    "thumb_up": "ThumbUp",
+    "thumb_up_down": "ThumbUD",
+    "random": "Rand",
+    "random_once": "RandOnce",
+    "random_drift": "RandDrift",
+    "random_no_dup": "RandNoDup"
+   },
+   "default_words": [
+    "played"
+   ]
   },
   {
    "atlas_id": "arp.playback.chance",
@@ -162,6 +1484,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -180,6 +1503,43 @@
     "min": 0.0,
     "max": 200.0
    },
+   "mechanism": "DIRECT_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "arp.playback.offset",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "ArpClip0",
+     "plainParams",
+     "kParamOffset"
+    ]
+   },
+   "domain": {
+    "kind": "open",
+    "default": null
+   },
+   "mechanism": "OPEN_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "arp.playback.repeats",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "ArpClip0",
+     "plainParams",
+     "kParamRepeats"
+    ]
+   },
+   "domain": {
+    "kind": "open",
+    "default": null
+   },
+   "mechanism": "OPEN_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -197,6 +1557,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -214,6 +1575,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -231,6 +1593,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -248,6 +1611,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -266,6 +1630,7 @@
     "min": 0.0,
     "max": 24.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -284,6 +1649,25 @@
     "min": -24.0,
     "max": 24.0
    },
+   "mechanism": "DIRECT_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "arp.velocity.decay",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "ArpClip0",
+     "plainParams",
+     "kParamVeloDecay"
+    ]
+   },
+   "domain": {
+    "kind": "open",
+    "default": null
+   },
+   "mechanism": "OPEN_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -301,6 +1685,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -318,6 +1703,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -336,6 +1722,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -354,6 +1741,7 @@
     "min": 0.0,
     "max": 10.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -372,6 +1760,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -390,6 +1779,7 @@
     "min": 0.0,
     "max": 32.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -408,6 +1798,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -426,6 +1817,7 @@
     "min": 0.0,
     "max": 5.2
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -444,6 +1836,7 @@
     "min": 0.0,
     "max": 32.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -462,6 +1855,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -480,6 +1874,7 @@
     "min": 0.0,
     "max": 1.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -498,6 +1893,7 @@
     "min": 0.0,
     "max": 10.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -516,6 +1912,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -534,6 +1931,7 @@
     "min": 0.0,
     "max": 32.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -552,6 +1950,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -570,6 +1969,7 @@
     "min": 0.0,
     "max": 5.2
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -588,6 +1988,7 @@
     "min": 0.0,
     "max": 32.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -606,6 +2007,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -624,6 +2026,7 @@
     "min": 0.0,
     "max": 1.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -642,6 +2045,7 @@
     "min": 0.0,
     "max": 10.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -660,6 +2064,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -678,6 +2083,7 @@
     "min": 0.0,
     "max": 32.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -696,6 +2102,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -714,6 +2121,7 @@
     "min": 0.0,
     "max": 5.2
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -732,6 +2140,7 @@
     "min": 0.0,
     "max": 32.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -750,6 +2159,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -768,6 +2178,7 @@
     "min": 0.0,
     "max": 1.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -786,6 +2197,7 @@
     "min": 0.0,
     "max": 10.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -804,6 +2216,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -822,6 +2235,7 @@
     "min": 0.0,
     "max": 32.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -840,6 +2254,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -858,6 +2273,7 @@
     "min": 0.0,
     "max": 5.2
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -876,6 +2292,7 @@
     "min": 0.0,
     "max": 32.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -894,6 +2311,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -912,6 +2330,7 @@
     "min": 0.0,
     "max": 1.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -930,6 +2349,7 @@
     "min": 0.0,
     "max": 1.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -948,6 +2368,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -965,6 +2386,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -982,6 +2404,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -1000,6 +2423,7 @@
     "min": 0.0,
     "max": 1.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -1018,6 +2442,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -1036,7 +2461,53 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "filter1.type",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "VoiceFilter0",
+     "plainParams",
+     "kParamType"
+    ]
+   },
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "L12",
+     "L24",
+     "H12",
+     "H24",
+     "B12",
+     "B24",
+     "N24",
+     "MgL24",
+     "CombN",
+     "FormantONE"
+    ]
+   },
+   "mechanism": "ENUM_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field",
+   "vocabulary_map": {
+    "lowpass_12": "L12",
+    "lowpass_24": "L24",
+    "highpass_12": "H12",
+    "highpass_24": "H24",
+    "bandpass_12": "B12",
+    "bandpass_24": "B24",
+    "notch": "N24",
+    "moog_lowpass_12": null,
+    "moog_lowpass_24": "MgL24",
+    "comb": "CombN",
+    "formant": "FormantONE"
+   },
+   "default_words": [
+    "moog_lowpass_12"
+   ]
   },
   {
    "atlas_id": "filter1.var",
@@ -1054,6 +2525,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -1072,6 +2544,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -1090,6 +2563,7 @@
     "min": 0.0,
     "max": 1.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -1108,6 +2582,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -1125,6 +2600,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -1142,6 +2618,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -1160,6 +2637,7 @@
     "min": 0.0,
     "max": 1.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -1178,6 +2656,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -1196,7 +2675,53 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "filter2.type",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "VoiceFilter1",
+     "plainParams",
+     "kParamType"
+    ]
+   },
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "L12",
+     "L24",
+     "H12",
+     "H24",
+     "B12",
+     "B24",
+     "N24",
+     "MgL24",
+     "CombN",
+     "FormantONE"
+    ]
+   },
+   "mechanism": "ENUM_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field",
+   "vocabulary_map": {
+    "lowpass_12": "L12",
+    "lowpass_24": "L24",
+    "highpass_12": "H12",
+    "highpass_24": "H24",
+    "bandpass_12": "B12",
+    "bandpass_24": "B24",
+    "notch": "N24",
+    "moog_lowpass_12": null,
+    "moog_lowpass_24": "MgL24",
+    "comb": "CombN",
+    "formant": "FormantONE"
+   },
+   "default_words": [
+    "moog_lowpass_12"
+   ]
   },
   {
    "atlas_id": "filter2.var",
@@ -1214,6 +2739,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -1232,6 +2758,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -1253,6 +2780,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -1274,6 +2802,7 @@
     "min": 0.1,
     "max": 3043.2
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -1295,6 +2824,7 @@
     "min": -100.0,
     "max": 82.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -1316,6 +2846,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -1337,6 +2868,7 @@
     "min": 0.0,
     "max": 26.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -1358,6 +2890,7 @@
     "min": 0.0,
     "max": 75.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -1379,6 +2912,7 @@
     "min": 0.0,
     "max": 20.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -1400,6 +2934,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -1421,6 +2956,7 @@
     "min": 0.1,
     "max": 1000.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -1442,6 +2978,7 @@
     "min": 1.0,
     "max": 32.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -1463,6 +3000,7 @@
     "min": 1.0,
     "max": 1000000.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -1484,6 +3022,7 @@
     "min": 0.1,
     "max": 1000.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -1505,6 +3044,7 @@
     "min": 0.0,
     "max": 1.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -1526,6 +3066,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -1547,6 +3088,7 @@
     "min": 0.0,
     "max": 40.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -1568,6 +3110,7 @@
     "min": 10.0,
     "max": 1000.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -1589,6 +3132,7 @@
     "min": -100.0,
     "max": 85.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -1610,6 +3154,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -1629,6 +3174,7 @@
    "domain": {
     "kind": "bool"
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -1650,6 +3196,7 @@
     "min": 0.0,
     "max": 90.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -1671,6 +3218,7 @@
     "min": 49.5,
     "max": 17981.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -1690,6 +3238,28 @@
    "domain": {
     "kind": "bool"
    },
+   "mechanism": "DIRECT_RAW",
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.delay.mode",
+   "context": "FX_FXDelay",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXDelay",
+     "plainParams",
+     "kParamMode"
+    ]
+   },
+   "domain": {
+    "kind": "open",
+    "default": null
+   },
+   "mechanism": "OPEN_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -1711,6 +3281,7 @@
     "min": 0.001,
     "max": 0.34
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -1732,6 +3303,7 @@
     "min": 0.001,
     "max": 0.32
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -1753,6 +3325,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -1774,6 +3347,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -1795,6 +3369,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -1816,6 +3391,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -1837,6 +3413,46 @@
     "min": 0.0,
     "max": 1.0
    },
+   "mechanism": "DIRECT_RAW",
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.distortion.type",
+   "context": "FX_FXDistortion",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXDistortion",
+     "plainParams",
+     "kParamMode"
+    ]
+   },
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "kAsym",
+     "kDiode1",
+     "kDiode2",
+     "kDownsample",
+     "kHardClip",
+     "kLinFold",
+     "kOverdrive",
+     "kRectify",
+     "kSinFold",
+     "kSineShaper",
+     "kSoftClip",
+     "kSoftSat",
+     "kStompBox",
+     "kTapeSat",
+     "kXShaper",
+     "kXShaperAsym",
+     "kZeroSquare"
+    ]
+   },
+   "mechanism": "ENUM_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -1858,6 +3474,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -1879,6 +3496,7 @@
     "min": 21.5,
     "max": 10000.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -1900,6 +3518,7 @@
     "min": -24.0,
     "max": 24.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -1921,6 +3540,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -1942,6 +3562,7 @@
     "min": 21.5,
     "max": 20000.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -1963,6 +3584,7 @@
     "min": -24.0,
     "max": 24.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -1984,6 +3606,7 @@
     "min": 0.0,
     "max": 95.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -2005,6 +3628,7 @@
     "min": 0.0,
     "max": 1.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -2026,6 +3650,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -2047,6 +3672,126 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.filter.type",
+   "context": "FX_FXFilter",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXFilter",
+     "plainParams",
+     "kParamType"
+    ]
+   },
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "L6",
+     "L12",
+     "L18",
+     "L24",
+     "H6",
+     "H12",
+     "H18",
+     "H24",
+     "B12",
+     "B24",
+     "N24",
+     "BN12",
+     "NN12",
+     "BPN12",
+     "BPN24",
+     "BandReject",
+     "Allpasses",
+     "LH12",
+     "HB12",
+     "LBH12",
+     "LBH24",
+     "LNH12",
+     "LNH24",
+     "LPH24",
+     "LN12",
+     "PP12",
+     "HP12",
+     "MgL6",
+     "MgL12",
+     "MgL18",
+     "MgL24",
+     "LadderMg",
+     "LadderAcid",
+     "LadderEMS",
+     "DirtyMg",
+     "Comb2",
+     "CombN",
+     "CombP",
+     "CombH6N",
+     "CombHL6P",
+     "DistComb2LP",
+     "DistComb2BP",
+     "FlangeN",
+     "FlangeP",
+     "FlangePhase12HL6P",
+     "Phase24P",
+     "Phase36N",
+     "Phase36P",
+     "Phase48H6P",
+     "Phase48HL6P",
+     "Phase48P",
+     "FormantONE",
+     "FormantTWB",
+     "FormantTWO",
+     "DJMixer",
+     "Diffuser",
+     "Exp",
+     "ExpBPF",
+     "PZ_SVF",
+     "RM",
+     "RMT",
+     "Reverb1",
+     "Scream",
+     "Scream3LP",
+     "Wsp",
+     "ADD_BASS",
+     "BEQ12",
+     "BP12",
+     "CombHL6N",
+     "CombL6N",
+     "Combs",
+     "DistComb1BP",
+     "DistComb1LP",
+     "FlangeH6P",
+     "FlangeL6P",
+     "HEQ12",
+     "HN12",
+     "LB12",
+     "N12",
+     "P12",
+     "FlangeHL6N",
+     "HEQ6",
+     "LPH12",
+     "PN12",
+     "Phase12N",
+     "Phase12P",
+     "SNH1",
+     "ZDF_A",
+     "Scream3BP",
+     "Phase48HL6N",
+     "Phase48N",
+     "FlangeHL6P",
+     "Phase24N",
+     "FlangeL6N",
+     "SNH2",
+     "CombH6P",
+     "LEQ12"
+    ]
+   },
+   "mechanism": "ENUM_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -2068,6 +3813,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -2089,6 +3835,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -2110,6 +3857,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -2131,6 +3879,7 @@
     "min": 0.0,
     "max": 10.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -2152,6 +3901,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -2173,6 +3923,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -2194,6 +3945,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -2215,6 +3967,7 @@
     "min": 0.0,
     "max": 7.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -2236,6 +3989,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -2257,6 +4011,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -2278,6 +4033,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -2299,6 +4055,7 @@
     "min": 20.0,
     "max": 20000.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -2320,6 +4077,7 @@
     "min": 0.0,
     "max": 20.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -2341,6 +4099,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -2362,6 +4121,33 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
+   "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "fx.reverb.type",
+   "context": "FX_FXReverb",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "FXRack0",
+     "FX",
+     0,
+     "FXReverb",
+     "plainParams",
+     "kParamType"
+    ]
+   },
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "kAbyss",
+     "kHall",
+     "kSpace",
+     "kVintage"
+    ]
+   },
+   "mechanism": "ENUM_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
   },
   {
@@ -2383,7 +4169,170 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"
+  },
+  {
+   "atlas_id": "global.bend_range_down",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Global0",
+     "plainParams",
+     "kParamBendRangeDn"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": -48.0,
+    "max": 0.0
+   },
+   "mechanism": "DIRECT_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "global.bend_range_up",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Global0",
+     "plainParams",
+     "kParamBendRangeUp"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 48.0
+   },
+   "mechanism": "DIRECT_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "global.direct_volume",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Global0",
+     "plainParams",
+     "kParamDirectVol"
+    ]
+   },
+   "domain": {
+    "kind": "open",
+    "default": null
+   },
+   "mechanism": "OPEN_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "global.fx_bus1_destination",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Global0",
+     "plainParams",
+     "kParamFXBus1Dest"
+    ]
+   },
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     1.0,
+     2.0
+    ]
+   },
+   "mechanism": "ENUM_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field",
+   "vocabulary_map": {
+    "master": 1.0,
+    "direct": 2.0
+   },
+   "default_words": []
+  },
+  {
+   "atlas_id": "global.fx_bus1_volume",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Global0",
+     "plainParams",
+     "kParamFXBus1Vol"
+    ]
+   },
+   "domain": {
+    "kind": "open",
+    "default": null
+   },
+   "mechanism": "OPEN_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "global.fx_bus2_destination",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Global0",
+     "plainParams",
+     "kParamFXBus2Dest"
+    ]
+   },
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     1.0,
+     2.0
+    ]
+   },
+   "mechanism": "ENUM_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field",
+   "vocabulary_map": {
+    "master": 1.0,
+    "direct": 2.0
+   },
+   "default_words": []
+  },
+  {
+   "atlas_id": "global.fx_bus2_volume",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Global0",
+     "plainParams",
+     "kParamFXBus2Vol"
+    ]
+   },
+   "domain": {
+    "kind": "open",
+    "default": null
+   },
+   "mechanism": "OPEN_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "global.global_tuning",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Global0",
+     "plainParams",
+     "kParamGlobalTuning"
+    ]
+   },
+   "domain": {
+    "kind": "open",
+    "default": null
+   },
+   "mechanism": "OPEN_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
    "atlas_id": "global.legato",
@@ -2400,6 +4349,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -2417,6 +4367,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -2435,6 +4386,7 @@
     "min": 0.0,
     "max": 1.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -2452,6 +4404,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -2469,6 +4422,25 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "global.oversampling",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Global0",
+     "plainParams",
+     "kParamOversampling"
+    ]
+   },
+   "domain": {
+    "kind": "open",
+    "default": null
+   },
+   "mechanism": "OPEN_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -2487,6 +4459,7 @@
     "min": 1.0,
     "max": 32.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -2504,6 +4477,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -2521,6 +4495,25 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "global.portamento_curve",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Global0",
+     "plainParams",
+     "kParamPortamentoCurve"
+    ]
+   },
+   "domain": {
+    "kind": "open",
+    "default": null
+   },
+   "mechanism": "OPEN_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -2539,6 +4532,7 @@
     "min": 0.0,
     "max": 3.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -2556,6 +4550,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -2574,6 +4569,44 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "global.swing_div",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Global0",
+     "plainParams",
+     "kParamSwingDiv"
+    ]
+   },
+   "domain": {
+    "kind": "open",
+    "default": null
+   },
+   "mechanism": "OPEN_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "global.transpose",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Global0",
+     "plainParams",
+     "kParamTranspose"
+    ]
+   },
+   "domain": {
+    "kind": "signed",
+    "min": -48.0,
+    "max": 48.0
+   },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -2591,6 +4624,79 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "global.voice_amp",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Global0",
+     "plainParams",
+     "kParamVoiceAmp"
+    ]
+   },
+   "domain": {
+    "kind": "open",
+    "default": null
+   },
+   "mechanism": "OPEN_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "global.voice_control.random.cutoff",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "VoicePanel0",
+     "plainParams",
+     "kParamGlobalRandomFilterCutoff"
+    ]
+   },
+   "domain": {
+    "kind": "open",
+    "default": null
+   },
+   "mechanism": "OPEN_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "global.voice_control.random.detune",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "VoicePanel0",
+     "plainParams",
+     "kParamGlobalRandomOscDetune"
+    ]
+   },
+   "domain": {
+    "kind": "open",
+    "default": null
+   },
+   "mechanism": "OPEN_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "global.voice_control.random.envs",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "VoicePanel0",
+     "plainParams",
+     "kParamGlobalRandomEnvTime"
+    ]
+   },
+   "domain": {
+    "kind": "open",
+    "default": null
+   },
+   "mechanism": "OPEN_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -2609,6 +4715,43 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "global.voice_control.scaling.envs",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "VoicePanel0",
+     "plainParams",
+     "kParamGlobalScalingEnvTime"
+    ]
+   },
+   "domain": {
+    "kind": "open",
+    "default": null
+   },
+   "mechanism": "OPEN_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "global.voice_control.scaling.lfos",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "VoicePanel0",
+     "plainParams",
+     "kParamGlobalScalingLfoTime"
+    ]
+   },
+   "domain": {
+    "kind": "open",
+    "default": null
+   },
+   "mechanism": "OPEN_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -2626,6 +4769,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -2644,6 +4788,7 @@
     "min": 0.0,
     "max": 3.6
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -2661,7 +4806,37 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo1.mode",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO0",
+     "plainParams",
+     "kParamMode"
+    ]
+   },
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "Retrig",
+     "Envelope"
+    ]
+   },
+   "mechanism": "ENUM_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field",
+   "vocabulary_map": {
+    "Free": null,
+    "Retrig": "Retrig",
+    "Envelope": "Envelope"
+   },
+   "default_words": [
+    "Free"
+   ]
   },
   {
    "atlas_id": "lfo1.mono",
@@ -2678,6 +4853,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -2696,6 +4872,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -2713,6 +4890,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -2731,7 +4909,38 @@
     "min": 0.0,
     "max": 5.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo1.shape",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO0",
+     "plainParams",
+     "kParamType"
+    ]
+   },
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "RandomSH",
+     "Rossler",
+     "Lorenz",
+     "Path"
+    ]
+   },
+   "mechanism": "ENUM_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field",
+   "vocabulary_map": {
+    "random_sh": "RandomSH",
+    "rossler": "Rossler",
+    "lorenz": "Lorenz",
+    "path": "Path"
+   },
+   "default_words": []
   },
   {
    "atlas_id": "lfo1.smooth",
@@ -2749,6 +4958,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -2767,6 +4977,7 @@
     "min": 0.0,
     "max": 1.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -2784,6 +4995,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -2801,6 +5013,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -2819,6 +5032,7 @@
     "min": 0.0,
     "max": 3.6
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -2836,7 +5050,37 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo2.mode",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO1",
+     "plainParams",
+     "kParamMode"
+    ]
+   },
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "Retrig",
+     "Envelope"
+    ]
+   },
+   "mechanism": "ENUM_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field",
+   "vocabulary_map": {
+    "Free": null,
+    "Retrig": "Retrig",
+    "Envelope": "Envelope"
+   },
+   "default_words": [
+    "Free"
+   ]
   },
   {
    "atlas_id": "lfo2.mono",
@@ -2853,6 +5097,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -2871,6 +5116,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -2888,6 +5134,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -2906,7 +5153,38 @@
     "min": 0.0,
     "max": 5.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo2.shape",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO1",
+     "plainParams",
+     "kParamType"
+    ]
+   },
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "RandomSH",
+     "Rossler",
+     "Lorenz",
+     "Path"
+    ]
+   },
+   "mechanism": "ENUM_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field",
+   "vocabulary_map": {
+    "random_sh": "RandomSH",
+    "rossler": "Rossler",
+    "lorenz": "Lorenz",
+    "path": "Path"
+   },
+   "default_words": []
   },
   {
    "atlas_id": "lfo2.smooth",
@@ -2924,6 +5202,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -2942,6 +5221,7 @@
     "min": 0.0,
     "max": 1.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -2959,6 +5239,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -2976,6 +5257,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -2994,6 +5276,7 @@
     "min": 0.0,
     "max": 3.6
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -3011,7 +5294,37 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo3.mode",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO2",
+     "plainParams",
+     "kParamMode"
+    ]
+   },
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "Retrig",
+     "Envelope"
+    ]
+   },
+   "mechanism": "ENUM_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field",
+   "vocabulary_map": {
+    "Free": null,
+    "Retrig": "Retrig",
+    "Envelope": "Envelope"
+   },
+   "default_words": [
+    "Free"
+   ]
   },
   {
    "atlas_id": "lfo3.mono",
@@ -3028,6 +5341,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -3046,6 +5360,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -3063,6 +5378,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -3081,7 +5397,38 @@
     "min": 0.0,
     "max": 5.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo3.shape",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO2",
+     "plainParams",
+     "kParamType"
+    ]
+   },
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "RandomSH",
+     "Rossler",
+     "Lorenz",
+     "Path"
+    ]
+   },
+   "mechanism": "ENUM_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field",
+   "vocabulary_map": {
+    "random_sh": "RandomSH",
+    "rossler": "Rossler",
+    "lorenz": "Lorenz",
+    "path": "Path"
+   },
+   "default_words": []
   },
   {
    "atlas_id": "lfo3.smooth",
@@ -3099,6 +5446,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -3117,6 +5465,7 @@
     "min": 0.0,
     "max": 1.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -3134,6 +5483,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -3151,6 +5501,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -3169,6 +5520,7 @@
     "min": 0.0,
     "max": 3.6
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -3186,7 +5538,37 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo4.mode",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO3",
+     "plainParams",
+     "kParamMode"
+    ]
+   },
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "Retrig",
+     "Envelope"
+    ]
+   },
+   "mechanism": "ENUM_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field",
+   "vocabulary_map": {
+    "Free": null,
+    "Retrig": "Retrig",
+    "Envelope": "Envelope"
+   },
+   "default_words": [
+    "Free"
+   ]
   },
   {
    "atlas_id": "lfo4.mono",
@@ -3203,6 +5585,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -3221,6 +5604,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -3238,6 +5622,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -3256,7 +5641,38 @@
     "min": 0.0,
     "max": 5.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo4.shape",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO3",
+     "plainParams",
+     "kParamType"
+    ]
+   },
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "RandomSH",
+     "Rossler",
+     "Lorenz",
+     "Path"
+    ]
+   },
+   "mechanism": "ENUM_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field",
+   "vocabulary_map": {
+    "random_sh": "RandomSH",
+    "rossler": "Rossler",
+    "lorenz": "Lorenz",
+    "path": "Path"
+   },
+   "default_words": []
   },
   {
    "atlas_id": "lfo4.smooth",
@@ -3274,6 +5690,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -3292,6 +5709,7 @@
     "min": 0.0,
     "max": 1.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -3309,6 +5727,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -3326,6 +5745,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -3344,6 +5764,7 @@
     "min": 0.0,
     "max": 3.6
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -3361,7 +5782,37 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo5.mode",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO4",
+     "plainParams",
+     "kParamMode"
+    ]
+   },
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "Retrig",
+     "Envelope"
+    ]
+   },
+   "mechanism": "ENUM_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field",
+   "vocabulary_map": {
+    "Free": null,
+    "Retrig": "Retrig",
+    "Envelope": "Envelope"
+   },
+   "default_words": [
+    "Free"
+   ]
   },
   {
    "atlas_id": "lfo5.mono",
@@ -3378,6 +5829,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -3396,6 +5848,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -3413,6 +5866,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -3431,7 +5885,38 @@
     "min": 0.0,
     "max": 5.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo5.shape",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO4",
+     "plainParams",
+     "kParamType"
+    ]
+   },
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "RandomSH",
+     "Rossler",
+     "Lorenz",
+     "Path"
+    ]
+   },
+   "mechanism": "ENUM_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field",
+   "vocabulary_map": {
+    "random_sh": "RandomSH",
+    "rossler": "Rossler",
+    "lorenz": "Lorenz",
+    "path": "Path"
+   },
+   "default_words": []
   },
   {
    "atlas_id": "lfo5.smooth",
@@ -3449,6 +5934,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -3467,6 +5953,7 @@
     "min": 0.0,
     "max": 1.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -3484,6 +5971,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -3501,6 +5989,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -3519,6 +6008,7 @@
     "min": 0.0,
     "max": 3.6
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -3536,7 +6026,37 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo6.mode",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO5",
+     "plainParams",
+     "kParamMode"
+    ]
+   },
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "Retrig",
+     "Envelope"
+    ]
+   },
+   "mechanism": "ENUM_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field",
+   "vocabulary_map": {
+    "Free": null,
+    "Retrig": "Retrig",
+    "Envelope": "Envelope"
+   },
+   "default_words": [
+    "Free"
+   ]
   },
   {
    "atlas_id": "lfo6.mono",
@@ -3553,6 +6073,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -3571,6 +6092,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -3588,6 +6110,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -3606,7 +6129,38 @@
     "min": 0.0,
     "max": 5.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "lfo6.shape",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "LFO5",
+     "plainParams",
+     "kParamType"
+    ]
+   },
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "RandomSH",
+     "Rossler",
+     "Lorenz",
+     "Path"
+    ]
+   },
+   "mechanism": "ENUM_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field",
+   "vocabulary_map": {
+    "random_sh": "RandomSH",
+    "rossler": "Rossler",
+    "lorenz": "Lorenz",
+    "path": "Path"
+   },
+   "default_words": []
   },
   {
    "atlas_id": "lfo6.smooth",
@@ -3624,6 +6178,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -3642,6 +6197,7 @@
     "min": 0.0,
     "max": 1.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -3659,7 +6215,33 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "macro1.name",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Macro0",
+     "name"
+    ]
+   },
+   "domain": {
+    "kind": "text",
+    "values": [
+     "QUAL_A",
+     "QUAL_B"
+    ]
+   },
+   "mechanism": "TEXT_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field",
+   "vocabulary_map": {
+    "QUAL_A": "QUAL_A",
+    "QUAL_B": "QUAL_B"
+   },
+   "default_words": []
   },
   {
    "atlas_id": "macro1.value",
@@ -3677,7 +6259,33 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "macro2.name",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Macro1",
+     "name"
+    ]
+   },
+   "domain": {
+    "kind": "text",
+    "values": [
+     "QUAL_A",
+     "QUAL_B"
+    ]
+   },
+   "mechanism": "TEXT_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field",
+   "vocabulary_map": {
+    "QUAL_A": "QUAL_A",
+    "QUAL_B": "QUAL_B"
+   },
+   "default_words": []
   },
   {
    "atlas_id": "macro2.value",
@@ -3695,7 +6303,33 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "macro3.name",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Macro2",
+     "name"
+    ]
+   },
+   "domain": {
+    "kind": "text",
+    "values": [
+     "QUAL_A",
+     "QUAL_B"
+    ]
+   },
+   "mechanism": "TEXT_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field",
+   "vocabulary_map": {
+    "QUAL_A": "QUAL_A",
+    "QUAL_B": "QUAL_B"
+   },
+   "default_words": []
   },
   {
    "atlas_id": "macro3.value",
@@ -3713,7 +6347,33 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "macro4.name",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Macro3",
+     "name"
+    ]
+   },
+   "domain": {
+    "kind": "text",
+    "values": [
+     "QUAL_A",
+     "QUAL_B"
+    ]
+   },
+   "mechanism": "TEXT_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field",
+   "vocabulary_map": {
+    "QUAL_A": "QUAL_A",
+    "QUAL_B": "QUAL_B"
+   },
+   "default_words": []
   },
   {
    "atlas_id": "macro4.value",
@@ -3731,7 +6391,33 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "macro5.name",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Macro4",
+     "name"
+    ]
+   },
+   "domain": {
+    "kind": "text",
+    "values": [
+     "QUAL_A",
+     "QUAL_B"
+    ]
+   },
+   "mechanism": "TEXT_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field",
+   "vocabulary_map": {
+    "QUAL_A": "QUAL_A",
+    "QUAL_B": "QUAL_B"
+   },
+   "default_words": []
   },
   {
    "atlas_id": "macro5.value",
@@ -3749,7 +6435,33 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "macro6.name",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Macro5",
+     "name"
+    ]
+   },
+   "domain": {
+    "kind": "text",
+    "values": [
+     "QUAL_A",
+     "QUAL_B"
+    ]
+   },
+   "mechanism": "TEXT_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field",
+   "vocabulary_map": {
+    "QUAL_A": "QUAL_A",
+    "QUAL_B": "QUAL_B"
+   },
+   "default_words": []
   },
   {
    "atlas_id": "macro6.value",
@@ -3767,7 +6479,33 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "macro7.name",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Macro6",
+     "name"
+    ]
+   },
+   "domain": {
+    "kind": "text",
+    "values": [
+     "QUAL_A",
+     "QUAL_B"
+    ]
+   },
+   "mechanism": "TEXT_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field",
+   "vocabulary_map": {
+    "QUAL_A": "QUAL_A",
+    "QUAL_B": "QUAL_B"
+   },
+   "default_words": []
   },
   {
    "atlas_id": "macro7.value",
@@ -3785,7 +6523,33 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "macro8.name",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Macro7",
+     "name"
+    ]
+   },
+   "domain": {
+    "kind": "text",
+    "values": [
+     "QUAL_A",
+     "QUAL_B"
+    ]
+   },
+   "mechanism": "TEXT_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field",
+   "vocabulary_map": {
+    "QUAL_A": "QUAL_A",
+    "QUAL_B": "QUAL_B"
+   },
+   "default_words": []
   },
   {
    "atlas_id": "macro8.value",
@@ -3803,6 +6567,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -3812,7 +6577,8 @@
     "kind": "raw_path",
     "path": [
      "RoutingSlot5",
-     "plainParams"
+     "plainParams",
+     "kParamFXBus1Level"
     ]
    },
    "domain": {
@@ -3820,6 +6586,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -3829,7 +6596,8 @@
     "kind": "raw_path",
     "path": [
      "RoutingSlot5",
-     "plainParams"
+     "plainParams",
+     "kParamFXBus2Level"
     ]
    },
    "domain": {
@@ -3837,6 +6605,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -3854,6 +6623,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -3872,6 +6642,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -3881,7 +6652,8 @@
     "kind": "raw_path",
     "path": [
      "RoutingSlot6",
-     "plainParams"
+     "plainParams",
+     "kParamFXBus1Level"
     ]
    },
    "domain": {
@@ -3889,6 +6661,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -3898,7 +6671,8 @@
     "kind": "raw_path",
     "path": [
      "RoutingSlot6",
-     "plainParams"
+     "plainParams",
+     "kParamFXBus2Level"
     ]
    },
    "domain": {
@@ -3906,6 +6680,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -3923,6 +6698,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -3941,6 +6717,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -3950,7 +6727,8 @@
     "kind": "raw_path",
     "path": [
      "RoutingSlot3",
-     "plainParams"
+     "plainParams",
+     "kParamFXBus1Level"
     ]
    },
    "domain": {
@@ -3958,6 +6736,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -3967,7 +6746,8 @@
     "kind": "raw_path",
     "path": [
      "RoutingSlot3",
-     "plainParams"
+     "plainParams",
+     "kParamFXBus2Level"
     ]
    },
    "domain": {
@@ -3975,6 +6755,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -3992,6 +6773,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4001,7 +6783,8 @@
     "kind": "raw_path",
     "path": [
      "RoutingSlot3",
-     "plainParams"
+     "plainParams",
+     "kParamFilterBalance"
     ]
    },
    "domain": {
@@ -4009,6 +6792,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4027,6 +6811,7 @@
     "min": -50.0,
     "max": 50.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4036,7 +6821,8 @@
     "kind": "raw_path",
     "path": [
      "RoutingSlot0",
-     "plainParams"
+     "plainParams",
+     "kParamFXBus1Level"
     ]
    },
    "domain": {
@@ -4044,6 +6830,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4053,7 +6840,8 @@
     "kind": "raw_path",
     "path": [
      "RoutingSlot0",
-     "plainParams"
+     "plainParams",
+     "kParamFXBus2Level"
     ]
    },
    "domain": {
@@ -4061,6 +6849,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4070,7 +6859,8 @@
     "kind": "raw_path",
     "path": [
      "RoutingSlot0",
-     "plainParams"
+     "plainParams",
+     "kParamFilterBalance"
     ]
    },
    "domain": {
@@ -4078,6 +6868,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4087,7 +6878,8 @@
     "kind": "raw_path",
     "path": [
      "RoutingSlot1",
-     "plainParams"
+     "plainParams",
+     "kParamFXBus1Level"
     ]
    },
    "domain": {
@@ -4095,6 +6887,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4104,7 +6897,8 @@
     "kind": "raw_path",
     "path": [
      "RoutingSlot1",
-     "plainParams"
+     "plainParams",
+     "kParamFXBus2Level"
     ]
    },
    "domain": {
@@ -4112,6 +6906,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4121,7 +6916,8 @@
     "kind": "raw_path",
     "path": [
      "RoutingSlot1",
-     "plainParams"
+     "plainParams",
+     "kParamFilterBalance"
     ]
    },
    "domain": {
@@ -4129,6 +6925,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4138,7 +6935,8 @@
     "kind": "raw_path",
     "path": [
      "RoutingSlot2",
-     "plainParams"
+     "plainParams",
+     "kParamFXBus1Level"
     ]
    },
    "domain": {
@@ -4146,6 +6944,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4155,7 +6954,8 @@
     "kind": "raw_path",
     "path": [
      "RoutingSlot2",
-     "plainParams"
+     "plainParams",
+     "kParamFXBus2Level"
     ]
    },
    "domain": {
@@ -4163,6 +6963,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4172,7 +6973,8 @@
     "kind": "raw_path",
     "path": [
      "RoutingSlot2",
-     "plainParams"
+     "plainParams",
+     "kParamFilterBalance"
     ]
    },
    "domain": {
@@ -4180,6 +6982,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4189,7 +6992,8 @@
     "kind": "raw_path",
     "path": [
      "RoutingSlot4",
-     "plainParams"
+     "plainParams",
+     "kParamFXBus1Level"
     ]
    },
    "domain": {
@@ -4197,6 +7001,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4206,7 +7011,8 @@
     "kind": "raw_path",
     "path": [
      "RoutingSlot4",
-     "plainParams"
+     "plainParams",
+     "kParamFXBus2Level"
     ]
    },
    "domain": {
@@ -4214,6 +7020,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4231,6 +7038,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4240,7 +7048,8 @@
     "kind": "raw_path",
     "path": [
      "RoutingSlot4",
-     "plainParams"
+     "plainParams",
+     "kParamFilterBalance"
     ]
    },
    "domain": {
@@ -4248,6 +7057,7 @@
     "min": 0.0,
     "max": 100.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4266,6 +7076,7 @@
     "min": -50.0,
     "max": 50.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4284,6 +7095,7 @@
     "min": 0.0,
     "max": 1.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4301,6 +7113,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4319,6 +7132,7 @@
     "min": -80.0,
     "max": 80.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4337,6 +7151,7 @@
     "min": -4.0,
     "max": 4.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4355,6 +7170,64 @@
     "min": -50.0,
     "max": 50.0
    },
+   "mechanism": "DIRECT_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscA.sample_loop_crossfade",
+   "context": "OSC_SAMPLE",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamLoopCrossfade"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "mechanism": "CONTEXTUAL_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscA.sample_loop_end",
+   "context": "OSC_SAMPLE",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamLoopEnd"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "mechanism": "CONTEXTUAL_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscA.sample_loop_start",
+   "context": "OSC_SAMPLE",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "plainParams",
+     "kParamLoopStart"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "mechanism": "CONTEXTUAL_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4373,6 +7246,7 @@
     "min": -12.0,
     "max": 12.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4391,6 +7265,7 @@
     "min": 1.0,
     "max": 16.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4410,6 +7285,425 @@
     "min": 0.0,
     "max": 1.0
    },
+   "mechanism": "DIRECT_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscA.warp_amount2",
+   "context": "OSC_WARP2",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "WTOsc0",
+     "plainParams",
+     "kParamWarp2"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "mechanism": "CONTEXTUAL_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscA.warp_mode",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator0",
+     "WTOsc0",
+     "plainParams",
+     "kParamWarpMenu"
+    ]
+   },
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "kAM_OSC",
+     "kSync",
+     "kPWM",
+     "kBendPos",
+     "kDistLinFold",
+     "kDistSoftClip",
+     "kDistHardClip",
+     "kQuantize",
+     "kFilterLPF",
+     "kFilterHPF"
+    ]
+   },
+   "mechanism": "ENUM_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field",
+   "vocabulary_map": {
+    "fm": null,
+    "am": "kAM_OSC",
+    "sync": "kSync",
+    "pwm": "kPWM",
+    "bend": "kBendPos",
+    "fold": "kDistLinFold",
+    "soft_clip": "kDistSoftClip",
+    "hard_clip": "kDistHardClip",
+    "quantize": "kQuantize",
+    "filter_lpf": "kFilterLPF",
+    "filter_hpf": "kFilterHPF"
+   },
+   "default_words": [
+    "fm"
+   ]
+  },
+  {
+   "atlas_id": "oscA.warp_mode2",
+   "context": "INIT",
+   "mutation": {
+    "kind": "leaf_set",
+    "primary": [
+     "Oscillator0",
+     "WTOsc0",
+     "plainParams",
+     "kParamWarpMenu2"
+    ],
+    "table": {
+     "fm": [
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "plainParams",
+        "kParamWarpMenu2"
+       ],
+       "kFM_OSC"
+      ],
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "plainParams",
+        "kParamWarp2"
+       ],
+       0.0
+      ],
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "plainParams",
+        "kParamXfadeMode"
+       ],
+       1.0
+      ]
+     ],
+     "am": [
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "plainParams",
+        "kParamWarpMenu2"
+       ],
+       "kAM_OSC"
+      ],
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "plainParams",
+        "kParamWarp2"
+       ],
+       0.0
+      ],
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "plainParams",
+        "kParamXfadeMode"
+       ],
+       1.0
+      ]
+     ],
+     "sync": [
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "plainParams",
+        "kParamWarpMenu2"
+       ],
+       "kSync"
+      ],
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "plainParams",
+        "kParamWarp2"
+       ],
+       0.0
+      ],
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "plainParams",
+        "kParamXfadeMode"
+       ],
+       1.0
+      ]
+     ],
+     "pwm": [
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "plainParams",
+        "kParamWarpMenu2"
+       ],
+       "kPWM"
+      ],
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "plainParams",
+        "kParamWarp2"
+       ],
+       0.0
+      ],
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "plainParams",
+        "kParamXfadeMode"
+       ],
+       1.0
+      ]
+     ],
+     "bend": [
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "plainParams",
+        "kParamWarpMenu2"
+       ],
+       "kBendPos"
+      ],
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "plainParams",
+        "kParamWarp2"
+       ],
+       0.0
+      ],
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "plainParams",
+        "kParamXfadeMode"
+       ],
+       1.0
+      ]
+     ],
+     "fold": [
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "plainParams",
+        "kParamWarpMenu2"
+       ],
+       "kDistLinFold"
+      ],
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "plainParams",
+        "kParamWarp2"
+       ],
+       0.0
+      ],
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "plainParams",
+        "kParamXfadeMode"
+       ],
+       1.0
+      ]
+     ],
+     "soft_clip": [
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "plainParams",
+        "kParamWarpMenu2"
+       ],
+       "kDistSoftClip"
+      ],
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "plainParams",
+        "kParamWarp2"
+       ],
+       0.0
+      ],
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "plainParams",
+        "kParamXfadeMode"
+       ],
+       1.0
+      ]
+     ],
+     "hard_clip": [
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "plainParams",
+        "kParamWarpMenu2"
+       ],
+       "kDistHardClip"
+      ],
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "plainParams",
+        "kParamWarp2"
+       ],
+       0.0
+      ],
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "plainParams",
+        "kParamXfadeMode"
+       ],
+       1.0
+      ]
+     ],
+     "quantize": [
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "plainParams",
+        "kParamWarpMenu2"
+       ],
+       "kQuantize"
+      ],
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "plainParams",
+        "kParamWarp2"
+       ],
+       0.0
+      ],
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "plainParams",
+        "kParamXfadeMode"
+       ],
+       1.0
+      ]
+     ],
+     "filter_lpf": [
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "plainParams",
+        "kParamWarpMenu2"
+       ],
+       "kFilterLPF"
+      ],
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "plainParams",
+        "kParamWarp2"
+       ],
+       0.0
+      ],
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "plainParams",
+        "kParamXfadeMode"
+       ],
+       1.0
+      ]
+     ],
+     "filter_hpf": [
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "plainParams",
+        "kParamWarpMenu2"
+       ],
+       "kFilterHPF"
+      ],
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "plainParams",
+        "kParamWarp2"
+       ],
+       0.0
+      ],
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "plainParams",
+        "kParamXfadeMode"
+       ],
+       1.0
+      ]
+     ]
+    }
+   },
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "fm",
+     "am",
+     "sync",
+     "pwm",
+     "bend",
+     "fold",
+     "soft_clip",
+     "hard_clip",
+     "quantize",
+     "filter_lpf",
+     "filter_hpf"
+    ]
+   },
+   "mechanism": "LEAF_SET",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4429,6 +7723,239 @@
     "min": 0.0,
     "max": 1.0
    },
+   "mechanism": "DIRECT_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscA.wavetable",
+   "context": "INIT",
+   "mutation": {
+    "kind": "leaf_set",
+    "primary": [
+     "Oscillator0",
+     "WTOsc0",
+     "relativePathToWT"
+    ],
+    "table": {
+     "default": [],
+     "analog_basic": [
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "relativePathToWT"
+       ],
+       "Analog/Basic Shapes.wav"
+      ],
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "numFrames"
+       ],
+       14336
+      ]
+     ],
+     "analog_warm": [
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "relativePathToWT"
+       ],
+       "S2 Tables/Analog/DM - OSCAR.wav"
+      ],
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "numFrames"
+       ],
+       8192
+      ]
+     ],
+     "pwm": [
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "relativePathToWT"
+       ],
+       "Analog/PWM Juno.wav"
+      ],
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "numFrames"
+       ],
+       229376
+      ]
+     ],
+     "analog_mini": [
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "relativePathToWT"
+       ],
+       "Analog/Basic Mini.wav"
+      ],
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "numFrames"
+       ],
+       8192
+      ]
+     ],
+     "warm_sub": [
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "relativePathToWT"
+       ],
+       "S2 Tables/Analog/Warm Sub.wav"
+      ],
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "numFrames"
+       ],
+       4096
+      ]
+     ],
+     "digital_fm": [
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "relativePathToWT"
+       ],
+       "S2 Tables/Digital/Basic OPL.wav"
+      ],
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "numFrames"
+       ],
+       16384
+      ]
+     ],
+     "harmonic_smooth": [
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "relativePathToWT"
+       ],
+       "S2 Tables/Digital/Harmonic Series Smooth.wav"
+      ],
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "numFrames"
+       ],
+       49152
+      ]
+     ],
+     "dying_sine": [
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "relativePathToWT"
+       ],
+       "S2 Tables/Digital/Dying Sine.wav"
+      ],
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "numFrames"
+       ],
+       524288
+      ]
+     ],
+     "acid": [
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "relativePathToWT"
+       ],
+       "Analog/Acid.wav"
+      ],
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "numFrames"
+       ],
+       81920
+      ]
+     ],
+     "fm_piano": [
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "relativePathToWT"
+       ],
+       "S2 Tables/Digital/FM Piano.wav"
+      ],
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "numFrames"
+       ],
+       4096
+      ]
+     ],
+     "flute": [
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "relativePathToWT"
+       ],
+       "S2 Tables/Digital/JF Flute.wav"
+      ],
+      [
+       [
+        "Oscillator0",
+        "WTOsc0",
+        "numFrames"
+       ],
+       524288
+      ]
+     ]
+    }
+   },
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "default",
+     "analog_basic",
+     "analog_warm",
+     "pwm",
+     "analog_mini",
+     "warm_sub",
+     "digital_fm",
+     "harmonic_smooth",
+     "dying_sine",
+     "acid",
+     "fm_piano",
+     "flute"
+    ]
+   },
+   "mechanism": "LEAF_SET",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4447,6 +7974,7 @@
     "min": 0.0,
     "max": 1.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4464,6 +7992,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4482,6 +8011,7 @@
     "min": -80.0,
     "max": 80.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4500,6 +8030,7 @@
     "min": -4.0,
     "max": 4.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4518,6 +8049,64 @@
     "min": -50.0,
     "max": 50.0
    },
+   "mechanism": "DIRECT_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscB.sample_loop_crossfade",
+   "context": "OSC_SAMPLE",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator1",
+     "plainParams",
+     "kParamLoopCrossfade"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "mechanism": "CONTEXTUAL_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscB.sample_loop_end",
+   "context": "OSC_SAMPLE",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator1",
+     "plainParams",
+     "kParamLoopEnd"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "mechanism": "CONTEXTUAL_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscB.sample_loop_start",
+   "context": "OSC_SAMPLE",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator1",
+     "plainParams",
+     "kParamLoopStart"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "mechanism": "CONTEXTUAL_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4536,6 +8125,7 @@
     "min": -12.0,
     "max": 12.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4554,6 +8144,7 @@
     "min": 1.0,
     "max": 16.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4573,6 +8164,425 @@
     "min": 0.0,
     "max": 1.0
    },
+   "mechanism": "DIRECT_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscB.warp_amount2",
+   "context": "OSC_WARP2",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator1",
+     "WTOsc1",
+     "plainParams",
+     "kParamWarp2"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "mechanism": "CONTEXTUAL_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscB.warp_mode",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator1",
+     "WTOsc1",
+     "plainParams",
+     "kParamWarpMenu"
+    ]
+   },
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "kAM_OSC",
+     "kSync",
+     "kPWM",
+     "kBendPos",
+     "kDistLinFold",
+     "kDistSoftClip",
+     "kDistHardClip",
+     "kQuantize",
+     "kFilterLPF",
+     "kFilterHPF"
+    ]
+   },
+   "mechanism": "ENUM_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field",
+   "vocabulary_map": {
+    "fm": null,
+    "am": "kAM_OSC",
+    "sync": "kSync",
+    "pwm": "kPWM",
+    "bend": "kBendPos",
+    "fold": "kDistLinFold",
+    "soft_clip": "kDistSoftClip",
+    "hard_clip": "kDistHardClip",
+    "quantize": "kQuantize",
+    "filter_lpf": "kFilterLPF",
+    "filter_hpf": "kFilterHPF"
+   },
+   "default_words": [
+    "fm"
+   ]
+  },
+  {
+   "atlas_id": "oscB.warp_mode2",
+   "context": "INIT",
+   "mutation": {
+    "kind": "leaf_set",
+    "primary": [
+     "Oscillator1",
+     "WTOsc1",
+     "plainParams",
+     "kParamWarpMenu2"
+    ],
+    "table": {
+     "fm": [
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "plainParams",
+        "kParamWarpMenu2"
+       ],
+       "kFM_OSC"
+      ],
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "plainParams",
+        "kParamWarp2"
+       ],
+       0.0
+      ],
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "plainParams",
+        "kParamXfadeMode"
+       ],
+       1.0
+      ]
+     ],
+     "am": [
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "plainParams",
+        "kParamWarpMenu2"
+       ],
+       "kAM_OSC"
+      ],
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "plainParams",
+        "kParamWarp2"
+       ],
+       0.0
+      ],
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "plainParams",
+        "kParamXfadeMode"
+       ],
+       1.0
+      ]
+     ],
+     "sync": [
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "plainParams",
+        "kParamWarpMenu2"
+       ],
+       "kSync"
+      ],
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "plainParams",
+        "kParamWarp2"
+       ],
+       0.0
+      ],
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "plainParams",
+        "kParamXfadeMode"
+       ],
+       1.0
+      ]
+     ],
+     "pwm": [
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "plainParams",
+        "kParamWarpMenu2"
+       ],
+       "kPWM"
+      ],
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "plainParams",
+        "kParamWarp2"
+       ],
+       0.0
+      ],
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "plainParams",
+        "kParamXfadeMode"
+       ],
+       1.0
+      ]
+     ],
+     "bend": [
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "plainParams",
+        "kParamWarpMenu2"
+       ],
+       "kBendPos"
+      ],
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "plainParams",
+        "kParamWarp2"
+       ],
+       0.0
+      ],
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "plainParams",
+        "kParamXfadeMode"
+       ],
+       1.0
+      ]
+     ],
+     "fold": [
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "plainParams",
+        "kParamWarpMenu2"
+       ],
+       "kDistLinFold"
+      ],
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "plainParams",
+        "kParamWarp2"
+       ],
+       0.0
+      ],
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "plainParams",
+        "kParamXfadeMode"
+       ],
+       1.0
+      ]
+     ],
+     "soft_clip": [
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "plainParams",
+        "kParamWarpMenu2"
+       ],
+       "kDistSoftClip"
+      ],
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "plainParams",
+        "kParamWarp2"
+       ],
+       0.0
+      ],
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "plainParams",
+        "kParamXfadeMode"
+       ],
+       1.0
+      ]
+     ],
+     "hard_clip": [
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "plainParams",
+        "kParamWarpMenu2"
+       ],
+       "kDistHardClip"
+      ],
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "plainParams",
+        "kParamWarp2"
+       ],
+       0.0
+      ],
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "plainParams",
+        "kParamXfadeMode"
+       ],
+       1.0
+      ]
+     ],
+     "quantize": [
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "plainParams",
+        "kParamWarpMenu2"
+       ],
+       "kQuantize"
+      ],
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "plainParams",
+        "kParamWarp2"
+       ],
+       0.0
+      ],
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "plainParams",
+        "kParamXfadeMode"
+       ],
+       1.0
+      ]
+     ],
+     "filter_lpf": [
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "plainParams",
+        "kParamWarpMenu2"
+       ],
+       "kFilterLPF"
+      ],
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "plainParams",
+        "kParamWarp2"
+       ],
+       0.0
+      ],
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "plainParams",
+        "kParamXfadeMode"
+       ],
+       1.0
+      ]
+     ],
+     "filter_hpf": [
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "plainParams",
+        "kParamWarpMenu2"
+       ],
+       "kFilterHPF"
+      ],
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "plainParams",
+        "kParamWarp2"
+       ],
+       0.0
+      ],
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "plainParams",
+        "kParamXfadeMode"
+       ],
+       1.0
+      ]
+     ]
+    }
+   },
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "fm",
+     "am",
+     "sync",
+     "pwm",
+     "bend",
+     "fold",
+     "soft_clip",
+     "hard_clip",
+     "quantize",
+     "filter_lpf",
+     "filter_hpf"
+    ]
+   },
+   "mechanism": "LEAF_SET",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4592,6 +8602,239 @@
     "min": 0.0,
     "max": 1.0
    },
+   "mechanism": "DIRECT_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscB.wavetable",
+   "context": "INIT",
+   "mutation": {
+    "kind": "leaf_set",
+    "primary": [
+     "Oscillator1",
+     "WTOsc1",
+     "relativePathToWT"
+    ],
+    "table": {
+     "default": [],
+     "analog_basic": [
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "relativePathToWT"
+       ],
+       "Analog/Basic Shapes.wav"
+      ],
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "numFrames"
+       ],
+       14336
+      ]
+     ],
+     "analog_warm": [
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "relativePathToWT"
+       ],
+       "S2 Tables/Analog/DM - OSCAR.wav"
+      ],
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "numFrames"
+       ],
+       8192
+      ]
+     ],
+     "pwm": [
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "relativePathToWT"
+       ],
+       "Analog/PWM Juno.wav"
+      ],
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "numFrames"
+       ],
+       229376
+      ]
+     ],
+     "analog_mini": [
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "relativePathToWT"
+       ],
+       "Analog/Basic Mini.wav"
+      ],
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "numFrames"
+       ],
+       8192
+      ]
+     ],
+     "warm_sub": [
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "relativePathToWT"
+       ],
+       "S2 Tables/Analog/Warm Sub.wav"
+      ],
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "numFrames"
+       ],
+       4096
+      ]
+     ],
+     "digital_fm": [
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "relativePathToWT"
+       ],
+       "S2 Tables/Digital/Basic OPL.wav"
+      ],
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "numFrames"
+       ],
+       16384
+      ]
+     ],
+     "harmonic_smooth": [
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "relativePathToWT"
+       ],
+       "S2 Tables/Digital/Harmonic Series Smooth.wav"
+      ],
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "numFrames"
+       ],
+       49152
+      ]
+     ],
+     "dying_sine": [
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "relativePathToWT"
+       ],
+       "S2 Tables/Digital/Dying Sine.wav"
+      ],
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "numFrames"
+       ],
+       524288
+      ]
+     ],
+     "acid": [
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "relativePathToWT"
+       ],
+       "Analog/Acid.wav"
+      ],
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "numFrames"
+       ],
+       81920
+      ]
+     ],
+     "fm_piano": [
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "relativePathToWT"
+       ],
+       "S2 Tables/Digital/FM Piano.wav"
+      ],
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "numFrames"
+       ],
+       4096
+      ]
+     ],
+     "flute": [
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "relativePathToWT"
+       ],
+       "S2 Tables/Digital/JF Flute.wav"
+      ],
+      [
+       [
+        "Oscillator1",
+        "WTOsc1",
+        "numFrames"
+       ],
+       524288
+      ]
+     ]
+    }
+   },
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "default",
+     "analog_basic",
+     "analog_warm",
+     "pwm",
+     "analog_mini",
+     "warm_sub",
+     "digital_fm",
+     "harmonic_smooth",
+     "dying_sine",
+     "acid",
+     "fm_piano",
+     "flute"
+    ]
+   },
+   "mechanism": "LEAF_SET",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4610,6 +8853,7 @@
     "min": 0.0,
     "max": 1.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4627,6 +8871,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4645,6 +8890,7 @@
     "min": -80.0,
     "max": 80.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4663,6 +8909,7 @@
     "min": -4.0,
     "max": 4.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4681,6 +8928,64 @@
     "min": -50.0,
     "max": 50.0
    },
+   "mechanism": "DIRECT_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscC.sample_loop_crossfade",
+   "context": "OSC_SAMPLE",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator2",
+     "plainParams",
+     "kParamLoopCrossfade"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "mechanism": "CONTEXTUAL_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscC.sample_loop_end",
+   "context": "OSC_SAMPLE",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator2",
+     "plainParams",
+     "kParamLoopEnd"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "mechanism": "CONTEXTUAL_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscC.sample_loop_start",
+   "context": "OSC_SAMPLE",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator2",
+     "plainParams",
+     "kParamLoopStart"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "mechanism": "CONTEXTUAL_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4699,6 +9004,7 @@
     "min": -12.0,
     "max": 12.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4717,6 +9023,7 @@
     "min": 1.0,
     "max": 16.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4736,6 +9043,425 @@
     "min": 0.0,
     "max": 1.0
    },
+   "mechanism": "DIRECT_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscC.warp_amount2",
+   "context": "OSC_WARP2",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator2",
+     "WTOsc2",
+     "plainParams",
+     "kParamWarp2"
+    ]
+   },
+   "domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "mechanism": "CONTEXTUAL_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscC.warp_mode",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator2",
+     "WTOsc2",
+     "plainParams",
+     "kParamWarpMenu"
+    ]
+   },
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "kAM_OSC",
+     "kSync",
+     "kPWM",
+     "kBendPos",
+     "kDistLinFold",
+     "kDistSoftClip",
+     "kDistHardClip",
+     "kQuantize",
+     "kFilterLPF",
+     "kFilterHPF"
+    ]
+   },
+   "mechanism": "ENUM_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field",
+   "vocabulary_map": {
+    "fm": null,
+    "am": "kAM_OSC",
+    "sync": "kSync",
+    "pwm": "kPWM",
+    "bend": "kBendPos",
+    "fold": "kDistLinFold",
+    "soft_clip": "kDistSoftClip",
+    "hard_clip": "kDistHardClip",
+    "quantize": "kQuantize",
+    "filter_lpf": "kFilterLPF",
+    "filter_hpf": "kFilterHPF"
+   },
+   "default_words": [
+    "fm"
+   ]
+  },
+  {
+   "atlas_id": "oscC.warp_mode2",
+   "context": "INIT",
+   "mutation": {
+    "kind": "leaf_set",
+    "primary": [
+     "Oscillator2",
+     "WTOsc2",
+     "plainParams",
+     "kParamWarpMenu2"
+    ],
+    "table": {
+     "fm": [
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "plainParams",
+        "kParamWarpMenu2"
+       ],
+       "kFM_OSC"
+      ],
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "plainParams",
+        "kParamWarp2"
+       ],
+       0.0
+      ],
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "plainParams",
+        "kParamXfadeMode"
+       ],
+       1.0
+      ]
+     ],
+     "am": [
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "plainParams",
+        "kParamWarpMenu2"
+       ],
+       "kAM_OSC"
+      ],
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "plainParams",
+        "kParamWarp2"
+       ],
+       0.0
+      ],
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "plainParams",
+        "kParamXfadeMode"
+       ],
+       1.0
+      ]
+     ],
+     "sync": [
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "plainParams",
+        "kParamWarpMenu2"
+       ],
+       "kSync"
+      ],
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "plainParams",
+        "kParamWarp2"
+       ],
+       0.0
+      ],
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "plainParams",
+        "kParamXfadeMode"
+       ],
+       1.0
+      ]
+     ],
+     "pwm": [
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "plainParams",
+        "kParamWarpMenu2"
+       ],
+       "kPWM"
+      ],
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "plainParams",
+        "kParamWarp2"
+       ],
+       0.0
+      ],
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "plainParams",
+        "kParamXfadeMode"
+       ],
+       1.0
+      ]
+     ],
+     "bend": [
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "plainParams",
+        "kParamWarpMenu2"
+       ],
+       "kBendPos"
+      ],
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "plainParams",
+        "kParamWarp2"
+       ],
+       0.0
+      ],
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "plainParams",
+        "kParamXfadeMode"
+       ],
+       1.0
+      ]
+     ],
+     "fold": [
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "plainParams",
+        "kParamWarpMenu2"
+       ],
+       "kDistLinFold"
+      ],
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "plainParams",
+        "kParamWarp2"
+       ],
+       0.0
+      ],
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "plainParams",
+        "kParamXfadeMode"
+       ],
+       1.0
+      ]
+     ],
+     "soft_clip": [
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "plainParams",
+        "kParamWarpMenu2"
+       ],
+       "kDistSoftClip"
+      ],
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "plainParams",
+        "kParamWarp2"
+       ],
+       0.0
+      ],
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "plainParams",
+        "kParamXfadeMode"
+       ],
+       1.0
+      ]
+     ],
+     "hard_clip": [
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "plainParams",
+        "kParamWarpMenu2"
+       ],
+       "kDistHardClip"
+      ],
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "plainParams",
+        "kParamWarp2"
+       ],
+       0.0
+      ],
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "plainParams",
+        "kParamXfadeMode"
+       ],
+       1.0
+      ]
+     ],
+     "quantize": [
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "plainParams",
+        "kParamWarpMenu2"
+       ],
+       "kQuantize"
+      ],
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "plainParams",
+        "kParamWarp2"
+       ],
+       0.0
+      ],
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "plainParams",
+        "kParamXfadeMode"
+       ],
+       1.0
+      ]
+     ],
+     "filter_lpf": [
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "plainParams",
+        "kParamWarpMenu2"
+       ],
+       "kFilterLPF"
+      ],
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "plainParams",
+        "kParamWarp2"
+       ],
+       0.0
+      ],
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "plainParams",
+        "kParamXfadeMode"
+       ],
+       1.0
+      ]
+     ],
+     "filter_hpf": [
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "plainParams",
+        "kParamWarpMenu2"
+       ],
+       "kFilterHPF"
+      ],
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "plainParams",
+        "kParamWarp2"
+       ],
+       0.0
+      ],
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "plainParams",
+        "kParamXfadeMode"
+       ],
+       1.0
+      ]
+     ]
+    }
+   },
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "fm",
+     "am",
+     "sync",
+     "pwm",
+     "bend",
+     "fold",
+     "soft_clip",
+     "hard_clip",
+     "quantize",
+     "filter_lpf",
+     "filter_hpf"
+    ]
+   },
+   "mechanism": "LEAF_SET",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4755,6 +9481,239 @@
     "min": 0.0,
     "max": 1.0
    },
+   "mechanism": "DIRECT_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscC.wavetable",
+   "context": "INIT",
+   "mutation": {
+    "kind": "leaf_set",
+    "primary": [
+     "Oscillator2",
+     "WTOsc2",
+     "relativePathToWT"
+    ],
+    "table": {
+     "default": [],
+     "analog_basic": [
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "relativePathToWT"
+       ],
+       "Analog/Basic Shapes.wav"
+      ],
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "numFrames"
+       ],
+       14336
+      ]
+     ],
+     "analog_warm": [
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "relativePathToWT"
+       ],
+       "S2 Tables/Analog/DM - OSCAR.wav"
+      ],
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "numFrames"
+       ],
+       8192
+      ]
+     ],
+     "pwm": [
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "relativePathToWT"
+       ],
+       "Analog/PWM Juno.wav"
+      ],
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "numFrames"
+       ],
+       229376
+      ]
+     ],
+     "analog_mini": [
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "relativePathToWT"
+       ],
+       "Analog/Basic Mini.wav"
+      ],
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "numFrames"
+       ],
+       8192
+      ]
+     ],
+     "warm_sub": [
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "relativePathToWT"
+       ],
+       "S2 Tables/Analog/Warm Sub.wav"
+      ],
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "numFrames"
+       ],
+       4096
+      ]
+     ],
+     "digital_fm": [
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "relativePathToWT"
+       ],
+       "S2 Tables/Digital/Basic OPL.wav"
+      ],
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "numFrames"
+       ],
+       16384
+      ]
+     ],
+     "harmonic_smooth": [
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "relativePathToWT"
+       ],
+       "S2 Tables/Digital/Harmonic Series Smooth.wav"
+      ],
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "numFrames"
+       ],
+       49152
+      ]
+     ],
+     "dying_sine": [
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "relativePathToWT"
+       ],
+       "S2 Tables/Digital/Dying Sine.wav"
+      ],
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "numFrames"
+       ],
+       524288
+      ]
+     ],
+     "acid": [
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "relativePathToWT"
+       ],
+       "Analog/Acid.wav"
+      ],
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "numFrames"
+       ],
+       81920
+      ]
+     ],
+     "fm_piano": [
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "relativePathToWT"
+       ],
+       "S2 Tables/Digital/FM Piano.wav"
+      ],
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "numFrames"
+       ],
+       4096
+      ]
+     ],
+     "flute": [
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "relativePathToWT"
+       ],
+       "S2 Tables/Digital/JF Flute.wav"
+      ],
+      [
+       [
+        "Oscillator2",
+        "WTOsc2",
+        "numFrames"
+       ],
+       524288
+      ]
+     ]
+    }
+   },
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "default",
+     "analog_basic",
+     "analog_warm",
+     "pwm",
+     "analog_mini",
+     "warm_sub",
+     "digital_fm",
+     "harmonic_smooth",
+     "dying_sine",
+     "acid",
+     "fm_piano",
+     "flute"
+    ]
+   },
+   "mechanism": "LEAF_SET",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4773,7 +9732,40 @@
     "min": -80.0,
     "max": 80.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
+  },
+  {
+   "atlas_id": "oscNoise.noise_type",
+   "context": "INIT",
+   "mutation": {
+    "kind": "raw_path",
+    "path": [
+     "Oscillator3",
+     "NoiseOsc3",
+     "plainParams",
+     "kParamNoiseType"
+    ]
+   },
+   "domain": {
+    "kind": "enum_str",
+    "values": [
+     "Pink",
+     "Brown",
+     "Geiger"
+    ]
+   },
+   "mechanism": "ENUM_RAW",
+   "derivation": "differential of upstream apply_spec on the bound PresetSpec field",
+   "vocabulary_map": {
+    "White": null,
+    "Pink": "Pink",
+    "Brown": "Brown",
+    "Geiger": "Geiger"
+   },
+   "default_words": [
+    "White"
+   ]
   },
   {
    "atlas_id": "oscNoise.pan",
@@ -4791,6 +9783,7 @@
     "min": -50.0,
     "max": 50.0
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4808,6 +9801,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4825,6 +9819,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4842,6 +9837,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   },
   {
@@ -4859,6 +9855,7 @@
     "kind": "bool",
     "default": null
    },
+   "mechanism": "DIRECT_RAW",
    "derivation": "differential of upstream apply_spec on the bound PresetSpec field"
   }
  ]

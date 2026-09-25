@@ -17,7 +17,7 @@ from serum2.evidence import epoch  # noqa: E402
 processor_state.PROCESSOR_VERSION = 9.0  # Serum 2.0.23 epoch (see qualification/pass1/harness_v9.py)
 import dawdreamer as daw  # noqa: E402
 
-PREFIXES = ("Oscillator", "Filter", "Env", "Global", "ModSlot", "FXRack", "VoicePanel")
+PREFIXES = ("Oscillator", "VoiceFilter", "Env", "Global", "ModSlot", "FXRack", "VoicePanel", "Arp", "ArpClip", "LFO", "Macro", "RoutingSlot")
 SR, BLOCK = 44100, 512
 _SKEL = None
 

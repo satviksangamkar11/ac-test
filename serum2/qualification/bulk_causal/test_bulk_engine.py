@@ -117,7 +117,7 @@ def test_pilot_is_parameter_by_parameter_inside_one_context():
     assert h["parameters"] >= 10 and h["values_observed"] >= 80 and h["sessions"] == 1 and h["context_loads"] == 1
     assert h["state_loads"] > 5 * h["persistent_presets_written"] * h["parameters"] / 5   # many loads, still one preset
     # the only .SerumPreset files under bulk_causal/ are the one-per-context presets (never one per parameter/value)
-    ctx_names = {c.get("preset_name", n) for f in HERE.glob("manifest_bulk_*.json") for n, c in json.loads(f.read_text())["contexts"].items()}
+    ctx_names = {c.get("preset_name", n) for f in HERE.glob("manifest_*.json") if json.loads(f.read_text()).get("kind") == "bulk_context" for n, c in json.loads(f.read_text())["contexts"].items()}
     found = {Path(p).stem for p in glob.glob(str(HERE / "**" / "*.SerumPreset"), recursive=True)}
     assert found == ctx_names and all(Path(p).parent.name == "contexts" for p in glob.glob(str(HERE / "**" / "*.SerumPreset"), recursive=True))
     for r in d["records"]:

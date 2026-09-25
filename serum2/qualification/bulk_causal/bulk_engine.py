@@ -31,6 +31,8 @@ def resolve_path(m: dict) -> list:
     {"kind":"fx_param","index":i,"module":<FX type>,"kparam":<raw key>,"rack":0}."""
     if m["kind"] == "raw_path":
         return list(m["path"])
+    if m["kind"] == "leaf_set":     # compound mutation: each vocabulary label writes SEVERAL leaves (derived from upstream apply_spec)
+        return list(m["primary"])
     if m["kind"] == "fx_param":
         return ["FXRack%d" % m.get("rack", 0), "FX", m.get("index", 0), m["module"], "plainParams", m["kparam"]]
     raise ValueError("unknown mutation kind %r" % m["kind"])
@@ -63,6 +65,14 @@ def body_delete(body, path):
         parent.pop(path[-1], None)
 
 
+def _leaves_for(m, v, path):
+    """[(leaf_path, leaf_value)] this vocabulary label/value writes: one leaf normally; a table lookup for a leaf_set mutation.
+    Out-of-vocabulary probes on a leaf_set write only the primary leaf (the label itself), so Serum's reaction to junk is observed."""
+    if m["kind"] == "leaf_set" and v in m["table"]:
+        return [(lp, lv) for lp, lv in m["table"][v]]
+    return [(path, v)]
+
+
 def roundtrip_ok(meta, body, path, v) -> bool:
     """In-memory .SerumPreset container round trip (pack -> unpack): the raw key must survive with the written value."""
     from preset_build import pack_unpack
@@ -91,16 +101,33 @@ def run_parameter(base_body, base_obs, floor, param, backend, cfg, counters, met
     rows, obs = [], {}
     for v, probe in values:
         body = copy.deepcopy(base_body)          # isolation: every mutation starts from the pristine context body
-        body_set(body, path, v)
-        backend.load(body)
-        counters["state_loads"] += 1
-        o = backend.observe()
-        sv = body_get(o["state"], path)
-        rows.append({"written": v, "probe": probe, "state_value": sv,
-                     "state_diff_keys": diff_keys(body_get(base_obs["state"], container), body_get(o["state"], container)),
-                     "file_roundtrip": None if meta is None else roundtrip_ok(meta, body, path, v), "band_db": o["band_db"], "band_delta_db": [round(a - b, 2) for a, b in zip(o["band_db"], base_obs["band_db"])],
+        leaves = _leaves_for(param["mutation"], v, path)
+        for lp, lv in leaves:
+            body_set(body, lp, lv)
+        try:
+            backend.load(body)
+            counters["state_loads"] += 1
+            o = backend.observe()
+            err = None
+        except Exception as ex:        # Serum's own loader rejected this state (wrong wire type etc.): that IS the wire-type-safety evidence
+            err = "%s: %s" % (type(ex).__name__, str(ex)[:160])
+            o = {"state": base_obs["state"], "band_db": base_obs["band_db"], "hosts": base_obs["hosts"]}
+            backend.load(base_body)    # recover; if THIS fails the session is unusable and the exception propagates
+            counters["state_loads"] += 1
+            counters["load_errors"] = counters.get("load_errors", 0) + 1
+        sv = None if err else body_get(o["state"], path)
+        leaf_states = None
+        if len(leaves) > 1 and not err:      # compound: the PRIMARY (semantic) leaf decides retention; every leaf's stored value is recorded
+            leaf_states = [[lp, lv, body_get(o["state"], lp)] for lp, lv in leaves]
+            pv = next((lv for lp, lv in leaves if lp == path), None)
+            sv = v if (pv is not None and close(body_get(o["state"], path), pv)) else None
+        rows.append({"written": v, "probe": probe, "state_value": sv, "load_error": err,
+                     "state_diff_keys": [] if err else diff_keys(body_get(base_obs["state"], container), body_get(o["state"], container)),
+                     "file_roundtrip": None if meta is None else all(roundtrip_ok(meta, body, lp, lv) for lp, lv in leaves),
+                     "leaves_written": [[lp, lv] for lp, lv in leaves] if len(leaves) > 1 else None, "leaf_states": leaf_states,
+                     "band_db": o["band_db"], "band_delta_db": [round(a - b, 2) for a, b in zip(o["band_db"], base_obs["band_db"])],
                      "host_params_changed": sorted(k for k in o["hosts"] if o["hosts"][k] != base_obs["hosts"].get(k))[:8]})
-        obs[repr(v)] = {"written": v, "state_value": sv, "probe": probe}
+        obs[repr(v)] = {"written": v, "state_value": sv, "probe": probe, "load_error": err}
     backend.load(base_body)                       # restore the context baseline ...
     counters["state_loads"] += 1
     counters["baseline_reloads"] = counters.get("baseline_reloads", 0) + 1
@@ -113,7 +140,7 @@ def run_parameter(base_body, base_obs, floor, param, backend, cfg, counters, met
             "noise_floor_db": floor}
 
 
-def run_context(name, base_body, params, backend_factory, cfg, counters=None, meta=None):
+def run_context(name, base_body, params, backend_factory, cfg, counters=None, meta=None, on_start=None, on_record=None):
     """Sweep `params` (all belonging to context `name`) against base_body. A fresh backend (Serum instance) is built every
     cfg['session_size'] parameters and the context base is loaded once into each; returns the per-parameter evidence."""
     counters = counters if counters is not None else {}
@@ -135,6 +162,11 @@ def run_context(name, base_body, params, backend_factory, cfg, counters=None, me
             counters["state_loads"] += 1
             again = backend.observe()
             floor = max(cfg.get("min_noise_floor_db", 0.5), 2 * max(abs(a - b) for a, b in zip(base_obs["band_db"], again["band_db"])))
-        records.append(run_parameter(base_body, base_obs, floor, p, backend, cfg, counters, meta))
+        if on_start:
+            on_start(p)
+        rec = run_parameter(base_body, base_obs, floor, p, backend, cfg, counters, meta)
+        records.append(rec)
+        if on_record:
+            on_record(rec)
     assert sha(base_body) == pristine, "the context body must never be mutated in place"
     return records

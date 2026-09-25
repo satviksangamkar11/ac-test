@@ -34,6 +34,11 @@ CONTAINER_SCHEMA = (("Oscillator", "OSCILLATOR_PARAMS"), ("WTOsc", "WTOSC_PARAMS
 
 
 def leaves(a, b, path=()):
+    # Serum's untouched-module sentinel ('default' string) vs a dict that gained keys: descend into the keys, not the container
+    if isinstance(b, dict) and isinstance(a, str) and not isinstance(a, dict):
+        a = {}
+    if isinstance(a, dict) and isinstance(b, str):
+        b = {}
     if isinstance(a, dict) and isinstance(b, dict):
         out = []
         for k in set(a) | set(b):
@@ -94,28 +99,133 @@ def test_values(fi, lo, hi):
     return []
 
 
-def derive_path(ctrl):
+# (PresetSpec model, field) -> where its vocabulary comes from. Reviewed data; every entry cites the upstream table it reads.
+VOCAB = {("OscillatorSpec", "warp_mode"): ("dict", "SIMPLE_WARP_MODES"), ("OscillatorSpec", "warp_mode2"): ("dict", "SIMPLE_WARP_MODES"),
+         ("OscillatorSpec", "wavetable"): ("dict", "SIMPLE_WAVETABLES"), ("OscillatorSpec", "noise_type"): ("enum", ("NOISEOSC_PARAMS", "kParamNoiseType")),
+         ("FilterSpec", "type"): ("dict", "SIMPLE_FILTER_TYPES"), ("LfoSpec", "mode"): ("enum", ("LFO_PARAMS", "kParamMode")),
+         ("LfoSpec", "shape"): ("dict", "SIMPLE_LFO_TYPES"), ("ArpSpec", "shape"): ("dict", "SIMPLE_ARP_SHAPES"),
+         ("MacroSpec", "name"): ("text", None), ("GlobalSpec", "fx_bus1_destination"): ("literal", None),
+         ("GlobalSpec", "fx_bus2_destination"): ("literal", None)}
+# fields that only take effect when a COMPANION field is set (differential is empty without it): context patch per field
+COMPANION = {"warp_amount2": ("warp_mode2", "fm")}
+SAMPLE_FIELDS = {"sample_loop_start", "sample_loop_end", "sample_loop_crossfade"}
+
+
+def vocab_words(ctrl):
+    fi = field_info(ctrl)
+    model = LISTS[ctrl["list"]] if ctrl["kind"] == "field" else SINGLETON_DEFAULTS[ctrl["attr"]]
+    src = VOCAB.get((model.__name__, ctrl["field"]))
+    if src is None:
+        return None, None
+    kind, ref = src
+    if kind == "dict":
+        return "enum_str", list(getattr(schema, ref))
+    if kind == "enum":
+        return "enum_str", list(getattr(schema, ref[0])[ref[1]].enum_values)
+    if kind == "literal":
+        return "enum_str", [x for t in typing.get_args(fi.annotation) for x in (typing.get_args(t) or (t,)) if isinstance(x, str)]
+    return "text", ["QUAL_A", "QUAL_B"]
+
+
+def sample_wav():
+    p = HERE / "contexts" / "qual_sample.wav"
+    if not p.exists():
+        import math
+        import struct
+        import wave
+        p.parent.mkdir(exist_ok=True)
+        with wave.open(str(p), "wb") as w:
+            w.setnchannels(1)
+            w.setsampwidth(2)
+            w.setframerate(44100)
+            w.writeframes(b"".join(struct.pack("<h", int(12000 * math.sin(2 * math.pi * 220 * i / 44100))) for i in range(44100)))
+    return str(p)
+
+
+def companion_spec(ctrl):
+    """(base spec with the companion fields set, context name) for fields whose effect needs another field; else (None, None)."""
+    if ctrl["kind"] != "field" or ctrl["list"] != "oscillators":
+        return None, None
+    f = ctrl["field"]
+    if f in COMPANION:
+        cf, cv = COMPANION[f]
+        lst = [o.model_copy(update={cf: cv}) if i < 3 else o for i, o in enumerate(base_spec().oscillators)]
+        return base_spec().model_copy(update={"oscillators": lst}), "OSC_WARP2"
+    if f in SAMPLE_FIELDS:
+        wav = sample_wav()
+        lst = [o.model_copy(update={"sample_playback_source": wav, "sample_loop": "forward"}) if i < 3 else o for i, o in enumerate(base_spec().oscillators)]
+        return base_spec().model_copy(update={"oscillators": lst}), "OSC_SAMPLE"
+    return None, None
+
+
+def diff_for(spec_base, ctrl, v):
+    b0 = apply_spec(BASE.data, spec_base)
+    b1 = apply_spec(BASE.data, with_field(spec_base, ctrl, v))
+    return leaves(b0, b1)
+
+
+def derive(ctrl):
+    """-> dict(mechanism, mutation, domain, context, [spec_patch]) or dict(reason=...). Reads only upstream apply_spec and schema tables."""
     fi = field_info(ctrl)
     lo, hi = bounds(fi)
     t = base_type(fi)
-    if t is str or (typing.get_origin(fi.annotation) is typing.Literal) or t not in (bool, int, float):
-        return None, "STRING_OR_COMPLEX_FIELD (enum/label semantics need GUI-proven labels)", None
-    vals = test_values(fi, lo, hi)
-    if not vals and t is not bool:
-        return None, "NO_DECLARED_BOUNDS on the PresetSpec field", None
-    b0 = apply_spec(BASE.data, base_spec())
+    kind, words = vocab_words(ctrl)
+    spec_base, ctx = companion_spec(ctrl)
+    spec_base = spec_base or base_spec()
+    ctx = ctx or "INIT"
+    if kind:                                         # string domains
+        table, paths = {}, []
+        for w in words:
+            try:
+                d = diff_for(spec_base, ctrl, w)
+            except Exception as e:
+                return {"reason": "apply_spec rejected vocabulary word %r: %s" % (w, str(e)[:70])}
+            table[w] = [(p, b) for p, a, b in d]
+            paths += [tuple(p) for p, _a, _b in d]
+        if not any(table.values()):
+            return {"reason": "NO_DIFF for any vocabulary word"}
+        distinct = {json.dumps([p for p, _ in v]) for v in table.values() if v}
+        if len(distinct) == 1 and all(len(v) == 1 for v in table.values() if v):
+            path = json.loads(next(iter(distinct)))[0]
+            raw = [v[0][1] for v in table.values() if v]
+            dflt = [w for w, v in table.items() if not v]
+            return {"mechanism": "ENUM_RAW" if kind == "enum_str" else "TEXT_RAW", "context": ctx,
+                    "mutation": {"kind": "raw_path", "path": path}, "domain": {"kind": kind, "values": list(dict.fromkeys(raw))},
+                    "vocabulary_map": {w: (v[0][1] if v else None) for w, v in table.items()}, "default_words": dflt}
+        # primary = the leaf whose value VARIES with the vocabulary word (the semantic leaf); constant leaves are side effects
+        cand = {}
+        for v in table.values():
+            for p, val in v:
+                cand.setdefault(json.dumps(p), set()).add(json.dumps(val))
+        primary = json.loads(max(cand, key=lambda k: len(cand[k])))
+        return {"mechanism": "LEAF_SET", "context": ctx,
+                "mutation": {"kind": "leaf_set", "primary": primary, "table": {w: [[list(p), val] for p, val in v] for w, v in table.items()}},
+                "domain": {"kind": kind, "values": list(table)}}
+    if t not in (bool, int, float):
+        return {"reason": "UNSUPPORTED_FIELD_TYPE %r" % (t,)}
+    if t is bool:
+        vals = [not bool(fi.default), bool(fi.default)]
+    else:
+        d0 = fi.default if isinstance(fi.default, (int, float)) and not isinstance(fi.default, bool) else 0.0
+        vals = test_values(fi, lo, hi) if lo is not None and hi is not None else [d0 + x for x in (1.0, -1.0, 10.0, -10.0, 0.5, -0.5, 100.0, -100.0)]
     tried = []
     for v in vals:
         try:
-            b1 = apply_spec(BASE.data, with_field(base_spec(), ctrl, v))
+            d = diff_for(spec_base, ctrl, v)
         except Exception as e:
-            tried.append("apply_spec rejected %r: %s" % (v, str(e)[:80]))
+            tried.append("apply_spec rejected %r" % (v,))
             continue
-        d = leaves(b0, b1)
         if len(d) == 1:
-            return d[0][0], None, {"kind": "bool" if t is bool else ("int" if t is int else "float"), "lo": lo, "hi": hi, "default": fi.default}
+            path = d[0][0]
+            dm = {"kind": "bool" if t is bool else ("int" if t is int else "float"), "lo": lo, "hi": hi, "default": fi.default}
+            dom = domain_for(dm, path)
+            out = {"mechanism": "DIRECT_RAW" if ctx == "INIT" else "CONTEXTUAL_RAW", "context": ctx, "mutation": {"kind": "raw_path", "path": path},
+                   "domain": dom or {"kind": "open", "default": fi.default}}
+            if dom is None:
+                out["mechanism"] = "OPEN_RAW" if ctx == "INIT" else "CONTEXTUAL_OPEN_RAW"
+            return out
         tried.append("%d leaves changed for %r" % (len(d), v))
-    return None, "NOT_A_SINGLE_LEAF (%s)" % "; ".join(tried[:2]) if tried else "NO_DIFF", None
+    return {"reason": "NOT_A_SINGLE_LEAF (%s)" % "; ".join(tried[:2]) if tried else "NO_DIFF"}
 
 
 def schema_bounds(path):
@@ -144,49 +254,74 @@ def domain_for(dm, raw_path):
     return {"kind": kind, "min": float(lo), "max": float(hi)}
 
 
+def ctx_def(name, spec_base=None, fx_type=None):
+    if fx_type:
+        return {"preset_name": "QUAL_" + name, "fx": [{"type": fx_type, "params": {}}]}
+    d = {"preset_name": "QUAL_" + name, "fx": []}
+    if spec_base is not None:
+        d["spec_patch"] = spec_base.model_dump(mode="json")
+    return d
+
+
 def main(manifest_out, accounting_out):
     bt = json.loads(BT.read_text())["controls"]
     params, acct = [], []
-    contexts = {"INIT": {"preset_name": "QUAL_INIT", "fx": []}}
+    contexts = {"INIT": ctx_def("INIT")}
     for cid, c in sorted(bt.items()):
         if c["kind"] == "fx":
-            ft = c["fx_type"]
+            ft, ctx = c["fx_type"], "FX_" + c["fx_type"]
             pd = schema.FX_PARAMS.get(ft, {}).get(c["param"])
-            ctx = "FX_" + ft
             path = ["FXRack0", "FX", 0, ft, "plainParams", c["param"]]
-            if pd is None or pd.kind == "enum" or (pd.kind == "float" and (pd.min is None or pd.max is None)):
-                acct.append({"atlas_id": cid, "family": ctx, "derived": False, "reason": "FX param with enum semantics or no schema bounds"})
+            if pd is None:
+                acct.append({"atlas_id": cid, "family": ctx, "derived": False, "reason": "FX param not in schema.FX_PARAMS"})
                 continue
-            contexts.setdefault(ctx, {"preset_name": "QUAL_" + ctx, "fx": [{"type": ft, "params": {}}]})
-            dom = {"kind": "bool"} if pd.kind == "bool" else {"kind": ("log" if pd.min > 0 and pd.max / pd.min >= 1000 else "signed" if pd.min < 0 < pd.max else "continuous"),
-                                                              "min": float(pd.min), "max": float(pd.max)}
-            params.append({"atlas_id": cid, "context": ctx, "mutation": {"kind": "raw_path", "path": path}, "domain": dom,
+            contexts.setdefault(ctx, ctx_def(ctx, fx_type=ft))
+            if pd.kind == "enum":
+                dom, mech = {"kind": "enum_str", "values": list(pd.enum_values or [])}, "ENUM_RAW"
+            elif pd.kind == "bool":
+                dom, mech = {"kind": "bool"}, "DIRECT_RAW"
+            elif pd.min is None or pd.max is None:
+                dom, mech = {"kind": "open", "default": pd.default}, "OPEN_RAW"
+            else:
+                dom, mech = {"kind": ("log" if pd.min > 0 and pd.max / pd.min >= 1000 else "signed" if pd.min < 0 < pd.max else "continuous"),
+                             "min": float(pd.min), "max": float(pd.max)}, "DIRECT_RAW"
+            params.append({"atlas_id": cid, "context": ctx, "mutation": {"kind": "raw_path", "path": path}, "domain": dom, "mechanism": mech,
                            "derivation": "fx unit param (fixed path); domain from schema.FX_PARAMS ParamDef"})
-            acct.append({"atlas_id": cid, "family": ctx, "derived": True, "raw_path": path, "domain": dom})
+            acct.append({"atlas_id": cid, "family": ctx, "derived": True, "mechanism": mech, "raw_path": path, "domain": dom})
             continue
-        path, reason, dm = derive_path(c)
         fam = c.get("list") or c.get("attr")
-        if path is None:
-            acct.append({"atlas_id": cid, "family": fam, "derived": False, "reason": reason})
+        r = derive(c)
+        if "reason" in r:
+            if "UNSUPPORTED_FIELD_TYPE" in r["reason"]:
+                r["reason"] = "VOCABULARY_UNKNOWN (unvalidated string enum: the live dropdown must be read to learn its words)"
+            acct.append({"atlas_id": cid, "family": fam, "derived": False, "reason": r["reason"]})
             continue
-        dom = domain_for(dm, path)
-        if dom is None:
-            acct.append({"atlas_id": cid, "family": fam, "derived": False, "reason": "NO_BOUNDS (neither PresetSpec field nor schema ParamDef)", "raw_path": path})
-            continue
-        params.append({"atlas_id": cid, "context": "INIT", "mutation": {"kind": "raw_path", "path": path}, "domain": dom,
-                       "derivation": "differential of upstream apply_spec on the bound PresetSpec field"})
-        acct.append({"atlas_id": cid, "family": fam, "derived": True, "raw_path": path, "domain": dom})
+        if r["context"] not in contexts:
+            sb, _ = companion_spec(c)
+            contexts[r["context"]] = ctx_def(r["context"], sb)
+        entry = {"atlas_id": cid, "context": r["context"], "mutation": r["mutation"], "domain": r["domain"], "mechanism": r["mechanism"],
+                 "derivation": "differential of upstream apply_spec on the bound PresetSpec field"}
+        for k in ("vocabulary_map", "default_words"):
+            if k in r:
+                entry[k] = r[k]
+        params.append(entry)
+        acct.append({"atlas_id": cid, "family": fam, "derived": True, "mechanism": r["mechanism"], "context": r["context"],
+                     "raw_path": r["mutation"].get("path") or r["mutation"].get("primary"), "domain": r["domain"]})
     m = {"version": 2, "kind": "bulk_context", "note": 48, "render_sec": 1.0, "bands": [20, 200, 800, 3000, 8000, 20000],
          "min_noise_floor_db": 0.5, "session_size": 30, "contexts": contexts, "parameters": params}
     json.dump(m, open(manifest_out, "w"), indent=1)
-    reasons = {}
-    for a in acct:
-        if not a["derived"]:
-            k = a["reason"].split(" (")[0]
+    mech, reasons = {}, {}
+    for a_ in acct:
+        if a_["derived"]:
+            mech[a_["mechanism"]] = mech.get(a_["mechanism"], 0) + 1
+        else:
+            k = a_["reason"].split(" (")[0]
             reasons[k] = reasons.get(k, 0) + 1
-    json.dump({"total_candidates": len(bt), "derived": len(params), "not_derived": len(bt) - len(params), "not_derived_reasons": reasons,
-               "authorizes_nothing": True, "candidates": acct}, open(accounting_out, "w"), indent=1)
-    print("candidates %d  derived %d  not derived %d\n%s" % (len(bt), len(params), len(bt) - len(params), json.dumps(reasons, indent=1)))
+    json.dump({"total_candidates": len(bt), "derived": len(params), "not_derived": len(bt) - len(params), "mechanisms": mech,
+               "not_derived_reasons": reasons, "authorizes_nothing": True, "candidates": acct}, open(accounting_out, "w"), indent=1)
+    print("candidates %d  derived %d  not derived %d" % (len(bt), len(params), len(bt) - len(params)))
+    print("mechanisms", json.dumps(mech))
+    print("not derived", json.dumps(reasons))
 
 
 if __name__ == "__main__":
