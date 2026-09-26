@@ -1,0 +1,159 @@
+{"part": "A", "atlas_id": "macro2.value", "preset": "BULK_01", "screen": "73", "result": "MATCH"}
+{"part": "A", "atlas_id": "global.bend_range_down", "preset": "BULK_01", "screen": "-8", "result": "MATCH"}
+{"part": "A", "atlas_id": "global.bend_range_up", "preset": "BULK_01", "screen": "9", "result": "MATCH"}
+{"part": "A", "atlas_id": "global.legato", "preset": "BULK_01", "screen": "On (LED lit, no tooltip)", "result": "MATCH"}
+{"part": "A", "atlas_id": "global.master_volume", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "A", "atlas_id": "global.mono", "preset": "BULK_01", "screen": "On (LED lit, no tooltip)", "result": "MATCH"}
+{"part": "A", "atlas_id": "global.porta_always", "preset": "BULK_01", "screen": "On (LED lit, no tooltip)", "result": "MATCH"}
+{"part": "A", "atlas_id": "global.porta_scaled", "preset": "BULK_01", "screen": "On (LED lit, no tooltip)", "result": "MATCH"}
+{"part": "A", "atlas_id": "global.portamento_time", "preset": "BULK_01", "screen": "1.90 s", "result": "MATCH"}
+{"part": "A", "atlas_id": "global.swing", "preset": "BULK_01", "screen": "35.0%", "result": "MATCH"}
+{"part": "A", "atlas_id": "mixer.filter1.bus1", "preset": "BULK_01", "screen": "25% [-36.1 dB]", "result": "MATCH"}
+{"part": "A", "atlas_id": "mixer.noise.enable", "preset": "BULK_01", "screen": "On", "result": "MATCH"}
+{"part": "A", "atlas_id": "mixer.noise.filter_balance", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE", "note": "balance knob hidden while noise routed to MAIN"}
+{"part": "A", "atlas_id": "env1.attack_curve", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE", "note": "0.5 ms attack segment ~4px wide"}
+{"part": "A", "atlas_id": "env2.sustain", "preset": "BULK_01", "screen": "30%", "result": "MATCH"}
+{"part": "A", "atlas_id": "env3.sustain", "preset": "BULK_01", "screen": "31%", "result": "MATCH"}
+{"part": "A", "atlas_id": "env4.sustain", "preset": "BULK_01", "screen": "20%", "result": "MATCH"}
+{"part": "A", "atlas_id": "filter1.cutoff", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "A", "atlas_id": "filter1.drive", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "A", "atlas_id": "filter1.enabled", "preset": "BULK_01", "screen": "On (LED lit)", "result": "MATCH"}
+{"part": "A", "atlas_id": "filter1.key_track", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "A", "atlas_id": "filter1.level_out", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "A", "atlas_id": "filter1.type", "preset": "BULK_01", "screen": "Low 12", "result": "MATCH"}
+{"part": "A", "atlas_id": "filter1.wet", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "A", "atlas_id": "filter2.enabled", "preset": "BULK_01", "screen": "On (LED lit)", "result": "MATCH"}
+{"part": "A", "atlas_id": "filter2.wet", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "A", "atlas_id": "lfo1.rate", "preset": "BULK_01", "screen": "1/2 t", "result": "MATCH"}
+{"part": "A", "atlas_id": "lfo1.smooth", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "A", "atlas_id": "lfo2.beat_sync", "preset": "BULK_01", "screen": "LFO 2 BPM (On); rate display 1/4.", "result": "DIFFERS"}
+{"part": "A", "atlas_id": "lfo3.beat_sync", "preset": "BULK_01", "screen": "LFO 3 BPM (On); rate display 1/16", "result": "DIFFERS"}
+{"part": "A", "atlas_id": "lfo3.delay", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "A", "atlas_id": "oscA.enabled", "preset": "BULK_01", "screen": "Off", "result": "MATCH"}
+{"part": "A", "atlas_id": "oscA.fine", "preset": "BULK_01", "screen": "-26", "result": "MATCH"}
+{"part": "A", "atlas_id": "oscA.octave", "preset": "BULK_01", "screen": "-2", "result": "MATCH"}
+{"part": "A", "atlas_id": "oscA.semitone", "preset": "BULK_01", "screen": "-5", "result": "MATCH"}
+{"part": "A", "atlas_id": "oscA.warp_var2", "preset": "BULK_01", "screen": "63 %", "result": "DIFFERS"}
+{"part": "A", "atlas_id": "oscB.detune", "preset": "BULK_01", "screen": "0.53", "result": "MATCH"}
+{"part": "A", "atlas_id": "oscB.pan", "preset": "BULK_01", "screen": "-24 L", "result": "MATCH"}
+{"part": "A", "atlas_id": "oscB.warp_amount", "preset": "BULK_01", "screen": "58 %", "result": "MATCH"}
+{"part": "A", "atlas_id": "oscB.warp_var2", "preset": "BULK_01", "screen": "1.49 %", "result": "DIFFERS"}
+{"part": "A", "atlas_id": "oscC.pan", "preset": "BULK_01", "screen": "-11 L", "result": "MATCH"}
+{"part": "A", "atlas_id": "oscC.warp_amount", "preset": "BULK_01", "screen": "18 %", "result": "MATCH"}
+{"part": "A", "atlas_id": "oscC.warp_var2", "preset": "BULK_01", "screen": "39 %", "result": "DIFFERS"}
+{"part": "A", "atlas_id": "oscA.sample_loop_crossfade", "preset": "BULK_02", "screen": "83 %", "result": "MATCH"}
+{"part": "B", "atlas_id": "arp.pattern.rate", "preset": "BULK_01", "screen": "1/8", "result": "READ"}
+{"part": "B", "atlas_id": "arp.pattern.shape", "preset": "BULK_01", "screen": "Chord", "result": "READ"}
+{"part": "B", "atlas_id": "arp.playback.chance", "preset": "BULK_01", "screen": "50", "result": "READ"}
+{"part": "B", "atlas_id": "arp.playback.gate", "preset": "BULK_01", "screen": "47", "result": "READ"}
+{"part": "B", "atlas_id": "arp.playback.offset", "preset": "BULK_01", "screen": "0", "result": "READ"}
+{"part": "B", "atlas_id": "arp.playback.repeats", "preset": "BULK_01", "screen": "10", "result": "READ"}
+{"part": "B", "atlas_id": "arp.playback.thru", "preset": "BULK_01", "screen": "On (icon lit)", "result": "READ"}
+{"part": "B", "atlas_id": "arp.retrigger.first", "preset": "BULK_01", "screen": "On (LED lit)", "result": "READ"}
+{"part": "B", "atlas_id": "arp.retrigger.launch", "preset": "BULK_01", "screen": "On (LED lit)", "result": "READ"}
+{"part": "B", "atlas_id": "arp.retrigger.note", "preset": "BULK_01", "screen": "On (LED lit)", "result": "READ"}
+{"part": "B", "atlas_id": "arp.transpose.range", "preset": "BULK_01", "screen": "8", "result": "READ"}
+{"part": "B", "atlas_id": "arp.transpose.shift", "preset": "BULK_01", "screen": "3", "result": "READ"}
+{"part": "B", "atlas_id": "arp.velocity.decay", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "B", "atlas_id": "arp.velocity.enable", "preset": "BULK_01", "screen": "On (LED lit)", "result": "READ"}
+{"part": "B", "atlas_id": "arp.velocity.retrig", "preset": "BULK_01", "screen": "On (LED lit)", "result": "READ"}
+{"part": "B", "atlas_id": "arp.velocity.target", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "B", "atlas_id": "macro1.name", "preset": "BULK_01", "screen": "ABSENT", "result": "ABSENT", "note": "tile shows number only; tooltip says 'Macro 1'"}
+{"part": "B", "atlas_id": "macro2.name", "preset": "BULK_01", "screen": "ABSENT", "result": "ABSENT", "note": "tooltip says 'Macro 2'"}
+{"part": "B", "atlas_id": "macro3.name", "preset": "BULK_01", "screen": "ABSENT", "result": "ABSENT"}
+{"part": "B", "atlas_id": "macro4.name", "preset": "BULK_01", "screen": "ABSENT", "result": "ABSENT"}
+{"part": "B", "atlas_id": "macro5.name", "preset": "BULK_01", "screen": "ABSENT", "result": "ABSENT"}
+{"part": "B", "atlas_id": "macro6.name", "preset": "BULK_01", "screen": "ABSENT", "result": "ABSENT"}
+{"part": "B", "atlas_id": "macro7.name", "preset": "BULK_01", "screen": "ABSENT", "result": "ABSENT"}
+{"part": "B", "atlas_id": "macro8.name", "preset": "BULK_01", "screen": "ABSENT", "result": "ABSENT"}
+{"part": "B", "atlas_id": "fx.bode.blur", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "B", "atlas_id": "fx.bode.wet", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "B", "atlas_id": "fx.chorus.depth", "preset": "BULK_01", "screen": "18.0 ms", "result": "READ"}
+{"part": "B", "atlas_id": "fx.chorus.feedback", "preset": "BULK_01", "screen": "32 %", "result": "READ"}
+{"part": "B", "atlas_id": "fx.chorus.wet", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "B", "atlas_id": "fx.compressor.wet", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "B", "atlas_id": "fx.convolve.decay", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "B", "atlas_id": "fx.convolve.tone", "preset": "BULK_01", "screen": "1 %", "result": "READ"}
+{"part": "B", "atlas_id": "fx.convolve.wet", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "B", "atlas_id": "fx.delay.bpm", "preset": "BULK_01", "screen": "Dly BPM (On)", "result": "READ"}
+{"part": "B", "atlas_id": "fx.delay.freq", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "B", "atlas_id": "fx.delay.link", "preset": "BULK_01", "screen": "Dly Link (On)", "result": "READ"}
+{"part": "B", "atlas_id": "fx.delay.mode", "preset": "BULK_01", "screen": "TAP->DELAY", "result": "READ"}
+{"part": "B", "atlas_id": "fx.delay.wet", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "B", "atlas_id": "fx.dimension.size", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "B", "atlas_id": "fx.dimension.wet", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "B", "atlas_id": "fx.distortion.drive", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "B", "atlas_id": "fx.distortion.freq", "preset": "BULK_01", "screen": "355 Hz", "result": "READ"}
+{"part": "B", "atlas_id": "fx.distortion.wet", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "B", "atlas_id": "fx.filter.cutoff", "preset": "BULK_01", "screen": "1629 Hz", "result": "READ"}
+{"part": "B", "atlas_id": "fx.filter.drive", "preset": "BULK_01", "screen": "41 %", "result": "READ"}
+{"part": "B", "atlas_id": "fx.filter.res", "preset": "BULK_01", "screen": "84 %", "result": "READ"}
+{"part": "B", "atlas_id": "fx.filter.type", "preset": "BULK_01", "screen": "Low 6", "result": "READ"}
+{"part": "B", "atlas_id": "fx.filter.wet", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "B", "atlas_id": "fx.flanger.depth", "preset": "BULK_01", "screen": "74 %", "result": "READ"}
+{"part": "B", "atlas_id": "fx.flanger.feedback", "preset": "BULK_01", "screen": "20 %", "result": "READ"}
+{"part": "B", "atlas_id": "fx.flanger.rate", "preset": "BULK_01", "screen": "6.40 Hz", "result": "READ"}
+{"part": "B", "atlas_id": "fx.flanger.wet", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "B", "atlas_id": "fx.hyper.unison", "preset": "BULK_01", "screen": "6", "result": "READ"}
+{"part": "B", "atlas_id": "fx.hyper.wet", "preset": "BULK_01", "screen": "53 %", "result": "READ"}
+{"part": "B", "atlas_id": "fx.phaser.depth", "preset": "BULK_01", "screen": "27 %", "result": "READ"}
+{"part": "B", "atlas_id": "fx.phaser.feedback", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "B", "atlas_id": "fx.phaser.freq", "preset": "BULK_01", "screen": "390 Hz", "result": "READ"}
+{"part": "B", "atlas_id": "fx.phaser.rate", "preset": "BULK_01", "screen": "3.30 Hz", "result": "READ"}
+{"part": "B", "atlas_id": "fx.phaser.wet", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "B", "atlas_id": "fx.reverb.size", "preset": "BULK_01", "screen": "76 %", "result": "READ"}
+{"part": "B", "atlas_id": "fx.reverb.wet", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "B", "atlas_id": "global.direct_volume", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "B", "atlas_id": "global.fx_bus1_volume", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "B", "atlas_id": "global.fx_bus2_volume", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "B", "atlas_id": "global.global_tuning", "preset": "BULK_01", "screen": "A = 450 Hz", "result": "READ"}
+{"part": "B", "atlas_id": "global.limit_same_note_polyphony", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE", "note": "left GLOBAL panel needs scrolling; wheel forbidden"}
+{"part": "B", "atlas_id": "global.note_latch", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE", "note": "left GLOBAL panel needs scrolling; wheel forbidden"}
+{"part": "B", "atlas_id": "global.poly_count", "preset": "BULK_01", "screen": "7 (dimmed, mono on)", "result": "READ"}
+{"part": "B", "atlas_id": "global.portamento_curve", "preset": "BULK_01", "screen": "0 %", "result": "READ"}
+{"part": "B", "atlas_id": "global.swing_div", "preset": "BULK_01", "screen": "1/4", "result": "READ"}
+{"part": "B", "atlas_id": "global.voice_amp", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "B", "atlas_id": "global.voice_control.random.cutoff", "preset": "BULK_01", "screen": "0%", "result": "READ"}
+{"part": "B", "atlas_id": "global.voice_control.random.detune", "preset": "BULK_01", "screen": "0.0", "result": "READ"}
+{"part": "B", "atlas_id": "global.voice_control.random.envs", "preset": "BULK_01", "screen": "100%", "result": "READ"}
+{"part": "B", "atlas_id": "global.voice_control.scaling.envs", "preset": "BULK_01", "screen": "1000%", "result": "READ"}
+{"part": "B", "atlas_id": "global.voice_control.scaling.lfos", "preset": "BULK_01", "screen": "10%", "result": "READ"}
+{"part": "B", "atlas_id": "mixer.noise.pan", "preset": "BULK_01", "screen": "-19 L", "result": "READ"}
+{"part": "B", "atlas_id": "mixer.sub.pan", "preset": "BULK_01", "screen": "-3 L", "result": "READ"}
+{"part": "B", "atlas_id": "oscNoise.pan", "preset": "BULK_01", "screen": "-19 L", "result": "READ", "note": "same control as mixer.noise.pan"}
+{"part": "B", "atlas_id": "lfo1.beat_sync", "preset": "BULK_01", "screen": "On", "result": "READ"}
+{"part": "B", "atlas_id": "lfo1.dotted", "preset": "BULK_01", "screen": "On", "result": "READ"}
+{"part": "B", "atlas_id": "lfo1.mono", "preset": "BULK_01", "screen": "On", "result": "READ"}
+{"part": "B", "atlas_id": "lfo1.rate_10x", "preset": "BULK_01", "screen": "ABSENT", "result": "ABSENT", "note": "no 10x control shown in BPM mode"}
+{"part": "B", "atlas_id": "lfo1.swing", "preset": "BULK_01", "screen": "ABSENT", "result": "ABSENT"}
+{"part": "B", "atlas_id": "lfo1.triplets", "preset": "BULK_01", "screen": "On", "result": "READ"}
+{"part": "B", "atlas_id": "lfo2.dotted", "preset": "BULK_01", "screen": "On", "result": "READ"}
+{"part": "B", "atlas_id": "lfo2.mono", "preset": "BULK_01", "screen": "On", "result": "READ"}
+{"part": "B", "atlas_id": "lfo2.rate_10x", "preset": "BULK_01", "screen": "ABSENT", "result": "ABSENT"}
+{"part": "B", "atlas_id": "lfo2.swing", "preset": "BULK_01", "screen": "ABSENT", "result": "ABSENT"}
+{"part": "B", "atlas_id": "lfo2.triplets", "preset": "BULK_01", "screen": "On", "result": "READ"}
+{"part": "B", "atlas_id": "lfo3.dotted", "preset": "BULK_01", "screen": "On", "result": "READ"}
+{"part": "B", "atlas_id": "lfo3.mono", "preset": "BULK_01", "screen": "On", "result": "READ"}
+{"part": "B", "atlas_id": "lfo3.rate_10x", "preset": "BULK_01", "screen": "ABSENT", "result": "ABSENT"}
+{"part": "B", "atlas_id": "lfo3.swing", "preset": "BULK_01", "screen": "ABSENT", "result": "ABSENT"}
+{"part": "B", "atlas_id": "lfo3.triplets", "preset": "BULK_01", "screen": "On", "result": "READ"}
+{"part": "B", "atlas_id": "lfo4.dotted", "preset": "BULK_01", "screen": "On", "result": "READ"}
+{"part": "B", "atlas_id": "lfo4.mono", "preset": "BULK_01", "screen": "On", "result": "READ"}
+{"part": "B", "atlas_id": "lfo4.rate_10x", "preset": "BULK_01", "screen": "ABSENT", "result": "ABSENT"}
+{"part": "B", "atlas_id": "lfo4.swing", "preset": "BULK_01", "screen": "ABSENT", "result": "ABSENT"}
+{"part": "B", "atlas_id": "lfo4.triplets", "preset": "BULK_01", "screen": "On", "result": "READ"}
+{"part": "B", "atlas_id": "lfo5.dotted", "preset": "BULK_01", "screen": "On", "result": "READ"}
+{"part": "B", "atlas_id": "lfo5.mono", "preset": "BULK_01", "screen": "On", "result": "READ"}
+{"part": "B", "atlas_id": "lfo5.rate_10x", "preset": "BULK_01", "screen": "ABSENT", "result": "ABSENT"}
+{"part": "B", "atlas_id": "lfo5.swing", "preset": "BULK_01", "screen": "ABSENT", "result": "ABSENT"}
+{"part": "B", "atlas_id": "lfo5.triplets", "preset": "BULK_01", "screen": "On", "result": "READ"}
+{"part": "B", "atlas_id": "lfo6.dotted", "preset": "BULK_01", "screen": "On", "result": "READ"}
+{"part": "B", "atlas_id": "lfo6.mono", "preset": "BULK_01", "screen": "On", "result": "READ"}
+{"part": "B", "atlas_id": "lfo6.rate_10x", "preset": "BULK_01", "screen": "ABSENT", "result": "ABSENT"}
+{"part": "B", "atlas_id": "lfo6.swing", "preset": "BULK_01", "screen": "ABSENT", "result": "ABSENT"}
+{"part": "B", "atlas_id": "lfo6.triplets", "preset": "BULK_01", "screen": "On", "result": "READ"}
+{"part": "B", "atlas_id": "oscNoise.fine", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "B", "atlas_id": "oscNoise.noise_type", "preset": "BULK_01", "screen": "Pink", "result": "READ"}
+{"part": "B", "atlas_id": "oscA.wavetable", "preset": "BULK_01", "screen": "Basic Shapes (dimmed, osc off)", "result": "READ"}
+{"part": "B", "atlas_id": "oscB.wavetable", "preset": "BULK_01", "screen": "DM - OSCAR", "result": "READ"}
+{"part": "B", "atlas_id": "oscC.wavetable", "preset": "BULK_01", "screen": "Basic Mini", "result": "READ"}
