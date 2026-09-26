@@ -6582,6 +6582,12 @@
     "alternatives": []
    }
   ],
-  "conclusion": "all 330 raw paths resolve against their own structural context; no undeclared collisions; every LOW row's chosen host name and its alternatives are listed for Phase 3A to pick a deterministic target"
+  "conclusion": "all 330 raw paths resolve against their own structural context; no undeclared collisions; every LOW row's chosen host name and its alternatives are listed for Phase 3A to pick a deterministic target",
+  "low_confidence_tie_breaks_NOTE": "misnamed: no LOW row has more than one candidate. See CORRECTION.low_confidence_has_no_alternatives."
+ },
+ "CORRECTION": {
+  "source": "local agent's re-check of 847262c (unpushed at time of writing)",
+  "bucket_B_is_not_no_identity": "bucket B (137) = 130 NONE + 7 LOW; separately, bucket D holds 7 more NONE rows and 8 LOW rows. 'No host identity' (NONE, 137) and 'bucket B' (137) are equal in COUNT only by coincidence.",
+  "low_confidence_has_no_alternatives": "WRONG in the offline_validation.low_confidence_tie_breaks framing below: all 15 LOW rows genuinely have an EMPTY ambiguous_with -- this is not a bug, it reflects the underlying method: LOW means 'exactly one name-matched candidate, never confirmed by any causal signal', not 'multiple candidates tied'. A separate AMBIGUOUS confidence value exists in the crosswalk builder for real ties and is used by ZERO of the 330 controls. There is no tie to break for Phase 3A; the low_confidence_tie_breaks list below should be read only as 'these 15 rows' best-and-only guess', not as a set of alternatives to choose between."
  }
 }
