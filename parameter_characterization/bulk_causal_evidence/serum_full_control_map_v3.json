@@ -8531,7 +8531,7 @@
        ],
        "verdict": "CURVE_OBSERVED",
        "method": "header row, 8 units",
-       "note": "display = 20*log10(raw) dB for units 1-5 and 7 (within 0.1 dB); in Limit mode about +6 dB (unit 8 +5.9; BULK 8/11/16.5 +5.7/+5.9/+6.1). Outlier: raw 20 (ratio 8) reads 28.0 vs 26.0: RECHECK unit 6 before closing.",
+       "note": "display = 20*log10(raw) dB for units 1-5 and 7 (within 0.1 dB); in Limit mode about +6 dB (unit 8 +5.9; BULK 8/11/16.5 +5.7/+5.9/+6.1). Outlier CONFIRMED by zoomed recheck: raw 20 at ratio 8:1 reads 28.0 vs 26.0 (unit 7, raw 27 at 32:1, fits exactly), so the offset is not explained by ratio alone. CAL_02 holds gain = 20 across 8 ratios to test it.",
        "tier": "C_direct_ui",
        "source": "ui_scan_2026-09-26.md CAL_01 section (5d9c424)"
       }
@@ -9009,7 +9009,7 @@
         "-15.6 dB",
         "-23.9 dB",
         "-31.4 dB",
-        "-40.4 dB",
+        "-49.4 dB",
         "-120.0 dB"
        ],
        "points": [
@@ -9039,7 +9039,7 @@
         },
         {
          "raw": 0.85,
-         "screen": "-40.4 dB"
+         "screen": "-49.4 dB"
         },
         {
          "raw": 1.0,
@@ -9048,7 +9048,7 @@
        ],
        "verdict": "MATCH_ON_KNOWN_CURVE",
        "method": "header row, 8 units",
-       "note": "display = 60*log10(1-raw) dB (raw 1.0 = -120 floor): fits 10 of 11 points (incl. earlier 0.25/0.4/0.49) within 0.05 dB. Outlier: raw 0.85 predicts -49.4, read -40.4 (likely a 4/9 misread): RECHECK unit 7.",
+       "note": "display = 60*log10(1-raw) dB (raw 1.0 = -120 floor): fits all 11 points (incl. earlier 0.25/0.4/0.49) within 0.05 dB. Unit 7 was first recorded as -40.4; the operator's zoomed recheck (screenshot, 2026-09-26 14:55) reads -49.4.",
        "tier": "C_direct_ui",
        "source": "ui_scan_2026-09-26.md CAL_01 section (5d9c424)"
       }

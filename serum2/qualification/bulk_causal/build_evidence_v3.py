@@ -89,9 +89,9 @@ CAL_SRC = "ui_scan_2026-09-26.md CAL_01 section (5d9c424)"
 # (atlas_id, [(raw, screen)], verdict, note). Values from the operator's header-row table; interpretation is mine.
 CAL_READS = [
     ("fx.compressor.thresh", [(0.05, "-1.3 dB"), (0.15, "-4.2 dB"), (0.3, "-9.3 dB"), (0.45, "-15.6 dB"), (0.6, "-23.9 dB"),
-                              (0.7, "-31.4 dB"), (0.85, "-40.4 dB"), (1.0, "-120.0 dB")], "MATCH_ON_KNOWN_CURVE",
-     "display = 60*log10(1-raw) dB (raw 1.0 = -120 floor): fits 10 of 11 points (incl. earlier 0.25/0.4/0.49) within 0.05 dB. "
-     "Outlier: raw 0.85 predicts -49.4, read -40.4 (likely a 4/9 misread): RECHECK unit 7."),
+                              (0.7, "-31.4 dB"), (0.85, "-49.4 dB"), (1.0, "-120.0 dB")], "MATCH_ON_KNOWN_CURVE",
+     "display = 60*log10(1-raw) dB (raw 1.0 = -120 floor): fits all 11 points (incl. earlier 0.25/0.4/0.49) within 0.05 dB. "
+     "Unit 7 was first recorded as -40.4; the operator's zoomed recheck (screenshot, 2026-09-26 14:55) reads -49.4."),
     ("fx.compressor.ratio", [(1.0, "1.0:1"), (1.5, "1.5:1"), (2.0, "2.0:1"), (3.0, "3:1"), (4.0, "4:1"), (8.0, "8:1"),
                              (20.0, "32:1"), (100.0, "Limit")], "DOMAIN_SCALE_MISMATCH",
      "display = raw for 1..8; raw 20 shows 32:1 and 100 shows Limit (so do 210/430/31622). Schema domain 1..1e6 is wrong; "
@@ -106,7 +106,8 @@ CAL_READS = [
     ("fx.compressor.gain", [(1.0, "0.0 dB"), (2.0, "6.0 dB"), (3.0, "9.5 dB"), (5.0, "14.0 dB"), (12.0, "21.6 dB"),
                             (20.0, "28.0 dB"), (27.0, "28.6 dB"), (32.0, "36.0 dB")], "CURVE_OBSERVED",
      "display = 20*log10(raw) dB for units 1-5 and 7 (within 0.1 dB); in Limit mode about +6 dB (unit 8 +5.9; BULK 8/11/16.5 "
-     "+5.7/+5.9/+6.1). Outlier: raw 20 (ratio 8) reads 28.0 vs 26.0: RECHECK unit 6 before closing."),
+     "+5.7/+5.9/+6.1). Outlier CONFIRMED by zoomed recheck: raw 20 at ratio 8:1 reads 28.0 vs 26.0 (unit 7, raw 27 at 32:1, fits exactly), "
+     "so the offset is not explained by ratio alone. CAL_02 holds gain = 20 across 8 ratios to test it."),
 ]
 REFERENCE_READS = [{"reference": "LFO7_CONTEXT_CONFLICT", "preset": B1, "verdict": "NOT_OBSERVABLE_IN_UI",
                     "note": "Serum 2.0.23 shows only LFO1-6 tabs; file slot LFO6 (UI LFO 7) cannot be viewed. The conflict reference "
