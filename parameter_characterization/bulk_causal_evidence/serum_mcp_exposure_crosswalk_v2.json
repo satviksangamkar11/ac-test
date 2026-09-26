@@ -1,0 +1,6587 @@
+{
+ "version": 2,
+ "total_controls": 330,
+ "source_map": "serum_full_control_map_v8.json",
+ "host_dump": {
+  "total_host_parameters": 412,
+  "note": "the 330 campaign controls are a curated subset the Atlas tracks; Serum exposes 412 raw VST3 host parameters in total, most with no campaign candidate at all"
+ },
+ "host_identity_confidence_counts": {
+  "NONE": 137,
+  "HIGH": 166,
+  "MEDIUM": 12,
+  "LOW": 15
+ },
+ "controls_with_some_host_identity": 193,
+ "bucket_definitions": {
+  "A": "MCP-editable + confident (HIGH/MEDIUM) host-parameter identity",
+  "B": "MCP-editable, no confident host-parameter identity (raw preset field only)",
+  "C": "not MCP-editable through serum-mcp's current PresetSpec/apply_spec surface",
+  "D": "MCP-editable, but a confirmed conformance exception (mismatch/schema mismatch/not persisted/unresolved curve)"
+ },
+ "bucket_counts": {
+  "B": 137,
+  "D": 19,
+  "A": 174
+ },
+ "controls": [
+  {
+   "atlas_id": "arp.pattern.rate",
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamRate"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "arp.pattern.shape",
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamShape"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "ENUM_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "arp.playback.chance",
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamChance"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "arp.playback.gate",
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamGate"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "arp.playback.offset",
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamOffset"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "OPEN_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "arp.playback.repeats",
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamRepeats"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "OPEN_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "arp.playback.thru",
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamThru"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "arp.retrigger.first",
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamFirstNoteRetrig"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "arp.retrigger.launch",
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamLaunchRetrig"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "arp.retrigger.note",
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamNoteRetrig"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "arp.transpose.range",
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamTransposeRange"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "UI_SCHEMA_MISMATCH",
+   "editable_note": null,
+   "bucket": "D"
+  },
+  {
+   "atlas_id": "arp.transpose.shape",
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamTransposeShape"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "ENUM_RAW (ArpSpec.transpose_shape; resolved offline, see residual_arp_transpose_shape_v1.json)",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": false,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": "18/18 vocabulary resolved; writable via serum-mcp's ArpSpec.transpose_shape field",
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "arp.transpose.shift",
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamTransposeShift"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "arp.velocity.decay",
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamVeloDecay"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "OPEN_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "arp.velocity.enable",
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamVeloEnabled"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "arp.velocity.retrig",
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamVeloRetrig"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "arp.velocity.target",
+   "raw_path": [
+    "ArpClip0",
+    "plainParams",
+    "kParamVeloTarget"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "env1.attack",
+   "raw_path": [
+    "Env0",
+    "plainParams",
+    "kParamAttack"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Env 1 Attack",
+   "host_parameter_index": 224,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "env1.attack_curve",
+   "raw_path": [
+    "Env0",
+    "plainParams",
+    "kParamCurve1"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Env 1 Atk Curve",
+   "host_parameter_index": 229,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "env1.decay",
+   "raw_path": [
+    "Env0",
+    "plainParams",
+    "kParamDecay"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Env 1 Decay",
+   "host_parameter_index": 226,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "env1.decay_curve",
+   "raw_path": [
+    "Env0",
+    "plainParams",
+    "kParamCurve2"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Env 1 Dec Curve",
+   "host_parameter_index": 230,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "env1.hold",
+   "raw_path": [
+    "Env0",
+    "plainParams",
+    "kParamHold"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Env 1 Hold",
+   "host_parameter_index": 225,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "env1.release",
+   "raw_path": [
+    "Env0",
+    "plainParams",
+    "kParamRelease"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Env 1 Release",
+   "host_parameter_index": 228,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "env1.release_curve",
+   "raw_path": [
+    "Env0",
+    "plainParams",
+    "kParamCurve3"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Env 1 Rel Curve",
+   "host_parameter_index": 231,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "env1.sustain",
+   "raw_path": [
+    "Env0",
+    "plainParams",
+    "kParamSustain"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Env 1 Sustain",
+   "host_parameter_index": 227,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "env2.attack",
+   "raw_path": [
+    "Env1",
+    "plainParams",
+    "kParamAttack"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Env 2 Attack",
+   "host_parameter_index": 232,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "env2.attack_curve",
+   "raw_path": [
+    "Env1",
+    "plainParams",
+    "kParamCurve1"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Env 2 Atk Curve",
+   "host_parameter_index": 237,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "env2.decay",
+   "raw_path": [
+    "Env1",
+    "plainParams",
+    "kParamDecay"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Env 2 Decay",
+   "host_parameter_index": 234,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "env2.decay_curve",
+   "raw_path": [
+    "Env1",
+    "plainParams",
+    "kParamCurve2"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Env 2 Dec Curve",
+   "host_parameter_index": 238,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "env2.hold",
+   "raw_path": [
+    "Env1",
+    "plainParams",
+    "kParamHold"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Env 2 Hold",
+   "host_parameter_index": 233,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "env2.release",
+   "raw_path": [
+    "Env1",
+    "plainParams",
+    "kParamRelease"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Env 2 Release",
+   "host_parameter_index": 236,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "env2.release_curve",
+   "raw_path": [
+    "Env1",
+    "plainParams",
+    "kParamCurve3"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Env 2 Rel Curve",
+   "host_parameter_index": 239,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "env2.sustain",
+   "raw_path": [
+    "Env1",
+    "plainParams",
+    "kParamSustain"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Env 2 Sustain",
+   "host_parameter_index": 235,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "env3.attack",
+   "raw_path": [
+    "Env2",
+    "plainParams",
+    "kParamAttack"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Env 3 Attack",
+   "host_parameter_index": 242,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "env3.attack_curve",
+   "raw_path": [
+    "Env2",
+    "plainParams",
+    "kParamCurve1"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Env 3 Atk Curve",
+   "host_parameter_index": 247,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "env3.decay",
+   "raw_path": [
+    "Env2",
+    "plainParams",
+    "kParamDecay"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Env 3 Decay",
+   "host_parameter_index": 244,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "env3.decay_curve",
+   "raw_path": [
+    "Env2",
+    "plainParams",
+    "kParamCurve2"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Env 3 Dec Curve",
+   "host_parameter_index": 248,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "env3.hold",
+   "raw_path": [
+    "Env2",
+    "plainParams",
+    "kParamHold"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Env 3 Hold",
+   "host_parameter_index": 243,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "env3.release",
+   "raw_path": [
+    "Env2",
+    "plainParams",
+    "kParamRelease"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Env 3 Release",
+   "host_parameter_index": 246,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "env3.release_curve",
+   "raw_path": [
+    "Env2",
+    "plainParams",
+    "kParamCurve3"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Env 3 Rel Curve",
+   "host_parameter_index": 249,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "env3.sustain",
+   "raw_path": [
+    "Env2",
+    "plainParams",
+    "kParamSustain"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Env 3 Sustain",
+   "host_parameter_index": 245,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "env4.attack",
+   "raw_path": [
+    "Env3",
+    "plainParams",
+    "kParamAttack"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Env 4 Attack",
+   "host_parameter_index": 252,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "env4.attack_curve",
+   "raw_path": [
+    "Env3",
+    "plainParams",
+    "kParamCurve1"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Env 4 Atk Curve",
+   "host_parameter_index": 257,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "env4.decay",
+   "raw_path": [
+    "Env3",
+    "plainParams",
+    "kParamDecay"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Env 4 Decay",
+   "host_parameter_index": 254,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "env4.decay_curve",
+   "raw_path": [
+    "Env3",
+    "plainParams",
+    "kParamCurve2"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Env 4 Dec Curve",
+   "host_parameter_index": 258,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "env4.hold",
+   "raw_path": [
+    "Env3",
+    "plainParams",
+    "kParamHold"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Env 4 Hold",
+   "host_parameter_index": 253,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "env4.release",
+   "raw_path": [
+    "Env3",
+    "plainParams",
+    "kParamRelease"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Env 4 Release",
+   "host_parameter_index": 256,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "env4.release_curve",
+   "raw_path": [
+    "Env3",
+    "plainParams",
+    "kParamCurve3"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Env 4 Rel Curve",
+   "host_parameter_index": 259,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "env4.sustain",
+   "raw_path": [
+    "Env3",
+    "plainParams",
+    "kParamSustain"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Env 4 Sustain",
+   "host_parameter_index": 255,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "filter1.cutoff",
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamFreq"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Filter 1 Freq",
+   "host_parameter_index": 205,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "filter1.drive",
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamDrive"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Filter 1 Drive",
+   "host_parameter_index": 207,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "filter1.enabled",
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamEnable"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Filter 1 On",
+   "host_parameter_index": 203,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "filter1.key_track",
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamKeyTrack"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Filter 1 Freq",
+   "host_parameter_index": 205,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "filter1.level_out",
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamLevelOut"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Filter 1 Level",
+   "host_parameter_index": 202,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "filter1.resonance",
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamReso"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Filter 1 Res",
+   "host_parameter_index": 206,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "filter1.stereo",
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamStereo"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Filter 1 Stereo",
+   "host_parameter_index": 210,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "filter1.type",
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamType"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "ENUM_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Filter 1 Type",
+   "host_parameter_index": 204,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "filter1.var",
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamVar"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Filter 1 Var",
+   "host_parameter_index": 208,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "filter1.wet",
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamWet"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Filter 1 Wet",
+   "host_parameter_index": 209,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "filter2.cutoff",
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamFreq"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Filter 2 Freq",
+   "host_parameter_index": 216,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "filter2.drive",
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamDrive"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Filter 2 Drive",
+   "host_parameter_index": 218,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "filter2.enabled",
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamEnable"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Filter 2 On",
+   "host_parameter_index": 214,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "filter2.key_track",
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamKeyTrack"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Filter 2 Freq",
+   "host_parameter_index": 216,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "filter2.level_out",
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamLevelOut"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Filter 2 Level",
+   "host_parameter_index": 213,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "filter2.resonance",
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamReso"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Filter 2 Res",
+   "host_parameter_index": 217,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "filter2.stereo",
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamStereo"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Filter 2 Stereo",
+   "host_parameter_index": 221,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "filter2.type",
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamType"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "ENUM_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Filter 2 Type",
+   "host_parameter_index": 215,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "filter2.var",
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamVar"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Filter 2 Var",
+   "host_parameter_index": 219,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "filter2.wet",
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamWet"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Filter 2 Wet",
+   "host_parameter_index": 220,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "fx.bode.blur",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXBode",
+    "plainParams",
+    "kParamBlur"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.bode.range",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXBode",
+    "plainParams",
+    "kParamRange"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": false,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.bode.shift",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXBode",
+    "plainParams",
+    "kParamShift"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": false,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.bode.wet",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXBode",
+    "plainParams",
+    "kParamWet"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.chorus.depth",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXChorus",
+    "plainParams",
+    "kParamDepth"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.chorus.feedback",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXChorus",
+    "plainParams",
+    "kParamFeedback"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.chorus.rate",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXChorus",
+    "plainParams",
+    "kParamRate"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": false,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.chorus.wet",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXChorus",
+    "plainParams",
+    "kParamWet"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.compressor.attack",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXComp",
+    "plainParams",
+    "kParamAttack"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "UI_SCHEMA_MISMATCH",
+   "editable_note": null,
+   "bucket": "D"
+  },
+  {
+   "atlas_id": "fx.compressor.gain",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXComp",
+    "plainParams",
+    "kParamMakeup"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.compressor.ratio",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXComp",
+    "plainParams",
+    "kParamRatio"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "UI_SCHEMA_MISMATCH",
+   "editable_note": null,
+   "bucket": "D"
+  },
+  {
+   "atlas_id": "fx.compressor.release",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXComp",
+    "plainParams",
+    "kParamRelease"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": false,
+   "GUI_confirmed": true,
+   "final_conclusion": "UI_SCHEMA_MISMATCH",
+   "editable_note": null,
+   "bucket": "D"
+  },
+  {
+   "atlas_id": "fx.compressor.thresh",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXComp",
+    "plainParams",
+    "kParamThresh"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.compressor.wet",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXComp",
+    "plainParams",
+    "kParamWet"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.convolve.decay",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXConv",
+    "plainParams",
+    "kParamDecay"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.convolve.size",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXConv",
+    "plainParams",
+    "kParamSize"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": false,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.convolve.tone",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXConv",
+    "plainParams",
+    "kParamTone"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.convolve.wet",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXConv",
+    "plainParams",
+    "kParamWet"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.delay.bpm",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXDelay",
+    "plainParams",
+    "kParamBeatSync"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.delay.feedback",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXDelay",
+    "plainParams",
+    "kParamFeedback"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": false,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.delay.freq",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXDelay",
+    "plainParams",
+    "kParamFreq"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.delay.link",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXDelay",
+    "plainParams",
+    "kParamLink"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.delay.mode",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXDelay",
+    "plainParams",
+    "kParamMode"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "OPEN_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.delay.time_l",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXDelay",
+    "plainParams",
+    "kParamTimeL"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": false,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.delay.time_r",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXDelay",
+    "plainParams",
+    "kParamTimeR"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": false,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.delay.wet",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXDelay",
+    "plainParams",
+    "kParamWet"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.dimension.size",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXHyperD",
+    "plainParams",
+    "kParamDimESize"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.dimension.wet",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXHyperD",
+    "plainParams",
+    "kParamDimEWet"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.distortion.drive",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXDistortion",
+    "plainParams",
+    "kParamDrive"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.distortion.freq",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXDistortion",
+    "plainParams",
+    "kParamFreq"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.distortion.type",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXDistortion",
+    "plainParams",
+    "kParamMode"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "ENUM_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": false,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.distortion.wet",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXDistortion",
+    "plainParams",
+    "kParamWet"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.equalizer.left_freq",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXEQ",
+    "plainParams",
+    "kParamFreq1"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": false,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.equalizer.left_gain",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXEQ",
+    "plainParams",
+    "kParamGain1"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": false,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.equalizer.left_q",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXEQ",
+    "plainParams",
+    "kParamReso1"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": false,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.equalizer.right_freq",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXEQ",
+    "plainParams",
+    "kParamFreq2"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": false,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.equalizer.right_gain",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXEQ",
+    "plainParams",
+    "kParamGain2"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": false,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.equalizer.right_q",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXEQ",
+    "plainParams",
+    "kParamReso2"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": false,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.filter.cutoff",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXFilter",
+    "plainParams",
+    "kParamFreq"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.filter.drive",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXFilter",
+    "plainParams",
+    "kParamDrive"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.filter.res",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXFilter",
+    "plainParams",
+    "kParamReso"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.filter.type",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXFilter",
+    "plainParams",
+    "kParamType"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "ENUM_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.filter.wet",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXFilter",
+    "plainParams",
+    "kParamWet"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.flanger.depth",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXFlanger",
+    "plainParams",
+    "kParamDepth"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.flanger.feedback",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXFlanger",
+    "plainParams",
+    "kParamFeedback"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.flanger.rate",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXFlanger",
+    "plainParams",
+    "kParamRate"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.flanger.wet",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXFlanger",
+    "plainParams",
+    "kParamWet"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.hyper.detune",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXHyperD",
+    "plainParams",
+    "kParamDetune"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": false,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.hyper.rate",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXHyperD",
+    "plainParams",
+    "kParamRate"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": false,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.hyper.unison",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXHyperD",
+    "plainParams",
+    "kParamUnison"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.hyper.wet",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXHyperD",
+    "plainParams",
+    "kParamWet"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.phaser.depth",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXPhaser",
+    "plainParams",
+    "kParamDepth"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.phaser.feedback",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXPhaser",
+    "plainParams",
+    "kParamFeedback"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.phaser.freq",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXPhaser",
+    "plainParams",
+    "kParamFreq"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.phaser.rate",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXPhaser",
+    "plainParams",
+    "kParamRate"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.phaser.wet",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXPhaser",
+    "plainParams",
+    "kParamWet"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.reverb.size",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXReverb",
+    "plainParams",
+    "kParamSize"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.reverb.type",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXReverb",
+    "plainParams",
+    "kParamType"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "ENUM_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "fx.reverb.wet",
+   "raw_path": [
+    "FXRack0",
+    "FX",
+    0,
+    "FXReverb",
+    "plainParams",
+    "kParamWet"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "global.bend_range_down",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamBendRangeDn"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Bend Down",
+   "host_parameter_index": 6,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "global.bend_range_up",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamBendRangeUp"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Bend Up",
+   "host_parameter_index": 5,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "global.direct_volume",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamDirectVol"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "OPEN_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "global.fx_bus1_destination",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamFXBus1Dest"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "ENUM_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "UI_SCHEMA_MISMATCH",
+   "editable_note": null,
+   "bucket": "D"
+  },
+  {
+   "atlas_id": "global.fx_bus1_volume",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamFXBus1Vol"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "OPEN_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "global.fx_bus2_destination",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamFXBus2Dest"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "ENUM_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "UI_SCHEMA_MISMATCH",
+   "editable_note": null,
+   "bucket": "D"
+  },
+  {
+   "atlas_id": "global.fx_bus2_volume",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamFXBus2Vol"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "OPEN_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "global.global_tuning",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamGlobalTuning"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "OPEN_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "global.legato",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamLegato"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Legato",
+   "host_parameter_index": 10,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "global.limit_same_note_polyphony",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamLimitSameNotePolyphony"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "global.master_volume",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamMasterVolume"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Main Vol",
+   "host_parameter_index": 0,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "global.mono",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamMonoToggle"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Mono Toggle",
+   "host_parameter_index": 9,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "global.note_latch",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamNoteLatch"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "global.oversampling",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamOversampling"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "OPEN_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "global.poly_count",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamPolyCount"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "global.porta_always",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamPortaAlways"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Porta Always",
+   "host_parameter_index": 11,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "global.porta_scaled",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamPortaScaled"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Porta Scaled",
+   "host_parameter_index": 12,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "global.portamento_curve",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamPortamentoCurve"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "OPEN_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "global.portamento_time",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamPortamentoTime"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Porta Time",
+   "host_parameter_index": 3,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "global.s1_compatibility",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamS1Compatibility"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": false,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "global.swing",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamSwing"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Swing",
+   "host_parameter_index": 13,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "global.swing_div",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamSwingDiv"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "OPEN_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "global.transpose",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamTranspose"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Transpose",
+   "host_parameter_index": 15,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "global.use_ultra_on_render",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamUseUltraOnRender"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": false,
+   "GUI_confirmed": false,
+   "final_conclusion": "RESIDUAL_NOT_STORED",
+   "editable_note": null,
+   "bucket": "D"
+  },
+  {
+   "atlas_id": "global.voice_amp",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamVoiceAmp"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "OPEN_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "global.voice_control.random.cutoff",
+   "raw_path": [
+    "VoicePanel0",
+    "plainParams",
+    "kParamGlobalRandomFilterCutoff"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "OPEN_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "global.voice_control.random.detune",
+   "raw_path": [
+    "VoicePanel0",
+    "plainParams",
+    "kParamGlobalRandomOscDetune"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "OPEN_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "global.voice_control.random.envs",
+   "raw_path": [
+    "VoicePanel0",
+    "plainParams",
+    "kParamGlobalRandomEnvTime"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "OPEN_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "global.voice_control.random.pan",
+   "raw_path": [
+    "VoicePanel0",
+    "plainParams",
+    "kParamGlobalRandomOscPan"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Osc Pan Rand",
+   "host_parameter_index": 468,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "global.voice_control.scaling.envs",
+   "raw_path": [
+    "VoicePanel0",
+    "plainParams",
+    "kParamGlobalScalingEnvTime"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "OPEN_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "global.voice_control.scaling.lfos",
+   "raw_path": [
+    "VoicePanel0",
+    "plainParams",
+    "kParamGlobalScalingLfoTime"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "OPEN_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "global.voice_priority",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamVoicePriority"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "TEXT_RAW (GlobalSpec.voice_priority; raw key confirmed in mapping.py:1430, UNVALIDATED)",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": false,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_UNOBSERVABLE",
+   "editable_note": "serum-mcp writes any string through GlobalSpec.voice_priority with no enum validation; the raw key is known even though the corresponding GUI control was never located (UI_UNOBSERVABLE)",
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "lfo1.beat_sync",
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamBeatSync"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "LFO 1 Delay",
+   "host_parameter_index": 265,
+   "host_identity_confidence": "MEDIUM",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "lfo1.delay",
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamDelay"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "LFO 1 Delay",
+   "host_parameter_index": 265,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "lfo1.dotted",
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamDotted"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "lfo1.mode",
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamMode"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "ENUM_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "lfo1.mono",
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamMono"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "lfo1.rate",
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamRate"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "LFO 1 Rate",
+   "host_parameter_index": 262,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "lfo1.rate_10x",
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamRate10x"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "LFO 1 Rate",
+   "host_parameter_index": 262,
+   "host_identity_confidence": "LOW",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_UNOBSERVABLE",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "lfo1.rise",
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamRise"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "LFO 1 Rise",
+   "host_parameter_index": 264,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "lfo1.shape",
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamType"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "ENUM_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": false,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "lfo1.smooth",
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamSmooth"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "LFO 1 Smooth",
+   "host_parameter_index": 263,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "lfo1.swing",
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamSwing"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_UNOBSERVABLE",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "lfo1.triplets",
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamTriplets"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "lfo2.beat_sync",
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamBeatSync"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "LFO 2 Delay",
+   "host_parameter_index": 270,
+   "host_identity_confidence": "MEDIUM",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "lfo2.delay",
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamDelay"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "LFO 2 Delay",
+   "host_parameter_index": 270,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "HOST_TEXT_VALIDATED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "lfo2.dotted",
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamDotted"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "lfo2.mode",
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamMode"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "ENUM_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "lfo2.mono",
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamMono"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "lfo2.rate",
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamRate"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "LFO 2 Rate",
+   "host_parameter_index": 267,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "HOST_TEXT_VALIDATED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "lfo2.rate_10x",
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamRate10x"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "LFO 2 Rate",
+   "host_parameter_index": 267,
+   "host_identity_confidence": "LOW",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_UNOBSERVABLE",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "lfo2.rise",
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamRise"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "LFO 2 Rise",
+   "host_parameter_index": 269,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "HOST_TEXT_VALIDATED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "lfo2.shape",
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamType"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "ENUM_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": false,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "lfo2.smooth",
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamSmooth"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "LFO 2 Smooth",
+   "host_parameter_index": 268,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "lfo2.swing",
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamSwing"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_UNOBSERVABLE",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "lfo2.triplets",
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamTriplets"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "lfo3.beat_sync",
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamBeatSync"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "LFO 3 Delay",
+   "host_parameter_index": 275,
+   "host_identity_confidence": "MEDIUM",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "lfo3.delay",
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamDelay"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "LFO 3 Delay",
+   "host_parameter_index": 275,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "lfo3.dotted",
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamDotted"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "lfo3.mode",
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamMode"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "ENUM_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "lfo3.mono",
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamMono"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "lfo3.rate",
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamRate"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "LFO 3 Rate",
+   "host_parameter_index": 272,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "HOST_TEXT_VALIDATED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "lfo3.rate_10x",
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamRate10x"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "LFO 3 Rate",
+   "host_parameter_index": 272,
+   "host_identity_confidence": "LOW",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_UNOBSERVABLE",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "lfo3.rise",
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamRise"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "LFO 3 Rise",
+   "host_parameter_index": 274,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "HOST_TEXT_VALIDATED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "lfo3.shape",
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamType"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "ENUM_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "lfo3.smooth",
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamSmooth"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "LFO 3 Smooth",
+   "host_parameter_index": 273,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "lfo3.swing",
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamSwing"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_UNOBSERVABLE",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "lfo3.triplets",
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamTriplets"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "lfo4.beat_sync",
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamBeatSync"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "LFO 4 Delay",
+   "host_parameter_index": 280,
+   "host_identity_confidence": "MEDIUM",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "lfo4.delay",
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamDelay"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "LFO 4 Delay",
+   "host_parameter_index": 280,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "lfo4.dotted",
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamDotted"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "lfo4.mode",
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamMode"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "ENUM_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "lfo4.mono",
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamMono"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "lfo4.rate",
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamRate"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "LFO 4 Rate",
+   "host_parameter_index": 277,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "HOST_TEXT_VALIDATED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "lfo4.rate_10x",
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamRate10x"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "LFO 4 Rate",
+   "host_parameter_index": 277,
+   "host_identity_confidence": "LOW",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_UNOBSERVABLE",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "lfo4.rise",
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamRise"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "LFO 4 Rise",
+   "host_parameter_index": 279,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "HOST_TEXT_VALIDATED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "lfo4.shape",
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamType"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "ENUM_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "lfo4.smooth",
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamSmooth"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "LFO 4 Smooth",
+   "host_parameter_index": 278,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "lfo4.swing",
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamSwing"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_UNOBSERVABLE",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "lfo4.triplets",
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamTriplets"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "lfo5.beat_sync",
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamBeatSync"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "LFO 5 Delay",
+   "host_parameter_index": 285,
+   "host_identity_confidence": "MEDIUM",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "lfo5.delay",
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamDelay"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "LFO 5 Delay",
+   "host_parameter_index": 285,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "lfo5.dotted",
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamDotted"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "lfo5.mode",
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamMode"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "ENUM_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "lfo5.mono",
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamMono"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "lfo5.rate",
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamRate"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "LFO 5 Rate",
+   "host_parameter_index": 282,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "HOST_TEXT_VALIDATED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "lfo5.rate_10x",
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamRate10x"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "LFO 5 Rate",
+   "host_parameter_index": 282,
+   "host_identity_confidence": "LOW",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_UNOBSERVABLE",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "lfo5.rise",
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamRise"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "LFO 5 Rise",
+   "host_parameter_index": 284,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "HOST_TEXT_VALIDATED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "lfo5.shape",
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamType"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "ENUM_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "lfo5.smooth",
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamSmooth"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "LFO 5 Smooth",
+   "host_parameter_index": 283,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "lfo5.swing",
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamSwing"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_UNOBSERVABLE",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "lfo5.triplets",
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamTriplets"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "lfo6.beat_sync",
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamBeatSync"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "LFO 6 Delay",
+   "host_parameter_index": 290,
+   "host_identity_confidence": "MEDIUM",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "lfo6.delay",
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamDelay"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "LFO 6 Delay",
+   "host_parameter_index": 290,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "lfo6.dotted",
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamDotted"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "lfo6.mode",
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamMode"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "ENUM_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "lfo6.mono",
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamMono"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "lfo6.rate",
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamRate"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "LFO 6 Rate",
+   "host_parameter_index": 287,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "HOST_TEXT_VALIDATED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "lfo6.rate_10x",
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamRate10x"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "LFO 6 Rate",
+   "host_parameter_index": 287,
+   "host_identity_confidence": "LOW",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_UNOBSERVABLE",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "lfo6.rise",
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamRise"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "LFO 6 Rise",
+   "host_parameter_index": 289,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "lfo6.shape",
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamType"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "ENUM_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "lfo6.smooth",
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamSmooth"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "LFO 6 Smooth",
+   "host_parameter_index": 288,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "lfo6.swing",
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamSwing"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_UNOBSERVABLE",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "lfo6.triplets",
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamTriplets"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "macro1.name",
+   "raw_path": [
+    "Macro0",
+    "name"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "TEXT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Macro 1",
+   "host_parameter_index": 440,
+   "host_identity_confidence": "LOW",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "UI_MISMATCH",
+   "editable_note": null,
+   "bucket": "D"
+  },
+  {
+   "atlas_id": "macro1.value",
+   "raw_path": [
+    "Macro0",
+    "plainParams",
+    "kParamValue"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Macro 1",
+   "host_parameter_index": 440,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "macro2.name",
+   "raw_path": [
+    "Macro1",
+    "name"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "TEXT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Macro 2",
+   "host_parameter_index": 441,
+   "host_identity_confidence": "LOW",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "UI_MISMATCH",
+   "editable_note": null,
+   "bucket": "D"
+  },
+  {
+   "atlas_id": "macro2.value",
+   "raw_path": [
+    "Macro1",
+    "plainParams",
+    "kParamValue"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Macro 2",
+   "host_parameter_index": 441,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "macro3.name",
+   "raw_path": [
+    "Macro2",
+    "name"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "TEXT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Macro 3",
+   "host_parameter_index": 442,
+   "host_identity_confidence": "LOW",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "UI_MISMATCH",
+   "editable_note": null,
+   "bucket": "D"
+  },
+  {
+   "atlas_id": "macro3.value",
+   "raw_path": [
+    "Macro2",
+    "plainParams",
+    "kParamValue"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Macro 3",
+   "host_parameter_index": 442,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "HOST_TEXT_VALIDATED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "macro4.name",
+   "raw_path": [
+    "Macro3",
+    "name"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "TEXT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Macro 4",
+   "host_parameter_index": 443,
+   "host_identity_confidence": "LOW",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "UI_MISMATCH",
+   "editable_note": null,
+   "bucket": "D"
+  },
+  {
+   "atlas_id": "macro4.value",
+   "raw_path": [
+    "Macro3",
+    "plainParams",
+    "kParamValue"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Macro 4",
+   "host_parameter_index": 443,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "HOST_TEXT_VALIDATED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "macro5.name",
+   "raw_path": [
+    "Macro4",
+    "name"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "TEXT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Macro 5",
+   "host_parameter_index": 444,
+   "host_identity_confidence": "LOW",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "UI_MISMATCH",
+   "editable_note": null,
+   "bucket": "D"
+  },
+  {
+   "atlas_id": "macro5.value",
+   "raw_path": [
+    "Macro4",
+    "plainParams",
+    "kParamValue"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Macro 5",
+   "host_parameter_index": 444,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "macro6.name",
+   "raw_path": [
+    "Macro5",
+    "name"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "TEXT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Macro 6",
+   "host_parameter_index": 445,
+   "host_identity_confidence": "LOW",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "UI_MISMATCH",
+   "editable_note": null,
+   "bucket": "D"
+  },
+  {
+   "atlas_id": "macro6.value",
+   "raw_path": [
+    "Macro5",
+    "plainParams",
+    "kParamValue"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Macro 6",
+   "host_parameter_index": 445,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "HOST_TEXT_VALIDATED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "macro7.name",
+   "raw_path": [
+    "Macro6",
+    "name"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "TEXT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Macro 7",
+   "host_parameter_index": 446,
+   "host_identity_confidence": "LOW",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "UI_MISMATCH",
+   "editable_note": null,
+   "bucket": "D"
+  },
+  {
+   "atlas_id": "macro7.value",
+   "raw_path": [
+    "Macro6",
+    "plainParams",
+    "kParamValue"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Macro 7",
+   "host_parameter_index": 446,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "HOST_TEXT_VALIDATED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "macro8.name",
+   "raw_path": [
+    "Macro7",
+    "name"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "TEXT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Macro 8",
+   "host_parameter_index": 447,
+   "host_identity_confidence": "LOW",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "UI_MISMATCH",
+   "editable_note": null,
+   "bucket": "D"
+  },
+  {
+   "atlas_id": "macro8.value",
+   "raw_path": [
+    "Macro7",
+    "plainParams",
+    "kParamValue"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Macro 8",
+   "host_parameter_index": 447,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "HOST_TEXT_VALIDATED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "mixer.filter1.bus1",
+   "raw_path": [
+    "RoutingSlot5",
+    "plainParams",
+    "kParamFXBus1Level"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Filter 1>BUS1",
+   "host_parameter_index": 463,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "mixer.filter1.bus2",
+   "raw_path": [
+    "RoutingSlot5",
+    "plainParams",
+    "kParamFXBus2Level"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Filter 1>BUS2",
+   "host_parameter_index": 464,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "HOST_TEXT_VALIDATED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "mixer.filter1.enable",
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamEnable"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Filter 1 On",
+   "host_parameter_index": 203,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "HOST_TEXT_VALIDATED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "mixer.filter1.wet",
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamWet"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Filter 1 Wet",
+   "host_parameter_index": 209,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "mixer.filter2.bus1",
+   "raw_path": [
+    "RoutingSlot6",
+    "plainParams",
+    "kParamFXBus1Level"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Filter 2>BUS1",
+   "host_parameter_index": 465,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "HOST_TEXT_VALIDATED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "mixer.filter2.bus2",
+   "raw_path": [
+    "RoutingSlot6",
+    "plainParams",
+    "kParamFXBus2Level"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Filter 2>BUS2",
+   "host_parameter_index": 466,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "HOST_TEXT_VALIDATED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "mixer.filter2.enable",
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamEnable"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Filter 2 On",
+   "host_parameter_index": 214,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "HOST_TEXT_VALIDATED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "mixer.filter2.wet",
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamWet"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Filter 2 Wet",
+   "host_parameter_index": 220,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "mixer.noise.bus1",
+   "raw_path": [
+    "RoutingSlot3",
+    "plainParams",
+    "kParamFXBus1Level"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Noise>BUS1",
+   "host_parameter_index": 458,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "HOST_TEXT_VALIDATED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "mixer.noise.bus2",
+   "raw_path": [
+    "RoutingSlot3",
+    "plainParams",
+    "kParamFXBus2Level"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Noise>BUS2",
+   "host_parameter_index": 459,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "HOST_TEXT_VALIDATED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "mixer.noise.enable",
+   "raw_path": [
+    "Oscillator3",
+    "plainParams",
+    "kParamEnable"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Noise Enable",
+   "host_parameter_index": 185,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "mixer.noise.filter_balance",
+   "raw_path": [
+    "RoutingSlot3",
+    "plainParams",
+    "kParamFilterBalance"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Noise>Filter Balance",
+   "host_parameter_index": 457,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "mixer.noise.pan",
+   "raw_path": [
+    "Oscillator3",
+    "plainParams",
+    "kParamPan"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Noise Pan",
+   "host_parameter_index": 187,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "UI_MISMATCH",
+   "editable_note": null,
+   "bucket": "D"
+  },
+  {
+   "atlas_id": "mixer.osc_a.bus1",
+   "raw_path": [
+    "RoutingSlot0",
+    "plainParams",
+    "kParamFXBus1Level"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "A>BUS1",
+   "host_parameter_index": 449,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "HOST_TEXT_VALIDATED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "mixer.osc_a.bus2",
+   "raw_path": [
+    "RoutingSlot0",
+    "plainParams",
+    "kParamFXBus2Level"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "A>BUS2",
+   "host_parameter_index": 450,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "HOST_TEXT_VALIDATED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "mixer.osc_a.filter_balance",
+   "raw_path": [
+    "RoutingSlot0",
+    "plainParams",
+    "kParamFilterBalance"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "A>Filter Balance",
+   "host_parameter_index": 448,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "mixer.osc_b.bus1",
+   "raw_path": [
+    "RoutingSlot1",
+    "plainParams",
+    "kParamFXBus1Level"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "B>BUS1",
+   "host_parameter_index": 452,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "HOST_TEXT_VALIDATED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "mixer.osc_b.bus2",
+   "raw_path": [
+    "RoutingSlot1",
+    "plainParams",
+    "kParamFXBus2Level"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "B>BUS2",
+   "host_parameter_index": 453,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "HOST_TEXT_VALIDATED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "mixer.osc_b.filter_balance",
+   "raw_path": [
+    "RoutingSlot1",
+    "plainParams",
+    "kParamFilterBalance"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "B>Filter Balance",
+   "host_parameter_index": 451,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "mixer.osc_c.bus1",
+   "raw_path": [
+    "RoutingSlot2",
+    "plainParams",
+    "kParamFXBus1Level"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "C>BUS1",
+   "host_parameter_index": 455,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "HOST_TEXT_VALIDATED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "mixer.osc_c.bus2",
+   "raw_path": [
+    "RoutingSlot2",
+    "plainParams",
+    "kParamFXBus2Level"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "C>BUS2",
+   "host_parameter_index": 456,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "HOST_TEXT_VALIDATED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "mixer.osc_c.filter_balance",
+   "raw_path": [
+    "RoutingSlot2",
+    "plainParams",
+    "kParamFilterBalance"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "C>Filter Balance",
+   "host_parameter_index": 454,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "mixer.sub.bus1",
+   "raw_path": [
+    "RoutingSlot4",
+    "plainParams",
+    "kParamFXBus1Level"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Sub Osc>BUS1",
+   "host_parameter_index": 461,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "HOST_TEXT_VALIDATED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "mixer.sub.bus2",
+   "raw_path": [
+    "RoutingSlot4",
+    "plainParams",
+    "kParamFXBus2Level"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Sub Osc>BUS2",
+   "host_parameter_index": 462,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "HOST_TEXT_VALIDATED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "mixer.sub.enable",
+   "raw_path": [
+    "Oscillator4",
+    "plainParams",
+    "kParamEnable"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Sub Enable",
+   "host_parameter_index": 193,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "HOST_TEXT_VALIDATED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "mixer.sub.filter_balance",
+   "raw_path": [
+    "RoutingSlot4",
+    "plainParams",
+    "kParamFilterBalance"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Sub Osc>Filter Balance",
+   "host_parameter_index": 460,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "mixer.sub.pan",
+   "raw_path": [
+    "Oscillator4",
+    "plainParams",
+    "kParamPan"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Sub Pan",
+   "host_parameter_index": 195,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "UI_MISMATCH",
+   "editable_note": null,
+   "bucket": "D"
+  },
+  {
+   "atlas_id": "oscA.detune",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamDetune"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "A Uni Detune",
+   "host_parameter_index": 46,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscA.enabled",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamEnable"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "A Enable",
+   "host_parameter_index": 20,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscA.fine",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamFine"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "A Fine",
+   "host_parameter_index": 25,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscA.octave",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamOctave"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "A Octave",
+   "host_parameter_index": 23,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscA.pan",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamPan"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "A Pan",
+   "host_parameter_index": 22,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscA.sample_loop_crossfade",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamLoopCrossfade"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "CONTEXTUAL_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "A Loop X-Fade",
+   "host_parameter_index": 39,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscA.sample_loop_end",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamLoopEnd"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "CONTEXTUAL_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "A Loop End",
+   "host_parameter_index": 38,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscA.sample_loop_start",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamLoopStart"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "CONTEXTUAL_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "A Loop Start",
+   "host_parameter_index": 37,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscA.semitone",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamPitch"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "A Semi",
+   "host_parameter_index": 24,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscA.unison",
+   "raw_path": [
+    "Oscillator0",
+    "plainParams",
+    "kParamUnison"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "A Unison",
+   "host_parameter_index": 44,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscA.warp_amount",
+   "raw_path": [
+    "Oscillator0",
+    "WTOsc0",
+    "plainParams",
+    "kParamWarp"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "A Warp",
+   "host_parameter_index": 53,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "UI_CURVE_UNRESOLVED_FINAL",
+   "editable_note": null,
+   "bucket": "D"
+  },
+  {
+   "atlas_id": "oscA.warp_amount2",
+   "raw_path": [
+    "Oscillator0",
+    "WTOsc0",
+    "plainParams",
+    "kParamWarp2"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "CONTEXTUAL_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "A Warp 2",
+   "host_parameter_index": 56,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscA.warp_mode",
+   "raw_path": [
+    "Oscillator0",
+    "WTOsc0",
+    "plainParams",
+    "kParamWarpMenu"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "ENUM_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "A Warp Mode",
+   "host_parameter_index": 55,
+   "host_identity_confidence": "MEDIUM",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscA.warp_mode2",
+   "raw_path": [
+    "Oscillator0",
+    "WTOsc0",
+    "plainParams",
+    "kParamWarpMenu2"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "LEAF_SET",
+   "host_parameter_present": true,
+   "host_parameter_name": "A Warp 2 Mode",
+   "host_parameter_index": 58,
+   "host_identity_confidence": "MEDIUM",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscA.warp_var2",
+   "raw_path": [
+    "Oscillator0",
+    "WTOsc0",
+    "plainParams",
+    "kParamWarpVar2"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "A Warp 2 Var",
+   "host_parameter_index": 57,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_UNOBSERVABLE",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscA.wavetable",
+   "raw_path": [
+    "Oscillator0",
+    "WTOsc0",
+    "relativePathToWT"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "LEAF_SET",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "oscB.detune",
+   "raw_path": [
+    "Oscillator1",
+    "plainParams",
+    "kParamDetune"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "B Uni Detune",
+   "host_parameter_index": 101,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscB.enabled",
+   "raw_path": [
+    "Oscillator1",
+    "plainParams",
+    "kParamEnable"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "B Enable",
+   "host_parameter_index": 75,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "HOST_TEXT_VALIDATED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscB.fine",
+   "raw_path": [
+    "Oscillator1",
+    "plainParams",
+    "kParamFine"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "B Fine",
+   "host_parameter_index": 80,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscB.octave",
+   "raw_path": [
+    "Oscillator1",
+    "plainParams",
+    "kParamOctave"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "B Octave",
+   "host_parameter_index": 78,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscB.pan",
+   "raw_path": [
+    "Oscillator1",
+    "plainParams",
+    "kParamPan"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "B Pan",
+   "host_parameter_index": 77,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscB.sample_loop_crossfade",
+   "raw_path": [
+    "Oscillator1",
+    "plainParams",
+    "kParamLoopCrossfade"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "CONTEXTUAL_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "B Loop X-Fade",
+   "host_parameter_index": 94,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "HOST_TEXT_VALIDATED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscB.sample_loop_end",
+   "raw_path": [
+    "Oscillator1",
+    "plainParams",
+    "kParamLoopEnd"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "CONTEXTUAL_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "B Loop End",
+   "host_parameter_index": 93,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscB.sample_loop_start",
+   "raw_path": [
+    "Oscillator1",
+    "plainParams",
+    "kParamLoopStart"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "CONTEXTUAL_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "B Loop Start",
+   "host_parameter_index": 92,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscB.semitone",
+   "raw_path": [
+    "Oscillator1",
+    "plainParams",
+    "kParamPitch"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "B Semi",
+   "host_parameter_index": 79,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscB.unison",
+   "raw_path": [
+    "Oscillator1",
+    "plainParams",
+    "kParamUnison"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "B Unison",
+   "host_parameter_index": 99,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscB.warp_amount",
+   "raw_path": [
+    "Oscillator1",
+    "WTOsc1",
+    "plainParams",
+    "kParamWarp"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "B Warp",
+   "host_parameter_index": 108,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscB.warp_amount2",
+   "raw_path": [
+    "Oscillator1",
+    "WTOsc1",
+    "plainParams",
+    "kParamWarp2"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "CONTEXTUAL_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "B Warp 2",
+   "host_parameter_index": 111,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscB.warp_mode",
+   "raw_path": [
+    "Oscillator1",
+    "WTOsc1",
+    "plainParams",
+    "kParamWarpMenu"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "ENUM_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "B Warp Mode",
+   "host_parameter_index": 110,
+   "host_identity_confidence": "MEDIUM",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscB.warp_mode2",
+   "raw_path": [
+    "Oscillator1",
+    "WTOsc1",
+    "plainParams",
+    "kParamWarpMenu2"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "LEAF_SET",
+   "host_parameter_present": true,
+   "host_parameter_name": "B Warp 2 Mode",
+   "host_parameter_index": 113,
+   "host_identity_confidence": "MEDIUM",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscB.warp_var2",
+   "raw_path": [
+    "Oscillator1",
+    "WTOsc1",
+    "plainParams",
+    "kParamWarpVar2"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "B Warp 2 Var",
+   "host_parameter_index": 112,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscB.wavetable",
+   "raw_path": [
+    "Oscillator1",
+    "WTOsc1",
+    "relativePathToWT"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "LEAF_SET",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "oscC.detune",
+   "raw_path": [
+    "Oscillator2",
+    "plainParams",
+    "kParamDetune"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "C Uni Detune",
+   "host_parameter_index": 156,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "HOST_TEXT_VALIDATED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscC.enabled",
+   "raw_path": [
+    "Oscillator2",
+    "plainParams",
+    "kParamEnable"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "C Enable",
+   "host_parameter_index": 130,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "HOST_TEXT_VALIDATED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscC.fine",
+   "raw_path": [
+    "Oscillator2",
+    "plainParams",
+    "kParamFine"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "C Fine",
+   "host_parameter_index": 135,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscC.octave",
+   "raw_path": [
+    "Oscillator2",
+    "plainParams",
+    "kParamOctave"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "C Octave",
+   "host_parameter_index": 133,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscC.pan",
+   "raw_path": [
+    "Oscillator2",
+    "plainParams",
+    "kParamPan"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "C Pan",
+   "host_parameter_index": 132,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscC.sample_loop_crossfade",
+   "raw_path": [
+    "Oscillator2",
+    "plainParams",
+    "kParamLoopCrossfade"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "CONTEXTUAL_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "C Loop X-Fade",
+   "host_parameter_index": 149,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "HOST_TEXT_VALIDATED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscC.sample_loop_end",
+   "raw_path": [
+    "Oscillator2",
+    "plainParams",
+    "kParamLoopEnd"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "CONTEXTUAL_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "C Loop End",
+   "host_parameter_index": 148,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscC.sample_loop_start",
+   "raw_path": [
+    "Oscillator2",
+    "plainParams",
+    "kParamLoopStart"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "CONTEXTUAL_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "C Loop Start",
+   "host_parameter_index": 147,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscC.semitone",
+   "raw_path": [
+    "Oscillator2",
+    "plainParams",
+    "kParamPitch"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "C Semi",
+   "host_parameter_index": 134,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscC.unison",
+   "raw_path": [
+    "Oscillator2",
+    "plainParams",
+    "kParamUnison"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "C Unison",
+   "host_parameter_index": 154,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscC.warp_amount",
+   "raw_path": [
+    "Oscillator2",
+    "WTOsc2",
+    "plainParams",
+    "kParamWarp"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "C Warp",
+   "host_parameter_index": 163,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscC.warp_amount2",
+   "raw_path": [
+    "Oscillator2",
+    "WTOsc2",
+    "plainParams",
+    "kParamWarp2"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "CONTEXTUAL_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "C Warp 2",
+   "host_parameter_index": 166,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscC.warp_mode",
+   "raw_path": [
+    "Oscillator2",
+    "WTOsc2",
+    "plainParams",
+    "kParamWarpMenu"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "ENUM_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "C Warp Mode",
+   "host_parameter_index": 165,
+   "host_identity_confidence": "MEDIUM",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscC.warp_mode2",
+   "raw_path": [
+    "Oscillator2",
+    "WTOsc2",
+    "plainParams",
+    "kParamWarpMenu2"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "LEAF_SET",
+   "host_parameter_present": true,
+   "host_parameter_name": "C Warp 2 Mode",
+   "host_parameter_index": 168,
+   "host_identity_confidence": "MEDIUM",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscC.warp_var2",
+   "raw_path": [
+    "Oscillator2",
+    "WTOsc2",
+    "plainParams",
+    "kParamWarpVar2"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "C Warp 2 Var",
+   "host_parameter_index": 167,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_UNOBSERVABLE",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "oscC.wavetable",
+   "raw_path": [
+    "Oscillator2",
+    "WTOsc2",
+    "relativePathToWT"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "LEAF_SET",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "oscNoise.fine",
+   "raw_path": [
+    "Oscillator3",
+    "plainParams",
+    "kParamFine"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Noise Fine",
+   "host_parameter_index": 190,
+   "host_identity_confidence": "LOW",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "oscNoise.noise_type",
+   "raw_path": [
+    "Oscillator3",
+    "NoiseOsc3",
+    "plainParams",
+    "kParamNoiseType"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "ENUM_RAW",
+   "host_parameter_present": false,
+   "host_parameter_name": null,
+   "host_parameter_index": null,
+   "host_identity_confidence": "NONE",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "DIRECT_UI_CONFIRMED",
+   "editable_note": null,
+   "bucket": "B"
+  },
+  {
+   "atlas_id": "oscNoise.pan",
+   "raw_path": [
+    "Oscillator3",
+    "plainParams",
+    "kParamPan"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Noise Pan",
+   "host_parameter_index": 187,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": true,
+   "final_conclusion": "UI_MISMATCH",
+   "editable_note": null,
+   "bucket": "D"
+  },
+  {
+   "atlas_id": "voice.voicing.legato",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamLegato"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Legato",
+   "host_parameter_index": 10,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "HOST_TEXT_VALIDATED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "voice.voicing.mono",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamMonoToggle"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Mono Toggle",
+   "host_parameter_index": 9,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "HOST_TEXT_VALIDATED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "voice.voicing.porta_always",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamPortaAlways"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Porta Always",
+   "host_parameter_index": 11,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "HOST_TEXT_VALIDATED",
+   "editable_note": null,
+   "bucket": "A"
+  },
+  {
+   "atlas_id": "voice.voicing.porta_scaled",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamPortaScaled"
+   ],
+   "serum_mcp_editable": true,
+   "mutation_mechanism": "DIRECT_RAW",
+   "host_parameter_present": true,
+   "host_parameter_name": "Porta Scaled",
+   "host_parameter_index": 12,
+   "host_identity_confidence": "HIGH",
+   "host_text_available": true,
+   "GUI_confirmed": false,
+   "final_conclusion": "HOST_TEXT_VALIDATED",
+   "editable_note": null,
+   "bucket": "A"
+  }
+ ],
+ "supersedes": "serum_mcp_exposure_crosswalk_v1.json (kept unchanged, identical bucket assignments)",
+ "terminology_clarification": "'193 controls have SOME host-parameter identity' (HIGH+MEDIUM+LOW) is not the same claim as '193 controls have a TRUSTED host-parameter identity'. Bucket A (174) already excludes LOW confidence and the 4 HIGH/MEDIUM controls that are also conformance exceptions -- it was correct in v1's JSON; only a chat summary conflated the two counts in prose. The clean breakdown:",
+ "clean_terminology": {
+  "HIGH_confidence_host_identity": 166,
+  "MEDIUM_confidence_host_identity": 12,
+  "LOW_confidence_host_identity": 15,
+  "no_host_identity": 137,
+  "bucket_A_high_or_medium_and_not_an_exception": 174,
+  "bucket_B_raw_field_only_no_confident_identity": 137,
+  "bucket_D_confirmed_conformance_exception": 19,
+  "note": "HIGH+MEDIUM totals 178; 4 of those (mixer.noise.pan, mixer.sub.pan, oscNoise.pan, oscA.warp_amount) are conformance exceptions, landing in D not A, which is why bucket A is 174 not 178."
+ },
+ "confidence_bucket_crosstab": {
+  "HIGH/A": 162,
+  "HIGH/D": 4,
+  "LOW/B": 7,
+  "LOW/D": 8,
+  "MEDIUM/A": 12,
+  "NONE/B": 130,
+  "NONE/D": 7
+ },
+ "offline_validation": {
+  "raw_path_resolution_failures": 0,
+  "undeclared_raw_path_collisions": 0,
+  "low_confidence_tie_breaks": [
+   {
+    "atlas_id": "lfo1.rate_10x",
+    "chosen": "LFO 1 Rate",
+    "alternatives": []
+   },
+   {
+    "atlas_id": "lfo2.rate_10x",
+    "chosen": "LFO 2 Rate",
+    "alternatives": []
+   },
+   {
+    "atlas_id": "lfo3.rate_10x",
+    "chosen": "LFO 3 Rate",
+    "alternatives": []
+   },
+   {
+    "atlas_id": "lfo4.rate_10x",
+    "chosen": "LFO 4 Rate",
+    "alternatives": []
+   },
+   {
+    "atlas_id": "lfo5.rate_10x",
+    "chosen": "LFO 5 Rate",
+    "alternatives": []
+   },
+   {
+    "atlas_id": "lfo6.rate_10x",
+    "chosen": "LFO 6 Rate",
+    "alternatives": []
+   },
+   {
+    "atlas_id": "macro1.name",
+    "chosen": "Macro 1",
+    "alternatives": []
+   },
+   {
+    "atlas_id": "macro2.name",
+    "chosen": "Macro 2",
+    "alternatives": []
+   },
+   {
+    "atlas_id": "macro3.name",
+    "chosen": "Macro 3",
+    "alternatives": []
+   },
+   {
+    "atlas_id": "macro4.name",
+    "chosen": "Macro 4",
+    "alternatives": []
+   },
+   {
+    "atlas_id": "macro5.name",
+    "chosen": "Macro 5",
+    "alternatives": []
+   },
+   {
+    "atlas_id": "macro6.name",
+    "chosen": "Macro 6",
+    "alternatives": []
+   },
+   {
+    "atlas_id": "macro7.name",
+    "chosen": "Macro 7",
+    "alternatives": []
+   },
+   {
+    "atlas_id": "macro8.name",
+    "chosen": "Macro 8",
+    "alternatives": []
+   },
+   {
+    "atlas_id": "oscNoise.fine",
+    "chosen": "Noise Fine",
+    "alternatives": []
+   }
+  ],
+  "conclusion": "all 330 raw paths resolve against their own structural context; no undeclared collisions; every LOW row's chosen host name and its alternatives are listed for Phase 3A to pick a deterministic target"
+ }
+}
