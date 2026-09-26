@@ -1,0 +1,433 @@
+{
+ "artifact": "mcp_smoke_phase3b_v1",
+ "n_tests": 9,
+ "source_contract": "mcp_execution_contract_v1.json (read-only)",
+ "backend": "run_mcp_execution_harness.LiveBackend: real Serum 2 VST3 in DawDreamer, sha256 stamped per row",
+ "run": "python serum2/qualification/bulk_causal/run_mcp_execution_harness.py --ids env1.attack,global.bend_range_down,arp.pattern.rate,fx.bode.blur,lfo1.dotted,lfo1.rate_10x,arp.transpose.range,fx.compressor.attack,macro1.name --out serum2/qualification/bulk_causal/giant_verify_out/bulk_ui_verification/mcp_exec_smoke_3b_results.jsonl",
+ "stop_rule": "do not start the 330 sweep if any A or B test returns MCP_EXEC_FAILED or MCP_EXEC_NOOP_SUSPECT, or any D test fails to return MCP_EXEC_CONFORMANCE_EXCEPTION",
+ "tests": [
+  {
+   "atlas_id": "env1.attack",
+   "bucket": "A",
+   "q4_mode": "NAMED",
+   "mcp_operation": {
+    "summary": "spec.envelopes[0].attack = 5.000000000000001",
+    "built_with": "serum_mcp.preset.mapping.apply_spec on the campaign companion spec (client_bodies)"
+   },
+   "mcp_edit_raw": {
+    "kind": "field",
+    "field": "attack",
+    "value": 5.000000000000001,
+    "list": "envelopes",
+    "index": 0
+   },
+   "test_value": 5.000000000000001,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "expected_raw": [
+    {
+     "path": [
+      "Env0",
+      "plainParams",
+      "kParamAttack"
+     ],
+     "value": 5.000000000000001
+    }
+   ],
+   "preset_to_create": {
+    "baseline": "SMOKE_3B_env1_attack__baseline",
+    "edited": "SMOKE_3B_env1_attack__edited",
+    "note": "labels only: bodies are built in memory (client_bodies) and reach Serum through ONE transient transport file overwritten on every load; no preset file is saved"
+   },
+   "serum_loader_action": [
+    "load(baseline body) -> state()+hosts() = pre_state/pre_hosts",
+    "load(edited body)   -> state()+hosts() = post_state/post_hosts",
+    "load(baseline body) again -> state() = restored_state (Q6 restoration check)"
+   ],
+   "readback_required": [
+    "Q3: post_state leaf at expected_raw path equals the written value (absent or unchanged from pre_state = no-op suspect)",
+    "Q6: reloading the untouched baseline reproduces pre_state at that leaf",
+    "Q4: host parameter 'Env 1 Attack' (index 224) text pre vs post"
+   ],
+   "pass_condition": "outcome MCP_EXEC_HOST_CONFIRMED: expected leaf persisted (post == written), the named host parameter's text changed pre -> post, restoration_verified true, serum_sha256 stamped",
+   "fail_condition": "MCP_EXEC_FAILED (build/load error, or the written leaf came back different) or MCP_EXEC_NOOP_SUSPECT (post_state unchanged) blocks the 330 sweep",
+   "known_exception_condition": "none declared; reference conclusion DIRECT_UI_CONFIRMED (carried from control map v3 (UI_CONFIRMED)). Not a failure: a host-text miss is recorded, not failed",
+   "prior_observed_outcome_v2": "MCP_EXEC_HOST_CONFIRMED"
+  },
+  {
+   "atlas_id": "global.bend_range_down",
+   "bucket": "A",
+   "q4_mode": "NAMED",
+   "mcp_operation": {
+    "summary": "spec.global_.bend_range_down = -12.0",
+    "built_with": "serum_mcp.preset.mapping.apply_spec on the campaign companion spec (client_bodies)"
+   },
+   "mcp_edit_raw": {
+    "kind": "singleton_field",
+    "field": "bend_range_down",
+    "value": -12.0,
+    "attr": "global_"
+   },
+   "test_value": -12.0,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "expected_raw": [
+    {
+     "path": [
+      "Global0",
+      "plainParams",
+      "kParamBendRangeDn"
+     ],
+     "value": -12.0
+    }
+   ],
+   "preset_to_create": {
+    "baseline": "SMOKE_3B_global_bend_range_down__baseline",
+    "edited": "SMOKE_3B_global_bend_range_down__edited",
+    "note": "labels only: bodies are built in memory (client_bodies) and reach Serum through ONE transient transport file overwritten on every load; no preset file is saved"
+   },
+   "serum_loader_action": [
+    "load(baseline body) -> state()+hosts() = pre_state/pre_hosts",
+    "load(edited body)   -> state()+hosts() = post_state/post_hosts",
+    "load(baseline body) again -> state() = restored_state (Q6 restoration check)"
+   ],
+   "readback_required": [
+    "Q3: post_state leaf at expected_raw path equals the written value (absent or unchanged from pre_state = no-op suspect)",
+    "Q6: reloading the untouched baseline reproduces pre_state at that leaf",
+    "Q4: host parameter 'Bend Down' (index 6) text pre vs post"
+   ],
+   "pass_condition": "outcome MCP_EXEC_HOST_CONFIRMED: expected leaf persisted (post == written), the named host parameter's text changed pre -> post, restoration_verified true, serum_sha256 stamped",
+   "fail_condition": "MCP_EXEC_FAILED (build/load error, or the written leaf came back different) or MCP_EXEC_NOOP_SUSPECT (post_state unchanged) blocks the 330 sweep",
+   "known_exception_condition": "none declared; reference conclusion DIRECT_UI_CONFIRMED (class representative: screen '-8' vs host '-8'). Not a failure: a host-text miss is recorded, not failed",
+   "prior_observed_outcome_v2": "MCP_EXEC_HOST_CONFIRMED"
+  },
+  {
+   "atlas_id": "arp.pattern.rate",
+   "bucket": "B",
+   "q4_mode": "FULL_SCAN",
+   "mcp_operation": {
+    "summary": "spec.arp.rate = 0.25",
+    "built_with": "serum_mcp.preset.mapping.apply_spec on the campaign companion spec (client_bodies)"
+   },
+   "mcp_edit_raw": {
+    "kind": "singleton_field",
+    "field": "rate",
+    "value": 0.25,
+    "attr": "arp"
+   },
+   "test_value": 0.25,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "expected_raw": [
+    {
+     "path": [
+      "ArpClip0",
+      "plainParams",
+      "kParamRate"
+     ],
+     "value": 0.25
+    }
+   ],
+   "preset_to_create": {
+    "baseline": "SMOKE_3B_arp_pattern_rate__baseline",
+    "edited": "SMOKE_3B_arp_pattern_rate__edited",
+    "note": "labels only: bodies are built in memory (client_bodies) and reach Serum through ONE transient transport file overwritten on every load; no preset file is saved"
+   },
+   "serum_loader_action": [
+    "load(baseline body) -> state()+hosts() = pre_state/pre_hosts",
+    "load(edited body)   -> state()+hosts() = post_state/post_hosts",
+    "load(baseline body) again -> state() = restored_state (Q6 restoration check)"
+   ],
+   "readback_required": [
+    "Q3: post_state leaf at expected_raw path equals the written value (absent or unchanged from pre_state = no-op suspect)",
+    "Q6: reloading the untouched baseline reproduces pre_state at that leaf",
+    "Q4: all 412 host parameter texts pre vs post"
+   ],
+   "pass_condition": "outcome MCP_EXEC_RAW_ONLY or MCP_EXEC_HOST_CONFIRMED: expected leaf persisted, restoration_verified true. Any changed host text is recorded as a new identity candidate, not a pass/fail signal",
+   "fail_condition": "MCP_EXEC_FAILED (build/load error, or the written leaf came back different) or MCP_EXEC_NOOP_SUSPECT (post_state unchanged) blocks the 330 sweep",
+   "known_exception_condition": "none declared; reference conclusion DIRECT_UI_CONFIRMED (raw 0.4 -> '1/8' (label)). Not a failure: a host-text miss is recorded, not failed",
+   "prior_observed_outcome_v2": "MCP_EXEC_RAW_ONLY"
+  },
+  {
+   "atlas_id": "fx.bode.blur",
+   "bucket": "B",
+   "q4_mode": "FULL_SCAN",
+   "mcp_operation": {
+    "summary": "spec.fx_chain = [FxUnitSpec(type=FXBode, params={kParamBlur: 50.0}, wet=100.0)]",
+    "built_with": "FxUnitSpec.model_validate + apply_spec on SPEC0 (client_bodies, fx branch)"
+   },
+   "mcp_edit_raw": {
+    "kind": "fx",
+    "fx_type": "FXBode",
+    "param": "kParamBlur",
+    "value": 50.0
+   },
+   "test_value": 50.0,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "expected_raw": [
+    {
+     "path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXBode",
+      "plainParams",
+      "kParamBlur"
+     ],
+     "value": 50.0
+    }
+   ],
+   "preset_to_create": {
+    "baseline": "SMOKE_3B_fx_bode_blur__baseline",
+    "edited": "SMOKE_3B_fx_bode_blur__edited",
+    "note": "labels only: bodies are built in memory (client_bodies) and reach Serum through ONE transient transport file overwritten on every load; no preset file is saved"
+   },
+   "serum_loader_action": [
+    "load(baseline body) -> state()+hosts() = pre_state/pre_hosts",
+    "load(edited body)   -> state()+hosts() = post_state/post_hosts",
+    "load(baseline body) again -> state() = restored_state (Q6 restoration check)"
+   ],
+   "readback_required": [
+    "Q3: post_state leaf at expected_raw path equals the written value (absent or unchanged from pre_state = no-op suspect)",
+    "Q6: reloading the untouched baseline reproduces pre_state at that leaf",
+    "Q4: all 412 host parameter texts pre vs post"
+   ],
+   "pass_condition": "outcome MCP_EXEC_RAW_ONLY or MCP_EXEC_HOST_CONFIRMED: expected leaf persisted, restoration_verified true. Any changed host text is recorded as a new identity candidate, not a pass/fail signal",
+   "fail_condition": "MCP_EXEC_FAILED (build/load error, or the written leaf came back different) or MCP_EXEC_NOOP_SUSPECT (post_state unchanged) blocks the 330 sweep",
+   "known_exception_condition": "none declared; reference conclusion UI_OBSERVABLE_BUT_UNREADABLE (no exact value after 2 hover attempts). Not a failure: RAW_ONLY is the expected outcome",
+   "prior_observed_outcome_v2": "MCP_EXEC_RAW_ONLY"
+  },
+  {
+   "atlas_id": "lfo1.dotted",
+   "bucket": "B",
+   "q4_mode": "FULL_SCAN",
+   "mcp_operation": {
+    "summary": "spec.lfos[0].dotted = True",
+    "built_with": "serum_mcp.preset.mapping.apply_spec on the campaign companion spec (client_bodies)"
+   },
+   "mcp_edit_raw": {
+    "kind": "field",
+    "field": "dotted",
+    "value": true,
+    "list": "lfos",
+    "index": 0
+   },
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
+   "expected_raw": [
+    {
+     "path": [
+      "LFO0",
+      "plainParams",
+      "kParamDotted"
+     ],
+     "value": 1.0
+    }
+   ],
+   "preset_to_create": {
+    "baseline": "SMOKE_3B_lfo1_dotted__baseline",
+    "edited": "SMOKE_3B_lfo1_dotted__edited",
+    "note": "labels only: bodies are built in memory (client_bodies) and reach Serum through ONE transient transport file overwritten on every load; no preset file is saved"
+   },
+   "serum_loader_action": [
+    "load(baseline body) -> state()+hosts() = pre_state/pre_hosts",
+    "load(edited body)   -> state()+hosts() = post_state/post_hosts",
+    "load(baseline body) again -> state() = restored_state (Q6 restoration check)"
+   ],
+   "readback_required": [
+    "Q3: post_state leaf at expected_raw path equals the written value (absent or unchanged from pre_state = no-op suspect)",
+    "Q6: reloading the untouched baseline reproduces pre_state at that leaf",
+    "Q4: all 412 host parameter texts pre vs post"
+   ],
+   "pass_condition": "outcome MCP_EXEC_RAW_ONLY or MCP_EXEC_HOST_CONFIRMED: expected leaf persisted, restoration_verified true. Any changed host text is recorded as a new identity candidate, not a pass/fail signal",
+   "fail_condition": "MCP_EXEC_FAILED (build/load error, or the written leaf came back different) or MCP_EXEC_NOOP_SUSPECT (post_state unchanged) blocks the 330 sweep",
+   "known_exception_condition": "none declared; reference conclusion DIRECT_UI_CONFIRMED (screen 'On' matches written value). Not a failure: a host-text miss is recorded, not failed",
+   "prior_observed_outcome_v2": "MCP_EXEC_RAW_ONLY"
+  },
+  {
+   "atlas_id": "lfo1.rate_10x",
+   "bucket": "B",
+   "q4_mode": "NAMED_THEN_FULL_SCAN",
+   "mcp_operation": {
+    "summary": "spec.lfos[0].rate10x = True",
+    "built_with": "serum_mcp.preset.mapping.apply_spec on the campaign companion spec (client_bodies)"
+   },
+   "mcp_edit_raw": {
+    "kind": "field",
+    "field": "rate10x",
+    "value": true,
+    "list": "lfos",
+    "index": 0
+   },
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
+   "expected_raw": [
+    {
+     "path": [
+      "LFO0",
+      "plainParams",
+      "kParamRate10x"
+     ],
+     "value": 1.0
+    }
+   ],
+   "preset_to_create": {
+    "baseline": "SMOKE_3B_lfo1_rate_10x__baseline",
+    "edited": "SMOKE_3B_lfo1_rate_10x__edited",
+    "note": "labels only: bodies are built in memory (client_bodies) and reach Serum through ONE transient transport file overwritten on every load; no preset file is saved"
+   },
+   "serum_loader_action": [
+    "load(baseline body) -> state()+hosts() = pre_state/pre_hosts",
+    "load(edited body)   -> state()+hosts() = post_state/post_hosts",
+    "load(baseline body) again -> state() = restored_state (Q6 restoration check)"
+   ],
+   "readback_required": [
+    "Q3: post_state leaf at expected_raw path equals the written value (absent or unchanged from pre_state = no-op suspect)",
+    "Q6: reloading the untouched baseline reproduces pre_state at that leaf",
+    "Q4: host parameter 'LFO 1 Rate' (index 262) first; if unchanged, all 412 host texts pre vs post"
+   ],
+   "pass_condition": "as FULL_SCAN, but the named host parameter is checked first and the 412-parameter scan runs only if it did not change",
+   "fail_condition": "MCP_EXEC_FAILED (build/load error, or the written leaf came back different) or MCP_EXEC_NOOP_SUSPECT (post_state unchanged) blocks the 330 sweep",
+   "known_exception_condition": "none declared; reference conclusion UI_UNOBSERVABLE (no 10x control in Hz mode; rate free-runs to 62.5 Hz directly. The What's New PDF's '10x Rate' may describe the free rate range itself, not a separate button, in this build.). Not a failure: RAW_ONLY is the expected outcome",
+   "prior_observed_outcome_v2": "MCP_EXEC_RAW_ONLY"
+  },
+  {
+   "atlas_id": "arp.transpose.range",
+   "bucket": "D",
+   "q4_mode": "ORACLE",
+   "mcp_operation": {
+    "summary": "spec.arp.transpose_range = 16.0",
+    "built_with": "serum_mcp.preset.mapping.apply_spec on the campaign companion spec (client_bodies)"
+   },
+   "mcp_edit_raw": {
+    "kind": "singleton_field",
+    "field": "transpose_range",
+    "value": 16.0,
+    "attr": "arp"
+   },
+   "test_value": 16.0,
+   "test_value_source": "bucket D: the value whose divergent display is already known (negative test)",
+   "expected_raw": [
+    {
+     "path": [
+      "ArpClip0",
+      "plainParams",
+      "kParamTransposeRange"
+     ],
+     "value": 16.0
+    }
+   ],
+   "preset_to_create": {
+    "baseline": "SMOKE_3B_arp_transpose_range__baseline",
+    "edited": "SMOKE_3B_arp_transpose_range__edited",
+    "note": "labels only: bodies are built in memory (client_bodies) and reach Serum through ONE transient transport file overwritten on every load; no preset file is saved"
+   },
+   "serum_loader_action": [
+    "load(baseline body) -> state()+hosts() = pre_state/pre_hosts",
+    "load(edited body)   -> state()+hosts() = post_state/post_hosts",
+    "load(baseline body) again -> state() = restored_state (Q6 restoration check)"
+   ],
+   "readback_required": [
+    "Q3: post_state leaf at expected_raw path equals the written value (absent or unchanged from pre_state = no-op suspect)",
+    "Q6: reloading the untouched baseline reproduces pre_state at that leaf",
+    "Q4/oracle: {\"kind\": \"gui_only\", \"expect\": \"screen shows 8, not 16\"}"
+   ],
+   "pass_condition": "outcome MCP_EXEC_CONFORMANCE_EXCEPTION with the observation recorded against the oracle, leaf persisted (or absent as the oracle states), restoration_verified true",
+   "fail_condition": "MCP_EXEC_FAILED (build/load error, or the written leaf came back different) or MCP_EXEC_NOOP_SUSPECT (post_state unchanged) blocks the 330 sweep",
+   "known_exception_condition": "DIVERGENT: written 16 displayed as 8; Serum's usable range is narrower than declared (reference conclusion UI_SCHEMA_MISMATCH: written 16, screen 8: Serum's range appears to stop at 8; declared domain too wide)",
+   "prior_observed_outcome_v2": "MCP_EXEC_CONFORMANCE_EXCEPTION"
+  },
+  {
+   "atlas_id": "fx.compressor.attack",
+   "bucket": "D",
+   "q4_mode": "ORACLE",
+   "mcp_operation": {
+    "summary": "spec.fx_chain = [FxUnitSpec(type=FXComp, params={kParamAttack: 100.00000000000001}, wet=100.0)]",
+    "built_with": "FxUnitSpec.model_validate + apply_spec on SPEC0 (client_bodies, fx branch)"
+   },
+   "mcp_edit_raw": {
+    "kind": "fx",
+    "fx_type": "FXComp",
+    "param": "kParamAttack",
+    "value": 100.00000000000001
+   },
+   "test_value": 100.00000000000001,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "expected_raw": [
+    {
+     "path": [
+      "FXRack0",
+      "FX",
+      0,
+      "FXComp",
+      "plainParams",
+      "kParamAttack"
+     ],
+     "value": 100.00000000000001
+    }
+   ],
+   "preset_to_create": {
+    "baseline": "SMOKE_3B_fx_compressor_attack__baseline",
+    "edited": "SMOKE_3B_fx_compressor_attack__edited",
+    "note": "labels only: bodies are built in memory (client_bodies) and reach Serum through ONE transient transport file overwritten on every load; no preset file is saved"
+   },
+   "serum_loader_action": [
+    "load(baseline body) -> state()+hosts() = pre_state/pre_hosts",
+    "load(edited body)   -> state()+hosts() = post_state/post_hosts",
+    "load(baseline body) again -> state() = restored_state (Q6 restoration check)"
+   ],
+   "readback_required": [
+    "Q3: post_state leaf at expected_raw path equals the written value (absent or unchanged from pre_state = no-op suspect)",
+    "Q6: reloading the untouched baseline reproduces pre_state at that leaf",
+    "Q4/oracle: observation recorded against the oracle, not machine-checked"
+   ],
+   "pass_condition": "outcome MCP_EXEC_CONFORMANCE_EXCEPTION with the observation recorded against the oracle, leaf persisted (or absent as the oracle states), restoration_verified true",
+   "fail_condition": "MCP_EXEC_FAILED (build/load error, or the written leaf came back different) or MCP_EXEC_NOOP_SUSPECT (post_state unchanged) blocks the 330 sweep",
+   "known_exception_condition": "DIVERGENT: displays raw ms with a numeric ratio, raw/100 ms only when ratio shows 'Limit' (control-map v8) (reference conclusion UI_SCHEMA_MISMATCH: carried from control map v3 (UI_SCHEMA_MISMATCH))",
+   "prior_observed_outcome_v2": "MCP_EXEC_CONFORMANCE_EXCEPTION"
+  },
+  {
+   "atlas_id": "macro1.name",
+   "bucket": "D",
+   "q4_mode": "ORACLE",
+   "mcp_operation": {
+    "summary": "spec.macros[0].name = 'MCP_TEST'",
+    "built_with": "serum_mcp.preset.mapping.apply_spec on the campaign companion spec (client_bodies)"
+   },
+   "mcp_edit_raw": {
+    "kind": "field",
+    "field": "name",
+    "value": "MCP_TEST",
+    "list": "macros",
+    "index": 0
+   },
+   "test_value": "MCP_TEST",
+   "test_value_source": "first vocabulary word / literal",
+   "expected_raw": [
+    {
+     "path": [
+      "Macro0",
+      "name"
+     ],
+     "value": "MCP_TEST"
+    }
+   ],
+   "preset_to_create": {
+    "baseline": "SMOKE_3B_macro1_name__baseline",
+    "edited": "SMOKE_3B_macro1_name__edited",
+    "note": "labels only: bodies are built in memory (client_bodies) and reach Serum through ONE transient transport file overwritten on every load; no preset file is saved"
+   },
+   "serum_loader_action": [
+    "load(baseline body) -> state()+hosts() = pre_state/pre_hosts",
+    "load(edited body)   -> state()+hosts() = post_state/post_hosts",
+    "load(baseline body) again -> state() = restored_state (Q6 restoration check)"
+   ],
+   "readback_required": [
+    "Q3: post_state leaf at expected_raw path equals the written value (absent or unchanged from pre_state = no-op suspect)",
+    "Q6: reloading the untouched baseline reproduces pre_state at that leaf",
+    "Q4/oracle: observation recorded against the oracle, not machine-checked"
+   ],
+   "pass_condition": "outcome MCP_EXEC_CONFORMANCE_EXCEPTION with the observation recorded against the oracle, leaf persisted (or absent as the oracle states), restoration_verified true",
+   "fail_condition": "MCP_EXEC_FAILED (build/load error, or the written leaf came back different) or MCP_EXEC_NOOP_SUSPECT (post_state unchanged) blocks the 330 sweep",
+   "known_exception_condition": "DIVERGENT: Serum shows 'Macro 1', never the written name (reference conclusion UI_MISMATCH: Serum shows 'Macro 1', not the written name: macro names are normally shown in the UI, so the raw write ['Macro0','name'] likely does not take effect)",
+   "prior_observed_outcome_v2": "MCP_EXEC_CONFORMANCE_EXCEPTION"
+  }
+ ]
+}
