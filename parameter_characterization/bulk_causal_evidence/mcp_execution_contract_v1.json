@@ -46,11 +46,11 @@
    "mcp_edit": {
     "kind": "singleton_field",
     "field": "shape",
-    "value": "Chord",
+    "value": "chord",
     "attr": "arp"
    },
-   "test_value": "Chord",
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": "chord",
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 'Chord' -> 'chord')",
    "expected_raw": [
     {
      "path": [
@@ -191,11 +191,11 @@
    "mcp_edit": {
     "kind": "singleton_field",
     "field": "thru",
-    "value": 1.0,
+    "value": true,
     "attr": "arp"
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -220,11 +220,11 @@
    "mcp_edit": {
     "kind": "singleton_field",
     "field": "first_note_retrig",
-    "value": 1.0,
+    "value": true,
     "attr": "arp"
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -249,11 +249,11 @@
    "mcp_edit": {
     "kind": "singleton_field",
     "field": "launch_retrig",
-    "value": 0.0,
+    "value": false,
     "attr": "arp"
    },
-   "test_value": 0.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": false,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 0.0 -> False)",
    "expected_raw": [
     {
      "path": [
@@ -278,11 +278,11 @@
    "mcp_edit": {
     "kind": "singleton_field",
     "field": "note_retrig",
-    "value": 1.0,
+    "value": true,
     "attr": "arp"
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -307,11 +307,11 @@
    "mcp_edit": {
     "kind": "singleton_field",
     "field": "transpose_range",
-    "value": 6.0,
+    "value": 16.0,
     "attr": "arp"
    },
-   "test_value": 6.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": 16.0,
+   "test_value_source": "bucket D: the value whose divergent display is already known (negative test)",
    "expected_raw": [
     {
      "path": [
@@ -319,13 +319,17 @@
       "plainParams",
       "kParamTransposeRange"
      ],
-     "value": 6.0
+     "value": 16.0
     }
    ],
    "q3_roundtrip_offline_confirmed": true,
    "q4_host_text_check": {
     "mode": "ORACLE",
-    "expected": "DIVERGENT: written 16 displayed as 8; Serum's usable range is narrower than declared"
+    "expected": "DIVERGENT: written 16 displayed as 8; Serum's usable range is narrower than declared",
+    "oracle_check": {
+     "kind": "gui_only",
+     "expect": "screen shows 8, not 16"
+    }
    },
    "q5_reference_conclusion": "UI_SCHEMA_MISMATCH",
    "q5_reference_reason": "written 16, screen 8: Serum's range appears to stop at 8; declared domain too wide",
@@ -423,11 +427,11 @@
    "mcp_edit": {
     "kind": "singleton_field",
     "field": "velo_enabled",
-    "value": 1.0,
+    "value": true,
     "attr": "arp"
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -452,11 +456,11 @@
    "mcp_edit": {
     "kind": "singleton_field",
     "field": "velo_retrig",
-    "value": 1.0,
+    "value": true,
     "attr": "arp"
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -1598,12 +1602,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "enabled",
-    "value": 1.0,
+    "value": true,
     "list": "filters",
     "index": 0
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -1630,12 +1634,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "key_track",
-    "value": 1.0,
+    "value": true,
     "list": "filters",
     "index": 0
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -1758,12 +1762,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "type",
-    "value": "L12",
+    "value": "lowpass_12",
     "list": "filters",
     "index": 0
    },
-   "test_value": "L12",
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": "lowpass_12",
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 'L12' -> 'lowpass_12')",
    "expected_raw": [
     {
      "path": [
@@ -1918,12 +1922,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "enabled",
-    "value": 1.0,
+    "value": true,
     "list": "filters",
     "index": 1
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -1950,12 +1954,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "key_track",
-    "value": 1.0,
+    "value": true,
     "list": "filters",
     "index": 1
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -2078,12 +2082,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "type",
-    "value": "L12",
+    "value": "lowpass_12",
     "list": "filters",
     "index": 1
    },
-   "test_value": "L12",
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": "lowpass_12",
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 'L12' -> 'lowpass_12')",
    "expected_raw": [
     {
      "path": [
@@ -2495,10 +2499,10 @@
     "kind": "fx",
     "fx_type": "FXComp",
     "param": "kParamRatio",
-    "value": 31622.7766016712
+    "value": 100.0
    },
-   "test_value": 31622.7766016712,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": 100.0,
+   "test_value_source": "bucket D: the value whose divergent display is already known (negative test)",
    "expected_raw": [
     {
      "path": [
@@ -2509,13 +2513,17 @@
       "plainParams",
       "kParamRatio"
      ],
-     "value": 31622.7766016712
+     "value": 100.0
     }
    ],
    "q3_roundtrip_offline_confirmed": true,
    "q4_host_text_check": {
     "mode": "ORACLE",
-    "expected": "DIVERGENT: raw==display for 1-8; 20 shows '32:1'; >=100 (and every value the campaign used, 210/430/31622) shows 'Limit'"
+    "expected": "DIVERGENT: raw==display for 1-8; 20 shows '32:1'; >=100 (and every value the campaign used, 210/430/31622) shows 'Limit'",
+    "oracle_check": {
+     "kind": "gui_only",
+     "expect": "ratio shows 'Limit'"
+    }
    },
    "q5_reference_conclusion": "UI_SCHEMA_MISMATCH",
    "q5_reference_reason": "carried from control map v3 (UI_SCHEMA_MISMATCH)",
@@ -2527,10 +2535,10 @@
     "kind": "fx",
     "fx_type": "FXComp",
     "param": "kParamRelease",
-    "value": 100.00000000000001
+    "value": 0.1
    },
-   "test_value": 100.00000000000001,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": 0.1,
+   "test_value_source": "bucket D: the value whose divergent display is already known (negative test)",
    "expected_raw": [
     {
      "path": [
@@ -2541,13 +2549,17 @@
       "plainParams",
       "kParamRelease"
      ],
-     "value": 100.00000000000001
+     "value": 0.1
     }
    ],
    "q3_roundtrip_offline_confirmed": true,
    "q4_host_text_check": {
     "mode": "ORACLE",
-    "expected": "DIVERGENT: displays raw ms directly; the declared minimum 0.1 shows 1000 (schema minimum invalid)"
+    "expected": "DIVERGENT: displays raw ms directly; the declared minimum 0.1 shows 1000 (schema minimum invalid)",
+    "oracle_check": {
+     "kind": "gui_only",
+     "expect": "declared minimum 0.1 shows 1000"
+    }
    },
    "q5_reference_conclusion": "UI_SCHEMA_MISMATCH",
    "q5_reference_reason": "carried from control map v3 (UI_SCHEMA_MISMATCH)",
@@ -2751,10 +2763,10 @@
     "kind": "fx",
     "fx_type": "FXDelay",
     "param": "kParamBeatSync",
-    "value": 0.0
+    "value": false
    },
-   "test_value": 0.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": false,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 0.0 -> False)",
    "expected_raw": [
     {
      "path": [
@@ -2847,10 +2859,10 @@
     "kind": "fx",
     "fx_type": "FXDelay",
     "param": "kParamLink",
-    "value": 1.0
+    "value": true
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -4153,11 +4165,11 @@
    "mcp_edit": {
     "kind": "singleton_field",
     "field": "fx_bus1_destination",
-    "value": 1.0,
+    "value": "master",
     "attr": "global_"
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": "master",
+   "test_value_source": "bucket D: the value whose divergent display is already known (negative test)",
    "expected_raw": [
     {
      "path": [
@@ -4165,13 +4177,17 @@
       "plainParams",
       "kParamFXBus1Dest"
      ],
-     "value": 2.0
+     "value": 1.0
     }
    ],
    "q3_roundtrip_offline_confirmed": true,
    "q4_host_text_check": {
     "mode": "ORACLE",
-    "expected": "DIVERGENT: schema word 'master' (raw 1.0) displays DIRECT"
+    "expected": "DIVERGENT: schema word 'master' (raw 1.0) displays DIRECT",
+    "oracle_check": {
+     "kind": "gui_only",
+     "expect": "BUS 1 -> DIRECT"
+    }
    },
    "q5_reference_conclusion": "UI_SCHEMA_MISMATCH",
    "q5_reference_reason": "carried from control map v3 (UI_SCHEMA_MISMATCH)",
@@ -4211,11 +4227,11 @@
    "mcp_edit": {
     "kind": "singleton_field",
     "field": "fx_bus2_destination",
-    "value": 1.0,
+    "value": "direct",
     "attr": "global_"
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": "direct",
+   "test_value_source": "bucket D: the value whose divergent display is already known (negative test)",
    "expected_raw": [
     {
      "path": [
@@ -4229,7 +4245,11 @@
    "q3_roundtrip_offline_confirmed": true,
    "q4_host_text_check": {
     "mode": "ORACLE",
-    "expected": "DIVERGENT: schema word 'direct' (raw 2.0) displays BUS 1"
+    "expected": "DIVERGENT: schema word 'direct' (raw 2.0) displays BUS 1",
+    "oracle_check": {
+     "kind": "gui_only",
+     "expect": "BUS 2 -> BUS 1"
+    }
    },
    "q5_reference_conclusion": "UI_SCHEMA_MISMATCH",
    "q5_reference_reason": "carried from control map v3 (UI_SCHEMA_MISMATCH)",
@@ -4298,11 +4318,11 @@
    "mcp_edit": {
     "kind": "singleton_field",
     "field": "legato",
-    "value": 1.0,
+    "value": true,
     "attr": "global_"
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -4329,11 +4349,11 @@
    "mcp_edit": {
     "kind": "singleton_field",
     "field": "limit_same_note_polyphony",
-    "value": 1.0,
+    "value": true,
     "attr": "global_"
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -4358,11 +4378,11 @@
    "mcp_edit": {
     "kind": "singleton_field",
     "field": "master_volume",
-    "value": 0.5000000000000001,
+    "value": 0.9,
     "attr": "global_"
    },
-   "test_value": 0.5000000000000001,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": 0.9,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (original pick 0.5000000000000001 was a no-op: it equals this field's own default; retried at fraction 0.90 of the range instead)",
    "expected_raw": [
     {
      "path": [
@@ -4370,7 +4390,7 @@
       "plainParams",
       "kParamMasterVolume"
      ],
-     "value": 0.5000000000000001
+     "value": 0.9
     }
    ],
    "q3_roundtrip_offline_confirmed": true,
@@ -4389,11 +4409,11 @@
    "mcp_edit": {
     "kind": "singleton_field",
     "field": "mono",
-    "value": 1.0,
+    "value": true,
     "attr": "global_"
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -4420,11 +4440,11 @@
    "mcp_edit": {
     "kind": "singleton_field",
     "field": "note_latch",
-    "value": 1.0,
+    "value": true,
     "attr": "global_"
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -4507,11 +4527,11 @@
    "mcp_edit": {
     "kind": "singleton_field",
     "field": "porta_always",
-    "value": 1.0,
+    "value": true,
     "attr": "global_"
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -4538,11 +4558,11 @@
    "mcp_edit": {
     "kind": "singleton_field",
     "field": "porta_scaled",
-    "value": 1.0,
+    "value": true,
     "attr": "global_"
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -4629,11 +4649,11 @@
    "mcp_edit": {
     "kind": "singleton_field",
     "field": "s1_compatibility",
-    "value": 1.0,
+    "value": true,
     "attr": "global_"
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -4749,11 +4769,11 @@
    "mcp_edit": {
     "kind": "singleton_field",
     "field": "use_ultra_on_render",
-    "value": 1.0,
+    "value": true,
     "attr": "global_"
    },
-   "test_value": 1.0,
-   "test_value_source": "the non-default boolean state",
+   "test_value": true,
+   "test_value_source": "bucket D: the value whose divergent display is already known (negative test)",
    "expected_raw": [
     {
      "path": [
@@ -4767,7 +4787,11 @@
    "q3_roundtrip_offline_confirmed": true,
    "q4_host_text_check": {
     "mode": "ORACLE",
-    "expected": "EXPECT NO DIFF: confirmed by direct toggle+save+diff test not persisted into any preset"
+    "expected": "EXPECT NO DIFF: confirmed by direct toggle+save+diff test not persisted into any preset",
+    "oracle_check": {
+     "kind": "not_persisted",
+     "expect": "leaf absent from Serum's re-saved state"
+    }
    },
    "q5_reference_conclusion": "RESIDUAL_NOT_STORED",
    "q5_reference_reason": "CONFIRMED by direct test (not just inferred from the campaign): the 'Use Ultra quality when rendering' toggle in GLOBAL preferences was switched off and saved; the file showed no difference from the baseline. This is an application-level preference, not a value Serum persists into a preset.",
@@ -5012,12 +5036,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "beat_sync",
-    "value": 0.0,
+    "value": false,
     "list": "lfos",
     "index": 0
    },
-   "test_value": 0.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": false,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 0.0 -> False)",
    "expected_raw": [
     {
      "path": [
@@ -5076,12 +5100,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "dotted",
-    "value": 1.0,
+    "value": true,
     "list": "lfos",
     "index": 0
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -5136,12 +5160,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "mono",
-    "value": 1.0,
+    "value": true,
     "list": "lfos",
     "index": 0
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -5198,12 +5222,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "rate10x",
-    "value": 1.0,
+    "value": true,
     "list": "lfos",
     "index": 0
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -5262,12 +5286,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "shape",
-    "value": "RandomSH",
+    "value": "random_sh",
     "list": "lfos",
     "index": 0
    },
-   "test_value": "RandomSH",
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": "random_sh",
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 'RandomSH' -> 'random_sh')",
    "expected_raw": [
     {
      "path": [
@@ -5354,12 +5378,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "triplets",
-    "value": 1.0,
+    "value": true,
     "list": "lfos",
     "index": 0
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -5384,12 +5408,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "beat_sync",
-    "value": 0.0,
+    "value": false,
     "list": "lfos",
     "index": 1
    },
-   "test_value": 0.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": false,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 0.0 -> False)",
    "expected_raw": [
     {
      "path": [
@@ -5448,12 +5472,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "dotted",
-    "value": 1.0,
+    "value": true,
     "list": "lfos",
     "index": 1
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -5508,12 +5532,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "mono",
-    "value": 1.0,
+    "value": true,
     "list": "lfos",
     "index": 1
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -5570,12 +5594,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "rate10x",
-    "value": 1.0,
+    "value": true,
     "list": "lfos",
     "index": 1
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -5634,12 +5658,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "shape",
-    "value": "RandomSH",
+    "value": "random_sh",
     "list": "lfos",
     "index": 1
    },
-   "test_value": "RandomSH",
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": "random_sh",
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 'RandomSH' -> 'random_sh')",
    "expected_raw": [
     {
      "path": [
@@ -5726,12 +5750,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "triplets",
-    "value": 1.0,
+    "value": true,
     "list": "lfos",
     "index": 1
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -5756,12 +5780,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "beat_sync",
-    "value": 0.0,
+    "value": false,
     "list": "lfos",
     "index": 2
    },
-   "test_value": 0.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": false,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 0.0 -> False)",
    "expected_raw": [
     {
      "path": [
@@ -5820,12 +5844,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "dotted",
-    "value": 1.0,
+    "value": true,
     "list": "lfos",
     "index": 2
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -5880,12 +5904,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "mono",
-    "value": 1.0,
+    "value": true,
     "list": "lfos",
     "index": 2
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -5942,12 +5966,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "rate10x",
-    "value": 1.0,
+    "value": true,
     "list": "lfos",
     "index": 2
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -6006,12 +6030,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "shape",
-    "value": "RandomSH",
+    "value": "random_sh",
     "list": "lfos",
     "index": 2
    },
-   "test_value": "RandomSH",
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": "random_sh",
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 'RandomSH' -> 'random_sh')",
    "expected_raw": [
     {
      "path": [
@@ -6098,12 +6122,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "triplets",
-    "value": 1.0,
+    "value": true,
     "list": "lfos",
     "index": 2
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -6128,12 +6152,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "beat_sync",
-    "value": 0.0,
+    "value": false,
     "list": "lfos",
     "index": 3
    },
-   "test_value": 0.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": false,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 0.0 -> False)",
    "expected_raw": [
     {
      "path": [
@@ -6192,12 +6216,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "dotted",
-    "value": 1.0,
+    "value": true,
     "list": "lfos",
     "index": 3
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -6252,12 +6276,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "mono",
-    "value": 1.0,
+    "value": true,
     "list": "lfos",
     "index": 3
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -6314,12 +6338,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "rate10x",
-    "value": 1.0,
+    "value": true,
     "list": "lfos",
     "index": 3
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -6378,12 +6402,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "shape",
-    "value": "RandomSH",
+    "value": "random_sh",
     "list": "lfos",
     "index": 3
    },
-   "test_value": "RandomSH",
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": "random_sh",
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 'RandomSH' -> 'random_sh')",
    "expected_raw": [
     {
      "path": [
@@ -6470,12 +6494,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "triplets",
-    "value": 1.0,
+    "value": true,
     "list": "lfos",
     "index": 3
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -6500,12 +6524,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "beat_sync",
-    "value": 0.0,
+    "value": false,
     "list": "lfos",
     "index": 4
    },
-   "test_value": 0.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": false,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 0.0 -> False)",
    "expected_raw": [
     {
      "path": [
@@ -6564,12 +6588,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "dotted",
-    "value": 1.0,
+    "value": true,
     "list": "lfos",
     "index": 4
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -6624,12 +6648,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "mono",
-    "value": 1.0,
+    "value": true,
     "list": "lfos",
     "index": 4
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -6686,12 +6710,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "rate10x",
-    "value": 1.0,
+    "value": true,
     "list": "lfos",
     "index": 4
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -6750,12 +6774,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "shape",
-    "value": "RandomSH",
+    "value": "random_sh",
     "list": "lfos",
     "index": 4
    },
-   "test_value": "RandomSH",
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": "random_sh",
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 'RandomSH' -> 'random_sh')",
    "expected_raw": [
     {
      "path": [
@@ -6842,12 +6866,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "triplets",
-    "value": 1.0,
+    "value": true,
     "list": "lfos",
     "index": 4
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -6872,12 +6896,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "beat_sync",
-    "value": 0.0,
+    "value": false,
     "list": "lfos",
     "index": 5
    },
-   "test_value": 0.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": false,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 0.0 -> False)",
    "expected_raw": [
     {
      "path": [
@@ -6936,12 +6960,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "dotted",
-    "value": 1.0,
+    "value": true,
     "list": "lfos",
     "index": 5
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -6996,12 +7020,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "mono",
-    "value": 1.0,
+    "value": true,
     "list": "lfos",
     "index": 5
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -7058,12 +7082,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "rate10x",
-    "value": 1.0,
+    "value": true,
     "list": "lfos",
     "index": 5
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -7122,12 +7146,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "shape",
-    "value": "RandomSH",
+    "value": "random_sh",
     "list": "lfos",
     "index": 5
    },
-   "test_value": "RandomSH",
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": "random_sh",
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 'RandomSH' -> 'random_sh')",
    "expected_raw": [
     {
      "path": [
@@ -7214,12 +7238,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "triplets",
-    "value": 1.0,
+    "value": true,
     "list": "lfos",
     "index": 5
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -7796,12 +7820,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "enabled",
-    "value": 1.0,
+    "value": true,
     "list": "filters",
     "index": 0
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -7924,12 +7948,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "enabled",
-    "value": 1.0,
+    "value": true,
     "list": "filters",
     "index": 1
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -8052,12 +8076,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "enabled",
-    "value": 1.0,
+    "value": true,
     "list": "oscillators",
     "index": 3
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -8116,12 +8140,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "pan",
-    "value": -25.0,
+    "value": -20.0,
     "list": "oscillators",
     "index": 3
    },
-   "test_value": -25.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": -20.0,
+   "test_value_source": "bucket D: the value whose divergent display is already known (negative test)",
    "expected_raw": [
     {
      "path": [
@@ -8129,13 +8153,18 @@
       "plainParams",
       "kParamPan"
      ],
-     "value": -25.0
+     "value": -20.0
     }
    ],
    "q3_roundtrip_offline_confirmed": true,
    "q4_host_text_check": {
     "mode": "ORACLE",
-    "expected": "DIVERGENT: display is written+1 toward zero (e.g. -20 -> '-19 L')"
+    "expected": "DIVERGENT: display is written+1 toward zero (e.g. -20 -> '-19 L')",
+    "oracle_check": {
+     "kind": "host_text",
+     "param": "Noise Pan",
+     "expect": "-19 L"
+    }
    },
    "q5_reference_conclusion": "UI_MISMATCH",
    "q5_reference_reason": "written -20, screen -19 L (host text agrees): pan display off by one",
@@ -8498,12 +8527,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "enabled",
-    "value": 1.0,
+    "value": true,
     "list": "oscillators",
     "index": 4
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -8562,12 +8591,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "pan",
-    "value": -25.0,
+    "value": -4.0,
     "list": "oscillators",
     "index": 4
    },
-   "test_value": -25.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": -4.0,
+   "test_value_source": "bucket D: the value whose divergent display is already known (negative test)",
    "expected_raw": [
     {
      "path": [
@@ -8575,13 +8604,18 @@
       "plainParams",
       "kParamPan"
      ],
-     "value": -25.0
+     "value": -4.0
     }
    ],
    "q3_roundtrip_offline_confirmed": true,
    "q4_host_text_check": {
     "mode": "ORACLE",
-    "expected": "DIVERGENT: display is written+1 toward zero (e.g. -4 -> '-3 L')"
+    "expected": "DIVERGENT: display is written+1 toward zero (e.g. -4 -> '-3 L')",
+    "oracle_check": {
+     "kind": "host_text",
+     "param": "Sub Pan",
+     "expect": "-3 L"
+    }
    },
    "q5_reference_conclusion": "UI_MISMATCH",
    "q5_reference_reason": "written -4, screen -3 L (host text agrees): pan display off by one",
@@ -8624,12 +8658,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "enabled",
-    "value": 0.0,
+    "value": false,
     "list": "oscillators",
     "index": 0
    },
-   "test_value": 0.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": false,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 0.0 -> False)",
    "expected_raw": [
     {
      "path": [
@@ -8976,12 +9010,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "warp_mode",
-    "value": "kAM_OSC",
+    "value": "am",
     "list": "oscillators",
     "index": 0
    },
-   "test_value": "kAM_OSC",
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": "am",
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 'kAM_OSC' -> 'am')",
    "expected_raw": [
     {
      "path": [
@@ -9021,6 +9055,15 @@
       "Oscillator0",
       "WTOsc0",
       "plainParams",
+      "kParamWarp2"
+     ],
+     "value": 0.0
+    },
+    {
+     "path": [
+      "Oscillator0",
+      "WTOsc0",
+      "plainParams",
       "kParamWarpMenu2"
      ],
      "value": "kFM_OSC"
@@ -9033,15 +9076,6 @@
       "kParamXfadeMode"
      ],
      "value": 1.0
-    },
-    {
-     "path": [
-      "Oscillator0",
-      "WTOsc0",
-      "plainParams",
-      "kParamWarp2"
-     ],
-     "value": 0.0
     }
    ],
    "q3_roundtrip_offline_confirmed": true,
@@ -9163,12 +9197,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "enabled",
-    "value": 1.0,
+    "value": true,
     "list": "oscillators",
     "index": 1
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -9517,12 +9551,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "warp_mode",
-    "value": "kAM_OSC",
+    "value": "am",
     "list": "oscillators",
     "index": 1
    },
-   "test_value": "kAM_OSC",
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": "am",
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 'kAM_OSC' -> 'am')",
    "expected_raw": [
     {
      "path": [
@@ -9562,6 +9596,15 @@
       "Oscillator1",
       "WTOsc1",
       "plainParams",
+      "kParamWarp2"
+     ],
+     "value": 0.0
+    },
+    {
+     "path": [
+      "Oscillator1",
+      "WTOsc1",
+      "plainParams",
       "kParamWarpMenu2"
      ],
      "value": "kFM_OSC"
@@ -9574,15 +9617,6 @@
       "kParamXfadeMode"
      ],
      "value": 1.0
-    },
-    {
-     "path": [
-      "Oscillator1",
-      "WTOsc1",
-      "plainParams",
-      "kParamWarp2"
-     ],
-     "value": 0.0
     }
    ],
    "q3_roundtrip_offline_confirmed": true,
@@ -9704,12 +9738,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "enabled",
-    "value": 1.0,
+    "value": true,
     "list": "oscillators",
     "index": 2
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -10058,12 +10092,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "warp_mode",
-    "value": "kAM_OSC",
+    "value": "am",
     "list": "oscillators",
     "index": 2
    },
-   "test_value": "kAM_OSC",
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": "am",
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 'kAM_OSC' -> 'am')",
    "expected_raw": [
     {
      "path": [
@@ -10103,6 +10137,15 @@
       "Oscillator2",
       "WTOsc2",
       "plainParams",
+      "kParamWarp2"
+     ],
+     "value": 0.0
+    },
+    {
+     "path": [
+      "Oscillator2",
+      "WTOsc2",
+      "plainParams",
       "kParamWarpMenu2"
      ],
      "value": "kFM_OSC"
@@ -10115,15 +10158,6 @@
       "kParamXfadeMode"
      ],
      "value": 1.0
-    },
-    {
-     "path": [
-      "Oscillator2",
-      "WTOsc2",
-      "plainParams",
-      "kParamWarp2"
-     ],
-     "value": 0.0
     }
    ],
    "q3_roundtrip_offline_confirmed": true,
@@ -10276,12 +10310,12 @@
    "mcp_edit": {
     "kind": "field",
     "field": "pan",
-    "value": -25.0,
+    "value": -20.0,
     "list": "oscillators",
     "index": 3
    },
-   "test_value": -25.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": -20.0,
+   "test_value_source": "bucket D: the value whose divergent display is already known (negative test)",
    "expected_raw": [
     {
      "path": [
@@ -10289,13 +10323,18 @@
       "plainParams",
       "kParamPan"
      ],
-     "value": -25.0
+     "value": -20.0
     }
    ],
    "q3_roundtrip_offline_confirmed": true,
    "q4_host_text_check": {
     "mode": "ORACLE",
-    "expected": "DIVERGENT: alias of mixer.noise.pan, same off-by-one"
+    "expected": "DIVERGENT: alias of mixer.noise.pan, same off-by-one",
+    "oracle_check": {
+     "kind": "host_text",
+     "param": "Noise Pan",
+     "expect": "-19 L"
+    }
    },
    "q5_reference_conclusion": "UI_MISMATCH",
    "q5_reference_reason": "alias of mixer.noise.pan: written -20, screen -19 L",
@@ -10306,11 +10345,11 @@
    "mcp_edit": {
     "kind": "singleton_field",
     "field": "legato",
-    "value": 1.0,
+    "value": true,
     "attr": "global_"
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -10337,11 +10376,11 @@
    "mcp_edit": {
     "kind": "singleton_field",
     "field": "mono",
-    "value": 1.0,
+    "value": true,
     "attr": "global_"
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -10368,11 +10407,11 @@
    "mcp_edit": {
     "kind": "singleton_field",
     "field": "porta_always",
-    "value": 1.0,
+    "value": true,
     "attr": "global_"
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [
@@ -10399,11 +10438,11 @@
    "mcp_edit": {
     "kind": "singleton_field",
     "field": "porta_scaled",
-    "value": 1.0,
+    "value": true,
     "attr": "global_"
    },
-   "test_value": 1.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
+   "test_value": true,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (sent in client form: 1.0 -> True)",
    "expected_raw": [
     {
      "path": [

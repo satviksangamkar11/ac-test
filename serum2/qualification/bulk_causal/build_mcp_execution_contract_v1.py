@@ -46,6 +46,8 @@ from preset_build import BASE, SPEC0, pack_unpack  # noqa: E402
 from range_plan import close, plan as range_plan  # noqa: E402
 from serum_mcp.generation.spec import FxUnitSpec  # noqa: E402
 from serum_mcp.preset.mapping import apply_spec  # noqa: E402
+from campaign_derive import leaves  # noqa: E402
+from run_mcp_execution_harness import client_bodies  # noqa: E402
 
 D_ORACLES = {
     "fx.compressor.attack": "DIVERGENT: displays raw ms with a numeric ratio, raw/100 ms only when ratio shows 'Limit' (control-map v8)",
@@ -64,21 +66,42 @@ D_ORACLES.update({"macro%d.name" % i: "DIVERGENT: Serum shows 'Macro %d', never 
 
 
 def spec_edit_and_diff(ctrl, atlas_id, value):
-    """(mcp_edit dict, [(path, old, new), ...]) for one binding-table entry, reusing campaign_derive's own field
-    setters so this is exactly the encoding path a real serum-mcp call takes."""
+    """(mcp_edit dict, [(path, old, new), ...]) through the SAME validated client path the live harness uses
+    (run_mcp_execution_harness.client_bodies): pydantic validation first, then apply_spec."""
+    b0, b1 = client_bodies(ctrl, value)
     if ctrl["kind"] == "fx":
-        path = ["FXRack0", "FX", 0, ctrl["fx_type"], "plainParams", ctrl["param"]]
-        b0 = apply_spec(BASE.data, SPEC0.model_copy(update={"fx_chain": [FxUnitSpec(type=ctrl["fx_type"], params={}, wet=100.0)]}))
-        b1 = apply_spec(BASE.data, SPEC0.model_copy(update={"fx_chain": [FxUnitSpec(type=ctrl["fx_type"], params={ctrl["param"]: value}, wet=100.0)]}))
         edit = {"kind": "fx", "fx_type": ctrl["fx_type"], "param": ctrl["param"], "value": value}
-        got = body_get(b1, path)
-        return edit, [(path, body_get(b0, path), got)]
-    spec_base, _ctx = companion_spec(ctrl)
-    spec_base = spec_base or base_spec()
-    d = diff_for(spec_base, ctrl, value)
-    field_desc = {"list": ctrl["list"], "index": ctrl["index"]} if ctrl["kind"] == "field" else {"attr": ctrl["attr"]}
-    edit = {"kind": ctrl["kind"], "field": ctrl["field"], "value": value, **field_desc}
-    return edit, d
+    else:
+        field_desc = {"list": ctrl["list"], "index": ctrl["index"]} if ctrl["kind"] == "field" else {"attr": ctrl["attr"]}
+        edit = {"kind": ctrl["kind"], "field": ctrl["field"], "value": value, **field_desc}
+    return edit, leaves(b0, b1)
+
+
+def to_client_value(value, domain, param):
+    """The value in the form a serum-mcp client sends: booleans as bool, vocabulary enums as the spec WORD (the
+    manifest's vocabulary_map maps word -> raw; a raw value like 'kSync' or 2.0 is mapped back to its word)."""
+    if domain["kind"] == "bool":
+        return bool(value)
+    vm = (param or {}).get("vocabulary_map")
+    if vm and value not in vm:
+        words = [w for w, raw in vm.items() if raw == value]
+        if words:
+            return words[0]
+    return value
+
+
+# bucket D: write the exact value whose divergent display is already known, so the negative test can show it
+D_ORACLE_VALUES = {
+    "arp.transpose.range": (16.0, {"kind": "gui_only", "expect": "screen shows 8, not 16"}),
+    "mixer.noise.pan": (-20.0, {"kind": "host_text", "param": "Noise Pan", "expect": "-19 L"}),
+    "oscNoise.pan": (-20.0, {"kind": "host_text", "param": "Noise Pan", "expect": "-19 L"}),
+    "mixer.sub.pan": (-4.0, {"kind": "host_text", "param": "Sub Pan", "expect": "-3 L"}),
+    "fx.compressor.ratio": (100.0, {"kind": "gui_only", "expect": "ratio shows 'Limit'"}),
+    "fx.compressor.release": (0.1, {"kind": "gui_only", "expect": "declared minimum 0.1 shows 1000"}),
+    "global.fx_bus1_destination": ("master", {"kind": "gui_only", "expect": "BUS 1 -> DIRECT"}),
+    "global.fx_bus2_destination": ("direct", {"kind": "gui_only", "expect": "BUS 2 -> BUS 1"}),
+    "global.use_ultra_on_render": (True, {"kind": "not_persisted", "expect": "leaf absent from Serum's re-saved state"}),
+}
 
 
 def pick_test_value(plan_row, domain, mutation, campaign_rec=None):
@@ -104,7 +127,10 @@ def pick_test_value(plan_row, domain, mutation, campaign_rec=None):
 
 def q4_strategy(row, cmap_row):
     if row["atlas_id"] in D_ORACLES:
-        return {"mode": "ORACLE", "expected": D_ORACLES[row["atlas_id"]]}
+        out = {"mode": "ORACLE", "expected": D_ORACLES[row["atlas_id"]]}
+        if row["atlas_id"] in D_ORACLE_VALUES:
+            out["oracle_check"] = D_ORACLE_VALUES[row["atlas_id"]][1]
+        return out
     if row["host_identity_confidence"] in ("HIGH", "MEDIUM"):
         return {"mode": "NAMED", "host_parameter": row["host_parameter_name"], "host_index": row["host_parameter_index"],
                "expect": "this parameter's text changes from its pre-edit reading"}
@@ -138,6 +164,13 @@ def main():
                       json.load(open(os.path.join(ED, "residual_arp_transpose_shape_v1.json")))["resolved"]]}
             mutation = {"kind": "singleton_field"}
         value, why = pick_test_value(plan.get(aid), domain, mutation, campaign_recs.get(aid))
+        if aid in D_ORACLE_VALUES:
+            value, why = D_ORACLE_VALUES[aid][0], "bucket D: the value whose divergent display is already known (negative test)"
+        elif value is not None:
+            cv = to_client_value(value, domain, p)
+            if cv != value or type(cv) is not type(value):
+                why += " (sent in client form: %r -> %r)" % (value, cv)
+            value = cv
         if value is None and domain["kind"] == "open":
             skipped.append({"atlas_id": aid, "reason": "open domain, no declared range to pick a test value from"})
             continue
@@ -146,6 +179,10 @@ def main():
         except Exception as e:
             skipped.append({"atlas_id": aid, "reason": "apply_spec rejected the chosen test value: %s" % e})
             continue
+        def _real(d):   # drop leaves whose old and new values are equal within float noise (0.5 -> 0.5000000000000001)
+            return [x for x in d if not (isinstance(x[1], (int, float)) and isinstance(x[2], (int, float))
+                                         and not isinstance(x[1], bool) and close(x[1], x[2]))]
+        diff = _real(diff)
         if not diff and domain["kind"] in ("continuous", "signed", "int", "log"):
             # the chosen value produced a NO-OP diff (it happened to equal this field's own default, e.g. the
             # domain midpoint on a symmetric 0..100 range) -- retry with other fractions of the range until one
@@ -159,6 +196,7 @@ def main():
                     edit2, diff2 = spec_edit_and_diff(ctrl, aid, alt)
                 except Exception:
                     continue
+                diff2 = _real(diff2)
                 if diff2:
                     why = why + (" (original pick %r was a no-op: it equals this field's own default; retried at "
                                  "fraction %.2f of the range instead)" % (value, frac))
