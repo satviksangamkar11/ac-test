@@ -186,3 +186,44 @@ def test_voice_priority_is_a_known_exception_tested_with_a_real_word(contract, b
     assert r["bucket"] == "D" and r["test_value"] == "Low"
     res = run(r, bt["global.voice_priority"])
     assert res["outcome"] == "MCP_EXEC_CONFORMANCE_EXCEPTION" and res["oracle_match"] is True
+
+
+def test_restoration_verified_when_reloading_baseline_reproduces_pre_state(contract, bt):
+    """Q6: a normal row reloads the untouched baseline body last and must land back on pre_state."""
+    r = named_row(contract)
+    res = run(r, bt[r["atlas_id"]], {r["q4_host_text_check"]["host_parameter"]: r["expected_raw"][0]["path"]})
+    assert res["restoration_verified"] is True
+    assert all("restored" in l for l in res["q3_leaves"])
+
+
+def test_restoration_fails_when_reload_does_not_reproduce_pre_state(contract, bt):
+    """A backend whose third load (n==3) does not return to pre_state must be caught, not silently accepted."""
+    r = named_row(contract)
+    path = r["expected_raw"][0]["path"]
+
+    def corrupt_restore(body):
+        cur = body
+        for k in path[:-1]:
+            cur = cur[k]
+        cur[path[-1]] = (cur.get(path[-1]) or 0) + 999.0
+
+    class ThirdLoadCorrupts(h.FakeBackend):
+        def __init__(self, host_paths):
+            super().__init__(host_paths)
+            self.n = 0
+
+        def load(self, body):
+            self.n += 1
+            super().load(body)
+            if self.n == 3:
+                corrupt_restore(self.body)
+
+    res = h.run_row(r, bt[r["atlas_id"]], ThirdLoadCorrupts({r["q4_host_text_check"]["host_parameter"]: path}))
+    assert res["restoration_verified"] is False
+
+
+def test_fake_backend_never_stamps_a_serum_sha(contract, bt):
+    """FakeBackend results must be unambiguously excluded from capability-evidence promotion."""
+    r = named_row(contract)
+    res = run(r, bt[r["atlas_id"]], {r["q4_host_text_check"]["host_parameter"]: r["expected_raw"][0]["path"]})
+    assert res["serum_sha256"] is None

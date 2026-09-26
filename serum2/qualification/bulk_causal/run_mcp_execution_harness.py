@@ -6,16 +6,21 @@ DawDreamer (serum_backend.SerumBackend) -- no GUI, no clicking.
     python run_mcp_execution_harness.py --fake --all        # offline end-to-end check (no Serum)
     python run_mcp_execution_harness.py --ids a,b,c         # re-run specific rows
 
-Per row, two loads into the same live Serum instance:
+Per row, three loads into the same live Serum instance:
   1. baseline body (the row's structural context, no edit)  -> pre_state (Serum's own re-save), pre_hosts
   2. edited body (context + the row's mcp_edit, built through serum-mcp's apply_spec) -> post_state, post_hosts
-and five answers:
+  3. the SAME baseline body again (unedited) -> restored_state, to prove the edit left no residue
+and six answers:
   Q1 addressable     apply_spec built the edited body
   Q2 raw written     every expected_raw leaf is in the edited body we sent
   Q3 Serum persisted every expected_raw leaf in post_state equals the written value; a leaf ABSENT from post_state
                      (Serum omits values equal to its own default) or unchanged from pre_state is a no-op suspect
   Q4 host text       per the row's q4_host_text_check.mode (NAMED / NAMED_THEN_FULL_SCAN / FULL_SCAN / ORACLE)
   Q5 reference       the control map v8 conclusion this result should agree with
+  Q6 restoration     reloading the untouched baseline body afterward reproduces pre_state for every judged leaf
+                     (restoration_verified); required before a row can be promoted to capability evidence
+Every result also carries serum_sha256, the exact Serum binary the row ran against (None for FakeBackend, which
+must never be promoted as capability evidence).
 Exactly one outcome per row:
   MCP_EXEC_HOST_CONFIRMED         persisted, and a host parameter's text changed (named, or discovered by scan)
   MCP_EXEC_CONFIRMED              persisted, but the NAMED host parameter did not change (worth a look)
@@ -57,8 +62,11 @@ class LiveBackend:
     """Real Serum 2 via DawDreamer, exactly the load path the campaign and dump_reference_parameter_text.py used."""
 
     def __init__(self):
+        import hashlib
         import serum_backend as sb   # lazy: only importable on the Serum machine
+        from serum2.producer.execution_epoch import SERUM_BINARY
         self.b = sb.SerumBackend({})
+        self.serum_sha256 = hashlib.sha256(open(SERUM_BINARY, "rb").read()).hexdigest()
 
     def load(self, body):
         self.b.load(body)
@@ -79,6 +87,7 @@ class FakeBackend:
     def __init__(self, host_paths):
         self.host_paths = host_paths   # host name -> raw path
         self.body = None
+        self.serum_sha256 = None   # never a real Serum; must never be promoted as capability evidence
 
     def load(self, body):
         self.body = copy.deepcopy(body)
@@ -118,7 +127,8 @@ def same(a, b):
 # ------------------------------------------------------------------------------------------------ one row -----------
 def run_row(row, ctrl, backend):
     out = {"atlas_id": row["atlas_id"], "bucket": row["bucket"], "test_value": row["test_value"],
-           "q4_mode": row["q4_host_text_check"]["mode"], "q5_reference": row["q5_reference_conclusion"]}
+           "q4_mode": row["q4_host_text_check"]["mode"], "q5_reference": row["q5_reference_conclusion"],
+           "serum_sha256": getattr(backend, "serum_sha256", None)}
     try:
         base, edited = build_bodies(row, ctrl)
     except Exception as ex:
@@ -132,6 +142,8 @@ def run_row(row, ctrl, backend):
         pre_state, pre_hosts = backend.state(), backend.hosts()
         backend.load(edited)
         post_state, post_hosts = backend.state(), backend.hosts()
+        backend.load(base)   # Q6: reload the untouched baseline body -- proves the edit didn't leave Serum in a
+        restored_state = backend.state()   # different resting state (nothing about "restoring a knob"; base was never touched)
     except Exception as ex:
         out.update(outcome="MCP_EXEC_FAILED", error="load: %s" % ex, trace=traceback.format_exc()[-400:])
         return out
@@ -140,14 +152,18 @@ def run_row(row, ctrl, backend):
     primary = row.get("primary_path")
     for d in exp:
         pre, post = body_get(pre_state, d["path"]), body_get(post_state, d["path"])
-        l = {"path": d["path"], "written": d["value"], "pre": pre, "post": post,
+        restored = body_get(restored_state, d["path"])
+        l = {"path": d["path"], "written": d["value"], "pre": pre, "post": post, "restored": restored,
              "persisted": post is not None and same(post, d["value"]),
-             "changed": not (pre is None and post is None) and not (pre is not None and post is not None and same(pre, post))}
+             "changed": not (pre is None and post is None) and not (pre is not None and post is not None and same(pre, post)),
+             "restoration_matches_baseline": (pre is None and restored is None) or
+                                              (pre is not None and restored is not None and same(pre, restored))}
         if primary and d["path"] != primary:
             l["side_leaf"] = True                              # a leaf set's companion write, e.g. kParamWarp2 = 0.0
             l["default_omitted"] = pre is None and post is None  # Serum omits a value equal to its own default on save
         leaves.append(l)
     out["q3_leaves"] = leaves
+    out["restoration_verified"] = all(l["restoration_matches_baseline"] for l in leaves)
     judged = [l for l in leaves if not l.get("side_leaf")] or leaves   # a leaf set is judged on its primary leaf
     persisted = all(l["persisted"] for l in judged)
     noop = all(not l["changed"] for l in judged)
