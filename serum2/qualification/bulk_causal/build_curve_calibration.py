@@ -84,12 +84,44 @@ def build_warp():
     print("wrote", path)
 
 
+def build_warp2():
+    """3 more Sync-mode points (0.05, 0.55, 0.97) chosen to bracket the 5 already read: a low extreme, a mid gap,
+    and a near-1.0 extreme. Combined with the 5 existing points this gives 8 for the curve fit."""
+    name = "CAL_08_WARP_SYNC_2"
+    base = apply_spec(BASE.data, SPEC0)
+    body = copy.deepcopy(base)
+    pts = {0: 0.05, 1: 0.55, 2: 0.97}
+    for i, v in pts.items():
+        wt = body["Oscillator%d" % i]["WTOsc%d" % i]
+        if not isinstance(wt.get("plainParams"), dict):
+            wt["plainParams"] = {}
+        wt["plainParams"]["kParamWarpMenu"] = "kSync"
+        wt["plainParams"]["kParamWarp"] = v
+    path = os.path.join(OUT, name + ".SerumPreset")
+    pack_file(SerumPreset(metadata=dict(BASE.metadata, presetName=name), data=body), path)
+    back = unpack_file(path).data
+    assert back == pack_unpack(BASE.metadata, body)
+    intended = {json.dumps(["Oscillator%d" % i, "WTOsc%d" % i, "plainParams", k]) for i in pts for k in ("kParamWarpMenu", "kParamWarp")}
+    changed = {json.dumps(p) for p, _a, _b in diff_leaves(pack_unpack(BASE.metadata, base), back)}
+    assert changed - intended == set(), sorted(changed - intended)
+    for i, v in pts.items():
+        assert body_get(back, ["Oscillator%d" % i, "WTOsc%d" % i, "plainParams", "kParamWarp"]) == v
+    json.dump({"preset": name + ".SerumPreset", "generated_only": True, "target_control": "oscA/B/C.warp_amount (mode=Sync)",
+               "rows": [{"osc": "ABC"[i], "raw": v} for i, v in pts.items()],
+               "prior_points_already_read": [{"raw": 0.32, "screen": "1.49"}, {"raw": 0.46, "screen": "2.46"},
+                                             {"raw": 0.20, "screen": "1.12"}, {"raw": 0.65, "screen": "5.12"},
+                                             {"raw": 0.90, "screen": "11.93"}]},
+              open(os.path.join(OUT, name + ".controls.json"), "w"), indent=1)
+    print("wrote", path)
+
+
 def main():
     build_fx("CAL_04_COMPRESSOR_GAIN", "FXComp", "kParamMakeup", GAIN_PTS,
              {"kParamRatio": 4.0, "kParamThresh": 0.5, "kParamAttack": 50.0, "kParamRelease": 200.0})  # safe, non-Limit
     build_fx("CAL_05_DISTORTION_FREQ", "FXDistortion", "kParamFreq", FREQ_PTS, {})
     build_fx("CAL_06_FILTER_CUTOFF", "FXFilter", "kParamFreq", FREQ_PTS, {})
     build_warp()
+    build_warp2()
 
 
 if __name__ == "__main__":
