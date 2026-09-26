@@ -1,0 +1,176 @@
+{
+  "video": "serum2/video_capture/v1/video.mp4",
+  "vst3_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+  "crop": {
+    "x": 700,
+    "y": 0,
+    "w": 1220,
+    "h": 1024
+  },
+  "threshold": 0.015,
+  "dense_fps": 10,
+  "windows": [
+    {
+      "start": 0.5,
+      "end": 54.5,
+      "dir": "serum2\\video_capture\\v1\\dense\\0000",
+      "frames": 540
+    },
+    {
+      "start": 64.5,
+      "end": 94.5,
+      "dir": "serum2\\video_capture\\v1\\dense\\0001",
+      "frames": 300
+    },
+    {
+      "start": 97.5,
+      "end": 110.5,
+      "dir": "serum2\\video_capture\\v1\\dense\\0002",
+      "frames": 130
+    },
+    {
+      "start": 120.5,
+      "end": 125.5,
+      "dir": "serum2\\video_capture\\v1\\dense\\0003",
+      "frames": 50
+    },
+    {
+      "start": 130.5,
+      "end": 139.5,
+      "dir": "serum2\\video_capture\\v1\\dense\\0004",
+      "frames": 90
+    },
+    {
+      "start": 142.5,
+      "end": 155.5,
+      "dir": "serum2\\video_capture\\v1\\dense\\0005",
+      "frames": 130
+    },
+    {
+      "start": 157.5,
+      "end": 166.5,
+      "dir": "serum2\\video_capture\\v1\\dense\\0006",
+      "frames": 90
+    },
+    {
+      "start": 167.5,
+      "end": 186.5,
+      "dir": "serum2\\video_capture\\v1\\dense\\0007",
+      "frames": 190
+    },
+    {
+      "start": 258.5,
+      "end": 263.5,
+      "dir": "serum2\\video_capture\\v1\\dense\\0008",
+      "frames": 50
+    },
+    {
+      "start": 264.5,
+      "end": 273.5,
+      "dir": "serum2\\video_capture\\v1\\dense\\0009",
+      "frames": 90
+    },
+    {
+      "start": 277.5,
+      "end": 282.5,
+      "dir": "serum2\\video_capture\\v1\\dense\\0010",
+      "frames": 50
+    },
+    {
+      "start": 285.5,
+      "end": 299.5,
+      "dir": "serum2\\video_capture\\v1\\dense\\0011",
+      "frames": 140
+    },
+    {
+      "start": 310.5,
+      "end": 315.5,
+      "dir": "serum2\\video_capture\\v1\\dense\\0012",
+      "frames": 50
+    },
+    {
+      "start": 328.5,
+      "end": 334.5,
+      "dir": "serum2\\video_capture\\v1\\dense\\0013",
+      "frames": 60
+    },
+    {
+      "start": 339.5,
+      "end": 344.5,
+      "dir": "serum2\\video_capture\\v1\\dense\\0014",
+      "frames": 50
+    },
+    {
+      "start": 413.5,
+      "end": 422.5,
+      "dir": "serum2\\video_capture\\v1\\dense\\0015",
+      "frames": 90
+    },
+    {
+      "start": 425.5,
+      "end": 445.5,
+      "dir": "serum2\\video_capture\\v1\\dense\\0016",
+      "frames": 200
+    },
+    {
+      "start": 446.5,
+      "end": 486.5,
+      "dir": "serum2\\video_capture\\v1\\dense\\0017",
+      "frames": 400
+    },
+    {
+      "start": 495.5,
+      "end": 520.5,
+      "dir": "serum2\\video_capture\\v1\\dense\\0018",
+      "frames": 250
+    },
+    {
+      "start": 523.5,
+      "end": 529.5,
+      "dir": "serum2\\video_capture\\v1\\dense\\0019",
+      "frames": 60
+    },
+    {
+      "start": 531.5,
+      "end": 539.5,
+      "dir": "serum2\\video_capture\\v1\\dense\\0020",
+      "frames": 80
+    },
+    {
+      "start": 543.5,
+      "end": 548.5,
+      "dir": "serum2\\video_capture\\v1\\dense\\0021",
+      "frames": 50
+    },
+    {
+      "start": 554.5,
+      "end": 562.5,
+      "dir": "serum2\\video_capture\\v1\\dense\\0022",
+      "frames": 80
+    },
+    {
+      "start": 563.5,
+      "end": 574.5,
+      "dir": "serum2\\video_capture\\v1\\dense\\0023",
+      "frames": 110
+    },
+    {
+      "start": 577.5,
+      "end": 588.5,
+      "dir": "serum2\\video_capture\\v1\\dense\\0024",
+      "frames": 110
+    },
+    {
+      "start": 591.5,
+      "end": 652.5,
+      "dir": "serum2\\video_capture\\v1\\dense\\0025",
+      "frames": 610
+    },
+    {
+      "start": 659.5,
+      "end": 679,
+      "dir": "serum2\\video_capture\\v1\\dense\\0026",
+      "frames": 195
+    }
+  ]
+}
