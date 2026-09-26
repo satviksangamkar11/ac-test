@@ -54,7 +54,7 @@ def _leaf_for(row):
     return judged[0] if len(judged) == 1 else None   # multi-leaf rows with no single judged leaf: skip, don't guess
 
 
-def to_evidence(row, body_key_to_canonical=None):
+def to_evidence(row, body_key_to_canonical=None, body_key_by_target=None):
     """One mcp_exec result row -> the dict shape evidence_promotion.py consumes, or (None, reason).
 
     body_key_to_canonical: optional dict mapping Serum's internal body-representation strings to the
@@ -78,7 +78,10 @@ def to_evidence(row, body_key_to_canonical=None):
         return None, "leaf did not persist"
     path = ".".join(str(p) for p in leaf["path"])
     raw_after = leaf["post"]
-    canonical_after = (body_key_to_canonical or {}).get(raw_after, raw_after)
+    # a per-control table (live-GUI-verified) wins over the global snapshot table: the same body key can mean different
+    # things in different controls (voice filter 'L12' -> 'lowpass_12', FX filter 'L12' -> the Atlas 'Normal' category)
+    table = (body_key_by_target or {}).get(row["atlas_id"], body_key_to_canonical or {})
+    canonical_after = table.get(raw_after, raw_after)
     ev = {
         "target": row["atlas_id"],
         "epoch": {"serum_sha256": sha, "product_version": "2.0.23"},
@@ -98,11 +101,15 @@ _NUMERIC_DOMAIN_KINDS = ("continuous", "signed", "log")   # manifest domain kind
                                                             # "open" and enum-like kinds are deliberately excluded
 
 
-def _augmented_get_control(real_get_control, params, augmented_log):
+_LIVE_GUI_DOMAIN_BASES = ("GUI_NUMERIC",)   # only bounds read as numbers off the on-screen Serum GUI are used
+
+
+def _augmented_get_control(real_get_control, params, augmented_log, live_domains=None):
     """Wraps the real get_control(): if the Atlas has no numeric bounds for a continuous/knob/etc. control AND the
-    campaign manifest independently established a real numeric domain for it, return a dataclasses.replace() copy
-    with those bounds filled in. Every other field, and every control the Atlas already bounds, passes through
-    completely unchanged -- this never overrides an Atlas-declared bound, only fills a genuine gap."""
+    campaign manifest (or, failing that, the Finish Line B live-GUI evidence) independently established a real
+    numeric domain for it, return a dataclasses.replace() copy with those bounds filled in. Every other field, and
+    every control the Atlas already bounds, passes through completely unchanged -- this never overrides an
+    Atlas-declared bound, only fills a genuine gap."""
     def wrapped(target):
         c = real_get_control(target)
         if c is None or c.control_type not in ("continuous", "knob", "stepper", "draggable_value"):
@@ -110,12 +117,30 @@ def _augmented_get_control(real_get_control, params, augmented_log):
         if c.min_value is not None or c.max_value is not None:
             return c
         dom = params.get(target, {}).get("domain") or {}
-        if dom.get("kind") not in _NUMERIC_DOMAIN_KINDS or dom.get("min") is None or dom.get("max") is None:
-            return c
-        augmented_log.append({"target": target, "min": dom["min"], "max": dom["max"],
-                              "source": "manifest_campaign_v1.json domain (kind=%s)" % dom["kind"]})
-        return dataclasses.replace(c, min_value=dom["min"], max_value=dom["max"])
+        if dom.get("kind") in _NUMERIC_DOMAIN_KINDS and dom.get("min") is not None and dom.get("max") is not None:
+            augmented_log.append({"target": target, "min": dom["min"], "max": dom["max"],
+                                  "source": "manifest_campaign_v1.json domain (kind=%s)" % dom["kind"]})
+            return dataclasses.replace(c, min_value=dom["min"], max_value=dom["max"])
+        live = (live_domains or {}).get(target)
+        if live and live["basis"] in _LIVE_GUI_DOMAIN_BASES:
+            augmented_log.append({"target": target, "min": live["min"], "max": live["max"],
+                                  "source": "finish_line_b_live_serum_evidence_v1.json (basis=%s)" % live["basis"]})
+            return dataclasses.replace(c, min_value=live["min"], max_value=live["max"])
+        return c
     return wrapped
+
+
+def load_live_evidence(path):
+    """Finish Line B live-Serum evidence -> (domains, per-control body-key -> Atlas canonical tables). A body key maps
+    only where the GUI showed it at the same rack slot AND that display equals an Atlas enum value; the Serum default
+    (no persisted key) and GUI names with no Atlas value are never put in a table."""
+    if not path or not os.path.exists(path):
+        return {}, {}
+    ev = json.load(open(path))
+    tables = {aid: {r["body_key"]: r["atlas_canonical"] for r in rows
+                    if r["body_key"] is not None and r["atlas_canonical"]}
+              for aid, rows in ev["enum_body_keys"].items()}
+    return ev["domains"], tables
 
 
 def main():
@@ -125,6 +150,9 @@ def main():
                     help="path to a real copy of the pinned Serum 2.0.23 VST3 binary (sha256 9293eb90...), "
                          "needed for execution_epoch.installed_epoch() to resolve an epoch in this environment")
     ap.add_argument("--manifest", default=os.path.join(HERE, "manifest_campaign_v1.json"))
+    ap.add_argument("--overlay", action="append", default=[],
+                    help="later harness results.jsonl whose rows replace the same atlas_id in `results` (fresh re-runs)")
+    ap.add_argument("--live-evidence", default=os.path.join(ED, "finish_line_b_live_serum_evidence_v1.json"))
     a = ap.parse_args()
 
     import functools
@@ -137,8 +165,10 @@ def main():
     evidence_promotion.installed_epoch = functools.partial(execution_epoch.installed_epoch, binary=a.serum_binary)
 
     params = {p["atlas_id"]: p for p in json.load(open(a.manifest))["parameters"]}
+    live_domains, body_key_by_target = load_live_evidence(a.live_evidence)
     bounds_augmented = []
-    evidence_promotion.get_control = _augmented_get_control(serum_atlas.get_control, params, bounds_augmented)
+    evidence_promotion.get_control = _augmented_get_control(serum_atlas.get_control, params, bounds_augmented,
+                                                            live_domains)
     from serum2.qualification.evidence_promotion import promote_verified_evidence
 
     # Build body-key -> canonical-display-name normalization table from the schema snapshot.
@@ -157,13 +187,20 @@ def main():
         body_key_to_canonical[_body] = _canon          # e.g. 'kSaw' -> 'saw'
 
     rows = [json.loads(l) for l in open(a.results) if l.strip()]
+    overlaid = []
+    for ov in a.overlay:
+        fresh = {r["atlas_id"]: r for r in (json.loads(l) for l in open(ov) if l.strip())}
+        rows = [fresh.pop(r["atlas_id"], r) if r["atlas_id"] in fresh else r for r in rows] + list(fresh.values())
+        overlaid.append({"file": os.path.basename(ov), "atlas_ids": sorted({json.loads(l)["atlas_id"] for l in open(ov) if l.strip()})})
     os.makedirs(OUT_DIR, exist_ok=True)
 
-    report = {"source": os.path.basename(a.results), "n_rows": len(rows), "accepted": [], "rejected": {},
+    report = {"source": os.path.basename(a.results), "overlays": overlaid,
+              "live_evidence": os.path.basename(a.live_evidence) if live_domains or body_key_by_target else None,
+              "n_rows": len(rows), "accepted": [], "rejected": {},
               "atlas_bounds_augmented_from_manifest": bounds_augmented}
     for row in rows:
         aid = row["atlas_id"]
-        ev, why = to_evidence(row, body_key_to_canonical=body_key_to_canonical)
+        ev, why = to_evidence(row, body_key_to_canonical=body_key_to_canonical, body_key_by_target=body_key_by_target)
         if ev is None:
             report["rejected"].setdefault(why, []).append(aid)
             continue

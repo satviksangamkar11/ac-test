@@ -1,0 +1,1290 @@
+{
+ "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+ "presets": [
+  {
+   "preset": "FLB_fx_distortion_type_01",
+   "atlas_id": "fx.distortion.type",
+   "rack_slots": [
+    {
+     "slot": 1,
+     "written": null,
+     "serum_readback": null
+    },
+    {
+     "slot": 2,
+     "written": "kAsym",
+     "serum_readback": "kAsym"
+    },
+    {
+     "slot": 3,
+     "written": "kDiode1",
+     "serum_readback": "kDiode1"
+    },
+    {
+     "slot": 4,
+     "written": "kDiode2",
+     "serum_readback": "kDiode2"
+    },
+    {
+     "slot": 5,
+     "written": "kDownsample",
+     "serum_readback": "kDownsample"
+    },
+    {
+     "slot": 6,
+     "written": "kHardClip",
+     "serum_readback": "kHardClip"
+    },
+    {
+     "slot": 7,
+     "written": "kLinFold",
+     "serum_readback": "kLinFold"
+    },
+    {
+     "slot": 8,
+     "written": "kOverdrive",
+     "serum_readback": "kOverdrive"
+    },
+    {
+     "slot": 9,
+     "written": "kRectify",
+     "serum_readback": "kRectify"
+    },
+    {
+     "slot": 10,
+     "written": "kSinFold",
+     "serum_readback": "kSinFold"
+    },
+    {
+     "slot": 11,
+     "written": "kSineShaper",
+     "serum_readback": "kSineShaper"
+    },
+    {
+     "slot": 12,
+     "written": "kSoftClip",
+     "serum_readback": "kSoftClip"
+    }
+   ]
+  },
+  {
+   "preset": "FLB_fx_distortion_type_02",
+   "atlas_id": "fx.distortion.type",
+   "rack_slots": [
+    {
+     "slot": 1,
+     "written": "kSoftSat",
+     "serum_readback": "kSoftSat"
+    },
+    {
+     "slot": 2,
+     "written": "kStompBox",
+     "serum_readback": "kStompBox"
+    },
+    {
+     "slot": 3,
+     "written": "kTapeSat",
+     "serum_readback": "kTapeSat"
+    },
+    {
+     "slot": 4,
+     "written": "kXShaper",
+     "serum_readback": "kXShaper"
+    },
+    {
+     "slot": 5,
+     "written": "kXShaperAsym",
+     "serum_readback": "kXShaperAsym"
+    },
+    {
+     "slot": 6,
+     "written": "kZeroSquare",
+     "serum_readback": "kZeroSquare"
+    }
+   ]
+  },
+  {
+   "preset": "FLB_fx_reverb_type_01",
+   "atlas_id": "fx.reverb.type",
+   "rack_slots": [
+    {
+     "slot": 1,
+     "written": null,
+     "serum_readback": null
+    },
+    {
+     "slot": 2,
+     "written": "kAbyss",
+     "serum_readback": "kAbyss"
+    },
+    {
+     "slot": 3,
+     "written": "kHall",
+     "serum_readback": "kHall"
+    },
+    {
+     "slot": 4,
+     "written": "kSpace",
+     "serum_readback": "kSpace"
+    },
+    {
+     "slot": 5,
+     "written": "kVintage",
+     "serum_readback": "kVintage"
+    }
+   ]
+  },
+  {
+   "preset": "FLB_fx_filter_type_01",
+   "atlas_id": "fx.filter.type",
+   "rack_slots": [
+    {
+     "slot": 1,
+     "written": null,
+     "serum_readback": null
+    },
+    {
+     "slot": 2,
+     "written": "L6",
+     "serum_readback": "L6"
+    },
+    {
+     "slot": 3,
+     "written": "L12",
+     "serum_readback": "L12"
+    },
+    {
+     "slot": 4,
+     "written": "L18",
+     "serum_readback": "L18"
+    },
+    {
+     "slot": 5,
+     "written": "L24",
+     "serum_readback": "L24"
+    },
+    {
+     "slot": 6,
+     "written": "H6",
+     "serum_readback": "H6"
+    },
+    {
+     "slot": 7,
+     "written": "H12",
+     "serum_readback": "H12"
+    },
+    {
+     "slot": 8,
+     "written": "H18",
+     "serum_readback": "H18"
+    },
+    {
+     "slot": 9,
+     "written": "H24",
+     "serum_readback": "H24"
+    },
+    {
+     "slot": 10,
+     "written": "B12",
+     "serum_readback": "B12"
+    },
+    {
+     "slot": 11,
+     "written": "B24",
+     "serum_readback": "B24"
+    },
+    {
+     "slot": 12,
+     "written": "N24",
+     "serum_readback": "N24"
+    }
+   ]
+  },
+  {
+   "preset": "FLB_fx_filter_type_02",
+   "atlas_id": "fx.filter.type",
+   "rack_slots": [
+    {
+     "slot": 1,
+     "written": "BN12",
+     "serum_readback": "BN12"
+    },
+    {
+     "slot": 2,
+     "written": "NN12",
+     "serum_readback": "NN12"
+    },
+    {
+     "slot": 3,
+     "written": "BPN12",
+     "serum_readback": "BPN12"
+    },
+    {
+     "slot": 4,
+     "written": "BPN24",
+     "serum_readback": "BPN24"
+    },
+    {
+     "slot": 5,
+     "written": "BandReject",
+     "serum_readback": "BandReject"
+    },
+    {
+     "slot": 6,
+     "written": "Allpasses",
+     "serum_readback": "Allpasses"
+    },
+    {
+     "slot": 7,
+     "written": "LH12",
+     "serum_readback": "LH12"
+    },
+    {
+     "slot": 8,
+     "written": "HB12",
+     "serum_readback": "HB12"
+    },
+    {
+     "slot": 9,
+     "written": "LBH12",
+     "serum_readback": "LBH12"
+    },
+    {
+     "slot": 10,
+     "written": "LBH24",
+     "serum_readback": "LBH24"
+    },
+    {
+     "slot": 11,
+     "written": "LNH12",
+     "serum_readback": "LNH12"
+    },
+    {
+     "slot": 12,
+     "written": "LNH24",
+     "serum_readback": "LNH24"
+    }
+   ]
+  },
+  {
+   "preset": "FLB_fx_filter_type_03",
+   "atlas_id": "fx.filter.type",
+   "rack_slots": [
+    {
+     "slot": 1,
+     "written": "LPH24",
+     "serum_readback": "LPH24"
+    },
+    {
+     "slot": 2,
+     "written": "LN12",
+     "serum_readback": "LN12"
+    },
+    {
+     "slot": 3,
+     "written": "PP12",
+     "serum_readback": "PP12"
+    },
+    {
+     "slot": 4,
+     "written": "HP12",
+     "serum_readback": "HP12"
+    },
+    {
+     "slot": 5,
+     "written": "MgL12",
+     "serum_readback": "MgL12"
+    },
+    {
+     "slot": 6,
+     "written": "MgL18",
+     "serum_readback": "MgL18"
+    },
+    {
+     "slot": 7,
+     "written": "MgL24",
+     "serum_readback": "MgL24"
+    },
+    {
+     "slot": 8,
+     "written": "LadderMg",
+     "serum_readback": "LadderMg"
+    },
+    {
+     "slot": 9,
+     "written": "LadderAcid",
+     "serum_readback": "LadderAcid"
+    },
+    {
+     "slot": 10,
+     "written": "LadderEMS",
+     "serum_readback": "LadderEMS"
+    },
+    {
+     "slot": 11,
+     "written": "DirtyMg",
+     "serum_readback": "DirtyMg"
+    },
+    {
+     "slot": 12,
+     "written": "Comb2",
+     "serum_readback": "Comb2"
+    }
+   ]
+  },
+  {
+   "preset": "FLB_fx_filter_type_04",
+   "atlas_id": "fx.filter.type",
+   "rack_slots": [
+    {
+     "slot": 1,
+     "written": "CombN",
+     "serum_readback": "CombN"
+    },
+    {
+     "slot": 2,
+     "written": "CombP",
+     "serum_readback": "CombP"
+    },
+    {
+     "slot": 3,
+     "written": "CombH6N",
+     "serum_readback": "CombH6N"
+    },
+    {
+     "slot": 4,
+     "written": "CombHL6P",
+     "serum_readback": "CombHL6P"
+    },
+    {
+     "slot": 5,
+     "written": "DistComb2LP",
+     "serum_readback": "DistComb2LP"
+    },
+    {
+     "slot": 6,
+     "written": "DistComb2BP",
+     "serum_readback": "DistComb2BP"
+    },
+    {
+     "slot": 7,
+     "written": "FlangeN",
+     "serum_readback": "FlangeN"
+    },
+    {
+     "slot": 8,
+     "written": "FlangeP",
+     "serum_readback": "FlangeP"
+    },
+    {
+     "slot": 9,
+     "written": "FlangePhase12HL6P",
+     "serum_readback": "FlangePhase12HL6P"
+    },
+    {
+     "slot": 10,
+     "written": "Phase24P",
+     "serum_readback": "Phase24P"
+    },
+    {
+     "slot": 11,
+     "written": "Phase36N",
+     "serum_readback": "Phase36N"
+    },
+    {
+     "slot": 12,
+     "written": "Phase36P",
+     "serum_readback": "Phase36P"
+    }
+   ]
+  },
+  {
+   "preset": "FLB_fx_filter_type_05",
+   "atlas_id": "fx.filter.type",
+   "rack_slots": [
+    {
+     "slot": 1,
+     "written": "Phase48H6P",
+     "serum_readback": "Phase48H6P"
+    },
+    {
+     "slot": 2,
+     "written": "Phase48HL6P",
+     "serum_readback": "Phase48HL6P"
+    },
+    {
+     "slot": 3,
+     "written": "Phase48P",
+     "serum_readback": "Phase48P"
+    },
+    {
+     "slot": 4,
+     "written": "FormantONE",
+     "serum_readback": "FormantONE"
+    },
+    {
+     "slot": 5,
+     "written": "FormantTWB",
+     "serum_readback": "FormantTWB"
+    },
+    {
+     "slot": 6,
+     "written": "FormantTWO",
+     "serum_readback": "FormantTWO"
+    },
+    {
+     "slot": 7,
+     "written": "DJMixer",
+     "serum_readback": "DJMixer"
+    },
+    {
+     "slot": 8,
+     "written": "Diffuser",
+     "serum_readback": "Diffuser"
+    },
+    {
+     "slot": 9,
+     "written": "Exp",
+     "serum_readback": "Exp"
+    },
+    {
+     "slot": 10,
+     "written": "ExpBPF",
+     "serum_readback": "ExpBPF"
+    },
+    {
+     "slot": 11,
+     "written": "PZ_SVF",
+     "serum_readback": "PZ_SVF"
+    },
+    {
+     "slot": 12,
+     "written": "RM",
+     "serum_readback": "RM"
+    }
+   ]
+  },
+  {
+   "preset": "FLB_fx_filter_type_06",
+   "atlas_id": "fx.filter.type",
+   "rack_slots": [
+    {
+     "slot": 1,
+     "written": "RMT",
+     "serum_readback": "RMT"
+    },
+    {
+     "slot": 2,
+     "written": "Reverb1",
+     "serum_readback": "Reverb1"
+    },
+    {
+     "slot": 3,
+     "written": "Scream",
+     "serum_readback": "Scream"
+    },
+    {
+     "slot": 4,
+     "written": "Scream3LP",
+     "serum_readback": "Scream3LP"
+    },
+    {
+     "slot": 5,
+     "written": "Wsp",
+     "serum_readback": "Wsp"
+    },
+    {
+     "slot": 6,
+     "written": "ADD_BASS",
+     "serum_readback": "ADD_BASS"
+    },
+    {
+     "slot": 7,
+     "written": "BEQ12",
+     "serum_readback": "BEQ12"
+    },
+    {
+     "slot": 8,
+     "written": "BP12",
+     "serum_readback": "BP12"
+    },
+    {
+     "slot": 9,
+     "written": "CombHL6N",
+     "serum_readback": "CombHL6N"
+    },
+    {
+     "slot": 10,
+     "written": "CombL6N",
+     "serum_readback": "CombL6N"
+    },
+    {
+     "slot": 11,
+     "written": "Combs",
+     "serum_readback": "Combs"
+    },
+    {
+     "slot": 12,
+     "written": "DistComb1BP",
+     "serum_readback": "DistComb1BP"
+    }
+   ]
+  },
+  {
+   "preset": "FLB_fx_filter_type_07",
+   "atlas_id": "fx.filter.type",
+   "rack_slots": [
+    {
+     "slot": 1,
+     "written": "DistComb1LP",
+     "serum_readback": "DistComb1LP"
+    },
+    {
+     "slot": 2,
+     "written": "FlangeH6P",
+     "serum_readback": "FlangeH6P"
+    },
+    {
+     "slot": 3,
+     "written": "FlangeL6P",
+     "serum_readback": "FlangeL6P"
+    },
+    {
+     "slot": 4,
+     "written": "HEQ12",
+     "serum_readback": "HEQ12"
+    },
+    {
+     "slot": 5,
+     "written": "HN12",
+     "serum_readback": "HN12"
+    },
+    {
+     "slot": 6,
+     "written": "LB12",
+     "serum_readback": "LB12"
+    },
+    {
+     "slot": 7,
+     "written": "N12",
+     "serum_readback": "N12"
+    },
+    {
+     "slot": 8,
+     "written": "P12",
+     "serum_readback": "P12"
+    },
+    {
+     "slot": 9,
+     "written": "FlangeHL6N",
+     "serum_readback": "FlangeHL6N"
+    },
+    {
+     "slot": 10,
+     "written": "HEQ6",
+     "serum_readback": "HEQ6"
+    },
+    {
+     "slot": 11,
+     "written": "LPH12",
+     "serum_readback": "LPH12"
+    },
+    {
+     "slot": 12,
+     "written": "PN12",
+     "serum_readback": "PN12"
+    }
+   ]
+  },
+  {
+   "preset": "FLB_fx_filter_type_08",
+   "atlas_id": "fx.filter.type",
+   "rack_slots": [
+    {
+     "slot": 1,
+     "written": "Phase12N",
+     "serum_readback": "Phase12N"
+    },
+    {
+     "slot": 2,
+     "written": "Phase12P",
+     "serum_readback": "Phase12P"
+    },
+    {
+     "slot": 3,
+     "written": "SNH1",
+     "serum_readback": "SNH1"
+    },
+    {
+     "slot": 4,
+     "written": "ZDF_A",
+     "serum_readback": "ZDF_A"
+    },
+    {
+     "slot": 5,
+     "written": "Scream3BP",
+     "serum_readback": "Scream3BP"
+    },
+    {
+     "slot": 6,
+     "written": "Phase48HL6N",
+     "serum_readback": "Phase48HL6N"
+    },
+    {
+     "slot": 7,
+     "written": "Phase48N",
+     "serum_readback": "Phase48N"
+    },
+    {
+     "slot": 8,
+     "written": "FlangeHL6P",
+     "serum_readback": "FlangeHL6P"
+    },
+    {
+     "slot": 9,
+     "written": "Phase24N",
+     "serum_readback": "Phase24N"
+    },
+    {
+     "slot": 10,
+     "written": "FlangeL6N",
+     "serum_readback": "FlangeL6N"
+    },
+    {
+     "slot": 11,
+     "written": "SNH2",
+     "serum_readback": "SNH2"
+    },
+    {
+     "slot": 12,
+     "written": "CombH6P",
+     "serum_readback": "CombH6P"
+    }
+   ]
+  },
+  {
+   "preset": "FLB_fx_filter_type_09",
+   "atlas_id": "fx.filter.type",
+   "rack_slots": [
+    {
+     "slot": 1,
+     "written": "LEQ12",
+     "serum_readback": "LEQ12"
+    }
+   ]
+  },
+  {
+   "preset": "FLB_fx_delay_mode_01",
+   "atlas_id": "fx.delay.mode",
+   "rack_slots": [
+    {
+     "slot": 1,
+     "written": null,
+     "serum_readback": null
+    },
+    {
+     "slot": 2,
+     "written": 1.0,
+     "serum_readback": 1.0
+    },
+    {
+     "slot": 3,
+     "written": 2.0,
+     "serum_readback": 2.0
+    }
+   ]
+  },
+  {
+   "preset": "FLB_DOMAIN_DEFAULT",
+   "written": null,
+   "controls": [
+    {
+     "atlas_id": "arp.playback.offset",
+     "path": [
+      "ArpClip0",
+      "plainParams",
+      "kParamOffset"
+     ],
+     "serum_readback": null
+    },
+    {
+     "atlas_id": "arp.playback.repeats",
+     "path": [
+      "ArpClip0",
+      "plainParams",
+      "kParamRepeats"
+     ],
+     "serum_readback": null
+    },
+    {
+     "atlas_id": "arp.velocity.decay",
+     "path": [
+      "ArpClip0",
+      "plainParams",
+      "kParamVeloDecay"
+     ],
+     "serum_readback": null
+    },
+    {
+     "atlas_id": "global.oversampling",
+     "path": [
+      "Global0",
+      "plainParams",
+      "kParamOversampling"
+     ],
+     "serum_readback": null
+    },
+    {
+     "atlas_id": "global.portamento_curve",
+     "path": [
+      "Global0",
+      "plainParams",
+      "kParamPortamentoCurve"
+     ],
+     "serum_readback": null
+    },
+    {
+     "atlas_id": "global.swing_div",
+     "path": [
+      "Global0",
+      "plainParams",
+      "kParamSwingDiv"
+     ],
+     "serum_readback": null
+    },
+    {
+     "atlas_id": "global.voice_amp",
+     "path": [
+      "Global0",
+      "plainParams",
+      "kParamVoiceAmp"
+     ],
+     "serum_readback": null
+    },
+    {
+     "atlas_id": "global.voice_control.random.cutoff",
+     "path": [
+      "VoicePanel0",
+      "plainParams",
+      "kParamGlobalRandomFilterCutoff"
+     ],
+     "serum_readback": null
+    },
+    {
+     "atlas_id": "global.voice_control.random.detune",
+     "path": [
+      "VoicePanel0",
+      "plainParams",
+      "kParamGlobalRandomOscDetune"
+     ],
+     "serum_readback": null
+    },
+    {
+     "atlas_id": "global.voice_control.random.envs",
+     "path": [
+      "VoicePanel0",
+      "plainParams",
+      "kParamGlobalRandomEnvTime"
+     ],
+     "serum_readback": null
+    },
+    {
+     "atlas_id": "global.voice_control.scaling.envs",
+     "path": [
+      "VoicePanel0",
+      "plainParams",
+      "kParamGlobalScalingEnvTime"
+     ],
+     "serum_readback": null
+    },
+    {
+     "atlas_id": "global.voice_control.scaling.lfos",
+     "path": [
+      "VoicePanel0",
+      "plainParams",
+      "kParamGlobalScalingLfoTime"
+     ],
+     "serum_readback": null
+    }
+   ]
+  },
+  {
+   "preset": "FLB_DOMAIN_MIN",
+   "written": -1000000.0,
+   "controls": [
+    {
+     "atlas_id": "arp.playback.offset",
+     "path": [
+      "ArpClip0",
+      "plainParams",
+      "kParamOffset"
+     ],
+     "serum_readback": -8.0
+    },
+    {
+     "atlas_id": "arp.playback.repeats",
+     "path": [
+      "ArpClip0",
+      "plainParams",
+      "kParamRepeats"
+     ],
+     "serum_readback": null
+    },
+    {
+     "atlas_id": "arp.velocity.decay",
+     "path": [
+      "ArpClip0",
+      "plainParams",
+      "kParamVeloDecay"
+     ],
+     "serum_readback": null
+    },
+    {
+     "atlas_id": "global.oversampling",
+     "path": [
+      "Global0",
+      "plainParams",
+      "kParamOversampling"
+     ],
+     "serum_readback": 0.0
+    },
+    {
+     "atlas_id": "global.portamento_curve",
+     "path": [
+      "Global0",
+      "plainParams",
+      "kParamPortamentoCurve"
+     ],
+     "serum_readback": -100.0
+    },
+    {
+     "atlas_id": "global.swing_div",
+     "path": [
+      "Global0",
+      "plainParams",
+      "kParamSwingDiv"
+     ],
+     "serum_readback": 0.0
+    },
+    {
+     "atlas_id": "global.voice_amp",
+     "path": [
+      "Global0",
+      "plainParams",
+      "kParamVoiceAmp"
+     ],
+     "serum_readback": 0.0
+    },
+    {
+     "atlas_id": "global.voice_control.random.cutoff",
+     "path": [
+      "VoicePanel0",
+      "plainParams",
+      "kParamGlobalRandomFilterCutoff"
+     ],
+     "serum_readback": null
+    },
+    {
+     "atlas_id": "global.voice_control.random.detune",
+     "path": [
+      "VoicePanel0",
+      "plainParams",
+      "kParamGlobalRandomOscDetune"
+     ],
+     "serum_readback": null
+    },
+    {
+     "atlas_id": "global.voice_control.random.envs",
+     "path": [
+      "VoicePanel0",
+      "plainParams",
+      "kParamGlobalRandomEnvTime"
+     ],
+     "serum_readback": null
+    },
+    {
+     "atlas_id": "global.voice_control.scaling.envs",
+     "path": [
+      "VoicePanel0",
+      "plainParams",
+      "kParamGlobalScalingEnvTime"
+     ],
+     "serum_readback": 10.0
+    },
+    {
+     "atlas_id": "global.voice_control.scaling.lfos",
+     "path": [
+      "VoicePanel0",
+      "plainParams",
+      "kParamGlobalScalingLfoTime"
+     ],
+     "serum_readback": 10.0
+    }
+   ]
+  },
+  {
+   "preset": "FLB_DOMAIN_MAX",
+   "written": 1000000.0,
+   "controls": [
+    {
+     "atlas_id": "arp.playback.offset",
+     "path": [
+      "ArpClip0",
+      "plainParams",
+      "kParamOffset"
+     ],
+     "serum_readback": 8.0
+    },
+    {
+     "atlas_id": "arp.playback.repeats",
+     "path": [
+      "ArpClip0",
+      "plainParams",
+      "kParamRepeats"
+     ],
+     "serum_readback": 16.0
+    },
+    {
+     "atlas_id": "arp.velocity.decay",
+     "path": [
+      "ArpClip0",
+      "plainParams",
+      "kParamVeloDecay"
+     ],
+     "serum_readback": 60.0
+    },
+    {
+     "atlas_id": "global.oversampling",
+     "path": [
+      "Global0",
+      "plainParams",
+      "kParamOversampling"
+     ],
+     "serum_readback": 2.0
+    },
+    {
+     "atlas_id": "global.portamento_curve",
+     "path": [
+      "Global0",
+      "plainParams",
+      "kParamPortamentoCurve"
+     ],
+     "serum_readback": 100.0
+    },
+    {
+     "atlas_id": "global.swing_div",
+     "path": [
+      "Global0",
+      "plainParams",
+      "kParamSwingDiv"
+     ],
+     "serum_readback": 6.0
+    },
+    {
+     "atlas_id": "global.voice_amp",
+     "path": [
+      "Global0",
+      "plainParams",
+      "kParamVoiceAmp"
+     ],
+     "serum_readback": 1.0
+    },
+    {
+     "atlas_id": "global.voice_control.random.cutoff",
+     "path": [
+      "VoicePanel0",
+      "plainParams",
+      "kParamGlobalRandomFilterCutoff"
+     ],
+     "serum_readback": 100.0
+    },
+    {
+     "atlas_id": "global.voice_control.random.detune",
+     "path": [
+      "VoicePanel0",
+      "plainParams",
+      "kParamGlobalRandomOscDetune"
+     ],
+     "serum_readback": 100.0
+    },
+    {
+     "atlas_id": "global.voice_control.random.envs",
+     "path": [
+      "VoicePanel0",
+      "plainParams",
+      "kParamGlobalRandomEnvTime"
+     ],
+     "serum_readback": 100.0
+    },
+    {
+     "atlas_id": "global.voice_control.scaling.envs",
+     "path": [
+      "VoicePanel0",
+      "plainParams",
+      "kParamGlobalScalingEnvTime"
+     ],
+     "serum_readback": 1000.0
+    },
+    {
+     "atlas_id": "global.voice_control.scaling.lfos",
+     "path": [
+      "VoicePanel0",
+      "plainParams",
+      "kParamGlobalScalingLfoTime"
+     ],
+     "serum_readback": 1000.0
+    }
+   ]
+  },
+  {
+   "preset": "FLB_DOMAIN_EXACT_LO",
+   "controls": [
+    {
+     "atlas_id": "arp.playback.offset",
+     "path": [
+      "ArpClip0",
+      "plainParams",
+      "kParamOffset"
+     ],
+     "written": -8.0,
+     "serum_readback": -8.0
+    },
+    {
+     "atlas_id": "arp.playback.repeats",
+     "path": [
+      "ArpClip0",
+      "plainParams",
+      "kParamRepeats"
+     ],
+     "written": 0.0,
+     "serum_readback": null
+    },
+    {
+     "atlas_id": "arp.velocity.decay",
+     "path": [
+      "ArpClip0",
+      "plainParams",
+      "kParamVeloDecay"
+     ],
+     "written": 0.0,
+     "serum_readback": null
+    },
+    {
+     "atlas_id": "global.oversampling",
+     "path": [
+      "Global0",
+      "plainParams",
+      "kParamOversampling"
+     ],
+     "written": 0.0,
+     "serum_readback": 0.0
+    },
+    {
+     "atlas_id": "global.portamento_curve",
+     "path": [
+      "Global0",
+      "plainParams",
+      "kParamPortamentoCurve"
+     ],
+     "written": -100.0,
+     "serum_readback": -100.0
+    },
+    {
+     "atlas_id": "global.swing_div",
+     "path": [
+      "Global0",
+      "plainParams",
+      "kParamSwingDiv"
+     ],
+     "written": 0.0,
+     "serum_readback": 0.0
+    },
+    {
+     "atlas_id": "global.voice_amp",
+     "path": [
+      "Global0",
+      "plainParams",
+      "kParamVoiceAmp"
+     ],
+     "written": 0.0,
+     "serum_readback": 0.0
+    },
+    {
+     "atlas_id": "global.voice_control.random.cutoff",
+     "path": [
+      "VoicePanel0",
+      "plainParams",
+      "kParamGlobalRandomFilterCutoff"
+     ],
+     "written": 0.0,
+     "serum_readback": null
+    },
+    {
+     "atlas_id": "global.voice_control.random.detune",
+     "path": [
+      "VoicePanel0",
+      "plainParams",
+      "kParamGlobalRandomOscDetune"
+     ],
+     "written": 0.0,
+     "serum_readback": null
+    },
+    {
+     "atlas_id": "global.voice_control.random.envs",
+     "path": [
+      "VoicePanel0",
+      "plainParams",
+      "kParamGlobalRandomEnvTime"
+     ],
+     "written": 0.0,
+     "serum_readback": null
+    },
+    {
+     "atlas_id": "global.voice_control.scaling.envs",
+     "path": [
+      "VoicePanel0",
+      "plainParams",
+      "kParamGlobalScalingEnvTime"
+     ],
+     "written": 10.0,
+     "serum_readback": 10.0
+    },
+    {
+     "atlas_id": "global.voice_control.scaling.lfos",
+     "path": [
+      "VoicePanel0",
+      "plainParams",
+      "kParamGlobalScalingLfoTime"
+     ],
+     "written": 10.0,
+     "serum_readback": 10.0
+    }
+   ]
+  },
+  {
+   "preset": "FLB_DOMAIN_EXACT_MID",
+   "controls": [
+    {
+     "atlas_id": "arp.playback.offset",
+     "path": [
+      "ArpClip0",
+      "plainParams",
+      "kParamOffset"
+     ],
+     "written": -3.0,
+     "serum_readback": -3.0
+    },
+    {
+     "atlas_id": "arp.playback.repeats",
+     "path": [
+      "ArpClip0",
+      "plainParams",
+      "kParamRepeats"
+     ],
+     "written": 5.0,
+     "serum_readback": 5.0
+    },
+    {
+     "atlas_id": "arp.velocity.decay",
+     "path": [
+      "ArpClip0",
+      "plainParams",
+      "kParamVeloDecay"
+     ],
+     "written": 30.0,
+     "serum_readback": 29.999999999999993
+    },
+    {
+     "atlas_id": "global.oversampling",
+     "path": [
+      "Global0",
+      "plainParams",
+      "kParamOversampling"
+     ],
+     "written": 2.0,
+     "serum_readback": 2.0
+    },
+    {
+     "atlas_id": "global.portamento_curve",
+     "path": [
+      "Global0",
+      "plainParams",
+      "kParamPortamentoCurve"
+     ],
+     "written": 50.0,
+     "serum_readback": 50.0
+    },
+    {
+     "atlas_id": "global.swing_div",
+     "path": [
+      "Global0",
+      "plainParams",
+      "kParamSwingDiv"
+     ],
+     "written": 3.0,
+     "serum_readback": null
+    },
+    {
+     "atlas_id": "global.voice_amp",
+     "path": [
+      "Global0",
+      "plainParams",
+      "kParamVoiceAmp"
+     ],
+     "written": 0.25,
+     "serum_readback": 0.25
+    },
+    {
+     "atlas_id": "global.voice_control.random.cutoff",
+     "path": [
+      "VoicePanel0",
+      "plainParams",
+      "kParamGlobalRandomFilterCutoff"
+     ],
+     "written": 40.0,
+     "serum_readback": 40.0
+    },
+    {
+     "atlas_id": "global.voice_control.random.detune",
+     "path": [
+      "VoicePanel0",
+      "plainParams",
+      "kParamGlobalRandomOscDetune"
+     ],
+     "written": 60.0,
+     "serum_readback": 60.0
+    },
+    {
+     "atlas_id": "global.voice_control.random.envs",
+     "path": [
+      "VoicePanel0",
+      "plainParams",
+      "kParamGlobalRandomEnvTime"
+     ],
+     "written": 80.0,
+     "serum_readback": 80.0
+    },
+    {
+     "atlas_id": "global.voice_control.scaling.envs",
+     "path": [
+      "VoicePanel0",
+      "plainParams",
+      "kParamGlobalScalingEnvTime"
+     ],
+     "written": 50.0,
+     "serum_readback": 49.99999999999999
+    },
+    {
+     "atlas_id": "global.voice_control.scaling.lfos",
+     "path": [
+      "VoicePanel0",
+      "plainParams",
+      "kParamGlobalScalingLfoTime"
+     ],
+     "written": 500.0,
+     "serum_readback": 499.99999999999966
+    }
+   ]
+  }
+ ]
+}

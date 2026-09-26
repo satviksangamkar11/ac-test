@@ -1,0 +1,47 @@
+{
+ "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+ "host_parameters": [
+  "Swing Div",
+  "Amp",
+  "Cutoff Rand",
+  "Osc Detune Rnd",
+  "Env Rand"
+ ],
+ "presets": {
+  "FLB_DOMAIN_DEFAULT": {
+   "Swing Div": "1/16",
+   "Amp": "0.5000",
+   "Cutoff Rand": "--",
+   "Osc Detune Rnd": "0.0",
+   "Env Rand": "--"
+  },
+  "FLB_DOMAIN_EXACT_LO": {
+   "Swing Div": "1/2",
+   "Amp": "0.0000",
+   "Cutoff Rand": "--",
+   "Osc Detune Rnd": "0.0",
+   "Env Rand": "--"
+  },
+  "FLB_DOMAIN_EXACT_MID": {
+   "Swing Div": "1/16",
+   "Amp": "0.2500",
+   "Cutoff Rand": "40%",
+   "Osc Detune Rnd": "12.0",
+   "Env Rand": "80%"
+  },
+  "FLB_DOMAIN_MIN": {
+   "Swing Div": "1/2",
+   "Amp": "0.0000",
+   "Cutoff Rand": "--",
+   "Osc Detune Rnd": "0.0",
+   "Env Rand": "--"
+  },
+  "FLB_DOMAIN_MAX": {
+   "Swing Div": "1/128",
+   "Amp": "1.0000",
+   "Cutoff Rand": "100%",
+   "Osc Detune Rnd": "20.0",
+   "Env Rand": "100%"
+  }
+ }
+}

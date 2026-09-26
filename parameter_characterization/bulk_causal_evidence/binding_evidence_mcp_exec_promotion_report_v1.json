@@ -1,5 +1,29 @@
 {
  "source": "mcp_exec_all_v2_results.jsonl",
+ "overlays": [
+  {
+   "file": "mcp_exec_finish_line_b_results.jsonl",
+   "atlas_ids": [
+    "arp.playback.offset",
+    "arp.playback.repeats",
+    "arp.velocity.decay",
+    "fx.delay.mode",
+    "fx.distortion.type",
+    "fx.filter.type",
+    "fx.reverb.type",
+    "global.oversampling",
+    "global.portamento_curve",
+    "global.swing_div",
+    "global.voice_amp",
+    "global.voice_control.random.cutoff",
+    "global.voice_control.random.detune",
+    "global.voice_control.random.envs",
+    "global.voice_control.scaling.envs",
+    "global.voice_control.scaling.lfos"
+   ]
+  }
+ ],
+ "live_evidence": "finish_line_b_live_serum_evidence_v1.json",
  "n_rows": 330,
  "accepted": [
   {
@@ -19,6 +43,16 @@
   },
   {
    "target": "arp.playback.gate",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "arp.playback.offset",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "arp.playback.repeats",
    "contract_status": "STRUCTURAL_ONLY",
    "allowed_operation": "mutate_numeric_value"
   },
@@ -49,6 +83,11 @@
   },
   {
    "target": "arp.transpose.shift",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "arp.velocity.decay",
    "contract_status": "STRUCTURAL_ONLY",
    "allowed_operation": "mutate_numeric_value"
   },
@@ -423,6 +462,11 @@
    "allowed_operation": "mutate_boolean_value"
   },
   {
+   "target": "fx.delay.mode",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_enum_value"
+  },
+  {
    "target": "fx.delay.time_l",
    "contract_status": "STRUCTURAL_ONLY",
    "allowed_operation": "mutate_numeric_value"
@@ -456,6 +500,11 @@
    "target": "fx.distortion.freq",
    "contract_status": "STRUCTURAL_ONLY",
    "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.distortion.type",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_enum_value"
   },
   {
    "target": "fx.distortion.wet",
@@ -506,6 +555,11 @@
    "target": "fx.filter.res",
    "contract_status": "STRUCTURAL_ONLY",
    "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.filter.type",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_enum_value"
   },
   {
    "target": "fx.filter.wet",
@@ -583,6 +637,11 @@
    "allowed_operation": "mutate_numeric_value"
   },
   {
+   "target": "fx.reverb.type",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_enum_value"
+  },
+  {
    "target": "fx.reverb.wet",
    "contract_status": "STRUCTURAL_ONLY",
    "allowed_operation": "mutate_numeric_value"
@@ -643,6 +702,11 @@
    "allowed_operation": "mutate_boolean_value"
   },
   {
+   "target": "global.oversampling",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
    "target": "global.poly_count",
    "contract_status": "STRUCTURAL_ONLY",
    "allowed_operation": "mutate_numeric_value"
@@ -678,7 +742,32 @@
    "allowed_operation": "mutate_numeric_value"
   },
   {
+   "target": "global.voice_control.random.cutoff",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "global.voice_control.random.detune",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "global.voice_control.random.envs",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
    "target": "global.voice_control.random.pan",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "global.voice_control.scaling.envs",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "global.voice_control.scaling.lfos",
    "contract_status": "STRUCTURAL_ONLY",
    "allowed_operation": "mutate_numeric_value"
   },
@@ -1474,20 +1563,6 @@
   }
  ],
  "rejected": {
-  "MISSING_DOMAIN: continuous control has no Atlas-declared bounds": [
-   "arp.playback.offset",
-   "arp.playback.repeats",
-   "arp.velocity.decay",
-   "global.oversampling",
-   "global.portamento_curve",
-   "global.swing_div",
-   "global.voice_amp",
-   "global.voice_control.random.cutoff",
-   "global.voice_control.random.detune",
-   "global.voice_control.random.envs",
-   "global.voice_control.scaling.envs",
-   "global.voice_control.scaling.lfos"
-  ],
   "outcome 'MCP_EXEC_CONFORMANCE_EXCEPTION' is not promotable (bucket D / no host confirmation path)": [
    "arp.transpose.range",
    "fx.compressor.attack",
@@ -1510,17 +1585,10 @@
    "oscA.warp_amount",
    "oscNoise.pan"
   ],
-  "INCONSISTENT_OPERAND_KIND: control_type=enum but mutation value 2.0 is not a string": [
-   "fx.delay.mode"
-  ],
-  "INCONSISTENT_OPERAND_KIND: mutation value 'kAsym' not in Atlas enum_values ('Tube', 'SoftClip', 'HardClip', 'Diode 1', 'Diode 2', 'Linear Fold', 'Sin Fold', 'Zero-Square', 'Downsample', 'Asym', 'Rectify', 'X-Shaper', 'X-Shaper (Asym)', 'Sine Shaper', 'Stomp Box', 'Tape Sat.', 'Overdrive', 'Soft Sat.')": [
-   "fx.distortion.type"
-  ],
-  "INCONSISTENT_OPERAND_KIND: mutation value 'L6' not in Atlas enum_values ('Normal (18 types: MG Low 6/12/18/24, Low 6/12/18/24, High 6/12/18/24, Band 12/24, Peak 12/24, Notch 12/24)', 'Multi', 'Flanges', 'Misc', 'S2 Filters')": [
-   "fx.filter.type"
-  ],
-  "INCONSISTENT_OPERAND_KIND: mutation value 'kAbyss' not in Atlas enum_values ('Plate', 'Hall', 'Vintage', 'Nitrous', 'Basin')": [
-   "fx.reverb.type"
+  "MISSING_DOMAIN: continuous control has no Atlas-declared bounds": [
+   "global.portamento_curve",
+   "global.swing_div",
+   "global.voice_amp"
   ]
  },
  "atlas_bounds_augmented_from_manifest": [
@@ -1543,10 +1611,28 @@
    "source": "manifest_campaign_v1.json domain (kind=continuous)"
   },
   {
+   "target": "arp.playback.offset",
+   "min": -8.0,
+   "max": 8.0,
+   "source": "finish_line_b_live_serum_evidence_v1.json (basis=GUI_NUMERIC)"
+  },
+  {
+   "target": "arp.playback.repeats",
+   "min": 0.0,
+   "max": 16.0,
+   "source": "finish_line_b_live_serum_evidence_v1.json (basis=GUI_NUMERIC)"
+  },
+  {
    "target": "arp.transpose.shift",
    "min": -24.0,
    "max": 24.0,
    "source": "manifest_campaign_v1.json domain (kind=signed)"
+  },
+  {
+   "target": "arp.velocity.decay",
+   "min": 0.0,
+   "max": 60.0,
+   "source": "finish_line_b_live_serum_evidence_v1.json (basis=GUI_NUMERIC)"
   },
   {
    "target": "arp.velocity.target",
@@ -1855,10 +1941,46 @@
    "source": "manifest_campaign_v1.json domain (kind=continuous)"
   },
   {
+   "target": "global.oversampling",
+   "min": 0.0,
+   "max": 2.0,
+   "source": "finish_line_b_live_serum_evidence_v1.json (basis=GUI_NUMERIC)"
+  },
+  {
+   "target": "global.voice_control.random.cutoff",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "finish_line_b_live_serum_evidence_v1.json (basis=GUI_NUMERIC)"
+  },
+  {
+   "target": "global.voice_control.random.detune",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "finish_line_b_live_serum_evidence_v1.json (basis=GUI_NUMERIC)"
+  },
+  {
+   "target": "global.voice_control.random.envs",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "finish_line_b_live_serum_evidence_v1.json (basis=GUI_NUMERIC)"
+  },
+  {
    "target": "global.voice_control.random.pan",
    "min": 0.0,
    "max": 100.0,
    "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "global.voice_control.scaling.envs",
+   "min": 10.0,
+   "max": 1000.0,
+   "source": "finish_line_b_live_serum_evidence_v1.json (basis=GUI_NUMERIC)"
+  },
+  {
+   "target": "global.voice_control.scaling.lfos",
+   "min": 10.0,
+   "max": 1000.0,
+   "source": "finish_line_b_live_serum_evidence_v1.json (basis=GUI_NUMERIC)"
   },
   {
    "target": "mixer.filter1.bus1",
@@ -1987,15 +2109,11 @@
    "source": "manifest_campaign_v1.json domain (kind=continuous)"
   }
  ],
- "n_accepted": 294,
- "n_rejected": 36,
- "n_atlas_bounds_augmented": 77,
+ "n_accepted": 307,
+ "n_rejected": 23,
+ "n_atlas_bounds_augmented": 86,
  "rejection_reason_counts": {
   "outcome 'MCP_EXEC_CONFORMANCE_EXCEPTION' is not promotable (bucket D / no host confirmation path)": 20,
-  "MISSING_DOMAIN: continuous control has no Atlas-declared bounds": 12,
-  "INCONSISTENT_OPERAND_KIND: control_type=enum but mutation value 2.0 is not a string": 1,
-  "INCONSISTENT_OPERAND_KIND: mutation value 'kAsym' not in Atlas enum_values ('Tube', 'SoftClip', 'HardClip', 'Diode 1', 'Diode 2', 'Linear Fold', 'Sin Fold', 'Zero-Square', 'Downsample', 'Asym', 'Rectify', 'X-Shaper', 'X-Shaper (Asym)', 'Sine Shaper', 'Stomp Box', 'Tape Sat.', 'Overdrive', 'Soft Sat.')": 1,
-  "INCONSISTENT_OPERAND_KIND: mutation value 'L6' not in Atlas enum_values ('Normal (18 types: MG Low 6/12/18/24, Low 6/12/18/24, High 6/12/18/24, Band 12/24, Peak 12/24, Notch 12/24)', 'Multi', 'Flanges', 'Misc', 'S2 Filters')": 1,
-  "INCONSISTENT_OPERAND_KIND: mutation value 'kAbyss' not in Atlas enum_values ('Plate', 'Hall', 'Vintage', 'Nitrous', 'Basin')": 1
+  "MISSING_DOMAIN: continuous control has no Atlas-declared bounds": 3
  }
 }
