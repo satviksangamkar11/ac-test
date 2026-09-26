@@ -38,7 +38,8 @@ class ContractRegistry:
     time via dataclasses.replace(), since CapabilityContract is frozen.
     """
 
-    def __init__(self, epoch=None, binding_evidence_dir=None, promoted_evidence_dir=None):
+    def __init__(self, epoch=None, binding_evidence_dir=None, promoted_evidence_dir=None,
+                 final_execution_contract_path=None):
         # epoch=None: the frozen legacy frontier, unchanged (every legacy test is pinned to it).
         # epoch=ExecutionEpoch: ONLY contracts qualified on that exact Serum build are loaded; everything
         # else is recorded in self.excluded with the reason. No contract crosses epochs.
@@ -48,6 +49,11 @@ class ContractRegistry:
         self._host_param_mapping = self._load_host_param_mapping()
         self._body_state_mapping = self._load_body_state_mapping()
         self._load_fresh_contracts()
+        # final_execution_contract is loaded BEFORE binding/promoted evidence loaders so it takes
+        # precedence; those loaders skip already-registered targets via their own guards.
+        self.final_contract_diagnostics = {}
+        self.known_exceptions: dict = {}
+        self._load_final_execution_contracts(final_execution_contract_path)
         self.binding_diagnostics = {}
         self._load_binding_evidence_contracts(binding_evidence_dir)
         self.promotion_diagnostics = {}
@@ -118,6 +124,57 @@ class ContractRegistry:
             binding_version=str(1),
         )
         return dataclasses.replace(contract, execution_binding=binding)
+
+    def _load_final_execution_contracts(self, path=None):
+        """Load CapabilityContracts from final_execution_contract_v1.json.
+
+        Explicit opt-in: runs only when epoch is given (same rule as every other
+        evidence loader). FileNotFoundError is recorded in final_contract_diagnostics
+        and does NOT silently fall back to the promoted-evidence dir — a missing
+        contract file is surfaced, never papered over.
+
+        Like every other evidence loader, this also gates on installed_epoch() so
+        that a machine without the matching Serum binary never loads evidence-derived
+        contracts, even from a pre-validated file. installed_epoch() is called through
+        evidence_promotion (same as promote_verified_evidence) so monkeypatching in
+        tests applies uniformly.
+
+        Loaded before binding/promoted evidence loaders so the final contract is the
+        primary source for MCP-exec controls; those loaders skip already-registered
+        targets via their existing guards.
+        """
+        if self.epoch is None:
+            return
+        from serum2.qualification import evidence_promotion as _ep
+        try:
+            machine_epoch = _ep.installed_epoch()
+        except Exception as exc:
+            self.final_contract_diagnostics["error"] = "installed_epoch() failed: %s" % exc
+            return
+        if machine_epoch.binary_sha256 != self.epoch.binary_sha256:
+            self.final_contract_diagnostics["error"] = (
+                "epoch mismatch: machine=%s, requested=%s" % (
+                    machine_epoch.binary_sha256[:8], self.epoch.binary_sha256[:8])
+            )
+            return
+        from serum2.producer.final_execution_contract import load_final_execution_contracts
+        try:
+            loaded, exceptions, source_path = load_final_execution_contracts(
+                path=path, epoch=self.epoch
+            )
+        except FileNotFoundError as exc:
+            self.final_contract_diagnostics["error"] = str(exc)
+            return
+        self.known_exceptions = exceptions
+        self.final_contract_diagnostics["source_path"] = source_path
+        self.final_contract_diagnostics["loaded"] = []
+        self.final_contract_diagnostics["skipped_already_registered"] = []
+        for target, c in loaded.items():
+            if target in self.contracts:
+                self.final_contract_diagnostics["skipped_already_registered"].append(target)
+            else:
+                self.contracts[target] = c
+                self.final_contract_diagnostics["loaded"].append(target)
 
     def _load_binding_evidence_contracts(self, evidence_dir=None):
         """Evidence-derived contracts (candidate_binding_qualifier output), built by the generic ClaimEngine/build_contract

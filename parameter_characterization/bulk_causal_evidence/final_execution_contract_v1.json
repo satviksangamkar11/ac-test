@@ -26,7 +26,7 @@
   },
   {
    "atlas_id": "arp.pattern.shape",
-   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "allowed_operation": "mutate_enum_value",
    "raw_body_path": "ArpClip0.plainParams.kParamShape",
    "valid_domain": {
     "kind": "enum",
@@ -118,7 +118,7 @@
   },
   {
    "atlas_id": "arp.playback.thru",
-   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "ArpClip0.plainParams.kParamThru",
    "valid_domain": {
     "kind": "enum",
@@ -136,7 +136,7 @@
   },
   {
    "atlas_id": "arp.retrigger.first",
-   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "ArpClip0.plainParams.kParamFirstNoteRetrig",
    "valid_domain": {
     "kind": "enum",
@@ -154,7 +154,7 @@
   },
   {
    "atlas_id": "arp.retrigger.launch",
-   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "ArpClip0.plainParams.kParamLaunchRetrig",
    "valid_domain": {
     "kind": "enum",
@@ -172,7 +172,7 @@
   },
   {
    "atlas_id": "arp.retrigger.note",
-   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "ArpClip0.plainParams.kParamNoteRetrig",
    "valid_domain": {
     "kind": "enum",
@@ -202,7 +202,7 @@
   },
   {
    "atlas_id": "arp.transpose.shape",
-   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "allowed_operation": "mutate_enum_value",
    "raw_body_path": "ArpClip0.plainParams.kParamTransposeShape",
    "valid_domain": {
     "kind": "enum",
@@ -264,7 +264,7 @@
   },
   {
    "atlas_id": "arp.velocity.enable",
-   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "ArpClip0.plainParams.kParamVeloEnabled",
    "valid_domain": {
     "kind": "enum",
@@ -282,7 +282,7 @@
   },
   {
    "atlas_id": "arp.velocity.retrig",
-   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "ArpClip0.plainParams.kParamVeloRetrig",
    "valid_domain": {
     "kind": "enum",
@@ -858,7 +858,7 @@
   },
   {
    "atlas_id": "filter1.enabled",
-   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "VoiceFilter0.plainParams.kParamEnable",
    "valid_domain": {
     "kind": "toggle"
@@ -872,7 +872,7 @@
   },
   {
    "atlas_id": "filter1.key_track",
-   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "VoiceFilter0.plainParams.kParamKeyTrack",
    "valid_domain": {
     "kind": "toggle"
@@ -1025,7 +1025,7 @@
   },
   {
    "atlas_id": "filter2.enabled",
-   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "VoiceFilter1.plainParams.kParamEnable",
    "valid_domain": {
     "kind": "toggle"
@@ -1039,7 +1039,7 @@
   },
   {
    "atlas_id": "filter2.key_track",
-   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "VoiceFilter1.plainParams.kParamKeyTrack",
    "valid_domain": {
     "kind": "toggle"
@@ -1406,7 +1406,7 @@
   },
   {
    "atlas_id": "fx.delay.bpm",
-   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "FXRack0.FX.0.FXDelay.plainParams.kParamBeatSync",
    "valid_domain": {
     "kind": "enum",
@@ -1452,7 +1452,7 @@
   },
   {
    "atlas_id": "fx.delay.link",
-   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "FXRack0.FX.0.FXDelay.plainParams.kParamLink",
    "valid_domain": {
     "kind": "enum",
@@ -1470,7 +1470,7 @@
   },
   {
    "atlas_id": "fx.delay.mode",
-   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "allowed_operation": "mutate_enum_value",
    "raw_body_path": "FXRack0.FX.0.FXDelay.plainParams.kParamMode",
    "valid_domain": {
     "kind": "enum",
@@ -1587,7 +1587,7 @@
   },
   {
    "atlas_id": "fx.distortion.type",
-   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "allowed_operation": "mutate_enum_value",
    "raw_body_path": "FXRack0.FX.0.FXDistortion.plainParams.kParamMode",
    "valid_domain": {
     "kind": "enum",
@@ -1761,7 +1761,7 @@
   },
   {
    "atlas_id": "fx.filter.type",
-   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "allowed_operation": "mutate_enum_value",
    "raw_body_path": "FXRack0.FX.0.FXFilter.plainParams.kParamType",
    "valid_domain": {
     "kind": "enum",
@@ -1992,7 +1992,7 @@
   },
   {
    "atlas_id": "fx.reverb.type",
-   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "allowed_operation": "mutate_enum_value",
    "raw_body_path": "FXRack0.FX.0.FXReverb.plainParams.kParamType",
    "valid_domain": {
     "kind": "enum",
@@ -2147,7 +2147,7 @@
   },
   {
    "atlas_id": "global.legato",
-   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "Global0.plainParams.kParamLegato",
    "valid_domain": {
     "kind": "toggle"
@@ -2161,7 +2161,7 @@
   },
   {
    "atlas_id": "global.limit_same_note_polyphony",
-   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "Global0.plainParams.kParamLimitSameNotePolyphony",
    "valid_domain": {
     "kind": "toggle"
@@ -2191,7 +2191,7 @@
   },
   {
    "atlas_id": "global.mono",
-   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "Global0.plainParams.kParamMonoToggle",
    "valid_domain": {
     "kind": "toggle"
@@ -2205,7 +2205,7 @@
   },
   {
    "atlas_id": "global.note_latch",
-   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "Global0.plainParams.kParamNoteLatch",
    "valid_domain": {
     "kind": "toggle"
@@ -2249,7 +2249,7 @@
   },
   {
    "atlas_id": "global.porta_always",
-   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "Global0.plainParams.kParamPortaAlways",
    "valid_domain": {
     "kind": "toggle"
@@ -2263,7 +2263,7 @@
   },
   {
    "atlas_id": "global.porta_scaled",
-   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "Global0.plainParams.kParamPortaScaled",
    "valid_domain": {
     "kind": "toggle"
@@ -2307,7 +2307,7 @@
   },
   {
    "atlas_id": "global.s1_compatibility",
-   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "Global0.plainParams.kParamS1Compatibility",
    "valid_domain": {
     "kind": "toggle"
@@ -2489,7 +2489,7 @@
   },
   {
    "atlas_id": "lfo1.beat_sync",
-   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "LFO0.plainParams.kParamBeatSync",
    "valid_domain": {
     "kind": "toggle"
@@ -2519,7 +2519,7 @@
   },
   {
    "atlas_id": "lfo1.dotted",
-   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "LFO0.plainParams.kParamDotted",
    "valid_domain": {
     "kind": "toggle"
@@ -2552,7 +2552,7 @@
   },
   {
    "atlas_id": "lfo1.mono",
-   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "LFO0.plainParams.kParamMono",
    "valid_domain": {
     "kind": "toggle"
@@ -2582,7 +2582,7 @@
   },
   {
    "atlas_id": "lfo1.rate_10x",
-   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "LFO0.plainParams.kParamRate10x",
    "valid_domain": {
     "kind": "toggle"
@@ -2664,7 +2664,7 @@
   },
   {
    "atlas_id": "lfo1.triplets",
-   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "LFO0.plainParams.kParamTriplets",
    "valid_domain": {
     "kind": "toggle"
@@ -2678,7 +2678,7 @@
   },
   {
    "atlas_id": "lfo2.beat_sync",
-   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "LFO1.plainParams.kParamBeatSync",
    "valid_domain": {
     "kind": "toggle"
@@ -2708,7 +2708,7 @@
   },
   {
    "atlas_id": "lfo2.dotted",
-   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "LFO1.plainParams.kParamDotted",
    "valid_domain": {
     "kind": "toggle"
@@ -2741,7 +2741,7 @@
   },
   {
    "atlas_id": "lfo2.mono",
-   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "LFO1.plainParams.kParamMono",
    "valid_domain": {
     "kind": "toggle"
@@ -2771,7 +2771,7 @@
   },
   {
    "atlas_id": "lfo2.rate_10x",
-   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "LFO1.plainParams.kParamRate10x",
    "valid_domain": {
     "kind": "toggle"
@@ -2853,7 +2853,7 @@
   },
   {
    "atlas_id": "lfo2.triplets",
-   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "LFO1.plainParams.kParamTriplets",
    "valid_domain": {
     "kind": "toggle"
@@ -2867,7 +2867,7 @@
   },
   {
    "atlas_id": "lfo3.beat_sync",
-   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "LFO2.plainParams.kParamBeatSync",
    "valid_domain": {
     "kind": "toggle"
@@ -2897,7 +2897,7 @@
   },
   {
    "atlas_id": "lfo3.dotted",
-   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "LFO2.plainParams.kParamDotted",
    "valid_domain": {
     "kind": "toggle"
@@ -2930,7 +2930,7 @@
   },
   {
    "atlas_id": "lfo3.mono",
-   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "LFO2.plainParams.kParamMono",
    "valid_domain": {
     "kind": "toggle"
@@ -2960,7 +2960,7 @@
   },
   {
    "atlas_id": "lfo3.rate_10x",
-   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "LFO2.plainParams.kParamRate10x",
    "valid_domain": {
     "kind": "toggle"
@@ -3042,7 +3042,7 @@
   },
   {
    "atlas_id": "lfo3.triplets",
-   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "LFO2.plainParams.kParamTriplets",
    "valid_domain": {
     "kind": "toggle"
@@ -3056,7 +3056,7 @@
   },
   {
    "atlas_id": "lfo4.beat_sync",
-   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "LFO3.plainParams.kParamBeatSync",
    "valid_domain": {
     "kind": "toggle"
@@ -3086,7 +3086,7 @@
   },
   {
    "atlas_id": "lfo4.dotted",
-   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "LFO3.plainParams.kParamDotted",
    "valid_domain": {
     "kind": "toggle"
@@ -3119,7 +3119,7 @@
   },
   {
    "atlas_id": "lfo4.mono",
-   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "LFO3.plainParams.kParamMono",
    "valid_domain": {
     "kind": "toggle"
@@ -3149,7 +3149,7 @@
   },
   {
    "atlas_id": "lfo4.rate_10x",
-   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "LFO3.plainParams.kParamRate10x",
    "valid_domain": {
     "kind": "toggle"
@@ -3231,7 +3231,7 @@
   },
   {
    "atlas_id": "lfo4.triplets",
-   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "LFO3.plainParams.kParamTriplets",
    "valid_domain": {
     "kind": "toggle"
@@ -3245,7 +3245,7 @@
   },
   {
    "atlas_id": "lfo5.beat_sync",
-   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "LFO4.plainParams.kParamBeatSync",
    "valid_domain": {
     "kind": "toggle"
@@ -3275,7 +3275,7 @@
   },
   {
    "atlas_id": "lfo5.dotted",
-   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "LFO4.plainParams.kParamDotted",
    "valid_domain": {
     "kind": "toggle"
@@ -3308,7 +3308,7 @@
   },
   {
    "atlas_id": "lfo5.mono",
-   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "LFO4.plainParams.kParamMono",
    "valid_domain": {
     "kind": "toggle"
@@ -3338,7 +3338,7 @@
   },
   {
    "atlas_id": "lfo5.rate_10x",
-   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "LFO4.plainParams.kParamRate10x",
    "valid_domain": {
     "kind": "toggle"
@@ -3420,7 +3420,7 @@
   },
   {
    "atlas_id": "lfo5.triplets",
-   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "LFO4.plainParams.kParamTriplets",
    "valid_domain": {
     "kind": "toggle"
@@ -3434,7 +3434,7 @@
   },
   {
    "atlas_id": "lfo6.beat_sync",
-   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "LFO5.plainParams.kParamBeatSync",
    "valid_domain": {
     "kind": "toggle"
@@ -3464,7 +3464,7 @@
   },
   {
    "atlas_id": "lfo6.dotted",
-   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "LFO5.plainParams.kParamDotted",
    "valid_domain": {
     "kind": "toggle"
@@ -3497,7 +3497,7 @@
   },
   {
    "atlas_id": "lfo6.mono",
-   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "LFO5.plainParams.kParamMono",
    "valid_domain": {
     "kind": "toggle"
@@ -3527,7 +3527,7 @@
   },
   {
    "atlas_id": "lfo6.rate_10x",
-   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "LFO5.plainParams.kParamRate10x",
    "valid_domain": {
     "kind": "toggle"
@@ -3609,7 +3609,7 @@
   },
   {
    "atlas_id": "lfo6.triplets",
-   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "LFO5.plainParams.kParamTriplets",
    "valid_domain": {
     "kind": "toggle"
@@ -3875,7 +3875,7 @@
   },
   {
    "atlas_id": "mixer.filter1.enable",
-   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "VoiceFilter0.plainParams.kParamEnable",
    "valid_domain": {
     "kind": "enum",
@@ -3935,7 +3935,7 @@
   },
   {
    "atlas_id": "mixer.filter2.enable",
-   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "VoiceFilter1.plainParams.kParamEnable",
    "valid_domain": {
     "kind": "enum",
@@ -3995,7 +3995,7 @@
   },
   {
    "atlas_id": "mixer.noise.enable",
-   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "Oscillator3.plainParams.kParamEnable",
    "valid_domain": {
     "kind": "enum",
@@ -4193,7 +4193,7 @@
   },
   {
    "atlas_id": "mixer.sub.enable",
-   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "Oscillator4.plainParams.kParamEnable",
    "valid_domain": {
     "kind": "enum",
@@ -4253,7 +4253,7 @@
   },
   {
    "atlas_id": "oscA.enabled",
-   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "Oscillator0.plainParams.kParamEnable",
    "valid_domain": {
     "kind": "toggle"
@@ -4621,7 +4621,7 @@
   },
   {
    "atlas_id": "oscB.enabled",
-   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "Oscillator1.plainParams.kParamEnable",
    "valid_domain": {
     "kind": "toggle"
@@ -4993,7 +4993,7 @@
   },
   {
    "atlas_id": "oscC.enabled",
-   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "Oscillator2.plainParams.kParamEnable",
    "valid_domain": {
     "kind": "toggle"
@@ -5397,7 +5397,7 @@
   },
   {
    "atlas_id": "voice.voicing.legato",
-   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "Global0.plainParams.kParamLegato",
    "valid_domain": {
     "kind": "checkbox"
@@ -5411,7 +5411,7 @@
   },
   {
    "atlas_id": "voice.voicing.mono",
-   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "Global0.plainParams.kParamMonoToggle",
    "valid_domain": {
     "kind": "checkbox"
@@ -5425,7 +5425,7 @@
   },
   {
    "atlas_id": "voice.voicing.porta_always",
-   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "Global0.plainParams.kParamPortaAlways",
    "valid_domain": {
     "kind": "toggle"
@@ -5439,7 +5439,7 @@
   },
   {
    "atlas_id": "voice.voicing.porta_scaled",
-   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "allowed_operation": "mutate_boolean_value",
    "raw_body_path": "Global0.plainParams.kParamPortaScaled",
    "valid_domain": {
     "kind": "toggle"

@@ -143,17 +143,25 @@ def main():
             "exception_detail": exception_detail,
             "epoch_sha256": epoch_sha,
         }
-        # Use promoted contract's allowed_operation when available (more precise than source_outcome)
+        # Derive allowed_operation from Atlas control_type — same mapping evidence_promotion.py uses.
         if ev:
-            # evidence file has source_outcome (harness category); surface has control_type
-            # derive allowed_operation from control_type (same mapping evidence_promotion.py uses)
             ct = surf.get("control_type")
-            if ct in ("continuous", "knob", "stepper", "draggable_value", "signed", "log"):
-                row["allowed_operation"] = "mutate_numeric_value"
-            elif ct == "enum":
-                row["allowed_operation"] = "mutate_enum_value"
-            elif ct == "boolean":
-                row["allowed_operation"] = "mutate_boolean_value"
+            _CT_TO_OP = {
+                "continuous": "mutate_numeric_value",
+                "knob": "mutate_numeric_value",
+                "stepper": "mutate_numeric_value",
+                "draggable_value": "mutate_numeric_value",
+                "signed": "mutate_numeric_value",
+                "log": "mutate_numeric_value",
+                "enum": "mutate_enum_value",
+                "dropdown": "mutate_enum_value",
+                "nested_dropdown": "mutate_enum_value",
+                "boolean": "mutate_boolean_value",
+                "toggle": "mutate_boolean_value",
+                "checkbox": "mutate_boolean_value",
+            }
+            if ct in _CT_TO_OP:
+                row["allowed_operation"] = _CT_TO_OP[ct]
         controls.append(row)
 
     # Verification
