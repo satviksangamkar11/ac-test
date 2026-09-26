@@ -2,8 +2,9 @@
 
 The actual routing DECISION (which backend an admitted operation uses)
 already lives in producer_brain.py's route_decision/RouteSelector logic and
-the SERUM_PRESET_PLAN_READY / MCP_PLAN_READY / MODULATION_ROUTE_PLAN_READY
-execution_status values it produces. This module does NOT reimplement that
+the ADVISORY_ONLY / MCP_PLAN_READY / MODULATION_ROUTE_PLAN_READY
+execution_status values it produces. (SERUM_PRESET_PLAN_READY was renamed
+ADVISORY_ONLY in Gate A — ProducerBrain no longer emits executable plans.) This module does NOT reimplement that
 -- doing so would be exactly the "second execution path" the architecture
 explicitly forbids. It exists because nothing currently gives episode-
 recording code ONE place to ask "which backend did this admitted operation

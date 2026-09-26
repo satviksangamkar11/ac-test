@@ -51,7 +51,7 @@ def build_admitted_plan():
     from serum2.producer.producer_brain import ProducerBrain, ProducerRequest
     r = ProducerBrain().execute(ProducerRequest(
         user_intent="longer Env1.Attack to 1.5 ms", mode="EXECUTE", visual_mode="NEVER"))
-    if not r.admitted or r._serum_preset_plan.get("status") != "SERUM_PRESET_PLAN_READY":
+    if not r.admitted or r._serum_preset_plan.get("status") != "ADVISORY_ONLY":
         raise RuntimeError("env1.attack was not admitted by the real chain: %r" % r.execution_status)
     return r._serum_preset_plan
 

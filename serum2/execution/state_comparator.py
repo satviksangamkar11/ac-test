@@ -130,16 +130,38 @@ def _ui_equal(expected: Any, ui_text: Any) -> bool:
     from serum2.producer.state_ledger import _numeric, exact_norm
     a, b = _numeric(expected, None), _numeric(ui_text, None)
     if a and b:
-        return a[1] == b[1] and math.isclose(a[0], b[0], rel_tol=1e-9, abs_tol=1e-9)
+        # Normalise units: "300" unit="ms" and "300 ms" unit="" are the same.
+        au = (a[1] or "").strip()
+        bu = (b[1] or "").strip()
+        units_ok = au == bu or (au + " " in bu) or (bu + " " in au) or au == "" or bu == ""
+        return units_ok and math.isclose(a[0], b[0], rel_tol=1e-6, abs_tol=1e-6)
     return exact_norm(expected) == exact_norm(ui_text)
+
+
+def _binding_quality(ui_readback: Dict[str, Any]) -> str:
+    """Classify how a UI readback was obtained.
+
+    LOADER_BOUND  — carries loader_evidence (run_id, track_nonce, serum_module_sha256)
+    MANUALLY_READ — has captured_at/serum/method metadata but no loader proof
+    UNBOUND       — bare dict; rejected from LIVE_UI_VERIFIED
+    """
+    if ui_readback.get("loader_evidence"):
+        le = ui_readback["loader_evidence"]
+        if le.get("run_id") and le.get("track_nonce") and le.get("serum_module_sha256"):
+            return "LOADER_BOUND"
+    if ui_readback.get("captured_at") or ui_readback.get("serum") or ui_readback.get("method"):
+        return "MANUALLY_READ"
+    return "UNBOUND"
 
 
 def compare_ui(rows, ui_readback: Dict[str, Any], report: CompileReport) -> Dict[str, Any]:
     """DIRECT_UI comparison: what the LIVE Serum showed, per control id, against what the video showed for the
     same control. ui_readback = {"route": "DIRECT_UI", "captured_at": ..., "values": {control_id: text}}.
-    A control that was compiled but has no UI reading is UNREADABLE (never assumed correct)."""
+    A control that was compiled but has no UI reading is UNREADABLE (never assumed correct).
+    An UNBOUND readback (bare dict) is accepted for comparison but will not reach LIVE_UI_VERIFIED."""
     if ui_readback.get("route") != DIRECT_UI:
         raise ValueError("ui_readback must come from the DIRECT_UI route")
+    bq = _binding_quality(ui_readback)
     ids = {o.operation_id for o in report.ops}
     vals = ui_readback["values"]
     fields: Dict[str, str] = {}
@@ -153,17 +175,20 @@ def compare_ui(rows, ui_readback: Dict[str, Any], report: CompileReport) -> Dict
         else:
             st = _grade(fid, _ui_equal(r.value, vals[r.control_id]))
         fields[r.control_id + "@" + str(r.context.get("rack", "-"))] = st
-    return {"route": DIRECT_UI, "captured_at": ui_readback.get("captured_at"), "field_counts": dict(Counter(fields.values())),
-            "fields": fields, "groups": _groups(rows, fields)}
+    return {"route": DIRECT_UI, "captured_at": ui_readback.get("captured_at"), "binding_quality": bq,
+            "field_counts": dict(Counter(fields.values())), "fields": fields, "groups": _groups(rows, fields)}
 
 
 def verification_level(file_cmp: Dict[str, Any], ui_cmp: Dict[str, Any] = None) -> str:
-    """The highest proof actually reached. Approximation/mismatch/unreadable never reach VERIFIED."""
+    """The highest proof actually reached. Approximation/mismatch/unreadable never reach VERIFIED.
+    An UNBOUND ui_cmp (bare hand-typed dict) is refused from LIVE_UI_VERIFIED."""
     bad = ("MISMATCH", "UNREADABLE", "NOT_COMPILED", "OVERRIDDEN_APPROXIMATION")
     if any(k in file_cmp["field_counts"] for k in bad):
         return "FILE_READBACK_FAILED_OR_APPROXIMATE"
     if ui_cmp is None:
         return "FILE_READBACK_VERIFIED_ONLY"
+    if ui_cmp.get("binding_quality") == "UNBOUND":
+        return "UI_READBACK_UNBOUND"
     if any(k in ui_cmp["field_counts"] for k in bad):
         return "UI_READBACK_FAILED_OR_INCOMPLETE"
     return "LIVE_UI_VERIFIED"

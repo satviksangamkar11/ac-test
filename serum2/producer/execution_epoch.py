@@ -30,6 +30,18 @@ EPOCH_2_0_23 = ExecutionEpoch(
     "2.0.23", "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3", 9.0)
 KNOWN_EPOCHS = (EPOCH_2_0_21, EPOCH_2_0_23)
 
+# Sentinel epoch for offline tests. Runs capped at OFFLINE_ONLY; can never yield VERIFIED claims.
+EPOCH_OFFLINE_TEST = ExecutionEpoch(
+    serum_version="OFFLINE_TEST",
+    binary_sha256="0" * 64,
+    processor_state_version=0.0,
+)
+
+
+def is_offline_test(epoch) -> bool:
+    """True for the OFFLINE_TEST sentinel and for None (backward-compat call sites)."""
+    return epoch is None or epoch is EPOCH_OFFLINE_TEST
+
 
 class UnknownEpoch(RuntimeError):
     pass

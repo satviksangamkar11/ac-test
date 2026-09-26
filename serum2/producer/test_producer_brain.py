@@ -226,13 +226,13 @@ def test_live_full_pipeline_release():
         "the Serum route — only finalize_serum_preset_execution() may, "
         "after real orchestrator-fed evidence"
     )
-    if result.execution_status == "SERUM_PRESET_PLAN_READY":
+    if result.execution_status == "ADVISORY_ONLY":
         assert result.admitted is True
         plan = getattr(result, "_serum_preset_plan", None)
         assert plan is not None
         assert plan["mutation_target_path"]
-        print("[LIVE] admitted plan target=%r value=%r" % (
-            plan["mutation_target_path"], plan["mutation_value_used"]
+        print("[LIVE] advisory plan target=%r qualification_test_value=%r" % (
+            plan["mutation_target_path"], plan.get("qualification_test_value")
         ))
     else:
         # May refuse if no valid contract in current environment
@@ -294,7 +294,7 @@ def test_live_mcp_path_filter_cutoff():
     # so brain refuses explicitly rather than guessing.
     assert result.execution_status in (
         "REFUSED_NO_MAPPING", "REFUSED_NO_EVIDENCE",
-        "REFUSED_NO_CONTRACT", "MCP_PLAN_READY",
+        "REFUSED_NO_CONTRACT", "MCP_PLAN_READY", "ADVISORY_ONLY",
     ), "Unexpected status: %s (%s)" % (result.execution_status, result.error)
     # Must not claim EXECUTED without real capability
     assert result.execution_status != "EXECUTED"

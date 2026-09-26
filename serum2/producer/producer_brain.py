@@ -21,7 +21,7 @@ There are exactly two real execution backends, each ending in a caller-fed
 finalize_*() call — a bare plan is never EXECUTED on its own:
 
   Serum-internal targets (e.g. Env1.Release):
-    ADMITTED → _build_serum_preset_plan() → SERUM_PRESET_PLAN_READY
+    ADMITTED → _build_serum_preset_plan() → ADVISORY_ONLY
     → orchestrator: serum-mcp generate_preset() → .SerumPreset + sha256
     → Serum 2.0.21's OWN in-plugin preset browser loads it (never Ableton's
       browser — it does not index .SerumPreset files; never
@@ -375,7 +375,7 @@ class ProducerResult:
     ProducerBrain.finalize_serum_preset_execution() has been called with
     real evidence. A non-None value here is the only thing that may
     justify execution_status == 'EXECUTED' for the Serum route — a bare
-    SERUM_PRESET_PLAN_READY must never claim EXECUTED."""
+    ADVISORY_ONLY must never claim EXECUTED."""
 
     # ---- intent classification ----
     intent_class: str = "MUTATION"
@@ -780,10 +780,10 @@ class ProducerBrain:
             }
 
         return {
-            "status": "SERUM_PRESET_PLAN_READY",
+            "status": "ADVISORY_ONLY",
             "contract_id": adm.contract_id,
             "mutation_target_path": mutation_path,
-            "mutation_value_used": mutation_value,
+            "qualification_test_value": mutation_value,
             "capability_key": contract.target,
             "final_execution_contract": final_contract_fields,
             "execution_steps": [
@@ -1993,11 +1993,11 @@ class ProducerBrain:
             result.error = "Execution authority not granted: %s" % plan
             return result
 
-        result.execution_status = "SERUM_PRESET_PLAN_READY"
+        result.execution_status = "ADVISORY_ONLY"
         result.advisory_rationale += (
-            " | Serum preset plan: target=%r value=%r contract_id=%r" % (
+            " | Serum preset advisory: target=%r qualification_test_value=%r contract_id=%r" % (
                 plan.get("mutation_target_path"),
-                plan.get("mutation_value_used"),
+                plan.get("qualification_test_value"),
                 plan.get("contract_id"),
             )
         )
@@ -2043,9 +2043,9 @@ class ProducerBrain:
             result.error = "%s: %s" % (reason, plan.get("detail", ""))
             return result
 
-        result.execution_status = "MCP_PLAN_READY"
+        result.execution_status = "ADVISORY_ONLY"
         result.advisory_rationale += (
-            " | MCP plan: host_param=%r index=%s track=%s device=%s steps=%d" % (
+            " | MCP Serum-device advisory: host_param=%r index=%s track=%s device=%s steps=%d" % (
                 plan.get("host_param_label"),
                 plan.get("host_param_index"),
                 plan.get("track_index"),
@@ -2137,7 +2137,7 @@ class ProducerBrain:
     # into the real Serum 2 instance through Serum's own in-plugin preset
     # browser, reads back the live UI, and feeds the REAL evidence in here.
     # Only after this call does execution_status become EXECUTED. A bare
-    # SERUM_PRESET_PLAN_READY must never be reported as EXECUTED.
+    # ADVISORY_ONLY must never be reported as EXECUTED.
     # ------------------------------------------------------------------
     def finalize_serum_preset_execution(
         self,
@@ -2152,7 +2152,7 @@ class ProducerBrain:
 
         Args:
             result: a ProducerResult previously returned with
-                execution_status == "SERUM_PRESET_PLAN_READY"
+                execution_status == "ADVISORY_ONLY"
                 (has result._serum_preset_plan)
             preset_path: absolute path of the .SerumPreset serum-mcp wrote
             preset_sha256: sha256 of that file (never fabricated)
@@ -2167,10 +2167,10 @@ class ProducerBrain:
             serum_preset_execution populated, decision set from
             readback_verified.
         """
-        if result.execution_status != "SERUM_PRESET_PLAN_READY":
+        if result.execution_status != "ADVISORY_ONLY":
             raise ValueError(
                 "finalize_serum_preset_execution() requires a result with "
-                "execution_status == 'SERUM_PRESET_PLAN_READY' (got %r). "
+                "execution_status == 'ADVISORY_ONLY' (got %r). "
                 "This prevents finalizing a REFUSED result as EXECUTED."
                 % result.execution_status
             )

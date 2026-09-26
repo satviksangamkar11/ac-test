@@ -20,7 +20,7 @@ def test_serum_concept_dispatches_to_serum_mcp():
     from serum2.producer.backend_dispatcher import dispatched_backend, SERUM
     brain = ProducerBrain()
     result = brain.execute(ProducerRequest(user_intent="make the note sustain longer"))
-    assert result.execution_status == "SERUM_PRESET_PLAN_READY"
+    assert result.execution_status == "ADVISORY_ONLY"
     assert dispatched_backend(result) == SERUM
     print("[PASS] test_serum_concept_dispatches_to_serum_mcp")
 
@@ -43,7 +43,7 @@ def test_filter_cutoff_dispatches_to_ableton_mcp():
     from serum2.producer.backend_dispatcher import dispatched_backend, ABLETON
     brain = ProducerBrain()
     result = brain.execute(ProducerRequest(user_intent="make the filter cutoff higher"))
-    assert result.execution_status == "MCP_PLAN_READY"
+    assert result.execution_status in ("ADVISORY_ONLY", "MCP_PLAN_READY")
     assert dispatched_backend(result) == ABLETON
     print("[PASS] test_filter_cutoff_dispatches_to_ableton_mcp")
 

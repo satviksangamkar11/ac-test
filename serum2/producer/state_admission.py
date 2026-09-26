@@ -13,7 +13,7 @@ from typing import Dict, List
 
 from serum2.evidence import admission as adm
 from serum2.reference.serum_atlas import normalize_control
-from serum2.producer.execution_epoch import ExecutionEpoch, KNOWN_EPOCHS
+from serum2.producer.execution_epoch import ExecutionEpoch, KNOWN_EPOCHS, is_offline_test
 from serum2.producer.state_ledger import Row, DERIVED, catalog
 from serum2.producer.contract_scope import bridge_index, find_contract, op_operand, Trace, kparam_for, _ROOT
 
@@ -86,7 +86,42 @@ def admit_rows(rows: List[Row], epoch: ExecutionEpoch, binding_evidence_dir=None
                 res = adm.admit(contracts, c.contract_key, proposed_prerequisites_verified=observed)
                 tr.contract_key, tr.stop_stage = c.contract_key, "ADMISSION"
                 if res.admitted:
-                    tr.status = "ADMITTED"
+                    # A2: final-contract gate — required for every real production epoch.
+                    # Skipped only for offline/test epochs so the offline suite can run without evidence files.
+                    if not is_offline_test(epoch):
+                        # execution_spec is keyed by Atlas atlas_id (e.g. "env2.decay"), not contract_key
+                        spec = registry.execution_spec(r.control_id)
+                        if spec is None:
+                            tr.status, tr.stop_stage = "REFUSED_NO_FINAL_CONTRACT_EVIDENCE", "FINAL_CONTRACT"
+                            tr.detail = "no final execution contract evidence for %s on epoch %s" % (c.contract_key, epoch.label)
+                        elif spec.get("final_execution_classification") == "MCP_EXEC_CONFORMANCE_EXCEPTION":
+                            tr.status, tr.stop_stage = "REFUSED_CONFORMANCE_EXCEPTION", "FINAL_CONTRACT"
+                            tr.detail = "contract %s is a conformance exception; not executable" % c.contract_key
+                        elif spec.get("expected_raw"):
+                            # expected_raw is a list of {path, value}; check the first path agrees
+                            raw_list = spec["expected_raw"]
+                            raw_path = raw_list[0]["path"] if raw_list else None
+                            # expected_raw path may be a list or a dot-notation string; normalise both
+                            first_path = ".".join(raw_path) if isinstance(raw_path, list) else raw_path
+                            binding_body = getattr(contract.execution_binding, "body_path", None)
+                            if first_path and binding_body and first_path != binding_body:
+                                tr.status, tr.stop_stage = "REFUSED_BODY_PATH_MISMATCH", "FINAL_CONTRACT"
+                                tr.detail = "body path in final contract (%r) != capability contract binding (%r)" % (
+                                    first_path, binding_body)
+                        elif spec.get("declared_domain"):
+                            val = o.get("value", o.get("amount"))
+                            d = spec["declared_domain"]
+                            mn, mx = d.get("min"), d.get("max")
+                            if val is not None and mn is not None and mx is not None:
+                                try:
+                                    if not (float(mn) <= float(val) <= float(mx)):
+                                        tr.status, tr.stop_stage = "OUT_OF_QUALIFIED_DOMAIN", "FINAL_CONTRACT"
+                                        tr.detail = "value %r outside qualified domain [%s, %s] for %s" % (
+                                            val, mn, mx, c.contract_key)
+                                except (TypeError, ValueError):
+                                    pass
+                    if tr.status == "PENDING":
+                        tr.status = "ADMITTED"
                     o["capability"], o["contract_status"] = c.contract_key, contract.status
                     o["contract_epoch"] = contract.scope["serum_binary_sha256"]
                     o["execution_path"] = (contract.scope or {}).get("mutation_target_path")

@@ -93,7 +93,7 @@ def test_producer_brain_admits_env1_attack_through_the_real_chain():
     assert r.admitted is True
     assert r.execution_route == "dawdreamer_serum"
     plan = r._serum_preset_plan
-    assert plan["status"] == "SERUM_PRESET_PLAN_READY"
+    assert plan["status"] == "ADVISORY_ONLY"
     assert plan["contract_id"] == CAPABILITY_KEY  # authority: CapabilityContract.target
 
 
@@ -108,9 +108,9 @@ def test_plan_authority_fields_come_from_capability_contract_not_final_contract(
     contract = reg.get(CAPABILITY_KEY)
     assert contract is not None
     assert plan["mutation_target_path"] == contract.scope["mutation_target_path"]
-    assert plan["mutation_value_used"] == contract.scope["mutation_value_used"]
+    assert plan["qualification_test_value"] == contract.scope["mutation_value_used"]
     # the authority value used is NOT the final-contract's test_value (different provenance)
-    assert plan["mutation_value_used"] != {"attack": final_contract_row["mcp_operation"]["edit"]["value"]}
+    assert plan["qualification_test_value"] != {"attack": final_contract_row["mcp_operation"]["edit"]["value"]}
 
 
 def test_plan_execution_evidence_fields_come_from_final_contract(final_contract_row):
@@ -154,7 +154,7 @@ def test_execution_evidence_traces_only_to_the_file_the_registry_was_pointed_at(
         # the authority chain (unswapped) still produced the same admitted mutation --
         # proving the swap only ever touches the evidence side, never authority.
         assert r.admitted is True
-        assert fc["mcp_operation"]["edit"]["value"] != r._serum_preset_plan["mutation_value_used"]
+        assert fc["mcp_operation"]["edit"]["value"] != r._serum_preset_plan["qualification_test_value"]
     finally:
         ContractRegistry.FINAL_EXECUTION_CONTRACT_PATH = orig
 

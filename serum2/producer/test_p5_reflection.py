@@ -165,7 +165,7 @@ def test_p5_2_failed_execution_becomes_a_contradicted_reflection_with_the_discre
 
 
 def test_p5_2_success_is_not_inferred_from_admission_or_a_claim():
-    planned = record_skill_outcome(attempt={**ATT, "executed": False, "execution_status": "SERUM_PRESET_PLAN_READY"},
+    planned = record_skill_outcome(attempt={**ATT, "executed": False, "execution_status": "ADVISORY_ONLY"},
                                    expected={"Env 1 Release": "838 ms"}, observed={"Env 1 Release": "838 ms"}, evidence=[READBACK])
     assert planned.discrepancy["class"] == NOT_EXECUTED and planned.lesson["kind"] == NOT_TESTED and dict(planned.observed_outcome) == {}
     no_rb = record_skill_outcome(attempt=ATT, expected={"Env 1 Release": "838 ms"}, observed={"Env 1 Release": "838 ms"}, evidence=[])
@@ -204,7 +204,7 @@ def test_p5_2_bad_attempts_are_refused():
 def test_p5_2_admitted_plan_ready_brain_result_is_not_an_execution_but_a_finalized_one_is():
     from serum2.producer.producer_brain import ProducerBrain, ProducerRequest
     res = ProducerBrain().execute(ProducerRequest(user_intent="longer Env1.Release to 838 ms", mode="EXECUTE", visual_mode="NEVER"))
-    assert res.execution_status == "SERUM_PRESET_PLAN_READY" and res.admitted is True
+    assert res.execution_status == "ADVISORY_ONLY" and res.admitted is True
     planned = attempt_from_result(res, episode_id="e9")
     assert planned["executed"] is False                                  # admission != execution
     ProducerBrain().finalize_serum_preset_execution(res, preset_path="p", preset_sha256="abc", ui_readback={"Env 1 Release": "838 ms"}, readback_verified=True)
@@ -247,7 +247,7 @@ def test_p5_3_an_inconclusive_attempt_counts_as_an_attempt_but_not_a_success_or_
 
 def test_p5_3_not_tested_reflection_changes_nothing():
     s = skill_from_episode("e1")
-    nt = record_skill_outcome(attempt={**ATT, "episode_id": "e3", "executed": False, "execution_status": "SERUM_PRESET_PLAN_READY"},
+    nt = record_skill_outcome(attempt={**ATT, "episode_id": "e3", "executed": False, "execution_status": "ADVISORY_ONLY"},
                               expected={"Env 1 Release": "838 ms"}, observed=None, evidence=[])
     assert apply_reflection(s, nt) is s
 

@@ -32,7 +32,7 @@ def test_scalar_change_produces_a_candidate_that_admits():
     brain = ProducerBrain()
     result = brain.execute(ProducerRequest(**candidates[0]["request_kwargs"]))
     assert result.resolved_concept == "note-release"
-    assert result.execution_status == "SERUM_PRESET_PLAN_READY"
+    assert result.execution_status == "ADVISORY_ONLY"
     print("[PASS] test_scalar_change_produces_a_candidate_that_admits")
 
 
