@@ -52,7 +52,11 @@ REJECT_UI_SEMANTICS_NOT_VERIFIED = "UI_SEMANTICS_NOT_VERIFIED"
 REJECT_BAD_PARAMETER_CONTRACT = "BAD_PARAMETER_CONTRACT"
 
 _VERIFIED_STATUSES = {"BINDING_VERIFIED", "STRUCTURAL_VERIFIED"}
-_ATLAS_KIND_TO_OPERAND = {"toggle": MUTATE_BOOLEAN, "continuous": MUTATE_NUMERIC, "enum": MUTATE_ENUM}   # LEGACY path only
+_ATLAS_KIND_TO_OPERAND = {  # LEGACY path only -- generic widget-type -> operand-kind reference data, no per-control branching
+    "toggle": MUTATE_BOOLEAN, "continuous": MUTATE_NUMERIC, "enum": MUTATE_ENUM,
+    "knob": MUTATE_NUMERIC, "stepper": MUTATE_NUMERIC, "draggable_value": MUTATE_NUMERIC,
+    "checkbox": MUTATE_BOOLEAN, "dropdown": MUTATE_ENUM, "nested_dropdown": MUTATE_ENUM,
+}
 _CONTRACT_KIND_TO_OPERAND = {"boolean": MUTATE_BOOLEAN, "numeric": MUTATE_NUMERIC, "enum": MUTATE_ENUM}
 _BOUND_TOL = 1e-3
 

@@ -38,7 +38,7 @@ class ContractRegistry:
     time via dataclasses.replace(), since CapabilityContract is frozen.
     """
 
-    def __init__(self, epoch=None, binding_evidence_dir=None):
+    def __init__(self, epoch=None, binding_evidence_dir=None, promoted_evidence_dir=None):
         # epoch=None: the frozen legacy frontier, unchanged (every legacy test is pinned to it).
         # epoch=ExecutionEpoch: ONLY contracts qualified on that exact Serum build are loaded; everything
         # else is recorded in self.excluded with the reason. No contract crosses epochs.
@@ -50,6 +50,8 @@ class ContractRegistry:
         self._load_fresh_contracts()
         self.binding_diagnostics = {}
         self._load_binding_evidence_contracts(binding_evidence_dir)
+        self.promotion_diagnostics = {}
+        self._load_promoted_evidence_contracts(promoted_evidence_dir)
 
     def _load_host_param_mapping(self) -> Dict[str, str]:
         """Load the authoritative capability_key -> host parameter name mapping.
@@ -133,6 +135,44 @@ class ContractRegistry:
             else:
                 self.contracts[target] = c
         self.binding_diagnostics = diag
+
+    def _load_promoted_evidence_contracts(self, evidence_dir=None):
+        """A second, parallel evidence source: raw `serum2.qualification.evidence_promotion` input dicts (the
+        MCP-execution / bulk-causal evidence shape -- target/epoch/status/body_diff_filtered/baseline_value/
+        mutated_value), NOT the candidate_binding_qualifier shape `_load_binding_evidence_contracts` above consumes.
+        Each file is re-validated through the existing pure `promote_verified_evidence` at load time -- no
+        pre-built contract is ever trusted as-is. Explicit opt-in, epoch runs only, and a target already registered
+        by any other source is never overridden (same rule as every other loader in this class)."""
+        if self.epoch is None or not evidence_dir:
+            return
+        import json
+        from serum2.qualification.evidence_promotion import promote_verified_evidence
+        d = Path(evidence_dir)
+        diag = {"loaded": [], "rejected_invalid_evidence": {}, "rejected_epoch": {}, "rejected_not_promoted": {}, "rejected_contract": {}}
+        for f in sorted(d.glob("*.json")) if d.is_dir() else []:
+            try:
+                ev = json.loads(f.read_text(encoding="utf-8"))
+            except Exception as e:
+                diag["rejected_invalid_evidence"][str(f)] = "unreadable: %s" % e
+                continue
+            sha = (ev.get("epoch") or {}).get("serum_sha256")
+            if sha != self.epoch.binary_sha256:
+                diag["rejected_epoch"][str(f)] = "recorded %s, run epoch %s" % (str(sha)[:8], self.epoch.label)
+                continue
+            # promote_verified_evidence is documented as a pure function of one evidence dict -> PromotionResult;
+            # it never raises (including when installed_epoch() can't resolve the machine's Serum binary -- that
+            # comes back as an ordinary REJECT_EPOCH_MISMATCH result, not an exception).
+            result = promote_verified_evidence(ev)
+            if not result.promoted:
+                diag["rejected_not_promoted"][str(f)] = "%s: %s" % (result.reason, result.detail)
+                continue
+            target = result.contract.target
+            if target in self.contracts:
+                diag["rejected_contract"][str(f)] = "target already registered"
+                continue
+            self.contracts[target] = result.contract
+            diag["loaded"].append(target)
+        self.promotion_diagnostics = diag
 
     def _attach_pass1_binding(self, contract):
         """Attach an ExecutionBinding ONLY from a BINDING_VERIFIED evidence file whose accessor was proven to

@@ -1,0 +1,1987 @@
+{
+ "source": "mcp_exec_all_v2_results.jsonl",
+ "n_rows": 330,
+ "accepted": [
+  {
+   "target": "arp.pattern.rate",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "arp.pattern.shape",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_enum_value"
+  },
+  {
+   "target": "arp.playback.chance",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "arp.playback.gate",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "arp.playback.thru",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "arp.retrigger.first",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "arp.retrigger.launch",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "arp.retrigger.note",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "arp.transpose.shape",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_enum_value"
+  },
+  {
+   "target": "arp.transpose.shift",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "arp.velocity.enable",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "arp.velocity.retrig",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "arp.velocity.target",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "env1.attack",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "env1.attack_curve",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "env1.decay",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "env1.decay_curve",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "env1.hold",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "env1.release",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "env1.release_curve",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "env1.sustain",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "env2.attack",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "env2.attack_curve",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "env2.decay",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "env2.decay_curve",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "env2.hold",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "env2.release",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "env2.release_curve",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "env2.sustain",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "env3.attack",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "env3.attack_curve",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "env3.decay",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "env3.decay_curve",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "env3.hold",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "env3.release",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "env3.release_curve",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "env3.sustain",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "env4.attack",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "env4.attack_curve",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "env4.decay",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "env4.decay_curve",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "env4.hold",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "env4.release",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "env4.release_curve",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "env4.sustain",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "filter1.cutoff",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "filter1.drive",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "filter1.enabled",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "filter1.key_track",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "filter1.level_out",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "filter1.resonance",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "filter1.stereo",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "filter1.var",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "filter1.wet",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "filter2.cutoff",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "filter2.drive",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "filter2.enabled",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "filter2.key_track",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "filter2.level_out",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "filter2.resonance",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "filter2.stereo",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "filter2.var",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "filter2.wet",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.bode.blur",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.bode.range",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.bode.shift",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.bode.wet",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.chorus.depth",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.chorus.feedback",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.chorus.rate",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.chorus.wet",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.compressor.gain",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.compressor.thresh",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.compressor.wet",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.convolve.decay",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.convolve.size",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.convolve.tone",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.convolve.wet",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.delay.bpm",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "fx.delay.feedback",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.delay.freq",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.delay.link",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "fx.delay.time_l",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.delay.time_r",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.delay.wet",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.dimension.size",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.dimension.wet",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.distortion.drive",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.distortion.freq",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.distortion.wet",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.equalizer.left_freq",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.equalizer.left_gain",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.equalizer.left_q",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.equalizer.right_freq",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.equalizer.right_gain",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.equalizer.right_q",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.filter.cutoff",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.filter.drive",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.filter.res",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.filter.wet",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.flanger.depth",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.flanger.feedback",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.flanger.rate",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.flanger.wet",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.hyper.detune",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.hyper.rate",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.hyper.unison",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.hyper.wet",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.phaser.depth",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.phaser.feedback",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.phaser.freq",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.phaser.rate",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.phaser.wet",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.reverb.size",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "fx.reverb.wet",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "global.bend_range_down",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "global.bend_range_up",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "global.direct_volume",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "global.fx_bus1_volume",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "global.fx_bus2_volume",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "global.global_tuning",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "global.legato",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "global.limit_same_note_polyphony",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "global.master_volume",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "global.mono",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "global.note_latch",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "global.poly_count",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "global.porta_always",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "global.porta_scaled",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "global.portamento_time",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "global.s1_compatibility",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "global.swing",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "global.transpose",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "global.voice_control.random.pan",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "lfo1.beat_sync",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "lfo1.delay",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "lfo1.dotted",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "lfo1.mode",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_enum_value"
+  },
+  {
+   "target": "lfo1.mono",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "lfo1.rate",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "lfo1.rate_10x",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "lfo1.rise",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "lfo1.shape",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_enum_value"
+  },
+  {
+   "target": "lfo1.smooth",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "lfo1.swing",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "lfo1.triplets",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "lfo2.beat_sync",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "lfo2.delay",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "lfo2.dotted",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "lfo2.mode",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_enum_value"
+  },
+  {
+   "target": "lfo2.mono",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "lfo2.rate",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "lfo2.rate_10x",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "lfo2.rise",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "lfo2.shape",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_enum_value"
+  },
+  {
+   "target": "lfo2.smooth",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "lfo2.swing",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "lfo2.triplets",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "lfo3.beat_sync",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "lfo3.delay",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "lfo3.dotted",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "lfo3.mode",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_enum_value"
+  },
+  {
+   "target": "lfo3.mono",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "lfo3.rate",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "lfo3.rate_10x",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "lfo3.rise",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "lfo3.shape",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_enum_value"
+  },
+  {
+   "target": "lfo3.smooth",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "lfo3.swing",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "lfo3.triplets",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "lfo4.beat_sync",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "lfo4.delay",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "lfo4.dotted",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "lfo4.mode",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_enum_value"
+  },
+  {
+   "target": "lfo4.mono",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "lfo4.rate",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "lfo4.rate_10x",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "lfo4.rise",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "lfo4.shape",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_enum_value"
+  },
+  {
+   "target": "lfo4.smooth",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "lfo4.swing",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "lfo4.triplets",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "lfo5.beat_sync",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "lfo5.delay",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "lfo5.dotted",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "lfo5.mode",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_enum_value"
+  },
+  {
+   "target": "lfo5.mono",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "lfo5.rate",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "lfo5.rate_10x",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "lfo5.rise",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "lfo5.shape",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_enum_value"
+  },
+  {
+   "target": "lfo5.smooth",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "lfo5.swing",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "lfo5.triplets",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "lfo6.beat_sync",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "lfo6.delay",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "lfo6.dotted",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "lfo6.mode",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_enum_value"
+  },
+  {
+   "target": "lfo6.mono",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "lfo6.rate",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "lfo6.rate_10x",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "lfo6.rise",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "lfo6.shape",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_enum_value"
+  },
+  {
+   "target": "lfo6.smooth",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "lfo6.swing",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "lfo6.triplets",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "macro1.value",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "macro2.value",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "macro3.value",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "macro4.value",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "macro5.value",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "macro6.value",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "macro7.value",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "macro8.value",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "mixer.filter1.bus1",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "mixer.filter1.bus2",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "mixer.filter1.enable",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "mixer.filter1.wet",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "mixer.filter2.bus1",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "mixer.filter2.bus2",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "mixer.filter2.enable",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "mixer.filter2.wet",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "mixer.noise.bus1",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "mixer.noise.bus2",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "mixer.noise.enable",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "mixer.noise.filter_balance",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "mixer.osc_a.bus1",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "mixer.osc_a.bus2",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "mixer.osc_a.filter_balance",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "mixer.osc_b.bus1",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "mixer.osc_b.bus2",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "mixer.osc_b.filter_balance",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "mixer.osc_c.bus1",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "mixer.osc_c.bus2",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "mixer.osc_c.filter_balance",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "mixer.sub.bus1",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "mixer.sub.bus2",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "mixer.sub.enable",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "mixer.sub.filter_balance",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "oscA.detune",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "oscA.enabled",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "oscA.fine",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "oscA.octave",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "oscA.pan",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "oscA.sample_loop_crossfade",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "oscA.sample_loop_end",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "oscA.sample_loop_start",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "oscA.semitone",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "oscA.unison",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "oscA.warp_amount2",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "oscA.warp_mode",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_enum_value"
+  },
+  {
+   "target": "oscA.warp_mode2",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_enum_value"
+  },
+  {
+   "target": "oscA.warp_var2",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "oscB.detune",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "oscB.enabled",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "oscB.fine",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "oscB.octave",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "oscB.pan",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "oscB.sample_loop_crossfade",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "oscB.sample_loop_end",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "oscB.sample_loop_start",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "oscB.semitone",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "oscB.unison",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "oscB.warp_amount",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "oscB.warp_amount2",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "oscB.warp_mode",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_enum_value"
+  },
+  {
+   "target": "oscB.warp_mode2",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_enum_value"
+  },
+  {
+   "target": "oscB.warp_var2",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "oscC.detune",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "oscC.enabled",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "oscC.fine",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "oscC.octave",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "oscC.pan",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "oscC.sample_loop_crossfade",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "oscC.sample_loop_end",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "oscC.sample_loop_start",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "oscC.semitone",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "oscC.unison",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "oscC.warp_amount",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "oscC.warp_amount2",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "oscC.warp_mode",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_enum_value"
+  },
+  {
+   "target": "oscC.warp_mode2",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_enum_value"
+  },
+  {
+   "target": "oscC.warp_var2",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "oscNoise.fine",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "oscNoise.noise_type",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_enum_value"
+  },
+  {
+   "target": "voice.voicing.legato",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "voice.voicing.mono",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "voice.voicing.porta_always",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  },
+  {
+   "target": "voice.voicing.porta_scaled",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_boolean_value"
+  }
+ ],
+ "rejected": {
+  "MISSING_DOMAIN: continuous control has no Atlas-declared bounds": [
+   "arp.playback.offset",
+   "arp.playback.repeats",
+   "arp.velocity.decay",
+   "global.oversampling",
+   "global.portamento_curve",
+   "global.swing_div",
+   "global.voice_amp",
+   "global.voice_control.random.cutoff",
+   "global.voice_control.random.detune",
+   "global.voice_control.random.envs",
+   "global.voice_control.scaling.envs",
+   "global.voice_control.scaling.lfos"
+  ],
+  "outcome 'MCP_EXEC_CONFORMANCE_EXCEPTION' is not promotable (bucket D / no host confirmation path)": [
+   "arp.transpose.range",
+   "fx.compressor.attack",
+   "fx.compressor.ratio",
+   "fx.compressor.release",
+   "global.fx_bus1_destination",
+   "global.fx_bus2_destination",
+   "global.use_ultra_on_render",
+   "global.voice_priority",
+   "macro1.name",
+   "macro2.name",
+   "macro3.name",
+   "macro4.name",
+   "macro5.name",
+   "macro6.name",
+   "macro7.name",
+   "macro8.name",
+   "mixer.noise.pan",
+   "mixer.sub.pan",
+   "oscA.warp_amount",
+   "oscNoise.pan"
+  ],
+  "INCONSISTENT_OPERAND_KIND: mutation value 'L12' not in Atlas enum_values ('lowpass_12', 'lowpass_24', 'highpass_12', 'highpass_24', 'bandpass_12', 'bandpass_24', 'notch', 'moog_lowpass_12', 'moog_lowpass_24', 'comb', 'formant')": [
+   "filter1.type",
+   "filter2.type"
+  ],
+  "INCONSISTENT_OPERAND_KIND: control_type=enum but mutation value 2.0 is not a string": [
+   "fx.delay.mode"
+  ],
+  "INCONSISTENT_OPERAND_KIND: mutation value 'kAsym' not in Atlas enum_values ('Tube', 'SoftClip', 'HardClip', 'Diode 1', 'Diode 2', 'Linear Fold', 'Sin Fold', 'Zero-Square', 'Downsample', 'Asym', 'Rectify', 'X-Shaper', 'X-Shaper (Asym)', 'Sine Shaper', 'Stomp Box', 'Tape Sat.', 'Overdrive', 'Soft Sat.')": [
+   "fx.distortion.type"
+  ],
+  "INCONSISTENT_OPERAND_KIND: mutation value 'L6' not in Atlas enum_values ('Normal (18 types: MG Low 6/12/18/24, Low 6/12/18/24, High 6/12/18/24, Band 12/24, Peak 12/24, Notch 12/24)', 'Multi', 'Flanges', 'Misc', 'S2 Filters')": [
+   "fx.filter.type"
+  ],
+  "INCONSISTENT_OPERAND_KIND: mutation value 'kAbyss' not in Atlas enum_values ('Plate', 'Hall', 'Vintage', 'Nitrous', 'Basin')": [
+   "fx.reverb.type"
+  ],
+  "INCONSISTENT_OPERAND_KIND: mutation value 'Analog/Basic Shapes.wav' not in Atlas enum_values ('default', 'analog_basic', 'analog_warm', 'pwm', 'analog_mini', 'warm_sub', 'digital_fm', 'harmonic_smooth', 'dying_sine', 'acid', 'fm_piano', 'flute')": [
+   "oscA.wavetable",
+   "oscB.wavetable",
+   "oscC.wavetable"
+  ]
+ },
+ "atlas_bounds_augmented_from_manifest": [
+  {
+   "target": "arp.pattern.rate",
+   "min": 0.0,
+   "max": 1.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "arp.playback.chance",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "arp.playback.gate",
+   "min": 0.0,
+   "max": 200.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "arp.transpose.shift",
+   "min": -24.0,
+   "max": 24.0,
+   "source": "manifest_campaign_v1.json domain (kind=signed)"
+  },
+  {
+   "target": "arp.velocity.target",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.bode.blur",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.bode.range",
+   "min": 0.1,
+   "max": 3043.2,
+   "source": "manifest_campaign_v1.json domain (kind=log)"
+  },
+  {
+   "target": "fx.bode.shift",
+   "min": -100.0,
+   "max": 82.0,
+   "source": "manifest_campaign_v1.json domain (kind=signed)"
+  },
+  {
+   "target": "fx.bode.wet",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.chorus.depth",
+   "min": 0.0,
+   "max": 26.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.chorus.feedback",
+   "min": 0.0,
+   "max": 75.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.chorus.rate",
+   "min": 0.0,
+   "max": 20.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.chorus.wet",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.compressor.gain",
+   "min": 1.0,
+   "max": 32.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.compressor.thresh",
+   "min": 0.0,
+   "max": 1.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.compressor.wet",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.convolve.decay",
+   "min": 0.0,
+   "max": 40.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.convolve.size",
+   "min": 10.0,
+   "max": 1000.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.convolve.tone",
+   "min": -100.0,
+   "max": 85.0,
+   "source": "manifest_campaign_v1.json domain (kind=signed)"
+  },
+  {
+   "target": "fx.convolve.wet",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.delay.feedback",
+   "min": 0.0,
+   "max": 90.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.delay.freq",
+   "min": 49.5,
+   "max": 17981.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.delay.time_l",
+   "min": 0.001,
+   "max": 0.34,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.delay.time_r",
+   "min": 0.001,
+   "max": 0.32,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.delay.wet",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.dimension.size",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.dimension.wet",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.distortion.drive",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.distortion.freq",
+   "min": 0.0,
+   "max": 1.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.distortion.wet",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.equalizer.left_freq",
+   "min": 21.5,
+   "max": 10000.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.equalizer.left_gain",
+   "min": -24.0,
+   "max": 24.0,
+   "source": "manifest_campaign_v1.json domain (kind=signed)"
+  },
+  {
+   "target": "fx.equalizer.left_q",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.equalizer.right_freq",
+   "min": 21.5,
+   "max": 20000.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.equalizer.right_gain",
+   "min": -24.0,
+   "max": 24.0,
+   "source": "manifest_campaign_v1.json domain (kind=signed)"
+  },
+  {
+   "target": "fx.equalizer.right_q",
+   "min": 0.0,
+   "max": 95.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.filter.cutoff",
+   "min": 0.0,
+   "max": 1.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.filter.drive",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.filter.res",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.filter.wet",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.flanger.depth",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.flanger.feedback",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.flanger.rate",
+   "min": 0.0,
+   "max": 10.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.flanger.wet",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.hyper.detune",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.hyper.rate",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.hyper.unison",
+   "min": 0.0,
+   "max": 7.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.hyper.wet",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.phaser.depth",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.phaser.feedback",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.phaser.freq",
+   "min": 20.0,
+   "max": 20000.0,
+   "source": "manifest_campaign_v1.json domain (kind=log)"
+  },
+  {
+   "target": "fx.phaser.rate",
+   "min": 0.0,
+   "max": 20.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.phaser.wet",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.reverb.size",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "fx.reverb.wet",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "global.voice_control.random.pan",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "mixer.filter1.bus1",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "mixer.filter1.bus2",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "mixer.filter1.wet",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "mixer.filter2.bus1",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "mixer.filter2.bus2",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "mixer.filter2.wet",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "mixer.noise.bus1",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "mixer.noise.bus2",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "mixer.noise.filter_balance",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "mixer.osc_a.bus1",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "mixer.osc_a.bus2",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "mixer.osc_a.filter_balance",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "mixer.osc_b.bus1",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "mixer.osc_b.bus2",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "mixer.osc_b.filter_balance",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "mixer.osc_c.bus1",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "mixer.osc_c.bus2",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "mixer.osc_c.filter_balance",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "mixer.sub.bus1",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "mixer.sub.bus2",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  },
+  {
+   "target": "mixer.sub.filter_balance",
+   "min": 0.0,
+   "max": 100.0,
+   "source": "manifest_campaign_v1.json domain (kind=continuous)"
+  }
+ ],
+ "n_accepted": 289,
+ "n_rejected": 41,
+ "n_atlas_bounds_augmented": 77,
+ "rejection_reason_counts": {
+  "outcome 'MCP_EXEC_CONFORMANCE_EXCEPTION' is not promotable (bucket D / no host confirmation path)": 20,
+  "MISSING_DOMAIN: continuous control has no Atlas-declared bounds": 12,
+  "INCONSISTENT_OPERAND_KIND: mutation value 'Analog/Basic Shapes.wav' not in Atlas enum_values ('default', 'analog_basic', 'analog_warm', 'pwm', 'analog_mini', 'warm_sub', 'digital_fm', 'harmonic_smooth', 'dying_sine', 'acid', 'fm_piano', 'flute')": 3,
+  "INCONSISTENT_OPERAND_KIND: mutation value 'L12' not in Atlas enum_values ('lowpass_12', 'lowpass_24', 'highpass_12', 'highpass_24', 'bandpass_12', 'bandpass_24', 'notch', 'moog_lowpass_12', 'moog_lowpass_24', 'comb', 'formant')": 2,
+  "INCONSISTENT_OPERAND_KIND: control_type=enum but mutation value 2.0 is not a string": 1,
+  "INCONSISTENT_OPERAND_KIND: mutation value 'kAsym' not in Atlas enum_values ('Tube', 'SoftClip', 'HardClip', 'Diode 1', 'Diode 2', 'Linear Fold', 'Sin Fold', 'Zero-Square', 'Downsample', 'Asym', 'Rectify', 'X-Shaper', 'X-Shaper (Asym)', 'Sine Shaper', 'Stomp Box', 'Tape Sat.', 'Overdrive', 'Soft Sat.')": 1,
+  "INCONSISTENT_OPERAND_KIND: mutation value 'L6' not in Atlas enum_values ('Normal (18 types: MG Low 6/12/18/24, Low 6/12/18/24, High 6/12/18/24, Band 12/24, Peak 12/24, Notch 12/24)', 'Multi', 'Flanges', 'Misc', 'S2 Filters')": 1,
+  "INCONSISTENT_OPERAND_KIND: mutation value 'kAbyss' not in Atlas enum_values ('Plate', 'Hall', 'Vintage', 'Nitrous', 'Basin')": 1
+ }
+}

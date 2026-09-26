@@ -1,0 +1,21 @@
+{
+ "target": "global.master_volume",
+ "epoch": {
+  "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+  "product_version": "2.0.23"
+ },
+ "status": "STRUCTURAL_VERIFIED",
+ "restoration_verified": true,
+ "body_diff_filtered": [
+  {
+   "path": "Global0.plainParams.kParamMasterVolume",
+   "before": 0.5000000000000001,
+   "after": 0.8999999999999999
+  }
+ ],
+ "baseline_value": 0.5000000000000001,
+ "mutated_value": 0.8999999999999999,
+ "backend": "run_mcp_execution_harness.py (real Serum VST3 in DawDreamer; load/edit/reload restoration check)",
+ "source_outcome": "MCP_EXEC_HOST_CONFIRMED",
+ "source_q4_mode": "NAMED"
+}

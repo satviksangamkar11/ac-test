@@ -1,0 +1,21 @@
+{
+ "target": "arp.pattern.rate",
+ "epoch": {
+  "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+  "product_version": "2.0.23"
+ },
+ "status": "STRUCTURAL_VERIFIED",
+ "restoration_verified": true,
+ "body_diff_filtered": [
+  {
+   "path": "ArpClip0.plainParams.kParamRate",
+   "before": null,
+   "after": 0.25
+  }
+ ],
+ "baseline_value": null,
+ "mutated_value": 0.25,
+ "backend": "run_mcp_execution_harness.py (real Serum VST3 in DawDreamer; load/edit/reload restoration check)",
+ "source_outcome": "MCP_EXEC_RAW_ONLY",
+ "source_q4_mode": "FULL_SCAN"
+}
