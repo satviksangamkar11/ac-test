@@ -567,12 +567,18 @@ def _run_brain_intent_admission(
     else:
         musical_context = f"{role} {character}"
 
+    from serum2.producer.execution_epoch import installed_epoch as _installed_epoch
+    try:
+        _epoch = _installed_epoch()
+    except Exception:
+        _epoch = None
+
     brain_result = execute_producer_request(ProducerRequest(
         user_intent=intent_text,
         musical_context=musical_context,
         advisory_context=context.to_dict() if context is not None else None,
         mode="CREATE",
-    ))
+    ), epoch=_epoch)
 
     intent = {
         "role": role,
