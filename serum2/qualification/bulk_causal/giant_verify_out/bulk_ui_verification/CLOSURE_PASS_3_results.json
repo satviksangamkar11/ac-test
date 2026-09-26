@@ -1,0 +1,5 @@
+{"part": "C3", "atlas_id": "mixer.osc_a.filter_balance", "screen": "A> Filter Balance (12)", "result": "READ"}
+{"part": "C3", "atlas_id": "mixer.osc_b.filter_balance", "screen": "B> Filter Balance (34)", "result": "READ"}
+{"part": "C3", "atlas_id": "mixer.osc_c.filter_balance", "screen": "C> Filter Balance (56)", "result": "READ"}
+{"part": "C3", "atlas_id": "mixer.noise.filter_balance", "screen": "Noise> Filter Balance (78)", "result": "READ"}
+{"part": "C3", "atlas_id": "mixer.sub.filter_balance", "screen": "Sub Osc> Filter Balance (90)", "result": "READ"}
