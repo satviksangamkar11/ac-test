@@ -1,0 +1,5455 @@
+{
+ "summary": {
+  "n_total": 330,
+  "n_executable": 310,
+  "n_exceptions": 20,
+  "n_open": 0,
+  "open_atlas_ids": [],
+  "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+  "source_results": "mcp_exec_all_v2_results.jsonl",
+  "source_evidence_dir": "parameter_characterization/binding_evidence_mcp_exec_v1"
+ },
+ "controls": [
+  {
+   "atlas_id": "arp.pattern.rate",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "ArpClip0.plainParams.kParamRate",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "arp.pattern.shape",
+   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "raw_body_path": "ArpClip0.plainParams.kParamShape",
+   "valid_domain": {
+    "kind": "enum",
+    "values": [
+     "Pattern",
+     "Up",
+     "Down",
+     "Up/Down",
+     "Down/Up",
+     "Up+Down",
+     "Down+Up",
+     "Thumb Up",
+     "Thumb UD",
+     "Pinky Up",
+     "Pinky UD",
+     "Converge",
+     "Diverge",
+     "Con+Diverge",
+     "Played",
+     "Chord",
+     "Random",
+     "Rand No Dup",
+     "Rand Drift",
+     "Rand Once"
+    ]
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "arp.playback.chance",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "ArpClip0.plainParams.kParamChance",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "arp.playback.gate",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "ArpClip0.plainParams.kParamGate",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "arp.playback.offset",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "ArpClip0.plainParams.kParamOffset",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "arp.playback.repeats",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "ArpClip0.plainParams.kParamRepeats",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "arp.playback.thru",
+   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "raw_body_path": "ArpClip0.plainParams.kParamThru",
+   "valid_domain": {
+    "kind": "enum",
+    "values": [
+     "On",
+     "Off"
+    ]
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "arp.retrigger.first",
+   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "raw_body_path": "ArpClip0.plainParams.kParamFirstNoteRetrig",
+   "valid_domain": {
+    "kind": "enum",
+    "values": [
+     "On",
+     "Off"
+    ]
+   },
+   "context_requirements": "NOTE == On",
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "arp.retrigger.launch",
+   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "raw_body_path": "ArpClip0.plainParams.kParamLaunchRetrig",
+   "valid_domain": {
+    "kind": "enum",
+    "values": [
+     "On",
+     "Off"
+    ]
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "arp.retrigger.note",
+   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "raw_body_path": "ArpClip0.plainParams.kParamNoteRetrig",
+   "valid_domain": {
+    "kind": "enum",
+    "values": [
+     "On",
+     "Off"
+    ]
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "arp.transpose.range",
+   "allowed_operation": null,
+   "raw_body_path": null,
+   "valid_domain": null,
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_CONFORMANCE_EXCEPTION",
+   "verification_method": "MCP_EXEC_CONFORMANCE_EXCEPTION",
+   "known_exception": true,
+   "exception_detail": "reference: UI_SCHEMA_MISMATCH; leaves_not_persisted: [ArpClip0.plainParams.kParamTransposeRange]",
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "arp.transpose.shape",
+   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "raw_body_path": "ArpClip0.plainParams.kParamTransposeShape",
+   "valid_domain": {
+    "kind": "enum",
+    "values": [
+     "Up",
+     "Down",
+     "Up/Down",
+     "Down/Up",
+     "Up+Down",
+     "Down+Up",
+     "Thumb Up",
+     "Thumb UD",
+     "Pinky Up",
+     "Pinky UD",
+     "Converge",
+     "Diverge",
+     "Con+Diverge",
+     "Chord",
+     "Random",
+     "Rand No Dup",
+     "Rand Drift",
+     "Rand Once"
+    ]
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "arp.transpose.shift",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "ArpClip0.plainParams.kParamTransposeShift",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "arp.velocity.decay",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "ArpClip0.plainParams.kParamVeloDecay",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "arp.velocity.enable",
+   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "raw_body_path": "ArpClip0.plainParams.kParamVeloEnabled",
+   "valid_domain": {
+    "kind": "enum",
+    "values": [
+     "On",
+     "Off"
+    ]
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "arp.velocity.retrig",
+   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "raw_body_path": "ArpClip0.plainParams.kParamVeloRetrig",
+   "valid_domain": {
+    "kind": "enum",
+    "values": [
+     "On",
+     "Off"
+    ]
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "arp.velocity.target",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "ArpClip0.plainParams.kParamVeloTarget",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "env1.attack",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Env0.plainParams.kParamAttack",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 10.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "env1.attack_curve",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Env0.plainParams.kParamCurve1",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "env1.decay",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Env0.plainParams.kParamDecay",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 32.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "env1.decay_curve",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Env0.plainParams.kParamCurve2",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "env1.hold",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Env0.plainParams.kParamHold",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 5.2
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "env1.release",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Env0.plainParams.kParamRelease",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 32.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "env1.release_curve",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Env0.plainParams.kParamCurve3",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "env1.sustain",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Env0.plainParams.kParamSustain",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "env2.attack",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Env1.plainParams.kParamAttack",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 10.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "env2.attack_curve",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Env1.plainParams.kParamCurve1",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "env2.decay",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Env1.plainParams.kParamDecay",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 32.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "env2.decay_curve",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Env1.plainParams.kParamCurve2",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "env2.hold",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Env1.plainParams.kParamHold",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 5.2
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "env2.release",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Env1.plainParams.kParamRelease",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 32.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "env2.release_curve",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Env1.plainParams.kParamCurve3",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "env2.sustain",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Env1.plainParams.kParamSustain",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "env3.attack",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Env2.plainParams.kParamAttack",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 10.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "env3.attack_curve",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Env2.plainParams.kParamCurve1",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "env3.decay",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Env2.plainParams.kParamDecay",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 32.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "env3.decay_curve",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Env2.plainParams.kParamCurve2",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "env3.hold",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Env2.plainParams.kParamHold",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 5.2
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "env3.release",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Env2.plainParams.kParamRelease",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 32.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "env3.release_curve",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Env2.plainParams.kParamCurve3",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "env3.sustain",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Env2.plainParams.kParamSustain",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "env4.attack",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Env3.plainParams.kParamAttack",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 10.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "env4.attack_curve",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Env3.plainParams.kParamCurve1",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "env4.decay",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Env3.plainParams.kParamDecay",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 32.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "env4.decay_curve",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Env3.plainParams.kParamCurve2",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "env4.hold",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Env3.plainParams.kParamHold",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 5.2
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "env4.release",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Env3.plainParams.kParamRelease",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 32.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "env4.release_curve",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Env3.plainParams.kParamCurve3",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "env4.sustain",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Env3.plainParams.kParamSustain",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "filter1.cutoff",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "VoiceFilter0.plainParams.kParamFreq",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "filter1.drive",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "VoiceFilter0.plainParams.kParamDrive",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "filter1.enabled",
+   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "raw_body_path": "VoiceFilter0.plainParams.kParamEnable",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "filter1.key_track",
+   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "raw_body_path": "VoiceFilter0.plainParams.kParamKeyTrack",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "filter1.level_out",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "VoiceFilter0.plainParams.kParamLevelOut",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "filter1.resonance",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "VoiceFilter0.plainParams.kParamReso",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "filter1.stereo",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "VoiceFilter0.plainParams.kParamStereo",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "filter1.type",
+   "allowed_operation": "mutate_enum_value",
+   "raw_body_path": "VoiceFilter0.plainParams.kParamType",
+   "valid_domain": {
+    "kind": "enum",
+    "values": [
+     "lowpass_12",
+     "lowpass_24",
+     "highpass_12",
+     "highpass_24",
+     "bandpass_12",
+     "bandpass_24",
+     "notch",
+     "moog_lowpass_12",
+     "moog_lowpass_24",
+     "comb",
+     "formant"
+    ]
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "filter1.var",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "VoiceFilter0.plainParams.kParamVar",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "filter1.wet",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "VoiceFilter0.plainParams.kParamWet",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "filter2.cutoff",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "VoiceFilter1.plainParams.kParamFreq",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "filter2.drive",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "VoiceFilter1.plainParams.kParamDrive",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "filter2.enabled",
+   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "raw_body_path": "VoiceFilter1.plainParams.kParamEnable",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "filter2.key_track",
+   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "raw_body_path": "VoiceFilter1.plainParams.kParamKeyTrack",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "filter2.level_out",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "VoiceFilter1.plainParams.kParamLevelOut",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "filter2.resonance",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "VoiceFilter1.plainParams.kParamReso",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "filter2.stereo",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "VoiceFilter1.plainParams.kParamStereo",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "filter2.type",
+   "allowed_operation": "mutate_enum_value",
+   "raw_body_path": "VoiceFilter1.plainParams.kParamType",
+   "valid_domain": {
+    "kind": "enum",
+    "values": [
+     "lowpass_12",
+     "lowpass_24",
+     "highpass_12",
+     "highpass_24",
+     "bandpass_12",
+     "bandpass_24",
+     "notch",
+     "moog_lowpass_12",
+     "moog_lowpass_24",
+     "comb",
+     "formant"
+    ]
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "filter2.var",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "VoiceFilter1.plainParams.kParamVar",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "filter2.wet",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "VoiceFilter1.plainParams.kParamWet",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.bode.blur",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXBode.plainParams.kParamBlur",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.bode.range",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXBode.plainParams.kParamRange",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.bode.shift",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXBode.plainParams.kParamShift",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.bode.wet",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXBode.plainParams.kParamWet",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.chorus.depth",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXChorus.plainParams.kParamDepth",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.chorus.feedback",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXChorus.plainParams.kParamFeedback",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.chorus.rate",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXChorus.plainParams.kParamRate",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.chorus.wet",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXChorus.plainParams.kParamWet",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.compressor.attack",
+   "allowed_operation": null,
+   "raw_body_path": null,
+   "valid_domain": null,
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_CONFORMANCE_EXCEPTION",
+   "verification_method": "MCP_EXEC_CONFORMANCE_EXCEPTION",
+   "known_exception": true,
+   "exception_detail": "reference: UI_SCHEMA_MISMATCH",
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.compressor.gain",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXComp.plainParams.kParamMakeup",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.compressor.ratio",
+   "allowed_operation": null,
+   "raw_body_path": null,
+   "valid_domain": null,
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_CONFORMANCE_EXCEPTION",
+   "verification_method": "MCP_EXEC_CONFORMANCE_EXCEPTION",
+   "known_exception": true,
+   "exception_detail": "reference: UI_SCHEMA_MISMATCH",
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.compressor.release",
+   "allowed_operation": null,
+   "raw_body_path": null,
+   "valid_domain": null,
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_CONFORMANCE_EXCEPTION",
+   "verification_method": "MCP_EXEC_CONFORMANCE_EXCEPTION",
+   "known_exception": true,
+   "exception_detail": "reference: UI_SCHEMA_MISMATCH",
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.compressor.thresh",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXComp.plainParams.kParamThresh",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.compressor.wet",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXComp.plainParams.kParamWet",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.convolve.decay",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXConv.plainParams.kParamDecay",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.convolve.size",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXConv.plainParams.kParamSize",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.convolve.tone",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXConv.plainParams.kParamTone",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.convolve.wet",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXConv.plainParams.kParamWet",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.delay.bpm",
+   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "raw_body_path": "FXRack0.FX.0.FXDelay.plainParams.kParamBeatSync",
+   "valid_domain": {
+    "kind": "enum",
+    "values": [
+     "On",
+     "Off"
+    ]
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.delay.feedback",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXDelay.plainParams.kParamFeedback",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.delay.freq",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXDelay.plainParams.kParamFreq",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.delay.link",
+   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "raw_body_path": "FXRack0.FX.0.FXDelay.plainParams.kParamLink",
+   "valid_domain": {
+    "kind": "enum",
+    "values": [
+     "On",
+     "Off"
+    ]
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.delay.mode",
+   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "raw_body_path": "FXRack0.FX.0.FXDelay.plainParams.kParamMode",
+   "valid_domain": {
+    "kind": "enum",
+    "values": [
+     "Normal",
+     "Ping-Pong",
+     "Tap->Delay"
+    ]
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.delay.time_l",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXDelay.plainParams.kParamTimeL",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.delay.time_r",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXDelay.plainParams.kParamTimeR",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.delay.wet",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXDelay.plainParams.kParamWet",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.dimension.size",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXHyperD.plainParams.kParamDimESize",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.dimension.wet",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXHyperD.plainParams.kParamDimEWet",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.distortion.drive",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXDistortion.plainParams.kParamDrive",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.distortion.freq",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXDistortion.plainParams.kParamFreq",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": "FILTER_POSITION != OFF (has effect)",
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.distortion.type",
+   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "raw_body_path": "FXRack0.FX.0.FXDistortion.plainParams.kParamMode",
+   "valid_domain": {
+    "kind": "enum",
+    "values": [
+     "Tube",
+     "SoftClip",
+     "HardClip",
+     "Diode 1",
+     "Diode 2",
+     "Linear Fold",
+     "Sin Fold",
+     "Zero-Square",
+     "Downsample",
+     "Asym",
+     "Rectify",
+     "X-Shaper",
+     "X-Shaper (Asym)",
+     "Sine Shaper",
+     "Stomp Box",
+     "Tape Sat.",
+     "Overdrive",
+     "Soft Sat."
+    ]
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.distortion.wet",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXDistortion.plainParams.kParamWet",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.equalizer.left_freq",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXEQ.plainParams.kParamFreq1",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.equalizer.left_gain",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXEQ.plainParams.kParamGain1",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.equalizer.left_q",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXEQ.plainParams.kParamReso1",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.equalizer.right_freq",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXEQ.plainParams.kParamFreq2",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.equalizer.right_gain",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXEQ.plainParams.kParamGain2",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.equalizer.right_q",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXEQ.plainParams.kParamReso2",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.filter.cutoff",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXFilter.plainParams.kParamFreq",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.filter.drive",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXFilter.plainParams.kParamDrive",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.filter.res",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXFilter.plainParams.kParamReso",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.filter.type",
+   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "raw_body_path": "FXRack0.FX.0.FXFilter.plainParams.kParamType",
+   "valid_domain": {
+    "kind": "enum",
+    "values": [
+     "Normal (18 types: MG Low 6/12/18/24, Low 6/12/18/24, High 6/12/18/24, Band 12/24, Peak 12/24, Notch 12/24)",
+     "Multi",
+     "Flanges",
+     "Misc",
+     "S2 Filters"
+    ]
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.filter.wet",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXFilter.plainParams.kParamWet",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.flanger.depth",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXFlanger.plainParams.kParamDepth",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.flanger.feedback",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXFlanger.plainParams.kParamFeedback",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.flanger.rate",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXFlanger.plainParams.kParamRate",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.flanger.wet",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXFlanger.plainParams.kParamWet",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.hyper.detune",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXHyperD.plainParams.kParamDetune",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.hyper.rate",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXHyperD.plainParams.kParamRate",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.hyper.unison",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXHyperD.plainParams.kParamUnison",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.hyper.wet",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXHyperD.plainParams.kParamWet",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.phaser.depth",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXPhaser.plainParams.kParamDepth",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.phaser.feedback",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXPhaser.plainParams.kParamFeedback",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.phaser.freq",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXPhaser.plainParams.kParamFreq",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.phaser.rate",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXPhaser.plainParams.kParamRate",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.phaser.wet",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXPhaser.plainParams.kParamWet",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.reverb.size",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXReverb.plainParams.kParamSize",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.reverb.type",
+   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "raw_body_path": "FXRack0.FX.0.FXReverb.plainParams.kParamType",
+   "valid_domain": {
+    "kind": "enum",
+    "values": [
+     "Plate",
+     "Hall",
+     "Vintage",
+     "Nitrous",
+     "Basin"
+    ]
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "fx.reverb.wet",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "FXRack0.FX.0.FXReverb.plainParams.kParamWet",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "global.bend_range_down",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Global0.plainParams.kParamBendRangeDn",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": -48.0,
+    "max": 0.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "global.bend_range_up",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Global0.plainParams.kParamBendRangeUp",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 48.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "global.direct_volume",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Global0.plainParams.kParamDirectVol",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": null
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "global.fx_bus1_destination",
+   "allowed_operation": null,
+   "raw_body_path": null,
+   "valid_domain": null,
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_CONFORMANCE_EXCEPTION",
+   "verification_method": "MCP_EXEC_CONFORMANCE_EXCEPTION",
+   "known_exception": true,
+   "exception_detail": "reference: UI_SCHEMA_MISMATCH",
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "global.fx_bus1_volume",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Global0.plainParams.kParamFXBus1Vol",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": null
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "global.fx_bus2_destination",
+   "allowed_operation": null,
+   "raw_body_path": null,
+   "valid_domain": null,
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_CONFORMANCE_EXCEPTION",
+   "verification_method": "MCP_EXEC_CONFORMANCE_EXCEPTION",
+   "known_exception": true,
+   "exception_detail": "reference: UI_SCHEMA_MISMATCH",
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "global.fx_bus2_volume",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Global0.plainParams.kParamFXBus2Vol",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": null
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "global.global_tuning",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Global0.plainParams.kParamGlobalTuning",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": null
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "global.legato",
+   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "raw_body_path": "Global0.plainParams.kParamLegato",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "global.limit_same_note_polyphony",
+   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "raw_body_path": "Global0.plainParams.kParamLimitSameNotePolyphony",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "global.master_volume",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Global0.plainParams.kParamMasterVolume",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "global.mono",
+   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "raw_body_path": "Global0.plainParams.kParamMonoToggle",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "global.note_latch",
+   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "raw_body_path": "Global0.plainParams.kParamNoteLatch",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "global.oversampling",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Global0.plainParams.kParamOversampling",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "global.poly_count",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Global0.plainParams.kParamPolyCount",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 1.0,
+    "max": 32.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "global.porta_always",
+   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "raw_body_path": "Global0.plainParams.kParamPortaAlways",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "global.porta_scaled",
+   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "raw_body_path": "Global0.plainParams.kParamPortaScaled",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "global.portamento_curve",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Global0.plainParams.kParamPortamentoCurve",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "global.portamento_time",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Global0.plainParams.kParamPortamentoTime",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 3.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "global.s1_compatibility",
+   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "raw_body_path": "Global0.plainParams.kParamS1Compatibility",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "global.swing",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Global0.plainParams.kParamSwing",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "global.swing_div",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Global0.plainParams.kParamSwingDiv",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "global.transpose",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Global0.plainParams.kParamTranspose",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": -48.0,
+    "max": 48.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "global.use_ultra_on_render",
+   "allowed_operation": null,
+   "raw_body_path": null,
+   "valid_domain": null,
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_CONFORMANCE_EXCEPTION",
+   "verification_method": "MCP_EXEC_CONFORMANCE_EXCEPTION",
+   "known_exception": true,
+   "exception_detail": "reference: RESIDUAL_NOT_STORED; leaves_not_persisted: [Global0.plainParams.kParamUseUltraOnRender]",
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "global.voice_amp",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Global0.plainParams.kParamVoiceAmp",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "global.voice_control.random.cutoff",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "VoicePanel0.plainParams.kParamGlobalRandomFilterCutoff",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "global.voice_control.random.detune",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "VoicePanel0.plainParams.kParamGlobalRandomOscDetune",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "global.voice_control.random.envs",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "VoicePanel0.plainParams.kParamGlobalRandomEnvTime",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "global.voice_control.random.pan",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "VoicePanel0.plainParams.kParamGlobalRandomOscPan",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "global.voice_control.scaling.envs",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "VoicePanel0.plainParams.kParamGlobalScalingEnvTime",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "global.voice_control.scaling.lfos",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "VoicePanel0.plainParams.kParamGlobalScalingLfoTime",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "global.voice_priority",
+   "allowed_operation": null,
+   "raw_body_path": null,
+   "valid_domain": null,
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_CONFORMANCE_EXCEPTION",
+   "verification_method": "MCP_EXEC_CONFORMANCE_EXCEPTION",
+   "known_exception": true,
+   "exception_detail": "reference: UI_UNOBSERVABLE",
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo1.beat_sync",
+   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "raw_body_path": "LFO0.plainParams.kParamBeatSync",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo1.delay",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "LFO0.plainParams.kParamDelay",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 3.6
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo1.dotted",
+   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "raw_body_path": "LFO0.plainParams.kParamDotted",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo1.mode",
+   "allowed_operation": "mutate_enum_value",
+   "raw_body_path": "LFO0.plainParams.kParamMode",
+   "valid_domain": {
+    "kind": "enum",
+    "values": [
+     "Free",
+     "Retrig",
+     "Envelope"
+    ]
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo1.mono",
+   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "raw_body_path": "LFO0.plainParams.kParamMono",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo1.rate",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "LFO0.plainParams.kParamRate",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo1.rate_10x",
+   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "raw_body_path": "LFO0.plainParams.kParamRate10x",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo1.rise",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "LFO0.plainParams.kParamRise",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 5.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo1.shape",
+   "allowed_operation": "mutate_enum_value",
+   "raw_body_path": "LFO0.plainParams.kParamType",
+   "valid_domain": {
+    "kind": "enum",
+    "values": [
+     "Rossler",
+     "Lorenz",
+     "RandomSH",
+     "Path"
+    ]
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo1.smooth",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "LFO0.plainParams.kParamSmooth",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo1.swing",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "LFO0.plainParams.kParamSwing",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo1.triplets",
+   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "raw_body_path": "LFO0.plainParams.kParamTriplets",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo2.beat_sync",
+   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "raw_body_path": "LFO1.plainParams.kParamBeatSync",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo2.delay",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "LFO1.plainParams.kParamDelay",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 3.6
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo2.dotted",
+   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "raw_body_path": "LFO1.plainParams.kParamDotted",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo2.mode",
+   "allowed_operation": "mutate_enum_value",
+   "raw_body_path": "LFO1.plainParams.kParamMode",
+   "valid_domain": {
+    "kind": "enum",
+    "values": [
+     "Free",
+     "Retrig",
+     "Envelope"
+    ]
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo2.mono",
+   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "raw_body_path": "LFO1.plainParams.kParamMono",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo2.rate",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "LFO1.plainParams.kParamRate",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo2.rate_10x",
+   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "raw_body_path": "LFO1.plainParams.kParamRate10x",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo2.rise",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "LFO1.plainParams.kParamRise",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 5.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo2.shape",
+   "allowed_operation": "mutate_enum_value",
+   "raw_body_path": "LFO1.plainParams.kParamType",
+   "valid_domain": {
+    "kind": "enum",
+    "values": [
+     "Rossler",
+     "Lorenz",
+     "RandomSH",
+     "Path"
+    ]
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo2.smooth",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "LFO1.plainParams.kParamSmooth",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo2.swing",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "LFO1.plainParams.kParamSwing",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo2.triplets",
+   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "raw_body_path": "LFO1.plainParams.kParamTriplets",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo3.beat_sync",
+   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "raw_body_path": "LFO2.plainParams.kParamBeatSync",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo3.delay",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "LFO2.plainParams.kParamDelay",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 3.6
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo3.dotted",
+   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "raw_body_path": "LFO2.plainParams.kParamDotted",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo3.mode",
+   "allowed_operation": "mutate_enum_value",
+   "raw_body_path": "LFO2.plainParams.kParamMode",
+   "valid_domain": {
+    "kind": "enum",
+    "values": [
+     "Free",
+     "Retrig",
+     "Envelope"
+    ]
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo3.mono",
+   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "raw_body_path": "LFO2.plainParams.kParamMono",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo3.rate",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "LFO2.plainParams.kParamRate",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo3.rate_10x",
+   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "raw_body_path": "LFO2.plainParams.kParamRate10x",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo3.rise",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "LFO2.plainParams.kParamRise",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 5.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo3.shape",
+   "allowed_operation": "mutate_enum_value",
+   "raw_body_path": "LFO2.plainParams.kParamType",
+   "valid_domain": {
+    "kind": "enum",
+    "values": [
+     "Rossler",
+     "Lorenz",
+     "RandomSH",
+     "Path"
+    ]
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo3.smooth",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "LFO2.plainParams.kParamSmooth",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo3.swing",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "LFO2.plainParams.kParamSwing",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo3.triplets",
+   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "raw_body_path": "LFO2.plainParams.kParamTriplets",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo4.beat_sync",
+   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "raw_body_path": "LFO3.plainParams.kParamBeatSync",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo4.delay",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "LFO3.plainParams.kParamDelay",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 3.6
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo4.dotted",
+   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "raw_body_path": "LFO3.plainParams.kParamDotted",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo4.mode",
+   "allowed_operation": "mutate_enum_value",
+   "raw_body_path": "LFO3.plainParams.kParamMode",
+   "valid_domain": {
+    "kind": "enum",
+    "values": [
+     "Free",
+     "Retrig",
+     "Envelope"
+    ]
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo4.mono",
+   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "raw_body_path": "LFO3.plainParams.kParamMono",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo4.rate",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "LFO3.plainParams.kParamRate",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo4.rate_10x",
+   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "raw_body_path": "LFO3.plainParams.kParamRate10x",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo4.rise",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "LFO3.plainParams.kParamRise",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 5.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo4.shape",
+   "allowed_operation": "mutate_enum_value",
+   "raw_body_path": "LFO3.plainParams.kParamType",
+   "valid_domain": {
+    "kind": "enum",
+    "values": [
+     "Rossler",
+     "Lorenz",
+     "RandomSH",
+     "Path"
+    ]
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo4.smooth",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "LFO3.plainParams.kParamSmooth",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo4.swing",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "LFO3.plainParams.kParamSwing",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo4.triplets",
+   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "raw_body_path": "LFO3.plainParams.kParamTriplets",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo5.beat_sync",
+   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "raw_body_path": "LFO4.plainParams.kParamBeatSync",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo5.delay",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "LFO4.plainParams.kParamDelay",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 3.6
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo5.dotted",
+   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "raw_body_path": "LFO4.plainParams.kParamDotted",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo5.mode",
+   "allowed_operation": "mutate_enum_value",
+   "raw_body_path": "LFO4.plainParams.kParamMode",
+   "valid_domain": {
+    "kind": "enum",
+    "values": [
+     "Free",
+     "Retrig",
+     "Envelope"
+    ]
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo5.mono",
+   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "raw_body_path": "LFO4.plainParams.kParamMono",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo5.rate",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "LFO4.plainParams.kParamRate",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo5.rate_10x",
+   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "raw_body_path": "LFO4.plainParams.kParamRate10x",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo5.rise",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "LFO4.plainParams.kParamRise",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 5.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo5.shape",
+   "allowed_operation": "mutate_enum_value",
+   "raw_body_path": "LFO4.plainParams.kParamType",
+   "valid_domain": {
+    "kind": "enum",
+    "values": [
+     "Rossler",
+     "Lorenz",
+     "RandomSH",
+     "Path"
+    ]
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo5.smooth",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "LFO4.plainParams.kParamSmooth",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo5.swing",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "LFO4.plainParams.kParamSwing",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo5.triplets",
+   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "raw_body_path": "LFO4.plainParams.kParamTriplets",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo6.beat_sync",
+   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "raw_body_path": "LFO5.plainParams.kParamBeatSync",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo6.delay",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "LFO5.plainParams.kParamDelay",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 3.6
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo6.dotted",
+   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "raw_body_path": "LFO5.plainParams.kParamDotted",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo6.mode",
+   "allowed_operation": "mutate_enum_value",
+   "raw_body_path": "LFO5.plainParams.kParamMode",
+   "valid_domain": {
+    "kind": "enum",
+    "values": [
+     "Free",
+     "Retrig",
+     "Envelope"
+    ]
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo6.mono",
+   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "raw_body_path": "LFO5.plainParams.kParamMono",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo6.rate",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "LFO5.plainParams.kParamRate",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo6.rate_10x",
+   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "raw_body_path": "LFO5.plainParams.kParamRate10x",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo6.rise",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "LFO5.plainParams.kParamRise",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 5.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo6.shape",
+   "allowed_operation": "mutate_enum_value",
+   "raw_body_path": "LFO5.plainParams.kParamType",
+   "valid_domain": {
+    "kind": "enum",
+    "values": [
+     "Rossler",
+     "Lorenz",
+     "RandomSH",
+     "Path"
+    ]
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo6.smooth",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "LFO5.plainParams.kParamSmooth",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo6.swing",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "LFO5.plainParams.kParamSwing",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "lfo6.triplets",
+   "allowed_operation": "MCP_EXEC_RAW_ONLY",
+   "raw_body_path": "LFO5.plainParams.kParamTriplets",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "macro1.name",
+   "allowed_operation": null,
+   "raw_body_path": null,
+   "valid_domain": null,
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_CONFORMANCE_EXCEPTION",
+   "verification_method": "MCP_EXEC_CONFORMANCE_EXCEPTION",
+   "known_exception": true,
+   "exception_detail": "reference: UI_MISMATCH; leaves_not_persisted: [Macro0.name]",
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "macro1.value",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Macro0.plainParams.kParamValue",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "macro2.name",
+   "allowed_operation": null,
+   "raw_body_path": null,
+   "valid_domain": null,
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_CONFORMANCE_EXCEPTION",
+   "verification_method": "MCP_EXEC_CONFORMANCE_EXCEPTION",
+   "known_exception": true,
+   "exception_detail": "reference: UI_MISMATCH; leaves_not_persisted: [Macro1.name]",
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "macro2.value",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Macro1.plainParams.kParamValue",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "macro3.name",
+   "allowed_operation": null,
+   "raw_body_path": null,
+   "valid_domain": null,
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_CONFORMANCE_EXCEPTION",
+   "verification_method": "MCP_EXEC_CONFORMANCE_EXCEPTION",
+   "known_exception": true,
+   "exception_detail": "reference: UI_MISMATCH; leaves_not_persisted: [Macro2.name]",
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "macro3.value",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Macro2.plainParams.kParamValue",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "macro4.name",
+   "allowed_operation": null,
+   "raw_body_path": null,
+   "valid_domain": null,
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_CONFORMANCE_EXCEPTION",
+   "verification_method": "MCP_EXEC_CONFORMANCE_EXCEPTION",
+   "known_exception": true,
+   "exception_detail": "reference: UI_MISMATCH; leaves_not_persisted: [Macro3.name]",
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "macro4.value",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Macro3.plainParams.kParamValue",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "macro5.name",
+   "allowed_operation": null,
+   "raw_body_path": null,
+   "valid_domain": null,
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_CONFORMANCE_EXCEPTION",
+   "verification_method": "MCP_EXEC_CONFORMANCE_EXCEPTION",
+   "known_exception": true,
+   "exception_detail": "reference: UI_MISMATCH; leaves_not_persisted: [Macro4.name]",
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "macro5.value",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Macro4.plainParams.kParamValue",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "macro6.name",
+   "allowed_operation": null,
+   "raw_body_path": null,
+   "valid_domain": null,
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_CONFORMANCE_EXCEPTION",
+   "verification_method": "MCP_EXEC_CONFORMANCE_EXCEPTION",
+   "known_exception": true,
+   "exception_detail": "reference: UI_MISMATCH; leaves_not_persisted: [Macro5.name]",
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "macro6.value",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Macro5.plainParams.kParamValue",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "macro7.name",
+   "allowed_operation": null,
+   "raw_body_path": null,
+   "valid_domain": null,
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_CONFORMANCE_EXCEPTION",
+   "verification_method": "MCP_EXEC_CONFORMANCE_EXCEPTION",
+   "known_exception": true,
+   "exception_detail": "reference: UI_MISMATCH; leaves_not_persisted: [Macro6.name]",
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "macro7.value",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Macro6.plainParams.kParamValue",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "macro8.name",
+   "allowed_operation": null,
+   "raw_body_path": null,
+   "valid_domain": null,
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_CONFORMANCE_EXCEPTION",
+   "verification_method": "MCP_EXEC_CONFORMANCE_EXCEPTION",
+   "known_exception": true,
+   "exception_detail": "reference: UI_MISMATCH; leaves_not_persisted: [Macro7.name]",
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "macro8.value",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Macro7.plainParams.kParamValue",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "mixer.filter1.bus1",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "RoutingSlot5.plainParams.kParamFXBus1Level",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "mixer.filter1.bus2",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "RoutingSlot5.plainParams.kParamFXBus2Level",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "mixer.filter1.enable",
+   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "raw_body_path": "VoiceFilter0.plainParams.kParamEnable",
+   "valid_domain": {
+    "kind": "enum",
+    "values": [
+     "On",
+     "Off"
+    ]
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "mixer.filter1.wet",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "VoiceFilter0.plainParams.kParamWet",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "mixer.filter2.bus1",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "RoutingSlot6.plainParams.kParamFXBus1Level",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "mixer.filter2.bus2",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "RoutingSlot6.plainParams.kParamFXBus2Level",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "mixer.filter2.enable",
+   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "raw_body_path": "VoiceFilter1.plainParams.kParamEnable",
+   "valid_domain": {
+    "kind": "enum",
+    "values": [
+     "On",
+     "Off"
+    ]
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "mixer.filter2.wet",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "VoiceFilter1.plainParams.kParamWet",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "mixer.noise.bus1",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "RoutingSlot3.plainParams.kParamFXBus1Level",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "mixer.noise.bus2",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "RoutingSlot3.plainParams.kParamFXBus2Level",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "mixer.noise.enable",
+   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "raw_body_path": "Oscillator3.plainParams.kParamEnable",
+   "valid_domain": {
+    "kind": "enum",
+    "values": [
+     "On",
+     "Off"
+    ]
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "mixer.noise.filter_balance",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "RoutingSlot3.plainParams.kParamFilterBalance",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": "Only visible/present when MIXER.NOISE.ROUTING = 'Filter'",
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "mixer.noise.pan",
+   "allowed_operation": null,
+   "raw_body_path": null,
+   "valid_domain": null,
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_CONFORMANCE_EXCEPTION",
+   "verification_method": "MCP_EXEC_CONFORMANCE_EXCEPTION",
+   "known_exception": true,
+   "exception_detail": "reference: UI_MISMATCH",
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "mixer.osc_a.bus1",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "RoutingSlot0.plainParams.kParamFXBus1Level",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "mixer.osc_a.bus2",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "RoutingSlot0.plainParams.kParamFXBus2Level",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "mixer.osc_a.filter_balance",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "RoutingSlot0.plainParams.kParamFilterBalance",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": "Only visible/present when MIXER.OSC_A.ROUTING = 'Filter'",
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "mixer.osc_b.bus1",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "RoutingSlot1.plainParams.kParamFXBus1Level",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "mixer.osc_b.bus2",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "RoutingSlot1.plainParams.kParamFXBus2Level",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "mixer.osc_b.filter_balance",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "RoutingSlot1.plainParams.kParamFilterBalance",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": "Only visible/present when MIXER.OSC_B.ROUTING = 'Filter'",
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "mixer.osc_c.bus1",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "RoutingSlot2.plainParams.kParamFXBus1Level",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "mixer.osc_c.bus2",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "RoutingSlot2.plainParams.kParamFXBus2Level",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "mixer.osc_c.filter_balance",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "RoutingSlot2.plainParams.kParamFilterBalance",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": "Only visible/present when MIXER.OSC_C.ROUTING = 'Filter'",
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "mixer.sub.bus1",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "RoutingSlot4.plainParams.kParamFXBus1Level",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "mixer.sub.bus2",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "RoutingSlot4.plainParams.kParamFXBus2Level",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "mixer.sub.enable",
+   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "raw_body_path": "Oscillator4.plainParams.kParamEnable",
+   "valid_domain": {
+    "kind": "enum",
+    "values": [
+     "On",
+     "Off"
+    ]
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "mixer.sub.filter_balance",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "RoutingSlot4.plainParams.kParamFilterBalance",
+   "valid_domain": {
+    "kind": "continuous"
+   },
+   "context_requirements": "Only visible/present when MIXER.SUB.ROUTING = 'Filter'",
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "mixer.sub.pan",
+   "allowed_operation": null,
+   "raw_body_path": null,
+   "valid_domain": null,
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_CONFORMANCE_EXCEPTION",
+   "verification_method": "MCP_EXEC_CONFORMANCE_EXCEPTION",
+   "known_exception": true,
+   "exception_detail": "reference: UI_MISMATCH",
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscA.detune",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Oscillator0.plainParams.kParamDetune",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "context_requirements": "Mode-dependent rendering (Wavetable/Sample/Multisample/Granular/Spectral) -- same VST3 index 20-62 slot repurposed per active oscillator mode; verified via mode_by_mode_verification in OSC closure evidence",
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscA.enabled",
+   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "raw_body_path": "Oscillator0.plainParams.kParamEnable",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscA.fine",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Oscillator0.plainParams.kParamFine",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": -80.0,
+    "max": 80.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscA.octave",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Oscillator0.plainParams.kParamOctave",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": -4.0,
+    "max": 4.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscA.pan",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Oscillator0.plainParams.kParamPan",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": -50.0,
+    "max": 50.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscA.sample_loop_crossfade",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Oscillator0.plainParams.kParamLoopCrossfade",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": "Mode-dependent rendering (Wavetable/Sample/Multisample/Granular/Spectral) -- same VST3 index 20-62 slot repurposed per active oscillator mode; verified via mode_by_mode_verification in OSC closure evidence",
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscA.sample_loop_end",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Oscillator0.plainParams.kParamLoopEnd",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": "Mode-dependent rendering (Wavetable/Sample/Multisample/Granular/Spectral) -- same VST3 index 20-62 slot repurposed per active oscillator mode; verified via mode_by_mode_verification in OSC closure evidence",
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscA.sample_loop_start",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Oscillator0.plainParams.kParamLoopStart",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": "Mode-dependent rendering (Wavetable/Sample/Multisample/Granular/Spectral) -- same VST3 index 20-62 slot repurposed per active oscillator mode; verified via mode_by_mode_verification in OSC closure evidence",
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscA.semitone",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Oscillator0.plainParams.kParamPitch",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": -12.0,
+    "max": 12.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscA.unison",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Oscillator0.plainParams.kParamUnison",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 1.0,
+    "max": 16.0
+   },
+   "context_requirements": "Mode-dependent rendering (Wavetable/Sample/Multisample/Granular/Spectral) -- same VST3 index 20-62 slot repurposed per active oscillator mode; verified via mode_by_mode_verification in OSC closure evidence",
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscA.warp_amount",
+   "allowed_operation": null,
+   "raw_body_path": null,
+   "valid_domain": null,
+   "context_requirements": "Mode-dependent rendering (Wavetable/Sample/Multisample/Granular/Spectral) -- same VST3 index 20-62 slot repurposed per active oscillator mode; verified via mode_by_mode_verification in OSC closure evidence",
+   "execution_outcome": "MCP_EXEC_CONFORMANCE_EXCEPTION",
+   "verification_method": "MCP_EXEC_CONFORMANCE_EXCEPTION",
+   "known_exception": true,
+   "exception_detail": "reference: UI_CURVE_UNRESOLVED_FINAL",
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscA.warp_amount2",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Oscillator0.WTOsc0.plainParams.kParamWarp2",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "context_requirements": "Mode-dependent rendering (Wavetable/Sample/Multisample/Granular/Spectral) -- same VST3 index 20-62 slot repurposed per active oscillator mode; verified via mode_by_mode_verification in OSC closure evidence",
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscA.warp_mode",
+   "allowed_operation": "mutate_enum_value",
+   "raw_body_path": "Oscillator0.WTOsc0.plainParams.kParamWarpMenu",
+   "valid_domain": {
+    "kind": "enum",
+    "values": [
+     "kAM_OSC",
+     "kAM_SUB",
+     "kASYMNeg",
+     "kASYMPos",
+     "kASYMPosNeg",
+     "kBendNeg",
+     "kBendPos",
+     "kBendPosNeg",
+     "kDLM",
+     "kDistAsym",
+     "kDistDiode1",
+     "kDistDiode2",
+     "kDistHardClip",
+     "kDistLinFold",
+     "kDistSineShaper",
+     "kDistSinFold",
+     "kDistSoftClip",
+     "kDistSoftSat",
+     "kDistStompBox",
+     "kDistTapeSat",
+     "kDistTube",
+     "kDistZeroSquare",
+     "kEvenOdd",
+     "kFMP_NOISE",
+     "kFMP_OSC",
+     "kFMX_NOISE",
+     "kFMX_OSC",
+     "kFMX_OSC2",
+     "kFM_FILT1",
+     "kFM_FILT2",
+     "kFM_NOISE",
+     "kFM_OSC",
+     "kFM_OSC2",
+     "kFM_SUB",
+     "kFilterHPF",
+     "kFilterLPF",
+     "kFlip",
+     "kPD_FILT1",
+     "kPD_NOISE",
+     "kPD_OSC",
+     "kPD_OSC2",
+     "kPD_SUB",
+     "kPWM",
+     "kQuantize",
+     "kRM_FILT1",
+     "kRM_FILT2",
+     "kRM_NOISE",
+     "kRM_OSC",
+     "kRM_OSC2",
+     "kRM_SUB",
+     "kRemap_4",
+     "kSelfPD",
+     "kSync"
+    ]
+   },
+   "context_requirements": "Mode-dependent rendering (Wavetable/Sample/Multisample/Granular/Spectral) -- same VST3 index 20-62 slot repurposed per active oscillator mode; verified via mode_by_mode_verification in OSC closure evidence",
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscA.warp_mode2",
+   "allowed_operation": "mutate_enum_value",
+   "raw_body_path": "Oscillator0.WTOsc0.plainParams.kParamWarpMenu2",
+   "valid_domain": {
+    "kind": "enum",
+    "values": [
+     "kAM_OSC",
+     "kAM_SUB",
+     "kASYMNeg",
+     "kASYMPos",
+     "kASYMPosNeg",
+     "kBendNeg",
+     "kBendPos",
+     "kBendPosNeg",
+     "kDLM",
+     "kDistAsym",
+     "kDistDiode1",
+     "kDistDiode2",
+     "kDistHardClip",
+     "kDistLinFold",
+     "kDistSineShaper",
+     "kDistSinFold",
+     "kDistSoftClip",
+     "kDistSoftSat",
+     "kDistStompBox",
+     "kDistTapeSat",
+     "kDistTube",
+     "kDistZeroSquare",
+     "kEvenOdd",
+     "kFMP_NOISE",
+     "kFMP_OSC",
+     "kFMX_NOISE",
+     "kFMX_OSC",
+     "kFMX_OSC2",
+     "kFM_FILT1",
+     "kFM_FILT2",
+     "kFM_NOISE",
+     "kFM_OSC",
+     "kFM_OSC2",
+     "kFM_SUB",
+     "kFilterHPF",
+     "kFilterLPF",
+     "kFlip",
+     "kPD_FILT1",
+     "kPD_NOISE",
+     "kPD_OSC",
+     "kPD_OSC2",
+     "kPD_SUB",
+     "kPWM",
+     "kQuantize",
+     "kRM_FILT1",
+     "kRM_FILT2",
+     "kRM_NOISE",
+     "kRM_OSC",
+     "kRM_OSC2",
+     "kRM_SUB",
+     "kRemap_4",
+     "kSelfPD",
+     "kSync"
+    ]
+   },
+   "context_requirements": "Mode-dependent rendering (Wavetable/Sample/Multisample/Granular/Spectral) -- same VST3 index 20-62 slot repurposed per active oscillator mode; verified via mode_by_mode_verification in OSC closure evidence",
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscA.warp_var2",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Oscillator0.WTOsc0.plainParams.kParamWarpVar2",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscA.wavetable",
+   "allowed_operation": "mutate_enum_value",
+   "raw_body_path": "Oscillator0.WTOsc0.relativePathToWT",
+   "valid_domain": {
+    "kind": "enum",
+    "values": [
+     "default",
+     "analog_basic",
+     "analog_warm",
+     "pwm",
+     "analog_mini",
+     "warm_sub",
+     "digital_fm",
+     "harmonic_smooth",
+     "dying_sine",
+     "acid",
+     "fm_piano",
+     "flute"
+    ]
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscB.detune",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Oscillator1.plainParams.kParamDetune",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "context_requirements": "Mode-dependent rendering (Wavetable/Sample/Multisample/Granular/Spectral) -- same VST3 index 20-62 slot repurposed per active oscillator mode; verified via mode_by_mode_verification in OSC closure evidence",
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscB.enabled",
+   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "raw_body_path": "Oscillator1.plainParams.kParamEnable",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscB.fine",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Oscillator1.plainParams.kParamFine",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": -80.0,
+    "max": 80.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscB.octave",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Oscillator1.plainParams.kParamOctave",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": -4.0,
+    "max": 4.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscB.pan",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Oscillator1.plainParams.kParamPan",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": -50.0,
+    "max": 50.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscB.sample_loop_crossfade",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Oscillator1.plainParams.kParamLoopCrossfade",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": "Mode-dependent rendering (Wavetable/Sample/Multisample/Granular/Spectral) -- same VST3 index 20-62 slot repurposed per active oscillator mode; verified via mode_by_mode_verification in OSC closure evidence",
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscB.sample_loop_end",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Oscillator1.plainParams.kParamLoopEnd",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": "Mode-dependent rendering (Wavetable/Sample/Multisample/Granular/Spectral) -- same VST3 index 20-62 slot repurposed per active oscillator mode; verified via mode_by_mode_verification in OSC closure evidence",
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscB.sample_loop_start",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Oscillator1.plainParams.kParamLoopStart",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": "Mode-dependent rendering (Wavetable/Sample/Multisample/Granular/Spectral) -- same VST3 index 20-62 slot repurposed per active oscillator mode; verified via mode_by_mode_verification in OSC closure evidence",
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscB.semitone",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Oscillator1.plainParams.kParamPitch",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": -12.0,
+    "max": 12.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscB.unison",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Oscillator1.plainParams.kParamUnison",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 1.0,
+    "max": 16.0
+   },
+   "context_requirements": "Mode-dependent rendering (Wavetable/Sample/Multisample/Granular/Spectral) -- same VST3 index 20-62 slot repurposed per active oscillator mode; verified via mode_by_mode_verification in OSC closure evidence",
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscB.warp_amount",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Oscillator1.WTOsc1.plainParams.kParamWarp",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "context_requirements": "Mode-dependent rendering (Wavetable/Sample/Multisample/Granular/Spectral) -- same VST3 index 20-62 slot repurposed per active oscillator mode; verified via mode_by_mode_verification in OSC closure evidence",
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscB.warp_amount2",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Oscillator1.WTOsc1.plainParams.kParamWarp2",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "context_requirements": "Mode-dependent rendering (Wavetable/Sample/Multisample/Granular/Spectral) -- same VST3 index 20-62 slot repurposed per active oscillator mode; verified via mode_by_mode_verification in OSC closure evidence",
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscB.warp_mode",
+   "allowed_operation": "mutate_enum_value",
+   "raw_body_path": "Oscillator1.WTOsc1.plainParams.kParamWarpMenu",
+   "valid_domain": {
+    "kind": "enum",
+    "values": [
+     "kAM_OSC",
+     "kAM_SUB",
+     "kASYMNeg",
+     "kASYMPos",
+     "kASYMPosNeg",
+     "kBendNeg",
+     "kBendPos",
+     "kBendPosNeg",
+     "kDLM",
+     "kDistAsym",
+     "kDistDiode1",
+     "kDistDiode2",
+     "kDistHardClip",
+     "kDistLinFold",
+     "kDistSineShaper",
+     "kDistSinFold",
+     "kDistSoftClip",
+     "kDistSoftSat",
+     "kDistStompBox",
+     "kDistTapeSat",
+     "kDistTube",
+     "kDistZeroSquare",
+     "kEvenOdd",
+     "kFMP_NOISE",
+     "kFMP_OSC",
+     "kFMX_NOISE",
+     "kFMX_OSC",
+     "kFMX_OSC2",
+     "kFM_FILT1",
+     "kFM_FILT2",
+     "kFM_NOISE",
+     "kFM_OSC",
+     "kFM_OSC2",
+     "kFM_SUB",
+     "kFilterHPF",
+     "kFilterLPF",
+     "kFlip",
+     "kPD_FILT1",
+     "kPD_NOISE",
+     "kPD_OSC",
+     "kPD_OSC2",
+     "kPD_SUB",
+     "kPWM",
+     "kQuantize",
+     "kRM_FILT1",
+     "kRM_FILT2",
+     "kRM_NOISE",
+     "kRM_OSC",
+     "kRM_OSC2",
+     "kRM_SUB",
+     "kRemap_4",
+     "kSelfPD",
+     "kSync"
+    ]
+   },
+   "context_requirements": "Mode-dependent rendering (Wavetable/Sample/Multisample/Granular/Spectral) -- same VST3 index 20-62 slot repurposed per active oscillator mode; verified via mode_by_mode_verification in OSC closure evidence",
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscB.warp_mode2",
+   "allowed_operation": "mutate_enum_value",
+   "raw_body_path": "Oscillator1.WTOsc1.plainParams.kParamWarpMenu2",
+   "valid_domain": {
+    "kind": "enum",
+    "values": [
+     "kAM_OSC",
+     "kAM_SUB",
+     "kASYMNeg",
+     "kASYMPos",
+     "kASYMPosNeg",
+     "kBendNeg",
+     "kBendPos",
+     "kBendPosNeg",
+     "kDLM",
+     "kDistAsym",
+     "kDistDiode1",
+     "kDistDiode2",
+     "kDistHardClip",
+     "kDistLinFold",
+     "kDistSineShaper",
+     "kDistSinFold",
+     "kDistSoftClip",
+     "kDistSoftSat",
+     "kDistStompBox",
+     "kDistTapeSat",
+     "kDistTube",
+     "kDistZeroSquare",
+     "kEvenOdd",
+     "kFMP_NOISE",
+     "kFMP_OSC",
+     "kFMX_NOISE",
+     "kFMX_OSC",
+     "kFMX_OSC2",
+     "kFM_FILT1",
+     "kFM_FILT2",
+     "kFM_NOISE",
+     "kFM_OSC",
+     "kFM_OSC2",
+     "kFM_SUB",
+     "kFilterHPF",
+     "kFilterLPF",
+     "kFlip",
+     "kPD_FILT1",
+     "kPD_NOISE",
+     "kPD_OSC",
+     "kPD_OSC2",
+     "kPD_SUB",
+     "kPWM",
+     "kQuantize",
+     "kRM_FILT1",
+     "kRM_FILT2",
+     "kRM_NOISE",
+     "kRM_OSC",
+     "kRM_OSC2",
+     "kRM_SUB",
+     "kRemap_4",
+     "kSelfPD",
+     "kSync"
+    ]
+   },
+   "context_requirements": "Mode-dependent rendering (Wavetable/Sample/Multisample/Granular/Spectral) -- same VST3 index 20-62 slot repurposed per active oscillator mode; verified via mode_by_mode_verification in OSC closure evidence",
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscB.warp_var2",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Oscillator1.WTOsc1.plainParams.kParamWarpVar2",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscB.wavetable",
+   "allowed_operation": "mutate_enum_value",
+   "raw_body_path": "Oscillator1.WTOsc1.relativePathToWT",
+   "valid_domain": {
+    "kind": "enum",
+    "values": [
+     "default",
+     "analog_basic",
+     "analog_warm",
+     "pwm",
+     "analog_mini",
+     "warm_sub",
+     "digital_fm",
+     "harmonic_smooth",
+     "dying_sine",
+     "acid",
+     "fm_piano",
+     "flute"
+    ]
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscC.detune",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Oscillator2.plainParams.kParamDetune",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "context_requirements": "Mode-dependent rendering (Wavetable/Sample/Multisample/Granular/Spectral) -- same VST3 index 20-62 slot repurposed per active oscillator mode; verified via mode_by_mode_verification in OSC closure evidence",
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscC.enabled",
+   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "raw_body_path": "Oscillator2.plainParams.kParamEnable",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscC.fine",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Oscillator2.plainParams.kParamFine",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": -80.0,
+    "max": 80.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscC.octave",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Oscillator2.plainParams.kParamOctave",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": -4.0,
+    "max": 4.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscC.pan",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Oscillator2.plainParams.kParamPan",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": -50.0,
+    "max": 50.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscC.sample_loop_crossfade",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Oscillator2.plainParams.kParamLoopCrossfade",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": "Mode-dependent rendering (Wavetable/Sample/Multisample/Granular/Spectral) -- same VST3 index 20-62 slot repurposed per active oscillator mode; verified via mode_by_mode_verification in OSC closure evidence",
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscC.sample_loop_end",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Oscillator2.plainParams.kParamLoopEnd",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": "Mode-dependent rendering (Wavetable/Sample/Multisample/Granular/Spectral) -- same VST3 index 20-62 slot repurposed per active oscillator mode; verified via mode_by_mode_verification in OSC closure evidence",
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscC.sample_loop_start",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Oscillator2.plainParams.kParamLoopStart",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 100.0
+   },
+   "context_requirements": "Mode-dependent rendering (Wavetable/Sample/Multisample/Granular/Spectral) -- same VST3 index 20-62 slot repurposed per active oscillator mode; verified via mode_by_mode_verification in OSC closure evidence",
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscC.semitone",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Oscillator2.plainParams.kParamPitch",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": -12.0,
+    "max": 12.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscC.unison",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Oscillator2.plainParams.kParamUnison",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 1.0,
+    "max": 16.0
+   },
+   "context_requirements": "Mode-dependent rendering (Wavetable/Sample/Multisample/Granular/Spectral) -- same VST3 index 20-62 slot repurposed per active oscillator mode; verified via mode_by_mode_verification in OSC closure evidence",
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscC.warp_amount",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Oscillator2.WTOsc2.plainParams.kParamWarp",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "context_requirements": "Mode-dependent rendering (Wavetable/Sample/Multisample/Granular/Spectral) -- same VST3 index 20-62 slot repurposed per active oscillator mode; verified via mode_by_mode_verification in OSC closure evidence",
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscC.warp_amount2",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Oscillator2.WTOsc2.plainParams.kParamWarp2",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "context_requirements": "Mode-dependent rendering (Wavetable/Sample/Multisample/Granular/Spectral) -- same VST3 index 20-62 slot repurposed per active oscillator mode; verified via mode_by_mode_verification in OSC closure evidence",
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscC.warp_mode",
+   "allowed_operation": "mutate_enum_value",
+   "raw_body_path": "Oscillator2.WTOsc2.plainParams.kParamWarpMenu",
+   "valid_domain": {
+    "kind": "enum",
+    "values": [
+     "kAM_OSC",
+     "kAM_SUB",
+     "kASYMNeg",
+     "kASYMPos",
+     "kASYMPosNeg",
+     "kBendNeg",
+     "kBendPos",
+     "kBendPosNeg",
+     "kDLM",
+     "kDistAsym",
+     "kDistDiode1",
+     "kDistDiode2",
+     "kDistHardClip",
+     "kDistLinFold",
+     "kDistSineShaper",
+     "kDistSinFold",
+     "kDistSoftClip",
+     "kDistSoftSat",
+     "kDistStompBox",
+     "kDistTapeSat",
+     "kDistTube",
+     "kDistZeroSquare",
+     "kEvenOdd",
+     "kFMP_NOISE",
+     "kFMP_OSC",
+     "kFMX_NOISE",
+     "kFMX_OSC",
+     "kFMX_OSC2",
+     "kFM_FILT1",
+     "kFM_FILT2",
+     "kFM_NOISE",
+     "kFM_OSC",
+     "kFM_OSC2",
+     "kFM_SUB",
+     "kFilterHPF",
+     "kFilterLPF",
+     "kFlip",
+     "kPD_FILT1",
+     "kPD_NOISE",
+     "kPD_OSC",
+     "kPD_OSC2",
+     "kPD_SUB",
+     "kPWM",
+     "kQuantize",
+     "kRM_FILT1",
+     "kRM_FILT2",
+     "kRM_NOISE",
+     "kRM_OSC",
+     "kRM_OSC2",
+     "kRM_SUB",
+     "kRemap_4",
+     "kSelfPD",
+     "kSync"
+    ]
+   },
+   "context_requirements": "Mode-dependent rendering (Wavetable/Sample/Multisample/Granular/Spectral) -- same VST3 index 20-62 slot repurposed per active oscillator mode; verified via mode_by_mode_verification in OSC closure evidence",
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscC.warp_mode2",
+   "allowed_operation": "mutate_enum_value",
+   "raw_body_path": "Oscillator2.WTOsc2.plainParams.kParamWarpMenu2",
+   "valid_domain": {
+    "kind": "enum",
+    "values": [
+     "kAM_OSC",
+     "kAM_SUB",
+     "kASYMNeg",
+     "kASYMPos",
+     "kASYMPosNeg",
+     "kBendNeg",
+     "kBendPos",
+     "kBendPosNeg",
+     "kDLM",
+     "kDistAsym",
+     "kDistDiode1",
+     "kDistDiode2",
+     "kDistHardClip",
+     "kDistLinFold",
+     "kDistSineShaper",
+     "kDistSinFold",
+     "kDistSoftClip",
+     "kDistSoftSat",
+     "kDistStompBox",
+     "kDistTapeSat",
+     "kDistTube",
+     "kDistZeroSquare",
+     "kEvenOdd",
+     "kFMP_NOISE",
+     "kFMP_OSC",
+     "kFMX_NOISE",
+     "kFMX_OSC",
+     "kFMX_OSC2",
+     "kFM_FILT1",
+     "kFM_FILT2",
+     "kFM_NOISE",
+     "kFM_OSC",
+     "kFM_OSC2",
+     "kFM_SUB",
+     "kFilterHPF",
+     "kFilterLPF",
+     "kFlip",
+     "kPD_FILT1",
+     "kPD_NOISE",
+     "kPD_OSC",
+     "kPD_OSC2",
+     "kPD_SUB",
+     "kPWM",
+     "kQuantize",
+     "kRM_FILT1",
+     "kRM_FILT2",
+     "kRM_NOISE",
+     "kRM_OSC",
+     "kRM_OSC2",
+     "kRM_SUB",
+     "kRemap_4",
+     "kSelfPD",
+     "kSync"
+    ]
+   },
+   "context_requirements": "Mode-dependent rendering (Wavetable/Sample/Multisample/Granular/Spectral) -- same VST3 index 20-62 slot repurposed per active oscillator mode; verified via mode_by_mode_verification in OSC closure evidence",
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscC.warp_var2",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Oscillator2.WTOsc2.plainParams.kParamWarpVar2",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 1.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscC.wavetable",
+   "allowed_operation": "mutate_enum_value",
+   "raw_body_path": "Oscillator2.WTOsc2.relativePathToWT",
+   "valid_domain": {
+    "kind": "enum",
+    "values": [
+     "default",
+     "analog_basic",
+     "analog_warm",
+     "pwm",
+     "analog_mini",
+     "warm_sub",
+     "digital_fm",
+     "harmonic_smooth",
+     "dying_sine",
+     "acid",
+     "fm_piano",
+     "flute"
+    ]
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscNoise.fine",
+   "allowed_operation": "mutate_numeric_value",
+   "raw_body_path": "Oscillator3.plainParams.kParamFine",
+   "valid_domain": {
+    "kind": "continuous",
+    "min": -80.0,
+    "max": 80.0
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscNoise.noise_type",
+   "allowed_operation": "mutate_enum_value",
+   "raw_body_path": "Oscillator3.NoiseOsc3.plainParams.kParamNoiseType",
+   "valid_domain": {
+    "kind": "enum",
+    "values": [
+     "White",
+     "Pink",
+     "Brown",
+     "Geiger"
+    ]
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_RAW_ONLY",
+   "verification_method": "MCP_EXEC_RAW_ONLY",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "oscNoise.pan",
+   "allowed_operation": null,
+   "raw_body_path": null,
+   "valid_domain": null,
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_CONFORMANCE_EXCEPTION",
+   "verification_method": "MCP_EXEC_CONFORMANCE_EXCEPTION",
+   "known_exception": true,
+   "exception_detail": "reference: UI_MISMATCH",
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "voice.voicing.legato",
+   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "raw_body_path": "Global0.plainParams.kParamLegato",
+   "valid_domain": {
+    "kind": "checkbox"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "voice.voicing.mono",
+   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "raw_body_path": "Global0.plainParams.kParamMonoToggle",
+   "valid_domain": {
+    "kind": "checkbox"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "voice.voicing.porta_always",
+   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "raw_body_path": "Global0.plainParams.kParamPortaAlways",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  {
+   "atlas_id": "voice.voicing.porta_scaled",
+   "allowed_operation": "MCP_EXEC_HOST_CONFIRMED",
+   "raw_body_path": "Global0.plainParams.kParamPortaScaled",
+   "valid_domain": {
+    "kind": "toggle"
+   },
+   "context_requirements": null,
+   "execution_outcome": "MCP_EXEC_HOST_CONFIRMED",
+   "verification_method": "MCP_EXEC_HOST_CONFIRMED",
+   "known_exception": false,
+   "exception_detail": null,
+   "epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  }
+ ]
+}
