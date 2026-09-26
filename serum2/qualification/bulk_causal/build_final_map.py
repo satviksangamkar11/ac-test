@@ -61,6 +61,24 @@ A_OVERRIDE = {
 # incidental screen confirmations from the misattributed reads above
 INCIDENTAL = {"oscA.warp_amount2": "screen '63 %' (AM mode, raw 0.63)", "oscB.warp_amount2": "screen '1.49 %' (Sync mode, raw 0.32; host text agrees)",
               "oscC.warp_amount2": "screen '39 %' (PWM mode inverted, raw 0.61)"}
+# D tier: manufacturer documentation (Serum 2 "What's New", v1.0.0). Never counts as a screen read; it can only change
+# which CONTEXT a read needs, or corroborate a schema finding.
+DOC = "Serum 2 What's New PDF (uploaded 2026-09-26)"
+DOC_EVIDENCE = {
+    **{"mixer.%s.filter_balance" % m: ("NEEDS_CONTEXT", "p16 'Balance Routing: balance routing to filters and FX busses': the balance "
+                                       "control appears on the MIX page only when the channel routes to the filters; the bulk preset "
+                                       "routed to MAIN. Needs a routing context.") for m in ("osc_a", "osc_b", "osc_c", "noise", "sub")},
+}
+DOC_NOTES = {
+    **{"lfo%d.swing" % i: "p14 'LFOs can now follow swing': likely an on/off follow-swing setting; read as a toggle" for i in range(1, 7)},
+    **{"lfo%d.rate_10x" % i: "p14 '10x Rate: set rates up to 1000 Hz': Hz-mode control" for i in range(1, 7)},
+    "global.transpose": "p19 keyboard transpose 'within a range of two octaves': corroborates +-24 (schema +-48)",
+    "fx.reverb.type": "p12 new reverb types 'Vintage, Nitrous, and Basin' (+ Plate, Hall): corroborates the 5-type menu",
+}
+DOC_GLOBAL = {"lfo7_tab": "p14 'LFO 7 to LFO 10 appear after you assign LFO 6': LFO 7 IS viewable once LFO 6 has a mod route; "
+                          "the earlier 'no UI tab' conclusion is withdrawn (the conflict itself is proven on LFO1, CAL_01)",
+              "coverage_gap": "p11 '13 powerful effects': the 330 candidates cover 12 FX types; the new Utility effect has none",
+              "multiple_instances": "p11 'Multiple instances of a single effect': supports CAL_01's 8-compressor rack"}
 # class whose identity was wrong: its members' host text is void, so they are not validated
 VOID_CLASS_OF = "lfo3.beat_sync"
 
@@ -116,11 +134,16 @@ def main():
         else:
             concl = {"UI_CONFIRMED": "DIRECT_UI_CONFIRMED"}.get(prev, prev)
             why = "carried from control map v3 (%s)" % prev
+        if a in DOC_EVIDENCE and concl in ("HOST_TEXT_UNVALIDATED", "UI_OBSERVABLE_BUT_UNREADABLE", "UI_UNOBSERVABLE"):
+            concl, why = DOC_EVIDENCE[a]
+        c["evidence"]["D_vendor_doc"] = ({"source": DOC, "note": DOC_EVIDENCE.get(a, (None, DOC_NOTES.get(a)))[1]}
+                                         if (a in DOC_EVIDENCE or a in DOC_NOTES) else None)
         c["final_conclusion"] = concl
         c["final_reason"] = why
         c["evidence"]["C_direct_ui"]["closure_pass"] = ev
         out.append(c)
 
+    cmap["vendor_doc_findings"] = DOC_GLOBAL
     cmap["version"] = 4
     cmap["supersedes"] = "serum_full_control_map_v1-v3 (kept unchanged); v4 adds the closure pass"
     cmap["terminal"] = ["DIRECT_UI_CONFIRMED", "HOST_TEXT_VALIDATED", "UI_OBSERVABLE_BUT_UNREADABLE", "UI_UNOBSERVABLE",
@@ -141,6 +164,7 @@ def main():
         if ids:
             L.append("**%s (%d)**: %s" % (k, len(ids), ", ".join("`%s`" % i for i in ids)))
             L.append("")
+    L += ["## Vendor documentation (D tier, never a screen read)", ""] + ["- %s" % v for v in DOC_GLOBAL.values()] + [""]
     L += ["## Mismatches found (terminal, reported not fixed)", ""]
     for c in sorted(out, key=lambda c: c["atlas_id"]):
         if c["final_conclusion"] in ("UI_MISMATCH", "UI_SCHEMA_MISMATCH"):

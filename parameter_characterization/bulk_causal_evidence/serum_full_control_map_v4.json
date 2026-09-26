@@ -110,7 +110,8 @@
       "screen": "1/8",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -217,7 +218,8 @@
       "screen": "Chord",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -309,7 +311,8 @@
       "screen": "50",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -401,7 +404,8 @@
       "screen": "47",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -492,7 +496,8 @@
       "screen": "0",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -583,7 +588,8 @@
       "screen": "10",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -674,7 +680,8 @@
       "screen": "On (icon lit)",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -765,7 +772,8 @@
       "screen": "On (LED lit)",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -856,7 +864,8 @@
       "screen": "On (LED lit)",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -947,7 +956,8 @@
       "screen": "On (LED lit)",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -1039,7 +1049,8 @@
       "screen": "8",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -1130,7 +1141,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -1222,7 +1234,8 @@
       "screen": "3",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -1313,7 +1326,8 @@
       "screen": "UNREADABLE",
       "result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -1404,7 +1418,8 @@
       "screen": "On (LED lit)",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -1495,7 +1510,8 @@
       "screen": "On (LED lit)",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -1587,7 +1603,8 @@
       "screen": "UNREADABLE",
       "result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "NO_TOOLTIP",
@@ -1697,7 +1714,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -1826,7 +1844,8 @@
       "result": "UNREADABLE",
       "note": "0.5 ms attack segment ~4px wide"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -1936,7 +1955,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -2064,7 +2084,8 @@
       "class_representative": "env1.attack_curve",
       "representative_result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -2171,7 +2192,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -2281,7 +2303,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -2409,7 +2432,8 @@
       "class_representative": "env1.attack_curve",
       "representative_result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -2548,7 +2572,8 @@
       }
      ],
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -2658,7 +2683,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -2783,7 +2809,8 @@
       "class_representative": "env1.attack_curve",
       "representative_result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -2893,7 +2920,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -3021,7 +3049,8 @@
       "class_representative": "env1.attack_curve",
       "representative_result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -3128,7 +3157,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -3238,7 +3268,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -3366,7 +3397,8 @@
       "class_representative": "env1.attack_curve",
       "representative_result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -3499,7 +3531,8 @@
       "screen": "30%",
       "result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -3609,7 +3642,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -3734,7 +3768,8 @@
       "class_representative": "env1.attack_curve",
       "representative_result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -3844,7 +3879,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -3972,7 +4008,8 @@
       "class_representative": "env1.attack_curve",
       "representative_result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -4079,7 +4116,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -4189,7 +4227,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -4317,7 +4356,8 @@
       "class_representative": "env1.attack_curve",
       "representative_result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -4450,7 +4490,8 @@
       "screen": "31%",
       "result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -4560,7 +4601,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -4685,7 +4727,8 @@
       "class_representative": "env1.attack_curve",
       "representative_result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -4795,7 +4838,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -4923,7 +4967,8 @@
       "class_representative": "env1.attack_curve",
       "representative_result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -5030,7 +5075,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -5140,7 +5186,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -5268,7 +5315,8 @@
       "class_representative": "env1.attack_curve",
       "representative_result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -5401,7 +5449,8 @@
       "screen": "20%",
       "result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -5529,7 +5578,8 @@
       "screen": "UNREADABLE",
       "result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "NO_TOOLTIP",
@@ -5657,7 +5707,8 @@
       "screen": "UNREADABLE",
       "result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "NO_TOOLTIP",
@@ -5777,7 +5828,8 @@
       "screen": "On (LED lit)",
       "result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -5895,7 +5947,8 @@
       "screen": "UNREADABLE",
       "result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "NO_TOOLTIP",
@@ -6023,7 +6076,8 @@
       "screen": "UNREADABLE",
       "result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "NO_TOOLTIP",
@@ -6151,7 +6205,8 @@
       "class_representative": "filter1.drive",
       "representative_result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "NO_TOOLTIP",
@@ -6276,7 +6331,8 @@
       "class_representative": "filter1.drive",
       "representative_result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "NO_TOOLTIP",
@@ -6432,7 +6488,8 @@
       "screen": "Low 12",
       "result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -6557,7 +6614,8 @@
       "class_representative": "filter1.drive",
       "representative_result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "NO_TOOLTIP",
@@ -6687,7 +6745,8 @@
       "screen": "UNREADABLE",
       "result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "NO_TOOLTIP",
@@ -6812,7 +6871,8 @@
       "class_representative": "filter1.cutoff",
       "representative_result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "NO_TOOLTIP",
@@ -6937,7 +6997,8 @@
       "class_representative": "filter1.drive",
       "representative_result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "NO_TOOLTIP",
@@ -7057,7 +7118,8 @@
       "screen": "On (LED lit)",
       "result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -7172,7 +7234,8 @@
       "class_representative": "filter1.key_track",
       "representative_result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "NO_TOOLTIP",
@@ -7297,7 +7360,8 @@
       "class_representative": "filter1.level_out",
       "representative_result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "NO_TOOLTIP",
@@ -7425,7 +7489,8 @@
       "class_representative": "filter1.drive",
       "representative_result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "NO_TOOLTIP",
@@ -7550,7 +7615,8 @@
       "class_representative": "filter1.drive",
       "representative_result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "NO_TOOLTIP",
@@ -7686,7 +7752,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -7811,7 +7878,8 @@
       "class_representative": "filter1.drive",
       "representative_result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "NO_TOOLTIP",
@@ -7941,7 +8009,8 @@
       "screen": "UNREADABLE",
       "result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "NO_TOOLTIP",
@@ -8036,7 +8105,8 @@
       "screen": "UNREADABLE",
       "result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -8118,7 +8188,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -8200,7 +8271,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -8295,7 +8367,8 @@
       "screen": "UNREADABLE",
       "result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -8390,7 +8463,8 @@
       "screen": "18.0 ms",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -8485,7 +8559,8 @@
       "screen": "32 %",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -8567,7 +8642,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -8662,7 +8738,8 @@
       "screen": "UNREADABLE",
       "result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -8851,7 +8928,8 @@
       }
      ],
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -9039,7 +9117,8 @@
       }
      ],
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -9228,7 +9307,8 @@
       }
      ],
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -9377,7 +9457,8 @@
       }
      ],
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -9565,7 +9646,8 @@
       }
      ],
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -9660,7 +9742,8 @@
       "screen": "UNREADABLE",
       "result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -9755,7 +9838,8 @@
       "screen": "UNREADABLE",
       "result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -9837,7 +9921,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -9932,7 +10017,8 @@
       "screen": "1 %",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -10027,7 +10113,8 @@
       "screen": "UNREADABLE",
       "result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -10120,7 +10207,8 @@
       "screen": "Dly BPM (On)",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -10202,7 +10290,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -10297,7 +10386,8 @@
       "screen": "UNREADABLE",
       "result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -10390,7 +10480,8 @@
       "screen": "Dly Link (On)",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -10484,7 +10575,8 @@
       "screen": "TAP->DELAY",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -10566,7 +10658,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -10648,7 +10741,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -10743,7 +10837,8 @@
       "screen": "UNREADABLE",
       "result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -10838,7 +10933,8 @@
       "screen": "UNREADABLE",
       "result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "NO_TOOLTIP",
@@ -10933,7 +11029,8 @@
       "screen": "UNREADABLE",
       "result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -11028,7 +11125,8 @@
       "screen": "UNREADABLE",
       "result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -11123,7 +11221,8 @@
       "screen": "355 Hz",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -11221,7 +11320,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -11316,7 +11416,8 @@
       "screen": "UNREADABLE",
       "result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -11398,7 +11499,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -11479,7 +11581,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -11560,7 +11663,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -11642,7 +11746,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -11723,7 +11828,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -11805,7 +11911,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -11900,7 +12007,8 @@
       "screen": "1629 Hz",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -11995,7 +12103,8 @@
       "screen": "41 %",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -12090,7 +12199,8 @@
       "screen": "84 %",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -12282,7 +12392,8 @@
       "screen": "Low 6",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -12377,7 +12488,8 @@
       "screen": "UNREADABLE",
       "result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -12472,7 +12584,8 @@
       "screen": "74 %",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -12567,7 +12680,8 @@
       "screen": "20 %",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -12662,7 +12776,8 @@
       "screen": "6.40 Hz",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -12757,7 +12872,8 @@
       "screen": "UNREADABLE",
       "result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -12839,7 +12955,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -12921,7 +13038,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -13021,7 +13139,8 @@
       "screen": "6",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -13116,7 +13235,8 @@
       "screen": "53 %",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -13211,7 +13331,8 @@
       "screen": "27 %",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -13306,7 +13427,8 @@
       "screen": "UNREADABLE",
       "result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -13401,7 +13523,8 @@
       "screen": "390 Hz",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -13496,7 +13619,8 @@
       "screen": "3.30 Hz",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -13591,7 +13715,8 @@
       "screen": "UNREADABLE",
       "result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -13686,7 +13811,8 @@
       "screen": "76 %",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -13827,6 +13953,10 @@
       }
      ],
      "closure_pass": null
+    },
+    "D_vendor_doc": {
+     "source": "Serum 2 What's New PDF (uploaded 2026-09-26)",
+     "note": "p12 new reverb types 'Vintage, Nitrous, and Basin' (+ Plate, Hall): corroborates the 5-type menu"
     }
    },
    "gui_readability": {
@@ -13922,7 +14052,8 @@
       "screen": "UNREADABLE",
       "result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -14051,7 +14182,8 @@
       "screen": "-8",
       "result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -14180,7 +14312,8 @@
       "screen": "9",
       "result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -14277,7 +14410,8 @@
       "screen": "UNREADABLE",
       "result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -14377,7 +14511,8 @@
       }
      ],
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -14474,7 +14609,8 @@
       "screen": "UNREADABLE",
       "result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -14574,7 +14710,8 @@
       }
      ],
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -14671,7 +14808,8 @@
       "screen": "UNREADABLE",
       "result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -14770,7 +14908,8 @@
       "screen": "A = 450 Hz",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -14888,7 +15027,8 @@
       "screen": "On (LED lit, no tooltip)",
       "result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -14980,7 +15120,8 @@
       "result": "UNREADABLE",
       "note": "left GLOBAL panel needs scrolling; wheel forbidden"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -15106,7 +15247,8 @@
       "screen": "UNREADABLE",
       "result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "NO_TOOLTIP",
@@ -15224,7 +15366,8 @@
       "screen": "On (LED lit, no tooltip)",
       "result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -15316,7 +15459,8 @@
       "result": "UNREADABLE",
       "note": "left GLOBAL panel needs scrolling; wheel forbidden"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -15413,7 +15557,8 @@
       }
      ],
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -15505,7 +15650,8 @@
       "screen": "7 (dimmed, mono on)",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -15623,7 +15769,8 @@
       "screen": "On (LED lit, no tooltip)",
       "result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -15741,7 +15888,8 @@
       "screen": "On (LED lit, no tooltip)",
       "result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -15838,7 +15986,8 @@
       "screen": "0 %",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -15964,7 +16113,8 @@
       "screen": "1.90 s",
       "result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -16041,7 +16191,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -16167,7 +16318,8 @@
       "screen": "35.0%",
       "result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -16264,7 +16416,8 @@
       "screen": "1/4",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -16369,6 +16522,10 @@
      },
      "bulk_observations": null,
      "closure_pass": null
+    },
+    "D_vendor_doc": {
+     "source": "Serum 2 What's New PDF (uploaded 2026-09-26)",
+     "note": "p19 keyboard transpose 'within a range of two octaves': corroborates +-24 (schema +-48)"
     }
    },
    "gui_readability": {
@@ -16442,7 +16599,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -16539,7 +16697,8 @@
       "screen": "UNREADABLE",
       "result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -16636,7 +16795,8 @@
       "screen": "0%",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -16733,7 +16893,8 @@
       "screen": "0.0",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -16830,7 +16991,8 @@
       "screen": "100%",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -16935,7 +17097,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -17026,7 +17189,8 @@
       "screen": "1000%",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -17117,7 +17281,8 @@
       "screen": "10%",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -17182,7 +17347,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -17315,7 +17481,8 @@
       "screen": "On",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -17423,7 +17590,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -17516,7 +17684,8 @@
       "screen": "On",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -17650,7 +17819,8 @@
       }
      ],
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -17743,7 +17913,8 @@
       "screen": "On",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -17874,7 +18045,8 @@
       "screen": "1/2 t",
       "result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -17976,6 +18148,10 @@
       "result": "ABSENT",
       "note": "no 10x control shown in BPM mode"
      }
+    },
+    "D_vendor_doc": {
+     "source": "Serum 2 What's New PDF (uploaded 2026-09-26)",
+     "note": "p14 '10x Rate: set rates up to 1000 Hz': Hz-mode control"
     }
    },
    "gui_readability": {
@@ -18084,7 +18260,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -18169,7 +18346,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -18297,7 +18475,8 @@
       "screen": "UNREADABLE",
       "result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -18391,6 +18570,10 @@
       "screen": "ABSENT",
       "result": "ABSENT"
      }
+    },
+    "D_vendor_doc": {
+     "source": "Serum 2 What's New PDF (uploaded 2026-09-26)",
+     "note": "p14 'LFOs can now follow swing': likely an on/off follow-swing setting; read as a toggle"
     }
    },
    "gui_readability": {
@@ -18484,7 +18667,8 @@
       "screen": "On",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -18617,7 +18801,8 @@
       "screen": "LFO 2 BPM (On); rate display 1/4.",
       "result": "DIFFERS"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -18742,7 +18927,8 @@
       "class_representative": "lfo1.rate",
       "representative_result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -18835,7 +19021,8 @@
       "screen": "On",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -18958,7 +19145,8 @@
       }
      ],
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -19051,7 +19239,8 @@
       "screen": "On",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -19179,7 +19368,8 @@
       "class_representative": "lfo1.rate",
       "representative_result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -19280,6 +19470,10 @@
       "screen": "ABSENT",
       "result": "ABSENT"
      }
+    },
+    "D_vendor_doc": {
+     "source": "Serum 2 What's New PDF (uploaded 2026-09-26)",
+     "note": "p14 '10x Rate: set rates up to 1000 Hz': Hz-mode control"
     }
    },
    "gui_readability": {
@@ -19405,7 +19599,8 @@
       "class_representative": "lfo1.rate",
       "representative_result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -19490,7 +19685,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -19615,7 +19811,8 @@
       "class_representative": "lfo1.smooth",
       "representative_result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -19709,6 +19906,10 @@
       "screen": "ABSENT",
       "result": "ABSENT"
      }
+    },
+    "D_vendor_doc": {
+     "source": "Serum 2 What's New PDF (uploaded 2026-09-26)",
+     "note": "p14 'LFOs can now follow swing': likely an on/off follow-swing setting; read as a toggle"
     }
    },
    "gui_readability": {
@@ -19802,7 +20003,8 @@
       "screen": "On",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -19935,7 +20137,8 @@
       "screen": "LFO 3 BPM (On); rate display 1/16",
       "result": "DIFFERS"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -20063,7 +20266,8 @@
       "screen": "UNREADABLE",
       "result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -20156,7 +20360,8 @@
       "screen": "On",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -20278,7 +20483,8 @@
       }
      ],
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -20371,7 +20577,8 @@
       "screen": "On",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -20499,7 +20706,8 @@
       "class_representative": "lfo1.rate",
       "representative_result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -20600,6 +20808,10 @@
       "screen": "ABSENT",
       "result": "ABSENT"
      }
+    },
+    "D_vendor_doc": {
+     "source": "Serum 2 What's New PDF (uploaded 2026-09-26)",
+     "note": "p14 '10x Rate: set rates up to 1000 Hz': Hz-mode control"
     }
    },
    "gui_readability": {
@@ -20725,7 +20937,8 @@
       "class_representative": "lfo1.rate",
       "representative_result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -20829,7 +21042,8 @@
       }
      ],
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -20954,7 +21168,8 @@
       "class_representative": "lfo1.smooth",
       "representative_result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -21048,6 +21263,10 @@
       "screen": "ABSENT",
       "result": "ABSENT"
      }
+    },
+    "D_vendor_doc": {
+     "source": "Serum 2 What's New PDF (uploaded 2026-09-26)",
+     "note": "p14 'LFOs can now follow swing': likely an on/off follow-swing setting; read as a toggle"
     }
    },
    "gui_readability": {
@@ -21141,7 +21360,8 @@
       "screen": "On",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -21271,7 +21491,8 @@
       "class_representative": "lfo3.beat_sync",
       "representative_result": "DIFFERS"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -21396,7 +21617,8 @@
       "class_representative": "lfo3.delay",
       "representative_result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -21489,7 +21711,8 @@
       "screen": "On",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -21611,7 +21834,8 @@
       }
      ],
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -21704,7 +21928,8 @@
       "screen": "On",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -21832,7 +22057,8 @@
       "class_representative": "lfo1.rate",
       "representative_result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -21933,6 +22159,10 @@
       "screen": "ABSENT",
       "result": "ABSENT"
      }
+    },
+    "D_vendor_doc": {
+     "source": "Serum 2 What's New PDF (uploaded 2026-09-26)",
+     "note": "p14 '10x Rate: set rates up to 1000 Hz': Hz-mode control"
     }
    },
    "gui_readability": {
@@ -22058,7 +22288,8 @@
       "class_representative": "lfo1.rate",
       "representative_result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -22162,7 +22393,8 @@
       }
      ],
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -22287,7 +22519,8 @@
       "class_representative": "lfo1.smooth",
       "representative_result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -22381,6 +22614,10 @@
       "screen": "ABSENT",
       "result": "ABSENT"
      }
+    },
+    "D_vendor_doc": {
+     "source": "Serum 2 What's New PDF (uploaded 2026-09-26)",
+     "note": "p14 'LFOs can now follow swing': likely an on/off follow-swing setting; read as a toggle"
     }
    },
    "gui_readability": {
@@ -22474,7 +22711,8 @@
       "screen": "On",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -22604,7 +22842,8 @@
       "class_representative": "lfo3.beat_sync",
       "representative_result": "DIFFERS"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -22729,7 +22968,8 @@
       "class_representative": "lfo3.delay",
       "representative_result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -22822,7 +23062,8 @@
       "screen": "On",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -22944,7 +23185,8 @@
       }
      ],
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -23037,7 +23279,8 @@
       "screen": "On",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -23165,7 +23408,8 @@
       "class_representative": "lfo1.rate",
       "representative_result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -23266,6 +23510,10 @@
       "screen": "ABSENT",
       "result": "ABSENT"
      }
+    },
+    "D_vendor_doc": {
+     "source": "Serum 2 What's New PDF (uploaded 2026-09-26)",
+     "note": "p14 '10x Rate: set rates up to 1000 Hz': Hz-mode control"
     }
    },
    "gui_readability": {
@@ -23391,7 +23639,8 @@
       "class_representative": "lfo1.rate",
       "representative_result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -23495,7 +23744,8 @@
       }
      ],
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -23620,7 +23870,8 @@
       "class_representative": "lfo1.smooth",
       "representative_result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -23714,6 +23965,10 @@
       "screen": "ABSENT",
       "result": "ABSENT"
      }
+    },
+    "D_vendor_doc": {
+     "source": "Serum 2 What's New PDF (uploaded 2026-09-26)",
+     "note": "p14 'LFOs can now follow swing': likely an on/off follow-swing setting; read as a toggle"
     }
    },
    "gui_readability": {
@@ -23807,7 +24062,8 @@
       "screen": "On",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -23937,7 +24193,8 @@
       "class_representative": "lfo3.beat_sync",
       "representative_result": "DIFFERS"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -24062,7 +24319,8 @@
       "class_representative": "lfo3.delay",
       "representative_result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -24155,7 +24413,8 @@
       "screen": "On",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -24277,7 +24536,8 @@
       }
      ],
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -24370,7 +24630,8 @@
       "screen": "On",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -24498,7 +24759,8 @@
       "class_representative": "lfo1.rate",
       "representative_result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -24599,6 +24861,10 @@
       "screen": "ABSENT",
       "result": "ABSENT"
      }
+    },
+    "D_vendor_doc": {
+     "source": "Serum 2 What's New PDF (uploaded 2026-09-26)",
+     "note": "p14 '10x Rate: set rates up to 1000 Hz': Hz-mode control"
     }
    },
    "gui_readability": {
@@ -24724,7 +24990,8 @@
       "class_representative": "lfo3.delay",
       "representative_result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -24828,7 +25095,8 @@
       }
      ],
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -24953,7 +25221,8 @@
       "class_representative": "lfo1.smooth",
       "representative_result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -25047,6 +25316,10 @@
       "screen": "ABSENT",
       "result": "ABSENT"
      }
+    },
+    "D_vendor_doc": {
+     "source": "Serum 2 What's New PDF (uploaded 2026-09-26)",
+     "note": "p14 'LFOs can now follow swing': likely an on/off follow-swing setting; read as a toggle"
     }
    },
    "gui_readability": {
@@ -25140,7 +25413,8 @@
       "screen": "On",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -25244,7 +25518,8 @@
       "result": "ABSENT",
       "note": "tile shows number only; tooltip says 'Macro 1'"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -25352,7 +25627,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -25456,7 +25732,8 @@
       "result": "ABSENT",
       "note": "tooltip says 'Macro 2'"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -25584,7 +25861,8 @@
       "screen": "73",
       "result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -25687,7 +25965,8 @@
       "screen": "ABSENT",
       "result": "ABSENT"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -25812,7 +26091,8 @@
       "class_representative": "macro2.value",
       "representative_result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -25915,7 +26195,8 @@
       "screen": "ABSENT",
       "result": "ABSENT"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -26040,7 +26321,8 @@
       "class_representative": "macro2.value",
       "representative_result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -26143,7 +26425,8 @@
       "screen": "ABSENT",
       "result": "ABSENT"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -26251,7 +26534,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -26354,7 +26638,8 @@
       "screen": "ABSENT",
       "result": "ABSENT"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -26479,7 +26764,8 @@
       "class_representative": "macro2.value",
       "representative_result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -26582,7 +26868,8 @@
       "screen": "ABSENT",
       "result": "ABSENT"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -26707,7 +26994,8 @@
       "class_representative": "macro2.value",
       "representative_result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -26810,7 +27098,8 @@
       "screen": "ABSENT",
       "result": "ABSENT"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -26935,7 +27224,8 @@
       "class_representative": "macro2.value",
       "representative_result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -27063,7 +27353,8 @@
       "screen": "25% [-36.1 dB]",
       "result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -27188,7 +27479,8 @@
       "class_representative": "mixer.filter1.bus1",
       "representative_result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -27303,7 +27595,8 @@
       "class_representative": "filter1.enabled",
       "representative_result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -27428,7 +27721,8 @@
       "class_representative": "filter1.wet",
       "representative_result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -27553,7 +27847,8 @@
       "class_representative": "mixer.filter1.bus1",
       "representative_result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -27678,7 +27973,8 @@
       "class_representative": "mixer.filter1.bus1",
       "representative_result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -27793,7 +28089,8 @@
       "class_representative": "filter2.enabled",
       "representative_result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -27918,7 +28215,8 @@
       "class_representative": "filter2.wet",
       "representative_result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -28043,7 +28341,8 @@
       "class_representative": "mixer.filter1.bus1",
       "representative_result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -28168,7 +28467,8 @@
       "class_representative": "mixer.filter1.bus1",
       "representative_result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -28286,7 +28586,8 @@
       "screen": "On",
       "result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -28418,6 +28719,10 @@
       "result": "UNREADABLE",
       "note": "balance knob hidden while noise routed to MAIN"
      }
+    },
+    "D_vendor_doc": {
+     "source": "Serum 2 What's New PDF (uploaded 2026-09-26)",
+     "note": "p16 'Balance Routing: balance routing to filters and FX busses': the balance control appears on the MIX page only when the channel routes to the filters; the bulk preset routed to MAIN. Needs a routing context."
     }
    },
    "gui_readability": {
@@ -28426,8 +28731,8 @@
    },
    "closure_classification": "HOST_TEXT_LANDED_UI_PENDING",
    "unresolved": "host text shows the value landed (B tier); a screen read is still needed to close",
-   "final_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
-   "final_reason": "class representative: screen 'UNREADABLE' vs host '44'"
+   "final_conclusion": "NEEDS_CONTEXT",
+   "final_reason": "p16 'Balance Routing: balance routing to filters and FX busses': the balance control appears on the MIX page only when the channel routes to the filters; the bulk preset routed to MAIN. Needs a routing context."
   },
   {
    "atlas_id": "mixer.noise.pan",
@@ -28548,7 +28853,8 @@
       "screen": "-19 L",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -28673,7 +28979,8 @@
       "class_representative": "mixer.filter1.bus1",
       "representative_result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -28798,7 +29105,8 @@
       "class_representative": "mixer.filter1.bus1",
       "representative_result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -28926,6 +29234,10 @@
       "class_representative": "mixer.noise.filter_balance",
       "representative_result": "UNREADABLE"
      }
+    },
+    "D_vendor_doc": {
+     "source": "Serum 2 What's New PDF (uploaded 2026-09-26)",
+     "note": "p16 'Balance Routing: balance routing to filters and FX busses': the balance control appears on the MIX page only when the channel routes to the filters; the bulk preset routed to MAIN. Needs a routing context."
     }
    },
    "gui_readability": {
@@ -28934,8 +29246,8 @@
    },
    "closure_classification": "HOST_TEXT_LANDED_UI_PENDING",
    "unresolved": "host text shows the value landed (B tier); a screen read is still needed to close",
-   "final_conclusion": "HOST_TEXT_UNVALIDATED",
-   "final_reason": "host text landed; class representative mixer.noise.filter_balance was UNREADABLE"
+   "final_conclusion": "NEEDS_CONTEXT",
+   "final_reason": "p16 'Balance Routing: balance routing to filters and FX busses': the balance control appears on the MIX page only when the channel routes to the filters; the bulk preset routed to MAIN. Needs a routing context."
   },
   {
    "atlas_id": "mixer.osc_b.bus1",
@@ -29051,7 +29363,8 @@
       "class_representative": "mixer.filter1.bus1",
       "representative_result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -29176,7 +29489,8 @@
       "class_representative": "mixer.filter1.bus1",
       "representative_result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -29304,6 +29618,10 @@
       "class_representative": "mixer.noise.filter_balance",
       "representative_result": "UNREADABLE"
      }
+    },
+    "D_vendor_doc": {
+     "source": "Serum 2 What's New PDF (uploaded 2026-09-26)",
+     "note": "p16 'Balance Routing: balance routing to filters and FX busses': the balance control appears on the MIX page only when the channel routes to the filters; the bulk preset routed to MAIN. Needs a routing context."
     }
    },
    "gui_readability": {
@@ -29312,8 +29630,8 @@
    },
    "closure_classification": "HOST_TEXT_LANDED_UI_PENDING",
    "unresolved": "host text shows the value landed (B tier); a screen read is still needed to close",
-   "final_conclusion": "HOST_TEXT_UNVALIDATED",
-   "final_reason": "host text landed; class representative mixer.noise.filter_balance was UNREADABLE"
+   "final_conclusion": "NEEDS_CONTEXT",
+   "final_reason": "p16 'Balance Routing: balance routing to filters and FX busses': the balance control appears on the MIX page only when the channel routes to the filters; the bulk preset routed to MAIN. Needs a routing context."
   },
   {
    "atlas_id": "mixer.osc_c.bus1",
@@ -29429,7 +29747,8 @@
       "class_representative": "mixer.filter1.bus1",
       "representative_result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -29554,7 +29873,8 @@
       "class_representative": "mixer.filter1.bus1",
       "representative_result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -29682,6 +30002,10 @@
       "class_representative": "mixer.noise.filter_balance",
       "representative_result": "UNREADABLE"
      }
+    },
+    "D_vendor_doc": {
+     "source": "Serum 2 What's New PDF (uploaded 2026-09-26)",
+     "note": "p16 'Balance Routing: balance routing to filters and FX busses': the balance control appears on the MIX page only when the channel routes to the filters; the bulk preset routed to MAIN. Needs a routing context."
     }
    },
    "gui_readability": {
@@ -29690,8 +30014,8 @@
    },
    "closure_classification": "HOST_TEXT_LANDED_UI_PENDING",
    "unresolved": "host text shows the value landed (B tier); a screen read is still needed to close",
-   "final_conclusion": "HOST_TEXT_UNVALIDATED",
-   "final_reason": "host text landed; class representative mixer.noise.filter_balance was UNREADABLE"
+   "final_conclusion": "NEEDS_CONTEXT",
+   "final_reason": "p16 'Balance Routing: balance routing to filters and FX busses': the balance control appears on the MIX page only when the channel routes to the filters; the bulk preset routed to MAIN. Needs a routing context."
   },
   {
    "atlas_id": "mixer.sub.bus1",
@@ -29807,7 +30131,8 @@
       "class_representative": "mixer.filter1.bus1",
       "representative_result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -29932,7 +30257,8 @@
       "class_representative": "mixer.filter1.bus1",
       "representative_result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -30047,7 +30373,8 @@
       "class_representative": "mixer.noise.enable",
       "representative_result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -30175,6 +30502,10 @@
       "class_representative": "mixer.noise.filter_balance",
       "representative_result": "UNREADABLE"
      }
+    },
+    "D_vendor_doc": {
+     "source": "Serum 2 What's New PDF (uploaded 2026-09-26)",
+     "note": "p16 'Balance Routing: balance routing to filters and FX busses': the balance control appears on the MIX page only when the channel routes to the filters; the bulk preset routed to MAIN. Needs a routing context."
     }
    },
    "gui_readability": {
@@ -30183,8 +30514,8 @@
    },
    "closure_classification": "HOST_TEXT_LANDED_UI_PENDING",
    "unresolved": "host text shows the value landed (B tier); a screen read is still needed to close",
-   "final_conclusion": "HOST_TEXT_UNVALIDATED",
-   "final_reason": "host text landed; class representative mixer.noise.filter_balance was UNREADABLE"
+   "final_conclusion": "NEEDS_CONTEXT",
+   "final_reason": "p16 'Balance Routing: balance routing to filters and FX busses': the balance control appears on the MIX page only when the channel routes to the filters; the bulk preset routed to MAIN. Needs a routing context."
   },
   {
    "atlas_id": "mixer.sub.pan",
@@ -30303,7 +30634,8 @@
       "screen": "-3 L",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -30411,7 +30743,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -30529,7 +30862,8 @@
       "screen": "Off",
       "result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -30657,7 +30991,8 @@
       "screen": "-26",
       "result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -30785,7 +31120,8 @@
       "screen": "-2",
       "result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -30893,7 +31229,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -31021,7 +31358,8 @@
       "screen": "83 %",
       "result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -31128,7 +31466,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -31235,7 +31574,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -31363,7 +31703,8 @@
       "screen": "-5",
       "result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -31470,7 +31811,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -31623,7 +31965,8 @@
       }
      ],
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -31761,7 +32104,8 @@
       "part": "A (incidental)",
       "screen": "screen '63 %' (AM mode, raw 0.63)"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -31950,7 +32294,8 @@
       }
      ],
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -32153,7 +32498,8 @@
       }
      ],
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -32289,7 +32635,8 @@
       "screen": "63 %",
       "result": "DIFFERS"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -32395,7 +32742,8 @@
       "screen": "Basic Shapes (dimmed, osc off)",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -32523,7 +32871,8 @@
       "screen": "0.53",
       "result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -32638,7 +32987,8 @@
       "class_representative": "oscA.enabled",
       "representative_result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -32745,7 +33095,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -32852,7 +33203,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -32980,7 +33332,8 @@
       "screen": "-24 L",
       "result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -33105,7 +33458,8 @@
       "class_representative": "oscA.sample_loop_crossfade",
       "representative_result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -33212,7 +33566,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -33319,7 +33674,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -33426,7 +33782,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -33533,7 +33890,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -33681,7 +34039,8 @@
       "screen": "58 %",
       "result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -33819,7 +34178,8 @@
       "part": "A (incidental)",
       "screen": "screen '1.49 %' (Sync mode, raw 0.32; host text agrees)"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -34008,7 +34368,8 @@
       }
      ],
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -34211,7 +34572,8 @@
       }
      ],
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -34347,7 +34709,8 @@
       "screen": "1.49 %",
       "result": "DIFFERS"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -34453,7 +34816,8 @@
       "screen": "DM - OSCAR",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -34578,7 +34942,8 @@
       "class_representative": "oscB.detune",
       "representative_result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -34693,7 +35058,8 @@
       "class_representative": "oscA.enabled",
       "representative_result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -34800,7 +35166,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -34907,7 +35274,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -35035,7 +35403,8 @@
       "screen": "-11 L",
       "result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -35160,7 +35529,8 @@
       "class_representative": "oscA.sample_loop_crossfade",
       "representative_result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -35267,7 +35637,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -35374,7 +35745,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -35481,7 +35853,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -35588,7 +35961,8 @@
      },
      "bulk_observations": null,
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -35736,7 +36110,8 @@
       "screen": "18 %",
       "result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -35874,7 +36249,8 @@
       "part": "A (incidental)",
       "screen": "screen '39 %' (PWM mode inverted, raw 0.61)"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -36063,7 +36439,8 @@
       }
      ],
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -36266,7 +36643,8 @@
       }
      ],
      "closure_pass": null
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -36402,7 +36780,8 @@
       "screen": "39 %",
       "result": "DIFFERS"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -36508,7 +36887,8 @@
       "screen": "Basic Mini",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -36610,7 +36990,8 @@
       "screen": "UNREADABLE",
       "result": "UNREADABLE"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -36713,7 +37094,8 @@
       "screen": "Pink",
       "result": "READ"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -36842,7 +37224,8 @@
       "result": "READ",
       "note": "same control as mixer.noise.pan"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -36955,7 +37338,8 @@
       "class_representative": "global.legato",
       "representative_result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -37068,7 +37452,8 @@
       "class_representative": "global.mono",
       "representative_result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -37181,7 +37566,8 @@
       "class_representative": "global.porta_always",
       "representative_result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -37294,7 +37680,8 @@
       "class_representative": "global.porta_scaled",
       "representative_result": "MATCH"
      }
-    }
+    },
+    "D_vendor_doc": null
    },
    "gui_readability": {
     "class": "UNKNOWN_OR_READABLE",
@@ -37307,6 +37694,11 @@
   }
  ],
  "supersedes": "serum_full_control_map_v1-v3 (kept unchanged); v4 adds the closure pass",
+ "vendor_doc_findings": {
+  "lfo7_tab": "p14 'LFO 7 to LFO 10 appear after you assign LFO 6': LFO 7 IS viewable once LFO 6 has a mod route; the earlier 'no UI tab' conclusion is withdrawn (the conflict itself is proven on LFO1, CAL_01)",
+  "coverage_gap": "p11 '13 powerful effects': the 330 candidates cover 12 FX types; the new Utility effect has none",
+  "multiple_instances": "p11 'Multiple instances of a single effect': supports CAL_01's 8-compressor rack"
+ },
  "terminal": [
   "DIRECT_UI_CONFIRMED",
   "HOST_TEXT_VALIDATED",
@@ -37318,9 +37710,9 @@
  "final_counts": {
   "DIRECT_UI_CONFIRMED": 172,
   "HOST_TEXT_VALIDATED": 40,
-  "UI_OBSERVABLE_BUT_UNREADABLE": 37,
-  "HOST_TEXT_UNVALIDATED": 36,
-  "NEEDS_CONTEXT": 12,
+  "UI_OBSERVABLE_BUT_UNREADABLE": 36,
+  "HOST_TEXT_UNVALIDATED": 32,
+  "NEEDS_CONTEXT": 17,
   "UI_MISMATCH": 11,
   "NEEDS_REREAD": 9,
   "UI_SCHEMA_MISMATCH": 6,
