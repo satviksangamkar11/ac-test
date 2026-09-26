@@ -427,12 +427,18 @@ class ProducerResult:
 class ProducerBrain:
     """Stateful (caches registry / selector) producer brain."""
 
-    def __init__(self, skill_retriever=None, prior_evidence=(), grounding_claims=None):
+    def __init__(self, skill_retriever=None, prior_evidence=(), grounding_claims=None,
+                 epoch=None, binding_evidence_dir=None, promoted_evidence_dir=None):
         # Optional advisory inputs (P3 skills, P4.5 prior outcomes, P6 grounding). They only feed reasoning; no authority.
         self._skill_retriever = skill_retriever
         self._prior_evidence = tuple(prior_evidence)
         self._grounding_claims = tuple(grounding_claims) if grounding_claims else ()
-        self._registry = ContractRegistry()
+        # epoch=None (default): the frozen legacy frontier, unchanged -- ContractRegistry() loads only the ~40
+        # legacy pickle-store contracts, exactly today's behavior. epoch=<ExecutionEpoch>: also loads the
+        # evidence-derived contracts from the given directories (explicit opt-in, same rule ContractRegistry
+        # itself already enforces -- no run's authority widens implicitly).
+        self._registry = ContractRegistry(epoch=epoch, binding_evidence_dir=binding_evidence_dir,
+                                          promoted_evidence_dir=promoted_evidence_dir)
         self._selector = RouteSelector()
         # Ordered explicit-target resolution over EXISTING registries (architecture 17/18): no tables here.
         from serum2.compiler.targets import SEMANTIC_TARGETS
@@ -2155,18 +2161,37 @@ def _capability_to_semantic_name(capability_key: Optional[str]) -> Optional[str]
 # ---------------------------------------------------------------------------
 
 _BRAIN: Optional[ProducerBrain] = None
+# One shared brain per (epoch, evidence-dir) key -- never a single epoch-less singleton reused across epochs. An
+# epoch=None caller (today's exact behavior) still gets the one legacy _BRAIN above, untouched.
+_BRAINS: Dict[tuple, ProducerBrain] = {}
+_REPO_ROOT = Path(__file__).resolve().parents[2]
+BINDING_EVIDENCE_DIR = _REPO_ROOT / "parameter_characterization" / "binding_evidence"
+PROMOTED_EVIDENCE_DIR = _REPO_ROOT / "parameter_characterization" / "binding_evidence_mcp_exec_v1"
 
 
-def execute_producer_request(request: ProducerRequest) -> ProducerResult:
-    """Canonical entry point. One brain, one decision flow.
+def execute_producer_request(request: ProducerRequest, epoch=None) -> ProducerResult:
+    """Canonical entry point. One brain per epoch, one decision flow.
 
     Args:
         request: ProducerRequest with user_intent and optional fields
+        epoch: optional ExecutionEpoch. None (default) preserves today's exact behavior -- the one legacy,
+            epoch-less singleton, loading only the ~40 legacy pickle-store contracts. Given an epoch, this call is
+            served by a brain cached under (epoch.binary_sha256, evidence dirs) that ALSO loads the evidence-derived
+            contracts for that epoch -- a different epoch always gets a different cached brain; a cache hit never
+            constructs a new ProducerBrain.
 
     Returns:
         ProducerResult with full reasoning trace, execution evidence, episode
     """
     global _BRAIN
+    if epoch is not None:
+        key = (epoch.binary_sha256, str(BINDING_EVIDENCE_DIR), str(PROMOTED_EVIDENCE_DIR))
+        brain = _BRAINS.get(key)
+        if brain is None:   # setdefault() would construct ProducerBrain(...) eagerly even on a cache hit
+            brain = ProducerBrain(epoch=epoch, binding_evidence_dir=BINDING_EVIDENCE_DIR,
+                                  promoted_evidence_dir=PROMOTED_EVIDENCE_DIR)
+            _BRAINS[key] = brain
+        return brain.execute(request)
     if _BRAIN is None:
         _BRAIN = ProducerBrain()
     return _BRAIN.execute(request)
