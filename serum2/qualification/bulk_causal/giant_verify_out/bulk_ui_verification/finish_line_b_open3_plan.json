@@ -1,0 +1,100 @@
+{
+ "serum_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+ "columns": [
+  "kParamVoiceAmp",
+  "kParamSwingDiv",
+  "kParamPortamentoCurve",
+  "kParamSwing",
+  "kParamPortamentoTime"
+ ],
+ "presets": [
+  {
+   "preset": "FLB_OPEN3_A",
+   "written": {
+    "kParamVoiceAmp": 0.0,
+    "kParamSwingDiv": 0,
+    "kParamPortamentoCurve": -100.0,
+    "kParamSwing": 25.0,
+    "kParamPortamentoTime": 1.5
+   },
+   "serum_readback": {
+    "kParamVoiceAmp": 0.0,
+    "kParamSwingDiv": 0.0,
+    "kParamPortamentoCurve": -100.0,
+    "kParamSwing": 25.0,
+    "kParamPortamentoTime": 1.5000000000000002
+   },
+   "host_text": {
+    "Amp": "0.0000",
+    "Swing": "25.0%",
+    "Swing Div": "1/2"
+   }
+  },
+  {
+   "preset": "FLB_OPEN3_B",
+   "written": {
+    "kParamVoiceAmp": 0.25,
+    "kParamSwingDiv": 1,
+    "kParamPortamentoCurve": -50.0,
+    "kParamSwing": 40.0,
+    "kParamPortamentoTime": 3.0
+   },
+   "serum_readback": {
+    "kParamVoiceAmp": 0.25,
+    "kParamSwingDiv": 1.0,
+    "kParamPortamentoCurve": -50.0,
+    "kParamSwing": 40.0,
+    "kParamPortamentoTime": 3.0
+   },
+   "host_text": {
+    "Amp": "0.2500",
+    "Swing": "40.0%",
+    "Swing Div": "1/4"
+   }
+  },
+  {
+   "preset": "FLB_OPEN3_C",
+   "written": {
+    "kParamVoiceAmp": 0.75,
+    "kParamSwingDiv": 5,
+    "kParamPortamentoCurve": 50.0,
+    "kParamSwing": 60.0,
+    "kParamPortamentoTime": 4.5
+   },
+   "serum_readback": {
+    "kParamVoiceAmp": 0.75,
+    "kParamSwingDiv": 5.0,
+    "kParamPortamentoCurve": 50.0,
+    "kParamSwing": 60.0,
+    "kParamPortamentoTime": 4.5
+   },
+   "host_text": {
+    "Amp": "0.7500",
+    "Swing": "60.0%",
+    "Swing Div": "1/64"
+   }
+  },
+  {
+   "preset": "FLB_OPEN3_D",
+   "written": {
+    "kParamVoiceAmp": 1.0,
+    "kParamSwingDiv": 6,
+    "kParamPortamentoCurve": 100.0,
+    "kParamSwing": 90.0,
+    "kParamPortamentoTime": 6.0
+   },
+   "serum_readback": {
+    "kParamVoiceAmp": 1.0,
+    "kParamSwingDiv": 6.0,
+    "kParamPortamentoCurve": 100.0,
+    "kParamSwing": 87.5,
+    "kParamPortamentoTime": 6.0
+   },
+   "host_text": {
+    "Amp": "1.0000",
+    "Swing": "87.5%",
+    "Swing Div": "1/128"
+   }
+  }
+ ]
+}

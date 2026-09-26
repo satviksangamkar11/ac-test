@@ -70,6 +70,16 @@ GUI_DOMAIN_READINGS = {
         "global.voice_control.random.detune": "0.0", "global.voice_control.random.envs": "--",
         "global.voice_control.scaling.envs": "1000%", "global.voice_control.scaling.lfos": "1000%"}},
 }
+GUI_DOMAIN_READINGS.update({
+    "FLB_OPEN3_A": {"file": GUI_DIR + "/FLB_OPEN3_A__curve_tooltip.png", "fields": {
+        "global.portamento_curve": "-100 %", "global.swing_div": "1/2", "global.swing": "25.0%"}},
+    "FLB_OPEN3_B": {"file": GUI_DIR + "/FLB_OPEN3_B__curve_tooltip.png", "fields": {
+        "global.portamento_curve": "-50 %", "global.swing_div": "1/4", "global.swing": "40.0%"}},
+    "FLB_OPEN3_C": {"file": GUI_DIR + "/FLB_OPEN3_C__curve_tooltip.png", "fields": {
+        "global.portamento_curve": "50 %", "global.swing_div": "1/64", "global.swing": "60.0%"}},
+    "FLB_OPEN3_D": {"file": GUI_DIR + "/FLB_OPEN3_D__curve_tooltip.png", "fields": {
+        "global.portamento_curve": "100 %", "global.swing_div": "1/128", "global.swing": "87.5%"}},
+})
 # GLOBAL-page quality readout for the untouched body (screenshot not retained: it was taken through the screen, which
 # the Claude window overlapped; the same value is recorded here only as a cross-check, not as a bound).
 GUI_DEFAULT_OBSERVED = {"global.oversampling": "High", "global.voice_control.scaling.envs": "100%",
@@ -139,6 +149,14 @@ def main():
     def gui(aid):
         return {k: v["fields"][aid] for k, v in GUI_DOMAIN_READINGS.items() if aid in v["fields"]}
 
+    open3 = json.load(open(os.path.join(BUV, "finish_line_b_open3_plan.json")))
+    assert open3["serum_sha256"] == sha
+    for op in open3["presets"]:
+        for aid, col, h in (("global.voice_amp", "kParamVoiceAmp", "Amp"), ("global.swing_div", "kParamSwingDiv", "Swing Div")):
+            host["presets"].setdefault(op["preset"], {})[h] = op["host_text"][h]
+    proof_path = GUI_DIR + "/voice_amp_gui_absence_proof.json"
+    proof = json.load(open(os.path.join(REPO, proof_path)))
+    assert proof["voice_amp_visible_in_gui"] is False
     H = {"global.swing_div": "Swing Div", "global.voice_amp": "Amp", "global.voice_control.random.cutoff": "Cutoff Rand",
          "global.voice_control.random.detune": "Osc Detune Rnd", "global.voice_control.random.envs": "Env Rand"}
     # min/max = Serum's own clamp of +/-1e6 (state re-save); a readback of None means Serum omitted the leaf because it
@@ -148,9 +166,9 @@ def main():
         "arp.playback.repeats": (0.0, 16.0, 0.0, "GUI_NUMERIC", "GUI 'inf' at raw 0 (= Serum default; 0 means infinite) / 16 at MAX; negatives omitted = default 0"),
         "arp.velocity.decay": (0.0, 60.0, 0.0, "GUI_NUMERIC", "GUI type-value box 0.00 (EXACT_LO) / 60.00 (MAX); state clamp max 60, negatives omitted = default 0"),
         "global.oversampling": (0.0, 2.0, 1.0, "GUI_NUMERIC", "GUI Quality Good/High/Ultra at raw 0/1(default)/2; state clamp 0..2"),
-        "global.portamento_curve": (-100.0, 100.0, 0.0, "STATE_CLAMP_GUI_SHAPE_ONLY", "state clamp -100..100; GUI CURVE control is a graphic with no numeric readout (shape visibly differs at -100/0/+100)"),
-        "global.swing_div": (0.0, 6.0, 3.0, "HOST_TEXT", "host text '1/2' (raw 0) / '1/16' (raw 3, default) / '1/128' (raw 6); state clamp 0..6; no GLOBAL-page readout"),
-        "global.voice_amp": (0.0, 1.0, 0.5, "HOST_TEXT", "host text 0.0000 / 0.5000 (default) / 1.0000; state clamp 0..1; no GLOBAL-page readout"),
+        "global.portamento_curve": (-100.0, 100.0, 0.0, "GUI_NUMERIC", "GUI press-and-hold tooltip 'Porta Curve : X %' reads -100 / -50 / 50 / 100 for raw -100 / -50 / 50 / 100 (OPEN3_A..D); state clamp -100..100"),
+        "global.swing_div": (0.0, 6.0, 3.0, "GUI_NUMERIC", "GUI keyboard-bar division readout '1/2' (raw 0) / '1/4' (raw 1) / '1/64' (raw 5) / '1/128' (raw 6); host text '1/16' at default raw 3; state clamp 0..6 (discrete: 7 steps)"),
+        "global.voice_amp": (0.0, 1.0, 0.5, "HOST_TEXT_NO_GUI_CONTROL", "NO base-value control exists on any page (see gui_absence_proof); the GUI exposes it only as the Matrix destination Global > Amp (matrix_destination_global_amp.png; its OUTPUT tooltip reads the route level 'Mod 1 Out', not Amp's value). Serum host parameter 'Amp' text 0.0000 / 0.2500 / 0.5000 (default) / 0.7500 / 1.0000 and state clamp 0..1 are the only Serum-side readings"),
         "global.voice_control.random.cutoff": (0.0, 100.0, 0.0, "GUI_NUMERIC", "GUI '--' at 0 / 40% / 100%, host text identical"),
         "global.voice_control.random.detune": (0.0, 100.0, 0.0, "GUI_NUMERIC", "GUI 0.0 / 12.0 (raw 60) / 20.0 (raw 100): display = raw/5, host text identical"),
         "global.voice_control.random.envs": (0.0, 100.0, 0.0, "GUI_NUMERIC", "GUI '--' at 0 / 80% / 100%, host text identical"),
@@ -160,7 +178,11 @@ def main():
     domains = {aid: {"min": mn, "max": mx, "serum_default": df, "basis": basis, "note": note,
                      "state_clamp_probe": domain_probe[aid], "gui_readings": gui(aid),
                      "gui_default_observed": GUI_DEFAULT_OBSERVED.get(aid),
-                     "host_text": {k: v[H[aid]] for k, v in host["presets"].items()} if aid in H else None}
+                     "gui_absence_proof": proof_path if basis == "HOST_TEXT_NO_GUI_CONTROL" else None,
+                     "open3_written_and_serum_readback": [
+                         {"preset": op["preset"], "written": op["written"], "serum_readback": op["serum_readback"]}
+                         for op in open3["presets"]] if aid in ("global.voice_amp", "global.swing_div", "global.portamento_curve") else None,
+                     "host_text": {k: v[H[aid]] for k, v in host["presets"].items() if H[aid] in v} if aid in H else None}
                for aid, (mn, mx, df, basis, note) in D.items()}
 
     findings = [
@@ -179,11 +201,22 @@ def main():
                     "value; the other 79 keys have verified GUI names but no Atlas category assignment (needs the GUI dropdown's category grouping). "
                     "Non-obvious names: FormantTWB->Formant-III, FormantTWO->Formant-II, Scream->French LP, ZDF_A->German LP. "
                     "The Atlas lists 'Peak 24' but none of the 96 persisted candidate keys displays as Peak 24."},
+        {"id": "FLB-F5", "controls": ["global.voice_amp"],
+         "finding": "Voice Amp has no on-screen base-value control: loading amp 0.0 vs 1.0 changes no pixel on any of the 5 top-level pages "
+                    "(body + top bar, PrintWindow captures; MAIN knob is unchanged, so it is not Voice Amp). Its bounds come from the Serum host "
+                    "parameter 'Amp' text and the state clamp only. Proof: " + proof_path + " (lower ENV/LFO/ARP/keyboard strip excluded; the only "
+                    "differences there between A and D are swing/division/curve/porta and leftover ARP state). UI structure cross-checked against "
+                    "'Serum 2 What's New.pdf' p4 (pages OSC/MIX/FX/MATRIX/GLOBAL; the top-right MAIN knob is 'Volume' = main volume, unaffected by "
+                    "voice_amp) and p15-19. The only GUI appearance of 'Amp' is the Matrix destination list, Global submenu (Main Tuning, Amp, Porta Time, "
+                    "Swing, Transpose, Envelope Scaling, LFO Scaling): " + GUI_DIR + "/matrix_destination_global_amp.png."},
+        {"id": "FLB-F6", "controls": ["global.swing", "global.swing_div", "global.portamento_curve"],
+         "finding": "Swing % clamps 90 -> 87.5 in Serum's own state (GUI shows 87.5%). Swing Div raw 0..6 displays 1/2, 1/4, (1/8, 1/16 default, 1/32 not read), "
+                    "1/64, 1/128. Porta Curve is readable on screen by pressing and holding (no drag) the CURVE box: the tooltip shows the value in %."},
     ]
     json.dump({"serum_sha256": sha, "product_version": "2.0.23",
                "sources": ["serum2/qualification/bulk_causal/giant_verify_out/bulk_ui_verification/" + f for f in (
                    "finish_line_b_probe.jsonl", "finish_line_b_gui_plan.json", "finish_line_b_hosttext.json",
-                   "mcp_exec_finish_line_b_results.jsonl")] + [GUI_DIR],
+                   "finish_line_b_open3_plan.json", "mcp_exec_finish_line_b_results.jsonl")] + [GUI_DIR],
                "domains": domains, "enum_body_keys": enums, "enum_rejected_candidate_keys": rejected_keys,
                "findings": findings}, open(OUT, "w"), indent=1, default=repr)
     print(OUT)

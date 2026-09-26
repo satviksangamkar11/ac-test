@@ -1,0 +1,77 @@
+{
+ "comparison": "FLB_OPEN3_A (kParamVoiceAmp=0.0, host 'Amp'='0.0000') vs FLB_OPEN3_D (1.0, '1.0000')",
+ "threshold": "any pixel channel difference > 40 counts as a difference",
+ "pages": {
+  "osc": {
+   "files": [
+    "FLB_OPEN3_A__page_osc.png",
+    "FLB_OPEN3_D__page_osc.png"
+   ],
+   "body_diff_bbox": null,
+   "topbar_diff_bbox": [
+    614,
+    44,
+    621,
+    54
+   ],
+   "topbar_diff_outside_preset_name_bbox": null
+  },
+  "mix": {
+   "files": [
+    "FLB_OPEN3_A__page_mix.png",
+    "FLB_OPEN3_D__page_mix.png"
+   ],
+   "body_diff_bbox": null,
+   "topbar_diff_bbox": [
+    614,
+    44,
+    621,
+    54
+   ],
+   "topbar_diff_outside_preset_name_bbox": null
+  },
+  "fx": {
+   "files": [
+    "FLB_OPEN3_A__page_fx.png",
+    "FLB_OPEN3_D__page_fx.png"
+   ],
+   "body_diff_bbox": null,
+   "topbar_diff_bbox": [
+    614,
+    44,
+    621,
+    54
+   ],
+   "topbar_diff_outside_preset_name_bbox": null
+  },
+  "matrix": {
+   "files": [
+    "FLB_OPEN3_A__page_matrix.png",
+    "FLB_OPEN3_D__page_matrix.png"
+   ],
+   "body_diff_bbox": null,
+   "topbar_diff_bbox": [
+    614,
+    44,
+    621,
+    54
+   ],
+   "topbar_diff_outside_preset_name_bbox": null
+  },
+  "global": {
+   "files": [
+    "FLB_OPEN3_A__page_global.png",
+    "FLB_OPEN3_D__page_global.png"
+   ],
+   "body_diff_bbox": null,
+   "topbar_diff_bbox": [
+    614,
+    44,
+    621,
+    54
+   ],
+   "topbar_diff_outside_preset_name_bbox": null
+  }
+ },
+ "voice_amp_visible_in_gui": false
+}

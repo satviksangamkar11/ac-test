@@ -5,6 +5,7 @@
   "serum2/qualification/bulk_causal/giant_verify_out/bulk_ui_verification/finish_line_b_probe.jsonl",
   "serum2/qualification/bulk_causal/giant_verify_out/bulk_ui_verification/finish_line_b_gui_plan.json",
   "serum2/qualification/bulk_causal/giant_verify_out/bulk_ui_verification/finish_line_b_hosttext.json",
+  "serum2/qualification/bulk_causal/giant_verify_out/bulk_ui_verification/finish_line_b_open3_plan.json",
   "serum2/qualification/bulk_causal/giant_verify_out/bulk_ui_verification/mcp_exec_finish_line_b_results.jsonl",
   "parameter_characterization/finish_line_b_gui_evidence"
  ],
@@ -72,6 +73,8 @@
     "FLB_DOMAIN_MIN": "-8"
    },
    "gui_default_observed": null,
+   "gui_absence_proof": null,
+   "open3_written_and_serum_readback": null,
    "host_text": null
   },
   "arp.playback.repeats": {
@@ -137,6 +140,8 @@
     "FLB_DOMAIN_MIN": "inf"
    },
    "gui_default_observed": null,
+   "gui_absence_proof": null,
+   "open3_written_and_serum_readback": null,
    "host_text": null
   },
   "arp.velocity.decay": {
@@ -201,6 +206,8 @@
     "FLB_DOMAIN_MIN": "-nan(ind)"
    },
    "gui_default_observed": null,
+   "gui_absence_proof": null,
+   "open3_written_and_serum_readback": null,
    "host_text": null
   },
   "global.oversampling": {
@@ -266,14 +273,16 @@
     "FLB_DOMAIN_MIN": "Good"
    },
    "gui_default_observed": "High",
+   "gui_absence_proof": null,
+   "open3_written_and_serum_readback": null,
    "host_text": null
   },
   "global.portamento_curve": {
    "min": -100.0,
    "max": 100.0,
    "serum_default": 0.0,
-   "basis": "STATE_CLAMP_GUI_SHAPE_ONLY",
-   "note": "state clamp -100..100; GUI CURVE control is a graphic with no numeric readout (shape visibly differs at -100/0/+100)",
+   "basis": "GUI_NUMERIC",
+   "note": "GUI press-and-hold tooltip 'Porta Curve : X %' reads -100 / -50 / 50 / 100 for raw -100 / -50 / 50 / 100 (OPEN3_A..D); state clamp -100..100",
    "state_clamp_probe": [
     {
      "written": -1000000.0,
@@ -324,16 +333,92 @@
      "readback": 100.0
     }
    ],
-   "gui_readings": {},
+   "gui_readings": {
+    "FLB_OPEN3_A": "-100 %",
+    "FLB_OPEN3_B": "-50 %",
+    "FLB_OPEN3_C": "50 %",
+    "FLB_OPEN3_D": "100 %"
+   },
    "gui_default_observed": null,
+   "gui_absence_proof": null,
+   "open3_written_and_serum_readback": [
+    {
+     "preset": "FLB_OPEN3_A",
+     "written": {
+      "kParamVoiceAmp": 0.0,
+      "kParamSwingDiv": 0,
+      "kParamPortamentoCurve": -100.0,
+      "kParamSwing": 25.0,
+      "kParamPortamentoTime": 1.5
+     },
+     "serum_readback": {
+      "kParamVoiceAmp": 0.0,
+      "kParamSwingDiv": 0.0,
+      "kParamPortamentoCurve": -100.0,
+      "kParamSwing": 25.0,
+      "kParamPortamentoTime": 1.5000000000000002
+     }
+    },
+    {
+     "preset": "FLB_OPEN3_B",
+     "written": {
+      "kParamVoiceAmp": 0.25,
+      "kParamSwingDiv": 1,
+      "kParamPortamentoCurve": -50.0,
+      "kParamSwing": 40.0,
+      "kParamPortamentoTime": 3.0
+     },
+     "serum_readback": {
+      "kParamVoiceAmp": 0.25,
+      "kParamSwingDiv": 1.0,
+      "kParamPortamentoCurve": -50.0,
+      "kParamSwing": 40.0,
+      "kParamPortamentoTime": 3.0
+     }
+    },
+    {
+     "preset": "FLB_OPEN3_C",
+     "written": {
+      "kParamVoiceAmp": 0.75,
+      "kParamSwingDiv": 5,
+      "kParamPortamentoCurve": 50.0,
+      "kParamSwing": 60.0,
+      "kParamPortamentoTime": 4.5
+     },
+     "serum_readback": {
+      "kParamVoiceAmp": 0.75,
+      "kParamSwingDiv": 5.0,
+      "kParamPortamentoCurve": 50.0,
+      "kParamSwing": 60.0,
+      "kParamPortamentoTime": 4.5
+     }
+    },
+    {
+     "preset": "FLB_OPEN3_D",
+     "written": {
+      "kParamVoiceAmp": 1.0,
+      "kParamSwingDiv": 6,
+      "kParamPortamentoCurve": 100.0,
+      "kParamSwing": 90.0,
+      "kParamPortamentoTime": 6.0
+     },
+     "serum_readback": {
+      "kParamVoiceAmp": 1.0,
+      "kParamSwingDiv": 6.0,
+      "kParamPortamentoCurve": 100.0,
+      "kParamSwing": 87.5,
+      "kParamPortamentoTime": 6.0
+     }
+    }
+   ],
    "host_text": null
   },
   "global.swing_div": {
    "min": 0.0,
    "max": 6.0,
    "serum_default": 3.0,
-   "basis": "HOST_TEXT",
-   "note": "host text '1/2' (raw 0) / '1/16' (raw 3, default) / '1/128' (raw 6); state clamp 0..6; no GLOBAL-page readout",
+   "basis": "GUI_NUMERIC",
+   "note": "GUI keyboard-bar division readout '1/2' (raw 0) / '1/4' (raw 1) / '1/64' (raw 5) / '1/128' (raw 6); host text '1/16' at default raw 3; state clamp 0..6 (discrete: 7 steps)",
    "state_clamp_probe": [
     {
      "written": -1000000.0,
@@ -384,22 +469,102 @@
      "readback": 6.0
     }
    ],
-   "gui_readings": {},
+   "gui_readings": {
+    "FLB_OPEN3_A": "1/2",
+    "FLB_OPEN3_B": "1/4",
+    "FLB_OPEN3_C": "1/64",
+    "FLB_OPEN3_D": "1/128"
+   },
    "gui_default_observed": null,
+   "gui_absence_proof": null,
+   "open3_written_and_serum_readback": [
+    {
+     "preset": "FLB_OPEN3_A",
+     "written": {
+      "kParamVoiceAmp": 0.0,
+      "kParamSwingDiv": 0,
+      "kParamPortamentoCurve": -100.0,
+      "kParamSwing": 25.0,
+      "kParamPortamentoTime": 1.5
+     },
+     "serum_readback": {
+      "kParamVoiceAmp": 0.0,
+      "kParamSwingDiv": 0.0,
+      "kParamPortamentoCurve": -100.0,
+      "kParamSwing": 25.0,
+      "kParamPortamentoTime": 1.5000000000000002
+     }
+    },
+    {
+     "preset": "FLB_OPEN3_B",
+     "written": {
+      "kParamVoiceAmp": 0.25,
+      "kParamSwingDiv": 1,
+      "kParamPortamentoCurve": -50.0,
+      "kParamSwing": 40.0,
+      "kParamPortamentoTime": 3.0
+     },
+     "serum_readback": {
+      "kParamVoiceAmp": 0.25,
+      "kParamSwingDiv": 1.0,
+      "kParamPortamentoCurve": -50.0,
+      "kParamSwing": 40.0,
+      "kParamPortamentoTime": 3.0
+     }
+    },
+    {
+     "preset": "FLB_OPEN3_C",
+     "written": {
+      "kParamVoiceAmp": 0.75,
+      "kParamSwingDiv": 5,
+      "kParamPortamentoCurve": 50.0,
+      "kParamSwing": 60.0,
+      "kParamPortamentoTime": 4.5
+     },
+     "serum_readback": {
+      "kParamVoiceAmp": 0.75,
+      "kParamSwingDiv": 5.0,
+      "kParamPortamentoCurve": 50.0,
+      "kParamSwing": 60.0,
+      "kParamPortamentoTime": 4.5
+     }
+    },
+    {
+     "preset": "FLB_OPEN3_D",
+     "written": {
+      "kParamVoiceAmp": 1.0,
+      "kParamSwingDiv": 6,
+      "kParamPortamentoCurve": 100.0,
+      "kParamSwing": 90.0,
+      "kParamPortamentoTime": 6.0
+     },
+     "serum_readback": {
+      "kParamVoiceAmp": 1.0,
+      "kParamSwingDiv": 6.0,
+      "kParamPortamentoCurve": 100.0,
+      "kParamSwing": 87.5,
+      "kParamPortamentoTime": 6.0
+     }
+    }
+   ],
    "host_text": {
     "FLB_DOMAIN_DEFAULT": "1/16",
     "FLB_DOMAIN_EXACT_LO": "1/2",
     "FLB_DOMAIN_EXACT_MID": "1/16",
     "FLB_DOMAIN_MIN": "1/2",
-    "FLB_DOMAIN_MAX": "1/128"
+    "FLB_DOMAIN_MAX": "1/128",
+    "FLB_OPEN3_A": "1/2",
+    "FLB_OPEN3_B": "1/4",
+    "FLB_OPEN3_C": "1/64",
+    "FLB_OPEN3_D": "1/128"
    }
   },
   "global.voice_amp": {
    "min": 0.0,
    "max": 1.0,
    "serum_default": 0.5,
-   "basis": "HOST_TEXT",
-   "note": "host text 0.0000 / 0.5000 (default) / 1.0000; state clamp 0..1; no GLOBAL-page readout",
+   "basis": "HOST_TEXT_NO_GUI_CONTROL",
+   "note": "NO base-value control exists on any page (see gui_absence_proof); the GUI exposes it only as the Matrix destination Global > Amp (matrix_destination_global_amp.png; its OUTPUT tooltip reads the route level 'Mod 1 Out', not Amp's value). Serum host parameter 'Amp' text 0.0000 / 0.2500 / 0.5000 (default) / 0.7500 / 1.0000 and state clamp 0..1 are the only Serum-side readings",
    "state_clamp_probe": [
     {
      "written": -1000000.0,
@@ -452,12 +617,87 @@
    ],
    "gui_readings": {},
    "gui_default_observed": null,
+   "gui_absence_proof": "parameter_characterization/finish_line_b_gui_evidence/voice_amp_gui_absence_proof.json",
+   "open3_written_and_serum_readback": [
+    {
+     "preset": "FLB_OPEN3_A",
+     "written": {
+      "kParamVoiceAmp": 0.0,
+      "kParamSwingDiv": 0,
+      "kParamPortamentoCurve": -100.0,
+      "kParamSwing": 25.0,
+      "kParamPortamentoTime": 1.5
+     },
+     "serum_readback": {
+      "kParamVoiceAmp": 0.0,
+      "kParamSwingDiv": 0.0,
+      "kParamPortamentoCurve": -100.0,
+      "kParamSwing": 25.0,
+      "kParamPortamentoTime": 1.5000000000000002
+     }
+    },
+    {
+     "preset": "FLB_OPEN3_B",
+     "written": {
+      "kParamVoiceAmp": 0.25,
+      "kParamSwingDiv": 1,
+      "kParamPortamentoCurve": -50.0,
+      "kParamSwing": 40.0,
+      "kParamPortamentoTime": 3.0
+     },
+     "serum_readback": {
+      "kParamVoiceAmp": 0.25,
+      "kParamSwingDiv": 1.0,
+      "kParamPortamentoCurve": -50.0,
+      "kParamSwing": 40.0,
+      "kParamPortamentoTime": 3.0
+     }
+    },
+    {
+     "preset": "FLB_OPEN3_C",
+     "written": {
+      "kParamVoiceAmp": 0.75,
+      "kParamSwingDiv": 5,
+      "kParamPortamentoCurve": 50.0,
+      "kParamSwing": 60.0,
+      "kParamPortamentoTime": 4.5
+     },
+     "serum_readback": {
+      "kParamVoiceAmp": 0.75,
+      "kParamSwingDiv": 5.0,
+      "kParamPortamentoCurve": 50.0,
+      "kParamSwing": 60.0,
+      "kParamPortamentoTime": 4.5
+     }
+    },
+    {
+     "preset": "FLB_OPEN3_D",
+     "written": {
+      "kParamVoiceAmp": 1.0,
+      "kParamSwingDiv": 6,
+      "kParamPortamentoCurve": 100.0,
+      "kParamSwing": 90.0,
+      "kParamPortamentoTime": 6.0
+     },
+     "serum_readback": {
+      "kParamVoiceAmp": 1.0,
+      "kParamSwingDiv": 6.0,
+      "kParamPortamentoCurve": 100.0,
+      "kParamSwing": 87.5,
+      "kParamPortamentoTime": 6.0
+     }
+    }
+   ],
    "host_text": {
     "FLB_DOMAIN_DEFAULT": "0.5000",
     "FLB_DOMAIN_EXACT_LO": "0.0000",
     "FLB_DOMAIN_EXACT_MID": "0.2500",
     "FLB_DOMAIN_MIN": "0.0000",
-    "FLB_DOMAIN_MAX": "1.0000"
+    "FLB_DOMAIN_MAX": "1.0000",
+    "FLB_OPEN3_A": "0.0000",
+    "FLB_OPEN3_B": "0.2500",
+    "FLB_OPEN3_C": "0.7500",
+    "FLB_OPEN3_D": "1.0000"
    }
   },
   "global.voice_control.random.cutoff": {
@@ -523,6 +763,8 @@
     "FLB_DOMAIN_MIN": "--"
    },
    "gui_default_observed": null,
+   "gui_absence_proof": null,
+   "open3_written_and_serum_readback": null,
    "host_text": {
     "FLB_DOMAIN_DEFAULT": "--",
     "FLB_DOMAIN_EXACT_LO": "--",
@@ -594,6 +836,8 @@
     "FLB_DOMAIN_MIN": "0.0"
    },
    "gui_default_observed": null,
+   "gui_absence_proof": null,
+   "open3_written_and_serum_readback": null,
    "host_text": {
     "FLB_DOMAIN_DEFAULT": "0.0",
     "FLB_DOMAIN_EXACT_LO": "0.0",
@@ -665,6 +909,8 @@
     "FLB_DOMAIN_MIN": "--"
    },
    "gui_default_observed": null,
+   "gui_absence_proof": null,
+   "open3_written_and_serum_readback": null,
    "host_text": {
     "FLB_DOMAIN_DEFAULT": "--",
     "FLB_DOMAIN_EXACT_LO": "--",
@@ -736,6 +982,8 @@
     "FLB_DOMAIN_MIN": "1000%"
    },
    "gui_default_observed": "100%",
+   "gui_absence_proof": null,
+   "open3_written_and_serum_readback": null,
    "host_text": null
   },
   "global.voice_control.scaling.lfos": {
@@ -801,6 +1049,8 @@
     "FLB_DOMAIN_MIN": "1000%"
    },
    "gui_default_observed": "100%",
+   "gui_absence_proof": null,
+   "open3_written_and_serum_readback": null,
    "host_text": null
   }
  },
@@ -2856,6 +3106,22 @@
     "fx.filter.type"
    ],
    "finding": "Atlas enum is category-level (5 strings). Only 'Normal' lists members, so only its 17 keyed members + default map to an Atlas value; the other 79 keys have verified GUI names but no Atlas category assignment (needs the GUI dropdown's category grouping). Non-obvious names: FormantTWB->Formant-III, FormantTWO->Formant-II, Scream->French LP, ZDF_A->German LP. The Atlas lists 'Peak 24' but none of the 96 persisted candidate keys displays as Peak 24."
+  },
+  {
+   "id": "FLB-F5",
+   "controls": [
+    "global.voice_amp"
+   ],
+   "finding": "Voice Amp has no on-screen base-value control: loading amp 0.0 vs 1.0 changes no pixel on any of the 5 top-level pages (body + top bar, PrintWindow captures; MAIN knob is unchanged, so it is not Voice Amp). Its bounds come from the Serum host parameter 'Amp' text and the state clamp only. Proof: parameter_characterization/finish_line_b_gui_evidence/voice_amp_gui_absence_proof.json (lower ENV/LFO/ARP/keyboard strip excluded; the only differences there between A and D are swing/division/curve/porta and leftover ARP state). UI structure cross-checked against 'Serum 2 What's New.pdf' p4 (pages OSC/MIX/FX/MATRIX/GLOBAL; the top-right MAIN knob is 'Volume' = main volume, unaffected by voice_amp) and p15-19. The only GUI appearance of 'Amp' is the Matrix destination list, Global submenu (Main Tuning, Amp, Porta Time, Swing, Transpose, Envelope Scaling, LFO Scaling): parameter_characterization/finish_line_b_gui_evidence/matrix_destination_global_amp.png."
+  },
+  {
+   "id": "FLB-F6",
+   "controls": [
+    "global.swing",
+    "global.swing_div",
+    "global.portamento_curve"
+   ],
+   "finding": "Swing % clamps 90 -> 87.5 in Serum's own state (GUI shows 87.5%). Swing Div raw 0..6 displays 1/2, 1/4, (1/8, 1/16 default, 1/32 not read), 1/64, 1/128. Porta Curve is readable on screen by pressing and holding (no drag) the CURVE box: the tooltip shows the value in %."
   }
  ]
 }

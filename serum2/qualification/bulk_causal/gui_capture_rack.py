@@ -91,6 +91,36 @@ def main():
         U.SetCursorPos(r.left + 400, r.top + 12)   # park on the title bar so no hover tooltip covers a slot
         time.sleep(0.6)
 
+    if steps == -2:  # press-and-hold (no movement, so no value change) on the GLOBAL-page CURVE control: its tooltip shows the value
+        front(h)
+        cx, cy = r.left + int((1173 - 89) * S), r.top + int((737 - 45) * S)
+        U.SetCursorPos(cx, cy)
+        time.sleep(0.3)
+        U.mouse_event(2, 0, 0, 0, 0)
+        time.sleep(0.9)
+        p = os.path.abspath(os.path.join(OUT, "%s__curve_tooltip.png" % name))
+        print_window(h).save(p)
+        U.mouse_event(4, 0, 0, 0, 0)
+        print(p)
+        return
+    if steps < 0:    # every top-level page (tab clicks only), PrintWindow each
+        for tab, (fx, fy) in (("osc", (276, 112)), ("mix", (340, 112)), ("fx", (404, 112)), ("matrix", (469, 112)),
+                              ("global", (533, 112))):
+            front(h)
+            cx, cy = r.left + int((fx - 89) * S), r.top + int((fy - 45) * S)
+            U.SetCursorPos(cx - 6, cy - 4)
+            time.sleep(0.2)
+            U.SetCursorPos(cx, cy)
+            time.sleep(0.3)
+            U.mouse_event(2, 0, 0, 0, 0)
+            time.sleep(0.12)
+            U.mouse_event(4, 0, 0, 0, 0)
+            U.SetCursorPos(r.left + 400, r.top + 12)
+            time.sleep(1.2)
+            p = os.path.abspath(os.path.join(OUT, "%s__page_%s.png" % (name, tab)))
+            print_window(h).save(p)
+            print(p)
+        return
     if steps == 0:   # whole plugin window via PrintWindow: Serum's own pixels even when another window overlaps it
         p = os.path.abspath(os.path.join(OUT, "%s__window.png" % name))
         print_window(h).save(p)

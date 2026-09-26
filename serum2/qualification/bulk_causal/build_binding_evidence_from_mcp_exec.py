@@ -101,7 +101,8 @@ _NUMERIC_DOMAIN_KINDS = ("continuous", "signed", "log")   # manifest domain kind
                                                             # "open" and enum-like kinds are deliberately excluded
 
 
-_LIVE_GUI_DOMAIN_BASES = ("GUI_NUMERIC",)   # only bounds read as numbers off the on-screen Serum GUI are used
+_LIVE_GUI_DOMAIN_BASES = ("GUI_NUMERIC",)   # bounds read off the on-screen Serum GUI; HOST_TEXT_NO_GUI_CONTROL is accepted
+                                            # only alongside an on-disk proof file that the GUI has no such control
 
 
 def _augmented_get_control(real_get_control, params, augmented_log, live_domains=None):
@@ -122,7 +123,9 @@ def _augmented_get_control(real_get_control, params, augmented_log, live_domains
                                   "source": "manifest_campaign_v1.json domain (kind=%s)" % dom["kind"]})
             return dataclasses.replace(c, min_value=dom["min"], max_value=dom["max"])
         live = (live_domains or {}).get(target)
-        if live and live["basis"] in _LIVE_GUI_DOMAIN_BASES:
+        if live and (live["basis"] in _LIVE_GUI_DOMAIN_BASES or (
+                live["basis"] == "HOST_TEXT_NO_GUI_CONTROL" and live.get("gui_absence_proof")
+                and os.path.exists(os.path.join(REPO, live["gui_absence_proof"])))):
             augmented_log.append({"target": target, "min": live["min"], "max": live["max"],
                                   "source": "finish_line_b_live_serum_evidence_v1.json (basis=%s)" % live["basis"]})
             return dataclasses.replace(c, min_value=live["min"], max_value=live["max"])
