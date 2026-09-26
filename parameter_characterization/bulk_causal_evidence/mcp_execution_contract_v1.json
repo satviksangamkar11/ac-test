@@ -542,13 +542,22 @@
    "mcp_edit": {
     "kind": "field",
     "field": "attack_curve",
-    "value": 50.0,
+    "value": 90.0,
     "list": "envelopes",
     "index": 0
    },
-   "test_value": 50.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
-   "expected_raw": [],
+   "test_value": 90.0,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (original pick 50.0 was a no-op: it equals this field's own default; retried at fraction 0.90 of the range instead)",
+   "expected_raw": [
+    {
+     "path": [
+      "Env0",
+      "plainParams",
+      "kParamCurve1"
+     ],
+     "value": 90.0
+    }
+   ],
    "q3_roundtrip_offline_confirmed": true,
    "q4_host_text_check": {
     "mode": "NAMED",
@@ -789,13 +798,22 @@
    "mcp_edit": {
     "kind": "field",
     "field": "attack_curve",
-    "value": 50.0,
+    "value": 90.0,
     "list": "envelopes",
     "index": 1
    },
-   "test_value": 50.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
-   "expected_raw": [],
+   "test_value": 90.0,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (original pick 50.0 was a no-op: it equals this field's own default; retried at fraction 0.90 of the range instead)",
+   "expected_raw": [
+    {
+     "path": [
+      "Env1",
+      "plainParams",
+      "kParamCurve1"
+     ],
+     "value": 90.0
+    }
+   ],
    "q3_roundtrip_offline_confirmed": true,
    "q4_host_text_check": {
     "mode": "NAMED",
@@ -1036,13 +1054,22 @@
    "mcp_edit": {
     "kind": "field",
     "field": "attack_curve",
-    "value": 50.0,
+    "value": 90.0,
     "list": "envelopes",
     "index": 2
    },
-   "test_value": 50.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
-   "expected_raw": [],
+   "test_value": 90.0,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (original pick 50.0 was a no-op: it equals this field's own default; retried at fraction 0.90 of the range instead)",
+   "expected_raw": [
+    {
+     "path": [
+      "Env2",
+      "plainParams",
+      "kParamCurve1"
+     ],
+     "value": 90.0
+    }
+   ],
    "q3_roundtrip_offline_confirmed": true,
    "q4_host_text_check": {
     "mode": "NAMED",
@@ -1283,13 +1310,22 @@
    "mcp_edit": {
     "kind": "field",
     "field": "attack_curve",
-    "value": 50.0,
+    "value": 90.0,
     "list": "envelopes",
     "index": 3
    },
-   "test_value": 50.0,
-   "test_value_source": "reused giant-preset target (already GUI-cross-checked once)",
-   "expected_raw": [],
+   "test_value": 90.0,
+   "test_value_source": "reused giant-preset target (already GUI-cross-checked once) (original pick 50.0 was a no-op: it equals this field's own default; retried at fraction 0.90 of the range instead)",
+   "expected_raw": [
+    {
+     "path": [
+      "Env3",
+      "plainParams",
+      "kParamCurve1"
+     ],
+     "value": 90.0
+    }
+   ],
    "q3_roundtrip_offline_confirmed": true,
    "q4_host_text_check": {
     "mode": "NAMED",
@@ -8985,6 +9021,15 @@
       "Oscillator0",
       "WTOsc0",
       "plainParams",
+      "kParamWarpMenu2"
+     ],
+     "value": "kFM_OSC"
+    },
+    {
+     "path": [
+      "Oscillator0",
+      "WTOsc0",
+      "plainParams",
       "kParamXfadeMode"
      ],
      "value": 1.0
@@ -8997,15 +9042,6 @@
       "kParamWarp2"
      ],
      "value": 0.0
-    },
-    {
-     "path": [
-      "Oscillator0",
-      "WTOsc0",
-      "plainParams",
-      "kParamWarpMenu2"
-     ],
-     "value": "kFM_OSC"
     }
    ],
    "q3_roundtrip_offline_confirmed": true,
@@ -9526,6 +9562,15 @@
       "Oscillator1",
       "WTOsc1",
       "plainParams",
+      "kParamWarpMenu2"
+     ],
+     "value": "kFM_OSC"
+    },
+    {
+     "path": [
+      "Oscillator1",
+      "WTOsc1",
+      "plainParams",
       "kParamXfadeMode"
      ],
      "value": 1.0
@@ -9538,15 +9583,6 @@
       "kParamWarp2"
      ],
      "value": 0.0
-    },
-    {
-     "path": [
-      "Oscillator1",
-      "WTOsc1",
-      "plainParams",
-      "kParamWarpMenu2"
-     ],
-     "value": "kFM_OSC"
     }
    ],
    "q3_roundtrip_offline_confirmed": true,
@@ -10067,6 +10103,15 @@
       "Oscillator2",
       "WTOsc2",
       "plainParams",
+      "kParamWarpMenu2"
+     ],
+     "value": "kFM_OSC"
+    },
+    {
+     "path": [
+      "Oscillator2",
+      "WTOsc2",
+      "plainParams",
       "kParamXfadeMode"
      ],
      "value": 1.0
@@ -10079,15 +10124,6 @@
       "kParamWarp2"
      ],
      "value": 0.0
-    },
-    {
-     "path": [
-      "Oscillator2",
-      "WTOsc2",
-      "plainParams",
-      "kParamWarpMenu2"
-     ],
-     "value": "kFM_OSC"
     }
    ],
    "q3_roundtrip_offline_confirmed": true,

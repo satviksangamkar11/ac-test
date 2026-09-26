@@ -146,7 +146,29 @@ def main():
         except Exception as e:
             skipped.append({"atlas_id": aid, "reason": "apply_spec rejected the chosen test value: %s" % e})
             continue
+        if not diff and domain["kind"] in ("continuous", "signed", "int", "log"):
+            # the chosen value produced a NO-OP diff (it happened to equal this field's own default, e.g. the
+            # domain midpoint on a symmetric 0..100 range) -- retry with other fractions of the range until one
+            # actually changes something, so an empty expected_raw is never silently reported as "confirmed"
+            lo, hi = float(domain["min"]), float(domain["max"])
+            for frac in (0.9, 0.1, 0.75, 0.25, 1.0, 0.0):
+                alt = round(lo + frac * (hi - lo), 6) if domain["kind"] != "int" else round(lo + frac * (hi - lo))
+                if alt == value:
+                    continue
+                try:
+                    edit2, diff2 = spec_edit_and_diff(ctrl, aid, alt)
+                except Exception:
+                    continue
+                if diff2:
+                    why = why + (" (original pick %r was a no-op: it equals this field's own default; retried at "
+                                 "fraction %.2f of the range instead)" % (value, frac))
+                    value, edit, diff = alt, edit2, diff2
+                    break
         expected_raw = [{"path": d[0], "value": d[2]} for d in diff]
+        if not expected_raw:
+            skipped.append({"atlas_id": aid, "reason": "no test value in the declared domain produces a non-empty "
+                            "diff -- every candidate tried equals this field's own default or apply_spec's no-op state"})
+            continue
         # Q3 offline half: the roundtrip. Build the body with this edit applied and confirm pack/unpack preserves it.
         base_body = apply_spec(BASE.data, base_spec()) if ctrl["kind"] != "fx" else apply_spec(BASE.data, SPEC0.model_copy(update={"fx_chain": [FxUnitSpec(type=ctrl["fx_type"], params={}, wet=100.0)]}))
         body = copy.deepcopy(base_body)
