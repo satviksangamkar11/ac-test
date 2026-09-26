@@ -1,0 +1,4 @@
+Timeout (0:00:15)!
+Thread 0x00008f5c (most recent call first):
+  File "C:\Users\Satvik\AppData\Local\Temp\claude\D--ableton-claude-final-best-youtube-to-serum\3d383433-992b-4c1f-ae7f-a02219dd3478\scratchpad\ole_drop.py", line 100 in drop
+  File "<string>", line 4 in <module>
