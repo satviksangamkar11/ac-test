@@ -1,0 +1,1636 @@
+{
+ "method": "direct_ui_screen_scan",
+ "description": "Genuine screen-level (pixel) observation of Serum 2's own plugin window, loaded via the corrected single VERIFY_REFERENCE_FULL.SerumPreset (all sections merged: INIT master + 12 simultaneous FX rack slots + OSC_SAMPLE oscillator config). Distinct from host_text_evidence: this is what a human sees on screen.",
+ "preset_loaded": "VERIFY_REFERENCE_FULL.SerumPreset",
+ "load_path": "Ableton Live 12 -> MIDI track 'QUAL_UI_VERIFY_TEMP' -> Serum 2 (VST3) -> User/BULKCAUSAL_VERIFY/VERIFY_REFERENCE_FULL",
+ "structural_confirmation": "FX page shows all 12 FX types (Bode, Chorus, Compressor, Convolve, Delay, Hyper/Dimension, Distortion, Equalizer, +Filter/Flanger/Phaser/Reverb below the fold) present SIMULTANEOUSLY as distinct rack slots in one preset -- confirms the multi-slot FX merge architecture works as intended, not just in theory.",
+ "raw_write_gap_finding": "SUPERSEDED (see DIRECT_UI_FINDING_RAW_WRITE_GAP.md CORRECTION 2 and 56cd943: serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md). encoder_diff.py showed the raw write and serum-mcp's apply_spec produce identical bodies for all comparable candidates, so there is no encoder bypass. The earlier compressor readings were one column off: release MATCHES; attack and gain MISMATCH; ratio shows 'Limit' (schema range wider than Serum's). env1-4.sustain remains a MISMATCH with an unknown display curve. lfo*.mode is a CONTEXT_CONFLICT with lfo*.shape=RandomSH, not a write bug.",
+ "observations": [
+  {
+   "atlas_id": "oscB.octave",
+   "expected_target": -2.0,
+   "screen_displayed": "-2",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "oscB.semitone",
+   "expected_target": -6.0,
+   "screen_displayed": "-6",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "oscB.fine",
+   "expected_target": -40.0,
+   "screen_displayed": "-40",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "oscC.octave",
+   "expected_target": -2.0,
+   "screen_displayed": "-2",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "oscC.semitone",
+   "expected_target": -6.0,
+   "screen_displayed": "-6",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "oscC.fine",
+   "expected_target": -40.0,
+   "screen_displayed": "-40",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "oscA.sample_loop_start",
+   "expected_target": 50.0,
+   "screen_displayed": "LS 50",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "oscA.sample_loop_end",
+   "expected_target": 50.0,
+   "screen_displayed": "LE 50",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "oscB.sample_loop_start",
+   "expected_target": 50.0,
+   "screen_displayed": "LS 50",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "oscB.sample_loop_end",
+   "expected_target": 50.0,
+   "screen_displayed": "LE 50",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "oscC.sample_loop_start",
+   "expected_target": 50.0,
+   "screen_displayed": "LS 50",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "oscC.sample_loop_end",
+   "expected_target": 50.0,
+   "screen_displayed": "LE 50",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "oscA.unison",
+   "expected_target": 9.0,
+   "screen_displayed": "9",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "oscB.unison",
+   "expected_target": 9.0,
+   "screen_displayed": "9",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "oscC.unison",
+   "expected_target": 9.0,
+   "screen_displayed": "9",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "oscA.detune",
+   "expected_target": 0.5,
+   "screen_displayed": "A Uni Detune (0.50)",
+   "method": "hover_tooltip",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "oscA.pan",
+   "expected_target": -25.0,
+   "screen_displayed": "A Pan (-25 L)",
+   "method": "hover_tooltip",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "global.transpose",
+   "expected_target": -24.0,
+   "screen_displayed": "TRANSPOSE: -24",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "noise.type",
+   "expected_target": null,
+   "screen_displayed": "Pink",
+   "verdict": "OBSERVED_NOT_IN_PLAN",
+   "note": "visible on screen but this atlas_id was NO_USABLE_TARGET_VALUE in the plan -- displayed value not cross-checkable against a target"
+  },
+  {
+   "atlas_id": "filter2.type",
+   "expected_target": "L12",
+   "screen_displayed": "Low 12",
+   "verdict": "NORMALIZED_MATCH",
+   "note": "raw enum code L12 displays as label 'Low 12' -- first GUI proof of this enum's label mapping"
+  },
+  {
+   "atlas_id": "fx.compressor.attack",
+   "expected_target": 100.0,
+   "screen_displayed": "1.0 ms",
+   "verdict": "MISMATCH",
+   "superseded": [
+    {
+     "screen_displayed": "100.0",
+     "verdict": "MATCH",
+     "superseded_by": "56cd943: serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md"
+    }
+   ],
+   "method": "hover tooltip",
+   "note": "Earlier MATCH read the RELEASE column. Raw 100 -> 1.0 ms. attack and release hold the same raw value with the same declared domain (log 0.1-1000) but display differently: the two slots do not share one encoding. Curve unknown.",
+   "source": "56cd943: serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md"
+  },
+  {
+   "atlas_id": "lfo1.mode",
+   "expected_target": "Envelope",
+   "screen_displayed": "FREE lit; ENVELOPE button greyed out (disabled)",
+   "verdict": "CONTEXT_CONFLICT",
+   "superseded": [
+    {
+     "screen_displayed": "FREE (button highlighted)",
+     "verdict": "MISMATCH",
+     "note": "CORRECTED: original 'S&H' reading was a methodology error -- that's lfo1.shape's dropdown (adjacent control), not the FREE/RETRIG/ENVELOPE mode toggle. Once reading the right control: isolated single-field write and structural-merge-only write BOTH correctly show ENVELOPE highlighted (raw write method itself works). Only the full 299-candidate giant preset shows FREE. Root cause is an unidentified interaction with the other 298 candidates, NOT the same encoder-bypass story as fx.compressor.ratio/release/env.sustain. See DIRECT_UI_FINDING_RAW_WRITE_GAP.md correction section.",
+     "superseded_by": "56cd943: serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md"
+    }
+   ],
+   "conflicts_with": "lfo1.shape",
+   "conflicting_target": "RandomSH",
+   "note": "Cross-parameter constraint: Serum disables mode=Envelope while shape=S&H and drops the stored mode. Live test on the loaded instance: switching only LFO1 shape S&H->Normal made ENVELOPE clickable and it lit when clicked. Isolation evidence (retained, still valid): single-field write of kParamMode='Envelope' on the pure init body -> ENVELOPE lit; structural-merge-only write (12 FX slots + OSC_SAMPLE, no other candidates) -> ENVELOPE lit. The raw field itself works. Not a MISMATCH and not a write bug; the giant preset co-applies two mutually exclusive targets.",
+   "isolation_evidence": [
+    {
+     "test": "single_field_init_body",
+     "screen_displayed": "ENVELOPE lit",
+     "verdict": "MATCH"
+    },
+    {
+     "test": "structural_merge_only",
+     "screen_displayed": "ENVELOPE lit",
+     "verdict": "MATCH"
+    }
+   ],
+   "source": "56cd943: serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md"
+  },
+  {
+   "atlas_id": "lfo1.shape",
+   "expected_target": "RandomSH",
+   "screen_displayed": "S&H",
+   "verdict": "NORMALIZED_MATCH",
+   "note": "raw 'RandomSH' (vocabulary_map: random_sh->RandomSH) displays as 'S&H' abbreviation -- this was the control mistakenly read as lfo1.mode in the original pass. Not one of the original 4 open findings; found as a byproduct of correcting the lfo1.mode misread."
+  },
+  {
+   "atlas_id": "fx.compressor.ratio",
+   "expected_target": 31622.7766016712,
+   "screen_displayed": "Limit",
+   "verdict": "MISMATCH",
+   "superseded": [
+    {
+     "screen_displayed": "RATIO 1.0",
+     "verdict": "MISMATCH",
+     "note": "RESOLVED (root cause found, not fixed): isolated single-field test (pure FXComp unit, only ratio+release touched) displays RATIO 0.9 -- DIFFERENT wrong value than the giant preset's 1.0, for the identical target. fx.compressor.attack (same FX unit, same DIRECT_RAW mechanism) matched exactly in both tests, proving this is specific to ratio/release's raw encoding, not a wholesale panel failure. See DIRECT_UI_FINDING_RAW_WRITE_GAP.md.",
+     "superseded_by": "56cd943: serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md"
+    }
+   ],
+   "method": "hover tooltip",
+   "note": "Earlier 'RATIO 1.0' was the ATTACK column. Serum shows 'Limit' (top of its range): schema max 1e6 is wider than Serum's range, so the target is not a representable numeric value. Kept as MISMATCH (domain), not a display misread.",
+   "source": "56cd943: serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md"
+  },
+  {
+   "atlas_id": "fx.compressor.release",
+   "expected_target": 100.0,
+   "screen_displayed": "100.0 ms",
+   "verdict": "MATCH",
+   "superseded": [
+    {
+     "screen_displayed": "RELEASE 30.4",
+     "verdict": "MISMATCH",
+     "note": "RESOLVED (root cause found, not fixed): isolated single-field test shows RELEASE 0.0 -- different wrong value than the giant preset's 30.4, for the identical target 100.0. Same root cause as fx.compressor.ratio. See DIRECT_UI_FINDING_RAW_WRITE_GAP.md.",
+     "superseded_by": "56cd943: serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md"
+    }
+   ],
+   "method": "hover tooltip",
+   "note": "Earlier 'RELEASE 30.4' was the GAIN column. Hover-confirmed 100.0 ms.",
+   "source": "56cd943: serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md"
+  },
+  {
+   "atlas_id": "MATRIX_PAGE",
+   "expected_target": null,
+   "screen_displayed": "all mod-route rows empty",
+   "verdict": "STRUCTURAL_CONFIRMATION",
+   "note": "consistent with the manifest having no mod_routes candidates; nothing to cross-check"
+  },
+  {
+   "atlas_id": "global.voice_control.random.pan",
+   "expected_target": 50.0,
+   "screen_displayed": "RANDOM PAN 50%",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "global.s1_compatibility",
+   "expected_target": 1.0,
+   "screen_displayed": "S1 COMPATIBILITY MODE (checked)",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "env1.attack",
+   "expected_target": 5.0,
+   "screen_displayed": "ATK 5.00s",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "env1.hold",
+   "expected_target": 2.6,
+   "screen_displayed": "HOLD 2.60s",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "env1.decay",
+   "expected_target": 16.0,
+   "screen_displayed": "DEC 16.0s",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "env1.release",
+   "expected_target": 16.0,
+   "screen_displayed": "REL 16.0s",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "env1.sustain",
+   "expected_target": 0.5,
+   "screen_displayed": "SUS -12.0dB",
+   "verdict": "MISMATCH",
+   "note": "RESOLVED: -12.0dB and env2/3/4's 25% are mutually consistent (10**(-12/20)=0.2512~=25.1%, standard dB<->linear conversion) -- both are the SAME underlying stored value in two different per-envelope display-unit choices, not a display-unit red herring. But that agreed value (~0.251) is NOT the target (0.5) -- a genuine, consistent (not random) undershoot on a DIRECT_RAW write. Same class of raw-write gap as lfo1.mode/fx.compressor.ratio/release. See DIRECT_UI_FINDING_RAW_WRITE_GAP.md."
+  },
+  {
+   "atlas_id": "env2.attack",
+   "expected_target": 5.0,
+   "screen_displayed": "ATK 5.00s",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "env2.hold",
+   "expected_target": 2.6,
+   "screen_displayed": "HOLD 2.60s",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "env2.decay",
+   "expected_target": 16.0,
+   "screen_displayed": "DEC 16.0s",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "env2.release",
+   "expected_target": 16.0,
+   "screen_displayed": "REL 16.0s",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "env2.sustain",
+   "expected_target": 0.5,
+   "screen_displayed": "SUS 25%",
+   "verdict": "MISMATCH",
+   "note": "RESOLVED: same underlying value as env1.sustain (~0.251, not target 0.5), just displayed in % instead of dB. See DIRECT_UI_FINDING_RAW_WRITE_GAP.md."
+  },
+  {
+   "atlas_id": "env3.attack",
+   "expected_target": 5.0,
+   "screen_displayed": "ATK 5.00s",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "env3.hold",
+   "expected_target": 2.6,
+   "screen_displayed": "HOLD 2.60s",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "env3.decay",
+   "expected_target": 16.0,
+   "screen_displayed": "DEC 16.0s",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "env3.release",
+   "expected_target": 16.0,
+   "screen_displayed": "REL 16.0s",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "env3.sustain",
+   "expected_target": 0.5,
+   "screen_displayed": "SUS 25%",
+   "verdict": "MISMATCH",
+   "note": "RESOLVED: same underlying value as env1.sustain (~0.251, not target 0.5). See DIRECT_UI_FINDING_RAW_WRITE_GAP.md."
+  },
+  {
+   "atlas_id": "env4.attack",
+   "expected_target": 5.0,
+   "screen_displayed": "ATK 5.00s",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "env4.hold",
+   "expected_target": 2.6,
+   "screen_displayed": "HOLD 2.60s",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "env4.decay",
+   "expected_target": 16.0,
+   "screen_displayed": "DEC 16.0s",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "env4.release",
+   "expected_target": 16.0,
+   "screen_displayed": "REL 16.0s",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "env4.sustain",
+   "expected_target": 0.5,
+   "screen_displayed": "SUS 25%",
+   "verdict": "MISMATCH",
+   "note": "RESOLVED: same underlying value as env1.sustain (~0.251, not target 0.5). See DIRECT_UI_FINDING_RAW_WRITE_GAP.md."
+  },
+  {
+   "atlas_id": "lfo1.rise",
+   "expected_target": 2.5,
+   "screen_displayed": "LFO 1 Rise (2.5 s)",
+   "method": "hover_tooltip",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "lfo1.delay",
+   "expected_target": 1.8,
+   "screen_displayed": "LFO 1 Delay (1.8 s)",
+   "method": "hover_tooltip",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "lfo2.shape",
+   "expected_target": "RandomSH",
+   "screen_displayed": "S&H",
+   "verdict": "NORMALIZED_MATCH",
+   "note": "consistent with lfo1.shape"
+  },
+  {
+   "atlas_id": "lfo2.mode",
+   "expected_target": "Envelope",
+   "screen_displayed": "FREE lit; ENVELOPE button greyed out (disabled)",
+   "verdict": "CONTEXT_CONFLICT",
+   "superseded": [
+    {
+     "screen_displayed": "FREE (button highlighted)",
+     "verdict": "MISMATCH",
+     "note": "mirrors lfo1.mode -- same unresolved giant-preset-specific interaction, not yet bisected",
+     "superseded_by": "56cd943: serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md"
+    }
+   ],
+   "conflicts_with": "lfo2.shape",
+   "conflicting_target": "RandomSH",
+   "note": "Cross-parameter constraint: Serum disables mode=Envelope while shape=S&H and drops the stored mode. Live test on the loaded instance: switching only LFO1 shape S&H->Normal made ENVELOPE clickable and it lit when clicked. Isolation evidence (retained, still valid): single-field write of kParamMode='Envelope' on the pure init body -> ENVELOPE lit; structural-merge-only write (12 FX slots + OSC_SAMPLE, no other candidates) -> ENVELOPE lit. The raw field itself works. Not a MISMATCH and not a write bug; the giant preset co-applies two mutually exclusive targets.",
+   "isolation_evidence": [
+    {
+     "test": "single_field_init_body",
+     "screen_displayed": "ENVELOPE lit",
+     "verdict": "MATCH"
+    },
+    {
+     "test": "structural_merge_only",
+     "screen_displayed": "ENVELOPE lit",
+     "verdict": "MATCH"
+    }
+   ],
+   "source": "56cd943: serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md"
+  },
+  {
+   "atlas_id": "macro1.value",
+   "expected_target": 50.0,
+   "screen_displayed": "Macro 1 (50)",
+   "method": "hover_tooltip",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "macro5.value",
+   "expected_target": 50.0,
+   "screen_displayed": "Macro 5 (50)",
+   "method": "hover_tooltip",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "fx.chorus.rate",
+   "expected_target": 10.0,
+   "screen_displayed": "FX 2: Cho Rate (10.00 Hz)",
+   "method": "hover_tooltip",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "fx.bode.shift",
+   "expected_target": -9.0,
+   "screen_displayed": "FX 1: Bode Shift (-9%)",
+   "method": "hover_tooltip",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "fx.bode.range",
+   "expected_target": 3043.2,
+   "screen_displayed": "FX 1: Bode Range (3043 Hz)",
+   "method": "hover_tooltip",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "fx.convolve.size",
+   "expected_target": 505.0,
+   "screen_displayed": "FX 4: Conv Size (505%)",
+   "method": "hover_tooltip",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "fx.delay.time_l",
+   "expected_target": 0.1705,
+   "screen_displayed": "L 170.50 ms",
+   "verdict": "MATCH",
+   "note": "raw seconds x1000 = displayed ms"
+  },
+  {
+   "atlas_id": "fx.delay.time_r",
+   "expected_target": 0.1605,
+   "screen_displayed": "R 160.50 ms",
+   "verdict": "MATCH",
+   "note": "raw seconds x1000 = displayed ms"
+  },
+  {
+   "atlas_id": "fx.delay.feedback",
+   "expected_target": 45.0,
+   "screen_displayed": "FX 5: Dly Feedback (45%)",
+   "method": "hover_tooltip",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "fx.hyper.rate",
+   "expected_target": 50.0,
+   "screen_displayed": "FX 6: Hyp Rate (50%)",
+   "method": "hover_tooltip",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "fx.hyper.detune",
+   "expected_target": 50.0,
+   "screen_displayed": "FX 6: Hyp Detune (50%)",
+   "method": "hover_tooltip",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "fx.hyper.unison",
+   "expected_target": 3.5,
+   "screen_displayed": "UNISON 4",
+   "verdict": "PLAUSIBLE_MATCH",
+   "note": "integer-quantized display, 3.5 rounds to 4; not hover-confirmed with exact decimal"
+  },
+  {
+   "atlas_id": "fx.distortion.type",
+   "expected_target": "kAsym",
+   "screen_displayed": "ASYM",
+   "verdict": "NORMALIZED_MATCH"
+  },
+  {
+   "atlas_id": "fx.equalizer.left_freq",
+   "expected_target": 5010.75,
+   "screen_displayed": "FREQ 5011",
+   "verdict": "MATCH",
+   "note": "rounded display"
+  },
+  {
+   "atlas_id": "fx.equalizer.left_q",
+   "expected_target": 50.0,
+   "screen_displayed": "Q 50",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "fx.equalizer.left_gain",
+   "expected_target": -12.0,
+   "screen_displayed": "GAIN -12.0",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "fx.equalizer.right_freq",
+   "expected_target": 10010.75,
+   "screen_displayed": "FREQ 10011",
+   "verdict": "MATCH",
+   "note": "rounded display"
+  },
+  {
+   "atlas_id": "fx.equalizer.right_q",
+   "expected_target": 47.5,
+   "screen_displayed": "Q 47",
+   "verdict": "MATCH",
+   "note": "rounded display"
+  },
+  {
+   "atlas_id": "fx.equalizer.right_gain",
+   "expected_target": -12.0,
+   "screen_displayed": "GAIN -12.0",
+   "verdict": "MATCH"
+  },
+  {
+   "atlas_id": "lfo3.mode",
+   "expected_target": "Envelope",
+   "screen_displayed": "FREE lit; ENVELOPE button greyed out (disabled)",
+   "verdict": "CONTEXT_CONFLICT",
+   "conflicts_with": "lfo3.shape",
+   "conflicting_target": "RandomSH",
+   "note": "Cross-parameter constraint: Serum disables mode=Envelope while shape=S&H and drops the stored mode. Live test on the loaded instance: switching only LFO1 shape S&H->Normal made ENVELOPE clickable and it lit when clicked. Isolation evidence (retained, still valid): single-field write of kParamMode='Envelope' on the pure init body -> ENVELOPE lit; structural-merge-only write (12 FX slots + OSC_SAMPLE, no other candidates) -> ENVELOPE lit. The raw field itself works. Not a MISMATCH and not a write bug; the giant preset co-applies two mutually exclusive targets.",
+   "isolation_evidence": [
+    {
+     "test": "single_field_init_body",
+     "screen_displayed": "ENVELOPE lit",
+     "verdict": "MATCH"
+    },
+    {
+     "test": "structural_merge_only",
+     "screen_displayed": "ENVELOPE lit",
+     "verdict": "MATCH"
+    }
+   ],
+   "observed_scope": "LFO3 shows the same state as LFO1 (S&H, ENVELOPE greyed)",
+   "source": "56cd943: serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md"
+  },
+  {
+   "atlas_id": "lfo4.mode",
+   "expected_target": "Envelope",
+   "screen_displayed": "FREE lit; ENVELOPE button greyed out (disabled)",
+   "verdict": "CONTEXT_CONFLICT",
+   "conflicts_with": "lfo4.shape",
+   "conflicting_target": "RandomSH",
+   "note": "Cross-parameter constraint: Serum disables mode=Envelope while shape=S&H and drops the stored mode. Live test on the loaded instance: switching only LFO1 shape S&H->Normal made ENVELOPE clickable and it lit when clicked. Isolation evidence (retained, still valid): single-field write of kParamMode='Envelope' on the pure init body -> ENVELOPE lit; structural-merge-only write (12 FX slots + OSC_SAMPLE, no other candidates) -> ENVELOPE lit. The raw field itself works. Not a MISMATCH and not a write bug; the giant preset co-applies two mutually exclusive targets.",
+   "isolation_evidence": [
+    {
+     "test": "single_field_init_body",
+     "screen_displayed": "ENVELOPE lit",
+     "verdict": "MATCH"
+    },
+    {
+     "test": "structural_merge_only",
+     "screen_displayed": "ENVELOPE lit",
+     "verdict": "MATCH"
+    }
+   ],
+   "observed_scope": "LFO4 shows the same state as LFO1 (S&H, ENVELOPE greyed)",
+   "source": "56cd943: serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md"
+  },
+  {
+   "atlas_id": "lfo5.mode",
+   "expected_target": "Envelope",
+   "screen_displayed": "FREE lit; ENVELOPE button greyed out (disabled)",
+   "verdict": "CONTEXT_CONFLICT",
+   "conflicts_with": "lfo5.shape",
+   "conflicting_target": "RandomSH",
+   "note": "Cross-parameter constraint: Serum disables mode=Envelope while shape=S&H and drops the stored mode. Live test on the loaded instance: switching only LFO1 shape S&H->Normal made ENVELOPE clickable and it lit when clicked. Isolation evidence (retained, still valid): single-field write of kParamMode='Envelope' on the pure init body -> ENVELOPE lit; structural-merge-only write (12 FX slots + OSC_SAMPLE, no other candidates) -> ENVELOPE lit. The raw field itself works. Not a MISMATCH and not a write bug; the giant preset co-applies two mutually exclusive targets.",
+   "isolation_evidence": [
+    {
+     "test": "single_field_init_body",
+     "screen_displayed": "ENVELOPE lit",
+     "verdict": "MATCH"
+    },
+    {
+     "test": "structural_merge_only",
+     "screen_displayed": "ENVELOPE lit",
+     "verdict": "MATCH"
+    }
+   ],
+   "observed_scope": "LFO5 shows the same state as LFO1 (S&H, ENVELOPE greyed)",
+   "source": "56cd943: serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md"
+  },
+  {
+   "atlas_id": "lfo6.mode",
+   "expected_target": "Envelope",
+   "screen_displayed": "FREE lit; ENVELOPE button greyed out (disabled)",
+   "verdict": "CONTEXT_CONFLICT",
+   "conflicts_with": "lfo6.shape",
+   "conflicting_target": "RandomSH",
+   "note": "Cross-parameter constraint: Serum disables mode=Envelope while shape=S&H and drops the stored mode. Live test on the loaded instance: switching only LFO1 shape S&H->Normal made ENVELOPE clickable and it lit when clicked. Isolation evidence (retained, still valid): single-field write of kParamMode='Envelope' on the pure init body -> ENVELOPE lit; structural-merge-only write (12 FX slots + OSC_SAMPLE, no other candidates) -> ENVELOPE lit. The raw field itself works. Not a MISMATCH and not a write bug; the giant preset co-applies two mutually exclusive targets.",
+   "isolation_evidence": [
+    {
+     "test": "single_field_init_body",
+     "screen_displayed": "ENVELOPE lit",
+     "verdict": "MATCH"
+    },
+    {
+     "test": "structural_merge_only",
+     "screen_displayed": "ENVELOPE lit",
+     "verdict": "MATCH"
+    }
+   ],
+   "observed_scope": "LFO6 shows the same state as LFO1 (S&H, ENVELOPE greyed)",
+   "source": "56cd943: serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md"
+  },
+  {
+   "atlas_id": "fx.compressor.gain",
+   "expected_target": 16.5,
+   "screen_displayed": "30.4 dB",
+   "verdict": "MISMATCH",
+   "method": "hover tooltip",
+   "note": "Raw kParamMakeup 16.5 -> 30.4 dB. Curve unknown. The earlier 'RELEASE 30.4' reading was this knob.",
+   "source": "56cd943: serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md"
+  },
+  {
+   "atlas_id": "fx.compressor.thresh",
+   "expected_target": 0.25,
+   "screen_displayed": "-7.5 dB",
+   "verdict": "CURVE_UNVERIFIED",
+   "method": "hover tooltip",
+   "note": "Consistent with display = -30 dB x raw, but that curve is unverified; not a MATCH or MISMATCH yet.",
+   "source": "56cd943: serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md"
+  },
+  {
+   "atlas_id": "fx.reverb.type",
+   "expected_target": "kAbyss",
+   "screen_displayed": "NITROUS",
+   "verdict": "VOCABULARY_MISMATCH",
+   "serum_vocabulary": [
+    "Plate",
+    "Hall",
+    "Vintage",
+    "Nitrous",
+    "Basin"
+   ],
+   "schema_vocabulary": [
+    "kAbyss",
+    "kHall",
+    "kSpace",
+    "kVintage"
+   ],
+   "note": "Serum 2.0.23's reverb menu does not contain Abyss or Space; Plate/Nitrous/Basin are missing from serum-mcp's schema. Unknown whether Nitrous is Serum's alias for kAbyss or a fallback. Schema/vocabulary finding, not a write finding.",
+   "source": "56cd943: serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md"
+  },
+  {
+   "atlas_id": "arp.transpose.shape",
+   "expected_target": null,
+   "screen_displayed": "Up",
+   "verdict": "VOCABULARY_DISCOVERED",
+   "plan_status": "NOT_DERIVED",
+   "display_vocabulary": [
+    "Up",
+    "Down",
+    "Up/Down",
+    "Down/Up",
+    "Up+Down",
+    "Down+Up",
+    "Thumb Up",
+    "Thumb UD",
+    "Pinky Up",
+    "Pinky UD",
+    "Converge",
+    "Diverge",
+    "Con+Diverge",
+    "Chord",
+    "Random",
+    "Rand No Dup",
+    "Rand Drift",
+    "Rand Once"
+   ],
+   "raw_values_known": false,
+   "note": "18 display labels enumerated from Serum's menu, in Serum's order. Raw stored strings still unknown: one file write per label needed. Compared with arp.pattern.shape's schema domain (15 values), the schema lacks Up, Pinky Up, Pinky UD. The live instance was stepped to Thumb Up while enumerating; the file was not changed.",
+   "source": "56cd943: serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md"
+  },
+  {
+   "atlas_id": "oscA.warp_amount",
+   "expected_target": 0.5,
+   "screen_displayed": null,
+   "verdict": "NOT_OBSERVABLE_IN_CONTEXT",
+   "context": "OSC_SAMPLE",
+   "note": "Not observable in this preset: all three oscillators run in SAMPLE mode (structural OSC_SAMPLE merge), so the warp panel shows SampleOsc warp (kFM_OSC 'FM (A)', slot 2 Off), not the WTOsc slot the target was written to. Not a failure; needs a wavetable-mode preset.",
+   "source": "56cd943: serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md"
+  },
+  {
+   "atlas_id": "oscA.warp_mode",
+   "expected_target": "kAM_OSC",
+   "screen_displayed": null,
+   "verdict": "NOT_OBSERVABLE_IN_CONTEXT",
+   "context": "OSC_SAMPLE",
+   "note": "Not observable in this preset: all three oscillators run in SAMPLE mode (structural OSC_SAMPLE merge), so the warp panel shows SampleOsc warp (kFM_OSC 'FM (A)', slot 2 Off), not the WTOsc slot the target was written to. Not a failure; needs a wavetable-mode preset.",
+   "source": "56cd943: serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md"
+  },
+  {
+   "atlas_id": "oscA.warp_mode2",
+   "expected_target": "fm",
+   "screen_displayed": null,
+   "verdict": "NOT_OBSERVABLE_IN_CONTEXT",
+   "context": "OSC_SAMPLE",
+   "note": "Not observable in this preset: all three oscillators run in SAMPLE mode (structural OSC_SAMPLE merge), so the warp panel shows SampleOsc warp (kFM_OSC 'FM (A)', slot 2 Off), not the WTOsc slot the target was written to. Not a failure; needs a wavetable-mode preset. Side issue: the file holds the spec word 'fm' in the raw kParamWarpMenu2 slot, where the leaf_set table maps fm -> kFM_OSC; verify in the wavetable-mode preset.",
+   "source": "56cd943: serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md"
+  },
+  {
+   "atlas_id": "oscA.warp_var2",
+   "expected_target": 0.5,
+   "screen_displayed": null,
+   "verdict": "NOT_OBSERVABLE_IN_CONTEXT",
+   "context": "OSC_SAMPLE",
+   "note": "Not observable in this preset: all three oscillators run in SAMPLE mode (structural OSC_SAMPLE merge), so the warp panel shows SampleOsc warp (kFM_OSC 'FM (A)', slot 2 Off), not the WTOsc slot the target was written to. Not a failure; needs a wavetable-mode preset.",
+   "source": "56cd943: serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md"
+  },
+  {
+   "atlas_id": "oscB.warp_amount",
+   "expected_target": 0.5,
+   "screen_displayed": null,
+   "verdict": "NOT_OBSERVABLE_IN_CONTEXT",
+   "context": "OSC_SAMPLE",
+   "note": "Not observable in this preset: all three oscillators run in SAMPLE mode (structural OSC_SAMPLE merge), so the warp panel shows SampleOsc warp (kFM_OSC 'FM (A)', slot 2 Off), not the WTOsc slot the target was written to. Not a failure; needs a wavetable-mode preset.",
+   "source": "56cd943: serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md"
+  },
+  {
+   "atlas_id": "oscB.warp_mode",
+   "expected_target": "kAM_OSC",
+   "screen_displayed": null,
+   "verdict": "NOT_OBSERVABLE_IN_CONTEXT",
+   "context": "OSC_SAMPLE",
+   "note": "Not observable in this preset: all three oscillators run in SAMPLE mode (structural OSC_SAMPLE merge), so the warp panel shows SampleOsc warp (kFM_OSC 'FM (A)', slot 2 Off), not the WTOsc slot the target was written to. Not a failure; needs a wavetable-mode preset.",
+   "source": "56cd943: serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md"
+  },
+  {
+   "atlas_id": "oscB.warp_mode2",
+   "expected_target": "fm",
+   "screen_displayed": null,
+   "verdict": "NOT_OBSERVABLE_IN_CONTEXT",
+   "context": "OSC_SAMPLE",
+   "note": "Not observable in this preset: all three oscillators run in SAMPLE mode (structural OSC_SAMPLE merge), so the warp panel shows SampleOsc warp (kFM_OSC 'FM (A)', slot 2 Off), not the WTOsc slot the target was written to. Not a failure; needs a wavetable-mode preset. Side issue: the file holds the spec word 'fm' in the raw kParamWarpMenu2 slot, where the leaf_set table maps fm -> kFM_OSC; verify in the wavetable-mode preset.",
+   "source": "56cd943: serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md"
+  },
+  {
+   "atlas_id": "oscB.warp_var2",
+   "expected_target": 0.5,
+   "screen_displayed": null,
+   "verdict": "NOT_OBSERVABLE_IN_CONTEXT",
+   "context": "OSC_SAMPLE",
+   "note": "Not observable in this preset: all three oscillators run in SAMPLE mode (structural OSC_SAMPLE merge), so the warp panel shows SampleOsc warp (kFM_OSC 'FM (A)', slot 2 Off), not the WTOsc slot the target was written to. Not a failure; needs a wavetable-mode preset.",
+   "source": "56cd943: serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md"
+  },
+  {
+   "atlas_id": "oscC.warp_amount",
+   "expected_target": 0.5,
+   "screen_displayed": null,
+   "verdict": "NOT_OBSERVABLE_IN_CONTEXT",
+   "context": "OSC_SAMPLE",
+   "note": "Not observable in this preset: all three oscillators run in SAMPLE mode (structural OSC_SAMPLE merge), so the warp panel shows SampleOsc warp (kFM_OSC 'FM (A)', slot 2 Off), not the WTOsc slot the target was written to. Not a failure; needs a wavetable-mode preset.",
+   "source": "56cd943: serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md"
+  },
+  {
+   "atlas_id": "oscC.warp_mode",
+   "expected_target": "kAM_OSC",
+   "screen_displayed": null,
+   "verdict": "NOT_OBSERVABLE_IN_CONTEXT",
+   "context": "OSC_SAMPLE",
+   "note": "Not observable in this preset: all three oscillators run in SAMPLE mode (structural OSC_SAMPLE merge), so the warp panel shows SampleOsc warp (kFM_OSC 'FM (A)', slot 2 Off), not the WTOsc slot the target was written to. Not a failure; needs a wavetable-mode preset.",
+   "source": "56cd943: serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md"
+  },
+  {
+   "atlas_id": "oscC.warp_mode2",
+   "expected_target": "fm",
+   "screen_displayed": null,
+   "verdict": "NOT_OBSERVABLE_IN_CONTEXT",
+   "context": "OSC_SAMPLE",
+   "note": "Not observable in this preset: all three oscillators run in SAMPLE mode (structural OSC_SAMPLE merge), so the warp panel shows SampleOsc warp (kFM_OSC 'FM (A)', slot 2 Off), not the WTOsc slot the target was written to. Not a failure; needs a wavetable-mode preset. Side issue: the file holds the spec word 'fm' in the raw kParamWarpMenu2 slot, where the leaf_set table maps fm -> kFM_OSC; verify in the wavetable-mode preset.",
+   "source": "56cd943: serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md"
+  },
+  {
+   "atlas_id": "oscC.warp_var2",
+   "expected_target": 0.5,
+   "screen_displayed": null,
+   "verdict": "NOT_OBSERVABLE_IN_CONTEXT",
+   "context": "OSC_SAMPLE",
+   "note": "Not observable in this preset: all three oscillators run in SAMPLE mode (structural OSC_SAMPLE merge), so the warp panel shows SampleOsc warp (kFM_OSC 'FM (A)', slot 2 Off), not the WTOsc slot the target was written to. Not a failure; needs a wavetable-mode preset.",
+   "source": "56cd943: serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md"
+  }
+ ],
+ "navigation_hazards_found": "Two accidental-mutation risks discovered while scanning the FX rack panel: (1) mouse-wheel scroll over a knob CHANGES its value (not panel scroll) -- must never scroll while the cursor is over a control; (2) a stray click near a module's collapse-triangle instead added a duplicate FX unit to the rack. Both were caught via the title's '*' modified indicator and fixed by reloading the preset fresh; neither corrupted the evidence already recorded (each recorded MATCH/MISMATCH was read and logged before the mutation occurred). Filter/Flanger/Phaser/Reverb (4 of 12 FX types) were not reached this pass as a result -- deferred rather than risk further accidental edits.",
+ "scope_note": "Checkpoint after continuing the page-by-page scan (OSC page more fully, MIX page, FX page structural + partial numeric). Far from exhaustive over 299 applied candidates -- see DIRECT_UI_VERIFICATION_CHECKLIST.md for remaining pages (MATRIX, GLOBAL, ENV/LFO/FILTER panels in depth, MACRO, secondary OSC_WARP2 preset) and the 3 open findings needing targeted single-value follow-up before being logged as final MATCH/MISMATCH in a closure ledger.",
+ "authorizes_nothing": true,
+ "revisions": [
+  {
+   "source": "56cd943: serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md",
+   "summary": "lfo1-6.mode -> CONTEXT_CONFLICT (isolation evidence kept); compressor release -> MATCH, attack -> MISMATCH, ratio note corrected, gain added; reverb.type VOCABULARY_MISMATCH; arp.transpose.shape 18-label vocabulary; osc*.warp_* NOT_OBSERVABLE_IN_CONTEXT (OSC_SAMPLE). Prior readings kept per entry under 'superseded'."
+  },
+  {
+   "source": "serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md (395277f, corrected e4e3203)",
+   "summary": "BULK_01/02 screen reads added as bulk_observations; v2 observations unchanged"
+  }
+ ],
+ "supersedes": "direct_ui_evidence_v2.json and v3 (both kept unchanged); v4 adds CAL_01",
+ "bulk_observations": [
+  {
+   "atlas_id": "oscA.warp_mode",
+   "preset": "BULK_01_WAVETABLE_MAIN",
+   "value_written": "kSync",
+   "screen_displayed": "SYNC",
+   "verdict": "NORMALIZED_MATCH",
+   "method": "zoomed label",
+   "note": "kSync -> 'Sync'",
+   "tier": "C_direct_ui",
+   "source": "serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md (395277f, corrected e4e3203)"
+  },
+  {
+   "atlas_id": "oscB.warp_mode",
+   "preset": "BULK_01_WAVETABLE_MAIN",
+   "value_written": "kPWM",
+   "screen_displayed": "PWM",
+   "verdict": "NORMALIZED_MATCH",
+   "method": "zoomed label",
+   "note": "kPWM -> 'PWM'",
+   "tier": "C_direct_ui",
+   "source": "serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md (395277f, corrected e4e3203)"
+  },
+  {
+   "atlas_id": "oscC.warp_mode",
+   "preset": "BULK_01_WAVETABLE_MAIN",
+   "value_written": "kBendPos",
+   "screen_displayed": "BEND+",
+   "verdict": "NORMALIZED_MATCH",
+   "method": "zoomed label",
+   "note": "kBendPos -> 'Bend +'",
+   "tier": "C_direct_ui",
+   "source": "serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md (395277f, corrected e4e3203)"
+  },
+  {
+   "atlas_id": "oscA.warp_mode2",
+   "preset": "BULK_01_WAVETABLE_MAIN",
+   "value_written": "am",
+   "screen_displayed": "AM(B)",
+   "verdict": "NORMALIZED_MATCH",
+   "method": "zoomed label",
+   "note": "leaf-set word am -> kAM_OSC -> 'AM (B)' (modulator named by the other osc)",
+   "tier": "C_direct_ui",
+   "source": "serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md (395277f, corrected e4e3203)"
+  },
+  {
+   "atlas_id": "oscB.warp_mode2",
+   "preset": "BULK_01_WAVETABLE_MAIN",
+   "value_written": "sync",
+   "screen_displayed": "SYNC",
+   "verdict": "NORMALIZED_MATCH",
+   "method": "zoomed label",
+   "note": "sync -> kSync -> 'Sync'",
+   "tier": "C_direct_ui",
+   "source": "serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md (395277f, corrected e4e3203)"
+  },
+  {
+   "atlas_id": "oscC.warp_mode2",
+   "preset": "BULK_01_WAVETABLE_MAIN",
+   "value_written": "pwm",
+   "screen_displayed": "PWM",
+   "verdict": "NORMALIZED_MATCH",
+   "method": "zoomed label",
+   "note": "pwm -> kPWM -> 'PWM'",
+   "tier": "C_direct_ui",
+   "source": "serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md (395277f, corrected e4e3203)"
+  },
+  {
+   "atlas_id": "oscA.warp_amount",
+   "preset": "BULK_01_WAVETABLE_MAIN",
+   "value_written": 0.46,
+   "screen_displayed": "A Warp (2.46 %)",
+   "verdict": "CURVE_OBSERVED",
+   "method": "hover tooltip",
+   "note": "raw 0.46 landed (file + host text agree); in SYNC mode the display is a mode-dependent nonlinear scale (0.32 -> 1.49, 0.46 -> 2.46). Not a write mismatch; curve formula unknown.",
+   "tier": "C_direct_ui",
+   "source": "serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md (395277f, corrected e4e3203)"
+  },
+  {
+   "atlas_id": "env1.sustain",
+   "preset": "BULK_01_WAVETABLE_MAIN",
+   "value_written": 0.16,
+   "screen_displayed": "-31.8 dB",
+   "verdict": "MATCH_ON_KNOWN_CURVE",
+   "method": "panel read",
+   "note": "display = 40*log10(raw) = 20*log10(raw^2): 40*log10(0.16) = -31.84 dB. Resolves the earlier sustain 'mismatch' as a squared display curve.",
+   "tier": "C_direct_ui",
+   "source": "serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md (395277f, corrected e4e3203)"
+  },
+  {
+   "atlas_id": "fx.compressor.thresh",
+   "preset": "BULK_01_WAVETABLE_MAIN",
+   "value_written": 0.49,
+   "screen_displayed": "-17.5 dB",
+   "verdict": "CURVE_OBSERVED",
+   "method": "header row",
+   "note": "second point: raw 0.25 -> -7.5, 0.4 -> -13.3, 0.49 -> -17.5 dB",
+   "tier": "C_direct_ui",
+   "source": "serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md (395277f, corrected e4e3203)"
+  },
+  {
+   "atlas_id": "fx.compressor.ratio",
+   "preset": "BULK_01_WAVETABLE_MAIN",
+   "value_written": 430.0,
+   "screen_displayed": "Limit",
+   "verdict": "DOMAIN_SCALE_MISMATCH",
+   "method": "header row",
+   "note": "raw 430 shows 'Limit' (so do 210 and 31622): the schema ratio domain 1..1e6 does not describe Serum's stored scale",
+   "tier": "C_direct_ui",
+   "source": "serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md (395277f, corrected e4e3203)"
+  },
+  {
+   "atlas_id": "fx.compressor.attack",
+   "preset": "BULK_01_WAVETABLE_MAIN",
+   "value_written": 22.0,
+   "screen_displayed": "0.2 ms",
+   "verdict": "DOMAIN_SCALE_MISMATCH",
+   "method": "header row",
+   "note": "raw 22 -> 0.2 ms with ratio at Limit. CAL_01 shows attack displays raw ms when the ratio is numeric and raw/100 only in Limit mode; see CAL_01 rows",
+   "tier": "C_direct_ui",
+   "source": "serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md (395277f, corrected e4e3203)"
+  },
+  {
+   "atlas_id": "fx.compressor.gain",
+   "preset": "BULK_01_WAVETABLE_MAIN",
+   "value_written": 11.0,
+   "screen_displayed": "26.7 dB",
+   "verdict": "CURVE_OBSERVED",
+   "method": "header row",
+   "note": "raw 8 -> 23.8, 11 -> 26.7, 16.5 -> 30.4 dB; close to 20*log10(2*raw), unverified",
+   "tier": "C_direct_ui",
+   "source": "serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md (395277f, corrected e4e3203)"
+  },
+  {
+   "atlas_id": "fx.reverb.type",
+   "preset": "BULK_01_WAVETABLE_MAIN",
+   "value_written": "kHall",
+   "screen_displayed": "HALL",
+   "verdict": "MATCH",
+   "method": "label",
+   "note": "kHall -> 'Hall'",
+   "tier": "C_direct_ui",
+   "source": "serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md (395277f, corrected e4e3203)"
+  },
+  {
+   "atlas_id": "global.oversampling",
+   "preset": "BULK_01_WAVETABLE_MAIN",
+   "value_written": 2.0,
+   "screen_displayed": "QUALITY Ultra",
+   "verdict": "NORMALIZED_MATCH",
+   "method": "label",
+   "note": "raw 2.0 -> 'Ultra'",
+   "tier": "C_direct_ui",
+   "source": "serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md (395277f, corrected e4e3203)"
+  },
+  {
+   "atlas_id": "global.fx_bus1_destination",
+   "preset": "BULK_01_WAVETABLE_MAIN",
+   "value_written": 1.0,
+   "screen_displayed": "BUS 1 -> DIRECT",
+   "verdict": "VOCABULARY_MISMATCH",
+   "method": "MIX page label",
+   "note": "raw 1.0 (schema word 'master') displays DIRECT",
+   "tier": "C_direct_ui",
+   "source": "serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md (395277f, corrected e4e3203)"
+  },
+  {
+   "atlas_id": "global.fx_bus2_destination",
+   "preset": "BULK_01_WAVETABLE_MAIN",
+   "value_written": 2.0,
+   "screen_displayed": "BUS 2 -> BUS 1",
+   "verdict": "VOCABULARY_MISMATCH",
+   "method": "MIX page label",
+   "note": "raw 2.0 (schema word 'direct') displays BUS 1: the schema's master/direct words do not match Serum's destination labels",
+   "tier": "C_direct_ui",
+   "source": "serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md (395277f, corrected e4e3203)"
+  },
+  {
+   "atlas_id": "lfo1.mode",
+   "preset": "BULK_01_WAVETABLE_MAIN",
+   "value_written": "Envelope",
+   "screen_displayed": "ENVELOPE lit (shape Normal)",
+   "verdict": "MATCH",
+   "method": "tab click",
+   "note": "compatible context: mode=Envelope under the default shape. The S&H + Envelope conflict remains a native constraint (v2 CONTEXT_CONFLICT evidence retained).",
+   "tier": "C_direct_ui",
+   "source": "serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md (395277f, corrected e4e3203)"
+  },
+  {
+   "atlas_id": "lfo2.mode",
+   "preset": "BULK_01_WAVETABLE_MAIN",
+   "value_written": "Envelope",
+   "screen_displayed": "ENVELOPE lit (shape Normal)",
+   "verdict": "MATCH",
+   "method": "tab click",
+   "note": "compatible context: mode=Envelope under the default shape. The S&H + Envelope conflict remains a native constraint (v2 CONTEXT_CONFLICT evidence retained).",
+   "tier": "C_direct_ui",
+   "source": "serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md (395277f, corrected e4e3203)"
+  },
+  {
+   "atlas_id": "lfo3.mode",
+   "preset": "BULK_01_WAVETABLE_MAIN",
+   "value_written": "Envelope",
+   "screen_displayed": "ENVELOPE lit (shape Normal)",
+   "verdict": "MATCH",
+   "method": "tab click",
+   "note": "compatible context: mode=Envelope under the default shape. The S&H + Envelope conflict remains a native constraint (v2 CONTEXT_CONFLICT evidence retained).",
+   "tier": "C_direct_ui",
+   "source": "serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md (395277f, corrected e4e3203)"
+  },
+  {
+   "atlas_id": "lfo4.mode",
+   "preset": "BULK_01_WAVETABLE_MAIN",
+   "value_written": "Envelope",
+   "screen_displayed": "ENVELOPE lit (shape Normal)",
+   "verdict": "MATCH",
+   "method": "tab click",
+   "note": "compatible context: mode=Envelope under the default shape. The S&H + Envelope conflict remains a native constraint (v2 CONTEXT_CONFLICT evidence retained).",
+   "tier": "C_direct_ui",
+   "source": "serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md (395277f, corrected e4e3203)"
+  },
+  {
+   "atlas_id": "lfo5.mode",
+   "preset": "BULK_01_WAVETABLE_MAIN",
+   "value_written": "Envelope",
+   "screen_displayed": "ENVELOPE lit (shape Normal)",
+   "verdict": "MATCH",
+   "method": "tab click",
+   "note": "compatible context: mode=Envelope under the default shape. The S&H + Envelope conflict remains a native constraint (v2 CONTEXT_CONFLICT evidence retained).",
+   "tier": "C_direct_ui",
+   "source": "serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md (395277f, corrected e4e3203)"
+  },
+  {
+   "atlas_id": "lfo6.mode",
+   "preset": "BULK_01_WAVETABLE_MAIN",
+   "value_written": "Envelope",
+   "screen_displayed": "ENVELOPE lit (shape Normal)",
+   "verdict": "MATCH",
+   "method": "tab click",
+   "note": "compatible context: mode=Envelope under the default shape. The S&H + Envelope conflict remains a native constraint (v2 CONTEXT_CONFLICT evidence retained).",
+   "tier": "C_direct_ui",
+   "source": "serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md (395277f, corrected e4e3203)"
+  },
+  {
+   "atlas_id": "fx.compressor.thresh",
+   "preset": "BULK_02_SAMPLE_CALIBRATION",
+   "value_written": 0.4,
+   "screen_displayed": "-13.3 dB",
+   "verdict": "CURVE_OBSERVED",
+   "method": "header row",
+   "note": "see BULK_01 row",
+   "tier": "C_direct_ui",
+   "source": "serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md (395277f, corrected e4e3203)"
+  },
+  {
+   "atlas_id": "fx.compressor.ratio",
+   "preset": "BULK_02_SAMPLE_CALIBRATION",
+   "value_written": 210.0,
+   "screen_displayed": "Limit",
+   "verdict": "DOMAIN_SCALE_MISMATCH",
+   "method": "header row",
+   "note": "raw 210 still 'Limit'",
+   "tier": "C_direct_ui",
+   "source": "serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md (395277f, corrected e4e3203)"
+  },
+  {
+   "atlas_id": "fx.compressor.attack",
+   "preset": "BULK_02_SAMPLE_CALIBRATION",
+   "value_written": 10.0,
+   "screen_displayed": "0.1 ms",
+   "verdict": "DOMAIN_SCALE_MISMATCH",
+   "method": "header row",
+   "note": "raw 10 -> 0.1 ms, ratio at Limit (limiter-mode scale)",
+   "tier": "C_direct_ui",
+   "source": "serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md (395277f, corrected e4e3203)"
+  },
+  {
+   "atlas_id": "fx.compressor.gain",
+   "preset": "BULK_02_SAMPLE_CALIBRATION",
+   "value_written": 8.0,
+   "screen_displayed": "23.8 dB",
+   "verdict": "CURVE_OBSERVED",
+   "method": "header row",
+   "note": "raw 8 -> 23.8 dB",
+   "tier": "C_direct_ui",
+   "source": "serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md (395277f, corrected e4e3203)"
+  },
+  {
+   "atlas_id": "fx.reverb.type",
+   "preset": "BULK_02_SAMPLE_CALIBRATION",
+   "value_written": "kSpace",
+   "screen_displayed": "BASIN",
+   "verdict": "VOCABULARY_MAPPED",
+   "method": "label",
+   "note": "kSpace -> 'Basin' (Basin relabels DECAY -> FEEDBACK and SPIN -> CHORUS). Known map: kHall=Hall, kSpace=Basin, kAbyss=Nitrous; kVintage untested; 'Plate' has no schema word.",
+   "tier": "C_direct_ui",
+   "source": "serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md (395277f, corrected e4e3203)"
+  },
+  {
+   "atlas_id": "lfo3.shape",
+   "preset": "BULK_02_SAMPLE_CALIBRATION",
+   "value_written": "RandomSH",
+   "screen_displayed": "S&H",
+   "verdict": "NORMALIZED_MATCH",
+   "method": "label",
+   "note": "RandomSH -> 'S&H'",
+   "tier": "C_direct_ui",
+   "source": "serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md (395277f, corrected e4e3203)"
+  },
+  {
+   "atlas_id": "lfo4.shape",
+   "preset": "BULK_02_SAMPLE_CALIBRATION",
+   "value_written": "Rossler",
+   "screen_displayed": "Chaos: Rossler",
+   "verdict": "NORMALIZED_MATCH",
+   "method": "label",
+   "note": "category prefix 'Chaos:'",
+   "tier": "C_direct_ui",
+   "source": "serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md (395277f, corrected e4e3203)"
+  },
+  {
+   "atlas_id": "lfo5.shape",
+   "preset": "BULK_02_SAMPLE_CALIBRATION",
+   "value_written": "Lorenz",
+   "screen_displayed": "Chaos: Lorenz",
+   "verdict": "NORMALIZED_MATCH",
+   "method": "label",
+   "note": "category prefix 'Chaos:'",
+   "tier": "C_direct_ui",
+   "source": "serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md (395277f, corrected e4e3203)"
+  },
+  {
+   "atlas_id": "lfo6.shape",
+   "preset": "BULK_02_SAMPLE_CALIBRATION",
+   "value_written": "Path",
+   "screen_displayed": "Path",
+   "verdict": "MATCH",
+   "method": "label",
+   "note": "",
+   "tier": "C_direct_ui",
+   "source": "serum2/qualification/bulk_causal/giant_verify_out/ui_scan_2026-09-26.md (395277f, corrected e4e3203)"
+  },
+  {
+   "atlas_id": "oscA.warp_amount",
+   "preset": "VERIFY_SECONDARY_OSC_WARP2",
+   "value_written": 0.0,
+   "screen_displayed": "0 %",
+   "verdict": "MATCH_AT_DEFAULT",
+   "method": "hover/label",
+   "note": "kFM_OSC is contextual: OSC A shows 'FM (B)', OSC B/C show 'FM (A)'. The session table's 'warp_var2 50 %' column is attributed to warp_amount2 (kParamWarp2 = 0.5 was the only 0.5 warp leaf written in that preset).",
+   "tier": "C_direct_ui",
+   "source": "d0f75df ui_scan_2026-09-26.md"
+  },
+  {
+   "atlas_id": "oscA.warp_amount2",
+   "preset": "VERIFY_SECONDARY_OSC_WARP2",
+   "value_written": 0.5,
+   "screen_displayed": "50 %",
+   "verdict": "MATCH",
+   "method": "hover/label",
+   "note": "kFM_OSC is contextual: OSC A shows 'FM (B)', OSC B/C show 'FM (A)'. The session table's 'warp_var2 50 %' column is attributed to warp_amount2 (kParamWarp2 = 0.5 was the only 0.5 warp leaf written in that preset).",
+   "tier": "C_direct_ui",
+   "source": "d0f75df ui_scan_2026-09-26.md"
+  },
+  {
+   "atlas_id": "oscA.warp_mode",
+   "preset": "VERIFY_SECONDARY_OSC_WARP2",
+   "value_written": "kFM_OSC",
+   "screen_displayed": "FM (B)",
+   "verdict": "NORMALIZED_MATCH",
+   "method": "hover/label",
+   "note": "kFM_OSC is contextual: OSC A shows 'FM (B)', OSC B/C show 'FM (A)'. The session table's 'warp_var2 50 %' column is attributed to warp_amount2 (kParamWarp2 = 0.5 was the only 0.5 warp leaf written in that preset).",
+   "tier": "C_direct_ui",
+   "source": "d0f75df ui_scan_2026-09-26.md"
+  },
+  {
+   "atlas_id": "oscA.warp_mode2",
+   "preset": "VERIFY_SECONDARY_OSC_WARP2",
+   "value_written": "kFM_OSC",
+   "screen_displayed": "FM (B)",
+   "verdict": "NORMALIZED_MATCH",
+   "method": "hover/label",
+   "note": "kFM_OSC is contextual: OSC A shows 'FM (B)', OSC B/C show 'FM (A)'. The session table's 'warp_var2 50 %' column is attributed to warp_amount2 (kParamWarp2 = 0.5 was the only 0.5 warp leaf written in that preset).",
+   "tier": "C_direct_ui",
+   "source": "d0f75df ui_scan_2026-09-26.md"
+  },
+  {
+   "atlas_id": "oscB.warp_amount",
+   "preset": "VERIFY_SECONDARY_OSC_WARP2",
+   "value_written": 0.0,
+   "screen_displayed": "0 %",
+   "verdict": "MATCH_AT_DEFAULT",
+   "method": "hover/label",
+   "note": "kFM_OSC is contextual: OSC A shows 'FM (B)', OSC B/C show 'FM (A)'. The session table's 'warp_var2 50 %' column is attributed to warp_amount2 (kParamWarp2 = 0.5 was the only 0.5 warp leaf written in that preset).",
+   "tier": "C_direct_ui",
+   "source": "d0f75df ui_scan_2026-09-26.md"
+  },
+  {
+   "atlas_id": "oscB.warp_amount2",
+   "preset": "VERIFY_SECONDARY_OSC_WARP2",
+   "value_written": 0.5,
+   "screen_displayed": "50 %",
+   "verdict": "MATCH",
+   "method": "hover/label",
+   "note": "kFM_OSC is contextual: OSC A shows 'FM (B)', OSC B/C show 'FM (A)'. The session table's 'warp_var2 50 %' column is attributed to warp_amount2 (kParamWarp2 = 0.5 was the only 0.5 warp leaf written in that preset).",
+   "tier": "C_direct_ui",
+   "source": "d0f75df ui_scan_2026-09-26.md"
+  },
+  {
+   "atlas_id": "oscB.warp_mode",
+   "preset": "VERIFY_SECONDARY_OSC_WARP2",
+   "value_written": "kFM_OSC",
+   "screen_displayed": "FM (A)",
+   "verdict": "NORMALIZED_MATCH",
+   "method": "hover/label",
+   "note": "kFM_OSC is contextual: OSC A shows 'FM (B)', OSC B/C show 'FM (A)'. The session table's 'warp_var2 50 %' column is attributed to warp_amount2 (kParamWarp2 = 0.5 was the only 0.5 warp leaf written in that preset).",
+   "tier": "C_direct_ui",
+   "source": "d0f75df ui_scan_2026-09-26.md"
+  },
+  {
+   "atlas_id": "oscB.warp_mode2",
+   "preset": "VERIFY_SECONDARY_OSC_WARP2",
+   "value_written": "kFM_OSC",
+   "screen_displayed": "FM (A)",
+   "verdict": "NORMALIZED_MATCH",
+   "method": "hover/label",
+   "note": "kFM_OSC is contextual: OSC A shows 'FM (B)', OSC B/C show 'FM (A)'. The session table's 'warp_var2 50 %' column is attributed to warp_amount2 (kParamWarp2 = 0.5 was the only 0.5 warp leaf written in that preset).",
+   "tier": "C_direct_ui",
+   "source": "d0f75df ui_scan_2026-09-26.md"
+  },
+  {
+   "atlas_id": "oscC.warp_amount",
+   "preset": "VERIFY_SECONDARY_OSC_WARP2",
+   "value_written": 0.0,
+   "screen_displayed": "0 %",
+   "verdict": "MATCH_AT_DEFAULT",
+   "method": "hover/label",
+   "note": "kFM_OSC is contextual: OSC A shows 'FM (B)', OSC B/C show 'FM (A)'. The session table's 'warp_var2 50 %' column is attributed to warp_amount2 (kParamWarp2 = 0.5 was the only 0.5 warp leaf written in that preset).",
+   "tier": "C_direct_ui",
+   "source": "d0f75df ui_scan_2026-09-26.md"
+  },
+  {
+   "atlas_id": "oscC.warp_amount2",
+   "preset": "VERIFY_SECONDARY_OSC_WARP2",
+   "value_written": 0.5,
+   "screen_displayed": "50 %",
+   "verdict": "MATCH",
+   "method": "hover/label",
+   "note": "kFM_OSC is contextual: OSC A shows 'FM (B)', OSC B/C show 'FM (A)'. The session table's 'warp_var2 50 %' column is attributed to warp_amount2 (kParamWarp2 = 0.5 was the only 0.5 warp leaf written in that preset).",
+   "tier": "C_direct_ui",
+   "source": "d0f75df ui_scan_2026-09-26.md"
+  },
+  {
+   "atlas_id": "oscC.warp_mode",
+   "preset": "VERIFY_SECONDARY_OSC_WARP2",
+   "value_written": "kFM_OSC",
+   "screen_displayed": "FM (A)",
+   "verdict": "NORMALIZED_MATCH",
+   "method": "hover/label",
+   "note": "kFM_OSC is contextual: OSC A shows 'FM (B)', OSC B/C show 'FM (A)'. The session table's 'warp_var2 50 %' column is attributed to warp_amount2 (kParamWarp2 = 0.5 was the only 0.5 warp leaf written in that preset).",
+   "tier": "C_direct_ui",
+   "source": "d0f75df ui_scan_2026-09-26.md"
+  },
+  {
+   "atlas_id": "oscC.warp_mode2",
+   "preset": "VERIFY_SECONDARY_OSC_WARP2",
+   "value_written": "kFM_OSC",
+   "screen_displayed": "FM (A)",
+   "verdict": "NORMALIZED_MATCH",
+   "method": "hover/label",
+   "note": "kFM_OSC is contextual: OSC A shows 'FM (B)', OSC B/C show 'FM (A)'. The session table's 'warp_var2 50 %' column is attributed to warp_amount2 (kParamWarp2 = 0.5 was the only 0.5 warp leaf written in that preset).",
+   "tier": "C_direct_ui",
+   "source": "d0f75df ui_scan_2026-09-26.md"
+  },
+  {
+   "atlas_id": "fx.compressor.thresh",
+   "preset": "CAL_01_COMPRESSOR_CURVES",
+   "value_written": [
+    0.05,
+    0.15,
+    0.3,
+    0.45,
+    0.6,
+    0.7,
+    0.85,
+    1.0
+   ],
+   "screen_displayed": [
+    "-1.3 dB",
+    "-4.2 dB",
+    "-9.3 dB",
+    "-15.6 dB",
+    "-23.9 dB",
+    "-31.4 dB",
+    "-40.4 dB",
+    "-120.0 dB"
+   ],
+   "points": [
+    {
+     "raw": 0.05,
+     "screen": "-1.3 dB"
+    },
+    {
+     "raw": 0.15,
+     "screen": "-4.2 dB"
+    },
+    {
+     "raw": 0.3,
+     "screen": "-9.3 dB"
+    },
+    {
+     "raw": 0.45,
+     "screen": "-15.6 dB"
+    },
+    {
+     "raw": 0.6,
+     "screen": "-23.9 dB"
+    },
+    {
+     "raw": 0.7,
+     "screen": "-31.4 dB"
+    },
+    {
+     "raw": 0.85,
+     "screen": "-40.4 dB"
+    },
+    {
+     "raw": 1.0,
+     "screen": "-120.0 dB"
+    }
+   ],
+   "verdict": "MATCH_ON_KNOWN_CURVE",
+   "method": "header row, 8 units",
+   "note": "display = 60*log10(1-raw) dB (raw 1.0 = -120 floor): fits 10 of 11 points (incl. earlier 0.25/0.4/0.49) within 0.05 dB. Outlier: raw 0.85 predicts -49.4, read -40.4 (likely a 4/9 misread): RECHECK unit 7.",
+   "tier": "C_direct_ui",
+   "source": "ui_scan_2026-09-26.md CAL_01 section (5d9c424)"
+  },
+  {
+   "atlas_id": "fx.compressor.ratio",
+   "preset": "CAL_01_COMPRESSOR_CURVES",
+   "value_written": [
+    1.0,
+    1.5,
+    2.0,
+    3.0,
+    4.0,
+    8.0,
+    20.0,
+    100.0
+   ],
+   "screen_displayed": [
+    "1.0:1",
+    "1.5:1",
+    "2.0:1",
+    "3:1",
+    "4:1",
+    "8:1",
+    "32:1",
+    "Limit"
+   ],
+   "points": [
+    {
+     "raw": 1.0,
+     "screen": "1.0:1"
+    },
+    {
+     "raw": 1.5,
+     "screen": "1.5:1"
+    },
+    {
+     "raw": 2.0,
+     "screen": "2.0:1"
+    },
+    {
+     "raw": 3.0,
+     "screen": "3:1"
+    },
+    {
+     "raw": 4.0,
+     "screen": "4:1"
+    },
+    {
+     "raw": 8.0,
+     "screen": "8:1"
+    },
+    {
+     "raw": 20.0,
+     "screen": "32:1"
+    },
+    {
+     "raw": 100.0,
+     "screen": "Limit"
+    }
+   ],
+   "verdict": "DOMAIN_SCALE_MISMATCH",
+   "method": "header row, 8 units",
+   "note": "display = raw for 1..8; raw 20 shows 32:1 and 100 shows Limit (so do 210/430/31622). Schema domain 1..1e6 is wrong; whether ratios above 8 are stepped (e.g. 16, 32, Limit) is open: points 10/12/16/24/32/50 would settle it.",
+   "tier": "C_direct_ui",
+   "source": "ui_scan_2026-09-26.md CAL_01 section (5d9c424)"
+  },
+  {
+   "atlas_id": "fx.compressor.attack",
+   "preset": "CAL_01_COMPRESSOR_CURVES",
+   "value_written": [
+    0.1,
+    0.5,
+    2.0,
+    5.0,
+    30.0,
+    150.0,
+    500.0,
+    1000.0
+   ],
+   "screen_displayed": [
+    "1000.0",
+    "0.5",
+    "2.0",
+    "5.0",
+    "30.0",
+    "150.0",
+    "500.0",
+    "10.0"
+   ],
+   "points": [
+    {
+     "raw": 0.1,
+     "screen": "1000.0"
+    },
+    {
+     "raw": 0.5,
+     "screen": "0.5"
+    },
+    {
+     "raw": 2.0,
+     "screen": "2.0"
+    },
+    {
+     "raw": 5.0,
+     "screen": "5.0"
+    },
+    {
+     "raw": 30.0,
+     "screen": "30.0"
+    },
+    {
+     "raw": 150.0,
+     "screen": "150.0"
+    },
+    {
+     "raw": 500.0,
+     "screen": "500.0"
+    },
+    {
+     "raw": 1000.0,
+     "screen": "10.0"
+    }
+   ],
+   "verdict": "DOMAIN_SCALE_MISMATCH",
+   "method": "header row, 8 units",
+   "note": "display = raw ms while the ratio is numeric (0.5..500); in Limit mode display = raw/100 (unit 8 and all BULK/giant points were Limit). raw 0.1, the declared minimum, shows 1000: the declared min is not valid in Serum.",
+   "tier": "C_direct_ui",
+   "source": "ui_scan_2026-09-26.md CAL_01 section (5d9c424)"
+  },
+  {
+   "atlas_id": "fx.compressor.release",
+   "preset": "CAL_01_COMPRESSOR_CURVES",
+   "value_written": [
+    0.1,
+    1.0,
+    5.0,
+    20.0,
+    50.0,
+    250.0,
+    600.0,
+    1000.0
+   ],
+   "screen_displayed": [
+    "1000.0",
+    "1.0",
+    "5.0",
+    "20.0",
+    "50.0",
+    "250.0",
+    "600.0",
+    "1000.0"
+   ],
+   "points": [
+    {
+     "raw": 0.1,
+     "screen": "1000.0"
+    },
+    {
+     "raw": 1.0,
+     "screen": "1.0"
+    },
+    {
+     "raw": 5.0,
+     "screen": "5.0"
+    },
+    {
+     "raw": 20.0,
+     "screen": "20.0"
+    },
+    {
+     "raw": 50.0,
+     "screen": "50.0"
+    },
+    {
+     "raw": 250.0,
+     "screen": "250.0"
+    },
+    {
+     "raw": 600.0,
+     "screen": "600.0"
+    },
+    {
+     "raw": 1000.0,
+     "screen": "1000.0"
+    }
+   ],
+   "verdict": "DOMAIN_SCALE_MISMATCH",
+   "method": "header row, 8 units",
+   "note": "display = raw ms for 1..1000 (incl. Limit mode); raw 0.1, the declared minimum, shows 1000: declared min invalid.",
+   "tier": "C_direct_ui",
+   "source": "ui_scan_2026-09-26.md CAL_01 section (5d9c424)"
+  },
+  {
+   "atlas_id": "fx.compressor.gain",
+   "preset": "CAL_01_COMPRESSOR_CURVES",
+   "value_written": [
+    1.0,
+    2.0,
+    3.0,
+    5.0,
+    12.0,
+    20.0,
+    27.0,
+    32.0
+   ],
+   "screen_displayed": [
+    "0.0 dB",
+    "6.0 dB",
+    "9.5 dB",
+    "14.0 dB",
+    "21.6 dB",
+    "28.0 dB",
+    "28.6 dB",
+    "36.0 dB"
+   ],
+   "points": [
+    {
+     "raw": 1.0,
+     "screen": "0.0 dB"
+    },
+    {
+     "raw": 2.0,
+     "screen": "6.0 dB"
+    },
+    {
+     "raw": 3.0,
+     "screen": "9.5 dB"
+    },
+    {
+     "raw": 5.0,
+     "screen": "14.0 dB"
+    },
+    {
+     "raw": 12.0,
+     "screen": "21.6 dB"
+    },
+    {
+     "raw": 20.0,
+     "screen": "28.0 dB"
+    },
+    {
+     "raw": 27.0,
+     "screen": "28.6 dB"
+    },
+    {
+     "raw": 32.0,
+     "screen": "36.0 dB"
+    }
+   ],
+   "verdict": "CURVE_OBSERVED",
+   "method": "header row, 8 units",
+   "note": "display = 20*log10(raw) dB for units 1-5 and 7 (within 0.1 dB); in Limit mode about +6 dB (unit 8 +5.9; BULK 8/11/16.5 +5.7/+5.9/+6.1). Outlier: raw 20 (ratio 8) reads 28.0 vs 26.0: RECHECK unit 6 before closing.",
+   "tier": "C_direct_ui",
+   "source": "ui_scan_2026-09-26.md CAL_01 section (5d9c424)"
+  },
+  {
+   "atlas_id": "lfo1.mode",
+   "preset": "CAL_01_COMPRESSOR_CURVES",
+   "value_written": "Envelope (with shape RandomSH)",
+   "screen_displayed": "S&H; FREE lit, ENVELOPE dim",
+   "verdict": "CONTEXT_CONFLICT_REFERENCE",
+   "method": "tab click",
+   "tier": "C_direct_ui",
+   "source": "ui_scan_2026-09-26.md CAL_01 section (5d9c424)",
+   "note": "native constraint reproduced on a clean preset; lfo1.mode itself is confirmed in BULK_01 (Normal + Envelope)"
+  }
+ ],
+ "reference_reads": [
+  {
+   "reference": "LFO7_CONTEXT_CONFLICT",
+   "preset": "BULK_01_WAVETABLE_MAIN",
+   "verdict": "NOT_OBSERVABLE_IN_UI",
+   "note": "Serum 2.0.23 shows only LFO1-6 tabs; file slot LFO6 (UI LFO 7) cannot be viewed. The conflict reference moves to a visible LFO in the calibration preset."
+  }
+ ]
+}

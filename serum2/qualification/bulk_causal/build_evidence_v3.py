@@ -3,9 +3,9 @@
     python build_evidence_v3.py
 
 Writes (parameter_characterization/bulk_causal_evidence/):
-  direct_ui_evidence_v3.json      = direct_ui_evidence_v2 observations + session-2 WT readings + BULK screen reads (C tier only)
+  direct_ui_evidence_v4.json      = direct_ui_evidence_v2 observations + session-2 WT readings + BULK screen reads (C tier only)
   host_text_bulk_evidence_v1.json = per-control host text from BULK_01/02_host_texts.json (B tier only, never DIRECT_UI)
-  serum_full_control_map_v2.json  = control map v1 + both new tiers + recomputed closure (330 entries)
+  serum_full_control_map_v3.json  = control map v1 + both new tiers + recomputed closure (330 entries)
 
 C-tier rows below are transcribed from ui_scan_2026-09-26.md sections that the operator marked as on-screen reads
 (zoomed labels, header rows, mode buttons, tooltips). Host-dump rows from the same doc are NOT transcribed here: they are
@@ -60,7 +60,8 @@ BULK_READS = [
     ("fx.compressor.ratio", B1, "Limit", "DOMAIN_SCALE_MISMATCH", "header row",
      "raw 430 shows 'Limit' (so do 210 and 31622): the schema ratio domain 1..1e6 does not describe Serum's stored scale"),
     ("fx.compressor.attack", B1, "0.2 ms", "DOMAIN_SCALE_MISMATCH", "header row",
-     "raw 22 -> 0.2 ms, 10 -> 0.1 ms, 100 -> 1.0 ms: display = raw/100 ms, not the schema's 0.1..1000 ms"),
+     "raw 22 -> 0.2 ms with ratio at Limit. CAL_01 shows attack displays raw ms when the ratio is numeric and raw/100 only in "
+     "Limit mode; see CAL_01 rows"),
     ("fx.compressor.gain", B1, "26.7 dB", "CURVE_OBSERVED", "header row", "raw 8 -> 23.8, 11 -> 26.7, 16.5 -> 30.4 dB; close to 20*log10(2*raw), unverified"),
     ("fx.reverb.type", B1, "HALL", "MATCH", "label", "kHall -> 'Hall'"),
     ("global.oversampling", B1, "QUALITY Ultra", "NORMALIZED_MATCH", "label", "raw 2.0 -> 'Ultra'"),
@@ -73,7 +74,7 @@ BULK_READS = [
       "(v2 CONTEXT_CONFLICT evidence retained).") for i in range(1, 7)] + [
     ("fx.compressor.thresh", B2, "-13.3 dB", "CURVE_OBSERVED", "header row", "see BULK_01 row"),
     ("fx.compressor.ratio", B2, "Limit", "DOMAIN_SCALE_MISMATCH", "header row", "raw 210 still 'Limit'"),
-    ("fx.compressor.attack", B2, "0.1 ms", "DOMAIN_SCALE_MISMATCH", "header row", "raw 10 -> 0.1 ms"),
+    ("fx.compressor.attack", B2, "0.1 ms", "DOMAIN_SCALE_MISMATCH", "header row", "raw 10 -> 0.1 ms, ratio at Limit (limiter-mode scale)"),
     ("fx.compressor.gain", B2, "23.8 dB", "CURVE_OBSERVED", "header row", "raw 8 -> 23.8 dB"),
     ("fx.reverb.type", B2, "BASIN", "VOCABULARY_MAPPED", "label",
      "kSpace -> 'Basin' (Basin relabels DECAY -> FEEDBACK and SPIN -> CHORUS). Known map: kHall=Hall, kSpace=Basin, kAbyss=Nitrous; "
@@ -82,6 +83,30 @@ BULK_READS = [
     ("lfo4.shape", B2, "Chaos: Rossler", "NORMALIZED_MATCH", "label", "category prefix 'Chaos:'"),
     ("lfo5.shape", B2, "Chaos: Lorenz", "NORMALIZED_MATCH", "label", "category prefix 'Chaos:'"),
     ("lfo6.shape", B2, "Path", "MATCH", "label", ""),
+]
+CAL = "CAL_01_COMPRESSOR_CURVES"
+CAL_SRC = "ui_scan_2026-09-26.md CAL_01 section (5d9c424)"
+# (atlas_id, [(raw, screen)], verdict, note). Values from the operator's header-row table; interpretation is mine.
+CAL_READS = [
+    ("fx.compressor.thresh", [(0.05, "-1.3 dB"), (0.15, "-4.2 dB"), (0.3, "-9.3 dB"), (0.45, "-15.6 dB"), (0.6, "-23.9 dB"),
+                              (0.7, "-31.4 dB"), (0.85, "-40.4 dB"), (1.0, "-120.0 dB")], "MATCH_ON_KNOWN_CURVE",
+     "display = 60*log10(1-raw) dB (raw 1.0 = -120 floor): fits 10 of 11 points (incl. earlier 0.25/0.4/0.49) within 0.05 dB. "
+     "Outlier: raw 0.85 predicts -49.4, read -40.4 (likely a 4/9 misread): RECHECK unit 7."),
+    ("fx.compressor.ratio", [(1.0, "1.0:1"), (1.5, "1.5:1"), (2.0, "2.0:1"), (3.0, "3:1"), (4.0, "4:1"), (8.0, "8:1"),
+                             (20.0, "32:1"), (100.0, "Limit")], "DOMAIN_SCALE_MISMATCH",
+     "display = raw for 1..8; raw 20 shows 32:1 and 100 shows Limit (so do 210/430/31622). Schema domain 1..1e6 is wrong; "
+     "whether ratios above 8 are stepped (e.g. 16, 32, Limit) is open: points 10/12/16/24/32/50 would settle it."),
+    ("fx.compressor.attack", [(0.1, "1000.0"), (0.5, "0.5"), (2.0, "2.0"), (5.0, "5.0"), (30.0, "30.0"), (150.0, "150.0"),
+                              (500.0, "500.0"), (1000.0, "10.0")], "DOMAIN_SCALE_MISMATCH",
+     "display = raw ms while the ratio is numeric (0.5..500); in Limit mode display = raw/100 (unit 8 and all BULK/giant points "
+     "were Limit). raw 0.1, the declared minimum, shows 1000: the declared min is not valid in Serum."),
+    ("fx.compressor.release", [(0.1, "1000.0"), (1.0, "1.0"), (5.0, "5.0"), (20.0, "20.0"), (50.0, "50.0"), (250.0, "250.0"),
+                               (600.0, "600.0"), (1000.0, "1000.0")], "DOMAIN_SCALE_MISMATCH",
+     "display = raw ms for 1..1000 (incl. Limit mode); raw 0.1, the declared minimum, shows 1000: declared min invalid."),
+    ("fx.compressor.gain", [(1.0, "0.0 dB"), (2.0, "6.0 dB"), (3.0, "9.5 dB"), (5.0, "14.0 dB"), (12.0, "21.6 dB"),
+                            (20.0, "28.0 dB"), (27.0, "28.6 dB"), (32.0, "36.0 dB")], "CURVE_OBSERVED",
+     "display = 20*log10(raw) dB for units 1-5 and 7 (within 0.1 dB); in Limit mode about +6 dB (unit 8 +5.9; BULK 8/11/16.5 "
+     "+5.7/+5.9/+6.1). Outlier: raw 20 (ratio 8) reads 28.0 vs 26.0: RECHECK unit 6 before closing."),
 ]
 REFERENCE_READS = [{"reference": "LFO7_CONTEXT_CONFLICT", "preset": B1, "verdict": "NOT_OBSERVABLE_IN_UI",
                     "note": "Serum 2.0.23 shows only LFO1-6 tabs; file slot LFO6 (UI LFO 7) cannot be viewed. The conflict reference "
@@ -140,7 +165,7 @@ def main():
     v2 = J(os.path.join(ED, "direct_ui_evidence_v2.json"))
     cmap1 = J(os.path.join(ED, "serum_full_control_map_v1.json"))
     v3 = copy.deepcopy(v2)
-    v3["supersedes"] = "direct_ui_evidence_v2.json (kept unchanged)"
+    v3["supersedes"] = "direct_ui_evidence_v2.json and v3 (both kept unchanged); v4 adds CAL_01"
     v3["bulk_observations"] = []
     for aid, preset, screen, verdict, method, note in BULK_READS:
         v3["bulk_observations"].append({"atlas_id": aid, "preset": preset, "value_written": ctrl_value(preset, aid),
@@ -151,10 +176,19 @@ def main():
         v3["bulk_observations"].append({"atlas_id": aid, "preset": s["preset"], "value_written": s["written"],
                                         "screen_displayed": s["screen"], "verdict": s["verdict"].split(" ")[0],
                                         "method": "hover/label", "note": s["note"], "tier": "C_direct_ui", "source": s["source"]})
+    for aid, pts, verdict, note in CAL_READS:
+        v3["bulk_observations"].append({"atlas_id": aid, "preset": CAL, "value_written": [p for p, _ in pts],
+                                        "screen_displayed": [t for _, t in pts], "points": [{"raw": p, "screen": t} for p, t in pts],
+                                        "verdict": verdict, "method": "header row, 8 units", "note": note, "tier": "C_direct_ui",
+                                        "source": CAL_SRC})
+    v3["bulk_observations"].append({"atlas_id": "lfo1.mode", "preset": CAL, "value_written": "Envelope (with shape RandomSH)",
+                                    "screen_displayed": "S&H; FREE lit, ENVELOPE dim", "verdict": "CONTEXT_CONFLICT_REFERENCE",
+                                    "method": "tab click", "tier": "C_direct_ui", "source": CAL_SRC,
+                                    "note": "native constraint reproduced on a clean preset; lfo1.mode itself is confirmed in BULK_01 (Normal + Envelope)"})
     v3["reference_reads"] = REFERENCE_READS
     v3["revisions"] = v3.get("revisions", []) + [{"source": SCAN, "summary": "BULK_01/02 screen reads added as bulk_observations; "
                                                   "v2 observations unchanged"}]
-    json.dump(v3, open(os.path.join(ED, "direct_ui_evidence_v3.json"), "w"), indent=1, ensure_ascii=False)
+    json.dump(v3, open(os.path.join(ED, "direct_ui_evidence_v4.json"), "w"), indent=1, ensure_ascii=False)
 
     host = host_tier(cmap1)
     json.dump({"tier": "B_host_text", "is_direct_ui": False, "source": "BULK_01/02_host_texts.json (DawDreamer, 395277f)",
@@ -165,8 +199,8 @@ def main():
     for o in v3["bulk_observations"]:
         by.setdefault(o["atlas_id"], []).append(o)
     cmap2 = copy.deepcopy(cmap1)
-    cmap2["version"] = 2
-    cmap2["supersedes"] = "serum_full_control_map_v1.json (kept unchanged)"
+    cmap2["version"] = 3
+    cmap2["supersedes"] = "serum_full_control_map_v1/v2 (kept unchanged); v3 adds CAL_01"
     for c in cmap2["controls"]:
         a = c["atlas_id"]
         c["evidence"]["B_host_text"]["bulk"] = host.get(a) or None
@@ -201,7 +235,7 @@ def main():
     cmap2["closure_counts"] = dict(Counter(c["closure_classification"] for c in cmap2["controls"]))
     assert len(cmap2["controls"]) == 330 and len({c["atlas_id"] for c in cmap2["controls"]}) == 330
     assert all(c["evidence"]["B_host_text"]["is_direct_ui"] is False for c in cmap2["controls"])
-    json.dump(cmap2, open(os.path.join(ED, "serum_full_control_map_v2.json"), "w"), indent=1, default=repr, ensure_ascii=False)
+    json.dump(cmap2, open(os.path.join(ED, "serum_full_control_map_v3.json"), "w"), indent=1, default=repr, ensure_ascii=False)
     print("C bulk observations:", len(v3["bulk_observations"]), dict(Counter(o["verdict"] for o in v3["bulk_observations"])))
     print("B host:", dict(Counter(r["status"] for rows in host.values() for r in rows)))
     print("closure v2:", cmap2["closure_counts"])
