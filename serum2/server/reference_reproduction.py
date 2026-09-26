@@ -86,7 +86,8 @@ def _coverage_status(rows, level: str) -> str:
 
 def run_reference_reproduction(stage_a_path, reread_log_path, corrections_path=None, *, source: Dict[str, Any], name: str,
                                epoch: Optional[ExecutionEpoch] = None, ui_readback: Optional[Dict[str, Any]] = None,
-                               subfolder: str = "VLP1", binding_evidence_dir: Optional[str] = None) -> ReferenceReproductionRun:
+                               subfolder: str = "VLP1", binding_evidence_dir: Optional[str] = None,
+                               promoted_evidence_dir: Optional[str] = None) -> ReferenceReproductionRun:
     epoch = epoch or installed_epoch()
     stage_a = json.loads(Path(stage_a_path).read_text(encoding="utf-8"))
     reread = json.loads(Path(reread_log_path).read_text(encoding="utf-8"))
@@ -96,7 +97,7 @@ def run_reference_reproduction(stage_a_path, reread_log_path, corrections_path=N
     ledger = conservation(stage_a, rows, corrections)
     if not ledger["invariant_holds"]:
         raise RuntimeError("ledger conservation invariant violated: %s" % ledger)
-    admission = admit_rows(rows, epoch, binding_evidence_dir)
+    admission = admit_rows(rows, epoch, binding_evidence_dir, promoted_evidence_dir)
     ops = ops_from_rows(rows, epoch)
     report = compile_ops(ops, name, "reference reproduction of %s; every operand from an admitted observation" % source.get("video_id"), epoch)
     path = serialize(report, subfolder)
@@ -105,7 +106,7 @@ def run_reference_reproduction(stage_a_path, reread_log_path, corrections_path=N
     level = verification_level(file_cmp, ui_cmp)
 
     from serum2.producer.contract_registry import ContractRegistry
-    reg = ContractRegistry(epoch=epoch, binding_evidence_dir=binding_evidence_dir)
+    reg = ContractRegistry(epoch=epoch, binding_evidence_dir=binding_evidence_dir, promoted_evidence_dir=promoted_evidence_dir)
     pins = {
         "serum_epoch": epoch.label, "serum_binary_sha256": epoch.binary_sha256,
         "binding_table_sha256": _sha(TABLE_PATH),
@@ -114,6 +115,7 @@ def run_reference_reproduction(stage_a_path, reread_log_path, corrections_path=N
                                        "binding": o.contract_binding, "execution_path": o.execution_path}
                       for o in ops},
         "binding_evidence_dir": str(binding_evidence_dir) if binding_evidence_dir else None,
+        "promoted_evidence_dir": str(promoted_evidence_dir) if promoted_evidence_dir else None,
         "registry_size": len(reg.contracts), "registry_excluded": dict(reg.excluded),
     }
     return ReferenceReproductionRun(
@@ -189,7 +191,8 @@ def to_experience_record(run: "ReferenceReproductionRun", ui_readback: Dict[str,
         "coverage_status": run.coverage_status, "reference_verified": run.reference_verified, "kind": kind,
         "coverage": coverage(run), "replay_pins": run.replay_pins}
     keys = sorted({o.contract_key for o in _authorized_ops(run)})
-    stamp_replay_provenance(rec, ContractRegistry(epoch=run.epoch, binding_evidence_dir=run.replay_pins.get("binding_evidence_dir")), keys,
+    stamp_replay_provenance(rec, ContractRegistry(epoch=run.epoch, binding_evidence_dir=run.replay_pins.get("binding_evidence_dir"),
+                                                  promoted_evidence_dir=run.replay_pins.get("promoted_evidence_dir")), keys,
                             {"serum": {"version": run.epoch.serum_version, "binary_sha256": run.epoch.binary_sha256},
                              "compiler_sha256": run.replay_pins["compiler_sha256"],
                              "binding_table_sha256": run.replay_pins["binding_table_sha256"]},
