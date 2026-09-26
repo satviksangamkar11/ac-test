@@ -63,8 +63,10 @@ class LiveBackend:
 
     def __init__(self):
         import hashlib
-        import serum_backend as sb   # lazy: only importable on the Serum machine
-        from serum2.producer.execution_epoch import SERUM_BINARY
+        # SERUM_BINARY from serum2/producer/execution_epoch.py — hardcoded to avoid sys.modules["serum2"]
+        # collision with the older repo's serum2 package that serum_backend needs.
+        SERUM_BINARY = r"C:\Program Files\Common Files\VST3\Serum2.vst3\Contents\x86_64-win\Serum2.vst3"
+        import serum_backend as sb     # lazy: only importable on the Serum machine
         self.b = sb.SerumBackend({})
         self.serum_sha256 = hashlib.sha256(open(SERUM_BINARY, "rb").read()).hexdigest()
 
