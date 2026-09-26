@@ -137,14 +137,20 @@ def run_row(row, ctrl, backend):
         return out
 
     leaves = []
+    primary = row.get("primary_path")
     for d in exp:
         pre, post = body_get(pre_state, d["path"]), body_get(post_state, d["path"])
-        leaves.append({"path": d["path"], "written": d["value"], "pre": pre, "post": post,
-                       "persisted": post is not None and same(post, d["value"]),
-                       "changed": not (pre is None and post is None) and not (pre is not None and post is not None and same(pre, post))})
+        l = {"path": d["path"], "written": d["value"], "pre": pre, "post": post,
+             "persisted": post is not None and same(post, d["value"]),
+             "changed": not (pre is None and post is None) and not (pre is not None and post is not None and same(pre, post))}
+        if primary and d["path"] != primary:
+            l["side_leaf"] = True                              # a leaf set's companion write, e.g. kParamWarp2 = 0.0
+            l["default_omitted"] = pre is None and post is None  # Serum omits a value equal to its own default on save
+        leaves.append(l)
     out["q3_leaves"] = leaves
-    persisted = all(l["persisted"] for l in leaves)
-    noop = all(not l["changed"] for l in leaves)
+    judged = [l for l in leaves if not l.get("side_leaf")] or leaves   # a leaf set is judged on its primary leaf
+    persisted = all(l["persisted"] for l in judged)
+    noop = all(not l["changed"] for l in judged)
 
     changed_hosts = sorted(n for n in post_hosts if post_hosts[n] != pre_hosts.get(n))
     q4 = row["q4_host_text_check"]
@@ -160,6 +166,9 @@ def run_row(row, ctrl, backend):
             got = post_hosts.get(chk["param"])
             out["oracle_match"] = got is not None and got.strip() == chk["expect"]
             out["oracle_observed"] = got
+        elif chk.get("kind") == "persisted_value":
+            out["oracle_match"] = any(l["post"] is not None and same(l["post"], chk["expect"]) for l in leaves)
+            out["oracle_observed"] = [l["post"] for l in leaves]
         elif chk.get("kind") == "not_persisted":
             out["oracle_match"] = all(l["post"] is None for l in leaves)
         else:

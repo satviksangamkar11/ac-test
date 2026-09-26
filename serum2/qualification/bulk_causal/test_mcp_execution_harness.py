@@ -157,3 +157,32 @@ def test_every_row_is_sent_in_validated_client_form(contract, bt):
                 "enabled", "beat_sync", "mono", "legato", "dotted", "triplets"):
             raise AssertionError("%s sends a float for a boolean field" % a)
     assert contract["global.fx_bus1_destination"]["test_value"] in ("master", "direct")
+
+
+def test_leaf_set_is_judged_on_its_primary_leaf(contract, bt):
+    """Smoke-run regression: oscA.warp_mode2 writes kParamWarp2 = 0.0 as a side leaf; Serum omits it on save
+    (default). That must not fail the row -- the primary kParamWarpMenu2 decides."""
+    r = contract["oscA.warp_mode2"]
+    side = next(d["path"] for d in r["expected_raw"] if d["path"] != r["primary_path"])
+
+    def drop_side(body):
+        cur = body
+        for k in side[:-1]:
+            cur = cur[k]
+        cur.pop(side[-1], None)
+    res = run(r, bt["oscA.warp_mode2"], post_override=drop_side)
+    assert res["outcome"] not in ("MCP_EXEC_FAILED", "MCP_EXEC_NOOP_SUSPECT")
+    assert any(l.get("side_leaf") for l in res["q3_leaves"])
+
+
+def test_open_domain_never_picks_zero(contract):
+    params = {p["atlas_id"]: p for p in json.load(open(HERE / "manifest_campaign_v1.json"))["parameters"]}
+    bad = [a for a, r in contract.items() if params.get(a, {}).get("domain", {}).get("kind") == "open" and r["test_value"] == 0.0]
+    assert not bad, bad
+
+
+def test_voice_priority_is_a_known_exception_tested_with_a_real_word(contract, bt):
+    r = contract["global.voice_priority"]
+    assert r["bucket"] == "D" and r["test_value"] == "Low"
+    res = run(r, bt["global.voice_priority"])
+    assert res["outcome"] == "MCP_EXEC_CONFORMANCE_EXCEPTION" and res["oracle_match"] is True

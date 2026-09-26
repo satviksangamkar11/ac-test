@@ -39,6 +39,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "raw 0.4 -> '1/8' (label)",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -68,6 +69,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen 'Chord' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -97,6 +99,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen '50' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -126,6 +129,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen '47' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -133,11 +137,11 @@
    "mcp_edit": {
     "kind": "singleton_field",
     "field": "offset",
-    "value": 0.0,
+    "value": 1.0,
     "attr": "arp"
    },
-   "test_value": 0.0,
-   "test_value_source": "open domain: reused a value Serum itself stored in the campaign (no declared range to pick from otherwise)",
+   "test_value": 1.0,
+   "test_value_source": "open domain: a non-zero value Serum itself stored in the campaign (0.0 excluded: it is Serum's default and would not persist)",
    "expected_raw": [
     {
      "path": [
@@ -145,7 +149,7 @@
       "plainParams",
       "kParamOffset"
      ],
-     "value": 0.0
+     "value": 1.0
     }
    ],
    "q3_roundtrip_offline_confirmed": true,
@@ -155,6 +159,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen '0' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -166,7 +171,7 @@
     "attr": "arp"
    },
    "test_value": 10.0,
-   "test_value_source": "open domain: reused a value Serum itself stored in the campaign (no declared range to pick from otherwise)",
+   "test_value_source": "open domain: a non-zero value Serum itself stored in the campaign (0.0 excluded: it is Serum's default and would not persist)",
    "expected_raw": [
     {
      "path": [
@@ -184,6 +189,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen '10' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -213,6 +219,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen 'On (icon lit)' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -242,6 +249,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen 'On (LED lit)' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -271,6 +279,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen 'On (LED lit)' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -300,6 +309,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen 'On (LED lit)' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -333,6 +343,7 @@
    },
    "q5_reference_conclusion": "UI_SCHEMA_MISMATCH",
    "q5_reference_reason": "written 16, screen 8: Serum's range appears to stop at 8; declared domain too wide",
+   "primary_path": null,
    "bucket": "D"
   },
   {
@@ -362,6 +373,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "vocabulary fully resolved (18/18): 15 derived offline from apply_spec (same words as arp.pattern.shape) + 3 confirmed by direct GUI selection, save and file diff (Up, Pinky Up -> 'PinkyUp', Pinky UD -> 'PinkyUD'). Screen labels themselves were enumerated on-screen in the 2026-09-26 session-1 scan.",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -391,6 +403,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen '3' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -402,7 +415,7 @@
     "attr": "arp"
    },
    "test_value": 0.9999999999999998,
-   "test_value_source": "open domain: reused a value Serum itself stored in the campaign (no declared range to pick from otherwise)",
+   "test_value_source": "open domain: a non-zero value Serum itself stored in the campaign (0.0 excluded: it is Serum's default and would not persist)",
    "expected_raw": [
     {
      "path": [
@@ -420,6 +433,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "no exact value after 2 hover attempts",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -449,6 +463,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen 'On (LED lit)' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -478,6 +493,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen 'On (LED lit)' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -507,6 +523,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "no exact value after 2 hover attempts",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -539,6 +556,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -571,6 +589,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "class representative: screen 'UNREADABLE' vs host '80'",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -603,6 +622,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -635,6 +655,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "hovered directly (not just via its class representative); still no exact value after the attempt",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -667,6 +688,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -699,6 +721,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -731,6 +754,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "hovered directly (not just via its class representative); still no exact value after the attempt",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -763,6 +787,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -795,6 +820,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -827,6 +853,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "hovered directly (not just via its class representative); still no exact value after the attempt",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -859,6 +886,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -891,6 +919,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "hovered directly (not just via its class representative); still no exact value after the attempt",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -923,6 +952,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -955,6 +985,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -987,6 +1018,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "hovered directly (not just via its class representative); still no exact value after the attempt",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -1019,6 +1051,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "class representative: screen '30%' vs host '30%'",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -1051,6 +1084,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -1083,6 +1117,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "hovered directly (not just via its class representative); still no exact value after the attempt",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -1115,6 +1150,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -1147,6 +1183,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "hovered directly (not just via its class representative); still no exact value after the attempt",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -1179,6 +1216,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -1211,6 +1249,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -1243,6 +1282,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "hovered directly (not just via its class representative); still no exact value after the attempt",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -1275,6 +1315,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "class representative: screen '31%' vs host '31%'",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -1307,6 +1348,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -1339,6 +1381,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "hovered directly (not just via its class representative); still no exact value after the attempt",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -1371,6 +1414,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -1403,6 +1447,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "hovered directly (not just via its class representative); still no exact value after the attempt",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -1435,6 +1480,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -1467,6 +1513,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -1499,6 +1546,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "hovered directly (not just via its class representative); still no exact value after the attempt",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -1531,6 +1579,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "class representative: screen '20%' vs host '20%'",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -1563,6 +1612,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "class representative: screen 'UNREADABLE' vs host '172'",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -1595,6 +1645,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "class representative: screen 'UNREADABLE' vs host '83'",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -1627,6 +1678,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "class representative: screen 'On (LED lit)' vs host 'On'",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -1659,6 +1711,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "class representative: screen 'UNREADABLE' vs host '172'",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -1691,6 +1744,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "class representative: screen 'UNREADABLE' vs host '6.5 dB'",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -1723,6 +1777,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "hovered directly (not just via its class representative); still no exact value after the attempt",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -1755,6 +1810,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "hovered directly (not just via its class representative); still no exact value after the attempt",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -1787,6 +1843,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "class representative: screen 'Low 12' vs host 'Low 12'",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -1819,6 +1876,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "hovered directly (not just via its class representative); still no exact value after the attempt",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -1851,6 +1909,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "class representative: screen 'UNREADABLE' vs host '13'",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -1883,6 +1942,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "hovered directly (not just via its class representative); still no exact value after the attempt",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -1915,6 +1975,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "hovered directly (not just via its class representative); still no exact value after the attempt",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -1947,6 +2008,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "class representative: screen 'On (LED lit)' vs host 'On'",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -1979,6 +2041,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "hovered directly (not just via its class representative); still no exact value after the attempt",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -2011,6 +2074,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "hovered directly (not just via its class representative); still no exact value after the attempt",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -2043,6 +2107,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "hovered directly (not just via its class representative); still no exact value after the attempt",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -2075,6 +2140,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "hovered directly (not just via its class representative); still no exact value after the attempt",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -2107,6 +2173,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -2139,6 +2206,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "hovered directly (not just via its class representative); still no exact value after the attempt",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -2171,6 +2239,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "class representative: screen 'UNREADABLE' vs host '90'",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -2203,6 +2272,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "no exact value after 2 hover attempts",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -2235,6 +2305,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -2267,6 +2338,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -2299,6 +2371,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "no exact value after 2 hover attempts",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -2331,6 +2404,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen '18.0 ms' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -2363,6 +2437,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen '32 %' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -2395,6 +2470,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -2427,6 +2503,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "no exact value after 2 hover attempts",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -2459,6 +2536,7 @@
    },
    "q5_reference_conclusion": "UI_SCHEMA_MISMATCH",
    "q5_reference_reason": "carried from control map v3 (UI_SCHEMA_MISMATCH)",
+   "primary_path": null,
    "bucket": "D"
   },
   {
@@ -2491,6 +2569,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "curve confirmed: display = 20*log10(raw) dB, exact fit on 8 points (CAL_04, max residual 0.04 dB). Unresolved footnote, not blocking: CAL_01 unit 6 (ratio=8:1) read 28.0 dB for raw 20 vs the 26.0 dB this formula predicts -- an interaction with a numeric (non-Limit) ratio near that value, not yet explained.",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -2527,6 +2606,7 @@
    },
    "q5_reference_conclusion": "UI_SCHEMA_MISMATCH",
    "q5_reference_reason": "carried from control map v3 (UI_SCHEMA_MISMATCH)",
+   "primary_path": null,
    "bucket": "D"
   },
   {
@@ -2563,6 +2643,7 @@
    },
    "q5_reference_conclusion": "UI_SCHEMA_MISMATCH",
    "q5_reference_reason": "carried from control map v3 (UI_SCHEMA_MISMATCH)",
+   "primary_path": null,
    "bucket": "D"
   },
   {
@@ -2595,6 +2676,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -2627,6 +2709,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "no exact value after 2 hover attempts",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -2659,6 +2742,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "no exact value after 2 hover attempts",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -2691,6 +2775,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -2723,6 +2808,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen '1 %' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -2755,6 +2841,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "no exact value after 2 hover attempts",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -2787,6 +2874,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen 'Dly BPM (On)' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -2819,6 +2907,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -2851,6 +2940,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "no exact value after 2 hover attempts",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -2883,6 +2973,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen 'Dly Link (On)' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -2891,10 +2982,10 @@
     "kind": "fx",
     "fx_type": "FXDelay",
     "param": "kParamMode",
-    "value": 1.0
+    "value": 2.0
    },
-   "test_value": 1.0,
-   "test_value_source": "open domain: reused a value Serum itself stored in the campaign (no declared range to pick from otherwise)",
+   "test_value": 2.0,
+   "test_value_source": "open domain: a non-zero value Serum itself stored in the campaign (0.0 excluded: it is Serum's default and would not persist)",
    "expected_raw": [
     {
      "path": [
@@ -2905,7 +2996,7 @@
       "plainParams",
       "kParamMode"
      ],
-     "value": 1.0
+     "value": 2.0
     }
    ],
    "q3_roundtrip_offline_confirmed": true,
@@ -2915,6 +3006,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "raw 2 -> 'TAP->DELAY' (label)",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -2947,6 +3039,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -2979,6 +3072,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -3011,6 +3105,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "no exact value after 2 hover attempts",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -3043,6 +3138,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "no exact value after 2 hover attempts",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -3075,6 +3171,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "no exact value after 2 hover attempts",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -3107,6 +3204,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "no exact value after 2 hover attempts",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -3139,6 +3237,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "curve confirmed: display = 8.25 * 10**(3.205*raw) Hz, fits 8 points within 0.6%",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -3171,6 +3270,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -3203,6 +3303,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "no exact value after 2 hover attempts",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -3235,6 +3336,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -3267,6 +3369,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -3299,6 +3402,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -3331,6 +3435,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -3363,6 +3468,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -3395,6 +3501,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -3427,6 +3534,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "curve confirmed: display = 8.17 * 10**(3.432*raw) Hz, fits 8 points within 1.1% (asymptotes ~22 kHz at raw=1)",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -3459,6 +3567,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen '41 %' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -3491,6 +3600,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen '84 %' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -3523,6 +3633,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen 'Low 6' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -3555,6 +3666,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "no exact value after 2 hover attempts",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -3587,6 +3699,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen '74 %' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -3619,6 +3732,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen '20 %' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -3651,6 +3765,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen '6.40 Hz' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -3683,6 +3798,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "no exact value after 2 hover attempts",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -3715,6 +3831,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -3747,6 +3864,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -3779,6 +3897,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen '6' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -3811,6 +3930,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen '53 %' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -3843,6 +3963,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen '27 %' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -3875,6 +3996,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "no exact value after 2 hover attempts",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -3907,6 +4029,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen '390 Hz' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -3939,6 +4062,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen '3.30 Hz' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -3971,6 +4095,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "no exact value after 2 hover attempts",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -4003,6 +4128,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen '76 %' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -4035,6 +4161,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -4067,6 +4194,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "no exact value after 2 hover attempts",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -4098,6 +4226,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "class representative: screen '-8' vs host '-8'",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -4129,6 +4258,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "class representative: screen '9' vs host '9'",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -4140,7 +4270,7 @@
     "attr": "global_"
    },
    "test_value": 0.09999999999999999,
-   "test_value_source": "open domain: reused a value Serum itself stored in the campaign (no declared range to pick from otherwise)",
+   "test_value_source": "open domain: a non-zero value Serum itself stored in the campaign (0.0 excluded: it is Serum's default and would not persist)",
    "expected_raw": [
     {
      "path": [
@@ -4158,6 +4288,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "no exact value after 2 hover attempts",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -4191,6 +4322,7 @@
    },
    "q5_reference_conclusion": "UI_SCHEMA_MISMATCH",
    "q5_reference_reason": "carried from control map v3 (UI_SCHEMA_MISMATCH)",
+   "primary_path": null,
    "bucket": "D"
   },
   {
@@ -4202,7 +4334,7 @@
     "attr": "global_"
    },
    "test_value": 0.09999999999999999,
-   "test_value_source": "open domain: reused a value Serum itself stored in the campaign (no declared range to pick from otherwise)",
+   "test_value_source": "open domain: a non-zero value Serum itself stored in the campaign (0.0 excluded: it is Serum's default and would not persist)",
    "expected_raw": [
     {
      "path": [
@@ -4220,6 +4352,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "no exact value after 2 hover attempts",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -4253,6 +4386,7 @@
    },
    "q5_reference_conclusion": "UI_SCHEMA_MISMATCH",
    "q5_reference_reason": "carried from control map v3 (UI_SCHEMA_MISMATCH)",
+   "primary_path": null,
    "bucket": "D"
   },
   {
@@ -4264,7 +4398,7 @@
     "attr": "global_"
    },
    "test_value": 0.09999999999999999,
-   "test_value_source": "open domain: reused a value Serum itself stored in the campaign (no declared range to pick from otherwise)",
+   "test_value_source": "open domain: a non-zero value Serum itself stored in the campaign (0.0 excluded: it is Serum's default and would not persist)",
    "expected_raw": [
     {
      "path": [
@@ -4282,6 +4416,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "no exact value after 2 hover attempts",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -4293,7 +4428,7 @@
     "attr": "global_"
    },
    "test_value": 450.0,
-   "test_value_source": "open domain: reused a value Serum itself stored in the campaign (no declared range to pick from otherwise)",
+   "test_value_source": "open domain: a non-zero value Serum itself stored in the campaign (0.0 excluded: it is Serum's default and would not persist)",
    "expected_raw": [
     {
      "path": [
@@ -4311,6 +4446,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "450 -> 'A = 450 Hz'",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -4342,6 +4478,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "class representative: screen 'On (LED lit, no tooltip)' vs host 'On'",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -4371,6 +4508,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "no exact value after 2 hover attempts",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -4402,6 +4540,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "class representative: screen 'UNREADABLE' vs host '91% [1.3 dB]'",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -4433,6 +4572,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "class representative: screen 'On (LED lit, no tooltip)' vs host 'On'",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -4462,6 +4602,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "no exact value after 2 hover attempts",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -4473,7 +4614,7 @@
     "attr": "global_"
    },
    "test_value": 2.0,
-   "test_value_source": "open domain: reused a value Serum itself stored in the campaign (no declared range to pick from otherwise)",
+   "test_value_source": "open domain: a non-zero value Serum itself stored in the campaign (0.0 excluded: it is Serum's default and would not persist)",
    "expected_raw": [
     {
      "path": [
@@ -4491,6 +4632,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -4520,6 +4662,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen '7 (dimmed, mono on)' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -4551,6 +4694,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "class representative: screen 'On (LED lit, no tooltip)' vs host 'On'",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -4582,6 +4726,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "class representative: screen 'On (LED lit, no tooltip)' vs host 'On'",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -4593,7 +4738,7 @@
     "attr": "global_"
    },
    "test_value": 0.0010000000000047748,
-   "test_value_source": "open domain: reused a value Serum itself stored in the campaign (no declared range to pick from otherwise)",
+   "test_value_source": "open domain: a non-zero value Serum itself stored in the campaign (0.0 excluded: it is Serum's default and would not persist)",
    "expected_raw": [
     {
      "path": [
@@ -4611,6 +4756,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "'Porta Curve (-37 %)' matches written -37",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -4642,6 +4788,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "class representative: screen '1.90 s' vs host '1.90 s'",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -4671,6 +4818,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -4702,6 +4850,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "class representative: screen '35.0%' vs host '35.0%'",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -4709,11 +4858,11 @@
    "mcp_edit": {
     "kind": "singleton_field",
     "field": "swing_div",
-    "value": 1.0,
+    "value": 6.0,
     "attr": "global_"
    },
-   "test_value": 1.0,
-   "test_value_source": "open domain: reused a value Serum itself stored in the campaign (no declared range to pick from otherwise)",
+   "test_value": 6.0,
+   "test_value_source": "open domain: a non-zero value Serum itself stored in the campaign (0.0 excluded: it is Serum's default and would not persist)",
    "expected_raw": [
     {
      "path": [
@@ -4721,7 +4870,7 @@
       "plainParams",
       "kParamSwingDiv"
      ],
-     "value": 1.0
+     "value": 6.0
     }
    ],
    "q3_roundtrip_offline_confirmed": true,
@@ -4731,6 +4880,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "raw 1 -> '1/4' (label)",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -4762,6 +4912,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -4795,6 +4946,7 @@
    },
    "q5_reference_conclusion": "RESIDUAL_NOT_STORED",
    "q5_reference_reason": "CONFIRMED by direct test (not just inferred from the campaign): the 'Use Ultra quality when rendering' toggle in GLOBAL preferences was switched off and saved; the file showed no difference from the baseline. This is an application-level preference, not a value Serum persists into a preset.",
+   "primary_path": null,
    "bucket": "D"
   },
   {
@@ -4802,11 +4954,11 @@
    "mcp_edit": {
     "kind": "singleton_field",
     "field": "voice_amp",
-    "value": 0.01,
+    "value": 0.1,
     "attr": "global_"
    },
-   "test_value": 0.01,
-   "test_value_source": "open domain: reused a value Serum itself stored in the campaign (no declared range to pick from otherwise)",
+   "test_value": 0.1,
+   "test_value_source": "open domain: a non-zero value Serum itself stored in the campaign (0.0 excluded: it is Serum's default and would not persist)",
    "expected_raw": [
     {
      "path": [
@@ -4814,7 +4966,7 @@
       "plainParams",
       "kParamVoiceAmp"
      ],
-     "value": 0.01
+     "value": 0.1
     }
    ],
    "q3_roundtrip_offline_confirmed": true,
@@ -4824,6 +4976,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "no exact value after 2 hover attempts",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -4835,7 +4988,7 @@
     "attr": "voice_unison"
    },
    "test_value": 1.0,
-   "test_value_source": "open domain: reused a value Serum itself stored in the campaign (no declared range to pick from otherwise)",
+   "test_value_source": "open domain: a non-zero value Serum itself stored in the campaign (0.0 excluded: it is Serum's default and would not persist)",
    "expected_raw": [
     {
      "path": [
@@ -4853,6 +5006,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "'37%' matches written 37",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -4864,7 +5018,7 @@
     "attr": "voice_unison"
    },
    "test_value": 1.0,
-   "test_value_source": "open domain: reused a value Serum itself stored in the campaign (no declared range to pick from otherwise)",
+   "test_value_source": "open domain: a non-zero value Serum itself stored in the campaign (0.0 excluded: it is Serum's default and would not persist)",
    "expected_raw": [
     {
      "path": [
@@ -4882,6 +5036,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "'4.6' matches written 23 (display = raw/5, per campaign host text)",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -4893,7 +5048,7 @@
     "attr": "voice_unison"
    },
    "test_value": 1.0,
-   "test_value_source": "open domain: reused a value Serum itself stored in the campaign (no declared range to pick from otherwise)",
+   "test_value_source": "open domain: a non-zero value Serum itself stored in the campaign (0.0 excluded: it is Serum's default and would not persist)",
    "expected_raw": [
     {
      "path": [
@@ -4911,6 +5066,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen '100%' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -4942,6 +5098,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -4953,7 +5110,7 @@
     "attr": "voice_unison"
    },
    "test_value": 1000.0,
-   "test_value_source": "open domain: reused a value Serum itself stored in the campaign (no declared range to pick from otherwise)",
+   "test_value_source": "open domain: a non-zero value Serum itself stored in the campaign (0.0 excluded: it is Serum's default and would not persist)",
    "expected_raw": [
     {
      "path": [
@@ -4971,6 +5128,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen '1000%' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -4982,7 +5140,7 @@
     "attr": "voice_unison"
    },
    "test_value": 1000.0,
-   "test_value_source": "open domain: reused a value Serum itself stored in the campaign (no declared range to pick from otherwise)",
+   "test_value_source": "open domain: a non-zero value Serum itself stored in the campaign (0.0 excluded: it is Serum's default and would not persist)",
    "expected_raw": [
     {
      "path": [
@@ -5000,6 +5158,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen '10%' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -5007,11 +5166,11 @@
    "mcp_edit": {
     "kind": "singleton_field",
     "field": "voice_priority",
-    "value": "MCP_TEST",
+    "value": "Low",
     "attr": "global_"
    },
-   "test_value": "MCP_TEST",
-   "test_value_source": "first vocabulary word / literal",
+   "test_value": "Low",
+   "test_value_source": "bucket D: the value whose divergent display is already known (negative test)",
    "expected_raw": [
     {
      "path": [
@@ -5019,17 +5178,23 @@
       "plainParams",
       "kParamVoicePriority"
      ],
-     "value": "MCP_TEST"
+     "value": "Low"
     }
    ],
    "q3_roundtrip_offline_confirmed": true,
    "q4_host_text_check": {
-    "mode": "FULL_SCAN",
-    "expect": "scan all 412 host parameters' before/after text; none should change. Any change found is a NEW identity to feed back into the crosswalk, not a pass/fail signal"
+    "mode": "ORACLE",
+    "expected": "EXCEPTION: serum-mcp accepts any string for voice_priority, Serum silently drops unknown words (smoke run: 'MCP_TEST' not persisted); re-tested with 'Low'",
+    "oracle_check": {
+     "kind": "persisted_value",
+     "expect": "Low",
+     "note": "serum-mcp writes any string unvalidated; Serum dropped the sentinel 'MCP_TEST' in the smoke run. 'Low' is the only value ever seen in a real preset (GlobalSpec.voice_priority docstring): match = control accepts valid words; no match = the key is dead in this Serum build"
+    }
    },
    "q5_reference_conclusion": "UI_UNOBSERVABLE",
    "q5_reference_reason": "not located: GLOBAL page (voice control, quality, tuning, the full preferences list via its scrollbar) checked in full, VOICING strip hovered once. No control resembling voice priority / voice stealing exists in this Serum 2.0.23 build's visible UI.",
-   "bucket": "B"
+   "primary_path": null,
+   "bucket": "D"
   },
   {
    "atlas_id": "lfo1.beat_sync",
@@ -5061,6 +5226,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen 'On' matches written value",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -5093,6 +5259,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -5123,6 +5290,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen 'On' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -5153,6 +5321,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -5183,6 +5352,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen 'On' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -5215,6 +5385,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "class representative: screen '1/2 t' vs host '1/2 t'",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -5247,6 +5418,7 @@
    },
    "q5_reference_conclusion": "UI_UNOBSERVABLE",
    "q5_reference_reason": "no 10x control in Hz mode; rate free-runs to 62.5 Hz directly. The What's New PDF's '10x Rate' may describe the free rate range itself, not a separate button, in this build.",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -5279,6 +5451,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -5309,6 +5482,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -5341,6 +5515,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "class representative: screen 'UNREADABLE' vs host '91'",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -5371,6 +5546,7 @@
    },
    "q5_reference_conclusion": "UI_UNOBSERVABLE",
    "q5_reference_reason": "no control named swing; the only other toggle ('Anchored') is a distinct, unidentified parameter and is not assumed to be this one",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -5401,6 +5577,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen 'On' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -5433,6 +5610,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen 'LFO 2 BPM (On)' matches written 1.0; the host comparison used a wrong crosswalk ('LFO 2 Delay')",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -5465,6 +5643,7 @@
    },
    "q5_reference_conclusion": "HOST_TEXT_VALIDATED",
    "q5_reference_reason": "host text matches; class representative lfo1.rate matched on screen",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -5495,6 +5674,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen 'On' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -5525,6 +5705,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -5555,6 +5736,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen 'On' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -5587,6 +5769,7 @@
    },
    "q5_reference_conclusion": "HOST_TEXT_VALIDATED",
    "q5_reference_reason": "host text matches; class representative lfo1.rate matched on screen",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -5619,6 +5802,7 @@
    },
    "q5_reference_conclusion": "UI_UNOBSERVABLE",
    "q5_reference_reason": "no 10x control in Hz mode; rate free-runs to 62.5 Hz directly. The What's New PDF's '10x Rate' may describe the free rate range itself, not a separate button, in this build.",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -5651,6 +5835,7 @@
    },
    "q5_reference_conclusion": "HOST_TEXT_VALIDATED",
    "q5_reference_reason": "host text matches; class representative lfo1.rate matched on screen",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -5681,6 +5866,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -5713,6 +5899,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "hovered directly (not just via its class representative); still no exact value after the attempt",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -5743,6 +5930,7 @@
    },
    "q5_reference_conclusion": "UI_UNOBSERVABLE",
    "q5_reference_reason": "no control named swing; the only other toggle ('Anchored') is a distinct, unidentified parameter and is not assumed to be this one",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -5773,6 +5961,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen 'On' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -5805,6 +5994,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen 'LFO 3 BPM (On)' matches written 1.0; wrong crosswalk ('LFO 3 Delay')",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -5837,6 +6027,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "class representative: screen 'UNREADABLE' vs host '4 bar t'",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -5867,6 +6058,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen 'On' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -5897,6 +6089,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -5927,6 +6120,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen 'On' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -5959,6 +6153,7 @@
    },
    "q5_reference_conclusion": "HOST_TEXT_VALIDATED",
    "q5_reference_reason": "host text matches; class representative lfo1.rate matched on screen",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -5991,6 +6186,7 @@
    },
    "q5_reference_conclusion": "UI_UNOBSERVABLE",
    "q5_reference_reason": "no 10x control in Hz mode; rate free-runs to 62.5 Hz directly. The What's New PDF's '10x Rate' may describe the free rate range itself, not a separate button, in this build.",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -6023,6 +6219,7 @@
    },
    "q5_reference_conclusion": "HOST_TEXT_VALIDATED",
    "q5_reference_reason": "host text matches; class representative lfo1.rate matched on screen",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -6053,6 +6250,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -6085,6 +6283,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "hovered directly (not just via its class representative); still no exact value after the attempt",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -6115,6 +6314,7 @@
    },
    "q5_reference_conclusion": "UI_UNOBSERVABLE",
    "q5_reference_reason": "no control named swing; the only other toggle ('Anchored') is a distinct, unidentified parameter and is not assumed to be this one",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -6145,6 +6345,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen 'On' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -6177,6 +6378,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "'LFO 4 BPM (On)' matches written 1.0",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -6209,6 +6411,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "hovered directly (not just via its class representative); still no exact value after the attempt",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -6239,6 +6442,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen 'On' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -6269,6 +6473,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -6299,6 +6504,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen 'On' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -6331,6 +6537,7 @@
    },
    "q5_reference_conclusion": "HOST_TEXT_VALIDATED",
    "q5_reference_reason": "host text matches; class representative lfo1.rate matched on screen",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -6363,6 +6570,7 @@
    },
    "q5_reference_conclusion": "UI_UNOBSERVABLE",
    "q5_reference_reason": "no 10x control in Hz mode; rate free-runs to 62.5 Hz directly. The What's New PDF's '10x Rate' may describe the free rate range itself, not a separate button, in this build.",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -6395,6 +6603,7 @@
    },
    "q5_reference_conclusion": "HOST_TEXT_VALIDATED",
    "q5_reference_reason": "host text matches; class representative lfo1.rate matched on screen",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -6425,6 +6634,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -6457,6 +6667,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "hovered directly (not just via its class representative); still no exact value after the attempt",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -6487,6 +6698,7 @@
    },
    "q5_reference_conclusion": "UI_UNOBSERVABLE",
    "q5_reference_reason": "no control named swing; the only other toggle ('Anchored') is a distinct, unidentified parameter and is not assumed to be this one",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -6517,6 +6729,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen 'On' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -6549,6 +6762,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "'LFO 5 BPM (On)' matches written 1.0",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -6581,6 +6795,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "hovered directly (not just via its class representative); still no exact value after the attempt",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -6611,6 +6826,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen 'On' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -6641,6 +6857,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -6671,6 +6888,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen 'On' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -6703,6 +6921,7 @@
    },
    "q5_reference_conclusion": "HOST_TEXT_VALIDATED",
    "q5_reference_reason": "host text matches; class representative lfo1.rate matched on screen",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -6735,6 +6954,7 @@
    },
    "q5_reference_conclusion": "UI_UNOBSERVABLE",
    "q5_reference_reason": "no 10x control in Hz mode; rate free-runs to 62.5 Hz directly. The What's New PDF's '10x Rate' may describe the free rate range itself, not a separate button, in this build.",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -6767,6 +6987,7 @@
    },
    "q5_reference_conclusion": "HOST_TEXT_VALIDATED",
    "q5_reference_reason": "host text matches; class representative lfo1.rate matched on screen",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -6797,6 +7018,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -6829,6 +7051,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "hovered directly (not just via its class representative); still no exact value after the attempt",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -6859,6 +7082,7 @@
    },
    "q5_reference_conclusion": "UI_UNOBSERVABLE",
    "q5_reference_reason": "no control named swing; the only other toggle ('Anchored') is a distinct, unidentified parameter and is not assumed to be this one",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -6889,6 +7113,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen 'On' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -6921,6 +7146,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "'LFO 6 BPM (On)' matches written 1.0",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -6953,6 +7179,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "hovered directly (not just via its class representative); still no exact value after the attempt",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -6983,6 +7210,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen 'On' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -7013,6 +7241,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -7043,6 +7272,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen 'On' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -7075,6 +7305,7 @@
    },
    "q5_reference_conclusion": "HOST_TEXT_VALIDATED",
    "q5_reference_reason": "host text matches; class representative lfo1.rate matched on screen",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -7107,6 +7338,7 @@
    },
    "q5_reference_conclusion": "UI_UNOBSERVABLE",
    "q5_reference_reason": "no 10x control in Hz mode; rate free-runs to 62.5 Hz directly. The What's New PDF's '10x Rate' may describe the free rate range itself, not a separate button, in this build.",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -7139,6 +7371,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "'LFO 6 Rise (2 bar t)' is a beat-synced note-value label, consistent with beat_sync=On",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -7169,6 +7402,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -7201,6 +7435,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "hovered directly (not just via its class representative); still no exact value after the attempt",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -7231,6 +7466,7 @@
    },
    "q5_reference_conclusion": "UI_UNOBSERVABLE",
    "q5_reference_reason": "no control named swing; the only other toggle ('Anchored') is a distinct, unidentified parameter and is not assumed to be this one",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -7261,6 +7497,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen 'On' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -7290,6 +7527,7 @@
    },
    "q5_reference_conclusion": "UI_MISMATCH",
    "q5_reference_reason": "Serum shows 'Macro 1', not the written name: macro names are normally shown in the UI, so the raw write ['Macro0','name'] likely does not take effect",
+   "primary_path": null,
    "bucket": "D"
   },
   {
@@ -7322,6 +7560,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -7351,6 +7590,7 @@
    },
    "q5_reference_conclusion": "UI_MISMATCH",
    "q5_reference_reason": "Serum shows 'Macro 2', not the written name: macro names are normally shown in the UI, so the raw write ['Macro1','name'] likely does not take effect",
+   "primary_path": null,
    "bucket": "D"
   },
   {
@@ -7383,6 +7623,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "class representative: screen '73' vs host '73'",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -7412,6 +7653,7 @@
    },
    "q5_reference_conclusion": "UI_MISMATCH",
    "q5_reference_reason": "Serum shows 'Macro 3', not the written name: macro names are normally shown in the UI, so the raw write ['Macro2','name'] likely does not take effect",
+   "primary_path": null,
    "bucket": "D"
   },
   {
@@ -7444,6 +7686,7 @@
    },
    "q5_reference_conclusion": "HOST_TEXT_VALIDATED",
    "q5_reference_reason": "host text matches; class representative macro2.value matched on screen",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -7473,6 +7716,7 @@
    },
    "q5_reference_conclusion": "UI_MISMATCH",
    "q5_reference_reason": "Serum shows 'Macro 4', not the written name: macro names are normally shown in the UI, so the raw write ['Macro3','name'] likely does not take effect",
+   "primary_path": null,
    "bucket": "D"
   },
   {
@@ -7505,6 +7749,7 @@
    },
    "q5_reference_conclusion": "HOST_TEXT_VALIDATED",
    "q5_reference_reason": "host text matches; class representative macro2.value matched on screen",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -7534,6 +7779,7 @@
    },
    "q5_reference_conclusion": "UI_MISMATCH",
    "q5_reference_reason": "Serum shows 'Macro 5', not the written name: macro names are normally shown in the UI, so the raw write ['Macro4','name'] likely does not take effect",
+   "primary_path": null,
    "bucket": "D"
   },
   {
@@ -7566,6 +7812,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -7595,6 +7842,7 @@
    },
    "q5_reference_conclusion": "UI_MISMATCH",
    "q5_reference_reason": "Serum shows 'Macro 6', not the written name: macro names are normally shown in the UI, so the raw write ['Macro5','name'] likely does not take effect",
+   "primary_path": null,
    "bucket": "D"
   },
   {
@@ -7627,6 +7875,7 @@
    },
    "q5_reference_conclusion": "HOST_TEXT_VALIDATED",
    "q5_reference_reason": "host text matches; class representative macro2.value matched on screen",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -7656,6 +7905,7 @@
    },
    "q5_reference_conclusion": "UI_MISMATCH",
    "q5_reference_reason": "Serum shows 'Macro 7', not the written name: macro names are normally shown in the UI, so the raw write ['Macro6','name'] likely does not take effect",
+   "primary_path": null,
    "bucket": "D"
   },
   {
@@ -7688,6 +7938,7 @@
    },
    "q5_reference_conclusion": "HOST_TEXT_VALIDATED",
    "q5_reference_reason": "host text matches; class representative macro2.value matched on screen",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -7717,6 +7968,7 @@
    },
    "q5_reference_conclusion": "UI_MISMATCH",
    "q5_reference_reason": "Serum shows 'Macro 8', not the written name: macro names are normally shown in the UI, so the raw write ['Macro7','name'] likely does not take effect",
+   "primary_path": null,
    "bucket": "D"
   },
   {
@@ -7749,6 +8001,7 @@
    },
    "q5_reference_conclusion": "HOST_TEXT_VALIDATED",
    "q5_reference_reason": "host text matches; class representative macro2.value matched on screen",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -7781,6 +8034,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "class representative: screen '25% [-36.1 dB]' vs host '25%'",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -7813,6 +8067,7 @@
    },
    "q5_reference_conclusion": "HOST_TEXT_VALIDATED",
    "q5_reference_reason": "host text matches; class representative mixer.filter1.bus1 matched on screen",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -7845,6 +8100,7 @@
    },
    "q5_reference_conclusion": "HOST_TEXT_VALIDATED",
    "q5_reference_reason": "host text matches; class representative filter1.enabled matched on screen",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -7877,6 +8133,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "'Filter 1 Wet (13 %)' read directly on the MIX page",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -7909,6 +8166,7 @@
    },
    "q5_reference_conclusion": "HOST_TEXT_VALIDATED",
    "q5_reference_reason": "host text matches; class representative mixer.filter1.bus1 matched on screen",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -7941,6 +8199,7 @@
    },
    "q5_reference_conclusion": "HOST_TEXT_VALIDATED",
    "q5_reference_reason": "host text matches; class representative mixer.filter1.bus1 matched on screen",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -7973,6 +8232,7 @@
    },
    "q5_reference_conclusion": "HOST_TEXT_VALIDATED",
    "q5_reference_reason": "host text matches; class representative filter2.enabled matched on screen",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -8005,6 +8265,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "'Filter 2 Wet (90 %)' read directly on the MIX page",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -8037,6 +8298,7 @@
    },
    "q5_reference_conclusion": "HOST_TEXT_VALIDATED",
    "q5_reference_reason": "host text matches; class representative mixer.filter1.bus1 matched on screen",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -8069,6 +8331,7 @@
    },
    "q5_reference_conclusion": "HOST_TEXT_VALIDATED",
    "q5_reference_reason": "host text matches; class representative mixer.filter1.bus1 matched on screen",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -8101,6 +8364,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "class representative: screen 'On' vs host 'On'",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -8133,6 +8397,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen 'Noise> Filter Balance (78)' matches the written/expected value exactly",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -8168,6 +8433,7 @@
    },
    "q5_reference_conclusion": "UI_MISMATCH",
    "q5_reference_reason": "written -20, screen -19 L (host text agrees): pan display off by one",
+   "primary_path": null,
    "bucket": "D"
   },
   {
@@ -8200,6 +8466,7 @@
    },
    "q5_reference_conclusion": "HOST_TEXT_VALIDATED",
    "q5_reference_reason": "host text matches; class representative mixer.filter1.bus1 matched on screen",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -8232,6 +8499,7 @@
    },
    "q5_reference_conclusion": "HOST_TEXT_VALIDATED",
    "q5_reference_reason": "host text matches; class representative mixer.filter1.bus1 matched on screen",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -8264,6 +8532,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "'A> Filter Balance (15)' matches written 15, routed to FILTER",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -8296,6 +8565,7 @@
    },
    "q5_reference_conclusion": "HOST_TEXT_VALIDATED",
    "q5_reference_reason": "host text matches; class representative mixer.filter1.bus1 matched on screen",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -8328,6 +8598,7 @@
    },
    "q5_reference_conclusion": "HOST_TEXT_VALIDATED",
    "q5_reference_reason": "host text matches; class representative mixer.filter1.bus1 matched on screen",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -8360,6 +8631,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen 'B> Filter Balance (34)' matches the written/expected value exactly",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -8392,6 +8664,7 @@
    },
    "q5_reference_conclusion": "HOST_TEXT_VALIDATED",
    "q5_reference_reason": "host text matches; class representative mixer.filter1.bus1 matched on screen",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -8424,6 +8697,7 @@
    },
    "q5_reference_conclusion": "HOST_TEXT_VALIDATED",
    "q5_reference_reason": "host text matches; class representative mixer.filter1.bus1 matched on screen",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -8456,6 +8730,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen 'C> Filter Balance (56)' matches the written/expected value exactly",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -8488,6 +8763,7 @@
    },
    "q5_reference_conclusion": "HOST_TEXT_VALIDATED",
    "q5_reference_reason": "host text matches; class representative mixer.filter1.bus1 matched on screen",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -8520,6 +8796,7 @@
    },
    "q5_reference_conclusion": "HOST_TEXT_VALIDATED",
    "q5_reference_reason": "host text matches; class representative mixer.filter1.bus1 matched on screen",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -8552,6 +8829,7 @@
    },
    "q5_reference_conclusion": "HOST_TEXT_VALIDATED",
    "q5_reference_reason": "host text matches; class representative mixer.noise.enable matched on screen",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -8584,6 +8862,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen 'Sub Osc> Filter Balance (90)' matches the written/expected value exactly",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -8619,6 +8898,7 @@
    },
    "q5_reference_conclusion": "UI_MISMATCH",
    "q5_reference_reason": "written -4, screen -3 L (host text agrees): pan display off by one",
+   "primary_path": null,
    "bucket": "D"
   },
   {
@@ -8651,6 +8931,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -8683,6 +8964,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "class representative: screen 'Off' vs host 'Off'",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -8715,6 +8997,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "class representative: screen '-26' vs host '-26'",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -8747,6 +9030,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "class representative: screen '-2' vs host '-2'",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -8779,6 +9063,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -8811,6 +9096,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "class representative: screen '83 %' vs host '83'",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -8843,6 +9129,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -8875,6 +9162,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -8907,6 +9195,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "class representative: screen '-5' vs host '-5'",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -8939,6 +9228,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -8970,6 +9260,7 @@
    },
    "q5_reference_conclusion": "UI_CURVE_UNRESOLVED_FINAL",
    "q5_reference_reason": "CLOSED as investigated, not as solved. Full 8-point dataset (Sync mode, A_direct_ui + closure_pass_4/5): 0.05->1.00%, 0.2->1.12%, 0.32->1.49%, 0.46->2.46%, 0.55->3.50%, 0.65->5.12%, 0.9->11.93%, 0.97->14.69%. The write is confirmed correct in every case -- raw changes a distinct, monotonically-increasing percentage on screen every time, never silently dropped or clamped to a repeat value. But no smooth raw->display curve fits: the best 5-point exponential candidate (6.7% max error) got WORSE on the full 8 points (23.9% max error); power-law and a 3-parameter quadratic-in-log-exponent both fit worse still. Adding data made the fit worse, not better -- the likely explanation is that Sync-mode warp snaps to a quantized set of musical ratios (the way filter1.type snaps to named types) rather than following a continuous function, so a smooth-curve model is the wrong shape of answer, not just an imprecise one. Reporting a formula here would be false precision. No further calibration is recommended: this is the map's last item and diminishing returns already showed at 8 points.",
+   "primary_path": null,
    "bucket": "D"
   },
   {
@@ -9003,6 +9294,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen '63 %' (AM mode, raw 0.63)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -9036,6 +9328,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -9055,6 +9348,15 @@
       "Oscillator0",
       "WTOsc0",
       "plainParams",
+      "kParamXfadeMode"
+     ],
+     "value": 1.0
+    },
+    {
+     "path": [
+      "Oscillator0",
+      "WTOsc0",
+      "plainParams",
       "kParamWarp2"
      ],
      "value": 0.0
@@ -9067,15 +9369,6 @@
       "kParamWarpMenu2"
      ],
      "value": "kFM_OSC"
-    },
-    {
-     "path": [
-      "Oscillator0",
-      "WTOsc0",
-      "plainParams",
-      "kParamXfadeMode"
-     ],
-     "value": 1.0
     }
    ],
    "q3_roundtrip_offline_confirmed": true,
@@ -9087,6 +9380,12 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": [
+    "Oscillator0",
+    "WTOsc0",
+    "plainParams",
+    "kParamWarpMenu2"
+   ],
    "bucket": "A"
   },
   {
@@ -9120,6 +9419,7 @@
    },
    "q5_reference_conclusion": "UI_UNOBSERVABLE",
    "q5_reference_reason": "warp_mode2 AM(B) has no VAR control on screen (only a Var bar for warp 1); the value cannot be read in this warp mode",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -9158,6 +9458,11 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "analog_basic -> 'Basic Shapes'",
+   "primary_path": [
+    "Oscillator0",
+    "WTOsc0",
+    "relativePathToWT"
+   ],
    "bucket": "B"
   },
   {
@@ -9190,6 +9495,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "class representative: screen '0.53' vs host '0.53'",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -9222,6 +9528,7 @@
    },
    "q5_reference_conclusion": "HOST_TEXT_VALIDATED",
    "q5_reference_reason": "host text matches; class representative oscA.enabled matched on screen",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -9254,6 +9561,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -9286,6 +9594,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -9318,6 +9627,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "class representative: screen '-24 L' vs host '-24 L'",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -9350,6 +9660,7 @@
    },
    "q5_reference_conclusion": "HOST_TEXT_VALIDATED",
    "q5_reference_reason": "host text matches; class representative oscA.sample_loop_crossfade matched on screen",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -9382,6 +9693,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -9414,6 +9726,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -9446,6 +9759,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -9478,6 +9792,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -9511,6 +9826,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "class representative: screen '58 %' vs host '58'",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -9544,6 +9860,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen '1.49 %' (Sync mode, raw 0.32; host text agrees)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -9577,6 +9894,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -9596,6 +9914,15 @@
       "Oscillator1",
       "WTOsc1",
       "plainParams",
+      "kParamXfadeMode"
+     ],
+     "value": 1.0
+    },
+    {
+     "path": [
+      "Oscillator1",
+      "WTOsc1",
+      "plainParams",
       "kParamWarp2"
      ],
      "value": 0.0
@@ -9608,15 +9935,6 @@
       "kParamWarpMenu2"
      ],
      "value": "kFM_OSC"
-    },
-    {
-     "path": [
-      "Oscillator1",
-      "WTOsc1",
-      "plainParams",
-      "kParamXfadeMode"
-     ],
-     "value": 1.0
     }
    ],
    "q3_roundtrip_offline_confirmed": true,
@@ -9628,6 +9946,12 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": [
+    "Oscillator1",
+    "WTOsc1",
+    "plainParams",
+    "kParamWarpMenu2"
+   ],
    "bucket": "A"
   },
   {
@@ -9661,6 +9985,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "'B Warp 2 Var (0.2200)' matches written 0.22 exactly",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -9699,6 +10024,11 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "analog_warm -> 'DM - OSCAR' (the mapped file)",
+   "primary_path": [
+    "Oscillator1",
+    "WTOsc1",
+    "relativePathToWT"
+   ],
    "bucket": "B"
   },
   {
@@ -9731,6 +10061,7 @@
    },
    "q5_reference_conclusion": "HOST_TEXT_VALIDATED",
    "q5_reference_reason": "host text matches; class representative oscB.detune matched on screen",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -9763,6 +10094,7 @@
    },
    "q5_reference_conclusion": "HOST_TEXT_VALIDATED",
    "q5_reference_reason": "host text matches; class representative oscA.enabled matched on screen",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -9795,6 +10127,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -9827,6 +10160,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -9859,6 +10193,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "class representative: screen '-11 L' vs host '-11 L'",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -9891,6 +10226,7 @@
    },
    "q5_reference_conclusion": "HOST_TEXT_VALIDATED",
    "q5_reference_reason": "host text matches; class representative oscA.sample_loop_crossfade matched on screen",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -9923,6 +10259,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -9955,6 +10292,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -9987,6 +10325,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -10019,6 +10358,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -10052,6 +10392,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "class representative: screen '18 %' vs host '18'",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -10085,6 +10426,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen '39 %' (PWM mode inverted, raw 0.61)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -10118,6 +10460,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -10137,6 +10480,15 @@
       "Oscillator2",
       "WTOsc2",
       "plainParams",
+      "kParamXfadeMode"
+     ],
+     "value": 1.0
+    },
+    {
+     "path": [
+      "Oscillator2",
+      "WTOsc2",
+      "plainParams",
       "kParamWarp2"
      ],
      "value": 0.0
@@ -10149,15 +10501,6 @@
       "kParamWarpMenu2"
      ],
      "value": "kFM_OSC"
-    },
-    {
-     "path": [
-      "Oscillator2",
-      "WTOsc2",
-      "plainParams",
-      "kParamXfadeMode"
-     ],
-     "value": 1.0
     }
    ],
    "q3_roundtrip_offline_confirmed": true,
@@ -10169,6 +10512,12 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "carried from control map v3 (UI_CONFIRMED)",
+   "primary_path": [
+    "Oscillator2",
+    "WTOsc2",
+    "plainParams",
+    "kParamWarpMenu2"
+   ],
    "bucket": "A"
   },
   {
@@ -10202,6 +10551,7 @@
    },
    "q5_reference_conclusion": "UI_UNOBSERVABLE",
    "q5_reference_reason": "warp_mode2 PWM has no VAR control on screen either",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -10240,6 +10590,11 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "analog_mini -> 'Basic Mini'",
+   "primary_path": [
+    "Oscillator2",
+    "WTOsc2",
+    "relativePathToWT"
+   ],
    "bucket": "B"
   },
   {
@@ -10272,6 +10627,7 @@
    },
    "q5_reference_conclusion": "UI_OBSERVABLE_BUT_UNREADABLE",
    "q5_reference_reason": "no exact value after 2 hover attempts",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -10303,6 +10659,7 @@
    },
    "q5_reference_conclusion": "DIRECT_UI_CONFIRMED",
    "q5_reference_reason": "screen 'Pink' matches written value",
+   "primary_path": null,
    "bucket": "B"
   },
   {
@@ -10338,6 +10695,7 @@
    },
    "q5_reference_conclusion": "UI_MISMATCH",
    "q5_reference_reason": "alias of mixer.noise.pan: written -20, screen -19 L",
+   "primary_path": null,
    "bucket": "D"
   },
   {
@@ -10369,6 +10727,7 @@
    },
    "q5_reference_conclusion": "HOST_TEXT_VALIDATED",
    "q5_reference_reason": "host text matches; class representative global.legato matched on screen",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -10400,6 +10759,7 @@
    },
    "q5_reference_conclusion": "HOST_TEXT_VALIDATED",
    "q5_reference_reason": "host text matches; class representative global.mono matched on screen",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -10431,6 +10791,7 @@
    },
    "q5_reference_conclusion": "HOST_TEXT_VALIDATED",
    "q5_reference_reason": "host text matches; class representative global.porta_always matched on screen",
+   "primary_path": null,
    "bucket": "A"
   },
   {
@@ -10462,6 +10823,7 @@
    },
    "q5_reference_conclusion": "HOST_TEXT_VALIDATED",
    "q5_reference_reason": "host text matches; class representative global.porta_scaled matched on screen",
+   "primary_path": null,
    "bucket": "A"
   }
  ]
