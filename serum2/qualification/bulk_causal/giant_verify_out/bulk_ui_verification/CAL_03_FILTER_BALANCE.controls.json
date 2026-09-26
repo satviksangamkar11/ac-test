@@ -1,0 +1,11 @@
+{
+ "preset": "CAL_03_FILTER_BALANCE.SerumPreset",
+ "generated_only": true,
+ "expect": {
+  "mixer.osc_a.filter_balance": 12.0,
+  "mixer.osc_b.filter_balance": 34.0,
+  "mixer.osc_c.filter_balance": 56.0,
+  "mixer.noise.filter_balance": 78.0,
+  "mixer.sub.filter_balance": 90.0
+ }
+}
