@@ -1,0 +1,368 @@
+{
+ "preset": "CAL_02_CONTEXTS.SerumPreset",
+ "generated_only": true,
+ "mod_route": {
+  "slot": "ModSlot0",
+  "plainParams": {
+   "kParamAmount": 10.0
+  }
+ },
+ "read_order": [
+  "LFO 1-6 tabs: Hz shown (not BPM), 10x lit, swing/follow-swing on (hover each)",
+  "LFO 7 tab (now visible because LFO 6 is assigned): S&H, ENVELOPE greyed, FREE lit",
+  "MIX page: each channel routed to FILTER; hover the balance control of A, B, C, Noise, Sub",
+  "GLOBAL page: random cutoff, random detune, portamento curve"
+ ],
+ "rows": [
+  {
+   "control": "lfo1.beat_sync",
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamBeatSync"
+   ],
+   "value": 0.0,
+   "expect_on_screen": "Hz shown (BPM off)"
+  },
+  {
+   "control": "lfo1.rate_10x",
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamRate10x"
+   ],
+   "value": 1.0,
+   "expect_on_screen": "10x on"
+  },
+  {
+   "control": "lfo1.swing",
+   "raw_path": [
+    "LFO0",
+    "plainParams",
+    "kParamSwing"
+   ],
+   "value": 1.0,
+   "expect_on_screen": "swing / follow-swing on"
+  },
+  {
+   "control": "lfo2.beat_sync",
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamBeatSync"
+   ],
+   "value": 0.0,
+   "expect_on_screen": "Hz shown (BPM off)"
+  },
+  {
+   "control": "lfo2.rate_10x",
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamRate10x"
+   ],
+   "value": 1.0,
+   "expect_on_screen": "10x on"
+  },
+  {
+   "control": "lfo2.swing",
+   "raw_path": [
+    "LFO1",
+    "plainParams",
+    "kParamSwing"
+   ],
+   "value": 1.0,
+   "expect_on_screen": "swing / follow-swing on"
+  },
+  {
+   "control": "lfo3.beat_sync",
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamBeatSync"
+   ],
+   "value": 0.0,
+   "expect_on_screen": "Hz shown (BPM off)"
+  },
+  {
+   "control": "lfo3.rate_10x",
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamRate10x"
+   ],
+   "value": 1.0,
+   "expect_on_screen": "10x on"
+  },
+  {
+   "control": "lfo3.swing",
+   "raw_path": [
+    "LFO2",
+    "plainParams",
+    "kParamSwing"
+   ],
+   "value": 1.0,
+   "expect_on_screen": "swing / follow-swing on"
+  },
+  {
+   "control": "lfo4.beat_sync",
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamBeatSync"
+   ],
+   "value": 0.0,
+   "expect_on_screen": "Hz shown (BPM off)"
+  },
+  {
+   "control": "lfo4.rate_10x",
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamRate10x"
+   ],
+   "value": 1.0,
+   "expect_on_screen": "10x on"
+  },
+  {
+   "control": "lfo4.swing",
+   "raw_path": [
+    "LFO3",
+    "plainParams",
+    "kParamSwing"
+   ],
+   "value": 1.0,
+   "expect_on_screen": "swing / follow-swing on"
+  },
+  {
+   "control": "lfo5.beat_sync",
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamBeatSync"
+   ],
+   "value": 0.0,
+   "expect_on_screen": "Hz shown (BPM off)"
+  },
+  {
+   "control": "lfo5.rate_10x",
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamRate10x"
+   ],
+   "value": 1.0,
+   "expect_on_screen": "10x on"
+  },
+  {
+   "control": "lfo5.swing",
+   "raw_path": [
+    "LFO4",
+    "plainParams",
+    "kParamSwing"
+   ],
+   "value": 1.0,
+   "expect_on_screen": "swing / follow-swing on"
+  },
+  {
+   "control": "lfo6.beat_sync",
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamBeatSync"
+   ],
+   "value": 0.0,
+   "expect_on_screen": "Hz shown (BPM off)"
+  },
+  {
+   "control": "lfo6.rate_10x",
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamRate10x"
+   ],
+   "value": 1.0,
+   "expect_on_screen": "10x on"
+  },
+  {
+   "control": "lfo6.swing",
+   "raw_path": [
+    "LFO5",
+    "plainParams",
+    "kParamSwing"
+   ],
+   "value": 1.0,
+   "expect_on_screen": "swing / follow-swing on"
+  },
+  {
+   "control": "context: RoutingSlot0 -> Filter",
+   "raw_path": [
+    "RoutingSlot0",
+    "plainParams",
+    "kParamRoutingDest"
+   ],
+   "value": "kRoutingDestFilter",
+   "expect_on_screen": "FILTER"
+  },
+  {
+   "control": "mixer.osc_a.filter_balance",
+   "raw_path": [
+    "RoutingSlot0",
+    "plainParams",
+    "kParamFilterBalance"
+   ],
+   "value": 15.0,
+   "expect_on_screen": "15 (balance)"
+  },
+  {
+   "control": "context: RoutingSlot1 -> Filter",
+   "raw_path": [
+    "RoutingSlot1",
+    "plainParams",
+    "kParamRoutingDest"
+   ],
+   "value": "kRoutingDestFilter",
+   "expect_on_screen": "FILTER"
+  },
+  {
+   "control": "mixer.osc_b.filter_balance",
+   "raw_path": [
+    "RoutingSlot1",
+    "plainParams",
+    "kParamFilterBalance"
+   ],
+   "value": 30.0,
+   "expect_on_screen": "30 (balance)"
+  },
+  {
+   "control": "context: RoutingSlot2 -> Filter",
+   "raw_path": [
+    "RoutingSlot2",
+    "plainParams",
+    "kParamRoutingDest"
+   ],
+   "value": "kRoutingDestFilter",
+   "expect_on_screen": "FILTER"
+  },
+  {
+   "control": "mixer.osc_c.filter_balance",
+   "raw_path": [
+    "RoutingSlot2",
+    "plainParams",
+    "kParamFilterBalance"
+   ],
+   "value": 45.0,
+   "expect_on_screen": "45 (balance)"
+  },
+  {
+   "control": "context: RoutingSlot3 -> Filter",
+   "raw_path": [
+    "RoutingSlot3",
+    "plainParams",
+    "kParamRoutingDest"
+   ],
+   "value": "kRoutingDestFilter",
+   "expect_on_screen": "FILTER"
+  },
+  {
+   "control": "mixer.noise.filter_balance",
+   "raw_path": [
+    "RoutingSlot3",
+    "plainParams",
+    "kParamFilterBalance"
+   ],
+   "value": 70.0,
+   "expect_on_screen": "70 (balance)"
+  },
+  {
+   "control": "context: RoutingSlot4 -> Filter",
+   "raw_path": [
+    "RoutingSlot4",
+    "plainParams",
+    "kParamRoutingDest"
+   ],
+   "value": "kRoutingDestFilter",
+   "expect_on_screen": "FILTER"
+  },
+  {
+   "control": "mixer.sub.filter_balance",
+   "raw_path": [
+    "RoutingSlot4",
+    "plainParams",
+    "kParamFilterBalance"
+   ],
+   "value": 85.0,
+   "expect_on_screen": "85 (balance)"
+  },
+  {
+   "control": "context: filter1 on",
+   "raw_path": [
+    "VoiceFilter0",
+    "plainParams",
+    "kParamEnable"
+   ],
+   "value": 1.0,
+   "expect_on_screen": "on"
+  },
+  {
+   "control": "context: filter2 on",
+   "raw_path": [
+    "VoiceFilter1",
+    "plainParams",
+    "kParamEnable"
+   ],
+   "value": 1.0,
+   "expect_on_screen": "on"
+  },
+  {
+   "control": "reference: LFO 7 shape",
+   "raw_path": [
+    "LFO6",
+    "plainParams",
+    "kParamType"
+   ],
+   "value": "RandomSH",
+   "expect_on_screen": "S&H"
+  },
+  {
+   "control": "reference: LFO 7 mode",
+   "raw_path": [
+    "LFO6",
+    "plainParams",
+    "kParamMode"
+   ],
+   "value": "Envelope",
+   "expect_on_screen": "ENVELOPE greyed, FREE lit"
+  },
+  {
+   "control": "global.voice_control.random.cutoff",
+   "raw_path": [
+    "VoicePanel0",
+    "plainParams",
+    "kParamGlobalRandomFilterCutoff"
+   ],
+   "value": 37.0,
+   "expect_on_screen": "37%"
+  },
+  {
+   "control": "global.voice_control.random.detune",
+   "raw_path": [
+    "VoicePanel0",
+    "plainParams",
+    "kParamGlobalRandomOscDetune"
+   ],
+   "value": 23.0,
+   "expect_on_screen": "4.6"
+  },
+  {
+   "control": "global.portamento_curve",
+   "raw_path": [
+    "Global0",
+    "plainParams",
+    "kParamPortamentoCurve"
+   ],
+   "value": -37.0,
+   "expect_on_screen": "-37"
+  }
+ ]
+}
