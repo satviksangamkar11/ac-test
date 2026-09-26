@@ -1,0 +1,73 @@
+{"part": "C2", "atlas_id": "lfo1.beat_sync", "screen": "LFO 1 BPM (Off); Hz lit", "result": "READ"}
+{"part": "C2", "atlas_id": "lfo1.rate_10x", "screen": "ABSENT", "result": "ABSENT", "note": "no 10x control in Hz mode; rate shows 62.5 Hz"}
+{"part": "C2", "atlas_id": "lfo1.swing", "screen": "ABSENT", "result": "ABSENT", "note": "no swing control; only other toggle is 'LFO 1 Anchored (On)'"}
+{"part": "C2", "atlas_id": "lfo2.beat_sync", "screen": "LFO 2 BPM (Off)", "result": "READ"}
+{"part": "C2", "atlas_id": "lfo2.rate_10x", "screen": "ABSENT", "result": "ABSENT", "note": "rate 62.5 Hz"}
+{"part": "C2", "atlas_id": "lfo2.swing", "screen": "ABSENT", "result": "ABSENT", "note": "LFO 2 Anchored (On)"}
+{"part": "C2", "atlas_id": "lfo3.beat_sync", "screen": "LFO 3 BPM (Off)", "result": "READ"}
+{"part": "C2", "atlas_id": "lfo3.rate_10x", "screen": "ABSENT", "result": "ABSENT", "note": "rate 62.5 Hz"}
+{"part": "C2", "atlas_id": "lfo3.swing", "screen": "ABSENT", "result": "ABSENT", "note": "LFO 3 Anchored (On)"}
+{"part": "C2", "atlas_id": "lfo4.beat_sync", "screen": "LFO 4 BPM (Off)", "result": "READ"}
+{"part": "C2", "atlas_id": "lfo4.rate_10x", "screen": "ABSENT", "result": "ABSENT", "note": "rate 62.5 Hz"}
+{"part": "C2", "atlas_id": "lfo4.swing", "screen": "ABSENT", "result": "ABSENT", "note": "LFO 4 Anchored (On)"}
+{"part": "C2", "atlas_id": "lfo5.beat_sync", "screen": "LFO 5 BPM (Off)", "result": "READ"}
+{"part": "C2", "atlas_id": "lfo5.rate_10x", "screen": "ABSENT", "result": "ABSENT", "note": "rate 62.5 Hz"}
+{"part": "C2", "atlas_id": "lfo5.swing", "screen": "ABSENT", "result": "ABSENT", "note": "LFO 5 Anchored (On)"}
+{"part": "C2", "atlas_id": "lfo6.beat_sync", "screen": "LFO 6 BPM (Off)", "result": "READ"}
+{"part": "C2", "atlas_id": "lfo6.rate_10x", "screen": "ABSENT", "result": "ABSENT", "note": "rate 62.5 Hz"}
+{"part": "C2", "atlas_id": "lfo6.swing", "screen": "ABSENT", "result": "ABSENT", "note": "LFO 6 Anchored (On)"}
+{"part": "C2", "atlas_id": "context: RoutingSlot0 -> Filter", "screen": "A Dest (Filter)", "result": "READ"}
+{"part": "C2", "atlas_id": "mixer.osc_a.filter_balance", "screen": "A> Filter Balance (15)", "result": "READ"}
+{"part": "C2", "atlas_id": "context: RoutingSlot1 -> Filter", "screen": "FILTER (dimmed, osc B off)", "result": "READ"}
+{"part": "C2", "atlas_id": "mixer.osc_b.filter_balance", "screen": "UNREADABLE", "result": "UNREADABLE", "note": "knob shown dimmed; osc B disabled, no tooltip"}
+{"part": "C2", "atlas_id": "context: RoutingSlot2 -> Filter", "screen": "FILTER (dimmed, osc C off)", "result": "READ"}
+{"part": "C2", "atlas_id": "mixer.osc_c.filter_balance", "screen": "UNREADABLE", "result": "UNREADABLE", "note": "osc C disabled, no tooltip"}
+{"part": "C2", "atlas_id": "context: RoutingSlot3 -> Filter", "screen": "FILTER (dimmed, noise off)", "result": "READ"}
+{"part": "C2", "atlas_id": "mixer.noise.filter_balance", "screen": "UNREADABLE", "result": "UNREADABLE", "note": "noise disabled, no tooltip"}
+{"part": "C2", "atlas_id": "context: RoutingSlot4 -> Filter", "screen": "FILTER (dimmed, sub off)", "result": "READ"}
+{"part": "C2", "atlas_id": "mixer.sub.filter_balance", "screen": "UNREADABLE", "result": "UNREADABLE", "note": "sub disabled, no tooltip"}
+{"part": "C2", "atlas_id": "context: filter1 on", "screen": "On (LED lit)", "result": "READ"}
+{"part": "C2", "atlas_id": "context: filter2 on", "screen": "On (LED lit)", "result": "READ"}
+{"part": "C2", "atlas_id": "reference: LFO 7 shape", "screen": "S&H", "result": "READ"}
+{"part": "C2", "atlas_id": "reference: LFO 7 mode", "screen": "ENVELOPE greyed; FREE and RETRIG both white; tooltip 'LFO 7 Mode (Envelope)'", "result": "READ"}
+{"part": "C2", "atlas_id": "global.voice_control.random.cutoff", "screen": "37%", "result": "READ"}
+{"part": "C2", "atlas_id": "global.voice_control.random.detune", "screen": "4.6", "result": "READ"}
+{"part": "C2", "atlas_id": "global.portamento_curve", "screen": "Porta Curve (-37 %)", "result": "READ"}
+{"part": "C2", "atlas_id": "lfo4.beat_sync", "preset": "BULK_01", "screen": "LFO 4 BPM (On)", "result": "READ"}
+{"part": "C2", "atlas_id": "lfo5.beat_sync", "preset": "BULK_01", "screen": "LFO 5 BPM (On)", "result": "READ"}
+{"part": "C2", "atlas_id": "lfo6.beat_sync", "preset": "BULK_01", "screen": "LFO 6 BPM (On)", "result": "READ"}
+{"part": "C2", "atlas_id": "oscA.warp_var2", "preset": "BULK_01", "screen": "ABSENT", "result": "ABSENT", "note": "warp 2 = AM(B) shows no VAR bar; the only bar is 'A Warp Var (0.0000)' for warp 1; knob 'A Warp 2 (63 %)' is the amount"}
+{"part": "C2", "atlas_id": "oscB.warp_var2", "preset": "BULK_01", "screen": "B Warp 2 Var (0.2200)", "result": "READ"}
+{"part": "C2", "atlas_id": "oscC.warp_var2", "preset": "BULK_01", "screen": "ABSENT", "result": "ABSENT", "note": "warp 2 = PWM shows no VAR bar"}
+{"part": "C2", "atlas_id": "env1.decay_curve", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE", "note": "curve handle tooltip is only 'Envelope display'"}
+{"part": "C2", "atlas_id": "env1.release_curve", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE", "note": "'Envelope display'"}
+{"part": "C2", "atlas_id": "env2.attack_curve", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE", "note": "same display class"}
+{"part": "C2", "atlas_id": "env2.decay_curve", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE", "note": "same display class"}
+{"part": "C2", "atlas_id": "env2.release_curve", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE", "note": "same display class"}
+{"part": "C2", "atlas_id": "env3.attack_curve", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE", "note": "same display class"}
+{"part": "C2", "atlas_id": "env3.decay_curve", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE", "note": "same display class"}
+{"part": "C2", "atlas_id": "env3.release_curve", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE", "note": "same display class"}
+{"part": "C2", "atlas_id": "env4.attack_curve", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE", "note": "same display class"}
+{"part": "C2", "atlas_id": "env4.decay_curve", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE", "note": "'Envelope display'"}
+{"part": "C2", "atlas_id": "env4.release_curve", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE", "note": "same display class"}
+{"part": "C2", "atlas_id": "filter1.resonance", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "C2", "atlas_id": "filter1.stereo", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "C2", "atlas_id": "filter1.var", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "C2", "atlas_id": "filter2.cutoff", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "C2", "atlas_id": "filter2.drive", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "C2", "atlas_id": "filter2.key_track", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "C2", "atlas_id": "filter2.level_out", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "C2", "atlas_id": "filter2.resonance", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "C2", "atlas_id": "filter2.stereo", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "C2", "atlas_id": "filter2.var", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "C2", "atlas_id": "lfo2.smooth", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "C2", "atlas_id": "lfo3.smooth", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "C2", "atlas_id": "lfo4.delay", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "C2", "atlas_id": "lfo4.smooth", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "C2", "atlas_id": "lfo5.delay", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "C2", "atlas_id": "lfo5.smooth", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "C2", "atlas_id": "lfo6.delay", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "C2", "atlas_id": "lfo6.rise", "preset": "BULK_01", "screen": "LFO 6 Rise (2 bar t) (scaled 10%)", "result": "READ"}
+{"part": "C2", "atlas_id": "lfo6.smooth", "preset": "BULK_01", "screen": "UNREADABLE", "result": "UNREADABLE"}
+{"part": "C2", "atlas_id": "mixer.filter1.wet", "preset": "BULK_01", "screen": "Filter 1 Wet (13 %)", "result": "READ", "note": "read on MIX page"}
+{"part": "C2", "atlas_id": "mixer.filter2.wet", "preset": "BULK_01", "screen": "Filter 2 Wet (90 %)", "result": "READ", "note": "read on MIX page"}
