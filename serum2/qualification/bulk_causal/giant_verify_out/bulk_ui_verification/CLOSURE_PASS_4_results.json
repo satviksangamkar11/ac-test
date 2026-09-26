@@ -1,0 +1,27 @@
+{"part": "C4", "preset": "CAL_04", "unit": 1, "raw": 1.0, "screen": "0.0"}
+{"part": "C4", "preset": "CAL_04", "unit": 2, "raw": 4.0, "screen": "12.0"}
+{"part": "C4", "preset": "CAL_04", "unit": 3, "raw": 7.0, "screen": "16.9"}
+{"part": "C4", "preset": "CAL_04", "unit": 4, "raw": 11.0, "screen": "20.8"}
+{"part": "C4", "preset": "CAL_04", "unit": 5, "raw": 15.0, "screen": "23.5"}
+{"part": "C4", "preset": "CAL_04", "unit": 6, "raw": 18.0, "screen": "25.1"}
+{"part": "C4", "preset": "CAL_04", "unit": 7, "raw": 23.0, "screen": "27.2"}
+{"part": "C4", "preset": "CAL_04", "unit": 8, "raw": 30.0, "screen": "29.5"}
+{"part": "C4", "preset": "CAL_05", "unit": 1, "raw": 0.05, "screen": "12"}
+{"part": "C4", "preset": "CAL_05", "unit": 2, "raw": 0.15, "screen": "25"}
+{"part": "C4", "preset": "CAL_05", "unit": 3, "raw": 0.28, "screen": "65"}
+{"part": "C4", "preset": "CAL_05", "unit": 4, "raw": 0.40, "screen": "157"}
+{"part": "C4", "preset": "CAL_05", "unit": 5, "raw": 0.52, "screen": "382"}
+{"part": "C4", "preset": "CAL_05", "unit": 6, "raw": 0.64, "screen": "928"}
+{"part": "C4", "preset": "CAL_05", "unit": 7, "raw": 0.76, "screen": "2254"}
+{"part": "C4", "preset": "CAL_05", "unit": 8, "raw": 0.90, "screen": "6345"}
+{"part": "C4", "preset": "CAL_06", "unit": 1, "raw": 0.05, "screen": "FX 1: FX Fil Freq (12 Hz)"}
+{"part": "C4", "preset": "CAL_06", "unit": 2, "raw": 0.15, "screen": "FX 2: FX Fil Freq (27 Hz)"}
+{"part": "C4", "preset": "CAL_06", "unit": 3, "raw": 0.28, "screen": "FX 3: FX Fil Freq (75 Hz)"}
+{"part": "C4", "preset": "CAL_06", "unit": 4, "raw": 0.40, "screen": "FX 4: FX Fil Freq (193 Hz)"}
+{"part": "C4", "preset": "CAL_06", "unit": 5, "raw": 0.52, "screen": "FX 5: FX Fil Freq (498 Hz)"}
+{"part": "C4", "preset": "CAL_06", "unit": 6, "raw": 0.64, "screen": "FX 6: FX Fil Freq (1285 Hz)"}
+{"part": "C4", "preset": "CAL_06", "unit": 7, "raw": 0.76, "screen": "FX 7: FX Fil Freq (3316 Hz)"}
+{"part": "C4", "preset": "CAL_06", "unit": 8, "raw": 0.90, "screen": "FX 8: FX Fil Freq (10025 Hz)"}
+{"part": "C4", "preset": "CAL_07", "unit": "A", "raw": 0.20, "screen": "A Warp (1.12 %)"}
+{"part": "C4", "preset": "CAL_07", "unit": "B", "raw": 0.65, "screen": "B Warp (5.12 %)", "note": "osc B disabled in this preset; tooltip still shown"}
+{"part": "C4", "preset": "CAL_07", "unit": "C", "raw": 0.90, "screen": "C Warp (11.93 %)", "note": "osc C disabled in this preset; tooltip still shown"}

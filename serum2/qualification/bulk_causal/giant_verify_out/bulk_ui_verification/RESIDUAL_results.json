@@ -1,0 +1,6 @@
+{"item": "baseline", "note": "No Init.SerumPreset on disk; Serum MENU > Init Preset was saved untouched as BULKCAUSAL_VERIFY/RESIDUAL_BASELINE.SerumPreset (user-approved). Diffs use readback_diff.py's logic (campaign_derive.leaves on preset_build.unpack_file); presetName differences omitted below."}
+{"item": "arp_transpose_shape_Up", "diff": [{"path": ["ArpClip0", "plainParams", "kParamTransposeShape"], "baseline": null, "value": "Up"}], "note": "Up is the Init default; Init omits the key, explicit selection writes 'Up'"}
+{"item": "arp_transpose_shape_Pinky Up", "diff": [{"path": ["ArpClip0", "plainParams", "kParamTransposeShape"], "baseline": null, "value": "PinkyUp"}]}
+{"item": "arp_transpose_shape_Pinky UD", "diff": [{"path": ["ArpClip0", "plainParams", "kParamTransposeShape"], "baseline": null, "value": "PinkyUD"}]}
+{"item": "voice_priority_control", "result": "NOT_LOCATED", "note": "GLOBAL page checked (voice control, quality, tuning, full preferences list via scrollbar) and VOICING strip hovered once; no priority control found"}
+{"item": "use_ultra_on_render", "diff": [], "note": "Control is 'Use Ultra quality when rendering' in GLOBAL preferences (app-level, was On). Saved with it Off: only differences were presetName and the carried-over transpose 'Up' -> setting is not persisted in the preset file. Restored to On afterwards."}
