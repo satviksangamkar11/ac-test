@@ -4,14 +4,26 @@ This runs every MCP control edit against a real headless Serum through DawDreame
 `dump_reference_parameter_text.py` already ran on this machine. Ableton and the Serum window are NOT used: do not
 open, click or change anything in them.
 
-## Step 1 — smoke run (~43 rows, a few minutes)
+## Step 0 — update and recheck the 3 rows that stopped the first smoke run
 
-From the repo root:
+The first smoke run stopped on `oscA.warp_mode2`, `arp.playback.offset` and `global.voice_priority`. All three
+were fixed on the cloud side (a side-leaf judging bug, a 0.0 default test value, and a sentinel string Serum
+drops). From the repo root:
 
 ```
 git pull origin claude/quirky-franklin-a9x2d3
+python serum2/qualification/bulk_causal/run_mcp_execution_harness.py --ids oscA.warp_mode2,arp.playback.offset,global.voice_priority --out serum2/qualification/bulk_causal/giant_verify_out/bulk_ui_verification/mcp_exec_recheck_results.jsonl
+```
+
+Keep that file; it is pushed in Step 4. Then continue with Step 1 regardless of what it printed.
+
+## Step 1 — smoke run (~43 rows, a few minutes)
+
+```
 python serum2/qualification/bulk_causal/run_mcp_execution_harness.py --sample
 ```
+
+This overwrites the earlier sample results file; that is intended.
 
 It prints progress and a final line like `done: {"MCP_EXEC_HOST_CONFIRMED": ..., ...}`.
 Output file: `serum2/qualification/bulk_causal/giant_verify_out/bulk_ui_verification/mcp_exec_sample_results.jsonl`
@@ -44,9 +56,13 @@ Output file: `.../bulk_ui_verification/mcp_exec_all_results.jsonl`
 ## Step 4 — push
 
 ```
-git add serum2/qualification/bulk_causal/giant_verify_out/bulk_ui_verification/mcp_exec_*_results.jsonl
+git add -f serum2/qualification/bulk_causal/giant_verify_out/bulk_ui_verification/mcp_exec_*_results.jsonl
 git commit -m "Phase 3 live MCP execution results"
 git push origin HEAD:claude/direct-ui-rescan-2026-09-26
 ```
+
+If that push is refused, push to a new branch instead and say which one:
+`git push origin HEAD:refs/heads/claude/phase3-results-2026-09-27`. The first smoke-run push never reached the
+remote, so check `git log origin/<branch> -1` after pushing.
 
 Do not interpret, summarise or edit the results. The report is built from the files on the cloud side.

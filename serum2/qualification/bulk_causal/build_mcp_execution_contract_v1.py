@@ -62,6 +62,8 @@ D_ORACLES = {
     "global.use_ultra_on_render": "EXPECT NO DIFF: confirmed by direct toggle+save+diff test not persisted into any preset",
     "oscA.warp_amount": "EXPECT MONOTONIC, NO EXACT VALUE: Sync-mode display likely quantized, no smooth curve fits 8 points",
 }
+D_ORACLES["global.voice_priority"] = ("EXCEPTION: serum-mcp accepts any string for voice_priority, Serum silently "
+                                       "drops unknown words (smoke run: 'MCP_TEST' not persisted); re-tested with 'Low'")
 D_ORACLES.update({"macro%d.name" % i: "DIVERGENT: Serum shows 'Macro %d', never the written name" % i for i in range(1, 9)})
 
 
@@ -101,6 +103,11 @@ D_ORACLE_VALUES = {
     "global.fx_bus1_destination": ("master", {"kind": "gui_only", "expect": "BUS 1 -> DIRECT"}),
     "global.fx_bus2_destination": ("direct", {"kind": "gui_only", "expect": "BUS 2 -> BUS 1"}),
     "global.use_ultra_on_render": (True, {"kind": "not_persisted", "expect": "leaf absent from Serum's re-saved state"}),
+    "global.voice_priority": ("Low", {"kind": "persisted_value", "expect": "Low",
+                                      "note": "serum-mcp writes any string unvalidated; Serum dropped the sentinel 'MCP_TEST' "
+                                              "in the smoke run. 'Low' is the only value ever seen in a real preset "
+                                              "(GlobalSpec.voice_priority docstring): match = control accepts valid words; "
+                                              "no match = the key is dead in this Serum build"}),
 }
 
 
@@ -118,6 +125,10 @@ def pick_test_value(plan_row, domain, mutation, campaign_rec=None):
         stored = sorted({v["state_value"] for v in (campaign_rec or {}).get("values", [])
                          if isinstance(v.get("state_value"), (int, float)) and not isinstance(v["state_value"], bool)
                          and not v.get("load_error")})
+        nonzero = [x for x in stored if x != 0.0]   # 0.0 is Serum's default for most open keys: a write of it is a no-op
+        if nonzero:
+            return nonzero[len(nonzero) // 2], ("open domain: a non-zero value Serum itself stored in the campaign "
+                                                "(0.0 excluded: it is Serum's default and would not persist)")
         if stored:
             return stored[len(stored) // 2], "open domain: reused a value Serum itself stored in the campaign (no declared range to pick from otherwise)"
         return None, "open domain, and Serum never stored any written value for this key in the campaign either"
@@ -202,6 +213,19 @@ def main():
                                  "fraction %.2f of the range instead)" % (value, frac))
                     value, edit, diff = alt, edit2, diff2
                     break
+        if not diff and domain["kind"] == "open":
+            rec = campaign_recs.get(aid) or {}
+            for alt in sorted({v["state_value"] for v in rec.get("values", []) if isinstance(v.get("state_value"), (int, float))
+                               and not isinstance(v["state_value"], bool) and not v.get("load_error")} - {value, 0.0}):
+                try:
+                    edit2, diff2 = spec_edit_and_diff(ctrl, aid, alt)
+                except Exception:
+                    continue
+                diff2 = _real(diff2)
+                if diff2:
+                    why += " (%r equals the baseline; used %r instead)" % (value, alt)
+                    value, edit, diff = alt, edit2, diff2
+                    break
         expected_raw = [{"path": d[0], "value": d[2]} for d in diff]
         if not expected_raw:
             skipped.append({"atlas_id": aid, "reason": "no test value in the declared domain produces a non-empty "
@@ -219,7 +243,8 @@ def main():
                     "expected_raw": expected_raw, "q3_roundtrip_offline_confirmed": roundtrip_ok,
                     "q4_host_text_check": q4_strategy(row, cmap[aid]),
                     "q5_reference_conclusion": cmap[aid]["final_conclusion"], "q5_reference_reason": cmap[aid]["final_reason"],
-                    "bucket": row["bucket"]})
+                    "primary_path": mutation.get("primary") if mutation.get("kind") == "leaf_set" else None,
+                    "bucket": "D" if aid in D_ORACLES else row["bucket"]})
 
     assert all(r["q3_roundtrip_offline_confirmed"] for r in rows), [r["atlas_id"] for r in rows if not r["q3_roundtrip_offline_confirmed"]]
     out = {"version": 1, "total_bindings": len(bt), "contract_rows": len(rows), "skipped": skipped,
