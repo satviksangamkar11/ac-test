@@ -151,6 +151,7 @@ def _download_best_video(
             "--print", "after_move:filepath",
             "--quiet",
             "--no-progress",
+            "--js-runtimes", "node",  # Node.js is available; required for 1080p format discovery
             "--",
             url,
         ]

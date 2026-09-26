@@ -69,7 +69,11 @@ def normalize_fetch_transcript_output(transcript_json_path: str) -> Dict[str, An
     }
 
 
+# Old video_capture naming: f_00001.jpg (1-based index, fps-derived timestamp)
 _FRAME_RE = re.compile(r"f_(\d+)\.jpg$")
+# acquire_visual_evidence naming: frame_<source_id>_<ms>.jpg (millisecond timestamp)
+# source_id itself contains underscores (e.g. yt_6351960979de), so match greedily up to the final _<digits>.jpg
+_FRAME_RE_AV = re.compile(r"frame_.+_(\d+)\.jpg$")
 
 
 def build_frame_manifest(frames_dir: str, fps: float = 1.0, dense_windows_json: Optional[str] = None) -> List[Dict[str, Any]]:
@@ -79,6 +83,7 @@ def build_frame_manifest(frames_dir: str, fps: float = 1.0, dense_windows_json: 
     they are two different images taken at two different resolutions/rates."""
     manifest = []
     fdir = Path(frames_dir)
+    # Old video_capture naming: f_00001.jpg
     for p in sorted(fdir.glob("f_*.jpg")):
         m = _FRAME_RE.search(p.name)
         if not m:
@@ -86,6 +91,14 @@ def build_frame_manifest(frames_dir: str, fps: float = 1.0, dense_windows_json: 
         idx = int(m.group(1))
         ts = (idx - 1) / fps
         manifest.append({"frame_id": "frame_%05d" % idx, "timestamp_sec": ts, "path": str(p), "source": "sparse"})
+    # acquire_visual_evidence naming: frame_<source_id>_<ms>.jpg
+    for p in sorted(fdir.glob("frame_*.jpg")):
+        m = _FRAME_RE_AV.search(p.name)
+        if not m:
+            continue
+        ts = int(m.group(1)) / 1000.0
+        frame_id = p.stem  # already unique: frame_yt_<sid>_<ms>
+        manifest.append({"frame_id": frame_id, "timestamp_sec": ts, "path": str(p), "source": "sparse"})
     if dense_windows_json and Path(dense_windows_json).exists():
         windows = json.loads(Path(dense_windows_json).read_text())
         dense_fps = windows.get("dense_fps", 10)

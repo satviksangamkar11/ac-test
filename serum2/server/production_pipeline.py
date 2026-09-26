@@ -163,10 +163,9 @@ def produce_from_youtube(url: str) -> ProductionRun:
 # a stage that already consumed it. This is deliberately unforgiving: a
 # stage that already passed must never be re-enterable via a stray or
 # duplicate call. MIDI_CREATED/ARRANGEMENT_VERIFIED are intentionally NOT
-# separate enforced stages: AbletonMCP's own guidance is to batch track+clip+
-# notes+arrangement into one batch_commands call ("one round-trip, one undo
-# step"), so ABLETON_CONFIGURED covers all of it atomically by design, not
-# by omission.
+# separate enforced stages: ABLETON_CONFIGURED covers the whole
+# track+clip+notes+arrangement call sequence as one stage by design, not by
+# omission.
 _STAGE_TO_STATE: Dict[str, ProductionState] = {
     "PRESET_GENERATED": ProductionState.PRESET_GENERATED,
     "SERUM_UI_CONFIGURED": ProductionState.SERUM_UI_CONFIGURED,
@@ -378,7 +377,7 @@ def _record_ableton_call(
         stage = _exp.EvidenceStage.SPECIFIED.value
 
     call = _exp.AbletonMcpCallRecord(
-        tool=(specified_action or {}).get("tool", "mcp__AbletonMCP__batch_commands"),
+        tool=(specified_action or {}).get("tool", "mcp__AbletonMCP__*"),
         args_specified=args_specified,
         stage=stage,
         result=evidence,
@@ -702,58 +701,61 @@ def _serum_verify_action(run: ProductionRun) -> Dict[str, Any]:
 
 def _ableton_action(run: ProductionRun) -> Dict[str, Any]:
     """Geometry matches the proven Gate 2A execution (commit cdfac5c):
-    4-bar (16-beat) clip, duplicated to arrangement at beats 0/16/32/48,
-    spanning 64 beats total. AbletonMCP lengths/positions are in BEATS,
-    not seconds/bars — the pre-fix version used bar numbers (4/8/12) where
-    beat numbers were required, corrupting the arrangement (clips
-    overlapped, render truncated to 6.7s instead of ~32s).
+    4-bar (16-beat) clip placed in the arrangement at beats 0/16/32/48,
+    spanning 64 beats. ableton-mcp-extended has no batch tool and exposes
+    1-based track/clip/bar indices; bars 1/5/9/13 in 4/4 == beats 0/16/32/48.
     """
+    n = "N (1-based index of the track created by create_midi_track)"
     return {
         "action": "configure_ableton",
-        "tool": "mcp__AbletonMCP__batch_commands",
-        "args": {
-            "commands": [
-                {"command": "set_tempo", "params": {"tempo_bpm": 120}},
-                {"command": "create_midi_track", "params": {"index": -1}},
-                {"command": "set_track_name", "params": {"track_index": "N", "name": "Serum Lead"}},
-                {"command": "create_clip", "params": {"track_index": "N", "clip_index": 0, "length": 16.0}},
-                {"command": "add_notes_to_clip", "params": {
-                    "notes": [
-                        {"pitch": 60, "velocity": 100, "start_time": 0, "duration": 1},
-                        {"pitch": 62, "velocity": 100, "start_time": 1, "duration": 1},
-                        {"pitch": 64, "velocity": 100, "start_time": 2, "duration": 1},
-                        {"pitch": 65, "velocity": 100, "start_time": 3, "duration": 1},
-                    ]
-                }},
-                {"command": "duplicate_to_arrangement", "params": {"track_index": "N", "clip_index": 0, "arrangement_position": 0}},
-                {"command": "duplicate_to_arrangement", "params": {"track_index": "N", "clip_index": 0, "arrangement_position": 16}},
-                {"command": "duplicate_to_arrangement", "params": {"track_index": "N", "clip_index": 0, "arrangement_position": 32}},
-                {"command": "duplicate_to_arrangement", "params": {"track_index": "N", "clip_index": 0, "arrangement_position": 48}},
-            ]
-        },
+        "tool": "mcp__AbletonMCP__*",
+        "calls": [
+            {"tool": "mcp__AbletonMCP__set_tempo", "args": {"tempo": 120}},
+            {"tool": "mcp__AbletonMCP__create_midi_track", "args": {"index": -1}},
+            {"tool": "mcp__AbletonMCP__set_track_name", "args": {"track_index": n, "name": "Serum Lead"}},
+            {"tool": "mcp__AbletonMCP__create_clip", "args": {"track_index": n, "clip_index": 1, "length": 16.0}},
+            {"tool": "mcp__AbletonMCP__add_notes_to_clip", "args": {
+                "track_index": n, "clip_index": 1,
+                "notes": [
+                    {"pitch": 60, "velocity": 100, "start_time": 0, "duration": 1},
+                    {"pitch": 62, "velocity": 100, "start_time": 1, "duration": 1},
+                    {"pitch": 64, "velocity": 100, "start_time": 2, "duration": 1},
+                    {"pitch": 65, "velocity": 100, "start_time": 3, "duration": 1},
+                ],
+            }},
+            *[
+                {"tool": "mcp__AbletonMCP__duplicate_clip_to_arrangement",
+                 "args": {"track_index": n, "clip_index": 1, "destination_bar": bar}}
+                for bar in (1, 5, 9, 13)
+            ],
+        ],
         "receipt_fields": {
-            "track_index": "created track index",
-            "tempo_bpm": "confirmed tempo",
-            "clip_info": "get_clip_info result (expect length=16.0 beats)",
-            "arrangement_clips": "get_arrangement_clips result (expect 4 clips at beats 0,16,32,48, spanning 0-64)",
+            "track_index": "created track index (1-based)",
+            "tempo_bpm": "confirmed tempo (get_session_info)",
+            "arrangement_clips": "get_arrangement_info(track_index=N) (expect 4 clips at beats 0,16,32,48, spanning 0-64)",
         },
     }
 
 
 def _render_action(run: ProductionRun) -> Dict[str, Any]:
-    """length is in BEATS (AbletonMCP convention), not seconds. 64 beats
-    at 120 BPM = 32 seconds, matching the arrangement's full 0-64 beat span
-    and the proven Gate 2A render (30.7s actual, within +/-2s tolerance)."""
+    """ableton-mcp-extended has no render/record tool, so the render is a
+    manual Live export. 64 beats at 120 BPM = 32 s, matching the proven
+    Gate 2A render (30.7 s actual, within +/-2 s tolerance)."""
     _RENDERS_DIR.mkdir(parents=True, exist_ok=True)
     render_path = str(_RENDERS_DIR / f"{run.run_id}.wav")
     return {
         "action": "render",
-        "tool": "mcp__AbletonMCP__record_section",
+        "tool": "manual:ableton_export_audio",
         "args": {
-            "start_time": 0,
-            "length": 64.0,
+            "start_beat": 0,
+            "length_beats": 64.0,
             "output_path": render_path,
         },
+        "steps": [
+            "1. In Live: File > Export Audio/Video, Rendered Track = Master",
+            "2. Render Start 1.1.1, Render Length 16.0.0 (64 beats)",
+            f"3. Save as {render_path}",
+        ],
         "receipt_fields": {
             "render_path": render_path,
             "file_size_bytes": "actual file size",

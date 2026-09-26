@@ -1,0 +1,693 @@
+{
+ "source_id": "yt_6351960979de",
+ "video_id": "WeRr68RBm8c",
+ "source_url": "https://www.youtube.com/watch?v=WeRr68RBm8c&t=41s",
+ "language": "en",
+ "transcript_sha256": "f37df152709f5af7dbe6ff18ff92e50df2454244ea2215274001da7110517c8d",
+ "transcript": [
+  {
+   "segment_id": "seg-0000",
+   "text": "Today, I'll show you how to make a heavy",
+   "start_time_sec": 0.0,
+   "duration": 4.56
+  },
+  {
+   "segment_id": "seg-0001",
+   "text": "rave lead in Serum 2 that you can use in",
+   "start_time_sec": 2.12,
+   "duration": 4.52
+  },
+  {
+   "segment_id": "seg-0002",
+   "text": "your drops. We'll build the sound, add",
+   "start_time_sec": 4.56,
+   "duration": 3.8
+  },
+  {
+   "segment_id": "seg-0003",
+   "text": "the processing, and finish with two",
+   "start_time_sec": 6.64,
+   "duration": 3.24
+  },
+  {
+   "segment_id": "seg-0004",
+   "text": "macros that let you change its",
+   "start_time_sec": 8.36,
+   "duration": 5.36
+  },
+  {
+   "segment_id": "seg-0005",
+   "text": "character. Let's hear it.",
+   "start_time_sec": 9.88,
+   "duration": 3.84
+  },
+  {
+   "segment_id": "seg-0006",
+   "text": "I already have a melody ready for this",
+   "start_time_sec": 15.68,
+   "duration": 3.08
+  },
+  {
+   "segment_id": "seg-0007",
+   "text": "tutorial.",
+   "start_time_sec": 17.4,
+   "duration": 3.52
+  },
+  {
+   "segment_id": "seg-0008",
+   "text": "I generated the MIDI with my rave engine",
+   "start_time_sec": 18.76,
+   "duration": 4.08
+  },
+  {
+   "segment_id": "seg-0009",
+   "text": "generator, which you can find in the",
+   "start_time_sec": 20.92,
+   "duration": 4.72
+  },
+  {
+   "segment_id": "seg-0010",
+   "text": "description.",
+   "start_time_sec": 22.84,
+   "duration": 2.8
+  },
+  {
+   "segment_id": "seg-0011",
+   "text": ">> [music]",
+   "start_time_sec": 26.2,
+   "duration": 3.12
+  },
+  {
+   "segment_id": "seg-0012",
+   "text": ">> We'll keep that same pattern playing",
+   "start_time_sec": 27.6,
+   "duration": 3.56
+  },
+  {
+   "segment_id": "seg-0013",
+   "text": "while we build the sound, starting with",
+   "start_time_sec": 29.32,
+   "duration": 3.43
+  },
+  {
+   "segment_id": "seg-0014",
+   "text": "oscillator A.",
+   "start_time_sec": 31.16,
+   "duration": 3.36
+  },
+  {
+   "segment_id": "seg-0015",
+   "text": ">> [music]",
+   "start_time_sec": 32.75,
+   "duration": 3.93
+  },
+  {
+   "segment_id": "seg-0016",
+   "text": ">> I'm using default shapes and bringing it",
+   "start_time_sec": 34.52,
+   "duration": 4.92
+  },
+  {
+   "segment_id": "seg-0017",
+   "text": "down two octaves. Next, I create this",
+   "start_time_sec": 36.68,
+   "duration": 6.6
+  },
+  {
+   "segment_id": "seg-0018",
+   "text": "shape in LFO 1, set it to free mode,",
+   "start_time_sec": 39.44,
+   "duration": 5.84
+  },
+  {
+   "segment_id": "seg-0019",
+   "text": "and assign it to the oscillator's coarse",
+   "start_time_sec": 43.28,
+   "duration": 3.4
+  },
+  {
+   "segment_id": "seg-0020",
+   "text": "pitch.",
+   "start_time_sec": 45.28,
+   "duration": 3.32
+  },
+  {
+   "segment_id": "seg-0021",
+   "text": "This introduces the pitch movement we'll",
+   "start_time_sec": 46.68,
+   "duration": 5.065
+  },
+  {
+   "segment_id": "seg-0022",
+   "text": "use throughout the patch.",
+   "start_time_sec": 48.6,
+   "duration": 5.165
+  },
+  {
+   "segment_id": "seg-0023",
+   "text": ">> [music]",
+   "start_time_sec": 51.745,
+   "duration": 2.02
+  },
+  {
+   "segment_id": "seg-0024",
+   "text": "[music]",
+   "start_time_sec": 58.95,
+   "duration": 2.02
+  },
+  {
+   "segment_id": "seg-0025",
+   "text": "[music]",
+   "start_time_sec": 64.19,
+   "duration": 2.02
+  },
+  {
+   "segment_id": "seg-0026",
+   "text": "[music]",
+   "start_time_sec": 75.325,
+   "duration": 2.02
+  },
+  {
+   "segment_id": "seg-0027",
+   "text": ">> Now, I enable the noise oscillator. In",
+   "start_time_sec": 80.32,
+   "duration": 5.4
+  },
+  {
+   "segment_id": "seg-0028",
+   "text": "oscillator A's first warp slot, I select",
+   "start_time_sec": 83.04,
+   "duration": 5.48
+  },
+  {
+   "segment_id": "seg-0029",
+   "text": "FM from noise and bring the amount to",
+   "start_time_sec": 85.72,
+   "duration": 5.92
+  },
+  {
+   "segment_id": "seg-0030",
+   "text": "around halfway.",
+   "start_time_sec": 88.52,
+   "duration": 3.12
+  },
+  {
+   "segment_id": "seg-0031",
+   "text": ">> [music]",
+   "start_time_sec": 93.011,
+   "duration": 2.02
+  },
+  {
+   "segment_id": "seg-0032",
+   "text": ">> This uses the noise to modulate",
+   "start_time_sec": 97.28,
+   "duration": 4.04
+  },
+  {
+   "segment_id": "seg-0033",
+   "text": "oscillator A, giving us a rougher",
+   "start_time_sec": 99.2,
+   "duration": 3.84
+  },
+  {
+   "segment_id": "seg-0034",
+   "text": "texture before we even reach the",
+   "start_time_sec": 101.32,
+   "duration": 3.92
+  },
+  {
+   "segment_id": "seg-0035",
+   "text": "effects. Now, let's build the effects",
+   "start_time_sec": 103.04,
+   "duration": 5.24
+  },
+  {
+   "segment_id": "seg-0036",
+   "text": "chain. First, I add hyperdimension and",
+   "start_time_sec": 105.24,
+   "duration": 5.28
+  },
+  {
+   "segment_id": "seg-0037",
+   "text": "lower the detune and mix in the hyper",
+   "start_time_sec": 108.28,
+   "duration": 4.88
+  },
+  {
+   "segment_id": "seg-0038",
+   "text": "section.",
+   "start_time_sec": 110.52,
+   "duration": 2.64
+  },
+  {
+   "segment_id": "seg-0039",
+   "text": "Next comes distortion. I select the mode",
+   "start_time_sec": 114.08,
+   "duration": 4.8
+  },
+  {
+   "segment_id": "seg-0040",
+   "text": "shown here and push the drive all the",
+   "start_time_sec": 116.88,
+   "duration": 4.951
+  },
+  {
+   "segment_id": "seg-0041",
+   "text": "way up. Let's hear what that adds.",
+   "start_time_sec": 118.88,
+   "duration": 4.971
+  },
+  {
+   "segment_id": "seg-0042",
+   "text": ">> [music]",
+   "start_time_sec": 121.831,
+   "duration": 2.02
+  },
+  {
+   "segment_id": "seg-0043",
+   "text": ">> After the distortion, I add a delay. The",
+   "start_time_sec": 124.04,
+   "duration": 4.92
+  },
+  {
+   "segment_id": "seg-0044",
+   "text": "left side is set to a quarter note and",
+   "start_time_sec": 126.72,
+   "duration": 6.0
+  },
+  {
+   "segment_id": "seg-0045",
+   "text": "the right side to a half note.",
+   "start_time_sec": 128.96,
+   "duration": 3.76
+  },
+  {
+   "segment_id": "seg-0046",
+   "text": "Then I bring up the mix slightly",
+   "start_time_sec": 135.0,
+   "duration": 4.72
+  },
+  {
+   "segment_id": "seg-0047",
+   "text": "so the repeats fill the gaps in the",
+   "start_time_sec": 138.0,
+   "duration": 6.0
+  },
+  {
+   "segment_id": "seg-0048",
+   "text": "melody. Next is reverb.",
+   "start_time_sec": 139.72,
+   "duration": 4.28
+  },
+  {
+   "segment_id": "seg-0049",
+   "text": "I raise the low cut, increase the decay",
+   "start_time_sec": 146.04,
+   "duration": 4.24
+  },
+  {
+   "segment_id": "seg-0050",
+   "text": "a little, and adjust the modulation",
+   "start_time_sec": 148.28,
+   "duration": 4.04
+  },
+  {
+   "segment_id": "seg-0051",
+   "text": "rate. Let's hear it with the delay and",
+   "start_time_sec": 150.28,
+   "duration": 4.679
+  },
+  {
+   "segment_id": "seg-0052",
+   "text": "reverb.",
+   "start_time_sec": 152.32,
+   "duration": 2.639
+  },
+  {
+   "segment_id": "seg-0053",
+   "text": "Now I add a compressor. I increase the",
+   "start_time_sec": 160.4,
+   "duration": 4.6
+  },
+  {
+   "segment_id": "seg-0054",
+   "text": "below control, lower the threshold",
+   "start_time_sec": 162.72,
+   "duration": 4.8
+  },
+  {
+   "segment_id": "seg-0055",
+   "text": "slightly, adjust the gain, and bring up",
+   "start_time_sec": 165.0,
+   "duration": 5.4
+  },
+  {
+   "segment_id": "seg-0056",
+   "text": "the high band.",
+   "start_time_sec": 167.52,
+   "duration": 2.88
+  },
+  {
+   "segment_id": "seg-0057",
+   "text": ">> [music]",
+   "start_time_sec": 177.506,
+   "duration": 4.574
+  },
+  {
+   "segment_id": "seg-0058",
+   "text": ">> Then I add an EQ, remove the low end,",
+   "start_time_sec": 179.04,
+   "duration": 7.4
+  },
+  {
+   "segment_id": "seg-0059",
+   "text": "and give the upper mids a small boost.",
+   "start_time_sec": 182.08,
+   "duration": 4.36
+  },
+  {
+   "segment_id": "seg-0060",
+   "text": "Back in the matrix, I increase the pitch",
+   "start_time_sec": 190.6,
+   "duration": 4.16
+  },
+  {
+   "segment_id": "seg-0061",
+   "text": "modulation amount to around 20. Here's",
+   "start_time_sec": 192.68,
+   "duration": 5.92
+  },
+  {
+   "segment_id": "seg-0062",
+   "text": "how the lead sounds at this point.",
+   "start_time_sec": 194.76,
+   "duration": 3.84
+  },
+  {
+   "segment_id": "seg-0063",
+   "text": ">> [music]",
+   "start_time_sec": 202.397,
+   "duration": 2.02
+  },
+  {
+   "segment_id": "seg-0064",
+   "text": ">> I also enable Kickstart 2 outside Serum.",
+   "start_time_sec": 205.56,
+   "duration": 4.64
+  },
+  {
+   "segment_id": "seg-0065",
+   "text": ">> [music]",
+   "start_time_sec": 210.257,
+   "duration": 2.02
+  },
+  {
+   "segment_id": "seg-0066",
+   "text": ">> Now we have the bass sound, but the",
+   "start_time_sec": 219.4,
+   "duration": 3.4
+  },
+  {
+   "segment_id": "seg-0067",
+   "text": "filter gives us another character to",
+   "start_time_sec": 221.12,
+   "duration": 3.92
+  },
+  {
+   "segment_id": "seg-0068",
+   "text": "work with. I enable filter one, choose",
+   "start_time_sec": 222.8,
+   "duration": 5.6
+  },
+  {
+   "segment_id": "seg-0069",
+   "text": "band pass 24.",
+   "start_time_sec": 225.04,
+   "duration": 3.36
+  },
+  {
+   "segment_id": "seg-0070",
+   "text": ">> and route only oscillator A through it.",
+   "start_time_sec": 240.36,
+   "duration": 4.24
+  },
+  {
+   "segment_id": "seg-0071",
+   "text": "I leave the cutoff around the middle,",
+   "start_time_sec": 242.96,
+   "duration": 3.84
+  },
+  {
+   "segment_id": "seg-0072",
+   "text": "raise the resonance, and turn the drive",
+   "start_time_sec": 244.6,
+   "duration": 4.68
+  },
+  {
+   "segment_id": "seg-0073",
+   "text": "all the way up. Then I assign the same",
+   "start_time_sec": 246.8,
+   "duration": 5.28
+  },
+  {
+   "segment_id": "seg-0074",
+   "text": "LFO to the filter cutoff. I make this",
+   "start_time_sec": 249.28,
+   "duration": 5.32
+  },
+  {
+   "segment_id": "seg-0075",
+   "text": "assignment bipolar, so the modulation",
+   "start_time_sec": 252.08,
+   "duration": 4.32
+  },
+  {
+   "segment_id": "seg-0076",
+   "text": "moves in both directions around THE",
+   "start_time_sec": 254.6,
+   "duration": 4.84
+  },
+  {
+   "segment_id": "seg-0077",
+   "text": "CUTOFF POSITION.",
+   "start_time_sec": 256.4,
+   "duration": 3.04
+  },
+  {
+   "segment_id": "seg-0078",
+   "text": ">> [music]",
+   "start_time_sec": 262.657,
+   "duration": 2.02
+  },
+  {
+   "segment_id": "seg-0079",
+   "text": ">> SO, I ASSIGN THE FILTER MIX TO macro",
+   "start_time_sec": 266.76,
+   "duration": 3.2
+  },
+  {
+   "segment_id": "seg-0080",
+   "text": "one.",
+   "start_time_sec": 268.96,
+   "duration": 3.32
+  },
+  {
+   "segment_id": "seg-0081",
+   "text": "With this macro, I can bring the filter",
+   "start_time_sec": 269.96,
+   "duration": 4.12
+  },
+  {
+   "segment_id": "seg-0082",
+   "text": "in gradually, blend it with the",
+   "start_time_sec": 272.28,
+   "duration": 4.08
+  },
+  {
+   "segment_id": "seg-0083",
+   "text": "unfiltered signal, or push it all the",
+   "start_time_sec": 274.08,
+   "duration": 5.608
+  },
+  {
+   "segment_id": "seg-0084",
+   "text": "way. Listen as I move through the range.",
+   "start_time_sec": 276.36,
+   "duration": 5.348
+  },
+  {
+   "segment_id": "seg-0085",
+   "text": ">> [music]",
+   "start_time_sec": 279.688,
+   "duration": 2.02
+  },
+  {
+   "segment_id": "seg-0086",
+   "text": "[music]",
+   "start_time_sec": 285.583,
+   "duration": 2.02
+  },
+  {
+   "segment_id": "seg-0087",
+   "text": "[music]",
+   "start_time_sec": 303.268,
+   "duration": 2.02
+  },
+  {
+   "segment_id": "seg-0088",
+   "text": "[music]",
+   "start_time_sec": 311.783,
+   "duration": 2.02
+  },
+  {
+   "segment_id": "seg-0089",
+   "text": "[music]",
+   "start_time_sec": 330.778,
+   "duration": 2.02
+  },
+  {
+   "segment_id": "seg-0090",
+   "text": ">> Then I assign the cutoff to macro two.",
+   "start_time_sec": 348.4,
+   "duration": 6.6
+  },
+  {
+   "segment_id": "seg-0091",
+   "text": "The LFO keeps the filter moving.",
+   "start_time_sec": 350.8,
+   "duration": 4.2
+  },
+  {
+   "segment_id": "seg-0092",
+   "text": "And this second macro lets me shift the",
+   "start_time_sec": 377.72,
+   "duration": 4.36
+  },
+  {
+   "segment_id": "seg-0093",
+   "text": "cutoff while that movement continues.",
+   "start_time_sec": 379.8,
+   "duration": 4.28
+  },
+  {
+   "segment_id": "seg-0094",
+   "text": "Now we have two simple controls for",
+   "start_time_sec": 382.08,
+   "duration": 4.32
+  },
+  {
+   "segment_id": "seg-0095",
+   "text": "creating variations. You can leave them",
+   "start_time_sec": 384.08,
+   "duration": 4.44
+  },
+  {
+   "segment_id": "seg-0096",
+   "text": "in one position for your main phrase,",
+   "start_time_sec": 386.4,
+   "duration": 4.0
+  },
+  {
+   "segment_id": "seg-0097",
+   "text": "then automate them to change the sound",
+   "start_time_sec": 388.52,
+   "duration": 3.8
+  },
+  {
+   "segment_id": "seg-0098",
+   "text": "in the next section. Let's hear a few",
+   "start_time_sec": 390.4,
+   "duration": 4.84
+  },
+  {
+   "segment_id": "seg-0099",
+   "text": "combinations.",
+   "start_time_sec": 392.32,
+   "duration": 2.92
+  },
+  {
+   "segment_id": "seg-0100",
+   "text": "Try it with your own melody and",
+   "start_time_sec": 422.6,
+   "duration": 3.96
+  },
+  {
+   "segment_id": "seg-0101",
+   "text": "experiment with those two macros to find",
+   "start_time_sec": 424.2,
+   "duration": 4.48
+  },
+  {
+   "segment_id": "seg-0102",
+   "text": "a setting that fits your drop. You can",
+   "start_time_sec": 426.56,
+   "duration": 4.28
+  },
+  {
+   "segment_id": "seg-0103",
+   "text": "download the preset through the link in",
+   "start_time_sec": 428.68,
+   "duration": 4.12
+  },
+  {
+   "segment_id": "seg-0104",
+   "text": "the description. And if you want more",
+   "start_time_sec": 430.84,
+   "duration": 3.92
+  },
+  {
+   "segment_id": "seg-0105",
+   "text": "sounds for your tracks, check out the",
+   "start_time_sec": 432.8,
+   "duration": 4.8
+  },
+  {
+   "segment_id": "seg-0106",
+   "text": "Crosper Serum 2 Vault. You'll also find",
+   "start_time_sec": 434.76,
+   "duration": 4.68
+  },
+  {
+   "segment_id": "seg-0107",
+   "text": "the ultimate bundle linked below for",
+   "start_time_sec": 437.6,
+   "duration": 3.92
+  },
+  {
+   "segment_id": "seg-0108",
+   "text": "more Crosper sounds and production",
+   "start_time_sec": 439.44,
+   "duration": 4.28
+  },
+  {
+   "segment_id": "seg-0109",
+   "text": "tools. If you found this useful,",
+   "start_time_sec": 441.52,
+   "duration": 4.36
+  },
+  {
+   "segment_id": "seg-0110",
+   "text": "subscribe for more hard music production",
+   "start_time_sec": 443.72,
+   "duration": 4.64
+  },
+  {
+   "segment_id": "seg-0111",
+   "text": "tutorials. Thanks for watching and I'll",
+   "start_time_sec": 445.88,
+   "duration": 4.24
+  },
+  {
+   "segment_id": "seg-0112",
+   "text": "see you in the next one. That's how you",
+   "start_time_sec": 448.36,
+   "duration": 5.76
+  },
+  {
+   "segment_id": "seg-0113",
+   "text": "turn sound into power.",
+   "start_time_sec": 450.12,
+   "duration": 4.0
+  }
+ ]
+}

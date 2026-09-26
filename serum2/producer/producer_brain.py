@@ -837,15 +837,16 @@ class ProducerBrain:
             "value_kind": value_kind,
             "value": value,
             "execution_steps": [
-                "1. get_device_parameters(track_index=%d, device_index=%d)"
-                % (host.track_index, host.device_index),
+                # MCP_HOST_MAP is 0-based; ableton-mcp-extended tools are 1-based.
+                "1. get_device_parameters(track_index=%d, device_index=%d, show_all=True)"
+                % (host.track_index + 1, host.device_index + 1),
                 "2. read current value at param index %d (%r)"
                 % (host.index, host.name),
                 "3. resolve_host_value(current, kind=%r, value=%s)"
                 % (value_kind, value),
                 "4. set_device_parameter(track_index=%d, device_index=%d, "
-                "parameter=%d, value=<resolved>)"
-                % (host.track_index, host.device_index, host.index),
+                "parameter_index=%d, value=<resolved>)"
+                % (host.track_index + 1, host.device_index + 1, host.index + 1),
                 "5. get_device_parameters again → readback to verify write",
                 "6. make_audit_record(plan, before, after)",
             ],

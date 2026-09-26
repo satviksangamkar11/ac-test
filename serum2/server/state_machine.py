@@ -29,10 +29,9 @@ class ProductionState(Enum):
     ABLETON_CONFIGURED   = "ABLETON_CONFIGURED"
     # Reserved, intentionally not part of the enforced sequence in
     # production_pipeline._EXPECTED_PREDECESSOR: track/clip/MIDI/arrangement
-    # are batched into ONE ABLETON_CONFIGURED transition per AbletonMCP's own
-    # guidance ("use batch_commands ... one round-trip, one undo step").
-    # Splitting these out would mean 3 separate Claude tool round-trips for
-    # what is correctly one atomic Ableton edit.
+    # are grouped into ONE ABLETON_CONFIGURED transition covering the whole
+    # Ableton call sequence; splitting them would add stage bookkeeping for
+    # what is one logical Ableton edit.
     MIDI_CREATED         = "MIDI_CREATED"
     ARRANGEMENT_VERIFIED = "ARRANGEMENT_VERIFIED"
     RENDERED             = "RENDERED"

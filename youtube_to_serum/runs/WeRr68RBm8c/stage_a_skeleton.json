@@ -1,0 +1,1661 @@
+{
+ "stage_a_provenance": {
+  "observer": "claude_code",
+  "observation_mode": "direct_visual_inspection",
+  "model_api_used": false
+ },
+ "frames": [
+  {
+   "frame_id": "frame_yt_6351960979de_00005000",
+   "timestamp_sec": 5.0,
+   "serum_visible": false,
+   "controls": []
+  },
+  {
+   "frame_id": "frame_yt_6351960979de_00010000",
+   "timestamp_sec": 10.0,
+   "serum_visible": false,
+   "controls": []
+  },
+  {
+   "frame_id": "frame_yt_6351960979de_00015000",
+   "timestamp_sec": 15.0,
+   "serum_visible": false,
+   "controls": []
+  },
+  {
+   "frame_id": "frame_yt_6351960979de_00020000",
+   "timestamp_sec": 20.0,
+   "serum_visible": false,
+   "controls": []
+  },
+  {
+   "frame_id": "frame_yt_6351960979de_00025000",
+   "timestamp_sec": 25.0,
+   "serum_visible": false,
+   "controls": []
+  },
+  {
+   "frame_id": "frame_yt_6351960979de_00030000",
+   "timestamp_sec": 30.0,
+   "serum_visible": false,
+   "controls": []
+  },
+  {
+   "frame_id": "frame_yt_6351960979de_00035000",
+   "timestamp_sec": 35.0,
+   "serum_visible": true,
+   "controls": [
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "oscA.enabled",
+     "status": "OBSERVED",
+     "control_type": "toggle"
+    },
+    {
+     "value": "Default Shapes",
+     "confidence": "high",
+     "control_id": "oscA.wavetable",
+     "status": "OBSERVED",
+     "control_type": "enum"
+    },
+    {
+     "value": -2,
+     "confidence": "high",
+     "control_id": "oscA.octave",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": 0,
+     "confidence": "high",
+     "control_id": "oscA.semitone",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": 0,
+     "confidence": "high",
+     "control_id": "oscA.fine",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": "FM (NOISE)",
+     "confidence": "high",
+     "control_id": "oscA.warp_mode",
+     "status": "OBSERVED",
+     "control_type": "enum"
+    },
+    {
+     "value": 100,
+     "confidence": "high",
+     "control_id": "oscA.rand"
+    },
+    {
+     "value": false,
+     "confidence": "high",
+     "control_id": "oscB.enabled",
+     "status": "OBSERVED",
+     "control_type": "toggle"
+    },
+    {
+     "value": false,
+     "confidence": "high",
+     "control_id": "oscC.enabled",
+     "status": "OBSERVED",
+     "control_type": "toggle"
+    },
+    {
+     "value": false,
+     "confidence": "high",
+     "control_id": "noise.enabled"
+    },
+    {
+     "value": false,
+     "confidence": "high",
+     "control_id": "filter1.enabled",
+     "status": "OBSERVED",
+     "control_type": "toggle"
+    },
+    {
+     "value": "Normal",
+     "confidence": "high",
+     "control_id": "lfo1.mode",
+     "status": "OBSERVED",
+     "control_type": "enum"
+    },
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "lfo1.free"
+    },
+    {
+     "value": "1.0 ms",
+     "confidence": "high",
+     "control_id": "env1.attack",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": "0.0 ms",
+     "confidence": "high",
+     "control_id": "env1.hold",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": "1.00 s",
+     "confidence": "high",
+     "control_id": "env1.decay",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": "0.0 dB",
+     "confidence": "high",
+     "control_id": "env1.sustain",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": "15 ms",
+     "confidence": "high",
+     "control_id": "env1.release",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": "1/4",
+     "confidence": "high",
+     "control_id": "lfo1.rate_sync"
+    },
+    {
+     "value": "BPM",
+     "confidence": "high",
+     "control_id": "lfo1.rate_mode"
+    },
+    {
+     "value": 8,
+     "confidence": "high",
+     "control_id": "voicing.poly"
+    },
+    {
+     "value": false,
+     "confidence": "high",
+     "control_id": "voicing.mono"
+    },
+    {
+     "value": false,
+     "confidence": "high",
+     "control_id": "voicing.legato"
+    }
+   ]
+  },
+  {
+   "frame_id": "frame_yt_6351960979de_00040000",
+   "timestamp_sec": 40.0,
+   "serum_visible": true,
+   "controls": [
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "oscA.enabled",
+     "status": "OBSERVED",
+     "control_type": "toggle"
+    },
+    {
+     "value": "Default Shapes",
+     "confidence": "high",
+     "control_id": "oscA.wavetable",
+     "status": "OBSERVED",
+     "control_type": "enum"
+    },
+    {
+     "value": -2,
+     "confidence": "high",
+     "control_id": "oscA.octave",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": 0,
+     "confidence": "high",
+     "control_id": "oscA.semitone",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": 0,
+     "confidence": "high",
+     "control_id": "oscA.fine",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": "FM (NOISE)",
+     "confidence": "high",
+     "control_id": "oscA.warp_mode",
+     "status": "OBSERVED",
+     "control_type": "enum"
+    },
+    {
+     "value": 100,
+     "confidence": "high",
+     "control_id": "oscA.rand"
+    },
+    {
+     "value": "Normal",
+     "confidence": "high",
+     "control_id": "lfo1.mode",
+     "status": "OBSERVED",
+     "control_type": "enum"
+    },
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "lfo1.free"
+    },
+    {
+     "value": "Custom",
+     "confidence": "high",
+     "control_id": "lfo1.shape",
+     "status": "OBSERVED",
+     "control_type": "enum"
+    },
+    {
+     "value": "Forward",
+     "confidence": "high",
+     "control_id": "lfo1.direction"
+    },
+    {
+     "value": "bar",
+     "confidence": "high",
+     "control_id": "lfo1.rate_sync"
+    },
+    {
+     "value": "BPM",
+     "confidence": "high",
+     "control_id": "lfo1.rate_mode"
+    }
+   ]
+  },
+  {
+   "frame_id": "frame_yt_6351960979de_00042000",
+   "timestamp_sec": 42.0,
+   "serum_visible": true,
+   "controls": [
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "oscA.enabled",
+     "status": "OBSERVED",
+     "control_type": "toggle"
+    },
+    {
+     "value": "Default Shapes",
+     "confidence": "high",
+     "control_id": "oscA.wavetable",
+     "status": "OBSERVED",
+     "control_type": "enum"
+    },
+    {
+     "value": -2,
+     "confidence": "high",
+     "control_id": "oscA.octave",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": 0,
+     "confidence": "high",
+     "control_id": "oscA.semitone",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": 0,
+     "confidence": "high",
+     "control_id": "oscA.fine",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": "FM (NOISE)",
+     "confidence": "high",
+     "control_id": "oscA.warp_mode",
+     "status": "OBSERVED",
+     "control_type": "enum"
+    },
+    {
+     "value": 100,
+     "confidence": "high",
+     "control_id": "oscA.rand"
+    },
+    {
+     "value": false,
+     "confidence": "high",
+     "control_id": "oscB.enabled",
+     "status": "OBSERVED",
+     "control_type": "toggle"
+    },
+    {
+     "value": false,
+     "confidence": "high",
+     "control_id": "oscC.enabled",
+     "status": "OBSERVED",
+     "control_type": "toggle"
+    },
+    {
+     "value": false,
+     "confidence": "high",
+     "control_id": "noise.enabled"
+    },
+    {
+     "value": false,
+     "confidence": "high",
+     "control_id": "filter1.enabled",
+     "status": "OBSERVED",
+     "control_type": "toggle"
+    },
+    {
+     "value": "Normal",
+     "confidence": "high",
+     "control_id": "lfo1.mode",
+     "status": "OBSERVED",
+     "control_type": "enum"
+    },
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "lfo1.free"
+    },
+    {
+     "value": "Custom",
+     "confidence": "high",
+     "control_id": "lfo1.shape",
+     "status": "OBSERVED",
+     "control_type": "enum"
+    },
+    {
+     "value": "Forward",
+     "confidence": "high",
+     "control_id": "lfo1.direction"
+    },
+    {
+     "value": "1/4",
+     "confidence": "high",
+     "control_id": "lfo1.rate_sync"
+    },
+    {
+     "value": "BPM",
+     "confidence": "high",
+     "control_id": "lfo1.rate_mode"
+    },
+    {
+     "value": "1.0 ms",
+     "confidence": "high",
+     "control_id": "env1.attack",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": "0.0 ms",
+     "confidence": "high",
+     "control_id": "env1.hold",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": "1.00 s",
+     "confidence": "high",
+     "control_id": "env1.decay",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": "0.0 dB",
+     "confidence": "high",
+     "control_id": "env1.sustain",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": "15 ms",
+     "confidence": "high",
+     "control_id": "env1.release",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": 8,
+     "confidence": "high",
+     "control_id": "voicing.poly"
+    },
+    {
+     "value": false,
+     "confidence": "high",
+     "control_id": "voicing.mono"
+    }
+   ]
+  },
+  {
+   "frame_id": "frame_yt_6351960979de_00080000",
+   "timestamp_sec": 80.0,
+   "serum_visible": true,
+   "controls": [
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "oscA.enabled",
+     "status": "OBSERVED",
+     "control_type": "toggle"
+    },
+    {
+     "value": "Default Shapes",
+     "confidence": "high",
+     "control_id": "oscA.wavetable",
+     "status": "OBSERVED",
+     "control_type": "enum"
+    },
+    {
+     "value": -2,
+     "confidence": "high",
+     "control_id": "oscA.octave",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": "FM (NOISE)",
+     "confidence": "high",
+     "control_id": "oscA.warp_mode",
+     "status": "OBSERVED",
+     "control_type": "enum"
+    },
+    {
+     "value": 100,
+     "confidence": "high",
+     "control_id": "oscA.rand"
+    },
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "noise.enabled"
+    },
+    {
+     "value": "AC hum1",
+     "confidence": "high",
+     "control_id": "noise.wavetable"
+    },
+    {
+     "value": false,
+     "confidence": "high",
+     "control_id": "filter1.enabled",
+     "status": "OBSERVED",
+     "control_type": "toggle"
+    }
+   ]
+  },
+  {
+   "frame_id": "frame_yt_6351960979de_00086000",
+   "timestamp_sec": 86.0,
+   "serum_visible": true,
+   "controls": [
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "oscA.enabled",
+     "status": "OBSERVED",
+     "control_type": "toggle"
+    },
+    {
+     "value": "Default Shapes",
+     "confidence": "high",
+     "control_id": "oscA.wavetable",
+     "status": "OBSERVED",
+     "control_type": "enum"
+    },
+    {
+     "value": -2,
+     "confidence": "high",
+     "control_id": "oscA.octave",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": "FM (NOISE)",
+     "confidence": "high",
+     "control_id": "oscA.warp_mode",
+     "status": "OBSERVED",
+     "control_type": "enum"
+    },
+    {
+     "value": 100,
+     "confidence": "high",
+     "control_id": "oscA.rand"
+    },
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "noise.enabled"
+    },
+    {
+     "value": "AC hum1",
+     "confidence": "high",
+     "control_id": "noise.wavetable"
+    },
+    {
+     "value": false,
+     "confidence": "high",
+     "control_id": "filter1.enabled",
+     "status": "OBSERVED",
+     "control_type": "toggle"
+    },
+    {
+     "value": "Normal",
+     "confidence": "high",
+     "control_id": "lfo1.mode",
+     "status": "OBSERVED",
+     "control_type": "enum"
+    },
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "lfo1.free"
+    },
+    {
+     "value": "Custom",
+     "confidence": "high",
+     "control_id": "lfo1.shape",
+     "status": "OBSERVED",
+     "control_type": "enum"
+    },
+    {
+     "value": "Forward",
+     "confidence": "high",
+     "control_id": "lfo1.direction"
+    },
+    {
+     "value": "BPM",
+     "confidence": "high",
+     "control_id": "lfo1.rate_mode"
+    },
+    {
+     "value": "bar",
+     "confidence": "high",
+     "control_id": "lfo1.rate_sync"
+    },
+    {
+     "value": 8,
+     "confidence": "high",
+     "control_id": "voicing.poly"
+    },
+    {
+     "value": false,
+     "confidence": "high",
+     "control_id": "voicing.legato"
+    }
+   ]
+  },
+  {
+   "frame_id": "frame_yt_6351960979de_00105000",
+   "timestamp_sec": 105.0,
+   "serum_visible": true,
+   "controls": [
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "fx.hyperdimension.enabled"
+    },
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "fx.distortion.enabled"
+    },
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "fx.delay.enabled"
+    },
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "fx.reverb.enabled"
+    },
+    {
+     "value": "Normal",
+     "confidence": "high",
+     "control_id": "lfo1.mode",
+     "status": "OBSERVED",
+     "control_type": "enum"
+    },
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "lfo1.free"
+    },
+    {
+     "value": "Custom",
+     "confidence": "high",
+     "control_id": "lfo1.shape",
+     "status": "OBSERVED",
+     "control_type": "enum"
+    },
+    {
+     "value": "BPM",
+     "confidence": "high",
+     "control_id": "lfo1.rate_mode"
+    },
+    {
+     "value": "bar",
+     "confidence": "high",
+     "control_id": "lfo1.rate_sync"
+    }
+   ]
+  },
+  {
+   "frame_id": "frame_yt_6351960979de_00114000",
+   "timestamp_sec": 114.0,
+   "serum_visible": true,
+   "controls": [
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "fx.hyperdimension.enabled"
+    },
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "fx.distortion.enabled"
+    },
+    {
+     "value": "ZERO-SQUARE",
+     "confidence": "high",
+     "control_id": "fx.distortion.mode"
+    },
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "fx.delay.enabled"
+    },
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "fx.reverb.enabled"
+    },
+    {
+     "value": "HALL",
+     "confidence": "high",
+     "control_id": "fx.reverb.type",
+     "status": "OBSERVED",
+     "control_type": "dropdown"
+    },
+    {
+     "value": 33,
+     "confidence": "high",
+     "control_id": "fx.reverb.lo_cut",
+     "status": "OBSERVED",
+     "control_type": "draggable_value"
+    },
+    {
+     "value": 35,
+     "confidence": "high",
+     "control_id": "fx.reverb.hi_cut",
+     "status": "OBSERVED",
+     "control_type": "draggable_value"
+    },
+    {
+     "value": 32,
+     "confidence": "high",
+     "control_id": "fx.reverb.rate"
+    },
+    {
+     "value": 20,
+     "confidence": "high",
+     "control_id": "fx.reverb.depth"
+    },
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "lfo1.free"
+    },
+    {
+     "value": "Custom",
+     "confidence": "high",
+     "control_id": "lfo1.shape",
+     "status": "OBSERVED",
+     "control_type": "enum"
+    },
+    {
+     "value": "BPM",
+     "confidence": "high",
+     "control_id": "lfo1.rate_mode"
+    },
+    {
+     "value": "bar",
+     "confidence": "high",
+     "control_id": "lfo1.rate_sync"
+    }
+   ]
+  },
+  {
+   "frame_id": "frame_yt_6351960979de_00127000",
+   "timestamp_sec": 127.0,
+   "serum_visible": true,
+   "controls": [
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "fx.delay.enabled"
+    },
+    {
+     "value": "NORMAL",
+     "confidence": "high",
+     "control_id": "fx.delay.mode",
+     "status": "OBSERVED",
+     "control_type": "dropdown"
+    },
+    {
+     "value": "1/4",
+     "confidence": "high",
+     "control_id": "fx.delay.time_left"
+    },
+    {
+     "value": "1/2",
+     "confidence": "high",
+     "control_id": "fx.delay.time_right"
+    },
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "fx.reverb.enabled"
+    },
+    {
+     "value": "HALL",
+     "confidence": "high",
+     "control_id": "fx.reverb.type",
+     "status": "OBSERVED",
+     "control_type": "dropdown"
+    },
+    {
+     "value": 33,
+     "confidence": "high",
+     "control_id": "fx.reverb.lo_cut",
+     "status": "OBSERVED",
+     "control_type": "draggable_value"
+    },
+    {
+     "value": 35,
+     "confidence": "high",
+     "control_id": "fx.reverb.hi_cut",
+     "status": "OBSERVED",
+     "control_type": "draggable_value"
+    },
+    {
+     "value": 32,
+     "confidence": "high",
+     "control_id": "fx.reverb.rate"
+    },
+    {
+     "value": 20,
+     "confidence": "high",
+     "control_id": "fx.reverb.depth"
+    }
+   ]
+  },
+  {
+   "frame_id": "frame_yt_6351960979de_00146000",
+   "timestamp_sec": 146.0,
+   "serum_visible": true,
+   "controls": [
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "fx.reverb.enabled"
+    },
+    {
+     "value": "HALL",
+     "confidence": "high",
+     "control_id": "fx.reverb.type",
+     "status": "OBSERVED",
+     "control_type": "dropdown"
+    },
+    {
+     "value": 33,
+     "confidence": "high",
+     "control_id": "fx.reverb.lo_cut",
+     "status": "OBSERVED",
+     "control_type": "draggable_value"
+    },
+    {
+     "value": 35,
+     "confidence": "high",
+     "control_id": "fx.reverb.hi_cut",
+     "status": "OBSERVED",
+     "control_type": "draggable_value"
+    },
+    {
+     "value": 32,
+     "confidence": "high",
+     "control_id": "fx.reverb.rate"
+    },
+    {
+     "value": 20,
+     "confidence": "high",
+     "control_id": "fx.reverb.depth"
+    },
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "fx.hyperdimension.enabled"
+    },
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "fx.distortion.enabled"
+    },
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "fx.delay.enabled"
+    }
+   ]
+  },
+  {
+   "frame_id": "frame_yt_6351960979de_00160000",
+   "timestamp_sec": 160.0,
+   "serum_visible": true,
+   "controls": [
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "fx.hyperdimension.enabled"
+    },
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "fx.distortion.enabled"
+    },
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "fx.delay.enabled"
+    },
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "fx.reverb.enabled"
+    },
+    {
+     "value": "HALL",
+     "confidence": "high",
+     "control_id": "fx.reverb.type",
+     "status": "OBSERVED",
+     "control_type": "dropdown"
+    },
+    {
+     "value": 33,
+     "confidence": "high",
+     "control_id": "fx.reverb.lo_cut",
+     "status": "OBSERVED",
+     "control_type": "draggable_value"
+    },
+    {
+     "value": 35,
+     "confidence": "high",
+     "control_id": "fx.reverb.hi_cut",
+     "status": "OBSERVED",
+     "control_type": "draggable_value"
+    },
+    {
+     "value": 32,
+     "confidence": "high",
+     "control_id": "fx.reverb.rate"
+    },
+    {
+     "value": 20,
+     "confidence": "high",
+     "control_id": "fx.reverb.depth"
+    },
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "fx.compressor.enabled"
+    },
+    {
+     "value": "MULTIBAND",
+     "confidence": "high",
+     "control_id": "fx.compressor.mode",
+     "status": "OBSERVED",
+     "control_type": "toggle_buttons"
+    },
+    {
+     "value": -10.9,
+     "confidence": "high",
+     "control_id": "fx.compressor.threshold"
+    },
+    {
+     "value": "4:1",
+     "confidence": "high",
+     "control_id": "fx.compressor.ratio",
+     "status": "OBSERVED",
+     "control_type": "knob"
+    },
+    {
+     "value": 90.1,
+     "confidence": "high",
+     "control_id": "fx.compressor.attack",
+     "status": "OBSERVED",
+     "control_type": "knob"
+    },
+    {
+     "value": 90.1,
+     "confidence": "high",
+     "control_id": "fx.compressor.release",
+     "status": "OBSERVED",
+     "control_type": "knob"
+    },
+    {
+     "value": 4.1,
+     "confidence": "high",
+     "control_id": "fx.compressor.gain",
+     "status": "OBSERVED",
+     "control_type": "knob"
+    },
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "lfo1.free"
+    },
+    {
+     "value": "Custom",
+     "confidence": "high",
+     "control_id": "lfo1.shape",
+     "status": "OBSERVED",
+     "control_type": "enum"
+    },
+    {
+     "value": "BPM",
+     "confidence": "high",
+     "control_id": "lfo1.rate_mode"
+    },
+    {
+     "value": "bar",
+     "confidence": "high",
+     "control_id": "lfo1.rate_sync"
+    }
+   ]
+  },
+  {
+   "frame_id": "frame_yt_6351960979de_00182000",
+   "timestamp_sec": 182.0,
+   "serum_visible": true,
+   "controls": [
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "fx.hyperdimension.enabled"
+    },
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "fx.distortion.enabled"
+    },
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "fx.delay.enabled"
+    },
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "fx.reverb.enabled"
+    },
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "fx.compressor.enabled"
+    },
+    {
+     "value": "MULTIBAND",
+     "confidence": "high",
+     "control_id": "fx.compressor.mode",
+     "status": "OBSERVED",
+     "control_type": "toggle_buttons"
+    },
+    {
+     "value": -10.9,
+     "confidence": "high",
+     "control_id": "fx.compressor.threshold"
+    },
+    {
+     "value": "4:1",
+     "confidence": "high",
+     "control_id": "fx.compressor.ratio",
+     "status": "OBSERVED",
+     "control_type": "knob"
+    },
+    {
+     "value": 90.1,
+     "confidence": "high",
+     "control_id": "fx.compressor.attack",
+     "status": "OBSERVED",
+     "control_type": "knob"
+    },
+    {
+     "value": 90.1,
+     "confidence": "high",
+     "control_id": "fx.compressor.release",
+     "status": "OBSERVED",
+     "control_type": "knob"
+    },
+    {
+     "value": 4.1,
+     "confidence": "high",
+     "control_id": "fx.compressor.gain",
+     "status": "OBSERVED",
+     "control_type": "knob"
+    },
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "fx.equalizer.enabled"
+    },
+    {
+     "value": 283,
+     "confidence": "high",
+     "control_id": "fx.equalizer.band1.freq"
+    },
+    {
+     "value": 45,
+     "confidence": "high",
+     "control_id": "fx.equalizer.band1.q"
+    },
+    {
+     "value": -4.4,
+     "confidence": "high",
+     "control_id": "fx.equalizer.band1.gain"
+    },
+    {
+     "value": 2746,
+     "confidence": "high",
+     "control_id": "fx.equalizer.band2.freq"
+    },
+    {
+     "value": 35,
+     "confidence": "high",
+     "control_id": "fx.equalizer.band2.q"
+    },
+    {
+     "value": 3.8,
+     "confidence": "high",
+     "control_id": "fx.equalizer.band2.gain"
+    }
+   ]
+  },
+  {
+   "frame_id": "frame_yt_6351960979de_00191000",
+   "timestamp_sec": 191.0,
+   "serum_visible": true,
+   "controls": [
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "oscA.enabled",
+     "status": "OBSERVED",
+     "control_type": "toggle"
+    },
+    {
+     "value": "Default Shapes",
+     "confidence": "high",
+     "control_id": "oscA.wavetable",
+     "status": "OBSERVED",
+     "control_type": "enum"
+    },
+    {
+     "value": -2,
+     "confidence": "high",
+     "control_id": "oscA.octave",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": "FM (NOISE)",
+     "confidence": "high",
+     "control_id": "oscA.warp_mode",
+     "status": "OBSERVED",
+     "control_type": "enum"
+    },
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "noise.enabled"
+    },
+    {
+     "value": false,
+     "confidence": "high",
+     "control_id": "filter1.enabled",
+     "status": "OBSERVED",
+     "control_type": "toggle"
+    },
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "lfo1.free"
+    },
+    {
+     "value": "Custom",
+     "confidence": "high",
+     "control_id": "lfo1.shape",
+     "status": "OBSERVED",
+     "control_type": "enum"
+    },
+    {
+     "value": "BPM",
+     "confidence": "high",
+     "control_id": "lfo1.rate_mode"
+    },
+    {
+     "value": "bar",
+     "confidence": "high",
+     "control_id": "lfo1.rate_sync"
+    },
+    {
+     "value": "1.0 ms",
+     "confidence": "high",
+     "control_id": "env1.attack",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": "0.0 ms",
+     "confidence": "high",
+     "control_id": "env1.hold",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": "1.00 s",
+     "confidence": "high",
+     "control_id": "env1.decay",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": "0.0 dB",
+     "confidence": "high",
+     "control_id": "env1.sustain",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": "15 ms",
+     "confidence": "high",
+     "control_id": "env1.release",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": 8,
+     "confidence": "high",
+     "control_id": "voicing.poly"
+    },
+    {
+     "value": false,
+     "confidence": "high",
+     "control_id": "voicing.mono"
+    },
+    {
+     "value": false,
+     "confidence": "high",
+     "control_id": "voicing.legato"
+    }
+   ]
+  },
+  {
+   "frame_id": "frame_yt_6351960979de_00225000",
+   "timestamp_sec": 225.0,
+   "serum_visible": true,
+   "controls": [
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "oscA.enabled",
+     "status": "OBSERVED",
+     "control_type": "toggle"
+    },
+    {
+     "value": "Default Shapes",
+     "confidence": "high",
+     "control_id": "oscA.wavetable",
+     "status": "OBSERVED",
+     "control_type": "enum"
+    },
+    {
+     "value": -2,
+     "confidence": "high",
+     "control_id": "oscA.octave",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": "FM (NOISE)",
+     "confidence": "high",
+     "control_id": "oscA.warp_mode",
+     "status": "OBSERVED",
+     "control_type": "enum"
+    },
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "noise.enabled"
+    },
+    {
+     "value": "AC hum1",
+     "confidence": "high",
+     "control_id": "noise.wavetable"
+    },
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "filter1.enabled",
+     "status": "OBSERVED",
+     "control_type": "toggle"
+    },
+    {
+     "value": "Band 24",
+     "confidence": "high",
+     "control_id": "filter1.type",
+     "status": "OBSERVED",
+     "control_type": "enum"
+    },
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "lfo1.free"
+    },
+    {
+     "value": "Custom",
+     "confidence": "high",
+     "control_id": "lfo1.shape",
+     "status": "OBSERVED",
+     "control_type": "enum"
+    },
+    {
+     "value": "BPM",
+     "confidence": "high",
+     "control_id": "lfo1.rate_mode"
+    },
+    {
+     "value": "bar",
+     "confidence": "high",
+     "control_id": "lfo1.rate_sync"
+    },
+    {
+     "value": "1.0 ms",
+     "confidence": "high",
+     "control_id": "env1.attack",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": "0.0 ms",
+     "confidence": "high",
+     "control_id": "env1.hold",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": "1.00 s",
+     "confidence": "high",
+     "control_id": "env1.decay",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": "0.0 dB",
+     "confidence": "high",
+     "control_id": "env1.sustain",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": "15 ms",
+     "confidence": "high",
+     "control_id": "env1.release",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": 8,
+     "confidence": "high",
+     "control_id": "voicing.poly"
+    },
+    {
+     "value": false,
+     "confidence": "high",
+     "control_id": "voicing.mono"
+    }
+   ]
+  },
+  {
+   "frame_id": "frame_yt_6351960979de_00243000",
+   "timestamp_sec": 243.0,
+   "serum_visible": true,
+   "controls": [
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "oscA.enabled",
+     "status": "OBSERVED",
+     "control_type": "toggle"
+    },
+    {
+     "value": "Default Shapes",
+     "confidence": "high",
+     "control_id": "oscA.wavetable",
+     "status": "OBSERVED",
+     "control_type": "enum"
+    },
+    {
+     "value": -2,
+     "confidence": "high",
+     "control_id": "oscA.octave",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": "FM (NOISE)",
+     "confidence": "high",
+     "control_id": "oscA.warp_mode",
+     "status": "OBSERVED",
+     "control_type": "enum"
+    },
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "noise.enabled"
+    },
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "filter1.enabled",
+     "status": "OBSERVED",
+     "control_type": "toggle"
+    },
+    {
+     "value": "Band 24",
+     "confidence": "high",
+     "control_id": "filter1.type",
+     "status": "OBSERVED",
+     "control_type": "enum"
+    },
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "lfo1.free"
+    },
+    {
+     "value": "Custom",
+     "confidence": "high",
+     "control_id": "lfo1.shape",
+     "status": "OBSERVED",
+     "control_type": "enum"
+    },
+    {
+     "value": "BPM",
+     "confidence": "high",
+     "control_id": "lfo1.rate_mode"
+    },
+    {
+     "value": "bar",
+     "confidence": "high",
+     "control_id": "lfo1.rate_sync"
+    },
+    {
+     "value": "1.0 ms",
+     "confidence": "high",
+     "control_id": "env1.attack",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": "0.0 ms",
+     "confidence": "high",
+     "control_id": "env1.hold",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": "1.00 s",
+     "confidence": "high",
+     "control_id": "env1.decay",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": "0.0 dB",
+     "confidence": "high",
+     "control_id": "env1.sustain",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": "15 ms",
+     "confidence": "high",
+     "control_id": "env1.release",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": 8,
+     "confidence": "high",
+     "control_id": "voicing.poly"
+    },
+    {
+     "value": false,
+     "confidence": "high",
+     "control_id": "voicing.mono"
+    }
+   ]
+  },
+  {
+   "frame_id": "frame_yt_6351960979de_00267000",
+   "timestamp_sec": 267.0,
+   "serum_visible": true,
+   "controls": [
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "oscA.enabled",
+     "status": "OBSERVED",
+     "control_type": "toggle"
+    },
+    {
+     "value": "Default Shapes",
+     "confidence": "high",
+     "control_id": "oscA.wavetable",
+     "status": "OBSERVED",
+     "control_type": "enum"
+    },
+    {
+     "value": -2,
+     "confidence": "high",
+     "control_id": "oscA.octave",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": "FM (NOISE)",
+     "confidence": "high",
+     "control_id": "oscA.warp_mode",
+     "status": "OBSERVED",
+     "control_type": "enum"
+    },
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "noise.enabled"
+    },
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "filter1.enabled",
+     "status": "OBSERVED",
+     "control_type": "toggle"
+    },
+    {
+     "value": "Band 24",
+     "confidence": "high",
+     "control_id": "filter1.type",
+     "status": "OBSERVED",
+     "control_type": "enum"
+    },
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "lfo1.free"
+    },
+    {
+     "value": "Custom",
+     "confidence": "high",
+     "control_id": "lfo1.shape",
+     "status": "OBSERVED",
+     "control_type": "enum"
+    },
+    {
+     "value": "BPM",
+     "confidence": "high",
+     "control_id": "lfo1.rate_mode"
+    },
+    {
+     "value": "bar",
+     "confidence": "high",
+     "control_id": "lfo1.rate_sync"
+    }
+   ]
+  },
+  {
+   "frame_id": "frame_yt_6351960979de_00348000",
+   "timestamp_sec": 348.0,
+   "serum_visible": true,
+   "controls": [
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "oscA.enabled",
+     "status": "OBSERVED",
+     "control_type": "toggle"
+    },
+    {
+     "value": "Default Shapes",
+     "confidence": "high",
+     "control_id": "oscA.wavetable",
+     "status": "OBSERVED",
+     "control_type": "enum"
+    },
+    {
+     "value": -2,
+     "confidence": "high",
+     "control_id": "oscA.octave",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": "FM (NOISE)",
+     "confidence": "high",
+     "control_id": "oscA.warp_mode",
+     "status": "OBSERVED",
+     "control_type": "enum"
+    },
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "noise.enabled"
+    },
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "filter1.enabled",
+     "status": "OBSERVED",
+     "control_type": "toggle"
+    },
+    {
+     "value": "Band 24",
+     "confidence": "high",
+     "control_id": "filter1.type",
+     "status": "OBSERVED",
+     "control_type": "enum"
+    },
+    {
+     "value": true,
+     "confidence": "high",
+     "control_id": "lfo1.free"
+    },
+    {
+     "value": "Custom",
+     "confidence": "high",
+     "control_id": "lfo1.shape",
+     "status": "OBSERVED",
+     "control_type": "enum"
+    },
+    {
+     "value": "BPM",
+     "confidence": "high",
+     "control_id": "lfo1.rate_mode"
+    },
+    {
+     "value": "bar",
+     "confidence": "high",
+     "control_id": "lfo1.rate_sync"
+    },
+    {
+     "value": "1.0 ms",
+     "confidence": "high",
+     "control_id": "env1.attack",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": "0.0 ms",
+     "confidence": "high",
+     "control_id": "env1.hold",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": "1.00 s",
+     "confidence": "high",
+     "control_id": "env1.decay",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": "0.0 dB",
+     "confidence": "high",
+     "control_id": "env1.sustain",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": "15 ms",
+     "confidence": "high",
+     "control_id": "env1.release",
+     "status": "OBSERVED",
+     "control_type": "continuous"
+    },
+    {
+     "value": 8,
+     "confidence": "high",
+     "control_id": "voicing.poly"
+    },
+    {
+     "value": false,
+     "confidence": "high",
+     "control_id": "voicing.mono"
+    }
+   ]
+  }
+ ]
+}
