@@ -54,8 +54,16 @@ def _leaf_for(row):
     return judged[0] if len(judged) == 1 else None   # multi-leaf rows with no single judged leaf: skip, don't guess
 
 
-def to_evidence(row):
-    """One mcp_exec result row -> the dict shape evidence_promotion.py consumes, or (None, reason)."""
+def to_evidence(row, body_key_to_canonical=None):
+    """One mcp_exec result row -> the dict shape evidence_promotion.py consumes, or (None, reason).
+
+    body_key_to_canonical: optional dict mapping Serum's internal body-representation strings to the
+    canonical Atlas display-name strings (e.g. {'L12': 'lowpass_12', 'Analog/Basic Shapes.wav': 'analog_basic'}).
+    Serum's VST body stores internal C++ enum keys and .wav filenames rather than the Atlas's canonical display
+    names; without this normalization the promoter's enum membership check ('L12' not in ('lowpass_12', ...))
+    rejects evidence that is genuinely valid. The mapping is purely canonical -- it never invents or widens a
+    value, only resolves a known representation difference. Body keys absent from the map are left unchanged.
+    """
     if row["outcome"] not in PROMOTABLE_OUTCOMES:
         return None, "outcome %r is not promotable (bucket D / no host confirmation path)" % row["outcome"]
     if row.get("restoration_verified") is not True:
@@ -69,16 +77,20 @@ def to_evidence(row):
     if not leaf["persisted"]:
         return None, "leaf did not persist"
     path = ".".join(str(p) for p in leaf["path"])
+    raw_after = leaf["post"]
+    canonical_after = (body_key_to_canonical or {}).get(raw_after, raw_after)
     ev = {
         "target": row["atlas_id"],
         "epoch": {"serum_sha256": sha, "product_version": "2.0.23"},
         "status": "STRUCTURAL_VERIFIED",
         "restoration_verified": True,
-        "body_diff_filtered": [{"path": path, "before": leaf["pre"], "after": leaf["post"]}],
-        "baseline_value": leaf["pre"], "mutated_value": leaf["post"],
+        "body_diff_filtered": [{"path": path, "before": leaf["pre"], "after": canonical_after}],
+        "baseline_value": leaf["pre"], "mutated_value": canonical_after,
         "backend": "run_mcp_execution_harness.py (real Serum VST3 in DawDreamer; load/edit/reload restoration check)",
         "source_outcome": row["outcome"], "source_q4_mode": row.get("q4_mode"),
     }
+    if raw_after != canonical_after:
+        ev["body_key_normalized_from"] = raw_after
     return ev, None
 
 
@@ -129,6 +141,21 @@ def main():
     evidence_promotion.get_control = _augmented_get_control(serum_atlas.get_control, params, bounds_augmented)
     from serum2.qualification.evidence_promotion import promote_verified_evidence
 
+    # Build body-key -> canonical-display-name normalization table from the schema snapshot.
+    # Serum's VST body stores internal C++ enum keys (e.g. 'L12') and .wav filenames (e.g.
+    # 'Analog/Basic Shapes.wav') rather than the Atlas's canonical display-name strings. The
+    # snapshot already encodes the complete mapping; inverting it gives a normalizer that lets
+    # the promoter's enum membership check pass for evidence that is genuinely valid.
+    _snap_path = os.path.join(REPO, "serum2", "reference", "serum_2_0_21_schema_snapshot.json")
+    _snap = json.load(open(_snap_path))["snapshot"]
+    body_key_to_canonical: dict = {}
+    for _canon, _body in _snap.get("simple_filter_types", {}).items():
+        body_key_to_canonical[_body] = _canon          # e.g. 'L12' -> 'lowpass_12'
+    for _canon, _body in _snap.get("simple_wavetables", {}).items():
+        body_key_to_canonical[_body] = _canon          # e.g. 'Analog/Basic Shapes.wav' -> 'analog_basic'
+    for _canon, _body in _snap.get("simple_sub_shapes", {}).items():
+        body_key_to_canonical[_body] = _canon          # e.g. 'kSaw' -> 'saw'
+
     rows = [json.loads(l) for l in open(a.results) if l.strip()]
     os.makedirs(OUT_DIR, exist_ok=True)
 
@@ -136,7 +163,7 @@ def main():
               "atlas_bounds_augmented_from_manifest": bounds_augmented}
     for row in rows:
         aid = row["atlas_id"]
-        ev, why = to_evidence(row)
+        ev, why = to_evidence(row, body_key_to_canonical=body_key_to_canonical)
         if ev is None:
             report["rejected"].setdefault(why, []).append(aid)
             continue

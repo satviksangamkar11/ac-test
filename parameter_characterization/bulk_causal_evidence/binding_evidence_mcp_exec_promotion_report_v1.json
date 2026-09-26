@@ -263,6 +263,11 @@
    "allowed_operation": "mutate_numeric_value"
   },
   {
+   "target": "filter1.type",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_enum_value"
+  },
+  {
    "target": "filter1.var",
    "contract_status": "STRUCTURAL_ONLY",
    "allowed_operation": "mutate_numeric_value"
@@ -306,6 +311,11 @@
    "target": "filter2.stereo",
    "contract_status": "STRUCTURAL_ONLY",
    "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "filter2.type",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_enum_value"
   },
   {
    "target": "filter2.var",
@@ -1268,6 +1278,11 @@
    "allowed_operation": "mutate_numeric_value"
   },
   {
+   "target": "oscA.wavetable",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_enum_value"
+  },
+  {
    "target": "oscB.detune",
    "contract_status": "STRUCTURAL_ONLY",
    "allowed_operation": "mutate_numeric_value"
@@ -1341,6 +1356,11 @@
    "target": "oscB.warp_var2",
    "contract_status": "STRUCTURAL_ONLY",
    "allowed_operation": "mutate_numeric_value"
+  },
+  {
+   "target": "oscB.wavetable",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_enum_value"
   },
   {
    "target": "oscC.detune",
@@ -1418,6 +1438,11 @@
    "allowed_operation": "mutate_numeric_value"
   },
   {
+   "target": "oscC.wavetable",
+   "contract_status": "STRUCTURAL_ONLY",
+   "allowed_operation": "mutate_enum_value"
+  },
+  {
    "target": "oscNoise.fine",
    "contract_status": "STRUCTURAL_ONLY",
    "allowed_operation": "mutate_numeric_value"
@@ -1485,10 +1510,6 @@
    "oscA.warp_amount",
    "oscNoise.pan"
   ],
-  "INCONSISTENT_OPERAND_KIND: mutation value 'L12' not in Atlas enum_values ('lowpass_12', 'lowpass_24', 'highpass_12', 'highpass_24', 'bandpass_12', 'bandpass_24', 'notch', 'moog_lowpass_12', 'moog_lowpass_24', 'comb', 'formant')": [
-   "filter1.type",
-   "filter2.type"
-  ],
   "INCONSISTENT_OPERAND_KIND: control_type=enum but mutation value 2.0 is not a string": [
    "fx.delay.mode"
   ],
@@ -1500,11 +1521,6 @@
   ],
   "INCONSISTENT_OPERAND_KIND: mutation value 'kAbyss' not in Atlas enum_values ('Plate', 'Hall', 'Vintage', 'Nitrous', 'Basin')": [
    "fx.reverb.type"
-  ],
-  "INCONSISTENT_OPERAND_KIND: mutation value 'Analog/Basic Shapes.wav' not in Atlas enum_values ('default', 'analog_basic', 'analog_warm', 'pwm', 'analog_mini', 'warm_sub', 'digital_fm', 'harmonic_smooth', 'dying_sine', 'acid', 'fm_piano', 'flute')": [
-   "oscA.wavetable",
-   "oscB.wavetable",
-   "oscC.wavetable"
   ]
  },
  "atlas_bounds_augmented_from_manifest": [
@@ -1971,14 +1987,12 @@
    "source": "manifest_campaign_v1.json domain (kind=continuous)"
   }
  ],
- "n_accepted": 289,
- "n_rejected": 41,
+ "n_accepted": 294,
+ "n_rejected": 36,
  "n_atlas_bounds_augmented": 77,
  "rejection_reason_counts": {
   "outcome 'MCP_EXEC_CONFORMANCE_EXCEPTION' is not promotable (bucket D / no host confirmation path)": 20,
   "MISSING_DOMAIN: continuous control has no Atlas-declared bounds": 12,
-  "INCONSISTENT_OPERAND_KIND: mutation value 'Analog/Basic Shapes.wav' not in Atlas enum_values ('default', 'analog_basic', 'analog_warm', 'pwm', 'analog_mini', 'warm_sub', 'digital_fm', 'harmonic_smooth', 'dying_sine', 'acid', 'fm_piano', 'flute')": 3,
-  "INCONSISTENT_OPERAND_KIND: mutation value 'L12' not in Atlas enum_values ('lowpass_12', 'lowpass_24', 'highpass_12', 'highpass_24', 'bandpass_12', 'bandpass_24', 'notch', 'moog_lowpass_12', 'moog_lowpass_24', 'comb', 'formant')": 2,
   "INCONSISTENT_OPERAND_KIND: control_type=enum but mutation value 2.0 is not a string": 1,
   "INCONSISTENT_OPERAND_KIND: mutation value 'kAsym' not in Atlas enum_values ('Tube', 'SoftClip', 'HardClip', 'Diode 1', 'Diode 2', 'Linear Fold', 'Sin Fold', 'Zero-Square', 'Downsample', 'Asym', 'Rectify', 'X-Shaper', 'X-Shaper (Asym)', 'Sine Shaper', 'Stomp Box', 'Tape Sat.', 'Overdrive', 'Soft Sat.')": 1,
   "INCONSISTENT_OPERAND_KIND: mutation value 'L6' not in Atlas enum_values ('Normal (18 types: MG Low 6/12/18/24, Low 6/12/18/24, High 6/12/18/24, Band 12/24, Peak 12/24, Notch 12/24)', 'Multi', 'Flanges', 'Misc', 'S2 Filters')": 1,
