@@ -1,0 +1,29 @@
+{
+ "preset": "CAL_07_WARP_SYNC.SerumPreset",
+ "generated_only": true,
+ "target_control": "oscA/B/C.warp_amount (mode=Sync)",
+ "rows": [
+  {
+   "osc": "A",
+   "raw": 0.2
+  },
+  {
+   "osc": "B",
+   "raw": 0.65
+  },
+  {
+   "osc": "C",
+   "raw": 0.9
+  }
+ ],
+ "prior_points_already_screen_read": [
+  {
+   "raw": 0.32,
+   "screen": "1.49"
+  },
+  {
+   "raw": 0.46,
+   "screen": "2.46"
+  }
+ ]
+}

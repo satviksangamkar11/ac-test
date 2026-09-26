@@ -1,0 +1,98 @@
+{
+ "atlas_id": "arp.transpose.shape",
+ "raw_path": [
+  "ArpClip0",
+  "plainParams",
+  "kParamTransposeShape"
+ ],
+ "method": "offline apply_spec diff (A tier, causal) -- NOT a screen read",
+ "confidence": "HIGH_NOT_DIRECT_UI",
+ "resolved": [
+  {
+   "schema_word": "down",
+   "raw_value": "Down"
+  },
+  {
+   "schema_word": "up_down",
+   "raw_value": "UpDown"
+  },
+  {
+   "schema_word": "down_up",
+   "raw_value": "DownUp"
+  },
+  {
+   "schema_word": "up_and_down",
+   "raw_value": "UpAndDown"
+  },
+  {
+   "schema_word": "down_and_up",
+   "raw_value": "DownAndUp"
+  },
+  {
+   "schema_word": "thumb_up",
+   "raw_value": "ThumbUp"
+  },
+  {
+   "schema_word": "thumb_up_down",
+   "raw_value": "ThumbUD"
+  },
+  {
+   "schema_word": "converge",
+   "raw_value": "Converge"
+  },
+  {
+   "schema_word": "diverge",
+   "raw_value": "Diverge"
+  },
+  {
+   "schema_word": "converge_diverge",
+   "raw_value": "ConvAndDiv"
+  },
+  {
+   "schema_word": "chord",
+   "raw_value": "Chord"
+  },
+  {
+   "schema_word": "random",
+   "raw_value": "Rand"
+  },
+  {
+   "schema_word": "random_no_dup",
+   "raw_value": "RandNoDup"
+  },
+  {
+   "schema_word": "random_drift",
+   "raw_value": "RandDrift"
+  },
+  {
+   "schema_word": "random_once",
+   "raw_value": "RandOnce"
+  }
+ ],
+ "screen_labels_in_order": [
+  "Up",
+  "Down",
+  "Up/Down",
+  "Down/Up",
+  "Up+Down",
+  "Down+Up",
+  "Thumb Up",
+  "Thumb UD",
+  "Pinky Up",
+  "Pinky UD",
+  "Converge",
+  "Diverge",
+  "Con+Diverge",
+  "Chord",
+  "Random",
+  "Rand No Dup",
+  "Rand Drift",
+  "Rand Once"
+ ],
+ "still_unresolved": [
+  "Up",
+  "Pinky Up",
+  "Pinky UD"
+ ],
+ "note": "transpose_shape's vocabulary is documented as identical to arp.pattern.shape's; this derives the raw string per word the same way apply_spec would encode it. 'Up', 'Pinky Up', 'Pinky UD' are additional labels this dropdown has that pattern.shape's vocabulary does not, so their raw values are unknown -- see RESIDUAL_INSTRUCTIONS.md for how to get them from Serum directly."
+}

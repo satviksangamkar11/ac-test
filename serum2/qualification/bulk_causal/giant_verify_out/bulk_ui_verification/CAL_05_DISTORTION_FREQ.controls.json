@@ -1,0 +1,39 @@
+{
+ "preset": "CAL_05_DISTORTION_FREQ.SerumPreset",
+ "generated_only": true,
+ "target_control": "kParamFreq",
+ "rows": [
+  {
+   "unit": 1,
+   "raw": 0.05
+  },
+  {
+   "unit": 2,
+   "raw": 0.15
+  },
+  {
+   "unit": 3,
+   "raw": 0.28
+  },
+  {
+   "unit": 4,
+   "raw": 0.4
+  },
+  {
+   "unit": 5,
+   "raw": 0.52
+  },
+  {
+   "unit": 6,
+   "raw": 0.64
+  },
+  {
+   "unit": 7,
+   "raw": 0.76
+  },
+  {
+   "unit": 8,
+   "raw": 0.9
+  }
+ ]
+}
