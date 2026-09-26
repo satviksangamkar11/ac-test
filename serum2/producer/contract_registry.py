@@ -354,11 +354,14 @@ class ContractRegistry:
 
     def _load_final_execution_contract(self):
         path = self.FINAL_EXECUTION_CONTRACT_PATH
+        self.execution_spec_excluded = {}
+        self.final_execution_contract_epoch = None  # (serum_version, serum_binary_sha256), or None if unloaded
         try:
             doc = json.loads(path.read_text())
         except (FileNotFoundError, json.JSONDecodeError) as e:
             print(f"[ContractRegistry] Warning: final execution contract not loaded: {e}")
             return
+        self.final_execution_contract_epoch = (doc["serum_version"], doc["serum_binary_sha256"])
         lookup = doc.get("producer_lookup", {})
         for row in doc.get("rows", ()):
             atlas_id = row["atlas_id"]
@@ -373,14 +376,28 @@ class ContractRegistry:
                 "exception_policy": pl.get("exception_policy", "NONE"),
                 "producer_lookup": pl,
                 "source_path": str(path),
+                "serum_version": doc["serum_version"],
+                "serum_binary_sha256": doc["serum_binary_sha256"],
             }
 
     def execution_spec(self, atlas_id: Optional[str]) -> Optional[Dict]:
         """Live-execution evidence for one Atlas atlas_id, from the committed final execution
-        contract only. None when atlas_id is None or has no row there -- never a fallback guess."""
+        contract only. None when atlas_id is None, has no row there, or (with an epoch set on this
+        registry -- self.epoch is not None) the final contract's own recorded epoch does not match
+        the run epoch -- never a fallback guess, and never served across epochs. With epoch=None
+        (the frozen legacy frontier, same convention every other loader in this class uses) the
+        spec is served unfiltered."""
         if not atlas_id:
             return None
-        return self.execution_specs.get(atlas_id)
+        spec = self.execution_specs.get(atlas_id)
+        if spec is None:
+            return None
+        if self.epoch is not None and self.final_execution_contract_epoch != (
+                self.epoch.serum_version, self.epoch.binary_sha256):
+            self.execution_spec_excluded[atlas_id] = "EPOCH_MISMATCH: final contract proven on %s, run epoch is %s" % (
+                self.final_execution_contract_epoch, self.epoch.label)
+            return None
+        return spec
 
     def get(self, semantic_target: str) -> Optional[CapabilityContract]:
         """Get contract for a semantic target.

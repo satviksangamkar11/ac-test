@@ -159,6 +159,79 @@ def test_execution_evidence_traces_only_to_the_file_the_registry_was_pointed_at(
         ContractRegistry.FINAL_EXECUTION_CONTRACT_PATH = orig
 
 
+def test_missing_final_contract_row_fails_closed(tmp_path):
+    """A control the atlas resolves but the final contract has no row for must refuse the plan
+    outright (fail closed), not silently proceed with no evidence attached."""
+    doc = json.loads(FINAL_CONTRACT_PATH.read_text())
+    doc["rows"] = [r for r in doc["rows"] if r["atlas_id"] != ATLAS_ID]
+    del doc["producer_lookup"][ATLAS_ID]
+    swapped = tmp_path / "missing_row.json"
+    swapped.write_text(json.dumps(doc))
+
+    orig = ContractRegistry.FINAL_EXECUTION_CONTRACT_PATH
+    ContractRegistry.FINAL_EXECUTION_CONTRACT_PATH = swapped
+    try:
+        r = _run()
+        assert r.execution_status == "REFUSED_AUTHORITY"
+        assert "REFUSED_NO_FINAL_CONTRACT_EVIDENCE" in r.error
+    finally:
+        ContractRegistry.FINAL_EXECUTION_CONTRACT_PATH = orig
+
+
+def test_conformance_exception_row_fails_closed_even_if_admitted(tmp_path):
+    """A row the final contract marks MCP_EXEC_CONFORMANCE_EXCEPTION must never become executable --
+    even if CapabilityResolver/admission independently admit it. Rule 7 of Finish Line B."""
+    doc = json.loads(FINAL_CONTRACT_PATH.read_text())
+    for r in doc["rows"]:
+        if r["atlas_id"] == ATLAS_ID:
+            r["final_execution_classification"] = "MCP_EXEC_CONFORMANCE_EXCEPTION"
+    doc["producer_lookup"][ATLAS_ID]["class"] = "CONFORMANCE_EXCEPTION"
+    swapped = tmp_path / "forced_exception.json"
+    swapped.write_text(json.dumps(doc))
+
+    orig = ContractRegistry.FINAL_EXECUTION_CONTRACT_PATH
+    ContractRegistry.FINAL_EXECUTION_CONTRACT_PATH = swapped
+    try:
+        r = _run()
+        assert r.execution_status == "REFUSED_AUTHORITY"
+        assert "REFUSED_CONFORMANCE_EXCEPTION_NOT_EXECUTABLE" in r.error
+    finally:
+        ContractRegistry.FINAL_EXECUTION_CONTRACT_PATH = orig
+
+
+def test_mismatched_raw_path_fails_closed(tmp_path):
+    """A row whose expected_raw disagrees with the admitted mutation_target_path must refuse,
+    not attach mismatched evidence to a ready plan."""
+    doc = json.loads(FINAL_CONTRACT_PATH.read_text())
+    for r in doc["rows"]:
+        if r["atlas_id"] == ATLAS_ID:
+            r["expected_raw"] = [{"path": ["SomeOtherModule", "plainParams", "kParamUnrelated"], "value": 1.0}]
+    swapped = tmp_path / "forced_mismatch.json"
+    swapped.write_text(json.dumps(doc))
+
+    orig = ContractRegistry.FINAL_EXECUTION_CONTRACT_PATH
+    ContractRegistry.FINAL_EXECUTION_CONTRACT_PATH = swapped
+    try:
+        r = _run()
+        assert r.execution_status == "REFUSED_AUTHORITY"
+        assert "REFUSED_FINAL_CONTRACT_MISMATCH" in r.error
+    finally:
+        ContractRegistry.FINAL_EXECUTION_CONTRACT_PATH = orig
+
+
+def test_epoch_mismatch_fails_closed():
+    """A ProducerBrain run under an epoch that does not match the final contract's own recorded
+    epoch (2.0.23 / the committed sha) must refuse env1.attack's plan, not silently serve stale
+    execution evidence across epochs. The existing epoch machinery decides the match; this test
+    only proves the final-contract gate respects it."""
+    from serum2.producer.execution_epoch import EPOCH_2_0_21
+
+    r = ProducerBrain(epoch=EPOCH_2_0_21).execute(ProducerRequest(
+        user_intent="longer Env1.Attack to 1.5 ms", mode="EXECUTE", visual_mode="NEVER"))
+    assert r.execution_status == "REFUSED_AUTHORITY"
+    assert "REFUSED_NO_FINAL_CONTRACT_EVIDENCE" in r.error
+
+
 def test_no_authority_field_is_duplicated_into_a_hand_authored_table():
     """allowed_operation is a CapabilityContract field only; the final execution contract schema
     (per the task's schema fact) carries no such field, and this module never invents one."""

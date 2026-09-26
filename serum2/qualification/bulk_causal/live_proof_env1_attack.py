@@ -8,20 +8,26 @@ the existing generic pieces only:
 
   - ProducerBrain.execute() for the admitted plan (same chain proof layer A exercises)
   - serum2.producer.execution_epoch for the epoch/SHA check (unmodified, not weakened)
-  - run_mcp_execution_harness.LiveBackend + serum_mcp.preset.mapping.apply_spec for the load/save/
-    readback (the SAME generic Serum preset loader the 330-row v2/v3 sweeps used -- no second
-    loader is created here)
+  - run_mcp_execution_harness.LiveBackend for the real Serum load/state/host-text readback (the SAME
+    generic backend the 330-row v2/v3 sweeps used -- no second loader is created here)
+  - serum_mcp.preset.mapping.apply_spec + serum_mcp.preset.packer.pack_file for building the edited
+    body and writing it as a genuine, round-trippable .SerumPreset container (the same generic
+    packer the campaign/sweep code writes presets with -- not a hand-rolled JSON dump)
 
 It does NOT re-run the 330-control sweep, the promotion campaign, or any characterization work: it
 runs the plan for exactly the one atlas_id named in the task, once.
 
-ENVIRONMENT NOTE: LiveBackend only imports on the machine that hosts the real Serum2.vst3 binary
-(see run_mcp_execution_harness.LiveBackend's docstring/import). This repository's cloud/CI container
+ENVIRONMENT NOTE: LiveBackend only works on the machine that hosts the real Serum2.vst3 binary (see
+run_mcp_execution_harness.LiveBackend's docstring/import path). This repository's cloud/CI container
 has no such binary and no DawDreamer install (verified: `import dawdreamer` fails, no *.vst3 file
-exists on this container). Running this script here therefore raises ModuleNotFoundError at the
-`import serum_backend` line before any Serum call is made -- it is written to run on the
-orchestrating agent's Serum-attached machine, not fabricated as having run here. See the proof
-report for the honest record of what could and could not be executed in this session.
+exists on this container). Running this script here reaches the real, unweakened epoch check
+(serum2.producer.execution_epoch.installed_epoch) and fails there with FileNotFoundError -- before
+any Serum call, MCP call, or preset write happens -- and reports that honestly rather than
+fabricating a live result. The apply_spec/with_field/pack_file/unpack_file steps (building the
+edited PresetSpec and writing+round-tripping a real .SerumPreset) were verified to work correctly in
+this container using the existing generic pieces; only the LiveBackend load into a real Serum
+instance and the true MCP tool call require the orchestrating agent's Serum-attached machine. See
+the proof report for the full honest record.
 """
 import hashlib
 import json
@@ -65,8 +71,10 @@ def run_live(plan):
     """The actual mutation, via the existing generic loader only. Returns the evidence record;
     never fabricates -- every field is a real captured value or the run fails outright."""
     import run_mcp_execution_harness as h  # the existing harness module; LiveBackend only, no new loader
-    from campaign_derive import base_spec
+    from campaign_derive import base_spec, with_field
+    from preset_build import BASE
     from serum_mcp.preset.mapping import apply_spec
+    from serum_mcp.preset.packer import SerumPreset, pack_file  # the existing generic Serum preset writer
 
     epoch = check_epoch()
     backend = h.LiveBackend()
@@ -78,9 +86,10 @@ def run_live(plan):
     leaf = fc["expected_raw"][0]  # env1.attack has exactly one raw leaf
     path, expected_value = leaf["path"], leaf["value"]
 
-    baseline_spec = base_spec("INIT")
-    baseline_body = apply_spec(baseline_spec)
-    edited_body = apply_spec(with_field_from_edit(baseline_spec, edit))
+    baseline_spec = base_spec()
+    baseline_body = apply_spec(BASE.data, baseline_spec)
+    edited_spec = with_field(baseline_spec, edit, edit["value"])
+    edited_body = apply_spec(BASE.data, edited_spec)
 
     backend.load(baseline_body)
     pre_state = backend.state()
@@ -95,8 +104,10 @@ def run_live(plan):
     restored_state = backend.state()
     restored_leaf = h.body_get(restored_state, path)
 
+    # The SAME generic Serum preset writer the 330-row sweeps used (serum_mcp.preset.packer),
+    # not a hand-rolled JSON dump -- this is a real, loadable .SerumPreset container.
     preset_path = OUT_PATH.with_suffix(".SerumPreset")
-    preset_path.write_bytes(json.dumps(edited_body).encode())
+    pack_file(SerumPreset(metadata=BASE.metadata, data=edited_body), preset_path)
     preset_sha256 = hashlib.sha256(preset_path.read_bytes()).hexdigest()
 
     return {
@@ -119,13 +130,6 @@ def run_live(plan):
         "host_text_named_change": post_hosts.get("Env 1 Attack"),
         "restoration": {"pre": pre_leaf, "restored": restored_leaf, "restoration_verified": restored_leaf == pre_leaf},
     }
-
-
-def with_field_from_edit(spec, edit):
-    """Apply the plan's own mcp_operation edit onto a baseline spec, via the existing campaign helper
-    -- no hand-built edit path."""
-    from campaign_derive import with_field
-    return with_field(spec, edit["list"], edit["index"], edit["field"], edit["value"])
 
 
 def main():

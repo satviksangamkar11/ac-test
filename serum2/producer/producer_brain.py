@@ -734,21 +734,39 @@ class ProducerBrain:
         mutation_path = scope["mutation_target_path"]
         mutation_value = scope["mutation_value_used"]
 
-        # Final execution contract cross-check (Finish Line B): the CapabilityContract
-        # above stays the sole authority for allowed_operation/status/prerequisites/
-        # admission -- nothing here can grant or widen authority. This only attaches,
-        # for the caller, the live-execution EVIDENCE already proven for this atlas_id
-        # in the committed final_execution_contract_v1.json (via ContractRegistry's
-        # execution_specs index), and records whether it agrees with the admitted
-        # mutation path. A missing/disagreeing spec never blocks the plan.
-        exec_spec = self._registry.execution_spec(atlas_id)
+        # Final execution contract gate (Finish Line B): the CapabilityContract above
+        # stays the sole authority for allowed_operation/status/prerequisites/admission
+        # -- nothing here can grant or widen authority, and mutation_path/mutation_value
+        # are never replaced by anything below. But for any atlas_id the final contract
+        # actually covers, that committed live-execution evidence is now the runtime's
+        # required execution-evidence source, not passive attachment: a control this
+        # atlas covers but the final contract has no row for, a row that disagrees with
+        # the admitted mutation path, or a row still classified as a conformance
+        # exception (never executable, per Finish Line B rule 7) all FAIL CLOSED here --
+        # admission having passed does not make the plan ready. atlas_id is None on the
+        # legacy natural-language path, which the final contract was never scoped to
+        # cover; that path is unaffected.
+        exec_spec = self._registry.execution_spec(atlas_id) if atlas_id else None
         final_contract_fields = None
-        if exec_spec is not None:
+        if atlas_id is not None:
+            if exec_spec is None:
+                return {"status": "NOT_ADMITTED", "pathway": record.pathway.value,
+                        "reason": "REFUSED_NO_FINAL_CONTRACT_EVIDENCE: no committed final-contract row "
+                                  "(or epoch mismatch) for atlas_id %r" % atlas_id}
+            if exec_spec["final_execution_classification"] == "MCP_EXEC_CONFORMANCE_EXCEPTION":
+                return {"status": "NOT_ADMITTED", "pathway": record.pathway.value,
+                        "reason": "REFUSED_CONFORMANCE_EXCEPTION_NOT_EXECUTABLE: %r is a known Finish Line B "
+                                  "conformance exception and is never executable" % atlas_id}
             expected_paths = [".".join(str(p) for p in leaf["path"]) for leaf in exec_spec["expected_raw"]]
             # authority scope's mutation_target_path may be coarser than a final-contract leaf path
             # (e.g. "Env0" vs "Env0.plainParams.kParamAttack" for a structured mutation_value_used);
             # agreement means the admitted path is that leaf, or a real prefix of it.
             agrees = any(p == mutation_path or p.startswith(mutation_path + ".") for p in expected_paths)
+            if not agrees:
+                return {"status": "NOT_ADMITTED", "pathway": record.pathway.value,
+                        "reason": "REFUSED_FINAL_CONTRACT_MISMATCH: admitted mutation_target_path %r matches "
+                                  "none of the final contract's expected_raw paths %r for atlas_id %r" % (
+                                      mutation_path, expected_paths, atlas_id)}
             final_contract_fields = {
                 "source_path": exec_spec["source_path"],
                 "atlas_id": exec_spec["atlas_id"],
