@@ -707,6 +707,7 @@ class ProducerBrain:
         resolution,
         adm,
         contract,
+        atlas_id=None,
     ) -> Dict[str, Any]:
         """Resolve admitted-contract authority into a Serum preset target.
 
@@ -733,12 +734,40 @@ class ProducerBrain:
         mutation_path = scope["mutation_target_path"]
         mutation_value = scope["mutation_value_used"]
 
+        # Final execution contract cross-check (Finish Line B): the CapabilityContract
+        # above stays the sole authority for allowed_operation/status/prerequisites/
+        # admission -- nothing here can grant or widen authority. This only attaches,
+        # for the caller, the live-execution EVIDENCE already proven for this atlas_id
+        # in the committed final_execution_contract_v1.json (via ContractRegistry's
+        # execution_specs index), and records whether it agrees with the admitted
+        # mutation path. A missing/disagreeing spec never blocks the plan.
+        exec_spec = self._registry.execution_spec(atlas_id)
+        final_contract_fields = None
+        if exec_spec is not None:
+            expected_paths = [".".join(str(p) for p in leaf["path"]) for leaf in exec_spec["expected_raw"]]
+            # authority scope's mutation_target_path may be coarser than a final-contract leaf path
+            # (e.g. "Env0" vs "Env0.plainParams.kParamAttack" for a structured mutation_value_used);
+            # agreement means the admitted path is that leaf, or a real prefix of it.
+            agrees = any(p == mutation_path or p.startswith(mutation_path + ".") for p in expected_paths)
+            final_contract_fields = {
+                "source_path": exec_spec["source_path"],
+                "atlas_id": exec_spec["atlas_id"],
+                "mcp_operation": exec_spec["mcp_operation"],
+                "expected_raw": exec_spec["expected_raw"],
+                "declared_domain": exec_spec["declared_domain"],
+                "final_execution_classification": exec_spec["final_execution_classification"],
+                "exception_policy": exec_spec["exception_policy"],
+                "restoration_verified": exec_spec["restoration_verified"],
+                "agrees_with_admitted_mutation_path": agrees,
+            }
+
         return {
             "status": "SERUM_PRESET_PLAN_READY",
             "contract_id": adm.contract_id,
             "mutation_target_path": mutation_path,
             "mutation_value_used": mutation_value,
             "capability_key": contract.target,
+            "final_execution_contract": final_contract_fields,
             "execution_steps": [
                 "1. serum-mcp generate_preset(spec) with %s set to the "
                 "admitted value" % mutation_path,
@@ -1522,6 +1551,9 @@ class ProducerBrain:
                 result.execution_status = "REFUSED_UNKNOWN_CONCEPT"
                 return result
             explicit_target = explicit.registry_target if explicit is not None else None
+            # Atlas canonical id (e.g. "env1.attack") -- the atlas_id key the final execution
+            # contract is indexed by. Only present on the explicit-target path.
+            atlas_id = explicit.canonical_id if explicit is not None else None
 
             # ---- retrieve real knowledge (Phase B) ----
             knowledge_contributions, knowledge_notes = self._retrieve_knowledge(
@@ -1630,7 +1662,7 @@ class ProducerBrain:
             if route_decision.route == ExecutionRoute.DAWDREAMER_SERUM:
                 return self._run_serum_preset_path(
                     result, request, intent, candidate, decision,
-                    capability_target,
+                    capability_target, atlas_id,
                 )
 
             if route_decision.route == ExecutionRoute.ABLETON_MCP:
@@ -1902,7 +1934,7 @@ class ProducerBrain:
 
     def _run_serum_preset_path(
         self, result, request, intent, candidate, decision,
-        capability_target,
+        capability_target, atlas_id=None,
     ) -> ProducerResult:
         """Canonical Serum execution route: resolution -> admission ->
         serum-mcp preset plan. See _build_serum_preset_plan's docstring for
@@ -1935,7 +1967,7 @@ class ProducerBrain:
         # Serum preset plan (Phase G) — see _build_serum_preset_plan's
         # docstring for why this stops at a plan rather than auto-executing.
         plan = self._build_serum_preset_plan(
-            intent, candidate, decision, resolution, adm, contract,
+            intent, candidate, decision, resolution, adm, contract, atlas_id,
         )
 
         if plan.get("status") == "NOT_ADMITTED":

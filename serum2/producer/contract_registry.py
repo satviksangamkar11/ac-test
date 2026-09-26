@@ -52,6 +52,8 @@ class ContractRegistry:
         self._load_binding_evidence_contracts(binding_evidence_dir)
         self.promotion_diagnostics = {}
         self._load_promoted_evidence_contracts(promoted_evidence_dir)
+        self.execution_specs = {}
+        self._load_final_execution_contract()
 
     def _load_host_param_mapping(self) -> Dict[str, str]:
         """Load the authoritative capability_key -> host parameter name mapping.
@@ -332,6 +334,53 @@ class ContractRegistry:
             key = (claim_id, sig_hash)
             result[key] = contract
         return result
+
+    # ------------------------------------------------------------------
+    # Final execution contract (Finish Line B, live v3 sweep authority):
+    # execution-EVIDENCE index only, keyed by the canonical Atlas atlas_id
+    # (e.g. "env1.attack"). This is NOT a second CapabilityContract source
+    # and NOT a parallel runtime-lookup subsystem: allowed_operation,
+    # capability status, prerequisites and admission authority remain
+    # exclusively on the CapabilityContract loaded above. This index only
+    # answers "what did live MCP execution prove for this atlas_id" --
+    # mcp_operation / expected_raw / declared_domain / final_execution_
+    # classification / exception_policy -- for the producer to cross-check
+    # against the authority contract's own scope, never to replace it.
+    # ------------------------------------------------------------------
+    FINAL_EXECUTION_CONTRACT_PATH = (
+        Path(__file__).parent.parent.parent / "parameter_characterization"
+        / "bulk_causal_evidence" / "final_execution_contract_v1.json"
+    )
+
+    def _load_final_execution_contract(self):
+        path = self.FINAL_EXECUTION_CONTRACT_PATH
+        try:
+            doc = json.loads(path.read_text())
+        except (FileNotFoundError, json.JSONDecodeError) as e:
+            print(f"[ContractRegistry] Warning: final execution contract not loaded: {e}")
+            return
+        lookup = doc.get("producer_lookup", {})
+        for row in doc.get("rows", ()):
+            atlas_id = row["atlas_id"]
+            pl = lookup.get(atlas_id, {})
+            self.execution_specs[atlas_id] = {
+                "atlas_id": atlas_id,
+                "mcp_operation": row["mcp_operation"],
+                "expected_raw": row["expected_raw"],
+                "declared_domain": row.get("declared_domain"),
+                "final_execution_classification": row["final_execution_classification"],
+                "restoration_verified": row["restoration_verified"],
+                "exception_policy": pl.get("exception_policy", "NONE"),
+                "producer_lookup": pl,
+                "source_path": str(path),
+            }
+
+    def execution_spec(self, atlas_id: Optional[str]) -> Optional[Dict]:
+        """Live-execution evidence for one Atlas atlas_id, from the committed final execution
+        contract only. None when atlas_id is None or has no row there -- never a fallback guess."""
+        if not atlas_id:
+            return None
+        return self.execution_specs.get(atlas_id)
 
     def get(self, semantic_target: str) -> Optional[CapabilityContract]:
         """Get contract for a semantic target.

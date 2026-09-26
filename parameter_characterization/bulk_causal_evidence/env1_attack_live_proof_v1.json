@@ -1,0 +1,59 @@
+{
+ "atlas_id": "env1.attack",
+ "status": "NOT_RUN_NO_LIVE_SERUM_IN_THIS_ENVIRONMENT",
+ "reason": "FileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Program Files\\\\Common Files\\\\VST3\\\\Serum2.vst3\\\\Contents\\\\x86_64-win\\\\Serum2.vst3'",
+ "admitted_plan": {
+  "status": "SERUM_PRESET_PLAN_READY",
+  "contract_id": "envelope_field_attack",
+  "mutation_target_path": "Env0",
+  "mutation_value_used": {
+   "plainParams": {
+    "kParamAttack": 0.8
+   }
+  },
+  "capability_key": "envelope_field_attack",
+  "final_execution_contract": {
+   "source_path": "/home/user/ac-test/parameter_characterization/bulk_causal_evidence/final_execution_contract_v1.json",
+   "atlas_id": "env1.attack",
+   "mcp_operation": {
+    "kind": "field",
+    "field": "attack",
+    "attr": null,
+    "edit": {
+     "kind": "field",
+     "field": "attack",
+     "value": 5.000000000000001,
+     "list": "envelopes",
+     "index": 0
+    }
+   },
+   "expected_raw": [
+    {
+     "path": [
+      "Env0",
+      "plainParams",
+      "kParamAttack"
+     ],
+     "value": 5.000000000000001
+    }
+   ],
+   "declared_domain": {
+    "kind": "continuous",
+    "min": 0.0,
+    "max": 10.0
+   },
+   "final_execution_classification": "MCP_EXEC_HOST_CONFIRMED",
+   "exception_policy": "NONE",
+   "restoration_verified": true,
+   "agrees_with_admitted_mutation_path": true
+  },
+  "execution_steps": [
+   "1. serum-mcp generate_preset(spec) with Env0 set to the admitted value",
+   "2. record preset_path + sha256 of the written .SerumPreset",
+   "3. Load the preset into the real Serum 2 instance via Serum's own in-plugin preset browser (NOT Ableton's browser \u2014 it does not index .SerumPreset files, and NOT set_device_parameter \u2014 Serum-internal fields are not on the Ableton-exposed parameter surface)",
+   "4. Screenshot/read back the real Serum UI to confirm the loaded value matches the admitted target",
+   "5. Call finalize_serum_preset_execution(plan, preset_path, preset_sha256, ui_readback, readback_verified)"
+  ]
+ },
+ "note": "This container has no DawDreamer install and no Serum2.vst3 binary; run this script on the orchestrating agent's Serum-attached machine to produce the live record."
+}
