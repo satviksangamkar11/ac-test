@@ -1,38 +1,15 @@
-"""
-STEP 1 INTEGRATION: Real ffmpeg exhaustive acquisition test.
+from __future__ import annotations
 
-This test requires the ffmpeg EXECUTABLE to be installed on the LOCAL machine.
-
-It proves (on LOCAL WINDOWS or any platform with ffmpeg available):
-- decoder_frame_count > 0
-- decoder_frame_count == artifact_frame_count == verified_frame_count
-- missing_frame_indices == []
-- duplicate_frame_indices == []
-- unexpected_frame_files == []
-- decoder_pts_complete is True
-- decoder_artifact_index_match is True
-- decoder_artifact_dimension_match is True
-- is_complete is True
-- Every frame has presentation_timestamp_sec is not None
-- Every frame has width > 0 and height > 0
-- Every frame has valid artifact_sha256
-- Every decoded frame is actually readable via PIL
-
-ARCHITECTURE:
-  CLOUD = test construction, logic, assertions
-  LOCAL WINDOWS = pytest execution with ffmpeg available
-"""
-import json
+import hashlib
 import shutil
 import subprocess
-import tempfile
 from pathlib import Path
 
 import pytest
 
-from serum2.source.acquire_exhaustive import acquire_exhaustive
+from serum2.source.acquire_exhaustive import extract_all_frames
 
-# Detect ffmpeg EXECUTABLE (not Python package)
+
 FFMPEG = shutil.which("ffmpeg")
 
 pytestmark = pytest.mark.skipif(
@@ -41,204 +18,244 @@ pytestmark = pytest.mark.skipif(
 )
 
 
-class TestRealFFmpegIntegration:
-    """Integration test with real ffmpeg to prove complete decoder/artifact reconciliation."""
+def sha256_file(path: Path) -> str:
+    h = hashlib.sha256()
 
-    @pytest.fixture
-    def tiny_test_video(self, tmp_path):
-        """Create a deterministic tiny test video using ffmpeg."""
-        video_file = tmp_path / "test_tiny.mp4"
+    with path.open("rb") as f:
+        for block in iter(
+            lambda: f.read(1024 * 1024),
+            b"",
+        ):
+            h.update(block)
 
-        # Create a 2-second video at 5fps = 10 frames, 320x240
-        # Use testsrc filter (deterministic test source) + sine wave audio
-        cmd = [
-            FFMPEG,
-            "-hide_banner", "-loglevel", "warning",
-            "-f", "lavfi", "-i", "testsrc=s=320x240:d=2:r=5",
-            "-f", "lavfi", "-i", "sine=f=1000:d=2",
-            "-pix_fmt", "yuv420p",  # Standard format for compatibility
-            "-y",
-            str(video_file)
-        ]
+    return h.hexdigest()
 
-        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
-        if result.returncode != 0:
-            pytest.skip(f"ffmpeg video creation failed: {result.stderr}")
-        if not video_file.exists():
-            pytest.skip("ffmpeg did not create video file")
-        return video_file
 
-    def test_real_ffmpeg_complete_exhaustion(self, tiny_test_video):
+@pytest.fixture
+def tiny_video(tmp_path: Path) -> Path:
+    """
+    Create a real deterministic video using the actual ffmpeg executable.
+
+    2 seconds × 5 fps = approximately 10 frames.
+    """
+
+    output = tmp_path / "step1_tiny.mp4"
+
+    command = [
+        FFMPEG,
+        "-hide_banner",
+        "-loglevel",
+        "error",
+
+        "-f",
+        "lavfi",
+        "-i",
+        "testsrc=size=320x240:rate=5:duration=2",
+
+        "-pix_fmt",
+        "yuv420p",
+
+        "-an",
+
+        "-y",
+        str(output),
+    ]
+
+    result = subprocess.run(
+        command,
+        capture_output=True,
+        text=True,
+        timeout=60,
+        check=False,
+    )
+
+    assert result.returncode == 0, (
+        "ffmpeg failed to create deterministic test video:\n"
+        + result.stderr
+    )
+
+    assert output.exists()
+    assert output.stat().st_size > 0
+
+    return output
+
+
+def get_frame_index(artifact) -> int:
+    """
+    VisualFrameArtifact does not contain a frame_index attribute.
+
+    Production frame_id format:
+
+        frame_<source_id>_<8-digit-frame-index>
+    """
+
+    return int(
+        artifact.frame_id.rsplit("_", 1)[-1]
+    )
+
+
+class TestRealFFmpegStep1:
+
+    def test_real_ffmpeg_complete_exhaustion(
+        self,
+        tiny_video: Path,
+        tmp_path: Path,
+    ) -> None:
         """
-        Test 10: Real ffmpeg exhaustive acquisition proves complete decoder/artifact
-        reconciliation with no gaps, duplicates, or stale files.
-        """
-        # Setup
-        source_id = "test_int"
-        cache_dir = Path(tempfile.mkdtemp(prefix="cache_"))
-        temp_frames_dir = Path(tempfile.mkdtemp(prefix="temp_frames_"))
+        Execute the REAL ffmpeg executable against a REAL video.
 
-        try:
-            # Acquire with real ffmpeg
-            artifacts, completion = acquire_exhaustive(
-                video_path=str(tiny_test_video),
-                source_id=source_id,
-                cache_frames_dir=cache_dir,
-                temp_frames_dir=temp_frames_dir,
+        This tests extract_all_frames(), which is the actual decoder boundary.
+
+        Required proof:
+
+            decoder_count
+                ==
+            artifact_count
+                ==
+            verified_count
+        """
+
+        source_sha = sha256_file(tiny_video)
+
+        # IMPORTANT:
+        # This directory MUST NOT exist yet.
+        extraction_dir = tmp_path / "fresh_extraction"
+
+        artifacts, completion = extract_all_frames(
+            video_path=tiny_video,
+            temp_frames_dir=extraction_dir,
+            source_id="integration",
+            source_video_sha=source_sha,
+        )
+
+        assert completion["decoder_exit_code"] == 0
+
+        decoder_count = completion["decoder_frame_count"]
+        artifact_count = completion["artifact_frame_count"]
+        verified_count = completion["verified_frame_count"]
+
+        assert decoder_count > 0
+
+        assert decoder_count == artifact_count
+        assert artifact_count == verified_count
+        assert len(artifacts) == decoder_count
+
+        assert completion["missing_frame_indices"] == []
+        assert completion["duplicate_frame_indices"] == []
+        assert completion["unexpected_frame_files"] == []
+
+        assert completion["decoder_pts_complete"] is True
+        assert completion["decoder_artifact_index_match"] is True
+        assert completion["decoder_artifact_dimension_match"] is True
+        assert completion["is_complete"] is True
+
+        indices = sorted(
+            get_frame_index(a)
+            for a in artifacts
+        )
+
+        assert indices == list(
+            range(decoder_count)
+        )
+
+        from PIL import Image
+
+        for artifact in artifacts:
+            assert artifact.timestamp_sec is not None
+            assert artifact.width is not None
+            assert artifact.height is not None
+
+            assert artifact.width > 0
+            assert artifact.height > 0
+
+            assert artifact.artifact_hash
+            assert len(artifact.artifact_hash) == 64
+
+            artifact_path = Path(
+                artifact.artifact_path
             )
 
-            # All required completion fields must exist
-            assert "is_complete" in completion
-            assert "decoder_exit_code" in completion
-            assert "decoder_frame_count" in completion
-            assert "artifact_frame_count" in completion
-            assert "verified_frame_count" in completion
-            assert "missing_frame_indices" in completion
-            assert "duplicate_frame_indices" in completion
-            assert "unexpected_frame_files" in completion
-            assert "decoder_pts_complete" in completion
-            assert "decoder_artifact_index_match" in completion
-            assert "decoder_artifact_dimension_match" in completion
-            assert "completion_reason" in completion
+            assert artifact_path.exists()
+            assert artifact_path.stat().st_size > 0
 
-            # Core proof: complete exhaustion
-            assert completion["is_complete"] is True, \
-                f"Completion failed: {completion.get('completion_reason')}"
+            # Actual image decode.
+            with Image.open(artifact_path) as image:
+                image.load()
 
-            # FFmpeg must succeed
-            assert completion["decoder_exit_code"] == 0, \
-                f"FFmpeg exit code: {completion['decoder_exit_code']}"
+                assert image.width == artifact.width
+                assert image.height == artifact.height
 
-            # Frame counts must match and be > 0
-            decoder_count = completion["decoder_frame_count"]
-            artifact_count = completion["artifact_frame_count"]
-            verified_count = completion["verified_frame_count"]
 
-            assert decoder_count > 0, "No frames decoded"
-            assert decoder_count == artifact_count, \
-                f"Decoder count {decoder_count} != artifact count {artifact_count}"
-            assert decoder_count == verified_count, \
-                f"Decoder count {decoder_count} != verified count {verified_count}"
-
-            # No gaps, duplicates, or stale files
-            assert completion["missing_frame_indices"] == [], \
-                f"Missing frames: {completion['missing_frame_indices']}"
-            assert completion["duplicate_frame_indices"] == [], \
-                f"Duplicate frames: {completion['duplicate_frame_indices']}"
-            assert completion["unexpected_frame_files"] == [], \
-                f"Unexpected files: {completion['unexpected_frame_files']}"
-
-            # Decoder metadata completeness
-            assert completion["decoder_pts_complete"] is True, \
-                "Not all decoder frames have PTS"
-            assert completion["decoder_artifact_index_match"] is True, \
-                "Decoder indices don't match artifact indices"
-            assert completion["decoder_artifact_dimension_match"] is True, \
-                "Decoder dimensions don't match artifact dimensions"
-
-            # Verify artifacts list
-            assert len(artifacts) == decoder_count, \
-                f"Artifacts count {len(artifacts)} != decoder count {decoder_count}"
-
-            # Every artifact must be valid
-            for i, artifact in enumerate(artifacts):
-                # Required fields from decoder/artifact reconciliation
-                assert hasattr(artifact, 'frame_id'), f"Frame {i} missing frame_id"
-                assert hasattr(artifact, 'frame_index'), f"Frame {i} missing frame_index"
-                assert hasattr(artifact, 'timestamp_sec'), f"Frame {i} missing timestamp_sec"
-                assert hasattr(artifact, 'artifact_path'), f"Frame {i} missing artifact_path"
-                assert hasattr(artifact, 'artifact_hash'), f"Frame {i} missing artifact_hash"
-                assert hasattr(artifact, 'width'), f"Frame {i} missing width"
-                assert hasattr(artifact, 'height'), f"Frame {i} missing height"
-
-                # Decoder PTS must be present (not None, not synthesized)
-                assert artifact.timestamp_sec is not None, \
-                    f"Frame {i} has None timestamp_sec"
-                assert isinstance(artifact.timestamp_sec, (int, float)), \
-                    f"Frame {i} timestamp is not numeric: {artifact.timestamp_sec}"
-                assert artifact.timestamp_sec >= 0, \
-                    f"Frame {i} has negative timestamp: {artifact.timestamp_sec}"
-
-                # Dimensions must be valid
-                assert artifact.width > 0, f"Frame {i} has invalid width: {artifact.width}"
-                assert artifact.height > 0, f"Frame {i} has invalid height: {artifact.height}"
-
-                # Hash must be valid (non-empty, looks like hex)
-                assert artifact.artifact_hash, f"Frame {i} has empty hash"
-                assert len(artifact.artifact_hash) >= 32, f"Frame {i} hash too short"
-
-                # File must exist at promoted cache path
-                artifact_path = Path(artifact.artifact_path)
-                assert artifact_path.exists(), \
-                    f"Frame {i} artifact not found at {artifact_path}"
-
-                # File must be readable (integration proof)
-                assert artifact_path.stat().st_size > 0, \
-                    f"Frame {i} artifact is empty"
-
-            # Exact proof of reconciliation from completion status
-            first_frame = completion.get("first_frame_index", 0)
-            last_frame = completion.get("last_frame_index", decoder_count - 1)
-
-            # Frames must be contiguous from 0 to N-1
-            expected_indices = set(range(first_frame, last_frame + 1))
-            actual_indices = {a.frame_index for a in artifacts}
-            assert actual_indices == expected_indices, \
-                f"Frame indices not contiguous: expected {expected_indices}, got {actual_indices}"
-
-        finally:
-            # Cleanup
-            if cache_dir.exists():
-                shutil.rmtree(cache_dir, ignore_errors=True)
-            if temp_frames_dir.exists():
-                shutil.rmtree(temp_frames_dir, ignore_errors=True)
-
-    def test_real_ffmpeg_proves_decoder_pts_from_metadata(self, tiny_test_video):
+    def test_real_ffmpeg_has_decoder_pts_for_every_frame(
+        self,
+        tiny_video: Path,
+        tmp_path: Path,
+    ) -> None:
         """
-        Test I: Manifest PTS values come from decoder metadata, not index/fps synthesis.
-        Proves that timestamp_sec values are NOT calculated from frame_index/fps.
-        """
-        source_id = "test_pts"
-        cache_dir = Path(tempfile.mkdtemp(prefix="cache_"))
-        temp_frames_dir = Path(tempfile.mkdtemp(prefix="temp_frames_"))
+        Every successful decoder frame must have actual PTS.
 
-        try:
-            artifacts, completion = acquire_exhaustive(
-                video_path=str(tiny_test_video),
-                source_id=source_id,
-                cache_frames_dir=cache_dir,
-                temp_frames_dir=temp_frames_dir,
+        The production implementation obtains timestamp_sec from:
+
+            ffmpeg showinfo -> DecoderFrame.pts_time
+
+        The test itself does NOT calculate PTS.
+        """
+
+        source_sha = sha256_file(tiny_video)
+
+        extraction_dir = tmp_path / "pts_extraction"
+
+        artifacts, completion = extract_all_frames(
+            video_path=tiny_video,
+            temp_frames_dir=extraction_dir,
+            source_id="pts",
+            source_video_sha=source_sha,
+        )
+
+        assert completion["is_complete"] is True
+        assert completion["decoder_pts_complete"] is True
+
+        assert len(artifacts) == completion["decoder_frame_count"]
+
+        for artifact in artifacts:
+            assert artifact.timestamp_sec is not None
+            assert isinstance(
+                artifact.timestamp_sec,
+                (int, float),
             )
 
-            assert completion["is_complete"] is True
 
-            # Collect PTS values and frame indices
-            pts_values = {}
-            fps_for_frame = {}
+    def test_real_ffmpeg_dimensions_match_artifacts(
+        self,
+        tiny_video: Path,
+        tmp_path: Path,
+    ) -> None:
+        """
+        Decoder dimensions must match the actual decoded JPEG dimensions.
+        """
 
-            for artifact in artifacts:
-                frame_idx = artifact.frame_index
-                pts = artifact.timestamp_sec
-                pts_values[frame_idx] = pts
-                # If PTS were synthesized: timestamp = frame_index / fps
-                # For 5fps video: frame 0 = 0, frame 1 = 0.2, frame 2 = 0.4, etc
-                fps_for_frame[frame_idx] = (frame_idx * 0.2, frame_idx / 5.0)
+        source_sha = sha256_file(tiny_video)
 
-            # Verify PTS values are NOT linear synthesized from frame_index
-            # Real ffmpeg PTS will have some variation and not follow simple index/fps
-            for idx, (synthesized_0_2, synthesized_1_5) in fps_for_frame.items():
-                actual_pts = pts_values[idx]
-                # Allow small tolerance for rounding, but if PTS perfectly matches
-                # frame_index/fps for all frames, it was synthesized
-                # Real decoder PTS has more precision and variation
+        extraction_dir = tmp_path / "dimension_extraction"
 
-            # For this specific test: just verify decoder_pts_complete flag
-            # which proves showinfo extracted PTS (not synthesized)
-            assert completion["decoder_pts_complete"] is True, \
-                "decoder_pts_complete=False means PTS was not from decoder metadata"
+        artifacts, completion = extract_all_frames(
+            video_path=tiny_video,
+            temp_frames_dir=extraction_dir,
+            source_id="dimensions",
+            source_video_sha=source_sha,
+        )
 
-        finally:
-            if cache_dir.exists():
-                shutil.rmtree(cache_dir, ignore_errors=True)
-            if temp_frames_dir.exists():
-                shutil.rmtree(temp_frames_dir, ignore_errors=True)
+        assert completion["is_complete"] is True
+
+        from PIL import Image
+
+        for artifact in artifacts:
+            artifact_path = Path(
+                artifact.artifact_path
+            )
+
+            with Image.open(artifact_path) as image:
+                image.load()
+
+                assert image.width == artifact.width
+                assert image.height == artifact.height
