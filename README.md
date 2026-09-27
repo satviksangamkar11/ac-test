@@ -5,16 +5,24 @@ changed, and reproduces that state in a `.SerumPreset` — with every step gated
 memory. Serum is driven only through [serum-mcp](vendor/serum-mcp) (vendored here). Claude Code is the model
 runtime; there is no Anthropic SDK call in the canonical path.
 
-> **Status (measured 2026-09-26):** `python -m pytest` → **1223 passed, 25 failed, 22 errors, 19 skipped**.
-> All 25 failures and 22 errors are environment-bound (Windows Serum binary unavailable, serum-mcp not running).
-> Cloud-only tests are green.
+> **Status (measured 2026-09-27):** `python -m pytest` → **1535 passed, 27 failed, 20 skipped, 16 errors**.
+> All 27 failures and 16 errors are environment-bound (Windows Serum binary unavailable, serum-mcp not running).
+> Cloud-only tests are green. +10 new passing tests from Phase 1 (universal observation pipeline).
 >
-> **Known integrity gaps (being fixed — see [SECOND_OPINION_AUDIT_2026-09-26.md](SECOND_OPINION_AUDIT_2026-09-26.md)):**
-> - Only 10 of 231 CapabilityContracts are reachable on the real 2.0.23 epoch (F1).
-> - The ledger crashes on `macro` and `singleton_field` controls (F3).
-> - Reference verification can pass with 1/300 frames and a hand-typed readback (F7).
-> - ProducerBrain uses the qualification test value as the production operand (F4).
-> - Cross-epoch execution is possible via `epoch=None` (F5).
+> **Phase 1 Complete (2026-09-27):** Universal full-frame observation pipeline replaces tutorial-specific `temporal_candidates()`.
+> See [PHASE_1_UNIVERSAL_OBSERVATION_COMPLETE.md](audit/PHASE_1_UNIVERSAL_OBSERVATION_COMPLETE.md) for architecture.
+> - ALL 269 frames now ingested and accounted for (was: 15 attempts on 6 hardcoded controls)
+> - Evidence-first VLM observation (no control_id hints)
+> - Zero tutorial-specific code in production
+> - Temporal grouping reduces VLM calls ~15×
+> - Zero new FAILED/ERROR node IDs (regression verified)
+>
+> **Remaining integrity gaps (being fixed in subsequent phases — see [SECOND_OPINION_AUDIT_2026-09-26.md](SECOND_OPINION_AUDIT_2026-09-26.md)):**
+> - Only 10 of 231 CapabilityContracts are reachable on the real 2.0.23 epoch (F1) — **targeted in Phase 2 (A4)**.
+> - The ledger crashes on `macro` and `singleton_field` controls (F3) — **targeted in Phase 2 (A5)**.
+> - Reference verification can pass with 1/300 frames and a hand-typed readback (F7) — **targeted in Phase 2 (A6/A7)**.
+> - ProducerBrain uses the qualification test value as the production operand (F4) — **targeted in Phase 2 (A1/A2)**.
+> - Cross-epoch execution is possible via `epoch=None` (F5) — **targeted in Phase 2 (A3)**.
 >
 > **Epoch:** Serum **2.0.23** (SHA-256 `9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3`).
 > Any reference to "Serum 2.0.21" in the codebase or docs is **stale**; the runtime is 2.0.23.
@@ -75,45 +83,52 @@ Ableton track → 16-bar arrangement → audible verified render
 
 ## Closure Plan
 
+**PHASE 1 (2026-09-27): COMPLETE** — Universal full-frame observation pipeline. See [PHASE_1_UNIVERSAL_OBSERVATION_COMPLETE.md](audit/PHASE_1_UNIVERSAL_OBSERVATION_COMPLETE.md).
+
 The project has four machine-checkable certificates, produced in order:
 
-| Certificate | Where | What it proves |
-|---|---|---|
-| **Cert 1 — Integrity** | Cloud | No authority bypass, no cross-epoch execution, no qualification-value substitution, no incomplete Stage-A success, no fake UI readback, no out-of-domain execution, no unsupported mutation |
-| **Cert 2 — Native Serum** | W1 Windows + Cloud | Loaded-module SHA matches 2.0.23 pin, genuine preset SHA, native re-save matches compiled operand, screenshot-bound readback matches, restoration verified, no DawDreamer in chain |
-| **Cert 3 — Product** | W2 Windows + Cloud | One untuned real tutorial → `reference_verified=True` with COMPLETE coverage + verified audible 16-bar render |
-| **Cert 4 — Control Surface** | Cloud + selective Local | Every non-exception control `EXECUTABLE+VERIFIED`, all 20 exceptions classified as `EXECUTABLE+UNVERIFIED`, `UNQUALIFIED`, or `GENUINELY_NON_EXECUTABLE` |
+| Certificate | Phase | Where | What it proves |
+|---|---|---|---|
+| **Cert 1 — Integrity** | Phase 2 | Cloud | No authority bypass, no cross-epoch execution, no qualification-value substitution, no incomplete Stage-A success, no fake UI readback, no out-of-domain execution, no unsupported mutation |
+| **Cert 2 — Native Serum** | Phase 3 | W1 Windows + Cloud | Loaded-module SHA matches 2.0.23 pin, genuine preset SHA, native re-save matches compiled operand, screenshot-bound readback matches, restoration verified, no DawDreamer in chain |
+| **Cert 3 — Product** | Phase 4 | W2 Windows + Cloud | One untuned real tutorial → `reference_verified=True` with COMPLETE coverage + verified audible 16-bar render |
+| **Cert 4 — Control Surface** | Phase 5 | Cloud + selective Local | Every non-exception control `EXECUTABLE+VERIFIED`, all 20 exceptions classified as `EXECUTABLE+UNVERIFIED`, `UNQUALIFIED`, or `GENUINELY_NON_EXECUTABLE` |
 
-**Critical path:** Step 0 → Gate A-core (A1+A2+A3+A7) → Gate A rest + Track B + C1 (parallel) → W1 → Cert 2 → C3 local VLM → integrate → W2 → Cert 3 → 16-bar render → Cert 3 product → 20 exceptions → Cert 4
+**Critical path:** Phase 1 ✓ → Phase 2 (Gate A-core A1+A2+A3+A7 + Gate A rest A4+A5+A6+A8 + Track B + C1, parallel) → Phase 3 (W1) → Cert 2 → Phase 4 (C3 local VLM benchmark + W2) → Cert 3 → Phase 5 (20 exceptions) → Cert 4
 
 See [SECOND_OPINION_AUDIT_2026-09-26.md](SECOND_OPINION_AUDIT_2026-09-26.md) for the full adversarial audit (findings F1–F16, Q1–Q20, branch topology, conformance-exception root causes).
 
 ## Current Implementation State
 
 ### What works (cloud, no Windows required)
+- **PHASE 1 COMPLETE:** Universal full-frame observation pipeline (`FrameObservationCensus`) — processes all 269 frames, evidence-first VLM (`observe_frame_all_controls`), zero tutorial hardcoding, 20 census metrics
 - CapabilityContract loading from pickle stores (`experiments/*.pkl`, `PASS1-*.pkl`) — 10 Pass-1 contracts with `mutation_target_path` set
-- `state_ledger.build_all()` for `osc/env/lfo/filter/fx` module kinds (crashes on `macro`/`singleton_field` — F3, being fixed)
+- `state_ledger.build_all()` for `osc/env/lfo/filter/fx` module kinds (crashes on `macro`/`singleton_field` — F3, being fixed in Phase 2 A5)
 - `state_admission.admit_rows()` — 10 controls admittable under the real 2.0.23 epoch
 - `authorized_state_compiler.compile_ops()` — generic compiler with `_validate()` defense-in-depth
 - `serum_mcp.generate_preset` / `pack_file` — genuine `.SerumPreset` output
-- `run_reference_reproduction()` — run object, proof level, coverage (but currently bypassed by F1/F7)
-- Test suite: 1223 passing tests (all environment-bound failures are expected)
+- `run_reference_reproduction()` — run object, proof level, coverage (but currently bypassed by F1/F7, being fixed in Phase 2)
+- Test suite: 1535 passing tests (all 27 environment-bound failures are expected)
 
-### What is broken or missing (being fixed)
-- **F1:** 221 of 231 promoted contracts are pathless — `promote_verified_evidence()` missing `mutation_target_path` → only 10 reachable
-- **F2:** 89 of 310 evidence files rejected as `MISSING_DOMAIN` at runtime; `BINDING_EVIDENCE_DIR` points at wrong directory (0 of 9 load)
-- **F3:** `_coerce()` crashes on `macro` (16 bindings) and `singleton_field` (53 bindings)
-- **F4:** `_build_serum_preset_plan` uses `scope["mutation_value_used"]` (the qualification test value, e.g. 0.8 for attack), not the user's requested value
-- **F5:** `epoch=None` serves 2.0.21 contracts to a 2.0.23 runtime; the env1.attack "proof" only works cross-epoch
-- **F7:** `stage_a_is_filled` uses `any()` — 1/300 frames analysed → `reference_verified=True`; hand-typed UI dict accepted
-- **F8:** `_ui_equal` unit-string comparison causes false negatives ("300" + unit "ms" ≠ "300 ms")
-- **F9:** Orchestrator returns `COMPLETE` even when bridge unavailable; never feeds UI readback into run
-- **F10:** Two independent authority models; NL path skips the final-contract gate entirely
-- **F11:** 330-control sweep requires `D:/ableton claude` (deleted); headless DawDreamer mislabelled as "live MCP"
-- **F12:** Frame acquisition caches by video only (not by decode params), truncates at 300 s, silently drops failures
-- **F13:** Legacy `VisualReasoner` cloud fallback still reachable from `ProducerBrain`
-- **F15:** "2.0.21" string in Atlas, `production_pipeline.py`, `reference_state_reconstructor`, README, main.py
-- **F16:** The existing test suite never exercises the real 2.0.23 end-to-end path (uses `epoch=None` or `admit()` directly)
+### What is broken or missing (being fixed in subsequent phases)
+
+**PHASE 1 addressed:** Frame selection now universal (all 269 frames ingested); no more hardcoded `_TUTORIAL_CANDIDATE_WINDOWS` (was limiting to 6 controls × 3 frames = 15 attempts).
+
+**Remaining findings (F1–F16):**
+- **F1:** 221 of 231 promoted contracts are pathless — `promote_verified_evidence()` missing `mutation_target_path` → only 10 reachable (Phase 2 A4)
+- **F2:** 89 of 310 evidence files rejected as `MISSING_DOMAIN` at runtime; `BINDING_EVIDENCE_DIR` points at wrong directory (0 of 9 load) (Phase 2 A4)
+- **F3:** `_coerce()` crashes on `macro` (16 bindings) and `singleton_field` (53 bindings) (Phase 2 A5)
+- **F4:** `_build_serum_preset_plan` uses `scope["mutation_value_used"]` (the qualification test value, e.g. 0.8 for attack), not the user's requested value (Phase 2 A1/A2)
+- **F5:** `epoch=None` serves 2.0.21 contracts to a 2.0.23 runtime; the env1.attack "proof" only works cross-epoch (Phase 2 A3)
+- **F7:** `stage_a_is_filled` uses `any()` — 1/300 frames analysed → `reference_verified=True`; hand-typed UI dict accepted (Phase 2 A6/A7)
+- **F8:** `_ui_equal` unit-string comparison causes false negatives ("300" + unit "ms" ≠ "300 ms") (Phase 2 A7)
+- **F9:** Orchestrator returns `COMPLETE` even when bridge unavailable; never feeds UI readback into run (Phase 2 A6/A7)
+- **F10:** Two independent authority models; NL path skips the final-contract gate entirely (Phase 2 A1/A2)
+- **F11:** 330-control sweep requires `D:/ableton claude` (deleted); headless DawDreamer mislabelled as "live MCP" (Phase 2 A8)
+- **F12:** Frame acquisition caches by video only (not by decode params), truncates at 300 s, silently drops failures (Phase 2 Track B)
+- **F13:** Legacy `VisualReasoner` cloud fallback still reachable from `ProducerBrain` (Phase 2 A1)
+- **F15:** "2.0.21" string in Atlas, `production_pipeline.py`, `reference_state_reconstructor`, docs (Phase 3)
+- **F16:** The existing test suite never exercises the real 2.0.23 end-to-end path (uses `epoch=None` or `admit()` directly) (Phase 2 tests)
 
 ### Gate-A fix targets (active, cloud)
 | Step | Fix | Closes |
