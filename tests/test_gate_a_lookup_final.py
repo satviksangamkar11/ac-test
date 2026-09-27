@@ -106,8 +106,8 @@ class TestA2GateUnchanged:
         from serum2.producer.state_admission import is_offline_test
         assert is_offline_test(EPOCH_OFFLINE_TEST)
         assert not is_offline_test(EPOCH_2_0_23)
-        # None is treated as offline for backward-compat (existing documented behavior)
-        assert is_offline_test(None)
+        # A3: None is NOT treated as offline; only EPOCH_OFFLINE_TEST is valid for offline testing
+        assert not is_offline_test(None)
 
     def test_lookup_final_epoch_isolation(self):
         """lookup_final() with epoch=2.0.23 must not serve a contract proven on 2.0.21."""

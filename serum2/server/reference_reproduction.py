@@ -88,7 +88,11 @@ def run_reference_reproduction(stage_a_path, reread_log_path, corrections_path=N
                                epoch: Optional[ExecutionEpoch] = None, ui_readback: Optional[Dict[str, Any]] = None,
                                subfolder: str = "VLP1", binding_evidence_dir: Optional[str] = None,
                                promoted_evidence_dir: Optional[str] = None) -> ReferenceReproductionRun:
-    epoch = epoch or installed_epoch()
+    # A3: epoch must be explicit; None is not valid in production
+    if epoch is None:
+        raise ValueError("run_reference_reproduction requires explicit epoch; do not pass None")
+    from serum2.producer.execution_epoch import require_epoch
+    epoch = require_epoch(epoch)
     stage_a = json.loads(Path(stage_a_path).read_text(encoding="utf-8"))
     reread = json.loads(Path(reread_log_path).read_text(encoding="utf-8"))
 

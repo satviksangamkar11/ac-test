@@ -15,7 +15,7 @@ import pytest
 from serum2.evidence import admission as adm
 from serum2.producer import producer_brain as pb
 from serum2.producer.contract_registry import ContractRegistry
-from serum2.producer.execution_epoch import EPOCH_2_0_21, EPOCH_2_0_23
+from serum2.producer.execution_epoch import EPOCH_2_0_21, EPOCH_2_0_23, EPOCH_OFFLINE_TEST
 
 TARGET = "env1.attack"
 
@@ -41,8 +41,9 @@ def _reset_brain_caches():
 
 
 def test_epoch_none_matches_legacy_registry_and_lacks_the_target():
-    """Proof 2 (half): ProducerBrain(epoch=None) is exactly today's registry -- no evidence dirs, target absent."""
-    brain = pb.ProducerBrain()
+    """Proof 2 (half): ProducerBrain(epoch=EPOCH_OFFLINE_TEST) uses legacy registry -- no evidence dirs, target absent."""
+    # A3: Must use EPOCH_OFFLINE_TEST explicitly, never epoch=None
+    brain = pb.ProducerBrain(epoch=EPOCH_OFFLINE_TEST)
     assert TARGET not in brain._registry.contracts
 
 
@@ -63,16 +64,16 @@ def test_epoch_given_target_actually_reaches_admission():
 
 
 def test_epoch_none_target_cannot_be_admitted_legacy_behavior_exactly_preserved():
-    """Proof 2 (the real claim): the identical admission check, with the legacy (epoch=None) registry, correctly
-    finds nothing to admit -- proving epoch=None truly is unaffected, not merely that the target is absent."""
-    brain = pb.ProducerBrain()
+    """Proof 2 (the real claim): the identical admission check, with the legacy (EPOCH_OFFLINE_TEST) registry, correctly
+    finds nothing to admit -- proving offline registry truly is unaffected, not merely that the target is absent."""
+    # A3: Must use EPOCH_OFFLINE_TEST explicitly, never epoch=None
+    brain = pb.ProducerBrain(epoch=EPOCH_OFFLINE_TEST)
     contracts = brain._registry.get_contracts_dict()
     assert not any(k[0] == TARGET for k in contracts)   # no (claim_id, sig) key for TARGET exists to even attempt
 
 
-def test_execute_producer_request_epoch_none_uses_the_one_legacy_singleton(monkeypatch):
-    """execute_producer_request(request, epoch=None) must behave exactly as before this change: one shared _BRAIN,
-    never touching _BRAINS."""
+def test_execute_producer_request_epoch_offline_test_uses_cache(monkeypatch):
+    """execute_producer_request(request, epoch=EPOCH_OFFLINE_TEST) must cache the brain per epoch."""
     seen = []
     real_init = pb.ProducerBrain.__init__
 
@@ -84,10 +85,14 @@ def test_execute_producer_request_epoch_none_uses_the_one_legacy_singleton(monke
     req = pb.ProducerRequest(user_intent="create a dark bass sound", mode="CREATE")
     monkeypatch.setattr(pb.ProducerBrain, "execute", lambda self, r: "OK")
 
-    pb.execute_producer_request(req)
-    pb.execute_producer_request(req)
-    assert seen == [None]                 # constructed exactly once, with epoch=None, and reused on the 2nd call
-    assert pb._BRAINS == {}               # the epoch-keyed cache is never touched by an epoch=None caller
+    # A3: Use EPOCH_OFFLINE_TEST explicitly for offline tests
+    pb.execute_producer_request(req, epoch=EPOCH_OFFLINE_TEST)
+    pb.execute_producer_request(req, epoch=EPOCH_OFFLINE_TEST)
+    # Both calls should construct exactly once and cache it (per epoch)
+    assert len(seen) == 1, f"Should construct once, got {len(seen)} constructions"
+    assert seen[0] == EPOCH_OFFLINE_TEST
+    # With offline epoch, uses the epoch-keyed cache
+    assert len(pb._BRAINS) == 1
 
 
 def test_execute_producer_request_epoch_keyed_cache_never_shares_across_epochs(monkeypatch):

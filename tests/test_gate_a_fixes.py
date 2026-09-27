@@ -37,15 +37,41 @@ class TestA3EpochHandling:
             require_epoch("not-an-epoch")
 
     def test_producer_brain_rejects_none_in_production(self):
-        """A3: ProducerBrain with epoch=None is only valid for backward compat."""
-        # This should NOT raise during init (backward compat for legacy code)
-        brain = ProducerBrain(epoch=None)
-        assert brain is not None
+        """A3: ProducerBrain(epoch=None) must fail in production."""
+        # ProducerBrain must reject None; no backward compat for unsafe defaults
+        with pytest.raises(ValueError, match="ProducerBrain requires explicit epoch"):
+            ProducerBrain(epoch=None)
 
     def test_producer_brain_accepts_valid_epoch(self):
         """A3: ProducerBrain(epoch=EPOCH_2_0_23) accepts valid epoch."""
         brain = ProducerBrain(epoch=EPOCH_2_0_23)
         assert brain is not None
+
+    def test_reference_reproduction_rejects_none_epoch(self):
+        """A3: run_reference_reproduction must reject epoch=None."""
+        from serum2.server.reference_reproduction import run_reference_reproduction
+        import tempfile
+        import json
+        from pathlib import Path
+
+        with tempfile.TemporaryDirectory() as tmp:
+            # Create minimal stage_a and reread files
+            stage_a = {"frames": []}
+            reread = {"rows": []}
+
+            p1 = Path(tmp) / "stage_a.json"
+            p2 = Path(tmp) / "reread.json"
+            p1.write_text(json.dumps(stage_a))
+            p2.write_text(json.dumps(reread))
+
+            # Must reject epoch=None
+            with pytest.raises(ValueError, match="requires explicit epoch"):
+                run_reference_reproduction(
+                    str(p1), str(p2),
+                    source={"video_id": "test"},
+                    name="test",
+                    epoch=None  # MUST FAIL
+                )
 
 
 class TestA1OperandSourcing:

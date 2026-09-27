@@ -434,11 +434,11 @@ class ProducerBrain:
         self._skill_retriever = skill_retriever
         self._prior_evidence = tuple(prior_evidence)
         self._grounding_claims = tuple(grounding_claims) if grounding_claims else ()
-        # A3: epoch=None is NOT valid in production; use EPOCH_OFFLINE_TEST for tests.
-        # require_epoch() fails closed on None. ContractRegistry itself already enforces
-        # epoch-aware contract selection (no implicit authority widening).
-        if epoch is not None:
-            require_epoch(epoch)
+        # A3: epoch MUST be provided; None is never valid in production.
+        # Use EPOCH_OFFLINE_TEST explicitly for tests; never rely on implicit defaults.
+        if epoch is None:
+            raise ValueError("ProducerBrain requires explicit epoch (use EPOCH_OFFLINE_TEST for offline tests, not None)")
+        require_epoch(epoch)
         self._registry = ContractRegistry(epoch=epoch, binding_evidence_dir=binding_evidence_dir,
                                           promoted_evidence_dir=promoted_evidence_dir)
         # Inject self._registry so RouteSelector uses the same epoch-aware store that
