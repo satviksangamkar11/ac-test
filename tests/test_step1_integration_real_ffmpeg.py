@@ -73,19 +73,21 @@ class TestRealFFmpegIntegration:
         Test 10: Real ffmpeg exhaustive acquisition proves complete decoder/artifact
         reconciliation with no gaps, duplicates, or stale files.
         """
-        # Setup
-        source_id = "test_int"
-        cache_dir = Path(tempfile.mkdtemp(prefix="cache_"))
-        temp_frames_dir = Path(tempfile.mkdtemp(prefix="temp_frames_"))
+        # Setup - use file:// URL for local video
+        source_url = tiny_test_video.as_uri()  # Convert to file:// URI
+        video_id = "test_int"
 
         try:
-            # Acquire with real ffmpeg
-            artifacts, completion = acquire_exhaustive(
-                video_path=str(tiny_test_video),
-                source_id=source_id,
-                cache_frames_dir=cache_dir,
-                temp_frames_dir=temp_frames_dir,
+            # Acquire with real ffmpeg via file URL
+            result = acquire_exhaustive(
+                source_url=source_url,
+                video_id=video_id,
+                force=True,
             )
+
+            # Extract completion status from result
+            completion = result
+            artifacts = result.get("frames", [])
 
             # All required completion fields must exist
             assert "is_complete" in completion
@@ -187,28 +189,25 @@ class TestRealFFmpegIntegration:
                 f"Frame indices not contiguous: expected {expected_indices}, got {actual_indices}"
 
         finally:
-            # Cleanup
-            if cache_dir.exists():
-                shutil.rmtree(cache_dir, ignore_errors=True)
-            if temp_frames_dir.exists():
-                shutil.rmtree(temp_frames_dir, ignore_errors=True)
+            pass  # No cleanup needed for file:// URLs
 
     def test_real_ffmpeg_proves_decoder_pts_from_metadata(self, tiny_test_video):
         """
         Test I: Manifest PTS values come from decoder metadata, not index/fps synthesis.
         Proves that timestamp_sec values are NOT calculated from frame_index/fps.
         """
-        source_id = "test_pts"
-        cache_dir = Path(tempfile.mkdtemp(prefix="cache_"))
-        temp_frames_dir = Path(tempfile.mkdtemp(prefix="temp_frames_"))
+        source_url = tiny_test_video.as_uri()  # Convert to file:// URI
+        video_id = "test_pts"
 
         try:
-            artifacts, completion = acquire_exhaustive(
-                video_path=str(tiny_test_video),
-                source_id=source_id,
-                cache_frames_dir=cache_dir,
-                temp_frames_dir=temp_frames_dir,
+            result = acquire_exhaustive(
+                source_url=source_url,
+                video_id=video_id,
+                force=True,
             )
+
+            completion = result
+            artifacts = result.get("frames", [])
 
             assert completion["is_complete"] is True
 
@@ -238,7 +237,4 @@ class TestRealFFmpegIntegration:
                 "decoder_pts_complete=False means PTS was not from decoder metadata"
 
         finally:
-            if cache_dir.exists():
-                shutil.rmtree(cache_dir, ignore_errors=True)
-            if temp_frames_dir.exists():
-                shutil.rmtree(temp_frames_dir, ignore_errors=True)
+            pass  # No cleanup needed for file:// URLs
