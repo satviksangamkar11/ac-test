@@ -110,6 +110,19 @@ See [SECOND_OPINION_AUDIT_2026-09-26.md](SECOND_OPINION_AUDIT_2026-09-26.md) for
 - `run_reference_reproduction()` — run object, proof level, coverage (but currently bypassed by F1/F7, being fixed in Phase 2)
 - Test suite: 1535 passing tests (all 27 environment-bound failures are expected)
 
+### BLOCKING SEAMS IN THE ONE-COMMAND RUNNER
+
+Four integration gaps block the canonical `python -m serum2.pipeline` path from completing on real data:
+
+| Seam | File | Issue | Status |
+|------|------|-------|--------|
+| **S1: REFERENCE_VERIFY** | `serum2/pipeline/runner.py:785` | Passes `reread_log_path=None` to `reference_reproduction()`, which immediately tries to load `Path(reread_log_path).read_text()` → crashes | **Needs: generate reread log before calling reference_reproduction** |
+| **S2: ARRANGEMENT** | `serum2/pipeline/runner.py:828` | Imports `from serum2.ableton.arrangement import create_16bar_arrangement` — module does not exist | **Needs: implement arrangement.py or provide fallback** |
+| **S3: RENDER VALIDATION** | `serum2/pipeline/runner.py:850+` | Must distinguish `render missing`, `render unreadable`, `render silent`, `render measurable`; cannot convert measurement failure into a numeric success value | **Needs: robust audio validation** |
+| **S4: NATIVE PROOF** | `serum2/pipeline/runner.py:1-end` | AWAITING_NATIVE_ENVIRONMENT boundary halts at OBSERVATION stage; LOCAL stages (NATIVE_LOAD, NATIVE_VERIFY, REFERENCE_VERIFY, ARRANGE, RENDER) cannot run on cloud | **By design — requires Windows + Serum 2.0.23 + Ableton; all CLOUD work must precede LOCAL** |
+
+The fastest path to product closure is **not proving additional controls**. It is: **fix S1, S2, S3 → re-run Gate B → fresh W2 → native reference verification → 16-bar Ableton render.**
+
 ### What is broken or missing (being fixed in subsequent phases)
 
 **PHASE 1 addressed:** Frame selection now universal (all 269 frames ingested); no more hardcoded `_TUTORIAL_CANDIDATE_WINDOWS` (was limiting to 6 controls × 3 frames = 15 attempts).
