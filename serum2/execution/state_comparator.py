@@ -154,12 +154,20 @@ def _binding_quality(ui_readback: Dict[str, Any]) -> str:
     """Classify how a UI readback was obtained.
 
     LOADER_BOUND         — carries complete loader_evidence (run_id, track_nonce, serum_module_sha256,
-                           epoch, screenshot_sha, crop_coords) with all required fields
+                           epoch, screenshot_sha, crop_coords) with all required fields AND valid content
     HEADLESS_DAWDREAMER  — A8: DawDreamer/headless evidence, never eligible for VERIFIED
     MANUALLY_READ        — has captured_at/serum/method metadata but no loader proof
     UNBOUND              — bare dict; rejected from LIVE_UI_VERIFIED
 
     A7: loader_evidence must include epoch and screenshot_sha for integrity binding to actual run.
+    All fields must have structurally valid content:
+    - run_id: non-empty string
+    - track_nonce: non-empty string
+    - serum_module_sha256: exactly 64 hexadecimal characters
+    - screenshot_sha: exactly 64 hexadecimal characters
+    - epoch: non-empty string
+    - crop_coords: exactly [x, y, w, h] with numeric finite non-negative values
+
     A8: DawDreamer evidence is labeled HEADLESS_DAWDREAMER and cannot reach VERIFIED.
     """
     # A8: Check for DawDreamer/headless marker first
@@ -170,10 +178,63 @@ def _binding_quality(ui_readback: Dict[str, Any]) -> str:
 
     if ui_readback.get("loader_evidence"):
         le = ui_readback["loader_evidence"]
-        # A7: Require all key fields for LOADER_BOUND classification (including crop_coords for screenshot integrity)
+        # A7: Require all key fields for LOADER_BOUND classification
         required_fields = {"run_id", "track_nonce", "serum_module_sha256", "epoch", "screenshot_sha", "crop_coords"}
-        if required_fields.issubset(le.keys()) and all(le.get(f) for f in required_fields):
-            return "LOADER_BOUND"
+        if not required_fields.issubset(le.keys()):
+            # Missing field
+            if ui_readback.get("captured_at") or ui_readback.get("serum") or ui_readback.get("method"):
+                return "MANUALLY_READ"
+            return "UNBOUND"
+
+        # A7: Validate content format (not just presence/truthiness)
+        run_id = le.get("run_id")
+        track_nonce = le.get("track_nonce")
+        sha256 = le.get("serum_module_sha256")
+        screenshot_sha = le.get("screenshot_sha")
+        epoch = le.get("epoch")
+        crop_coords = le.get("crop_coords")
+
+        # run_id: non-empty string
+        if not isinstance(run_id, str) or not run_id.strip():
+            return "MANUALLY_READ" if (ui_readback.get("captured_at") or ui_readback.get("serum")) else "UNBOUND"
+
+        # track_nonce: non-empty string
+        if not isinstance(track_nonce, str) or not track_nonce.strip():
+            return "MANUALLY_READ" if (ui_readback.get("captured_at") or ui_readback.get("serum")) else "UNBOUND"
+
+        # serum_module_sha256: exactly 64 hex characters
+        if not isinstance(sha256, str) or len(sha256) != 64:
+            return "MANUALLY_READ" if (ui_readback.get("captured_at") or ui_readback.get("serum")) else "UNBOUND"
+        try:
+            int(sha256, 16)  # Verify all characters are hex
+        except ValueError:
+            return "MANUALLY_READ" if (ui_readback.get("captured_at") or ui_readback.get("serum")) else "UNBOUND"
+
+        # screenshot_sha: exactly 64 hex characters
+        if not isinstance(screenshot_sha, str) or len(screenshot_sha) != 64:
+            return "MANUALLY_READ" if (ui_readback.get("captured_at") or ui_readback.get("serum")) else "UNBOUND"
+        try:
+            int(screenshot_sha, 16)  # Verify all characters are hex
+        except ValueError:
+            return "MANUALLY_READ" if (ui_readback.get("captured_at") or ui_readback.get("serum")) else "UNBOUND"
+
+        # epoch: non-empty string
+        if not isinstance(epoch, str) or not epoch.strip():
+            return "MANUALLY_READ" if (ui_readback.get("captured_at") or ui_readback.get("serum")) else "UNBOUND"
+
+        # crop_coords: exactly [x, y, w, h] with numeric values (not strings)
+        if not isinstance(crop_coords, list) or len(crop_coords) != 4:
+            return "MANUALLY_READ" if (ui_readback.get("captured_at") or ui_readback.get("serum")) else "UNBOUND"
+        # Check that ALL elements are numeric (int or float), not strings
+        if not all(isinstance(c, (int, float)) and not isinstance(c, bool) for c in crop_coords):
+            return "MANUALLY_READ" if (ui_readback.get("captured_at") or ui_readback.get("serum")) else "UNBOUND"
+        # Verify all are finite
+        if not all(-float('inf') < c < float('inf') for c in crop_coords):
+            return "MANUALLY_READ" if (ui_readback.get("captured_at") or ui_readback.get("serum")) else "UNBOUND"
+
+        # All validation passed
+        return "LOADER_BOUND"
+
     if ui_readback.get("captured_at") or ui_readback.get("serum") or ui_readback.get("method"):
         return "MANUALLY_READ"
     return "UNBOUND"

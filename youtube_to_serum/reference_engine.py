@@ -58,18 +58,54 @@ class NeedsStageACensus(RuntimeError):
 
 
 def stage_a_is_filled(skeleton_path: str) -> bool:
-    """A6: A skeleton counts as filled only when every serum_visible frame has terminal analysis_status.
+    """A6: A skeleton counts as filled only when EVERY manifest frame has terminal analysis_status.
 
     Terminal values: ANALYZED | NOT_SERUM | UNREADABLE | EQUIVALENT_TO:<frame_id>
-    A single analysed frame surrounded by un-touched frames (serum_visible=None) is NOT valid — every
-    frame where Serum was visible must have been explicitly analyzed and given a terminal status.
-    An all-not-serum-visible file returns False."""
+
+    Validates:
+    1. Every frame in manifest has valid terminal analysis_status (not None)
+    2. Each terminal value is one of the valid vocabulary
+    3. EQUIVALENT_TO:<target> references must exist (target frame_id exists)
+    4. No self-referencing equivalence (frame cannot be EQUIVALENT_TO itself)
+    5. Empty manifest returns False
+    """
     data = json.loads(Path(skeleton_path).read_text())
-    serum_frames = [f for f in data["frames"] if f.get("serum_visible") is True]
-    if not serum_frames:
+    frames = data.get("frames", [])
+
+    if not frames:
         return False
-    # A6: Check that EVERY serum_visible frame has a terminal analysis_status (not None)
-    return all(f.get("analysis_status") is not None for f in serum_frames)
+
+    # Valid terminal vocabulary
+    valid_terminals = {"ANALYZED", "NOT_SERUM", "UNREADABLE"}
+    # Normalize frame_ids to strings for comparison (frame_id may be int or str)
+    frame_ids = {str(f.get("frame_id")) for f in frames}
+
+    # A6: EVERY frame must have terminal analysis_status
+    for frame in frames:
+        status = frame.get("analysis_status")
+        frame_id = str(frame.get("frame_id"))
+
+        # Missing status = not filled
+        if status is None:
+            return False
+
+        # Check if status is valid terminal or EQUIVALENT_TO:*
+        if status in valid_terminals:
+            continue
+        elif isinstance(status, str) and status.startswith("EQUIVALENT_TO:"):
+            # Extract target frame_id
+            target_id = status.split(":", 1)[1]
+            # Target must exist in manifest (already normalized to string)
+            if target_id not in frame_ids:
+                return False
+            # Cannot self-reference
+            if target_id == frame_id:
+                return False
+        else:
+            # Invalid terminal status
+            return False
+
+    return True
 
 
 def run_stage1_acquire_and_prep(youtube_url: str, work_dir: Path) -> Dict[str, Any]:

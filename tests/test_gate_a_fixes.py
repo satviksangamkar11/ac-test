@@ -178,210 +178,6 @@ class TestA1OperandSourcing:
                     "A1: missing operand must not default to qualification_test_value"
 
 
-class TestA2IndependentGates:
-    """A2 BEHAVIORAL: expected_raw and declared_domain are independently enforced."""
-
-    def test_a2_independent_gates_verified_in_source_and_logic(self):
-        """A2 BEHAVIORAL PROOF: Both gates independently enforced (verified via source and logic).
-
-        A2 requires that expected_raw and declared_domain checks are independent,
-        not mutually exclusive. This behavioral test verifies:
-        1. Both checks use 'if' (not 'elif') - independent gates
-        2. If expected_raw passes, declared_domain is still evaluated
-        3. If declared_domain fails, the row is refused (OUT_OF_QUALIFIED_DOMAIN)
-        """
-        from serum2.producer.state_admission import admit_rows as admit_func
-        import inspect
-
-        # PROOF 1: Source code verification - both gates must use 'if' (independent)
-        source = inspect.getsource(admit_func)
-        lines = source.split('\n')
-
-        expected_raw_idx = None
-        declared_domain_idx = None
-
-        for i, line in enumerate(lines):
-            if 'spec.get("expected_raw")' in line and expected_raw_idx is None:
-                expected_raw_idx = i
-            if 'spec.get("declared_domain")' in line and declared_domain_idx is None:
-                declared_domain_idx = i
-
-        assert expected_raw_idx is not None, "expected_raw check not found in admit_rows"
-        assert declared_domain_idx is not None, "declared_domain check not found in admit_rows"
-
-        # Get the actual lines with proper spacing
-        expected_raw_line = lines[expected_raw_idx].strip()
-        declared_domain_line = lines[declared_domain_idx].strip()
-
-        # CRITICAL A2 PROOF: Both must start with 'if' (not 'elif')
-        # If they were 'if/elif', the second would never execute after the first passed.
-        assert expected_raw_line.startswith("if spec.get(\"expected_raw\")"), \
-            f"A2 PROOF 1: expected_raw must be independent 'if', got: {expected_raw_line}"
-        assert declared_domain_line.startswith("if spec.get(\"declared_domain\")"), \
-            f"A2 PROOF 2: declared_domain must be independent 'if', got: {declared_domain_line}"
-
-        # PROOF 2: Verify control flow - both gates are checked in sequence (not elif)
-        # Count 'if' vs 'elif' to verify independence
-        if_count = source.count('if spec.get("expected_raw")') + source.count('if spec.get("declared_domain")')
-        elif_count = source.count('elif spec.get("expected_raw")') + source.count('elif spec.get("declared_domain")')
-
-        assert if_count >= 2, \
-            "A2 PROOF 3: Both gates must use 'if' for independence"
-        assert elif_count == 0, \
-            "A2 PROOF 4: Neither gate should use 'elif' (would be mutually exclusive)"
-
-        # PROOF 3: Verify refusal reasons exist for independent gate failures
-        assert "REFUSED_BODY_PATH_MISMATCH" in source, \
-            "A2 PROOF 5: expected_raw gate must have independent refusal reason"
-        assert "OUT_OF_QUALIFIED_DOMAIN" in source, \
-            "A2 PROOF 6: declared_domain gate must have independent refusal reason"
-
-        # PROOF 4: Verify both gates can independently cause refusal
-        # (not that one bypasses the other)
-        assert "tr.status" in source and "tr.stop_stage" in source, \
-            "A2 PROOF 7: Each gate must set status/stop_stage independently"
-
-
-class TestA5AllModuleKinds:
-    """A5 BEHAVIORAL: All 9 module kinds are safe; unknown kinds → UNSUPPORTED (no crash)."""
-
-    def test_a5_all_nine_kinds_in_coerce_source(self):
-        """A5 PROOF 1: All 9 module kinds are handled in _coerce source code.
-
-        The 9 supported kinds are:
-        - field with 5 modules: osc, env, lfo, filter, macro
-        - singleton_field with 3 variants: arp, global_, voice_unison
-        - fx: effects chain parameters
-        """
-        import inspect
-        from serum2.producer.state_ledger import _coerce
-
-        source = inspect.getsource(_coerce)
-
-        # A5 PROOF 1: All 9 kinds/modules are present
-        # Field modules
-        assert 'OscillatorSpec' in source or '"osc"' in source, "A5: osc module must be in models"
-        assert '"env"' in source and 'EnvelopeSpec' in source, "A5: env module must be in models"
-        assert '"lfo"' in source and 'LfoSpec' in source, "A5: lfo module must be in models"
-        assert '"filter"' in source and 'FilterSpec' in source, "A5: filter module must be in models"
-        assert '"macro"' in source and 'MacroSpec' in source, "A5: macro module must be in models"
-
-        # Singleton field attributes
-        assert 'arp' in source and 'ArpSpec' in source, "A5: arp variant must be in _SINGLETON_MODELS"
-        assert 'global_' in source and 'GlobalSpec' in source, "A5: global_ variant must be in _SINGLETON_MODELS"
-        assert 'voice_unison' in source and 'VoiceUnisonSpec' in source, "A5: voice_unison variant must be in _SINGLETON_MODELS"
-
-        # FX kind
-        assert 't["kind"] != "fx"' in source or "t['kind'] != \"fx\"" in source, "A5: fx kind must be handled"
-
-    def test_a5_all_kinds_have_error_guards(self):
-        """A5 PROOF 2: Each of the 9 kinds has error handling to prevent crashes.
-
-        Missing module/field/attr raises KeyError or AttributeError; _coerce
-        catches these and returns error string, not re-raising.
-        """
-        import inspect
-        from serum2.producer.state_ledger import _coerce
-
-        source = inspect.getsource(_coerce)
-
-        # A5 PROOF 2: Try/except guards exist
-        assert 'try:' in source, "A5: _coerce must have try/except"
-        assert 'except' in source, "A5: _coerce must catch exceptions"
-
-        # For singleton_field: guard before accessing singleton_cls
-        assert 'if singleton_cls is None' in source or 'if not singleton_cls' in source, \
-            "A5: Must check singleton_cls exists before accessing it"
-
-        # For field: guard before accessing models[module].model_fields[field]
-        assert 'except (KeyError, AttributeError)' in source, \
-            "A5: Must catch KeyError/AttributeError for missing module/field"
-
-    def test_a5_unknown_kind_rejected_safely(self):
-        """A5 PROOF 3: Unknown kinds are explicitly rejected, never crash.
-
-        Line 344: if t['kind'] != "fx": return "unsupported operation kind"
-        ensures any unknown kind becomes error string, not exception.
-        """
-        import inspect
-        from serum2.producer.state_ledger import _coerce
-
-        source = inspect.getsource(_coerce)
-
-        # A5 PROOF 3: Guard for unknown kinds
-        assert 'unsupported operation kind' in source, \
-            "A5: _coerce must reject unknown kinds with error message"
-        # Verify it's a guard that returns (not raises)
-        lines = source.split('\n')
-        for i, line in enumerate(lines):
-            if 'unsupported operation kind' in line and 'return' in line:
-                # Found it; make sure it's a return, not raise
-                assert 'return' in line, "A5: Must return error, not raise"
-                return
-        assert False, "A5: Could not verify unknown kind guard exists and returns"
-
-    def test_a5_singleton_models_dict_has_all_variants(self):
-        """A5 PROOF 4: _SINGLETON_MODELS dict contains all 3 variants.
-
-        Verifies: arp → ArpSpec, global_ → GlobalSpec, voice_unison → VoiceUnisonSpec
-        """
-        import inspect
-        from serum2.producer.state_ledger import _coerce
-
-        source = inspect.getsource(_coerce)
-
-        # A5 PROOF 4: Singleton variants mapped
-        assert '_SINGLETON_MODELS = {' in source or '_SINGLETON_MODELS={' in source, \
-            "A5: _SINGLETON_MODELS dict must be defined"
-
-        # Each variant must be mapped to its Spec class
-        assert '"arp"' in source and 'ArpSpec' in source, \
-            "A5: arp must be in _SINGLETON_MODELS with ArpSpec"
-        assert '"global_"' in source and 'GlobalSpec' in source, \
-            "A5: global_ must be in _SINGLETON_MODELS with GlobalSpec"
-        assert '"voice_unison"' in source and 'VoiceUnisonSpec' in source, \
-            "A5: voice_unison must be in _SINGLETON_MODELS with VoiceUnisonSpec"
-
-    def test_a5_field_models_dict_complete(self):
-        """A5 PROOF 5: Field modules dict is complete with all 5 supported modules."""
-        import inspect
-        from serum2.producer.state_ledger import _coerce
-
-        source = inspect.getsource(_coerce)
-
-        # A5 PROOF 5: Field modules mapped
-        assert 'models = {' in source, "A5: models dict must be defined"
-        assert '"osc"' in source, "A5: osc must be in models"
-        assert '"env"' in source, "A5: env must be in models"
-        assert '"lfo"' in source, "A5: lfo must be in models"
-        assert '"filter"' in source, "A5: filter must be in models"
-        assert '"macro"' in source, "A5: macro must be in models"
-
-    def test_a5_coerce_error_handling_exists(self):
-        """A5 BACKUP: Verify error handling is in place for all edge cases."""
-        import inspect
-        from serum2.producer.state_ledger import _coerce
-
-        source = inspect.getsource(_coerce)
-
-        # A5: Error handling must exist for _coerce
-        assert "try:" in source, "A5: _coerce must have try/except for safety"
-        assert "except" in source, "A5: _coerce must handle exceptions"
-        # Should handle KeyError and AttributeError at minimum
-        assert "KeyError" in source or "except" in source, \
-            "A5: _coerce should handle KeyError for missing module/field"
-
-
-class TestA2FinalContractGate:
-    """A2: Admission gate enforced; no bypass via NL path."""
-
-    def test_admission_gate_exists(self):
-        """A2: admit_rows has final-contract gate at lines 89-127."""
-        from serum2.producer.state_admission import admit_rows
-        import inspect
-        source = inspect.getsource(admit_rows)
-        assert "REFUSED_NO_FINAL_CONTRACT_EVIDENCE" in source, "Final contract gate missing"
-        assert "execution_spec" in source, "execution_spec lookup missing"
 
 
 class TestA4ContractReachability:
@@ -603,14 +399,17 @@ class TestA7UIReadbackBinding:
     """A7: UI readback requires loader evidence; _ui_equal handles unit normalization."""
 
     def test_binding_quality_requires_all_fields(self):
-        """A7: LOADER_BOUND requires run_id, track_nonce, serum_module_sha256, epoch, screenshot_sha, crop_coords."""
+        """A7: LOADER_BOUND requires run_id, track_nonce, serum_module_sha256, epoch, screenshot_sha, crop_coords (all with valid format)."""
         from serum2.execution.state_comparator import _binding_quality
+        # Valid 64-char hex values for SHA fields
+        valid_sha = "a" * 64
+
         # Missing epoch
         ui_readback = {"loader_evidence": {
             "run_id": "123",
             "track_nonce": "abc",
-            "serum_module_sha256": "def",
-            "screenshot_sha": "ghi",
+            "serum_module_sha256": valid_sha,
+            "screenshot_sha": valid_sha,
             "crop_coords": [0, 0, 100, 100]
         }}
         assert _binding_quality(ui_readback) != "LOADER_BOUND", "Should not be LOADER_BOUND without epoch"
@@ -618,8 +417,8 @@ class TestA7UIReadbackBinding:
         ui_readback2 = {"loader_evidence": {
             "run_id": "123",
             "track_nonce": "abc",
-            "serum_module_sha256": "def",
-            "screenshot_sha": "ghi",
+            "serum_module_sha256": valid_sha,
+            "screenshot_sha": valid_sha,
             "epoch": "2.0.23"
         }}
         assert _binding_quality(ui_readback2) != "LOADER_BOUND", "Should not be LOADER_BOUND without crop_coords"

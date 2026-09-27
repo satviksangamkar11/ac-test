@@ -45,6 +45,8 @@ def gate_b_status(result, epoch=None) -> str:
       "CANONICAL_GATE_B_VERIFIED"  — full chain verified with bound native proof
       "NATIVE_STATE_PROOF"         — native execution verified but chain not fully bound
       "GATE_B_BLOCKED"             — execution was not completed or not accepted
+
+    A8: DawDreamer/headless evidence blocks CANONICAL_GATE_B_VERIFIED.
     """
     # Must be executed and accepted
     if getattr(result, "execution_status", None) != "EXECUTED":
@@ -65,6 +67,13 @@ def gate_b_status(result, epoch=None) -> str:
 
     # Check loader_evidence for module SHA binding
     ui_rb = spe.get("ui_readback") or {}
+
+    # A8: DawDreamer/headless evidence blocks CANONICAL_GATE_B_VERIFIED
+    if ui_rb.get("backend") and "DawDreamer" in str(ui_rb.get("backend")):
+        return "NATIVE_STATE_PROOF"
+    if ui_rb.get("is_headless") is True:
+        return "NATIVE_STATE_PROOF"
+
     le = ui_rb.get("loader_evidence") or {}
     module_sha = le.get("serum_module_sha256")
     if not module_sha:
@@ -132,11 +141,15 @@ def gate_b_certificate(result, epoch=None, *,
         else:
             operand_invariant_status = "OPERAND_INVARIANT_VERIFIED"
 
+    # A8: Derive headless evidence from actual ui_readback (not hardcoded False)
+    dawdreamer_used = ui_rb.get("backend") and "DawDreamer" in str(ui_rb.get("backend")) or False
+    headless_substitution_used = ui_rb.get("is_headless") is True or False
+
     cert: Dict[str, Any] = {
         "gate_b_status": effective_status,
         "native_evidence_source": "Windows/Ableton/Serum 2.0.23",
-        "dawdreamer_used": False,
-        "headless_substitution_used": False,
+        "dawdreamer_used": dawdreamer_used,
+        "headless_substitution_used": headless_substitution_used,
         # epoch
         "epoch": epoch.label if epoch is not None else None,
         "epoch_binary_sha256": epoch.binary_sha256 if epoch is not None else None,
