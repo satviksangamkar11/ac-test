@@ -21,6 +21,44 @@ from serum2.producer.contract_scope import bridge_index, find_contract, op_opera
 ROUTE_KEY = "serum.modulation_route.add"
 
 
+def validate_final_execution_gate(*, spec, contract, operand):
+    """Validate the final execution gate: expected_raw and declared_domain.
+
+    Returns one of:
+    - "REFUSED_NO_FINAL_CONTRACT_EVIDENCE" (spec is None)
+    - "REFUSED_CONFORMANCE_EXCEPTION" (spec classified as conformance exception)
+    - "REFUSED_BODY_PATH_MISMATCH" (expected_raw path != binding path)
+    - "OUT_OF_QUALIFIED_DOMAIN" (operand outside domain bounds)
+    - "ADMITTED" (all checks pass)
+    """
+    if spec is None:
+        return "REFUSED_NO_FINAL_CONTRACT_EVIDENCE"
+
+    if spec.get("final_execution_classification") == "MCP_EXEC_CONFORMANCE_EXCEPTION":
+        return "REFUSED_CONFORMANCE_EXCEPTION"
+
+    expected_raw = spec.get("expected_raw") or []
+    if expected_raw:
+        raw_path = expected_raw[0].get("path")
+        expected_path = ".".join(raw_path) if isinstance(raw_path, list) else raw_path
+        binding_path = getattr(contract.execution_binding, "body_path", None)
+        if expected_path and binding_path and expected_path != binding_path:
+            return "REFUSED_BODY_PATH_MISMATCH"
+
+    domain = spec.get("declared_domain") or {}
+    mn = domain.get("min")
+    mx = domain.get("max")
+    if mn is not None and mx is not None:
+        try:
+            value = float(operand)
+            if not float(mn) <= value <= float(mx):
+                return "OUT_OF_QUALIFIED_DOMAIN"
+        except (TypeError, ValueError):
+            return "OUT_OF_QUALIFIED_DOMAIN"
+
+    return "ADMITTED"
+
+
 def observed_body_state(rows: List[Row], cat) -> Dict[str, float]:
     """Directly observed field values keyed by body path, used ONLY to verify a contract's declared
     prerequisites against this video's own state (never to widen a contract's scope)."""
@@ -89,37 +127,27 @@ def admit_rows(rows: List[Row], epoch: ExecutionEpoch, binding_evidence_dir=None
                     # A2: final-contract gate — required for every real production epoch.
                     # Skipped only for offline/test epochs so the offline suite can run without evidence files.
                     if not is_offline_test(epoch):
-                        # execution_spec is keyed by Atlas atlas_id (e.g. "env2.decay"), not contract_key
                         spec = registry.execution_spec(r.control_id)
-                        if spec is None:
-                            tr.status, tr.stop_stage = "REFUSED_NO_FINAL_CONTRACT_EVIDENCE", "FINAL_CONTRACT"
-                            tr.detail = "no final execution contract evidence for %s on epoch %s" % (c.contract_key, epoch.label)
-                        elif spec.get("final_execution_classification") == "MCP_EXEC_CONFORMANCE_EXCEPTION":
-                            tr.status, tr.stop_stage = "REFUSED_CONFORMANCE_EXCEPTION", "FINAL_CONTRACT"
-                            tr.detail = "contract %s is a conformance exception; not executable" % c.contract_key
-                        if spec.get("expected_raw"):
-                            # expected_raw is a list of {path, value}; check the first path agrees
-                            raw_list = spec["expected_raw"]
-                            raw_path = raw_list[0]["path"] if raw_list else None
-                            # expected_raw path may be a list or a dot-notation string; normalise both
-                            first_path = ".".join(raw_path) if isinstance(raw_path, list) else raw_path
-                            binding_body = getattr(contract.execution_binding, "body_path", None)
-                            if first_path and binding_body and first_path != binding_body:
-                                tr.status, tr.stop_stage = "REFUSED_BODY_PATH_MISMATCH", "FINAL_CONTRACT"
+                        operand_val = o.get("value", o.get("amount"))
+                        gate_result = validate_final_execution_gate(spec=spec, contract=contract, operand=operand_val)
+                        if gate_result != "ADMITTED":
+                            tr.status, tr.stop_stage = gate_result, "FINAL_CONTRACT"
+                            if gate_result == "REFUSED_NO_FINAL_CONTRACT_EVIDENCE":
+                                tr.detail = "no final execution contract evidence for %s on epoch %s" % (c.contract_key, epoch.label)
+                            elif gate_result == "REFUSED_CONFORMANCE_EXCEPTION":
+                                tr.detail = "contract %s is a conformance exception; not executable" % c.contract_key
+                            elif gate_result == "REFUSED_BODY_PATH_MISMATCH":
+                                raw_list = (spec or {}).get("expected_raw", [])
+                                raw_path = raw_list[0].get("path") if raw_list else None
+                                first_path = ".".join(raw_path) if isinstance(raw_path, list) else raw_path
+                                binding_body = getattr(contract.execution_binding, "body_path", None)
                                 tr.detail = "body path in final contract (%r) != capability contract binding (%r)" % (
                                     first_path, binding_body)
-                        if spec.get("declared_domain"):
-                            val = o.get("value", o.get("amount"))
-                            d = spec["declared_domain"]
-                            mn, mx = d.get("min"), d.get("max")
-                            if val is not None and mn is not None and mx is not None:
-                                try:
-                                    if not (float(mn) <= float(val) <= float(mx)):
-                                        tr.status, tr.stop_stage = "OUT_OF_QUALIFIED_DOMAIN", "FINAL_CONTRACT"
-                                        tr.detail = "value %r outside qualified domain [%s, %s] for %s" % (
-                                            val, mn, mx, c.contract_key)
-                                except (TypeError, ValueError):
-                                    pass
+                            elif gate_result == "OUT_OF_QUALIFIED_DOMAIN":
+                                d = (spec or {}).get("declared_domain", {})
+                                mn, mx = d.get("min"), d.get("max")
+                                tr.detail = "value %r outside qualified domain [%s, %s] for %s" % (
+                                    operand_val, mn, mx, c.contract_key)
                     if tr.status == "PENDING":
                         tr.status = "ADMITTED"
                     o["capability"], o["contract_status"] = c.contract_key, contract.status
