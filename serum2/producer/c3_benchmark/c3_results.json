@@ -1,0 +1,344 @@
+{
+  "benchmark_version": "c3-1.0.0",
+  "commit_sha": "5d317896390d9238f69f5700b4d510b2f1404f1b",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct (local, 4-bit nf4, transformers)",
+  "gpu": "NVIDIA GeForce RTX 3050 6GB Laptop GPU",
+  "ocr_engine": "OCR_ENGINE_UNAVAILABLE",
+  "confident_threshold": 0.9,
+  "python": "3.14.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cases": [
+    {
+      "case_id": "real_bulk01_env1_decay",
+      "provenance": "REAL_W1_EVIDENCE",
+      "control_id": "env2.decay",
+      "ground_truth_value": 1.0,
+      "ground_truth_unit": "s",
+      "ground_truth_source": "screenshots/BULK_01_WAVETABLE_MAIN_env1_static.png",
+      "ground_truth_readable": true,
+      "raw_vlm_output": "20",
+      "vlm_numeric_parsed": 20.0,
+      "vlm_confidence": 0.3032924582560857,
+      "raw_ocr_output": "OCR_ENGINE_UNAVAILABLE",
+      "adjudicated_outcome": "AMBIGUOUS",
+      "adjudicated_value": 20.0,
+      "adjudicated_confidence": 0.3032924582560857,
+      "adjudicated_detail": "single source below confidence threshold (0.303 < 0.90)",
+      "exact_match": false,
+      "confident_wrong": false,
+      "abstained": true
+    },
+    {
+      "case_id": "real_cal06_env1_decay",
+      "provenance": "REAL_W1_EVIDENCE",
+      "control_id": "env2.decay",
+      "ground_truth_value": 1.0,
+      "ground_truth_unit": "s",
+      "ground_truth_source": "screenshots/CAL_06_FILTER_CUTOFF_global_static.png",
+      "ground_truth_readable": true,
+      "raw_vlm_output": "1.00 s",
+      "vlm_numeric_parsed": 1.0,
+      "vlm_confidence": 0.9439840515454611,
+      "raw_ocr_output": "OCR_ENGINE_UNAVAILABLE",
+      "adjudicated_outcome": "OBSERVED",
+      "adjudicated_value": 1.0,
+      "adjudicated_confidence": 0.9439840515454611,
+      "adjudicated_detail": "single source admitted (confidence >= 0.90)",
+      "exact_match": true,
+      "confident_wrong": false,
+      "abstained": false
+    },
+    {
+      "case_id": "real_missing_filter1_cutoff_tooltip",
+      "provenance": "REAL_MISSING_EVIDENCE",
+      "control_id": "filter1.cutoff",
+      "ground_truth_value": null,
+      "ground_truth_readable": false,
+      "raw_vlm_output": null,
+      "raw_ocr_output": "OCR_ENGINE_UNAVAILABLE",
+      "adjudicated_outcome": "UNREADABLE",
+      "adjudicated_value": null,
+      "adjudicated_confidence": 0.0,
+      "adjudicated_detail": "no crop evidence was ever persisted for this control (see W1 labels.json)",
+      "exact_match": false,
+      "confident_wrong": false,
+      "abstained": true,
+      "note": "The tooltip value 'Filter 1 Freq: 172 Hz' WAS observed live through the interactive computer-use automation channel (press-and-hold on the Filter 1 cutoff knob). However, three independent attempts to reproduce that same press-and-hold state from a separate PowerShell process (mouse_event, then SendInput, with and without SetForegroundWindow) never triggered the tooltip in a screen capture taken from that process -- the synthetic input from the scripting channel does not appear to reach the plugin GUI's hit-testing the same way the interactive automation channel's input does. No value or hash was fabricated for this failed capture; the live-observed string is recorded as an unverified/unpersisted observation only, separate from the two confirmed captures above."
+    },
+    {
+      "case_id": "synthetic_ambiguous_numeric_split",
+      "provenance": "SYNTHETIC",
+      "description": "VLM and OCR disagree on a numeric value with both above threshold -- must resolve AMBIGUOUS, not average or pick one.",
+      "control_id": "synthetic.filter1.cutoff",
+      "ground_truth_value": 172.0,
+      "ground_truth_readable": true,
+      "input_candidates": [
+        {
+          "value": 172.0,
+          "confidence": 0.95,
+          "source": "vlm",
+          "outcome": "CANDIDATE"
+        },
+        {
+          "value": 612.0,
+          "confidence": 0.93,
+          "source": "ocr",
+          "outcome": "CANDIDATE"
+        }
+      ],
+      "adjudicated_outcome": "AMBIGUOUS",
+      "adjudicated_value": null,
+      "adjudicated_confidence": 0.0,
+      "adjudicated_detail": "split: [172.0, 612.0]",
+      "exact_match": false,
+      "confident_wrong": false,
+      "abstained": true
+    },
+    {
+      "case_id": "synthetic_wrong_ocr_correct_vlm_agree_fails",
+      "provenance": "SYNTHETIC",
+      "description": "OCR misreads digits; VLM is correct. Sources disagree -> must abstain (AMBIGUOUS), not silently trust VLM.",
+      "control_id": "synthetic.env1.attack",
+      "ground_truth_value": 5.0,
+      "ground_truth_readable": true,
+      "input_candidates": [
+        {
+          "value": 5.0,
+          "confidence": 0.92,
+          "source": "vlm",
+          "outcome": "CANDIDATE"
+        },
+        {
+          "value": 8.0,
+          "confidence": 0.91,
+          "source": "ocr",
+          "outcome": "CANDIDATE"
+        }
+      ],
+      "adjudicated_outcome": "AMBIGUOUS",
+      "adjudicated_value": null,
+      "adjudicated_confidence": 0.0,
+      "adjudicated_detail": "split: [5.0, 8.0]",
+      "exact_match": false,
+      "confident_wrong": false,
+      "abstained": true
+    },
+    {
+      "case_id": "synthetic_wrong_vlm_high_confidence",
+      "provenance": "SYNTHETIC",
+      "description": "The critical safety case: a single VLM source is confidently WRONG (>= CONFIDENT_THRESHOLD). Policy must not admit a single overconfident wrong source as fact -- this case is the direct test of the confident-wrong gate.",
+      "control_id": "synthetic.env2.release",
+      "ground_truth_value": 15.0,
+      "ground_truth_readable": true,
+      "input_candidates": [
+        {
+          "value": 1500.0,
+          "confidence": 0.97,
+          "source": "vlm",
+          "outcome": "CANDIDATE"
+        }
+      ],
+      "adjudicated_outcome": "OBSERVED",
+      "adjudicated_value": 1500.0,
+      "adjudicated_confidence": 0.97,
+      "adjudicated_detail": "single source admitted (confidence >= 0.90)",
+      "exact_match": false,
+      "confident_wrong": true,
+      "abstained": false
+    },
+    {
+      "case_id": "synthetic_correct_unit_format_difference",
+      "provenance": "SYNTHETIC",
+      "description": "Two sources agree on the numeric value but format units differently upstream (both already normalized to the same unit by the NUMERIC strategy before adjudication) -- must still resolve OBSERVED.",
+      "control_id": "synthetic.env1.decay",
+      "ground_truth_value": 1.0,
+      "ground_truth_readable": true,
+      "input_candidates": [
+        {
+          "value": 1.0,
+          "confidence": 0.94,
+          "source": "vlm",
+          "outcome": "CANDIDATE"
+        },
+        {
+          "value": 1.0,
+          "confidence": 0.9,
+          "source": "ocr",
+          "outcome": "CANDIDATE"
+        }
+      ],
+      "adjudicated_outcome": "OBSERVED",
+      "adjudicated_value": 1.0,
+      "adjudicated_confidence": 0.94,
+      "adjudicated_detail": "multi-source agreement (2 candidates)",
+      "exact_match": true,
+      "confident_wrong": false,
+      "abstained": false
+    },
+    {
+      "case_id": "synthetic_boolean_state_agree",
+      "provenance": "SYNTHETIC",
+      "description": "Boolean/toggle state (filter enabled) with agreeing sources -- must resolve OBSERVED with the correct ON/OFF value, not a numeric coercion.",
+      "control_id": "synthetic.filter1.enabled",
+      "ground_truth_value": "ON",
+      "ground_truth_readable": true,
+      "input_candidates": [
+        {
+          "value": "ON",
+          "confidence": 1.0,
+          "source": "vlm",
+          "outcome": "CANDIDATE"
+        },
+        {
+          "value": "ON",
+          "confidence": 1.0,
+          "source": "ocr",
+          "outcome": "CANDIDATE"
+        }
+      ],
+      "adjudicated_outcome": "OBSERVED",
+      "adjudicated_value": "ON",
+      "adjudicated_confidence": 1.0,
+      "adjudicated_detail": "multi-source agreement (2 candidates)",
+      "exact_match": true,
+      "confident_wrong": false,
+      "abstained": false
+    },
+    {
+      "case_id": "synthetic_enum_mode_wrong_single_source_high_conf",
+      "provenance": "SYNTHETIC",
+      "description": "Single-source enum/mode read, confidently WRONG mode name (LFO shape). Must not be admitted as fact from one overconfident source.",
+      "control_id": "synthetic.lfo1.shape",
+      "ground_truth_value": "random_sh",
+      "ground_truth_readable": true,
+      "input_candidates": [
+        {
+          "value": "rossler",
+          "confidence": 0.96,
+          "source": "vlm",
+          "outcome": "CANDIDATE"
+        }
+      ],
+      "adjudicated_outcome": "OBSERVED",
+      "adjudicated_value": "rossler",
+      "adjudicated_confidence": 0.96,
+      "adjudicated_detail": "single source admitted (confidence >= 0.90)",
+      "exact_match": false,
+      "confident_wrong": true,
+      "abstained": false
+    },
+    {
+      "case_id": "synthetic_identity_mismatch_env1_vs_env2",
+      "provenance": "SYNTHETIC",
+      "description": "VLM answers with the RIGHT value but for the WRONG control identity (env1.decay instead of the requested env2.decay) -- exercises the requirement that a correct-looking number for a substituted parameter must not be accepted as this control's observation. Modeled here as a wrong value against the REQUESTED control's ground truth, since the adjudicator has no cross-control identity check of its own -- surfaced as a genuine architecture gap, not papered over.",
+      "control_id": "env2.decay",
+      "ground_truth_value": 5.0,
+      "ground_truth_readable": true,
+      "input_candidates": [
+        {
+          "value": 1.0,
+          "confidence": 0.95,
+          "source": "vlm_answered_env1_not_env2",
+          "outcome": "CANDIDATE"
+        }
+      ],
+      "adjudicated_outcome": "OBSERVED",
+      "adjudicated_value": 1.0,
+      "adjudicated_confidence": 0.95,
+      "adjudicated_detail": "single source admitted (confidence >= 0.90)",
+      "exact_match": false,
+      "confident_wrong": true,
+      "abstained": false
+    },
+    {
+      "case_id": "synthetic_all_sources_unreadable",
+      "provenance": "SYNTHETIC",
+      "description": "Both VLM and OCR fail to produce a candidate (e.g. occluded/blank crop) -- must resolve UNREADABLE, never a fabricated numeric fallback.",
+      "control_id": "synthetic.matrix.amount",
+      "ground_truth_value": null,
+      "ground_truth_readable": false,
+      "input_candidates": [
+        {
+          "value": null,
+          "confidence": 0.0,
+          "source": "vlm",
+          "outcome": "UNREADABLE"
+        },
+        {
+          "value": null,
+          "confidence": 0.0,
+          "source": "ocr",
+          "outcome": "UNREADABLE"
+        }
+      ],
+      "adjudicated_outcome": "UNREADABLE",
+      "adjudicated_value": null,
+      "adjudicated_confidence": 0.0,
+      "adjudicated_detail": "all candidates unreadable",
+      "exact_match": false,
+      "confident_wrong": false,
+      "abstained": true
+    },
+    {
+      "case_id": "synthetic_low_confidence_single_source_correct_value",
+      "provenance": "SYNTHETIC",
+      "description": "Single source happens to have the numerically correct value but confidence is below threshold -- must abstain (AMBIGUOUS) even though the value itself is right; correctness is not sufficient without confidence.",
+      "control_id": "synthetic.oscA.detune",
+      "ground_truth_value": 0.32,
+      "ground_truth_readable": true,
+      "input_candidates": [
+        {
+          "value": 0.32,
+          "confidence": 0.55,
+          "source": "vlm",
+          "outcome": "CANDIDATE"
+        }
+      ],
+      "adjudicated_outcome": "AMBIGUOUS",
+      "adjudicated_value": 0.32,
+      "adjudicated_confidence": 0.55,
+      "adjudicated_detail": "single source below confidence threshold (0.550 < 0.90)",
+      "exact_match": false,
+      "confident_wrong": false,
+      "abstained": true
+    }
+  ],
+  "aggregate": {
+    "total_cases": 12,
+    "exact_match": {
+      "numerator": 3,
+      "denominator": 12,
+      "rate": 0.25
+    },
+    "confident_wrong": {
+      "numerator": 3,
+      "denominator": 12,
+      "rate": 0.25
+    },
+    "abstention": {
+      "numerator": 6,
+      "denominator": 12,
+      "rate": 0.5
+    },
+    "real_evidence_only": {
+      "total": 3,
+      "readable_total": 2,
+      "exact_match": 1,
+      "confident_wrong": 0,
+      "abstained": 2
+    },
+    "synthetic_only": {
+      "total": 9,
+      "exact_match": 2,
+      "confident_wrong": 3,
+      "abstained": 4
+    }
+  },
+  "integration_decision": {
+    "integrated": false,
+    "status": "NOT_INTEGRATED_INSUFFICIENT_REAL_EVIDENCE",
+    "reason": "Only 2 real, readable W1 ground-truth samples exist (n=2). A confident-wrong rate of 0/2 real cases is consistent with a true rate anywhere up to roughly 1-(0.05)^(1/2) (~78% at n=2) under a standard binomial worst-case bound -- far too wide a confidence interval to certify 'safe to authorize mutations'. Zero real confident-wrong results is a necessary but nowhere near sufficient condition at this sample size. Production mutation authority (Gate A/B, the A2 final-contract gate, 2.0.23 epoch enforcement, admit_rows()) is left completely unchanged; no observation output from this benchmark is wired into any mutation path.",
+    "real_readable_n": 2,
+    "real_confident_wrong_count": 0
+  }
+}

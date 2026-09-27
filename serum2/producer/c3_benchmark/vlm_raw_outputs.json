@@ -1,0 +1,29 @@
+[
+  {
+    "control_id": "env2.decay",
+    "image": "parameter_characterization/vlm_ground_truth/crops/BULK_01_WAVETABLE_MAIN_env1_crop.png",
+    "raw_vlm_output": "20",
+    "mean_token_prob": 0.3032924582560857,
+    "per_token_probs": [
+      0.1802963763475418,
+      0.32698526978492737,
+      0.40259572863578796
+    ],
+    "inference_seconds": 1.8190441131591797
+  },
+  {
+    "control_id": "env2.decay_cal06",
+    "image": "parameter_characterization/vlm_ground_truth/crops/CAL_06_env1_crop.png",
+    "raw_vlm_output": "1.00 s",
+    "mean_token_prob": 0.9439840515454611,
+    "per_token_probs": [
+      0.9537815451622009,
+      0.7909973859786987,
+      0.9995311498641968,
+      0.9925359487533569,
+      0.9332597255706787,
+      0.993798553943634
+    ],
+    "inference_seconds": 0.6152102947235107
+  }
+]
