@@ -176,6 +176,55 @@ class EpisodeContextResolver:
         return None
 
 
+def resolve_observation_type(canonical_id: str):
+    """Look up observation kind and strategy for a control ID via the frozen Atlas.
+
+    UNIVERSAL ARCHITECTURE: Does NOT use parameter-name string matching.
+    canonical_id + Atlas lookup -> (observation_kind, strategy). Module-level so any
+    caller needing "what ObservationEngine strategy applies to this control" (not only
+    ExpectedInventoryBuilder) can reuse the identical, single-source-of-truth mapping
+    instead of re-deriving or hardcoding it.
+
+    Returns: (observation_kind, strategy), or (None, None) when the Atlas cannot resolve
+    this control -- never an invented default.
+    """
+    try:
+        # normalize_control() returns a Resolution object (status, canonical_id, candidates,
+        # raw), never a plain string -- passing it directly to get_control(control_id: str)
+        # silently returns None (dict-key lookup miss, no exception), which every caller of
+        # this function has always misread as "Atlas cannot resolve this control." That made
+        # resolve_observation_type() return (None, None) for EVERY control, unconditionally,
+        # since this function was written. Fixed: use the resolution's own .canonical_id, and
+        # only trust an EXACT/ALIAS resolution (an AMBIGUOUS or UNRESOLVED one is correctly
+        # still "cannot resolve", not a guessed canonical id).
+        from serum2.reference.serum_atlas import EXACT, ALIAS
+        resolution = normalize_control(canonical_id)
+        if resolution.status not in (EXACT, ALIAS):
+            return (None, None)
+        control = get_control(resolution.canonical_id)
+        if not control:
+            return (None, None)
+
+        element_kind = getattr(control, 'element_kind', None)
+
+        if element_kind == "CONTROL":
+            return ("NUMERIC", "NUMERIC")
+        elif element_kind == "SELECTOR":
+            return ("ENUM", "ENUM")
+        elif element_kind == "ENABLE_STATE":
+            return ("ENABLE_STATE", "ENABLE_STATE")
+        elif element_kind == "ROUTE":
+            return ("ROUTE", "ROUTE_TEXT")
+        elif element_kind in ("GRAPH", "CURVE"):
+            return ("GRAPH_DERIVED", "GRAPH_DERIVED")
+        elif element_kind == "TEXT_IDENTITY":
+            return ("TEXT", "TEXT")
+        else:
+            return (None, None)
+    except Exception:
+        return (None, None)
+
+
 class ExpectedInventoryBuilder:
     """Builds immutable ExpectedInventory from Atlas + episode context.
 
@@ -248,53 +297,11 @@ class ExpectedInventoryBuilder:
     def _resolve_observation_type(self, canonical_id: str) -> tuple:
         """Look up observation kind and strategy for a control ID via frozen Atlas.
 
-        UNIVERSAL ARCHITECTURE: Does NOT use parameter-name string matching.
-        Instead: canonical_id + Atlas lookup → observation_kind + strategy
-
-        Returns: (observation_kind, strategy)
-
-        Atlas import is canonical (module-level). If unavailable, that is
-        a configuration error that should be caught at startup, not here.
+        Delegates to the module-level resolve_observation_type() (single source of truth,
+        also used by universal_frame_observer.py's adjudication so both consult the
+        identical Atlas-derived mapping rather than two independently-maintained copies).
         """
-        try:
-            # Normalize the canonical_id (removes aliases, ensures canonical form)
-            normalized_id = normalize_control(canonical_id)
-
-            # Look up the control in the frozen Atlas
-            control = get_control(normalized_id)
-
-            if not control:
-                # Atlas cannot resolve this control — explicit UNRESOLVED, not invented strategy
-                return (None, None)
-
-            # Derive observation strategy from Atlas element_kind
-            element_kind = getattr(control, 'element_kind', None)
-
-            if element_kind == "CONTROL":
-                # Continuous parameter
-                return ("NUMERIC", "NUMERIC")
-            elif element_kind == "SELECTOR":
-                # Enum/categorical value
-                return ("ENUM", "ENUM")
-            elif element_kind == "ENABLE_STATE":
-                # Checkbox/toggle
-                return ("ENABLE_STATE", "ENABLE_STATE")
-            elif element_kind == "ROUTE":
-                # Modulation routing
-                return ("ROUTE", "ROUTE_TEXT")
-            elif element_kind in ("GRAPH", "CURVE"):
-                # Visual/derived state
-                return ("GRAPH_DERIVED", "GRAPH_DERIVED")
-            elif element_kind == "TEXT_IDENTITY":
-                # Text label
-                return ("TEXT", "TEXT")
-            else:
-                # Unmapped element kind in Atlas — explicit UNRESOLVED, not invented
-                return (None, None)
-
-        except Exception:
-            # Atlas lookup failed — explicit UNRESOLVED, not invented strategy
-            return (None, None)
+        return resolve_observation_type(canonical_id)
 
 
 class CompletenessValidator:

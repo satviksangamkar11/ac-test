@@ -136,6 +136,7 @@ class ObservationCensus:
             outcome = getattr(adj, "outcome", "UNREADABLE")
             value = getattr(adj, "value", None)
             scalar_value = _flatten_value(value)
+            unit = _value_unit(value)
             evidence_hash = getattr(adj, "evidence_hash", "") or ""
             single_source = getattr(adj, "single_source", True)
             metrics.append({
@@ -145,6 +146,11 @@ class ObservationCensus:
                 "evidence_hash": evidence_hash,
                 "adjudicated_outcome": outcome,
                 "adjudicated_value": scalar_value,
+                # NUMERIC strategy's normalized_value is (num, unit); _flatten_value() above
+                # keeps only num for a plain scalar reading. The unit is preserved here
+                # (never silently dropped) so a downstream Row can be built with its real
+                # unit -- state_ledger.derive()'s unit conversion needs it to be correct.
+                "adjudicated_unit": unit,
                 "adjudicated_confidence": getattr(adj, "confidence", 0.0),
                 "adjudicated_detail": getattr(adj, "detail", ""),
                 "adjudicated_evidence_hash": evidence_hash,
@@ -188,6 +194,14 @@ def _flatten_value(value: Any) -> Any:
     if isinstance(value, tuple) and len(value) == 2:
         return value[0]
     return value
+
+
+def _value_unit(value: Any) -> Optional[str]:
+    """The unit half of a NUMERIC strategy's (num, unit) normalized_value, or None for
+    every other strategy (whose adjudicated_value is already a plain scalar/string)."""
+    if isinstance(value, tuple) and len(value) == 2:
+        return value[1]
+    return None
 
 
 class FrameObservationCensus:
@@ -482,6 +496,7 @@ class FrameObservationCensus:
             OUTCOME_CANDIDATE, adjudicate,
         )
         from serum2.producer.observation_engine import ObservationEngine
+        from serum2.producer.expected_inventory import resolve_observation_type
 
         # Group by control_id
         by_control: Dict[str, List[ResolvedFinding]] = {}
@@ -493,6 +508,20 @@ class FrameObservationCensus:
         results: Dict[str, Any] = {}
 
         for control_id, rfs in by_control.items():
+            # Which ObservationEngine strategy actually applies to THIS control, from the
+            # same Atlas-derived mapping expected_inventory.py uses -- never hardcoded to
+            # NUMERIC. A toggle (ENABLE_STATE), an enum (SELECTOR), or a route (ROUTE) would
+            # previously be force-fed through numeric parsing and silently fail to observe at
+            # all; an Atlas-unresolvable control_id is explicit UNREADABLE, never guessed.
+            _obs_kind, strategy = resolve_observation_type(control_id)
+            if strategy is None:
+                from serum2.producer.observation_policy import ObservationCandidate as PC
+                results[control_id] = PC(
+                    outcome="UNREADABLE", control_id=control_id,
+                    detail="control_id not resolvable in Atlas; no observation strategy",
+                )
+                continue
+
             seen_hashes: set = set()
             policy_candidates: List[PolicyCandidate] = []
 
@@ -506,8 +535,7 @@ class FrameObservationCensus:
 
                 ctx = {
                     "control_id": control_id,
-                    "element_kind": "CONTROL",
-                    "control_type": "continuous",
+                    "force_strategy": strategy,
                     "roi_hash": f.evidence_hash,
                     "vlm_source": f.source_type == "vlm",
                 }

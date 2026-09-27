@@ -482,6 +482,49 @@ def _stage_observation(manifest: RunManifest, run_dir: Path) -> StageRecord:
     return rec
 
 
+def _row_from_metric(m: Dict[str, Any]):
+    """Build a real state_ledger.Row from one c3_observation_metrics.json metric entry and
+    run it through the real derive() -- the ONLY correct way to turn an adjudicated
+    observation into a ledger row.
+
+    state_ledger.derive(row, tempo) mutates `row` in place and returns None; it does NOT
+    take (control_id, value) and does NOT return a Row. Calling it that way (as this
+    function replaces) raises AttributeError on every single call, which every call site
+    here previously caught with a bare `except Exception: pass` -- silently producing zero
+    ledger rows regardless of what OBSERVATION actually found. Generic across every
+    control_id; no per-control branch.
+
+    Route-kind observations (control_id starting with "route:") need state_ledger.
+    derive_route(), a different function requiring source/destination context this
+    observation schema does not yet carry (ROUTE_TEXT's normalized_value is deferred,
+    always None today) -- skipped explicitly rather than mis-called.
+
+    Returns the derived Row if terminal == OPERATION_DERIVED, else None (never fabricated).
+    """
+    from serum2.producer.state_ledger import Row, derive
+
+    control_id = m["control_id"]
+    if control_id.startswith("route:"):
+        return None  # derive_route() needs source/destination context not yet captured here
+
+    row = Row(
+        control_id=control_id,
+        value=m.get("adjudicated_value"),
+        unit=m.get("adjudicated_unit"),
+        status="OBSERVED",
+        control_type="control",
+        source_ts=float(m.get("timestamp_sec", 0.0) or 0.0),
+        n_readings=1,
+        changed_from_previous=False,
+        context={},
+    )
+    try:
+        derive(row, tempo=None)
+    except Exception:
+        return None
+    return row if row.terminal == "OPERATION_DERIVED" else None
+
+
 # ---------------------------------------------------------------------------
 # Stage: LEDGER
 # ---------------------------------------------------------------------------
@@ -520,15 +563,11 @@ def _stage_ledger(manifest: RunManifest, run_dir: Path) -> StageRecord:
             and m["control_id"] in covered
         ]
 
-        from serum2.producer.state_ledger import derive
         rows = []
         for m in admissible_metrics:
-            try:
-                row = derive(m["control_id"], m["adjudicated_value"])
-                if row is not None:
-                    rows.append(row)
-            except Exception as e:
-                pass  # unsupported kind — recorded in ledger output
+            row = _row_from_metric(m)
+            if row is not None:
+                rows.append(row)
 
         ledger_path = run_dir / "ledger_rows.json"
         ledger_path.parent.mkdir(parents=True, exist_ok=True)
@@ -577,7 +616,6 @@ def _stage_admission(manifest: RunManifest, run_dir: Path) -> StageRecord:
     try:
         from serum2.producer.state_admission import admit_rows
         from serum2.producer.execution_epoch import installed_epoch
-        from serum2.producer.state_ledger import derive
 
         # Re-derive rows from observation metrics (stateless approach)
         obs_path = manifest.stage_record("OBSERVATION").outputs.get("observation_path")
@@ -592,14 +630,7 @@ def _stage_admission(manifest: RunManifest, run_dir: Path) -> StageRecord:
             and m["control_id"] in covered
         ]
 
-        rows = []
-        for m in admissible_metrics:
-            try:
-                row = derive(m["control_id"], m["adjudicated_value"])
-                if row is not None:
-                    rows.append(row)
-            except Exception:
-                pass
+        rows = [r for r in (_row_from_metric(m) for m in admissible_metrics) if r is not None]
 
         if not rows:
             rec.mark_failed(
@@ -611,8 +642,12 @@ def _stage_admission(manifest: RunManifest, run_dir: Path) -> StageRecord:
             return rec
 
         epoch = installed_epoch()
+        # admit_rows()'s returned per-row diagnostic dicts key the outcome as "status"
+        # (matching Row.admission's value), never "admission" -- that key does not exist
+        # on this dict, so `a.get("admission")` always returned None here before this fix,
+        # making admitted_count always 0 regardless of real admission outcomes.
         admitted = admit_rows(rows, epoch=epoch)
-        admitted_count = sum(1 for a in admitted if a.get("admission") == "ADMITTED")
+        admitted_count = sum(1 for a in admitted if a.get("status") == "ADMITTED")
 
         admission_path = run_dir / "admitted_rows.json"
         with open(admission_path, "w") as f:
@@ -659,7 +694,6 @@ def _stage_compile(manifest: RunManifest, run_dir: Path, run_name: str) -> Stage
     try:
         from serum2.producer.state_admission import admit_rows
         from serum2.producer.execution_epoch import installed_epoch
-        from serum2.producer.state_ledger import derive
         from serum2.execution.authorized_state_compiler import compile_ops, ops_from_rows
 
         obs_path = manifest.stage_record("OBSERVATION").outputs.get("observation_path")
@@ -672,11 +706,13 @@ def _stage_compile(manifest: RunManifest, run_dir: Path, run_name: str) -> Stage
             if m.get("adjudicated_outcome") == "OBSERVED" and m["control_id"] in covered
         ]
 
-        rows = [derive(m["control_id"], m["adjudicated_value"]) for m in admissible_metrics
-                if derive(m["control_id"], m["adjudicated_value"]) is not None]
+        rows = [r for r in (_row_from_metric(m) for m in admissible_metrics) if r is not None]
         epoch = installed_epoch()
-        admitted = admit_rows(rows, epoch=epoch)
-        admitted_rows_only = [a for a in admitted if a.get("admission") == "ADMITTED"]
+        # admit_rows() mutates each Row in place (.admission, .op) and returns a SEPARATE list
+        # of plain diagnostic dicts -- ops_from_rows() needs the real, mutated Row objects
+        # (it reads r.op/r.terminal), never that returned dict list.
+        admit_rows(rows, epoch=epoch)
+        admitted_rows_only = [r for r in rows if r.admission == "ADMITTED"]
 
         if not admitted_rows_only:
             rec.mark_failed("No rows passed admission gate — cannot compile")
