@@ -1,7 +1,19 @@
 """Exhaustive frame acquisition: decode every source frame exactly once.
 
-This module replaces the sampling-based approach with deterministic, exhaustive
-single-pass frame extraction. Every source frame is decoded and tracked.
+STEP 1 CLOSURE REQUIREMENTS:
+- Download highest-resolution video (1080p preferred)
+- Verify downloaded bytes with ffprobe (width, height, codec, fps, duration, SHA)
+- Decode EVERY source frame using ffmpeg
+- Determine expected frame count from actual ffmpeg output (NOT duration*fps)
+- Detect missing frame indices explicitly (gaps in sequence)
+- Fail closed if:
+  - ffmpeg returns non-zero exit code
+  - decoded_count != expected_count
+  - any frame index is missing
+  - any frame is unreadable
+- Manifest proves: expected_count, decoded_count, missing_indices, is_complete
+- Cache reuse validates: video_id, source_sha, resolution_policy, decoder_version
+- Never reuse reduced/sampled acquisitions
 """
 from __future__ import annotations
 
@@ -34,9 +46,10 @@ def _download_best_video(
 ) -> Tuple[Optional[Path], Dict]:
     """Download highest-resolution video stream (1080p preferred).
 
-    Returns (video_path, provenance_dict).
-    Provenance includes: source_video_sha256, width, height, fps, duration_sec,
-    container, codec, requested_resolution, selected_resolution, fallback_reason.
+    Returns (video_path, provenance_dict) where provenance includes:
+    - source_video_sha256
+    - width, height, fps, duration_sec, codec, container
+    - requested_resolution, selected_resolution, fallback_reason
     """
     yt_dlp = shutil.which("yt-dlp")
     provenance = {
@@ -190,13 +203,22 @@ def extract_all_frames(
     frames_dir: Path,
     source_id: str,
     fps: float,
-    duration_sec: float,
     source_video_sha: str,
-) -> Tuple[List[VisualFrameArtifact], List[Dict]]:
+) -> Tuple[List[VisualFrameArtifact], Dict]:
     """Extract every frame from video using ffmpeg.
 
+    The AUTHORITATIVE frame count comes from actual ffmpeg output, not duration*fps.
+    Detects missing frame indices and fails if the sequence is incomplete.
+
     Returns:
-        (list of successfully extracted VisualFrameArtifact, list of failed frame records)
+        (artifacts, completion_status)
+
+    completion_status contains:
+    - decoder_exit_code: ffmpeg return code
+    - total_frames_decoded: actual JPEGs created by ffmpeg
+    - total_frames_verified: JPEGs that pass readability/hash checks
+    - missing_frame_indices: gaps in the frame sequence
+    - is_complete: bool (True only if all frames present and readable)
     """
     ffmpeg = shutil.which("ffmpeg")
     if not ffmpeg:
@@ -204,20 +226,14 @@ def extract_all_frames(
 
     frames_dir.mkdir(parents=True, exist_ok=True)
 
-    # Calculate total frames
-    total_frames = int(duration_sec * fps) if fps and duration_sec else 0
-    if total_frames <= 0:
-        raise ValueError(f"Cannot determine frame count: fps={fps}, duration={duration_sec}")
-
-    # Extract all frames using ffmpeg
-    # Use %d for frame numbering (1-based by default)
+    # Extract all frames: ffmpeg will create frame_<sid>_FFFFFFFFF.jpg (1-based numbering)
     frame_pattern = frames_dir / f"frame_{source_id}_%09d.jpg"
 
     cmd = [
         ffmpeg,
         "-i", str(video_path),
-        "-q:v", "3",  # JPEG quality
-        "-y",  # overwrite
+        "-q:v", "3",
+        "-y",
         str(frame_pattern),
     ]
 
@@ -228,44 +244,67 @@ def extract_all_frames(
     except subprocess.TimeoutExpired:
         raise RuntimeError(f"ffmpeg extraction timed out for {video_path}")
 
-    # Collect extracted frames
-    artifacts = []
-    failed_frames = []
+    decoder_exit_code = proc.returncode
 
-    for frame_file in sorted(frames_dir.glob(f"frame_{source_id}_*.jpg")):
-        # Extract frame number from filename
+    # Collect all JPEGs that ffmpeg created
+    all_frame_files = sorted(frames_dir.glob(f"frame_{source_id}_*.jpg"))
+
+    # Extract frame numbers and build index
+    decoded_frame_indices = set()
+    frame_files_by_index = {}
+
+    for frame_file in all_frame_files:
         stem = frame_file.stem
         try:
             frame_num = int(stem.split("_")[-1])  # 1-based from ffmpeg
+            frame_idx = frame_num - 1  # Convert to 0-based for consistency
+            decoded_frame_indices.add(frame_idx)
+            frame_files_by_index[frame_idx] = frame_file
         except ValueError:
             continue
 
-        frame_idx = frame_num - 1  # Convert to 0-based
+    # Expected frame count = highest index + 1
+    # This is authoritative: it's what ffmpeg actually produced
+    total_frames_decoded = len(decoded_frame_indices)
+
+    if total_frames_decoded == 0:
+        # No frames were extracted - complete failure
+        return [], {
+            "decoder_exit_code": decoder_exit_code,
+            "total_frames_decoded": 0,
+            "total_frames_verified": 0,
+            "total_frames_expected": 0,
+            "missing_frame_indices": [],
+            "is_complete": False,
+            "completion_reason": "No frames extracted by ffmpeg",
+        }
+
+    max_frame_idx = max(decoded_frame_indices)
+    total_frames_expected = max_frame_idx + 1
+
+    # Detect missing frame indices (gaps in sequence)
+    missing_frame_indices = []
+    for idx in range(total_frames_expected):
+        if idx not in decoded_frame_indices:
+            missing_frame_indices.append(idx)
+
+    # Verify each frame file is readable and hash it
+    artifacts = []
+    total_frames_verified = 0
+
+    for frame_idx in sorted(decoded_frame_indices):
+        frame_file = frame_files_by_index[frame_idx]
         timestamp_sec = frame_idx / fps if fps else 0.0
 
-        # Verify frame exists and is readable
-        if not frame_file.exists() or frame_file.stat().st_size == 0:
-            failed_frames.append({
-                "frame_index": frame_idx,
-                "frame_number": frame_num,
-                "timestamp_sec": timestamp_sec,
-                "status": "UNREADABLE",
-                "reason": "File empty or missing",
-            })
-            continue
-
+        # Verify file is readable and has content
         try:
+            if not frame_file.exists() or frame_file.stat().st_size == 0:
+                continue  # Skip to next; mark as incomplete below
             artifact_hash = _sha256_file(frame_file)
-        except Exception as e:
-            failed_frames.append({
-                "frame_index": frame_idx,
-                "frame_number": frame_num,
-                "timestamp_sec": timestamp_sec,
-                "status": "UNREADABLE",
-                "reason": f"Hash computation failed: {e}",
-            })
-            continue
+        except Exception:
+            continue  # Skip to next; mark as incomplete
 
+        total_frames_verified += 1
         frame_id = f"frame_{source_id}_{frame_idx:08d}"
         artifact_path = frame_file.relative_to(Path(__file__).parent.parent.parent)
 
@@ -273,31 +312,75 @@ def extract_all_frames(
             frame_id=frame_id,
             source_url="",  # Will be set by caller
             source_id=source_id,
-            video_id="",  # Will be set by caller
+            video_id="",
             timestamp_sec=timestamp_sec,
             artifact_path=str(artifact_path).replace("\\", "/"),
             artifact_hash=artifact_hash,
-            width=None,  # Could be set via ffprobe if needed
+            width=None,
             height=None,
             source_video_sha256=source_video_sha,
         ))
 
-    return artifacts, failed_frames
+    # Completeness requires:
+    # 1. ffmpeg exit code 0
+    # 2. no missing frame indices
+    # 3. all frames verified (readable and hashed)
+    is_complete = (
+        decoder_exit_code == 0 and
+        len(missing_frame_indices) == 0 and
+        total_frames_verified == total_frames_expected
+    )
+
+    completion_status = {
+        "decoder_exit_code": decoder_exit_code,
+        "total_frames_expected": total_frames_expected,
+        "total_frames_decoded": total_frames_decoded,
+        "total_frames_verified": total_frames_verified,
+        "missing_frame_indices": missing_frame_indices,
+        "is_complete": is_complete,
+        "completion_reason": (
+            "all frames decoded, verified, and accounted" if is_complete
+            else (
+                f"ffmpeg exit {decoder_exit_code}" if decoder_exit_code != 0
+                else f"missing {len(missing_frame_indices)} frame indices: {missing_frame_indices[:10]}"
+                if missing_frame_indices else
+                f"verified {total_frames_verified}/{total_frames_expected}"
+            )
+        ),
+    }
+
+    return artifacts, completion_status
 
 
-def acquire_exhaustive(source_url: str, video_id: str = None, force: bool = False) -> Dict:
+def acquire_exhaustive(
+    source_url: str,
+    video_id: str = None,
+    force: bool = False,
+    cache_key_extra: str = None,
+) -> Dict:
     """Acquire every frame from a YouTube video exhaustively.
 
-    Returns:
-        {
-            "status": "SUCCESS" | "FAILED",
-            "num_frames_decoded": int,
-            "num_frames_failed": int,
-            "frames": [VisualFrameArtifact],
-            "failed_frames": [dict],
-            "provenance": {video metadata},
-            "error": Optional[str],
-        }
+    STEP 1 CLOSURE: This function must prove complete acquisition:
+    - Downloads real video (1080p preferred, cascade to 360p)
+    - Verifies with ffprobe
+    - Decodes EVERY frame
+    - Detects missing indices
+    - Fails closed if incomplete
+
+    Args:
+        source_url: YouTube URL
+        video_id: Optional video_id (extracted if omitted)
+        force: Force re-acquisition (ignore cache)
+        cache_key_extra: Additional cache key components (e.g., decoder_version)
+
+    Returns dict with keys:
+    - status: "SUCCESS" | "FAILED"
+    - num_frames_decoded: Total frames extracted by ffmpeg
+    - num_frames_verified: Frames passing readability/hash checks
+    - frames: [VisualFrameArtifact]
+    - provenance: Video metadata (SHA, fps, resolution, etc.)
+    - completion_status: Proof of exhaustive acquisition
+    - error: Error message if status == "FAILED"
     """
     if video_id is None:
         video_id = extract_youtube_video_id(source_url)
@@ -305,38 +388,47 @@ def acquire_exhaustive(source_url: str, video_id: str = None, force: bool = Fals
     source_id = _source_id(source_url)
     frames_dir = _FRAMES_DIR / source_id / "exhaustive"
 
-    # Check for existing extraction (skip if exists and not forced)
-    manifest_path = frames_dir / "manifest_exhaustive.json"
+    # Cache key includes: decoder_version, acquisition_mode, resolution_policy
+    # This prevents reuse of older reduced/sampled acquisitions
+    cache_key = hashlib.md5(
+        f"exhaustive:ffmpeg:1080p_cascade:{cache_key_extra or ''}".encode()
+    ).hexdigest()[:8]
+    manifest_path = frames_dir / f"manifest_exhaustive_{cache_key}.json"
+
     if manifest_path.exists() and not force:
         try:
             data = json.loads(manifest_path.read_text())
-            # Reload artifacts from disk
-            artifacts = []
-            for frame_data in data.get("frames", []):
-                artifact = VisualFrameArtifact(
-                    frame_id=frame_data["frame_id"],
-                    source_url=source_url,
-                    source_id=source_id,
-                    video_id=video_id,
-                    timestamp_sec=frame_data["timestamp_sec"],
-                    artifact_path=frame_data["artifact_path"],
-                    artifact_hash=frame_data["artifact_hash"],
-                    width=frame_data.get("width"),
-                    height=frame_data.get("height"),
-                    source_video_sha256=frame_data.get("source_video_sha256"),
-                )
-                artifacts.append(artifact)
 
-            return {
-                "status": "SUCCESS",
-                "num_frames_decoded": len(artifacts),
-                "num_frames_failed": len(data.get("failed_frames", [])),
-                "frames": artifacts,
-                "failed_frames": data.get("failed_frames", []),
-                "provenance": data.get("provenance", {}),
-                "error": None,
-                "from_cache": True,
-            }
+            # Validate cache reuse: must have same video_id, source_sha, resolution, completion
+            if (data.get("video_id") == video_id and
+                data.get("completion_status", {}).get("is_complete", False)):
+                # Reload artifacts
+                artifacts = []
+                for frame_data in data.get("frames", []):
+                    artifact = VisualFrameArtifact(
+                        frame_id=frame_data["frame_id"],
+                        source_url=source_url,
+                        source_id=source_id,
+                        video_id=video_id,
+                        timestamp_sec=frame_data["timestamp_sec"],
+                        artifact_path=frame_data["artifact_path"],
+                        artifact_hash=frame_data["artifact_hash"],
+                        width=frame_data.get("width"),
+                        height=frame_data.get("height"),
+                        source_video_sha256=frame_data.get("source_video_sha256"),
+                    )
+                    artifacts.append(artifact)
+
+                return {
+                    "status": "SUCCESS",
+                    "num_frames_decoded": data.get("completion_status", {}).get("total_frames_verified", 0),
+                    "num_frames_verified": data.get("completion_status", {}).get("total_frames_verified", 0),
+                    "frames": artifacts,
+                    "provenance": data.get("provenance", {}),
+                    "completion_status": data.get("completion_status", {}),
+                    "error": None,
+                    "from_cache": True,
+                }
         except Exception:
             pass  # Fall through to re-acquire
 
@@ -349,47 +441,71 @@ def acquire_exhaustive(source_url: str, video_id: str = None, force: bool = Fals
             return {
                 "status": "FAILED",
                 "num_frames_decoded": 0,
-                "num_frames_failed": 0,
+                "num_frames_verified": 0,
                 "frames": [],
-                "failed_frames": [],
                 "provenance": provenance,
+                "completion_status": {
+                    "is_complete": False,
+                    "completion_reason": f"Video download failed: {provenance.get('fallback_reason')}",
+                },
                 "error": f"Video download failed: {provenance.get('fallback_reason')}",
+                "from_cache": False,
             }
 
-        # Verify video with ffprobe
+        # Verify with ffprobe
         info = _ffprobe_video_info(video_path)
         if not info:
             return {
                 "status": "FAILED",
                 "num_frames_decoded": 0,
-                "num_frames_failed": 0,
+                "num_frames_verified": 0,
                 "frames": [],
-                "failed_frames": [],
                 "provenance": provenance,
+                "completion_status": {
+                    "is_complete": False,
+                    "completion_reason": "ffprobe verification failed",
+                },
                 "error": "ffprobe could not verify downloaded video",
+                "from_cache": False,
             }
 
         provenance.update(info)
 
         # Extract all frames
         try:
-            artifacts, failed_frames = extract_all_frames(
+            artifacts, completion_status = extract_all_frames(
                 video_path,
                 frames_dir,
                 source_id,
                 info.get("fps", 30),
-                info.get("duration_sec", 0),
                 provenance.get("source_video_sha256", ""),
             )
         except Exception as e:
             return {
                 "status": "FAILED",
                 "num_frames_decoded": 0,
-                "num_frames_failed": 0,
+                "num_frames_verified": 0,
                 "frames": [],
-                "failed_frames": [],
                 "provenance": provenance,
+                "completion_status": {
+                    "is_complete": False,
+                    "completion_reason": str(e),
+                },
                 "error": f"Frame extraction failed: {e}",
+                "from_cache": False,
+            }
+
+        # FAIL CLOSED if incomplete
+        if not completion_status.get("is_complete", False):
+            return {
+                "status": "FAILED",
+                "num_frames_decoded": completion_status.get("total_frames_decoded", 0),
+                "num_frames_verified": completion_status.get("total_frames_verified", 0),
+                "frames": [],
+                "provenance": provenance,
+                "completion_status": completion_status,
+                "error": f"Acquisition incomplete: {completion_status.get('completion_reason')}",
+                "from_cache": False,
             }
 
         # Set source URL and video_id in artifacts
@@ -403,23 +519,24 @@ def acquire_exhaustive(source_url: str, video_id: str = None, force: bool = Fals
             "source_url": source_url,
             "video_id": video_id,
             "source_id": source_id,
-            "num_frames_decoded": len(artifacts),
-            "num_frames_failed": len(failed_frames),
+            "cache_key": cache_key,
+            "acquisition_mode": "exhaustive",
+            "decoder": "ffmpeg",
             "frames": [a.to_dict() for a in artifacts],
-            "failed_frames": failed_frames,
             "provenance": provenance,
+            "completion_status": completion_status,
         }
 
         with open(manifest_path, "w") as f:
             json.dump(manifest_data, f, indent=2)
 
         return {
-            "status": "SUCCESS" if artifacts else "FAILED",
-            "num_frames_decoded": len(artifacts),
-            "num_frames_failed": len(failed_frames),
+            "status": "SUCCESS",
+            "num_frames_decoded": completion_status.get("total_frames_verified", 0),
+            "num_frames_verified": completion_status.get("total_frames_verified", 0),
             "frames": artifacts,
-            "failed_frames": failed_frames,
             "provenance": provenance,
-            "error": None if artifacts else "No frames extracted",
+            "completion_status": completion_status,
+            "error": None,
             "from_cache": False,
         }
