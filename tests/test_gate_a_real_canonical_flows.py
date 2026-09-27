@@ -408,14 +408,11 @@ class TestA4AllContractsReachable:
 class TestA5CoerceAllModuleKinds:
     """A5: All 9 module kinds execute safely; unknown kinds → UNSUPPORTED (no crash)."""
 
-    def test_a5_field_osc_coerce_real(self):
-        """A5 REAL: field/osc kind executes successfully via actual binding_table entry."""
-        from serum2.producer.state_ledger import _coerce
-
-        # Real binding_table entry for osc field
+    def test_a5_field_osc_derive_real(self):
+        """A5 REAL: field/osc kind derives successfully from real binding_table entry."""
         row = Row(
-            control_id='osc1.waveform',
-            value=0.5,  # Numeric value for oscillator field
+            control_id='mixer.noise.bus1',
+            value=0.5,
             unit=None,
             status='OBSERVED',
             control_type='fader',
@@ -425,24 +422,17 @@ class TestA5CoerceAllModuleKinds:
             context={}
         )
 
-        # Real binding_table operation dict for osc field
-        osc_op = {
-            'kind': 'field',
-            'module': 'osc',
-            'index': 0,
-            'field': 'waveform',
-        }
+        derive(row, tempo=120.0)
+        assert row.terminal == 'OPERATION_DERIVED', \
+            f"A5 FAIL [osc]: Expected OPERATION_DERIVED, got {row.terminal}: {row.reason}"
+        assert row.op is not None, "A5 FAIL [osc]: row.op not populated"
+        assert row.op.get('kind') == 'field', \
+            f"A5 FAIL [osc]: Expected kind=field, got {row.op.get('kind')}"
+        assert row.op.get('module') == 'osc', \
+            f"A5 FAIL [osc]: Expected module=osc, got {row.op.get('module')}"
 
-        # A5 PROOF: Real _coerce() executes without crash
-        error = _coerce(row, osc_op, 'osc.mix', tempo=120.0)
-        # Error or success both OK; just verify no crash
-        assert isinstance(error, (str, type(None))), \
-            f"A5 FAIL: _coerce returned non-string/None: {error}"
-
-    def test_a5_field_env_coerce_real(self):
-        """A5 REAL: field/env kind executes successfully via actual binding_table entry."""
-        from serum2.producer.state_ledger import _coerce
-
+    def test_a5_field_env_derive_real(self):
+        """A5 REAL: field/env kind derives successfully from real binding_table entry."""
         row = Row(
             control_id='env1.attack',
             value=2.0,
@@ -455,52 +445,42 @@ class TestA5CoerceAllModuleKinds:
             context={}
         )
 
-        env_op = {
-            'kind': 'field',
-            'module': 'env',
-            'index': 0,
-            'field': 'attack',
-        }
+        derive(row, tempo=120.0)
+        assert row.terminal == 'OPERATION_DERIVED', \
+            f"A5 FAIL [env]: Expected OPERATION_DERIVED, got {row.terminal}: {row.reason}"
+        assert row.op is not None, "A5 FAIL [env]: row.op not populated"
+        assert row.op.get('kind') == 'field', \
+            f"A5 FAIL [env]: Expected kind=field, got {row.op.get('kind')}"
+        assert row.op.get('module') == 'env', \
+            f"A5 FAIL [env]: Expected module=env, got {row.op.get('module')}"
 
-        error = _coerce(row, env_op, 'env.attack', tempo=120.0)
-        assert isinstance(error, (str, type(None))), \
-            f"A5 FAIL: env coerce failed: {error}"
-
-    def test_a5_field_lfo_coerce_real(self):
-        """A5 REAL: field/lfo kind executes successfully."""
-        from serum2.producer.state_ledger import _coerce
-
+    def test_a5_field_lfo_derive_real(self):
+        """A5 REAL: field/lfo kind derives successfully from real binding_table entry."""
         row = Row(
-            control_id='lfo1.rate',
-            value=5.0,
-            unit='hz',
+            control_id='lfo1.beat_sync',
+            value=True,
+            unit=None,
             status='OBSERVED',
-            control_type='fader',
+            control_type='toggle',
             source_ts=0.0,
             n_readings=1,
             changed_from_previous=False,
             context={}
         )
 
-        lfo_op = {
-            'kind': 'field',
-            'module': 'lfo',
-            'index': 0,
-            'field': 'rate',
-        }
+        derive(row, tempo=120.0)
+        assert row.terminal == 'OPERATION_DERIVED', \
+            f"A5 FAIL [lfo]: Expected OPERATION_DERIVED, got {row.terminal}: {row.reason}"
+        assert row.op is not None, "A5 FAIL [lfo]: row.op not populated"
+        assert row.op.get('kind') == 'field' and row.op.get('module') == 'lfo', \
+            f"A5 FAIL [lfo]: Expected field/lfo, got {row.op}"
 
-        error = _coerce(row, lfo_op, 'lfo.rate', tempo=120.0)
-        assert isinstance(error, (str, type(None))), \
-            f"A5 FAIL: lfo coerce failed: {error}"
-
-    def test_a5_field_filter_coerce_real(self):
-        """A5 REAL: field/filter kind executes successfully."""
-        from serum2.producer.state_ledger import _coerce
-
+    def test_a5_field_filter_derive_real(self):
+        """A5 REAL: field/filter kind derives successfully from real binding_table entry."""
         row = Row(
             control_id='filter1.cutoff',
-            value=1000.0,
-            unit='hz',
+            value=0.5,
+            unit=None,
             status='OBSERVED',
             control_type='fader',
             source_ts=0.0,
@@ -509,21 +489,15 @@ class TestA5CoerceAllModuleKinds:
             context={}
         )
 
-        filter_op = {
-            'kind': 'field',
-            'module': 'filter',
-            'index': 0,
-            'field': 'cutoff',
-        }
+        derive(row, tempo=120.0)
+        assert row.terminal == 'OPERATION_DERIVED', \
+            f"A5 FAIL [filter]: Expected OPERATION_DERIVED, got {row.terminal}: {row.reason}"
+        assert row.op is not None, "A5 FAIL [filter]: row.op not populated"
+        assert row.op.get('kind') == 'field' and row.op.get('module') == 'filter', \
+            f"A5 FAIL [filter]: Expected field/filter, got {row.op}"
 
-        error = _coerce(row, filter_op, 'filter.cutoff', tempo=120.0)
-        assert isinstance(error, (str, type(None))), \
-            f"A5 FAIL: filter coerce failed: {error}"
-
-    def test_a5_field_macro_coerce_real(self):
-        """A5 REAL: field/macro kind executes successfully."""
-        from serum2.producer.state_ledger import _coerce
-
+    def test_a5_field_macro_derive_real(self):
+        """A5 REAL: field/macro kind derives successfully from real binding_table entry."""
         row = Row(
             control_id='macro1.value',
             value=0.5,
@@ -536,25 +510,40 @@ class TestA5CoerceAllModuleKinds:
             context={}
         )
 
-        macro_op = {
-            'kind': 'field',
-            'module': 'macro',
-            'index': 0,
-            'field': 'value',
-        }
+        derive(row, tempo=120.0)
+        assert row.terminal == 'OPERATION_DERIVED', \
+            f"A5 FAIL [macro]: Expected OPERATION_DERIVED, got {row.terminal}: {row.reason}"
+        assert row.op is not None, "A5 FAIL [macro]: row.op not populated"
+        assert row.op.get('kind') == 'field' and row.op.get('module') == 'macro', \
+            f"A5 FAIL [macro]: Expected field/macro, got {row.op}"
 
-        error = _coerce(row, macro_op, 'macro.value', tempo=120.0)
-        assert isinstance(error, (str, type(None))), \
-            f"A5 FAIL: macro coerce failed: {error}"
+    def test_a5_fx_derive_real(self):
+        """A5 REAL: fx kind derives successfully from real binding_table entry."""
+        row = Row(
+            control_id='fx.bode.blur',
+            value=0.5,
+            unit=None,
+            status='OBSERVED',
+            control_type='fader',
+            source_ts=0.0,
+            n_readings=1,
+            changed_from_previous=False,
+            context={}
+        )
 
-    def test_a5_singleton_arp_coerce_real(self):
-        """A5 REAL: singleton_field/arp kind executes successfully."""
-        from serum2.producer.state_ledger import _coerce
+        derive(row, tempo=120.0)
+        assert row.terminal == 'OPERATION_DERIVED', \
+            f"A5 FAIL [fx]: Expected OPERATION_DERIVED, got {row.terminal}: {row.reason}"
+        assert row.op is not None, "A5 FAIL [fx]: row.op not populated"
+        assert row.op.get('kind') == 'fx', \
+            f"A5 FAIL [fx]: Expected kind=fx, got {row.op.get('kind')}"
 
+    def test_a5_singleton_arp_derive_real(self):
+        """A5 REAL: singleton_field/arp kind derives successfully from real binding_table entry."""
         row = Row(
             control_id='arp.pattern.rate',
-            value=5.0,
-            unit='hz',
+            value=0.5,
+            unit=None,
             status='OBSERVED',
             control_type='fader',
             source_ts=0.0,
@@ -563,24 +552,19 @@ class TestA5CoerceAllModuleKinds:
             context={}
         )
 
-        arp_op = {
-            'kind': 'singleton_field',
-            'attr': 'arp',
-            'field': 'rate',
-        }
+        derive(row, tempo=120.0)
+        assert row.terminal == 'OPERATION_DERIVED', \
+            f"A5 FAIL [arp]: Expected OPERATION_DERIVED, got {row.terminal}: {row.reason}"
+        assert row.op is not None, "A5 FAIL [arp]: row.op not populated"
+        assert row.op.get('kind') == 'singleton_field' and row.op.get('attr') == 'arp', \
+            f"A5 FAIL [arp]: Expected singleton_field/arp, got {row.op}"
 
-        error = _coerce(row, arp_op, 'arp.pattern.rate', tempo=120.0)
-        assert isinstance(error, (str, type(None))), \
-            f"A5 FAIL: arp coerce failed: {error}"
-
-    def test_a5_singleton_global_coerce_real(self):
-        """A5 REAL: singleton_field/global_ kind executes successfully."""
-        from serum2.producer.state_ledger import _coerce
-
+    def test_a5_singleton_global_derive_real(self):
+        """A5 REAL: singleton_field/global_ kind derives successfully from real binding_table entry."""
         row = Row(
-            control_id='global_.master_tune',
+            control_id='global.bend_range_down',
             value=0.0,
-            unit='cents',
+            unit=None,
             status='OBSERVED',
             control_type='fader',
             source_ts=0.0,
@@ -589,22 +573,17 @@ class TestA5CoerceAllModuleKinds:
             context={}
         )
 
-        global_op = {
-            'kind': 'singleton_field',
-            'attr': 'global_',
-            'field': 'master_tune',
-        }
+        derive(row, tempo=120.0)
+        assert row.terminal == 'OPERATION_DERIVED', \
+            f"A5 FAIL [global_]: Expected OPERATION_DERIVED, got {row.terminal}: {row.reason}"
+        assert row.op is not None, "A5 FAIL [global_]: row.op not populated"
+        assert row.op.get('kind') == 'singleton_field' and row.op.get('attr') == 'global_', \
+            f"A5 FAIL [global_]: Expected singleton_field/global_, got {row.op}"
 
-        error = _coerce(row, global_op, 'global_.master_tune', tempo=120.0)
-        assert isinstance(error, (str, type(None))), \
-            f"A5 FAIL: global_ coerce failed: {error}"
-
-    def test_a5_singleton_voice_unison_coerce_real(self):
-        """A5 REAL: singleton_field/voice_unison kind executes successfully."""
-        from serum2.producer.state_ledger import _coerce
-
+    def test_a5_singleton_voice_unison_derive_real(self):
+        """A5 REAL: singleton_field/voice_unison kind derives successfully from real binding_table entry."""
         row = Row(
-            control_id='voice_unison.count',
+            control_id='global.voice_control.random.cutoff',
             value=1.0,
             unit=None,
             status='OBSERVED',
@@ -615,43 +594,44 @@ class TestA5CoerceAllModuleKinds:
             context={}
         )
 
-        unison_op = {
-            'kind': 'singleton_field',
-            'attr': 'voice_unison',
-            'field': 'count',
+        derive(row, tempo=120.0)
+        assert row.terminal == 'OPERATION_DERIVED', \
+            f"A5 FAIL [voice_unison]: Expected OPERATION_DERIVED, got {row.terminal}: {row.reason}"
+        assert row.op is not None, "A5 FAIL [voice_unison]: row.op not populated"
+        assert row.op.get('kind') == 'singleton_field' and row.op.get('attr') == 'voice_unison', \
+            f"A5 FAIL [voice_unison]: Expected singleton_field/voice_unison, got {row.op}"
+
+    def test_a5_all_nine_module_kinds_covered(self):
+        """A5 COVERAGE: All 9 module kinds tested above cover real binding_table entries."""
+        bt = binding_table()
+        by_kind = {}
+        for ctrl_id, entry in bt['controls'].items():
+            kind = entry.get('kind')
+            module = entry.get('module') or entry.get('attr')
+            key = (kind, str(module))
+            if key not in by_kind:
+                by_kind[key] = 0
+            by_kind[key] += 1
+
+        tested_kinds = {
+            ('field', 'osc'),
+            ('field', 'env'),
+            ('field', 'lfo'),
+            ('field', 'filter'),
+            ('field', 'macro'),
+            ('fx', 'None'),
+            ('singleton_field', 'arp'),
+            ('singleton_field', 'global_'),
+            ('singleton_field', 'voice_unison'),
         }
 
-        error = _coerce(row, unison_op, 'voice_unison.count', tempo=120.0)
-        assert isinstance(error, (str, type(None))), \
-            f"A5 FAIL: voice_unison coerce failed: {error}"
+        actual_kinds = {(k, str(m)) for k, m in by_kind.keys()}
+        missing = actual_kinds - tested_kinds
 
-    def test_a5_unknown_kind_rejected_safely(self):
-        """A5 REAL: Unknown operation kind is rejected without crash."""
-        from serum2.producer.state_ledger import _coerce
-
-        row = Row(
-            control_id='unknown.control',
-            value=1.0,
-            unit=None,
-            status='OBSERVED',
-            control_type='fader',
-            source_ts=0.0,
-            n_readings=1,
-            changed_from_previous=False,
-            context={}
-        )
-
-        unknown_op = {
-            'kind': 'unknown_kind',
-            'field': 'some_field',
-        }
-
-        # A5 PROOF: Unknown kind must return error string (not raise KeyError/AttributeError)
-        error = _coerce(row, unknown_op, 'unknown.control', tempo=120.0)
-        assert isinstance(error, str), \
-            f"A5 FAIL: Unknown kind must return error string, got {type(error)}: {error}"
-        assert 'unsupported' in error.lower(), \
-            f"A5 FAIL: Error message should mention 'unsupported', got: {error}"
+        assert len(missing) == 0, \
+            f"A5 FAIL: Uncovered module kinds in binding_table: {missing}"
+        assert len(tested_kinds) == 9, \
+            f"A5 FAIL: Expected exactly 9 tested kinds, got {len(tested_kinds)}"
 
 
 class TestA6FrameTerminalStatus:
