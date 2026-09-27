@@ -1,0 +1,154 @@
+{
+  "manifest_version": "c3-evidence-1.0",
+  "benchmark_version": "c3-3.0.0",
+  "validated_against_remediation_commit": "9115382",
+  "evidence_files": {
+    "vlm_raw_outputs.json": "88804dab65c6d7b9b415b3b1b1dee2bbad74beb68d1f44dd60f3e74c63439475",
+    "vlm_raw_outputs_expansion.json": "67b8519fc813fc2e2594412394ff44bebd789dbe90db10bf2ba9746e44852724",
+    "vlm_raw_outputs_expansion2.json": "eb239941ac835fdfb5d4038ae671b7e2c41848b7a970faacd6b53484b6db84cb",
+    "ocr_raw_outputs.json": "4828d66a1be45ff82efb9fceb0ad17a202613f4fdbaf97bdce3402b27ed56847",
+    "ocr_raw_outputs2.json": "ba951b118da74793483d7f87b2cf56c6f1f89059b40c165912996363542dbf45",
+    "c3_results.json": "034f56b2125c47063bf054f693af5ac2ec0265de748dd739fcde71e7620fd96f"
+  },
+  "ground_truth_crops": {
+    "C3_GT_ENV1_DIVERSE_env1_crop.png": "49e5ba37cdcbfceb34c9fc6ed19d1739d844e348ab1b4726681c64892e31ba1e",
+    "C3_GT_ENV1_DIVERSE_static.png": "2cb4b5b54acdde23437d4c0d6f2ee055a2fb140f2f5938533760bc68b9ff246e",
+    "C3_GT_ENV3_DIVERSE_env3_crop.png": "018d6bc474465b58515d79e2bc5db7dde612c403b4df5314750a1b1b1c7f6f0e",
+    "C3_GT_ENV3_DIVERSE_static.png": "476077133ea51354115605fffa59882ef24e3b26f72d2fd1ced350af89d2421c",
+    "C3_GT_GLOBAL_DIVERSE_static.png": "2f1c6ad87264da02044632a2d81b58237380ea89535059cb4b41ed052a84ac59",
+    "C3_GT_GLOBAL_DIVERSE_tuning_crop.png": "c60e2e34757b5c17c418152f90ee5bf605781e39ebc8a9c9564ff5cc2b8ea771"
+  },
+  "real_case_summary": [
+    {
+      "case_id": "real_bulk01_env1_decay",
+      "provenance": "REAL_W1_EVIDENCE",
+      "ground_truth_readable": true,
+      "ground_truth_value": 1.0,
+      "adjudicated_outcome": "AMBIGUOUS",
+      "confident_wrong": false,
+      "abstained": true,
+      "vlm_numeric_parsed": 20.0,
+      "ocr_numeric_parsed": null,
+      "ocr_used_as_source": false
+    },
+    {
+      "case_id": "real_cal06_env1_decay",
+      "provenance": "REAL_W1_EVIDENCE",
+      "ground_truth_readable": true,
+      "ground_truth_value": 1.0,
+      "adjudicated_outcome": "OBSERVED",
+      "confident_wrong": false,
+      "abstained": false,
+      "vlm_numeric_parsed": 1.0,
+      "ocr_numeric_parsed": 1.0,
+      "ocr_used_as_source": true
+    },
+    {
+      "case_id": "real_c3_env1_diverse_decay",
+      "provenance": "REAL_W1_EVIDENCE",
+      "ground_truth_readable": true,
+      "ground_truth_value": 3.5,
+      "adjudicated_outcome": "OBSERVED",
+      "confident_wrong": false,
+      "abstained": false,
+      "vlm_numeric_parsed": 3.5,
+      "ocr_numeric_parsed": 3.5,
+      "ocr_used_as_source": true
+    },
+    {
+      "case_id": "real_c3_env3_diverse_sustain",
+      "provenance": "REAL_W1_EVIDENCE",
+      "ground_truth_readable": true,
+      "ground_truth_value": "61%",
+      "adjudicated_outcome": "AMBIGUOUS",
+      "confident_wrong": false,
+      "abstained": true,
+      "vlm_numeric_parsed": 61.0,
+      "ocr_numeric_parsed": 6191.0,
+      "ocr_used_as_source": true
+    },
+    {
+      "case_id": "real_c3_global_tuning",
+      "provenance": "REAL_W1_EVIDENCE",
+      "ground_truth_readable": true,
+      "ground_truth_value": 442.0,
+      "adjudicated_outcome": "AMBIGUOUS",
+      "confident_wrong": false,
+      "abstained": true,
+      "vlm_numeric_parsed": 442.0,
+      "ocr_numeric_parsed": 4.0,
+      "ocr_used_as_source": true
+    },
+    {
+      "case_id": "real_missing_filter1_cutoff_tooltip",
+      "provenance": "REAL_MISSING_EVIDENCE",
+      "ground_truth_readable": false,
+      "ground_truth_value": null,
+      "adjudicated_outcome": "UNREADABLE",
+      "confident_wrong": false,
+      "abstained": true,
+      "vlm_numeric_parsed": null,
+      "ocr_numeric_parsed": null,
+      "ocr_used_as_source": false
+    }
+  ],
+  "gap_validation": {
+    "GAP_A_identity_binding_closed": true,
+    "GAP_A_evidence": "synthetic_gap_a2 (correct value, wrong identity) resolved IDENTITY_UNRESOLVED",
+    "GAP_B_single_source_no_longer_authorizes_closed": true,
+    "GAP_B_evidence": "the 2 single-source-confident-wrong synthetic cases from c3-1.0.0 both now resolve AMBIGUOUS as required",
+    "GAP_C_evidence_hash_propagates": true,
+    "GAP_C_tamper_test": true,
+    "real_confident_wrong_count": 0,
+    "real_readable_n": 5,
+    "genuinely_independent_corroboration_real_cases": 4,
+    "corroboration_note": "Genuine independent corroboration (2 distinct model pipelines -- Qwen2.5-VL-3B and easyocr, not repeated frames of the same model) occurred in 4 of 5 real readable cases. The remaining cases had only a single usable source (OCR could not be positionally trusted), and under the remediated policy correctly resolved AMBIGUOUS rather than being admitted.",
+    "mutation_boundary_intact": true
+  },
+  "aggregate": {
+    "real_readable_only": {
+      "total": 5,
+      "exact_match": 2,
+      "confident_wrong": 0,
+      "abstained": 3
+    },
+    "real_complete_including_missing": {
+      "total": 6,
+      "exact_match": 2,
+      "confident_wrong": 0,
+      "abstained": 4
+    },
+    "synthetic_only": {
+      "total": 12,
+      "exact_match": 3,
+      "confident_wrong": 0,
+      "abstained": 9
+    },
+    "gap_a_identity_cases": {
+      "synthetic_gap_a1_correct_value_correct_identity": {
+        "outcome": "OBSERVED",
+        "exact_match": true,
+        "confident_wrong": false
+      },
+      "synthetic_gap_a2_correct_value_wrong_identity": {
+        "outcome": "IDENTITY_UNRESOLVED",
+        "exact_match": false,
+        "confident_wrong": false
+      },
+      "synthetic_gap_a3_correct_value_missing_identity": {
+        "outcome": "AMBIGUOUS",
+        "exact_match": false,
+        "confident_wrong": false
+      },
+      "synthetic_gap_a4_correct_identity_wrong_value": {
+        "outcome": "AMBIGUOUS",
+        "exact_match": false,
+        "confident_wrong": false
+      }
+    }
+  },
+  "disposition": {
+    "status": "C3_REMEDIATION_STILL_INSUFFICIENT",
+    "reason": "real readable n=5 is still below the n>=8 target this task set for statistical sufficiency (a worst-case binomial bound at n=5 with 0 observed failures still permits a true confident-wrong rate well above 0%)"
+  }
+}
