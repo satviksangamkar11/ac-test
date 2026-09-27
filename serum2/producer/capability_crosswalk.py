@@ -33,4 +33,15 @@ CAPABILITY_KEY_TO_ATLAS_ID: dict = {
     # These are the same physical control — envelope index 2 (Serum's Env 2, 0-indexed as
     # Env1 in the body path) decay parameter.  Reviewed 2026-09-27.
     "envelope2_field_decay": "env2.decay",
+    # Envelope 1 attack: evidence collected as "env1.attack" (Env0.plainParams.kParamAttack);
+    # SEMANTIC_TARGETS maps "Env1.Attack" → capability_key "envelope_field_attack". These are
+    # the same physical control — envelope index 1 (Serum's Env 1, 0-indexed as Env0 in the
+    # body path) attack parameter. Without this entry, get_by_capability_key("envelope_field_attack")
+    # returns None even though env1.attack has a real, qualified, accessor-bound contract
+    # (resolver_operation_id="envelopes[0].attack") -- causing RouteSelector to fall through to
+    # ABLETON_MCP (MCP_HOST_MAP has "Env1.Attack") instead of the correct DAWDREAMER_SERUM route,
+    # since a Serum-internal envelope field is never on the Ableton-exposed 127-param surface.
+    # Found during a real W1 native run (blocked before native load: execution_route=ableton_mcp
+    # instead of dawdreamer_serum). Reviewed 2026-09-27.
+    "envelope_field_attack": "env1.attack",
 }

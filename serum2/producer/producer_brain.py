@@ -746,7 +746,27 @@ class ProducerBrain:
         # A1: qualification_test_value (test evidence value) is for reference only.
         # The actual operative value comes from the admitted operation, not the qualification test.
         # This plan is ADVISORY_ONLY; the actual execution must use the admitted value from the run.
-        qualification_test_value = scope["mutation_value_used"]
+        #
+        # Two real CapabilityContract scope schemas exist for this same field, from two different
+        # evidence producers: the older Pass-1/candidate_binding_qualifier path names this
+        # "mutation_value_used" (serum2/qualification/pass1, and the handful of Pass-1-covered
+        # envelope 2/3/4 decay/release targets in _PASS1_TARGETS), while
+        # serum2.qualification.evidence_promotion.promote_verified_evidence -- the generic promoter
+        # behind the entire parameter_characterization/binding_evidence_mcp_exec_v1 corpus (222 of 232
+        # real SERUM_PRESET_STRUCTURAL contracts as of 2026-09-27) -- names the identical fact
+        # "mutated_value". Prefer the former (a hand-reviewed, already-production-shaped value) when
+        # both exist; fall back to the latter rather than KeyError on the vast majority of real
+        # promoted contracts, which never carry "mutation_value_used" at all. Found during a real W1
+        # native run once the capability_crosswalk fix let env1.attack reach this code path for the
+        # first time. Neither key present is a genuine evidence gap, not something to paper over.
+        if "mutation_value_used" in scope:
+            qualification_test_value = scope["mutation_value_used"]
+        elif "mutated_value" in scope:
+            qualification_test_value = scope["mutated_value"]
+        else:
+            return {"status": "NOT_ADMITTED", "pathway": record.pathway.value,
+                    "reason": "REFUSED_NO_QUALIFICATION_VALUE: contract scope for %r has neither "
+                              "'mutation_value_used' nor 'mutated_value'" % contract.target}
 
         # Final execution contract gate (Finish Line B): the CapabilityContract above
         # stays the sole authority for allowed_operation/status/prerequisites/admission
