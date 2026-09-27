@@ -61,6 +61,60 @@ runtime; there is no Anthropic SDK call in the canonical path.
 >   existing filename-timestamp regex (written for the old sampling path) would have silently divided that
 >   index by 1000 and treated it as a millisecond timestamp, corrupting every Stage-A frame's timestamp.
 >
+> **Phase 3 (2026-09-27): W1 CLOUD-SIDE ORCHESTRATOR — two real blockers found and closed.** An
+> independent cross-session check of the committed repository (not a report) found that a claimed
+> "generic accessor fix" commit did not exist anywhere in this history. Re-deriving the actual problem
+> from source found it was real: 185 of 231 `SERUM_PRESET_STRUCTURAL` promoted contracts (every
+> field-kind one lacking an explicit `accessor` in its evidence file, `env1.attack` included) could be
+> `ADMITTED` but could never reach `compile_ops() SUCCESS` — reproduced directly as
+> `UnauthorizedOperation("...contract binding is SERUM_PRESET_STRUCTURAL/None")`. Fixed generically (no
+> per-control branch) in `serum2/qualification/evidence_promotion.py`, by falling back to the same
+> `serum_mcp_binding_table.json` lookup `derive()`/`admit_rows()` already trust when an evidence file's
+> own accessor is absent. Second: `serum2/producer/serum_preset_orchestrator.py` (new) is the generic
+> bridge from `ProducerBrain`'s `ADVISORY_ONLY` plan to real native execution/evidence — without adding
+> any Windows/Ableton logic to `ProducerBrain` itself — and its preset-generation step now calls the
+> real `compile_ops()`/`serialize()` chain (previously an honest fail-closed stub), producing a genuine
+> `.SerumPreset` file, proven for `env1.attack`-shaped and other field-kind targets alike. Both fixes
+> verified against the actual committed remote state, not a local worktree. Details:
+> [GATE_A_MATRIX.md](GATE_A_MATRIX.md) covers Gate-A; the accessor/orchestrator fix commit message on
+> `serum2/qualification/evidence_promotion.py` / `serum2/producer/serum_preset_orchestrator.py` covers
+> this round. Full suite: 479 passed, 16 failed (identical pre-existing environment-bound failures —
+> missing `cbor2`, no `SERUM_PRESETS_PATH` in this container — confirmed unchanged via `git stash`), 4
+> skipped. **Still open before Local can run a real W1:** the orchestrator's two genuinely
+> environment-dependent seams (`native_execution_fn`, `ui_evidence_provider`) are real Windows/Ableton
+> code, not yet exercised outside test fixtures.
+>
+> **VLM/OCR (Stage-A production observation) — infrastructure exists; production closure does NOT.**
+> Do not read "Gate-A closed" or "acquisition closed and wired" above as "the VLM/OCR pipeline is done" —
+> those close the *ledger-side* completeness/binding checks (A6/A7) and the *frame-acquisition* step, not
+> the *frame → terminal Stage-A result* step itself. Concretely:
+> - **Done:** the universal full-frame acquisition/observation framework (`FrameObservationCensus`,
+>   Phase 1); the earlier 269-frame corpus is ingested and accounted for; evidence-first VLM processing
+>   and temporal grouping exist; OCR/VLM can be used as an observation input rather than a hardcoded
+>   tutorial assumption.
+> - **Not done / not certified:** the production Stage-A VLM/OCR pipeline that deterministically turns
+>   *every* acquired frame into a terminal Stage-A result (`ANALYZED`/`NOT_SERUM`/`UNREADABLE`/
+>   `EQUIVALENT_TO:<frame>`) is not fully wired end to end. Reliable extraction of **actual Serum
+>   parameter values** (not just module/control *names*) is the hard remaining part — Qwen-based testing
+>   showed name recognition working well while truthful value extraction did not. The full chain
+>   `frame → VLM/OCR observation → temporal corroboration → terminal Stage-A result → ledger →
+>   ExpectedInventory completeness` still needs closing before this can be marked done. This is
+>   explicitly carried forward as its own gate for W2 (see Step 17/18 below) — it is not forgotten and
+>   must not be conflated with Gate-A or the acquisition-wiring closure above.
+>
+> **Big-picture status (2026-09-27):**
+>
+> | Component | Status |
+> |---|---|
+> | 330 Serum controls / universal contract | ✅ Complete |
+> | Serum native mapping/evidence | ✅ Complete |
+> | Generic authority/admission/compile architecture | ✅ Mostly complete — accessor gap (185 contracts) and canonical-preset-generation wiring closed this round; native execution/evidence seams still test-only |
+> | VLM/OCR infrastructure | ✅ Exists |
+> | VLM/OCR reliable production Stage-A closure | 🟡 Not fully closed — see above |
+> | Native Serum W1 certification | 🟡 Pending — cloud-side blockers closed; Local native run not yet performed against this fixed code |
+> | YouTube → Serum full product run (W2) | ⏳ Pending |
+> | 16-bar Ableton arrangement/render | ⏳ Pending |
+
 > **Epoch:** Serum **2.0.23** (SHA-256 `9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3`).
 > Any reference to "Serum 2.0.21" in the codebase or docs is **stale**; the runtime is 2.0.23.
 
@@ -130,15 +184,30 @@ Ableton track → 16-bar arrangement → audible verified render
 - **Acquisition: ✅ CLOSED AND WIRED** — exhaustive frame decoding, and the production runner now actually
   calls it (previously it still called the old sampling function; an independent review caught this).
 - STILL OPEN (not addressed by Gate-A): Stage-A output generation from real VLM census (A6/A7 closed the
-  *ledger-side completeness/binding checks*, not the VLM observation step itself), transcript resolution,
-  ARRANGE real MIDI, RENDER automation, FINALIZE gates. Cert 1 is not yet fully claimable until these are done.
+  *ledger-side completeness/binding checks*, not the VLM observation step itself — see the VLM/OCR status
+  banner above: infrastructure exists, production frame→terminal-result closure does not), transcript
+  resolution, ARRANGE real MIDI, RENDER automation, FINALIZE gates. Cert 1 is not yet fully claimable
+  until these are done.
+
+**PHASE 3 (2026-09-27): W1 CLOUD-SIDE ORCHESTRATOR — two blockers closed, native execution still open**
+- Generic accessor-derivation gap (185 of 231 `SERUM_PRESET_STRUCTURAL` contracts, including `env1.attack`)
+  found and fixed in `serum2/qualification/evidence_promotion.py` — see the status banner above.
+- `serum2/producer/serum_preset_orchestrator.py` (new): the generic bridge from `ProducerBrain`'s
+  `ADVISORY_ONLY` plan to real native execution/evidence, keeping `ProducerBrain` itself
+  environment-independent. Its canonical-preset-generation step now calls the real
+  `compile_ops()`/`serialize()` chain (previously an honest fail-closed stub) — proven to produce a
+  genuine `.SerumPreset` file for real admitted operations, not test fixtures.
+- STILL OPEN: the orchestrator's `native_execution_fn` (real `serum_track_loader.load_and_verify()` on
+  Windows/Ableton) and `ui_evidence_provider` (real screenshot/observed-value/restoration adapter) seams
+  are only exercised by test fixtures so far — a real Local W1 run against this fixed code has not
+  happened yet.
 
 The project has four machine-checkable certificates, produced in order:
 
 | Certificate | Phase | Where | What it proves | Status |
 |---|---|---|---|---|
 | **Cert 1 — Integrity** | Phase 2 | Cloud | No authority bypass, no cross-epoch execution, no qualification-value substitution, no incomplete Stage-A success, no fake UI readback, no out-of-domain execution, no unsupported mutation | Gate-A logic closed; Stage-A/transcript/render wiring above still open before this cert can be issued |
-| **Cert 2 — Native Serum** | Phase 3 | W1 Windows + Cloud | Loaded-module SHA matches 2.0.23 pin, genuine preset SHA, native re-save matches compiled operand, screenshot-bound readback matches, restoration verified, no DawDreamer in chain | Not started — requires Windows/Ableton/Serum session |
+| **Cert 2 — Native Serum** | Phase 3 | W1 Windows + Cloud | Loaded-module SHA matches 2.0.23 pin, genuine preset SHA, native re-save matches compiled operand, screenshot-bound readback matches, restoration verified, no DawDreamer in chain | Cloud-side generic orchestrator + real `compile_ops()` wiring done (accessor gap fixed); native Windows/Ableton execution not yet run against this code |
 | **Cert 3 — Product** | Phase 4 | W2 Windows + Cloud | One untuned real tutorial → `reference_verified=True` with COMPLETE coverage + verified audible 16-bar render | Not started |
 | **Cert 4 — Control Surface** | Phase 5 | Cloud + selective Local | Every non-exception control `EXECUTABLE+VERIFIED`, all 20 exceptions classified as `EXECUTABLE+UNVERIFIED`, `UNQUALIFIED`, or `GENUINELY_NON_EXECUTABLE` | Not started |
 
