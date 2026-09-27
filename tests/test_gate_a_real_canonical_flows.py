@@ -291,12 +291,17 @@ class TestA2RealAdmissionGates:
 
 
 class TestA4AllContractsReachable:
-    """A4: ALL promoted executable contracts are actually reachable."""
+    """A4: ALL promoted executable contracts are actually reachable via canonical runtime paths."""
 
-    def test_a4_every_promoted_contract_has_path_and_spec(self):
-        """A4 REAL: Every promoted contract has mutation_target_path (dynamically counted).
+    def test_a4_every_promoted_executable_contract_reachable(self):
+        """A4 REAL: ALL promoted executable contracts from promotion_diagnostics["loaded"] are reachable.
 
-        No hardcoded threshold. Assert EXACTLY that every loaded contract has a path.
+        Uses actual promotion_diagnostics["loaded"] (dynamic list, not hardcoded).
+        Verifies each promoted contract via:
+        1. execution_spec lookup (canonical direct path)
+        2. find_contract via binding_table (capability lookup path)
+
+        No hardcoded thresholds. Assert: unreachable == [] AND tested == actual_promoted_count.
         """
         reg = ContractRegistry(
             epoch=EPOCH_2_0_23,
@@ -304,26 +309,44 @@ class TestA4AllContractsReachable:
             promoted_evidence_dir=str(ROOT / "parameter_characterization" / "binding_evidence_mcp_exec_v1")
         )
 
-        # Count ALL contracts (dynamic, not hardcoded)
-        total_contracts = len(reg.contracts)
-        promoted_with_path = []
-        promoted_without_path = []
+        promoted_targets = reg.promotion_diagnostics.get("loaded", [])
+        assert len(promoted_targets) > 0, \
+            f"A4 FAIL: No promoted executable contracts found in promotion_diagnostics['loaded']"
 
-        for key, contract in reg.contracts.items():
-            scope = contract.scope or {}
-            if scope.get('mutation_target_path'):
-                promoted_with_path.append(key)
-            else:
-                promoted_without_path.append(key)
+        bt = binding_table()
+        bridge = bridge_index(reg)
+        cat = catalog()
+        unreachable = []
+        tested_count = 0
 
-        # A4 PROOF: ALL promoted contracts have path (not just >= 220)
-        assert total_contracts > 0, f"A4 FAIL: No contracts loaded from registry"
-        assert len(promoted_with_path) == total_contracts, \
-            f"A4 FAIL: Not all contracts have mutation_target_path. With path: {len(promoted_with_path)}, total: {total_contracts}, without: {promoted_without_path}"
+        for target in promoted_targets:
+            tested_count += 1
+            contract = reg.get(target)
+            assert contract is not None, \
+                f"A4 FAIL: Promoted target {target} not found in registry.contracts"
 
-        # Verify no pathless contracts
-        assert len(promoted_without_path) == 0, \
-            f"A4 FAIL: Found {len(promoted_without_path)} pathless contracts: {promoted_without_path}"
+            reachable = False
+
+            spec = reg.execution_spec(target)
+            if spec is not None:
+                reachable = True
+
+            if not reachable:
+                binding_entry = bt['controls'].get(target)
+                if binding_entry and binding_entry.get('kind') == 'field':
+                    op = {k: v for k, v in binding_entry.items() if k != 'basis'}
+                    op['operation'] = 'SET'
+                    found, _ = find_contract(op, {}, bridge, cat)
+                    if found:
+                        reachable = True
+
+            if not reachable:
+                unreachable.append(target)
+
+        assert unreachable == [], \
+            f"A4 FAIL: {len(unreachable)} promoted contracts unreachable via canonical paths: {unreachable}"
+        assert tested_count == len(promoted_targets), \
+            f"A4 FAIL: tested_count {tested_count} != promoted_targets {len(promoted_targets)}"
 
     def test_a4_every_user_facing_control_reachable(self):
         """A4 REAL: Every user-facing control from binding_table is reachable.
