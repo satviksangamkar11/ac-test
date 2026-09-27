@@ -2161,8 +2161,10 @@ class ProducerBrain:
             ui_readback: real values read off the actual Serum UI (e.g. a
                 screenshot-derived dict), never a planned/expected value
             readback_verified: True iff ui_readback actually matches the
-                plan's mutation_target_path/mutation_value_used (caller
-                must have compared, not assumed)
+                plan's mutation_target_path at the requested production value
+                (caller must have compared, not assumed; plan's
+                qualification_test_value is evidence metadata only and must
+                never be used as the production operand)
 
         Returns:
             The same result object, mutated: execution_status="EXECUTED",

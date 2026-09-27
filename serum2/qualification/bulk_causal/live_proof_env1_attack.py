@@ -117,7 +117,7 @@ def run_live(plan):
         "capability_contract_authority_metadata_used": {
             "contract_id": plan["contract_id"],
             "mutation_target_path": plan["mutation_target_path"],
-            "mutation_value_used": plan["mutation_value_used"],
+            "qualification_test_value": plan.get("qualification_test_value", plan.get("mutation_value_used")),
         },
         "generated_preset_path": str(preset_path),
         "preset_sha256": preset_sha256,
