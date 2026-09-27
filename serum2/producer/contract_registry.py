@@ -14,6 +14,13 @@ from pathlib import Path
 
 from serum2.evidence.capability_contract import CapabilityContract, ExecutionBinding
 
+# Module-level alias kept for backward compatibility with test_runtime_consumption_proof.py
+FINAL_CONTRACT_PATH = (
+    Path(__file__).parent.parent.parent
+    / "parameter_characterization"
+    / "bulk_causal_evidence"
+    / "final_execution_contract_v1.json"
+)
 
 _PASS1_TARGETS = frozenset(
     ["oscillator_field_OSC2-ENABLE", "oscillator_field_OSC3-ENABLE",
@@ -356,6 +363,8 @@ class ContractRegistry:
         path = self.FINAL_EXECUTION_CONTRACT_PATH
         self.execution_spec_excluded = {}
         self.final_execution_contract_epoch = None  # (serum_version, serum_binary_sha256), or None if unloaded
+        self._final_contract = None
+        self._final_contract_sha = None
         try:
             doc = json.loads(path.read_text())
         except (FileNotFoundError, json.JSONDecodeError) as e:
@@ -363,6 +372,9 @@ class ContractRegistry:
             return
         self.final_execution_contract_epoch = (doc["serum_version"], doc["serum_binary_sha256"])
         lookup = doc.get("producer_lookup", {})
+        # Populate backward-compat attributes used by test_runtime_consumption_proof.py
+        self._final_contract = lookup
+        self._final_contract_sha = doc.get("serum_binary_sha256")
         for row in doc.get("rows", ()):
             atlas_id = row["atlas_id"]
             pl = lookup.get(atlas_id, {})
@@ -398,6 +410,17 @@ class ContractRegistry:
                 self.final_execution_contract_epoch, self.epoch.label)
             return None
         return spec
+
+    def lookup_final(self, atlas_id: str) -> Optional[Dict]:
+        """Return the producer_lookup entry for atlas_id from final_execution_contract_v1.json.
+
+        Returns a dict with keys: op, raw, verify, class, exception_policy.
+        Returns None when the contract was not loaded or the atlas_id is absent.
+        Read-only — never produces an AuthorizedOperation and never sets admission status.
+        """
+        if self._final_contract is None:
+            return None
+        return self._final_contract.get(atlas_id)
 
     def get(self, semantic_target: str) -> Optional[CapabilityContract]:
         """Get contract for a semantic target.
