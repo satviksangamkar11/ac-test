@@ -1,0 +1,23 @@
+{
+  "gate_b_status": "CANONICAL_GATE_B_VERIFIED",
+  "native_evidence_source": "Windows/Ableton/Serum 2.0.23",
+  "dawdreamer_used": false,
+  "headless_substitution_used": false,
+  "epoch": "2.0.23@9293eb90",
+  "epoch_binary_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+  "execution_status": "EXECUTED",
+  "decision": "ACCEPTED",
+  "admitted": true,
+  "preset_sha256": "9D1D82F03BDDFB615717F495270002978019420BB21C0274FABD6228B0DA418C",
+  "readback_verified": true,
+  "loaded_module_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+  "run_id": "SRM0A209B",
+  "track_nonce": "SRM0A209B",
+  "target_path": "Env1.plainParams.kParamDecay",
+  "qualification_test_value": 0.5,
+  "atlas_id": "env2.decay",
+  "agrees_with_admitted_mutation_path": true,
+  "final_execution_classification": "MCP_EXEC_HOST_CONFIRMED",
+  "screenshot_sha256": "BBF75927932B8FABA9BD02D4D825FAABB1A84377D11A48EB3ADF8DD177AE4717",
+  "restoration_verified": true
+}
