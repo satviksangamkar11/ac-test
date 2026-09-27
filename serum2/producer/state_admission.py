@@ -123,7 +123,7 @@ def admit_rows(rows: List[Row], epoch: ExecutionEpoch, binding_evidence_dir=None
                     if tr.status == "PENDING":
                         tr.status = "ADMITTED"
                     o["capability"], o["contract_status"] = c.contract_key, contract.status
-                    o["contract_epoch"] = contract.scope["serum_binary_sha256"]
+                    o["contract_epoch"] = contract.scope.get("serum_binary_sha256", epoch.binary_sha256)
                     o["execution_path"] = (contract.scope or {}).get("mutation_target_path")
                     b = contract.execution_binding
                     o["contract_binding"] = getattr(b, "resolver_operation_id", None)
