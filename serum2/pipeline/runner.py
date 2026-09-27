@@ -944,45 +944,115 @@ def _stage_render(manifest: RunManifest, run_dir: Path) -> StageRecord:
     rec.mark_running()
     manifest.update_stage(rec)
 
-    # Verify RMS > -60 dBFS (audible signal)
+    # Validate audio: RMS (loudness), peak (headroom), and non-silence fraction
     try:
-        rms_dbfs = _check_render_rms(render_path)
-        if rms_dbfs <= -60.0:
+        metrics = _validate_render_audio(render_path)
+        validation_issues = []
+
+        # Fail closed: all metrics must pass
+        if metrics["rms_dbfs"] <= -60.0:
+            validation_issues.append(
+                f"RMS={metrics['rms_dbfs']:.1f} dBFS (must be > -60 dBFS for audible signal)"
+            )
+        if metrics["peak_dbfs"] > -2.0:
+            validation_issues.append(
+                f"Peak={metrics['peak_dbfs']:.1f} dBFS (likely clipping; must be ≤ -2 dBFS)"
+            )
+        if metrics["non_silence_fraction"] < 0.10:
+            validation_issues.append(
+                f"Non-silence: {metrics['non_silence_fraction']*100:.1f}% "
+                "(must be ≥ 10% for meaningful audio)"
+            )
+
+        if validation_issues:
             rec.mark_failed(
-                f"Render is silent or near-silent (RMS={rms_dbfs:.1f} dBFS). "
-                "Verify MIDI clip is in Arrangement view, not Session. "
-                "Check audio signal path."
+                f"Render audio validation failed:\n  • " + "\n  • ".join(validation_issues) + "\n"
+                "Verify MIDI clip is in Arrangement view and Serum track has audio output. "
+                "Check mixer levels and audio device settings."
             )
         else:
             rec.mark_complete({
                 "render_path": str(render_path),
                 "render_hash": content_hash(render_path),
-                "rms_dbfs": rms_dbfs,
+                "rms_dbfs": metrics["rms_dbfs"],
+                "peak_dbfs": metrics["peak_dbfs"],
+                "non_silence_fraction": metrics["non_silence_fraction"],
                 "audible": True,
             })
             manifest.render_path = str(render_path)
+    except ValueError as e:
+        rec.mark_failed(f"Render file unreadable: {e}")
     except Exception as e:
-        rec.mark_failed(f"Render RMS check failed: {e}")
+        rec.mark_failed(f"Render validation error: {e}")
 
     manifest.update_stage(rec)
     return rec
 
 
-def _check_render_rms(wav_path: Path) -> float:
-    """Compute RMS of a WAV file in dBFS.  Returns 0.0 if measurement fails."""
-    import math, struct, wave as wv
+def _validate_render_audio(wav_path: Path) -> Dict[str, Any]:
+    """Validate render audio: measure RMS, peak, and non-silence fraction.
+
+    Raises:
+        ValueError: If the file cannot be read or is not a valid WAV.
+        Exception: For any other measurement error.
+
+    Returns:
+        Dict with keys: rms_dbfs, peak_dbfs, non_silence_fraction
+    """
+    import math
+    import struct
+    import wave as wv
+
     try:
-        with wv.open(str(wav_path)) as w:
-            frames = w.readframes(w.getnframes())
+        with wv.open(str(wav_path), "rb") as w:
+            nframes = w.getnframes()
+            if nframes == 0:
+                raise ValueError("WAV file has 0 frames (empty)")
+
             sampwidth = w.getsampwidth()
-            nchannels = w.getnchannels()
+            if sampwidth not in (1, 2, 4):
+                raise ValueError(f"Unsupported sample width: {sampwidth} bytes")
+
+            frames = w.readframes(nframes)
+            if len(frames) == 0:
+                raise ValueError("Could not read frames from WAV file")
+
+    except (wv.Error, OSError) as e:
+        raise ValueError(f"Cannot read WAV file: {e}")
+
+    # Unpack samples to integers
+    try:
         fmt = {1: "b", 2: "h", 4: "i"}[sampwidth]
-        samples = struct.unpack(f"<{len(frames)//sampwidth}{fmt}", frames)
-        max_val = float(2 ** (8 * sampwidth - 1))
-        rms = math.sqrt(sum(s * s for s in samples) / len(samples)) / max_val
-        return 20.0 * math.log10(rms) if rms > 0 else -120.0
-    except Exception:
-        return 0.0
+        nsamps = len(frames) // sampwidth
+        samples = struct.unpack(f"<{nsamps}{fmt}", frames)
+    except struct.error as e:
+        raise ValueError(f"Cannot unpack audio samples: {e}")
+
+    if len(samples) == 0:
+        raise ValueError("No audio samples to analyze")
+
+    # Compute metrics
+    max_val = float(2 ** (8 * sampwidth - 1))
+
+    # RMS (root mean square) in dBFS
+    sum_sq = sum(s * s for s in samples)
+    rms = math.sqrt(sum_sq / len(samples)) / max_val
+    rms_dbfs = 20.0 * math.log10(rms) if rms > 0 else -120.0
+
+    # Peak (maximum absolute amplitude) in dBFS
+    peak = max(abs(s) for s in samples) / max_val
+    peak_dbfs = 20.0 * math.log10(peak) if peak > 0 else -120.0
+
+    # Non-silence fraction: samples above -40 dBFS
+    threshold = max_val * (10.0 ** (-40.0 / 20.0))
+    non_silence_count = sum(1 for s in samples if abs(s) > threshold)
+    non_silence_fraction = non_silence_count / len(samples)
+
+    return {
+        "rms_dbfs": rms_dbfs,
+        "peak_dbfs": peak_dbfs,
+        "non_silence_fraction": non_silence_fraction,
+    }
 
 
 # ---------------------------------------------------------------------------
