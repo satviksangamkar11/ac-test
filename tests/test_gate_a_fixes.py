@@ -422,8 +422,10 @@ class TestA7UIReadbackBinding:
             "epoch": "2.0.23"
         }}
         assert _binding_quality(ui_readback2) != "LOADER_BOUND", "Should not be LOADER_BOUND without crop_coords"
-        # Complete with all fields
+        # Complete with all fields, plus an actual observed values payload (A7: a structurally perfect
+        # loader_evidence with no observed UI content does not prove anything was actually read)
         ui_readback["loader_evidence"]["epoch"] = "2.0.23"
+        ui_readback["values"] = {"env1.attack": "5.0"}
         assert _binding_quality(ui_readback) == "LOADER_BOUND", "Should be LOADER_BOUND with all fields including crop_coords"
 
     def test_ui_equal_unit_normalization(self):

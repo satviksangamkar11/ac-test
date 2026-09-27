@@ -112,7 +112,7 @@ class TestGateBCertificate:
 
     def _make_result(self, *, execution_status="ADVISORY_ONLY", decision=None,
                      admitted=None, readback_verified=None, preset_sha256=None,
-                     module_sha=None, plan=None):
+                     module_sha=None, plan=None, restoration_verified=True):
         """Build a minimal ProducerResult for certificate testing."""
         r = ProducerResult(request=ProducerRequest(user_intent="test"))
         r.execution_status = execution_status
@@ -125,6 +125,7 @@ class TestGateBCertificate:
                 "ui_readback": {
                     "route": "DIRECT_UI",
                     "values": {},
+                    "restoration_verified": restoration_verified,
                     "loader_evidence": {
                         "serum_module_sha256": module_sha,
                         "run_id": "test-run",
@@ -305,6 +306,7 @@ class TestOperandInvariant:
             "ui_readback": {
                 "route": "DIRECT_UI",
                 "values": {"env2.decay": "5.00 s"},
+                "restoration_verified": True,
                 "loader_evidence": {
                     "serum_module_sha256": EPOCH_2_0_23.binary_sha256,
                     "run_id": "W1_GATE_B_22433E83",

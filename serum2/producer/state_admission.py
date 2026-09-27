@@ -40,10 +40,15 @@ def validate_final_execution_gate(*, spec, contract, operand):
     expected_raw = spec.get("expected_raw") or []
     if expected_raw:
         raw_path = expected_raw[0].get("path")
-        expected_path = ".".join(raw_path) if isinstance(raw_path, list) else raw_path
-        binding_path = getattr(contract.execution_binding, "body_path", None)
-        if expected_path and binding_path and expected_path != binding_path:
-            return "REFUSED_BODY_PATH_MISMATCH"
+        expected_path = ".".join(str(seg) for seg in raw_path) if isinstance(raw_path, list) else raw_path
+        if expected_path:
+            binding = getattr(contract, "execution_binding", None)
+            binding_path = getattr(binding, "body_path", None) if binding is not None else None
+            # A2: a declared expected_raw path with no corresponding capability binding (or a binding that
+            # disagrees) is a mismatch, not a pass-through -- the final-evidence gate and the authority
+            # contract must independently agree on WHERE this operation executes.
+            if not binding_path or expected_path != binding_path:
+                return "REFUSED_BODY_PATH_MISMATCH"
 
     domain = spec.get("declared_domain") or {}
     mn = domain.get("min")
@@ -139,7 +144,7 @@ def admit_rows(rows: List[Row], epoch: ExecutionEpoch, binding_evidence_dir=None
                             elif gate_result == "REFUSED_BODY_PATH_MISMATCH":
                                 raw_list = (spec or {}).get("expected_raw", [])
                                 raw_path = raw_list[0].get("path") if raw_list else None
-                                first_path = ".".join(raw_path) if isinstance(raw_path, list) else raw_path
+                                first_path = ".".join(str(seg) for seg in raw_path) if isinstance(raw_path, list) else raw_path
                                 binding_body = getattr(contract.execution_binding, "body_path", None)
                                 tr.detail = "body path in final contract (%r) != capability contract binding (%r)" % (
                                     first_path, binding_body)

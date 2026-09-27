@@ -83,6 +83,12 @@ def gate_b_status(result, epoch=None) -> str:
         if module_sha != epoch.binary_sha256:
             return "NATIVE_STATE_PROOF"
 
+    # Canonical Gate B additionally requires restoration evidence: the canonical chain must show the
+    # mutated state was verified restorable (see module docstring), not just that a value was written and
+    # read back once. Absence of this evidence downgrades to NATIVE_STATE_PROOF, never a silent pass.
+    if ui_rb.get("restoration_verified") is not True:
+        return "NATIVE_STATE_PROOF"
+
     return "CANONICAL_GATE_B_VERIFIED"
 
 
@@ -145,9 +151,20 @@ def gate_b_certificate(result, epoch=None, *,
     dawdreamer_used = ui_rb.get("backend") and "DawDreamer" in str(ui_rb.get("backend")) or False
     headless_substitution_used = ui_rb.get("is_headless") is True or False
 
+    # A8: native_evidence_source must never claim native (Windows/Ableton) proof for evidence this
+    # certificate itself knows is headless/DawDreamer-substituted -- that would let a non-native run
+    # carry a certificate that reads as native. Derived from the SAME evidence as the flags above, and
+    # from the epoch actually passed in (never a hardcoded version string).
+    if dawdreamer_used or headless_substitution_used:
+        native_evidence_source = "DawDreamer (headless, non-native substitution)"
+    elif epoch is not None:
+        native_evidence_source = "Windows/Ableton/Serum %s" % epoch.serum_version
+    else:
+        native_evidence_source = None
+
     cert: Dict[str, Any] = {
         "gate_b_status": effective_status,
-        "native_evidence_source": "Windows/Ableton/Serum 2.0.23",
+        "native_evidence_source": native_evidence_source,
         "dawdreamer_used": dawdreamer_used,
         "headless_substitution_used": headless_substitution_used,
         # epoch

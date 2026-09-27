@@ -16,6 +16,12 @@ from typing import Any, Dict, List, Optional, Tuple
 
 _FX = re.compile(r"^FXRack(\d+)\.FX\.(\d+)\.(FX\w+)\.plainParams\.(kParam\w+)$")
 _INST = re.compile(r"^([A-Za-z]+?)(\d+)\.plainParams\.(kParam\w+)$")
+# A sub-oscillator's own plainParams, one level deeper than _INST (e.g. "Oscillator0.WTOsc0.plainParams.
+# kParamWarp2" for the wavetable engine, "Oscillator3.NoiseOsc3.plainParams.kParamNoiseType" for noise) --
+# still an INSTANCE binding on the outer root/index, just reached through the named sub-module.
+_NESTED_INST = re.compile(r"^([A-Za-z]+?)(\d+)\.[A-Za-z]+\d+\.plainParams\.(kParam\w+)$")
+# A sub-oscillator's own STRUCTURED (non-plainParams) field, e.g. "Oscillator0.WTOsc0.relativePathToWT".
+_NESTED_STRUCT = re.compile(r"^([A-Za-z]+?)(\d+)\.([A-Za-z]+\d+)\.(\w+)$")
 _STRUCT = re.compile(r"^([A-Za-z]+?)(\d+)(?:\.(\w+))?$")
 
 _OPERAND = {"mutate_numeric_value": "numeric", "mutate_numeric": "numeric", "mutate_enum_value": "enum",
@@ -23,7 +29,35 @@ _OPERAND = {"mutate_numeric_value": "numeric", "mutate_numeric": "numeric", "mut
             "mutate_structured_value": "structured", "unknown_operation": "unknown"}
 _ROOT = {"env": ("Env", ["envelope"]),
          "osc": ("Oscillator", ["oscillator", "wavetable_oscillator", "noise_oscillator"]),
-         "filter": ("VoiceFilter", ["voice_filter"]), "lfo": ("LFO", ["lfo"])}
+         "filter": ("VoiceFilter", ["voice_filter"]), "lfo": ("LFO", ["lfo"]),
+         "macro": ("Macro", ["macro"])}
+
+# A handful of binding_table field names abbreviate or rename what the catalog's kParam actually calls the
+# same control (e.g. UI-facing "semitone" is Serum's own "Pitch" plainParam; "warp_amount2" is "Warp2").
+# Each entry here is confirmed directly against a real promoted contract's own mutation_target_path
+# (see ContractRegistry.promotion_diagnostics) -- never guessed.
+_FIELD_KPARAM_ALIASES = {
+    ("osc", "semitone"): "kParamPitch",
+    ("osc", "warp_amount"): "kParamWarp",
+    ("osc", "warp_amount2"): "kParamWarp2",
+    ("osc", "warp_mode"): "kParamWarpMenu",
+    ("osc", "warp_mode2"): "kParamWarpMenu2",
+    ("osc", "sample_loop_start"): "kParamLoopStart",
+    ("osc", "sample_loop_end"): "kParamLoopEnd",
+    ("osc", "sample_loop_crossfade"): "kParamLoopCrossfade",
+    ("filter", "cutoff"): "kParamFreq",
+    ("filter", "resonance"): "kParamReso",
+    ("lfo", "shape"): "kParamType",
+    ("env", "attack_curve"): "kParamCurve1",
+    ("env", "decay_curve"): "kParamCurve2",
+    ("env", "release_curve"): "kParamCurve3",
+}
+
+# Singleton (single-instance) module roots -- attr -> (Serum root class name, catalog sections to search
+# for the kParam). Only attrs with a real, evidence-confirmed root are listed; an attr not listed here
+# (e.g. "voice_unison", for which no promoted contract yet confirms the structural root) is correctly
+# reported NO_CAPABILITY rather than guessed.
+_SINGLETON_ROOT = {"arp": ("ArpClip", ["arp_clip"]), "global_": ("Global", ["global"])}
 
 
 @dataclass(frozen=True)
@@ -49,6 +83,12 @@ def coverage_of(key: str, contract) -> Coverage:
     m = _INST.match(path)
     if m:
         return Coverage(key, "instance", operand, root=m.group(1), index=int(m.group(2)), kparam=m.group(3))
+    m = _NESTED_INST.match(path)
+    if m:
+        return Coverage(key, "instance", operand, root=m.group(1), index=int(m.group(2)), kparam=m.group(3))
+    m = _NESTED_STRUCT.match(path)
+    if m:
+        return Coverage(key, "structured", operand, root=m.group(1), index=int(m.group(2)), kparam=m.group(4))
     m = _STRUCT.match(path)
     if m:
         return Coverage(key, "structured", operand, root=m.group(1), index=int(m.group(2)), kparam=m.group(3))
@@ -60,12 +100,46 @@ def _norm(k: str) -> str:
 
 
 def kparam_for(module: str, fld: str, catalog: Dict[str, Any]) -> Optional[str]:
-    """Exact-normalized equality between a spec field and a catalog kParam (enabled == enable). No prefixes."""
+    """Exact-normalized equality between a spec field and a catalog kParam (enabled == enable). No prefixes.
+    Falls back to _FIELD_KPARAM_ALIASES for the small set of confirmed name-vs-kParam mismatches."""
     want = {"enabled": "enable"}.get(fld, fld)
     for section in _ROOT[module][1]:
         for k in catalog.get(section, {}):
             if _norm(k) == _norm(want):
                 return k
+    alias = _FIELD_KPARAM_ALIASES.get((module, fld))
+    if alias and any(alias in catalog.get(section, {}) for section in _ROOT[module][1]):
+        return alias
+    return None
+
+
+# A handful of Global0 kParams abbreviate a word the binding_table field name spells out in full
+# ("Dn" for "down", "Vol" for "volume") and so never match under plain exact-normalized equality.
+# Each entry here is confirmed directly against a real promoted contract's own mutation_target_path
+# (see ContractRegistry.promotion_diagnostics) -- never guessed.
+_SINGLETON_KPARAM_ALIASES = {
+    ("global_", "bend_range_down"): "kParamBendRangeDn",
+    ("global_", "direct_volume"): "kParamDirectVol",
+    ("global_", "fx_bus1_volume"): "kParamFXBus1Vol",
+    ("global_", "fx_bus2_volume"): "kParamFXBus2Vol",
+    ("global_", "mono"): "kParamMonoToggle",
+}
+
+
+def kparam_for_singleton(attr: str, fld: str, catalog: Dict[str, Any]) -> Optional[str]:
+    """Exact-normalized equality between a singleton_field's field name and a catalog kParam, restricted
+    to the catalog section(s) that back that singleton attr's own Serum root (see _SINGLETON_ROOT).
+    Falls back to _SINGLETON_KPARAM_ALIASES for the small set of confirmed abbreviation mismatches."""
+    sections = _SINGLETON_ROOT.get(attr, (None, None))[1]
+    if not sections:
+        return None
+    for section in sections:
+        for k in catalog.get(section, {}):
+            if _norm(k) == _norm(fld):
+                return k
+    alias = _SINGLETON_KPARAM_ALIASES.get((attr, fld))
+    if alias and any(alias in catalog.get(section, {}) for section in sections):
+        return alias
     return None
 
 
@@ -137,6 +211,27 @@ def find_contract(op: Dict[str, Any], ctx: Dict[str, Any], cov: List[Coverage], 
             tr.status, tr.stop_stage = "SCOPE_WOULD_EXPAND", "SCOPE"
             tr.detail = "contract %s proven on %s%d only; operation targets %s%d" % (
                 same[0].contract_key, root, same[0].index, root, op["index"])
+            return None, tr
+        tr.status, tr.stop_stage, tr.detail = "NO_CAPABILITY", "CONTRACT_LOOKUP", "no contract covers %s" % key
+        return None, tr
+    if op["kind"] == "singleton_field":
+        attr = op.get("attr")
+        root = _SINGLETON_ROOT.get(attr, (None, None))[0]
+        kp = kparam_for_singleton(attr, op.get("field"), catalog) if root else None
+        if not root or not kp:
+            tr.status, tr.stop_stage = "NO_CAPABILITY", "STRUCTURAL_KEY"
+            tr.detail = "no catalog kParam for singleton_field %s.%s" % (attr, op.get("field"))
+            return None, tr
+        key = "%s0.%s" % (root, kp)
+        tr.stages.append(("STRUCTURAL_KEY", key))
+        same = [c for c in cov if c.root == root and c.kparam == kp and c.kind == "instance"]
+        exact = [c for c in same if c.index == 0]
+        if exact:
+            return exact[0], tr
+        if same:
+            tr.status, tr.stop_stage = "SCOPE_WOULD_EXPAND", "SCOPE"
+            tr.detail = "contract %s proven on %s%d only; singleton %s0 has no separate instance" % (
+                same[0].contract_key, root, same[0].index, root)
             return None, tr
         tr.status, tr.stop_stage, tr.detail = "NO_CAPABILITY", "CONTRACT_LOOKUP", "no contract covers %s" % key
         return None, tr

@@ -150,11 +150,17 @@ def _ui_equal(expected: Any, ui_text: Any) -> bool:
     return exact_norm(expected) == exact_norm(ui_text)
 
 
+def _known_epoch_versions() -> set:
+    from serum2.producer.execution_epoch import KNOWN_EPOCHS
+    return {e.serum_version for e in KNOWN_EPOCHS}
+
+
 def _binding_quality(ui_readback: Dict[str, Any]) -> str:
     """Classify how a UI readback was obtained.
 
     LOADER_BOUND         — carries complete loader_evidence (run_id, track_nonce, serum_module_sha256,
-                           epoch, screenshot_sha, crop_coords) with all required fields AND valid content
+                           epoch, screenshot_sha, crop_coords) with all required fields AND valid content,
+                           AND the top-level readback carries an actual observed UI values payload
     HEADLESS_DAWDREAMER  — A8: DawDreamer/headless evidence, never eligible for VERIFIED
     MANUALLY_READ        — has captured_at/serum/method metadata but no loader proof
     UNBOUND              — bare dict; rejected from LIVE_UI_VERIFIED
@@ -165,8 +171,14 @@ def _binding_quality(ui_readback: Dict[str, Any]) -> str:
     - track_nonce: non-empty string
     - serum_module_sha256: exactly 64 hexadecimal characters
     - screenshot_sha: exactly 64 hexadecimal characters
-    - epoch: non-empty string
+    - epoch: must identify one of the pinned, known ExecutionEpochs (e.g. "2.0.23", "2.0.21") -- an
+      arbitrary non-empty string ("staging", "1.0.0") does NOT integrity-bind the readback to a real,
+      qualified Serum build, so it is refused exactly like a missing field.
     - crop_coords: exactly [x, y, w, h] with numeric finite non-negative values
+    - values: the readback must ALSO carry a non-empty top-level "values" mapping of actually observed
+      control readings. A structurally perfect loader_evidence envelope with valid hashes but no real
+      observed UI content is not sufficient evidence that anything was actually read -- it is downgraded
+      exactly like a missing/invalid loader_evidence field.
 
     A8: DawDreamer evidence is labeled HEADLESS_DAWDREAMER and cannot reach VERIFIED.
     """
@@ -218,8 +230,8 @@ def _binding_quality(ui_readback: Dict[str, Any]) -> str:
         except ValueError:
             return "MANUALLY_READ" if (ui_readback.get("captured_at") or ui_readback.get("serum")) else "UNBOUND"
 
-        # epoch: non-empty string
-        if not isinstance(epoch, str) or not epoch.strip():
+        # epoch: must identify one of the pinned, known ExecutionEpochs -- not an arbitrary string
+        if not isinstance(epoch, str) or epoch.strip() not in _known_epoch_versions():
             return "MANUALLY_READ" if (ui_readback.get("captured_at") or ui_readback.get("serum")) else "UNBOUND"
 
         # crop_coords: exactly [x, y, w, h] with numeric values (not strings)
@@ -230,6 +242,12 @@ def _binding_quality(ui_readback: Dict[str, Any]) -> str:
             return "MANUALLY_READ" if (ui_readback.get("captured_at") or ui_readback.get("serum")) else "UNBOUND"
         # Verify all are finite
         if not all(-float('inf') < c < float('inf') for c in crop_coords):
+            return "MANUALLY_READ" if (ui_readback.get("captured_at") or ui_readback.get("serum")) else "UNBOUND"
+
+        # A7: a structurally perfect loader_evidence envelope with no actual observed UI content is not
+        # sufficient evidence that anything was actually read from the live plugin.
+        values = ui_readback.get("values")
+        if not isinstance(values, dict) or not values:
             return "MANUALLY_READ" if (ui_readback.get("captured_at") or ui_readback.get("serum")) else "UNBOUND"
 
         # All validation passed

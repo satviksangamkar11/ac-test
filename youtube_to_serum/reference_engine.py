@@ -58,7 +58,9 @@ class NeedsStageACensus(RuntimeError):
 
 
 def stage_a_is_filled(skeleton_path: str) -> bool:
-    """A6: A skeleton counts as filled only when EVERY manifest frame has terminal analysis_status.
+    """A6: A skeleton counts as filled only when EVERY manifest frame has terminal analysis_status,
+    EVERY EQUIVALENT_TO reference resolves to a real, non-cyclic terminal frame, frame identity is
+    unambiguous, and (when the skeleton declares one) its ExpectedInventory is fully covered.
 
     Terminal values: ANALYZED | NOT_SERUM | UNREADABLE | EQUIVALENT_TO:<frame_id>
 
@@ -67,7 +69,16 @@ def stage_a_is_filled(skeleton_path: str) -> bool:
     2. Each terminal value is one of the valid vocabulary
     3. EQUIVALENT_TO:<target> references must exist (target frame_id exists)
     4. No self-referencing equivalence (frame cannot be EQUIVALENT_TO itself)
-    5. Empty manifest returns False
+    5. No equivalence CYCLE (e.g. 0 -> 1 -> 0): every EQUIVALENT_TO chain must terminate at a real
+       ANALYZED/NOT_SERUM/UNREADABLE frame, not loop back on itself
+    6. No duplicate frame_id in the manifest (frame identity must be unambiguous)
+    7. Empty manifest returns False
+    8. When the skeleton declares "expected_controls" (the ExpectedInventory for this episode -- see
+       serum2/producer/expected_inventory.py), every declared control_id must appear in at least one
+       frame's "controls" list -- i.e. the census actually accounted for it, terminal outcome or not.
+       A frame-complete skeleton with an incompletely-covered ExpectedInventory is NOT filled.
+       A skeleton that declares no "expected_controls" key at all is judged on frame terminality alone
+       (unchanged, backward-compatible behavior for skeletons that predate ExpectedInventory).
     """
     data = json.loads(Path(skeleton_path).read_text())
     frames = data.get("frames", [])
@@ -77,8 +88,30 @@ def stage_a_is_filled(skeleton_path: str) -> bool:
 
     # Valid terminal vocabulary
     valid_terminals = {"ANALYZED", "NOT_SERUM", "UNREADABLE"}
+
+    # A6: frame identity must be unambiguous -- no duplicate frame_id
+    raw_frame_ids = [f.get("frame_id") for f in frames]
+    if len(raw_frame_ids) != len(set(str(fid) for fid in raw_frame_ids)):
+        return False
+
     # Normalize frame_ids to strings for comparison (frame_id may be int or str)
-    frame_ids = {str(f.get("frame_id")) for f in frames}
+    frame_ids = {str(fid) for fid in raw_frame_ids}
+    status_by_id = {str(f.get("frame_id")): f.get("analysis_status") for f in frames}
+
+    def _resolves_without_cycle(frame_id: str, seen: frozenset) -> bool:
+        """Follow an EQUIVALENT_TO chain from frame_id; True iff it terminates at a real terminal
+        status without ever revisiting a frame_id already on this chain (a cycle)."""
+        if frame_id in seen:
+            return False
+        status = status_by_id.get(frame_id)
+        if status in valid_terminals:
+            return True
+        if isinstance(status, str) and status.startswith("EQUIVALENT_TO:"):
+            target_id = status.split(":", 1)[1]
+            if target_id not in frame_ids or target_id == frame_id:
+                return False
+            return _resolves_without_cycle(target_id, seen | {frame_id})
+        return False
 
     # A6: EVERY frame must have terminal analysis_status
     for frame in frames:
@@ -101,8 +134,20 @@ def stage_a_is_filled(skeleton_path: str) -> bool:
             # Cannot self-reference
             if target_id == frame_id:
                 return False
+            # Cannot participate in (or lead into) an equivalence cycle
+            if not _resolves_without_cycle(frame_id, frozenset()):
+                return False
         else:
             # Invalid terminal status
+            return False
+
+    # A6: ExpectedInventory coverage, when declared
+    expected_controls = data.get("expected_controls")
+    if expected_controls:
+        observed_control_ids = {
+            c.get("control_id") for f in frames for c in f.get("controls", [])
+        }
+        if not set(expected_controls) <= observed_control_ids:
             return False
 
     return True
