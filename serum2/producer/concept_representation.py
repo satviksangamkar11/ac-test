@@ -192,7 +192,17 @@ class ConceptDerivationEngine:
         common = dict(canonical_target=cid, atlas_entry=atlas_res,
                       semantic_target_name=res.registry_target, capability_key=res.capability_key,
                       derivation_chain=chain)
-        if contract is not None and contract.usable_for(required_causal=True):
+        # Absolute parameter writes (numeric/enum/boolean SET) require only structural
+        # execution evidence; causal/audible verification is not required for the B1
+        # representation.  The causal gate is enforced separately at admission.
+        _ABSOLUTE_SET_OPS = frozenset({
+            "mutate_numeric_value", "mutate_enum_value", "mutate_boolean_value",
+        })
+        _op_needs_causal = (
+            contract.allowed_operation not in _ABSOLUTE_SET_OPS
+            if contract is not None else True
+        )
+        if contract is not None and contract.usable_for(required_causal=_op_needs_causal):
             chain.append("contract_registry[%s]: %s" % (res.capability_key, contract.status))
             op = self._operation_type(contract)
             vd = self._value_domain_from_atlas(atlas_ctrl, op)

@@ -147,10 +147,28 @@ class TargetResolver:
         # Check for contract attachment (optional; missing contract does not block this layer)
         mapping = None
         contract = self._contracts.contracts.get(cap) if cap else None
-        if contract is not None and contract.usable_for(required_causal=True):
+        # Absolute parameter writes (numeric/enum/boolean SET) require only structural
+        # execution evidence — the operation writes a parameter value, not an audible claim.
+        # Causal verification (CAUSAL_VERIFIED status) is required only for operations that
+        # assert a measured audible effect.  Non-SET operations (none currently in production)
+        # are treated as causal-requiring.
+        _ABSOLUTE_SET_OPS = frozenset({
+            "mutate_numeric_value", "mutate_enum_value", "mutate_boolean_value",
+        })
+        _op_needs_causal = (
+            contract.allowed_operation not in _ABSOLUTE_SET_OPS
+            if contract is not None else False
+        )
+        if contract is not None and contract.usable_for(required_causal=_op_needs_causal):
             mapping = self._factory(
                 universal_concept=concept, semantic_target=cap, confidence=1.0,
-                rationale="derived from SEMANTIC_TARGETS + a CAUSAL_VERIFIED contract; not a hand-written mapping")
+                rationale=(
+                    "derived from SEMANTIC_TARGETS + an executable contract (absolute SET); "
+                    "not a hand-written mapping"
+                    if not _op_needs_causal else
+                    "derived from SEMANTIC_TARGETS + a CAUSAL_VERIFIED contract; "
+                    "not a hand-written mapping"
+                ))
 
         # Return SUCCESS: canonical concept always established.
         # Capability Resolution layer later checks whether contract exists (if cap is set).
