@@ -439,6 +439,13 @@ class ProducerBrain:
         if epoch is None:
             raise ValueError("ProducerBrain requires explicit epoch (use EPOCH_OFFLINE_TEST for offline tests, not None)")
         require_epoch(epoch)
+        self._epoch = epoch
+        # Retained (not just passed to ContractRegistry) so a caller holding this exact brain instance --
+        # e.g. serum_preset_orchestrator.execute_serum_preset_plan() -- can re-run admission through the
+        # SAME evidence dirs via a different admission gate (state_admission.admit_rows(), which always
+        # builds its own ContractRegistry from dir paths) without guessing what dirs this brain used.
+        self._binding_evidence_dir = binding_evidence_dir
+        self._promoted_evidence_dir = promoted_evidence_dir
         self._registry = ContractRegistry(epoch=epoch, binding_evidence_dir=binding_evidence_dir,
                                           promoted_evidence_dir=promoted_evidence_dir)
         # Inject self._registry so RouteSelector uses the same epoch-aware store that

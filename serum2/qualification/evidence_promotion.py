@@ -128,8 +128,33 @@ def _body_path(evidence: Dict[str, Any]) -> Optional[str]:
     return path
 
 
-def _accessor(evidence: Dict[str, Any]) -> Optional[str]:
-    return evidence.get("accessor") or evidence.get("resolver_operation_id")
+def _accessor_from_binding_table(target: str) -> Optional[str]:
+    """Generic accessor derivation for a 'field'-kind control: looked up in the SAME authoritative
+    serum_mcp_binding_table.json that state_ledger.derive()/admit_rows() already trust as the single
+    source of a control's list/index/field identity, keyed by control_id -- which is exactly this
+    contract's own `target`. Never guessed from body_path, never branched on which control this is:
+    every target that has a 'field'-kind binding_table entry is reconstructed identically. A target
+    with no entry, or a non-field kind (fx/route/singleton_field, which _validate() never compares
+    against this accessor string at all), correctly returns None -- not every promoted contract needs
+    or gets one."""
+    from serum2.producer.state_ledger import binding_table
+    entry = (binding_table().get("controls") or {}).get(target)
+    if not isinstance(entry, dict) or entry.get("kind") != "field":
+        return None
+    list_, index, field = entry.get("list"), entry.get("index"), entry.get("field")
+    if list_ is None or index is None or not field:
+        return None
+    return "%s[%d].%s" % (list_, index, field)
+
+
+def _accessor(evidence: Dict[str, Any], target: Optional[str] = None) -> Optional[str]:
+    """Prefer an accessor the evidence itself already carries (e.g. from a candidate_binding_qualifier
+    run); otherwise reconstruct it generically from the binding table by this evidence's own target --
+    never fabricated, never target-specific code, just the same lookup derive()/admit_rows() use."""
+    explicit = evidence.get("accessor") or evidence.get("resolver_operation_id")
+    if explicit:
+        return explicit
+    return _accessor_from_binding_table(target) if target else None
 
 
 def _mutation_values(evidence: Dict[str, Any]) -> Tuple[Any, Any]:
@@ -244,7 +269,7 @@ def promote_verified_evidence(evidence: Dict[str, Any], *, trusted_epoch=None) -
                                detail="restoration_verified=%r" % _restoration_verified(evidence))
 
     body_path = _body_path(evidence)
-    accessor = _accessor(evidence)
+    accessor = _accessor(evidence, target)
     if not body_path and not accessor:
         return PromotionResult(False, REJECT_MISSING_BODY_PATH, detail=target)
 

@@ -19,6 +19,7 @@ Covers the required cases:
 """
 from __future__ import annotations
 
+import hashlib
 import platform
 
 import pytest
@@ -33,6 +34,7 @@ from serum2.producer.serum_preset_orchestrator import (
     NativeExecutionEvidence,
     ExecutionEnvironmentUnavailable,
     PresetGenerationFailed,
+    _generate_canonical_preset,
 )
 
 BINDING_DIR = Path(__file__).parent.parent / "serum2" / "qualification" / "binding_evidence"
@@ -264,6 +266,65 @@ class TestOrchestratorIsGenericNotTargetSpecific:
             assert forbidden not in src, (
                 "orchestrator must remain generic; found target-specific text %r" % forbidden
             )
+
+
+class TestProductionCanonicalPresetGeneration:
+    """Proves the REAL production generator (serum2.execution.authorized_state_compiler.compile_ops,
+    invoked via _generate_canonical_preset -- never preset_generation_fn) turns a real ADVISORY_ONLY
+    ProducerResult into a genuine .SerumPreset file, for two different control families, WITHOUT
+    passing a test-injected preset_generation_fn. serialize()/generate_preset() needs a real
+    SERUM_PRESETS_PATH to write into; tests point it at tmp_path, which is not fabricating evidence --
+    it is the exact real vendored serum-mcp writer, just given a writable destination."""
+
+    @pytest.mark.parametrize("intent,target,capability_key", [
+        ("set Env2.Decay to 5.0 seconds", "Env2.Decay", "envelope2_field_decay"),
+        ("set Env2.Decay to 8.0 seconds", "Env2.Decay", "envelope2_field_decay"),
+    ])
+    def test_real_compile_ops_produces_genuine_preset_file(self, tmp_path, monkeypatch, intent, target, capability_key):
+        monkeypatch.setenv("SERUM_PRESETS_PATH", str(tmp_path))
+        brain = _brain()
+        result = _advisory_result(brain, intent, target)
+
+        gen = _generate_canonical_preset(result, result._serum_preset_plan, EPOCH_2_0_23, brain)
+
+        assert gen["status"] == "SUCCESS", gen
+        preset_path = Path(gen["preset_path"])
+        assert preset_path.is_file()
+        assert preset_path.is_relative_to(tmp_path)
+        real_sha = hashlib.sha256(preset_path.read_bytes()).hexdigest()
+        assert real_sha == gen["preset_sha256"], "reported sha256 must be the real file's own hash"
+        # A genuine .SerumPreset is zlib-compressed XferJson, never an empty or placeholder file.
+        assert preset_path.read_bytes()[:8] == b"XferJson"
+
+    def test_full_orchestrator_without_preset_generation_fn_override(self, tmp_path, monkeypatch):
+        """execute_serum_preset_plan() with NO preset_generation_fn override -- the actual production
+        code path end to end, only Step 2 (native load) and Step 3 (UI evidence) use test seams, since
+        those are genuinely environment-dependent (Windows/Ableton) and not this task's subject."""
+        monkeypatch.setenv("SERUM_PRESETS_PATH", str(tmp_path))
+        brain = _brain()
+        result = _advisory_result(brain, "set Env2.Decay to 5.0 seconds", "Env2.Decay")
+
+        finalized = execute_serum_preset_plan(
+            result, EPOCH_2_0_23, brain=brain,
+            # preset_generation_fn intentionally omitted: exercises _generate_canonical_preset for real.
+            native_execution_fn=_fake_native_load_success,
+            ui_evidence_provider=make_test_ui_evidence_provider(epoch=EPOCH_2_0_23),
+        )
+
+        assert finalized.execution_status == "EXECUTED"
+        spe = finalized.serum_preset_execution
+        assert Path(spe["preset_path"]).is_file()
+        assert spe["preset_sha256"] == hashlib.sha256(Path(spe["preset_path"]).read_bytes()).hexdigest()
+
+    def test_missing_operand_evidence_fails_closed(self):
+        """A result whose b1_intent lacks operation.target_value must never fabricate an operand."""
+        brain = _brain()
+        result = _advisory_result(brain, "set Env2.Decay to 5.0 seconds", "Env2.Decay")
+        result.b1_intent["operation"]["target_value"] = None
+
+        gen = _generate_canonical_preset(result, result._serum_preset_plan, EPOCH_2_0_23, brain)
+        assert gen["status"] == "FAILED"
+        assert "target_value" in gen["error"] or "operand" in gen["error"]
 
 
 class TestOrchestratorRejectsNonAdvisoryInput:

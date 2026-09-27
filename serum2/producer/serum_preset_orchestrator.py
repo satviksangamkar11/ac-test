@@ -10,8 +10,9 @@ module is the environment-dependent stage that comes after it:
           v
     execute_serum_preset_plan()
           |
-          +-- 1. generate the canonical .SerumPreset            (cloud-capable; not yet wired -- see
-          |                                                       _generate_canonical_preset's docstring)
+          +-- 1. generate the canonical .SerumPreset            (cloud-capable; calls the existing
+          |                                                       compile_ops() via a reconstructed Row --
+          |                                                       see _generate_canonical_preset's docstring)
           +-- 2. serum_track_loader.load_and_verify()            (Windows/Ableton only; fails closed
           |                                                       with ExecutionEnvironmentUnavailable
           |                                                       everywhere else)
@@ -43,7 +44,9 @@ callers wire an adapter that actually drives the Windows/Ableton/Serum GUI and r
 """
 from __future__ import annotations
 
+import hashlib
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional
 
 from serum2.producer.execution_epoch import ExecutionEpoch, require_epoch
@@ -137,7 +140,10 @@ def execute_serum_preset_plan(
     brain = brain or get_brain(epoch)
 
     # ---- Step 1: generate the canonical .SerumPreset ----
-    gen = (preset_generation_fn or _generate_canonical_preset)(result, plan, epoch)
+    if preset_generation_fn:
+        gen = preset_generation_fn(result, plan, epoch)
+    else:
+        gen = _generate_canonical_preset(result, plan, epoch, brain)
     if gen.get("status") != "SUCCESS":
         raise PresetGenerationFailed(
             "Canonical preset generation failed: %s" % gen.get("error", "unknown error")
@@ -217,33 +223,78 @@ def _validate_evidence(evidence: NativeExecutionEvidence) -> None:
 
 
 def _generate_canonical_preset(
-    result: ProducerResult, plan: Dict[str, Any], epoch: ExecutionEpoch,
+    result: ProducerResult, plan: Dict[str, Any], epoch: ExecutionEpoch, brain: ProducerBrain,
 ) -> Dict[str, Any]:
-    """Canonical preset generation for the single-target intent-based admission path.
+    """Canonical preset generation for the single-target intent-based admission path, calling the
+    EXISTING generic compiler (serum2.execution.authorized_state_compiler.compile_ops -- the same one
+    reference_reproduction.py uses) rather than reimplementing any of its lowering/validation logic.
 
-    NOT YET IMPLEMENTED for production. This is the honest remaining gap in the orchestrator, not a
-    fabricated success: the existing generic compiler (serum2.execution.authorized_state_compiler.
-    compile_ops, which reference_reproduction.py already uses) takes AuthorizedOperation records
-    built by ops_from_rows() from state-ledger Rows -- a DIFFERENT admission chain than the one
-    _run_serum_preset_path() produces (ContractGovernedExecutor -> ExecutionAuthority.scope, a plain
-    {mutation_target_path, mutation_value_used} pair, with no Row/binding-dict/contract_domain
-    attached). Bridging the two requires re-deriving AuthorizedOperation's binding dict (kind/module/
-    field/index or fx/route shape) from the admitted contract's own execution_binding
-    (see serum2.evidence.capability_contract.ExecutionBinding) via contract_scope.coverage_of() and a
-    reverse kParam->field lookup against contract_scope.kparam_for()'s catalog -- each piece exists,
-    but assembling it without a subtle field-naming mistake needs its own dedicated pass and tests,
-    not a guess folded into this orchestrator. Fails closed rather than emit an approximately-correct
-    preset. `preset_generation_fn` is the injection point a caller (or a following change) uses until
-    this is wired; production callers must not pass a fabricated one.
+    The bridge: _run_serum_preset_path()'s own admission (ContractGovernedExecutor -> ExecutionAuthority.
+    scope) proves the target is ADMITTED but produces a plain {mutation_target_path, mutation_value_used}
+    pair -- not the AuthorizedOperation/binding-dict shape compile_ops() requires (which
+    ops_from_rows() only ever builds from a state_ledger Row). Rather than re-derive that binding dict
+    by hand (real risk of a subtle field-naming mistake silently producing a WRONG preset), this
+    reconstructs a single observed Row from the SAME real facts the brain already produced --
+    canonical_target and the user's actual requested operand, both read from result.b1_intent (never
+    from plan['qualification_test_value'], which is evidence metadata only per architecture rule) --
+    and runs it through the real state_ledger.derive() -> state_admission.admit_rows() ->
+    authorized_state_compiler.ops_from_rows()/compile_ops() chain unchanged. admit_rows() is a SEPARATE,
+    independent admission gate (the one the row-based reference-reproduction path already uses); calling
+    it here can only ADD a stricter check on top of the brain's own ContractGovernedExecutor admission,
+    never weaken or bypass it -- it consults the identical evidence dirs/epoch this exact brain was
+    built with (brain._binding_evidence_dir/_promoted_evidence_dir), so it can never admit under
+    different evidence than the brain itself was authorized against.
+
+    Generic across every 'field'-kind control: nothing below names one specific control. A target whose
+    binding is fx/route/singleton_field, or that derive()/admit_rows() itself refuses, fails closed with
+    the real refusal reason -- never an approximately-correct preset.
     """
-    return {
-        "status": "FAILED",
-        "error": (
-            "Canonical preset generation from an intent-based ADVISORY_ONLY plan is not yet wired "
-            "(see _generate_canonical_preset's docstring for the exact remaining bridge). Pass "
-            "preset_generation_fn explicitly for tests; do not fabricate a preset in production."
-        ),
-    }
+    b1 = result.b1_intent or {}
+    target = b1.get("canonical_target")
+    op = b1.get("operation") or {}
+    value = op.get("target_value")
+    if not target or value is None:
+        return {"status": "FAILED",
+                "error": "result.b1_intent missing canonical_target/operation.target_value "
+                         "(resolution_mode=%r) -- cannot identify the real requested operand" % b1.get("resolution_mode")}
+
+    # The target's OWN declared production-facing unit (e.g. 'seconds' for env2.decay) -- real data from
+    # this same admitted resolution's representation.value_domain, never guessed or hardcoded per target.
+    unit = ((b1.get("representation") or {}).get("value_domain") or {}).get("unit") or ""
+
+    from serum2.producer.state_ledger import Row, derive
+    from serum2.producer.state_admission import admit_rows
+    from serum2.execution.authorized_state_compiler import ops_from_rows, compile_ops
+    from serum2.execution.state_comparator import serialize
+
+    row = Row(control_id=target, value=value, unit=unit, status="OBSERVED", control_type="fader",
+              source_ts=0.0, n_readings=1, changed_from_previous=False, context={})
+    derive(row, tempo=120.0)
+    if row.terminal != "OPERATION_DERIVED":
+        return {"status": "FAILED",
+                "error": "derive() could not turn %s=%r%s into an operation: %s" % (target, value, unit, row.reason)}
+
+    admit_rows([row], epoch, binding_evidence_dir=brain._binding_evidence_dir,
+              promoted_evidence_dir=brain._promoted_evidence_dir)
+    if row.admission != "ADMITTED":
+        return {"status": "FAILED",
+                "error": "admit_rows() (independent row-based gate) refused %s: %s" % (target, row.admission)}
+
+    ops = ops_from_rows([row], epoch)
+    if not ops:
+        return {"status": "FAILED", "error": "ops_from_rows() produced no AuthorizedOperation for %s" % target}
+
+    try:
+        report = compile_ops(ops, plan.get("capability_key") or target,
+                             "W1 orchestrator: %s set to admitted operand" % target, epoch)
+    except Exception as e:
+        return {"status": "FAILED", "error": "compile_ops() raised %s: %s" % (type(e).__name__, e)}
+    if report.status != "SUCCESS":
+        return {"status": "FAILED", "error": "compile_ops() incomplete: missing=%s" % report.missing}
+
+    preset_path = serialize(report, subfolder="W1")
+    preset_sha256 = hashlib.sha256(Path(preset_path).read_bytes()).hexdigest()
+    return {"status": "SUCCESS", "preset_path": preset_path, "preset_sha256": preset_sha256}
 
 
 def _load_preset_native(preset_path: str) -> Dict[str, Any]:
