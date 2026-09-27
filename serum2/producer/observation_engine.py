@@ -467,5 +467,11 @@ class ObservationEngine:
                 value=result.normalized_value,
                 confidence=s.get("confidence", result.confidence),
                 source=src_label,
+                control_id=result.control_id,
+                evidence_hash=result.evidence_hash,
             ))
-        return adjudicate(policy_candidates, numeric_tol=numeric_tol)
+        return adjudicate(
+            policy_candidates,
+            numeric_tol=numeric_tol,
+            requested_control_id=context.get("control_id", ""),
+        )

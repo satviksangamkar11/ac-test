@@ -31,9 +31,10 @@ def test_all_unreadable_returns_unreadable():
     assert r.outcome == OUTCOME_UNREADABLE
 
 
-def test_single_high_confidence_is_observed():
+def test_single_high_confidence_is_ambiguous_not_observed():
+    # GAP B fix: single source, even above threshold, requires corroboration.
     r = adjudicate([_cand(1.5, confidence=0.95)])
-    assert r.outcome == OUTCOME_OBSERVED
+    assert r.outcome == OUTCOME_AMBIGUOUS
     assert r.value == 1.5
     assert r.single_source is True
 
@@ -41,7 +42,7 @@ def test_single_high_confidence_is_observed():
 def test_single_low_confidence_is_ambiguous():
     r = adjudicate([_cand(1.5, confidence=0.7)])
     assert r.outcome == OUTCOME_AMBIGUOUS
-    assert r.single_source is False
+    assert r.single_source is True
 
 
 def test_two_candidates_agree_numeric():
@@ -101,6 +102,8 @@ def test_single_below_threshold_is_ambiguous_not_unreadable():
     assert r.outcome == OUTCOME_AMBIGUOUS
 
 
-def test_single_at_threshold_is_observed():
+def test_single_at_threshold_is_ambiguous_not_observed():
+    # GAP B fix: even exactly at threshold, single source is not sufficient.
     r = adjudicate([_cand(1.0, confidence=CONFIDENT_THRESHOLD)])
-    assert r.outcome == OUTCOME_OBSERVED
+    assert r.outcome == OUTCOME_AMBIGUOUS
+    assert r.single_source is True

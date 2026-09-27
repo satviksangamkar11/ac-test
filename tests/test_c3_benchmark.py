@@ -19,13 +19,18 @@ from serum2.producer.observation_engine import ObservationEngine
 from serum2.producer.observation_policy import OUTCOME_OBSERVED, OUTCOME_AMBIGUOUS, OUTCOME_UNREADABLE
 
 
-def test_real_high_confidence_correct_vlm_is_observed_and_exact():
-    """The one real case where Qwen was both correct and confident must be admitted."""
+def test_real_high_confidence_correct_vlm_is_now_ambiguous_single_source():
+    """GAP B remediation: the real case where Qwen was correct and confident (CAL_06,
+    0.944 confidence) now returns AMBIGUOUS because it is a single source with no
+    independent corroboration (OCR unavailable). The value is preserved in the result
+    (value=1.0) but the outcome is AMBIGUOUS, not OBSERVED.
+    Correctness + high confidence is necessary but not sufficient; corroboration is
+    required before a reading can be mutation-authorizing."""
     cases = {c["case_id"]: c for c in build_real_cases()}
     row = run_real_case(cases["real_cal06_env1_decay"], ObservationEngine())
-    assert row["adjudicated_outcome"] == OUTCOME_OBSERVED
-    assert row["exact_match"] is True
+    assert row["adjudicated_outcome"] == OUTCOME_AMBIGUOUS
     assert row["confident_wrong"] is False
+    assert row["abstained"] is True
 
 
 def test_real_low_confidence_wrong_vlm_abstains_not_confident_wrong():
@@ -61,17 +66,17 @@ def test_synthetic_disagreeing_sources_never_silently_pick_one():
     assert row["adjudicated_outcome"] == OUTCOME_AMBIGUOUS
 
 
-def test_synthetic_single_confident_wrong_source_IS_admitted_known_gap():
-    """Documents a real, unresolved gap: a single source above CONFIDENT_THRESHOLD is
-    admitted as OBSERVED regardless of correctness -- the policy has no independent way
-    to detect it's wrong. This is why C3 is NOT integrated into the mutation pipeline.
-    If this test starts failing (i.e. the policy starts abstaining here), the integration
-    decision in c3_report.md should be revisited -- it would mean the risk got smaller,
-    not that it's automatically now safe to wire in."""
+def test_synthetic_single_confident_wrong_source_is_now_ambiguous():
+    """GAP B remediation: a single source above CONFIDENT_THRESHOLD now returns
+    AMBIGUOUS (corroboration required), not OBSERVED. The confident-wrong outcome
+    no longer occurs for single-source cases -- multi-source agreement is required
+    for OBSERVED. This is the C3 remediation fix for the single-source gap.
+    See c3_report.md for the original gap description."""
     cases = {c["case_id"]: c for c in build_synthetic_cases()}
     row = run_synthetic_case(cases["synthetic_wrong_vlm_high_confidence"])
-    assert row["adjudicated_outcome"] == OUTCOME_OBSERVED
-    assert row["confident_wrong"] is True
+    assert row["adjudicated_outcome"] == OUTCOME_AMBIGUOUS
+    assert row["confident_wrong"] is False
+    assert row["abstained"] is True
 
 
 def test_synthetic_agreeing_correct_sources_observed():
