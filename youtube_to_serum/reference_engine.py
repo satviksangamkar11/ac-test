@@ -58,15 +58,18 @@ class NeedsStageACensus(RuntimeError):
 
 
 def stage_a_is_filled(skeleton_path: str) -> bool:
-    """A skeleton counts as filled only when every serum_visible frame has been analysed (has at
-    least one entry in controls or mod_routes). A single analysed frame surrounded by un-touched
-    frames (serum_visible=None) is NOT a valid census — every frame where Serum was visible must
-    have been worked through. An all-not-serum-visible file returns False."""
+    """A6: A skeleton counts as filled only when every serum_visible frame has terminal analysis_status.
+
+    Terminal values: ANALYZED | NOT_SERUM | UNREADABLE | EQUIVALENT_TO:<frame_id>
+    A single analysed frame surrounded by un-touched frames (serum_visible=None) is NOT valid — every
+    frame where Serum was visible must have been explicitly analyzed and given a terminal status.
+    An all-not-serum-visible file returns False."""
     data = json.loads(Path(skeleton_path).read_text())
     serum_frames = [f for f in data["frames"] if f.get("serum_visible") is True]
     if not serum_frames:
         return False
-    return all(bool(f.get("controls") or f.get("mod_routes")) for f in serum_frames)
+    # A6: Check that EVERY serum_visible frame has a terminal analysis_status (not None)
+    return all(f.get("analysis_status") is not None for f in serum_frames)
 
 
 def run_stage1_acquire_and_prep(youtube_url: str, work_dir: Path) -> Dict[str, Any]:

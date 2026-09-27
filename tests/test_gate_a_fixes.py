@@ -508,30 +508,95 @@ class TestA4ContractReachability:
 
 
 class TestA6FrameAnalysisStatus:
-    """A6: Per-frame analysis_status; stage_a_is_filled uses all() not any()."""
+    """A6: Per-frame analysis_status; stage_a_is_filled uses terminal status values."""
 
     def test_stage_a_skeleton_includes_analysis_status(self):
-        """A6: empty_stage_a_skeleton includes 'analysis_status' field."""
+        """A6 PROOF 1: empty_stage_a_skeleton includes 'analysis_status' field."""
         from serum2.producer.stage_a_census_prep import empty_stage_a_skeleton
         manifest = [{"frame_id": "f1", "timestamp_sec": 0.0, "path": "/tmp/f1.jpg", "source": "sparse"}]
         skeleton = empty_stage_a_skeleton(manifest)
         assert "analysis_status" in skeleton["frames"][0], "analysis_status not in frame schema"
         assert skeleton["frames"][0]["analysis_status"] is None, "analysis_status should start as None"
 
-    def test_stage_a_is_filled_uses_all(self):
-        """A6: stage_a_is_filled uses all() over serum_visible frames (not any())."""
+    def test_stage_a_is_filled_requires_terminal_analysis_status(self):
+        """A6 PROOF 2: stage_a_is_filled checks analysis_status, not just controls/mod_routes presence.
+
+        Terminal values: ANALYZED | NOT_SERUM | UNREADABLE | EQUIVALENT_TO:<frame_id>
+        Every serum_visible frame MUST have one of these values (not None) for is_filled=True.
+        """
         from youtube_to_serum.reference_engine import stage_a_is_filled
         import json
         import tempfile
         from pathlib import Path
+
         with tempfile.TemporaryDirectory() as tmp:
-            # Test: 1 of 300 frames analysed should return False
-            frames = [{"serum_visible": True, "controls": [{"control_id": "env2.decay", "value": "300"}]}]
-            frames += [{"serum_visible": True, "controls": []} for _ in range(99)]
+            # A6 PROOF 2a: None analysis_status should fail (not filled)
+            frames = [
+                {"frame_id": f"f{i}", "serum_visible": True, "analysis_status": None,
+                 "controls": [{"control_id": "env2.decay", "value": "300"}] if i == 0 else []}
+                for i in range(10)
+            ]
             skeleton = {"frames": frames}
-            p = Path(tmp) / "skeleton.json"
+            p = Path(tmp) / "skeleton_none.json"
             p.write_text(json.dumps(skeleton))
-            assert stage_a_is_filled(str(p)) is False, "all() should reject partial completion"
+            result = stage_a_is_filled(str(p))
+            assert result is False, "A6 PROOF 2a: None analysis_status should reject (not filled)"
+
+            # A6 PROOF 2b: All ANALYZED should pass
+            frames = [
+                {"frame_id": f"f{i}", "serum_visible": True, "analysis_status": "ANALYZED",
+                 "controls": [{"control_id": "env2.decay", "value": "300"}] if i == 0 else []}
+                for i in range(10)
+            ]
+            skeleton = {"frames": frames}
+            p = Path(tmp) / "skeleton_analyzed.json"
+            p.write_text(json.dumps(skeleton))
+            result = stage_a_is_filled(str(p))
+            assert result is True, "A6 PROOF 2b: All ANALYZED should accept"
+
+            # A6 PROOF 2c: NOT_SERUM and UNREADABLE are also valid terminal statuses
+            frames = [
+                {"frame_id": f"f{i}", "serum_visible": True, "analysis_status": ["ANALYZED", "NOT_SERUM", "UNREADABLE"][i % 3],
+                 "controls": []}
+                for i in range(9)
+            ]
+            skeleton = {"frames": frames}
+            p = Path(tmp) / "skeleton_mixed.json"
+            p.write_text(json.dumps(skeleton))
+            result = stage_a_is_filled(str(p))
+            assert result is True, "A6 PROOF 2c: ANALYZED|NOT_SERUM|UNREADABLE all valid"
+
+            # A6 PROOF 2d: EQUIVALENT_TO is also valid (terminal equivalence pointer)
+            frames = [
+                {"frame_id": f"f{i}", "serum_visible": True, "analysis_status": "EQUIVALENT_TO:f0" if i > 0 else "ANALYZED",
+                 "controls": []}
+                for i in range(10)
+            ]
+            skeleton = {"frames": frames}
+            p = Path(tmp) / "skeleton_equiv.json"
+            p.write_text(json.dumps(skeleton))
+            result = stage_a_is_filled(str(p))
+            assert result is True, "A6 PROOF 2d: EQUIVALENT_TO:frame_id is valid terminal status"
+
+    def test_stage_a_is_filled_uses_all_not_any(self):
+        """A6 PROOF 3: stage_a_is_filled uses all() to require every serum_visible frame analyzed."""
+        from youtube_to_serum.reference_engine import stage_a_is_filled
+        import json
+        import tempfile
+        from pathlib import Path
+
+        with tempfile.TemporaryDirectory() as tmp:
+            # One analyzed, 99 unanalyzed should fail (testing all() logic)
+            frames = [
+                {"frame_id": f"f{i}", "serum_visible": True,
+                 "analysis_status": "ANALYZED" if i == 0 else None, "controls": []}
+                for i in range(100)
+            ]
+            skeleton = {"frames": frames}
+            p = Path(tmp) / "skeleton_partial.json"
+            p.write_text(json.dumps(skeleton))
+            result = stage_a_is_filled(str(p))
+            assert result is False, "A6 PROOF 3: Partial (1/100) should fail (all() logic)"
 
 
 class TestA7UIReadbackBinding:
