@@ -170,8 +170,8 @@ def _binding_quality(ui_readback: Dict[str, Any]) -> str:
 
     if ui_readback.get("loader_evidence"):
         le = ui_readback["loader_evidence"]
-        # A7: Require all key fields for LOADER_BOUND classification
-        required_fields = {"run_id", "track_nonce", "serum_module_sha256", "epoch", "screenshot_sha"}
+        # A7: Require all key fields for LOADER_BOUND classification (including crop_coords for screenshot integrity)
+        required_fields = {"run_id", "track_nonce", "serum_module_sha256", "epoch", "screenshot_sha", "crop_coords"}
         if required_fields.issubset(le.keys()) and all(le.get(f) for f in required_fields):
             return "LOADER_BOUND"
     if ui_readback.get("captured_at") or ui_readback.get("serum") or ui_readback.get("method"):

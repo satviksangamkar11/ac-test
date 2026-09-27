@@ -223,19 +223,29 @@ class TestA7UIReadbackBinding:
     """A7: UI readback requires loader evidence; _ui_equal handles unit normalization."""
 
     def test_binding_quality_requires_all_fields(self):
-        """A7: LOADER_BOUND requires run_id, track_nonce, serum_module_sha256, epoch, screenshot_sha."""
+        """A7: LOADER_BOUND requires run_id, track_nonce, serum_module_sha256, epoch, screenshot_sha, crop_coords."""
         from serum2.execution.state_comparator import _binding_quality
         # Missing epoch
         ui_readback = {"loader_evidence": {
             "run_id": "123",
             "track_nonce": "abc",
             "serum_module_sha256": "def",
-            "screenshot_sha": "ghi"
+            "screenshot_sha": "ghi",
+            "crop_coords": [0, 0, 100, 100]
         }}
         assert _binding_quality(ui_readback) != "LOADER_BOUND", "Should not be LOADER_BOUND without epoch"
-        # Complete
+        # Add epoch but missing crop_coords
+        ui_readback2 = {"loader_evidence": {
+            "run_id": "123",
+            "track_nonce": "abc",
+            "serum_module_sha256": "def",
+            "screenshot_sha": "ghi",
+            "epoch": "2.0.23"
+        }}
+        assert _binding_quality(ui_readback2) != "LOADER_BOUND", "Should not be LOADER_BOUND without crop_coords"
+        # Complete with all fields
         ui_readback["loader_evidence"]["epoch"] = "2.0.23"
-        assert _binding_quality(ui_readback) == "LOADER_BOUND", "Should be LOADER_BOUND with all fields"
+        assert _binding_quality(ui_readback) == "LOADER_BOUND", "Should be LOADER_BOUND with all fields including crop_coords"
 
     def test_ui_equal_unit_normalization(self):
         """A7: _ui_equal handles unit normalization ("300" + "ms" == "300 ms")."""
