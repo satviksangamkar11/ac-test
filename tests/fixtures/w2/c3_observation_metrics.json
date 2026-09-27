@@ -1,0 +1,117 @@
+{
+  "source_video": "AjE11L_OwLA",
+  "metrics": [
+    {
+      "control_id": "env1.decay",
+      "frame_id": "frame_yt_19935949eb0e_00024000",
+      "timestamp_sec": 24.0,
+      "evidence_hash": "ef8d99acf75e11efc53e0b1b676b1358391cabafcf56d7af66e0609157051fac",
+      "source_count": 2,
+      "source_types": [
+        "qwen2.5-vl-3b-instruct",
+        "easyocr-1.7.2"
+      ],
+      "raw_vlm_output": "1.0 s",
+      "vlm_confidence": 0.8534,
+      "raw_ocr_output": "1005",
+      "ocr_confidence": 0.16438478231430054,
+      "adjudicated_outcome": "AMBIGUOUS",
+      "adjudicated_value": null,
+      "adjudicated_confidence": 0.0,
+      "adjudicated_detail": "split: [(1.0, 's'), (1005.0, 's')]",
+      "adjudicated_evidence_hash": null,
+      "single_source": false,
+      "confident_wrong": false,
+      "exact_match": false,
+      "ocr_used_as_source": false,
+      "has_execution_contract_row": true
+    },
+    {
+      "control_id": "oscA.octave",
+      "frame_id": "frame_yt_19935949eb0e_00024000",
+      "timestamp_sec": 24.0,
+      "evidence_hash": "143e4e0e90b613c0a350d7e1a1486cf47cef6cc381a8014f5a8dd4e87c67387e",
+      "source_count": 1,
+      "source_types": [
+        "qwen2.5-vl-3b-instruct"
+      ],
+      "raw_vlm_output": "0",
+      "vlm_confidence": 0.9742,
+      "raw_ocr_output": null,
+      "ocr_confidence": null,
+      "adjudicated_outcome": "AMBIGUOUS",
+      "adjudicated_value": 0.0,
+      "adjudicated_confidence": 0.9742,
+      "adjudicated_detail": "single source: corroboration required (confidence 0.974 >= 0.90 but no independent source)",
+      "adjudicated_evidence_hash": "143e4e0e90b613c0a350d7e1a1486cf47cef6cc381a8014f5a8dd4e87c67387e",
+      "single_source": true,
+      "confident_wrong": false,
+      "exact_match": false,
+      "ocr_used_as_source": false,
+      "has_execution_contract_row": true
+    },
+    {
+      "control_id": "oscA.octave",
+      "frame_id": "frame_yt_19935949eb0e_00034000",
+      "timestamp_sec": 34.0,
+      "evidence_hash": "ea1f8ef0f2559956c1274504c419adf5d82c0f91bb9c636d13ad2ad12867d23d",
+      "source_count": 1,
+      "source_types": [
+        "qwen2.5-vl-3b-instruct"
+      ],
+      "raw_vlm_output": "-2",
+      "vlm_confidence": 0.7822,
+      "raw_ocr_output": null,
+      "ocr_confidence": null,
+      "adjudicated_outcome": "AMBIGUOUS",
+      "adjudicated_value": -2.0,
+      "adjudicated_confidence": 0.7822,
+      "adjudicated_detail": "single source below confidence threshold (0.782 < 0.90)",
+      "adjudicated_evidence_hash": "ea1f8ef0f2559956c1274504c419adf5d82c0f91bb9c636d13ad2ad12867d23d",
+      "single_source": true,
+      "confident_wrong": false,
+      "exact_match": false,
+      "ocr_used_as_source": false,
+      "has_execution_contract_row": true
+    },
+    {
+      "control_id": "oscA.rand_phase",
+      "frame_id": "frame_yt_19935949eb0e_00034000",
+      "timestamp_sec": 34.0,
+      "evidence_hash": "35fc140f386efe8e28528f3f449d3d23c15aa36e91a2aaf0cdb1cfd75ba26c4d",
+      "source_count": 2,
+      "source_types": [
+        "qwen2.5-vl-3b-instruct",
+        "easyocr-1.7.2"
+      ],
+      "raw_vlm_output": "62",
+      "vlm_confidence": 0.9938,
+      "raw_ocr_output": "62",
+      "ocr_confidence": 0.9999689800604141,
+      "adjudicated_outcome": "OBSERVED",
+      "adjudicated_value": 62.0,
+      "adjudicated_confidence": 0.9999689800604141,
+      "adjudicated_detail": "multi-source agreement (2 candidates)",
+      "adjudicated_evidence_hash": "35fc140f386efe8e28528f3f449d3d23c15aa36e91a2aaf0cdb1cfd75ba26c4d",
+      "single_source": false,
+      "confident_wrong": false,
+      "exact_match": false,
+      "ocr_used_as_source": true,
+      "has_execution_contract_row": false
+    }
+  ],
+  "aggregate": {
+    "source_video": "AjE11L_OwLA",
+    "real_readable_count": 4,
+    "observed_corroborated_count": 1,
+    "abstained_count": 3,
+    "identity_unresolved_count": 0,
+    "single_source_count": 2,
+    "confident_wrong_count": 0,
+    "exact_match_count": 0,
+    "admissible_observed_count": 0,
+    "observed_controls_missing_contract_row": [
+      "oscA.rand_phase"
+    ]
+  }
+}

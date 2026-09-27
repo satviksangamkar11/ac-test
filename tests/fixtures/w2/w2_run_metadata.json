@@ -1,0 +1,45 @@
+{
+  "w2_run_id": "W2_AjE11L_OwLA",
+  "tutorial": {
+    "url": "https://www.youtube.com/watch?v=AjE11L_OwLA",
+    "video_id": "AjE11L_OwLA",
+    "title": "How to Make a Wobble Bass in Serum 2 | Complete Guide",
+    "uploader": "Arc Nade",
+    "duration_sec": 539.4,
+    "creation_time": "2025-03-30",
+    "source_video_sha256": "c805c377ae2d3b653a61679443443b39f1e48405cc227eb2eb6f13374dc6ba60",
+    "untouched_status": "confirmed -- video_id not present in any prior W1/C3/Gate-B evidence run"
+  },
+  "acquisition": {
+    "storyboard_only": false,
+    "num_frames_acquired": 269,
+    "sample_interval_sec": 2.0,
+    "manifest_file": "tests/fixtures/w2/w2_acquisition_manifest.json"
+  },
+  "frame_accounting": {
+    "USED": ["frame_yt_19935949eb0e_00024000", "frame_yt_19935949eb0e_00034000"],
+    "INSPECTED_NOT_USED": ["frame_yt_19935949eb0e_00062000", "frame_yt_19935949eb0e_00064000",
+                            "frame_yt_19935949eb0e_00072000", "frame_yt_19935949eb0e_00096000"],
+    "NOT_YET_CLASSIFIED": 263,
+    "note": "Only a targeted subset (matched to transcript-flagged parameter-change moments) was inspected within this session's time budget. The remaining 263 acquired frames exist on disk with real hashes/timestamps in w2_acquisition_manifest.json but were not individually terminal-classified (USED/UNREADABLE/NON_RELEVANT/DUPLICATE/FAILED) -- reported honestly as NOT_YET_CLASSIFIED rather than silently omitted or fabricated as complete."
+  },
+  "epoch": {"label": "2.0.23@9293eb90", "binary_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"},
+  "ableton_version_discrepancy": {
+    "runbook_states": "Ableton 11.3",
+    "actual_installed_and_running": "Ableton Live 12 Suite",
+    "resolution": "Proceeded with the actual installed environment (Live 12 Suite) -- the same version every prior successful native session in this repo (Gate B, W1, C3) has used. Treated as a stale runbook string, not a genuine version-lock; documented rather than silently changed or blocked on."
+  },
+  "abletonmcp_connectivity": "AbletonMCP MCP session was disconnected for part of this task; the underlying bridge TCP port (9877) was confirmed listening throughout. Native Serum load/readback (Phases 8+) were not reached because Phase 5/6 never produced an admissible OBSERVED value -- see blocker below -- so AbletonMCP reconnection was not the limiting factor in the end.",
+  "stage_a_c3_metrics_file": "tests/fixtures/w2/c3_observation_metrics.json",
+  "blocker": {
+    "phase": "Phase 5/6 boundary (state ledger / admission)",
+    "exact_condition": "Of 4 real Stage-A observations adjudicated via the actual, unmodified observation_engine.adjudicated_observe(), exactly 1 reached OUTCOME_OBSERVED (oscA.rand_phase=62, genuine VLM+easyocr agreement). That control has no row in parameter_characterization/bulk_causal_evidence/final_execution_contract_v1.json (the 330-control set) -- 'missing execution-contract row', an explicit W2 stop condition. The other 3 real observations (env1.decay, oscA.octave x2) all correctly resolved AMBIGUOUS under the GAP-B-remediated policy (2 as single-source regardless of confidence, 1 as genuine VLM/OCR disagreement) -- also correctly, none reached admissible OBSERVED status.",
+    "remediation_attempted": [
+      "Retried oscA.octave (a control that IS in the execution contract) with a tighter, isolated crop of just the digit -- OCR dropped the minus sign, read '2' instead of '-2' (still disagrees with VLM's correct '-2').",
+      "Retried again with a wider, contrast-enhanced crop preserving the minus glyph -- OCR still misread it entirely ('1').",
+      "Searched subsequent frames (t=62s-96s) for a positive-valued, contract-covered control (oscA.warp_amount, mentioned as '28%' in the transcript) with a static/tooltip numeric readout -- none of the inspected frames showed a legible numeric overlay for it (menu navigation and an unrelated LFO curve edit were in progress instead).",
+      "All attempts used only real, unmodified evidence and the real, unmodified observation_engine/observation_policy -- no fabricated values, no bypassed adjudication, no architecture changes."
+    ],
+    "conclusion": "Genuine, reproducible stop condition given the evidence collected in this session. Not fixed by weakening the architecture (explicitly prohibited) or fabricating evidence (also prohibited). Legitimate next steps: (a) expand the inspected-frame set toward the full 269 to find a naturally-corroborated, contract-covered control elsewhere in the video, or (b) target frames with clean positive-valued static numeric readouts (avoiding OCR's demonstrated weakness on the minus-sign glyph at this resolution)."
+  }
+}
