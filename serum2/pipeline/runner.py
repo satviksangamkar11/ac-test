@@ -189,47 +189,62 @@ def _stage_acquire(manifest: RunManifest, run_dir: Path, youtube_url: str,
     manifest.update_stage(rec)
 
     try:
-        from serum2.source.acquire_visual_evidence import acquire_visual_evidence
-        # acquire_visual_evidence's own default (max_frames=8) is a silent-truncation trap
-        # if omitted here -- max_frames=None means "no cap" per this CLI's own docs, so pass
-        # an explicit large value rather than relying on the callee's unrelated small default.
-        kwargs: Dict[str, Any] = {"source_url": youtube_url, "sample_interval_sec": sample_interval_sec,
-                                   "max_frames": max_frames if max_frames is not None else 10_000}
+        from serum2.source.acquire_exhaustive import acquire_exhaustive
 
-        bundle = acquire_visual_evidence(**kwargs)
-        if bundle.storyboard_only:
-            rec.mark_failed("storyboard fallback is not acceptable for value reading")
+        # Exhaustive acquisition: decode EVERY source frame, no sampling
+        result = acquire_exhaustive(source_url=youtube_url, video_id=video_id, force=False)
+
+        if result["status"] != "SUCCESS":
+            rec.mark_failed(f"Exhaustive frame acquisition failed: {result.get('error', 'unknown error')}")
             manifest.update_stage(rec)
             return rec
 
-        # Persist a manifest in the run_dir
+        # Must have frames; even if some failed, we need decoded frames
+        if result["num_frames_decoded"] == 0:
+            rec.mark_failed(
+                f"No frames successfully decoded. Failed: {result['num_frames_failed']}. "
+                f"Error: {result.get('error', 'unknown')}"
+            )
+            manifest.update_stage(rec)
+            return rec
+
+        # Persist acquisition manifest in run_dir
         out_manifest = run_dir / "acquisition_manifest.json"
         out_manifest.parent.mkdir(parents=True, exist_ok=True)
         manifest_data = {
             "source_url": youtube_url,
             "video_id": video_id,
-            "storyboard_only": bundle.storyboard_only,
-            "num_frames": len(bundle.frames),
+            "acquisition_mode": "exhaustive",
+            "decoder_version": "ffmpeg-frame-by-frame",
+            "num_frames_decoded": result["num_frames_decoded"],
+            "num_frames_failed": result["num_frames_failed"],
             "frames": [
                 {
-                    "frame_id": f.frame_id or f"frame_{i:08d}",
+                    "frame_id": f.frame_id,
+                    "frame_index": int(f.frame_id.split("_")[-1]),
                     "timestamp_sec": f.timestamp_sec,
                     "artifact_path": f.artifact_path,
                     "artifact_hash": f.artifact_hash,
                     "width": f.width,
                     "height": f.height,
+                    "source_video_sha256": f.source_video_sha256,
                 }
-                for i, f in enumerate(bundle.frames)
+                for f in result["frames"]
             ],
+            "failed_frames": result["failed_frames"],
+            "provenance": result["provenance"],
         }
         with open(out_manifest, "w") as f:
             json.dump(manifest_data, f, indent=2)
+
         mhash = content_hash(out_manifest)
         rec.mark_complete({
             "manifest_path": str(out_manifest),
             "manifest_hash": mhash,
-            "num_frames": len(bundle.frames),
-            "storyboard_only": False,
+            "num_frames": result["num_frames_decoded"],
+            "num_frames_failed": result["num_frames_failed"],
+            "acquisition_mode": "exhaustive",
+            "from_cache": result.get("from_cache", False),
         })
     except Exception as e:
         rec.mark_failed(str(e))
