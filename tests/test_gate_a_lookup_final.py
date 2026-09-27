@@ -87,11 +87,13 @@ class TestNoAdmissionBypass:
     def test_no_admitted_status_outside_state_admission(self):
         """Grep-level: no code outside state_admission.py ASSIGNS 'ADMITTED' to admission field."""
         import subprocess
+        from pathlib import Path
         # Match only assignment patterns, not comparisons (== or !=)
+        repo_root = Path(__file__).parent.parent
         result = subprocess.run(
             ["grep", "-rEn", r'\.admission\s*=\s*["\x27]ADMITTED["\x27]',
              "serum2/", "--include=*.py"],
-            capture_output=True, text=True, cwd="/home/user/ac-test")
+            capture_output=True, text=True, cwd=str(repo_root))
         hits = [l for l in result.stdout.splitlines()
                 if "state_admission" not in l and "test_gate_a" not in l]
         assert not hits, "Found ADMITTED assigned outside state_admission.py:\n" + "\n".join(hits)
