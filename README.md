@@ -119,7 +119,7 @@ See [SECOND_OPINION_AUDIT_2026-09-26.md](SECOND_OPINION_AUDIT_2026-09-26.md) for
 
 | Aspect | Issue | Status |
 |--------|-------|--------|
-| **ACQUISITION** | Was sampling at 45-second intervals (max 8-10k frames). Must exhaust every source frame. | ✅ **FIXED (2026-09-27)** — `acquire_exhaustive.py` decodes every frame, saves with frame_index. Cache keyed by decoder version + acquisition mode (never reuses reduced sets). |
+| **ACQUISITION** | Was sampling at 45-second intervals (max 8-10k frames). Must exhaust every source frame. | ✅ **STEP 1 CLOSED (2026-09-27)** — `acquire_exhaustive.py` with authoritative decoder-side accounting: two independent reconciled ledgers (decoder metadata via ffmpeg showinfo + artifact enumeration), complete frame manifest with every frame index/PTS/dimensions from decoder, PIL verification of every artifact, fail-closed design, comprehensive cache validation. **20 unit tests PASSING + integration test framework ready** (see `tests/test_step1_closure.py`, `tests/test_step1_integration_real_ffmpeg.py`). Cache keyed by decoder version + acquisition mode + exhaustive proof (never reuses reduced/incomplete/old-non-exhaustive). Commit: `0781797`. |
 | **TRANSCRIPT** | Runner used `tests/fixtures/w2/transcript.json` for production. Must resolve transcript for actual requested video. | 🔴 **TODO** — Implement video_id → transcript resolution; fail if unavailable; never substitute fixtures. |
 | **STAGE-A** | Universal observer outputs `c3_observation_metrics.json`. Ledger expects real Stage-A structure. | 🔴 **TODO** — Emit frame-by-frame terminal status (ANALYZED/NOT_SERUM/UNREADABLE/EQUIVALENT_TO); include control findings + route findings. |
 | **S1: NATIVE_VERIFY** | Must parse `readback_diff.json` and extract genuine native control values. | ✅ **FIXED (2026-09-27)** — Extracts `target_control`, builds `ui_readback` with `binding_quality: NATIVE_BOUND`. |
@@ -129,7 +129,7 @@ See [SECOND_OPINION_AUDIT_2026-09-26.md](SECOND_OPINION_AUDIT_2026-09-26.md) for
 | **RENDER AUTOMATION** | Pipeline only validates existing WAV; must trigger Ableton export/render itself. | 🔴 **TODO** — Use existing MCP to export audio; verify duration matches 16 bars. |
 | **FINALIZE** | Must gate on ALL genuine artifacts (no manual injection). | 🔴 **TODO** — Validate complete chain: exhaustive frames → Stage-A coverage → verified reference → real MIDI → real render. |
 
-**Critical path:** Acquisition ✅ → Transcript resolution → Stage-A output → one Gate-B native run → fresh W2 → product closure.
+**Critical path (STEP 1 ACQUISITION CLOSED):** Transcript resolution → Stage-A output → one Gate-B native run → fresh W2 → product closure.
 
 Do not add more control proofs until the pipeline completes end-to-end.
 
