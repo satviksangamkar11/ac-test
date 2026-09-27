@@ -2242,6 +2242,15 @@ def execute_producer_request(request: ProducerRequest, epoch=None) -> ProducerRe
     Returns:
         ProducerResult with full reasoning trace, execution evidence, episode
     """
+    return get_brain(epoch).execute(request)
+
+
+def get_brain(epoch=None) -> ProducerBrain:
+    """The same one-brain-per-epoch cache execute_producer_request() uses, exposed so a caller that
+    already has an ADVISORY_ONLY ProducerResult (from a prior execute_producer_request() call with this
+    exact epoch) can reach the SAME ProducerBrain instance to call finalize_serum_preset_execution() /
+    finalize_mcp_execution() on it -- those are bound methods, not free functions, and this avoids ever
+    constructing a second, distinct brain for what must be one continuous run."""
     global _BRAIN
     if epoch is not None:
         key = (epoch.binary_sha256, str(BINDING_EVIDENCE_DIR), str(PROMOTED_EVIDENCE_DIR))
@@ -2250,7 +2259,7 @@ def execute_producer_request(request: ProducerRequest, epoch=None) -> ProducerRe
             brain = ProducerBrain(epoch=epoch, binding_evidence_dir=BINDING_EVIDENCE_DIR,
                                   promoted_evidence_dir=PROMOTED_EVIDENCE_DIR)
             _BRAINS[key] = brain
-        return brain.execute(request)
+        return brain
     if _BRAIN is None:
         _BRAIN = ProducerBrain()
-    return _BRAIN.execute(request)
+    return _BRAIN
