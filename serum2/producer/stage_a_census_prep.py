@@ -132,6 +132,7 @@ def empty_stage_a_skeleton(frame_manifest: List[Dict[str, Any]]) -> Dict[str, An
                 "frame_id": f["frame_id"], "timestamp_sec": f["timestamp_sec"],
                 "serum_visible": None,   # census must set true/false explicitly -- never left implying "no"
                 "visible_panel": None,
+                "analysis_status": None, # A6: ANALYZED|NOT_SERUM|UNREADABLE|EQUIVALENT_TO (filled by census)
                 "controls": [], "mod_routes": [], "observations": [], "unknown": [],
                 "_source_path": f["path"],   # census provenance only; state_ledger.build_all ignores unknown keys
             }

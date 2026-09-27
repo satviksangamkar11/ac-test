@@ -130,24 +130,49 @@ def _ui_equal(expected: Any, ui_text: Any) -> bool:
     from serum2.producer.state_ledger import _numeric, exact_norm
     a, b = _numeric(expected, None), _numeric(ui_text, None)
     if a and b:
-        # Normalise units: "300" unit="ms" and "300 ms" unit="" are the same.
+        # A7: Unit normalization: "300" unit="ms" and "300 ms" are equivalent.
+        # Compare numeric values first (they must match within tolerance).
+        if not math.isclose(a[0], b[0], rel_tol=1e-6, abs_tol=1e-6):
+            return False
+        # Then check unit compatibility. Units match if:
+        #   - they're identical, or
+        #   - one is empty (unit-less), or
+        #   - they normalize to the same canonical form (e.g., "ms " == " ms")
         au = (a[1] or "").strip()
         bu = (b[1] or "").strip()
-        units_ok = au == bu or (au + " " in bu) or (bu + " " in au) or au == "" or bu == ""
-        return units_ok and math.isclose(a[0], b[0], rel_tol=1e-6, abs_tol=1e-6)
+        if au == bu:
+            return True
+        if au == "" or bu == "":
+            return True
+        # One unit contains the other as a substring (with spaces normalized)
+        # "ms" in "300 ms" after split, or "milliseconds" in "milliseconds per beat"
+        return au in bu or bu in au
     return exact_norm(expected) == exact_norm(ui_text)
 
 
 def _binding_quality(ui_readback: Dict[str, Any]) -> str:
     """Classify how a UI readback was obtained.
 
-    LOADER_BOUND  — carries loader_evidence (run_id, track_nonce, serum_module_sha256)
-    MANUALLY_READ — has captured_at/serum/method metadata but no loader proof
-    UNBOUND       — bare dict; rejected from LIVE_UI_VERIFIED
+    LOADER_BOUND         — carries complete loader_evidence (run_id, track_nonce, serum_module_sha256,
+                           epoch, screenshot_sha, crop_coords) with all required fields
+    HEADLESS_DAWDREAMER  — A8: DawDreamer/headless evidence, never eligible for VERIFIED
+    MANUALLY_READ        — has captured_at/serum/method metadata but no loader proof
+    UNBOUND              — bare dict; rejected from LIVE_UI_VERIFIED
+
+    A7: loader_evidence must include epoch and screenshot_sha for integrity binding to actual run.
+    A8: DawDreamer evidence is labeled HEADLESS_DAWDREAMER and cannot reach VERIFIED.
     """
+    # A8: Check for DawDreamer/headless marker first
+    if ui_readback.get("backend") and "DawDreamer" in str(ui_readback.get("backend")):
+        return "HEADLESS_DAWDREAMER"
+    if ui_readback.get("is_headless") is True:
+        return "HEADLESS_DAWDREAMER"
+
     if ui_readback.get("loader_evidence"):
         le = ui_readback["loader_evidence"]
-        if le.get("run_id") and le.get("track_nonce") and le.get("serum_module_sha256"):
+        # A7: Require all key fields for LOADER_BOUND classification
+        required_fields = {"run_id", "track_nonce", "serum_module_sha256", "epoch", "screenshot_sha"}
+        if required_fields.issubset(le.keys()) and all(le.get(f) for f in required_fields):
             return "LOADER_BOUND"
     if ui_readback.get("captured_at") or ui_readback.get("serum") or ui_readback.get("method"):
         return "MANUALLY_READ"
@@ -181,7 +206,10 @@ def compare_ui(rows, ui_readback: Dict[str, Any], report: CompileReport) -> Dict
 
 def verification_level(file_cmp: Dict[str, Any], ui_cmp: Dict[str, Any] = None) -> str:
     """The highest proof actually reached. Approximation/mismatch/unreadable never reach VERIFIED.
-    An UNBOUND ui_cmp (bare hand-typed dict) is refused from LIVE_UI_VERIFIED."""
+    An UNBOUND ui_cmp (bare hand-typed dict) is refused from LIVE_UI_VERIFIED.
+
+    A8: DawDreamer/headless evidence is labeled HEADLESS_DAWDREAMER and never eligible for VERIFIED.
+    """
     bad = ("MISMATCH", "UNREADABLE", "NOT_COMPILED", "OVERRIDDEN_APPROXIMATION")
     if any(k in file_cmp["field_counts"] for k in bad):
         return "FILE_READBACK_FAILED_OR_APPROXIMATE"
@@ -189,6 +217,9 @@ def verification_level(file_cmp: Dict[str, Any], ui_cmp: Dict[str, Any] = None) 
         return "FILE_READBACK_VERIFIED_ONLY"
     if ui_cmp.get("binding_quality") == "UNBOUND":
         return "UI_READBACK_UNBOUND"
+    # A8: DawDreamer/headless evidence can never produce VERIFIED claims
+    if ui_cmp.get("binding_quality") == "HEADLESS_DAWDREAMER":
+        return "UI_READBACK_HEADLESS_DAWDREAMER_NOT_VERIFIED"
     if any(k in ui_cmp["field_counts"] for k in bad):
         return "UI_READBACK_FAILED_OR_INCOMPLETE"
     return "LIVE_UI_VERIFIED"
