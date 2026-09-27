@@ -1,7 +1,9 @@
 """
 STEP 1 INTEGRATION: Real ffmpeg exhaustive acquisition test.
 
-This test requires ffmpeg to be installed. It proves:
+This test requires the ffmpeg EXECUTABLE to be installed on the LOCAL machine.
+
+It proves (on LOCAL WINDOWS or any platform with ffmpeg available):
 - decoder_frame_count > 0
 - decoder_frame_count == artifact_frame_count == verified_frame_count
 - missing_frame_indices == []
@@ -15,6 +17,10 @@ This test requires ffmpeg to be installed. It proves:
 - Every frame has width > 0 and height > 0
 - Every frame has valid artifact_sha256
 - Every decoded frame is actually readable via PIL
+
+ARCHITECTURE:
+  CLOUD = test construction, logic, assertions
+  LOCAL WINDOWS = pytest execution with ffmpeg available
 """
 import json
 import shutil
@@ -24,10 +30,15 @@ from pathlib import Path
 
 import pytest
 
-# Skip entire module if ffmpeg is not available
-pytest.importorskip("ffmpeg", minversion=None, reason="ffmpeg not installed")
-
 from serum2.source.acquire_exhaustive import acquire_exhaustive
+
+# Detect ffmpeg EXECUTABLE (not Python package)
+FFMPEG = shutil.which("ffmpeg")
+
+pytestmark = pytest.mark.skipif(
+    FFMPEG is None,
+    reason="ffmpeg executable not installed on this machine",
+)
 
 
 class TestRealFFmpegIntegration:
@@ -41,7 +52,7 @@ class TestRealFFmpegIntegration:
         # Create a 2-second video at 5fps = 10 frames, 320x240
         # Use testsrc filter (deterministic test source) + sine wave audio
         cmd = [
-            "ffmpeg",
+            FFMPEG,
             "-hide_banner", "-loglevel", "warning",
             "-f", "lavfi", "-i", "testsrc=s=320x240:d=2:r=5",
             "-f", "lavfi", "-i", "sine=f=1000:d=2",
@@ -50,15 +61,12 @@ class TestRealFFmpegIntegration:
             str(video_file)
         ]
 
-        try:
-            result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
-            if result.returncode != 0:
-                pytest.skip(f"ffmpeg video creation failed: {result.stderr}")
-            if not video_file.exists():
-                pytest.skip("ffmpeg did not create video file")
-            return video_file
-        except (FileNotFoundError, subprocess.TimeoutExpired) as e:
-            pytest.skip(f"ffmpeg not available or timed out: {e}")
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+        if result.returncode != 0:
+            pytest.skip(f"ffmpeg video creation failed: {result.stderr}")
+        if not video_file.exists():
+            pytest.skip("ffmpeg did not create video file")
+        return video_file
 
     def test_real_ffmpeg_complete_exhaustion(self, tiny_test_video):
         """
