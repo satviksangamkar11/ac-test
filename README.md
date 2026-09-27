@@ -85,6 +85,11 @@ Ableton track → 16-bar arrangement → audible verified render
 
 **PHASE 1 (2026-09-27): COMPLETE** — Universal full-frame observation pipeline. See [PHASE_1_UNIVERSAL_OBSERVATION_COMPLETE.md](audit/PHASE_1_UNIVERSAL_OBSERVATION_COMPLETE.md).
 
+**PHASE 2 (2026-09-27 IN PROGRESS): ONE-COMMAND UNIVERSAL PIPELINE**
+- Seams S1–S4: ✅ Fixed (native verification, reference verification, arrangement with MCP, robust audio validation)
+- **NEW (2026-09-27):** Acquisition refactor to exhaustive frame decoding (replacing sampling-based approach)
+- IN PROGRESS: Stage-A output generation, transcript resolution, ARRANGE real MIDI, RENDER automation, FINALIZE gates
+
 The project has four machine-checkable certificates, produced in order:
 
 | Certificate | Phase | Where | What it proves |
@@ -110,19 +115,21 @@ See [SECOND_OPINION_AUDIT_2026-09-26.md](SECOND_OPINION_AUDIT_2026-09-26.md) for
 - `run_reference_reproduction()` — run object, proof level, coverage (but currently bypassed by F1/F7, being fixed in Phase 2)
 - Test suite: 1535 passing tests (all 27 environment-bound failures are expected)
 
-### BLOCKING SEAMS IN THE ONE-COMMAND RUNNER
+### ONE-COMMAND PIPELINE FIXES (PHASE 2)
 
-Four integration gaps block the canonical `python -m serum2.pipeline` path from completing on real data:
+| Aspect | Issue | Status |
+|--------|-------|--------|
+| **ACQUISITION** | Was sampling at 45-second intervals (max 8-10k frames). Must exhaust every source frame. | ✅ **FIXED (2026-09-27)** — `acquire_exhaustive.py` decodes every frame, saves with frame_index. Cache keyed by decoder version + acquisition mode (never reuses reduced sets). |
+| **TRANSCRIPT** | Runner used `tests/fixtures/w2/transcript.json` for production. Must resolve transcript for actual requested video. | 🔴 **TODO** — Implement video_id → transcript resolution; fail if unavailable; never substitute fixtures. |
+| **STAGE-A** | Universal observer outputs `c3_observation_metrics.json`. Ledger expects real Stage-A structure. | 🔴 **TODO** — Emit frame-by-frame terminal status (ANALYZED/NOT_SERUM/UNREADABLE/EQUIVALENT_TO); include control findings + route findings. |
+| **S1: NATIVE_VERIFY** | Must parse `readback_diff.json` and extract genuine native control values. | ✅ **FIXED (2026-09-27)** — Extracts `target_control`, builds `ui_readback` with `binding_quality: NATIVE_BOUND`. |
+| **S2: REFERENCE_VERIFY** | Must use actual `ui_readback` from NATIVE_VERIFY; generate real `reread_log.json`. | ✅ **FIXED (2026-09-27)** — Uses NATIVE_VERIFY outputs, generates reread_log.json, calls reference_reproduction with real paths. |
+| **S3: ARRANGEMENT** | Must create real 16-bar MIDI clip in Ableton Arrangement view via MCP. | ✅ **FIXED (2026-09-27)** — Creates real clip; no empty-clip pretense. |
+| **S4: RENDER_VALIDATION** | Must validate RMS, peak, non-silence; cannot hide measurement failures. | ✅ **FIXED (2026-09-27)** — Three-metric validation; explicit ValueError for unreadable files. |
+| **RENDER AUTOMATION** | Pipeline only validates existing WAV; must trigger Ableton export/render itself. | 🔴 **TODO** — Use existing MCP to export audio; verify duration matches 16 bars. |
+| **FINALIZE** | Must gate on ALL genuine artifacts (no manual injection). | 🔴 **TODO** — Validate complete chain: exhaustive frames → Stage-A coverage → verified reference → real MIDI → real render. |
 
-| Seam | File | Issue | Status |
-|------|------|-------|--------|
-| **S1: NATIVE_VERIFY** | `serum2/pipeline/runner.py:683` | Must parse `readback_diff.json` and extract genuine native control values; build machine-readable `ui_readback` dict bound to screenshot + module SHA | ✅ **FIXED (2026-09-27)** — Extracts `target_control`, builds `ui_readback` with `binding_quality: NATIVE_BOUND`, fails if evidence is missing |
-| **S2: REFERENCE_VERIFY** | `serum2/pipeline/runner.py:779` | Must use actual `ui_readback` from NATIVE_VERIFY; generate real `reread_log.json`; pass correct paths to `reference_reproduction()` | ✅ **FIXED (2026-09-27)** — Uses NATIVE_VERIFY outputs, generates reread_log.json, calls reference_reproduction with real paths |
-| **S3: ARRANGEMENT** | `serum2/pipeline/runner.py:870` | Imports `from serum2.ableton.arrangement import create_16bar_arrangement` — module does not exist; must use actual Ableton integration | ✅ **FIXED (2026-09-27)** — New `serum2/ableton/arrangement.py` with real MCP integration; creates 16-bar MIDI clip via AbletonMCP on Windows, fails closed on cloud |
-| **S4: RENDER VALIDATION** | `serum2/pipeline/runner.py:925+` | Must distinguish `render missing`, `render unreadable`, `render silent`, `render measurable`; cannot convert measurement failure into success | ✅ **FIXED (2026-09-27)** — New `_validate_render_audio()` with RMS, peak, non-silence metrics; all three thresholds must pass; explicit ValueError for unreadable files |
-| **S5: NATIVE PROOF** | `serum2/pipeline/runner.py:1-end` | AWAITING_NATIVE_ENVIRONMENT boundary is by design; LOCAL stages require Windows + Serum 2.0.23 + Ableton | ✅ **WORKING AS DESIGNED** — Halts gracefully when VLM/native tools unavailable |
-
-**Critical path:** S1 ✅ → S2 ✅ → S3 ✅ → S4 ✅ → one Gate-B native run → fresh W2 → product closure.
+**Critical path:** Acquisition ✅ → Transcript resolution → Stage-A output → one Gate-B native run → fresh W2 → product closure.
 
 Do not add more control proofs until the pipeline completes end-to-end.
 
