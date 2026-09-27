@@ -276,9 +276,11 @@ def _coerce(row: Row, t: Dict[str, Any], canon: str, tempo: Optional[float]) -> 
         singleton_cls = _SINGLETON_MODELS.get(attr)
         if singleton_cls is None or field_name is None:
             return "singleton_field has unknown attr %r or missing field" % attr
-        fi = singleton_cls.model_fields.get(field_name)
-        if fi is None:
-            return "singleton_field attr=%r has no model field %r" % (attr, field_name)
+        # A5: safe guard against missing field (not all singleton attrs are fully bound)
+        try:
+            fi = singleton_cls.model_fields[field_name]
+        except (KeyError, AttributeError):
+            return "singleton_field attr=%r has no model field %r (not in coercion models)" % (attr, field_name)
         ann = str(fi.annotation)
         if "bool" in ann:
             if v.lower() in ("on", "true"):
@@ -303,7 +305,11 @@ def _coerce(row: Row, t: Dict[str, Any], canon: str, tempo: Optional[float]) -> 
         t["value"], t["operation"], t["normalized"] = val, "SET", (val != n[0])
         return None
     if t["kind"] == "field":
-        fi = models[t["module"]].model_fields[t["field"]]
+        # A5: safe guard against missing module/field in models dict (e.g., macro bindings, unknown fields)
+        try:
+            fi = models[t["module"]].model_fields[t["field"]]
+        except (KeyError, AttributeError) as e:
+            return "unsupported field binding: module=%r field=%r (not in coercion models)" % (t["module"], t["field"])
         ann = str(fi.annotation)
         if "bool" in ann:
             if v.lower() in ("on", "true"):

@@ -39,8 +39,18 @@ EPOCH_OFFLINE_TEST = ExecutionEpoch(
 
 
 def is_offline_test(epoch) -> bool:
-    """True for the OFFLINE_TEST sentinel and for None (backward-compat call sites)."""
-    return epoch is None or epoch is EPOCH_OFFLINE_TEST
+    """True for the OFFLINE_TEST sentinel only. Production code must never pass None."""
+    return epoch is EPOCH_OFFLINE_TEST
+
+
+def require_epoch(epoch) -> ExecutionEpoch:
+    """Production epoch guard: raises ValueError if epoch is None or invalid.
+    Use this at production entry points to fail-closed on missing epoch."""
+    if epoch is None:
+        raise ValueError("epoch=None is not valid in production; use EPOCH_OFFLINE_TEST for tests or pass a known ExecutionEpoch")
+    if not isinstance(epoch, ExecutionEpoch):
+        raise ValueError(f"epoch must be ExecutionEpoch, got {type(epoch).__name__}")
+    return epoch
 
 
 class UnknownEpoch(RuntimeError):

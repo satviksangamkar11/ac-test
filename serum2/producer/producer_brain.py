@@ -85,6 +85,7 @@ from step_6_6_capability_resolution import CapabilityResolver, ResolutionStatus
 from step_6_7_admission_handoff import AdmissionHandoff
 from step_6_8_contract_governed_execution import ContractGovernedExecutor
 from serum2.evidence import admission as admission_mod
+from serum2.producer.execution_epoch import require_epoch
 
 
 # ---------------------------------------------------------------------------
@@ -433,10 +434,11 @@ class ProducerBrain:
         self._skill_retriever = skill_retriever
         self._prior_evidence = tuple(prior_evidence)
         self._grounding_claims = tuple(grounding_claims) if grounding_claims else ()
-        # epoch=None (default): the frozen legacy frontier, unchanged -- ContractRegistry() loads only the ~40
-        # legacy pickle-store contracts, exactly today's behavior. epoch=<ExecutionEpoch>: also loads the
-        # evidence-derived contracts from the given directories (explicit opt-in, same rule ContractRegistry
-        # itself already enforces -- no run's authority widens implicitly).
+        # A3: epoch=None is NOT valid in production; use EPOCH_OFFLINE_TEST for tests.
+        # require_epoch() fails closed on None. ContractRegistry itself already enforces
+        # epoch-aware contract selection (no implicit authority widening).
+        if epoch is not None:
+            require_epoch(epoch)
         self._registry = ContractRegistry(epoch=epoch, binding_evidence_dir=binding_evidence_dir,
                                           promoted_evidence_dir=promoted_evidence_dir)
         # Inject self._registry so RouteSelector uses the same epoch-aware store that
@@ -734,7 +736,10 @@ class ProducerBrain:
 
         scope = authority.scope or {}
         mutation_path = scope["mutation_target_path"]
-        mutation_value = scope["mutation_value_used"]
+        # A1: qualification_test_value (test evidence value) is for reference only.
+        # The actual operative value comes from the admitted operation, not the qualification test.
+        # This plan is ADVISORY_ONLY; the actual execution must use the admitted value from the run.
+        qualification_test_value = scope["mutation_value_used"]
 
         # Final execution contract gate (Finish Line B): the CapabilityContract above
         # stays the sole authority for allowed_operation/status/prerequisites/admission
@@ -785,7 +790,7 @@ class ProducerBrain:
             "status": "ADVISORY_ONLY",
             "contract_id": adm.contract_id,
             "mutation_target_path": mutation_path,
-            "qualification_test_value": mutation_value,
+            "qualification_test_value": qualification_test_value,
             "capability_key": contract.target,
             "final_execution_contract": final_contract_fields,
             "execution_steps": [
