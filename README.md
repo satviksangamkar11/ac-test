@@ -116,12 +116,15 @@ Four integration gaps block the canonical `python -m serum2.pipeline` path from 
 
 | Seam | File | Issue | Status |
 |------|------|-------|--------|
-| **S1: REFERENCE_VERIFY** | `serum2/pipeline/runner.py:785` | Passes `reread_log_path=None` to `reference_reproduction()`, which immediately tries to load `Path(reread_log_path).read_text()` → crashes | **Needs: generate reread log before calling reference_reproduction** |
-| **S2: ARRANGEMENT** | `serum2/pipeline/runner.py:828` | Imports `from serum2.ableton.arrangement import create_16bar_arrangement` — module does not exist | **Needs: implement arrangement.py or provide fallback** |
-| **S3: RENDER VALIDATION** | `serum2/pipeline/runner.py:850+` | Must distinguish `render missing`, `render unreadable`, `render silent`, `render measurable`; cannot convert measurement failure into a numeric success value | **Needs: robust audio validation** |
-| **S4: NATIVE PROOF** | `serum2/pipeline/runner.py:1-end` | AWAITING_NATIVE_ENVIRONMENT boundary halts at OBSERVATION stage; LOCAL stages (NATIVE_LOAD, NATIVE_VERIFY, REFERENCE_VERIFY, ARRANGE, RENDER) cannot run on cloud | **By design — requires Windows + Serum 2.0.23 + Ableton; all CLOUD work must precede LOCAL** |
+| **S1: NATIVE_VERIFY** | `serum2/pipeline/runner.py:683` | Must parse `readback_diff.json` and extract genuine native control values; build machine-readable `ui_readback` dict bound to screenshot + module SHA | ✅ **FIXED (2026-09-27)** — Extracts `target_control`, builds `ui_readback` with `binding_quality: NATIVE_BOUND`, fails if evidence is missing |
+| **S2: REFERENCE_VERIFY** | `serum2/pipeline/runner.py:779` | Must use actual `ui_readback` from NATIVE_VERIFY; generate real `reread_log.json`; pass correct paths to `reference_reproduction()` | ✅ **FIXED (2026-09-27)** — Uses NATIVE_VERIFY outputs, generates reread_log.json, calls reference_reproduction with real paths |
+| **S3: ARRANGEMENT** | `serum2/pipeline/runner.py:848` | Imports `from serum2.ableton.arrangement import create_16bar_arrangement` — module does not exist; must use actual Ableton integration | **🔴 TODO — Inspect serum2/ableton/ and implement or fallback** |
+| **S4: RENDER VALIDATION** | `serum2/pipeline/runner.py:890+` | Must distinguish `render missing`, `render unreadable`, `render silent`, `render measurable`; cannot convert measurement failure into success | **🔴 TODO — Add robust audio analysis (RMS, peak, non-silence fraction)** |
+| **S5: NATIVE PROOF** | `serum2/pipeline/runner.py:1-end` | AWAITING_NATIVE_ENVIRONMENT boundary is by design; LOCAL stages require Windows + Serum 2.0.23 + Ableton | ✅ **WORKING AS DESIGNED** — Halts gracefully when VLM/native tools unavailable |
 
-The fastest path to product closure is **not proving additional controls**. It is: **fix S1, S2, S3 → re-run Gate B → fresh W2 → native reference verification → 16-bar Ableton render.**
+**Critical path:** S1 ✅ → S2 ✅ → S3 → S4 → one Gate-B native run → fresh W2 → product closure.
+
+Do not add more control proofs until the pipeline completes end-to-end.
 
 ### What is broken or missing (being fixed in subsequent phases)
 

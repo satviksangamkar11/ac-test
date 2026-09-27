@@ -890,23 +890,34 @@ def _stage_arrange(manifest: RunManifest, run_dir: Path) -> StageRecord:
     # Arrangement is Ableton-MCP-driven; attempt if bridge is available.
     try:
         from serum2.ableton.arrangement import create_16bar_arrangement
+        from serum2.ableton.serum_track_loader import BridgeUnavailable
+
         result = create_16bar_arrangement(
             track_id=manifest.stage_record("NATIVE_LOAD").outputs.get("run_id_native", ""),
             run_dir=str(run_dir),
         )
-        arr_path = run_dir / "arrangement.json"
-        with open(arr_path, "w") as fh:
-            json.dump(result, fh, indent=2)
-        rec.mark_complete({"arrangement_path": str(arr_path),
-                           "arrangement_hash": content_hash(arr_path)})
+        # Result includes arrangement_path that was written by create_16bar_arrangement
+        rec.mark_complete({
+            "arrangement_path": result.get("arrangement_path"),
+            "arrangement_hash": content_hash(result.get("arrangement_path")),
+            "track_index": result.get("track_index"),
+            "clip_details": result.get("clip_details"),
+        })
     except Exception as exc:
-        rec.mark_awaiting(
-            f"AWAITING_NATIVE_ENVIRONMENT: Ableton arrangement requires MCP bridge: {exc}. "
-            "Run this command on the LOCAL Windows machine with Ableton 11.3 open. "
-            "Create a 16-bar MIDI clip in Arrangement view (not session mode). "
-            f"Write arrangement details to {run_dir}/arrangement.json then re-run with --resume.",
-            {"halted_for": "AWAITING_NATIVE_ENVIRONMENT"},
-        )
+        from serum2.ableton.serum_track_loader import BridgeUnavailable
+
+        # Distinguish between expected bridge unavailability (on cloud) and other errors
+        if isinstance(exc, BridgeUnavailable):
+            rec.mark_awaiting(
+                f"AWAITING_NATIVE_ENVIRONMENT: {str(exc)} "
+                "Run this command on the LOCAL Windows machine with Ableton 11.3 open. "
+                "The 16-bar MIDI clip in Arrangement view will be created automatically. "
+                f"Re-run with --resume once execution completes.",
+                {"halted_for": "AWAITING_NATIVE_ENVIRONMENT"},
+            )
+        else:
+            rec.mark_failed(f"Arrangement creation failed: {exc}")
+
     manifest.update_stage(rec)
     return rec
 
