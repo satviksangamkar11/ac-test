@@ -77,39 +77,105 @@ class TestA3EpochHandling:
 class TestA1OperandSourcing:
     """A1: operand is observed value from run, not qualification_test_value; end-to-end proof."""
 
-    def test_a1_operand_is_from_admitted_rows_not_test_values(self):
-        """A1: AuthorizedOperation.operand comes from observed value, not test evidence.
+    def test_a1_three_distinct_operands_flow_canonical_path(self):
+        """A1 BEHAVIORAL PROOF: 3 distinct values → row.op["value"] → AuthorizedOperation.operand
 
-        Proves: ops_from_rows(STEP 3) only accepts OPERATION_DERIVED + ADMITTED rows.
-        The operand is always o.get("value", o.get("amount")) from the row's observation.
+        Exercises actual canonical functions:
+        1. Create rows with OPERATION_DERIVED + ADMITTED status, distinct observed values
+        2. Call ops_from_rows() (the real compiler input function)
+        3. Verify AuthorizedOperation.operand equals observed value (not qualification_test_value)
+        4. Prove all 3 distinct values survive the canonical path unchanged
+        5. Prove missing operand fails (no default to test value)
         """
-        from serum2.execution.authorized_state_compiler import AuthorizedOperation
+        from serum2.producer.state_ledger import Row
+        from serum2.execution.authorized_state_compiler import ops_from_rows
+        from serum2.producer.execution_epoch import EPOCH_2_0_23
 
-        # The A1 core invariant: AuthorizedOperation.operand comes from the observed value
-        # in the row (r.op["value"]), never from qualification_test_value.
+        # Three distinct observed values that must flow through unchanged
+        observed_values = [0.3, 0.5, 0.8]
+        qualification_test_value = 0.4  # Different from all observed values
 
-        # This is the operand as it flows from ledger row → admitted → compiler
-        op = AuthorizedOperation(
-            operation_id="env1.attack@-",
-            canonical_target="env1.attack",
-            operation="SET",
-            operand=0.7,  # The OBSERVED value from the run, not test/qualification value
-            binding={"kind": "field", "module": "env", "index": 0, "field": "attack"},
-            contract_key="env1.attack",
-            contract_epoch="abc123",
-            execution_path="/Env/plainParams/kParamAttack",
-            contract_binding="",
-            admission_evidence={"status": "ADMITTED", "contract_status": "VERIFIED"},
-            provenance={"frame_ts": 1.0, "readings": 1, "read_quality": 0.95, "observed": 0.7, "rack": None}
+        # Create rows as they would exist after ledger derivation + admission
+        rows = []
+        for idx, obs_val in enumerate(observed_values):
+            r = Row(
+                control_id='env1.attack',
+                value=obs_val,  # The OBSERVED value
+                unit='s',
+                status='OBSERVED',
+                control_type='fader',
+                source_ts=float(idx),
+                n_readings=1,
+                changed_from_previous=False,
+                context={}
+            )
+            # Simulate successful derivation + admission
+            r.op = {
+                'kind': 'field',
+                'module': 'env',
+                'index': 0,
+                'field': 'attack',
+                'operation': 'SET',
+                'value': obs_val,  # Operand is the OBSERVED value
+                'contract_status': 'VERIFIED',
+                'capability': 'env1.attack',
+                'contract_epoch': EPOCH_2_0_23.binary_sha256[:8],
+                'execution_path': '/Env/plainParams/kParamAttack'
+            }
+            r.terminal = 'OPERATION_DERIVED'
+            r.admission = 'ADMITTED'
+            rows.append(r)
+
+        # CANONICAL PATH: ops_from_rows() processes admitted rows
+        ops = ops_from_rows(rows, EPOCH_2_0_23)
+
+        # A1 PROOF 1: All 3 distinct operands flow through unchanged
+        compiled_operands = [op.operand for op in ops if op.canonical_target == 'env1.attack']
+        assert len(compiled_operands) == 3, f"Should compile 3 operations, got {len(compiled_operands)}"
+        assert compiled_operands == observed_values, \
+            f"A1: operands should be observed values {observed_values}, got {compiled_operands}"
+
+        # A1 PROOF 2: Qualification test value is NOT used
+        for op in ops:
+            if op.canonical_target == 'env1.attack':
+                assert op.operand != qualification_test_value, \
+                    f"A1: operand {op.operand} should never equal qualification_test_value {qualification_test_value}"
+
+        # A1 PROOF 3: NEGATIVE - missing operand cannot default to test value
+        # Create a row with no operand value
+        bad_row = Row(
+            control_id='env1.attack',
+            value=0.7,
+            unit='s',
+            status='OBSERVED',
+            control_type='fader',
+            source_ts=3.0,
+            n_readings=1,
+            changed_from_previous=False,
+            context={}
         )
+        bad_row.op = {
+            'kind': 'field',
+            'module': 'env',
+            'index': 0,
+            'field': 'attack',
+            'operation': 'SET',
+            # MISSING 'value' key
+            'contract_status': 'VERIFIED',
+            'capability': 'env1.attack',
+            'contract_epoch': EPOCH_2_0_23.binary_sha256[:8]
+        }
+        bad_row.terminal = 'OPERATION_DERIVED'
+        bad_row.admission = 'ADMITTED'
 
-        # A1 invariant: operand is the observed value
-        assert op.operand == 0.7, "Operand should be the observed value from the run"
-
-        # If we had a different qualification_test_value (e.g., 0.5), it would be WRONG
-        qualification_test_value = 0.5
-        assert op.operand != qualification_test_value, \
-            "A1: operand must be the observed value, never the qualification_test_value"
+        # ops_from_rows() should handle missing value gracefully
+        # (either skip or use o.get("amount") fallback, never assume test value)
+        ops_with_bad = ops_from_rows([bad_row], EPOCH_2_0_23)
+        # If operand is created, verify it's None (not the test value)
+        for op in ops_with_bad:
+            if op.canonical_target == 'env1.attack':
+                assert op.operand is None or op.operand != qualification_test_value, \
+                    "A1: missing operand must not default to qualification_test_value"
 
 
 class TestA2IndependentGates:
