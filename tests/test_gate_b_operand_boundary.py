@@ -279,3 +279,129 @@ class TestQualificationValueReadClassification:
         assert len(set(qtvs)) == 1, (
             "qualification_test_value must be constant contract metadata "
             "across phrasings: %r" % qtvs)
+
+
+# ---------------------------------------------------------------------------
+# Tests A–F: operand invariant in gate_b_certificate()
+# ---------------------------------------------------------------------------
+
+class TestOperandInvariant:
+    """gate_b_certificate() operand invariant: requested==compiled, native~=compiled."""
+
+    _W1_REQUESTED = 5.0
+    _W1_COMPILED = 5.0
+    _W1_NATIVE_RESAVE = 5.000000000000001  # float64 round-trip from Serum native Save As
+
+    def _make_canonical_result(self):
+        """Full canonical chain result suitable for CANONICAL_GATE_B_VERIFIED."""
+        from serum2.producer.producer_brain import ProducerResult, ProducerRequest
+        r = ProducerResult(request=ProducerRequest(user_intent="test"))
+        r.execution_status = "EXECUTED"
+        r.decision = "ACCEPTED"
+        r.admitted = True
+        r.serum_preset_execution = {
+            "readback_verified": True,
+            "preset_sha256": "0998b65a229b275cc0c93dec290d96544e4297591bac2124d9bcb8bdf83567a0",
+            "ui_readback": {
+                "route": "DIRECT_UI",
+                "values": {"env2.decay": "5.00 s"},
+                "loader_evidence": {
+                    "serum_module_sha256": EPOCH_2_0_23.binary_sha256,
+                    "run_id": "W1_GATE_B_22433E83",
+                    "track_nonce": "W1_GATE_B_22433E83",
+                },
+            },
+        }
+        r._serum_preset_plan = {
+            "mutation_target_path": "Env1.plainParams.kParamDecay",
+            "qualification_test_value": 0.5,
+        }
+        return r
+
+    def test_a_requested_equals_compiled_passes(self):
+        """Test A: requested_operand == compiled_operand → CANONICAL_GATE_B_VERIFIED kept."""
+        from serum2.producer.gate_b_certificate import gate_b_certificate, gate_b_verified
+        r = self._make_canonical_result()
+        cert = gate_b_certificate(r, epoch=EPOCH_2_0_23,
+                                   requested_operand=self._W1_REQUESTED,
+                                   compiled_operand=self._W1_COMPILED,
+                                   native_resave_operand=self._W1_NATIVE_RESAVE)
+        assert cert["gate_b_status"] == "CANONICAL_GATE_B_VERIFIED", cert["gate_b_status"]
+        assert cert["operand_invariant_status"] == "OPERAND_INVARIANT_VERIFIED"
+        assert gate_b_verified(cert) is True
+
+    def test_b_float_round_trip_passes(self):
+        """Test B: native_resave ≈ compiled (float64 round-trip) → invariant OK."""
+        from serum2.producer.gate_b_certificate import gate_b_certificate
+        r = self._make_canonical_result()
+        cert = gate_b_certificate(r, epoch=EPOCH_2_0_23,
+                                   requested_operand=5.0,
+                                   compiled_operand=5.0,
+                                   native_resave_operand=5.000000000000001)
+        assert cert["operand_invariant_status"] == "OPERAND_INVARIANT_VERIFIED"
+        assert cert["gate_b_status"] == "CANONICAL_GATE_B_VERIFIED"
+
+    def test_c_requested_mismatch_fails(self):
+        """Test C: requested_operand != compiled_operand → downgrade to NATIVE_STATE_PROOF."""
+        from serum2.producer.gate_b_certificate import gate_b_certificate, gate_b_verified
+        r = self._make_canonical_result()
+        cert = gate_b_certificate(r, epoch=EPOCH_2_0_23,
+                                   requested_operand=3.0,   # wrong — doesn't match compiled
+                                   compiled_operand=5.0,
+                                   native_resave_operand=5.000000000000001)
+        assert cert["gate_b_status"] == "NATIVE_STATE_PROOF", cert["gate_b_status"]
+        assert cert["operand_invariant_status"] == "OPERAND_MISMATCH_REQUESTED_VS_COMPILED"
+        assert gate_b_verified(cert) is False
+
+    def test_d_native_mismatch_fails(self):
+        """Test D: native_resave far from compiled → downgrade to NATIVE_STATE_PROOF."""
+        from serum2.producer.gate_b_certificate import gate_b_certificate, gate_b_verified
+        r = self._make_canonical_result()
+        cert = gate_b_certificate(r, epoch=EPOCH_2_0_23,
+                                   requested_operand=5.0,
+                                   compiled_operand=5.0,
+                                   native_resave_operand=3.0)  # way off — not a float64 artifact
+        assert cert["gate_b_status"] == "NATIVE_STATE_PROOF", cert["gate_b_status"]
+        assert cert["operand_invariant_status"] == "OPERAND_MISMATCH_NATIVE_VS_COMPILED"
+        assert gate_b_verified(cert) is False
+
+    def test_e_missing_operand_blocks(self):
+        """Test E: partial operand evidence (only some provided) blocks CANONICAL."""
+        from serum2.producer.gate_b_certificate import gate_b_certificate, gate_b_verified
+        r = self._make_canonical_result()
+        # Provide only two of three — should downgrade
+        cert = gate_b_certificate(r, epoch=EPOCH_2_0_23,
+                                   requested_operand=5.0,
+                                   compiled_operand=5.0,
+                                   native_resave_operand=None)  # missing
+        assert cert["gate_b_status"] == "NATIVE_STATE_PROOF", cert["gate_b_status"]
+        assert cert["operand_invariant_status"] == "INCOMPLETE_OPERAND_EVIDENCE"
+        assert gate_b_verified(cert) is False
+
+    def test_f_qualification_separation_maintained(self):
+        """Test F: qualification_test_value (0.5) must differ from requested_operand (5.0)."""
+        from serum2.producer.gate_b_certificate import gate_b_certificate
+        r = self._make_canonical_result()
+        cert = gate_b_certificate(r, epoch=EPOCH_2_0_23,
+                                   requested_operand=self._W1_REQUESTED,
+                                   compiled_operand=self._W1_COMPILED,
+                                   native_resave_operand=self._W1_NATIVE_RESAVE)
+        assert cert["qualification_test_value"] == 0.5, (
+            "qualification_test_value must be the binding-test metadata value (0.5), "
+            "not the production operand")
+        assert cert["requested_operand"] == 5.0
+        assert cert["qualification_test_value"] != cert["requested_operand"], (
+            "qualification_test_value must differ from requested_operand — "
+            "they are different things: binding-test metadata vs user production value")
+
+    def test_no_operands_backward_compat(self):
+        """gate_b_certificate() without operands → CANONICAL still works (backward compat)."""
+        from serum2.producer.gate_b_certificate import gate_b_certificate, gate_b_verified
+        r = self._make_canonical_result()
+        cert = gate_b_certificate(r, epoch=EPOCH_2_0_23)
+        assert cert["gate_b_status"] == "CANONICAL_GATE_B_VERIFIED"
+        assert cert["operand_invariant_status"] == "OPERAND_EVIDENCE_NOT_PROVIDED"
+        assert cert["requested_operand"] is None
+        assert cert["compiled_operand"] is None
+        assert cert["native_resave_operand"] is None
+        assert gate_b_verified(cert) is True  # backward compat — no operands doesn't block
