@@ -162,70 +162,73 @@ def _stage_acquire(manifest: RunManifest, run_dir: Path, youtube_url: str,
     video_id = manifest.video_id
 
     # Check for a previously acquired manifest in the run_dir (cache reuse).
-    # VALIDATION REQUIRED: Must prove complete exhaustive acquisition before reuse
-    candidate_paths = [
-        run_dir / "acquisition_manifest.json",
-    ]
-    for cand in candidate_paths:
-        if cand.exists():
-            with open(cand) as f:
+    # Runner-side cache reuse is allowed only after the same exhaustive proof validation
+    # as the acquisition layer.
+    candidate = run_dir / "acquisition_manifest.json"
+
+    if candidate.exists():
+        try:
+            with open(candidate, "r", encoding="utf-8") as f:
                 existing = json.load(f)
 
-            # STEP 1 CLOSURE: Validate complete exhaustive proof before reusing
-            completion = existing.get("completion_status", {})
-            can_reuse = (
-                existing.get("video_id") == video_id and
-                existing.get("source_url") == youtube_url and
-                existing.get("acquisition_mode") == "exhaustive" and
-                completion.get("is_complete", False) and
-                completion.get("decoder_exit_code") == 0 and
-                completion.get("verified_frame_count", 0) > 0 and
-                completion.get("decoder_frame_count") == completion.get("artifact_frame_count") and
-                completion.get("decoder_frame_count") == completion.get("verified_frame_count") and
-                completion.get("missing_frame_indices", []) == [] and
-                completion.get("duplicate_frame_indices", []) == [] and
-                completion.get("unexpected_frame_files", []) == []
+            from serum2.source.acquire_exhaustive import (
+                _validate_cached_manifest,
+            )
+
+            source_id = "yt_" + hashlib.md5(
+                youtube_url.encode()
+            ).hexdigest()[:12]
+
+            # Runner-side cache reuse is allowed only after the same
+            # exhaustive proof validation as the acquisition layer.
+            #
+            # IMPORTANT:
+            # source SHA is NOT blindly reconstructed here.
+            # The manifest must already carry the validated source identity.
+            cache_key = existing.get("cache_key", "")
+
+            can_reuse = _validate_cached_manifest(
+                existing,
+                source_url=youtube_url,
+                video_id=video_id,
+                source_id=source_id,
+                cache_key=cache_key,
             )
 
             if can_reuse:
                 try:
                     assert_no_redownload(existing)
+                    existing_hash = content_hash(candidate)
 
-                    # Validate all frame artifacts still exist and hash correctly
-                    all_frames_valid = True
-                    for frame_data in existing.get("frames", []):
-                        frame_path = Path(frame_data.get("artifact_path", ""))
-                        if not frame_path.exists():
-                            all_frames_valid = False
-                            break
-                        expected_hash = frame_data.get("artifact_hash")
-                        if expected_hash:
-                            # Recompute hash to validate integrity
-                            actual_hash = content_hash(frame_path)
-                            if expected_hash != actual_hash:
-                                all_frames_valid = False
-                                break
+                    completion = existing.get("completion_status", {})
+                    rec.mark_skipped(
+                        "reusing validated exhaustive acquisition: "
+                        f"{completion.get('decoder_frame_count')} "
+                        "decoder frames reconciled and verified"
+                    )
 
-                    if all_frames_valid:
-                        existing_hash = content_hash(cand)
-                        rec.mark_skipped(
-                            f"reusing existing exhaustive acquisition at {cand} "
-                            f"({completion.get('verified_frame_count')} frames verified, complete={completion.get('is_complete')})"
-                        )
-                        rec.outputs = {
-                            "manifest_path": str(cand),
-                            "manifest_hash": existing_hash,
-                            "num_frames": completion.get("verified_frame_count", 0),
-                            "num_frames_expected": completion.get("decoder_frame_count", 0),
-                            "storyboard_only": False,
-                            "is_complete": True,
-                        }
-                        manifest.update_stage(rec)
-                        return rec
+                    rec.outputs = {
+                        "manifest_path": str(candidate),
+                        "manifest_hash": existing_hash,
+                        "num_frames": completion.get(
+                            "verified_frame_count"
+                        ),
+                        "num_frames_expected": completion.get(
+                            "decoder_frame_count"
+                        ),
+                        "acquisition_mode": "exhaustive",
+                        "is_complete": True,
+                    }
+
+                    manifest.update_stage(rec)
+                    return rec
+
                 except AssertionError:
                     pass  # storyboard — fall through to re-acquire
-                except Exception:
-                    pass  # Manifest invalid or frames missing — fall through to re-acquire
+
+        except Exception:
+            # Any validation problem means the cache is NOT reusable.
+            pass
 
     # No reusable manifest: attempt real acquisition
     rec.mark_running()
@@ -259,24 +262,35 @@ def _stage_acquire(manifest: RunManifest, run_dir: Path, youtube_url: str,
         out_manifest = run_dir / "acquisition_manifest.json"
         out_manifest.parent.mkdir(parents=True, exist_ok=True)
         completion = result.get("completion_status", {})
+
+        cache_key = result.get("cache_key", "")
+        if not cache_key:
+            # Compute cache key for manifest
+            cache_key = hashlib.md5(
+                f"exhaustive:ffmpeg:1080p_cascade:{result['provenance'].get('ffmpeg_version', '')}:{result['provenance'].get('yt_dlp_version', '')}".encode()
+            ).hexdigest()[:12]
+
         manifest_data = {
             "source_url": youtube_url,
             "video_id": video_id,
-            "source_id": result.get("source_id", ""),
+            "source_id": result["source_id"],
+            "cache_key": cache_key,
             "acquisition_mode": "exhaustive",
-            "decoder_version": "ffmpeg-frame-by-frame",
-            "num_frames_decoded": result["num_frames_decoded"],
-            "num_frames_verified": result["num_frames_verified"],
+            "decoder": "ffmpeg",
+            "decoder_version": result["provenance"]["ffmpeg_version"],
             "frames": [
                 {
                     "frame_id": f.frame_id,
-                    "frame_index": int(f.frame_id.split("_")[-1]),
-                    "timestamp_sec": f.timestamp_sec,
+                    "frame_index": int(
+                        f.frame_id.rsplit("_", 1)[-1]
+                    ),
+                    "presentation_timestamp_sec": f.timestamp_sec,
                     "artifact_path": f.artifact_path,
-                    "artifact_hash": f.artifact_hash,
+                    "artifact_sha256": f.artifact_hash,
                     "width": f.width,
                     "height": f.height,
                     "source_video_sha256": f.source_video_sha256,
+                    "decode_status": "VERIFIED",
                 }
                 for f in result["frames"]
             ],
