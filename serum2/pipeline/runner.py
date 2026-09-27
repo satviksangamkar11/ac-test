@@ -162,6 +162,7 @@ def _stage_acquire(manifest: RunManifest, run_dir: Path, youtube_url: str,
     video_id = manifest.video_id
 
     # Check for a previously acquired manifest in the run_dir (cache reuse).
+    # VALIDATION REQUIRED: Must prove complete exhaustive acquisition before reuse
     candidate_paths = [
         run_dir / "acquisition_manifest.json",
     ]
@@ -169,21 +170,62 @@ def _stage_acquire(manifest: RunManifest, run_dir: Path, youtube_url: str,
         if cand.exists():
             with open(cand) as f:
                 existing = json.load(f)
-            if existing.get("video_id") == video_id:
+
+            # STEP 1 CLOSURE: Validate complete exhaustive proof before reusing
+            completion = existing.get("completion_status", {})
+            can_reuse = (
+                existing.get("video_id") == video_id and
+                existing.get("source_url") == youtube_url and
+                existing.get("acquisition_mode") == "exhaustive" and
+                completion.get("is_complete", False) and
+                completion.get("decoder_exit_code") == 0 and
+                completion.get("verified_frame_count", 0) > 0 and
+                completion.get("decoder_frame_count") == completion.get("artifact_frame_count") and
+                completion.get("decoder_frame_count") == completion.get("verified_frame_count") and
+                completion.get("missing_frame_indices", []) == [] and
+                completion.get("duplicate_frame_indices", []) == [] and
+                completion.get("unexpected_frame_files", []) == []
+            )
+
+            if can_reuse:
                 try:
                     assert_no_redownload(existing)
-                    existing_hash = content_hash(cand)
-                    rec.mark_skipped(f"reusing existing manifest at {cand} (video_id matches, not storyboard)")
-                    rec.outputs = {
-                        "manifest_path": str(cand),
-                        "manifest_hash": existing_hash,
-                        "num_frames": existing.get("num_frames", 0),
-                        "storyboard_only": False,
-                    }
-                    manifest.update_stage(rec)
-                    return rec
-                except AssertionError as e:
+
+                    # Validate all frame artifacts still exist and hash correctly
+                    all_frames_valid = True
+                    for frame_data in existing.get("frames", []):
+                        frame_path = Path(frame_data.get("artifact_path", ""))
+                        if not frame_path.exists():
+                            all_frames_valid = False
+                            break
+                        expected_hash = frame_data.get("artifact_hash")
+                        if expected_hash:
+                            # Recompute hash to validate integrity
+                            actual_hash = content_hash(frame_path)
+                            if expected_hash != actual_hash:
+                                all_frames_valid = False
+                                break
+
+                    if all_frames_valid:
+                        existing_hash = content_hash(cand)
+                        rec.mark_skipped(
+                            f"reusing existing exhaustive acquisition at {cand} "
+                            f"({completion.get('verified_frame_count')} frames verified, complete={completion.get('is_complete')})"
+                        )
+                        rec.outputs = {
+                            "manifest_path": str(cand),
+                            "manifest_hash": existing_hash,
+                            "num_frames": completion.get("verified_frame_count", 0),
+                            "num_frames_expected": completion.get("decoder_frame_count", 0),
+                            "storyboard_only": False,
+                            "is_complete": True,
+                        }
+                        manifest.update_stage(rec)
+                        return rec
+                except AssertionError:
                     pass  # storyboard — fall through to re-acquire
+                except Exception:
+                    pass  # Manifest invalid or frames missing — fall through to re-acquire
 
     # No reusable manifest: attempt real acquisition
     rec.mark_running()
@@ -200,25 +242,27 @@ def _stage_acquire(manifest: RunManifest, run_dir: Path, youtube_url: str,
             manifest.update_stage(rec)
             return rec
 
-        # Must have frames verified (readable, hashed, accounted)
+        # Must have frames verified (decodable with dimensions, hashed, accounted)
         if result["num_frames_verified"] == 0:
             completion = result.get("completion_status", {})
             rec.mark_failed(
-                f"No frames successfully verified. Expected: {completion.get('total_frames_expected', 0)}, "
-                f"Decoded: {result.get('num_frames_decoded', 0)}, "
+                f"No frames successfully verified. Decoder count: {completion.get('decoder_frame_count', 0)}, "
+                f"Artifact count: {completion.get('artifact_frame_count', 0)}, "
                 f"Verified: {result.get('num_frames_verified', 0)}. "
-                f"Error: {result.get('error', 'unknown')}"
+                f"Reason: {completion.get('completion_reason', result.get('error', 'unknown'))}"
             )
             manifest.update_stage(rec)
             return rec
 
         # Persist acquisition manifest in run_dir
-        # This manifest includes completion_status to prove exhaustive acquisition
+        # This manifest includes completion_status to prove complete exhaustive acquisition
         out_manifest = run_dir / "acquisition_manifest.json"
         out_manifest.parent.mkdir(parents=True, exist_ok=True)
+        completion = result.get("completion_status", {})
         manifest_data = {
             "source_url": youtube_url,
             "video_id": video_id,
+            "source_id": result.get("source_id", ""),
             "acquisition_mode": "exhaustive",
             "decoder_version": "ffmpeg-frame-by-frame",
             "num_frames_decoded": result["num_frames_decoded"],
@@ -237,18 +281,17 @@ def _stage_acquire(manifest: RunManifest, run_dir: Path, youtube_url: str,
                 for f in result["frames"]
             ],
             "provenance": result["provenance"],
-            "completion_status": result.get("completion_status", {}),
+            "completion_status": completion,
         }
         with open(out_manifest, "w") as f:
             json.dump(manifest_data, f, indent=2)
 
         mhash = content_hash(out_manifest)
-        completion = result.get("completion_status", {})
         rec.mark_complete({
             "manifest_path": str(out_manifest),
             "manifest_hash": mhash,
             "num_frames": result["num_frames_verified"],
-            "num_frames_expected": completion.get("total_frames_expected", 0),
+            "num_frames_expected": completion.get("decoder_frame_count", 0),
             "acquisition_mode": "exhaustive",
             "is_complete": completion.get("is_complete", False),
             "from_cache": result.get("from_cache", False),
