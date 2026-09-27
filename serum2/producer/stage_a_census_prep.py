@@ -83,6 +83,15 @@ def build_frame_manifest(frames_dir: str, fps: float = 1.0, dense_windows_json: 
     they are two different images taken at two different resolutions/rates."""
     manifest = []
     fdir = Path(frames_dir)
+    # acquire_exhaustive() writes a sidecar mapping frame_id -> the REAL decoder pts_time (ffmpeg showinfo),
+    # alongside frame_<source_id>_<8-digit-decoder-index>.jpg files. That trailing number is a decoder
+    # INDEX, not milliseconds -- it must never be divided by 1000 and treated as a timestamp (that digit
+    # string is indistinguishable from acquire_visual_evidence's millisecond naming by regex alone, so the
+    # sidecar, not the filename, is the authoritative source whenever it exists).
+    exhaustive_sidecar = fdir / "exhaustive_timestamps.json"
+    exhaustive_timestamps: Dict[str, float] = (
+        json.loads(exhaustive_sidecar.read_text()) if exhaustive_sidecar.exists() else {}
+    )
     # Old video_capture naming: f_00001.jpg
     for p in sorted(fdir.glob("f_*.jpg")):
         m = _FRAME_RE.search(p.name)
@@ -91,13 +100,17 @@ def build_frame_manifest(frames_dir: str, fps: float = 1.0, dense_windows_json: 
         idx = int(m.group(1))
         ts = (idx - 1) / fps
         manifest.append({"frame_id": "frame_%05d" % idx, "timestamp_sec": ts, "path": str(p), "source": "sparse"})
-    # acquire_visual_evidence naming: frame_<source_id>_<ms>.jpg
+    # acquire_visual_evidence naming: frame_<source_id>_<ms>.jpg -- OR acquire_exhaustive naming:
+    # frame_<source_id>_<decoder_index>.jpg, disambiguated by the sidecar above when present.
     for p in sorted(fdir.glob("frame_*.jpg")):
-        m = _FRAME_RE_AV.search(p.name)
-        if not m:
-            continue
-        ts = int(m.group(1)) / 1000.0
-        frame_id = p.stem  # already unique: frame_yt_<sid>_<ms>
+        frame_id = p.stem  # already unique: frame_yt_<sid>_<ms-or-decoder-index>
+        if frame_id in exhaustive_timestamps:
+            ts = exhaustive_timestamps[frame_id]
+        else:
+            m = _FRAME_RE_AV.search(p.name)
+            if not m:
+                continue
+            ts = int(m.group(1)) / 1000.0
         manifest.append({"frame_id": frame_id, "timestamp_sec": ts, "path": str(p), "source": "sparse"})
     if dense_windows_json and Path(dense_windows_json).exists():
         windows = json.loads(Path(dense_windows_json).read_text())

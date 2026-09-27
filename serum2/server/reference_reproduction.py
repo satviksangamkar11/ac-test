@@ -106,7 +106,7 @@ def run_reference_reproduction(stage_a_path, reread_log_path, corrections_path=N
     report = compile_ops(ops, name, "reference reproduction of %s; every operand from an admitted observation" % source.get("video_id"), epoch)
     path = serialize(report, subfolder)
     file_cmp = compare_file(rows, read_back_file(path), report)
-    ui_cmp = compare_ui(rows, ui_readback, report) if ui_readback else None
+    ui_cmp = compare_ui(rows, ui_readback, report, epoch=epoch) if ui_readback else None
     level = verification_level(file_cmp, ui_cmp)
 
     from serum2.producer.contract_registry import ContractRegistry

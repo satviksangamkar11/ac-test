@@ -155,11 +155,12 @@ def _known_epoch_versions() -> set:
     return {e.serum_version for e in KNOWN_EPOCHS}
 
 
-def _binding_quality(ui_readback: Dict[str, Any]) -> str:
+def _binding_quality(ui_readback: Dict[str, Any], expected_epoch=None) -> str:
     """Classify how a UI readback was obtained.
 
     LOADER_BOUND         — carries complete loader_evidence (run_id, track_nonce, serum_module_sha256,
                            epoch, screenshot_sha, crop_coords) with all required fields AND valid content,
+                           bound to the EXACT epoch this run executed on (when expected_epoch is given),
                            AND the top-level readback carries an actual observed UI values payload
     HEADLESS_DAWDREAMER  — A8: DawDreamer/headless evidence, never eligible for VERIFIED
     MANUALLY_READ        — has captured_at/serum/method metadata but no loader proof
@@ -171,10 +172,18 @@ def _binding_quality(ui_readback: Dict[str, Any]) -> str:
     - track_nonce: non-empty string
     - serum_module_sha256: exactly 64 hexadecimal characters
     - screenshot_sha: exactly 64 hexadecimal characters
-    - epoch: must identify one of the pinned, known ExecutionEpochs (e.g. "2.0.23", "2.0.21") -- an
-      arbitrary non-empty string ("staging", "1.0.0") does NOT integrity-bind the readback to a real,
-      qualified Serum build, so it is refused exactly like a missing field.
-    - crop_coords: exactly [x, y, w, h] with numeric finite non-negative values
+    - epoch / serum_module_sha256 binding: when `expected_epoch` (an ExecutionEpoch) is passed -- the
+      normal, production case, where the caller always knows which epoch the run actually executed on --
+      BOTH must match that EXACT epoch:
+        loader_evidence["epoch"] == expected_epoch.serum_version
+        loader_evidence["serum_module_sha256"] == expected_epoch.binary_sha256
+      "this is A known, pinned epoch" is not the same claim as "this readback belongs to the epoch THIS
+      RUN executed on" -- a 2.0.21 readback must never bind a 2.0.23 run, or vice versa, even though both
+      are individually real, qualified epochs. When `expected_epoch` is omitted (only legitimate for
+      epoch-agnostic offline paths that have no run context at all), falls back to the weaker "identifies
+      some known pinned epoch" check.
+    - crop_coords: exactly [x, y, w, h], numeric, finite, AND non-negative (a negative coordinate cannot
+      describe a real screen region)
     - values: the readback must ALSO carry a non-empty top-level "values" mapping of actually observed
       control readings. A structurally perfect loader_evidence envelope with valid hashes but no real
       observed UI content is not sufficient evidence that anything was actually read -- it is downgraded
@@ -230,8 +239,14 @@ def _binding_quality(ui_readback: Dict[str, Any]) -> str:
         except ValueError:
             return "MANUALLY_READ" if (ui_readback.get("captured_at") or ui_readback.get("serum")) else "UNBOUND"
 
-        # epoch: must identify one of the pinned, known ExecutionEpochs -- not an arbitrary string
-        if not isinstance(epoch, str) or epoch.strip() not in _known_epoch_versions():
+        # epoch + module SHA: bound to the EXACT runtime epoch when one is known, never merely "some
+        # known pinned epoch" -- a 2.0.21 readback must never satisfy a 2.0.23 run.
+        if not isinstance(epoch, str) or not epoch.strip():
+            return "MANUALLY_READ" if (ui_readback.get("captured_at") or ui_readback.get("serum")) else "UNBOUND"
+        if expected_epoch is not None:
+            if epoch.strip() != expected_epoch.serum_version or sha256 != expected_epoch.binary_sha256:
+                return "MANUALLY_READ" if (ui_readback.get("captured_at") or ui_readback.get("serum")) else "UNBOUND"
+        elif epoch.strip() not in _known_epoch_versions():
             return "MANUALLY_READ" if (ui_readback.get("captured_at") or ui_readback.get("serum")) else "UNBOUND"
 
         # crop_coords: exactly [x, y, w, h] with numeric values (not strings)
@@ -240,8 +255,8 @@ def _binding_quality(ui_readback: Dict[str, Any]) -> str:
         # Check that ALL elements are numeric (int or float), not strings
         if not all(isinstance(c, (int, float)) and not isinstance(c, bool) for c in crop_coords):
             return "MANUALLY_READ" if (ui_readback.get("captured_at") or ui_readback.get("serum")) else "UNBOUND"
-        # Verify all are finite
-        if not all(-float('inf') < c < float('inf') for c in crop_coords):
+        # Verify all are finite and non-negative (a negative coordinate cannot describe a real screen region)
+        if not all(0 <= c < float('inf') for c in crop_coords):
             return "MANUALLY_READ" if (ui_readback.get("captured_at") or ui_readback.get("serum")) else "UNBOUND"
 
         # A7: a structurally perfect loader_evidence envelope with no actual observed UI content is not
@@ -258,14 +273,18 @@ def _binding_quality(ui_readback: Dict[str, Any]) -> str:
     return "UNBOUND"
 
 
-def compare_ui(rows, ui_readback: Dict[str, Any], report: CompileReport) -> Dict[str, Any]:
+def compare_ui(rows, ui_readback: Dict[str, Any], report: CompileReport, epoch=None) -> Dict[str, Any]:
     """DIRECT_UI comparison: what the LIVE Serum showed, per control id, against what the video showed for the
     same control. ui_readback = {"route": "DIRECT_UI", "captured_at": ..., "values": {control_id: text}}.
     A control that was compiled but has no UI reading is UNREADABLE (never assumed correct).
-    An UNBOUND readback (bare dict) is accepted for comparison but will not reach LIVE_UI_VERIFIED."""
+    An UNBOUND readback (bare dict) is accepted for comparison but will not reach LIVE_UI_VERIFIED.
+
+    A7: `epoch` (the run's own ExecutionEpoch) is passed through to _binding_quality so LOADER_BOUND
+    requires the readback to be bound to the EXACT epoch this run executed on, not merely some known
+    pinned epoch. Omitting it falls back to the weaker "known epoch" check (see _binding_quality)."""
     if ui_readback.get("route") != DIRECT_UI:
         raise ValueError("ui_readback must come from the DIRECT_UI route")
-    bq = _binding_quality(ui_readback)
+    bq = _binding_quality(ui_readback, expected_epoch=epoch)
     ids = {o.operation_id for o in report.ops}
     vals = ui_readback["values"]
     fields: Dict[str, str] = {}

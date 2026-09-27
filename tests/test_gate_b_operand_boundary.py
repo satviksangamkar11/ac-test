@@ -112,25 +112,42 @@ class TestGateBCertificate:
 
     def _make_result(self, *, execution_status="ADVISORY_ONLY", decision=None,
                      admitted=None, readback_verified=None, preset_sha256=None,
-                     module_sha=None, plan=None, restoration_verified=True):
-        """Build a minimal ProducerResult for certificate testing."""
+                     module_sha=None, plan=None, restoration_verified=True, epoch_str=None):
+        """Build a minimal ProducerResult for certificate testing. When module_sha is given, the
+        loader_evidence is filled out to a complete, real A7 LOADER_BOUND shape (epoch_str defaults to
+        matching module_sha's own epoch when it's a known binary_sha256) so a test asking for a working
+        native/canonical case actually gets one under the full A7 binding contract, not a shape that used
+        to pass only because gate_b_status() re-implemented a narrower check."""
         r = ProducerResult(request=ProducerRequest(user_intent="test"))
         r.execution_status = execution_status
         r.decision = decision
         r.admitted = admitted
         if readback_verified is not None or preset_sha256:
+            if module_sha:
+                if epoch_str is None:
+                    from serum2.producer.execution_epoch import KNOWN_EPOCHS
+                    matched = next((e for e in KNOWN_EPOCHS if e.binary_sha256 == module_sha), None)
+                    epoch_str = matched.serum_version if matched else EPOCH_2_0_23.serum_version
+                loader_evidence = {
+                    "serum_module_sha256": module_sha,
+                    "run_id": "test-run",
+                    "track_nonce": "test-nonce",
+                    "epoch": epoch_str,
+                    "screenshot_sha": "e" * 64,
+                    "crop_coords": [0, 0, 100, 100],
+                }
+                values = {"env1.attack": "5.0"}
+            else:
+                loader_evidence = None
+                values = {}
             r.serum_preset_execution = {
                 "readback_verified": readback_verified,
                 "preset_sha256": preset_sha256 or "abc123",
                 "ui_readback": {
                     "route": "DIRECT_UI",
-                    "values": {},
+                    "values": values,
                     "restoration_verified": restoration_verified,
-                    "loader_evidence": {
-                        "serum_module_sha256": module_sha,
-                        "run_id": "test-run",
-                        "track_nonce": "test-nonce",
-                    } if module_sha else None,
+                    "loader_evidence": loader_evidence,
                 },
             }
         if plan:
@@ -311,6 +328,9 @@ class TestOperandInvariant:
                     "serum_module_sha256": EPOCH_2_0_23.binary_sha256,
                     "run_id": "W1_GATE_B_22433E83",
                     "track_nonce": "W1_GATE_B_22433E83",
+                    "epoch": EPOCH_2_0_23.serum_version,
+                    "screenshot_sha": "d" * 64,
+                    "crop_coords": [0, 0, 100, 100],
                 },
             },
         }

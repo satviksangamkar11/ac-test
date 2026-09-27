@@ -47,6 +47,15 @@ def gate_b_status(result, epoch=None) -> str:
       "GATE_B_BLOCKED"             — execution was not completed or not accepted
 
     A8: DawDreamer/headless evidence blocks CANONICAL_GATE_B_VERIFIED.
+
+    A7/A8 integration: CANONICAL_GATE_B_VERIFIED consumes the SAME canonical binding-quality validation
+    A7 owns (state_comparator._binding_quality), rather than re-implementing a narrower, independently
+    maintained subset of its checks here. A readback A7 itself would refuse to call LOADER_BOUND (missing
+    run_id/track_nonce/screenshot hash/crop_coords/observed values, or bound to the WRONG epoch) can
+    therefore never be promoted to CANONICAL_GATE_B_VERIFIED just because this function's own older,
+    narrower check (module SHA alone) happened to pass -- that gap was a real authority/evidence-gate
+    bypass. `epoch` is REQUIRED (not merely accepted) for CANONICAL_GATE_B_VERIFIED: epoch=None can never
+    reach canonical, since there would be no runtime epoch to bind the readback to.
     """
     # Must be executed and accepted
     if getattr(result, "execution_status", None) != "EXECUTED":
@@ -61,27 +70,24 @@ def gate_b_status(result, epoch=None) -> str:
         return "GATE_B_BLOCKED"
 
     # NATIVE_STATE_PROOF: all minimal evidence present
-    # CANONICAL_GATE_B_VERIFIED: additionally requires admitted + bound module SHA
+    # CANONICAL_GATE_B_VERIFIED: additionally requires admitted + the full A7 LOADER_BOUND evidence chain
     if not getattr(result, "admitted", False):
         return "NATIVE_STATE_PROOF"
 
-    # Check loader_evidence for module SHA binding
     ui_rb = spe.get("ui_readback") or {}
 
-    # A8: DawDreamer/headless evidence blocks CANONICAL_GATE_B_VERIFIED
-    if ui_rb.get("backend") and "DawDreamer" in str(ui_rb.get("backend")):
-        return "NATIVE_STATE_PROOF"
-    if ui_rb.get("is_headless") is True:
-        return "NATIVE_STATE_PROOF"
-
-    le = ui_rb.get("loader_evidence") or {}
-    module_sha = le.get("serum_module_sha256")
-    if not module_sha:
+    # epoch is mandatory for canonical status: with no runtime epoch, there is nothing to bind the
+    # readback's own claimed epoch/module SHA to, so it can never be more than NATIVE_STATE_PROOF.
+    if epoch is None:
         return "NATIVE_STATE_PROOF"
 
-    if epoch is not None:
-        if module_sha != epoch.binary_sha256:
-            return "NATIVE_STATE_PROOF"
+    # A canonical readback must actually come from the live plugin route, not a file-only comparison.
+    if ui_rb.get("route") != "DIRECT_UI":
+        return "NATIVE_STATE_PROOF"
+
+    from serum2.execution.state_comparator import _binding_quality
+    if _binding_quality(ui_rb, expected_epoch=epoch) != "LOADER_BOUND":
+        return "NATIVE_STATE_PROOF"
 
     # Canonical Gate B additionally requires restoration evidence: the canonical chain must show the
     # mutated state was verified restorable (see module docstring), not just that a value was written and
@@ -197,8 +203,10 @@ def gate_b_certificate(result, epoch=None, *,
         "atlas_id": fc.get("atlas_id"),
         "agrees_with_admitted_mutation_path": fc.get("agrees_with_admitted_mutation_path"),
         "final_execution_classification": fc.get("final_execution_classification"),
-        # screenshot binding
-        "screenshot_sha256": ui_rb.get("screenshot_sha256"),
+        # screenshot binding. A7's loader_evidence schema (state_comparator._binding_quality) names this
+        # field "screenshot_sha" inside loader_evidence -- not a top-level "screenshot_sha256" on ui_rb,
+        # which never existed in any real evidence shape and always read back None.
+        "screenshot_sha256": le.get("screenshot_sha"),
         # restoration
         "restoration_verified": (
             fc.get("restoration_verified")

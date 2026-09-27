@@ -31,7 +31,7 @@ if _SOURCE_PATH not in sys.path:
     sys.path.insert(0, _SOURCE_PATH)
 
 from serum2.source.fetch_youtube import fetch_transcript  # noqa: E402
-from serum2.source.acquire_visual_evidence import acquire_visual_evidence  # noqa: E402
+from serum2.source.acquire_exhaustive import acquire_exhaustive  # noqa: E402
 from serum2.source.youtube_url import extract_youtube_video_id  # noqa: E402
 from serum2.producer.stage_a_census_prep import prep as stage_a_prep  # noqa: E402
 from serum2.producer.state_ledger import build_all, conservation  # noqa: E402
@@ -183,11 +183,26 @@ def run_stage1_acquire_and_prep(youtube_url: str, work_dir: Path) -> Dict[str, A
         raise RuntimeError("fetch_transcript reported success but %s was not found relative to the current "
                            "working directory (%s)" % (transcript_path, Path.cwd()))
 
-    bundle = acquire_visual_evidence(source_url=youtube_url, transcript_sufficiency=None,
-                                     max_frames=999999, sample_interval_sec=1.0, force=False)
-    if not bundle.frames:
-        raise RuntimeError("acquire_visual_evidence returned zero frames for %r" % youtube_url)
-    frame_dir = (ROOT / bundle.frames[0].artifact_path).parent
+    # CRITICAL: the canonical acquisition source is the exhaustive decoder-accounted path
+    # (serum2.source.acquire_exhaustive), never the older interval-sampling acquire_visual_evidence.
+    # acquire_exhaustive() decodes EVERY source frame exactly once (ffmpeg showinfo decoder ledger,
+    # independently reconciled against the artifact ledger -- see that module's docstring) and fails
+    # closed on any decoder/artifact mismatch; it never silently promotes a partial or sampled set. A
+    # max_frames/sample_interval_sec pair is NOT a disguised substitute for that -- it is a genuinely
+    # different (sampling) acquisition strategy and must never be the production Stage-A source.
+    result = acquire_exhaustive(source_url=youtube_url, video_id=video_id, force=False)
+    if result["status"] != "SUCCESS":
+        raise RuntimeError("acquire_exhaustive failed for %r: %s" % (youtube_url, result.get("error")))
+    if not result["frames"]:
+        raise RuntimeError("acquire_exhaustive returned zero frames for %r" % youtube_url)
+    # acquire_exhaustive's artifact_path values are already absolute (cache_frames_dir under
+    # serum2/data/visual_frames), unlike the old sampling path's ROOT-relative paths -- do not re-prefix.
+    frame_dir = Path(result["frames"][0].artifact_path).parent
+    # acquire_exhaustive's filenames end in a decoder FRAME INDEX, not milliseconds -- write the real,
+    # decoder-authoritative pts_time per frame_id so stage_a_census_prep.build_frame_manifest never
+    # mis-derives a timestamp by dividing that index by 1000 (see that module's naming-disambiguation note).
+    (frame_dir / "exhaustive_timestamps.json").write_text(json.dumps(
+        {f.frame_id: f.timestamp_sec for f in result["frames"]}))
 
     prep_result = stage_a_prep(
         frames_dir=str(frame_dir),

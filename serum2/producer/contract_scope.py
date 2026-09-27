@@ -148,6 +148,22 @@ def op_operand(op: Dict[str, Any]) -> str:
             "ADD": "structured"}.get(op["operation"], "unknown")
 
 
+def _select_by_operand(candidates: List[Coverage], want_operand: str) -> Coverage:
+    """When more than one contract legitimately covers the exact same structural key (e.g. an atlas-id
+    target promoted from live evidence AND an older capability_key-named contract for the identical
+    Serum parameter -- see ContractRegistry's several independent, non-overwriting loaders), a plain
+    "first in dict order" pick can silently select one whose OWN allowed_operation disagrees with the
+    real operation's operand kind (e.g. a stale contract proven "numeric" for a control the binding
+    table -- and every real observation -- treats as boolean), making the operation permanently
+    inadmissible even though a perfectly good same-parameter contract sits right next to it.
+
+    Prefers the first candidate whose own .operand agrees with the operation actually being attempted;
+    falls back to the first candidate outright only when none agree (so behavior for a single-candidate
+    list, the overwhelming majority, is completely unchanged)."""
+    agreeing = [c for c in candidates if c.operand == want_operand]
+    return agreeing[0] if agreeing else candidates[0]
+
+
 @dataclass
 class Trace:
     status: str
@@ -174,7 +190,7 @@ def find_contract(op: Dict[str, Any], ctx: Dict[str, Any], cov: List[Coverage], 
         same_param = [c for c in cov if c.kind == "fx" and c.fx_type == op["fx_type"] and c.kparam == op["param"]]
         exact = [c for c in same_param if c.rack == rack]
         if exact:
-            return exact[0], tr
+            return _select_by_operand(exact, op_operand(op)), tr
         if same_param:
             tr.status, tr.stop_stage = "SCOPE_WOULD_EXPAND", "SCOPE"
             tr.detail = "contract %s proven in rack %s only; operation targets rack %s" % (
@@ -206,7 +222,7 @@ def find_contract(op: Dict[str, Any], ctx: Dict[str, Any], cov: List[Coverage], 
         same = [c for c in cov if c.root == root and c.kparam == kp and c.kind == "instance"]
         exact = [c for c in same if c.index == op["index"]]
         if exact:
-            return exact[0], tr
+            return _select_by_operand(exact, op_operand(op)), tr
         if same:
             tr.status, tr.stop_stage = "SCOPE_WOULD_EXPAND", "SCOPE"
             tr.detail = "contract %s proven on %s%d only; operation targets %s%d" % (
@@ -227,7 +243,7 @@ def find_contract(op: Dict[str, Any], ctx: Dict[str, Any], cov: List[Coverage], 
         same = [c for c in cov if c.root == root and c.kparam == kp and c.kind == "instance"]
         exact = [c for c in same if c.index == 0]
         if exact:
-            return exact[0], tr
+            return _select_by_operand(exact, op_operand(op)), tr
         if same:
             tr.status, tr.stop_stage = "SCOPE_WOULD_EXPAND", "SCOPE"
             tr.detail = "contract %s proven on %s%d only; singleton %s0 has no separate instance" % (
