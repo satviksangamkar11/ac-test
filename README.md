@@ -118,11 +118,11 @@ Four integration gaps block the canonical `python -m serum2.pipeline` path from 
 |------|------|-------|--------|
 | **S1: NATIVE_VERIFY** | `serum2/pipeline/runner.py:683` | Must parse `readback_diff.json` and extract genuine native control values; build machine-readable `ui_readback` dict bound to screenshot + module SHA | ✅ **FIXED (2026-09-27)** — Extracts `target_control`, builds `ui_readback` with `binding_quality: NATIVE_BOUND`, fails if evidence is missing |
 | **S2: REFERENCE_VERIFY** | `serum2/pipeline/runner.py:779` | Must use actual `ui_readback` from NATIVE_VERIFY; generate real `reread_log.json`; pass correct paths to `reference_reproduction()` | ✅ **FIXED (2026-09-27)** — Uses NATIVE_VERIFY outputs, generates reread_log.json, calls reference_reproduction with real paths |
-| **S3: ARRANGEMENT** | `serum2/pipeline/runner.py:848` | Imports `from serum2.ableton.arrangement import create_16bar_arrangement` — module does not exist; must use actual Ableton integration | **🔴 TODO — Inspect serum2/ableton/ and implement or fallback** |
-| **S4: RENDER VALIDATION** | `serum2/pipeline/runner.py:890+` | Must distinguish `render missing`, `render unreadable`, `render silent`, `render measurable`; cannot convert measurement failure into success | **🔴 TODO — Add robust audio analysis (RMS, peak, non-silence fraction)** |
+| **S3: ARRANGEMENT** | `serum2/pipeline/runner.py:870` | Imports `from serum2.ableton.arrangement import create_16bar_arrangement` — module does not exist; must use actual Ableton integration | ✅ **FIXED (2026-09-27)** — New `serum2/ableton/arrangement.py` with real MCP integration; creates 16-bar MIDI clip via AbletonMCP on Windows, fails closed on cloud |
+| **S4: RENDER VALIDATION** | `serum2/pipeline/runner.py:925+` | Must distinguish `render missing`, `render unreadable`, `render silent`, `render measurable`; cannot convert measurement failure into success | ✅ **FIXED (2026-09-27)** — New `_validate_render_audio()` with RMS, peak, non-silence metrics; all three thresholds must pass; explicit ValueError for unreadable files |
 | **S5: NATIVE PROOF** | `serum2/pipeline/runner.py:1-end` | AWAITING_NATIVE_ENVIRONMENT boundary is by design; LOCAL stages require Windows + Serum 2.0.23 + Ableton | ✅ **WORKING AS DESIGNED** — Halts gracefully when VLM/native tools unavailable |
 
-**Critical path:** S1 ✅ → S2 ✅ → S3 → S4 → one Gate-B native run → fresh W2 → product closure.
+**Critical path:** S1 ✅ → S2 ✅ → S3 ✅ → S4 ✅ → one Gate-B native run → fresh W2 → product closure.
 
 Do not add more control proofs until the pipeline completes end-to-end.
 
