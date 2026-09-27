@@ -129,66 +129,28 @@ def filter_contract_covered(
 # Temporal candidate selection
 # ---------------------------------------------------------------------------
 
-# Transcript-cued windows for this specific tutorial (AjE11L_OwLA).
-# Each entry: (control_id, description, frames_t_min, frames_t_max, prefer_positive).
-# These are read from transcript analysis; do not invent values.
-# "prefer_positive" flags that minus-sign OCR is unreliable at this resolution
-# and the session should prioritise frames where the value is likely positive.
-_TUTORIAL_CANDIDATE_WINDOWS: List[Tuple[str, str, float, float, bool]] = [
-    # oscA.octave was shown as 0 at t≈24s (VLM single-source, needs OCR corroboration).
-    # Zero value → no minus sign → OCR-friendly. Try t=22-28s.
-    ("oscA.octave", "osc A octave shown at ~24s, value appears 0 (positive/zero)", 22.0, 28.0, True),
-    # oscA.octave also visible at t≈34s as -2, but minus-sign OCR is unreliable here.
-    # Secondary option only if zero-value frames don't corroborate.
-    ("oscA.octave", "osc A octave at ~34s shows -2, but minus sign OCR unreliable", 32.0, 36.0, False),
-    # env1.decay at t≈24s: VLM=1.0s but OCR fragmented to 1005. Try tighter ROI.
-    ("env1.decay", "env1 decay row visible at ~24s; OCR fragmented '1.0 s' as '1005'", 22.0, 28.0, True),
-    # LFO1 rate: core of a wobble bass — look in the 40-100s range where LFO is configured.
-    ("lfo1.rate", "LFO1 rate likely configured during wobble section ~40-100s", 38.0, 100.0, True),
-    # filter1.cutoff: sweep target for the wobble — visible when filter is adjusted.
-    ("filter1.cutoff", "filter cutoff likely visible ~40-120s during wobble setup", 38.0, 120.0, True),
-    # env2.decay: if a second envelope is shown (modulation depth), likely ~60-150s.
-    ("env2.decay", "env2 decay possibly visible if second envelope used ~60-150s", 60.0, 150.0, True),
-]
-
-
-def temporal_candidates(
+def all_manifest_frames_for_control(
     manifest: dict,
     control_id: str,
     contract_covered: Optional[Set[str]] = None,
 ) -> List[dict]:
-    """Return a list of manifest frame dicts suitable for temporal corroboration.
+    """Return ALL manifest frames for a given control (if contract-covered).
 
-    Selects up to 3 distinct timestamps from transcript-cued windows for ``control_id``.
-    Returns [] if ``control_id`` is not contract-covered or has no cued window.
-    Never returns duplicate frame_ids.
+    DEPRECATED: temporal_candidates() was tutorial-specific and hardcoded
+    for a single video's transcript landmarks.
+    The universal frame observer uses all_manifest_frames_for_control() to
+    ensure every frame is evaluated in evidence-first observation.
+
+    Returns [] if ``control_id`` is not contract-covered.
     """
     if contract_covered is None:
         contract_covered = contract_covered_controls()
     if control_id not in contract_covered:
         return []
 
-    windows = [w for w in _TUTORIAL_CANDIDATE_WINDOWS if w[0] == control_id]
-    if not windows:
-        return []
-
-    seen_ids: Set[str] = set()
-    result: List[dict] = []
-    for _, _desc, t_min, t_max, _prefer_pos in windows:
-        frames_in_window = select_frames_by_timestamp(manifest, t_min, t_max)
-        # Prefer every-other frame to maximise temporal separation within the window.
-        for i, fr in enumerate(frames_in_window):
-            if len(result) >= 3:
-                break
-            fid = fr["frame_id"]
-            if fid in seen_ids:
-                continue
-            seen_ids.add(fid)
-            result.append(fr)
-        if len(result) >= 3:
-            break
-
-    return result[:3]
+    # Return all frames, sorted by timestamp
+    frames = manifest.get("frames", [])
+    return sorted(frames, key=lambda f: float(f.get("timestamp_sec", 0.0)))
 
 
 # ---------------------------------------------------------------------------

@@ -19,7 +19,7 @@ from serum2.producer.w2_fast_path import (
     select_frames_by_timestamp,
     contract_covered_controls,
     filter_contract_covered,
-    temporal_candidates,
+    all_manifest_frames_for_control,
     numeric_ocr_profile,
     assert_no_redownload,
     rand_phase_exclusion_reason,
@@ -175,43 +175,49 @@ class TestContractFirstFiltering:
 
 
 # ---------------------------------------------------------------------------
-# 4. Temporal candidate selection returns real existing frame IDs
+# 4. All manifest frames (universal observer) — no tutorial-specific windows
 # ---------------------------------------------------------------------------
 
-class TestTemporalCandidates:
-    def test_oscA_octave_returns_frames(self, manifest, covered_controls):
-        frames = temporal_candidates(manifest, "oscA.octave", covered_controls)
-        assert len(frames) >= 1
-        assert len(frames) <= 3
+class TestAllManifestFramesForControl:
+    def test_oscA_octave_returns_all_frames(self, manifest, covered_controls):
+        """all_manifest_frames_for_control returns ALL frames for contract-covered controls."""
+        frames = all_manifest_frames_for_control(manifest, "oscA.octave", covered_controls)
+        assert len(frames) == 269
 
-    def test_oscA_octave_frames_are_manifest_entries(self, manifest, covered_controls):
+    def test_all_frames_are_manifest_entries(self, manifest, covered_controls):
         all_ids = set(manifest_frame_ids(manifest))
-        frames = temporal_candidates(manifest, "oscA.octave", covered_controls)
+        frames = all_manifest_frames_for_control(manifest, "oscA.octave", covered_controls)
         for fr in frames:
             assert fr["frame_id"] in all_ids
 
-    def test_temporal_candidates_no_duplicate_frame_ids(self, manifest, covered_controls):
-        frames = temporal_candidates(manifest, "oscA.octave", covered_controls)
+    def test_all_frames_no_duplicates(self, manifest, covered_controls):
+        frames = all_manifest_frames_for_control(manifest, "oscA.octave", covered_controls)
         ids = [fr["frame_id"] for fr in frames]
         assert len(ids) == len(set(ids))
 
-    def test_temporal_candidates_rand_phase_returns_empty(self, manifest, covered_controls):
-        """rand_phase not contract-covered → no candidates."""
-        frames = temporal_candidates(manifest, "oscA.rand_phase", covered_controls)
+    def test_rand_phase_returns_empty(self, manifest, covered_controls):
+        """rand_phase not contract-covered → no frames."""
+        frames = all_manifest_frames_for_control(manifest, "oscA.rand_phase", covered_controls)
         assert frames == []
 
-    def test_temporal_candidates_unknown_control_returns_empty(self, manifest, covered_controls):
-        frames = temporal_candidates(manifest, "fake.nonexistent", covered_controls)
+    def test_unknown_control_returns_empty(self, manifest, covered_controls):
+        frames = all_manifest_frames_for_control(manifest, "fake.nonexistent", covered_controls)
         assert frames == []
 
-    def test_temporal_candidates_env1_decay_returns_frames(self, manifest, covered_controls):
-        frames = temporal_candidates(manifest, "env1.decay", covered_controls)
-        assert len(frames) >= 1
+    def test_env1_decay_returns_all_frames(self, manifest, covered_controls):
+        """All contract-covered controls get all frames, not selective windows."""
+        frames = all_manifest_frames_for_control(manifest, "env1.decay", covered_controls)
+        assert len(frames) == 269
 
-    def test_temporal_candidates_lfo1_rate_has_cued_window(self, manifest, covered_controls):
-        frames = temporal_candidates(manifest, "lfo1.rate", covered_controls)
-        # lfo1.rate has a wide cued window (38-100s); should find frames
-        assert len(frames) >= 1
+    def test_lfo1_rate_returns_all_frames(self, manifest, covered_controls):
+        """LFO1.rate not tutorial-specific; gets full frame set for universal observer."""
+        frames = all_manifest_frames_for_control(manifest, "lfo1.rate", covered_controls)
+        assert len(frames) == 269
+
+    def test_frames_sorted_by_timestamp(self, manifest, covered_controls):
+        frames = all_manifest_frames_for_control(manifest, "oscA.octave", covered_controls)
+        timestamps = [float(fr.get("timestamp_sec", 0.0)) for fr in frames]
+        assert timestamps == sorted(timestamps)
 
 
 # ---------------------------------------------------------------------------

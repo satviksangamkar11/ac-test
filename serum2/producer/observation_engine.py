@@ -544,6 +544,79 @@ class ObservationEngine:
                    "roi_hash": roi_hash}
         return self.adjudicated_observe(sources, context, numeric_tol=1e-3)
 
+    def observe_frame_all_controls(self, frame_path: str) -> List[Dict[str, Any]]:
+        """Evidence-first VLM census: identify all visible Serum controls without a target hint.
+
+        Args:
+            frame_path: Path to the full frame image (not a crop).
+
+        Returns:
+            List of dicts, each with keys: {"panel", "label", "value", "confidence", "evidence_hash"}
+
+        The VLM prompt asks what controls are visible WITHOUT giving any control_id hint.
+        This is used by the universal frame observer (Stage 5) to discover controls
+        rather than search for pre-selected ones.
+        """
+        try:
+            from PIL import Image
+        except Exception:
+            return []
+
+        try:
+            im = Image.open(frame_path)
+        except Exception:
+            return []
+
+        import hashlib
+        import io
+        buf = io.BytesIO()
+        im.convert("RGB").save(buf, format="PNG")
+        frame_hash = hashlib.sha256(buf.getvalue()).hexdigest()
+
+        import torch
+        from qwen_vl_utils import process_vision_info
+        model, proc = _load_vlm()
+
+        # Generic evidence-first prompt: no control_id hint, just ask what's readable
+        prompt = (
+            "This is a screenshot of a Serum 2 synthesizer plugin UI. "
+            "List every parameter whose value is clearly readable. "
+            "For each readable parameter, output exactly one line with this format: "
+            "PANEL: <section name> CTRL: <label as shown> VALUE: <exact value> CONF: <0.0-1.0>\n"
+            "If no parameters are clearly readable, output: NO_READABLE_CONTROLS"
+        )
+
+        msgs = [{"role": "user", "content": [{"type": "image", "image": frame_path}, {"type": "text", "text": prompt}]}]
+        text = proc.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
+        img_objs, vids = process_vision_info(msgs)
+        inp = proc(text=[text], images=img_objs, videos=vids, padding=True, return_tensors="pt").to(model.device)
+        out = model.generate(**inp, max_new_tokens=256, output_scores=True, return_dict_in_generate=True, do_sample=False)
+        gen = out.sequences[0][inp.input_ids.shape[1]:]
+        probs = [torch.softmax(sl[0].float(), dim=-1)[t].item() for sl, t in zip(out.scores, gen)]
+        mean_prob = sum(probs) / len(probs) if probs else 0.0
+        result = proc.batch_decode([gen], skip_special_tokens=True)[0]
+
+        if "NO_READABLE_CONTROLS" in result.upper():
+            return []
+
+        # Parse output lines matching: PANEL: <panel> CTRL: <label> VALUE: <value> CONF: <confidence>
+        findings = []
+        pattern = r"PANEL:\s*(.+?)\s+CTRL:\s*(.+?)\s+VALUE:\s*(.+?)\s+CONF:\s*([\d.]+)"
+        for match in re.finditer(pattern, result, re.IGNORECASE):
+            panel, label, value, conf_str = match.groups()
+            try:
+                conf = float(conf_str)
+            except ValueError:
+                conf = 0.5
+            findings.append({
+                "panel": panel.strip(),
+                "label": label.strip(),
+                "value": value.strip(),
+                "confidence": min(1.0, max(0.0, conf)),
+                "evidence_hash": frame_hash,
+            })
+        return findings
+
 
 # ---------------------------------------------------------------------------
 # Generic Serum-UI-layout crop registry + lazy local-model runners

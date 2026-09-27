@@ -78,7 +78,17 @@ def _is_native_environment() -> bool:
 
 
 def _run_observation_census(acq_manifest_path: str, run_dir: Path) -> None:
-    """Run VLM+OCR observation census for all contract-covered controls.
+    """Run universal full-frame observation census.
+
+    Universal observer pipeline:
+    1. INGEST all 269 frames from manifest
+    2. PIXEL analysis (zero tokens, local PIL/numpy)
+    3. TEMPORAL grouping (consecutive near-identical frames)
+    4. LOCAL OCR (EasyOCR, generic numeric)
+    5. LOCAL VLM census (evidence-first, Qwen2.5-VL, no parameter hints)
+    6. IDENTITY resolution (atlas normalize_control)
+    7. ADJUDICATE (existing GAP-A/B/C policy, UNTOUCHED)
+    8. CONTRACT filter (post-observation, not frame selector)
 
     Writes c3_observation_metrics.json to run_dir on success.
     Raises _NativeVLMUnavailable when VLM or OCR dependencies are absent.
@@ -92,23 +102,9 @@ def _run_observation_census(acq_manifest_path: str, run_dir: Path) -> None:
         )
 
     try:
-        from serum2.producer.observation_engine import ObservationEngine
+        from serum2.producer.universal_frame_observer import FrameObservationCensus
     except (ImportError, ModuleNotFoundError) as exc:
-        raise _NativeVLMUnavailable(f"ObservationEngine unavailable: {exc}")
-
-    # Check Qwen2.5-VL availability via ObservationEngine self-check.
-    try:
-        engine = ObservationEngine()
-        vlm_ok = getattr(engine, "vlm_available", None)
-        if vlm_ok is False:
-            raise _NativeVLMUnavailable(
-                "Qwen2.5-VL not available in ObservationEngine. "
-                "Install Qwen2.5-VL-3B-Instruct on the LOCAL machine."
-            )
-    except _NativeVLMUnavailable:
-        raise
-    except Exception as exc:
-        raise _NativeVLMUnavailable(f"ObservationEngine init failed: {exc}")
+        raise _NativeVLMUnavailable(f"FrameObservationCensus unavailable: {exc}")
 
     try:
         with open(acq_manifest_path) as fh:
@@ -116,58 +112,16 @@ def _run_observation_census(acq_manifest_path: str, run_dir: Path) -> None:
     except Exception as exc:
         raise RuntimeError(f"Cannot load acquisition manifest: {exc}")
 
-    covered = contract_covered_controls()
-    from serum2.producer.w2_fast_path import temporal_candidates
+    try:
+        census = FrameObservationCensus().run(acq_manifest, run_dir=run_dir)
+    except Exception as exc:
+        raise RuntimeError(f"FrameObservationCensus.run() failed: {exc}")
 
-    metrics: List[Dict[str, Any]] = []
-
-    for control_id in sorted(covered):
-        frames = temporal_candidates(acq_manifest, control_id, covered)
-        for frame in frames:
-            frame_path_rel = frame.get("artifact_path", "")
-            frame_path = ROOT / frame_path_rel if frame_path_rel else None
-            if frame_path is None or not frame_path.exists():
-                continue
-            try:
-                result = engine.observe_control_in_frame(
-                    frame_path=str(frame_path),
-                    control_id=control_id,
-                )
-                metrics.append({
-                    "control_id": control_id,
-                    "frame_id": frame.get("frame_id", ""),
-                    "timestamp_sec": frame.get("timestamp_sec", 0.0),
-                    "evidence_hash": getattr(result, "evidence_hash", "") or "",
-                    "adjudicated_outcome": getattr(result, "outcome", "UNREADABLE"),
-                    "adjudicated_value": getattr(result, "value", None),
-                    "single_source": getattr(result, "single_source", True),
-                    "confident_wrong": False,
-                    "exact_match": False,
-                    "ocr_used_as_source": False,
-                    "has_execution_contract_row": control_id in covered,
-                })
-                if getattr(result, "outcome", "") == "OBSERVED":
-                    break
-            except Exception:
-                continue
-
-    observed = [m for m in metrics if m["adjudicated_outcome"] == "OBSERVED"]
-    admissible = [m for m in observed if m["has_execution_contract_row"]]
-    output = {
-        "pipeline_run_id": run_dir.name,
-        "metrics": metrics,
-        "aggregate": {
-            "total_frames": acq_manifest.get("num_frames", 0),
-            "total_controls_attempted": len(covered),
-            "observed_corroborated_count": len(observed),
-            "admissible_observed_count": len(admissible),
-            "confident_wrong_count": 0,
-        },
-    }
+    metrics_dict = census.to_metrics_json()
     obs_path = run_dir / "c3_observation_metrics.json"
     obs_path.parent.mkdir(parents=True, exist_ok=True)
     with open(obs_path, "w") as fh:
-        json.dump(output, fh, indent=2)
+        json.dump(metrics_dict, fh, indent=2)
 
 
 # ---------------------------------------------------------------------------
