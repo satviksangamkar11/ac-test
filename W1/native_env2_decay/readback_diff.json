@@ -1,0 +1,1145 @@
+{
+  "baseline_file": "compiled_preset.SerumPreset",
+  "changed_file": "native_resave.SerumPreset",
+  "total_leaf_diffs": 141,
+  "target_control": {
+    "atlas_id": "env2.decay",
+    "raw_body_path": "Env1.plainParams.kParamDecay",
+    "compiled_value": 5.0,
+    "native_resave_value": 5.000000000000001,
+    "match_within_float64_precision": true,
+    "residual": 8.881784197001252e-16
+  },
+  "all_diffs": [
+    {
+      "path": [
+        "LFO8",
+        "plainParams",
+        "kParamDefaultMode"
+      ],
+      "baseline": "None",
+      "changed": "0.0"
+    },
+    {
+      "path": [
+        "ModSlot28"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "productVersion"
+      ],
+      "baseline": "'2.0.11'",
+      "changed": "'2.0.23'"
+    },
+    {
+      "path": [
+        "ModSlot57"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "Oscillator0",
+        "plainParams",
+        "kParamEnable"
+      ],
+      "baseline": "1.0",
+      "changed": "None"
+    },
+    {
+      "path": [
+        "Oscillator0",
+        "plainParams",
+        "kParamType"
+      ],
+      "baseline": "'kOsc_WT'",
+      "changed": "None"
+    },
+    {
+      "path": [
+        "Oscillator0",
+        "WTOsc0",
+        "plainParams",
+        "kParamTablePos"
+      ],
+      "baseline": "0.0",
+      "changed": "None"
+    },
+    {
+      "path": [
+        "Oscillator0",
+        "WTOsc0",
+        "plainParams",
+        "kParamWarp"
+      ],
+      "baseline": "0.0",
+      "changed": "None"
+    },
+    {
+      "path": [
+        "ModSlot27"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "ModSlot36"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "ModSlot17"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "ModSlot1"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "Macro1",
+        "plainParams",
+        "kParamValue"
+      ],
+      "baseline": "0.0",
+      "changed": "None"
+    },
+    {
+      "path": [
+        "Global0",
+        "plainParams",
+        "kParamMasterVolume"
+      ],
+      "baseline": "0.5",
+      "changed": "0.5000000000000001"
+    },
+    {
+      "path": [
+        "ModSlot59"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "Env2",
+        "plainParams",
+        "kParamRelease"
+      ],
+      "baseline": "0.015",
+      "changed": "0.014999999999999989"
+    },
+    {
+      "path": [
+        "Env2",
+        "plainParams",
+        "kParamVoiceStealRestart"
+      ],
+      "baseline": "None",
+      "changed": "0.0"
+    },
+    {
+      "path": [
+        "Env2",
+        "plainParams",
+        "kParamSustain"
+      ],
+      "baseline": "1.0",
+      "changed": "None"
+    },
+    {
+      "path": [
+        "Env2",
+        "plainParams",
+        "kParamDecay"
+      ],
+      "baseline": "1.0",
+      "changed": "None"
+    },
+    {
+      "path": [
+        "Env2",
+        "plainParams",
+        "kParamAttack"
+      ],
+      "baseline": "0.0005",
+      "changed": "0.0004999999999999998"
+    },
+    {
+      "path": [
+        "Arp0",
+        "activeClip"
+      ],
+      "baseline": "None",
+      "changed": "0"
+    },
+    {
+      "path": [
+        "presetDescription"
+      ],
+      "baseline": "''",
+      "changed": "'Blank starting point used as the base for generated presets.'"
+    },
+    {
+      "path": [
+        "ModSlot13"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "ModSlot60"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "LFO1",
+        "plainParams",
+        "kParamDefaultMode"
+      ],
+      "baseline": "None",
+      "changed": "0.0"
+    },
+    {
+      "path": [
+        "ModSlot41"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "Macro6",
+        "plainParams",
+        "kParamValue"
+      ],
+      "baseline": "0.0",
+      "changed": "None"
+    },
+    {
+      "path": [
+        "SerumGUI",
+        "kUIParamShowMidiOut"
+      ],
+      "baseline": "None",
+      "changed": "0.0"
+    },
+    {
+      "path": [
+        "ModSlot0"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "Env3",
+        "plainParams",
+        "kParamRelease"
+      ],
+      "baseline": "0.015",
+      "changed": "0.014999999999999989"
+    },
+    {
+      "path": [
+        "Env3",
+        "plainParams",
+        "kParamVoiceStealRestart"
+      ],
+      "baseline": "None",
+      "changed": "0.0"
+    },
+    {
+      "path": [
+        "Env3",
+        "plainParams",
+        "kParamSustain"
+      ],
+      "baseline": "1.0",
+      "changed": "None"
+    },
+    {
+      "path": [
+        "Env3",
+        "plainParams",
+        "kParamDecay"
+      ],
+      "baseline": "1.0",
+      "changed": "None"
+    },
+    {
+      "path": [
+        "Env3",
+        "plainParams",
+        "kParamAttack"
+      ],
+      "baseline": "0.0005",
+      "changed": "0.0004999999999999998"
+    },
+    {
+      "path": [
+        "ModSlot25"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "ModSlot9"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "LFO7",
+        "plainParams",
+        "kParamDefaultMode"
+      ],
+      "baseline": "None",
+      "changed": "0.0"
+    },
+    {
+      "path": [
+        "ModSlot2"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "ModSlot10"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "ModSlot29"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "Macro0",
+        "plainParams",
+        "kParamValue"
+      ],
+      "baseline": "0.0",
+      "changed": "None"
+    },
+    {
+      "path": [
+        "ModSlot35"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "LFO0",
+        "plainParams",
+        "kParamDefaultMode"
+      ],
+      "baseline": "None",
+      "changed": "0.0"
+    },
+    {
+      "path": [
+        "LFO6",
+        "plainParams",
+        "kParamDefaultMode"
+      ],
+      "baseline": "None",
+      "changed": "0.0"
+    },
+    {
+      "path": [
+        "ModSlot62"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "VoicePanel0",
+        "displayName"
+      ],
+      "baseline": "None",
+      "changed": "''"
+    },
+    {
+      "path": [
+        "ModSlot40"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "ModSlot12"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "presetName"
+      ],
+      "baseline": "'BA - Sub Sustain - mids'",
+      "changed": "'W1_GATE_B_ENV2_DECAY_NATIVE_RESAVE'"
+    },
+    {
+      "path": [
+        "ModSlot6"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "ArpClip0",
+        "plainParams",
+        "kParamTransposeShift"
+      ],
+      "baseline": "0.0",
+      "changed": "None"
+    },
+    {
+      "path": [
+        "ArpClip0",
+        "plainParams",
+        "kParamRate"
+      ],
+      "baseline": "0.5",
+      "changed": "None"
+    },
+    {
+      "path": [
+        "Macro2",
+        "plainParams",
+        "kParamValue"
+      ],
+      "baseline": "0.0",
+      "changed": "None"
+    },
+    {
+      "path": [
+        "ModSlot52"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "ModSlot46"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "ModSlot5"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "LFO2",
+        "plainParams",
+        "kParamDefaultMode"
+      ],
+      "baseline": "None",
+      "changed": "0.0"
+    },
+    {
+      "path": [
+        "ModSlot19"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "ModSlot50"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "ModSlot45"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "Macro5",
+        "plainParams",
+        "kParamValue"
+      ],
+      "baseline": "0.0",
+      "changed": "None"
+    },
+    {
+      "path": [
+        "ModSlot32"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "Oscillator3",
+        "plainParams",
+        "kParamEnable"
+      ],
+      "baseline": "0.0",
+      "changed": "None"
+    },
+    {
+      "path": [
+        "Oscillator3",
+        "NoiseOsc3",
+        "numFrames"
+      ],
+      "baseline": "None",
+      "changed": "78241"
+    },
+    {
+      "path": [
+        "Oscillator3",
+        "NoiseOsc3",
+        "sampleRate"
+      ],
+      "baseline": "None",
+      "changed": "44100"
+    },
+    {
+      "path": [
+        "Oscillator3",
+        "NoiseOsc3",
+        "detuneFactor"
+      ],
+      "baseline": "None",
+      "changed": "0.4758218478413068"
+    },
+    {
+      "path": [
+        "Oscillator3",
+        "NoiseOsc3",
+        "numChannels"
+      ],
+      "baseline": "None",
+      "changed": "1"
+    },
+    {
+      "path": [
+        "ModSlot55"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "Macro7",
+        "plainParams",
+        "kParamValue"
+      ],
+      "baseline": "0.0",
+      "changed": "None"
+    },
+    {
+      "path": [
+        "Env0",
+        "plainParams",
+        "kParamRelease"
+      ],
+      "baseline": "0.015",
+      "changed": "0.014999999999999989"
+    },
+    {
+      "path": [
+        "Env0",
+        "plainParams",
+        "kParamSustain"
+      ],
+      "baseline": "1.0",
+      "changed": "None"
+    },
+    {
+      "path": [
+        "Env0",
+        "plainParams",
+        "kParamDecay"
+      ],
+      "baseline": "1.0",
+      "changed": "None"
+    },
+    {
+      "path": [
+        "Env0",
+        "plainParams",
+        "kParamAttack"
+      ],
+      "baseline": "0.0005",
+      "changed": "0.0004999999999999998"
+    },
+    {
+      "path": [
+        "ModSlot31"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "ModSlot23"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "ModSlot47"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "ClipPlayer",
+        "kUIParamPianoRollNotePreview"
+      ],
+      "baseline": "None",
+      "changed": "1.0"
+    },
+    {
+      "path": [
+        "ModSlot42"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "ModSlot54"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "presetAuthor"
+      ],
+      "baseline": "'Electric Himalaya'",
+      "changed": "'serum-mcp'"
+    },
+    {
+      "path": [
+        "ModSlot4"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "ModSlot22"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "ModSlot26"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "ModSlot18"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "ModSlot49"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "ModSlot56"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "ModSlot63"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "ModSlot21"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "LFO5",
+        "plainParams",
+        "kParamDefaultMode"
+      ],
+      "baseline": "None",
+      "changed": "0.0"
+    },
+    {
+      "path": [
+        "ModSlot51"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "LFO9",
+        "plainParams",
+        "kParamDefaultMode"
+      ],
+      "baseline": "None",
+      "changed": "0.0"
+    },
+    {
+      "path": [
+        "Oscillator4",
+        "plainParams",
+        "kParamEnable"
+      ],
+      "baseline": "0.0",
+      "changed": "None"
+    },
+    {
+      "path": [
+        "ModSlot20"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "Oscillator1",
+        "plainParams",
+        "kParamEnable"
+      ],
+      "baseline": "0.0",
+      "changed": "None"
+    },
+    {
+      "path": [
+        "Oscillator1",
+        "plainParams",
+        "kParamType"
+      ],
+      "baseline": "'kOsc_WT'",
+      "changed": "None"
+    },
+    {
+      "path": [
+        "Oscillator1",
+        "WTOsc1",
+        "plainParams",
+        "kParamTablePos"
+      ],
+      "baseline": "0.0",
+      "changed": "None"
+    },
+    {
+      "path": [
+        "Oscillator1",
+        "WTOsc1",
+        "plainParams",
+        "kParamWarp"
+      ],
+      "baseline": "0.0",
+      "changed": "None"
+    },
+    {
+      "path": [
+        "LFO3",
+        "plainParams",
+        "kParamDefaultMode"
+      ],
+      "baseline": "None",
+      "changed": "0.0"
+    },
+    {
+      "path": [
+        "VoiceFilter0",
+        "plainParams",
+        "kParamEnable"
+      ],
+      "baseline": "0.0",
+      "changed": "None"
+    },
+    {
+      "path": [
+        "VoiceFilter0",
+        "plainParams",
+        "kParamFreq"
+      ],
+      "baseline": "0.5",
+      "changed": "None"
+    },
+    {
+      "path": [
+        "VoiceFilter0",
+        "plainParams",
+        "kParamType"
+      ],
+      "baseline": "'MgL12'",
+      "changed": "None"
+    },
+    {
+      "path": [
+        "VoiceFilter0",
+        "plainParams",
+        "kParamKeyTrack"
+      ],
+      "baseline": "0.0",
+      "changed": "None"
+    },
+    {
+      "path": [
+        "ModSlot7"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "Macro4",
+        "plainParams",
+        "kParamValue"
+      ],
+      "baseline": "0.0",
+      "changed": "None"
+    },
+    {
+      "path": [
+        "ModSlot30"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "ModSlot33"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "tags"
+      ],
+      "baseline": "['Wavetable', 'Mono', 'Preview']",
+      "changed": "['Wavetable', 'Poly', 'Arp', 'Preview']"
+    },
+    {
+      "path": [
+        "Macro3",
+        "plainParams",
+        "kParamValue"
+      ],
+      "baseline": "0.0",
+      "changed": "None"
+    },
+    {
+      "path": [
+        "ModSlot15"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "ModSlot14"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "ModSlot11"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "version"
+      ],
+      "baseline": "4.0",
+      "changed": "9.0"
+    },
+    {
+      "path": [
+        "ModSlot61"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "ModSlot53"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "ModSlot37"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "LFO4",
+        "plainParams",
+        "kParamDefaultMode"
+      ],
+      "baseline": "None",
+      "changed": "0.0"
+    },
+    {
+      "path": [
+        "ModSlot43"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "ModSlot38"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "ModSlot48"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "ModSlot16"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "ModSlot24"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "ModSlot3"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "ModSlot8"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "ModSlot39"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "Env1",
+        "plainParams",
+        "kParamRelease"
+      ],
+      "baseline": "0.015",
+      "changed": "0.014999999999999989"
+    },
+    {
+      "path": [
+        "Env1",
+        "plainParams",
+        "kParamVoiceStealRestart"
+      ],
+      "baseline": "None",
+      "changed": "0.0"
+    },
+    {
+      "path": [
+        "Env1",
+        "plainParams",
+        "kParamSustain"
+      ],
+      "baseline": "1.0",
+      "changed": "None"
+    },
+    {
+      "path": [
+        "Env1",
+        "plainParams",
+        "kParamDecay"
+      ],
+      "baseline": "5.0",
+      "changed": "5.000000000000001"
+    },
+    {
+      "path": [
+        "Env1",
+        "plainParams",
+        "kParamAttack"
+      ],
+      "baseline": "0.0005",
+      "changed": "0.0004999999999999998"
+    },
+    {
+      "path": [
+        "ModSlot58"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "mpeEnabled"
+      ],
+      "baseline": "False",
+      "changed": "True"
+    },
+    {
+      "path": [
+        "ModSlot34"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "Oscillator2",
+        "plainParams",
+        "kParamEnable"
+      ],
+      "baseline": "0.0",
+      "changed": "None"
+    },
+    {
+      "path": [
+        "Oscillator2",
+        "plainParams",
+        "kParamType"
+      ],
+      "baseline": "'kOsc_WT'",
+      "changed": "None"
+    },
+    {
+      "path": [
+        "Oscillator2",
+        "WTOsc2",
+        "plainParams",
+        "kParamTablePos"
+      ],
+      "baseline": "0.0",
+      "changed": "None"
+    },
+    {
+      "path": [
+        "Oscillator2",
+        "WTOsc2",
+        "plainParams",
+        "kParamWarp"
+      ],
+      "baseline": "0.0",
+      "changed": "None"
+    },
+    {
+      "path": [
+        "ModSlot44"
+      ],
+      "baseline": "None",
+      "changed": "{'plainParams': 'default'}"
+    },
+    {
+      "path": [
+        "VoiceFilter1",
+        "plainParams",
+        "kParamEnable"
+      ],
+      "baseline": "0.0",
+      "changed": "None"
+    },
+    {
+      "path": [
+        "VoiceFilter1",
+        "plainParams",
+        "kParamFreq"
+      ],
+      "baseline": "0.5",
+      "changed": "None"
+    },
+    {
+      "path": [
+        "VoiceFilter1",
+        "plainParams",
+        "kParamType"
+      ],
+      "baseline": "'MgL12'",
+      "changed": "None"
+    },
+    {
+      "path": [
+        "VoiceFilter1",
+        "plainParams",
+        "kParamKeyTrack"
+      ],
+      "baseline": "0.0",
+      "changed": "None"
+    }
+  ],
+  "non_target_diffs_classification": "metadata/format artifacts (productVersion stamp, preset format version bump, default-value serialization differences between serum-mcp minimal overlay and native Serum full-state save) -- none touch the target control raw path"
+}

@@ -1,0 +1,62 @@
+{
+  "test_setup": {
+    "tempo_bpm": 120.0,
+    "time_signature": "4/4",
+    "clip_notes": [
+      {"pitch": 60, "start_beat": 0, "duration_beats": 4},
+      {"pitch": 64, "start_beat": 4, "duration_beats": 4},
+      {"pitch": 67, "start_beat": 8, "duration_beats": 4},
+      {"pitch": 60, "start_beat": 12, "duration_beats": 4}
+    ],
+    "clip_construction_method": "create_clip (session slot) + add_notes_to_clip, then duplicate_clip_to_arrangement(destination_bar=1) -- create_arrangement_midi_clip's own empty clip could not take notes via add_notes_to_clip (it addresses session clip slots only; errored 'No clip in slot' when tried directly on the arrangement clip).",
+    "arrangement_loop": "bars 1-5 (16 beats = 4 bars at 4/4)",
+    "export_method": "File > Export Audio/Video, Rendered Track = the specific track (isolates one track from the master mix), Render Start 1.1.1, Render Length 4.0.0, WAV 24-bit 48000 Hz",
+    "wav_analysis_method": "Read WAV via Python wave module, decode 24-bit PCM to float64, compute peak abs value, RMS, and count of non-zero samples across both channels."
+  },
+  "test_1_stock_instrument": {
+    "track": "8-Operator (MIDI track created with create_midi_track, Operator loaded via load_instrument_or_effect uri='query:Synths#Operator')",
+    "track_arm_state_at_creation": true,
+    "render_file": "stock_instrument/r1_stock_operator_render.wav",
+    "result": "AUDIBLE",
+    "peak": 0.39815306663513184,
+    "rms": 0.14831309883709717,
+    "nonzero_samples": 768000,
+    "total_samples": 768000,
+    "nonzero_fraction": 1.0
+  },
+  "test_2_serum_arrangement": {
+    "track": "BULK_01_WAVETABLE_MAIN (MIDI track created with create_serum_track, loading BULKCAUSAL_VERIFY/BULK_01_WAVETABLE_MAIN.SerumPreset -- osc B, C, Noise, Sub all enabled per describe_preset)",
+    "track_arm_state": false,
+    "serum_module_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+    "render_file": "serum_arrangement/r1_serum_bulk01_render.wav",
+    "result": "SILENT",
+    "peak": 0.0,
+    "rms": 0.0,
+    "nonzero_samples": 0,
+    "total_samples": 768000,
+    "nonzero_fraction": 0.0
+  },
+  "test_3_serum_after_enable_device": {
+    "hypothesis_tested": "Serum 2 device on the track is bypassed/disabled, silencing the render.",
+    "action_taken": "enable_device(track_index=6, device_index=1) -- returned 'Serum 2 enabled' (does not distinguish 'was already enabled' from 'just enabled').",
+    "render_file": "serum_arrangement/r1_serum_bulk01_render_after_enable_device.wav",
+    "result": "STILL SILENT",
+    "peak": 0.0,
+    "rms": 0.0,
+    "nonzero_samples": 0,
+    "total_samples": 768000,
+    "conclusion": "Device-enabled/bypass state is RULED OUT as the cause."
+  },
+  "diagnosis_summary": {
+    "confirmed": "The Ableton Arrangement export/render mechanism itself is not broken in general -- an equivalent MIDI track + arrangement clip + per-track export using Ableton's own stock Operator instrument produces full, expected audio (peak ~0.40, RMS ~0.15, 100% non-zero samples) under the exact same tempo/clip/export procedure. The silence is specific to tracks created via create_serum_track / Serum 2, not a general Arrangement-export defect. This reproduces the prior project history's finding of digital silence on Serum Arrangement renders.",
+    "ruled_out": ["Serum 2 device bypass/disabled state (tested directly via enable_device, no change)"],
+    "not_yet_tested_open_hypotheses": [
+      "Track record-arm state: the working Operator track was armed (arm=true) at creation; the silent Serum tracks are unarmed (arm=false). Whether record-arm affects Ableton's per-track Export rendering (as opposed to normal playback, where arm should not matter) was identified as worth testing but not completed in this session -- locating the Session-view mixer arm button for the Serum tracks required scrolling/resizing the Ableton window in a way that repeatedly proved unreliable via UI automation in this environment (see note below).",
+      "Track audio output routing (Audio To): not independently confirmed as 'Master' for the Serum tracks vs the working Operator track -- no AbletonMCP tool exposes track output routing directly; would require UI inspection.",
+      "MIDI routing/track input monitoring state specific to how create_serum_track wires the track (its own docstring notes 'no state readback yet' on preset load -- the same may be true of the track's other mixer/routing defaults).",
+      "Whether the same Serum track produces audio during ordinary Session-view clip playback (not Arrangement, not export) -- would isolate whether this is an Arrangement-specific or completely general MIDI-to-Serum delivery failure."
+    ],
+    "environment_note": "UI automation in this session showed the Ableton/Serum window position and layout shifting unpredictably between the interactive computer-use automation channel and a separate PowerShell-driven screen-capture channel (see W1/blocker notes on the VLM tooltip capture) -- full mixer-strip inspection (arm/routing buttons) was not completed for this reason, not because it is inherently unavailable.",
+    "not_claimed": "This diagnosis does NOT claim a root cause. It confirms the symptom is real, reproducible, and isolated to Serum tracks (not a general render-path failure), and rules out one specific hypothesis (device bypass). Root-causing the remaining hypotheses (arm state, output routing, create_serum_track's track-setup defaults) is the recommended next step, ideally with direct AbletonMCP routing/arm tools rather than fragile UI automation."
+  }
+}
