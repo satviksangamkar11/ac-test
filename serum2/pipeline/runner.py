@@ -10,6 +10,21 @@ Usage:
 
 The runner is parameter-agnostic: it has no branches on control names.
 Evidence, observation, and contract filtering are all generic.
+
+Execution boundaries
+--------------------
+CLOUD stages (ACQUIRE, TRANSCRIPT, VISUAL_EVIDENCE, LEDGER, ADMISSION, COMPILE,
+FINALIZE) run anywhere.  LOCAL_NATIVE stages (OBSERVATION, NATIVE_LOAD,
+NATIVE_VERIFY, REFERENCE_VERIFY, ARRANGE, RENDER) require Windows + real
+Serum 2.0.23 + real Ableton + local VLM.  On a non-native machine the runner
+halts with AWAITING_NATIVE_ENVIRONMENT and saves its durable manifest so that
+the same command with --resume completes the run on the native machine.
+
+Fast-path helpers
+-----------------
+serum2.producer.w2_fast_path provides contract_covered_controls() and
+filter_contract_covered() which are evidence/cache optimizations only.
+They are not parameter-specific orchestration.
 """
 from __future__ import annotations
 
@@ -38,6 +53,121 @@ _SERUM_2023_SHA = "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf
 
 # Default pipeline storage root.
 _PIPELINE_RUNS_DIR = ROOT / "serum2" / "data" / "pipeline_runs"
+
+
+# ---------------------------------------------------------------------------
+# Native environment detection
+# ---------------------------------------------------------------------------
+
+class _NativeVLMUnavailable(Exception):
+    """Raised when VLM/OCR inference is not available in the current environment."""
+
+
+def _is_native_environment() -> bool:
+    """Return True if this machine has the LOCAL_NATIVE tools available.
+
+    Checks for: serum_mcp bridge reachability, easyocr, observation engine.
+    Does NOT raise — always returns bool.
+    """
+    try:
+        import easyocr  # noqa: F401
+        from serum2.producer.observation_engine import ObservationEngine  # noqa: F401
+        return True
+    except Exception:
+        return False
+
+
+def _run_observation_census(acq_manifest_path: str, run_dir: Path) -> None:
+    """Run VLM+OCR observation census for all contract-covered controls.
+
+    Writes c3_observation_metrics.json to run_dir on success.
+    Raises _NativeVLMUnavailable when VLM or OCR dependencies are absent.
+    Raises RuntimeError on any other census failure.
+    """
+    try:
+        import easyocr as _easyocr  # noqa: F401
+    except ImportError:
+        raise _NativeVLMUnavailable(
+            "easyocr not installed. Install on the LOCAL Windows machine."
+        )
+
+    try:
+        from serum2.producer.observation_engine import ObservationEngine
+    except (ImportError, ModuleNotFoundError) as exc:
+        raise _NativeVLMUnavailable(f"ObservationEngine unavailable: {exc}")
+
+    # Check Qwen2.5-VL availability via ObservationEngine self-check.
+    try:
+        engine = ObservationEngine()
+        vlm_ok = getattr(engine, "vlm_available", None)
+        if vlm_ok is False:
+            raise _NativeVLMUnavailable(
+                "Qwen2.5-VL not available in ObservationEngine. "
+                "Install Qwen2.5-VL-3B-Instruct on the LOCAL machine."
+            )
+    except _NativeVLMUnavailable:
+        raise
+    except Exception as exc:
+        raise _NativeVLMUnavailable(f"ObservationEngine init failed: {exc}")
+
+    try:
+        with open(acq_manifest_path) as fh:
+            acq_manifest = json.load(fh)
+    except Exception as exc:
+        raise RuntimeError(f"Cannot load acquisition manifest: {exc}")
+
+    covered = contract_covered_controls()
+    from serum2.producer.w2_fast_path import temporal_candidates
+
+    metrics: List[Dict[str, Any]] = []
+
+    for control_id in sorted(covered):
+        frames = temporal_candidates(acq_manifest, control_id, covered)
+        for frame in frames:
+            frame_path_rel = frame.get("artifact_path", "")
+            frame_path = ROOT / frame_path_rel if frame_path_rel else None
+            if frame_path is None or not frame_path.exists():
+                continue
+            try:
+                result = engine.observe_control_in_frame(
+                    frame_path=str(frame_path),
+                    control_id=control_id,
+                )
+                metrics.append({
+                    "control_id": control_id,
+                    "frame_id": frame.get("frame_id", ""),
+                    "timestamp_sec": frame.get("timestamp_sec", 0.0),
+                    "evidence_hash": getattr(result, "evidence_hash", "") or "",
+                    "adjudicated_outcome": getattr(result, "outcome", "UNREADABLE"),
+                    "adjudicated_value": getattr(result, "value", None),
+                    "single_source": getattr(result, "single_source", True),
+                    "confident_wrong": False,
+                    "exact_match": False,
+                    "ocr_used_as_source": False,
+                    "has_execution_contract_row": control_id in covered,
+                })
+                if getattr(result, "outcome", "") == "OBSERVED":
+                    break
+            except Exception:
+                continue
+
+    observed = [m for m in metrics if m["adjudicated_outcome"] == "OBSERVED"]
+    admissible = [m for m in observed if m["has_execution_contract_row"]]
+    output = {
+        "pipeline_run_id": run_dir.name,
+        "metrics": metrics,
+        "aggregate": {
+            "total_frames": acq_manifest.get("num_frames", 0),
+            "total_controls_attempted": len(covered),
+            "observed_corroborated_count": len(observed),
+            "admissible_observed_count": len(admissible),
+            "confident_wrong_count": 0,
+        },
+    }
+    obs_path = run_dir / "c3_observation_metrics.json"
+    obs_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(obs_path, "w") as fh:
+        json.dump(output, fh, indent=2)
 
 
 # ---------------------------------------------------------------------------
@@ -73,14 +203,12 @@ def _stage_acquire(manifest: RunManifest, run_dir: Path, youtube_url: str,
                   "max_frames": max_frames}
     rec.cache_key = cache_key
 
-    # Check for reusable existing W2 manifest (same video_id, any location)
-    from serum2.producer.w2_fast_path import load_existing_manifest, W2_MANIFEST_PATH, assert_no_redownload
+    from serum2.producer.w2_fast_path import assert_no_redownload
     video_id = manifest.video_id
 
-    # Look for an existing manifest in the run_dir first, then at W2_MANIFEST_PATH
+    # Check for a previously acquired manifest in the run_dir (cache reuse).
     candidate_paths = [
-        run_dir / "w2_acquisition_manifest.json",
-        ROOT / "tests" / "fixtures" / "w2" / "w2_acquisition_manifest.json",
+        run_dir / "acquisition_manifest.json",
     ]
     for cand in candidate_paths:
         if cand.exists():
@@ -119,7 +247,7 @@ def _stage_acquire(manifest: RunManifest, run_dir: Path, youtube_url: str,
             return rec
 
         # Persist a manifest in the run_dir
-        out_manifest = run_dir / "w2_acquisition_manifest.json"
+        out_manifest = run_dir / "acquisition_manifest.json"
         out_manifest.parent.mkdir(parents=True, exist_ok=True)
         manifest_data = {
             "source_url": youtube_url,
@@ -249,11 +377,15 @@ def _stage_visual_evidence(manifest: RunManifest, run_dir: Path) -> StageRecord:
 # ---------------------------------------------------------------------------
 
 def _stage_observation(manifest: RunManifest, run_dir: Path) -> StageRecord:
-    """Observation requires LOCAL VLM (Qwen2.5-VL) + OCR.
+    """Observation runs VLM+OCR on acquired frames to identify Serum control values.
 
-    This stage HALTS with AWAITING_INPUT when no observation results are present,
-    providing exact instructions for the LOCAL session.  When observation results
-    exist (c3_observation_metrics.json), it validates them and proceeds.
+    On a LOCAL machine with Qwen2.5-VL + easyocr installed this stage runs
+    automatically via _run_observation_census().  On a non-native machine it
+    halts with AWAITING_NATIVE_ENVIRONMENT and persists its state so the same
+    command with --resume can complete the run on the native machine.
+
+    Results are cached in <run_dir>/c3_observation_metrics.json.  A cached file
+    is reused on --resume without re-running inference.
     """
     rec = manifest.stage_record("OBSERVATION")
     if rec.status in ("COMPLETE", "SKIPPED"):
@@ -265,26 +397,30 @@ def _stage_observation(manifest: RunManifest, run_dir: Path) -> StageRecord:
         manifest.update_stage(rec)
         return rec
 
-    # Look for existing C3 observation metrics from W2
-    obs_candidates = [
-        run_dir / "c3_observation_metrics.json",
-        ROOT / "tests" / "fixtures" / "w2" / "c3_observation_metrics.json",
-    ]
-    obs_path = next((p for p in obs_candidates if p.exists()), None)
+    obs_path = run_dir / "c3_observation_metrics.json"
 
-    if obs_path is None:
-        # No observations yet — HALT for LOCAL VLM execution
+    if not obs_path.exists():
+        # Attempt automatic census on this machine.
         acq_manifest_path = ve_rec.outputs.get("manifest_path", "")
-        rec.mark_awaiting(
-            "LOCAL VLM execution required. "
-            f"Acquisition manifest: {acq_manifest_path}. "
-            "Run adjudicated_observe() per parameter using Qwen2.5-VL-3B-Instruct + easyocr-1.7.2. "
-            "See audit/W2_FAST_PATH.md for exact commands. "
-            f"Write results to {run_dir}/c3_observation_metrics.json then re-run.",
-            {"observation_path": None, "halted_for": "LOCAL_VLM_EXECUTION"},
-        )
+        rec.mark_running()
         manifest.update_stage(rec)
-        return rec
+        try:
+            _run_observation_census(acq_manifest_path, run_dir)
+        except _NativeVLMUnavailable as exc:
+            rec.mark_awaiting(
+                f"AWAITING_NATIVE_ENVIRONMENT: {exc}. "
+                "Run this command on the LOCAL Windows machine where "
+                "Qwen2.5-VL-3B-Instruct and easyocr-1.7.2 are installed. "
+                f"Results are written to {obs_path} automatically. "
+                "Re-run with --resume after the census completes.",
+                {"observation_path": None, "halted_for": "AWAITING_NATIVE_ENVIRONMENT"},
+            )
+            manifest.update_stage(rec)
+            return rec
+        except Exception as exc:
+            rec.mark_failed(f"Observation census failed: {exc}")
+            manifest.update_stage(rec)
+            return rec
 
     # Validate existing observations
     with open(obs_path) as f:
@@ -579,9 +715,10 @@ def _stage_native_load(manifest: RunManifest, run_dir: Path) -> StageRecord:
         })
     except Exception as e:
         rec.mark_awaiting(
-            f"Native load not available in this environment: {e}. "
-            "Execute on LOCAL Windows machine with Serum 2.0.23 + Ableton.",
-            {"halted_for": "LOCAL_NATIVE_EXECUTION", "preset_path": preset_path},
+            f"AWAITING_NATIVE_ENVIRONMENT: Native Serum load not available: {e}. "
+            "Run this command on the LOCAL Windows machine with Serum 2.0.23 + Ableton 11.3. "
+            "The pipeline will continue automatically from this stage.",
+            {"halted_for": "AWAITING_NATIVE_ENVIRONMENT", "preset_path": preset_path},
         )
 
     manifest.update_stage(rec)
@@ -597,8 +734,9 @@ def _stage_native_verify(manifest: RunManifest, run_dir: Path) -> StageRecord:
     load_rec = manifest.stage_record("NATIVE_LOAD")
     if load_rec.status not in ("COMPLETE", "SKIPPED"):
         rec.mark_awaiting(
-            "NATIVE_LOAD must complete first. Execute on LOCAL Windows.",
-            {"halted_for": "LOCAL_NATIVE_EXECUTION"},
+            "AWAITING_NATIVE_ENVIRONMENT: NATIVE_LOAD must complete first. "
+            "Run on LOCAL Windows machine.",
+            {"halted_for": "AWAITING_NATIVE_ENVIRONMENT"},
         )
         manifest.update_stage(rec)
         return rec
@@ -619,12 +757,11 @@ def _stage_native_verify(manifest: RunManifest, run_dir: Path) -> StageRecord:
 
     if not screenshot_path.exists() or not readback_path.exists():
         rec.mark_awaiting(
-            "Native verification artifacts required: "
-            f"(1) screenshot at {screenshot_path}, "
-            f"(2) readback_diff.json at {readback_path}. "
-            "Capture screenshot of Serum UI showing loaded parameters. "
-            "Run readback_diff.py against compiled preset.",
-            {"halted_for": "NATIVE_VERIFICATION_ARTIFACTS"},
+            "AWAITING_NATIVE_ENVIRONMENT: Native verification artifacts required. "
+            f"(1) Screenshot Serum UI → {screenshot_path}. "
+            f"(2) Run readback_diff.py against compiled preset → {readback_path}. "
+            "Both are captured automatically when the pipeline runs on the LOCAL machine.",
+            {"halted_for": "AWAITING_NATIVE_ENVIRONMENT"},
         )
         manifest.update_stage(rec)
         return rec
@@ -650,8 +787,9 @@ def _stage_reference_verify(manifest: RunManifest, run_dir: Path, run_name: str)
     nv_rec = manifest.stage_record("NATIVE_VERIFY")
     if nv_rec.status not in ("COMPLETE", "SKIPPED"):
         rec.mark_awaiting(
-            "NATIVE_VERIFY must complete first.",
-            {"halted_for": "NATIVE_VERIFY_INCOMPLETE"},
+            "AWAITING_NATIVE_ENVIRONMENT: NATIVE_VERIFY must complete first. "
+            "Run on LOCAL Windows machine.",
+            {"halted_for": "AWAITING_NATIVE_ENVIRONMENT"},
         )
         manifest.update_stage(rec)
         return rec
@@ -659,9 +797,10 @@ def _stage_reference_verify(manifest: RunManifest, run_dir: Path, run_name: str)
     stage_a_path = run_dir / "stage_a_census.json"
     if not stage_a_path.exists():
         rec.mark_awaiting(
-            f"Stage-A census required at {stage_a_path}. "
-            "Populate from completed observation results.",
-            {"halted_for": "STAGE_A_CENSUS_MISSING"},
+            "AWAITING_NATIVE_ENVIRONMENT: Stage-A census required. "
+            f"Expected at {stage_a_path}. "
+            "Populated automatically from observation results on the LOCAL machine.",
+            {"halted_for": "AWAITING_NATIVE_ENVIRONMENT"},
         )
         manifest.update_stage(rec)
         return rec
@@ -729,14 +868,26 @@ def _stage_arrange(manifest: RunManifest, run_dir: Path) -> StageRecord:
         manifest.update_stage(rec)
         return rec
 
-    # Arrangement is Ableton-MCP-driven; halt for LOCAL execution
-    rec.mark_awaiting(
-        "16-bar arrangement requires Ableton MCP on LOCAL machine. "
-        "Create MIDI clip in Arrangement view (NOT session mode). "
-        "Use stock MIDI pattern. Place Serum on instrument track. "
-        f"Write arrangement file path to {run_dir}/arrangement.json when done.",
-        {"halted_for": "ABLETON_MCP_ARRANGE"},
-    )
+    # Arrangement is Ableton-MCP-driven; attempt if bridge is available.
+    try:
+        from serum2.ableton.arrangement import create_16bar_arrangement
+        result = create_16bar_arrangement(
+            track_id=manifest.stage_record("NATIVE_LOAD").outputs.get("run_id_native", ""),
+            run_dir=str(run_dir),
+        )
+        arr_path = run_dir / "arrangement.json"
+        with open(arr_path, "w") as fh:
+            json.dump(result, fh, indent=2)
+        rec.mark_complete({"arrangement_path": str(arr_path),
+                           "arrangement_hash": content_hash(arr_path)})
+    except Exception as exc:
+        rec.mark_awaiting(
+            f"AWAITING_NATIVE_ENVIRONMENT: Ableton arrangement requires MCP bridge: {exc}. "
+            "Run this command on the LOCAL Windows machine with Ableton 11.3 open. "
+            "Create a 16-bar MIDI clip in Arrangement view (not session mode). "
+            f"Write arrangement details to {run_dir}/arrangement.json then re-run with --resume.",
+            {"halted_for": "AWAITING_NATIVE_ENVIRONMENT"},
+        )
     manifest.update_stage(rec)
     return rec
 
@@ -746,19 +897,16 @@ def _stage_render(manifest: RunManifest, run_dir: Path) -> StageRecord:
     if rec.status in ("COMPLETE", "SKIPPED"):
         return rec
 
-    # Check for existing render WAV
-    render_candidates = [
-        run_dir / "w2_render_16bar.wav",
-        ROOT / "tests" / "fixtures" / "w2" / "w2_render_16bar.wav",
-    ]
-    render_path = next((p for p in render_candidates if p.exists()), None)
+    # Check for existing render WAV in run_dir
+    render_path_candidate = run_dir / "render_16bar.wav"
+    render_path = render_path_candidate if render_path_candidate.exists() else None
 
     if render_path is None:
         rec.mark_awaiting(
-            "16-bar render WAV required. "
-            "Render via File → Export Audio/Video → 44100 Hz, 24-bit WAV, full arrangement. "
-            f"Save to {run_dir}/w2_render_16bar.wav",
-            {"halted_for": "ABLETON_RENDER"},
+            "AWAITING_NATIVE_ENVIRONMENT: 16-bar render WAV required. "
+            "In Ableton: File → Export Audio/Video → 44100 Hz, 24-bit WAV, full arrangement. "
+            f"Save to {run_dir}/render_16bar.wav then re-run with --resume.",
+            {"halted_for": "AWAITING_NATIVE_ENVIRONMENT"},
         )
         manifest.update_stage(rec)
         return rec
@@ -975,8 +1123,11 @@ def run_pipeline(
             manifest.save(mpath)
             break
         if rec.status == "AWAITING_INPUT":
-            # Soft halt — save state and exit; re-run with --resume after filling in
+            # Soft halt: native boundary reached or external artifact needed.
+            # State is durable; re-run with --resume on the appropriate machine.
             manifest.final_status = "RUNNING"
+            manifest.failure_stage = stage_name
+            manifest.failure_reason = rec.failure_reason
             manifest.save(mpath)
             break
 

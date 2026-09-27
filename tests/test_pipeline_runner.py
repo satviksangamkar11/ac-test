@@ -348,6 +348,51 @@ class TestNativeEvidenceNotFabricatable:
         src = inspect.getsource(runner_mod)
         assert "dawdreamer_used" in src
 
+    def test_native_vlm_unavailable_class_exists(self):
+        """_NativeVLMUnavailable sentinel exception must exist in runner module."""
+        assert hasattr(runner_mod, "_NativeVLMUnavailable"), (
+            "runner.py must define _NativeVLMUnavailable for VLM-absent environments"
+        )
+
+    def test_is_native_environment_callable(self):
+        """_is_native_environment() must exist and be callable."""
+        assert callable(runner_mod._is_native_environment)
+
+    def test_is_native_environment_returns_bool(self):
+        """_is_native_environment() must return bool (not raise) on cloud."""
+        result = runner_mod._is_native_environment()
+        assert isinstance(result, bool)
+
+    def test_run_observation_census_raises_on_no_easyocr(self):
+        """_run_observation_census must raise _NativeVLMUnavailable, not crash, when easyocr absent."""
+        import unittest.mock as mock, pathlib
+        # Simulate missing easyocr by patching the import inside _run_observation_census
+        with mock.patch.dict("sys.modules", {"easyocr": None}):
+            try:
+                runner_mod._run_observation_census("/nonexistent/manifest.json", pathlib.Path("/tmp"))
+                assert False, "Expected _NativeVLMUnavailable to be raised"
+            except runner_mod._NativeVLMUnavailable:
+                pass  # correct
+
+    def test_observation_awaiting_includes_awaiting_native_env(self):
+        """OBSERVATION AWAITING message must start with AWAITING_NATIVE_ENVIRONMENT."""
+        m = RunManifest(run_id="x", video_id="y", source_url="z")
+        rec = m.stage_record("OBSERVATION")
+        rec.mark_awaiting(
+            "AWAITING_NATIVE_ENVIRONMENT: easyocr not installed. ...",
+            {"observation_path": None, "halted_for": "AWAITING_NATIVE_ENVIRONMENT"},
+        )
+        m.update_stage(rec)
+        assert rec.status == "AWAITING_INPUT"
+        assert rec.outputs.get("halted_for") == "AWAITING_NATIVE_ENVIRONMENT"
+
+    def test_runner_has_no_w2_fixture_paths(self):
+        """runner.py must not contain hardcoded tests/fixtures/w2/ paths."""
+        src = inspect.getsource(runner_mod)
+        assert "tests/fixtures/w2" not in src, (
+            "runner.py must not reference W2-specific fixture paths"
+        )
+
 
 # ---------------------------------------------------------------------------
 # 11. Final gate rejects incomplete native verification
@@ -494,3 +539,21 @@ class TestCleanRunBehavior:
         assert "youtube_url" in params
         assert "work_dir" in params
         assert "resume" in params
+
+    def test_runner_uses_generic_acquisition_filename(self):
+        """Acquisition output must use generic acquisition_manifest.json, not W2-specific name."""
+        src = inspect.getsource(runner_mod)
+        assert "acquisition_manifest.json" in src
+        assert "w2_acquisition_manifest" not in src
+
+    def test_runner_uses_generic_render_filename(self):
+        """Render output must use generic render_16bar.wav, not W2-specific name."""
+        src = inspect.getsource(runner_mod)
+        assert "render_16bar.wav" in src
+        assert "w2_render_16bar" not in src
+
+    def test_runner_docstring_mentions_fast_path_helpers(self):
+        """Module docstring must note that fast-path helpers are evidence/cache optimizations only."""
+        src = inspect.getsource(runner_mod)
+        assert "Fast-path helpers" in src
+        assert "evidence/cache optimizations only" in src

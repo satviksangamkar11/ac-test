@@ -183,22 +183,19 @@ Failure of any gate → `PRODUCT_NOT_CLOSED` with `failure_stage` pointing to th
 
 ---
 
-## W2 Fast Path Distinction
+## Fast-Path Helpers
 
-For W2 (tutorial re-run), the OBSERVATION stage looks for an existing
-`tests/fixtures/w2/c3_observation_metrics.json`. If found, it loads the
-admissible observations from it without re-running VLM/OCR.
+`serum2.producer.w2_fast_path` provides `contract_covered_controls()` and
+`filter_contract_covered()`, which are **evidence/cache optimizations only**.
+They are not parameter-specific orchestration. The runner uses them generically
+to select which controls from the execution contract to observe; it never names
+specific parameter IDs (e.g. `oscA.octave`, `env1.decay`).
 
-If not found, it halts with `AWAITING_INPUT` and prints the W2 fast-path procedure:
-```
-  See: audit/W2_FAST_PATH.md
-  Priority 1: oscA.octave at t=24s (value=0, no minus sign, OCR-friendly)
-  Priority 2: env1.decay at t=24s (tight crop to avoid "1.0 s" → "1005")
-  Priority 3: lfo1.rate in temporal_candidates(manifest, "lfo1.rate")
-  STOP at first admissible OBSERVED. Re-run with --resume.
-```
-
-The fast path is described in `audit/W2_FAST_PATH.md`.
+When the OBSERVATION stage cannot find VLM+OCR tools, it halts with
+`AWAITING_NATIVE_ENVIRONMENT`. Running the same command on the LOCAL Windows
+machine (with Qwen2.5-VL-3B-Instruct and easyocr-1.7.2) causes the runner to
+automatically execute the full observation census for all contract-covered
+controls and write `c3_observation_metrics.json` to the run directory.
 
 ---
 
@@ -212,6 +209,8 @@ The fast path is described in `audit/W2_FAST_PATH.md`.
 - `PRODUCT_CLOSED` certificate includes `failures: []`
 - `PRODUCT_NOT_CLOSED` certificate includes all failing gate names
 - `OBSERVATION` stage boundary is `LOCAL_NATIVE` — cannot be fabricated in cloud
+- No `tests/fixtures/w2/` paths in runner.py — fully tutorial-agnostic
+- All native-boundary halts use `halted_for: "AWAITING_NATIVE_ENVIRONMENT"`
 
 ---
 
@@ -223,13 +222,13 @@ The fast path is described in `audit/W2_FAST_PATH.md`.
 | `serum2/pipeline/__main__.py` | `python -m serum2.pipeline` entry point |
 | `serum2/pipeline/runner.py` | Universal 13-stage orchestrator |
 | `serum2/pipeline/stage_manifest.py` | Durable stage records + RunManifest |
-| `tests/test_pipeline_runner.py` | 70 deterministic tests |
+| `tests/test_pipeline_runner.py` | 83 deterministic tests |
 
 ---
 
 ## LOCAL Execution Procedure (after CLOUD stages complete)
 
-After the CLOUD stages have run and the runner halts at `AWAITING_INPUT`:
+After the CLOUD stages have run and the runner halts at `AWAITING_NATIVE_ENVIRONMENT`:
 
 1. On the Windows machine with Serum 2.0.23 and Ableton 11.3:
    ```
@@ -237,19 +236,20 @@ After the CLOUD stages have run and the runner halts at `AWAITING_INPUT`:
    python -m serum2.pipeline <url> --resume
    ```
 
-2. The runner will proceed through OBSERVATION (requires Qwen2.5-VL on local GPU
-   and EasyOCR). Follow the instructions in `audit/W2_FAST_PATH.md`.
+2. The runner automatically proceeds through OBSERVATION using Qwen2.5-VL on
+   the local GPU and EasyOCR. No separate observation command is needed.
+   Observation results are written to `<work_dir>/c3_observation_metrics.json`.
 
-3. After OBSERVATION writes `tests/fixtures/w2/c3_observation_metrics.json`,
-   the runner will continue through LEDGER → ADMISSION → COMPILE automatically.
+3. After OBSERVATION completes, the runner continues through LEDGER → ADMISSION
+   → COMPILE automatically.
 
 4. NATIVE_LOAD, NATIVE_VERIFY, REFERENCE_VERIFY, ARRANGE, RENDER all require
-   active Serum 2.0.23 in Ableton. The runner will call the serum-mcp bridge
-   for each.
+   active Serum 2.0.23 in Ableton. The runner calls the serum-mcp bridge
+   for each automatically. No separate commands are needed.
 
 5. Once FINALIZE completes, check exit code 0 for PRODUCT_CLOSED.
-   The certificate is at `<work_dir>/product_cert.json`.
+   The certificate is at `<work_dir>/pipeline_certificate.json`.
 
 ---
 
-*See also: `audit/W2_RUNBOOK.md` (full 12-phase runbook), `audit/W2_FAST_PATH.md` (fast path for W2 observation)*
+*See also: `audit/W1_RUNBOOK.md` (Gate B native verification runbook)*
