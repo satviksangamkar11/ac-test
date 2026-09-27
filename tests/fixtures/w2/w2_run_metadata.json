@@ -1,45 +1,54 @@
 {
-  "w2_run_id": "W2_AjE11L_OwLA",
+  "w2_run_id": "pipeline_6b818abcd2cc",
   "tutorial": {
     "url": "https://www.youtube.com/watch?v=AjE11L_OwLA",
     "video_id": "AjE11L_OwLA",
     "title": "How to Make a Wobble Bass in Serum 2 | Complete Guide",
     "uploader": "Arc Nade",
     "duration_sec": 539.4,
-    "creation_time": "2025-03-30",
-    "source_video_sha256": "c805c377ae2d3b653a61679443443b39f1e48405cc227eb2eb6f13374dc6ba60",
     "untouched_status": "confirmed -- video_id not present in any prior W1/C3/Gate-B evidence run"
   },
-  "acquisition": {
-    "storyboard_only": false,
-    "num_frames_acquired": 269,
-    "sample_interval_sec": 2.0,
-    "manifest_file": "tests/fixtures/w2/w2_acquisition_manifest.json"
-  },
-  "frame_accounting": {
-    "USED": ["frame_yt_19935949eb0e_00024000", "frame_yt_19935949eb0e_00034000"],
-    "INSPECTED_NOT_USED": ["frame_yt_19935949eb0e_00062000", "frame_yt_19935949eb0e_00064000",
-                            "frame_yt_19935949eb0e_00072000", "frame_yt_19935949eb0e_00096000"],
-    "NOT_YET_CLASSIFIED": 263,
-    "note": "Only a targeted subset (matched to transcript-flagged parameter-change moments) was inspected within this session's time budget. The remaining 263 acquired frames exist on disk with real hashes/timestamps in w2_acquisition_manifest.json but were not individually terminal-classified (USED/UNREADABLE/NON_RELEVANT/DUPLICATE/FAILED) -- reported honestly as NOT_YET_CLASSIFIED rather than silently omitted or fabricated as complete."
-  },
+  "canonical_command": "python -m serum2.pipeline \"https://www.youtube.com/watch?v=AjE11L_OwLA\" --resume",
+  "acquisition": {"num_frames_acquired": 269, "sample_interval_sec": 2.0, "storyboard_only": false},
   "epoch": {"label": "2.0.23@9293eb90", "binary_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"},
-  "ableton_version_discrepancy": {
-    "runbook_states": "Ableton 11.3",
-    "actual_installed_and_running": "Ableton Live 12 Suite",
-    "resolution": "Proceeded with the actual installed environment (Live 12 Suite) -- the same version every prior successful native session in this repo (Gate B, W1, C3) has used. Treated as a stale runbook string, not a genuine version-lock; documented rather than silently changed or blocked on."
+  "real_bugs_found_and_fixed_in_pipeline_infrastructure": [
+    {
+      "bug": "ACQUIRE stage called .get() on VisualFrameArtifact dataclass instances (not dicts), crashing every run.",
+      "fix": "serum2/pipeline/runner.py: use attribute access (f.frame_id, f.artifact_hash, etc.) matching the real dataclass fields.",
+      "scope": "Pipeline glue/orchestration code only -- no policy, contract, or admission logic touched."
+    },
+    {
+      "bug": "ACQUIRE stage omitted max_frames when None (meaning 'no cap' per the CLI's own docs), silently falling back to acquire_visual_evidence's own unrelated default of 8 frames -- a silent truncation trap for a 539s video.",
+      "fix": "Pass an explicit large value (10000) when max_frames is None instead of omitting the kwarg.",
+      "scope": "Same file, same nature."
+    },
+    {
+      "bug": "TRANSCRIPT stage looked for fetch_transcript's output at serum2/data/sources/*video_id*/*.json (stale assumption); the actual current implementation writes to <cwd>/data/transcripts/<source_id>.json.",
+      "fix": "Corrected the expected output path using the real compute_source_id() + the real write location.",
+      "scope": "Same file, same nature."
+    },
+    {
+      "bug": "OBSERVATION stage called engine.observe_control_in_frame(frame_path, control_id) -- a method that did not exist anywhere in observation_engine.py. Every call raised AttributeError, silently caught by a broad except-continue, producing a fabricated-looking '0 admissible observations' result that was actually '0 real inference attempts ever succeeded', not a genuine adjudication outcome.",
+      "fix": "Implemented observe_control_in_frame() for real: a generic locate -> crop -> transcribe -> explicit-null mechanism (adapted from this repo's own earlier roi_crop_extractor.py prototype) using real local Qwen2.5-VL-3B-Instruct + real local easyocr 1.7.2, with a small fast-path crop registry (2 controls, Serum-UI-layout-based fractions, not video-specific) as an optimization only. Never guesses; explicitly returns UNREADABLE when the VLM cannot locate or read a value.",
+      "scope": "New method + 5 new lazy-loaded helper functions in serum2/producer/observation_engine.py. No change to observation_policy.py (adjudicate/CONFIDENT_THRESHOLD/GAP A-B-C logic untouched), no change to any Gate A/B/admission/contract file."
+    }
+  ],
+  "known_remaining_limitation": {
+    "issue": "serum2/producer/w2_fast_path.py's temporal_candidates() selects candidate frames from a hardcoded _TUTORIAL_CANDIDATE_WINDOWS list keyed to THIS specific video's timeline/chapters (with comments literally referencing prior manual findings for this exact video) -- this is a per-video shortcut, not the generic, parameter-agnostic candidate-selection mechanism the task requires. It was not rewritten this session (a truly generic mechanism would need to scan across many/all of the 269 frames for each of the 330 contract-covered controls, which is not tractable in this session's time budget with per-frame VLM inference). This is a genuine, documented architecture gap, not something papered over.",
+    "impact": "The 15 real observations collected this run came from the 6 controls covered by the hardcoded window list, not from a full generic sweep. observe_control_in_frame() itself IS generic (works for any control_id via locate+transcribe); temporal_candidates() (which decides WHICH frames to try it on) is not."
   },
-  "abletonmcp_connectivity": "AbletonMCP MCP session was disconnected for part of this task; the underlying bridge TCP port (9877) was confirmed listening throughout. Native Serum load/readback (Phases 8+) were not reached because Phase 5/6 never produced an admissible OBSERVED value -- see blocker below -- so AbletonMCP reconnection was not the limiting factor in the end.",
-  "stage_a_c3_metrics_file": "tests/fixtures/w2/c3_observation_metrics.json",
+  "real_observation_result": {
+    "total_frames_available": 269,
+    "total_controls_contract_covered": 183,
+    "real_observations_attempted": 15,
+    "observed_corroborated_count": 0,
+    "admissible_observed_count": 0,
+    "confident_wrong_count": 0,
+    "notable_finding": "oscA.octave at t=22s: VLM hallucinated '4088' as a single source (genuinely wrong) -- correctly remained AMBIGUOUS under GAP B (single-source, never admitted) rather than becoming a confident-wrong observation. This is the safety invariant working exactly as designed even when the underlying VLM read is bad."
+  },
   "blocker": {
-    "phase": "Phase 5/6 boundary (state ledger / admission)",
-    "exact_condition": "Of 4 real Stage-A observations adjudicated via the actual, unmodified observation_engine.adjudicated_observe(), exactly 1 reached OUTCOME_OBSERVED (oscA.rand_phase=62, genuine VLM+easyocr agreement). That control has no row in parameter_characterization/bulk_causal_evidence/final_execution_contract_v1.json (the 330-control set) -- 'missing execution-contract row', an explicit W2 stop condition. The other 3 real observations (env1.decay, oscA.octave x2) all correctly resolved AMBIGUOUS under the GAP-B-remediated policy (2 as single-source regardless of confidence, 1 as genuine VLM/OCR disagreement) -- also correctly, none reached admissible OBSERVED status.",
-    "remediation_attempted": [
-      "Retried oscA.octave (a control that IS in the execution contract) with a tighter, isolated crop of just the digit -- OCR dropped the minus sign, read '2' instead of '-2' (still disagrees with VLM's correct '-2').",
-      "Retried again with a wider, contrast-enhanced crop preserving the minus glyph -- OCR still misread it entirely ('1').",
-      "Searched subsequent frames (t=62s-96s) for a positive-valued, contract-covered control (oscA.warp_amount, mentioned as '28%' in the transcript) with a static/tooltip numeric readout -- none of the inspected frames showed a legible numeric overlay for it (menu navigation and an unrelated LFO curve edit were in progress instead).",
-      "All attempts used only real, unmodified evidence and the real, unmodified observation_engine/observation_policy -- no fabricated values, no bypassed adjudication, no architecture changes."
-    ],
-    "conclusion": "Genuine, reproducible stop condition given the evidence collected in this session. Not fixed by weakening the architecture (explicitly prohibited) or fabricating evidence (also prohibited). Legitimate next steps: (a) expand the inspected-frame set toward the full 269 to find a naturally-corroborated, contract-covered control elsewhere in the video, or (b) target frames with clean positive-valued static numeric readouts (avoiding OCR's demonstrated weakness on the minus-sign glyph at this resolution)."
+    "phase": "OBSERVATION -> LEDGER boundary",
+    "exact_condition": "0 of 15 real Stage-A observations reached OUTCOME_OBSERVED with an execution-contract row. Most resolved UNREADABLE (VLM genuinely could not locate/read the control in that frame) or AMBIGUOUS (single-source, or the one case with a 2nd source it disagreed). Per Phase 5, only OBSERVED values may enter the state ledger -- with 0 OBSERVED, LEDGER/ADMISSION/COMPILE/NATIVE_LOAD/NATIVE_VERIFY/REFERENCE_VERIFY/ARRANGE/RENDER were never reached by the pipeline (correctly -- it fails closed rather than fabricating an input to feed them).",
+    "conclusion": "Genuine, reproducible stop condition from the real pipeline command after fixing 4 real infrastructure bugs (3 pipeline glue bugs + 1 missing method). Not fixed by weakening the architecture or fabricating evidence. FINAL_STATUS = PRODUCT_NOT_CLOSED."
   }
 }

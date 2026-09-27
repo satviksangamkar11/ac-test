@@ -236,9 +236,11 @@ def _stage_acquire(manifest: RunManifest, run_dir: Path, youtube_url: str,
 
     try:
         from serum2.source.acquire_visual_evidence import acquire_visual_evidence
-        kwargs: Dict[str, Any] = {"source_url": youtube_url, "sample_interval_sec": sample_interval_sec}
-        if max_frames is not None:
-            kwargs["max_frames"] = max_frames
+        # acquire_visual_evidence's own default (max_frames=8) is a silent-truncation trap
+        # if omitted here -- max_frames=None means "no cap" per this CLI's own docs, so pass
+        # an explicit large value rather than relying on the callee's unrelated small default.
+        kwargs: Dict[str, Any] = {"source_url": youtube_url, "sample_interval_sec": sample_interval_sec,
+                                   "max_frames": max_frames if max_frames is not None else 10_000}
 
         bundle = acquire_visual_evidence(**kwargs)
         if bundle.storyboard_only:
@@ -256,12 +258,12 @@ def _stage_acquire(manifest: RunManifest, run_dir: Path, youtube_url: str,
             "num_frames": len(bundle.frames),
             "frames": [
                 {
-                    "frame_id": f.get("frame_id", f"frame_{i:08d}"),
-                    "timestamp_sec": f.get("timestamp_sec", 0.0),
-                    "artifact_path": f.get("artifact_path", ""),
-                    "artifact_hash": f.get("sha256", ""),
-                    "width": f.get("width"),
-                    "height": f.get("height"),
+                    "frame_id": f.frame_id or f"frame_{i:08d}",
+                    "timestamp_sec": f.timestamp_sec,
+                    "artifact_path": f.artifact_path,
+                    "artifact_hash": f.artifact_hash,
+                    "width": f.width,
+                    "height": f.height,
                 }
                 for i, f in enumerate(bundle.frames)
             ],
@@ -313,22 +315,21 @@ def _stage_transcript(manifest: RunManifest, run_dir: Path, youtube_url: str) ->
         _src_path = str(ROOT / "serum2" / "source")
         if _src_path not in sys.path:
             sys.path.insert(0, _src_path)
-        from serum2.source.fetch_youtube import fetch_transcript
+        from serum2.source.fetch_youtube import fetch_transcript, compute_source_id
         out_path = run_dir / "transcript.json"
         out_path.parent.mkdir(parents=True, exist_ok=True)
         ok = fetch_transcript(video_id=video_id, url=youtube_url)
         if ok:
-            # fetch_transcript writes to serum2/data/sources/<source_id>/
-            # Try to find it and copy to run_dir
-            sources_dir = ROOT / "serum2" / "data" / "sources"
-            found = sorted(sources_dir.glob(f"*{video_id}*/*.json"), key=lambda p: p.stat().st_mtime)
-            if found:
+            # fetch_transcript writes to <cwd>/data/transcripts/<source_id>.json
+            source_id = compute_source_id(youtube_url)
+            src = ROOT / "data" / "transcripts" / f"{source_id}.json"
+            if src.exists():
                 import shutil
-                shutil.copy2(found[-1], out_path)
+                shutil.copy2(src, out_path)
                 th = content_hash(out_path)
                 rec.mark_complete({"transcript_path": str(out_path), "transcript_hash": th})
             else:
-                rec.mark_failed("fetch_transcript returned True but no output file found")
+                rec.mark_failed(f"fetch_transcript returned True but expected output not found at {src}")
         else:
             rec.mark_awaiting("transcript not available; advisory context only — pipeline may continue without it",
                               {"transcript_path": None})

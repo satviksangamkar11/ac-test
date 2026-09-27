@@ -1,0 +1,124 @@
+{
+  "run_id": "pipeline_6b818abcd2cc",
+  "video_id": "AjE11L_OwLA",
+  "source_url": "https://www.youtube.com/watch?v=AjE11L_OwLA",
+  "created_at": "2026-09-27T15:14:54.883507+00:00",
+  "updated_at": "2026-09-27T15:29:10.025059+00:00",
+  "work_dir": "D:\\ableton claude final best\\serum2\\data\\pipeline_runs\\AjE11L_OwLA",
+  "stages": {
+    "ACQUIRE": {
+      "stage": "ACQUIRE",
+      "status": "COMPLETE",
+      "run_id": "",
+      "started_at": "2026-09-27T15:21:02.458942+00:00",
+      "finished_at": "2026-09-27T15:21:25.090221+00:00",
+      "execution_boundary": "ANY",
+      "inputs": {
+        "url": "https://www.youtube.com/watch?v=AjE11L_OwLA",
+        "sample_interval_sec": 2.0,
+        "max_frames": null
+      },
+      "outputs": {
+        "manifest_path": "D:\\ableton claude final best\\serum2\\data\\pipeline_runs\\AjE11L_OwLA\\acquisition_manifest.json",
+        "manifest_hash": "34429f2fcfb0cafe5c2614517caa4f9308e764dc6e87c2fdc6aebbd4e8a3c10e",
+        "num_frames": 269,
+        "storyboard_only": false
+      },
+      "failure_reason": null,
+      "cache_key": "167c3ecc1ae62bbc760a7f3df3575066a94ed93201f64399d13ed75837b5f576"
+    },
+    "TRANSCRIPT": {
+      "stage": "TRANSCRIPT",
+      "status": "COMPLETE",
+      "run_id": "pipeline_6b818abcd2cc",
+      "started_at": "2026-09-27T15:18:37.088738+00:00",
+      "finished_at": "2026-09-27T15:18:49.693223+00:00",
+      "execution_boundary": "ANY",
+      "inputs": {
+        "url": "https://www.youtube.com/watch?v=AjE11L_OwLA"
+      },
+      "outputs": {
+        "transcript_path": "D:\\ableton claude final best\\serum2\\data\\pipeline_runs\\AjE11L_OwLA\\transcript.json",
+        "transcript_hash": "23cecda995ed734a5c16290959f0836ab1ef49fc5d2824487f629473a4f31245"
+      },
+      "failure_reason": "fetch_transcript returned True but no output file found",
+      "cache_key": null
+    },
+    "VISUAL_EVIDENCE": {
+      "stage": "VISUAL_EVIDENCE",
+      "status": "COMPLETE",
+      "run_id": "",
+      "started_at": null,
+      "finished_at": "2026-09-27T15:21:25.091198+00:00",
+      "execution_boundary": "ANY",
+      "inputs": {},
+      "outputs": {
+        "manifest_path": "D:\\ableton claude final best\\serum2\\data\\pipeline_runs\\AjE11L_OwLA\\acquisition_manifest.json",
+        "frame_count": 269,
+        "manifest_hash": "34429f2fcfb0cafe5c2614517caa4f9308e764dc6e87c2fdc6aebbd4e8a3c10e"
+      },
+      "failure_reason": null,
+      "cache_key": null
+    },
+    "OBSERVATION": {
+      "stage": "OBSERVATION",
+      "status": "COMPLETE",
+      "run_id": "",
+      "started_at": "2026-09-27T15:28:22.434839+00:00",
+      "finished_at": "2026-09-27T15:29:09.993427+00:00",
+      "execution_boundary": "ANY",
+      "inputs": {},
+      "outputs": {
+        "observation_path": "D:\\ableton claude final best\\serum2\\data\\pipeline_runs\\AjE11L_OwLA\\c3_observation_metrics.json",
+        "observation_hash": "cad41ed3307099ddd971e34e7d270042d7492d0e80369779720e87ecd6a78d43",
+        "total_observations": 15,
+        "observed_corroborated_count": 0,
+        "admissible_observed_count": 0,
+        "excluded_no_contract_row": [],
+        "confident_wrong_count": 0
+      },
+      "failure_reason": null,
+      "cache_key": null
+    },
+    "LEDGER": {
+      "stage": "LEDGER",
+      "status": "COMPLETE",
+      "run_id": "pipeline_6b818abcd2cc",
+      "started_at": "2026-09-27T15:19:19.132377+00:00",
+      "finished_at": "2026-09-27T15:19:19.145086+00:00",
+      "execution_boundary": "ANY",
+      "inputs": {},
+      "outputs": {
+        "ledger_path": "D:\\ableton claude final best\\serum2\\data\\pipeline_runs\\AjE11L_OwLA\\ledger_rows.json",
+        "ledger_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "row_count": 0,
+        "admissible_metrics_count": 0
+      },
+      "failure_reason": null,
+      "cache_key": null
+    },
+    "ADMISSION": {
+      "stage": "ADMISSION",
+      "status": "FAILED",
+      "run_id": "pipeline_6b818abcd2cc",
+      "started_at": "2026-09-27T15:29:09.995574+00:00",
+      "finished_at": "2026-09-27T15:29:10.025029+00:00",
+      "execution_boundary": "ANY",
+      "inputs": {},
+      "outputs": {},
+      "failure_reason": "PRODUCT_NOT_CLOSED: no admissible OBSERVED observations. See OBSERVATION stage for details. Do not bypass A2 \u2014 the pipeline fails closed.",
+      "cache_key": null
+    }
+  },
+  "final_status": "PRODUCT_NOT_CLOSED",
+  "failure_stage": "ADMISSION",
+  "failure_reason": "PRODUCT_NOT_CLOSED: no admissible OBSERVED observations. See OBSERVATION stage for details. Do not bypass A2 \u2014 the pipeline fails closed.",
+  "observed_count": 0,
+  "admitted_count": 0,
+  "compiled_count": 0,
+  "native_verified": false,
+  "reference_verified": false,
+  "coverage_status": "UNKNOWN",
+  "render_path": null,
+  "certificate_path": null
+}

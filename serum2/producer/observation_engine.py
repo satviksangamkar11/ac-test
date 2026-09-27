@@ -475,3 +475,226 @@ class ObservationEngine:
             numeric_tol=numeric_tol,
             requested_control_id=context.get("control_id", ""),
         )
+
+    def observe_control_in_frame(self, frame_path: str, control_id: str) -> "ObservationCandidate":
+        """Run real local VLM (+ OCR corroboration on the same ROI) against one frame image
+        for one control, and return the adjudicated result.
+
+        Generic candidate-selection mechanism (locate -> crop -> transcribe -> explicit null),
+        adapted from the earlier roi_crop_extractor.py prototype in this repo: ask the VLM to
+        LOCATE the control's bounding box on the full frame first, then crop to that ROI and
+        ask it to transcribe ONLY the visible value there, replying UNREADABLE rather than
+        guessing on occlusion/illegibility/wrong-context. This works for any control_id without
+        a precomputed per-control pixel region. A small fast-path registry
+        (_GENERIC_SERUM_UI_CROPS, fractions of frame size derived from Serum 2's own fixed
+        OSC-page layout) skips the locate step for the 2 controls already validated this way,
+        as an optimization, not a requirement -- every other control_id goes through locate.
+        """
+        from serum2.producer.observation_policy import ObservationCandidate as PolicyCandidate
+        import hashlib
+
+        try:
+            from PIL import Image
+        except Exception as exc:
+            return PolicyCandidate(outcome="UNREADABLE", detail="PIL unavailable: %s" % exc)
+
+        try:
+            im = Image.open(frame_path)
+        except Exception as exc:
+            return PolicyCandidate(outcome="UNREADABLE", detail="cannot open frame: %s" % exc)
+
+        w, h = im.size
+        crop_spec = _GENERIC_SERUM_UI_CROPS.get(control_id)
+        field_index = field_count = None
+
+        if crop_spec is not None:
+            fx0, fy0, fx1, fy1, field_index, field_count = crop_spec
+            box = (int(fx0 * w), int(fy0 * h), int(fx1 * w), int(fy1 * h))
+        else:
+            box = _locate_control_bbox(frame_path, control_id, (w, h))
+            if box is None:
+                return PolicyCandidate(outcome="UNREADABLE",
+                                        detail="VLM locate step could not find control %r in this frame" % control_id)
+
+        crop = im.crop(box)
+        import io
+        buf = io.BytesIO()
+        crop.convert("RGB").save(buf, format="PNG")
+        roi_hash = hashlib.sha256(buf.getvalue()).hexdigest()
+        crop_path = frame_path + f".__roi_{control_id.replace('.', '_')}.png"
+        crop.convert("RGB").save(crop_path)
+
+        if crop_spec is not None:
+            vlm_text, vlm_conf = _run_vlm_on_crop(crop_path, control_id, field_index, field_count)
+        else:
+            vlm_text, vlm_conf = _transcribe_roi(crop_path, control_id)
+            if vlm_text is None:
+                return PolicyCandidate(outcome="UNREADABLE",
+                                        detail="VLM transcribe step returned UNREADABLE for %r" % control_id,
+                                        evidence_hash=roi_hash)
+
+        sources = [{"raw_value": vlm_text, "source": "qwen2.5-vl-3b-instruct", "confidence": vlm_conf}]
+
+        ocr_num, ocr_conf = _run_ocr_on_crop(crop_path, field_index, field_count) if crop_spec is not None \
+            else _run_ocr_freeform(crop_path)
+        if ocr_num is not None:
+            sources.append({"raw_value": ocr_num, "source": "easyocr-1.7.2", "confidence": ocr_conf})
+
+        context = {"control_id": control_id, "element_kind": "CONTROL", "control_type": "continuous",
+                   "roi_hash": roi_hash}
+        return self.adjudicated_observe(sources, context, numeric_tol=1e-3)
+
+
+# ---------------------------------------------------------------------------
+# Generic Serum-UI-layout crop registry + lazy local-model runners
+# (used by ObservationEngine.observe_control_in_frame)
+# ---------------------------------------------------------------------------
+
+# control_id -> (x0_frac, y0_frac, x1_frac, y1_frac, field_index_in_row, expected_field_count)
+# Fractions derived from Serum 2's fixed OSC-page panel geometry at 1920x1080; the same
+# panel layout applies regardless of which tutorial is being captured, provided the capture
+# shows Serum's OSC page at a similar aspect ratio (16:9, plugin filling the frame).
+_GENERIC_SERUM_UI_CROPS: Dict[str, tuple] = {
+    "env1.decay": (0.1875, 0.7639, 0.3958, 0.7917, 2, 5),   # ATK/HOLD/DEC/SUS/REL row
+    "oscA.octave": (0.1224, 0.1944, 0.3177, 0.2176, None, None),  # OCT/SEM/FIN/CRS row (VLM-only; OCR unreliable here)
+}
+
+_vlm_singleton = None
+_ocr_singleton = None
+
+
+def _load_vlm():
+    global _vlm_singleton
+    if _vlm_singleton is None:
+        import torch
+        from transformers import Qwen2_5_VLForConditionalGeneration, AutoProcessor, BitsAndBytesConfig
+        q = BitsAndBytesConfig(load_in_4bit=True, bnb_4bit_compute_dtype=torch.float16)
+        model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
+            "models/Qwen2.5-VL-3B-Instruct", quantization_config=q, device_map="auto")
+        proc = AutoProcessor.from_pretrained("models/Qwen2.5-VL-3B-Instruct",
+                                              min_pixels=64 * 28 * 28, max_pixels=1024 * 28 * 28)
+        _vlm_singleton = (model, proc)
+    return _vlm_singleton
+
+
+def _run_vlm_on_crop(crop_path: str, control_id: str, field_index: Optional[int], field_count: Optional[int]):
+    import torch
+    from qwen_vl_utils import process_vision_info
+    model, proc = _load_vlm()
+    if field_index is not None and field_count is not None:
+        ordinal = ["first", "second", "third", "fourth", "fifth", "sixth"][field_index] if field_index < 6 else str(field_index + 1)
+        prompt = ("This is a crop of a Serum 2 synthesizer UI row with %d numeric fields "
+                  "side by side. Read ONLY the %s field's exact displayed value (the field "
+                  "labelled for control '%s'). Answer with only the number (and unit/sign if "
+                  "shown), nothing else." % (field_count, ordinal, control_id))
+    else:
+        prompt = ("This is a crop of a Serum 2 synthesizer UI showing the control '%s'. "
+                  "Read its exact currently-displayed numeric value. Answer with only the "
+                  "number (and unit/sign if shown), nothing else." % control_id)
+    msgs = [{"role": "user", "content": [{"type": "image", "image": crop_path}, {"type": "text", "text": prompt}]}]
+    text = proc.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
+    img_objs, vids = process_vision_info(msgs)
+    inp = proc(text=[text], images=img_objs, videos=vids, padding=True, return_tensors="pt").to(model.device)
+    out = model.generate(**inp, max_new_tokens=16, output_scores=True, return_dict_in_generate=True, do_sample=False)
+    gen = out.sequences[0][inp.input_ids.shape[1]:]
+    probs = [torch.softmax(sl[0].float(), dim=-1)[t].item() for sl, t in zip(out.scores, gen)]
+    mean_prob = sum(probs) / len(probs) if probs else 0.0
+    result = proc.batch_decode([gen], skip_special_tokens=True)[0]
+    return result, mean_prob
+
+
+def _run_ocr_on_crop(crop_path: str, field_index: Optional[int], expected_field_count: Optional[int]):
+    global _ocr_singleton
+    if field_index is None:
+        return None, None
+    import easyocr
+    if _ocr_singleton is None:
+        _ocr_singleton = easyocr.Reader(["en"], gpu=True)
+    detections = _ocr_singleton.readtext(crop_path, detail=1)
+    if len(detections) != expected_field_count or field_index >= len(detections):
+        return None, None  # fragment count doesn't match expected row shape -- refuse rather than guess
+    raw = detections[field_index][1]
+    conf = detections[field_index][2]
+    m = re.search(r"[+-]?\d+(?:\.\d+)?", raw.replace(",", ".").replace("$", "s"))
+    return (float(m.group(0)), conf) if m else (None, None)
+
+
+def _locate_control_bbox(frame_path: str, control_id: str, frame_size: tuple):
+    """Stage 1 of the generic locate->transcribe pattern: ask the VLM to find control_id's
+    bounding box anywhere in the full frame. Returns a PIL-crop-ready (x0,y0,x1,y1) pixel
+    box, or None if the VLM cannot locate it (explicit null, never a guessed default region).
+    """
+    import torch
+    from qwen_vl_utils import process_vision_info
+    model, proc = _load_vlm()
+    w, h = frame_size
+    prompt = (
+        "This is a screenshot of a Serum 2 synthesizer plugin UI. Locate the control "
+        "labelled or corresponding to '%s'. If visible, reply with exactly one line: "
+        "bbox=[x1,y1,x2,y2] using pixel coordinates in a %dx%d image. "
+        "If it is not visible in this frame, reply exactly: NOT_VISIBLE" % (control_id, w, h)
+    )
+    msgs = [{"role": "user", "content": [{"type": "image", "image": frame_path}, {"type": "text", "text": prompt}]}]
+    text = proc.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
+    img_objs, vids = process_vision_info(msgs)
+    inp = proc(text=[text], images=img_objs, videos=vids, padding=True, return_tensors="pt").to(model.device)
+    out = model.generate(**inp, max_new_tokens=32, do_sample=False)
+    result = proc.batch_decode([o[len(i):] for i, o in zip(inp.input_ids, out)], skip_special_tokens=True)[0]
+    m = re.search(r"\[?\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\]?", result)
+    if not m:
+        return None
+    x0, y0, x1, y1 = (int(v) for v in m.groups())
+    # Pad slightly for label context, clamp to frame bounds, reject degenerate boxes.
+    pad = 6
+    x0, y0 = max(0, x0 - pad), max(0, y0 - pad)
+    x1, y1 = min(w, x1 + pad), min(h, y1 + pad)
+    if x1 - x0 < 4 or y1 - y0 < 4:
+        return None
+    return (x0, y0, x1, y1)
+
+
+def _transcribe_roi(crop_path: str, control_id: str):
+    """Stage 2 of the generic locate->transcribe pattern: read ONLY the value visible in an
+    already-located ROI crop, with an explicit UNREADABLE reply path -- never a guess.
+    Returns (text, mean_token_confidence) or (None, 0.0) if the VLM reports UNREADABLE.
+    """
+    import torch
+    from qwen_vl_utils import process_vision_info
+    model, proc = _load_vlm()
+    prompt = (
+        "This is a cropped region of a Serum 2 UI, located as the control '%s'. "
+        "Read ONLY the numeric value visible in this crop. If it is occluded, too small, "
+        "blurry, or this crop does not actually show that control, reply exactly: UNREADABLE. "
+        "Otherwise answer with only the number (and unit/sign if shown), nothing else." % control_id
+    )
+    msgs = [{"role": "user", "content": [{"type": "image", "image": crop_path}, {"type": "text", "text": prompt}]}]
+    text = proc.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
+    img_objs, vids = process_vision_info(msgs)
+    inp = proc(text=[text], images=img_objs, videos=vids, padding=True, return_tensors="pt").to(model.device)
+    out = model.generate(**inp, max_new_tokens=16, output_scores=True, return_dict_in_generate=True, do_sample=False)
+    gen = out.sequences[0][inp.input_ids.shape[1]:]
+    probs = [torch.softmax(sl[0].float(), dim=-1)[t].item() for sl, t in zip(out.scores, gen)]
+    mean_prob = sum(probs) / len(probs) if probs else 0.0
+    result = proc.batch_decode([gen], skip_special_tokens=True)[0]
+    if "UNREADABLE" in result.upper() or not re.search(r"\d", result):
+        return None, 0.0
+    return result, mean_prob
+
+
+def _run_ocr_freeform(crop_path: str):
+    """OCR corroboration for a located (not fixed-row) ROI: take the single highest-confidence
+    numeric fragment anywhere in the crop, or (None, None) if none parses. Looser than the
+    fixed-row _run_ocr_on_crop (which requires an exact expected fragment count) because a
+    located ROI's fragment count isn't known in advance -- still never guesses a value with
+    no digits in it."""
+    global _ocr_singleton
+    import easyocr
+    if _ocr_singleton is None:
+        _ocr_singleton = easyocr.Reader(["en"], gpu=True)
+    detections = _ocr_singleton.readtext(crop_path, detail=1)
+    best = None
+    for _, raw, conf in detections:
+        m = re.search(r"[+-]?\d+(?:\.\d+)?", raw.replace(",", ".").replace("$", "s"))
+        if m and (best is None or conf > best[1]):
+            best = (float(m.group(0)), conf)
+    return best if best else (None, None)

@@ -1,26 +1,179 @@
 {
-  "source_video": "AjE11L_OwLA",
+  "pipeline_run_id": "AjE11L_OwLA",
   "metrics": [
+    {
+      "control_id": "env1.decay",
+      "frame_id": "frame_yt_19935949eb0e_00022000",
+      "timestamp_sec": 22.0,
+      "evidence_hash": "05d1994e51fd303384e547114dbac9a87b25d40ffa08d54094f6d41fa6d30c75",
+      "adjudicated_outcome": "AMBIGUOUS",
+      "adjudicated_value": [
+        1.0,
+        "ms"
+      ],
+      "single_source": true,
+      "confident_wrong": false,
+      "exact_match": false,
+      "ocr_used_as_source": false,
+      "has_execution_contract_row": true
+    },
     {
       "control_id": "env1.decay",
       "frame_id": "frame_yt_19935949eb0e_00024000",
       "timestamp_sec": 24.0,
-      "evidence_hash": "ef8d99acf75e11efc53e0b1b676b1358391cabafcf56d7af66e0609157051fac",
-      "source_count": 2,
-      "source_types": [
-        "qwen2.5-vl-3b-instruct",
-        "easyocr-1.7.2"
-      ],
-      "raw_vlm_output": "1.0 s",
-      "vlm_confidence": 0.8534,
-      "raw_ocr_output": "1005",
-      "ocr_confidence": 0.16438478231430054,
+      "evidence_hash": "",
       "adjudicated_outcome": "AMBIGUOUS",
       "adjudicated_value": null,
-      "adjudicated_confidence": 0.0,
-      "adjudicated_detail": "split: [(1.0, 's'), (1005.0, 's')]",
-      "adjudicated_evidence_hash": null,
       "single_source": false,
+      "confident_wrong": false,
+      "exact_match": false,
+      "ocr_used_as_source": false,
+      "has_execution_contract_row": true
+    },
+    {
+      "control_id": "env1.decay",
+      "frame_id": "frame_yt_19935949eb0e_00026000",
+      "timestamp_sec": 26.0,
+      "evidence_hash": "",
+      "adjudicated_outcome": "AMBIGUOUS",
+      "adjudicated_value": null,
+      "single_source": false,
+      "confident_wrong": false,
+      "exact_match": false,
+      "ocr_used_as_source": false,
+      "has_execution_contract_row": true
+    },
+    {
+      "control_id": "env2.decay",
+      "frame_id": "frame_yt_19935949eb0e_00060000",
+      "timestamp_sec": 60.0,
+      "evidence_hash": "",
+      "adjudicated_outcome": "UNREADABLE",
+      "adjudicated_value": null,
+      "single_source": false,
+      "confident_wrong": false,
+      "exact_match": false,
+      "ocr_used_as_source": false,
+      "has_execution_contract_row": true
+    },
+    {
+      "control_id": "env2.decay",
+      "frame_id": "frame_yt_19935949eb0e_00062000",
+      "timestamp_sec": 62.0,
+      "evidence_hash": "b2a9997ac9eb4459e7838a1114589a4b7fcd8b0d31ec7f467cfc1104add7d571",
+      "adjudicated_outcome": "UNREADABLE",
+      "adjudicated_value": null,
+      "single_source": false,
+      "confident_wrong": false,
+      "exact_match": false,
+      "ocr_used_as_source": false,
+      "has_execution_contract_row": true
+    },
+    {
+      "control_id": "env2.decay",
+      "frame_id": "frame_yt_19935949eb0e_00064000",
+      "timestamp_sec": 64.0,
+      "evidence_hash": "",
+      "adjudicated_outcome": "UNREADABLE",
+      "adjudicated_value": null,
+      "single_source": false,
+      "confident_wrong": false,
+      "exact_match": false,
+      "ocr_used_as_source": false,
+      "has_execution_contract_row": true
+    },
+    {
+      "control_id": "filter1.cutoff",
+      "frame_id": "frame_yt_19935949eb0e_00038000",
+      "timestamp_sec": 38.0,
+      "evidence_hash": "40edb9035f661deca39eade842972707f1cb804e5abd5a5395956884e2784dcb",
+      "adjudicated_outcome": "UNREADABLE",
+      "adjudicated_value": null,
+      "single_source": false,
+      "confident_wrong": false,
+      "exact_match": false,
+      "ocr_used_as_source": false,
+      "has_execution_contract_row": true
+    },
+    {
+      "control_id": "filter1.cutoff",
+      "frame_id": "frame_yt_19935949eb0e_00040000",
+      "timestamp_sec": 40.0,
+      "evidence_hash": "9055469cc9eef9dff1db22b8f5609653ec2e7b008f6a059e0944195bd65135ac",
+      "adjudicated_outcome": "UNREADABLE",
+      "adjudicated_value": null,
+      "single_source": false,
+      "confident_wrong": false,
+      "exact_match": false,
+      "ocr_used_as_source": false,
+      "has_execution_contract_row": true
+    },
+    {
+      "control_id": "filter1.cutoff",
+      "frame_id": "frame_yt_19935949eb0e_00042000",
+      "timestamp_sec": 42.0,
+      "evidence_hash": "7d28aa57ad1850015078626f491b27aa57407bbb2dd0c58ceeb163b09df85132",
+      "adjudicated_outcome": "UNREADABLE",
+      "adjudicated_value": null,
+      "single_source": false,
+      "confident_wrong": false,
+      "exact_match": false,
+      "ocr_used_as_source": false,
+      "has_execution_contract_row": true
+    },
+    {
+      "control_id": "lfo1.rate",
+      "frame_id": "frame_yt_19935949eb0e_00038000",
+      "timestamp_sec": 38.0,
+      "evidence_hash": "e5e202d4638ba3867a048a328475a48c4e56dc84ec6757ce5fa390498f7b3e7d",
+      "adjudicated_outcome": "UNREADABLE",
+      "adjudicated_value": null,
+      "single_source": false,
+      "confident_wrong": false,
+      "exact_match": false,
+      "ocr_used_as_source": false,
+      "has_execution_contract_row": true
+    },
+    {
+      "control_id": "lfo1.rate",
+      "frame_id": "frame_yt_19935949eb0e_00040000",
+      "timestamp_sec": 40.0,
+      "evidence_hash": "2b820a6061ff4778c8edc2342d742928edfda4212bac428a1ff55a5780db3314",
+      "adjudicated_outcome": "UNREADABLE",
+      "adjudicated_value": null,
+      "single_source": false,
+      "confident_wrong": false,
+      "exact_match": false,
+      "ocr_used_as_source": false,
+      "has_execution_contract_row": true
+    },
+    {
+      "control_id": "lfo1.rate",
+      "frame_id": "frame_yt_19935949eb0e_00042000",
+      "timestamp_sec": 42.0,
+      "evidence_hash": "2bc63c279fc553186a06e80663f054d1a4fdfd5afd08ae55a879a2062a44b443",
+      "adjudicated_outcome": "AMBIGUOUS",
+      "adjudicated_value": [
+        -2.0,
+        ""
+      ],
+      "single_source": true,
+      "confident_wrong": false,
+      "exact_match": false,
+      "ocr_used_as_source": false,
+      "has_execution_contract_row": true
+    },
+    {
+      "control_id": "oscA.octave",
+      "frame_id": "frame_yt_19935949eb0e_00022000",
+      "timestamp_sec": 22.0,
+      "evidence_hash": "8d94328bb32eae046c85816806534e44b0e7c8308a9d1d12bf6b4e6f1f843a0b",
+      "adjudicated_outcome": "AMBIGUOUS",
+      "adjudicated_value": [
+        4088.0,
+        ""
+      ],
+      "single_source": true,
       "confident_wrong": false,
       "exact_match": false,
       "ocr_used_as_source": false,
@@ -30,20 +183,12 @@
       "control_id": "oscA.octave",
       "frame_id": "frame_yt_19935949eb0e_00024000",
       "timestamp_sec": 24.0,
-      "evidence_hash": "143e4e0e90b613c0a350d7e1a1486cf47cef6cc381a8014f5a8dd4e87c67387e",
-      "source_count": 1,
-      "source_types": [
-        "qwen2.5-vl-3b-instruct"
-      ],
-      "raw_vlm_output": "0",
-      "vlm_confidence": 0.9742,
-      "raw_ocr_output": null,
-      "ocr_confidence": null,
+      "evidence_hash": "3c2a7cd10a04165031aaf87b48c07eea61c29857a34493fc86a3ad3577463215",
       "adjudicated_outcome": "AMBIGUOUS",
-      "adjudicated_value": 0.0,
-      "adjudicated_confidence": 0.9742,
-      "adjudicated_detail": "single source: corroboration required (confidence 0.974 >= 0.90 but no independent source)",
-      "adjudicated_evidence_hash": "143e4e0e90b613c0a350d7e1a1486cf47cef6cc381a8014f5a8dd4e87c67387e",
+      "adjudicated_value": [
+        0.0,
+        ""
+      ],
       "single_source": true,
       "confident_wrong": false,
       "exact_match": false,
@@ -52,66 +197,26 @@
     },
     {
       "control_id": "oscA.octave",
-      "frame_id": "frame_yt_19935949eb0e_00034000",
-      "timestamp_sec": 34.0,
-      "evidence_hash": "ea1f8ef0f2559956c1274504c419adf5d82c0f91bb9c636d13ad2ad12867d23d",
-      "source_count": 1,
-      "source_types": [
-        "qwen2.5-vl-3b-instruct"
-      ],
-      "raw_vlm_output": "-2",
-      "vlm_confidence": 0.7822,
-      "raw_ocr_output": null,
-      "ocr_confidence": null,
+      "frame_id": "frame_yt_19935949eb0e_00026000",
+      "timestamp_sec": 26.0,
+      "evidence_hash": "170767439b6dda2f278fbc9969ad04e23e441e85622cb09f82d5b64907c118c3",
       "adjudicated_outcome": "AMBIGUOUS",
-      "adjudicated_value": -2.0,
-      "adjudicated_confidence": 0.7822,
-      "adjudicated_detail": "single source below confidence threshold (0.782 < 0.90)",
-      "adjudicated_evidence_hash": "ea1f8ef0f2559956c1274504c419adf5d82c0f91bb9c636d13ad2ad12867d23d",
+      "adjudicated_value": [
+        0.0,
+        ""
+      ],
       "single_source": true,
       "confident_wrong": false,
       "exact_match": false,
       "ocr_used_as_source": false,
       "has_execution_contract_row": true
-    },
-    {
-      "control_id": "oscA.rand_phase",
-      "frame_id": "frame_yt_19935949eb0e_00034000",
-      "timestamp_sec": 34.0,
-      "evidence_hash": "35fc140f386efe8e28528f3f449d3d23c15aa36e91a2aaf0cdb1cfd75ba26c4d",
-      "source_count": 2,
-      "source_types": [
-        "qwen2.5-vl-3b-instruct",
-        "easyocr-1.7.2"
-      ],
-      "raw_vlm_output": "62",
-      "vlm_confidence": 0.9938,
-      "raw_ocr_output": "62",
-      "ocr_confidence": 0.9999689800604141,
-      "adjudicated_outcome": "OBSERVED",
-      "adjudicated_value": 62.0,
-      "adjudicated_confidence": 0.9999689800604141,
-      "adjudicated_detail": "multi-source agreement (2 candidates)",
-      "adjudicated_evidence_hash": "35fc140f386efe8e28528f3f449d3d23c15aa36e91a2aaf0cdb1cfd75ba26c4d",
-      "single_source": false,
-      "confident_wrong": false,
-      "exact_match": false,
-      "ocr_used_as_source": true,
-      "has_execution_contract_row": false
     }
   ],
   "aggregate": {
-    "source_video": "AjE11L_OwLA",
-    "real_readable_count": 4,
-    "observed_corroborated_count": 1,
-    "abstained_count": 3,
-    "identity_unresolved_count": 0,
-    "single_source_count": 2,
-    "confident_wrong_count": 0,
-    "exact_match_count": 0,
+    "total_frames": 269,
+    "total_controls_attempted": 183,
+    "observed_corroborated_count": 0,
     "admissible_observed_count": 0,
-    "observed_controls_missing_contract_row": [
-      "oscA.rand_phase"
-    ]
+    "confident_wrong_count": 0
   }
 }

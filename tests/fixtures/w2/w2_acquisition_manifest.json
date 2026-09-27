@@ -1,2175 +1,2158 @@
 {
   "source_url": "https://www.youtube.com/watch?v=AjE11L_OwLA",
-  "source_id": "yt_19935949eb0e",
   "video_id": "AjE11L_OwLA",
-  "acquired_at": "2026-09-27T13:52:58.417765+00:00",
   "storyboard_only": false,
-  "source_video_info": {
-    "requested_resolution": 1080,
-    "selected_resolution": 1080,
-    "format_id": null,
-    "fallback_reason": null,
-    "yt_dlp_version": "2026.08.19",
-    "width": 1920,
-    "height": 1080,
-    "fps": 25.0,
-    "codec": "h264",
-    "container": "mp4",
-    "duration_sec": 539.4,
-    "source_video_sha256": "c805c377ae2d3b653a61679443443b39f1e48405cc227eb2eb6f13374dc6ba60"
-  },
   "num_frames": 269,
-  "acquisition_error": null,
   "frames": [
     {
       "frame_id": "frame_yt_19935949eb0e_00002000",
       "timestamp_sec": 2.0,
-      "artifact_hash": "cc69921620c47f4bcc0300930556ad92e6da77bcbf09468ebf6a467cffde7dea",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00002000.jpg",
+      "artifact_hash": "cc69921620c47f4bcc0300930556ad92e6da77bcbf09468ebf6a467cffde7dea",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00004000",
       "timestamp_sec": 4.0,
-      "artifact_hash": "3e97d552839f1e74ef364351c12425f53800edf88e1a1a516dd48abd481f2f90",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00004000.jpg",
+      "artifact_hash": "3e97d552839f1e74ef364351c12425f53800edf88e1a1a516dd48abd481f2f90",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00006000",
       "timestamp_sec": 6.0,
-      "artifact_hash": "18dd93bc87a76535ce8abad4f25f01e99e9a1f130adf038d5f4877c5a147a24a",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00006000.jpg",
+      "artifact_hash": "18dd93bc87a76535ce8abad4f25f01e99e9a1f130adf038d5f4877c5a147a24a",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00008000",
       "timestamp_sec": 8.0,
-      "artifact_hash": "215a7f9dc1a74873ff3cb140212732d328ab2994091099ac19cd579139946f4f",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00008000.jpg",
+      "artifact_hash": "215a7f9dc1a74873ff3cb140212732d328ab2994091099ac19cd579139946f4f",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00010000",
       "timestamp_sec": 10.0,
-      "artifact_hash": "d3ace731a88e897efe457df76b27111e89239dce88c35b49368267dcce63f900",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00010000.jpg",
+      "artifact_hash": "d3ace731a88e897efe457df76b27111e89239dce88c35b49368267dcce63f900",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00012000",
       "timestamp_sec": 12.0,
-      "artifact_hash": "5376184dd3f6e625a0fe837e1014545bb1e4d1f4423f829f309f47ef8a83d693",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00012000.jpg",
+      "artifact_hash": "5376184dd3f6e625a0fe837e1014545bb1e4d1f4423f829f309f47ef8a83d693",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00014000",
       "timestamp_sec": 14.0,
-      "artifact_hash": "345172d5bee1f5e655e2b3fcb546691f24590b77e5992ba0197f53631b364727",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00014000.jpg",
+      "artifact_hash": "345172d5bee1f5e655e2b3fcb546691f24590b77e5992ba0197f53631b364727",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00016000",
       "timestamp_sec": 16.0,
-      "artifact_hash": "b196bbb1bdb582d163420d7f7cb7c55bf4753461a5940c0262ed057486c9b823",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00016000.jpg",
+      "artifact_hash": "b196bbb1bdb582d163420d7f7cb7c55bf4753461a5940c0262ed057486c9b823",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00018000",
       "timestamp_sec": 18.0,
-      "artifact_hash": "7001e6c73bb98f83c6f8fa74c60859b6e571f695b27c908739eb19cb5a0bf636",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00018000.jpg",
+      "artifact_hash": "7001e6c73bb98f83c6f8fa74c60859b6e571f695b27c908739eb19cb5a0bf636",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00020000",
       "timestamp_sec": 20.0,
-      "artifact_hash": "d5f06eee4c4d0238d1658c17e418da1486a7453f1b10d5341ccc883ff6f8f09a",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00020000.jpg",
+      "artifact_hash": "d5f06eee4c4d0238d1658c17e418da1486a7453f1b10d5341ccc883ff6f8f09a",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00022000",
       "timestamp_sec": 22.0,
-      "artifact_hash": "bda072cba076bc9aa5c562bcf2c51aef43c8ff88aedf49bc46370b948493f2b3",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00022000.jpg",
+      "artifact_hash": "bda072cba076bc9aa5c562bcf2c51aef43c8ff88aedf49bc46370b948493f2b3",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00024000",
       "timestamp_sec": 24.0,
-      "artifact_hash": "8e8af7540735b16b0e10ae7d5f9e18ba46bdf4c7a5b547a9ada1f565f7f11018",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00024000.jpg",
+      "artifact_hash": "8e8af7540735b16b0e10ae7d5f9e18ba46bdf4c7a5b547a9ada1f565f7f11018",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00026000",
       "timestamp_sec": 26.0,
-      "artifact_hash": "320a737cd775fb146c168ffe6d6f34efee0374db23187389e5a7d0231bf85d9d",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00026000.jpg",
+      "artifact_hash": "320a737cd775fb146c168ffe6d6f34efee0374db23187389e5a7d0231bf85d9d",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00028000",
       "timestamp_sec": 28.0,
-      "artifact_hash": "5ef7a82da1fa872ca4b3c328613966c558aa2be343f4783125654f0776cfb66f",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00028000.jpg",
+      "artifact_hash": "5ef7a82da1fa872ca4b3c328613966c558aa2be343f4783125654f0776cfb66f",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00030000",
       "timestamp_sec": 30.0,
-      "artifact_hash": "1125bd4fe41950113a9fb173a41871b2b6e682314109c5f3742cc0c2be14e544",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00030000.jpg",
+      "artifact_hash": "1125bd4fe41950113a9fb173a41871b2b6e682314109c5f3742cc0c2be14e544",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00032000",
       "timestamp_sec": 32.0,
-      "artifact_hash": "973cdb4cf692d409012304eef0d78a9066f7a0436bc466334cec0edf375fb281",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00032000.jpg",
+      "artifact_hash": "973cdb4cf692d409012304eef0d78a9066f7a0436bc466334cec0edf375fb281",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00034000",
       "timestamp_sec": 34.0,
-      "artifact_hash": "4c85a936b78cc24bfb4c54ac22ce6f20aeaa4935ec92c79fadfe78de8917d9fd",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00034000.jpg",
+      "artifact_hash": "4c85a936b78cc24bfb4c54ac22ce6f20aeaa4935ec92c79fadfe78de8917d9fd",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00036000",
       "timestamp_sec": 36.0,
-      "artifact_hash": "5fb2998450e26700017fbe7403d4f92565ae9284d3a8b9da0b0530e3a61ab38e",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00036000.jpg",
+      "artifact_hash": "5fb2998450e26700017fbe7403d4f92565ae9284d3a8b9da0b0530e3a61ab38e",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00038000",
       "timestamp_sec": 38.0,
-      "artifact_hash": "3d3d590b703615be6e8dbbc79990340bd2032e61c2c22a0a8144b7439a4e237c",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00038000.jpg",
+      "artifact_hash": "3d3d590b703615be6e8dbbc79990340bd2032e61c2c22a0a8144b7439a4e237c",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00040000",
       "timestamp_sec": 40.0,
-      "artifact_hash": "08987c6ac4bbf09e996bb90a3e4a1b2c7062ff49c46f6ee54becdcbe54a44701",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00040000.jpg",
+      "artifact_hash": "08987c6ac4bbf09e996bb90a3e4a1b2c7062ff49c46f6ee54becdcbe54a44701",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00042000",
       "timestamp_sec": 42.0,
-      "artifact_hash": "5addd51126bbd6d710e472fe820f987bab843c826dbbf0773b3de3b9f7a39ed7",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00042000.jpg",
+      "artifact_hash": "5addd51126bbd6d710e472fe820f987bab843c826dbbf0773b3de3b9f7a39ed7",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00044000",
       "timestamp_sec": 44.0,
-      "artifact_hash": "157056604016a9a91620a6da3de85c42c66eb79cb2c50428254680eb0bb73e54",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00044000.jpg",
+      "artifact_hash": "157056604016a9a91620a6da3de85c42c66eb79cb2c50428254680eb0bb73e54",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00046000",
       "timestamp_sec": 46.0,
-      "artifact_hash": "20ba87ea7734f15e48c0136bd809a5bbe84ca3cb375a5edd87efd4b096a49821",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00046000.jpg",
+      "artifact_hash": "20ba87ea7734f15e48c0136bd809a5bbe84ca3cb375a5edd87efd4b096a49821",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00048000",
       "timestamp_sec": 48.0,
-      "artifact_hash": "3a1869a97b5f4315343656d1462ea4572f4ee61bc962d7599f4fdc005b0e5ac2",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00048000.jpg",
+      "artifact_hash": "3a1869a97b5f4315343656d1462ea4572f4ee61bc962d7599f4fdc005b0e5ac2",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00050000",
       "timestamp_sec": 50.0,
-      "artifact_hash": "4ea7c2e6ce1b3822b15b6d69e9630b8765ec10ec5d26b8e65819ae7069bc7d4d",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00050000.jpg",
+      "artifact_hash": "4ea7c2e6ce1b3822b15b6d69e9630b8765ec10ec5d26b8e65819ae7069bc7d4d",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00052000",
       "timestamp_sec": 52.0,
-      "artifact_hash": "c3d8f8bf3f60466f6356c9b70d43c1c0109c55fbf57860e8802731249085c0c1",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00052000.jpg",
+      "artifact_hash": "c3d8f8bf3f60466f6356c9b70d43c1c0109c55fbf57860e8802731249085c0c1",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00054000",
       "timestamp_sec": 54.0,
-      "artifact_hash": "0109c00c5ff1c9de1142311c166945855fec1dcc8d9057bbeaf756764c43515d",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00054000.jpg",
+      "artifact_hash": "0109c00c5ff1c9de1142311c166945855fec1dcc8d9057bbeaf756764c43515d",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00056000",
       "timestamp_sec": 56.0,
-      "artifact_hash": "010ee035f92efa8093a3aa4ded6463b3bf79e2288d0506681d30c9105615285c",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00056000.jpg",
+      "artifact_hash": "010ee035f92efa8093a3aa4ded6463b3bf79e2288d0506681d30c9105615285c",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00058000",
       "timestamp_sec": 58.0,
-      "artifact_hash": "3b97b0d69c80a95fbf86d4885082dc027d0ea94b724f691dc1c5f7d65a7338c3",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00058000.jpg",
+      "artifact_hash": "3b97b0d69c80a95fbf86d4885082dc027d0ea94b724f691dc1c5f7d65a7338c3",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00060000",
       "timestamp_sec": 60.0,
-      "artifact_hash": "cbf74a09ebae2f479dddbbdd73d80980084b740a28d5ef6a1374809630e06d93",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00060000.jpg",
+      "artifact_hash": "cbf74a09ebae2f479dddbbdd73d80980084b740a28d5ef6a1374809630e06d93",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00062000",
       "timestamp_sec": 62.0,
-      "artifact_hash": "3e66fd09eee2679aca2201318991cacfe1bf65b479af25b8699cca0fb5047f88",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00062000.jpg",
+      "artifact_hash": "3e66fd09eee2679aca2201318991cacfe1bf65b479af25b8699cca0fb5047f88",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00064000",
       "timestamp_sec": 64.0,
-      "artifact_hash": "697f9a996ca603b2c7a3d3765937ba7d8ae2528cb26315bae47e736f0e3406c9",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00064000.jpg",
+      "artifact_hash": "697f9a996ca603b2c7a3d3765937ba7d8ae2528cb26315bae47e736f0e3406c9",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00066000",
       "timestamp_sec": 66.0,
-      "artifact_hash": "98777aaeb9839b73547a757b59642a4e8119cb71ec452149f8a1e4045a17a389",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00066000.jpg",
+      "artifact_hash": "98777aaeb9839b73547a757b59642a4e8119cb71ec452149f8a1e4045a17a389",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00068000",
       "timestamp_sec": 68.0,
-      "artifact_hash": "7854f76f03d620646516c3dadb69e49559488aa90760203c3826adb220b54767",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00068000.jpg",
+      "artifact_hash": "7854f76f03d620646516c3dadb69e49559488aa90760203c3826adb220b54767",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00070000",
       "timestamp_sec": 70.0,
-      "artifact_hash": "12415b5e73dadc705464fcd900a7f64f98c40706584cb3bb61cd715e6ad09895",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00070000.jpg",
+      "artifact_hash": "12415b5e73dadc705464fcd900a7f64f98c40706584cb3bb61cd715e6ad09895",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00072000",
       "timestamp_sec": 72.0,
-      "artifact_hash": "f6c436919549e6660780eec7a67cdea2016c2e8efb3a9c641fe632c2daee2cf8",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00072000.jpg",
+      "artifact_hash": "f6c436919549e6660780eec7a67cdea2016c2e8efb3a9c641fe632c2daee2cf8",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00074000",
       "timestamp_sec": 74.0,
-      "artifact_hash": "a95de0e5519700d7b259f61f9215e9e220d548d361bb18daadcd75fe5bf3aa68",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00074000.jpg",
+      "artifact_hash": "a95de0e5519700d7b259f61f9215e9e220d548d361bb18daadcd75fe5bf3aa68",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00076000",
       "timestamp_sec": 76.0,
-      "artifact_hash": "51a9e4037b16c8b373e1eb27e6b49665f189eb4c02c3b7e6ec34b4b349824acd",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00076000.jpg",
+      "artifact_hash": "51a9e4037b16c8b373e1eb27e6b49665f189eb4c02c3b7e6ec34b4b349824acd",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00078000",
       "timestamp_sec": 78.0,
-      "artifact_hash": "9dafbc647ade9fcaf06510bd3df9c4acdf9785fcbf59356f2ef7edfe67d77e28",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00078000.jpg",
+      "artifact_hash": "9dafbc647ade9fcaf06510bd3df9c4acdf9785fcbf59356f2ef7edfe67d77e28",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00080000",
       "timestamp_sec": 80.0,
-      "artifact_hash": "c5a13b397bc2332559d3dcff49ddb6d09fe7b0e29fd8506f44b9ff934e00cca3",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00080000.jpg",
+      "artifact_hash": "c5a13b397bc2332559d3dcff49ddb6d09fe7b0e29fd8506f44b9ff934e00cca3",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00082000",
       "timestamp_sec": 82.0,
-      "artifact_hash": "4b40a3b0b6712201c239f77bbb741a993f4b50af12a9adf470dc1650f624a041",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00082000.jpg",
+      "artifact_hash": "4b40a3b0b6712201c239f77bbb741a993f4b50af12a9adf470dc1650f624a041",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00084000",
       "timestamp_sec": 84.0,
-      "artifact_hash": "ee2feaf45c0b3070cb171eb1ca2fba4df94d50fea9173544082452dc174052c6",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00084000.jpg",
+      "artifact_hash": "ee2feaf45c0b3070cb171eb1ca2fba4df94d50fea9173544082452dc174052c6",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00086000",
       "timestamp_sec": 86.0,
-      "artifact_hash": "590f0bc169c8714597bbcdce59235ccdd24d09a9de6e36ea6aefa48b3e37cfc9",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00086000.jpg",
+      "artifact_hash": "590f0bc169c8714597bbcdce59235ccdd24d09a9de6e36ea6aefa48b3e37cfc9",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00088000",
       "timestamp_sec": 88.0,
-      "artifact_hash": "f8fb9717d05d9367e1a8e234fbe59b345c0542c5db574195b44bed111bc192a7",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00088000.jpg",
+      "artifact_hash": "f8fb9717d05d9367e1a8e234fbe59b345c0542c5db574195b44bed111bc192a7",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00090000",
       "timestamp_sec": 90.0,
-      "artifact_hash": "565d5fd9c34134408e38736a1595f85728bb9ff7279521e360dcd6a9264b10da",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00090000.jpg",
+      "artifact_hash": "565d5fd9c34134408e38736a1595f85728bb9ff7279521e360dcd6a9264b10da",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00092000",
       "timestamp_sec": 92.0,
-      "artifact_hash": "e20917d86c3da16c31b2a0aaac4bfed417f88ab81e04d22aac6dee0fd01557bf",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00092000.jpg",
+      "artifact_hash": "e20917d86c3da16c31b2a0aaac4bfed417f88ab81e04d22aac6dee0fd01557bf",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00094000",
       "timestamp_sec": 94.0,
-      "artifact_hash": "ffbcb23af8eba80b022a7c605ba08949711ffa20c6f9b6fe90876a87f1878577",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00094000.jpg",
+      "artifact_hash": "ffbcb23af8eba80b022a7c605ba08949711ffa20c6f9b6fe90876a87f1878577",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00096000",
       "timestamp_sec": 96.0,
-      "artifact_hash": "e4d70cc1c0ffc4366fa21b552c5c1b79a2b57a5eceb0ee121c8f85d335b280b7",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00096000.jpg",
+      "artifact_hash": "e4d70cc1c0ffc4366fa21b552c5c1b79a2b57a5eceb0ee121c8f85d335b280b7",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00098000",
       "timestamp_sec": 98.0,
-      "artifact_hash": "dc392f48c92d5e3cfbcb81eaadb7cfbad8e94f4facd85c6e9dffa20d0d57689b",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00098000.jpg",
+      "artifact_hash": "dc392f48c92d5e3cfbcb81eaadb7cfbad8e94f4facd85c6e9dffa20d0d57689b",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00100000",
       "timestamp_sec": 100.0,
-      "artifact_hash": "51b4d27d6f1aa166cfe636663bb246bec6e23cd21cdb5dabcdf361380b89f83b",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00100000.jpg",
+      "artifact_hash": "51b4d27d6f1aa166cfe636663bb246bec6e23cd21cdb5dabcdf361380b89f83b",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00102000",
       "timestamp_sec": 102.0,
-      "artifact_hash": "e0adca76f9523c852c0e70d4785d2fc5b15344150cc93477b59670732f68fb7d",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00102000.jpg",
+      "artifact_hash": "e0adca76f9523c852c0e70d4785d2fc5b15344150cc93477b59670732f68fb7d",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00104000",
       "timestamp_sec": 104.0,
-      "artifact_hash": "44db2038a3afa05af3fba4143256d05331fc689f6dc669c8a99040dd0aba9d0d",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00104000.jpg",
+      "artifact_hash": "44db2038a3afa05af3fba4143256d05331fc689f6dc669c8a99040dd0aba9d0d",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00106000",
       "timestamp_sec": 106.0,
-      "artifact_hash": "59a2a3316b8302deb9b74e96e3b614963796baa42c9ace4d05519b015ff3fbcd",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00106000.jpg",
+      "artifact_hash": "59a2a3316b8302deb9b74e96e3b614963796baa42c9ace4d05519b015ff3fbcd",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00108000",
       "timestamp_sec": 108.0,
-      "artifact_hash": "e7fc8a0c883011fa06e9b44452588b61871deb325ddf07fae919db6ee8bdb286",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00108000.jpg",
+      "artifact_hash": "e7fc8a0c883011fa06e9b44452588b61871deb325ddf07fae919db6ee8bdb286",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00110000",
       "timestamp_sec": 110.0,
-      "artifact_hash": "0c4e664a847f58fa13e2fe52735b71252f0712c1967c2b3e24cf53da9c6b2d49",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00110000.jpg",
+      "artifact_hash": "0c4e664a847f58fa13e2fe52735b71252f0712c1967c2b3e24cf53da9c6b2d49",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00112000",
       "timestamp_sec": 112.0,
-      "artifact_hash": "11cb8369bd5a84c52e973046787384b26e314a170d2157873c7547ccb80745b3",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00112000.jpg",
+      "artifact_hash": "11cb8369bd5a84c52e973046787384b26e314a170d2157873c7547ccb80745b3",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00114000",
       "timestamp_sec": 114.0,
-      "artifact_hash": "07b7bb99f574b11aa88907f6ed19a9f5878444ae11209312667e6e47e9b703a2",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00114000.jpg",
+      "artifact_hash": "07b7bb99f574b11aa88907f6ed19a9f5878444ae11209312667e6e47e9b703a2",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00116000",
       "timestamp_sec": 116.0,
-      "artifact_hash": "61acb4426ddc59fb3c63d578d4e9bd3eee7de74bb567ff505401b0ce3d83f5a8",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00116000.jpg",
+      "artifact_hash": "61acb4426ddc59fb3c63d578d4e9bd3eee7de74bb567ff505401b0ce3d83f5a8",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00118000",
       "timestamp_sec": 118.0,
-      "artifact_hash": "92d3b62e1c63c310cc4846dd822f73fe94378842e08c08d34b81220871a36c0b",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00118000.jpg",
+      "artifact_hash": "92d3b62e1c63c310cc4846dd822f73fe94378842e08c08d34b81220871a36c0b",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00120000",
       "timestamp_sec": 120.0,
-      "artifact_hash": "46bfd75585bf71abb7a847e761cbc377b52d5591614c8a23c93904f7ba18162b",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00120000.jpg",
+      "artifact_hash": "46bfd75585bf71abb7a847e761cbc377b52d5591614c8a23c93904f7ba18162b",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00122000",
       "timestamp_sec": 122.0,
-      "artifact_hash": "8c0bf1699ee0302130cc278a72db50b56a66bd0c9ac3b44cf015a011e65198d6",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00122000.jpg",
+      "artifact_hash": "8c0bf1699ee0302130cc278a72db50b56a66bd0c9ac3b44cf015a011e65198d6",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00124000",
       "timestamp_sec": 124.0,
-      "artifact_hash": "7e36e05c47b922e7974a983eecc51b876980aff75a74020348cd15992e4bf65d",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00124000.jpg",
+      "artifact_hash": "7e36e05c47b922e7974a983eecc51b876980aff75a74020348cd15992e4bf65d",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00126000",
       "timestamp_sec": 126.0,
-      "artifact_hash": "271f0a87860df055e498f61518ba4e00d40243aab8d7f785db0ce78c1e31064f",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00126000.jpg",
+      "artifact_hash": "271f0a87860df055e498f61518ba4e00d40243aab8d7f785db0ce78c1e31064f",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00128000",
       "timestamp_sec": 128.0,
-      "artifact_hash": "681f381bfa5d88a8be8b228ee33e2373b3bf30e85607ce757f0c25d43f9be11a",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00128000.jpg",
+      "artifact_hash": "681f381bfa5d88a8be8b228ee33e2373b3bf30e85607ce757f0c25d43f9be11a",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00130000",
       "timestamp_sec": 130.0,
-      "artifact_hash": "6979edb35265597899a9ce74e86128be98455d33095fede1c760e3929e8072d7",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00130000.jpg",
+      "artifact_hash": "6979edb35265597899a9ce74e86128be98455d33095fede1c760e3929e8072d7",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00132000",
       "timestamp_sec": 132.0,
-      "artifact_hash": "29c9f8e34cbc922fd5bfe2e98c43539a586263553be83109b9e807668f3ba70b",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00132000.jpg",
+      "artifact_hash": "29c9f8e34cbc922fd5bfe2e98c43539a586263553be83109b9e807668f3ba70b",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00134000",
       "timestamp_sec": 134.0,
-      "artifact_hash": "82ceb4bfbd74fb6b3488eef2e7a9d02ced0c410b177239319c130d9e5ce6fdd0",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00134000.jpg",
+      "artifact_hash": "82ceb4bfbd74fb6b3488eef2e7a9d02ced0c410b177239319c130d9e5ce6fdd0",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00136000",
       "timestamp_sec": 136.0,
-      "artifact_hash": "3b7fe5df8533541dd5fa1ac38b7979e153a695171e3ccebae4cf8660e0cc52c0",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00136000.jpg",
+      "artifact_hash": "3b7fe5df8533541dd5fa1ac38b7979e153a695171e3ccebae4cf8660e0cc52c0",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00138000",
       "timestamp_sec": 138.0,
-      "artifact_hash": "dad33c97f3dcc2fafb8bc0f619537e39d7f695abd4b60f0c045d39a37bb54ccb",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00138000.jpg",
+      "artifact_hash": "dad33c97f3dcc2fafb8bc0f619537e39d7f695abd4b60f0c045d39a37bb54ccb",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00140000",
       "timestamp_sec": 140.0,
-      "artifact_hash": "844621966c357ce5bd6ee97db337155d8402aff70f506e557733fcd9baf05549",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00140000.jpg",
+      "artifact_hash": "844621966c357ce5bd6ee97db337155d8402aff70f506e557733fcd9baf05549",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00142000",
       "timestamp_sec": 142.0,
-      "artifact_hash": "e26ba5a6a1fbf21cb997d2841ebaaef6b637cb88b885e50e942c2855af53af12",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00142000.jpg",
+      "artifact_hash": "e26ba5a6a1fbf21cb997d2841ebaaef6b637cb88b885e50e942c2855af53af12",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00144000",
       "timestamp_sec": 144.0,
-      "artifact_hash": "6fd69d9349d290662c7a34cb8b97539ff723d52665adb356f8cb516282d6ac83",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00144000.jpg",
+      "artifact_hash": "6fd69d9349d290662c7a34cb8b97539ff723d52665adb356f8cb516282d6ac83",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00146000",
       "timestamp_sec": 146.0,
-      "artifact_hash": "361f50bb74b55ad57d1ac115b944f3fb3e63615fb7c1f7a527db66c0c63c95fe",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00146000.jpg",
+      "artifact_hash": "361f50bb74b55ad57d1ac115b944f3fb3e63615fb7c1f7a527db66c0c63c95fe",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00148000",
       "timestamp_sec": 148.0,
-      "artifact_hash": "f58c1602f6d78444be718833ce50a5d67f49c93e3aa9fcd9f670ab5408b7b214",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00148000.jpg",
+      "artifact_hash": "f58c1602f6d78444be718833ce50a5d67f49c93e3aa9fcd9f670ab5408b7b214",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00150000",
       "timestamp_sec": 150.0,
-      "artifact_hash": "1356326e527eac89d3e91fc6f11821c5625d7808423b0ccf3ec1b932d534ae66",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00150000.jpg",
+      "artifact_hash": "1356326e527eac89d3e91fc6f11821c5625d7808423b0ccf3ec1b932d534ae66",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00152000",
       "timestamp_sec": 152.0,
-      "artifact_hash": "5cefaa3985276f2d193b2ccbbd5e517b416092622a4da167bbc3c6f2e3c2a955",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00152000.jpg",
+      "artifact_hash": "5cefaa3985276f2d193b2ccbbd5e517b416092622a4da167bbc3c6f2e3c2a955",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00154000",
       "timestamp_sec": 154.0,
-      "artifact_hash": "490b2ece0faea1a67daaa09ae47ff9dbe83d63fdbf4fe207119664d14904d49e",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00154000.jpg",
+      "artifact_hash": "490b2ece0faea1a67daaa09ae47ff9dbe83d63fdbf4fe207119664d14904d49e",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00156000",
       "timestamp_sec": 156.0,
-      "artifact_hash": "da8d6c0a631c2e34cddf3754dabc9e0b449e04d5a1a4acd1427050a52a457313",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00156000.jpg",
+      "artifact_hash": "da8d6c0a631c2e34cddf3754dabc9e0b449e04d5a1a4acd1427050a52a457313",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00158000",
       "timestamp_sec": 158.0,
-      "artifact_hash": "09406b228dddc1d79af6bfd27565f8f3b9bdd60cbdfcecaea0c16c932b79ffbf",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00158000.jpg",
+      "artifact_hash": "09406b228dddc1d79af6bfd27565f8f3b9bdd60cbdfcecaea0c16c932b79ffbf",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00160000",
       "timestamp_sec": 160.0,
-      "artifact_hash": "cf0ec28e111a21da1b2db147b36b05d9e992c5c6685294d7bb8edb9321b900f5",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00160000.jpg",
+      "artifact_hash": "cf0ec28e111a21da1b2db147b36b05d9e992c5c6685294d7bb8edb9321b900f5",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00162000",
       "timestamp_sec": 162.0,
-      "artifact_hash": "73a48336c6daf1abc4cba7f466eaf343ec927748eb6f89cb801070fe50f0f3f8",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00162000.jpg",
+      "artifact_hash": "73a48336c6daf1abc4cba7f466eaf343ec927748eb6f89cb801070fe50f0f3f8",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00164000",
       "timestamp_sec": 164.0,
-      "artifact_hash": "56530af726f348fbe9131c3297f5474347dbb80adf5c97ead65669ab9abf2e85",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00164000.jpg",
+      "artifact_hash": "56530af726f348fbe9131c3297f5474347dbb80adf5c97ead65669ab9abf2e85",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00166000",
       "timestamp_sec": 166.0,
-      "artifact_hash": "d96ac37d7acff8699f7bc76a3f24b2485a4dec527b52574ba154aa1682661968",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00166000.jpg",
+      "artifact_hash": "d96ac37d7acff8699f7bc76a3f24b2485a4dec527b52574ba154aa1682661968",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00168000",
       "timestamp_sec": 168.0,
-      "artifact_hash": "e836529ad788eecf4e7099b85e34b75f97b1b80affcf659232192e09cef752fd",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00168000.jpg",
+      "artifact_hash": "e836529ad788eecf4e7099b85e34b75f97b1b80affcf659232192e09cef752fd",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00170000",
       "timestamp_sec": 170.0,
-      "artifact_hash": "1f090d72cfa884ea7a955716e5c8a34fc3e0e9a6dd07a667379fc8cc4653c34b",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00170000.jpg",
+      "artifact_hash": "1f090d72cfa884ea7a955716e5c8a34fc3e0e9a6dd07a667379fc8cc4653c34b",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00172000",
       "timestamp_sec": 172.0,
-      "artifact_hash": "54bf38152ca84feb263c6eef35cf2e7abce019318901f82772cafa59c05a8943",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00172000.jpg",
+      "artifact_hash": "54bf38152ca84feb263c6eef35cf2e7abce019318901f82772cafa59c05a8943",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00174000",
       "timestamp_sec": 174.0,
-      "artifact_hash": "bdc2c29e3eac00e92ebf1efae23704bd6eb98cd0a51f0256d4fb6f6c6bd2e3e4",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00174000.jpg",
+      "artifact_hash": "bdc2c29e3eac00e92ebf1efae23704bd6eb98cd0a51f0256d4fb6f6c6bd2e3e4",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00176000",
       "timestamp_sec": 176.0,
-      "artifact_hash": "bf28d1df3f5927482c096a8e20a58a47a85712cc954ccac08c3f91e0980b748d",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00176000.jpg",
+      "artifact_hash": "bf28d1df3f5927482c096a8e20a58a47a85712cc954ccac08c3f91e0980b748d",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00178000",
       "timestamp_sec": 178.0,
-      "artifact_hash": "892e354bc508029a2fc8b4d35a6d91172d353b4ba969856e22b9d05f5a115789",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00178000.jpg",
+      "artifact_hash": "892e354bc508029a2fc8b4d35a6d91172d353b4ba969856e22b9d05f5a115789",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00180000",
       "timestamp_sec": 180.0,
-      "artifact_hash": "ce430bc08088ff736517d2f62fa4a09f9ca4fe57b81dcc07aa4ab714d0ab5a5f",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00180000.jpg",
+      "artifact_hash": "ce430bc08088ff736517d2f62fa4a09f9ca4fe57b81dcc07aa4ab714d0ab5a5f",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00182000",
       "timestamp_sec": 182.0,
-      "artifact_hash": "ff4c12f6b4357d49d2050f5a9806c3468e653f2647710c9588a6e10a9ae5d600",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00182000.jpg",
+      "artifact_hash": "ff4c12f6b4357d49d2050f5a9806c3468e653f2647710c9588a6e10a9ae5d600",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00184000",
       "timestamp_sec": 184.0,
-      "artifact_hash": "402287c3f40af3a25f58ece2c378419663666f79a41b5e7637eb8b595d1c483e",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00184000.jpg",
+      "artifact_hash": "402287c3f40af3a25f58ece2c378419663666f79a41b5e7637eb8b595d1c483e",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00186000",
       "timestamp_sec": 186.0,
-      "artifact_hash": "2f8ebb31b13ff79d3aaca5b8882210cbfe514e044c59a2742beef38dc5b2a27f",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00186000.jpg",
+      "artifact_hash": "2f8ebb31b13ff79d3aaca5b8882210cbfe514e044c59a2742beef38dc5b2a27f",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00188000",
       "timestamp_sec": 188.0,
-      "artifact_hash": "df40238deb5b49bbe8597a1117722a326a8e244ec7ab893d5bfe42c6e0d37eb9",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00188000.jpg",
+      "artifact_hash": "df40238deb5b49bbe8597a1117722a326a8e244ec7ab893d5bfe42c6e0d37eb9",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00190000",
       "timestamp_sec": 190.0,
-      "artifact_hash": "d16e7e6d683e7056b9e4b75ad90fa92bfe6f71e30303e83dc6ccae7e6a7960cb",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00190000.jpg",
+      "artifact_hash": "d16e7e6d683e7056b9e4b75ad90fa92bfe6f71e30303e83dc6ccae7e6a7960cb",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00192000",
       "timestamp_sec": 192.0,
-      "artifact_hash": "d3fb5b1407e27b735c8dc83a30a3ff78ea9cc7b3231208ef344f24a515144ca9",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00192000.jpg",
+      "artifact_hash": "d3fb5b1407e27b735c8dc83a30a3ff78ea9cc7b3231208ef344f24a515144ca9",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00194000",
       "timestamp_sec": 194.0,
-      "artifact_hash": "637c489376455c6a79a3a0fef269a59a70fefee0161d8a01eded47a5cfa7ee27",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00194000.jpg",
+      "artifact_hash": "637c489376455c6a79a3a0fef269a59a70fefee0161d8a01eded47a5cfa7ee27",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00196000",
       "timestamp_sec": 196.0,
-      "artifact_hash": "de7871a70fde2df57785bace82a1b5ead8c890fc8b2986dfe13e34aa4cf4e13a",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00196000.jpg",
+      "artifact_hash": "de7871a70fde2df57785bace82a1b5ead8c890fc8b2986dfe13e34aa4cf4e13a",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00198000",
       "timestamp_sec": 198.0,
-      "artifact_hash": "d0b67cce87edc4f841404486111c075948bdae9676f2cd78e508f13d5d13df49",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00198000.jpg",
+      "artifact_hash": "d0b67cce87edc4f841404486111c075948bdae9676f2cd78e508f13d5d13df49",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00200000",
       "timestamp_sec": 200.0,
-      "artifact_hash": "c5ebc6c5b2c10497bf3aead753a30256ac0227a41065d72f3e78b9f51066ddd3",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00200000.jpg",
+      "artifact_hash": "c5ebc6c5b2c10497bf3aead753a30256ac0227a41065d72f3e78b9f51066ddd3",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00202000",
       "timestamp_sec": 202.0,
-      "artifact_hash": "0fa6925ec4324ba723ace676a0d102c76b3a4d3e7a996f8a5b1b1148e3f647bc",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00202000.jpg",
+      "artifact_hash": "0fa6925ec4324ba723ace676a0d102c76b3a4d3e7a996f8a5b1b1148e3f647bc",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00204000",
       "timestamp_sec": 204.0,
-      "artifact_hash": "c2daebc8363f8a091c8b0827c29165b9b5aa916c652d9be00d179575aa0f8733",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00204000.jpg",
+      "artifact_hash": "c2daebc8363f8a091c8b0827c29165b9b5aa916c652d9be00d179575aa0f8733",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00206000",
       "timestamp_sec": 206.0,
-      "artifact_hash": "590e9fa371dc6c946fa804b78774ccbdd606260392374e1323fbb4a796998ad0",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00206000.jpg",
+      "artifact_hash": "590e9fa371dc6c946fa804b78774ccbdd606260392374e1323fbb4a796998ad0",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00208000",
       "timestamp_sec": 208.0,
-      "artifact_hash": "5c409d01e352cb37b00c5bfaab4f7cb7d8a39e1c740a1ff374def48a9a1611c1",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00208000.jpg",
+      "artifact_hash": "5c409d01e352cb37b00c5bfaab4f7cb7d8a39e1c740a1ff374def48a9a1611c1",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00210000",
       "timestamp_sec": 210.0,
-      "artifact_hash": "41e37df85da3f0ef01c25f8456633af4505b8505ec4cde73087b14bd64fc2c86",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00210000.jpg",
+      "artifact_hash": "41e37df85da3f0ef01c25f8456633af4505b8505ec4cde73087b14bd64fc2c86",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00212000",
       "timestamp_sec": 212.0,
-      "artifact_hash": "2164d157f9ffaf249eeabfd922705a434b9b0e2575bb5fbc6f8170b57ce7b0cf",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00212000.jpg",
+      "artifact_hash": "2164d157f9ffaf249eeabfd922705a434b9b0e2575bb5fbc6f8170b57ce7b0cf",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00214000",
       "timestamp_sec": 214.0,
-      "artifact_hash": "6ffff90bf841039622abd6b73ae1d129fc292d4a3ac068788449277c44214b11",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00214000.jpg",
+      "artifact_hash": "6ffff90bf841039622abd6b73ae1d129fc292d4a3ac068788449277c44214b11",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00216000",
       "timestamp_sec": 216.0,
-      "artifact_hash": "84baf58d80bf1910ec7a6c2bbd8bf80a25ff98e72e3921ccf0e81bd73df62d2d",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00216000.jpg",
+      "artifact_hash": "84baf58d80bf1910ec7a6c2bbd8bf80a25ff98e72e3921ccf0e81bd73df62d2d",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00218000",
       "timestamp_sec": 218.0,
-      "artifact_hash": "e52559ee56a79d73afb03b234641fb9901da685e20f0868dc0776b4a7e60e295",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00218000.jpg",
+      "artifact_hash": "e52559ee56a79d73afb03b234641fb9901da685e20f0868dc0776b4a7e60e295",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00220000",
       "timestamp_sec": 220.0,
-      "artifact_hash": "0be458202be236b4c959a81484e0958f85a553bb61680623132d5cbded3a32fa",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00220000.jpg",
+      "artifact_hash": "0be458202be236b4c959a81484e0958f85a553bb61680623132d5cbded3a32fa",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00222000",
       "timestamp_sec": 222.0,
-      "artifact_hash": "4b6371722abd245488d116a80e50fdb9ca61a0e0f2775092d217b95c8a156cce",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00222000.jpg",
+      "artifact_hash": "4b6371722abd245488d116a80e50fdb9ca61a0e0f2775092d217b95c8a156cce",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00224000",
       "timestamp_sec": 224.0,
-      "artifact_hash": "52803d0fb751f6769ff9d367e4caa6061e91b88fae1bd2558c0dfa8e12f256ed",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00224000.jpg",
+      "artifact_hash": "52803d0fb751f6769ff9d367e4caa6061e91b88fae1bd2558c0dfa8e12f256ed",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00226000",
       "timestamp_sec": 226.0,
-      "artifact_hash": "c0248c7249b64bcfc11a91cb49899cd1f205c795ef3a9782cdf41b608acbf6f7",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00226000.jpg",
+      "artifact_hash": "c0248c7249b64bcfc11a91cb49899cd1f205c795ef3a9782cdf41b608acbf6f7",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00228000",
       "timestamp_sec": 228.0,
-      "artifact_hash": "9d4d99b69f1b458f7aa22933b04ae351437d8da707af4066b5b01d39ceb3c338",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00228000.jpg",
+      "artifact_hash": "9d4d99b69f1b458f7aa22933b04ae351437d8da707af4066b5b01d39ceb3c338",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00230000",
       "timestamp_sec": 230.0,
-      "artifact_hash": "b2daccc8abb0b189f17cff73cab3074cc6c31ca8ccb9c80981874f78735fbbff",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00230000.jpg",
+      "artifact_hash": "b2daccc8abb0b189f17cff73cab3074cc6c31ca8ccb9c80981874f78735fbbff",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00232000",
       "timestamp_sec": 232.0,
-      "artifact_hash": "6c19ed405ad918d8af3b70ec12e77fbde4bbecc629f809c6d2293e29641781a8",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00232000.jpg",
+      "artifact_hash": "6c19ed405ad918d8af3b70ec12e77fbde4bbecc629f809c6d2293e29641781a8",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00234000",
       "timestamp_sec": 234.0,
-      "artifact_hash": "e50c462f0f1efb101362aa7f9ff85bdc94ec425f54360ca079fe7f7bbdafffc4",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00234000.jpg",
+      "artifact_hash": "e50c462f0f1efb101362aa7f9ff85bdc94ec425f54360ca079fe7f7bbdafffc4",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00236000",
       "timestamp_sec": 236.0,
-      "artifact_hash": "1d5c3a29c0fbea4241c086ec4e30b0bef4fe4d1cbceec490d1c3e54e8c3d7371",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00236000.jpg",
+      "artifact_hash": "1d5c3a29c0fbea4241c086ec4e30b0bef4fe4d1cbceec490d1c3e54e8c3d7371",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00238000",
       "timestamp_sec": 238.0,
-      "artifact_hash": "b5042c83c326907afe15d262ca2e6d5eea4a19f4e99de3d5971399d64ff3263c",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00238000.jpg",
+      "artifact_hash": "b5042c83c326907afe15d262ca2e6d5eea4a19f4e99de3d5971399d64ff3263c",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00240000",
       "timestamp_sec": 240.0,
-      "artifact_hash": "62e3e4d28370f9600ea595bbfbb0b1a19497f03642a188fa16e951eac067e85f",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00240000.jpg",
+      "artifact_hash": "62e3e4d28370f9600ea595bbfbb0b1a19497f03642a188fa16e951eac067e85f",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00242000",
       "timestamp_sec": 242.0,
-      "artifact_hash": "27cdca9bda02fcdd55937bb9b750ceebd2de2ddd6459508057f19a1571bf5b5a",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00242000.jpg",
+      "artifact_hash": "27cdca9bda02fcdd55937bb9b750ceebd2de2ddd6459508057f19a1571bf5b5a",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00244000",
       "timestamp_sec": 244.0,
-      "artifact_hash": "d4d10e0f8fa0f8528c794239c50cb3dd2e4ce5729b743eb32c2230950bebca02",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00244000.jpg",
+      "artifact_hash": "d4d10e0f8fa0f8528c794239c50cb3dd2e4ce5729b743eb32c2230950bebca02",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00246000",
       "timestamp_sec": 246.0,
-      "artifact_hash": "c315c7842c5de9daf56b3c9b4cd1bf263ae2a91c6a4b8e42d7e6d9573b180e3f",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00246000.jpg",
+      "artifact_hash": "c315c7842c5de9daf56b3c9b4cd1bf263ae2a91c6a4b8e42d7e6d9573b180e3f",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00248000",
       "timestamp_sec": 248.0,
-      "artifact_hash": "24998cc1db96cbbcdd84b48f0ed4225d7b084b989848d1d2e0e3015527cccb6e",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00248000.jpg",
+      "artifact_hash": "24998cc1db96cbbcdd84b48f0ed4225d7b084b989848d1d2e0e3015527cccb6e",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00250000",
       "timestamp_sec": 250.0,
-      "artifact_hash": "10144ae3281faa8456b163aed3e9004db41ab811200e4fcf05b5383e391c2427",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00250000.jpg",
+      "artifact_hash": "10144ae3281faa8456b163aed3e9004db41ab811200e4fcf05b5383e391c2427",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00252000",
       "timestamp_sec": 252.0,
-      "artifact_hash": "acdf3f9e8ce60f09d08b6a423ea4276e3a14639de6aaad498544a8afd3988963",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00252000.jpg",
+      "artifact_hash": "acdf3f9e8ce60f09d08b6a423ea4276e3a14639de6aaad498544a8afd3988963",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00254000",
       "timestamp_sec": 254.0,
-      "artifact_hash": "e2e33155370b89acc39cec2a78ce9d70e203e762e538016211f8be7e31eef2d6",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00254000.jpg",
+      "artifact_hash": "e2e33155370b89acc39cec2a78ce9d70e203e762e538016211f8be7e31eef2d6",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00256000",
       "timestamp_sec": 256.0,
-      "artifact_hash": "2484caffdb5be33e44d35cfcdb3da673932c051c839c5a803aa0c17602504bdc",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00256000.jpg",
+      "artifact_hash": "2484caffdb5be33e44d35cfcdb3da673932c051c839c5a803aa0c17602504bdc",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00258000",
       "timestamp_sec": 258.0,
-      "artifact_hash": "91214484de8dc05009f081da4bd2b2f547d5f20cc49a53794c223c8fc1464cf0",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00258000.jpg",
+      "artifact_hash": "91214484de8dc05009f081da4bd2b2f547d5f20cc49a53794c223c8fc1464cf0",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00260000",
       "timestamp_sec": 260.0,
-      "artifact_hash": "831348d34fa44dce1b243b090589bfb370f7214bb0d2790e8456c6705d6d634b",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00260000.jpg",
+      "artifact_hash": "831348d34fa44dce1b243b090589bfb370f7214bb0d2790e8456c6705d6d634b",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00262000",
       "timestamp_sec": 262.0,
-      "artifact_hash": "de3882971e01b1698cdd4672220c2cb971c5f66bda3f910afc0fbe2bd70942b0",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00262000.jpg",
+      "artifact_hash": "de3882971e01b1698cdd4672220c2cb971c5f66bda3f910afc0fbe2bd70942b0",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00264000",
       "timestamp_sec": 264.0,
-      "artifact_hash": "ec2077a976aae7f6b3029fa1345093cfdcfb0732ecb262a230adf9ddccc86ce5",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00264000.jpg",
+      "artifact_hash": "ec2077a976aae7f6b3029fa1345093cfdcfb0732ecb262a230adf9ddccc86ce5",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00266000",
       "timestamp_sec": 266.0,
-      "artifact_hash": "748d037ca96403f2410b4e243d997aa9fc02f2514fd00a64f58d47b8aa0c1ae4",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00266000.jpg",
+      "artifact_hash": "748d037ca96403f2410b4e243d997aa9fc02f2514fd00a64f58d47b8aa0c1ae4",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00268000",
       "timestamp_sec": 268.0,
-      "artifact_hash": "8f615c5a8b78f1d45e26819ab13f4091a9f4e9de9cbfb8d7df942bba29988b67",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00268000.jpg",
+      "artifact_hash": "8f615c5a8b78f1d45e26819ab13f4091a9f4e9de9cbfb8d7df942bba29988b67",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00270000",
       "timestamp_sec": 270.0,
-      "artifact_hash": "bfcef21cc0aa01a5fd68a96a860ac5eabe7551a334479c98594dacaaaa402f80",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00270000.jpg",
+      "artifact_hash": "bfcef21cc0aa01a5fd68a96a860ac5eabe7551a334479c98594dacaaaa402f80",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00272000",
       "timestamp_sec": 272.0,
-      "artifact_hash": "95e90e845501b0daa3f3f88a3e20518ee4c7fe28b45d78bf5d0a507662eaa62a",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00272000.jpg",
+      "artifact_hash": "95e90e845501b0daa3f3f88a3e20518ee4c7fe28b45d78bf5d0a507662eaa62a",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00274000",
       "timestamp_sec": 274.0,
-      "artifact_hash": "6d522d4c2d544e7ac0fe4f37f17804175c0de6c5100375e70c09240444360099",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00274000.jpg",
+      "artifact_hash": "6d522d4c2d544e7ac0fe4f37f17804175c0de6c5100375e70c09240444360099",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00276000",
       "timestamp_sec": 276.0,
-      "artifact_hash": "029150efe3fb83dac0576f46997d3c81538cb0aaffc8e0f4a43f855e7745697b",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00276000.jpg",
+      "artifact_hash": "029150efe3fb83dac0576f46997d3c81538cb0aaffc8e0f4a43f855e7745697b",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00278000",
       "timestamp_sec": 278.0,
-      "artifact_hash": "b1fac2524f85f1f8b25a479dc41ab5e76f038364ce936ae90fceafbfb1a92032",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00278000.jpg",
+      "artifact_hash": "b1fac2524f85f1f8b25a479dc41ab5e76f038364ce936ae90fceafbfb1a92032",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00280000",
       "timestamp_sec": 280.0,
-      "artifact_hash": "181b584867f57f29104b0e195fe1a999a2d6b9d85a8833d8491370ca127c5daa",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00280000.jpg",
+      "artifact_hash": "181b584867f57f29104b0e195fe1a999a2d6b9d85a8833d8491370ca127c5daa",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00282000",
       "timestamp_sec": 282.0,
-      "artifact_hash": "118686408bc5c78c3ccf65bc20727d74599eb59e4202b5dd745efbed1742ec1d",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00282000.jpg",
+      "artifact_hash": "118686408bc5c78c3ccf65bc20727d74599eb59e4202b5dd745efbed1742ec1d",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00284000",
       "timestamp_sec": 284.0,
-      "artifact_hash": "ee23573938e5430311580c99840e240ede1bbd18c9e0ab735fe990b13cafc03b",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00284000.jpg",
+      "artifact_hash": "ee23573938e5430311580c99840e240ede1bbd18c9e0ab735fe990b13cafc03b",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00286000",
       "timestamp_sec": 286.0,
-      "artifact_hash": "188d86aa4d9a5d7c0f6dcbab9ee4589c43e5fa73802eb0ab1aa53539039c7e28",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00286000.jpg",
+      "artifact_hash": "188d86aa4d9a5d7c0f6dcbab9ee4589c43e5fa73802eb0ab1aa53539039c7e28",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00288000",
       "timestamp_sec": 288.0,
-      "artifact_hash": "d6a24f6942b069b10ab1a7c6c45b4ca92e479ce7e5b27b8d5572db3a9791b81c",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00288000.jpg",
+      "artifact_hash": "d6a24f6942b069b10ab1a7c6c45b4ca92e479ce7e5b27b8d5572db3a9791b81c",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00290000",
       "timestamp_sec": 290.0,
-      "artifact_hash": "b52fee138bd6408fdf02d1aa5bfeb37e679b38129bc7901835db1a428c94c8df",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00290000.jpg",
+      "artifact_hash": "b52fee138bd6408fdf02d1aa5bfeb37e679b38129bc7901835db1a428c94c8df",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00292000",
       "timestamp_sec": 292.0,
-      "artifact_hash": "f07c9ad8637bdba61aeb7e03959bbc6f7e66e0085a406d1b3dbb70686e72104d",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00292000.jpg",
+      "artifact_hash": "f07c9ad8637bdba61aeb7e03959bbc6f7e66e0085a406d1b3dbb70686e72104d",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00294000",
       "timestamp_sec": 294.0,
-      "artifact_hash": "f5e9e1cb0aba72fc98e51b192acfa406309553135f754b2aa86314d52a71867a",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00294000.jpg",
+      "artifact_hash": "f5e9e1cb0aba72fc98e51b192acfa406309553135f754b2aa86314d52a71867a",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00296000",
       "timestamp_sec": 296.0,
-      "artifact_hash": "9d871edbd2be4a546a7d74db27a4e7202bb37a6808256fbfaacf6810e83cac7f",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00296000.jpg",
+      "artifact_hash": "9d871edbd2be4a546a7d74db27a4e7202bb37a6808256fbfaacf6810e83cac7f",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00298000",
       "timestamp_sec": 298.0,
-      "artifact_hash": "db4aadf763e825769c2eff359fe364d34078fb6f3ab251bb7cd268a8246dcba6",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00298000.jpg",
+      "artifact_hash": "db4aadf763e825769c2eff359fe364d34078fb6f3ab251bb7cd268a8246dcba6",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00300000",
       "timestamp_sec": 300.0,
-      "artifact_hash": "655e08cf2fcd64229d229740def6cd79c64091050bc3c5bdc851a6d04aef457c",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00300000.jpg",
+      "artifact_hash": "655e08cf2fcd64229d229740def6cd79c64091050bc3c5bdc851a6d04aef457c",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00302000",
       "timestamp_sec": 302.0,
-      "artifact_hash": "9886cb0f33e27573f82b6bd8ffa8af9582d287538869ed60ca7e52990f3367e9",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00302000.jpg",
+      "artifact_hash": "9886cb0f33e27573f82b6bd8ffa8af9582d287538869ed60ca7e52990f3367e9",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00304000",
       "timestamp_sec": 304.0,
-      "artifact_hash": "1020da449f448779d7d9f041290e5d6ea269e3a721591928ce19ec7dce68f0a3",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00304000.jpg",
+      "artifact_hash": "1020da449f448779d7d9f041290e5d6ea269e3a721591928ce19ec7dce68f0a3",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00306000",
       "timestamp_sec": 306.0,
-      "artifact_hash": "2bf734c10aeda1df83c61ecacc459311ba577177f9400db5af50a30bdee1fad3",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00306000.jpg",
+      "artifact_hash": "2bf734c10aeda1df83c61ecacc459311ba577177f9400db5af50a30bdee1fad3",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00308000",
       "timestamp_sec": 308.0,
-      "artifact_hash": "b45926b0c6250b41ce9cbfabe2b5c3f69b2cf7b745fbf8cbeaa211f658e6236e",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00308000.jpg",
+      "artifact_hash": "b45926b0c6250b41ce9cbfabe2b5c3f69b2cf7b745fbf8cbeaa211f658e6236e",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00310000",
       "timestamp_sec": 310.0,
-      "artifact_hash": "04f7f97f68f46895682823555c4aaaf5c5ed351506cd74d60c470e5c9c613530",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00310000.jpg",
+      "artifact_hash": "04f7f97f68f46895682823555c4aaaf5c5ed351506cd74d60c470e5c9c613530",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00312000",
       "timestamp_sec": 312.0,
-      "artifact_hash": "e80f640879f7ada28b8ca251574a445b444ce9c2594cdf844a846be51aa37d50",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00312000.jpg",
+      "artifact_hash": "e80f640879f7ada28b8ca251574a445b444ce9c2594cdf844a846be51aa37d50",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00314000",
       "timestamp_sec": 314.0,
-      "artifact_hash": "abde79456a2c220aab9ce9aee38f6553ed6a40aa3f278e5ec4c3b644d32c28a1",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00314000.jpg",
+      "artifact_hash": "abde79456a2c220aab9ce9aee38f6553ed6a40aa3f278e5ec4c3b644d32c28a1",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00316000",
       "timestamp_sec": 316.0,
-      "artifact_hash": "1cd023ef4858865ebdbfa440d1c17e425ef7179548f50b886dffe071b77c952f",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00316000.jpg",
+      "artifact_hash": "1cd023ef4858865ebdbfa440d1c17e425ef7179548f50b886dffe071b77c952f",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00318000",
       "timestamp_sec": 318.0,
-      "artifact_hash": "dcf1008076c658e1c0a8790550639ca921a40a68ba60399dd695c0f013869a65",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00318000.jpg",
+      "artifact_hash": "dcf1008076c658e1c0a8790550639ca921a40a68ba60399dd695c0f013869a65",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00320000",
       "timestamp_sec": 320.0,
-      "artifact_hash": "7aeea163226c111b0f60d37116f7c4d5d29f4022f7b18dce24bd626f4892639d",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00320000.jpg",
+      "artifact_hash": "7aeea163226c111b0f60d37116f7c4d5d29f4022f7b18dce24bd626f4892639d",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00322000",
       "timestamp_sec": 322.0,
-      "artifact_hash": "a64abb90432c17b39abd2c2041ffd4b3e9fe6f946ba997a9899d4d23985ad1dc",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00322000.jpg",
+      "artifact_hash": "a64abb90432c17b39abd2c2041ffd4b3e9fe6f946ba997a9899d4d23985ad1dc",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00324000",
       "timestamp_sec": 324.0,
-      "artifact_hash": "2c0e5d1e7fe2a5269e56e13d43c26ecb61867d5696377ce34344be4e5e7ba19c",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00324000.jpg",
+      "artifact_hash": "2c0e5d1e7fe2a5269e56e13d43c26ecb61867d5696377ce34344be4e5e7ba19c",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00326000",
       "timestamp_sec": 326.0,
-      "artifact_hash": "d80c3ecaa300f6a32761369297b1c78425b8fabf648f989392748e269533d1c8",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00326000.jpg",
+      "artifact_hash": "d80c3ecaa300f6a32761369297b1c78425b8fabf648f989392748e269533d1c8",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00328000",
       "timestamp_sec": 328.0,
-      "artifact_hash": "4c2b771385fa4e3813574b1e6745458d5ade3679d2bb7f24cc3e44dcf48e0378",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00328000.jpg",
+      "artifact_hash": "4c2b771385fa4e3813574b1e6745458d5ade3679d2bb7f24cc3e44dcf48e0378",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00330000",
       "timestamp_sec": 330.0,
-      "artifact_hash": "4b6db3ed512ae6ba8b5442527686f915557a1249334127f48013abc70373bc61",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00330000.jpg",
+      "artifact_hash": "4b6db3ed512ae6ba8b5442527686f915557a1249334127f48013abc70373bc61",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00332000",
       "timestamp_sec": 332.0,
-      "artifact_hash": "ec9624d8f8c39fc1c3669a9b412616b5734dde63096e2f9c1ed8984abc05353c",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00332000.jpg",
+      "artifact_hash": "ec9624d8f8c39fc1c3669a9b412616b5734dde63096e2f9c1ed8984abc05353c",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00334000",
       "timestamp_sec": 334.0,
-      "artifact_hash": "6d0b8425bdfaeaea3650636315a48f363603685cdf4f2e1d1f855b901849dec7",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00334000.jpg",
+      "artifact_hash": "6d0b8425bdfaeaea3650636315a48f363603685cdf4f2e1d1f855b901849dec7",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00336000",
       "timestamp_sec": 336.0,
-      "artifact_hash": "6c347a18919325277a47a3749a3eb9d6e146b765a3950920500468b2b020c77e",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00336000.jpg",
+      "artifact_hash": "6c347a18919325277a47a3749a3eb9d6e146b765a3950920500468b2b020c77e",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00338000",
       "timestamp_sec": 338.0,
-      "artifact_hash": "8a5b3a1a9c8743b10d58cc4d7c81c34754d6169f1ab8befe4c94b2e7e2a6921c",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00338000.jpg",
+      "artifact_hash": "8a5b3a1a9c8743b10d58cc4d7c81c34754d6169f1ab8befe4c94b2e7e2a6921c",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00340000",
       "timestamp_sec": 340.0,
-      "artifact_hash": "2536c2cfca5a15a6e2a9dfedc3e4a8e660f70f327379734a164be6a7b0f67b20",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00340000.jpg",
+      "artifact_hash": "2536c2cfca5a15a6e2a9dfedc3e4a8e660f70f327379734a164be6a7b0f67b20",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00342000",
       "timestamp_sec": 342.0,
-      "artifact_hash": "bedaeecc9696a0444989b505e8df46b014bd8495215d3a2adb71deb3a68ccf10",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00342000.jpg",
+      "artifact_hash": "bedaeecc9696a0444989b505e8df46b014bd8495215d3a2adb71deb3a68ccf10",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00344000",
       "timestamp_sec": 344.0,
-      "artifact_hash": "93e083e462662b519a521183765ce9517abf30429dad5fb302f94ad75400e178",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00344000.jpg",
+      "artifact_hash": "93e083e462662b519a521183765ce9517abf30429dad5fb302f94ad75400e178",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00346000",
       "timestamp_sec": 346.0,
-      "artifact_hash": "e7614492a028db40e7b2beb22d85b60053775fa7e2feacc44e878632cc3e9eb3",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00346000.jpg",
+      "artifact_hash": "e7614492a028db40e7b2beb22d85b60053775fa7e2feacc44e878632cc3e9eb3",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00348000",
       "timestamp_sec": 348.0,
-      "artifact_hash": "2b45d6bb04570dbe2ae6256d4cad8212e31780fed1c8b93383f9e31b4b3441ce",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00348000.jpg",
+      "artifact_hash": "2b45d6bb04570dbe2ae6256d4cad8212e31780fed1c8b93383f9e31b4b3441ce",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00350000",
       "timestamp_sec": 350.0,
-      "artifact_hash": "75ed6ec2f37c416a5e61b9ef012baebc323ff6e60a83d544ac01accfc8dc91dd",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00350000.jpg",
+      "artifact_hash": "75ed6ec2f37c416a5e61b9ef012baebc323ff6e60a83d544ac01accfc8dc91dd",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00352000",
       "timestamp_sec": 352.0,
-      "artifact_hash": "c13ce80b6b38765cf098f4c03dbdc6187aebe4c868c83e033f466b9e47b6c46d",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00352000.jpg",
+      "artifact_hash": "c13ce80b6b38765cf098f4c03dbdc6187aebe4c868c83e033f466b9e47b6c46d",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00354000",
       "timestamp_sec": 354.0,
-      "artifact_hash": "a176e1f1f852ebbfc793d20c157277ac7265faf07a8856954b63b55e2c6355de",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00354000.jpg",
+      "artifact_hash": "a176e1f1f852ebbfc793d20c157277ac7265faf07a8856954b63b55e2c6355de",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00356000",
       "timestamp_sec": 356.0,
-      "artifact_hash": "c0cb5cf856e764a114d9a1adb44bd393c909347143dca296931047903b9a05b0",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00356000.jpg",
+      "artifact_hash": "c0cb5cf856e764a114d9a1adb44bd393c909347143dca296931047903b9a05b0",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00358000",
       "timestamp_sec": 358.0,
-      "artifact_hash": "cdc7175e7c81f75963004901fc9a6504b3bb7347babda5ea220a59c88fa3d22d",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00358000.jpg",
+      "artifact_hash": "cdc7175e7c81f75963004901fc9a6504b3bb7347babda5ea220a59c88fa3d22d",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00360000",
       "timestamp_sec": 360.0,
-      "artifact_hash": "0484a646d8d69de37d082e10d7c536385765bce4656d568e5d4205d75cb3a8cf",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00360000.jpg",
+      "artifact_hash": "0484a646d8d69de37d082e10d7c536385765bce4656d568e5d4205d75cb3a8cf",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00362000",
       "timestamp_sec": 362.0,
-      "artifact_hash": "bbd0e8f4c98a7323570a38b6cc17c6c69fd5cb17186302b3b1b7af5a77bb632c",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00362000.jpg",
+      "artifact_hash": "bbd0e8f4c98a7323570a38b6cc17c6c69fd5cb17186302b3b1b7af5a77bb632c",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00364000",
       "timestamp_sec": 364.0,
-      "artifact_hash": "bfdce2b18ffa1196f1123f9d75e7c78b1e3283349afa537899a71c0eb0f95462",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00364000.jpg",
+      "artifact_hash": "bfdce2b18ffa1196f1123f9d75e7c78b1e3283349afa537899a71c0eb0f95462",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00366000",
       "timestamp_sec": 366.0,
-      "artifact_hash": "f3d5000b0510a2ac76d19d3f6514f68ba408f8cbdb9ab4903081541ead6e4d46",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00366000.jpg",
+      "artifact_hash": "f3d5000b0510a2ac76d19d3f6514f68ba408f8cbdb9ab4903081541ead6e4d46",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00368000",
       "timestamp_sec": 368.0,
-      "artifact_hash": "b0aad6efa45be6020526054fdcb22772b9d8b04012737a49cca2256e1d1fc7a9",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00368000.jpg",
+      "artifact_hash": "b0aad6efa45be6020526054fdcb22772b9d8b04012737a49cca2256e1d1fc7a9",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00370000",
       "timestamp_sec": 370.0,
-      "artifact_hash": "ba89f99d1d275d8a2a944bbb278ce6526e8d295341ca1ebfe3dff18362551e8b",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00370000.jpg",
+      "artifact_hash": "ba89f99d1d275d8a2a944bbb278ce6526e8d295341ca1ebfe3dff18362551e8b",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00372000",
       "timestamp_sec": 372.0,
-      "artifact_hash": "172cba036eeb6d93bfabdf2d77fb0bd807fa815ba9d16498295e149800b99e9a",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00372000.jpg",
+      "artifact_hash": "172cba036eeb6d93bfabdf2d77fb0bd807fa815ba9d16498295e149800b99e9a",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00374000",
       "timestamp_sec": 374.0,
-      "artifact_hash": "7b244c5dcf9d46b23255e5a3f7fc5bce3cb8ac4897bab4a86f6a911066b93a9a",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00374000.jpg",
+      "artifact_hash": "7b244c5dcf9d46b23255e5a3f7fc5bce3cb8ac4897bab4a86f6a911066b93a9a",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00376000",
       "timestamp_sec": 376.0,
-      "artifact_hash": "74a814c6f19b6d350904a7712d5bebf11cd8e57cf2ae613f699ea94a868ea33b",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00376000.jpg",
+      "artifact_hash": "74a814c6f19b6d350904a7712d5bebf11cd8e57cf2ae613f699ea94a868ea33b",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00378000",
       "timestamp_sec": 378.0,
-      "artifact_hash": "2b8f5e1cef4de6e51bc5585731760cee3d7823eb8ba361b874d9f3c7126a53f3",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00378000.jpg",
+      "artifact_hash": "2b8f5e1cef4de6e51bc5585731760cee3d7823eb8ba361b874d9f3c7126a53f3",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00380000",
       "timestamp_sec": 380.0,
-      "artifact_hash": "9dc8fb8e8140591db2966dfe8d90326c5236594a11c5aaf30ae83a534e5bf6a5",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00380000.jpg",
+      "artifact_hash": "9dc8fb8e8140591db2966dfe8d90326c5236594a11c5aaf30ae83a534e5bf6a5",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00382000",
       "timestamp_sec": 382.0,
-      "artifact_hash": "d601aeaa9942bfbde4c442e8f75f409d20d5ad26c9ae59c6ecdb8af051a4af0c",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00382000.jpg",
+      "artifact_hash": "d601aeaa9942bfbde4c442e8f75f409d20d5ad26c9ae59c6ecdb8af051a4af0c",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00384000",
       "timestamp_sec": 384.0,
-      "artifact_hash": "554b8dbb287ca7054cdbe2eacf1677af1da188609bd12c5da567b6b23bf126de",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00384000.jpg",
+      "artifact_hash": "554b8dbb287ca7054cdbe2eacf1677af1da188609bd12c5da567b6b23bf126de",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00386000",
       "timestamp_sec": 386.0,
-      "artifact_hash": "dd3198c8a86e8e15e77239d5649a6e08638a5f9bade9a2c525f8de2d451308e1",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00386000.jpg",
+      "artifact_hash": "dd3198c8a86e8e15e77239d5649a6e08638a5f9bade9a2c525f8de2d451308e1",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00388000",
       "timestamp_sec": 388.0,
-      "artifact_hash": "61118d6c5a887d0bfde81a01d169b91fdca7d2778563241449a8961d443c0d82",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00388000.jpg",
+      "artifact_hash": "61118d6c5a887d0bfde81a01d169b91fdca7d2778563241449a8961d443c0d82",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00390000",
       "timestamp_sec": 390.0,
-      "artifact_hash": "fe48d75ffc15987f3fafe4cd06612c14d929b8e51ca57630b0caffdd4fce7b23",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00390000.jpg",
+      "artifact_hash": "fe48d75ffc15987f3fafe4cd06612c14d929b8e51ca57630b0caffdd4fce7b23",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00392000",
       "timestamp_sec": 392.0,
-      "artifact_hash": "0e6d4e007ae20b20c862c7b924e04eace150e11d7cf57ef438f7cfff6d084c61",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00392000.jpg",
+      "artifact_hash": "0e6d4e007ae20b20c862c7b924e04eace150e11d7cf57ef438f7cfff6d084c61",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00394000",
       "timestamp_sec": 394.0,
-      "artifact_hash": "29c6c30514ab7fadc1092c8da73b1026891f648b8db528837bb84c1dc14d1848",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00394000.jpg",
+      "artifact_hash": "29c6c30514ab7fadc1092c8da73b1026891f648b8db528837bb84c1dc14d1848",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00396000",
       "timestamp_sec": 396.0,
-      "artifact_hash": "3fcc3f78ae545d1ca5aa3f40af78dea5fa0993a1396441d85e22c184503288d4",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00396000.jpg",
+      "artifact_hash": "3fcc3f78ae545d1ca5aa3f40af78dea5fa0993a1396441d85e22c184503288d4",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00398000",
       "timestamp_sec": 398.0,
-      "artifact_hash": "8cf7faa31d773ff1d438c66acc49066adfde46b5396d3b037d34af8da1deae96",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00398000.jpg",
+      "artifact_hash": "8cf7faa31d773ff1d438c66acc49066adfde46b5396d3b037d34af8da1deae96",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00400000",
       "timestamp_sec": 400.0,
-      "artifact_hash": "10569eb9f82492a0990b4d77c5b3ad05cea5dee474a10e5f56494790028cfa07",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00400000.jpg",
+      "artifact_hash": "10569eb9f82492a0990b4d77c5b3ad05cea5dee474a10e5f56494790028cfa07",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00402000",
       "timestamp_sec": 402.0,
-      "artifact_hash": "1b5d72bc094304d5234d44fb326ea0bef5d5c2a3c41f69acb67504609fb2770a",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00402000.jpg",
+      "artifact_hash": "1b5d72bc094304d5234d44fb326ea0bef5d5c2a3c41f69acb67504609fb2770a",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00404000",
       "timestamp_sec": 404.0,
-      "artifact_hash": "c2a0e3328dfc82b77fa462547f19c3197b4bcf8c042a1bdebfa1b600c68977cd",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00404000.jpg",
+      "artifact_hash": "c2a0e3328dfc82b77fa462547f19c3197b4bcf8c042a1bdebfa1b600c68977cd",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00406000",
       "timestamp_sec": 406.0,
-      "artifact_hash": "594bbf75ed55665c78692614cefc10efb762b0175dcb0236714d101f1de0c2f2",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00406000.jpg",
+      "artifact_hash": "594bbf75ed55665c78692614cefc10efb762b0175dcb0236714d101f1de0c2f2",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00408000",
       "timestamp_sec": 408.0,
-      "artifact_hash": "f7b9fe4627588c46fdb37cc2f8744b15282035cd1347c49db855b4115470e7b7",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00408000.jpg",
+      "artifact_hash": "f7b9fe4627588c46fdb37cc2f8744b15282035cd1347c49db855b4115470e7b7",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00410000",
       "timestamp_sec": 410.0,
-      "artifact_hash": "5f1c9f394d44bd6f6b86e622d508903713bd38e392c2fd85ae6ea200722604ea",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00410000.jpg",
+      "artifact_hash": "5f1c9f394d44bd6f6b86e622d508903713bd38e392c2fd85ae6ea200722604ea",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00412000",
       "timestamp_sec": 412.0,
-      "artifact_hash": "f8bb36c9ba057c310bc20c7433972d758b81dee9bff009804ae9753365bad0b5",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00412000.jpg",
+      "artifact_hash": "f8bb36c9ba057c310bc20c7433972d758b81dee9bff009804ae9753365bad0b5",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00414000",
       "timestamp_sec": 414.0,
-      "artifact_hash": "c82684645863a4ddb4264b50e443bb347163246ddb765b02588a58bfa613df78",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00414000.jpg",
+      "artifact_hash": "c82684645863a4ddb4264b50e443bb347163246ddb765b02588a58bfa613df78",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00416000",
       "timestamp_sec": 416.0,
-      "artifact_hash": "4f29b11653e5ed87da3d5b16b79f8388574e274732a7c23d9b8c6e31d33baab0",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00416000.jpg",
+      "artifact_hash": "4f29b11653e5ed87da3d5b16b79f8388574e274732a7c23d9b8c6e31d33baab0",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00418000",
       "timestamp_sec": 418.0,
-      "artifact_hash": "b8dda5f88af8295de4ac594eb83c3d47927f3ac644f571017a5a53095ce4a43e",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00418000.jpg",
+      "artifact_hash": "b8dda5f88af8295de4ac594eb83c3d47927f3ac644f571017a5a53095ce4a43e",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00420000",
       "timestamp_sec": 420.0,
-      "artifact_hash": "fcbc37b9e0fe314747a093d1a0ff45534f98be1f812576e3ef663d035de299aa",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00420000.jpg",
+      "artifact_hash": "fcbc37b9e0fe314747a093d1a0ff45534f98be1f812576e3ef663d035de299aa",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00422000",
       "timestamp_sec": 422.0,
-      "artifact_hash": "84d852036aa1608990ff5ec327a4e4f55ed48b0e62c618e6d5591cef49f20a4f",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00422000.jpg",
+      "artifact_hash": "84d852036aa1608990ff5ec327a4e4f55ed48b0e62c618e6d5591cef49f20a4f",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00424000",
       "timestamp_sec": 424.0,
-      "artifact_hash": "eedbd76be09428faf33666a407db9260cecba0c9b1fb03f80882b06856c6a982",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00424000.jpg",
+      "artifact_hash": "eedbd76be09428faf33666a407db9260cecba0c9b1fb03f80882b06856c6a982",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00426000",
       "timestamp_sec": 426.0,
-      "artifact_hash": "b6975bac925fec91504d1e5a2b857f861b1d2caa237111d0754f48a29eb6f20c",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00426000.jpg",
+      "artifact_hash": "b6975bac925fec91504d1e5a2b857f861b1d2caa237111d0754f48a29eb6f20c",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00428000",
       "timestamp_sec": 428.0,
-      "artifact_hash": "be3fd2237b0aa496c817d8d5c1874209d78dc7b2e569b8570d42c865bff8128c",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00428000.jpg",
+      "artifact_hash": "be3fd2237b0aa496c817d8d5c1874209d78dc7b2e569b8570d42c865bff8128c",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00430000",
       "timestamp_sec": 430.0,
-      "artifact_hash": "9cfa07edb1fa09002fecef8e8267928e5f2cd496602bb816946d17b15b60b51f",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00430000.jpg",
+      "artifact_hash": "9cfa07edb1fa09002fecef8e8267928e5f2cd496602bb816946d17b15b60b51f",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00432000",
       "timestamp_sec": 432.0,
-      "artifact_hash": "6ac4ae90d14b842b1f442623356ffae9432acecb8f957359bd29719fefaef06e",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00432000.jpg",
+      "artifact_hash": "6ac4ae90d14b842b1f442623356ffae9432acecb8f957359bd29719fefaef06e",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00434000",
       "timestamp_sec": 434.0,
-      "artifact_hash": "2152c9db425f34ba8064eb8a6a28aecfd1fb8c05d0a9e6fbde896ba26dbe8aba",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00434000.jpg",
+      "artifact_hash": "2152c9db425f34ba8064eb8a6a28aecfd1fb8c05d0a9e6fbde896ba26dbe8aba",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00436000",
       "timestamp_sec": 436.0,
-      "artifact_hash": "a6a3f9abd74c6bc5a92e8f0168a9cd3bd9fa7dd1b1a82e72158a18dd2b8cfccf",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00436000.jpg",
+      "artifact_hash": "a6a3f9abd74c6bc5a92e8f0168a9cd3bd9fa7dd1b1a82e72158a18dd2b8cfccf",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00438000",
       "timestamp_sec": 438.0,
-      "artifact_hash": "c0b769bf7be03d38d22f7aa3311371b6f084007076dfb4806bfdc7644b0fcfe7",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00438000.jpg",
+      "artifact_hash": "c0b769bf7be03d38d22f7aa3311371b6f084007076dfb4806bfdc7644b0fcfe7",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00440000",
       "timestamp_sec": 440.0,
-      "artifact_hash": "cc0d4af4b4b3fcdc6e5b8c9d892baf05368c3a8bfeca8712b7c3af230776904f",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00440000.jpg",
+      "artifact_hash": "cc0d4af4b4b3fcdc6e5b8c9d892baf05368c3a8bfeca8712b7c3af230776904f",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00442000",
       "timestamp_sec": 442.0,
-      "artifact_hash": "fff8a8515348289919e382fcc6286834b93038d5ecdce93af6e1700a53243a51",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00442000.jpg",
+      "artifact_hash": "fff8a8515348289919e382fcc6286834b93038d5ecdce93af6e1700a53243a51",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00444000",
       "timestamp_sec": 444.0,
-      "artifact_hash": "6cf734d2a1dbea160e3d28897d4aa9dee6882a2f04e12410b9173663caddcf4a",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00444000.jpg",
+      "artifact_hash": "6cf734d2a1dbea160e3d28897d4aa9dee6882a2f04e12410b9173663caddcf4a",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00446000",
       "timestamp_sec": 446.0,
-      "artifact_hash": "4b6094757802e40c2afb679c47e1db14a1520893ab0e41dfbb1329720f48e6aa",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00446000.jpg",
+      "artifact_hash": "4b6094757802e40c2afb679c47e1db14a1520893ab0e41dfbb1329720f48e6aa",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00448000",
       "timestamp_sec": 448.0,
-      "artifact_hash": "e67866d6090a56f7256e80746ac9c4e6d8f8b3a82fb57ce6301b2cc0abae5214",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00448000.jpg",
+      "artifact_hash": "e67866d6090a56f7256e80746ac9c4e6d8f8b3a82fb57ce6301b2cc0abae5214",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00450000",
       "timestamp_sec": 450.0,
-      "artifact_hash": "aa94db99d2d53fa0dff41a75482fb888c9cc0e11d5dff81600e62eed218d0cc6",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00450000.jpg",
+      "artifact_hash": "aa94db99d2d53fa0dff41a75482fb888c9cc0e11d5dff81600e62eed218d0cc6",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00452000",
       "timestamp_sec": 452.0,
-      "artifact_hash": "a1b2039c3f7118a700ed156eaa1fb623bc7c91f0cec0b7ee653adc1cc9a6d87b",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00452000.jpg",
+      "artifact_hash": "a1b2039c3f7118a700ed156eaa1fb623bc7c91f0cec0b7ee653adc1cc9a6d87b",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00454000",
       "timestamp_sec": 454.0,
-      "artifact_hash": "c3bd9ecb8ffe93c62a7dd24182fb43690a6dca1315575c8ec1e385ad3b07beef",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00454000.jpg",
+      "artifact_hash": "c3bd9ecb8ffe93c62a7dd24182fb43690a6dca1315575c8ec1e385ad3b07beef",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00456000",
       "timestamp_sec": 456.0,
-      "artifact_hash": "4efe44584b0b9578b71b0fd58c8e6b1d58aa73d5b90871d4d5c654a9c27502fd",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00456000.jpg",
+      "artifact_hash": "4efe44584b0b9578b71b0fd58c8e6b1d58aa73d5b90871d4d5c654a9c27502fd",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00458000",
       "timestamp_sec": 458.0,
-      "artifact_hash": "ed0ca5a0e7c2742dc3c64595b7244321e2d4172e8b92b79eed9b3b7907681d0f",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00458000.jpg",
+      "artifact_hash": "ed0ca5a0e7c2742dc3c64595b7244321e2d4172e8b92b79eed9b3b7907681d0f",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00460000",
       "timestamp_sec": 460.0,
-      "artifact_hash": "86a4eb1f999b92857c323c8a9c0da0b1fa6d2b88b8b7e9e53033c3d71f600102",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00460000.jpg",
+      "artifact_hash": "86a4eb1f999b92857c323c8a9c0da0b1fa6d2b88b8b7e9e53033c3d71f600102",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00462000",
       "timestamp_sec": 462.0,
-      "artifact_hash": "bf8422605a419fce42ee85c4936bf78a1b49e217b81df797f8d3bebf80ece4a6",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00462000.jpg",
+      "artifact_hash": "bf8422605a419fce42ee85c4936bf78a1b49e217b81df797f8d3bebf80ece4a6",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00464000",
       "timestamp_sec": 464.0,
-      "artifact_hash": "f1de710089d9df97d2fa353e864b8c8aa51d786f34b2f2570ff72f80b309b9f0",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00464000.jpg",
+      "artifact_hash": "f1de710089d9df97d2fa353e864b8c8aa51d786f34b2f2570ff72f80b309b9f0",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00466000",
       "timestamp_sec": 466.0,
-      "artifact_hash": "54eea799d03cdfe0ff192b551a2675c8b5014818d83756a6bd9fb8b3d3e3da2c",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00466000.jpg",
+      "artifact_hash": "54eea799d03cdfe0ff192b551a2675c8b5014818d83756a6bd9fb8b3d3e3da2c",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00468000",
       "timestamp_sec": 468.0,
-      "artifact_hash": "bb36e4ddf7ae324cd6c891f0922ce89ef55b16128362218eec44160a1ed1f76e",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00468000.jpg",
+      "artifact_hash": "bb36e4ddf7ae324cd6c891f0922ce89ef55b16128362218eec44160a1ed1f76e",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00470000",
       "timestamp_sec": 470.0,
-      "artifact_hash": "8e94d41b0157d94fabe8a8f61353dbb1f4630a81258cfcc4043319ad100c057f",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00470000.jpg",
+      "artifact_hash": "8e94d41b0157d94fabe8a8f61353dbb1f4630a81258cfcc4043319ad100c057f",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00472000",
       "timestamp_sec": 472.0,
-      "artifact_hash": "66e882beda60584cc24fad28cd8a25b32b55ad0d00ecbd1b045029b2845f97e0",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00472000.jpg",
+      "artifact_hash": "66e882beda60584cc24fad28cd8a25b32b55ad0d00ecbd1b045029b2845f97e0",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00474000",
       "timestamp_sec": 474.0,
-      "artifact_hash": "d952164f78edeef48f527be59bf1df234c9729434a0e970390b0ad086edbb8d1",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00474000.jpg",
+      "artifact_hash": "d952164f78edeef48f527be59bf1df234c9729434a0e970390b0ad086edbb8d1",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00476000",
       "timestamp_sec": 476.0,
-      "artifact_hash": "60526d5b0a13805daa5d505cf0d46d026a475cfeb2e784d4ea8955317c1655c8",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00476000.jpg",
+      "artifact_hash": "60526d5b0a13805daa5d505cf0d46d026a475cfeb2e784d4ea8955317c1655c8",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00478000",
       "timestamp_sec": 478.0,
-      "artifact_hash": "ffd30185a36a35840ab0f8cfd18c0b1bf2893cc230e840c98424b8a3d7ef53d2",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00478000.jpg",
+      "artifact_hash": "ffd30185a36a35840ab0f8cfd18c0b1bf2893cc230e840c98424b8a3d7ef53d2",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00480000",
       "timestamp_sec": 480.0,
-      "artifact_hash": "d0fbb9348a8d479d222934239ded146b050deb35679003532c90510bc54fe186",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00480000.jpg",
+      "artifact_hash": "d0fbb9348a8d479d222934239ded146b050deb35679003532c90510bc54fe186",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00482000",
       "timestamp_sec": 482.0,
-      "artifact_hash": "550a6d1cf3510119d548b44ecec23a2ca07f9af1a32d6a4db6dd2828a737c694",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00482000.jpg",
+      "artifact_hash": "550a6d1cf3510119d548b44ecec23a2ca07f9af1a32d6a4db6dd2828a737c694",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00484000",
       "timestamp_sec": 484.0,
-      "artifact_hash": "4051f0064c4671cf30f8af7173b337bb6892b53bfc85f1bbb4f5c5213e419d7b",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00484000.jpg",
+      "artifact_hash": "4051f0064c4671cf30f8af7173b337bb6892b53bfc85f1bbb4f5c5213e419d7b",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00486000",
       "timestamp_sec": 486.0,
-      "artifact_hash": "8e372e947bf13f428e2dabad119bf93f9f5881a7a55d09bbea4a10ec6f28f2ab",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00486000.jpg",
+      "artifact_hash": "8e372e947bf13f428e2dabad119bf93f9f5881a7a55d09bbea4a10ec6f28f2ab",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00488000",
       "timestamp_sec": 488.0,
-      "artifact_hash": "3cdd334fdc2e3d49cb90b01ea5905f4b7d45c948e1a71dcdeb27ef3188f49856",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00488000.jpg",
+      "artifact_hash": "3cdd334fdc2e3d49cb90b01ea5905f4b7d45c948e1a71dcdeb27ef3188f49856",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00490000",
       "timestamp_sec": 490.0,
-      "artifact_hash": "b81e7542a166e39fa8770dc57e719bf45d8089dcc334aa2afd326f84f09e3a28",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00490000.jpg",
+      "artifact_hash": "b81e7542a166e39fa8770dc57e719bf45d8089dcc334aa2afd326f84f09e3a28",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00492000",
       "timestamp_sec": 492.0,
-      "artifact_hash": "e1c56e845cef19167864fc4241b653bd5b365e3fffc2885a65228f1cf557079c",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00492000.jpg",
+      "artifact_hash": "e1c56e845cef19167864fc4241b653bd5b365e3fffc2885a65228f1cf557079c",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00494000",
       "timestamp_sec": 494.0,
-      "artifact_hash": "aee35ae1dbbdda4299ec67f0d0b7dc2700752db86d3f09e512abb6ca511897e1",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00494000.jpg",
+      "artifact_hash": "aee35ae1dbbdda4299ec67f0d0b7dc2700752db86d3f09e512abb6ca511897e1",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00496000",
       "timestamp_sec": 496.0,
-      "artifact_hash": "265050a6fa5efd16dc90ad0d96b37409208ce09911c583b67f8076d7b03a382c",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00496000.jpg",
+      "artifact_hash": "265050a6fa5efd16dc90ad0d96b37409208ce09911c583b67f8076d7b03a382c",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00498000",
       "timestamp_sec": 498.0,
-      "artifact_hash": "7fab9579b456fa5cdd840576deadc17b3ffc89827825b66887d12ba52741dade",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00498000.jpg",
+      "artifact_hash": "7fab9579b456fa5cdd840576deadc17b3ffc89827825b66887d12ba52741dade",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00500000",
       "timestamp_sec": 500.0,
-      "artifact_hash": "1daee785133558681e94360ada8a42ce37fc1cf1aec0a3530b9b1cf1c83dac50",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00500000.jpg",
+      "artifact_hash": "1daee785133558681e94360ada8a42ce37fc1cf1aec0a3530b9b1cf1c83dac50",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00502000",
       "timestamp_sec": 502.0,
-      "artifact_hash": "005e5858c09d626c8e8f8766b2c084969f329d742740eca42480a0895289673b",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00502000.jpg",
+      "artifact_hash": "005e5858c09d626c8e8f8766b2c084969f329d742740eca42480a0895289673b",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00504000",
       "timestamp_sec": 504.0,
-      "artifact_hash": "26c6035e7bea16b15f13294486474767e9f8badb751d9c1290b4f6ef315caf1c",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00504000.jpg",
+      "artifact_hash": "26c6035e7bea16b15f13294486474767e9f8badb751d9c1290b4f6ef315caf1c",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00506000",
       "timestamp_sec": 506.0,
-      "artifact_hash": "7b6a1048a1087055244c21f079cd2ba0af88b577ddb3dd5bf80fea86106a2fee",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00506000.jpg",
+      "artifact_hash": "7b6a1048a1087055244c21f079cd2ba0af88b577ddb3dd5bf80fea86106a2fee",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00508000",
       "timestamp_sec": 508.0,
-      "artifact_hash": "259c57ebb644ba2d7f5e66b5e1134fc42e02ca4243ed828e01cea3173f225f22",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00508000.jpg",
+      "artifact_hash": "259c57ebb644ba2d7f5e66b5e1134fc42e02ca4243ed828e01cea3173f225f22",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00510000",
       "timestamp_sec": 510.0,
-      "artifact_hash": "c777aaffd3fda61a0f2753fb7d9eef9ac8c29851e61875fe71916a6eaa244dca",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00510000.jpg",
+      "artifact_hash": "c777aaffd3fda61a0f2753fb7d9eef9ac8c29851e61875fe71916a6eaa244dca",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00512000",
       "timestamp_sec": 512.0,
-      "artifact_hash": "d526c30b8bdfdd01a087dc951838da45324021b090bc048c8ea6b79c369a5ffa",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00512000.jpg",
+      "artifact_hash": "d526c30b8bdfdd01a087dc951838da45324021b090bc048c8ea6b79c369a5ffa",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00514000",
       "timestamp_sec": 514.0,
-      "artifact_hash": "e66609b38186d15ac63fbc70b317581fb7c54cf6193ba92709dcf0636d0d963b",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00514000.jpg",
+      "artifact_hash": "e66609b38186d15ac63fbc70b317581fb7c54cf6193ba92709dcf0636d0d963b",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00516000",
       "timestamp_sec": 516.0,
-      "artifact_hash": "f6f4bb21d768a420171b2f0bf6dd6bf8da5dc525331d1c8e5569a1a57d52853d",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00516000.jpg",
+      "artifact_hash": "f6f4bb21d768a420171b2f0bf6dd6bf8da5dc525331d1c8e5569a1a57d52853d",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00518000",
       "timestamp_sec": 518.0,
-      "artifact_hash": "540469a0c388c2469301495101faf8a123121e076a57df5a1ead811045a47d4e",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00518000.jpg",
+      "artifact_hash": "540469a0c388c2469301495101faf8a123121e076a57df5a1ead811045a47d4e",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00520000",
       "timestamp_sec": 520.0,
-      "artifact_hash": "fde5d311a8def5ff100ab428e5ce23e4839ff4ecf740fb714d80e41c4fa8694c",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00520000.jpg",
+      "artifact_hash": "fde5d311a8def5ff100ab428e5ce23e4839ff4ecf740fb714d80e41c4fa8694c",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00522000",
       "timestamp_sec": 522.0,
-      "artifact_hash": "cb63801b437924aeb53f73c8240514a90a60aec549cadfe58b3f8831a2d8795e",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00522000.jpg",
+      "artifact_hash": "cb63801b437924aeb53f73c8240514a90a60aec549cadfe58b3f8831a2d8795e",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00524000",
       "timestamp_sec": 524.0,
-      "artifact_hash": "7e89e2571a94f1e4a2542344fb05cde5a72ea11194b78061e88365c9db1df69d",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00524000.jpg",
+      "artifact_hash": "7e89e2571a94f1e4a2542344fb05cde5a72ea11194b78061e88365c9db1df69d",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00526000",
       "timestamp_sec": 526.0,
-      "artifact_hash": "c9b11acea9d6c8126da1ce2fc724d71389b20e87617ed0f7fa47786c2831cf9a",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00526000.jpg",
+      "artifact_hash": "c9b11acea9d6c8126da1ce2fc724d71389b20e87617ed0f7fa47786c2831cf9a",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00528000",
       "timestamp_sec": 528.0,
-      "artifact_hash": "c7ebe928c3e4b6fa6381ba675a763f6383d9af1a568fa3417775ff3ab9a9e4b8",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00528000.jpg",
+      "artifact_hash": "c7ebe928c3e4b6fa6381ba675a763f6383d9af1a568fa3417775ff3ab9a9e4b8",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00530000",
       "timestamp_sec": 530.0,
-      "artifact_hash": "d89ee1810205eda14ba78043feffc0e9c6de4a317aed4a8a8b4ea774c133b152",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00530000.jpg",
+      "artifact_hash": "d89ee1810205eda14ba78043feffc0e9c6de4a317aed4a8a8b4ea774c133b152",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00532000",
       "timestamp_sec": 532.0,
-      "artifact_hash": "3028df9763da0946aaaed2674e35a90ad6fdd61ee428f830d5768aaa9ecab70b",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00532000.jpg",
+      "artifact_hash": "3028df9763da0946aaaed2674e35a90ad6fdd61ee428f830d5768aaa9ecab70b",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00534000",
       "timestamp_sec": 534.0,
-      "artifact_hash": "46ccbca348ee996a012f9f0eab18b5ba5f5d8cf5cac23581f3f8becfb9fc26c2",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00534000.jpg",
+      "artifact_hash": "46ccbca348ee996a012f9f0eab18b5ba5f5d8cf5cac23581f3f8becfb9fc26c2",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00536000",
       "timestamp_sec": 536.0,
-      "artifact_hash": "891f98888a0d54a7117ade25f80a412f7c8bfaf53f4baa9de488eee7b20bdb2e",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00536000.jpg",
+      "artifact_hash": "891f98888a0d54a7117ade25f80a412f7c8bfaf53f4baa9de488eee7b20bdb2e",
       "width": 1920,
       "height": 1080
     },
     {
       "frame_id": "frame_yt_19935949eb0e_00538000",
       "timestamp_sec": 538.0,
-      "artifact_hash": "631593bb0aada6bf115ef2c0921a8027e94ba078375e4d89bbce11e4fe748693",
       "artifact_path": "serum2/data/visual_frames/yt_19935949eb0e/frame_yt_19935949eb0e_00538000.jpg",
+      "artifact_hash": "631593bb0aada6bf115ef2c0921a8027e94ba078375e4d89bbce11e4fe748693",
       "width": 1920,
       "height": 1080
     }
