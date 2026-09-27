@@ -5,12 +5,27 @@ Source of truth for which contracts are available to the producer.
 
 Maps semantic targets to their CAUSAL_VERIFIED contracts.
 Never falls back to design-JSON or archived contracts.
+
+Final execution contract (Serum 2.0.23): producer-facing lookup table built
+from the full 330-control MCP execution sweep; loaded by _load_final_execution_contract()
+and queryable via lookup_final(atlas_id).  Authority path is unchanged — the final
+contract provides op/raw/domain facts for execution; admit() / ClaimEngine / epoch
+checks are not touched.
 """
 import json
 import pickle
 import dataclasses
 from typing import Optional, Dict, Tuple
 from pathlib import Path
+
+# Canonical path to the final producer-facing MCP execution contract.
+# All 330 controls, serum 2.0.23, sourced from bulk-causal sweep v3.
+FINAL_CONTRACT_PATH = (
+    Path(__file__).parent.parent.parent
+    / "parameter_characterization"
+    / "bulk_causal_evidence"
+    / "final_execution_contract_v1.json"
+)
 
 from serum2.evidence.capability_contract import CapabilityContract, ExecutionBinding
 
@@ -59,6 +74,10 @@ class ContractRegistry:
         self._load_binding_evidence_contracts(binding_evidence_dir)
         self.promotion_diagnostics = {}
         self._load_promoted_evidence_contracts(promoted_evidence_dir)
+        # Final execution contract: 330-control producer-facing lookup table (Serum 2.0.23).
+        # Loaded unconditionally; epoch check is internal.
+        self._final_contract: Optional[Dict] = None
+        self._final_contract_sha: Optional[str] = None
         self.execution_specs = {}
         self._load_final_execution_contract()
         self._register_capability_key_aliases()
@@ -348,6 +367,40 @@ class ContractRegistry:
                           "epoch_source": source})
             kept[target] = dataclasses.replace(c, scope=scope)
         self.contracts = kept
+
+    def _load_final_execution_contract(self, path: Optional[Path] = None) -> None:
+        """Load the final producer-facing MCP execution contract from JSON.
+
+        Populates self._final_contract (atlas_id -> producer_lookup row) and
+        self._final_contract_sha.  Never raises; logs a warning on failure.
+        Does NOT replace or override any CapabilityContract in self.contracts —
+        authority boundaries are unchanged.
+        """
+        p = path or FINAL_CONTRACT_PATH
+        try:
+            data = json.loads(Path(p).read_text(encoding="utf-8"))
+        except Exception as e:
+            print("[ContractRegistry] Warning: could not load final_execution_contract_v1.json: %s" % e)
+            return
+        sha = data.get("serum_binary_sha256")
+        if self.epoch is not None and sha != self.epoch.binary_sha256:
+            print("[ContractRegistry] Warning: final_execution_contract sha %s != epoch %s" % (
+                str(sha)[:8], self.epoch.label))
+        self._final_contract = data.get("producer_lookup", {})
+        self._final_contract_sha = sha
+        print("[ContractRegistry] Loaded final_execution_contract_v1.json: %d entries, sha=%s..." % (
+            len(self._final_contract), str(sha)[:8]))
+
+    def lookup_final(self, atlas_id: str) -> Optional[Dict]:
+        """Return the producer_lookup entry for atlas_id from final_execution_contract_v1.json.
+
+        Returns a dict with keys: op, raw, verify, class, exception_policy.
+        Returns None when the contract was not loaded or the atlas_id is absent.
+        Never falls back to pickle stores, hardcoded dicts, or legacy directories.
+        """
+        if self._final_contract is None:
+            return None
+        return self._final_contract.get(atlas_id)
 
     def get_contracts_dict(self) -> Dict[Tuple[str, str], CapabilityContract]:
         """Return contracts in format expected by admission.admit().

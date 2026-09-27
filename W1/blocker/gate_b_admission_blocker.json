@@ -1,0 +1,52 @@
+{
+  "status": "GATE_B_BLOCKED",
+  "control": "env2.decay",
+  "capability_key": "envelope2_field_decay",
+  "reproduction": {
+    "code": "from serum2.producer.producer_brain import ProducerBrain, ProducerRequest\nr = ProducerBrain().execute(ProducerRequest(user_intent='shorten Env2.Decay to 5 s', mode='EXECUTE', visual_mode='NEVER'))",
+    "result": {
+      "execution_status": "REFUSED_NO_EVIDENCE",
+      "resolution_mode": "B1_CANONICAL",
+      "admitted": null,
+      "refusal": {
+        "code": "REFUSED_NO_CAPABILITY",
+        "layer": "CAPABILITY_RESOLUTION",
+        "canonical_target": "Env2.Decay",
+        "reason": "No admission-ready evidence on either route for 'Env2.Decay' (capability_key=envelope2_field_decay). REFUSE."
+      }
+    },
+    "also_tried": "Constructing ProducerBrain(epoch=EPOCH_2_0_23, binding_evidence_dir='serum2/qualification/binding_evidence') -- same refusal, because Gap B (below) means RouteSelector never sees the epoch-aware registry regardless."
+  },
+  "root_causes": [
+    {
+      "id": "gap_a_target_key_mismatch",
+      "summary": "Evidence-derived contracts register under atlas_id naming ('env2.decay'); SEMANTIC_TARGETS/TargetResolver require strict equality against the legacy capability_key naming ('envelope2_field_decay').",
+      "evidence": "Constructing ContractRegistry(epoch=EPOCH_2_0_23, binding_evidence_dir='serum2/qualification/binding_evidence') DOES produce a real CapabilityContract for env2.decay (status=STRUCTURAL_ONLY, execution_binding=SERUM_PRESET_STRUCTURAL -> Env1.plainParams.kParamDecay), confirmed by direct inspection: reg.contracts['env2.decay'] is populated, reg.binding_diagnostics['loaded'] includes 'env2.decay'. But targets.py's resolution (serum2/compiler/targets.py:417) does 'c.target == ref.capability_key', i.e. it looks for contracts['envelope2_field_decay'], which does not exist.",
+      "files": [
+        "serum2/compiler/targets.py:417",
+        "serum2/qualification/binding_contract.py (contract_from_binding_evidence -> target = ev['control_id'])",
+        "serum2/producer/concept_representation.py:111 (explicit design comment against fuzzy name/suffix matching)"
+      ],
+      "do_not_fix_with": "Fuzzy/suffix-based contract lookup -- concept_representation.py:111 explicitly warns this would let env2.decay borrow env1's contract. Any fix must be an explicit, hand-reviewed capability_key<->atlas_id crosswalk, never a runtime string heuristic."
+    },
+    {
+      "id": "gap_b_route_selector_disconnected_registry",
+      "summary": "RouteSelector.__init__ (serum2/producer/route_selection.py:152) hardcodes `self._fresh_registry = ContractRegistry()` with no epoch/binding_evidence_dir, completely independent of the epoch-aware registry ProducerBrain builds for itself (self._registry). Even if Gap A is fixed, RouteSelector's own internal evidence-tier check never sees the promoted env2.decay contract, so it still reports UNQUALIFIED/REFUSE for both DAWDREAMER_SERUM and ABLETON_MCP routes.",
+      "files": ["serum2/producer/route_selection.py:152"],
+      "confirmed_by": "This is the actual origin of the 'No admission-ready evidence on either route' message (serum2/producer/route_selection.py:234), which is the exact refusal text produced in the reproduction above."
+    }
+  ],
+  "proposed_fix_scope_minimal_env2_decay_only": [
+    "1. Add one explicit capability_key<->atlas_id crosswalk entry mapping 'envelope2_field_decay' <-> 'env2.decay' (reviewed by hand, not derived by string matching).",
+    "2. Change RouteSelector.__init__ to accept an optional injected ContractRegistry (default unchanged: ContractRegistry() for backward compatibility), and have ProducerBrain pass its own self._registry.",
+    "3. Preserve strict target-key equality everywhere else (do not relax targets.py:417's check).",
+    "4. Preserve the A2 admission gate exactly as-is; add regression tests covering: (a) env2.decay now resolves through RouteSelector when given the epoch-aware registry, (b) env1.decay / env2.decay remain distinguishable (no cross-contamination), (c) the default no-epoch legacy behavior (existing ~40 pickle-store contracts) is unchanged.",
+    "5. Rerun the canonical path: ProducerBrain(epoch=EPOCH_2_0_23, binding_evidence_dir=..., promoted_evidence_dir=...).execute(ProducerRequest(...)) end to end through finalize_serum_preset_execution(), and confirm proof_level reaches LIVE_UI_VERIFIED only when native evidence is fed back in."
+  ],
+  "explicitly_not_authorized_in_local_session": [
+    "Modifying RouteSelector, contract_registry.py, producer_brain.py, or admit()/admit_rows() to force this through locally.",
+    "Any crosswalk or registry-injection change performed outside a reviewed cloud session.",
+    "Treating the bulk-causal sweep's HOST_CONFIRMED classification as equivalent to producer-chain admission."
+  ],
+  "recorded_by": "local W1 native verification session, 2026-09-27"
+}

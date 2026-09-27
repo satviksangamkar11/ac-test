@@ -1,0 +1,7 @@
+{
+  "compiled_preset.SerumPreset": "0998b65a229b275cc0c93dec290d96544e4297591bac2124d9bcb8bdf83567a0",
+  "native_resave.SerumPreset": "c61700aa0a6af6778a97cf56967e483bebbe1d8c1e5fd2591a37a4d0c9b6a41b",
+  "serum_module_loaded_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+  "serum_module_pinned_epoch_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+  "sha_match_pinned_epoch": true
+}

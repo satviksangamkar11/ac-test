@@ -1,0 +1,76 @@
+{
+  "evidence_label": "NATIVE_SERUM_STATE_PROOF_ONLY",
+  "explicitly_not": ["GATE_B_COMPLETE", "LIVE_UI_VERIFIED", "reference_verified=True"],
+  "atlas_id": "env2.decay",
+  "raw_body_path": "Env1.plainParams.kParamDecay",
+  "requested_test_operand": 5.0,
+  "requested_test_operand_unit": "seconds",
+  "run_id": "W1_GATE_B_22433E83",
+  "track_index_at_time_of_test": 6,
+  "epoch": {
+    "serum_version": "2.0.23",
+    "binary_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3"
+  },
+  "environment_verification": {
+    "disk_preset_sha256_checked": true,
+    "loaded_ableton_module_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+    "matches_pinned_epoch": true,
+    "abletonmcp_connected": true,
+    "verification_method": "PowerShell Get-Process | Select Modules, compared against pinned SHA"
+  },
+  "a2_gate_check": {
+    "bucket": "A",
+    "classification": "MCP_EXEC_HOST_CONFIRMED",
+    "conformance_exception": false,
+    "source": "final_execution_contract_v1.json (producer_lookup['env2.decay'])"
+  },
+  "preset_load": {
+    "method": "create_serum_track (AbletonMCP)",
+    "status": "LOADED_VISUAL",
+    "track_index": 6
+  },
+  "native_ui_readback": {
+    "tab": "ENV 2",
+    "displayed_values": {"ATK": "0.5ms", "HOLD": "0.0ms", "DEC": "5.00s", "SUS": "100%", "REL": "15ms"},
+    "target_field": "DEC",
+    "target_displayed_value": "5.00 s",
+    "capture_method": "computer-use screenshot during interactive session",
+    "screenshot_persisted_as_file": false,
+    "screenshot_sha256": null,
+    "note": "Screenshot was observed and read directly during the interactive session via the computer-use tool; it was not saved to a standalone image file at the time of capture, so no SHA256 is recorded for it. Not fabricated -- left null rather than invented. The persisted, hashable evidence for this observation is the native_resave.SerumPreset file plus readback_diff.json, both of which independently confirm the same DEC=5.0s state."
+  },
+  "native_resave": {
+    "filename": "W1_GATE_B_ENV2_DECAY_NATIVE_RESAVE.SerumPreset",
+    "sha256": "c61700aa0a6af6778a97cf56967e483bebbe1d8c1e5fd2591a37a4d0c9b6a41b",
+    "save_method": "Serum's own native \"Save Preset As...\" dialog, driven via OS-level UI automation to the real User presets folder",
+    "saved_path": "Documents\\Xfer\\Serum 2 Presets\\Presets\\User\\W1_GATE_B_ENV2_DECAY_NATIVE_RESAVE.SerumPreset"
+  },
+  "readback_diff_result": {
+    "target_control_compiled_value": 5.0,
+    "target_control_native_resave_value": 5.000000000000001,
+    "residual": 1e-15,
+    "match": "MATCH_WITHIN_FLOAT64_PRECISION",
+    "total_leaf_diffs": 141,
+    "non_target_diffs": "all metadata/serialization-format artifacts, none touching Env1.plainParams.kParamDecay",
+    "detail_file": "readback_diff.json"
+  },
+  "restoration": {
+    "method": "AbletonMCP delete_track(track_index=6)",
+    "result": "Deleted track 'W1_GATE_B_22433E83'. 5 tracks remaining.",
+    "pre_test_track_count": 5,
+    "post_test_track_count": 5,
+    "verified": true,
+    "verification_method": "get_session_info track_count compared before/after"
+  },
+  "canonical_gate_b_finalization": {
+    "attempted": true,
+    "method": "ProducerBrain().execute(ProducerRequest(user_intent='shorten Env2.Decay to 5 s'))",
+    "execution_status": "REFUSED_NO_EVIDENCE",
+    "refusal_code": "REFUSED_NO_CAPABILITY",
+    "refusal_layer": "CAPABILITY_RESOLUTION / ROUTE_SELECTION",
+    "refusal_reason": "No admission-ready evidence on either route for 'Env2.Decay' (capability_key=envelope2_field_decay). REFUSE.",
+    "finalize_serum_preset_execution_reached": false,
+    "gate_b_status": "BLOCKED",
+    "note": "The canonical ProducerBrain -> admission -> finalize_serum_preset_execution() path was never reached. The native UI proof above is real but does not by itself constitute Gate B closure."
+  }
+}

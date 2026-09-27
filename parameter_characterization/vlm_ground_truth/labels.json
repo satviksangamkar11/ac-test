@@ -1,0 +1,49 @@
+{
+  "methodology": "Ground truth was read directly from native Serum 2.0.23 UI state after loading each preset via AbletonMCP create_serum_track. Static numeric readouts were captured with a full-screen .NET GDI screen capture (real file, real SHA256), then cropped to the relevant region (also hashed). No value here was asked of or produced by a VLM -- these are the labels a VLM would later be graded against.",
+  "captures": [
+    {
+      "control_group": "envelope_1_all_fields",
+      "source_preset": "BULKCAUSAL_VERIFY/BULK_01_WAVETABLE_MAIN.SerumPreset",
+      "panel": "OSC (default landing tab)",
+      "capture_type": "static",
+      "native_values": {"ATK": "0.5 ms", "HOLD": "0.0 ms", "DEC": "1.00 s", "SUS": "-31.8 dB", "REL": "15 ms"},
+      "file_declared_values": {"attack": 0.0005, "decay": 1.0, "sustain": 0.16, "release": 0.01},
+      "screenshot_file": "screenshots/BULK_01_WAVETABLE_MAIN_env1_static.png",
+      "screenshot_sha256": "65fdd204516836152d880a1aeb2c5232c4a0c3e79fe3f254356c7e4b33b937b1",
+      "crop_file": "crops/BULK_01_WAVETABLE_MAIN_env1_crop.png",
+      "crop_sha256": "f30d5a6fe0c261db340517376eb373b614323e2beebb608e5248c9ff5da56f3c",
+      "crop_region_px": [220, 455, 480, 660],
+      "serum_module_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+      "note": "sustain=0.16 (normalized) displays as -31.8 dB, not the simple 20*log10(0.16)=-15.9dB one might expect -- consistent with a squared (40*log10) amplitude-to-dB curve for envelope sustain in this build. Recorded as observed, not corrected/assumed."
+    },
+    {
+      "control_group": "envelope_1_all_fields",
+      "source_preset": "BULKCAUSAL_VERIFY/CAL_06_FILTER_CUTOFF.SerumPreset",
+      "panel": "GLOBAL",
+      "capture_type": "static",
+      "native_values": {"ATK": "0.5 ms", "HOLD": "0.0 ms", "DEC": "1.00 s", "SUS": "0.0 dB", "REL": "15 ms"},
+      "file_declared_values": {"attack": 0.0005, "decay": 1.0, "sustain": 1.0, "release": 0.01},
+      "screenshot_file": "screenshots/CAL_06_FILTER_CUTOFF_global_static.png",
+      "screenshot_sha256": "8306f2d14b40914dd637c74b3ee1bd551a89db06226a62c6c8c0421b9c6fa6a8",
+      "crop_file": "crops/CAL_06_env1_crop.png",
+      "crop_sha256": "115898c9181d4b5503bc3e57d9a753b7477f9d64bb28241144a954d4c4c293d3",
+      "crop_region_px": [300, 795, 640, 830],
+      "serum_module_sha256": "9293eb90fc9fc890fd2505272abd6172cee5bd32b1fb20be22531810702bf9b3",
+      "note": "sustain=1.0 (normalized) displays as 0.0 dB -- confirms the dB curve passes through unity at full sustain, consistent with the note above (40*log10(1.0)=0)."
+    }
+  ],
+  "failed_capture_attempts": [
+    {
+      "control_id": "filter1.cutoff",
+      "source_preset": "BULKCAUSAL_VERIFY/BULK_01_WAVETABLE_MAIN.SerumPreset",
+      "capture_type": "tooltip",
+      "attempted_value_live_observed_only": "Filter 1 Freq: 172 Hz",
+      "status": "FAILED_NOT_PERSISTED",
+      "screenshot_file": "screenshots/BULK_01_WAVETABLE_MAIN_filter1_tooltip.png",
+      "screenshot_sha256": "9cfa00a4f1ac8965b494c4c78b241c79084f9b010a05f0aca6503eeb22d833a6",
+      "reason": "The tooltip value 'Filter 1 Freq: 172 Hz' WAS observed live through the interactive computer-use automation channel (press-and-hold on the Filter 1 cutoff knob). However, three independent attempts to reproduce that same press-and-hold state from a separate PowerShell process (mouse_event, then SendInput, with and without SetForegroundWindow) never triggered the tooltip in a screen capture taken from that process -- the synthetic input from the scripting channel does not appear to reach the plugin GUI's hit-testing the same way the interactive automation channel's input does. No value or hash was fabricated for this failed capture; the live-observed string is recorded as an unverified/unpersisted observation only, separate from the two confirmed captures above.",
+      "explicitly_not_used_as_ground_truth": true
+    }
+  ],
+  "scope_note": "This is a representative sample (2 controls fully captured, 1 documented failure), not an exhaustive pass over all 330 bulk-causal controls or the full CAL_*/BULK_* preset set. Extending to the full set is straightforward with the same method (create_serum_track -> static full-screen capture -> crop -> hash) for any control whose value is shown without requiring a held tooltip; tooltip-gated controls need the automation-channel gap above resolved first."
+}
