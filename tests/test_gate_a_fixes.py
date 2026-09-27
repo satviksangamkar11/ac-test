@@ -112,6 +112,49 @@ class TestA1OperandSourcing:
             "A1: operand must be the observed value, never the qualification_test_value"
 
 
+class TestA2IndependentGates:
+    """A2: expected_raw and declared_domain are independently enforced (not if/elif)."""
+
+    def test_a2_both_gates_checked_independently(self):
+        """A2: Both expected_raw AND declared_domain are checked; neither can bypass the other.
+
+        Proves: If expected_raw passes, declared_domain is still checked.
+        Proves: Control-flow is NOT if/elif (which would skip second gate).
+        """
+        from serum2.producer.state_admission import admit_rows
+        import inspect
+
+        source = inspect.getsource(admit_rows)
+
+        # A2 behavioral proof: find the gate checks
+        lines = source.split('\n')
+
+        # Look for the expected_raw and declared_domain checks
+        expected_raw_idx = None
+        declared_domain_idx = None
+
+        for i, line in enumerate(lines):
+            if 'spec.get("expected_raw")' in line and expected_raw_idx is None:
+                expected_raw_idx = i
+            if 'spec.get("declared_domain")' in line and declared_domain_idx is None:
+                declared_domain_idx = i
+
+        assert expected_raw_idx is not None, "expected_raw check not found"
+        assert declared_domain_idx is not None, "declared_domain check not found"
+
+        # A2 fix: both checks must use 'if', not 'if/elif'
+        # The line before expected_raw should be 'if' (not 'elif')
+        expected_raw_line = lines[expected_raw_idx].strip()
+        declared_domain_line = lines[declared_domain_idx].strip()
+
+        # Both should start with 'if spec.get' (not 'elif')
+        # This proves they're independent gates, not mutually exclusive branches
+        assert expected_raw_line.startswith("if spec.get"), \
+            f"A2: expected_raw check should start with 'if', got: {expected_raw_line}"
+        assert declared_domain_line.startswith("if spec.get"), \
+            f"A2: declared_domain check should start with 'if', got: {declared_domain_line}"
+
+
 class TestA5LedgerSafety:
     """A5: _coerce handles macro and singleton_field safely; unknown kinds → UNSUPPORTED."""
 

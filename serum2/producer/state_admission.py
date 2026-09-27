@@ -97,7 +97,7 @@ def admit_rows(rows: List[Row], epoch: ExecutionEpoch, binding_evidence_dir=None
                         elif spec.get("final_execution_classification") == "MCP_EXEC_CONFORMANCE_EXCEPTION":
                             tr.status, tr.stop_stage = "REFUSED_CONFORMANCE_EXCEPTION", "FINAL_CONTRACT"
                             tr.detail = "contract %s is a conformance exception; not executable" % c.contract_key
-                        elif spec.get("expected_raw"):
+                        if spec.get("expected_raw"):
                             # expected_raw is a list of {path, value}; check the first path agrees
                             raw_list = spec["expected_raw"]
                             raw_path = raw_list[0]["path"] if raw_list else None
@@ -108,7 +108,7 @@ def admit_rows(rows: List[Row], epoch: ExecutionEpoch, binding_evidence_dir=None
                                 tr.status, tr.stop_stage = "REFUSED_BODY_PATH_MISMATCH", "FINAL_CONTRACT"
                                 tr.detail = "body path in final contract (%r) != capability contract binding (%r)" % (
                                     first_path, binding_body)
-                        elif spec.get("declared_domain"):
+                        if spec.get("declared_domain"):
                             val = o.get("value", o.get("amount"))
                             d = spec["declared_domain"]
                             mn, mx = d.get("min"), d.get("max")
