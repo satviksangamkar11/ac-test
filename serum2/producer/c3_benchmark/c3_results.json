@@ -1,13 +1,14 @@
 {
-  "benchmark_version": "c3-1.0.0",
-  "commit_sha": "5d317896390d9238f69f5700b4d510b2f1404f1b",
+  "benchmark_version": "c3-3.0.0",
+  "validated_against_remediation_commit": "9115382",
+  "commit_sha": "911538210fe9b53f8d1d9bfe5a82be3dc540d5c3",
   "model": "Qwen/Qwen2.5-VL-3B-Instruct (local, 4-bit nf4, transformers)",
+  "ocr_engine": "easyocr==1.7.2 (local, CUDA, en detector+recognizer)",
   "gpu": "NVIDIA GeForce RTX 3050 6GB Laptop GPU",
-  "ocr_engine": "OCR_ENGINE_UNAVAILABLE",
   "confident_threshold": 0.9,
   "python": "3.14.3",
   "platform": "Windows-11-10.0.26200-SP0",
-  "cases": [
+  "real_cases": [
     {
       "case_id": "real_bulk01_env1_decay",
       "provenance": "REAL_W1_EVIDENCE",
@@ -16,14 +17,64 @@
       "ground_truth_unit": "s",
       "ground_truth_source": "screenshots/BULK_01_WAVETABLE_MAIN_env1_static.png",
       "ground_truth_readable": true,
+      "evidence_hash": "f30d5a6fe0c261db340517376eb373b614323e2beebb608e5248c9ff5da56f3c",
       "raw_vlm_output": "20",
       "vlm_numeric_parsed": 20.0,
       "vlm_confidence": 0.3032924582560857,
-      "raw_ocr_output": "OCR_ENGINE_UNAVAILABLE",
+      "raw_ocr_fragments": [
+        {
+          "text": "0i1 :",
+          "confidence": 0.12078023957858819
+        },
+        {
+          "text": "(T",
+          "confidence": 0.04198075304296355
+        },
+        {
+          "text": "UNISOH",
+          "confidence": 0.6587088236642482
+        },
+        {
+          "text": "DETUNE",
+          "confidence": 0.9746402255888582
+        },
+        {
+          "text": "BLEHD",
+          "confidence": 0.5965438276991812
+        },
+        {
+          "text": "SyNc",
+          "confidence": 0.3161117434501648
+        },
+        {
+          "text": "AM(B)",
+          "confidence": 0.941709083935595
+        },
+        {
+          "text": "WARP",
+          "confidence": 0.983765184879303
+        },
+        {
+          "text": "ENV 1",
+          "confidence": 0.8852847780720171
+        },
+        {
+          "text": "ENV 2",
+          "confidence": 0.9989171637539184
+        }
+      ],
+      "ocr_numeric_parsed": null,
+      "ocr_matched_raw_text": null,
+      "ocr_field_positionally_located": false,
+      "ocr_used_as_source": false,
+      "sources_count": 1,
+      "genuinely_independent_sources": false,
       "adjudicated_outcome": "AMBIGUOUS",
       "adjudicated_value": 20.0,
       "adjudicated_confidence": 0.3032924582560857,
       "adjudicated_detail": "single source below confidence threshold (0.303 < 0.90)",
+      "adjudicated_evidence_hash": "f30d5a6fe0c261db340517376eb373b614323e2beebb608e5248c9ff5da56f3c",
+      "adjudicated_control_id": "env2.decay",
       "exact_match": false,
       "confident_wrong": false,
       "abstained": true
@@ -36,17 +87,185 @@
       "ground_truth_unit": "s",
       "ground_truth_source": "screenshots/CAL_06_FILTER_CUTOFF_global_static.png",
       "ground_truth_readable": true,
+      "evidence_hash": "115898c9181d4b5503bc3e57d9a753b7477f9d64bb28241144a954d4c4c293d3",
       "raw_vlm_output": "1.00 s",
       "vlm_numeric_parsed": 1.0,
       "vlm_confidence": 0.9439840515454611,
-      "raw_ocr_output": "OCR_ENGINE_UNAVAILABLE",
+      "raw_ocr_fragments": [
+        {
+          "text": "0,5 ms",
+          "confidence": 0.353754348257436
+        },
+        {
+          "text": "0@ms",
+          "confidence": 0.32003915309906006
+        },
+        {
+          "text": "1,00 $",
+          "confidence": 0.7203404298903722
+        },
+        {
+          "text": "0 0dB",
+          "confidence": 0.13264383801776447
+        },
+        {
+          "text": "15ms",
+          "confidence": 0.969541072845459
+        }
+      ],
+      "ocr_numeric_parsed": 1.0,
+      "ocr_matched_raw_text": "1,00 $",
+      "ocr_field_positionally_located": true,
+      "ocr_used_as_source": true,
+      "sources_count": 2,
+      "genuinely_independent_sources": true,
       "adjudicated_outcome": "OBSERVED",
       "adjudicated_value": 1.0,
       "adjudicated_confidence": 0.9439840515454611,
-      "adjudicated_detail": "single source admitted (confidence >= 0.90)",
+      "adjudicated_detail": "multi-source agreement (2 candidates)",
+      "adjudicated_evidence_hash": "115898c9181d4b5503bc3e57d9a753b7477f9d64bb28241144a954d4c4c293d3",
+      "adjudicated_control_id": "env2.decay",
       "exact_match": true,
       "confident_wrong": false,
       "abstained": false
+    },
+    {
+      "case_id": "real_c3_env1_diverse_decay",
+      "provenance": "REAL_W1_EVIDENCE",
+      "control_id": "env1.decay",
+      "ground_truth_value": 3.5,
+      "ground_truth_unit": "s",
+      "ground_truth_source": "serum2/producer/c3_benchmark/ground_truth/C3_GT_ENV1_DIVERSE_env1_crop.png",
+      "ground_truth_readable": true,
+      "evidence_hash": "49e5ba37cdcbfceb34c9fc6ed19d1739d844e348ab1b4726681c64892e31ba1e",
+      "raw_vlm_output": "3.50 s",
+      "vlm_numeric_parsed": 3.5,
+      "vlm_confidence": 0.9752130607763926,
+      "raw_ocr_fragments": [
+        {
+          "text": "250 ms",
+          "confidence": 0.48280728312857407
+        },
+        {
+          "text": "50 ms",
+          "confidence": 0.8667676350184748
+        },
+        {
+          "text": "3.50 $",
+          "confidence": 0.4346535177039065
+        },
+        {
+          "text": "F15.]d8",
+          "confidence": 0.32377130925594166
+        },
+        {
+          "text": "bo0 Ms",
+          "confidence": 0.5407420493997553
+        }
+      ],
+      "ocr_numeric_parsed": 3.5,
+      "ocr_matched_raw_text": "3.50 $",
+      "ocr_field_positionally_located": true,
+      "ocr_used_as_source": true,
+      "sources_count": 2,
+      "genuinely_independent_sources": true,
+      "adjudicated_outcome": "OBSERVED",
+      "adjudicated_value": 3.5,
+      "adjudicated_confidence": 0.9752130607763926,
+      "adjudicated_detail": "multi-source agreement (2 candidates)",
+      "adjudicated_evidence_hash": "49e5ba37cdcbfceb34c9fc6ed19d1739d844e348ab1b4726681c64892e31ba1e",
+      "adjudicated_control_id": "env1.decay",
+      "exact_match": true,
+      "confident_wrong": false,
+      "abstained": false
+    },
+    {
+      "case_id": "real_c3_env3_diverse_sustain",
+      "provenance": "REAL_W1_EVIDENCE",
+      "control_id": "env3.sustain",
+      "ground_truth_value": "61%",
+      "ground_truth_unit": null,
+      "ground_truth_source": "serum2/producer/c3_benchmark/ground_truth/C3_GT_ENV3_DIVERSE_env3_crop.png",
+      "ground_truth_readable": true,
+      "evidence_hash": "018d6bc474465b58515d79e2bc5db7dde612c403b4df5314750a1b1b1c7f6f0e",
+      "raw_vlm_output": "61%",
+      "vlm_numeric_parsed": 61.0,
+      "vlm_confidence": 0.8275113552808762,
+      "raw_ocr_fragments": [
+        {
+          "text": "6.,50 5",
+          "confidence": 0.2033775741025132
+        },
+        {
+          "text": "120 $",
+          "confidence": 0.7849012252885229
+        },
+        {
+          "text": "g0 ms",
+          "confidence": 0.26937178902986986
+        },
+        {
+          "text": "6191",
+          "confidence": 0.10337453335523605
+        }
+      ],
+      "ocr_numeric_parsed": 6191.0,
+      "ocr_matched_raw_text": "6191",
+      "ocr_field_positionally_located": true,
+      "ocr_used_as_source": true,
+      "sources_count": 2,
+      "genuinely_independent_sources": true,
+      "adjudicated_outcome": "AMBIGUOUS",
+      "adjudicated_value": null,
+      "adjudicated_confidence": 0.0,
+      "adjudicated_detail": "split: [(61.0, '%'), (6191.0, '')]",
+      "adjudicated_evidence_hash": null,
+      "adjudicated_control_id": "",
+      "exact_match": false,
+      "confident_wrong": false,
+      "abstained": true
+    },
+    {
+      "case_id": "real_c3_global_tuning",
+      "provenance": "REAL_W1_EVIDENCE",
+      "control_id": "global.tuning",
+      "ground_truth_value": 442.0,
+      "ground_truth_unit": "Hz",
+      "ground_truth_source": "serum2/producer/c3_benchmark/ground_truth/C3_GT_GLOBAL_DIVERSE_tuning_crop.png",
+      "ground_truth_readable": true,
+      "evidence_hash": "c60e2e34757b5c17c418152f90ee5bf605781e39ebc8a9c9564ff5cc2b8ea771",
+      "raw_vlm_output": "442 Hz",
+      "vlm_numeric_parsed": 442.0,
+      "vlm_confidence": 0.9790816307067871,
+      "raw_ocr_fragments": [
+        {
+          "text": "G",
+          "confidence": 0.6306437309306148
+        },
+        {
+          "text": "4e",
+          "confidence": 0.21952784690630014
+        },
+        {
+          "text": "4L2 Hz",
+          "confidence": 0.4632763395571858
+        }
+      ],
+      "ocr_numeric_parsed": 4.0,
+      "ocr_matched_raw_text": "4L2 Hz",
+      "ocr_field_positionally_located": true,
+      "ocr_used_as_source": true,
+      "sources_count": 2,
+      "genuinely_independent_sources": true,
+      "adjudicated_outcome": "AMBIGUOUS",
+      "adjudicated_value": null,
+      "adjudicated_confidence": 0.0,
+      "adjudicated_detail": "split: [(442.0, 'hz'), (4.0, 'hz')]",
+      "adjudicated_evidence_hash": null,
+      "adjudicated_control_id": "",
+      "exact_match": false,
+      "confident_wrong": false,
+      "abstained": true
     },
     {
       "case_id": "real_missing_filter1_cutoff_tooltip",
@@ -55,7 +274,8 @@
       "ground_truth_value": null,
       "ground_truth_readable": false,
       "raw_vlm_output": null,
-      "raw_ocr_output": "OCR_ENGINE_UNAVAILABLE",
+      "raw_ocr_fragments": null,
+      "evidence_hash": null,
       "adjudicated_outcome": "UNREADABLE",
       "adjudicated_value": null,
       "adjudicated_confidence": 0.0,
@@ -64,12 +284,15 @@
       "confident_wrong": false,
       "abstained": true,
       "note": "The tooltip value 'Filter 1 Freq: 172 Hz' WAS observed live through the interactive computer-use automation channel (press-and-hold on the Filter 1 cutoff knob). However, three independent attempts to reproduce that same press-and-hold state from a separate PowerShell process (mouse_event, then SendInput, with and without SetForegroundWindow) never triggered the tooltip in a screen capture taken from that process -- the synthetic input from the scripting channel does not appear to reach the plugin GUI's hit-testing the same way the interactive automation channel's input does. No value or hash was fabricated for this failed capture; the live-observed string is recorded as an unverified/unpersisted observation only, separate from the two confirmed captures above."
-    },
+    }
+  ],
+  "synthetic_cases": [
     {
       "case_id": "synthetic_ambiguous_numeric_split",
       "provenance": "SYNTHETIC",
-      "description": "VLM and OCR disagree on a numeric value with both above threshold -- must resolve AMBIGUOUS, not average or pick one.",
+      "description": "VLM and OCR disagree on a numeric value. Must resolve AMBIGUOUS.",
       "control_id": "synthetic.filter1.cutoff",
+      "requested_control_id": "",
       "ground_truth_value": 172.0,
       "ground_truth_readable": true,
       "input_candidates": [
@@ -77,19 +300,23 @@
           "value": 172.0,
           "confidence": 0.95,
           "source": "vlm",
-          "outcome": "CANDIDATE"
+          "outcome": "CANDIDATE",
+          "control_id": ""
         },
         {
           "value": 612.0,
           "confidence": 0.93,
           "source": "ocr",
-          "outcome": "CANDIDATE"
+          "outcome": "CANDIDATE",
+          "control_id": ""
         }
       ],
       "adjudicated_outcome": "AMBIGUOUS",
       "adjudicated_value": null,
       "adjudicated_confidence": 0.0,
       "adjudicated_detail": "split: [172.0, 612.0]",
+      "adjudicated_evidence_hash": null,
+      "adjudicated_control_id": "",
       "exact_match": false,
       "confident_wrong": false,
       "abstained": true
@@ -97,8 +324,9 @@
     {
       "case_id": "synthetic_wrong_ocr_correct_vlm_agree_fails",
       "provenance": "SYNTHETIC",
-      "description": "OCR misreads digits; VLM is correct. Sources disagree -> must abstain (AMBIGUOUS), not silently trust VLM.",
+      "description": "OCR misreads digits; VLM is correct. Sources disagree -> must abstain.",
       "control_id": "synthetic.env1.attack",
+      "requested_control_id": "",
       "ground_truth_value": 5.0,
       "ground_truth_readable": true,
       "input_candidates": [
@@ -106,19 +334,23 @@
           "value": 5.0,
           "confidence": 0.92,
           "source": "vlm",
-          "outcome": "CANDIDATE"
+          "outcome": "CANDIDATE",
+          "control_id": ""
         },
         {
           "value": 8.0,
           "confidence": 0.91,
           "source": "ocr",
-          "outcome": "CANDIDATE"
+          "outcome": "CANDIDATE",
+          "control_id": ""
         }
       ],
       "adjudicated_outcome": "AMBIGUOUS",
       "adjudicated_value": null,
       "adjudicated_confidence": 0.0,
       "adjudicated_detail": "split: [5.0, 8.0]",
+      "adjudicated_evidence_hash": null,
+      "adjudicated_control_id": "",
       "exact_match": false,
       "confident_wrong": false,
       "abstained": true
@@ -126,8 +358,9 @@
     {
       "case_id": "synthetic_wrong_vlm_high_confidence",
       "provenance": "SYNTHETIC",
-      "description": "The critical safety case: a single VLM source is confidently WRONG (>= CONFIDENT_THRESHOLD). Policy must not admit a single overconfident wrong source as fact -- this case is the direct test of the confident-wrong gate.",
+      "description": "GAP B direct test: a single VLM source is confidently WRONG (>=0.9). Under the remediated policy this must now abstain (AMBIGUOUS, single_source=True), not be admitted.",
       "control_id": "synthetic.env2.release",
+      "requested_control_id": "",
       "ground_truth_value": 15.0,
       "ground_truth_readable": true,
       "input_candidates": [
@@ -135,22 +368,26 @@
           "value": 1500.0,
           "confidence": 0.97,
           "source": "vlm",
-          "outcome": "CANDIDATE"
+          "outcome": "CANDIDATE",
+          "control_id": ""
         }
       ],
-      "adjudicated_outcome": "OBSERVED",
+      "adjudicated_outcome": "AMBIGUOUS",
       "adjudicated_value": 1500.0,
       "adjudicated_confidence": 0.97,
-      "adjudicated_detail": "single source admitted (confidence >= 0.90)",
+      "adjudicated_detail": "single source: corroboration required (confidence 0.970 >= 0.90 but no independent source)",
+      "adjudicated_evidence_hash": null,
+      "adjudicated_control_id": "",
       "exact_match": false,
-      "confident_wrong": true,
-      "abstained": false
+      "confident_wrong": false,
+      "abstained": true
     },
     {
       "case_id": "synthetic_correct_unit_format_difference",
       "provenance": "SYNTHETIC",
-      "description": "Two sources agree on the numeric value but format units differently upstream (both already normalized to the same unit by the NUMERIC strategy before adjudication) -- must still resolve OBSERVED.",
+      "description": "Two sources agree on the numeric value after normalization -- must resolve OBSERVED.",
       "control_id": "synthetic.env1.decay",
+      "requested_control_id": "",
       "ground_truth_value": 1.0,
       "ground_truth_readable": true,
       "input_candidates": [
@@ -158,19 +395,23 @@
           "value": 1.0,
           "confidence": 0.94,
           "source": "vlm",
-          "outcome": "CANDIDATE"
+          "outcome": "CANDIDATE",
+          "control_id": ""
         },
         {
           "value": 1.0,
           "confidence": 0.9,
           "source": "ocr",
-          "outcome": "CANDIDATE"
+          "outcome": "CANDIDATE",
+          "control_id": ""
         }
       ],
       "adjudicated_outcome": "OBSERVED",
       "adjudicated_value": 1.0,
       "adjudicated_confidence": 0.94,
       "adjudicated_detail": "multi-source agreement (2 candidates)",
+      "adjudicated_evidence_hash": null,
+      "adjudicated_control_id": "",
       "exact_match": true,
       "confident_wrong": false,
       "abstained": false
@@ -178,8 +419,9 @@
     {
       "case_id": "synthetic_boolean_state_agree",
       "provenance": "SYNTHETIC",
-      "description": "Boolean/toggle state (filter enabled) with agreeing sources -- must resolve OBSERVED with the correct ON/OFF value, not a numeric coercion.",
+      "description": "Boolean/toggle state with agreeing sources -- must resolve OBSERVED with correct ON/OFF.",
       "control_id": "synthetic.filter1.enabled",
+      "requested_control_id": "",
       "ground_truth_value": "ON",
       "ground_truth_readable": true,
       "input_candidates": [
@@ -187,19 +429,23 @@
           "value": "ON",
           "confidence": 1.0,
           "source": "vlm",
-          "outcome": "CANDIDATE"
+          "outcome": "CANDIDATE",
+          "control_id": ""
         },
         {
           "value": "ON",
           "confidence": 1.0,
           "source": "ocr",
-          "outcome": "CANDIDATE"
+          "outcome": "CANDIDATE",
+          "control_id": ""
         }
       ],
       "adjudicated_outcome": "OBSERVED",
       "adjudicated_value": "ON",
       "adjudicated_confidence": 1.0,
       "adjudicated_detail": "multi-source agreement (2 candidates)",
+      "adjudicated_evidence_hash": null,
+      "adjudicated_control_id": "",
       "exact_match": true,
       "confident_wrong": false,
       "abstained": false
@@ -207,8 +453,9 @@
     {
       "case_id": "synthetic_enum_mode_wrong_single_source_high_conf",
       "provenance": "SYNTHETIC",
-      "description": "Single-source enum/mode read, confidently WRONG mode name (LFO shape). Must not be admitted as fact from one overconfident source.",
+      "description": "GAP B: single-source enum/mode read, confidently WRONG mode name -- now must abstain.",
       "control_id": "synthetic.lfo1.shape",
+      "requested_control_id": "",
       "ground_truth_value": "random_sh",
       "ground_truth_readable": true,
       "input_candidates": [
@@ -216,45 +463,26 @@
           "value": "rossler",
           "confidence": 0.96,
           "source": "vlm",
-          "outcome": "CANDIDATE"
+          "outcome": "CANDIDATE",
+          "control_id": ""
         }
       ],
-      "adjudicated_outcome": "OBSERVED",
+      "adjudicated_outcome": "AMBIGUOUS",
       "adjudicated_value": "rossler",
       "adjudicated_confidence": 0.96,
-      "adjudicated_detail": "single source admitted (confidence >= 0.90)",
+      "adjudicated_detail": "single source: corroboration required (confidence 0.960 >= 0.90 but no independent source)",
+      "adjudicated_evidence_hash": null,
+      "adjudicated_control_id": "",
       "exact_match": false,
-      "confident_wrong": true,
-      "abstained": false
-    },
-    {
-      "case_id": "synthetic_identity_mismatch_env1_vs_env2",
-      "provenance": "SYNTHETIC",
-      "description": "VLM answers with the RIGHT value but for the WRONG control identity (env1.decay instead of the requested env2.decay) -- exercises the requirement that a correct-looking number for a substituted parameter must not be accepted as this control's observation. Modeled here as a wrong value against the REQUESTED control's ground truth, since the adjudicator has no cross-control identity check of its own -- surfaced as a genuine architecture gap, not papered over.",
-      "control_id": "env2.decay",
-      "ground_truth_value": 5.0,
-      "ground_truth_readable": true,
-      "input_candidates": [
-        {
-          "value": 1.0,
-          "confidence": 0.95,
-          "source": "vlm_answered_env1_not_env2",
-          "outcome": "CANDIDATE"
-        }
-      ],
-      "adjudicated_outcome": "OBSERVED",
-      "adjudicated_value": 1.0,
-      "adjudicated_confidence": 0.95,
-      "adjudicated_detail": "single source admitted (confidence >= 0.90)",
-      "exact_match": false,
-      "confident_wrong": true,
-      "abstained": false
+      "confident_wrong": false,
+      "abstained": true
     },
     {
       "case_id": "synthetic_all_sources_unreadable",
       "provenance": "SYNTHETIC",
-      "description": "Both VLM and OCR fail to produce a candidate (e.g. occluded/blank crop) -- must resolve UNREADABLE, never a fabricated numeric fallback.",
+      "description": "Both VLM and OCR fail -- must resolve UNREADABLE, never a fabricated numeric fallback.",
       "control_id": "synthetic.matrix.amount",
+      "requested_control_id": "",
       "ground_truth_value": null,
       "ground_truth_readable": false,
       "input_candidates": [
@@ -262,19 +490,23 @@
           "value": null,
           "confidence": 0.0,
           "source": "vlm",
-          "outcome": "UNREADABLE"
+          "outcome": "UNREADABLE",
+          "control_id": ""
         },
         {
           "value": null,
           "confidence": 0.0,
           "source": "ocr",
-          "outcome": "UNREADABLE"
+          "outcome": "UNREADABLE",
+          "control_id": ""
         }
       ],
       "adjudicated_outcome": "UNREADABLE",
       "adjudicated_value": null,
       "adjudicated_confidence": 0.0,
       "adjudicated_detail": "all candidates unreadable",
+      "adjudicated_evidence_hash": null,
+      "adjudicated_control_id": "",
       "exact_match": false,
       "confident_wrong": false,
       "abstained": true
@@ -282,8 +514,9 @@
     {
       "case_id": "synthetic_low_confidence_single_source_correct_value",
       "provenance": "SYNTHETIC",
-      "description": "Single source happens to have the numerically correct value but confidence is below threshold -- must abstain (AMBIGUOUS) even though the value itself is right; correctness is not sufficient without confidence.",
+      "description": "Single source has the numerically correct value but confidence is below threshold -- must abstain.",
       "control_id": "synthetic.oscA.detune",
+      "requested_control_id": "",
       "ground_truth_value": 0.32,
       "ground_truth_readable": true,
       "input_candidates": [
@@ -291,54 +524,217 @@
           "value": 0.32,
           "confidence": 0.55,
           "source": "vlm",
-          "outcome": "CANDIDATE"
+          "outcome": "CANDIDATE",
+          "control_id": ""
         }
       ],
       "adjudicated_outcome": "AMBIGUOUS",
       "adjudicated_value": 0.32,
       "adjudicated_confidence": 0.55,
       "adjudicated_detail": "single source below confidence threshold (0.550 < 0.90)",
+      "adjudicated_evidence_hash": null,
+      "adjudicated_control_id": "",
+      "exact_match": false,
+      "confident_wrong": false,
+      "abstained": true
+    },
+    {
+      "case_id": "synthetic_gap_a1_correct_value_correct_identity",
+      "provenance": "SYNTHETIC",
+      "description": "GAP A1: correct value + correct control identity + 2 agreeing sources -> OBSERVED.",
+      "control_id": "env2.decay",
+      "requested_control_id": "env2.decay",
+      "ground_truth_value": 5.0,
+      "ground_truth_readable": true,
+      "input_candidates": [
+        {
+          "value": 5.0,
+          "confidence": 0.95,
+          "source": "vlm",
+          "outcome": "CANDIDATE",
+          "control_id": "env2.decay"
+        },
+        {
+          "value": 5.0,
+          "confidence": 0.9,
+          "source": "ocr",
+          "outcome": "CANDIDATE",
+          "control_id": "env2.decay"
+        }
+      ],
+      "adjudicated_outcome": "OBSERVED",
+      "adjudicated_value": 5.0,
+      "adjudicated_confidence": 0.95,
+      "adjudicated_detail": "multi-source agreement (2 candidates)",
+      "adjudicated_evidence_hash": null,
+      "adjudicated_control_id": "env2.decay",
+      "exact_match": true,
+      "confident_wrong": false,
+      "abstained": false
+    },
+    {
+      "case_id": "synthetic_gap_a2_correct_value_wrong_identity",
+      "provenance": "SYNTHETIC",
+      "description": "GAP A2: a source reports the numerically correct-looking value but asserts a DIFFERENT control identity than requested (e.g. answered about env1.decay when env2.decay was asked). Must resolve IDENTITY_UNRESOLVED, never become an observation for the requested control merely because the number looks plausible.",
+      "control_id": "env2.decay",
+      "requested_control_id": "env2.decay",
+      "ground_truth_value": 5.0,
+      "ground_truth_readable": true,
+      "input_candidates": [
+        {
+          "value": 5.0,
+          "confidence": 0.95,
+          "source": "vlm",
+          "outcome": "CANDIDATE",
+          "control_id": "env1.decay"
+        }
+      ],
+      "adjudicated_outcome": "IDENTITY_UNRESOLVED",
+      "adjudicated_value": null,
+      "adjudicated_confidence": 0.0,
+      "adjudicated_detail": "all 1 candidate(s) had mismatched control_id (expected 'env2.decay')",
+      "adjudicated_evidence_hash": null,
+      "adjudicated_control_id": "env2.decay",
+      "exact_match": false,
+      "confident_wrong": false,
+      "abstained": true
+    },
+    {
+      "case_id": "synthetic_gap_a3_correct_value_missing_identity",
+      "provenance": "SYNTHETIC",
+      "description": "GAP A3: a source reports the correct value but asserts NO identity at all (control_id=''). Per the current policy, an empty control_id is treated as 'no identity asserted' and is not excluded by the identity filter -- it still must NOT be admitted as OBSERVED on its own (GAP B: single source, any confidence). Recorded honestly: identity-agnostic single-source evidence is not mutation-authorizing for a completely separate reason (corroboration), not because identity absence is itself caught.",
+      "control_id": "env2.decay",
+      "requested_control_id": "env2.decay",
+      "ground_truth_value": 5.0,
+      "ground_truth_readable": true,
+      "input_candidates": [
+        {
+          "value": 5.0,
+          "confidence": 0.95,
+          "source": "vlm",
+          "outcome": "CANDIDATE",
+          "control_id": ""
+        }
+      ],
+      "adjudicated_outcome": "AMBIGUOUS",
+      "adjudicated_value": 5.0,
+      "adjudicated_confidence": 0.95,
+      "adjudicated_detail": "single source: corroboration required (confidence 0.950 >= 0.90 but no independent source)",
+      "adjudicated_evidence_hash": null,
+      "adjudicated_control_id": "",
+      "exact_match": false,
+      "confident_wrong": false,
+      "abstained": true
+    },
+    {
+      "case_id": "synthetic_gap_a4_correct_identity_wrong_value",
+      "provenance": "SYNTHETIC",
+      "description": "GAP A4: correct control identity, but the value is WRONG and plausible-looking. Identity being correct must not itself authorize an incorrect value -- with only one source this abstains via GAP B; with two agreeing-on-a-wrong-value sources it would still be admitted (identity binding cannot detect a value being objectively wrong, only whose control it claims to describe) -- surfaced honestly as a real limit of identity binding, not something GAP A was ever meant to solve.",
+      "control_id": "env2.decay",
+      "requested_control_id": "env2.decay",
+      "ground_truth_value": 5.0,
+      "ground_truth_readable": true,
+      "input_candidates": [
+        {
+          "value": 99.0,
+          "confidence": 0.95,
+          "source": "vlm",
+          "outcome": "CANDIDATE",
+          "control_id": "env2.decay"
+        }
+      ],
+      "adjudicated_outcome": "AMBIGUOUS",
+      "adjudicated_value": 99.0,
+      "adjudicated_confidence": 0.95,
+      "adjudicated_detail": "single source: corroboration required (confidence 0.950 >= 0.90 but no independent source)",
+      "adjudicated_evidence_hash": null,
+      "adjudicated_control_id": "env2.decay",
       "exact_match": false,
       "confident_wrong": false,
       "abstained": true
     }
   ],
+  "evidence_hash_tamper_test": {
+    "original_file": "serum2\\producer\\c3_benchmark\\ground_truth\\C3_GT_GLOBAL_DIVERSE_tuning_crop.png",
+    "original_hash": "c60e2e34757b5c17c418152f90ee5bf605781e39ebc8a9c9564ff5cc2b8ea771",
+    "tampered_hash": "8cb4e1c4834c629ec89e2c0c56625cff095ce7e7140609cf372b0abc24486cdb",
+    "hashes_differ": true,
+    "committed_evidence_untouched": true
+  },
+  "mutation_boundary_test": {
+    "gate_modules_checked": [
+      "serum2/producer/contract_registry.py",
+      "serum2/producer/route_selection.py",
+      "serum2/producer/producer_brain.py",
+      "serum2/producer/gate_b_certificate.py",
+      "serum2/evidence/admission.py"
+    ],
+    "clean": {
+      "serum2/producer/contract_registry.py": true,
+      "serum2/producer/route_selection.py": true,
+      "serum2/producer/producer_brain.py": true,
+      "serum2/producer/gate_b_certificate.py": true,
+      "serum2/evidence/admission.py": true
+    },
+    "all_clean": true
+  },
   "aggregate": {
-    "total_cases": 12,
-    "exact_match": {
-      "numerator": 3,
-      "denominator": 12,
-      "rate": 0.25
-    },
-    "confident_wrong": {
-      "numerator": 3,
-      "denominator": 12,
-      "rate": 0.25
-    },
-    "abstention": {
-      "numerator": 6,
-      "denominator": 12,
-      "rate": 0.5
-    },
-    "real_evidence_only": {
-      "total": 3,
-      "readable_total": 2,
-      "exact_match": 1,
+    "real_readable_only": {
+      "total": 5,
+      "exact_match": 2,
       "confident_wrong": 0,
-      "abstained": 2
+      "abstained": 3
+    },
+    "real_complete_including_missing": {
+      "total": 6,
+      "exact_match": 2,
+      "confident_wrong": 0,
+      "abstained": 4
     },
     "synthetic_only": {
-      "total": 9,
-      "exact_match": 2,
-      "confident_wrong": 3,
-      "abstained": 4
+      "total": 12,
+      "exact_match": 3,
+      "confident_wrong": 0,
+      "abstained": 9
+    },
+    "gap_a_identity_cases": {
+      "synthetic_gap_a1_correct_value_correct_identity": {
+        "outcome": "OBSERVED",
+        "exact_match": true,
+        "confident_wrong": false
+      },
+      "synthetic_gap_a2_correct_value_wrong_identity": {
+        "outcome": "IDENTITY_UNRESOLVED",
+        "exact_match": false,
+        "confident_wrong": false
+      },
+      "synthetic_gap_a3_correct_value_missing_identity": {
+        "outcome": "AMBIGUOUS",
+        "exact_match": false,
+        "confident_wrong": false
+      },
+      "synthetic_gap_a4_correct_identity_wrong_value": {
+        "outcome": "AMBIGUOUS",
+        "exact_match": false,
+        "confident_wrong": false
+      }
     }
   },
-  "integration_decision": {
-    "integrated": false,
-    "status": "NOT_INTEGRATED_INSUFFICIENT_REAL_EVIDENCE",
-    "reason": "Only 2 real, readable W1 ground-truth samples exist (n=2). A confident-wrong rate of 0/2 real cases is consistent with a true rate anywhere up to roughly 1-(0.05)^(1/2) (~78% at n=2) under a standard binomial worst-case bound -- far too wide a confidence interval to certify 'safe to authorize mutations'. Zero real confident-wrong results is a necessary but nowhere near sufficient condition at this sample size. Production mutation authority (Gate A/B, the A2 final-contract gate, 2.0.23 epoch enforcement, admit_rows()) is left completely unchanged; no observation output from this benchmark is wired into any mutation path.",
-    "real_readable_n": 2,
-    "real_confident_wrong_count": 0
+  "gap_validation": {
+    "GAP_A_identity_binding_closed": true,
+    "GAP_A_evidence": "synthetic_gap_a2 (correct value, wrong identity) resolved IDENTITY_UNRESOLVED",
+    "GAP_B_single_source_no_longer_authorizes_closed": true,
+    "GAP_B_evidence": "the 2 single-source-confident-wrong synthetic cases from c3-1.0.0 both now resolve AMBIGUOUS as required",
+    "GAP_C_evidence_hash_propagates": true,
+    "GAP_C_tamper_test": true,
+    "real_confident_wrong_count": 0,
+    "real_readable_n": 5,
+    "genuinely_independent_corroboration_real_cases": 4,
+    "corroboration_note": "Genuine independent corroboration (2 distinct model pipelines -- Qwen2.5-VL-3B and easyocr, not repeated frames of the same model) occurred in 4 of 5 real readable cases. The remaining cases had only a single usable source (OCR could not be positionally trusted), and under the remediated policy correctly resolved AMBIGUOUS rather than being admitted.",
+    "mutation_boundary_intact": true
+  },
+  "disposition": {
+    "status": "C3_REMEDIATION_STILL_INSUFFICIENT",
+    "reason": "real readable n=5 is still below the n>=8 target this task set for statistical sufficiency (a worst-case binomial bound at n=5 with 0 observed failures still permits a true confident-wrong rate well above 0%)"
   }
 }

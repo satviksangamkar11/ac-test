@@ -1,0 +1,126 @@
+[
+  {
+    "control_id": "env2.decay",
+    "image": "parameter_characterization/vlm_ground_truth/crops/BULK_01_WAVETABLE_MAIN_env1_crop.png",
+    "ocr_raw": [
+      {
+        "text": "0i1 :",
+        "confidence": 0.12078023957858819
+      },
+      {
+        "text": "(T",
+        "confidence": 0.04198075304296355
+      },
+      {
+        "text": "UNISOH",
+        "confidence": 0.6587088236642482
+      },
+      {
+        "text": "DETUNE",
+        "confidence": 0.9746402255888582
+      },
+      {
+        "text": "BLEHD",
+        "confidence": 0.5965438276991812
+      },
+      {
+        "text": "SyNc",
+        "confidence": 0.3161117434501648
+      },
+      {
+        "text": "AM(B)",
+        "confidence": 0.941709083935595
+      },
+      {
+        "text": "WARP",
+        "confidence": 0.983765184879303
+      },
+      {
+        "text": "ENV 1",
+        "confidence": 0.8852847780720171
+      },
+      {
+        "text": "ENV 2",
+        "confidence": 0.9989171637539184
+      }
+    ],
+    "inference_seconds": 1.0019738674163818
+  },
+  {
+    "control_id": "env2.decay_cal06",
+    "image": "parameter_characterization/vlm_ground_truth/crops/CAL_06_env1_crop.png",
+    "ocr_raw": [
+      {
+        "text": "0,5 ms",
+        "confidence": 0.353754348257436
+      },
+      {
+        "text": "0@ms",
+        "confidence": 0.32003915309906006
+      },
+      {
+        "text": "1,00 $",
+        "confidence": 0.7203404298903722
+      },
+      {
+        "text": "0 0dB",
+        "confidence": 0.13264383801776447
+      },
+      {
+        "text": "15ms",
+        "confidence": 0.969541072845459
+      }
+    ],
+    "inference_seconds": 0.08527565002441406
+  },
+  {
+    "control_id": "c3_gt_env1_diverse",
+    "image": "serum2/producer/c3_benchmark/ground_truth/C3_GT_ENV1_DIVERSE_env1_crop.png",
+    "ocr_raw": [
+      {
+        "text": "250 ms",
+        "confidence": 0.48280728312857407
+      },
+      {
+        "text": "50 ms",
+        "confidence": 0.8667676350184748
+      },
+      {
+        "text": "3.50 $",
+        "confidence": 0.4346535177039065
+      },
+      {
+        "text": "F15.]d8",
+        "confidence": 0.32377130925594166
+      },
+      {
+        "text": "bo0 Ms",
+        "confidence": 0.5407420493997553
+      }
+    ],
+    "inference_seconds": 0.09065485000610352
+  },
+  {
+    "control_id": "c3_gt_env3_diverse",
+    "image": "serum2/producer/c3_benchmark/ground_truth/C3_GT_ENV3_DIVERSE_env3_crop.png",
+    "ocr_raw": [
+      {
+        "text": "6.,50 5",
+        "confidence": 0.2033775741025132
+      },
+      {
+        "text": "120 $",
+        "confidence": 0.7849012252885229
+      },
+      {
+        "text": "g0 ms",
+        "confidence": 0.26937178902986986
+      },
+      {
+        "text": "6191",
+        "confidence": 0.10337453335523605
+      }
+    ],
+    "inference_seconds": 0.06345057487487793
+  }
+]

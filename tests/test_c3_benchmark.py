@@ -19,18 +19,18 @@ from serum2.producer.observation_engine import ObservationEngine
 from serum2.producer.observation_policy import OUTCOME_OBSERVED, OUTCOME_AMBIGUOUS, OUTCOME_UNREADABLE
 
 
-def test_real_high_confidence_correct_vlm_is_now_ambiguous_single_source():
-    """GAP B remediation: the real case where Qwen was correct and confident (CAL_06,
-    0.944 confidence) now returns AMBIGUOUS because it is a single source with no
-    independent corroboration (OCR unavailable). The value is preserved in the result
-    (value=1.0) but the outcome is AMBIGUOUS, not OBSERVED.
-    Correctness + high confidence is necessary but not sufficient; corroboration is
-    required before a reading can be mutation-authorizing."""
+def test_real_high_confidence_correct_vlm_now_has_ocr_corroboration_and_is_observed():
+    """As of the C3 ground-truth expansion, easyocr 1.7.2 is locally available and DID
+    positionally locate this crop's decay field, agreeing with VLM (both read 1.0). This
+    is genuine 2-source corroboration (2 distinct model pipelines), not a single source --
+    GAP B's corroboration requirement is satisfied here, not bypassed, so OBSERVED is the
+    correct outcome. (Superseded the earlier OCR-unavailable-era expectation of AMBIGUOUS.)"""
     cases = {c["case_id"]: c for c in build_real_cases()}
     row = run_real_case(cases["real_cal06_env1_decay"], ObservationEngine())
-    assert row["adjudicated_outcome"] == OUTCOME_AMBIGUOUS
+    assert row["adjudicated_outcome"] == OUTCOME_OBSERVED
+    assert row["ocr_used_as_source"] is True
+    assert row["exact_match"] is True
     assert row["confident_wrong"] is False
-    assert row["abstained"] is True
 
 
 def test_real_low_confidence_wrong_vlm_abstains_not_confident_wrong():

@@ -1,0 +1,8 @@
+[
+  {
+    "control_id": "c3_gt_global_tuning",
+    "image": "serum2/producer/c3_benchmark/ground_truth/C3_GT_GLOBAL_DIVERSE_tuning_crop.png",
+    "raw_vlm_output": "442 Hz",
+    "mean_token_prob": 0.9790816307067871
+  }
+]

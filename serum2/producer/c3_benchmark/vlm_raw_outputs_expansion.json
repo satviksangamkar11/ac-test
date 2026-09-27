@@ -1,0 +1,14 @@
+[
+  {
+    "control_id": "c3_gt_env1_diverse",
+    "image": "serum2/producer/c3_benchmark/ground_truth/C3_GT_ENV1_DIVERSE_env1_crop.png",
+    "raw_vlm_output": "3.50 s",
+    "mean_token_prob": 0.9752130607763926
+  },
+  {
+    "control_id": "c3_gt_env3_diverse",
+    "image": "serum2/producer/c3_benchmark/ground_truth/C3_GT_ENV3_DIVERSE_env3_crop.png",
+    "raw_vlm_output": "61%",
+    "mean_token_prob": 0.8275113552808762
+  }
+]

@@ -1,0 +1,21 @@
+[
+  {
+    "control_id": "c3_gt_global_tuning",
+    "image": "serum2/producer/c3_benchmark/ground_truth/C3_GT_GLOBAL_DIVERSE_tuning_crop.png",
+    "ocr_raw": [
+      {
+        "text": "G",
+        "confidence": 0.6306437309306148
+      },
+      {
+        "text": "4e",
+        "confidence": 0.21952784690630014
+      },
+      {
+        "text": "4L2 Hz",
+        "confidence": 0.4632763395571858
+      }
+    ],
+    "inference_seconds": 0
+  }
+]
