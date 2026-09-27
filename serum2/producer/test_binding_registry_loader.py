@@ -113,15 +113,17 @@ def test_promoted_evidence_untouched_when_no_epoch(tmp_path, monkeypatch):
 
 
 def test_installed_epoch_resolution_failure_is_a_diagnostic_not_a_crash(tmp_path, monkeypatch):
-    """promote_verified_evidence itself catches installed_epoch() failing (no Serum on this machine) and returns an
-    ordinary EPOCH_MISMATCH rejection -- never an exception. The registry must not crash either way."""
+    """When the registry passes trusted_epoch, installed_epoch() is never called.
+    The evidence is promoted successfully even when Serum is not installed on this machine.
+    The registry must not crash and the contract must be loaded."""
     from serum2.qualification import evidence_promotion
 
     def boom():
         raise FileNotFoundError("no Serum installed on this machine")
     monkeypatch.setattr(evidence_promotion, "installed_epoch", boom)
     _write(tmp_path, **{"env1.attack": _promo_ev("env1.attack", "Env0.plainParams.kParamAttack")})
+    # Registry passes trusted_epoch, so installed_epoch() is bypassed — must not raise.
     r = ContractRegistry(epoch=EPOCH_2_0_23, promoted_evidence_dir=tmp_path)   # must not raise
-    assert "env1.attack" not in r.contracts
-    assert r.promotion_diagnostics["rejected_not_promoted"]
-    assert "EPOCH_MISMATCH" in next(iter(r.promotion_diagnostics["rejected_not_promoted"].values()))
+    # With trusted_epoch, the matching evidence SHA allows the contract to be promoted.
+    assert "env1.attack" in r.contracts
+    assert not r.promotion_diagnostics.get("rejected_not_promoted")

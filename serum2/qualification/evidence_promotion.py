@@ -196,7 +196,8 @@ def _promote_from_parameter_contract(evidence, target, control, epoch, body_path
     contract = CapabilityContract(
         target=target, allowed_operation=kind, status=STRUCTURAL_ONLY, prerequisites=(),
         verified={"load": "PASS", "persistence": "PASS", "causal": "NOT_RUN"}, measurement=None,
-        scope={"tested_context_only": True, "domain": domain, "baseline_value": baseline_value, "mutated_value": mutated_value},
+        scope={"tested_context_only": True, "domain": domain, "baseline_value": baseline_value, "mutated_value": mutated_value,
+               "mutation_target_path": body_path, "source_backend": evidence.get("backend", "UNKNOWN")},
         provenance={"promoted_from": "serum2.qualification.evidence_promotion.promote_verified_evidence",
                     "evidence_epoch_sha": epoch["sha"], "atlas_control_type": control.control_type,
                     "operand_kind_source": "parameter_contract", "domain_source": pc.get("domain_source"), "ui_semantics": ui.get("evidence")},
@@ -204,12 +205,16 @@ def _promote_from_parameter_contract(evidence, target, control, epoch, body_path
         execution_binding=binding)
     return PromotionResult(True, "PROMOTED", contract)
 
-def promote_verified_evidence(evidence: Dict[str, Any]) -> PromotionResult:
+def promote_verified_evidence(evidence: Dict[str, Any], *, trusted_epoch=None) -> PromotionResult:
     """Pure function of one evidence dict -> PromotionResult. No branch on
     `target`'s identity anywhere in this function; every per-control fact
     (operand kind, numeric bounds, enum vocabulary) comes from the Atlas's
     existing get_control() -- the same source candidate_binding_qualifier.py
-    already uses for domain derivation -- never hardcoded here."""
+    already uses for domain derivation -- never hardcoded here.
+
+    trusted_epoch: when provided (an ExecutionEpoch whose SHA was already
+    validated by the caller), the installed_epoch() check is skipped.
+    This allows offline/cloud promotion when the Serum binary is absent."""
     target = _target(evidence)
     if not target:
         return PromotionResult(False, REJECT_MISSING_TARGET)
@@ -217,13 +222,18 @@ def promote_verified_evidence(evidence: Dict[str, Any]) -> PromotionResult:
     epoch = _epoch(evidence)
     if not epoch:
         return PromotionResult(False, REJECT_MISSING_EPOCH, detail=target)
-    try:
-        pinned = installed_epoch()
-    except Exception as exc:
-        return PromotionResult(False, REJECT_EPOCH_MISMATCH, detail="cannot resolve installed epoch: %r" % exc)
-    if epoch["sha"] != pinned.binary_sha256:
-        return PromotionResult(False, REJECT_EPOCH_MISMATCH,
-                               detail="evidence sha %s != installed epoch sha %s" % (epoch["sha"], pinned.binary_sha256))
+    if trusted_epoch is not None:
+        if epoch["sha"] != trusted_epoch.binary_sha256:
+            return PromotionResult(False, REJECT_EPOCH_MISMATCH,
+                                   detail="evidence sha %s != trusted epoch sha %s" % (epoch["sha"], trusted_epoch.binary_sha256))
+    else:
+        try:
+            pinned = installed_epoch()
+        except Exception as exc:
+            return PromotionResult(False, REJECT_EPOCH_MISMATCH, detail="cannot resolve installed epoch: %r" % exc)
+        if epoch["sha"] != pinned.binary_sha256:
+            return PromotionResult(False, REJECT_EPOCH_MISMATCH,
+                                   detail="evidence sha %s != installed epoch sha %s" % (epoch["sha"], pinned.binary_sha256))
 
     if not _status_verified(evidence):
         return PromotionResult(False, REJECT_MISSING_VERIFICATION,
@@ -311,6 +321,8 @@ def promote_verified_evidence(evidence: Dict[str, Any]) -> PromotionResult:
             "domain": domain,
             "baseline_value": baseline_value,
             "mutated_value": mutated_value,
+            "mutation_target_path": body_path,
+            "source_backend": evidence.get("backend", "UNKNOWN"),
         },
         provenance={
             "promoted_from": "serum2.qualification.evidence_promotion.promote_verified_evidence",

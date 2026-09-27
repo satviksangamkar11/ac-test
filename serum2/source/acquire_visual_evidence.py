@@ -44,8 +44,16 @@ def _find_ffmpeg() -> Optional[str]:
     return shutil.which("ffmpeg")
 
 
+class AcquisitionError(RuntimeError):
+    """Raised when frame acquisition cannot proceed safely (e.g. duration unknown)."""
+
+
 def _source_id(url: str) -> str:
     return "yt_" + hashlib.md5(url.encode()).hexdigest()[:12]
+
+
+def _params_hash(max_frames: int, sample_interval_sec: float) -> str:
+    return hashlib.md5(("%d:%.3f" % (max_frames, sample_interval_sec)).encode()).hexdigest()[:8]
 
 
 def _sha256_file(path: Path) -> str:
@@ -577,9 +585,10 @@ def acquire_visual_evidence(
         transcript_sufficiency=transcript_sufficiency,
     )
 
-    # Check if frames already exist (idempotent)
+    # Check if frames already exist (idempotent). Cache key includes acquisition parameters so
+    # that changing max_frames or sample_interval_sec forces re-acquisition.
     frames_dir = _FRAMES_DIR / sid
-    manifest_path = frames_dir / "manifest.json"
+    manifest_path = frames_dir / ("manifest_%s.json" % _params_hash(max_frames, sample_interval_sec))
     if manifest_path.exists() and not force:
         _load_existing_frames(bundle, manifest_path)
         return bundle
@@ -598,7 +607,10 @@ def acquire_visual_evidence(
 
         if video_path is not None:
             duration = video_provenance.get("duration_sec") or _get_video_duration(video_path, ffmpeg)
-            effective_duration = duration if duration else 300.0
+            if not duration:
+                raise AcquisitionError(
+                    "ffprobe could not determine video duration for %s; refusing to truncate at 300s" % video_id)
+            effective_duration = duration
             frame_w = video_provenance.get("width")
             frame_h = video_provenance.get("height")
             src_sha = video_provenance.get("source_video_sha256")
@@ -615,6 +627,7 @@ def acquire_visual_evidence(
                 timestamps = [30.0]
 
             manifest_frames = []
+            frame_index = 0
             for ts in timestamps:
                 frame_id = "frame_%s_%08d" % (sid, int(ts * 1000))
                 out_path = frames_dir / ("%s.jpg" % frame_id)
@@ -641,13 +654,17 @@ def acquire_visual_evidence(
                     source_video_sha256=src_sha,
                 )
                 bundle.frames.append(artifact)
-                manifest_frames.append(artifact.to_dict())
+                d = artifact.to_dict()
+                d["frame_index"] = frame_index
+                manifest_frames.append(d)
+                frame_index += 1
 
             if bundle.frames:
                 bundle.source_video_info = video_provenance
                 manifest_path.write_text(json.dumps({
                     "frames": manifest_frames,
                     "source_video_info": video_provenance,
+                    "storyboard_only": False,
                 }, indent=2))
                 return bundle  # success via real video stream
             else:
@@ -663,10 +680,12 @@ def acquire_visual_evidence(
 
     if sb_frames:
         bundle.frames = sb_frames
+        bundle.storyboard_only = True
         bundle.source_video_info = None  # storyboard path — no real video provenance
         manifest_path.write_text(json.dumps({
             "frames": [f.to_dict() for f in sb_frames],
             "source_video_info": None,
+            "storyboard_only": True,
         }, indent=2))
         return bundle
 
@@ -786,6 +805,7 @@ def _load_existing_frames(bundle: VisualEvidenceBundle, manifest_path: Path) -> 
     if isinstance(data, dict):
         frame_items = data.get("frames", [])
         bundle.source_video_info = data.get("source_video_info")
+        bundle.storyboard_only = data.get("storyboard_only", False)
     else:
         frame_items = data  # legacy: bare list of frame dicts
     for item in frame_items:

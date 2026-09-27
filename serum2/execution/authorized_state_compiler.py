@@ -115,6 +115,9 @@ def _validate(op, epoch: ExecutionEpoch):
         if not ok:
             raise UnauthorizedOperation("%s route %s -> %s (amount %r) is outside its contract's qualified domain" % (
                 op.operation_id, b["source"], b["destination"], amount))
+    elif b["kind"] == "singleton_field":
+        if not b.get("attr") or not b.get("field"):
+            raise UnauthorizedOperation("%s singleton_field binding missing attr or field" % op.operation_id)
     else:
         raise UnauthorizedOperation("%s has unknown lowering kind %r" % (op.operation_id, b["kind"]))
 
@@ -123,7 +126,7 @@ def compile_ops(ops: List[AuthorizedOperation], name: str, description: str, epo
     for op in ops:
         _validate(op, epoch)
     spec: Dict[str, Any] = {"name": name, "description": description, "oscillators": [], "envelopes": [],
-                            "lfos": [], "filters": [], "fx_chain": [], "mod_routes": []}
+                            "lfos": [], "filters": [], "fx_chain": [], "mod_routes": [], "macros": []}
     units: Dict[Tuple[Any, str], Dict[str, Any]] = {}
     done: List[str] = []
     for op in sorted(ops, key=lambda o: o.provenance["frame_ts"]):
@@ -142,6 +145,11 @@ def compile_ops(ops: List[AuthorizedOperation], name: str, description: str, epo
                 u["wet"] = op.operand
             else:
                 u["params"][b["param"]] = op.operand
+        elif b["kind"] == "singleton_field":
+            attr = b["attr"]
+            if attr not in spec:
+                spec[attr] = {}
+            spec[attr][b["field"]] = op.operand
         else:
             continue
         done.append(op.operation_id)

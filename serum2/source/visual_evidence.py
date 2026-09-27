@@ -618,6 +618,11 @@ class VisualEvidenceBundle:
     transcript_sufficiency: Optional[TranscriptSufficiency] = None
     """Result of the transcript sufficiency check that triggered this visual path."""
 
+    storyboard_only: bool = False
+    """True when frames came from storyboard sprites, not a real decoded video stream.
+    Callers must never read control values from storyboard-only frames; they are
+    low-res navigation thumbnails, not accurate UI readbacks."""
+
     acquisition_error: Optional[str] = None
     """Non-None if frame acquisition failed."""
 
@@ -655,6 +660,7 @@ class VisualEvidenceBundle:
             "transcript_sufficiency": self.transcript_sufficiency.to_dict() if self.transcript_sufficiency else None,
             "acquisition_error": self.acquisition_error,
             "reasoning_error": self.reasoning_error,
+            "storyboard_only": self.storyboard_only,
         }
         return d
 
@@ -671,6 +677,7 @@ class VisualEvidenceBundle:
             acquired_at=data.get("acquired_at", ""),
             acquisition_error=data.get("acquisition_error"),
             reasoning_error=data.get("reasoning_error"),
+            storyboard_only=data.get("storyboard_only", False),
         )
         bundle.frames = [VisualFrameArtifact(**f) for f in data.get("frames", [])]
         bundle.observations = [VisualObservation(**o) for o in data.get("observations", [])]

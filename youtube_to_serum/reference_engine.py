@@ -58,13 +58,15 @@ class NeedsStageACensus(RuntimeError):
 
 
 def stage_a_is_filled(skeleton_path: str) -> bool:
-    """A skeleton counts as filled once at least one frame has a non-empty controls/observations/unknown list, or
-    serum_visible has been set to something other than None. An all-still-empty file is not a valid census."""
+    """A skeleton counts as filled only when every serum_visible frame has been analysed (has at
+    least one entry in controls or mod_routes). A single analysed frame surrounded by un-touched
+    frames (serum_visible=None) is NOT a valid census — every frame where Serum was visible must
+    have been worked through. An all-not-serum-visible file returns False."""
     data = json.loads(Path(skeleton_path).read_text())
-    return any(
-        f.get("serum_visible") is not None or f["controls"] or f["mod_routes"] or f["observations"] or f["unknown"]
-        for f in data["frames"]
-    )
+    serum_frames = [f for f in data["frames"] if f.get("serum_visible") is True]
+    if not serum_frames:
+        return False
+    return all(bool(f.get("controls") or f.get("mod_routes")) for f in serum_frames)
 
 
 def run_stage1_acquire_and_prep(youtube_url: str, work_dir: Path) -> Dict[str, Any]:

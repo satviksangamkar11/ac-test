@@ -437,3 +437,35 @@ class ObservationEngine:
             f"Observation metadata insufficient or ambiguous: element_kind={element_kind}, control_type={control_type}. "
             f"Refusing to default to TEXT for unclassified observation. Outcome: IDENTITY_UNRESOLVED"
         )
+
+    def adjudicated_observe(self, sources: List[Dict], context: Dict[str, Any], *, numeric_tol: float = 1e-3) -> "ObservationCandidate":
+        """Wrap observe() with the multi-source adjudication policy.
+
+        sources: list of dicts, each with at least {"raw_value": ..., "source": "<label>"} and
+        optionally "confidence" overrides. Each entry is independently run through observe(),
+        then the results are adjudicated via observation_policy.adjudicate().
+
+        Returns an observation_policy.ObservationCandidate (not the engine's own ObservationCandidate)
+        so the caller can distinguish OBSERVED / AMBIGUOUS / UNREADABLE outcomes without importing
+        the policy module directly.
+        """
+        from serum2.producer.observation_policy import (
+            ObservationCandidate as PolicyCandidate, OUTCOME_CANDIDATE, adjudicate,
+        )
+        policy_candidates = []
+        for s in sources:
+            raw = s.get("raw_value")
+            src_label = s.get("source", "unknown")
+            try:
+                result = self.observe(raw, dict(context, **{k: v for k, v in s.items() if k not in ("raw_value", "source")}))
+            except Exception as exc:
+                policy_candidates.append(PolicyCandidate(
+                    outcome="UNREADABLE", source=src_label, detail="observe() raised: %s" % exc))
+                continue
+            policy_candidates.append(PolicyCandidate(
+                outcome=OUTCOME_CANDIDATE if result.outcome == OUTCOME_CANDIDATE else "UNREADABLE",
+                value=result.normalized_value,
+                confidence=s.get("confidence", result.confidence),
+                source=src_label,
+            ))
+        return adjudicate(policy_candidates, numeric_tol=numeric_tol)

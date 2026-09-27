@@ -267,8 +267,41 @@ def derive(row: Row, tempo: Optional[float]) -> None:
 
 def _coerce(row: Row, t: Dict[str, Any], canon: str, tempo: Optional[float]) -> Optional[str]:
     from serum_mcp.generation import spec as S
-    models = {"osc": S.OscillatorSpec, "env": S.EnvelopeSpec, "lfo": S.LfoSpec, "filter": S.FilterSpec}
+    _SINGLETON_MODELS = {"arp": S.ArpSpec, "global_": S.GlobalSpec, "voice_unison": S.VoiceUnisonSpec}
+    models = {"osc": S.OscillatorSpec, "env": S.EnvelopeSpec, "lfo": S.LfoSpec, "filter": S.FilterSpec, "macro": S.MacroSpec}
     v = str(row.value).strip()
+    if t["kind"] == "singleton_field":
+        attr = t.get("attr")
+        field_name = t.get("field")
+        singleton_cls = _SINGLETON_MODELS.get(attr)
+        if singleton_cls is None or field_name is None:
+            return "singleton_field has unknown attr %r or missing field" % attr
+        fi = singleton_cls.model_fields.get(field_name)
+        if fi is None:
+            return "singleton_field attr=%r has no model field %r" % (attr, field_name)
+        ann = str(fi.annotation)
+        if "bool" in ann:
+            if v.lower() in ("on", "true"):
+                t["value"] = True
+            elif v.lower() in ("off", "false"):
+                t["value"] = False
+            else:
+                return "non-boolean %r for boolean singleton field" % v
+            t["operation"] = "TOGGLE_ON" if t["value"] else "TOGGLE_OFF"
+            return None
+        n = _numeric(v, row.unit)
+        if n is None:
+            return "value %r is not numeric for singleton_field %s.%s" % (v, attr, field_name)
+        lo, hi = _field_range(fi)
+        val, why = _to_target_unit(n[0], n[1], "seconds" if "seconds" in (fi.description or "").lower() else "", lo, hi,
+                                   _display_curve(fi))
+        if val is None:
+            return why
+        bad = _clamp_check(val, lo, hi)
+        if bad:
+            return bad
+        t["value"], t["operation"], t["normalized"] = val, "SET", (val != n[0])
+        return None
     if t["kind"] == "field":
         fi = models[t["module"]].model_fields[t["field"]]
         ann = str(fi.annotation)
@@ -301,6 +334,8 @@ def _coerce(row: Row, t: Dict[str, Any], canon: str, tempo: Optional[float]) -> 
             return bad
         t["value"], t["operation"], t["normalized"] = val, "SET", (val != n[0])
         return None
+    if t["kind"] != "fx":
+        return "unsupported operation kind %r" % t["kind"]
     p = catalog()["fx_params"][t["fx_type"]].get(t["param"])
     if p is None:
         return "binding table names %s.%s which is not in the serum-mcp catalog" % (t["fx_type"], t["param"])

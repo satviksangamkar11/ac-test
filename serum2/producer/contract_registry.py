@@ -164,7 +164,7 @@ class ContractRegistry:
             # promote_verified_evidence is documented as a pure function of one evidence dict -> PromotionResult;
             # it never raises (including when installed_epoch() can't resolve the machine's Serum binary -- that
             # comes back as an ordinary REJECT_EPOCH_MISMATCH result, not an exception).
-            result = promote_verified_evidence(ev)
+            result = promote_verified_evidence(ev, trusted_epoch=self.epoch)
             if not result.promoted:
                 diag["rejected_not_promoted"][str(f)] = "%s: %s" % (result.reason, result.detail)
                 continue
