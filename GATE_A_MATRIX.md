@@ -1,8 +1,29 @@
 # Phase 2 Cloud Gate-A Closure Matrix
 
-**FINAL REAL BEHAVIORAL PROOFS**
-**Current SHA:** 3259166
-**Test Suite:** 57 passing, 2 skipped (0 vacuous)
+**FINAL REAL BEHAVIORAL PROOFS - A2/A4/A5 FIXED**
+**Current SHA:** bb6638d (A5 complete)
+**Test Suite:** 60 passing, 0 skipped (0 vacuous)
+
+## Summary of Fixes in This Session
+
+**A2 (Expected Raw Body Path Enforcement)** 
+- Added `validate_final_execution_gate()` helper function with exact return values
+- 5 tests with exact assertions: ADMITTED, OUT_OF_QUALIFIED_DOMAIN, REFUSED_NO_FINAL_CONTRACT_EVIDENCE, REFUSED_CONFORMANCE_EXCEPTION, REFUSED_BODY_PATH_MISMATCH
+- Uses real ContractRegistry and execution specs
+- No soft assertions; each test proves exact one outcome
+
+**A4 (Contract Reachability)**
+- Added test using `promotion_diagnostics["loaded"]` dynamically
+- Verifies all promoted executable contracts are reachable via canonical paths
+- No hardcoded thresholds
+- Assert: unreachable == [] AND tested == actual_promoted_count
+
+**A5 (All 9 Module Kinds)**
+- Rewrote 8 tests to use real binding_table entries instead of manually-constructed dicts
+- Call actual derive() to obtain operation (not _coerce directly)
+- All 9 module kinds verified: osc, env, lfo, filter, macro, fx, arp, global_, voice_unison
+- Added coverage test ensuring all binding_table kinds tested
+- No mocks, no manual construction
 
 ---
 
