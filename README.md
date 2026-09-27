@@ -84,6 +84,37 @@ runtime; there is no Anthropic SDK call in the canonical path.
 > environment-dependent seams (`native_execution_fn`, `ui_evidence_provider`) are real Windows/Ableton
 > code, not yet exercised outside test fixtures.
 >
+> **Phase 3 continued (2026-09-27): a real Local W1 attempt found — and this round closed — two more
+> genuine bugs.** A Local session ran a real native attempt (live Ableton + Serum 2.0.23, module SHA
+> independently confirmed against the installed binary, not a config constant) against the commit
+> above, and correctly **stopped** at a precisely-traced blocker rather than working around it, per its
+> own no-shortcut instructions. Independently re-verified against source (not the report alone):
+> - **Wrong execution route.** `"set Env1.Attack..."` reached `ADVISORY_ONLY` via `execution_route:
+>   "ableton_mcp"` instead of `"dawdreamer_serum"` — which would have faked a Serum-internal envelope
+>   mutation through Ableton host-parameter automation, explicitly prohibited (Env1.Attack is not on the
+>   127-param Ableton-exposed surface). Root cause: `serum2/producer/capability_crosswalk.py`'s
+>   `CAPABILITY_KEY_TO_ATLAS_ID` is an intentionally small, hand-reviewed allowlist (its own docstring:
+>   "must remain small and explicit... NO string heuristics") that had exactly **one** entry
+>   (`envelope2_field_decay → env2.decay`) — which is why every `Env2.Decay` example in this repo has
+>   always worked, and `Env1.Attack` (`capability_key="envelope_field_attack"`) never had. **Fixed** by
+>   adding the missing, human-reviewed entry (`envelope_field_attack → env1.attack`) — the exact
+>   mechanism the module already documents for this situation; a data-table addition, not a change to
+>   `RouteSelector` or the matching logic, and it cannot grant authority a real contract doesn't already
+>   carry.
+> - **Scope-schema mismatch.** With routing fixed, `_build_serum_preset_plan()` immediately crashed with
+>   `KeyError('mutation_value_used')`. Two real `CapabilityContract` scope schemas exist for the
+>   identical fact: the older Pass-1 producer names it `mutation_value_used`; `evidence_promotion.
+>   promote_verified_evidence` — the generic promoter behind **222 of 232** real
+>   `SERUM_PRESET_STRUCTURAL` contracts — names it `mutated_value`. **Fixed** generically: prefer the
+>   former when present, fall back to the latter, refuse cleanly (`REFUSED_AUTHORITY`) rather than crash
+>   when neither key exists.
+>
+> Proven end to end from the committed state: `env1.attack` now reaches `execution_route:
+> "dawdreamer_serum"`, a real `ADVISORY_ONLY` plan, and a genuine `compile_ops()`-produced
+> `.SerumPreset` file — unblocking exactly the target the Local W1 run stopped on. 6 new tests. Full
+> suite: 485 passed (+6), 16 failed (identical pre-existing environment-bound failures, unchanged), 4
+> skipped.
+>
 > **VLM/OCR (Stage-A production observation) — infrastructure exists; production closure does NOT.**
 > Do not read "Gate-A closed" or "acquisition closed and wired" above as "the VLM/OCR pipeline is done" —
 > those close the *ledger-side* completeness/binding checks (A6/A7) and the *frame-acquisition* step, not
@@ -197,6 +228,12 @@ Ableton track → 16-bar arrangement → audible verified render
   environment-independent. Its canonical-preset-generation step now calls the real
   `compile_ops()`/`serialize()` chain (previously an honest fail-closed stub) — proven to produce a
   genuine `.SerumPreset` file for real admitted operations, not test fixtures.
+- A real Local W1 attempt against this code found and this round fixed two more real bugs: `Env1.Attack`
+  reached `ADVISORY_ONLY` via the wrong route (`ableton_mcp` instead of `dawdreamer_serum`, from a missing
+  `capability_crosswalk.py` entry), and once routed correctly, `_build_serum_preset_plan()` crashed on a
+  scope-schema mismatch affecting 222 of 232 promoted contracts (`mutation_value_used` vs `mutated_value`).
+  Both fixed generically — see the status banner above. `env1.attack` now produces a genuine
+  `compile_ops()`-built `.SerumPreset`, unblocking the target that specific Local run stopped on.
 - STILL OPEN: the orchestrator's `native_execution_fn` (real `serum_track_loader.load_and_verify()` on
   Windows/Ableton) and `ui_evidence_provider` (real screenshot/observed-value/restoration adapter) seams
   are only exercised by test fixtures so far — a real Local W1 run against this fixed code has not
@@ -207,7 +244,7 @@ The project has four machine-checkable certificates, produced in order:
 | Certificate | Phase | Where | What it proves | Status |
 |---|---|---|---|---|
 | **Cert 1 — Integrity** | Phase 2 | Cloud | No authority bypass, no cross-epoch execution, no qualification-value substitution, no incomplete Stage-A success, no fake UI readback, no out-of-domain execution, no unsupported mutation | Gate-A logic closed; Stage-A/transcript/render wiring above still open before this cert can be issued |
-| **Cert 2 — Native Serum** | Phase 3 | W1 Windows + Cloud | Loaded-module SHA matches 2.0.23 pin, genuine preset SHA, native re-save matches compiled operand, screenshot-bound readback matches, restoration verified, no DawDreamer in chain | Cloud-side generic orchestrator + real `compile_ops()` wiring done (accessor gap fixed); native Windows/Ableton execution not yet run against this code |
+| **Cert 2 — Native Serum** | Phase 3 | W1 Windows + Cloud | Loaded-module SHA matches 2.0.23 pin, genuine preset SHA, native re-save matches compiled operand, screenshot-bound readback matches, restoration verified, no DawDreamer in chain | Cloud-side generic orchestrator + real `compile_ops()` wiring done; accessor gap, route-selection gap, and scope-schema gap all fixed after a real Local W1 attempt surfaced them; native Windows/Ableton execution (screenshot/readback/re-save) not yet run against this fully fixed code |
 | **Cert 3 — Product** | Phase 4 | W2 Windows + Cloud | One untuned real tutorial → `reference_verified=True` with COMPLETE coverage + verified audible 16-bar render | Not started |
 | **Cert 4 — Control Surface** | Phase 5 | Cloud + selective Local | Every non-exception control `EXECUTABLE+VERIFIED`, all 20 exceptions classified as `EXECUTABLE+UNVERIFIED`, `UNQUALIFIED`, or `GENUINELY_NON_EXECUTABLE` | Not started |
 
