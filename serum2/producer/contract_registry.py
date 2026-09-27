@@ -61,6 +61,32 @@ class ContractRegistry:
         self._load_promoted_evidence_contracts(promoted_evidence_dir)
         self.execution_specs = {}
         self._load_final_execution_contract()
+        self._register_capability_key_aliases()
+
+    def _register_capability_key_aliases(self) -> None:
+        """Register crosswalk aliases in self.contracts so lookups by capability_key resolve.
+
+        After all evidence sources are loaded (contracts keyed by atlas_id), add an alias
+        entry for each explicit capability_key in CAPABILITY_KEY_TO_ATLAS_ID.  The alias
+        points to the SAME contract object -- no evidence is duplicated or borrowed.
+
+        Only adds an alias when:
+          - the atlas_id contract actually exists in self.contracts, and
+          - the capability_key is not already occupied by a separate contract
+            (e.g. a legacy pickle-store contract under that key).
+        """
+        from serum2.producer.capability_crosswalk import CAPABILITY_KEY_TO_ATLAS_ID
+        for capability_key, atlas_id in CAPABILITY_KEY_TO_ATLAS_ID.items():
+            if atlas_id in self.contracts and capability_key not in self.contracts:
+                self.contracts[capability_key] = self.contracts[atlas_id]
+
+    def get_by_capability_key(self, capability_key: str) -> Optional["CapabilityContract"]:
+        """Return a contract by capability_key, consulting the crosswalk aliases.
+
+        Equivalent to contracts.get(capability_key) now that aliases are registered,
+        but provides a named call site so callers can document their intent.
+        """
+        return self.contracts.get(capability_key)
 
     def _load_host_param_mapping(self) -> Dict[str, str]:
         """Load the authoritative capability_key -> host parameter name mapping.
@@ -398,10 +424,21 @@ class ContractRegistry:
         registry -- self.epoch is not None) the final contract's own recorded epoch does not match
         the run epoch -- never a fallback guess, and never served across epochs. With epoch=None
         (the frozen legacy frontier, same convention every other loader in this class uses) the
-        spec is served unfiltered."""
+        spec is served unfiltered.
+
+        When the caller passes a capability_key (e.g. "envelope2_field_decay") instead of an
+        atlas_id, the explicit crosswalk is consulted to remap it to the atlas_id used in the
+        final execution contract (e.g. "env2.decay").  No string heuristics are used.
+        """
         if not atlas_id:
             return None
         spec = self.execution_specs.get(atlas_id)
+        if spec is None:
+            # Crosswalk: capability_key may differ from atlas_id in the final contract
+            from serum2.producer.capability_crosswalk import CAPABILITY_KEY_TO_ATLAS_ID
+            mapped = CAPABILITY_KEY_TO_ATLAS_ID.get(atlas_id)
+            if mapped:
+                spec = self.execution_specs.get(mapped)
         if spec is None:
             return None
         if self.epoch is not None and self.final_execution_contract_epoch != (
@@ -423,15 +460,19 @@ class ContractRegistry:
         return self._final_contract.get(atlas_id)
 
     def get(self, semantic_target: str) -> Optional[CapabilityContract]:
-        """Get contract for a semantic target.
+        """Get contract for a semantic target or capability_key.
+
+        Checks both direct key (atlas_id) and registered crosswalk aliases
+        (capability_key → atlas_id), so callers need not know which convention
+        was used to register the contract.
 
         Args:
-            semantic_target: e.g., "envelope_field_release"
+            semantic_target: e.g., "envelope2_field_decay" or "env2.decay"
 
         Returns:
             CapabilityContract if available, None otherwise
         """
-        return self.contracts.get(semantic_target)
+        return self.get_by_capability_key(semantic_target)
 
     def all_targets(self) -> list:
         """Return list of all registered semantic targets."""

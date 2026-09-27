@@ -147,9 +147,18 @@ class RouteSelector:
     This class only decides WHICH of those paths to attempt, and why.
     """
 
-    def __init__(self):
+    def __init__(self, registry=None):
+        """
+        Args:
+            registry: Optional ContractRegistry to use for evidence lookups.
+                When None (default), a fresh epoch-less ContractRegistry is created
+                (legacy behaviour, loads only the ~40 pickle-store contracts).
+                When provided (by ProducerBrain), the caller's epoch-aware registry
+                is used -- the same registry that will later be used for admission,
+                so no disconnected duplicate is ever constructed for a real epoch run.
+        """
         self._historical_status = _load_historical_status()
-        self._fresh_registry = ContractRegistry()
+        self._registry = registry if registry is not None else ContractRegistry()
 
     def select_route(self, semantic_target_name: str) -> RouteDecision:
         decision = RouteDecision(semantic_target_name=semantic_target_name)
@@ -168,7 +177,7 @@ class RouteSelector:
         decision.capability_key = capability_key
 
         # ---- DawDreamer/Serum evidence ----
-        if capability_key in self._fresh_registry.contracts:
+        if self._registry.get_by_capability_key(capability_key) is not None:
             decision.dawdreamer_evidence = EvidenceTier.FRESH_4Q_VERIFIED
             decision.dawdreamer_admission_ready = True
         elif self._historical_status.get(capability_key) == "CAUSAL_VERIFIED":

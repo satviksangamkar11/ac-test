@@ -439,7 +439,9 @@ class ProducerBrain:
         # itself already enforces -- no run's authority widens implicitly).
         self._registry = ContractRegistry(epoch=epoch, binding_evidence_dir=binding_evidence_dir,
                                           promoted_evidence_dir=promoted_evidence_dir)
-        self._selector = RouteSelector()
+        # Inject self._registry so RouteSelector uses the same epoch-aware store that
+        # admit_rows() will use -- no disconnected second registry for production runs.
+        self._selector = RouteSelector(registry=self._registry)
         # Ordered explicit-target resolution over EXISTING registries (architecture 17/18): no tables here.
         from serum2.compiler.targets import SEMANTIC_TARGETS
         from serum2.knowledge.step_6_6_capability_resolution import UNIVERSAL_TO_SEMANTIC, SemanticTargetMapping
