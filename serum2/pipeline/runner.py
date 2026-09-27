@@ -148,13 +148,14 @@ def _stage_acquire(manifest: RunManifest, run_dir: Path, youtube_url: str,
     if rec.status in ("COMPLETE", "SKIPPED"):
         return rec
 
+    # STEP 1 CLOSURE: Exhaustive acquisition always uses ffmpeg frame-by-frame extraction.
+    # sample_interval_sec and max_frames parameters are ignored.
     cache_key = dict_hash({
         "url": youtube_url,
-        "sample_interval_sec": sample_interval_sec,
-        "max_frames": max_frames,
+        "acquisition_mode": "exhaustive",
+        "decoder": "ffmpeg-frame-by-frame",
     })
-    rec.inputs = {"url": youtube_url, "sample_interval_sec": sample_interval_sec,
-                  "max_frames": max_frames}
+    rec.inputs = {"url": youtube_url, "acquisition_mode": "exhaustive"}
     rec.cache_key = cache_key
 
     from serum2.producer.w2_fast_path import assert_no_redownload
@@ -199,16 +200,20 @@ def _stage_acquire(manifest: RunManifest, run_dir: Path, youtube_url: str,
             manifest.update_stage(rec)
             return rec
 
-        # Must have frames; even if some failed, we need decoded frames
-        if result["num_frames_decoded"] == 0:
+        # Must have frames verified (readable, hashed, accounted)
+        if result["num_frames_verified"] == 0:
+            completion = result.get("completion_status", {})
             rec.mark_failed(
-                f"No frames successfully decoded. Failed: {result['num_frames_failed']}. "
+                f"No frames successfully verified. Expected: {completion.get('total_frames_expected', 0)}, "
+                f"Decoded: {result.get('num_frames_decoded', 0)}, "
+                f"Verified: {result.get('num_frames_verified', 0)}. "
                 f"Error: {result.get('error', 'unknown')}"
             )
             manifest.update_stage(rec)
             return rec
 
         # Persist acquisition manifest in run_dir
+        # This manifest includes completion_status to prove exhaustive acquisition
         out_manifest = run_dir / "acquisition_manifest.json"
         out_manifest.parent.mkdir(parents=True, exist_ok=True)
         manifest_data = {
@@ -217,7 +222,7 @@ def _stage_acquire(manifest: RunManifest, run_dir: Path, youtube_url: str,
             "acquisition_mode": "exhaustive",
             "decoder_version": "ffmpeg-frame-by-frame",
             "num_frames_decoded": result["num_frames_decoded"],
-            "num_frames_failed": result["num_frames_failed"],
+            "num_frames_verified": result["num_frames_verified"],
             "frames": [
                 {
                     "frame_id": f.frame_id,
@@ -231,19 +236,21 @@ def _stage_acquire(manifest: RunManifest, run_dir: Path, youtube_url: str,
                 }
                 for f in result["frames"]
             ],
-            "failed_frames": result["failed_frames"],
             "provenance": result["provenance"],
+            "completion_status": result.get("completion_status", {}),
         }
         with open(out_manifest, "w") as f:
             json.dump(manifest_data, f, indent=2)
 
         mhash = content_hash(out_manifest)
+        completion = result.get("completion_status", {})
         rec.mark_complete({
             "manifest_path": str(out_manifest),
             "manifest_hash": mhash,
-            "num_frames": result["num_frames_decoded"],
-            "num_frames_failed": result["num_frames_failed"],
+            "num_frames": result["num_frames_verified"],
+            "num_frames_expected": completion.get("total_frames_expected", 0),
             "acquisition_mode": "exhaustive",
+            "is_complete": completion.get("is_complete", False),
             "from_cache": result.get("from_cache", False),
         })
     except Exception as e:
