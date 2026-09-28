@@ -27,6 +27,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
+import numpy as np
+
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
 # Pixel-analysis thresholds (generic, no control names)
@@ -400,7 +402,7 @@ class FrameObservationCensus:
             roi_hash = hashlib.sha256(buf.getvalue()).hexdigest()
 
             detections = self._ocr_reader.readtext(
-                panel,
+                np.array(panel.convert("RGB")),
                 detail=1,
                 allowlist="0123456789.-+eEsSmMhHzZkKdD%:",
                 mag_ratio=1.5,
@@ -426,29 +428,80 @@ class FrameObservationCensus:
 
     # ------------------------------------------------------------------
     # Stage 5: LOCAL VLM — evidence-first, no target parameter hint
+    #
+    # Discovery runs per screen-space TILE, not on the full 1920x1080 frame.
+    # A full-frame call downscales small UI text below Qwen's own legibility
+    # threshold (confirmed empirically: real Serum frames with dozens of
+    # plainly-readable values returned NO_READABLE_CONTROLS every time).
+    # Tiling is a fixed geometric grid over the WHOLE frame -- no assumption
+    # about where Serum's window sits, no per-control/per-panel hardcoding --
+    # each tile just gets a larger share of the model's pixel budget than the
+    # same region would get inside a full-frame call.
     # ------------------------------------------------------------------
+
+    _TILE_GRID = (2, 3)       # (rows, cols)
+    _TILE_OVERLAP_FRAC = 0.08  # fractional overlap so a control isn't split at a tile edge
+
+    def _tile_boxes(self, width: int, height: int) -> List[Tuple[int, int, int, int]]:
+        rows, cols = self._TILE_GRID
+        tile_w, tile_h = width / cols, height / rows
+        ox, oy = tile_w * self._TILE_OVERLAP_FRAC, tile_h * self._TILE_OVERLAP_FRAC
+        boxes = []
+        for r in range(rows):
+            for c in range(cols):
+                x0 = max(0, int(c * tile_w - ox))
+                y0 = max(0, int(r * tile_h - oy))
+                x1 = min(width, int((c + 1) * tile_w + ox))
+                y1 = min(height, int((r + 1) * tile_h + oy))
+                boxes.append((x0, y0, x1, y1))
+        return boxes
 
     def _run_vlm(
         self, engine: Any, frame_path: str, frame_id: str, group_index: int
     ) -> List[RawFinding]:
-        """Ask the VLM what Serum controls are visible. No control_id given."""
+        """Ask the VLM what Serum controls are visible, tile by tile. No control_id given."""
         try:
-            raw_list = engine.observe_frame_all_controls(frame_path)
+            from PIL import Image
+        except Exception:
+            return []
+
+        try:
+            im = Image.open(frame_path)
         except Exception:
             return []
 
         findings: List[RawFinding] = []
-        for item in raw_list:
-            findings.append(RawFinding(
-                frame_id=frame_id,
-                group_index=group_index,
-                claimed_panel=item.get("panel", ""),
-                claimed_label=item.get("label", ""),
-                raw_value=item.get("value", ""),
-                source_type="vlm",
-                vlm_confidence=float(item.get("confidence", 0.0)),
-                evidence_hash=item.get("evidence_hash", ""),
-            ))
+        tile_paths: List[str] = []
+        try:
+            for i, box in enumerate(self._tile_boxes(*im.size)):
+                tile = im.crop(box)
+                tile_path = f"{frame_path}.__tile_{i}.png"
+                tile.convert("RGB").save(tile_path)
+                tile_paths.append(tile_path)
+
+                try:
+                    raw_list = engine.observe_frame_all_controls(tile_path)
+                except Exception:
+                    continue
+
+                for item in raw_list:
+                    findings.append(RawFinding(
+                        frame_id=frame_id,
+                        group_index=group_index,
+                        claimed_panel=item.get("panel", ""),
+                        claimed_label=item.get("label", ""),
+                        raw_value=item.get("value", ""),
+                        source_type="vlm",
+                        vlm_confidence=float(item.get("confidence", 0.0)),
+                        evidence_hash=item.get("evidence_hash", ""),
+                    ))
+        finally:
+            for p in tile_paths:
+                try:
+                    Path(p).unlink(missing_ok=True)
+                except Exception:
+                    pass
+
         return findings
 
     # ------------------------------------------------------------------

@@ -593,23 +593,42 @@ class ObservationEngine:
         from qwen_vl_utils import process_vision_info
         model, proc = _load_vlm()
 
-        # Generic evidence-first prompt: no control_id hint, just ask what's readable
+        # Generic evidence-first prompt: no control_id hint, just ask what's readable.
+        # Two things confirmed empirically necessary on this 4-bit quantized 3B model:
+        #  1. An example line -- without one the model defaults to a refusal even on
+        #     frames with plainly legible text.
+        #  2. NOT offering an explicit "say NO_READABLE_CONTROLS if unsure" escape hatch
+        #     -- offering it made the model take it far more often than warranted, even
+        #     right after it had just correctly transcribed the same crop under a
+        #     differently-worded prompt. This discovery pass is not authoritative (see
+        #     _adjudicate()'s docstring: its claimed VALUEs are discarded and re-verified
+        #     per-control via the confidence-gated ROI crop in Stage 7), and the regex
+        #     parse below already yields zero findings on any output with no matching
+        #     lines, so no explicit fallback instruction is needed here.
+        # Wording matters a great deal to this specific 3B model -- even innocuous-looking
+        # placeholder elaboration ("<section name>" instead of "<section>") flipped it from
+        # a reliable structured answer to emitting a single newline and stopping. Keep this
+        # exact phrasing; it is the one empirically confirmed (repeatedly) to work.
         prompt = (
-            "This is a screenshot of a Serum 2 synthesizer plugin UI. "
-            "List every parameter whose value is clearly readable. "
-            "For each readable parameter, output exactly one line with this format: "
-            "PANEL: <section name> CTRL: <label as shown> VALUE: <exact value> CONF: <0.0-1.0>\n"
-            "If no parameters are clearly readable, output: NO_READABLE_CONTROLS"
+            "This is a screenshot of a music synthesizer plugin UI. "
+            "List every parameter label and its current value that you can read. "
+            "Format each as: PANEL: <section> CTRL: <label> VALUE: <value> CONF: <0.0-1.0>\n"
+            "Example: PANEL: OSC A CTRL: OCT VALUE: -3 CONF: 0.9\n"
+            "List as many as you can find."
         )
 
         msgs = [{"role": "user", "content": [{"type": "image", "image": frame_path}, {"type": "text", "text": prompt}]}]
         text = proc.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
         img_objs, vids = process_vision_info(msgs)
         inp = proc(text=[text], images=img_objs, videos=vids, padding=True, return_tensors="pt").to(model.device)
-        out = model.generate(**inp, max_new_tokens=256, output_scores=True, return_dict_in_generate=True, do_sample=False)
-        gen = out.sequences[0][inp.input_ids.shape[1]:]
-        probs = [torch.softmax(sl[0].float(), dim=-1)[t].item() for sl, t in zip(out.scores, gen)]
-        mean_prob = sum(probs) / len(probs) if probs else 0.0
+        # NOTE: output_scores=True/return_dict_in_generate=True must NOT be passed here.
+        # Confirmed empirically on this 4-bit quantized model: requesting per-step scores
+        # changes the actual greedy-decoded text (same prompt+image, only this flag
+        # differing, reliably flips the output between a real structured answer and the
+        # NO_READABLE_CONTROLS refusal). The per-line confidence used below comes from the
+        # model's own "CONF: <value>" text, not from these scores, so nothing is lost.
+        out = model.generate(**inp, max_new_tokens=256, do_sample=False)
+        gen = out[0][inp.input_ids.shape[1]:]
         result = proc.batch_decode([gen], skip_special_tokens=True)[0]
 
         if "NO_READABLE_CONTROLS" in result.upper():
