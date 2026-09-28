@@ -491,17 +491,25 @@ class ObservationEngine:
         as an optimization, not a requirement -- every other control_id goes through locate.
         """
         from serum2.producer.observation_policy import ObservationCandidate as PolicyCandidate
+        from serum2.producer.expected_inventory import resolve_observation_type
         import hashlib
+
+        # Real per-control strategy from the Atlas -- never hardcoded to NUMERIC/CONTROL.
+        # An Atlas-unresolvable control_id is explicit UNREADABLE, never a guessed strategy.
+        _obs_kind, strategy = resolve_observation_type(control_id)
+        if strategy is None:
+            return PolicyCandidate(outcome="UNREADABLE", control_id=control_id,
+                                    detail="control_id not resolvable in Atlas; no observation strategy")
 
         try:
             from PIL import Image
         except Exception as exc:
-            return PolicyCandidate(outcome="UNREADABLE", detail="PIL unavailable: %s" % exc)
+            return PolicyCandidate(outcome="UNREADABLE", control_id=control_id, detail="PIL unavailable: %s" % exc)
 
         try:
             im = Image.open(frame_path)
         except Exception as exc:
-            return PolicyCandidate(outcome="UNREADABLE", detail="cannot open frame: %s" % exc)
+            return PolicyCandidate(outcome="UNREADABLE", control_id=control_id, detail="cannot open frame: %s" % exc)
 
         w, h = im.size
         crop_spec = _GENERIC_SERUM_UI_CROPS.get(control_id)
@@ -513,7 +521,7 @@ class ObservationEngine:
         else:
             box = _locate_control_bbox(frame_path, control_id, (w, h))
             if box is None:
-                return PolicyCandidate(outcome="UNREADABLE",
+                return PolicyCandidate(outcome="UNREADABLE", control_id=control_id,
                                         detail="VLM locate step could not find control %r in this frame" % control_id)
 
         crop = im.crop(box)
@@ -525,23 +533,31 @@ class ObservationEngine:
         crop.convert("RGB").save(crop_path)
 
         if crop_spec is not None:
-            vlm_text, vlm_conf = _run_vlm_on_crop(crop_path, control_id, field_index, field_count)
+            vlm_text, vlm_conf = _run_vlm_on_crop(crop_path, control_id, field_index, field_count, strategy=strategy)
         else:
-            vlm_text, vlm_conf = _transcribe_roi(crop_path, control_id)
+            vlm_text, vlm_conf = _transcribe_roi(crop_path, control_id, strategy=strategy)
             if vlm_text is None:
-                return PolicyCandidate(outcome="UNREADABLE",
+                return PolicyCandidate(outcome="UNREADABLE", control_id=control_id,
                                         detail="VLM transcribe step returned UNREADABLE for %r" % control_id,
                                         evidence_hash=roi_hash)
 
         sources = [{"raw_value": vlm_text, "source": "qwen2.5-vl-3b-instruct", "confidence": vlm_conf}]
 
-        ocr_num, ocr_conf = _run_ocr_on_crop(crop_path, field_index, field_count) if crop_spec is not None \
-            else _run_ocr_freeform(crop_path)
-        if ocr_num is not None:
-            sources.append({"raw_value": ocr_num, "source": "easyocr-1.7.2", "confidence": ocr_conf})
+        # OCR corroboration is a numeric-fragment reader only -- meaningless for ENUM/
+        # ENABLE_STATE/TEXT labels, so it is skipped for any non-NUMERIC strategy rather
+        # than fed a value it cannot actually validate.
+        if strategy == "NUMERIC":
+            ocr_num, ocr_conf = _run_ocr_on_crop(crop_path, field_index, field_count) if crop_spec is not None \
+                else _run_ocr_freeform(crop_path)
+            if ocr_num is not None:
+                sources.append({"raw_value": ocr_num, "source": "easyocr-1.7.2", "confidence": ocr_conf})
 
-        context = {"control_id": control_id, "element_kind": "CONTROL", "control_type": "continuous",
-                   "roi_hash": roi_hash}
+        context = {"control_id": control_id, "force_strategy": strategy, "roi_hash": roi_hash}
+        if strategy == "ENUM":
+            from serum2.reference.serum_atlas import get_control, normalize_control, EXACT, ALIAS
+            resolution = normalize_control(control_id)
+            control = get_control(resolution.canonical_id) if resolution.status in (EXACT, ALIAS) else None
+            context["enum_values"] = list(getattr(control, "enum_values", None) or [])
         return self.adjudicated_observe(sources, context, numeric_tol=1e-3)
 
     def observe_frame_all_controls(self, frame_path: str) -> List[Dict[str, Any]]:
@@ -650,20 +666,28 @@ def _load_vlm():
     return _vlm_singleton
 
 
-def _run_vlm_on_crop(crop_path: str, control_id: str, field_index: Optional[int], field_count: Optional[int]):
+_STRATEGY_READ_DESCRIPTION = {
+    "NUMERIC": "exact displayed numeric value. Answer with only the number (and unit/sign if shown), nothing else",
+    "ENUM": "exact displayed selection/label text. Answer with only that text, nothing else",
+    "ENABLE_STATE": "on/off (enabled/disabled) state. Answer with only ON or OFF, nothing else",
+    "TEXT": "exact displayed text. Answer with only that text, nothing else",
+}
+
+
+def _run_vlm_on_crop(crop_path: str, control_id: str, field_index: Optional[int], field_count: Optional[int],
+                     strategy: str = "NUMERIC"):
     import torch
     from qwen_vl_utils import process_vision_info
     model, proc = _load_vlm()
+    read_what = _STRATEGY_READ_DESCRIPTION.get(strategy, _STRATEGY_READ_DESCRIPTION["NUMERIC"])
     if field_index is not None and field_count is not None:
         ordinal = ["first", "second", "third", "fourth", "fifth", "sixth"][field_index] if field_index < 6 else str(field_index + 1)
-        prompt = ("This is a crop of a Serum 2 synthesizer UI row with %d numeric fields "
-                  "side by side. Read ONLY the %s field's exact displayed value (the field "
-                  "labelled for control '%s'). Answer with only the number (and unit/sign if "
-                  "shown), nothing else." % (field_count, ordinal, control_id))
+        prompt = ("This is a crop of a Serum 2 synthesizer UI row with %d fields side by side. "
+                  "Read ONLY the %s field's %s (the field labelled for control '%s')."
+                  % (field_count, ordinal, read_what, control_id))
     else:
         prompt = ("This is a crop of a Serum 2 synthesizer UI showing the control '%s'. "
-                  "Read its exact currently-displayed numeric value. Answer with only the "
-                  "number (and unit/sign if shown), nothing else." % control_id)
+                  "Read its %s." % (control_id, read_what))
     msgs = [{"role": "user", "content": [{"type": "image", "image": crop_path}, {"type": "text", "text": prompt}]}]
     text = proc.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
     img_objs, vids = process_vision_info(msgs)
@@ -726,7 +750,7 @@ def _locate_control_bbox(frame_path: str, control_id: str, frame_size: tuple):
     return (x0, y0, x1, y1)
 
 
-def _transcribe_roi(crop_path: str, control_id: str):
+def _transcribe_roi(crop_path: str, control_id: str, strategy: str = "NUMERIC"):
     """Stage 2 of the generic locate->transcribe pattern: read ONLY the value visible in an
     already-located ROI crop, with an explicit UNREADABLE reply path -- never a guess.
     Returns (text, mean_token_confidence) or (None, 0.0) if the VLM reports UNREADABLE.
@@ -734,11 +758,11 @@ def _transcribe_roi(crop_path: str, control_id: str):
     import torch
     from qwen_vl_utils import process_vision_info
     model, proc = _load_vlm()
+    read_what = _STRATEGY_READ_DESCRIPTION.get(strategy, _STRATEGY_READ_DESCRIPTION["NUMERIC"])
     prompt = (
         "This is a cropped region of a Serum 2 UI, located as the control '%s'. "
-        "Read ONLY the numeric value visible in this crop. If it is occluded, too small, "
-        "blurry, or this crop does not actually show that control, reply exactly: UNREADABLE. "
-        "Otherwise answer with only the number (and unit/sign if shown), nothing else." % control_id
+        "Read ONLY its %s. If it is occluded, too small, blurry, or this crop does not "
+        "actually show that control, reply exactly: UNREADABLE." % (control_id, read_what)
     )
     msgs = [{"role": "user", "content": [{"type": "image", "image": crop_path}, {"type": "text", "text": prompt}]}]
     text = proc.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
@@ -749,7 +773,11 @@ def _transcribe_roi(crop_path: str, control_id: str):
     probs = [torch.softmax(sl[0].float(), dim=-1)[t].item() for sl, t in zip(out.scores, gen)]
     mean_prob = sum(probs) / len(probs) if probs else 0.0
     result = proc.batch_decode([gen], skip_special_tokens=True)[0]
-    if "UNREADABLE" in result.upper() or not re.search(r"\d", result):
+    if "UNREADABLE" in result.upper():
+        return None, 0.0
+    # NUMERIC is the only strategy that requires a digit to be present in the reply -- an
+    # ENUM/ENABLE_STATE/TEXT reading is legitimately non-numeric (e.g. "Lorenz", "ON").
+    if strategy == "NUMERIC" and not re.search(r"\d", result):
         return None, 0.0
     return result, mean_prob
 

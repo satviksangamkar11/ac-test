@@ -90,8 +90,6 @@ class TestAdjudicateUsesRealStrategyNotHardcodedNumeric:
     def test_universal_frame_observer_imports_resolve_observation_type(self):
         import inspect
         import serum2.producer.universal_frame_observer as ufo
-        src = inspect.getsource(ufo._adjudicate) if hasattr(ufo, "_adjudicate") else inspect.getsource(ufo)
-        # The hardcoded literals must be gone from the adjudication path.
         assert '"element_kind": "CONTROL"' not in inspect.getsource(ufo)
         assert '"control_type": "continuous"' not in inspect.getsource(ufo)
         assert "resolve_observation_type" in inspect.getsource(ufo)
@@ -104,26 +102,9 @@ class TestAdjudicateUsesRealStrategyNotHardcodedNumeric:
                          raw_value="7", source_type="vlm", vlm_confidence=0.95, evidence_hash="h1")
         resolved = [ResolvedFinding(raw=raw, resolved_control_id="no.such.control.exists", resolution_status="EXACT")]
 
-        result = census._adjudicate(resolved)
+        result = census._adjudicate(resolved, groups=[], engine=None)
         assert "no.such.control.exists" in result
         assert result["no.such.control.exists"].outcome == "UNREADABLE"
-
-    def test_adjudicate_correctly_parses_numeric_for_a_real_numeric_control(self):
-        from serum2.producer.universal_frame_observer import FrameObservationCensus, RawFinding, ResolvedFinding
-
-        census = FrameObservationCensus()
-        # Two independent temporal groups agreeing -> OBSERVED (corroboration policy, unchanged).
-        raws = [
-            RawFinding(frame_id="f1", group_index=0, claimed_panel="", claimed_label="",
-                      raw_value="5.0", source_type="vlm", vlm_confidence=0.9, evidence_hash="hash_g0"),
-            RawFinding(frame_id="f2", group_index=1, claimed_panel="", claimed_label="",
-                      raw_value="5.0", source_type="vlm", vlm_confidence=0.9, evidence_hash="hash_g1"),
-        ]
-        resolved = [ResolvedFinding(raw=r, resolved_control_id="env1.attack", resolution_status="EXACT") for r in raws]
-
-        result = census._adjudicate(resolved)
-        assert result["env1.attack"].outcome == "OBSERVED"
-        assert result["env1.attack"].value == (5.0, "")
 
 
 class TestMetricsPreserveUnit:
@@ -232,3 +213,271 @@ class TestRunnerFullChainFromRealMetricsToCompiledPreset:
         assert "admission" not in result[0]
         assert result[0]["status"] == "ADMITTED"
         assert result[0]["status"] == row.admission
+
+
+# ---------------------------------------------------------------------------
+# ROI value-extraction wiring (this round): observe_control_in_frame(), the proven
+# locate -> crop -> transcribe -> explicit-UNREADABLE mechanism (existed, unused by
+# production), is now what _adjudicate() actually reads per candidate temporal group --
+# never the full-frame census's own guessed value. Real Qwen/EasyOCR need a GPU + local
+# model weights this container does not have; every test here drives the REAL adjudication
+# logic (strategy dispatch, corroboration, provenance, fail-closed behavior) through an
+# injected fake engine, exactly the seam _adjudicate()'s new `engine` parameter exists for.
+# Validating the fake engine's canned answers against a REAL video is Local's job, not this
+# pass's -- this proves the wiring and policy are correct, not model accuracy.
+# ---------------------------------------------------------------------------
+
+class _FakeEngine:
+    """Test double for ObservationEngine: canned observe_control_in_frame() results keyed by
+    (frame_path, control_id), so tests drive _adjudicate()'s real corroboration/provenance
+    logic without a GPU or downloaded model weights."""
+
+    def __init__(self, answers=None, raises_for=frozenset()):
+        # answers: {(frame_path, control_id): ObservationCandidate}
+        self._answers = answers or {}
+        self._raises_for = raises_for
+
+    def observe_control_in_frame(self, frame_path, control_id):
+        from serum2.producer.observation_policy import ObservationCandidate as PC
+        key = (frame_path, control_id)
+        if key in self._raises_for:
+            raise RuntimeError("simulated malformed model output for %r" % (key,))
+        return self._answers.get(key, PC(outcome="UNREADABLE", control_id=control_id))
+
+
+def _finding(frame_id, group_index, evidence_hash="h"):
+    from serum2.producer.universal_frame_observer import RawFinding
+    return RawFinding(frame_id=frame_id, group_index=group_index, claimed_panel="", claimed_label="",
+                      raw_value="irrelevant-full-frame-guess", source_type="vlm", vlm_confidence=0.9,
+                      evidence_hash=evidence_hash)
+
+
+def _group(group_index, representative_frame_id, representative_path):
+    from serum2.producer.universal_frame_observer import TemporalGroup
+    return TemporalGroup(group_index=group_index, frame_ids=[representative_frame_id],
+                         representative_frame_id=representative_frame_id, representative_path=representative_path,
+                         start_ts=0.0, end_ts=0.0, mean_change_score=0.0)
+
+
+class TestROIValueExtractionWiredIntoProduction:
+    """Proves the real production _adjudicate() path performs ROI value extraction, per the
+    W2 next-step spec's items A-J."""
+
+    def test_A_correct_numeric_value_via_two_group_corroboration(self):
+        from serum2.producer.observation_policy import ObservationCandidate as PC
+        from serum2.producer.universal_frame_observer import FrameObservationCensus, ResolvedFinding
+
+        groups = [_group(0, "f0", "/frames/g0.jpg"), _group(1, "f1", "/frames/g1.jpg")]
+        engine = _FakeEngine(answers={
+            ("/frames/g0.jpg", "env1.attack"): PC(outcome="CANDIDATE", value=(5.0, "s"), confidence=0.92,
+                                                  source="qwen2.5-vl-3b-instruct", control_id="env1.attack",
+                                                  evidence_hash="roi_g0"),
+            ("/frames/g1.jpg", "env1.attack"): PC(outcome="CANDIDATE", value=(5.0, "s"), confidence=0.88,
+                                                  source="qwen2.5-vl-3b-instruct", control_id="env1.attack",
+                                                  evidence_hash="roi_g1"),
+        })
+        resolved = [ResolvedFinding(raw=_finding("f0", 0), resolved_control_id="env1.attack", resolution_status="EXACT"),
+                   ResolvedFinding(raw=_finding("f1", 1), resolved_control_id="env1.attack", resolution_status="EXACT")]
+
+        census = FrameObservationCensus()
+        result = census._adjudicate(resolved, groups, engine)
+
+        assert result["env1.attack"].outcome == "OBSERVED"
+        assert result["env1.attack"].value == (5.0, "s")
+
+    def test_B_correct_enum_value(self):
+        from serum2.producer.observation_policy import ObservationCandidate as PC
+        from serum2.producer.universal_frame_observer import FrameObservationCensus, ResolvedFinding
+
+        groups = [_group(0, "f0", "/frames/g0.jpg"), _group(1, "f1", "/frames/g1.jpg")]
+        engine = _FakeEngine(answers={
+            ("/frames/g0.jpg", "filter1.type"): PC(outcome="CANDIDATE", value="lowpass_24", confidence=1.0,
+                                                    source="qwen2.5-vl-3b-instruct", control_id="filter1.type",
+                                                    evidence_hash="roi_g0"),
+            ("/frames/g1.jpg", "filter1.type"): PC(outcome="CANDIDATE", value="lowpass_24", confidence=1.0,
+                                                    source="qwen2.5-vl-3b-instruct", control_id="filter1.type",
+                                                    evidence_hash="roi_g1"),
+        })
+        resolved = [ResolvedFinding(raw=_finding("f0", 0), resolved_control_id="filter1.type", resolution_status="EXACT"),
+                   ResolvedFinding(raw=_finding("f1", 1), resolved_control_id="filter1.type", resolution_status="EXACT")]
+
+        census = FrameObservationCensus()
+        result = census._adjudicate(resolved, groups, engine)
+
+        assert result["filter1.type"].outcome == "OBSERVED"
+        assert result["filter1.type"].value == "lowpass_24"
+
+    def test_C_correct_boolean_enable_state(self):
+        from serum2.producer.observation_policy import ObservationCandidate as PC
+        from serum2.producer.universal_frame_observer import FrameObservationCensus, ResolvedFinding
+
+        groups = [_group(0, "f0", "/frames/g0.jpg"), _group(1, "f1", "/frames/g1.jpg")]
+        engine = _FakeEngine(answers={
+            ("/frames/g0.jpg", "oscA.enabled"): PC(outcome="CANDIDATE", value="ON", confidence=1.0,
+                                                    source="qwen2.5-vl-3b-instruct", control_id="oscA.enabled",
+                                                    evidence_hash="roi_g0"),
+            ("/frames/g1.jpg", "oscA.enabled"): PC(outcome="CANDIDATE", value="ON", confidence=1.0,
+                                                    source="qwen2.5-vl-3b-instruct", control_id="oscA.enabled",
+                                                    evidence_hash="roi_g1"),
+        })
+        resolved = [ResolvedFinding(raw=_finding("f0", 0), resolved_control_id="oscA.enabled", resolution_status="EXACT"),
+                   ResolvedFinding(raw=_finding("f1", 1), resolved_control_id="oscA.enabled", resolution_status="EXACT")]
+
+        census = FrameObservationCensus()
+        result = census._adjudicate(resolved, groups, engine)
+
+        assert result["oscA.enabled"].outcome == "OBSERVED"
+        assert result["oscA.enabled"].value == "ON"
+
+    def test_D_explicit_unreadable_never_fabricates_a_value(self):
+        from serum2.producer.universal_frame_observer import FrameObservationCensus, ResolvedFinding
+
+        groups = [_group(0, "f0", "/frames/g0.jpg")]
+        engine = _FakeEngine(answers={})  # default UNREADABLE for any key
+        resolved = [ResolvedFinding(raw=_finding("f0", 0), resolved_control_id="env1.attack", resolution_status="EXACT")]
+
+        census = FrameObservationCensus()
+        result = census._adjudicate(resolved, groups, engine)
+
+        assert result["env1.attack"].outcome == "UNREADABLE"
+        assert result["env1.attack"].value is None
+
+    def test_E_malformed_model_output_fails_closed_not_crash(self):
+        from serum2.producer.universal_frame_observer import FrameObservationCensus, ResolvedFinding
+
+        groups = [_group(0, "f0", "/frames/g0.jpg")]
+        engine = _FakeEngine(raises_for={("/frames/g0.jpg", "env1.attack")})
+        resolved = [ResolvedFinding(raw=_finding("f0", 0), resolved_control_id="env1.attack", resolution_status="EXACT")]
+
+        census = FrameObservationCensus()
+        result = census._adjudicate(resolved, groups, engine)  # must not raise
+
+        assert result["env1.attack"].outcome == "UNREADABLE"
+
+    def test_F_conflicting_values_are_not_silently_accepted(self):
+        from serum2.producer.observation_policy import ObservationCandidate as PC
+        from serum2.producer.universal_frame_observer import FrameObservationCensus, ResolvedFinding
+
+        groups = [_group(0, "f0", "/frames/g0.jpg"), _group(1, "f1", "/frames/g1.jpg")]
+        engine = _FakeEngine(answers={
+            ("/frames/g0.jpg", "env1.attack"): PC(outcome="CANDIDATE", value=(5.0, "s"), confidence=0.9,
+                                                  source="qwen2.5-vl-3b-instruct", control_id="env1.attack"),
+            ("/frames/g1.jpg", "env1.attack"): PC(outcome="CANDIDATE", value=(8.0, "s"), confidence=0.9,
+                                                  source="qwen2.5-vl-3b-instruct", control_id="env1.attack"),
+        })
+        resolved = [ResolvedFinding(raw=_finding("f0", 0), resolved_control_id="env1.attack", resolution_status="EXACT"),
+                   ResolvedFinding(raw=_finding("f1", 1), resolved_control_id="env1.attack", resolution_status="EXACT")]
+
+        census = FrameObservationCensus()
+        result = census._adjudicate(resolved, groups, engine)
+
+        # A hallucinated/conflicting reading must never resolve to OBSERVED just because
+        # something was returned -- the split-vote policy path (unchanged GAP B) applies.
+        assert result["env1.attack"].outcome == "AMBIGUOUS"
+        assert result["env1.attack"].value is None
+
+    def test_G_roi_provenance_survives_to_the_adjudicated_result_and_metrics(self):
+        from serum2.producer.observation_policy import ObservationCandidate as PC
+        from serum2.producer.universal_frame_observer import FrameObservationCensus, ResolvedFinding, ObservationCensus
+
+        groups = [_group(0, "f0", "/frames/g0.jpg"), _group(1, "f1", "/frames/g1.jpg")]
+        engine = _FakeEngine(answers={
+            ("/frames/g0.jpg", "env1.attack"): PC(outcome="CANDIDATE", value=(5.0, "s"), confidence=0.9,
+                                                  source="qwen2.5-vl-3b-instruct", control_id="env1.attack",
+                                                  evidence_hash="real_roi_sha256_g0"),
+            ("/frames/g1.jpg", "env1.attack"): PC(outcome="CANDIDATE", value=(5.0, "s"), confidence=0.9,
+                                                  source="qwen2.5-vl-3b-instruct", control_id="env1.attack",
+                                                  evidence_hash="real_roi_sha256_g1"),
+        })
+        resolved = [ResolvedFinding(raw=_finding("f0", 0), resolved_control_id="env1.attack", resolution_status="EXACT"),
+                   ResolvedFinding(raw=_finding("f1", 1), resolved_control_id="env1.attack", resolution_status="EXACT")]
+
+        census_obj = FrameObservationCensus()
+        adjudicated = census_obj._adjudicate(resolved, groups, engine)
+
+        # The propagated evidence_hash must be a real ROI crop's hash, never the full-frame's.
+        assert adjudicated["env1.attack"].evidence_hash in ("real_roi_sha256_g0", "real_roi_sha256_g1")
+
+        census = ObservationCensus()
+        census.adjudicated = adjudicated
+        metrics = census.to_metrics_json()["metrics"]
+        assert metrics[0]["evidence_hash"] in ("real_roi_sha256_g0", "real_roi_sha256_g1")
+        assert metrics[0]["adjudicated_unit"] == "s"
+
+    def test_H_temporal_corroboration_confirms_a_value_single_group_does_not(self):
+        from serum2.producer.observation_policy import ObservationCandidate as PC
+        from serum2.producer.universal_frame_observer import FrameObservationCensus, ResolvedFinding
+
+        # Single group only -> AMBIGUOUS (single_source), never OBSERVED, even at high confidence.
+        groups_one = [_group(0, "f0", "/frames/g0.jpg")]
+        engine = _FakeEngine(answers={
+            ("/frames/g0.jpg", "env1.attack"): PC(outcome="CANDIDATE", value=(5.0, "s"), confidence=0.99,
+                                                  source="qwen2.5-vl-3b-instruct", control_id="env1.attack"),
+        })
+        resolved_one = [ResolvedFinding(raw=_finding("f0", 0), resolved_control_id="env1.attack", resolution_status="EXACT")]
+        census = FrameObservationCensus()
+        result_one = census._adjudicate(resolved_one, groups_one, engine)
+        assert result_one["env1.attack"].outcome == "AMBIGUOUS"
+        assert result_one["env1.attack"].single_source is True
+
+    def test_I_contradictory_observations_are_deterministic_across_repeat_runs(self):
+        from serum2.producer.observation_policy import ObservationCandidate as PC
+        from serum2.producer.universal_frame_observer import FrameObservationCensus, ResolvedFinding
+
+        groups = [_group(0, "f0", "/frames/g0.jpg"), _group(1, "f1", "/frames/g1.jpg")]
+        engine = _FakeEngine(answers={
+            ("/frames/g0.jpg", "env1.attack"): PC(outcome="CANDIDATE", value=(5.0, "s"), confidence=0.9,
+                                                  source="qwen2.5-vl-3b-instruct", control_id="env1.attack"),
+            ("/frames/g1.jpg", "env1.attack"): PC(outcome="CANDIDATE", value=(8.0, "s"), confidence=0.9,
+                                                  source="qwen2.5-vl-3b-instruct", control_id="env1.attack"),
+        })
+        resolved = [ResolvedFinding(raw=_finding("f0", 0), resolved_control_id="env1.attack", resolution_status="EXACT"),
+                   ResolvedFinding(raw=_finding("f1", 1), resolved_control_id="env1.attack", resolution_status="EXACT")]
+
+        outcomes = set()
+        for _ in range(5):
+            census = FrameObservationCensus()
+            result = census._adjudicate(resolved, groups, engine)
+            outcomes.add(result["env1.attack"].outcome)
+        assert outcomes == {"AMBIGUOUS"}, "adjudication must be deterministic, not flaky, across repeat runs"
+
+    def test_J_no_observation_disappears_silently(self):
+        """A control the full-frame census claimed in a group, whose ROI read comes back
+        UNREADABLE, must still get an explicit terminal entry in the results dict -- never
+        silently absent."""
+        from serum2.producer.universal_frame_observer import FrameObservationCensus, ResolvedFinding
+
+        groups = [_group(0, "f0", "/frames/g0.jpg")]
+        engine = _FakeEngine(answers={})  # every ROI read comes back UNREADABLE
+        resolved = [
+            ResolvedFinding(raw=_finding("f0", 0, "h1"), resolved_control_id="env1.attack", resolution_status="EXACT"),
+            ResolvedFinding(raw=_finding("f0", 0, "h2"), resolved_control_id="oscA.enabled", resolution_status="EXACT"),
+        ]
+
+        census = FrameObservationCensus()
+        result = census._adjudicate(resolved, groups, engine)
+
+        assert set(result.keys()) == {"env1.attack", "oscA.enabled"}
+        assert all(r.outcome == "UNREADABLE" for r in result.values())
+
+
+class TestFrameConservationUnaffectedByROIWiring:
+    """Step 5: every decoded source frame remains accounted for regardless of VLM/OCR/ROI
+    outcome -- ingestion (Stage 1) is independent of adjudication (Stage 7)."""
+
+    def test_every_manifest_frame_is_ingested_regardless_of_adjudication_outcome(self, tmp_path):
+        from serum2.producer.universal_frame_observer import FrameObservationCensus
+
+        manifest = {"frames": [
+            {"frame_id": "f_%d" % i, "timestamp_sec": float(i), "artifact_path": "nonexistent_%d.jpg" % i,
+             "artifact_hash": "h%d" % i}
+            for i in range(12)
+        ]}
+        engine = _FakeEngine(answers={})  # everything UNREADABLE
+        census = FrameObservationCensus(engine=engine)
+        result = census.run(manifest, run_dir=tmp_path)
+
+        assert result.total_frames == 12
+        assert len(result.frame_records) == 12
+        # Missing image files -> NO_IMAGE, still explicitly accounted for, never dropped.
+        assert all(r.pixel_status == "NO_IMAGE" for r in result.frame_records)

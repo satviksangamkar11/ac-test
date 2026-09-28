@@ -207,9 +207,12 @@ def _value_unit(value: Any) -> Optional[str]:
 class FrameObservationCensus:
     """Orchestrates the 10-stage universal full-frame observation pipeline."""
 
-    def __init__(self) -> None:
+    def __init__(self, engine: Any = None) -> None:
         self._ocr_reader = None  # lazy singleton
-        self._engine = None      # lazy singleton
+        # `engine` is the test-injection point (a fake with a canned observe_control_in_frame/
+        # observe_frame_all_controls, avoiding the real ~7GB local Qwen model in CI); None
+        # means run() lazy-loads the real ObservationEngine.
+        self._engine = engine
 
     # ------------------------------------------------------------------
     # Stage 1: INGEST — all frames, no exceptions
@@ -484,19 +487,34 @@ class FrameObservationCensus:
     # ------------------------------------------------------------------
 
     def _adjudicate(
-        self, resolved: List[ResolvedFinding], *, numeric_tol: float = 1e-3
+        self, resolved: List[ResolvedFinding], groups: List[TemporalGroup], engine: Any,
+        *, numeric_tol: float = 1e-3,
     ) -> Dict[str, Any]:
-        """Group by resolved_control_id; adjudicate via existing policy.
+        """Group by resolved_control_id; read the real VALUE via a targeted ROI, then
+        adjudicate across distinct temporal groups via the existing policy.
+
+        Stage 5's full-frame VLM census (_run_vlm/observe_frame_all_controls) is a candidate-
+        DISCOVERY signal only: "this control_id appears to be visible in this temporal group,
+        per its claimed panel+label". Its own claimed VALUE text is discarded here and never
+        used as evidence -- that is exactly the full-frame free-text reading Qwen's own
+        documented findings (qwen_ui_findings.txt) show inventing numeric values. The real
+        value for each (control_id, group) the full-frame census flagged as present is read
+        fresh via ObservationEngine.observe_control_in_frame() -- the proven, audited
+        locate -> crop -> transcribe -> explicit-UNREADABLE ROI mechanism (never recreated
+        here, only invoked) -- against that group's own representative frame. One real read
+        per (control_id, group) pair, not per raw finding, since group membership (not the
+        full-frame guess) is the only thing being reused from Stage 5/6.
 
         Corroboration requires two genuinely distinct temporal groups (different
-        group_index). Findings with identical evidence_hash are deduplicated.
+        group_index) to agree, exactly as before -- unchanged from GAP B.
         """
         from serum2.producer.observation_policy import (
             ObservationCandidate as PolicyCandidate,
             OUTCOME_CANDIDATE, adjudicate,
         )
-        from serum2.producer.observation_engine import ObservationEngine
         from serum2.producer.expected_inventory import resolve_observation_type
+
+        group_by_index: Dict[int, TemporalGroup] = {g.group_index: g for g in groups}
 
         # Group by control_id
         by_control: Dict[str, List[ResolvedFinding]] = {}
@@ -504,7 +522,6 @@ class FrameObservationCensus:
             if rf.resolved_control_id is not None:
                 by_control.setdefault(rf.resolved_control_id, []).append(rf)
 
-        engine = ObservationEngine()
         results: Dict[str, Any] = {}
 
         for control_id, rfs in by_control.items():
@@ -522,36 +539,32 @@ class FrameObservationCensus:
                 )
                 continue
 
-            seen_hashes: set = set()
+            # Distinct temporal groups the full-frame census claimed to see this control in --
+            # a discovery signal only, spending one real targeted ROI read per group, never
+            # per raw finding (repeated claims within the same group are not independent).
+            candidate_group_indices = sorted({rf.raw.group_index for rf in rfs})
+
             policy_candidates: List[PolicyCandidate] = []
-
-            for rf in rfs:
-                f = rf.raw
-                # Deduplicate by evidence_hash (same crop = not independent)
-                dup_key = f.evidence_hash or f"{f.frame_id}:{f.raw_value}"
-                if dup_key in seen_hashes:
+            for gi in candidate_group_indices:
+                group = group_by_index.get(gi)
+                if group is None or not group.representative_path:
                     continue
-                seen_hashes.add(dup_key)
-
-                ctx = {
-                    "control_id": control_id,
-                    "force_strategy": strategy,
-                    "roi_hash": f.evidence_hash,
-                    "vlm_source": f.source_type == "vlm",
-                }
+                if engine is None:
+                    continue  # no local VLM/OCR available on this machine; contributes nothing
                 try:
-                    eng_result = engine.observe(f.raw_value, ctx)
-                    if eng_result.outcome == "CANDIDATE":
-                        policy_candidates.append(PolicyCandidate(
-                            outcome=OUTCOME_CANDIDATE,
-                            value=eng_result.normalized_value,
-                            confidence=f.vlm_confidence if f.source_type == "vlm" else f.ocr_confidence,
-                            source=_SRC_VLM if f.source_type == "vlm" else _SRC_OCR,
-                            control_id=control_id,
-                            evidence_hash=f.evidence_hash,
-                        ))
+                    roi_result = engine.observe_control_in_frame(group.representative_path, control_id)
                 except Exception:
-                    pass
+                    continue
+                if getattr(roi_result, "value", None) is None:
+                    continue  # UNREADABLE/IDENTITY_UNRESOLVED at this group -- no fabricated candidate
+                policy_candidates.append(PolicyCandidate(
+                    outcome=OUTCOME_CANDIDATE,
+                    value=roi_result.value,
+                    confidence=getattr(roi_result, "confidence", 0.0),
+                    source=getattr(roi_result, "source", "") or "roi_extraction",
+                    control_id=control_id,
+                    evidence_hash=getattr(roi_result, "evidence_hash", None),
+                ))
 
             if not policy_candidates:
                 from serum2.producer.observation_policy import ObservationCandidate as PC
@@ -617,13 +630,16 @@ class FrameObservationCensus:
             g for g in groups if g.representative_path and Path(g.representative_path).exists()
         ]
 
-        # Attempt to load ObservationEngine (needs qwen/torch on LOCAL only)
-        engine = None
-        try:
-            from serum2.producer.observation_engine import ObservationEngine
-            engine = ObservationEngine()
-        except Exception:
-            pass
+        # Attempt to load ObservationEngine (needs qwen/torch on LOCAL only), unless a caller
+        # already injected one (real singleton reuse, or a test fake).
+        engine = self._engine
+        if engine is None:
+            try:
+                from serum2.producer.observation_engine import ObservationEngine
+                engine = ObservationEngine()
+                self._engine = engine
+            except Exception:
+                pass
 
         for g in active_groups:
             census.candidate_regions += 1
@@ -651,8 +667,10 @@ class FrameObservationCensus:
         census.resolved_findings = resolved
         census.identity_attempts = sum(1 for r in resolved if r.raw.source_type == "vlm")
 
-        # Stage 7: Adjudication (existing GAP-A/B/C, UNTOUCHED)
-        adjudicated = self._adjudicate(resolved)
+        # Stage 7: Adjudication (GAP-A/B/C corroboration policy UNTOUCHED; per-value evidence
+        # now comes from a real targeted ROI read via engine.observe_control_in_frame(), not
+        # the full-frame census's own claimed value -- see _adjudicate()'s docstring)
+        adjudicated = self._adjudicate(resolved, groups, engine)
         census.adjudicated = adjudicated
 
         for cid, result in adjudicated.items():
