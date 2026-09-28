@@ -220,6 +220,13 @@ def resolve_observation_type(canonical_id: str):
         elif element_kind == "TEXT_IDENTITY":
             return ("TEXT", "TEXT")
         else:
+            # element_kind absent: fall back to control_type so controls like
+            # oscA.crs (continuous) and oscB.wavetable (enum) still get a strategy.
+            control_type = getattr(control, 'control_type', None)
+            if control_type in ('continuous', 'knob'):
+                return ("NUMERIC", "NUMERIC")
+            if control_type == 'enum':
+                return ("ENUM", "ENUM")
             return (None, None)
     except Exception:
         return (None, None)

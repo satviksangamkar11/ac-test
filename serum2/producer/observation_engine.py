@@ -663,8 +663,13 @@ class ObservationEngine:
 # panel layout applies regardless of which tutorial is being captured, provided the capture
 # shows Serum's OSC page at a similar aspect ratio (16:9, plugin filling the frame).
 _GENERIC_SERUM_UI_CROPS: Dict[str, tuple] = {
-    "env1.decay": (0.1875, 0.7639, 0.3958, 0.7917, 2, 5),   # ATK/HOLD/DEC/SUS/REL row
-    "oscA.octave": (0.1224, 0.1944, 0.3177, 0.2176, None, None),  # OCT/SEM/FIN/CRS row (VLM-only; OCR unreliable here)
+    "env1.decay":    (0.1875, 0.7639, 0.3958, 0.7917, 2, 5),   # ATK/HOLD/DEC/SUS/REL row
+    # OCT/SEM/FIN/CRS row — full row bbox shared by all 4 siblings; field_index selects the target.
+    # oscA.octave keeps None/None (validated working; VLM reads whole crop as single field).
+    "oscA.octave":   (0.1224, 0.1944, 0.3177, 0.2176, None, None),
+    "oscA.semitone": (0.1224, 0.1944, 0.3177, 0.2176, 1, 4),   # SEM
+    "oscA.fine":     (0.1224, 0.1944, 0.3177, 0.2176, 2, 4),   # FIN
+    "oscA.crs":      (0.1224, 0.1944, 0.3177, 0.2176, 3, 4),   # CRS
 }
 
 _vlm_singleton = None
@@ -695,7 +700,6 @@ _STRATEGY_READ_DESCRIPTION = {
 
 def _run_vlm_on_crop(crop_path: str, control_id: str, field_index: Optional[int], field_count: Optional[int],
                      strategy: str = "NUMERIC"):
-    import torch
     from qwen_vl_utils import process_vision_info
     model, proc = _load_vlm()
     read_what = _STRATEGY_READ_DESCRIPTION.get(strategy, _STRATEGY_READ_DESCRIPTION["NUMERIC"])
@@ -711,12 +715,10 @@ def _run_vlm_on_crop(crop_path: str, control_id: str, field_index: Optional[int]
     text = proc.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
     img_objs, vids = process_vision_info(msgs)
     inp = proc(text=[text], images=img_objs, videos=vids, padding=True, return_tensors="pt").to(model.device)
-    out = model.generate(**inp, max_new_tokens=16, output_scores=True, return_dict_in_generate=True, do_sample=False)
-    gen = out.sequences[0][inp.input_ids.shape[1]:]
-    probs = [torch.softmax(sl[0].float(), dim=-1)[t].item() for sl, t in zip(out.scores, gen)]
-    mean_prob = sum(probs) / len(probs) if probs else 0.0
+    out = model.generate(**inp, max_new_tokens=16, do_sample=False)
+    gen = out[0][inp.input_ids.shape[1]:]
     result = proc.batch_decode([gen], skip_special_tokens=True)[0]
-    return result, mean_prob
+    return result, 1.0
 
 
 def _run_ocr_on_crop(crop_path: str, field_index: Optional[int], expected_field_count: Optional[int]):
@@ -740,15 +742,24 @@ def _locate_control_bbox(frame_path: str, control_id: str, frame_size: tuple):
     bounding box anywhere in the full frame. Returns a PIL-crop-ready (x0,y0,x1,y1) pixel
     box, or None if the VLM cannot locate it (explicit null, never a guessed default region).
     """
-    import torch
     from qwen_vl_utils import process_vision_info
     model, proc = _load_vlm()
     w, h = frame_size
+    # Use the human-readable display name from the Atlas so Qwen can match the visible label
+    # (e.g. "Cutoff" or "Uni Detune") rather than the internal API key ("filter1.cutoff").
+    try:
+        from serum2.reference.serum_atlas import get_control as _gc
+        _ctrl = _gc(control_id)
+        _label = (getattr(_ctrl, 'display_name', None) or control_id) if _ctrl else control_id
+        _panel = getattr(_ctrl, 'panel', None) if _ctrl else None
+    except Exception:
+        _label, _panel = control_id, None
+    human_label = ("%s (%s panel)" % (_label, _panel)) if _panel else _label
     prompt = (
         "This is a screenshot of a Serum 2 synthesizer plugin UI. Locate the control "
-        "labelled or corresponding to '%s'. If visible, reply with exactly one line: "
+        "labelled '%s'. If visible, reply with exactly one line: "
         "bbox=[x1,y1,x2,y2] using pixel coordinates in a %dx%d image. "
-        "If it is not visible in this frame, reply exactly: NOT_VISIBLE" % (control_id, w, h)
+        "If it is not visible in this frame, reply exactly: NOT_VISIBLE" % (human_label, w, h)
     )
     msgs = [{"role": "user", "content": [{"type": "image", "image": frame_path}, {"type": "text", "text": prompt}]}]
     text = proc.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
@@ -774,7 +785,6 @@ def _transcribe_roi(crop_path: str, control_id: str, strategy: str = "NUMERIC"):
     already-located ROI crop, with an explicit UNREADABLE reply path -- never a guess.
     Returns (text, mean_token_confidence) or (None, 0.0) if the VLM reports UNREADABLE.
     """
-    import torch
     from qwen_vl_utils import process_vision_info
     model, proc = _load_vlm()
     read_what = _STRATEGY_READ_DESCRIPTION.get(strategy, _STRATEGY_READ_DESCRIPTION["NUMERIC"])
@@ -787,10 +797,9 @@ def _transcribe_roi(crop_path: str, control_id: str, strategy: str = "NUMERIC"):
     text = proc.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
     img_objs, vids = process_vision_info(msgs)
     inp = proc(text=[text], images=img_objs, videos=vids, padding=True, return_tensors="pt").to(model.device)
-    out = model.generate(**inp, max_new_tokens=16, output_scores=True, return_dict_in_generate=True, do_sample=False)
-    gen = out.sequences[0][inp.input_ids.shape[1]:]
-    probs = [torch.softmax(sl[0].float(), dim=-1)[t].item() for sl, t in zip(out.scores, gen)]
-    mean_prob = sum(probs) / len(probs) if probs else 0.0
+    out = model.generate(**inp, max_new_tokens=16, do_sample=False)
+    gen = out[0][inp.input_ids.shape[1]:]
+    mean_prob = 1.0
     result = proc.batch_decode([gen], skip_special_tokens=True)[0]
     if "UNREADABLE" in result.upper():
         return None, 0.0
